@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+.venv/
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Test and quality tools
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+secrets.toml
+*.pem
+*.key
+
+# Private application data
+data/
+private/
+uploads/
+exports/
+backups/
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+
+# Editor/OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
