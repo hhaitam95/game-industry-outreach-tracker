@@ -4,6 +4,8 @@ Meaningful changes are recorded here. This file starts with the initial document
 
 ## Unreleased
 
+- Upgraded ESLint to supported v10.13.0, aligned `@eslint/js` to v10.0.1, and declared the ESLint-10-compatible `typescript-eslint` range; full validation is recorded after the standard CI run succeeds.
+
 - Follow-up hardens feedback reports by omitting branch names and filenames and replacing free-form diagnostic excerpts with fixed, non-sensitive categories.
 - CI checks now continue independently after dependency installation, so a formatting failure cannot hide lint, type, test, build, or production-dependency audit results.
 - Aligned Prettier settings with the existing double-quote style and documented that CSS syntax is checked by the production build rather than Prettier.
