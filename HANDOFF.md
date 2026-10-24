@@ -1,7 +1,7 @@
 # Project Handoff
 
-**Last updated:** 2026-10-24  
-**Project stage:** Phase 1 remediation prepared on the feature branch; standard CI must pass on the final commit before acceptance  
+**Last updated:** 2026-10-25  
+**Project stage:** Phase 1 automated acceptance checks are implemented and validated on the closeout tree; the feature-branch CI run is the final acceptance gate  
 **Default branch:** main  
 **Baseline branch:** docs/project-foundation  
 **Architecture baseline:** architecture/pages-actions-cv
@@ -35,25 +35,25 @@ Build a personal tool to discover game studios/opportunities worldwide, verify o
 
 ## Current implementation state
 
-- Phase 1 adds the responsive React + TypeScript + Vite frontend shell, simple local navigation, placeholder screens, and a subpath-capable static build.
-- CI checks run independently after dependency installation. The standard run identified formatting failures and 15 dependency advisories; the refreshed lockfile candidate's full npm audit reported zero vulnerabilities. The final standard CI run on the committed feature-branch head is still required before Phase 1 can be accepted.
+- Phase 1 adds the responsive React + TypeScript + Vite frontend shell, simple local navigation, placeholder screens, and a subpath-capable static build. GitHub Actions also starts Vite Preview with the repository base path and verifies the HTML shell plus generated JavaScript and CSS assets are served successfully.
+- The isolated closeout validation run passed formatting, lint, type checks, all nine unit tests, dependency audit, the repository-subpath production build, and the preview HTTP smoke test. The standard CI run on the final feature-branch closeout commit remains the acceptance gate.
 - `npm run feedback-report` provides optional local diagnostics with fixed-category failure summaries; it omits raw diagnostic lines and filenames.
 - Studio discovery, persistent private data, resume extraction/generation, and public deployment are not implemented.
 - Scheduled discovery workflow is specified but not implemented.
 - Resume extraction/generation is specified but not implemented.
 - docs/resume-guidelines/ and docs/operations/ are present on the architecture baseline.
 - Local setup and the privacy-conscious feedback process are documented in `docs/LOCAL_DEVELOPMENT.md`.
-- Three navigation tests and six report-safety tests are included (nine total). The remediation validation passed all nine; acceptance still depends on the standard CI run for the final committed revision.
-- The baseline install reported 15 npm advisories (2 low, 3 moderate, 10 high). The refreshed lockfile candidate's full npm audit reported zero vulnerabilities; standard CI must confirm the result on the final committed revision.
+- Three navigation tests and six report-safety tests are included (nine total). All nine passed in the closeout validation run.
+- The earlier baseline install reported 15 npm advisories (2 low, 3 moderate, 10 high); the refreshed lockfile's full npm audit reported zero vulnerabilities, and the current CI dependency-audit step passes.
 - Public Pages deployment repository has not been created.
 - Cross-repository publish credential and exact deployment process remain undecided.
 - No private candidate profile, CV, personal application data or secrets belong in source control.
 
 ## Next steps
 
-1. Confirm the latest standard CI run for `feat/static-frontend-shell` passes on the final commit, including formatting, lint, type checks, tests, dependency audit, and subpath build. Do not begin Phase 2 until these exit criteria are met.
-2. Review the shell visually only if useful; local testing is optional and documented in `docs/LOCAL_DEVELOPMENT.md`.
-3. Next implement the browser-local encrypted storage/export foundation and establish the public data contract.
+1. Use the final standard CI run on the `feat/static-frontend-shell` closeout commit as the Phase 1 acceptance gate; do not begin Phase 2 until it is green.
+2. The automated preview smoke test checks HTTP delivery of the shell and generated assets under the repository subpath; it does not check visual layout. A visual browser review has not been performed and remains optional.
+3. After acceptance, begin the browser-local encrypted storage/export foundation with schemas and dummy test data. Do not use real private CV/application data or deploy publicly as part of that work.
 4. Build the discovery runner and scheduled workflow only after the studio registry, normalizer, and tests exist.
 5. Do not deploy public data until the public-data allowlist and privacy checks are tested.
 

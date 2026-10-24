@@ -1,7 +1,7 @@
 # Implementation Plan
 
 **Status:** Revised roadmap following GitHub Pages, scheduled discovery, and browser-first resume decisions  
-**Last updated:** 2026-10-24
+**Last updated:** 2026-10-25
 
 ## Delivery principles
 
@@ -30,7 +30,7 @@
 
 ## Phase 1 — Static frontend shell and safe local project setup
 
-**Implementation status:** Added on `feat/static-frontend-shell`; the remediation addresses the reported formatting and dependency issues. Phase 1 remains pending until standard CI passes on the final committed feature-branch head.
+**Implementation status:** Implemented on `feat/static-frontend-shell`. The isolated closeout CI run passed formatting, lint, type checks, nine unit tests, dependency audit, the repository-subpath production build, and a Vite Preview HTTP smoke test for the HTML shell and generated JavaScript/CSS assets. The final feature-branch closeout commit's standard CI run is the acceptance gate. Visual browser review has not been performed.
 
 ### Scope
 - Initialize the chosen frontend toolchain (proposed TypeScript + Vite, lightweight component architecture).
@@ -41,8 +41,8 @@
 - Update safe .gitignore/configuration for Node build outputs and private user files.
 
 ### Exit criteria
-- Site builds to static files and works in local preview.
-- Base URLs work when hosted under a repository subpath.
+- Site builds to static files; the automated Vite Preview smoke test confirms the shell HTML is served and generated JavaScript/CSS assets return successfully.
+- The page and asset URLs use the configured repository subpath (`/game-industry-outreach-tracker/`). The HTTP smoke test does not verify visual layout or browser interaction.
 - No server runtime, secrets or personal files are required.
 
 ## Phase 2 — Browser-local private data foundation
@@ -186,4 +186,4 @@
 
 ## Immediate next coding task
 
-Confirm the standard GitHub Actions run for the final commit on `feat/static-frontend-shell` passes formatting, lint, type checks, tests, full dependency audit, and subpath production build. Decide whether visual browser review is warranted, and do not start Phase 2 until the Phase 1 exit criteria are met. Do not build the crawler, enable scheduled polling, process real private resume data, or deploy publicly as part of Phase 1.
+Confirm the final standard GitHub Actions run for the closeout commit on `feat/static-frontend-shell` is green. Once accepted, begin Phase 2 — browser-local private data foundation — with schemas, dummy test data, and a privacy-focused storage/export prototype. Keep real CV/application data and public deployment out of scope until the relevant privacy checks are designed and tested. Do not build the crawler or enable scheduled polling as part of Phase 1.
