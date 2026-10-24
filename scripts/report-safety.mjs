@@ -35,6 +35,8 @@ export function redactSensitiveText(value) {
  * that pattern-based redaction will not reliably detect.
  */
 export function safeDiagnosticLines(output, limit = 6) {
+  if (limit <= 0) return [];
+
   const text = String(output);
   const categories = [
     [/\b(?:TS\d{3,5}|tsc|typescript)\b/i, "TypeScript diagnostics detected; details omitted."],
@@ -44,12 +46,14 @@ export function safeDiagnosticLines(output, limit = 6) {
     [/\b(?:assertionerror|not ok|test(?:s|ing)?|failed test)\b/i, "Test diagnostics detected; details omitted."],
     [/\b(?:vite|rollup|esbuild|production build)\b/i, "Build-tool diagnostics detected; details omitted."],
     [/\b(?:enoent|not found|command could not start|permission denied|timed out|timeout)\b/i, "Command or environment diagnostics detected; details omitted."],
-    [/\b(?:error|failed|failure|warning|cannot|unable|missing|invalid|unexpected|err_[a-z]+)\b/i, "Command diagnostics detected; details omitted."],
   ];
-  const safe = [];
-  for (const [pattern, label] of categories) {
-    if (pattern.test(text)) safe.push(label);
-    if (safe.length >= limit) break;
-  }
-  return safe;
+  const specificMatches = categories
+    .filter(([pattern]) => pattern.test(text))
+    .map(([, label]) => label);
+
+  if (specificMatches.length > 0) return specificMatches.slice(0, limit);
+
+  const genericError =
+    /\b(?:error|failed|failure|warning|cannot|unable|missing|invalid|unexpected|err_[a-z]+)\b/i;
+  return genericError.test(text) ? ["Command diagnostics detected; details omitted."] : [];
 }

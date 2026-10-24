@@ -35,3 +35,14 @@ test("diagnostic categories never include personal text, paths, or contact detai
     assert.equal(reportText.includes(sensitive), false);
   }
 });
+
+test("generic failures produce one fixed category only when no specific category matches", () => {
+  assert.deepEqual(safeDiagnosticLines("Error: something failed"), [
+    "Command diagnostics detected; details omitted.",
+  ]);
+  assert.deepEqual(safeDiagnosticLines("no actionable diagnostic here"), []);
+});
+
+test("diagnostic limit of zero returns no categories", () => {
+  assert.deepEqual(safeDiagnosticLines("TypeError: invalid value", 0), []);
+});
