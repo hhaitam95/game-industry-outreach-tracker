@@ -1,6 +1,6 @@
 import { spawnSync } from "node:child_process";
 import { chmodSync, writeFileSync } from "node:fs";
-import { isSensitivePath, safeDiagnosticLines, redactSensitiveText } from "./report-safety.mjs";
+import { safeDiagnosticLines } from "./report-safety.mjs";
 
 const reportPath = "feedback-report.md";
 const timeoutMs = 180_000;
@@ -24,24 +24,23 @@ function run(command, args, options = {}) {
   };
 }
 
-function firstLine(result) {
-  if (result.error) return "unavailable (command could not start)";
-  const line = (result.stdout || result.stderr).trim().split(/\r?\n/)[0] || "unavailable";
-  return redactSensitiveText(line).slice(0, 120);
+function firstLine(name, result) {
+  if (result.error || result.status !== 0) return "unavailable";
+  const line = (result.stdout || "").trim().split(/\r?\n/)[0] || "";
+  const patterns = {
+    "Node.js": /^v\d+\.\d+\.\d+(?:[-+][\w.-]+)?$/,
+    npm: /^\d+\.\d+\.\d+(?:[-+][\w.-]+)?$/,
+    Git: /^git version \d+(?:\.\d+){1,3}(?:[-+][\w.-]+)?$/,
+  };
+  return patterns[name]?.test(line) ? line.slice(0, 40) : "unavailable (version string not recognized)";
 }
 
-function safeChangedFiles() {
+function changedPathSummary() {
   const result = run("git", ["status", "--short", "--untracked-files=all"]);
-  if (result.status !== 0) return ["Git status unavailable."];
-  const paths = result.stdout
-    .split(/\r?\n/)
-    .filter(Boolean)
-    .map((line) => line.slice(3).trim().replace(/^["']|["']$/g, ""))
-    .filter(Boolean);
-  if (paths.length === 0) return ["No changed paths reported by Git."];
-  return paths.slice(0, 60).map((path) =>
-    isSensitivePath(path) ? "[private-looking path omitted]" : path.slice(0, 180),
-  );
+  if (result.status !== 0) return ["Git change count unavailable."];
+  const entries = result.stdout.split(/\r?\n/).filter(Boolean);
+  if (entries.length === 0) return ["No changed paths reported by Git."];
+  return [String(entries.length) + " changed path(s) detected; names intentionally omitted for privacy."];
 }
 
 function statusLabel(result) {
@@ -100,7 +99,7 @@ const results = checks.map(([label, command, args]) => {
   return { label, command: [command, ...args].join(" "), result, diagnostics };
 });
 
-const changedFiles = safeChangedFiles();
+const changedFiles = changedPathSummary();
 const failures = results.filter(({ result }) => result.status !== 0 || result.error);
 const lines = [
   "# Local-to-AI Feedback Report",
@@ -109,12 +108,12 @@ const lines = [
   "",
   "## 1. What was run and what happened",
   "",
-  "- Branch: " + (branchResult.status === 0 ? branchResult.stdout.trim() || "(detached HEAD)" : "unavailable"),
+  "- Branch: " + (branchResult.status === 0 ? "detected (name omitted for privacy)" : "unavailable"),
   "- Commit: " + (commitResult.status === 0 ? commitResult.stdout.trim() : "unavailable"),
   "",
   "### Tool versions",
   "",
-  ...toolVersions.map(([name, result]) => "- " + name + ": " + firstLine(result)),
+  ...toolVersions.map(([name, result]) => "- " + name + ": " + firstLine(name, result)),
   "",
   "### Changed paths (names only; private-looking paths are omitted)",
   "",

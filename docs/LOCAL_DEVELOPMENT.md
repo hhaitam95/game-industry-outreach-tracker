@@ -98,7 +98,7 @@ Expected results:
 - `npm run format:check`: Prettier says all matched files use the expected style.
 - `npm run lint`: exits with code 0 and no lint errors.
 - `npm run typecheck`: exits with code 0 without TypeScript diagnostics.
-- `npm test`: reports 6 passing tests and 0 failures.
+- `npm test`: reports 7 passing tests and 0 failures.
 - `npm run build`: creates `dist/` and reports a successful Vite production build.
 
 An empty successful output from lint or type checking is normal. Always check the command's exit code, not just whether it printed text.
@@ -134,11 +134,11 @@ npm run feedback-report
 The command:
 
 1. Records branch and short commit information plus Node/npm/Git versions.
-2. Lists changed path names without collecting diffs or source files.
+2. Reports only the number of changed paths; filenames, branch names, diffs, and source files are omitted.
 3. Runs Git's whitespace check, formatting, lint, type checking, unit tests, and the production build.
 4. Writes `feedback-report.md` in the repository root and prints the same Markdown to the terminal. The report file is ignored by Git.
 
-Copy the entire report from the terminal, or open `feedback-report.md` and paste its contents into the conversation. If a check fails, the script adds selected safe diagnostics when available and suggests a next step. It deliberately does not include raw logs, source content, test output, or diffs.
+Copy the entire report from the terminal, or open `feedback-report.md` and paste its contents into the conversation. If a check fails, the script adds only fixed diagnostic-category labels and suggests a next step. It never copies free-form diagnostic lines, which could contain personal details despite pattern-based redaction. It does not include raw logs, source content, test output, filenames, or diffs.
 
 ### Privacy limitation
 

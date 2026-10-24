@@ -1,7 +1,7 @@
 # Project Handoff
 
 **Last updated:** 2026-10-24  
-**Project stage:** Phase 1 static frontend implementation committed; check the current cloud CI result  
+**Project stage:** Phase 1 shell committed; CI follow-up addresses the first run's formatting blocker; inspect latest run before acceptance  
 **Default branch:** main  
 **Baseline branch:** docs/project-foundation  
 **Architecture baseline:** architecture/pages-actions-cv
@@ -36,21 +36,22 @@ Build a personal tool to discover game studios/opportunities worldwide, verify o
 ## Current implementation state
 
 - Phase 1 adds the responsive React + TypeScript + Vite frontend shell, simple local navigation, placeholder screens, and a subpath-capable static build.
-- GitHub Actions CI checks formatting, lint, types, tests, and production build; verify the latest run before considering acceptance criteria satisfied.
+- The first GitHub Actions run failed at Prettier formatting, which skipped later checks. The follow-up makes checks run independently after install and adds a production-dependency audit; inspect the latest run before considering Phase 1 accepted.
 - `npm run feedback-report` provides optional local diagnostics with conservative redaction.
 - Studio discovery, persistent private data, resume extraction/generation, and public deployment are not implemented.
 - Scheduled discovery workflow is specified but not implemented.
 - Resume extraction/generation is specified but not implemented.
 - docs/resume-guidelines/ and docs/operations/ are present on the architecture baseline.
 - Local setup and the privacy-conscious feedback process are documented in `docs/LOCAL_DEVELOPMENT.md`.
-- Three initial navigation tests and three report-safety tests are included; check cloud Actions status before treating them as passing.
+- Three navigation tests and four report-safety tests are included; they are not considered passing until the latest cloud Actions run completes.
+- The initial install reported 15 npm advisories across the dependency tree; production dependencies get a dedicated audit step, while development-tool advisories remain to be reviewed.
 - Public Pages deployment repository has not been created.
 - Cross-repository publish credential and exact deployment process remain undecided.
 - No private candidate profile, CV, personal application data or secrets belong in source control.
 
 ## Next steps
 
-1. Inspect the GitHub Actions result for `feat/static-frontend-shell` and address any verified CI failures.
+1. Inspect the latest GitHub Actions result for `feat/static-frontend-shell`; fix remaining check failures and resolve or explicitly document development-dependency advisories before Phase 2.
 2. Review the shell visually only if useful; local testing is optional and documented in `docs/LOCAL_DEVELOPMENT.md`.
 3. Next implement the browser-local encrypted storage/export foundation and establish the public data contract.
 4. Build the discovery runner and scheduled workflow only after the studio registry, normalizer, and tests exist.

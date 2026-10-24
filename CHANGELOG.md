@@ -4,6 +4,12 @@ Meaningful changes are recorded here. This file starts with the initial document
 
 ## Unreleased
 
+- Follow-up hardens feedback reports by omitting branch names and filenames and replacing free-form diagnostic excerpts with fixed, non-sensitive categories.
+- CI checks now continue independently after dependency installation, so a formatting failure cannot hide lint, type, test, build, or production-dependency audit results.
+- Aligned Prettier settings with the existing double-quote style and documented that CSS syntax is checked by the production build rather than Prettier.
+- Pinned install-script approval to the locked esbuild 0.25.2 package. The full development-dependency audit still needs review.
+
+
 - Added the Phase 1 React/TypeScript/Vite static workspace shell with responsive section navigation and honest feature placeholders.
 - Added a locked Node toolchain, formatting/lint/type/test/build scripts, and GitHub Actions CI for branch pushes and pull requests.
 - Added the optional `npm run feedback-report` script and exact macOS/VS Code instructions for local troubleshooting; report output omits raw logs and file contents.

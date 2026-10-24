@@ -36,7 +36,7 @@
 - Initialize the chosen frontend toolchain (proposed TypeScript + Vite, lightweight component architecture).
 - Add base routing/navigation, styling, static build command, and local preview.
 - Add deployment-path/base-URL configuration for a GitHub Pages project site.
-- Add lint/format/test scripts and minimal CI checks.
+- Add lint/format/test scripts and minimal CI checks; run each check independently after install and audit production dependencies.
 - Retain Python toolchain for future Actions discovery scripts.
 - Update safe .gitignore/configuration for Node build outputs and private user files.
 

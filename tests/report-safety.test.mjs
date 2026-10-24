@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { isSensitivePath, redactSensitiveText, safeDiagnosticLines } from "../scripts/report-safety.mjs";
 
-test("private-looking file paths are omitted from reports", () => {
+test("private-looking file paths are recognized", () => {
   assert.equal(isSensitivePath("private-resumes/current.pdf"), true);
   assert.equal(isSensitivePath("personal-data/profile.json"), true);
   assert.equal(isSensitivePath("src/App.tsx"), false);
@@ -19,8 +19,19 @@ test("common credentials and contact information are redacted", () => {
   assert.match(result, /redacted/);
 });
 
-test("diagnostics are limited to likely issue lines", () => {
+test("diagnostics report safe categories instead of copying error lines", () => {
   const result = safeDiagnosticLines("normal output\nTypeError: invalid value\nmore normal output");
-  assert.equal(result.length, 1);
-  assert.match(result[0], /TypeError/);
+  assert.deepEqual(result, ["JavaScript runtime or syntax diagnostics detected; details omitted."]);
+});
+
+test("diagnostic categories never include personal text, paths, or contact details", () => {
+  const hostileOutput =
+    "TypeError: candidate Haitam failed at /Users/haitam/private-resumes/resume.pdf, contact person@example.com";
+  const result = safeDiagnosticLines(hostileOutput);
+  const reportText = result.join(" ");
+
+  assert.deepEqual(result, ["JavaScript runtime or syntax diagnostics detected; details omitted."]);
+  for (const sensitive of ["Haitam", "/Users/haitam", "resume.pdf", "person@example.com"]) {
+    assert.equal(reportText.includes(sensitive), false);
+  }
 });

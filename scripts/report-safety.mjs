@@ -6,11 +6,7 @@ const sensitiveExtension = /\.(?:pdf|docx|sqlite3?|db|pem|key)$/i;
 export function isSensitivePath(path) {
   const normalized = String(path).replaceAll("\\", "/");
   const basename = normalized.split("/").at(-1) ?? normalized;
-  return (
-    sensitivePathSegments.test(normalized) ||
-    sensitiveFileName.test(basename) ||
-    sensitiveExtension.test(basename)
-  );
+  return sensitivePathSegments.test(normalized) || sensitiveFileName.test(basename) || sensitiveExtension.test(basename);
 }
 
 export function redactSensitiveText(value) {
@@ -30,30 +26,30 @@ export function redactSensitiveText(value) {
     [/\/home\/[^/\s]+/g, "/home/<redacted>"],
     [/C:\\Users\\[^\\\s]+/gi, "C:\\Users\\<redacted>"],
   ];
-
-  for (const [pattern, replacement] of replacements) {
-    output = output.replace(pattern, replacement);
-  }
+  for (const [pattern, replacement] of replacements) output = output.replace(pattern, replacement);
   return output;
 }
 
+/**
+ * Return only fixed category labels. Free-form command output can contain unique personal data
+ * that pattern-based redaction will not reliably detect.
+ */
 export function safeDiagnosticLines(output, limit = 6) {
-  const interesting = String(output)
-    .split(/\r?\n/)
-    .map((line) => line.trim())
-    .filter((line) =>
-      /\b(error|failed|failure|warning|cannot|unable|not found|missing|invalid|unexpected|permission denied|timed out|timeout|syntaxerror|typeerror|assertionerror|err_[a-z]+|ts\d{3,5})\b/i.test(line),
-    );
-
+  const text = String(output);
+  const categories = [
+    [/\b(?:TS\d{3,5}|tsc|typescript)\b/i, "TypeScript diagnostics detected; details omitted."],
+    [/\b(?:prettier|format(?:ting)?)\b/i, "Formatting diagnostics detected; details omitted."],
+    [/\b(?:eslint|lint)\b/i, "Lint diagnostics detected; details omitted."],
+    [/\b(?:syntaxerror|typeerror|referenceerror)\b/i, "JavaScript runtime or syntax diagnostics detected; details omitted."],
+    [/\b(?:assertionerror|not ok|test(?:s|ing)?|failed test)\b/i, "Test diagnostics detected; details omitted."],
+    [/\b(?:vite|rollup|esbuild|production build)\b/i, "Build-tool diagnostics detected; details omitted."],
+    [/\b(?:enoent|not found|command could not start|permission denied|timed out|timeout)\b/i, "Command or environment diagnostics detected; details omitted."],
+    [/\b(?:error|failed|failure|warning|cannot|unable|missing|invalid|unexpected|err_[a-z]+)\b/i, "Command diagnostics detected; details omitted."],
+  ];
   const safe = [];
-  for (const line of interesting) {
-    const redacted = redactSensitiveText(line).slice(0, 240);
-    if (/\b(?:github_pat_[A-Za-z0-9_]{20,}|gh[pousr]_[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16})\b/.test(redacted)) {
-      continue;
-    }
-    if (!safe.includes(redacted)) safe.push(redacted);
+  for (const [pattern, label] of categories) {
+    if (pattern.test(text)) safe.push(label);
     if (safe.length >= limit) break;
   }
-
   return safe;
 }
