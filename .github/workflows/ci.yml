@@ -99,8 +99,8 @@ jobs:
 
           grep -q '<div id="root"></div>' /tmp/preview-index.html
 
-          js_asset="$(grep -oE 'src="[^"]+\\.js"' /tmp/preview-index.html | head -n 1 | cut -d '"' -f 2 || true)"
-          css_asset="$(grep -oE 'href="[^"]+\\.css"' /tmp/preview-index.html | head -n 1 | cut -d '"' -f 2 || true)"
+          js_asset="$(grep -oE 'src="[^"]+\.js"' /tmp/preview-index.html | head -n 1 | cut -d '"' -f 2 || true)"
+          css_asset="$(grep -oE 'href="[^"]+\.css"' /tmp/preview-index.html | head -n 1 | cut -d '"' -f 2 || true)"
 
           if [[ -z "$js_asset" || -z "$css_asset" ]]; then
             cat /tmp/preview-index.html
