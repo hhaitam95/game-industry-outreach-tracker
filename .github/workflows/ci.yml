@@ -60,6 +60,10 @@ jobs:
         env:
           VITE_BASE_PATH: /game-industry-outreach-tracker/
 
+      - name: Check tracked paths and built artifacts for private-data leaks
+        if: steps.install.outcome == 'success' && steps.build.outcome == 'success'
+        run: npm run check:privacy
+
       - name: Smoke-test preview and repository-subpath assets
         if: steps.install.outcome == 'success' && steps.build.outcome == 'success'
         shell: bash

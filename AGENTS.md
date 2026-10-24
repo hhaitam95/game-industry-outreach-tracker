@@ -119,3 +119,12 @@ Ask for clarification when a decision is consequential and cannot safely be infe
 - Use allowlisted diagnostic summaries, path filtering, and redaction. Explain that pattern-based redaction is imperfect and advise the user to review a report before sharing it.
 - Do not add GitHub credentials or API calls to the local report script; inspect cloud results through the GitHub connector instead.
 - Keep generated `feedback-report.md` out of version control.
+
+
+## 12. Phase 2 private-data guardrails
+
+- The IndexedDB adapter accepts only the versioned encrypted envelope, never a decrypted workspace object.
+- Strict private-record schemas reject unknown fields and must not persist raw resume contents or extracted CV text.
+- Every save/export uses AES-GCM with a fresh IV; never reuse an IV with the same key.
+- Encrypted import must be size/format checked, authenticated/decrypted, and schema-validated before replacing the current local record.
+- Keep cloud CI and a dummy-data browser smoke test as Phase 2 acceptance gates. Do not declare privacy acceptance from unit tests or a successful static build alone.

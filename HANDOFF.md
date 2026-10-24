@@ -1,11 +1,12 @@
 # Project Handoff
 
 **Last updated:** 2026-10-25  
-**Project stage:** Phase 1 automated acceptance checks are implemented and validated on the closeout tree; the feature-branch CI run is the final acceptance gate  
+**Project stage:** Phase 2 implementation is on feat/browser-local-private-data; cloud CI and a dummy-data browser smoke test remain acceptance gates  
 **Default branch:** main  
 **Baseline branch:** docs/project-foundation  
 **Architecture baseline:** architecture/pages-actions-cv
-**Phase 1 implementation branch:** feat/static-frontend-shell
+**Phase 1 implementation branch:** feat/static-frontend-shell  
+**Phase 2 implementation branch:** feat/browser-local-private-data
 
 ## Purpose
 
@@ -36,9 +37,10 @@ Build a personal tool to discover game studios/opportunities worldwide, verify o
 ## Current implementation state
 
 - Phase 1 adds the responsive React + TypeScript + Vite frontend shell, simple local navigation, placeholder screens, and a subpath-capable static build. GitHub Actions also starts Vite Preview with the repository base path and verifies the HTML shell plus generated JavaScript and CSS assets are served successfully.
-- The isolated closeout validation run passed formatting, lint, type checks, all nine unit tests, dependency audit, the repository-subpath production build, and the preview HTTP smoke test. The standard CI run on the final feature-branch closeout commit remains the acceptance gate.
+- Current branch parent is Phase 1 commit a850adae5cb863b1f021618f22ac8d59c9771ec5. The connector returned no commit status contexts for the earlier commit, so its current cloud CI status was not independently confirmed.
 - `npm run feedback-report` provides optional local diagnostics with fixed-category failure summaries; it omits raw diagnostic lines and filenames.
-- Studio discovery, persistent private data, resume extraction/generation, and public deployment are not implemented.
+- Phase 2 adds encrypted browser-local private profile/draft/application records and encrypted backup export/import; see the acceptance gates below.
+- Studio discovery, resume extraction/generation, scheduled polling, and public deployment are not implemented.
 - Scheduled discovery workflow is specified but not implemented.
 - Resume extraction/generation is specified but not implemented.
 - docs/resume-guidelines/ and docs/operations/ are present on the architecture baseline.
@@ -51,11 +53,11 @@ Build a personal tool to discover game studios/opportunities worldwide, verify o
 
 ## Next steps
 
-1. Use the final standard CI run on the `feat/static-frontend-shell` closeout commit as the Phase 1 acceptance gate; do not begin Phase 2 until it is green.
-2. The automated preview smoke test checks HTTP delivery of the shell and generated assets under the repository subpath; it does not check visual layout. A visual browser review has not been performed and remains optional.
-3. After acceptance, begin the browser-local encrypted storage/export foundation with schemas and dummy test data. Do not use real private CV/application data or deploy publicly as part of that work.
-4. Build the discovery runner and scheduled workflow only after the studio registry, normalizer, and tests exist.
-5. Do not deploy public data until the public-data allowlist and privacy checks are tested.
+1. Check GitHub Actions for feat/browser-local-private-data; the current connector has not yet exposed a confirmed push-run result.
+2. Perform the dummy-data browser smoke test documented in docs/LOCAL_DEVELOPMENT.md: create/unlock, save fake profile/application, reload and unlock, export, lock, then restore from backup in a clean test vault.
+3. Inspect IndexedDB while locked and confirm only the encrypted envelope fields are stored and dummy strings are not readable.
+4. Do not use real personal data until CI is green and the browser smoke test passes.
+5. Phase 3 can define studio/opportunity schemas and seed a small sourced dataset. Build the discovery runner only after the registry, normalizer, and tests exist.
 
 ## Known trade-offs
 
@@ -68,3 +70,14 @@ Build a personal tool to discover game studios/opportunities worldwide, verify o
 ## Handoff rules
 
 Read README.md, PROJECT_SPECS.md, ARCHITECTURE.md, IMPLEMENTATION_PLAN.md, DECISIONS.md, AGENTS.md, and this file. Inspect the actual repository refs, files and tests before acting. Treat source code and GitHub state as authoritative, not prior chat context alone.
+
+
+## Phase 2 implementation and acceptance status
+
+- Branch: feat/browser-local-private-data, based on Phase 1 commit a850adae5cb863b1f021618f22ac8d59c9771ec5.
+- Settings supports create/unlock, profile fields, application records, encrypted backup export/import, explicit lock, and local deletion.
+- Private data modules are under src/lib/private-data/: schema.mjs (strict validation), crypto-vault.mjs (PBKDF2/AES-GCM), and indexed-db.mjs (encrypted-envelope-only persistence).
+- tests/private-data.test.mjs covers schema rejection, URL validation, encryption round trips, plaintext canaries, wrong-passphrase/tampering, KDF/size bounds, and refusal to store plaintext.
+- scripts/check-public-data-boundary.mjs scans tracked paths and public/build output for prohibited private file types/path segments and common credential formats.
+- Isolated local validation: 11 crypto/schema/adapter tests passed and strict TypeScript checks passed for the core modules. The full frontend dependency tree and browser UI/IndexedDB flow were not run locally.
+- Next: inspect the actual GitHub Actions run and complete the dummy-data browser smoke test before using real CV or application data. Phase 3 remains out of scope.

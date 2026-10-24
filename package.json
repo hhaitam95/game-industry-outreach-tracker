@@ -12,7 +12,8 @@
     "lint": "eslint --max-warnings=0 --ext .js,.mjs,.ts,.tsx src scripts tests vite.config.ts eslint.config.js",
     "typecheck": "tsc --noEmit",
     "test": "node --test tests/*.test.mjs",
-    "feedback-report": "node scripts/feedback-report.mjs"
+    "feedback-report": "node scripts/feedback-report.mjs",
+    "check:privacy": "node scripts/check-public-data-boundary.mjs"
   },
   "dependencies": {
     "react": "^18.2.0",

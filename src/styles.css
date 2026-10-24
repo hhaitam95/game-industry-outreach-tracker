@@ -278,3 +278,79 @@ button:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
 }
+
+
+/* Phase 2: browser-local encrypted private workspace */
+.private-data-page { gap: 18px; }
+.private-data-intro,
+.private-data-card {
+  padding: 23px 25px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+.private-data-intro > p,
+.private-data-card > p,
+.private-data-card .section-heading p {
+  max-width: 850px;
+  margin: 10px 0 0;
+  color: #727d72;
+  font-size: 12px;
+  line-height: 1.75;
+}
+.private-data-card h3 { margin: 0; font-size: 16px; letter-spacing: -0.025em; }
+.private-data-card h4 { margin: 0; font-size: 12px; font-weight: 700; }
+.privacy-facts { display: grid; gap: 8px; margin: 14px 0 0; padding-left: 19px; color: #667267; font-size: 11px; line-height: 1.65; }
+.vault-state { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 7px; padding: 8px 10px; border: 1px solid #e7e9e5; border-radius: 999px; color: #737d73; font-size: 10px; font-weight: 650; white-space: nowrap; }
+.vault-state-open { border-color: #d9e7d6; background: #f2f7ef; color: #4c6a50; }
+.vault-state-dot { width: 6px; height: 6px; border-radius: 50%; background: #9ba49a; }
+.vault-state-open .vault-state-dot { background: #608d65; }
+.vault-form { display: grid; max-width: 760px; gap: 8px; margin-top: 17px; }
+.vault-form label { margin-top: 5px; color: #586558; font-size: 11px; font-weight: 650; }
+.vault-form input,
+.vault-form textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 11px 12px;
+  border: 1px solid #dfe5dd;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 12px;
+  outline: none;
+}
+.vault-form input:focus-visible,
+.vault-form textarea:focus-visible { border-color: #8ca991; box-shadow: 0 0 0 3px rgb(99 134 109 / 15%); }
+.vault-form textarea { resize: vertical; line-height: 1.65; }
+.vault-form > .button { justify-self: start; margin-top: 8px; }
+.vault-warning { margin-top: 13px !important; padding: 11px 13px; border-left: 3px solid #c9ad6d; background: #fcf9f1; color: #746443 !important; }
+.vault-message { margin: 0; padding: 12px 14px; border: 1px solid #dfe7dc; border-radius: 10px; background: #f5f8f3; color: #4e6d52; font-size: 12px; line-height: 1.6; overflow-wrap: anywhere; }
+.vault-message-error { border-color: #ead2ce; background: #fff7f5; color: #8a453b; }
+.vault-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.vault-actions-wrap { margin-top: 18px; }
+.button-danger { border-color: #ead2ce; background: #fff8f6; color: #8a453b; }
+.button-danger:hover { background: #fff0ec; }
+.record-count { padding: 7px 9px; border-radius: 7px; background: #f4f6f2; color: #6c776b; font-size: 10px; white-space: nowrap; }
+.private-record-list { display: grid; gap: 0; margin-top: 15px; border-top: 1px solid #eef1ec; }
+.private-record-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 15px; padding: 14px 0; border-bottom: 1px solid #eef1ec; }
+.private-record-row p { margin: 5px 0 0; color: #758075; font-size: 11px; line-height: 1.6; overflow-wrap: anywhere; }
+.private-record-row .private-record-url { color: #6f8771; font-size: 10px; }
+.record-status { flex: 0 0 auto; padding: 5px 7px; border: 1px solid #e1e8df; border-radius: 999px; background: #f6f8f4; color: #667b65; font-size: 9px; text-transform: capitalize; }
+.empty-record-note { margin-top: 13px !important; color: #90988f !important; }
+.import-form { max-width: 720px; margin-top: 24px; padding-top: 20px; border-top: 1px solid #eef1ec; }
+.import-form input[type="file"] { padding: 8px; background: #fafbf9; }
+.import-form .muted-note { margin-top: 4px; line-height: 1.7; }
+.private-data-caveats { background: #fafbf9; box-shadow: none; }
+.private-data-caveats p { max-width: 900px; }
+@media (max-width: 760px) {
+  .private-data-intro,
+  .private-data-card { padding: 19px 16px; }
+  .private-data-intro .section-heading,
+  .private-data-card .section-heading { align-items: flex-start; }
+  .vault-state { font-size: 9px; padding: 7px 8px; }
+  .vault-actions-wrap { align-items: stretch; }
+  .vault-actions-wrap .button { flex: 1 1 100%; }
+  .private-record-row { gap: 10px; }
+}

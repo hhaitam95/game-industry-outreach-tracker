@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { getNavItem, NAV_ITEMS } from "./lib/navigation.mjs";
+import PrivateDataSettings from "./components/PrivateDataSettings";
 
 const pageRoadmap: Record<string, string> = {
   studios: "Phases 3–5",
@@ -128,8 +129,7 @@ function OverviewPage({ onNavigate }: { onNavigate: (pageId: string) => void }) 
         </div>
       </section>
       <p className="privacy-footnote">
-        This shell contains no studio records or personal application data. Later phases add browser-local data handling
-        and discovery features.
+        Studio and opportunity discovery is not implemented yet. Private candidate records created in Settings remain encrypted in this browser and are not synced to a server.
       </p>
     </div>
   );
@@ -214,12 +214,14 @@ export default function App() {
           </div>
           <span className="phase-badge">
             <span className="phase-badge-dot" />
-            Phase 1 · Foundation
+            Phase 2 · Private data
           </span>
         </header>
         <div className="page-content">
           {isOverview ? (
             <OverviewPage onNavigate={setActivePageId} />
+          ) : activeItem.id === "settings" ? (
+            <PrivateDataSettings />
           ) : (
             <PlaceholderPage pageId={activePageId} onNavigate={setActivePageId} />
           )}

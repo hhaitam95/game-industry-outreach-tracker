@@ -26,3 +26,9 @@ Meaningful changes are recorded here. This file starts with the initial document
 - Added architecture proposal for evidence-backed discovery, role matching, human-reviewed outreach, application tracking, optional salary estimates, and private remote access.
 - Added AI-agent operating rules and repository safety/approval requirements.
 - Application code and automated tests have not yet been implemented.
+
+## 2026-10-25 — Phase 2 private-data foundation
+
+- Added strict versioned schemas for private profile, resume metadata, outreach drafts, and application records; raw CV content is not persisted.
+- Added a passphrase-derived AES-256-GCM vault, encrypted IndexedDB persistence, encrypted backup export/import, lock/delete actions, and a Settings workflow.
+- Added cryptographic/schema tests and a post-build privacy-boundary check in frontend CI. Cloud CI and browser smoke-test acceptance remain to be confirmed.

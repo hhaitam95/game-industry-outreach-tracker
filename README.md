@@ -2,7 +2,7 @@
 
 A personal, evidence-driven workspace for discovering video game studios and opportunities worldwide, assessing transferable technical skills, preparing tailored outreach, and tracking application outcomes.
 
-> **Current status:** Phase 1 static frontend shell and cloud CI are implemented on `feat/static-frontend-shell`. Check that branch's latest GitHub Actions run for the current validation result. Product functionality is still being built in phases.
+> **Current status:** Phase 2 browser-local encrypted workspace is implemented on `feat/browser-local-private-data`; cloud CI and the dummy-data browser smoke test remain acceptance gates. Studio discovery, resume parsing, full outreach drafting, and broader application management are future work.
 
 ## Current frontend shell
 
@@ -11,7 +11,8 @@ A personal, evidence-driven workspace for discovering video game studios and opp
 - Placeholder screens clearly distinguish planned features from implemented functionality; no fake studio or application data is shown.
 - ESLint, Prettier, TypeScript checks, Node's built-in test runner, and a local-to-AI feedback report.
 - GitHub Actions validates frontend formatting, lint, types, tests, and a production build using a repository subpath.
-- No server-side runtime, external analytics, private profile storage, resume processing, or automatic outbound communication is included in this phase.
+- Settings supports a passphrase-protected local vault, profile fields, basic application records, encrypted backup export/import, locking, and local deletion.
+- No server-side runtime, remote sync, raw CV storage, resume processing, or automatic outbound communication is included.
 
 ## Product goals
 
@@ -29,7 +30,7 @@ A personal, evidence-driven workspace for discovering video game studios and opp
 
 GitHub Pages is a public static host, not a private server-side application. The current source repository remains private. The planned Pages release will publish only a static build and an allowlisted public studio/opportunity feed to a separate public deployment repository.
 
-Private candidate profile data, resume content, personal drafts, and application history must never be committed or published. Later phases will process selected resumes locally in the browser and use encrypted browser-local records/export/import. This is not automatic cloud sync. A private backend would require a future decision.
+Private candidate profile data, resume content, personal drafts, and application history must never be committed or published. Profile and tracker records use encrypted browser-local records with user-controlled encrypted export/import. Original CVs and extracted resume text are not stored, and this is not automatic cloud sync. A private backend would require a future decision.
 
 ## Development and testing
 

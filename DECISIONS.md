@@ -180,3 +180,12 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Context:** The user prefers results to be available directly from GitHub Actions and wants local testing minimized while retaining a simple way to share environment-specific failures.
 - **Decision:** Run formatting, lint, type checking, unit tests, and a static subpath build in GitHub Actions on branch pushes and pull requests. Provide documented optional macOS/VS Code setup and a single-command local report. The report records versions, changed path names, check results, and selected sanitized diagnostics; it does not include raw logs, source contents, or diffs.
 - **Consequences:** Cloud CI is authoritative for committed revisions. Local reports are a diagnostic aid only; pattern-based redaction cannot guarantee that every possible sensitive detail is recognized, so the report warns users to review it before sharing.
+
+
+## ADR-022 — Encrypted browser-local vault and backup envelope
+
+- **Date:** 2026-10-25
+- **Status:** Accepted implementation; browser acceptance tests pending
+- **Context:** Phase 2 needs private records without a server, paid service, or automatic cloud sync.
+- **Decision:** Store only versioned AES-256-GCM encrypted envelopes in IndexedDB. Derive a non-extractable key from the user passphrase with PBKDF2-HMAC-SHA-256 at 600,000 iterations. Use a fresh random IV for each encryption. Encrypted JSON export/import is bounded to 5 MiB. Strict schemas reject unknown fields and do not model raw resume contents. The user must confirm before import replaces local records.
+- **Consequences:** A lost passphrase cannot be recovered; exports need separate safe backup handling. The vault is browser/device local and is not protection from malicious scripts while unlocked. Manual browser testing with dummy records and a green cloud CI run remain acceptance gates before real personal data is used.

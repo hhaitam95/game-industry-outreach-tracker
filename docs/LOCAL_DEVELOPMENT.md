@@ -154,3 +154,18 @@ The source repository's GitHub Actions run is authoritative for the committed re
 - **`npm ci` fails**: retain the error summary, check the Node/npm versions, and do not delete or regenerate the lockfile as a workaround.
 - **Cloud CI passes but local checks fail**: compare your Node/npm versions and ensure `npm ci` was run in the repository root.
 - **Local checks pass but cloud CI fails**: share the cloud Actions run URL or ask the assistant to inspect the run; do not repeat tests needlessly.
+
+
+## Phase 2 browser smoke test — dummy data only
+
+This acceptance check exercises browser IndexedDB, passphrase unlock, downloads and restore behavior that Node unit tests cannot fully validate. Use a current browser over HTTPS or localhost. Do not enter real personal data.
+
+1. Open Settings and create a vault using a throwaway test passphrase of at least 12 characters. Expected: the vault is created and marked unlocked.
+2. Enter a fake profile name/headline and save the profile. Add a clearly fake studio/role record. Expected: both actions show success and the application appears in the list.
+3. Reload the page. Expected: the vault appears locked and private records are not rendered until the passphrase unlocks it.
+4. Open browser DevTools → Application/Storage → IndexedDB → studio-outreach-private-vault → encrypted-records. Expected: the encrypted-workspace-v1 value contains the envelope fields format, version, cipher, kdf, iterations, salt, iv, and ciphertext; none of the dummy strings are readable.
+5. Unlock and download an encrypted backup. Open it in a text editor. Expected: JSON envelope metadata and ciphertext only; profile/application text is not readable.
+6. Lock and unlock again. Expected: the fake records return.
+7. In a throwaway test, export a backup, delete the vault, create a fresh vault, and import the backup using the backup's original passphrase. Confirm the replacement warning. Expected: the fake records restore and the imported backup passphrase becomes the local vault passphrase.
+
+A forgotten passphrase cannot be reset. Browser storage may be cleared or evicted. Keep backups safely and never send a real backup or its passphrase to an external service.

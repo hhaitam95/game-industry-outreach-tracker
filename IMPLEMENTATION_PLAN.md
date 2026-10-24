@@ -47,6 +47,8 @@
 
 ## Phase 2 — Browser-local private data foundation
 
+**Implementation status:** Implemented on feat/browser-local-private-data. Encrypted schemas, IndexedDB adapter, Settings workflow, backup import/export, unit tests, and a build-artifact privacy check are included. Phase 2 is not accepted until feature-branch cloud CI is green and the browser workflow is smoke-tested with dummy data only.
+
 ### Scope
 - Define local profile, resume metadata, draft and application record schemas.
 - Choose client-side persistence: encrypted IndexedDB or a similarly appropriate browser-local mechanism.
@@ -186,4 +188,4 @@
 
 ## Immediate next coding task
 
-Confirm the final standard GitHub Actions run for the closeout commit on `feat/static-frontend-shell` is green. Once accepted, begin Phase 2 — browser-local private data foundation — with schemas, dummy test data, and a privacy-focused storage/export prototype. Keep real CV/application data and public deployment out of scope until the relevant privacy checks are designed and tested. Do not build the crawler or enable scheduled polling as part of Phase 1.
+Confirm cloud CI for feat/browser-local-private-data is green and perform the dummy-data browser smoke test documented in docs/LOCAL_DEVELOPMENT.md. Do not introduce real CV/application content until both acceptance checks pass. Phase 3 can then define studio/opportunity schemas and seed a small sourced public dataset. Do not build the crawler or enable scheduled polling as part of Phase 2.
