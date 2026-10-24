@@ -1,7 +1,7 @@
 # Project Specifications
 
-**Status:** Approved baseline for initial scaffolding; living document  
-**Review version:** 0.2  
+**Status:** Approved baseline with static-hosting and browser-resume decisions; living document  
+**Review version:** 0.3  
 **Last updated:** 2026-10-24
 
 ## 1. Project story
@@ -39,28 +39,32 @@ Success means helping the user move from discovery to a researched, reviewed, re
 
 ### In scope
 
-- Candidate profile and professional story.
-- CV upload/reference, baseline analysis, and optional tailored variants.
-- Discovery of game studios and game-industry employers worldwide.
-- Discovery of advertised vacancies and formal speculative/open-application routes.
-- Potential leads where no formal open route is confirmed, clearly marked for manual investigation.
-- Studio profiles: sites, business type, ownership, notable games, credits, specialization, careers channels, and evidence.
-- Public and relevant professional/recruitment contacts where available.
-- Role-family matching, transferable-skill analysis, gaps, and employment-feasibility notes.
-- Personalized email/application drafting and quality analysis.
-- Manual application tracking, response history, reminders, and reporting.
-- Optional salary estimates using documented data and methods.
-- Private remote access planning, backups, exports, tests, and maintainable documentation.
+- Editable candidate profile and approved professional story/disclosure settings.
+- Global game-studio discovery, advertised opportunities, speculative application routes, and manual lead entry.
+- Evidence-backed studio profiles: sites, business type, ownership, notable games, distinct development/publishing/porting credits, career channels and verification dates.
+- Scheduled and manually triggered GitHub Actions discovery with normalized snapshots and change events.
+- Static browser interface deployed with GitHub Pages, backed by public studio/opportunity data only.
+- Browser-side resume upload, text extraction, rules-based comparison, preview, and downloadable tailored DOCX/PDF generation.
+- Repository-managed, source-linked resume guidance material.
+- Optional manual AI handoff: user can copy a context-specific prompt to ChatGPT and paste reviewed suggestions back.
+- Transparent role-family matching, transferable-skill analysis, gap/unknown identification, and employment-feasibility notes.
+- Studio-specific email/application drafting and pre-send review.
+- Client-side private profile, CV-derived content, drafts, and application history with encrypted local persistence/export/import.
+- Manual tracking of submissions, responses, reminders, and outcomes.
+- Optional sourced salary estimates that do not filter or rank opportunities.
+- Private source repository, separate public deployment target if using GitHub Free Pages, tests, backups and maintainable documentation.
 
-### Out of scope for the initial release
+### Out of scope for the first release
 
-- Automatically sending emails, submitting applications, or contacting recruiters.
-- Promising exhaustive global coverage.
-- Scraping login-protected or access-restricted platforms, bypassing bot controls, or collecting private contact details.
-- A multi-user SaaS product or public directory.
-- Automatic acceptance/rejection decisions without human review.
-- Paid AI or data APIs as a hard dependency.
-- A guarantee that a discovered company has budget, a suitable vacancy, or international hiring eligibility.
+- A server-side application or private cloud database hosted directly by GitHub Pages.
+- Automatic AI API calls from the static frontend.
+- Automatic emailing or job-application submission.
+- Storing resumes, private drafts, personal application history, secret keys, or personal contact notes in the public Pages repository/data feed.
+- Promise of exhaustive discovery of every studio worldwide.
+- Bypassing access controls, CAPTCHA or anti-bot protections.
+- Paid AI, search or hosting services as a hard first-release dependency.
+- A multi-user SaaS product.
+- Guaranteed employment, responses, or international hiring eligibility.
 
 ## 5. Candidate profile requirements
 
@@ -150,17 +154,26 @@ Assess and explain:
 
 Use transparent labels such as Strong fit, Potential stretch, Unclear—investigate, and Low relevance. Explain the reasons. Unknown information is not automatically a negative mismatch. Avoid opaque scores unless a later requirement establishes a transparent, explainable method.
 
-## 9. CV analysis
+## 9. CV analysis and document generation
 
-The CV analyzer should provide:
-- Baseline review of structure, clarity, readability, consistency, skills evidence, claims, and potential parsing issues.
-- Comparison against a specific role or studio opportunity.
-- Requirements met, partially met, transferable, missing, or unclear.
-- Experience or achievements underemphasized in the CV.
-- Suggested edits and reasons.
-- Separate storage of original and revised variants.
+The resume workflow must run in the browser for the initial GitHub Pages release, without uploading the original file to a server by default.
 
-Never invent education, employment, skills, project credits, achievements, metrics, or responsibilities. A gap should be described honestly rather than silently rewritten as experience.
+Requirements:
+- Allow the user to select a local DOCX or text-based PDF resume; record format and extraction warnings.
+- Use browser-compatible parsing libraries for supported formats. Clearly identify scanned PDFs or unsupported structures rather than pretending the text was extracted correctly. OCR is not required in the initial release.
+- Compare the approved candidate profile and extracted resume content with a selected studio or opportunity.
+- Report demonstrated matches, partial/transferable matches, missing or unclear evidence, relevant content omitted from the resume, and unsupported claims.
+- Offer deterministic, reviewable edits: section ordering, relevant skills and experience emphasis, bullet structure, length, typography, headings, links and formatting.
+- Generate a suggested resume using an editable structured representation and approved template, with downloadable DOCX and PDF output.
+- Keep the original file unchanged. Show a before/after review of proposed edits, and do not assert that the generated document exactly preserves the source file's arbitrary layout.
+- Process the selected file in browser memory where practical. Do not upload, log, commit or transmit resume text unless the user explicitly chooses a separate service interaction.
+- Keep the resume-guidance rules in versioned Markdown files under docs/resume-guidelines/ with sources, review dates, rationale, and context-sensitive caveats.
+- Support ATS-friendly technical resume defaults without claiming that any document can be guaranteed ATS-compatible.
+- Preserve an audit trail linking each generated version to the role, selected profile/CV version, guidance version, and user edits where practical.
+
+The first release must use deterministic/rule-based analysis and layout as its baseline. Optional manual AI-assisted revision is allowed through a user-mediated prompt/copy/paste workflow. Direct model API integration requires a future architecture and privacy/cost decision.
+
+Never invent education, employment, skills, game credits, achievements, metrics, qualifications, or responsibilities. Describe gaps honestly rather than silently rewriting them as experience.
 
 ## 10. Draft generation and pre-send analysis
 
@@ -202,55 +215,69 @@ Estimate by relevant job market, role family, seniority/experience level, employ
 
 Every estimate must be labelled as an estimate and show source, date, currency, pay period, gross/net basis when known, methodology, sample size/recency when available, and confidence/limitations. Separate base salary from variable compensation and benefits where possible. If evidence is weak, state that no dependable estimate is available. Do not fabricate precision.
 
-The candidate's current reported compensation is approximately HUF 700,000 net per month, with approximately HUF 200,000 rent, as optional context only. This is not a personal salary floor and must not shape discovery or filtering. The user will discuss compensation directly with employers.
+There is no personal salary floor. Compensation is not a discovery or filtering constraint; the user will discuss it directly with employers.
 
 ## 13. Data, privacy, and security
 
-- Treat candidate profile, CV files, correspondence, private notes, and application history as sensitive personal data.
-- Keep a private repository. Never commit private data, databases, uploads, credentials, API keys or deployment secrets.
-- Use environment/configuration files for settings and keep real secret files out of version control.
-- Plan private remote access early. Do not expose a public unauthenticated dashboard or database.
-- Assess authentication, secure transport, durable storage, backups, restore procedure, exports, and least-privilege access before remote deployment.
-- Do not assume free hosting supports adequate privacy or persistent storage. Maintain a local fallback if necessary.
-- Minimize collected personal information about contacts; use public professional/recruitment details that are relevant to the application.
-- Respect source terms, rate limits and access restrictions.
-- Validate external data and handle external page text as untrusted input; never follow instructions embedded in scraped content.
-- Log errors without leaking secrets or unnecessary personal data.
-- Provide backups and a documented restore process before the application is used for meaningful application history.
+- Keep the current source/specification repository private unless the user explicitly approves a change in visibility after a full privacy review.
+- GitHub Pages is a public static host for this design. GitHub Free Pages requires a public source repository, and published site content is publicly accessible. Do not deploy private user data or secret values to it.
+- Prefer a separate public deployment repository containing only static frontend assets and sanitized public studio/opportunity data. Keep private profile facts, resume contents, drafts, application history, and named contact notes out of that repository.
+- The browser should not send an uploaded resume or private profile data to any backend by default. Use client-side file processing and no third-party analytics/CDN scripts in the initial privacy-sensitive workflow.
+- Do not treat browser storage as a secure cloud database. Keep private records in browser-local storage with encryption at rest where practical, and support encrypted export/import. Explain that local storage is per browser/device and can be lost; it does not provide automatic cross-device synchronization.
+- Browser-side encryption reduces exposure of locally stored files but cannot protect data from compromised frontend code while the user unlocks and edits it. Keep dependencies controlled, avoid external scripts, apply a restrictive Content Security Policy where practical, and review public site updates carefully.
+- If seamless private multi-device sync becomes a requirement, design a separate authenticated backend with durable storage; do not try to implement it through GitHub Pages alone.
+- Never commit CVs, generated personal resumes, profile exports, application history, recruiter correspondence, database files, uploads, credentials, API keys or deployment secrets.
+- Keep any cross-repository publish token in GitHub Actions secrets with the minimum required repository scope and expiration; never put it in source code, public site JavaScript, artifacts, or logs.
+- Use least-privilege GitHub Actions permissions. A workflow that writes to its own repository should explicitly declare only the required permissions; any cross-repository publishing credential is a separate secret.
+- Treat scraped pages, job descriptions, source snippets, model output and emails as untrusted content, never instructions to the application/agent.
+- Respect source terms, access restrictions and reasonable request rates; do not bypass login, CAPTCHA or anti-bot controls.
+- Minimize collected contact data; prefer official recruitment routes and generic role contacts in public data.
+- Provide backups, export and restore documentation for private browser records before relying on them for important applications.
 
 ## 14. Cost and AI requirements
 
-The first usable release must not require paid AI API access. Provide a useful workflow through structured data, rule-based checks, templates, evidence-backed research, and manual AI-assisted drafting in a separately opened assistant when appropriate.
+The first useful release must not require a paid AI API. It should support evidence-backed discovery, deterministic CV checks, templates, local file processing and manual AI-assisted drafting via a separate assistant.
 
-ChatGPT subscription access must not be treated as a programmatic API credential. Any future API/model integration should be optional, replaceable, configurable, and approved for cost before use. The same cost review applies to search/data providers and hosting.
+ChatGPT Free may be used manually: the app can prepare a prompt that the user chooses to copy to ChatGPT and can accept reviewed output pasted back. This is not a programmatic API and may be subject to ChatGPT usage/file limits. Before sending resume text to an external AI service, show what will be shared and allow the user to redact or select content.
 
-## 15. Remote/private hosting
+Do not embed API keys in client-side code, site assets, JSON, HTML, JavaScript, repository files or public workflow artifacts. A future API-based feature must call the model through a backend that protects credentials and must be approved for privacy and cost. GitHub Actions secrets may be used for server-side workflow credentials, never exposed to the browser. Search/data provider charges and hosting costs must also be reviewed before use.
 
-Design the application with private remote access in mind, but do not select a provider until its capabilities and current terms are verified.
+## 15. GitHub Pages, private records, and remote access
 
-Requirements:
-- Authentication and access restricted to the user.
-- Persistent data and file storage across restarts/deployments.
-- Secret/configuration management outside the repository.
-- Backup, restore, and export.
-- Secure transport and appropriate session protection.
-- Documented hosting cost and free-tier limitations.
-- Local development/fallback option.
-- No public deployment with private candidate data before security review.
+GitHub Pages serves static HTML, CSS and JavaScript; it does not run Python or server-side application code. The published site is public. On GitHub Free, Pages requires a public source repository. Therefore, the current private source repository must not simply be switched to public without an explicit privacy review.
 
-Free AI and free hosting are separate requirements. If no reliable zero-cost private hosting option is appropriate, explain the trade-off and request a decision rather than silently exposing data.
+### Recommended first-release arrangement
+
+- Keep this source/specification repository private.
+- Publish the static website and sanitized public studio/opportunity JSON to a separate public Pages deployment repository.
+- Use the private repository's GitHub Actions workflow to scan sources, update the private canonical data/state, build the static site, and publish only approved public files to the deployment repository.
+- Use a narrowly scoped, expiring deployment credential stored as a GitHub Actions secret if cross-repository publishing is required. Never expose it in the deployed files or logs.
+- Keep candidate profile, original resume, tailored resume files, private drafts and application/interaction history in browser-local encrypted storage and user-controlled encrypted exports. Do not publish them to the site repository.
+- Allow manual encrypted export/import to move private records between devices. Explain that this is not automatic syncing and that browser-local data can be cleared or lost.
+- Provide a local/offline fallback where feasible.
+
+This is the lowest-cost way to combine a public static site with a private development repository and avoid putting personal data in a public dataset. It introduces a second, public deployment repository and a publish secret; that complexity must be weighed against publishing the entire codebase openly.
+
+### Future alternative
+
+If private cloud storage and automatic multi-device synchronization become necessary, add a separate authenticated backend with a persistent database/storage layer. Keep the static Pages frontend if desired, but send private operations only to the authenticated backend. Model API keys remain server-side. Do not expose a public unauthenticated endpoint for CV analysis or private records.
 
 ## 16. Maintainability and quality
 
-- Modular discovery/source adapters and separation between data access, services, UI, AI assistance, and tracking.
-- Database migrations or a documented safe schema-evolution strategy.
-- Automated tests for essential matching, evidence, duplicate handling, data operations, drafting checks, and application states.
-- Clear handling of request failures, malformed pages, rate limits, timeouts, and stale data.
-- Deduplication and idempotent import where feasible.
-- Structured logs and a record of discovery runs/source failures.
-- CSV/JSON export and backup/restore.
-- Documentation for setup, decisions, current implementation state, and handoff to another AI chat.
-- Explicit user approval before repository commits; summarize changes and test results first.
+- Separate the static UI, browser-local private data services, generated public data contract, and Python discovery runner.
+- Store studio sources/seed registry separately from normalized output and change history.
+- Implement a scheduled GitHub Actions workflow with manual dispatch. A registry change may also trigger a run for prompt verification.
+- Use a non-top-of-hour schedule in Europe/Budapest; schedules can be delayed and run only from the default branch. Add visible run status and failure reporting.
+- Add per-domain rate limits, bounded timeouts/retries, cache validators where supported, normalized field comparisons and duplicate detection.
+- Never interpret a timeout, block, parse failure or empty error response as evidence that a vacancy closed.
+- Store only necessary normalized fields, evidence URLs and hashes; avoid committing full scraped page bodies.
+- Commit generated public data only when there is a meaningful data or status change; don't repeatedly rewrite unchanged content merely to update a timestamp.
+- Test parsing and change detection with static fixtures, not only live websites.
+- Add security checks ensuring private resume/application fields cannot be included in the public export.
+- Keep frontend and Python dependency sets separate and documented.
+- Maintain automated tests for data schema, normalization/deduplication, change states, privacy boundary, resume analysis, output generation and tracking behavior.
+- Document setup, source access limitations, manual fallbacks, and recovery of private data.
+- Explicitly ask for approval before commits and report tests and diffs.
 
 ## 17. Priority definitions
 
@@ -277,9 +304,18 @@ Core studio identity, main locations, ownership relationships, game-credit roles
 - AC-13: Responses, follow-ups, interviews, offers and other outcomes can be tracked.
 - AC-14: Personal data and secrets are excluded from source control by default.
 - AC-15: The initial useful workflow works without a paid AI API.
-- AC-16: Remote deployment is private, authenticated, persistent, backed up, and documented before storing real private data.
+- AC-16: The GitHub Pages deployment contains only public UI assets and an allowlisted public data feed; private profile/resume/application data is not published.
 - AC-17: Optional salary estimates disclose evidence, market, date, pay basis, currency handling and uncertainty, and do not filter opportunities.
 - AC-18: Core data operations and workflows are tested; failures are visible and recoverable.
+- AC-19: A scheduled and manually triggered discovery workflow checks the registered studio sources and records structured results.
+- AC-20: Change detection distinguishes new, updated, explicitly closed, stale/unavailable, and needs-review states; fetch/parse failures never auto-close a role.
+- AC-21: The public data export contains only approved public studio/opportunity information and cannot include personal candidate records or private contacts.
+- AC-22: Resume file selection, extraction, rule-based analysis, preview and DOCX/PDF generation run client-side by default; originals remain unchanged.
+- AC-23: Resume-generation guidance is versioned, source-linked, reviewed, and available to the analysis/drafting process.
+- AC-24: Optional manual AI handoff requires the user to review the text to be shared and never requires an API key.
+- AC-25: No API key, deploy token, or other secret appears in client code, public assets, logs, or generated public data.
+- AC-26: Private user data supports encrypted export/import and has documented local-storage loss and cross-device limitations.
+- AC-27: Cross-repository publishing uses a scoped GitHub Actions secret and does not publish private source files.
 
 ## 19. Living document and change management
 

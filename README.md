@@ -1,46 +1,49 @@
 # Game Industry Outreach Tracker
 
-A personal, evidence-driven tool for discovering video game studios and opportunities worldwide, assessing how a candidate's existing technical experience could transfer into game development, preparing tailored outreach, and tracking application outcomes.
+A personal, evidence-driven tool for discovering video game studios and opportunities worldwide, assessing transferable technical skills, preparing tailored outreach, and tracking application outcomes.
 
-> **Status:** Documentation and foundation setup. The application itself has not been implemented yet. Requirements are a living document and may change as the project develops.
+> **Status:** Architecture/documentation stage. The application and scheduled discovery workflow are not implemented yet. Requirements are living documents.
 
-## Project goals
+## Goals
 
-- Discover studios with relevant advertised roles or verified speculative/open-application routes.
-- Build concise studio profiles with evidence for ownership, locations, business type, games, credits, and application channels.
-- Explain how the candidate's skills might fit a role or studio, including gaps and unknowns.
-- Analyze CVs and prepare studio-specific outreach drafts.
-- Keep the candidate in control: messages are reviewed and sent manually.
-- Track research, applications, responses, follow-ups, and outcomes.
-- Start without paid AI APIs, while keeping optional integrations replaceable.
-- Plan for private remote access early without exposing private candidate data.
+- Discover relevant advertised roles and verified speculative-application routes worldwide.
+- Build source-backed studio profiles with ownership, locations, notable games, and explicit development/publishing credit relationships.
+- Monitor registered studios with a daily/manual GitHub Actions discovery workflow.
+- Explain role relevance, transferable skills, gaps and unknowns.
+- Process resumes in the browser, analyze them against an opportunity, and generate reviewed DOCX/PDF versions.
+- Maintain sourced resume guidance in the repository.
+- Prepare personalized outreach and pre-send checks; the user sends messages manually.
+- Track responses, follow-ups and outcomes.
+- Start without paid AI API access.
 
-## Current scope
+## Hosting and privacy model
 
-The initial user is a single candidate with a technical software-support background seeking a route into the video game industry. The search is worldwide and intentionally open to adjacent or stretch roles. Salary estimates are optional and must not filter or rank opportunities.
+GitHub Pages is a public static host, not a private server-side application. The current source repository should remain private. For GitHub Free Pages, the plan is to publish only a static build and an allowlisted public studio/opportunity data feed to a separate public deployment repository.
 
-See the project specifications for complete requirements, priorities, and acceptance criteria.
+Private candidate profile data, resume content, personal drafts and application history must not be committed or published. The initial design processes selected resumes locally in the browser and uses encrypted browser-local records/export/import. This is not automatic cloud sync. A private backend would require a future decision.
 
 ## Proposed technology direction
 
-The initial direction is Python, Streamlit, and SQLite, with modular discovery adapters and tests. These are documented as proposed baseline choices and may be revised if implementation or remote-hosting requirements justify a change.
+- TypeScript + Vite for the static frontend.
+- Python scripts under GitHub Actions for scheduled public-source discovery.
+- Browser-side resume processing, deterministic checks, and DOCX/PDF downloads.
+- Optional manual AI prompt handoff; no direct model API required.
+- Tests for source parsing, change detection, data privacy and document workflow.
 
-The first release must work without a paid model API. ChatGPT Free access is not assumed to provide programmatic API access; manual AI-assisted drafting is the fallback.
+These are proposed architecture choices documented in ARCHITECTURE.md and DECISIONS.md.
 
 ## Documentation
 
-- PROJECT_SPECS.md — goals, user stories, requirements, constraints, and acceptance criteria.
-- ARCHITECTURE.md — modules, data model, evidence provenance, privacy, hosting, and system flow.
-- IMPLEMENTATION_PLAN.md — phased roadmap and exit criteria.
-- DECISIONS.md — decisions, rationale, and status.
-- AGENTS.md — instructions for AI coding agents and repository safety.
+- PROJECT_SPECS.md — product scope, requirements and acceptance criteria.
+- ARCHITECTURE.md — static hosting, discovery pipeline, data model, resume processing and privacy.
+- IMPLEMENTATION_PLAN.md — phases and exit criteria.
+- DECISIONS.md — decisions, rationale and status.
+- AGENTS.md — AI-agent operating and security instructions.
 - CHANGELOG.md — meaningful project changes.
-- HANDOFF.md — current state, known limitations, and next task.
+- HANDOFF.md — current state and next task.
+- docs/resume-guidelines/ — source-linked resume standards and role-specific guidance.
+- docs/operations/automated-discovery.md — proposed daily workflow and change-detection behavior.
 
-## Current status
+## Repository hygiene
 
-No application functionality is implemented yet. The current stage is project documentation and repository scaffolding. See HANDOFF.md before continuing work.
-
-## Privacy reminder
-
-Do not commit personal CVs, application history, recruiter correspondence, database files, uploaded documents, credentials, API keys, or deployment secrets. Keep private data outside source control and use the approved private-storage design.
+Do not commit CVs, resume exports, personal application history, correspondence, local databases, profile exports, credentials, API keys or deployment tokens. See .gitignore and AGENTS.md.

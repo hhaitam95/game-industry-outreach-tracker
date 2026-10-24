@@ -19,6 +19,14 @@ build/
 .coverage.*
 htmlcov/
 
+# Frontend build artifacts
+node_modules/
+dist/
+.vite/
+coverage/
+playwright-report/
+test-results/
+
 # Local configuration and secrets
 .env
 .env.*
@@ -34,10 +42,16 @@ private/
 uploads/
 exports/
 backups/
+resume-uploads/
+private-resumes/
+outputs/resumes/
+personal-data/
 *.db
 *.sqlite
 *.sqlite3
 *.db-journal
+*.pdf
+*.docx
 
 # Editor/OS
 .DS_Store

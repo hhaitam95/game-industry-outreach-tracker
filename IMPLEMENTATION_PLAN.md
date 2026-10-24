@@ -1,171 +1,187 @@
 # Implementation Plan
 
-**Status:** Initial roadmap; subject to revision  
+**Status:** Revised roadmap following GitHub Pages, scheduled discovery, and browser-first resume decisions  
 **Last updated:** 2026-10-24
 
-## Delivery strategy
+## Delivery principles
 
-Build an end-to-end useful workflow in small testable milestones. Do not spend months optimizing global crawling before the application can store a profile, evaluate a lead, create a draft, and track an outcome.
+- Build a complete, useful path in incremental steps.
+- Keep the source/specification repository private.
+- Use GitHub Pages only for public static frontend assets and sanitized public studio/opportunity data.
+- Keep all personal CV, profile, draft and application data out of public repositories.
+- The initial release must not require a paid AI API.
+- Do not enable a scheduled workflow before its runner and source registry exist.
+- Test parsing, state changes, public-data sanitization and browser-only privacy behavior before real use.
+- Ask explicitly before commits and report diffs/tests.
 
-Each milestone must include:
-- Scope and acceptance criteria.
-- Relevant automated/manual tests.
-- Documentation updates.
-- Known limitations.
-- A concise handoff note.
-
-## Phase 0 — Project documentation and repository foundations
-
-### Scope
-- Maintain project specifications, architecture, implementation plan, decisions, AI-agent instructions, changelog, and handoff notes.
-- Add safe repository hygiene (.gitignore, configuration example, test/lint configuration).
-- Establish branch/commit approval workflow and a privacy-first repository policy.
-- Keep the private remote-hosting choice open until requirements are assessed against real provider capabilities.
-
-### Exit criteria
-- Core requirements and acceptance criteria are documented.
-- Proposed architecture, data concepts, and privacy boundaries are documented.
-- New AI chats can understand current progress from repository documents.
-- No personal CV, application history, secrets, or database files are committed.
-
-## Phase 1 — Local application skeleton, profile, and tracker foundation
+## Phase 0 — Requirements and architecture documentation
 
 ### Scope
-- Create Python project structure and local run instructions.
-- Add Streamlit shell and basic navigation.
-- Create SQLite schema and a safe schema evolution/migration strategy.
-- Implement profile storage/editing with disclosure separation.
-- Implement manual studio/opportunity/contact/route entry.
-- Implement application and interaction statuses.
-- Add CSV/JSON export and initial backup/restore path.
-- Add basic tests and development commands.
+- Document approved requirements and living-document policy.
+- Document GitHub Pages constraints, public deployment split, Actions monitoring, change detection and CV workflow.
+- Add resume guidance sources and synthesized guidelines.
+- Establish repository hygiene, AI-agent instructions, decision records, and handoff.
+- Keep current code and personal context in the private source repository.
 
 ### Exit criteria
-- Application runs locally.
-- Profile can be created and edited.
-- User can add, inspect, filter, update and export studio/application records.
-- Core data operations have automated tests.
-- Local data files are excluded from version control.
+- Architecture and privacy boundaries are documented.
+- User has reviewed the decision to publish only static code/public data to a public Pages target.
+- No application code or public-data workflow is claimed to exist until implemented.
 
-## Phase 2 — Evidence-backed studio and opportunity model
+## Phase 1 — Static frontend shell and safe local project setup
 
 ### Scope
-- Implement source evidence records and field-level verification metadata.
-- Add studio pages: identity, aliases, locations, business type, ownership, career routes, known games and credit relationships.
-- Distinguish developer, co-developer, publisher, porting, support, and other credit types.
-- Add statuses for verified/potential/stale/conflicting/rejected information.
-- Add duplicate detection and safe merging workflows.
+- Initialize the chosen frontend toolchain (proposed TypeScript + Vite, lightweight component architecture).
+- Add base routing/navigation, styling, static build command, and local preview.
+- Add deployment-path/base-URL configuration for a GitHub Pages project site.
+- Add lint/format/test scripts and minimal CI checks.
+- Retain Python toolchain for future Actions discovery scripts.
+- Update safe .gitignore/configuration for Node build outputs and private user files.
 
 ### Exit criteria
-- Records can represent a studio with multiple locations, ownership levels, and distinct credits.
-- Important claims include provenance and verification timestamps.
-- Conflicting or unknown information is visible rather than silently resolved.
-- Manual entry remains possible for any field/source.
+- Site builds to static files and works in local preview.
+- Base URLs work when hosted under a repository subpath.
+- No server runtime, secrets or personal files are required.
 
-## Phase 3 — Controlled discovery MVP
+## Phase 2 — Browser-local private data foundation
 
 ### Scope
-- Implement a modular source-adapter interface.
-- Start with a small set of reliable, public and permitted discovery sources.
-- Capture advertised vacancy versus speculative route versus potential lead.
-- Add timeouts, rate limits, caching/retry policy, structured errors and source-run history.
-- Extract official career/application routes and relevant profile evidence.
-- Recheck selected results and mark stale records.
-- Evaluate discovery quality using a small manually verified reference set.
+- Define local profile, resume metadata, draft and application record schemas.
+- Choose client-side persistence: encrypted IndexedDB or a similarly appropriate browser-local mechanism.
+- Design encrypted export/import and recovery warnings.
+- Do not store the original CV by default; process selected files in browser memory.
+- Enforce separation between private records and public published JSON.
+- Add data export/backup tests and public-data leak checks.
 
 ### Exit criteria
-- Discovery returns source-backed candidates and avoids duplicate records.
-- Official speculative routes are not confused with ordinary careers pages.
-- Source errors and uncertain findings are visible.
-- Coverage limitations and last checked dates are reported.
+- A test profile and dummy application can be saved locally, unlocked, exported and restored.
+- Private data never appears in public data fixtures or build artifacts.
+- Browser-local and cross-device limitations are clearly explained.
 
-## Phase 4 — Matching and employment feasibility
+## Phase 3 — Studio and opportunity data model
 
 ### Scope
-- Build a candidate profile model and role-family taxonomy that can evolve.
-- Identify relevant responsibilities and skill signals from job descriptions.
-- Produce explanatory fit summaries, gaps, stretch opportunities and unknowns.
-- Track location, hiring eligibility, remote policy, language, sponsorship and relocation evidence.
-- Keep compensation estimates out of fit eligibility and default ranking.
+- Define canonical studio, site, ownership, game, credit, opportunity, application-route, source-evidence and change-event schemas.
+- Use distinct company credit roles: developer, co-developer, publisher, porting, support and other.
+- Add field-level provenance and last verification dates.
+- Add validation, stable identifiers, normalization and duplicate handling.
+- Seed a small manually verified set of studios for realistic tests.
 
 ### Exit criteria
-- Every match provides evidence-based reasons and uncertainty.
-- Unknown eligibility/salary data is not automatically treated as rejection.
-- User can adjust preferences without code changes.
+- UI can display sourced studio details and verified/unverified states.
+- Credits and ownership relationships are not flattened into ambiguous text.
+- Schema supports manual entry without automated discovery.
 
-## Phase 5 — CV analysis and personalized outreach
+## Phase 4 — Daily GitHub Actions discovery
 
 ### Scope
-- Support CV text extraction from appropriate user-supplied files, preserving originals.
-- Implement a baseline CV review and opportunity-specific analysis.
-- Build draft templates and a provider-neutral/manual AI-assisted drafting workflow.
-- Generate drafts using approved profile facts and verified studio context.
-- Add pre-send checks for personalization, factual support, generic tone, privacy, and application instructions.
-- Preserve draft history and link each draft to profile/CV versions and evidence.
+- Implement Python source adapters and a curated registry file.
+- Implement workflow triggers: scheduled daily, workflow_dispatch, optionally push on registry changes.
+- Run at a non-top-of-hour time in Europe/Budapest; use bounded concurrency, timeout and retries.
+- Check official vacancies and speculative/application routes for registered studios.
+- Use public APIs/ATS endpoints, structured data, feeds or official pages where permitted.
+- Record normalized observations, source evidence, errors and last successful observations in a dedicated private discovery-state branch so main does not receive routine scan-state commits.
+- Implement stable-ID and field/hash change detection.
+- Add guarded closure/stale logic and “unavailable / needs review” states.
+- Add manual review for dynamic, blocked or inconsistent sources; never bypass restrictions.
+- Validate public output against an allowlist and publish only sanitized files to the separate public Pages repository.
+- Store cross-repository publish credential in GitHub Actions secrets with minimum scope; never inject it into client assets.
+- Keep routine state updates on the private discovery-state branch; publish to the public Pages repository only when the normalized public dataset changes. Avoid no-op public commits; retain manual dispatch and Action run summaries.
 
 ### Exit criteria
-- User can prepare, review, edit and save a studio-specific email/application.
-- Unsupported claims are flagged.
-- CV original is never overwritten.
-- No sending occurs automatically and submission status requires user confirmation.
+- Local/fixture tests cover new/updated/closed/stale/blocked cases.
+- A failed fetch never closes a role.
+- First manual run successfully processes a small known list.
+- Only approved public company/role fields are published.
+- Daily schedule is enabled only after workflow is on default branch and manual test succeeds.
 
-## Phase 6 — End-to-end tracking and reporting
+## Phase 5 — Studio research and matching UI
 
 ### Scope
-- Connect discovery, review, drafting, sending confirmation and response logging.
-- Add follow-up dates and next actions.
-- Add dashboard views for discovered leads, ready-to-review drafts, sent applications, responses and interviews.
-- Add basic metrics with low-sample caveats.
-- Improve deduplication, error recovery and export/backup UX.
+- Display scannable studio profiles, career routes, source evidence and verification state.
+- Filter public studios/opportunities by country, role family, source/status, and fit.
+- Explain relevance and skill gaps transparently.
+- Track location and hiring eligibility as known/unknown/verified, not inferred.
+- Add manual review workflow for potential leads.
 
 ### Exit criteria
-- User can complete the principal workflow without editing the database manually.
-- Interaction history and application state remain consistent.
-- Reporting avoids implying causation or strong trends from small samples.
+- The user can research an opportunity and understand why it was found and why it may be relevant.
+- Public facts have source and freshness indicators.
+- Uncertain facts are visibly marked.
 
-## Phase 7 — Private remote deployment
-
-Plan for this early, but implement against a verified hosting choice rather than a guessed free tier.
+## Phase 6 — Resume guidance and browser-side document workflow
 
 ### Scope
-- Compare deployment options for private authentication, persistence, secure configuration, backups, restore and cost.
-- Decide whether SQLite is suitable for the provider or whether managed persistent storage is needed.
-- Add authentication/access controls and production configuration validation.
-- Configure secrets outside source control.
-- Test restart/redeploy persistence, backup/restore, access control and exports.
-- Keep local mode available.
+- Maintain docs/resume-guidelines/ as versioned, source-linked rules.
+- Bundle the applicable guidance into the static app at build time; do not rely on private files fetched from public pages.
+- Implement DOCX and text-based PDF extraction in-browser using tested libraries.
+- Handle extraction failures/scanned PDFs without false confidence; OCR remains optional/later.
+- Implement baseline rules-based checks and role-specific comparison with profile and opportunity.
+- Create structured editable resume content and diff/review display.
+- Generate downloadable DOCX and PDF without a server.
+- Keep original files unchanged and do not upload them to GitHub.
+- Add optional manual ChatGPT prompt/copy/paste flow with disclosure warning and redaction choices.
 
 ### Exit criteria
-- Only the authorized user can access the dashboard and data.
-- Data persists across restarts/deployments.
-- Backup and recovery have been tested.
-- Deployment has no committed secrets and no unintended public data access.
-- Costs and free-tier limitations are documented.
+- Supported sample CV files can be processed locally and export valid DOCX/PDF.
+- No file upload/network transfer occurs by default.
+- Suggested changes are explainable and do not invent experience.
+- Resume standards are traceable to dated source references.
 
-## Phase 8 — Optional salary estimates and advanced research
+## Phase 7 — Outreach drafting and application tracker
 
 ### Scope
-- Implement market-specific salary estimates only if there are defensible sources.
-- Support role family, seniority, geography, pay basis, sample size, confidence, source dates, and currency conversion metadata.
-- Display local market currency when location is known, with USD/EUR equivalents.
-- Add optional ownership-history and advanced reporting improvements.
-- Expand discovery source coverage and measure source precision/freshness.
+- Build studio-specific drafts from approved profile facts and sourced studio/role data.
+- Add pre-send checks for personalization, relevance, factual grounding, generic wording, tone and privacy.
+- Save draft versions locally and link them to selected profile/CV/guidance versions.
+- Track manual submission confirmations, responses, follow-ups, interviews and outcomes.
+- Build dashboard views and basic outcome metrics.
 
 ### Exit criteria
-- Salary estimates are labelled, sourced, date-stamped, and uncertainty-aware.
-- Salary never filters or ranks opportunities based on a personal minimum.
-- Weak data produces a clear unavailable/low-confidence result rather than invented precision.
+- The complete discovery-to-outcome workflow works.
+- The tool never sends an email or marks a draft submitted without user confirmation.
+- Personal drafts and application history stay out of public data/repository.
 
-## Cross-cutting work
+## Phase 8 — Public Pages deployment and privacy review
 
-- Keep dependencies minimal and documented.
-- Use tests for important business logic and data migrations.
-- Keep external source adapters replaceable.
-- Respect website access restrictions and use modest request rates.
-- Keep private data outside Git.
-- Update documentation and HANDOFF.md at the end of each material milestone.
-- Ask for explicit approval before committing; summarize diff and test results first.
+### Scope
+- Create/confirm a separate public deployment repository containing only static assets and sanitized public JSON.
+- Configure the private source repository workflow to publish the approved output using a narrowly scoped secret.
+- Apply least-privilege Actions permissions, pin third-party actions to reviewed commit SHAs where practical, and review build logs/artifacts for secrets.
+- Add restrictive client-side security policy where supported, bundle assets locally and avoid analytics/CDN scripts in private-data flows.
+- Test public-data allowlist, site URL/base path, public access, private local storage, encrypted export/import and restore.
+- Document that the site is public and browser data is per-device, not cloud sync.
 
-## Immediate next task after scaffolding
+### Exit criteria
+- The public site exposes no profile/CV/draft/application records or secrets.
+- The current source repository remains private.
+- The deployed artifact builds and displays public data correctly.
+- Manual recovery and privacy checks pass.
+- Any real private data is introduced only after the privacy review.
 
-Implement Phase 1's smallest slice: Python project skeleton, configuration validation, database bootstrap, and a minimal Streamlit dashboard, with tests. Do not add web crawling, paid AI APIs, email sending, or deployment secrets in that first coding task.
+## Phase 9 — Optional improvements
+
+### Scope
+- Optional salary estimates, only when defensible source data exists.
+- Better discovery coverage, source adapters and confidence metrics.
+- Optional backend for private multi-device synchronization, subject to a new security/cost decision.
+- Optional AI API integration, subject to separate cost, privacy and deployment approval.
+- Advanced analytics and historical ownership/credit changes.
+
+### Exit criteria
+- New features address measured limitations.
+- Every paid service is explicitly approved.
+- No optional feature compromises privacy, factuality or human control.
+
+## Cross-cutting acceptance checks
+
+- Public/static and private/client data have separate schemas and export paths.
+- No API key or deploy token is included in public JavaScript, static JSON, source files or logs.
+- GitHub Actions failures are visible and don't corrupt known-good observations.
+- Daily workflow is best-effort and manually runnable.
+- External sites are accessed within terms and reasonable rate limits.
+- Documentation and HANDOFF.md are updated at each meaningful milestone.
+
+## Immediate next coding task
+
+Build the static frontend skeleton only: frontend package setup, base layout/navigation, local build/preview, configuration for Pages subpath, and a basic CI test. Do not build the crawler, enable scheduled polling, process real private resume data, or deploy publicly in the same first coding commit.

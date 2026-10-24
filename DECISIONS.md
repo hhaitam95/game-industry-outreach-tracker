@@ -10,13 +10,13 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Decision:** Optimize the first version for one authorized user; do not build multi-user accounts or public access by default.
 - **Consequences:** Simpler product model, but authentication and privacy remain essential if remotely hosted.
 
-## ADR-002 — Python, Streamlit, and SQLite as the proposed baseline
+## ADR-002 — Original Python/Streamlit/SQLite proposal
 
 - **Date:** 2026-10-24
-- **Status:** Proposed baseline; validate during implementation
-- **Context:** The product needs a practical research dashboard and local data store with minimal cost and complexity.
-- **Decision:** Start with Python, Streamlit, and SQLite unless implementation or hosting tests show a material limitation.
-- **Consequences:** Fast initial development and local operation. Reassess SQLite concurrency/persistence and provider compatibility before remote deployment.
+- **Status:** Superseded for the deployed UI by ADR-013
+- **Context:** The initial plan assumed a Python-backed dashboard. The user later selected GitHub Pages, which only serves static frontend assets.
+- **Decision:** Use a static TypeScript/Vite frontend for the hosted UI and Python for the scheduled discovery runner. Browser-local encrypted data replaces server-side SQLite in the first release.
+- **Consequences:** A static UI has no private server-side persistence or automatic cross-device sync. Revisit a backend/database only if that becomes a requirement.
 
 ## ADR-003 — No paid AI API as a first-release dependency
 
@@ -74,13 +74,13 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Decision:** Search globally and consider technical support, developer support, tooling, build/release, QA, live operations, platform/DevOps, integration and other plausible roles. Explain fit and gaps instead of using exact title matching alone.
 - **Consequences:** Broader search space needs transparent relevance explanations and visible eligibility unknowns.
 
-## ADR-010 — Plan for private remote access early
+## ADR-010 — Original private-remote-access goal
 
 - **Date:** 2026-10-24
-- **Status:** Accepted direction; provider TBD
-- **Context:** The user wants a dashboard accessible remotely/private-hosted, but personal data must remain protected and project costs low.
-- **Decision:** Design for private authenticated access, durable storage, secret isolation, backup/restore, and cost awareness. Do not select a provider until its capabilities are verified. Retain local development/fallback mode.
-- **Consequences:** Hosting needs may affect database selection. Free hosting is not assumed to be safe or persistent.
+- **Status:** Superseded for the first release by ADR-013 and ADR-014
+- **Context:** The original direction favored a privately hosted dashboard. The selected GitHub Pages plan cannot provide private server-side storage.
+- **Decision:** The first release uses public static hosting for public data only and browser-local encrypted personal records. True private cloud sync requires a separately approved backend.
+- **Consequences:** Manual encrypted export/import is required for cross-device transfer; a public Pages site must not be described as a private dashboard.
 
 ## ADR-011 — Living requirements and repository-backed continuity
 
@@ -106,3 +106,60 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - Whether a remote database is needed or SQLite with persistent storage is sufficient.
 - Which salary data sources, if any, provide defensible coverage.
 - Exact candidate-profile schema and disclosure permissions.
+
+
+## ADR-013 — GitHub Pages for static public UI and sanitized data
+
+- **Date:** 2026-10-24
+- **Status:** Accepted direction; deployment repository still to be created
+- **Context:** The user wants zero-cost, simple hosting and has selected GitHub Pages, while the current specification repository is private and contains personal project context.
+- **Decision:** Keep the source/specification repository private. Use a separate public Pages deployment repository for static frontend assets and a sanitized public studio/opportunity dataset. GitHub Pages is not a private backend, and the public site must contain no candidate CV, profile, private drafts, application history, or secrets.
+- **Consequences:** The current repository cannot be published directly on GitHub Free Pages because a Pages source repository must be public on that plan. A publishing workflow will need a narrowly scoped cross-repository credential stored as an Actions secret. If this arrangement proves too complex, revisit the choice before changing repository visibility.
+
+## ADR-014 — Browser-local private data for the first release
+
+- **Date:** 2026-10-24
+- **Status:** Accepted direction; exact storage/encryption format to be tested
+- **Context:** GitHub Pages cannot execute server-side code, and the first release should avoid paid services.
+- **Decision:** Process selected resume files client-side and keep profile/draft/application data in encrypted browser-local storage and user-controlled encrypted export/import. Do not upload the source resume by default. Do not store raw original resume files in GitHub.
+- **Consequences:** Data is per browser/device and requires manual export/import for transfer. Browser-side encryption cannot protect data from malicious frontend code executing while unlocked. A private backend is required for seamless remote multi-device synchronization.
+
+## ADR-015 — Deterministic CV baseline with manual AI handoff
+
+- **Date:** 2026-10-24
+- **Status:** Accepted
+- **Context:** The user wants tailored resumes in DOCX/PDF, built-in resume standards and no recurring AI API cost initially.
+- **Decision:** Use client-side extraction, deterministic checks, structured resume generation and local document downloads. Provide an optional user-initiated prompt/copy/paste workflow to ChatGPT Free. Do not call model APIs from browser code or embed credentials in static assets.
+- **Consequences:** Rules-based checks are explainable but cannot match all semantic reasoning or polished rewriting from a language model. Any content copied to ChatGPT is a separate user-approved disclosure to that service. Direct API use requires a later backend, cost and privacy decision.
+
+## ADR-016 — Resume guidance is versioned source material
+
+- **Date:** 2026-10-24
+- **Status:** Accepted
+- **Context:** Resume advice must be applied consistently and grounded in current, role-appropriate sources.
+- **Decision:** Maintain synthesized guidance in docs/resume-guidelines/ with source URLs, last-reviewed dates, context, and caveats. Bundle relevant guidance at build time. Do not copy whole source articles or encode universal rules where guidance varies by country/role.
+- **Consequences:** Guidance will need periodic review. Employer instructions and role-specific context override general defaults.
+
+## ADR-017 — Daily GitHub Actions polling and conservative change detection
+
+- **Date:** 2026-10-24
+- **Status:** Accepted direction; workflow implementation deferred until source registry/runner exist
+- **Context:** The user wants a daily check of known studios and visible changes to jobs and application routes.
+- **Decision:** Use GitHub Actions schedule plus manual dispatch; consider triggering on registry changes. Keep schedule away from the top of the hour. Compare normalized successful observations using stable IDs/URLs and hashes. Persist scan state on a dedicated discovery-state branch, separate from main. Distinguish job closure from site unavailability and require strong evidence before marking closed. Publish only sanitized public data, and only when its normalized projection changes.
+- **Consequences:** Polling is best-effort, not real-time, and only monitors known studios. Broad discovery of new studios is a separate process. Blocked/inconsistent pages require manual review; do not bypass protections.
+
+## ADR-018 — Separate private development repository from public Pages deployment output
+
+- **Date:** 2026-10-24
+- **Status:** Accepted direction; operational details to be validated
+- **Context:** GitHub Free Pages requires a public source repository, but the current source repository should remain private.
+- **Decision:** Publish only built static files and the explicit public data contract to a separate public deployment repository. Use a narrowly scoped token stored in the private source repository's Actions secrets, never in frontend code, public data or logs. Include only verified public company/job facts in that output.
+- **Consequences:** Requires cross-repository deployment setup and a security review. If user prefers one repository, request explicit approval and a complete history/privacy review before changing visibility.
+
+## ADR-019 — No secrets or private resume content in static artifacts
+
+- **Date:** 2026-10-24
+- **Status:** Accepted
+- **Context:** Static site source and bundled assets are inspectable by anyone who can access the public site.
+- **Decision:** Never embed AI API keys, deploy credentials or other secrets in browser code or public outputs. Resume processing remains client-side by default; no file upload to Actions or GitHub Pages. Secrets used by workflows remain in GitHub Actions secret storage with least privilege.
+- **Consequences:** Automatic AI calls require a separate authenticated backend. Manual AI handoff remains optional and must show what the user will share.
