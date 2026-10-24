@@ -322,3 +322,13 @@ Core studio identity, main locations, ownership relationships, game-credit roles
 Requirements will evolve as new needs, data sources, deployment constraints, and real outreach outcomes emerge. Changes should be recorded with the rationale, affected requirements, privacy/cost/architecture impacts, and implementation status. Update this file and the relevant architecture/plan/decision documents after an approved material change.
 
 The current specification is a starting baseline, not a claim that all future needs are known.
+
+
+## 20. Development and local feedback workflow
+
+- GitHub Actions is the default validation environment for committed frontend changes. It should run formatting, linting, type checks, unit tests, and a static production build.
+- Local test setup is optional except when a user chooses visual review or cloud execution cannot reproduce an environment-specific issue.
+- Document all needed macOS/VS Code prerequisites, exact commands, and expected successful outcomes in `docs/LOCAL_DEVELOPMENT.md`.
+- Provide a single-command local feedback report that records tool versions, branch/commit context, changed path names, check results, and carefully filtered diagnostics.
+- Do not include raw command logs, source content, diffs, resumes, or private exports. Apply conservative secret/personal-data redaction and state its limitations prominently.
+- Cloud CI results remain authoritative for committed revisions; a local report is for troubleshooting and should not require a GitHub token.

@@ -163,3 +163,20 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Context:** Static site source and bundled assets are inspectable by anyone who can access the public site.
 - **Decision:** Never embed AI API keys, deploy credentials or other secrets in browser code or public outputs. Resume processing remains client-side by default; no file upload to Actions or GitHub Pages. Secrets used by workflows remain in GitHub Actions secret storage with least privilege.
 - **Consequences:** Automatic AI calls require a separate authenticated backend. Manual AI handoff remains optional and must show what the user will share.
+
+
+## ADR-020 — React + TypeScript + Vite for the static frontend shell
+
+- **Date:** 2026-10-24
+- **Status:** Accepted
+- **Context:** The application will grow into several interactive research, resume, outreach, and tracking workflows, but the first implementation must remain a simple static site.
+- **Decision:** Use React + TypeScript + Vite. Start with lightweight client-side section navigation and avoid adding a routing library until URL-based routes are needed. Keep the application build static and do not add a backend or private cloud storage in this phase.
+- **Consequences:** The component model supports incremental growth and type checking. The initial navigation is not yet deep-linkable; that can be revisited when real workflows are implemented.
+
+## ADR-021 — Cloud-first CI with a privacy-conscious optional local report
+
+- **Date:** 2026-10-24
+- **Status:** Accepted
+- **Context:** The user prefers results to be available directly from GitHub Actions and wants local testing minimized while retaining a simple way to share environment-specific failures.
+- **Decision:** Run formatting, lint, type checking, unit tests, and a static subpath build in GitHub Actions on branch pushes and pull requests. Provide documented optional macOS/VS Code setup and a single-command local report. The report records versions, changed path names, check results, and selected sanitized diagnostics; it does not include raw logs, source contents, or diffs.
+- **Consequences:** Cloud CI is authoritative for committed revisions. Local reports are a diagnostic aid only; pattern-based redaction cannot guarantee that every possible sensitive detail is recognized, so the report warns users to review it before sharing.

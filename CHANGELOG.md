@@ -4,6 +4,11 @@ Meaningful changes are recorded here. This file starts with the initial document
 
 ## Unreleased
 
+- Added the Phase 1 React/TypeScript/Vite static workspace shell with responsive section navigation and honest feature placeholders.
+- Added a locked Node toolchain, formatting/lint/type/test/build scripts, and GitHub Actions CI for branch pushes and pull requests.
+- Added the optional `npm run feedback-report` script and exact macOS/VS Code instructions for local troubleshooting; report output omits raw logs and file contents.
+- Cloud validation should be checked in the latest GitHub Actions run for the Phase 1 branch; no public deployment or discovery/resume workflow is included in this change.
+
 - Revised architecture direction to GitHub Pages static hosting plus browser-local private data, with a separate public deployment target planned.
 - Specified daily/manual GitHub Actions monitoring, conservative change detection, and public-data allowlisting.
 - Added browser-first resume analysis and DOCX/PDF generation design, optional manual ChatGPT handoff, and source-linked resume guidance.

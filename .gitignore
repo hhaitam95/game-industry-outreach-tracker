@@ -26,6 +26,9 @@ dist/
 coverage/
 playwright-report/
 test-results/
+*.tsbuildinfo
+npm-debug.log*
+feedback-report.md
 
 # Local configuration and secrets
 .env
@@ -56,5 +59,7 @@ personal-data/
 # Editor/OS
 .DS_Store
 Thumbs.db
-.vscode/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
 .idea/

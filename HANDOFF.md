@@ -1,10 +1,11 @@
 # Project Handoff
 
 **Last updated:** 2026-10-24  
-**Project stage:** Architecture revision prepared; review/commit pending  
+**Project stage:** Phase 1 static frontend implementation committed; check the current cloud CI result  
 **Default branch:** main  
 **Baseline branch:** docs/project-foundation  
-**Proposed architecture branch:** architecture/pages-actions-cv
+**Architecture baseline:** architecture/pages-actions-cv
+**Phase 1 implementation branch:** feat/static-frontend-shell
 
 ## Purpose
 
@@ -15,7 +16,8 @@ Build a personal tool to discover game studios/opportunities worldwide, verify o
 - Repository: https://github.com/hhaitam95/game-industry-outreach-tracker
 - Current source/specification repository is private.
 - Initial documentation foundation commit: 064d9487ad9b43d0b3a46d886b07d96b6371a09c on docs/project-foundation.
-- This architecture revision is staged as an uncommitted tree proposal on architecture/pages-actions-cv; verify live refs before resuming and do not assume it was committed.
+- Architecture baseline commit: `3a94de576a04d33b49ea8b0f5920acd143e74448` on `architecture/pages-actions-cv`.
+- Phase 1 implementation is on `feat/static-frontend-shell`; inspect the live branch head and its GitHub Actions run when resuming.
 
 ## Current architecture direction
 
@@ -33,21 +35,25 @@ Build a personal tool to discover game studios/opportunities worldwide, verify o
 
 ## Current implementation state
 
-- Application code is not implemented.
+- Phase 1 adds the responsive React + TypeScript + Vite frontend shell, simple local navigation, placeholder screens, and a subpath-capable static build.
+- GitHub Actions CI checks formatting, lint, types, tests, and production build; verify the latest run before considering acceptance criteria satisfied.
+- `npm run feedback-report` provides optional local diagnostics with conservative redaction.
+- Studio discovery, persistent private data, resume extraction/generation, and public deployment are not implemented.
 - Scheduled discovery workflow is specified but not implemented.
 - Resume extraction/generation is specified but not implemented.
-- docs/resume-guidelines/ and docs/operations/ are proposed in the architecture revision.
-- Tests have not been created/run.
+- docs/resume-guidelines/ and docs/operations/ are present on the architecture baseline.
+- Local setup and the privacy-conscious feedback process are documented in `docs/LOCAL_DEVELOPMENT.md`.
+- Three initial navigation tests and three report-safety tests are included; check cloud Actions status before treating them as passing.
 - Public Pages deployment repository has not been created.
 - Cross-repository publish credential and exact deployment process remain undecided.
 - No private candidate profile, CV, personal application data or secrets belong in source control.
 
 ## Next steps
 
-1. Review/approve the proposed architecture/documentation change and its commit.
-2. After this documentation baseline is committed, implement a minimal TypeScript/Vite static frontend shell and tests on a feature branch.
-3. Then implement browser-local encrypted storage/export and establish the public data contract.
-4. Build the discovery runner and scheduled workflow only after the studio registry, normalizer and tests exist.
+1. Inspect the GitHub Actions result for `feat/static-frontend-shell` and address any verified CI failures.
+2. Review the shell visually only if useful; local testing is optional and documented in `docs/LOCAL_DEVELOPMENT.md`.
+3. Next implement the browser-local encrypted storage/export foundation and establish the public data contract.
+4. Build the discovery runner and scheduled workflow only after the studio registry, normalizer, and tests exist.
 5. Do not deploy public data until the public-data allowlist and privacy checks are tested.
 
 ## Known trade-offs

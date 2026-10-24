@@ -109,3 +109,13 @@ Ask for clarification when a decision is consequential and cannot safely be infe
 - Never call an AI API directly from static browser code and never place a model key in the frontend.
 - Generate editable document variants; preserve the original. Require factual review before downloading/sending.
 - Include source URLs and review dates in resume-guidance documents; do not turn general advice into rigid rules where country/role context varies.
+
+
+## 11. Cloud-first development and feedback reporting
+
+- Prefer the configured GitHub Actions CI for committed changes. Do not ask the user to run local tests when the cloud can validate the same behavior.
+- If local validation is genuinely needed, consult `docs/LOCAL_DEVELOPMENT.md` and give exact commands plus expected results.
+- The optional `npm run feedback-report` command may inspect Git status and run the project's quality checks. Its report must not include raw diffs, source contents, raw logs, resume text, or private exports.
+- Use allowlisted diagnostic summaries, path filtering, and redaction. Explain that pattern-based redaction is imperfect and advise the user to review a report before sharing it.
+- Do not add GitHub credentials or API calls to the local report script; inspect cloud results through the GitHub connector instead.
+- Keep generated `feedback-report.md` out of version control.
