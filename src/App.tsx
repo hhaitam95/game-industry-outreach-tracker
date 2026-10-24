@@ -41,15 +41,7 @@ function Icon({ name, size = 18 }: { name: string; size?: number }) {
   );
 }
 
-function StatCard({
-  label,
-  detail,
-  icon,
-}: {
-  label: string;
-  detail: string;
-  icon: string;
-}) {
+function StatCard({ label, detail, icon }: { label: string; detail: string; icon: string }) {
   return (
     <article className="stat-card">
       <div className="stat-icon">
@@ -70,8 +62,8 @@ function OverviewPage({ onNavigate }: { onNavigate: (pageId: string) => void }) 
           <span className="eyebrow">YOUR NEXT CHAPTER</span>
           <h2>Make the next move with intention.</h2>
           <p>
-            Research game studios, connect your existing technical experience to relevant teams,
-            and prepare thoughtful professional outreach — all in one workspace.
+            Research game studios, connect your existing technical experience to relevant teams, and prepare thoughtful
+            professional outreach — all in one workspace.
           </p>
           <button className="button button-primary" onClick={() => onNavigate("studios")}>
             Explore studios
@@ -136,20 +128,14 @@ function OverviewPage({ onNavigate }: { onNavigate: (pageId: string) => void }) 
         </div>
       </section>
       <p className="privacy-footnote">
-        This shell contains no studio records or personal application data. Later phases add
-        browser-local data handling and discovery features.
+        This shell contains no studio records or personal application data. Later phases add browser-local data handling
+        and discovery features.
       </p>
     </div>
   );
 }
 
-function PlaceholderPage({
-  pageId,
-  onNavigate,
-}: {
-  pageId: string;
-  onNavigate: (pageId: string) => void;
-}) {
+function PlaceholderPage({ pageId, onNavigate }: { pageId: string; onNavigate: (pageId: string) => void }) {
   const item = getNavItem(pageId);
   return (
     <section className="placeholder-card">
@@ -162,8 +148,7 @@ function PlaceholderPage({
       <div className="placeholder-note">
         <Icon name="spark" size={17} />
         <span>
-          This section is a navigation placeholder for now. No records are stored or processed by
-          this screen yet.
+          This section is a navigation placeholder for now. No records are stored or processed by this screen yet.
         </span>
       </div>
       <button className="button button-secondary" onClick={() => onNavigate("overview")}>

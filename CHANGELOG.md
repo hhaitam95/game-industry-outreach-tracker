@@ -7,7 +7,7 @@ Meaningful changes are recorded here. This file starts with the initial document
 - Follow-up hardens feedback reports by omitting branch names and filenames and replacing free-form diagnostic excerpts with fixed, non-sensitive categories.
 - CI checks now continue independently after dependency installation, so a formatting failure cannot hide lint, type, test, build, or production-dependency audit results.
 - Aligned Prettier settings with the existing double-quote style and documented that CSS syntax is checked by the production build rather than Prettier.
-- Pinned install-script approval to the locked esbuild 0.25.2 package. The full development-dependency audit still needs review.
+- Pinned install-script approval to the locked esbuild 0.25.2 package and refreshed the dependency lockfile within declared semver ranges. The candidate's full npm audit returned zero vulnerabilities; standard CI on the final commit remains the acceptance gate.
 
 
 - Added the Phase 1 React/TypeScript/Vite static workspace shell with responsive section navigation and honest feature placeholders.

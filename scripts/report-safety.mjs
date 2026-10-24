@@ -6,7 +6,9 @@ const sensitiveExtension = /\.(?:pdf|docx|sqlite3?|db|pem|key)$/i;
 export function isSensitivePath(path) {
   const normalized = String(path).replaceAll("\\", "/");
   const basename = normalized.split("/").at(-1) ?? normalized;
-  return sensitivePathSegments.test(normalized) || sensitiveFileName.test(basename) || sensitiveExtension.test(basename);
+  return (
+    sensitivePathSegments.test(normalized) || sensitiveFileName.test(basename) || sensitiveExtension.test(basename)
+  );
 }
 
 export function redactSensitiveText(value) {
@@ -42,18 +44,21 @@ export function safeDiagnosticLines(output, limit = 6) {
     [/\b(?:TS\d{3,5}|tsc|typescript)\b/i, "TypeScript diagnostics detected; details omitted."],
     [/\b(?:prettier|format(?:ting)?)\b/i, "Formatting diagnostics detected; details omitted."],
     [/\b(?:eslint|lint)\b/i, "Lint diagnostics detected; details omitted."],
-    [/\b(?:syntaxerror|typeerror|referenceerror)\b/i, "JavaScript runtime or syntax diagnostics detected; details omitted."],
+    [
+      /\b(?:syntaxerror|typeerror|referenceerror)\b/i,
+      "JavaScript runtime or syntax diagnostics detected; details omitted.",
+    ],
     [/\b(?:assertionerror|not ok|test(?:s|ing)?|failed test)\b/i, "Test diagnostics detected; details omitted."],
     [/\b(?:vite|rollup|esbuild|production build)\b/i, "Build-tool diagnostics detected; details omitted."],
-    [/\b(?:enoent|not found|command could not start|permission denied|timed out|timeout)\b/i, "Command or environment diagnostics detected; details omitted."],
+    [
+      /\b(?:enoent|not found|command could not start|permission denied|timed out|timeout)\b/i,
+      "Command or environment diagnostics detected; details omitted.",
+    ],
   ];
-  const specificMatches = categories
-    .filter(([pattern]) => pattern.test(text))
-    .map(([, label]) => label);
+  const specificMatches = categories.filter(([pattern]) => pattern.test(text)).map(([, label]) => label);
 
   if (specificMatches.length > 0) return specificMatches.slice(0, limit);
 
-  const genericError =
-    /\b(?:error|failed|failure|warning|cannot|unable|missing|invalid|unexpected|err_[a-z]+)\b/i;
+  const genericError = /\b(?:error|failed|failure|warning|cannot|unable|missing|invalid|unexpected|err_[a-z]+)\b/i;
   return genericError.test(text) ? ["Command diagnostics detected; details omitted."] : [];
 }

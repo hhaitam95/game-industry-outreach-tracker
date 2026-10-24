@@ -30,7 +30,7 @@
 
 ## Phase 1 — Static frontend shell and safe local project setup
 
-**Implementation status:** Added on `feat/static-frontend-shell`; use the latest GitHub Actions run to confirm the acceptance checks.
+**Implementation status:** Added on `feat/static-frontend-shell`; the remediation addresses the reported formatting and dependency issues. Phase 1 remains pending until standard CI passes on the final committed feature-branch head.
 
 ### Scope
 - Initialize the chosen frontend toolchain (proposed TypeScript + Vite, lightweight component architecture).
@@ -186,4 +186,4 @@
 
 ## Immediate next coding task
 
-Review the Phase 1 GitHub Actions result on `feat/static-frontend-shell` and fix any verified failures. Local execution is optional; use `docs/LOCAL_DEVELOPMENT.md` only when a visual review or machine-specific diagnosis is useful. Do not build the crawler, enable scheduled polling, process real private resume data, or deploy publicly as part of Phase 1.
+Confirm the standard GitHub Actions run for the final commit on `feat/static-frontend-shell` passes formatting, lint, type checks, tests, full dependency audit, and subpath production build. Decide whether visual browser review is warranted, and do not start Phase 2 until the Phase 1 exit criteria are met. Do not build the crawler, enable scheduled polling, process real private resume data, or deploy publicly as part of Phase 1.

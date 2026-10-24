@@ -98,7 +98,7 @@ Expected results:
 - `npm run format:check`: Prettier says all matched files use the expected style.
 - `npm run lint`: exits with code 0 and no lint errors.
 - `npm run typecheck`: exits with code 0 without TypeScript diagnostics.
-- `npm test`: reports 7 passing tests and 0 failures.
+- `npm test`: reports 9 passing tests and 0 failures.
 - `npm run build`: creates `dist/` and reports a successful Vite production build.
 
 An empty successful output from lint or type checking is normal. Always check the command's exit code, not just whether it printed text.
@@ -133,7 +133,7 @@ npm run feedback-report
 
 The command:
 
-1. Records branch and short commit information plus Node/npm/Git versions.
+1. Reports whether a branch was detected, a short commit identifier, and Node/npm/Git versions; the branch name is omitted.
 2. Reports only the number of changed paths; filenames, branch names, diffs, and source files are omitted.
 3. Runs Git's whitespace check, formatting, lint, type checking, unit tests, and the production build.
 4. Writes `feedback-report.md` in the repository root and prints the same Markdown to the terminal. The report file is ignored by Git.
@@ -142,7 +142,7 @@ Copy the entire report from the terminal, or open `feedback-report.md` and paste
 
 ### Privacy limitation
 
-Redaction uses conservative patterns for common tokens, credentials, contact details, local user paths, and private-looking filenames. No pattern-based system can guarantee detection of every secret, person's name, or unique personal fact. Review the report before sharing it if you know your local command output contains sensitive material. Raw output is not written into the report, and raw unit-test output is always omitted.
+The report does not copy arbitrary command stdout/stderr into its output. Failed checks are summarized with fixed diagnostic categories, and raw unit-test output is omitted. The separate helper includes pattern-based functions tested against common sensitive values, but these functions are not a guarantee that every secret, name, or personal detail can be detected. Review the generated report before sharing it.
 
 ## 7. Cloud-first troubleshooting
 

@@ -91,11 +91,12 @@ const checks = [
 
 const results = checks.map(([label, command, args]) => {
   const result = run(command, args);
-  const diagnostics = result.status === 0 && !result.error
-    ? []
-    : label === "Unit tests"
+  const diagnostics =
+    result.status === 0 && !result.error
       ? []
-      : safeDiagnosticLines(result.stdout + "\n" + result.stderr);
+      : label === "Unit tests"
+        ? []
+        : safeDiagnosticLines(result.stdout + "\n" + result.stderr);
   return { label, command: [command, ...args].join(" "), result, diagnostics };
 });
 
@@ -115,13 +116,15 @@ const lines = [
   "",
   ...toolVersions.map(([name, result]) => "- " + name + ": " + firstLine(name, result)),
   "",
-  "### Changed paths (names only; private-looking paths are omitted)",
+  "### Changed paths (count only; filenames omitted)",
   "",
   ...changedFiles.map((path) => "- " + path),
   "",
   "### Checks",
   "",
-  ...results.map(({ label, command, result }) => "- **" + label + ": " + statusLabel(result) + "** — " + tick + command + tick),
+  ...results.map(
+    ({ label, command, result }) => "- **" + label + ": " + statusLabel(result) + "** — " + tick + command + tick,
+  ),
   "",
   "## 2. Errors or issues I hit",
   "",
@@ -135,14 +138,16 @@ if (failures.length === 0) {
     if (failure.diagnostics.length > 0) {
       for (const diagnostic of failure.diagnostics) lines.push("  - Safe diagnostic: " + diagnostic);
     } else {
-      lines.push("  - Raw output was intentionally omitted because no diagnostic line passed the safety filter, or because this was the unit-test command.");
+      lines.push(
+        "  - Raw output was intentionally omitted because no diagnostic line passed the safety filter, or because this was the unit-test command.",
+      );
     }
   }
 }
 
 lines.push(
   "",
-  "Raw command output, source contents, diffs, resume files, and private-looking filenames are never copied into this report. Pattern-based redaction is a precaution, not a guarantee that every possible secret or personal detail will be recognized.",
+  "Raw command output, source contents, diffs, resume files, and filenames are omitted from this report. Failed checks are represented by fixed diagnostic categories; arbitrary command output is not copied. This reduces exposure but is not a guarantee that every possible secret or personal detail will be absent from all report fields.",
   "",
   "## 3. Suggested fixes or next steps for you to review",
   "",
@@ -150,7 +155,9 @@ lines.push(
 
 const suggestions = [...new Set(failures.map((failure) => suggestionFor(failure.label, failure.result)))];
 if (suggestions.length === 0) {
-  lines.push("- Local checks passed. No immediate fix is suggested; inspect the latest GitHub Actions run for the committed branch as the authoritative cloud result.");
+  lines.push(
+    "- Local checks passed. No immediate fix is suggested; inspect the latest GitHub Actions run for the committed branch as the authoritative cloud result.",
+  );
 } else {
   lines.push(...suggestions.map((suggestion) => "- " + suggestion));
 }

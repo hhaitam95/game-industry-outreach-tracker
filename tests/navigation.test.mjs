@@ -7,14 +7,7 @@ test("navigation identifiers are unique and include the six workspace sections",
 
   assert.equal(identifiers.length, 6);
   assert.equal(new Set(identifiers).size, identifiers.length);
-  assert.deepEqual(identifiers, [
-    "overview",
-    "studios",
-    "resume",
-    "outreach",
-    "applications",
-    "settings",
-  ]);
+  assert.deepEqual(identifiers, ["overview", "studios", "resume", "outreach", "applications", "settings"]);
 });
 
 test("getNavItem returns the requested navigation item", () => {

@@ -37,9 +37,7 @@ test("diagnostic categories never include personal text, paths, or contact detai
 });
 
 test("generic failures produce one fixed category only when no specific category matches", () => {
-  assert.deepEqual(safeDiagnosticLines("Error: something failed"), [
-    "Command diagnostics detected; details omitted.",
-  ]);
+  assert.deepEqual(safeDiagnosticLines("Error: something failed"), ["Command diagnostics detected; details omitted."]);
   assert.deepEqual(safeDiagnosticLines("no actionable diagnostic here"), []);
 });
 
