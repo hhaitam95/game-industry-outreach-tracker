@@ -11,6 +11,8 @@ function describeError(error: unknown) {
   return error instanceof Error ? error.message : "The requested action could not be completed.";
 }
 
+type PrivateWorkspace = ReturnType<typeof validateWorkspaceData>;
+
 function downloadBackup(contents: string) {
   const url = URL.createObjectURL(new Blob([contents], { type: "application/json;charset=utf-8" }));
   const link = document.createElement("a");
@@ -30,7 +32,7 @@ export default function PrivateDataSettings() {
   const [storageReady, setStorageReady] = useState<boolean | null>(null);
   const [vaultExists, setVaultExists] = useState(false);
   const [session, setSession] = useState<Awaited<ReturnType<typeof createEncryptedSession>>["session"] | null>(null);
-  const [workspace, setWorkspace] = useState<ReturnType<typeof createEmptyWorkspace> | null>(null);
+  const [workspace, setWorkspace] = useState<PrivateWorkspace | null>(null);
   const [passphrase, setPassphrase] = useState("");
   const [backupPassphrase, setBackupPassphrase] = useState("");
   const [busy, setBusy] = useState(false);
@@ -64,7 +66,7 @@ export default function PrivateDataSettings() {
     setNotice("Unsaved changes — save the profile before locking or leaving this page.");
   }
 
-  async function persistWorkspace(nextWorkspace: ReturnType<typeof createEmptyWorkspace>, successMessage: string) {
+  async function persistWorkspace(nextWorkspace: PrivateWorkspace, successMessage: string) {
     if (!session) {
       setError("Unlock the local vault before saving.");
       return false;

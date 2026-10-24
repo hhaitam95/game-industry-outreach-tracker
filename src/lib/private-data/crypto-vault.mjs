@@ -88,8 +88,10 @@ async function deriveKey(passphrase, salt, provider) {
   const material = await provider.subtle.importKey(
     "raw", new TextEncoder().encode(passphrase), "PBKDF2", false, ["deriveKey"],
   );
+  const saltBuffer = new ArrayBuffer(salt.byteLength);
+  new Uint8Array(saltBuffer).set(salt);
   return provider.subtle.deriveKey(
-    { name: "PBKDF2", salt, iterations: PBKDF2_ITERATIONS, hash: "SHA-256" },
+    { name: "PBKDF2", salt: saltBuffer, iterations: PBKDF2_ITERATIONS, hash: "SHA-256" },
     material, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"],
   );
 }

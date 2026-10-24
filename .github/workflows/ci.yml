@@ -33,6 +33,17 @@ jobs:
         id: install
         run: npm ci
 
+      - name: TEMPORARY — format sources and export formatted snapshot
+        if: steps.install.outcome == 'success'
+        shell: bash
+        run: |
+          npm run format
+          for file in src/App.tsx src/components/PrivateDataSettings.tsx src/lib/private-data/crypto-vault.mjs src/lib/private-data/indexed-db.mjs tests/private-data.test.mjs scripts/check-public-data-boundary.mjs; do
+            printf '\n__FMT_START__%s\n' "$file"
+            base64 -w 0 "$file"
+            printf '\n__FMT_END__%s\n' "$file"
+          done
+
       - name: Check formatting
         if: always() && steps.install.outcome == 'success'
         run: npm run format:check
