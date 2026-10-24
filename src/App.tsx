@@ -129,7 +129,8 @@ function OverviewPage({ onNavigate }: { onNavigate: (pageId: string) => void }) 
         </div>
       </section>
       <p className="privacy-footnote">
-        Studio and opportunity discovery is not implemented yet. Private candidate records created in Settings remain encrypted in this browser and are not synced to a server.
+        Studio and opportunity discovery is not implemented yet. Private candidate records created in Settings remain
+        encrypted in this browser and are not synced to a server.
       </p>
     </div>
   );

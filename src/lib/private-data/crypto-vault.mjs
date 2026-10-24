@@ -65,13 +65,20 @@ function validateEnvelope(serialized) {
     throw new Error("This file is not a valid encrypted workspace backup.");
   }
   const keys = Object.keys(parsed);
-  if (keys.length !== ENVELOPE_KEYS.length || keys.some((key) => !ENVELOPE_KEYS.includes(key)) ||
-      ENVELOPE_KEYS.some((key) => !Object.hasOwn(parsed, key))) {
+  if (
+    keys.length !== ENVELOPE_KEYS.length ||
+    keys.some((key) => !ENVELOPE_KEYS.includes(key)) ||
+    ENVELOPE_KEYS.some((key) => !Object.hasOwn(parsed, key))
+  ) {
     throw new Error("Encrypted backup contains an unsupported format.");
   }
-  if (parsed.format !== VAULT_FORMAT || parsed.version !== VAULT_FORMAT_VERSION ||
-      parsed.cipher !== "AES-GCM-256" || parsed.kdf !== "PBKDF2-SHA-256" ||
-      parsed.iterations !== PBKDF2_ITERATIONS) {
+  if (
+    parsed.format !== VAULT_FORMAT ||
+    parsed.version !== VAULT_FORMAT_VERSION ||
+    parsed.cipher !== "AES-GCM-256" ||
+    parsed.kdf !== "PBKDF2-SHA-256" ||
+    parsed.iterations !== PBKDF2_ITERATIONS
+  ) {
     throw new Error("This encrypted backup uses an unsupported encryption format.");
   }
   const salt = base64ToBytes(parsed.salt, "salt");
@@ -85,14 +92,17 @@ function validateEnvelope(serialized) {
 
 /** @param {string} passphrase @param {Uint8Array} salt @param {Crypto} provider @returns {Promise<CryptoKey>} */
 async function deriveKey(passphrase, salt, provider) {
-  const material = await provider.subtle.importKey(
-    "raw", new TextEncoder().encode(passphrase), "PBKDF2", false, ["deriveKey"],
-  );
+  const material = await provider.subtle.importKey("raw", new TextEncoder().encode(passphrase), "PBKDF2", false, [
+    "deriveKey",
+  ]);
   const saltBuffer = new ArrayBuffer(salt.byteLength);
   new Uint8Array(saltBuffer).set(salt);
   return provider.subtle.deriveKey(
     { name: "PBKDF2", salt: saltBuffer, iterations: PBKDF2_ITERATIONS, hash: "SHA-256" },
-    material, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"],
+    material,
+    { name: "AES-GCM", length: 256 },
+    false,
+    ["encrypt", "decrypt"],
   );
 }
 
@@ -108,18 +118,24 @@ function makeSession(key, salt, provider) {
       }
       const iv = provider.getRandomValues(new Uint8Array(IV_BYTES));
       const encrypted = await provider.subtle.encrypt(
-        { name: "AES-GCM", iv, additionalData: AAD, tagLength: 128 }, key, plaintext,
+        { name: "AES-GCM", iv, additionalData: AAD, tagLength: 128 },
+        key,
+        plaintext,
       );
-      const serialized = JSON.stringify({
-        format: VAULT_FORMAT,
-        version: VAULT_FORMAT_VERSION,
-        cipher: "AES-GCM-256",
-        kdf: "PBKDF2-SHA-256",
-        iterations: PBKDF2_ITERATIONS,
-        salt: bytesToBase64(salt),
-        iv: bytesToBase64(iv),
-        ciphertext: bytesToBase64(new Uint8Array(encrypted)),
-      }, null, 2);
+      const serialized = JSON.stringify(
+        {
+          format: VAULT_FORMAT,
+          version: VAULT_FORMAT_VERSION,
+          cipher: "AES-GCM-256",
+          kdf: "PBKDF2-SHA-256",
+          iterations: PBKDF2_ITERATIONS,
+          salt: bytesToBase64(salt),
+          iv: bytesToBase64(iv),
+          ciphertext: bytesToBase64(new Uint8Array(encrypted)),
+        },
+        null,
+        2,
+      );
       if (new TextEncoder().encode(serialized).byteLength > MAX_ENCRYPTED_BACKUP_BYTES) {
         throw new Error("Encrypted backup exceeds the 5 MiB size limit.");
       }
@@ -148,7 +164,9 @@ export async function openEncryptedSession(serialized, passphrase, provider = gl
   let plaintext;
   try {
     plaintext = await provider.subtle.decrypt(
-      { name: "AES-GCM", iv, additionalData: AAD, tagLength: 128 }, key, ciphertext,
+      { name: "AES-GCM", iv, additionalData: AAD, tagLength: 128 },
+      key,
+      ciphertext,
     );
   } catch {
     throw new Error("Unable to unlock this backup. Check the passphrase and the file's integrity.");

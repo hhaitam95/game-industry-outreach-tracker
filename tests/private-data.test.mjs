@@ -111,8 +111,10 @@ test("wrong passphrase and modified ciphertext fail authentication", async () =>
   await assert.rejects(openEncryptedSession(backup, "different incorrect passphrase", webcrypto), /Unable to unlock/i);
   const envelope = JSON.parse(backup);
   const index = Math.floor(envelope.ciphertext.length / 2);
-  envelope.ciphertext = envelope.ciphertext.slice(0, index) +
-    (envelope.ciphertext[index] === "A" ? "B" : "A") + envelope.ciphertext.slice(index + 1);
+  envelope.ciphertext =
+    envelope.ciphertext.slice(0, index) +
+    (envelope.ciphertext[index] === "A" ? "B" : "A") +
+    envelope.ciphertext.slice(index + 1);
   await assert.rejects(openEncryptedSession(JSON.stringify(envelope), passphrase, webcrypto), /Unable to unlock/i);
 });
 
@@ -120,7 +122,10 @@ test("unsupported KDF parameters and malformed or oversized backups are rejected
   const { envelope } = await createEncryptedSession(passphrase, webcrypto);
   const parsed = JSON.parse(envelope);
   parsed.iterations = 10;
-  await assert.rejects(openEncryptedSession(JSON.stringify(parsed), passphrase, webcrypto), /unsupported encryption format/i);
+  await assert.rejects(
+    openEncryptedSession(JSON.stringify(parsed), passphrase, webcrypto),
+    /unsupported encryption format/i,
+  );
   await assert.rejects(openEncryptedSession("not json", passphrase, webcrypto), /valid encrypted workspace backup/i);
   await assert.rejects(
     openEncryptedSession("x".repeat(MAX_ENCRYPTED_BACKUP_BYTES + 1), passphrase, webcrypto),
@@ -134,6 +139,9 @@ test("new vault creation requires a passphrase of at least twelve characters", a
 
 test("IndexedDB adapter refuses plaintext data before opening storage", async () => {
   const store = createIndexedDbVaultStore(undefined);
-  await assert.rejects(store.save(JSON.stringify(createEmptyWorkspace(timestamp))), /only encrypted workspace envelopes/i);
+  await assert.rejects(
+    store.save(JSON.stringify(createEmptyWorkspace(timestamp))),
+    /only encrypted workspace envelopes/i,
+  );
   await assert.rejects(store.save("not encrypted"), /only encrypted workspace envelopes/i);
 });

@@ -12,16 +12,27 @@ function assertEncryptedEnvelope(serialized) {
     throw new Error("Only valid-size encrypted vault envelopes can be stored locally.");
   }
   let envelope;
-  try { envelope = JSON.parse(serialized); }
-  catch { throw new Error("The local vault accepts only encrypted workspace envelopes."); }
-  if (!envelope || typeof envelope !== "object" || Array.isArray(envelope) ||
-      Object.keys(envelope).length !== ENVELOPE_KEYS.length ||
-      Object.keys(envelope).some((key) => !ENVELOPE_KEYS.includes(key)) ||
-      ENVELOPE_KEYS.some((key) => !Object.hasOwn(envelope, key)) ||
-      envelope.format !== VAULT_FORMAT || envelope.version !== VAULT_FORMAT_VERSION ||
-      envelope.cipher !== "AES-GCM-256" || envelope.kdf !== "PBKDF2-SHA-256" ||
-      envelope.iterations !== PBKDF2_ITERATIONS || typeof envelope.salt !== "string" ||
-      typeof envelope.iv !== "string" || typeof envelope.ciphertext !== "string") {
+  try {
+    envelope = JSON.parse(serialized);
+  } catch {
+    throw new Error("The local vault accepts only encrypted workspace envelopes.");
+  }
+  if (
+    !envelope ||
+    typeof envelope !== "object" ||
+    Array.isArray(envelope) ||
+    Object.keys(envelope).length !== ENVELOPE_KEYS.length ||
+    Object.keys(envelope).some((key) => !ENVELOPE_KEYS.includes(key)) ||
+    ENVELOPE_KEYS.some((key) => !Object.hasOwn(envelope, key)) ||
+    envelope.format !== VAULT_FORMAT ||
+    envelope.version !== VAULT_FORMAT_VERSION ||
+    envelope.cipher !== "AES-GCM-256" ||
+    envelope.kdf !== "PBKDF2-SHA-256" ||
+    envelope.iterations !== PBKDF2_ITERATIONS ||
+    typeof envelope.salt !== "string" ||
+    typeof envelope.iv !== "string" ||
+    typeof envelope.ciphertext !== "string"
+  ) {
     throw new Error("The local vault accepts only encrypted workspace envelopes.");
   }
 }
@@ -30,7 +41,10 @@ function assertEncryptedEnvelope(serialized) {
 export function createIndexedDbVaultStore(factory = globalThis.indexedDB) {
   /** @returns {Promise<IDBDatabase>} */
   function openDatabase() {
-    if (!factory) return Promise.reject(new Error("This browser does not support IndexedDB. Use a current browser over HTTPS or localhost."));
+    if (!factory)
+      return Promise.reject(
+        new Error("This browser does not support IndexedDB. Use a current browser over HTTPS or localhost."),
+      );
     return new Promise((resolve, reject) => {
       const request = factory.open(PRIVATE_VAULT_DATABASE, DATABASE_VERSION);
       request.onupgradeneeded = () => {
@@ -39,7 +53,8 @@ export function createIndexedDbVaultStore(factory = globalThis.indexedDB) {
         }
       };
       request.onerror = () => reject(new Error("The local encrypted vault could not be opened."));
-      request.onblocked = () => reject(new Error("The local vault is busy in another tab. Close other project tabs and retry."));
+      request.onblocked = () =>
+        reject(new Error("The local vault is busy in another tab. Close other project tabs and retry."));
       request.onsuccess = () => {
         const database = request.result;
         database.onversionchange = () => database.close();
@@ -66,9 +81,18 @@ export function createIndexedDbVaultStore(factory = globalThis.indexedDB) {
           result = request.result ?? null;
         };
         request.onerror = () => reject(new Error("The local encrypted vault could not be read."));
-        transaction.oncomplete = () => { database.close(); resolve(result); };
-        transaction.onerror = () => { database.close(); reject(new Error("The local encrypted vault could not be read.")); };
-        transaction.onabort = () => { database.close(); reject(new Error("The local encrypted vault read was cancelled.")); };
+        transaction.oncomplete = () => {
+          database.close();
+          resolve(result);
+        };
+        transaction.onerror = () => {
+          database.close();
+          reject(new Error("The local encrypted vault could not be read."));
+        };
+        transaction.onabort = () => {
+          database.close();
+          reject(new Error("The local encrypted vault read was cancelled."));
+        };
       });
     },
 
@@ -79,9 +103,18 @@ export function createIndexedDbVaultStore(factory = globalThis.indexedDB) {
       return new Promise((resolve, reject) => {
         const transaction = database.transaction(PRIVATE_VAULT_STORE, "readwrite");
         transaction.objectStore(PRIVATE_VAULT_STORE).put(encryptedEnvelope, PRIMARY_KEY);
-        transaction.oncomplete = () => { database.close(); resolve(); };
-        transaction.onerror = () => { database.close(); reject(new Error("The encrypted vault could not be saved to this browser.")); };
-        transaction.onabort = () => { database.close(); reject(new Error("Saving the encrypted vault was cancelled.")); };
+        transaction.oncomplete = () => {
+          database.close();
+          resolve();
+        };
+        transaction.onerror = () => {
+          database.close();
+          reject(new Error("The encrypted vault could not be saved to this browser."));
+        };
+        transaction.onabort = () => {
+          database.close();
+          reject(new Error("Saving the encrypted vault was cancelled."));
+        };
       });
     },
 
@@ -91,9 +124,18 @@ export function createIndexedDbVaultStore(factory = globalThis.indexedDB) {
       return new Promise((resolve, reject) => {
         const transaction = database.transaction(PRIVATE_VAULT_STORE, "readwrite");
         transaction.objectStore(PRIVATE_VAULT_STORE).delete(PRIMARY_KEY);
-        transaction.oncomplete = () => { database.close(); resolve(); };
-        transaction.onerror = () => { database.close(); reject(new Error("The local vault could not be deleted.")); };
-        transaction.onabort = () => { database.close(); reject(new Error("Deleting the local vault was cancelled.")); };
+        transaction.oncomplete = () => {
+          database.close();
+          resolve();
+        };
+        transaction.onerror = () => {
+          database.close();
+          reject(new Error("The local vault could not be deleted."));
+        };
+        transaction.onabort = () => {
+          database.close();
+          reject(new Error("Deleting the local vault was cancelled."));
+        };
       });
     },
   });

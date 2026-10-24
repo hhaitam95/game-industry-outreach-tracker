@@ -42,25 +42,24 @@ function trackedPathFindings() {
     const segments = filePath.split(/[\\/]/);
     const name = segments.at(-1) ?? "";
     const isEnvironmentExample = name === ".env.example";
-    if (segments.some((segment) => forbiddenPathSegment.test(segment)) ||
-        forbiddenFileExtension.test(filePath) ||
-        (!isEnvironmentExample && /^\.env(?:\.|$)/i.test(name))) {
+    if (
+      segments.some((segment) => forbiddenPathSegment.test(segment)) ||
+      forbiddenFileExtension.test(filePath) ||
+      (!isEnvironmentExample && /^\.env(?:\.|$)/i.test(name))
+    ) {
       findings.push("tracked private path");
     }
   }
   return findings;
 }
 
-const findings = [
-  ...trackedPathFindings(),
-  ...walk(path.join(root, "public")),
-  ...walk(path.join(root, "dist")),
-];
+const findings = [...trackedPathFindings(), ...walk(path.join(root, "public")), ...walk(path.join(root, "dist"))];
 if (findings.length > 0) {
   // Never print filenames or matched text: a path may itself contain personal information.
   process.stderr.write(
-    "Privacy boundary check failed: " + findings.length +
-    " prohibited path/content finding(s). Review locally without sharing raw filenames.\n",
+    "Privacy boundary check failed: " +
+      findings.length +
+      " prohibited path/content finding(s). Review locally without sharing raw filenames.\n",
   );
   process.exitCode = 1;
 } else {
