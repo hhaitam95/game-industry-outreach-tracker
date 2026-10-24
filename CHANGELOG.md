@@ -31,4 +31,4 @@ Meaningful changes are recorded here. This file starts with the initial document
 
 - Added strict versioned schemas for private profile, resume metadata, outreach drafts, and application records; raw CV content is not persisted.
 - Added a passphrase-derived AES-256-GCM vault, encrypted IndexedDB persistence, encrypted backup export/import, lock/delete actions, and a Settings workflow.
-- Added cryptographic/schema tests and a post-build privacy-boundary check in frontend CI. Cloud CI and browser smoke-test acceptance remain to be confirmed.
+- Added cryptographic/schema tests and a post-build privacy-boundary check in frontend CI. Standard cloud CI passed in run 40144691400; the documented dummy-data browser smoke test remains pending.

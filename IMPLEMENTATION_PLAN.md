@@ -30,7 +30,7 @@
 
 ## Phase 1 — Static frontend shell and safe local project setup
 
-**Implementation status:** Implemented on `feat/static-frontend-shell`. The isolated closeout CI run passed formatting, lint, type checks, nine unit tests, dependency audit, the repository-subpath production build, and a Vite Preview HTTP smoke test for the HTML shell and generated JavaScript/CSS assets. The final feature-branch closeout commit's standard CI run is the acceptance gate. Visual browser review has not been performed.
+**Implementation status:** Implemented on `feat/static-frontend-shell`. Standard GitHub Actions run 40143560612 passed formatting, lint, type checks, nine unit tests, dependency audit, the repository-subpath production build, and a Vite Preview HTTP smoke test for the HTML shell and generated JavaScript/CSS assets. Visual browser review was not part of Phase 1 acceptance.
 
 ### Scope
 - Initialize the chosen frontend toolchain (proposed TypeScript + Vite, lightweight component architecture).
@@ -47,7 +47,7 @@
 
 ## Phase 2 — Browser-local private data foundation
 
-**Implementation status:** Implemented on feat/browser-local-private-data. Encrypted schemas, IndexedDB adapter, Settings workflow, backup import/export, unit tests, and a build-artifact privacy check are included. Phase 2 is not accepted until feature-branch cloud CI is green and the browser workflow is smoke-tested with dummy data only.
+**Implementation status:** Implemented on `feat/browser-local-private-data`. Standard cloud CI run 40144691400 is green: formatting, lint, TypeScript, 19 unit tests, dependency audit, production build, privacy-boundary scan, and subpath preview smoke test all passed. Phase 2 remains pending only the documented dummy-data browser smoke test.
 
 ### Scope
 - Define local profile, resume metadata, draft and application record schemas.
@@ -188,4 +188,4 @@
 
 ## Immediate next coding task
 
-Confirm cloud CI for feat/browser-local-private-data is green and perform the dummy-data browser smoke test documented in docs/LOCAL_DEVELOPMENT.md. Do not introduce real CV/application content until both acceptance checks pass. Phase 3 can then define studio/opportunity schemas and seed a small sourced public dataset. Do not build the crawler or enable scheduled polling as part of Phase 2.
+Cloud CI is green for feat/browser-local-private-data. Perform the dummy-data browser smoke test documented in docs/LOCAL_DEVELOPMENT.md before introducing real CV/application content. Phase 3 can then define studio/opportunity schemas and seed a small sourced public dataset. Do not build the crawler or enable scheduled polling as part of Phase 2.

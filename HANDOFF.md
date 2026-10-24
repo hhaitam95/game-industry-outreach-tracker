@@ -1,7 +1,7 @@
 # Project Handoff
 
 **Last updated:** 2026-10-25  
-**Project stage:** Phase 2 implementation is on feat/browser-local-private-data; cloud CI and a dummy-data browser smoke test remain acceptance gates  
+**Project stage:** Phase 2 code is implemented and cloud CI passes on `feat/browser-local-private-data`; dummy-data browser smoke test remains the final acceptance gate  
 **Default branch:** main  
 **Baseline branch:** docs/project-foundation  
 **Architecture baseline:** architecture/pages-actions-cv
@@ -37,7 +37,7 @@ Build a personal tool to discover game studios/opportunities worldwide, verify o
 ## Current implementation state
 
 - Phase 1 adds the responsive React + TypeScript + Vite frontend shell, simple local navigation, placeholder screens, and a subpath-capable static build. GitHub Actions also starts Vite Preview with the repository base path and verifies the HTML shell plus generated JavaScript and CSS assets are served successfully.
-- Current branch parent is Phase 1 commit a850adae5cb863b1f021618f22ac8d59c9771ec5. The connector returned no commit status contexts for the earlier commit, so its current cloud CI status was not independently confirmed.
+- Phase 1 standard CI passed for commit `a850adae5cb863b1f021618f22ac8d59c9771ec5` in run [40143560612](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40143560612). Phase 2 standard CI passed for commit `a1ebe25ab7e6977fd43b89ae8e9c3fcba0e2edc0` in run [40144691400](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40144691400).
 - `npm run feedback-report` provides optional local diagnostics with fixed-category failure summaries; it omits raw diagnostic lines and filenames.
 - Phase 2 adds encrypted browser-local private profile/draft/application records and encrypted backup export/import; see the acceptance gates below.
 - Studio discovery, resume extraction/generation, scheduled polling, and public deployment are not implemented.
@@ -45,7 +45,7 @@ Build a personal tool to discover game studios/opportunities worldwide, verify o
 - Resume extraction/generation is specified but not implemented.
 - docs/resume-guidelines/ and docs/operations/ are present on the architecture baseline.
 - Local setup and the privacy-conscious feedback process are documented in `docs/LOCAL_DEVELOPMENT.md`.
-- Three navigation tests and six report-safety tests are included (nine total). All nine passed in the closeout validation run.
+- The current cloud workflow passes all 19 unit tests (3 navigation, 10 private-data/schema/crypto, 6 report-safety), formatting, lint, TypeScript checks, dependency audit (zero vulnerabilities), production build, privacy-boundary scan, and repository-subpath preview smoke test.
 - The earlier baseline install reported 15 npm advisories (2 low, 3 moderate, 10 high); the refreshed lockfile's full npm audit reported zero vulnerabilities, and the current CI dependency-audit step passes.
 - Public Pages deployment repository has not been created.
 - Cross-repository publish credential and exact deployment process remain undecided.
@@ -53,11 +53,10 @@ Build a personal tool to discover game studios/opportunities worldwide, verify o
 
 ## Next steps
 
-1. Check GitHub Actions for feat/browser-local-private-data; the current connector has not yet exposed a confirmed push-run result.
-2. Perform the dummy-data browser smoke test documented in docs/LOCAL_DEVELOPMENT.md: create/unlock, save fake profile/application, reload and unlock, export, lock, then restore from backup in a clean test vault.
-3. Inspect IndexedDB while locked and confirm only the encrypted envelope fields are stored and dummy strings are not readable.
-4. Do not use real personal data until CI is green and the browser smoke test passes.
-5. Phase 3 can define studio/opportunity schemas and seed a small sourced dataset. Build the discovery runner only after the registry, normalizer, and tests exist.
+1. Complete the one-time dummy-data browser smoke test documented in docs/LOCAL_DEVELOPMENT.md: create/unlock, save fake profile/application, reload and unlock, export, lock, then restore from backup in a clean test vault.
+2. Inspect IndexedDB while locked and confirm only the encrypted envelope fields are stored and dummy strings are not readable.
+3. Do not use real personal data until the browser smoke test passes; automated cloud CI is green on the latest commit.
+4. After acceptance, Phase 3 can define studio/opportunity schemas and seed a small sourced dataset. Build the discovery runner only after the registry, normalizer, and tests exist.
 
 ## Known trade-offs
 
@@ -79,5 +78,5 @@ Read README.md, PROJECT_SPECS.md, ARCHITECTURE.md, IMPLEMENTATION_PLAN.md, DECIS
 - Private data modules are under src/lib/private-data/: schema.mjs (strict validation), crypto-vault.mjs (PBKDF2/AES-GCM), and indexed-db.mjs (encrypted-envelope-only persistence).
 - tests/private-data.test.mjs covers schema rejection, URL validation, encryption round trips, plaintext canaries, wrong-passphrase/tampering, KDF/size bounds, and refusal to store plaintext.
 - scripts/check-public-data-boundary.mjs scans tracked paths and public/build output for prohibited private file types/path segments and common credential formats.
-- Isolated local validation: 11 crypto/schema/adapter tests passed and strict TypeScript checks passed for the core modules. The full frontend dependency tree and browser UI/IndexedDB flow were not run locally.
-- Next: inspect the actual GitHub Actions run and complete the dummy-data browser smoke test before using real CV or application data. Phase 3 remains out of scope.
+- Cloud validation: 19 unit tests pass; formatting, lint, TypeScript, npm audit (zero vulnerabilities), subpath build, privacy-boundary scan, and Vite Preview HTTP smoke test all pass in GitHub Actions run 40144691400.
+- Browser UI/IndexedDB/download/restore behavior has not been exercised in an actual browser yet. Complete the documented dummy-data smoke test before using real CV or application data. Phase 3 remains out of scope.

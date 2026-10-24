@@ -2,7 +2,7 @@
 
 A personal, evidence-driven workspace for discovering video game studios and opportunities worldwide, assessing transferable technical skills, preparing tailored outreach, and tracking application outcomes.
 
-> **Current status:** Phase 2 browser-local encrypted workspace is implemented on `feat/browser-local-private-data`; cloud CI and the dummy-data browser smoke test remain acceptance gates. Studio discovery, resume parsing, full outreach drafting, and broader application management are future work.
+> **Current status:** Phase 2 browser-local encrypted workspace is implemented on `feat/browser-local-private-data`. GitHub Actions is green for the current commit; only the documented dummy-data browser smoke test remains before using real personal data. Studio discovery, resume parsing, full outreach drafting, and broader application management remain future work.
 
 ## Current frontend shell
 
