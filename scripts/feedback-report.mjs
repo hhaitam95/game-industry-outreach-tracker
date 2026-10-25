@@ -70,6 +70,12 @@ function suggestionFor(label, result) {
   if (label === "Production build") {
     return "Inspect the build diagnostics and check VITE_BASE_PATH if the error mentions the deployment base path.";
   }
+  if (label === "Privacy boundary") {
+    return "Review the privacy-boundary findings locally; do not paste private filenames or matched content into a report.";
+  }
+  if (label === "Browser vault smoke test") {
+    return "Inspect test-results/phase2-browser-smoke-report.md, confirm Chrome/Chromium is available, and rerun the browser test.";
+  }
   return "Inspect the repository state and check output, then rerun this command.";
 }
 
@@ -87,6 +93,8 @@ const checks = [
   ["Type checking", "npm", ["run", "typecheck"]],
   ["Unit tests", "npm", ["test"]],
   ["Production build", "npm", ["run", "build"]],
+  ["Privacy boundary", "npm", ["run", "check:privacy"]],
+  ["Browser vault smoke test", "node", ["scripts/browser-vault-smoke.mjs"]],
 ];
 
 const results = checks.map(([label, command, args]) => {

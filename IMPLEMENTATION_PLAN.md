@@ -47,7 +47,7 @@
 
 ## Phase 2 — Browser-local private data foundation
 
-**Implementation status:** Implemented on `feat/browser-local-private-data`. Standard cloud CI run 40144691400 is green: formatting, lint, TypeScript, 19 unit tests, dependency audit, production build, privacy-boundary scan, and subpath preview smoke test all passed. Phase 2 remains pending only the documented dummy-data browser smoke test.
+**Implementation status:** Implemented and browser-acceptance-tested on `feat/browser-local-private-data`. Standard cloud CI and the automated dummy-data browser test pass. The browser test verifies vault creation, save/reload/lock/unlock, encrypted IndexedDB/export contents, backup restore, and the imported passphrase.
 
 ### Scope
 - Define local profile, resume metadata, draft and application record schemas.

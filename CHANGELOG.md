@@ -4,6 +4,8 @@ Meaningful changes are recorded here. This file starts with the initial document
 
 ## Unreleased
 
+- Added a dependency-free Chrome/Chromium browser acceptance test for Phase 2 vault creation, persistence, lock/unlock, encrypted backup export, restore, and plaintext-canary checks. GitHub Actions stores a sanitized Markdown report artifact; the local feedback report now includes privacy-boundary and browser checks.
+
 - Upgraded ESLint to supported v10.13.0, aligned `@eslint/js` to v10.0.1, and set the ESLint-10-compatible `typescript-eslint` range; isolated upgrade validation and standard CI on the feature-branch commit passed.
 
 - Follow-up hardens feedback reports by omitting branch names and filenames and replacing free-form diagnostic excerpts with fixed, non-sensitive categories.

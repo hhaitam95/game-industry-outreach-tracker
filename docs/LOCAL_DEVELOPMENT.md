@@ -54,7 +54,7 @@ Open the existing repository clone in VS Code, then open **Terminal → New Term
 If you do not already have the repository locally, clone the private repository using your configured GitHub authentication:
 
 ```sh
-git clone --branch feat/static-frontend-shell --single-branch https://github.com/hhaitam95/game-industry-outreach-tracker.git
+git clone --branch feat/browser-local-private-data --single-branch https://github.com/hhaitam95/game-industry-outreach-tracker.git
 cd game-industry-outreach-tracker
 ```
 
@@ -98,7 +98,7 @@ Expected results:
 - `npm run format:check`: Prettier says all matched files use the expected style.
 - `npm run lint`: exits with code 0 and no lint errors.
 - `npm run typecheck`: exits with code 0 without TypeScript diagnostics.
-- `npm test`: reports 9 passing tests and 0 failures.
+- `npm test`: reports 19 passing tests and 0 failures.
 - `npm run build`: creates `dist/` and reports a successful Vite production build.
 
 An empty successful output from lint or type checking is normal. Always check the command's exit code, not just whether it printed text.
@@ -135,8 +135,8 @@ The command:
 
 1. Reports whether a branch was detected, a short commit identifier, and Node/npm/Git versions; the branch name is omitted.
 2. Reports only the number of changed paths; filenames, branch names, diffs, and source files are omitted.
-3. Runs Git's whitespace check, formatting, lint, type checking, unit tests, and the production build.
-4. Writes `feedback-report.md` in the repository root and prints the same Markdown to the terminal. The report file is ignored by Git.
+3. Runs Git's whitespace check, formatting, lint, type checking, unit tests, the production build, the privacy-boundary scan, and the automated browser-vault smoke test.
+4. Writes `feedback-report.md` in the repository root and prints the same Markdown to the terminal. The browser test also writes `test-results/phase2-browser-smoke-report.md`. Both reports are ignored by Git.
 
 Copy the entire report from the terminal, or open `feedback-report.md` and paste its contents into the conversation. If a check fails, the script adds only fixed diagnostic-category labels and suggests a next step. It never copies free-form diagnostic lines, which could contain personal details despite pattern-based redaction. It does not include raw logs, source content, test output, filenames, or diffs.
 
@@ -156,16 +156,23 @@ The source repository's GitHub Actions run is authoritative for the committed re
 - **Local checks pass but cloud CI fails**: share the cloud Actions run URL or ask the assistant to inspect the run; do not repeat tests needlessly.
 
 
-## Phase 2 browser smoke test — dummy data only
+## 9. Automated Phase 2 browser acceptance test
 
-This acceptance check exercises browser IndexedDB, passphrase unlock, downloads and restore behavior that Node unit tests cannot fully validate. Use a current browser over HTTPS or localhost. Do not enter real personal data.
+The browser test is now automated and runs in GitHub Actions for commits to `feat/browser-local-private-data`. To run the same test locally, install Chrome or Chromium and run this one command from the repository root:
 
-1. Open Settings and create a vault using a throwaway test passphrase of at least 12 characters. Expected: the vault is created and marked unlocked.
-2. Enter a fake profile name/headline and save the profile. Add a clearly fake studio/role record. Expected: both actions show success and the application appears in the list.
-3. Reload the page. Expected: the vault appears locked and private records are not rendered until the passphrase unlocks it.
-4. Open browser DevTools → Application/Storage → IndexedDB → studio-outreach-private-vault → encrypted-records. Expected: the encrypted-workspace-v1 value contains the envelope fields format, version, cipher, kdf, iterations, salt, iv, and ciphertext; none of the dummy strings are readable.
-5. Unlock and download an encrypted backup. Open it in a text editor. Expected: JSON envelope metadata and ciphertext only; profile/application text is not readable.
-6. Lock and unlock again. Expected: the fake records return.
-7. In a throwaway test, export a backup, delete the vault, create a fresh vault, and import the backup using the backup's original passphrase. Confirm the replacement warning. Expected: the fake records restore and the imported backup passphrase becomes the local vault passphrase.
+```sh
+node scripts/browser-vault-smoke.mjs
+```
 
-A forgotten passphrase cannot be reset. Browser storage may be cleared or evicted. Keep backups safely and never send a real backup or its passphrase to an external service.
+The script builds the static app with the GitHub Pages repository subpath, starts a temporary production preview, launches a separate headless browser profile, and tests:
+
+1. Create an encrypted vault using a synthetic passphrase.
+2. Save a synthetic profile and application.
+3. Reload the app and verify it is locked before private records are shown.
+4. Unlock the existing vault and verify the saved records return.
+5. Inspect the IndexedDB envelope and exported backup for expected encryption fields and absence of dummy plaintext markers.
+6. Lock/unlock again, delete the test vault, create a fresh vault, restore the exported backup, and verify the original backup passphrase unlocks the restored data.
+
+The report is written to `test-results/phase2-browser-smoke-report.md` with restrictive local file permissions. The test uses a temporary browser profile and synthetic values only; it does not read the existing browser profile or any CV. The report omits raw logs, source contents, file paths, passphrases, and record values. Chrome/Chromium must be installed; set `CHROME_BIN` if it is installed in a nonstandard location.
+
+The browser test is an acceptance smoke test, not a security audit. It does not establish protection against compromised browser software, malicious extensions, or malicious site code while the vault is unlocked.

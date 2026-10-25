@@ -2,15 +2,15 @@
 
 A personal, evidence-driven workspace for discovering video game studios and opportunities worldwide, assessing transferable technical skills, preparing tailored outreach, and tracking application outcomes.
 
-> **Current status:** Phase 2 browser-local encrypted workspace is implemented on `feat/browser-local-private-data`. GitHub Actions is green for the current commit; only the documented dummy-data browser smoke test remains before using real personal data. Studio discovery, resume parsing, full outreach drafting, and broader application management remain future work.
+> **Current status:** Phase 2 browser-local encrypted workspace and automated dummy-data browser acceptance test are implemented on `feat/browser-local-private-data`. GitHub Actions passes the unit, privacy, build, and browser-vault checks. Studio discovery, resume parsing, full outreach drafting, and broader application management remain future work.
 
 ## Current frontend shell
 
 - React + TypeScript with Vite for static site development and builds.
 - Responsive workspace layout with navigation for overview, studio research, resume review, outreach, applications, and settings.
 - Placeholder screens clearly distinguish planned features from implemented functionality; no fake studio or application data is shown.
-- ESLint, Prettier, TypeScript checks, Node's built-in test runner, and a local-to-AI feedback report.
-- GitHub Actions validates frontend formatting, lint, types, tests, and a production build using a repository subpath.
+- ESLint, Prettier, TypeScript checks, Node's built-in test runner, an automated Chrome/Chromium vault smoke test, and privacy-conscious Markdown feedback reports.
+- GitHub Actions validates formatting, lint, types, unit tests, dependency audit, privacy boundaries, the production build, and browser-level vault create/save/reload/lock/export/restore behavior.
 - Settings supports a passphrase-protected local vault, profile fields, basic application records, encrypted backup export/import, locking, and local deletion.
 - No server-side runtime, remote sync, raw CV storage, resume processing, or automatic outbound communication is included.
 
