@@ -46,7 +46,7 @@ Build a personal tool to discover game studios/opportunities worldwide, verify o
 - docs/resume-guidelines/ and docs/operations/ are present on the architecture baseline.
 - Local setup and the privacy-conscious feedback process are documented in `docs/LOCAL_DEVELOPMENT.md`.
 - The standard cloud workflow passes all 19 unit tests (3 navigation, 10 private-data/schema/crypto, 6 report-safety), formatting, lint, TypeScript checks, dependency audit (zero vulnerabilities), production build, privacy-boundary scan, and repository-subpath preview smoke test.
-- Automated browser acceptance passes 12/12 steps using a temporary headless Chrome profile and synthetic data: vault creation, profile/application persistence, reload-to-locked state, unlock, encrypted IndexedDB and backup checks, lock/unlock, backup restore, and imported-passphrase verification. The sanitized Markdown report is attached to the browser workflow run.
+- Automated browser acceptance passed 12/12 steps on the last verified revision using a temporary headless Chrome profile and synthetic data. The test script has since been hardened to check exact AES-GCM envelope metadata/byte lengths and UI rejection of an incorrect passphrase; verify the latest browser workflow run after these additions before treating the hardened checks as passed. The sanitized Markdown report is attached to each browser workflow run.
 - The earlier baseline install reported 15 npm advisories (2 low, 3 moderate, 10 high); the refreshed lockfile's full npm audit reported zero vulnerabilities, and the current CI dependency-audit step passes.
 - Public Pages deployment repository has not been created.
 - Cross-repository publish credential and exact deployment process remain undecided.

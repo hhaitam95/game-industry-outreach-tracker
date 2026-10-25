@@ -61,6 +61,49 @@ function run(command, args, env = process.env) {
   if (result.error || result.status !== 0) throw new Error("command-failed");
 }
 
+
+function validateEncryptedEnvelope(serialized) {
+  if (typeof serialized !== "string" || serialized.length === 0) {
+    throw new Error("unexpected-envelope-shape");
+  }
+  let envelope;
+  try {
+    envelope = JSON.parse(serialized);
+  } catch {
+    throw new Error("unexpected-envelope-shape");
+  }
+  const keys = ["format", "version", "cipher", "kdf", "iterations", "salt", "iv", "ciphertext"];
+  if (
+    !envelope ||
+    typeof envelope !== "object" ||
+    Array.isArray(envelope) ||
+    Object.keys(envelope).length !== keys.length ||
+    keys.some((key) => !Object.hasOwn(envelope, key)) ||
+    Object.keys(envelope).some((key) => !keys.includes(key)) ||
+    envelope.format !== "game-industry-outreach-tracker/encrypted-vault" ||
+    envelope.version !== 1 ||
+    envelope.cipher !== "AES-GCM-256" ||
+    envelope.kdf !== "PBKDF2-SHA-256" ||
+    envelope.iterations !== 600_000 ||
+    typeof envelope.salt !== "string" ||
+    typeof envelope.iv !== "string" ||
+    typeof envelope.ciphertext !== "string" ||
+    !/^[A-Za-z0-9+/]+={0,2}$/.test(envelope.salt) ||
+    !/^[A-Za-z0-9+/]+={0,2}$/.test(envelope.iv) ||
+    !/^[A-Za-z0-9+/]+={0,2}$/.test(envelope.ciphertext)
+  ) {
+    throw new Error("unexpected-envelope-shape");
+  }
+  if (
+    Buffer.from(envelope.salt, "base64").byteLength !== 16 ||
+    Buffer.from(envelope.iv, "base64").byteLength !== 12 ||
+    Buffer.from(envelope.ciphertext, "base64").byteLength < 16
+  ) {
+    throw new Error("unexpected-envelope-shape");
+  }
+  return envelope;
+}
+
 async function waitForHttp(target, processRef) {
   for (let attempt = 0; attempt < 40; attempt += 1) {
     if (processRef.exitCode !== null) throw new Error("preview-exited");
@@ -175,6 +218,7 @@ class DevTools {
       BROWSER_TEST_STUDIO_CANARY: "application after unlock",
       BROWSER_TEST_PROFILE_CANARY: "profile after unlock",
       "Vault locked.": "lock confirmation",
+      "Unable to unlock this backup.": "incorrect passphrase rejection",
       "Backup restored.": "backup restoration",
     };
     await this.waitFor(
@@ -380,7 +424,15 @@ async function main() {
     if (leaked) throw new Error("private-record-visible-while-locked");
   });
 
-  await step("Unlock the existing vault after reload", async () => {
+  await step("Reject a wrong passphrase and unlock after reload", async () => {
+    await client.fill("#vault-passphrase", "definitely-wrong-dummy-passphrase");
+    await client.clickButton("Unlock vault");
+    await client.waitForText("Unable to unlock this backup.");
+    const leaked = await client.evaluate(
+      "document.body.innerText.includes('BROWSER_TEST_PROFILE_CANARY') || document.body.innerText.includes('BROWSER_TEST_STUDIO_CANARY')",
+    );
+    if (leaked) throw new Error("private-record-visible-while-locked");
+
     await client.fill("#vault-passphrase", "phase-two-test-passphrase-123");
     await client.clickButton("Unlock vault");
     await client.waitForText("BROWSER_TEST_STUDIO_CANARY");
@@ -406,15 +458,14 @@ async function main() {
       return value;
     })()`);
     if (typeof serialized !== "string") throw new Error("encrypted-envelope-missing");
-    const envelope = JSON.parse(serialized);
-    const keys = ["format", "version", "cipher", "kdf", "iterations", "salt", "iv", "ciphertext"];
-    if (keys.some((key) => !Object.hasOwn(envelope, key)) || Object.keys(envelope).length !== keys.length) {
-      throw new Error("unexpected-envelope-shape");
-    }
+    validateEncryptedEnvelope(serialized);
     for (const marker of [
       "BROWSER_TEST_PROFILE_CANARY",
       "BROWSER_TEST_STUDIO_CANARY",
+      "Synthetic QA Profile",
+      "Browser QA Role",
       "Synthetic test content only.",
+      "https://example.com/careers",
     ]) {
       if (serialized.includes(marker)) throw new Error("plaintext-found-in-indexeddb");
     }
@@ -422,7 +473,7 @@ async function main() {
     await client.waitForText("Encrypted backup downloaded.");
     encryptedBackupPath = await waitForFile(downloadDir);
     const backup = readFileSync(encryptedBackupPath, "utf8");
-    JSON.parse(backup);
+    validateEncryptedEnvelope(backup);
     for (const marker of [
       "BROWSER_TEST_PROFILE_CANARY",
       "BROWSER_TEST_STUDIO_CANARY",
@@ -503,6 +554,7 @@ try {
     ["condition-not-met-application after unlock", "application record did not appear after unlock"],
     ["condition-not-met-profile after unlock", "profile record did not appear after unlock"],
     ["condition-not-met-lock confirmation", "lock confirmation did not appear"],
+    ["condition-not-met-incorrect passphrase rejection", "incorrect passphrase was not rejected in the UI"],
     ["condition-not-met-backup restoration", "backup restoration did not complete"],
   ]);
   failureReason = safeReasons.has(message)
