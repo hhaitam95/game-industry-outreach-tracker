@@ -4,6 +4,9 @@ Meaningful changes are recorded here. This file starts with the initial document
 
 ## Unreleased
 
+- Added the Phase 3 manual studio registry foundation: strict schemas for studios, sites, ownership, games, distinct studio credits, opportunities, application routes, source evidence, and change events; seeded four source-linked studios; and integrated a searchable catalogue UI. The public catalogue is separate from private application data and contains no live vacancy claims.
+- Added catalogue validation/search tests and extended headless-browser acceptance to verify the catalogue UI on the Phase 3 branch.
+
 - Hardened the Phase 2 browser smoke test to verify exact encrypted-envelope metadata and binary lengths, and to test that an incorrect passphrase is rejected by the Settings UI without exposing private records.
 
 - Added a dependency-free Chrome/Chromium browser acceptance test for Phase 2 vault creation, persistence, lock/unlock, encrypted backup export, restore, and plaintext-canary checks. GitHub Actions stores a sanitized Markdown report artifact; the local feedback report now includes privacy-boundary and browser checks.

@@ -1,12 +1,13 @@
 # Project Handoff
 
 **Last updated:** 2026-10-25  
-**Project stage:** Phase 2 automated browser acceptance and cloud CI pass on `feat/browser-local-private-data`; ready to plan Phase 3  
+**Project stage:** Phase 3 manual studio catalogue implemented on `feat/phase3-manual-studio-catalog`; verify cloud acceptance for the current commit  
 **Default branch:** main  
 **Baseline branch:** docs/project-foundation  
 **Architecture baseline:** architecture/pages-actions-cv
 **Phase 1 implementation branch:** feat/static-frontend-shell  
-**Phase 2 implementation branch:** feat/browser-local-private-data
+**Phase 2 implementation branch:** feat/browser-local-private-data  
+**Phase 3 implementation branch:** feat/phase3-manual-studio-catalog
 
 ## Purpose
 
@@ -40,8 +41,9 @@ Build a personal tool to discover game studios/opportunities worldwide, verify o
 - Phase 1 standard CI passed for commit `a850adae5cb863b1f021618f22ac8d59c9771ec5` in run [40143560612](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40143560612). Phase 2 standard CI passed for the current implementation in run [40187348311](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40187348311); the complete feedback suite and automated browser acceptance report passed in run [40187348383](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40187348383).
 - `npm run feedback-report` provides optional local diagnostics with fixed-category failure summaries; it omits raw diagnostic lines and filenames.
 - Phase 2 adds encrypted browser-local private profile/draft/application records and encrypted backup export/import; see the acceptance gates below.
-- Studio discovery, resume extraction/generation, scheduled polling, and public deployment are not implemented.
-- Scheduled discovery workflow is specified but not implemented.
+- Phase 3 adds a source-linked manual catalogue for CD PROJEKT RED, Naughty Dog, Santa Monica Studio, and Riot Games. The schema separately represents studios, sites, ownership relationships, games, credit roles, opportunities, application routes, source evidence, and change events.
+- Live studio/job discovery, scheduled polling, resume extraction/generation, and public deployment are not implemented.
+- The browser-acceptance workflow also checks the catalogue on `feat/phase3-manual-studio-catalog`; verify the result for the current commit.
 - Resume extraction/generation is specified but not implemented.
 - docs/resume-guidelines/ and docs/operations/ are present on the architecture baseline.
 - Local setup and the privacy-conscious feedback process are documented in `docs/LOCAL_DEVELOPMENT.md`.
@@ -56,7 +58,9 @@ Build a personal tool to discover game studios/opportunities worldwide, verify o
 
 1. Phase 2 acceptance is complete for the tested flow: standard CI and automated browser acceptance both pass on `feat/browser-local-private-data`.
 2. Before using real personal data, understand the local-only storage, unrecoverable passphrase, browser-storage loss, and encrypted-backup limitations; the automated test used only synthetic data and is not a security audit.
-3. Phase 3 can define studio/opportunity schemas and seed a small sourced dataset. Build the discovery runner only after the registry, normalizer, and tests exist.
+3. Review official source links and verify standard CI and the Phase 3 browser-acceptance run for `feat/phase3-manual-studio-catalog` before treating the milestone as accepted.
+4. Only then plan Phase 4 discovery adapters and a manually triggered fixture-backed registry scan. Do not enable schedule or publishing yet.
+5. Keep private application integration separate; the Phase 3 catalogue must not read or update encrypted application records.
 
 ## Known trade-offs
 
@@ -79,4 +83,4 @@ Read README.md, PROJECT_SPECS.md, ARCHITECTURE.md, IMPLEMENTATION_PLAN.md, DECIS
 - tests/private-data.test.mjs covers schema rejection, URL validation, encryption round trips, plaintext canaries, wrong-passphrase/tampering, KDF/size bounds, and refusal to store plaintext.
 - scripts/check-public-data-boundary.mjs scans tracked paths and public/build output for prohibited private file types/path segments and common credential formats.
 - Cloud validation: 19 unit tests pass; formatting, lint, TypeScript, npm audit (zero vulnerabilities), subpath build, privacy-boundary scan, and Vite Preview HTTP smoke test all pass in GitHub Actions run 40144691400.
-- Browser UI/IndexedDB/download/restore behavior has been exercised by the automated headless-browser acceptance test using synthetic data only. The browser workflow report is available from run [40187348383](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40187348383). Phase 3 remains the next planned milestone.
+- Browser UI/IndexedDB/download/restore behavior has been exercised by the automated headless-browser acceptance test using synthetic data only. The browser workflow report is available from run [40187348383](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40187348383). Phase 3 manual studio catalogue is implemented on `feat/phase3-manual-studio-catalog`; see the current implementation summary above.

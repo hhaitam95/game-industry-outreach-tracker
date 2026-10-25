@@ -12,7 +12,7 @@ export const NAV_ITEMS = [
     id: "studios",
     label: "Studios & roles",
     icon: "studios",
-    description: "Research studios, career routes, and relevant opportunities.",
+    description: "Browse a small, source-linked catalogue of studios and official career routes.",
   },
   {
     id: "resume",

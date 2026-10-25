@@ -2,13 +2,15 @@
 
 A personal, evidence-driven workspace for discovering video game studios and opportunities worldwide, assessing transferable technical skills, preparing tailored outreach, and tracking application outcomes.
 
-> **Current status:** Phase 2 browser-local encrypted workspace and automated dummy-data browser acceptance test are implemented on `feat/browser-local-private-data`. GitHub Actions passes the unit, privacy, build, and browser-vault checks. Studio discovery, resume parsing, full outreach drafting, and broader application management remain future work.
+> **Current status:** Phase 2 encrypted browser-local workspace is implemented. The initial Phase 3 manual studio catalogue is implemented on `feat/phase3-manual-studio-catalog`; verify standard CI and browser acceptance for the current branch commit before treating Phase 3 as accepted.
 
 ## Current frontend shell
 
 - React + TypeScript with Vite for static site development and builds.
 - Responsive workspace layout with navigation for overview, studio research, resume review, outreach, applications, and settings.
-- Placeholder screens clearly distinguish planned features from implemented functionality; no fake studio or application data is shown.
+- The Studios & roles screen displays four manually sourced studio profiles, separate site/ownership/game-credit relationships, official career routes, and expandable source evidence.
+- The starter registry does not claim to list current vacancies; opportunity and change-event collections start empty.
+- Manual studio data is kept separate from encrypted private candidate/application records. No crawler or scheduled polling is included.
 - ESLint, Prettier, TypeScript checks, Node's built-in test runner, an automated Chrome/Chromium vault smoke test, and privacy-conscious Markdown feedback reports.
 - GitHub Actions validates formatting, lint, types, unit tests, dependency audit, privacy boundaries, the production build, and browser-level vault create/save/reload/lock/export/restore behavior.
 - Settings supports a passphrase-protected local vault, profile fields, basic application records, encrypted backup export/import, locking, and local deletion.
@@ -48,6 +50,7 @@ See [Local Development and Feedback Workflow](docs/LOCAL_DEVELOPMENT.md) for the
 - [Changelog](CHANGELOG.md) — meaningful project changes.
 - [Handoff](HANDOFF.md) — current state and next task.
 - [Resume guidance](docs/resume-guidelines/) — source-linked standards and role-specific guidance.
+- [Studio catalogue guide](docs/studio-catalog.md) — Phase 3 data semantics, evidence rules, and manual maintenance procedure.
 - [Automated discovery plan](docs/operations/automated-discovery.md) — planned daily workflow and change-detection behavior.
 
 ## Repository hygiene

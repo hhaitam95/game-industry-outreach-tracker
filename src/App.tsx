@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { getNavItem, NAV_ITEMS } from "./lib/navigation.mjs";
 import PrivateDataSettings from "./components/PrivateDataSettings";
+import StudioCatalog from "./components/StudioCatalog";
+import { STUDIO_PROFILES } from "./lib/studios/catalog.mjs";
 
 const pageRoadmap: Record<string, string> = {
   studios: "Phases 3–5",
@@ -42,14 +44,14 @@ function Icon({ name, size = 18 }: { name: string; size?: number }) {
   );
 }
 
-function StatCard({ label, detail, icon }: { label: string; detail: string; icon: string }) {
+function StatCard({ label, detail, icon, value = "—" }: { label: string; detail: string; icon: string; value?: string }) {
   return (
     <article className="stat-card">
       <div className="stat-icon">
         <Icon name={icon} size={19} />
       </div>
       <p className="stat-label">{label}</p>
-      <p className="stat-value">—</p>
+      <p className="stat-value">{value}</p>
       <p className="stat-detail">{detail}</p>
     </article>
   );
@@ -87,7 +89,7 @@ function OverviewPage({ onNavigate }: { onNavigate: (pageId: string) => void }) 
           <span className="muted-note">No records yet</span>
         </div>
         <div className="stats-grid">
-          <StatCard label="Studios" detail="Researched and verified" icon="studios" />
+          <StatCard label="Studios" detail="Manually sourced in the catalogue" icon="studios" value={String(STUDIO_PROFILES.length)} />
           <StatCard label="Opportunities" detail="Potential roles and routes" icon="search" />
           <StatCard label="Outreach drafts" detail="Prepared for your review" icon="outreach" />
           <StatCard label="Applications" detail="Tracked submissions" icon="applications" />
@@ -129,8 +131,8 @@ function OverviewPage({ onNavigate }: { onNavigate: (pageId: string) => void }) 
         </div>
       </section>
       <p className="privacy-footnote">
-        Studio and opportunity discovery is not implemented yet. Private candidate records created in Settings remain
-        encrypted in this browser and are not synced to a server.
+        The studio catalogue is manually sourced; live vacancy discovery and polling are not implemented yet. Private candidate
+        records created in Settings remain encrypted in this browser and are not synced to a server.
       </p>
     </div>
   );
@@ -198,7 +200,7 @@ export default function App() {
         <div className="sidebar-bottom">
           <div className="sidebar-status">
             <span className="status-dot" />
-            <span>Foundation phase</span>
+            <span>Phase 3 studio registry</span>
           </div>
           <p>Built around evidence, privacy, and human control.</p>
         </div>
@@ -215,12 +217,14 @@ export default function App() {
           </div>
           <span className="phase-badge">
             <span className="phase-badge-dot" />
-            Phase 2 · Private data
+            Phase 3 · Studio catalogue
           </span>
         </header>
         <div className="page-content">
           {isOverview ? (
             <OverviewPage onNavigate={setActivePageId} />
+          ) : activeItem.id === "studios" ? (
+            <StudioCatalog />
           ) : activeItem.id === "settings" ? (
             <PrivateDataSettings />
           ) : (

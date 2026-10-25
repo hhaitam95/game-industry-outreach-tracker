@@ -74,7 +74,7 @@ function suggestionFor(label, result) {
     return "Review the privacy-boundary findings locally; do not paste private filenames or matched content into a report.";
   }
   if (label === "Browser vault smoke test") {
-    return "Inspect test-results/phase2-browser-smoke-report.md, confirm Chrome/Chromium is available, and rerun the browser test.";
+    return "Inspect test-results/browser-acceptance-report.md, confirm Chrome/Chromium is available, and rerun the browser test.";
   }
   return "Inspect the repository state and check output, then rerun this command.";
 }

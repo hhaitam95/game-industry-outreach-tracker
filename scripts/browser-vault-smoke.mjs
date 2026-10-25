@@ -14,7 +14,7 @@ import path from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
 
 const root = process.cwd();
-const reportPath = path.join(root, "test-results", "phase2-browser-smoke-report.md");
+const reportPath = path.join(root, "test-results", "browser-acceptance-report.md");
 const basePath = "/game-industry-outreach-tracker/";
 const url = "http://127.0.0.1:4173" + basePath;
 const timeoutMs = 20_000;
@@ -237,9 +237,9 @@ function saveReport() {
   mkdirSync(path.dirname(reportPath), { recursive: true });
   const passed = results.filter((item) => item.status.startsWith("PASS")).length;
   const lines = [
-    "# Phase 2 Browser Acceptance Report",
+    "# Browser Acceptance Report",
     "",
-    "- Scope: dummy-data-only browser smoke test for the encrypted local vault.",
+    "- Scope: synthetic-data browser test for the encrypted local vault; the Phase 3 catalogue is checked when enabled.",
     "- Runtime: " + safeVersion("node", ["--version"]),
     "- Browser: " + (chromePath ? safeVersion(chromePath, ["--version"]) : "unavailable"),
     "- Result: **" + (failure ? "FAIL" : "PASS") + "**",
@@ -368,6 +368,18 @@ async function main() {
   await client.send("Page.setDownloadBehavior", { behavior: "allow", downloadPath: downloadDir });
   await client.send("Page.navigate", { url });
   await client.waitForText("Your workspace");
+
+  if (process.env.EXPECT_STUDIO_CATALOG === "1") {
+    await step("Verify Phase 3 studio catalogue UI and source links", async () => {
+      await client.clickButton("Studios & roles");
+      await client.waitForText("A small, sourced starting list");
+      const summary = await client.evaluate("(() => { const cards = [...document.querySelectorAll('.studio-card')]; const routeLinks = [...document.querySelectorAll('.studio-card .studio-actions a')]; const evidenceLinks = [...document.querySelectorAll('.studio-sources a')]; return { cardCount: cards.length, hasFourStudioNames: ['CD PROJEKT RED', 'Naughty Dog', 'Santa Monica Studio', 'Riot Games'].every((name) => document.body.innerText.includes(name)), hasCareerRoutes: routeLinks.length >= 8, sourceLinksUseHttps: evidenceLinks.length >= 8 && evidenceLinks.every((link) => link.href.startsWith('https://')), noVacancyClaim: document.body.innerText.includes('not a live list of vacancies') }; })()");
+      if (!summary || summary.cardCount !== 4 || !summary.hasFourStudioNames || !summary.hasCareerRoutes || !summary.sourceLinksUseHttps || !summary.noVacancyClaim) {
+        throw new Error("studio-catalogue-acceptance-failed");
+      }
+    });
+  }
+
   const settingsClicked = await client.evaluate(`(() => {
     const item = [...document.querySelectorAll(".nav-link")].find((element) => element.innerText.trim().includes("Settings"));
     if (!item) return false;

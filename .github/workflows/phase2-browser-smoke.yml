@@ -1,9 +1,10 @@
-name: Phase 2 Browser Acceptance
+name: Phase 2 and 3 Browser Acceptance
 
 on:
   push:
     branches:
       - feat/browser-local-private-data
+      - feat/phase3-manual-studio-catalog
   workflow_dispatch:
 
 permissions:
@@ -32,6 +33,8 @@ jobs:
         run: npm ci
 
       - name: Run complete local-to-AI feedback suite
+        env:
+          EXPECT_STUDIO_CATALOG: ${{ github.ref_name == 'feat/phase3-manual-studio-catalog' && '1' || '0' }}
         run: npm run feedback-report
 
       - name: Add sanitized Markdown report to the run summary
@@ -43,17 +46,17 @@ jobs:
           else
             echo "Feedback report was not generated; inspect the failed setup step." >> "$GITHUB_STEP_SUMMARY"
           fi
-          if [[ -f test-results/phase2-browser-smoke-report.md ]]; then
-            cat test-results/phase2-browser-smoke-report.md >> "$GITHUB_STEP_SUMMARY"
+          if [[ -f test-results/browser-acceptance-report.md ]]; then
+            cat test-results/browser-acceptance-report.md >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: Upload Markdown report
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: phase2-browser-smoke-report
+          name: browser-acceptance-report
           path: |
             feedback-report.md
-            test-results/phase2-browser-smoke-report.md
+            test-results/browser-acceptance-report.md
           if-no-files-found: warn
           retention-days: 14

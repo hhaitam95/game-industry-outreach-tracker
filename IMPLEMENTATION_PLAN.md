@@ -64,17 +64,23 @@
 
 ## Phase 3 — Studio and opportunity data model
 
+**Implementation status:** Initial data contract and four-record manual catalogue implemented on `feat/phase3-manual-studio-catalog`; verify standard CI and browser acceptance for the current commit before treating this increment as accepted.
+
 ### Scope
 - Define canonical studio, site, ownership, game, credit, opportunity, application-route, source-evidence and change-event schemas.
 - Use distinct company credit roles: developer, co-developer, publisher, porting, support and other.
 - Add field-level provenance and last verification dates.
 - Add validation, stable identifiers, normalization and duplicate handling.
-- Seed a small manually verified set of studios for realistic tests.
+- Seed four manually curated studios with official website/career sources, selected locations, explicit game-credit roles, and directly evidenced career routes.
+- Keep opportunities and change events empty until actual roles or changes are directly observed; a career page is not itself a vacancy.
+- Keep public studio catalogue records separate from the encrypted private workspace; application tracker integration is a separate later decision.
 
 ### Exit criteria
 - UI can display sourced studio details and verified/unverified states.
 - Credits and ownership relationships are not flattened into ambiguous text.
 - Schema supports manual entry without automated discovery.
+- The UI displays sourced studio details, direct career links, distinct credit roles, and unknown ownership where no relationship is sourced.
+- Validation rejects invalid IDs, duplicate studio names, unsupported fields/statuses, unsafe URLs, broken entity references, and verified routes without direct matching evidence.
 
 ## Phase 4 — Daily GitHub Actions discovery
 

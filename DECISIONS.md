@@ -189,3 +189,12 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Context:** Phase 2 needs private records without a server, paid service, or automatic cloud sync.
 - **Decision:** Store only versioned AES-256-GCM encrypted envelopes in IndexedDB. Derive a non-extractable key from the user passphrase with PBKDF2-HMAC-SHA-256 at 600,000 iterations. Use a fresh random IV for each encryption. Encrypted JSON export/import is bounded to 5 MiB. Strict schemas reject unknown fields and do not model raw resume contents. The user must confirm before import replaces local records.
 - **Consequences:** A lost passphrase cannot be recovered; exports need separate safe backup handling. The vault is browser/device local and is not protection from malicious scripts while unlocked. Cloud CI passed in run 40144691400; the dummy-record browser test remains the final acceptance gate before real personal data is used.
+
+
+## ADR-015 — Phase 3 starts with a small manual public studio catalogue
+
+- **Date:** 2026-10-25
+- **Status:** Accepted
+- **Context:** Realistic studio records are needed to exercise the UI and data model, but automated research is premature before relationships, source evidence, and schema validation are reliable. Personal applications already live in the encrypted browser-local workspace.
+- **Decision:** Start with four manually curated studio records (CD PROJEKT RED, Naughty Dog, Santa Monica Studio, and Riot Games). Store studios, sites, ownership relationships, games, credit roles, opportunities, application routes, source evidence, and change events as distinct entities with stable IDs and validation. Every seeded studio and verified career route must link to direct official source evidence. Keep opportunities and change events empty until observed, and keep the public registry separate from private candidate/application records.
+- **Consequences:** The UI can display sourced details without pretending to discover live openings. Manual source refresh is required; the catalogue is neither comprehensive nor continuously monitored. Any future integration between public studios and private application records must be designed and approved separately.
