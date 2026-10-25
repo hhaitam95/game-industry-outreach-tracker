@@ -373,7 +373,9 @@ async function main() {
     await step("Verify Phase 3 studio catalogue UI and source links", async () => {
       await client.clickButton("Studios & roles");
       await client.waitForText("A small, sourced starting list");
-      const summary = await client.evaluate("(() => { const cards = [...document.querySelectorAll('.studio-card')]; const routeLinks = [...document.querySelectorAll('.studio-card .studio-actions a')]; const evidenceLinks = [...document.querySelectorAll('.studio-sources a')]; return { cardCount: cards.length, hasFourStudioNames: ['CD PROJEKT RED', 'Naughty Dog', 'Santa Monica Studio', 'Riot Games'].every((name) => document.body.innerText.includes(name)), hasCareerRoutes: routeLinks.length >= 8, sourceLinksUseHttps: evidenceLinks.length >= 8 && evidenceLinks.every((link) => link.href.startsWith('https://')), noVacancyClaim: document.body.innerText.includes('not a live list of vacancies') }; })()");
+      const summary = await client.evaluate(
+        "(() => { const cards = [...document.querySelectorAll('.studio-card')]; const routeLinks = [...document.querySelectorAll('.studio-card .studio-actions a')]; const evidenceLinks = [...document.querySelectorAll('.studio-sources a')]; return { cardCount: cards.length, hasFourStudioNames: ['CD PROJEKT RED', 'Naughty Dog', 'Santa Monica Studio', 'Riot Games'].every((name) => document.body.innerText.includes(name)), hasCareerRoutes: routeLinks.length >= 8, sourceLinksUseHttps: evidenceLinks.length >= 8 && evidenceLinks.every((link) => link.href.startsWith('https://')), noVacancyClaim: document.body.innerText.includes('not a live list of vacancies') }; })()",
+      );
       if (
         !summary ||
         summary.cardCount !== 4 ||

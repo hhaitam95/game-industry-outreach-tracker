@@ -258,8 +258,11 @@ export function validateStudioCatalog(input) {
     };
   });
 
-  const ownershipRelationships = objectList(input.ownershipRelationships, "Ownership relationships", 100).map(
-    (value) => {
+  const ownershipRelationships = objectList(
+    input.ownershipRelationships,
+    "Ownership relationships",
+    100,
+  ).map((value) => {
     const id = registerId(
       value,
       "Ownership relationship",
@@ -348,8 +351,12 @@ export function validateStudioCatalog(input) {
   });
 
   const allEntityIds = new Set([
-    ...studioIds, ...sites.map((item) => item.id), ...ownershipRelationships.map((item) => item.id),
-    ...games.map((item) => item.id), ...credits.map((item) => item.id), ...opportunities.map((item) => item.id),
+    ...studioIds,
+    ...sites.map((item) => item.id),
+    ...ownershipRelationships.map((item) => item.id),
+    ...games.map((item) => item.id),
+    ...credits.map((item) => item.id),
+    ...opportunities.map((item) => item.id),
     ...applicationRoutes.map((item) => item.id),
   ]);
   const changeEvents = objectList(input.changeEvents, "Change events", 10_000).map((value) => {
@@ -365,7 +372,9 @@ export function validateStudioCatalog(input) {
     const sourceId = identifier(value.sourceId, "Change event source ID");
     if (!validSourceIds.has(sourceId)) throw new Error("Change event references missing source evidence.");
     return {
-      id, entityType, entityId,
+      id,
+      entityType,
+      entityId,
       changeType: oneOf(value.changeType, CHANGE_EVENT_TYPES, "Change event type"),
       observedAt: calendarDate(value.observedAt, "Change event date"),
       sourceId,
@@ -374,8 +383,17 @@ export function validateStudioCatalog(input) {
   });
 
   return {
-    schemaVersion: CATALOG_SCHEMA_VERSION, cataloguedOn, sources: validSources, studios, sites,
-    ownershipRelationships, games, credits, opportunities, applicationRoutes, changeEvents,
+    schemaVersion: CATALOG_SCHEMA_VERSION,
+    cataloguedOn,
+    sources: validSources,
+    studios,
+    sites,
+    ownershipRelationships,
+    games,
+    credits,
+    opportunities,
+    applicationRoutes,
+    changeEvents,
   };
 }
 
