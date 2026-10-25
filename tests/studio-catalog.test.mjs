@@ -14,12 +14,10 @@ test("starter registry contains four uniquely identified studios", () => {
   assert.equal(STUDIO_CATALOG_DATA.schemaVersion, CATALOG_SCHEMA_VERSION);
   assert.equal(STUDIO_CATALOG_DATA.studios.length, 4);
   assert.equal(new Set(STUDIO_CATALOG_DATA.studios.map((studio) => studio.id)).size, 4);
-  assert.deepEqual(STUDIO_CATALOG_DATA.studios.map((studio) => studio.name), [
-    "CD PROJEKT RED",
-    "Naughty Dog",
-    "Santa Monica Studio",
-    "Riot Games",
-  ]);
+  assert.deepEqual(
+    STUDIO_CATALOG_DATA.studios.map((studio) => studio.name),
+    ["CD PROJEKT RED", "Naughty Dog", "Santa Monica Studio", "Riot Games"],
+  );
 });
 
 test("each studio website and career route has direct HTTPS source evidence", () => {

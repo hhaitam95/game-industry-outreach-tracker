@@ -1,17 +1,64 @@
 export const CATALOG_SCHEMA_VERSION = 1;
-export const STUDIO_CREDIT_ROLES = Object.freeze(["developer", "co-developer", "publisher", "porting", "support", "other"]);
+export const STUDIO_CREDIT_ROLES = Object.freeze([
+  "developer",
+  "co-developer",
+  "publisher",
+  "porting",
+  "support",
+  "other",
+]);
 export const APPLICATION_ROUTE_STATUSES = Object.freeze(["verified", "unverified", "stale", "conflicting", "unknown"]);
-export const APPLICATION_ROUTE_TYPES = Object.freeze(["careers", "role-specific", "talent-community", "speculative", "other"]);
+export const APPLICATION_ROUTE_TYPES = Object.freeze([
+  "careers",
+  "role-specific",
+  "talent-community",
+  "speculative",
+  "other",
+]);
 export const OPPORTUNITY_TYPES = Object.freeze(["advertised-role", "talent-community", "speculative-route", "other"]);
-export const OPPORTUNITY_STATUSES = Object.freeze(["announced", "closed", "stale", "unavailable", "needs-review", "unknown"]);
-export const CHANGE_EVENT_TYPES = Object.freeze(["created", "updated", "explicitly-closed", "stale", "unavailable", "needs-review"]);
+export const OPPORTUNITY_STATUSES = Object.freeze([
+  "announced",
+  "closed",
+  "stale",
+  "unavailable",
+  "needs-review",
+  "unknown",
+]);
+export const CHANGE_EVENT_TYPES = Object.freeze([
+  "created",
+  "updated",
+  "explicitly-closed",
+  "stale",
+  "unavailable",
+  "needs-review",
+]);
 
 const CATALOGUED_ON = "2026-10-25";
 const SOURCE_TYPES = ["official-site", "official-careers", "official-company", "official-publisher"];
 const SITE_TYPES = ["headquarters", "studio", "office"];
 const OWNERSHIP_TYPES = ["wholly-owned-subsidiary-of", "majority-owned-by", "member-of", "operated-by", "other"];
-const CHANGE_ENTITY_TYPES = ["studio", "site", "ownership-relationship", "game", "credit", "opportunity", "application-route"];
-const CATALOG_KEYS = ["schemaVersion", "cataloguedOn", "sources", "studios", "sites", "ownershipRelationships", "games", "credits", "opportunities", "applicationRoutes", "changeEvents"];
+const CHANGE_ENTITY_TYPES = [
+  "studio",
+  "site",
+  "ownership-relationship",
+  "game",
+  "credit",
+  "opportunity",
+  "application-route",
+];
+const CATALOG_KEYS = [
+  "schemaVersion",
+  "cataloguedOn",
+  "sources",
+  "studios",
+  "sites",
+  "ownershipRelationships",
+  "games",
+  "credits",
+  "opportunities",
+  "applicationRoutes",
+  "changeEvents",
+];
 
 /** @typedef {{id:string,label:string,url:string,publisher:string,sourceType:string,accessedOn:string}} SourceEvidence */
 /** @typedef {{id:string,name:string,businessType:string,summary:string,officialWebsiteUrl:string,sourceIds:string[]}} StudioRecord */
@@ -27,7 +74,9 @@ const CATALOG_KEYS = ["schemaVersion", "cataloguedOn", "sources", "studios", "si
 
 /** @param {unknown} value @param {string[]} keys @param {string} label @returns {asserts value is Record<string, unknown>} */
 function assertExactKeys(value, keys, label) {
-  if (value === null || typeof value !== "object" || Array.isArray(value)) throw new Error(label + " must be an object.");
+  if (value === null || typeof value !== "object" || Array.isArray(value)) {
+    throw new Error(label + " must be an object.");
+  }
   const allowed = new Set(keys);
   const actual = Object.keys(value);
   if (actual.some((key) => !allowed.has(key)) || keys.some((key) => !Object.hasOwn(value, key))) {
@@ -80,12 +129,14 @@ function httpsUrl(value, label) {
 /** @param {unknown} value @param {string} label @param {number} maxItems @param {boolean} [allowEmpty] */
 function stringList(value, label, maxItems, allowEmpty = false) {
   if (!Array.isArray(value) || value.length > maxItems || (!allowEmpty && value.length === 0)) {
-    throw new Error(label + " must be a list with " + (allowEmpty ? "at most " : "between one and ") + maxItems + " items.");
+    throw new Error(
+      label + " must be a list with " + (allowEmpty ? "at most " : "between one and ") + maxItems + " items.",
+    );
   }
   return value.map((item) => text(item, label + " item", 100));
 }
 
-/** @param {unknown} value @param {string[]} choices @param {string} label */
+/** @param {unknown} value @param {ReadonlyArray<string>} choices @param {string} label */
 function oneOf(value, choices, label) {
   const result = text(value, label, 100);
   if (!choices.includes(result)) throw new Error(label + " has an unsupported value.");
@@ -103,9 +154,13 @@ function registerId(value, label, allowedKeys, seenIds) {
 
 /** @param {unknown} input @param {string} label @param {number} maxItems @returns {Array<Record<string, unknown>>} */
 function objectList(input, label, maxItems) {
-  if (!Array.isArray(input) || input.length > maxItems) throw new Error(label + " must be a list of at most " + maxItems + " records.");
+  if (!Array.isArray(input) || input.length > maxItems) {
+    throw new Error(label + " must be a list of at most " + maxItems + " records.");
+  }
   for (const item of input) {
-    if (item === null || typeof item !== "object" || Array.isArray(item)) throw new Error(label + " entries must be objects.");
+    if (item === null || typeof item !== "object" || Array.isArray(item)) {
+      throw new Error(label + " entries must be objects.");
+    }
   }
   return input;
 }
@@ -133,7 +188,9 @@ export function validateStudioCatalog(input) {
       accessedOn: calendarDate(value.accessedOn, "Source access date"),
     };
   });
-  if (new Set(validSources.map((source) => source.url)).size !== validSources.length) throw new Error("Duplicate source URL.");
+  if (new Set(validSources.map((source) => source.url)).size !== validSources.length) {
+    throw new Error("Duplicate source URL.");
+  }
   const sourceById = new Map(validSources.map((source) => [source.id, source]));
   const validSourceIds = new Set(sourceById.keys());
 
@@ -148,7 +205,12 @@ export function validateStudioCatalog(input) {
   if (studioValues.length < 3) throw new Error("The starter studio catalog must contain between 3 and 5 studios.");
   /** @type {StudioRecord[]} */
   const studios = studioValues.map((value) => {
-    const id = registerId(value, "Studio", ["id", "name", "businessType", "summary", "officialWebsiteUrl", "sourceIds"], seenIds);
+    const id = registerId(
+      value,
+      "Studio",
+      ["id", "name", "businessType", "summary", "officialWebsiteUrl", "sourceIds"],
+      seenIds,
+    );
     const officialWebsiteUrl = httpsUrl(value.officialWebsiteUrl, "Studio website");
     const sourceIds = validateSources(value.sourceIds, "Studio");
     if (!sourceIds.some((sourceId) => sourceById.get(sourceId)?.url === officialWebsiteUrl)) {
@@ -164,8 +226,12 @@ export function validateStudioCatalog(input) {
     };
   });
   const studioIds = new Set(studios.map((studio) => studio.id));
-  const normalizedNames = studios.map((studio) => studio.name.normalize("NFKC").toLowerCase().replace(/\s+/g, " ").trim());
-  if (new Set(normalizedNames).size !== normalizedNames.length) throw new Error("Duplicate studio names are not allowed.");
+  const normalizedNames = studios.map((studio) =>
+    studio.name.normalize("NFKC").toLowerCase().replace(/\s+/g, " ").trim(),
+  );
+  if (new Set(normalizedNames).size !== normalizedNames.length) {
+    throw new Error("Duplicate studio names are not allowed.");
+  }
 
   /** @param {unknown} value @param {string} label */
   const validateStudioReference = (value, label) => {
@@ -175,7 +241,12 @@ export function validateStudioCatalog(input) {
   };
 
   const sites = objectList(input.sites, "Studio sites", 100).map((value) => {
-    const id = registerId(value, "Studio site", ["id", "studioId", "siteType", "city", "region", "country", "sourceIds"], seenIds);
+    const id = registerId(
+      value,
+      "Studio site",
+      ["id", "studioId", "siteType", "city", "region", "country", "sourceIds"],
+      seenIds,
+    );
     return {
       id,
       studioId: validateStudioReference(value.studioId, "Studio site"),
@@ -187,8 +258,14 @@ export function validateStudioCatalog(input) {
     };
   });
 
-  const ownershipRelationships = objectList(input.ownershipRelationships, "Ownership relationships", 100).map((value) => {
-    const id = registerId(value, "Ownership relationship", ["id", "studioId", "ownerName", "relationshipType", "sourceIds"], seenIds);
+  const ownershipRelationships = objectList(input.ownershipRelationships, "Ownership relationships", 100).map(
+    (value) => {
+    const id = registerId(
+      value,
+      "Ownership relationship",
+      ["id", "studioId", "ownerName", "relationshipType", "sourceIds"],
+      seenIds,
+    );
     return {
       id,
       studioId: validateStudioReference(value.studioId, "Ownership relationship"),
@@ -205,17 +282,34 @@ export function validateStudioCatalog(input) {
   const gameIds = new Set(games.map((game) => game.id));
 
   const credits = objectList(input.credits, "Credits", 1_000).map((value) => {
-    const id = registerId(value, "Studio credit", ["id", "studioId", "gameId", "role", "sourceIds", "verifiedOn"], seenIds);
+    const id = registerId(
+      value,
+      "Studio credit",
+      ["id", "studioId", "gameId", "role", "sourceIds", "verifiedOn"],
+      seenIds,
+    );
     const studioId = validateStudioReference(value.studioId, "Studio credit");
     const gameId = identifier(value.gameId, "Credit game ID");
     if (!gameIds.has(gameId)) throw new Error("Studio credit references an unknown game.");
     const sourceIds = validateSources(value.sourceIds, "Studio credit");
     const verifiedOn = calendarDate(value.verifiedOn, "Credit verification date");
-    return { id, studioId, gameId, role: oneOf(value.role, STUDIO_CREDIT_ROLES, "Studio credit role"), sourceIds, verifiedOn };
+    return {
+      id,
+      studioId,
+      gameId,
+      role: oneOf(value.role, STUDIO_CREDIT_ROLES, "Studio credit role"),
+      sourceIds,
+      verifiedOn,
+    };
   });
 
   const opportunities = objectList(input.opportunities, "Opportunities", 5_000).map((value) => {
-    const id = registerId(value, "Opportunity", ["id", "studioId", "title", "opportunityType", "status", "location", "sourceIds", "observedAt"], seenIds);
+    const id = registerId(
+      value,
+      "Opportunity",
+      ["id", "studioId", "title", "opportunityType", "status", "location", "sourceIds", "observedAt"],
+      seenIds,
+    );
     return {
       id,
       studioId: validateStudioReference(value.studioId, "Opportunity"),
@@ -229,7 +323,12 @@ export function validateStudioCatalog(input) {
   });
 
   const applicationRoutes = objectList(input.applicationRoutes, "Application routes", 500).map((value) => {
-    const id = registerId(value, "Application route", ["id", "studioId", "label", "routeType", "status", "url", "sourceIds", "verifiedOn"], seenIds);
+    const id = registerId(
+      value,
+      "Application route",
+      ["id", "studioId", "label", "routeType", "status", "url", "sourceIds", "verifiedOn"],
+      seenIds,
+    );
     const url = httpsUrl(value.url, "Application route URL");
     const sourceIds = validateSources(value.sourceIds, "Application route");
     const status = oneOf(value.status, APPLICATION_ROUTE_STATUSES, "Application route status");
@@ -254,7 +353,12 @@ export function validateStudioCatalog(input) {
     ...applicationRoutes.map((item) => item.id),
   ]);
   const changeEvents = objectList(input.changeEvents, "Change events", 10_000).map((value) => {
-    const id = registerId(value, "Change event", ["id", "entityType", "entityId", "changeType", "observedAt", "sourceId", "summary"], seenIds);
+    const id = registerId(
+      value,
+      "Change event",
+      ["id", "entityType", "entityId", "changeType", "observedAt", "sourceId", "summary"],
+      seenIds,
+    );
     const entityType = oneOf(value.entityType, CHANGE_ENTITY_TYPES, "Change event entity type");
     const entityId = identifier(value.entityId, "Change event entity ID");
     if (!allEntityIds.has(entityId)) throw new Error("Change event references an unknown catalog entity.");
@@ -280,38 +384,221 @@ const initialCatalog = {
   schemaVersion: CATALOG_SCHEMA_VERSION,
   cataloguedOn: CATALOGUED_ON,
   sources: [
-    { id: "source-cdpr-site", label: "CD PROJEKT RED official website", url: "https://www.cdprojektred.com/en/", publisher: "CD PROJEKT RED", sourceType: "official-site", accessedOn: CATALOGUED_ON },
-    { id: "source-cdpr-careers", label: "CD PROJEKT RED careers", url: "https://www.cdprojektred.com/en/jobs", publisher: "CD PROJEKT RED", sourceType: "official-careers", accessedOn: CATALOGUED_ON },
-    { id: "source-cdpr-group", label: "CD PROJEKT RED Capital Group", url: "https://www.cdprojekt.com/en/capital-group/", publisher: "CD PROJEKT RED S.A.", sourceType: "official-company", accessedOn: CATALOGUED_ON },
-    { id: "source-cdpr-games", label: "CD PROJEKT RED official games", url: "https://www.cdprojektred.com/en/our-games", publisher: "CD PROJEKT RED", sourceType: "official-site", accessedOn: CATALOGUED_ON },
-    { id: "source-cdpr-contact", label: "CD PROJEKT RED contact and Warsaw address", url: "https://www.cdprojekt.com/en/Contact/", publisher: "CD PROJEKT RED S.A.", sourceType: "official-company", accessedOn: CATALOGUED_ON },
-    { id: "source-nd-site", label: "Naughty Dog official website", url: "https://www.naughtydog.com/", publisher: "Naughty Dog", sourceType: "official-site", accessedOn: CATALOGUED_ON },
-    { id: "source-nd-about", label: "Naughty Dog company information", url: "https://www.naughtydog.com/company", publisher: "Naughty Dog", sourceType: "official-company", accessedOn: CATALOGUED_ON },
-    { id: "source-nd-careers", label: "Naughty Dog careers", url: "https://www.naughtydog.com/careers", publisher: "Naughty Dog", sourceType: "official-careers", accessedOn: CATALOGUED_ON },
-    { id: "source-sms-site", label: "Santa Monica Studio official website", url: "https://sms.playstation.com/", publisher: "Santa Monica Studio / PlayStation", sourceType: "official-site", accessedOn: CATALOGUED_ON },
-    { id: "source-sms-careers", label: "Santa Monica Studio careers", url: "https://sms.playstation.com/careers/", publisher: "Santa Monica Studio / PlayStation", sourceType: "official-careers", accessedOn: CATALOGUED_ON },
-    { id: "source-sms-about", label: "Santa Monica Studio official studio history", url: "https://sms.playstation.com/who-we-are", publisher: "Santa Monica Studio / PlayStation", sourceType: "official-company", accessedOn: CATALOGUED_ON },
-    { id: "source-playstation-studios", label: "PlayStation Studios official studio directory", url: "https://www.playstation.com/en-gb/corporate/playstation-studios/", publisher: "PlayStation", sourceType: "official-publisher", accessedOn: CATALOGUED_ON },
-    { id: "source-riot-site", label: "Riot Games official website", url: "https://www.riotgames.com/en", publisher: "Riot Games", sourceType: "official-site", accessedOn: CATALOGUED_ON },
-    { id: "source-riot-careers", label: "Riot Games careers and job listings", url: "https://www.riotgames.com/en/work-with-us", publisher: "Riot Games", sourceType: "official-careers", accessedOn: CATALOGUED_ON },
-    { id: "source-riot-about", label: "Riot Games official company and games overview", url: "https://www.riotgames.com/en/who-we-are", publisher: "Riot Games", sourceType: "official-company", accessedOn: CATALOGUED_ON },
+    {
+      id: "source-cdpr-site",
+      label: "CD PROJEKT RED official website",
+      url: "https://www.cdprojektred.com/en/",
+      publisher: "CD PROJEKT RED",
+      sourceType: "official-site",
+      accessedOn: CATALOGUED_ON,
+    },
+    {
+      id: "source-cdpr-careers",
+      label: "CD PROJEKT RED careers",
+      url: "https://www.cdprojektred.com/en/jobs",
+      publisher: "CD PROJEKT RED",
+      sourceType: "official-careers",
+      accessedOn: CATALOGUED_ON,
+    },
+    {
+      id: "source-cdpr-group",
+      label: "CD PROJEKT RED Capital Group",
+      url: "https://www.cdprojekt.com/en/capital-group/",
+      publisher: "CD PROJEKT RED S.A.",
+      sourceType: "official-company",
+      accessedOn: CATALOGUED_ON,
+    },
+    {
+      id: "source-cdpr-games",
+      label: "CD PROJEKT RED official games",
+      url: "https://www.cdprojektred.com/en/our-games",
+      publisher: "CD PROJEKT RED",
+      sourceType: "official-site",
+      accessedOn: CATALOGUED_ON,
+    },
+    {
+      id: "source-cdpr-contact",
+      label: "CD PROJEKT RED contact and Warsaw address",
+      url: "https://www.cdprojekt.com/en/Contact/",
+      publisher: "CD PROJEKT RED S.A.",
+      sourceType: "official-company",
+      accessedOn: CATALOGUED_ON,
+    },
+    {
+      id: "source-nd-site",
+      label: "Naughty Dog official website",
+      url: "https://www.naughtydog.com/",
+      publisher: "Naughty Dog",
+      sourceType: "official-site",
+      accessedOn: CATALOGUED_ON,
+    },
+    {
+      id: "source-nd-about",
+      label: "Naughty Dog company information",
+      url: "https://www.naughtydog.com/company",
+      publisher: "Naughty Dog",
+      sourceType: "official-company",
+      accessedOn: CATALOGUED_ON,
+    },
+    {
+      id: "source-nd-careers",
+      label: "Naughty Dog careers",
+      url: "https://www.naughtydog.com/careers",
+      publisher: "Naughty Dog",
+      sourceType: "official-careers",
+      accessedOn: CATALOGUED_ON,
+    },
+    {
+      id: "source-sms-site",
+      label: "Santa Monica Studio official website",
+      url: "https://sms.playstation.com/",
+      publisher: "Santa Monica Studio / PlayStation",
+      sourceType: "official-site",
+      accessedOn: CATALOGUED_ON,
+    },
+    {
+      id: "source-sms-careers",
+      label: "Santa Monica Studio careers",
+      url: "https://sms.playstation.com/careers/",
+      publisher: "Santa Monica Studio / PlayStation",
+      sourceType: "official-careers",
+      accessedOn: CATALOGUED_ON,
+    },
+    {
+      id: "source-sms-about",
+      label: "Santa Monica Studio official studio history",
+      url: "https://sms.playstation.com/who-we-are",
+      publisher: "Santa Monica Studio / PlayStation",
+      sourceType: "official-company",
+      accessedOn: CATALOGUED_ON,
+    },
+    {
+      id: "source-playstation-studios",
+      label: "PlayStation Studios official studio directory",
+      url: "https://www.playstation.com/en-gb/corporate/playstation-studios/",
+      publisher: "PlayStation",
+      sourceType: "official-publisher",
+      accessedOn: CATALOGUED_ON,
+    },
+    {
+      id: "source-riot-site",
+      label: "Riot Games official website",
+      url: "https://www.riotgames.com/en",
+      publisher: "Riot Games",
+      sourceType: "official-site",
+      accessedOn: CATALOGUED_ON,
+    },
+    {
+      id: "source-riot-careers",
+      label: "Riot Games careers and job listings",
+      url: "https://www.riotgames.com/en/work-with-us",
+      publisher: "Riot Games",
+      sourceType: "official-careers",
+      accessedOn: CATALOGUED_ON,
+    },
+    {
+      id: "source-riot-about",
+      label: "Riot Games official company and games overview",
+      url: "https://www.riotgames.com/en/who-we-are",
+      publisher: "Riot Games",
+      sourceType: "official-company",
+      accessedOn: CATALOGUED_ON,
+    },
   ],
   studios: [
-    { id: "cd-projekt-red", name: "CD PROJEKT RED", businessType: "game-developer-publisher", summary: "A video-game development studio known for The Witcher and Cyberpunk; its official careers site lists teams across multiple projects and locations.", officialWebsiteUrl: "https://www.cdprojektred.com/en/", sourceIds: ["source-cdpr-site", "source-cdpr-careers", "source-cdpr-group", "source-cdpr-games"] },
-    { id: "naughty-dog", name: "Naughty Dog", businessType: "game-developer", summary: "A PlayStation first-party game developer known for The Last of Us and Uncharted; its company page also identifies Intergalactic: The Heretic Prophet as in development.", officialWebsiteUrl: "https://www.naughtydog.com/", sourceIds: ["source-nd-site", "source-nd-about", "source-nd-careers"] },
-    { id: "santa-monica-studio", name: "Santa Monica Studio", businessType: "game-developer", summary: "A PlayStation Studios developer known for the God of War series.", officialWebsiteUrl: "https://sms.playstation.com/", sourceIds: ["source-sms-site", "source-sms-careers", "source-sms-about", "source-playstation-studios"] },
-    { id: "riot-games", name: "Riot Games", businessType: "game-developer-publisher", summary: "A game developer and publisher whose official career listings organize work around products including League of Legends, VALORANT, and Teamfight Tactics.", officialWebsiteUrl: "https://www.riotgames.com/en", sourceIds: ["source-riot-site", "source-riot-careers", "source-riot-about"] },
+    {
+      id: "cd-projekt-red",
+      name: "CD PROJEKT RED",
+      businessType: "game-developer-publisher",
+      summary: "A video-game development studio known for The Witcher and Cyberpunk; its official careers site lists teams across multiple projects and locations.",
+      officialWebsiteUrl: "https://www.cdprojektred.com/en/",
+      sourceIds: ["source-cdpr-site", "source-cdpr-careers", "source-cdpr-group", "source-cdpr-games"],
+    },
+    {
+      id: "naughty-dog",
+      name: "Naughty Dog",
+      businessType: "game-developer",
+      summary: "A PlayStation first-party game developer known for The Last of Us and Uncharted; its company page also identifies Intergalactic: The Heretic Prophet as in development.",
+      officialWebsiteUrl: "https://www.naughtydog.com/",
+      sourceIds: ["source-nd-site", "source-nd-about", "source-nd-careers"],
+    },
+    {
+      id: "santa-monica-studio",
+      name: "Santa Monica Studio",
+      businessType: "game-developer",
+      summary: "A PlayStation Studios developer known for the God of War series.",
+      officialWebsiteUrl: "https://sms.playstation.com/",
+      sourceIds: ["source-sms-site", "source-sms-careers", "source-sms-about", "source-playstation-studios"],
+    },
+    {
+      id: "riot-games",
+      name: "Riot Games",
+      businessType: "game-developer-publisher",
+      summary: "A game developer and publisher whose official career listings organize work around products including League of Legends, VALORANT, and Teamfight Tactics.",
+      officialWebsiteUrl: "https://www.riotgames.com/en",
+      sourceIds: ["source-riot-site", "source-riot-careers", "source-riot-about"],
+    },
   ],
   sites: [
-    { id: "site-cdpr-warsaw", studioId: "cd-projekt-red", siteType: "headquarters", city: "Warsaw", region: "Masovian Voivodeship", country: "Poland", sourceIds: ["source-cdpr-contact", "source-cdpr-group"] },
-    { id: "site-naughty-dog-santa-monica", studioId: "naughty-dog", siteType: "studio", city: "Santa Monica", region: "California", country: "United States", sourceIds: ["source-nd-careers", "source-nd-about"] },
-    { id: "site-santa-monica-studio", studioId: "santa-monica-studio", siteType: "studio", city: "Santa Monica", region: "California", country: "United States", sourceIds: ["source-sms-careers"] },
-    { id: "site-riot-los-angeles", studioId: "riot-games", siteType: "office", city: "Los Angeles", region: "California", country: "United States", sourceIds: ["source-riot-careers"] },
+    {
+      id: "site-cdpr-warsaw",
+      studioId: "cd-projekt-red",
+      siteType: "headquarters",
+      city: "Warsaw",
+      region: "Masovian Voivodeship",
+      country: "Poland",
+      sourceIds: ["source-cdpr-contact", "source-cdpr-group"],
+    },
+    {
+      id: "site-naughty-dog-santa-monica",
+      studioId: "naughty-dog",
+      siteType: "studio",
+      city: "Santa Monica",
+      region: "California",
+      country: "United States",
+      sourceIds: ["source-nd-careers", "source-nd-about"],
+    },
+    {
+      id: "site-santa-monica-studio",
+      studioId: "santa-monica-studio",
+      siteType: "studio",
+      city: "Santa Monica",
+      region: "California",
+      country: "United States",
+      sourceIds: ["source-sms-careers"],
+    },
+    {
+      id: "site-riot-los-angeles",
+      studioId: "riot-games",
+      siteType: "office",
+      city: "Los Angeles",
+      region: "California",
+      country: "United States",
+      sourceIds: ["source-riot-careers"],
+    },
   ],
   ownershipRelationships: [
-    { id: "ownership-cdpr", studioId: "cd-projekt-red", ownerName: "CD PROJEKT S.A.", relationshipType: "operated-by", sourceIds: ["source-cdpr-group"] },
-    { id: "ownership-naughty-dog", studioId: "naughty-dog", ownerName: "Sony Interactive Entertainment", relationshipType: "wholly-owned-subsidiary-of", sourceIds: ["source-nd-about"] },
-    { id: "ownership-santa-monica", studioId: "santa-monica-studio", ownerName: "PlayStation Studios", relationshipType: "member-of", sourceIds: ["source-playstation-studios"] },
+    {
+      id: "ownership-cdpr",
+      studioId: "cd-projekt-red",
+      ownerName: "CD PROJEKT S.A.",
+      relationshipType: "operated-by",
+      sourceIds: ["source-cdpr-group"],
+    },
+    {
+      id: "ownership-naughty-dog",
+      studioId: "naughty-dog",
+      ownerName: "Sony Interactive Entertainment",
+      relationshipType: "wholly-owned-subsidiary-of",
+      sourceIds: ["source-nd-about"],
+    },
+    {
+      id: "ownership-santa-monica",
+      studioId: "santa-monica-studio",
+      ownerName: "PlayStation Studios",
+      relationshipType: "member-of",
+      sourceIds: ["source-playstation-studios"],
+    },
   ],
   games: [
     { id: "game-the-witcher-series", title: "The Witcher series", sourceIds: ["source-cdpr-games"] },
@@ -325,22 +612,121 @@ const initialCatalog = {
     { id: "game-teamfight-tactics", title: "Teamfight Tactics", sourceIds: ["source-riot-about"] },
   ],
   credits: [
-    { id: "credit-cdpr-witcher", studioId: "cd-projekt-red", gameId: "game-the-witcher-series", role: "developer", sourceIds: ["source-cdpr-games"], verifiedOn: CATALOGUED_ON },
-    { id: "credit-cdpr-cyberpunk", studioId: "cd-projekt-red", gameId: "game-cyberpunk-2077", role: "developer", sourceIds: ["source-cdpr-games"], verifiedOn: CATALOGUED_ON },
-    { id: "credit-nd-last-of-us", studioId: "naughty-dog", gameId: "game-the-last-of-us-series", role: "developer", sourceIds: ["source-nd-about"], verifiedOn: CATALOGUED_ON },
-    { id: "credit-nd-uncharted", studioId: "naughty-dog", gameId: "game-uncharted-series", role: "developer", sourceIds: ["source-nd-about"], verifiedOn: CATALOGUED_ON },
-    { id: "credit-nd-intergalactic", studioId: "naughty-dog", gameId: "game-intergalactic", role: "developer", sourceIds: ["source-nd-about"], verifiedOn: CATALOGUED_ON },
-    { id: "credit-sms-god-of-war", studioId: "santa-monica-studio", gameId: "game-god-of-war-series", role: "developer", sourceIds: ["source-sms-about"], verifiedOn: CATALOGUED_ON },
-    { id: "credit-riot-lol", studioId: "riot-games", gameId: "game-league-of-legends", role: "developer", sourceIds: ["source-riot-about"], verifiedOn: CATALOGUED_ON },
-    { id: "credit-riot-valorant", studioId: "riot-games", gameId: "game-valorant", role: "developer", sourceIds: ["source-riot-about"], verifiedOn: CATALOGUED_ON },
-    { id: "credit-riot-tft", studioId: "riot-games", gameId: "game-teamfight-tactics", role: "developer", sourceIds: ["source-riot-about"], verifiedOn: CATALOGUED_ON },
+    {
+      id: "credit-cdpr-witcher",
+      studioId: "cd-projekt-red",
+      gameId: "game-the-witcher-series",
+      role: "developer",
+      sourceIds: ["source-cdpr-games"],
+      verifiedOn: CATALOGUED_ON,
+    },
+    {
+      id: "credit-cdpr-cyberpunk",
+      studioId: "cd-projekt-red",
+      gameId: "game-cyberpunk-2077",
+      role: "developer",
+      sourceIds: ["source-cdpr-games"],
+      verifiedOn: CATALOGUED_ON,
+    },
+    {
+      id: "credit-nd-last-of-us",
+      studioId: "naughty-dog",
+      gameId: "game-the-last-of-us-series",
+      role: "developer",
+      sourceIds: ["source-nd-about"],
+      verifiedOn: CATALOGUED_ON,
+    },
+    {
+      id: "credit-nd-uncharted",
+      studioId: "naughty-dog",
+      gameId: "game-uncharted-series",
+      role: "developer",
+      sourceIds: ["source-nd-about"],
+      verifiedOn: CATALOGUED_ON,
+    },
+    {
+      id: "credit-nd-intergalactic",
+      studioId: "naughty-dog",
+      gameId: "game-intergalactic",
+      role: "developer",
+      sourceIds: ["source-nd-about"],
+      verifiedOn: CATALOGUED_ON,
+    },
+    {
+      id: "credit-sms-god-of-war",
+      studioId: "santa-monica-studio",
+      gameId: "game-god-of-war-series",
+      role: "developer",
+      sourceIds: ["source-sms-about"],
+      verifiedOn: CATALOGUED_ON,
+    },
+    {
+      id: "credit-riot-lol",
+      studioId: "riot-games",
+      gameId: "game-league-of-legends",
+      role: "developer",
+      sourceIds: ["source-riot-about"],
+      verifiedOn: CATALOGUED_ON,
+    },
+    {
+      id: "credit-riot-valorant",
+      studioId: "riot-games",
+      gameId: "game-valorant",
+      role: "developer",
+      sourceIds: ["source-riot-about"],
+      verifiedOn: CATALOGUED_ON,
+    },
+    {
+      id: "credit-riot-tft",
+      studioId: "riot-games",
+      gameId: "game-teamfight-tactics",
+      role: "developer",
+      sourceIds: ["source-riot-about"],
+      verifiedOn: CATALOGUED_ON,
+    },
   ],
   opportunities: [],
   applicationRoutes: [
-    { id: "route-cdpr-careers", studioId: "cd-projekt-red", label: "Official careers and vacancies", routeType: "careers", status: "verified", url: "https://www.cdprojektred.com/en/jobs", sourceIds: ["source-cdpr-careers"], verifiedOn: CATALOGUED_ON },
-    { id: "route-naughty-dog-careers", studioId: "naughty-dog", label: "Official careers and vacancies", routeType: "careers", status: "verified", url: "https://www.naughtydog.com/careers", sourceIds: ["source-nd-careers"], verifiedOn: CATALOGUED_ON },
-    { id: "route-santa-monica-careers", studioId: "santa-monica-studio", label: "Official careers and vacancies", routeType: "careers", status: "verified", url: "https://sms.playstation.com/careers/", sourceIds: ["source-sms-careers"], verifiedOn: CATALOGUED_ON },
-    { id: "route-riot-careers", studioId: "riot-games", label: "Official careers and vacancies", routeType: "careers", status: "verified", url: "https://www.riotgames.com/en/work-with-us", sourceIds: ["source-riot-about"], verifiedOn: CATALOGUED_ON },
+    {
+      id: "route-cdpr-careers",
+      studioId: "cd-projekt-red",
+      label: "Official careers and vacancies",
+      routeType: "careers",
+      status: "verified",
+      url: "https://www.cdprojektred.com/en/jobs",
+      sourceIds: ["source-cdpr-careers"],
+      verifiedOn: CATALOGUED_ON,
+    },
+    {
+      id: "route-naughty-dog-careers",
+      studioId: "naughty-dog",
+      label: "Official careers and vacancies",
+      routeType: "careers",
+      status: "verified",
+      url: "https://www.naughtydog.com/careers",
+      sourceIds: ["source-nd-careers"],
+      verifiedOn: CATALOGUED_ON,
+    },
+    {
+      id: "route-santa-monica-careers",
+      studioId: "santa-monica-studio",
+      label: "Official careers and vacancies",
+      routeType: "careers",
+      status: "verified",
+      url: "https://sms.playstation.com/careers/",
+      sourceIds: ["source-sms-careers"],
+      verifiedOn: CATALOGUED_ON,
+    },
+    {
+      id: "route-riot-careers",
+      studioId: "riot-games",
+      label: "Official careers and vacancies",
+      routeType: "careers",
+      status: "verified",
+      url: "https://www.riotgames.com/en/work-with-us",
+      sourceIds: ["source-riot-careers"],
+      verifiedOn: CATALOGUED_ON,
+    },
   ],
   changeEvents: [],
 };
@@ -360,7 +746,9 @@ export const STUDIO_CATALOG_DATA = deepFreeze(validateStudioCatalog(initialCatal
 export const STUDIO_PROFILES = STUDIO_CATALOG_DATA.studios.map((studio) => ({
   ...studio,
   sites: STUDIO_CATALOG_DATA.sites.filter((site) => site.studioId === studio.id),
-  ownershipRelationships: STUDIO_CATALOG_DATA.ownershipRelationships.filter((relationship) => relationship.studioId === studio.id),
+  ownershipRelationships: STUDIO_CATALOG_DATA.ownershipRelationships.filter(
+    (relationship) => relationship.studioId === studio.id,
+  ),
   credits: STUDIO_CATALOG_DATA.credits
     .filter((credit) => credit.studioId === studio.id)
     .map((credit) => ({

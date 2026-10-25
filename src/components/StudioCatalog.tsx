@@ -58,7 +58,9 @@ export default function StudioCatalog() {
                 <div>
                   <h3>{studio.name}</h3>
                   <span className="studio-type">
-                    {studio.businessType === "game-developer-publisher" ? "Developer · Publisher" : "Game developer"}
+                    {studio.businessType === "game-developer-publisher"
+                      ? "Developer · Publisher"
+                      : "Game developer"}
                   </span>
                 </div>
                 <span className="studio-reviewed">Reviewed {STUDIO_CATALOG_DATA.cataloguedOn}</span>
@@ -95,7 +97,9 @@ export default function StudioCatalog() {
                       ))}
                     </ul>
                   ) : (
-                    <p className="studio-unknown">Not verified in this starter entry; this does not imply independent ownership.</p>
+                    <p className="studio-unknown">
+                      Not verified in this starter entry; this does not imply independent ownership.
+                    </p>
                   )}
                 </div>
 
@@ -119,7 +123,9 @@ export default function StudioCatalog() {
                 {studio.routes.map((route) => (
                   <a key={route.id} href={route.url} target="_blank" rel="noopener noreferrer">
                     {route.label} <span aria-hidden="true">↗</span>
-                    <span className={route.status === "verified" ? "route-status route-status-verified" : "route-status"}>
+                    <span
+                      className={route.status === "verified" ? "route-status route-status-verified" : "route-status"}
+                    >
                       {route.status === "verified" ? "Verified" : route.status}
                     </span>
                   </a>
@@ -149,8 +155,8 @@ export default function StudioCatalog() {
       )}
 
       <p className="catalog-boundary-note">
-        Catalogue data is manually maintained. No websites are crawled, no vacancies are inferred from career links,
-        and no private profile, draft, or application record is read or changed by this page.
+        Catalogue data is manually maintained. No websites are crawled, no vacancies are inferred from career links, and
+        no private profile, draft, or application record is read or changed by this page.
       </p>
     </section>
   );

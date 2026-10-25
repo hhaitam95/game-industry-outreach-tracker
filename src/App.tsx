@@ -44,7 +44,17 @@ function Icon({ name, size = 18 }: { name: string; size?: number }) {
   );
 }
 
-function StatCard({ label, detail, icon, value = "—" }: { label: string; detail: string; icon: string; value?: string }) {
+function StatCard({
+  label,
+  detail,
+  icon,
+  value = "—",
+}: {
+  label: string;
+  detail: string;
+  icon: string;
+  value?: string;
+}) {
   return (
     <article className="stat-card">
       <div className="stat-icon">
@@ -89,7 +99,12 @@ function OverviewPage({ onNavigate }: { onNavigate: (pageId: string) => void }) 
           <span className="muted-note">No records yet</span>
         </div>
         <div className="stats-grid">
-          <StatCard label="Studios" detail="Manually sourced in the catalogue" icon="studios" value={String(STUDIO_PROFILES.length)} />
+          <StatCard
+            label="Studios"
+            detail="Manually sourced in the catalogue"
+            icon="studios"
+            value={String(STUDIO_PROFILES.length)}
+          />
           <StatCard label="Opportunities" detail="Potential roles and routes" icon="search" />
           <StatCard label="Outreach drafts" detail="Prepared for your review" icon="outreach" />
           <StatCard label="Applications" detail="Tracked submissions" icon="applications" />
@@ -131,8 +146,8 @@ function OverviewPage({ onNavigate }: { onNavigate: (pageId: string) => void }) 
         </div>
       </section>
       <p className="privacy-footnote">
-        The studio catalogue is manually sourced; live vacancy discovery and polling are not implemented yet. Private candidate
-        records created in Settings remain encrypted in this browser and are not synced to a server.
+        The studio catalogue is manually sourced; live vacancy discovery and polling are not implemented yet. Private
+        candidate records created in Settings remain encrypted in this browser and are not synced to a server.
       </p>
     </div>
   );
