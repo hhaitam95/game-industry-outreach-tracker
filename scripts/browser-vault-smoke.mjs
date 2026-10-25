@@ -1,5 +1,14 @@
 import { spawn, spawnSync } from "node:child_process";
-import { chmodSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import {
+  chmodSync,
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  readdirSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
@@ -42,7 +51,13 @@ function findChrome() {
 }
 
 function run(command, args, env = process.env) {
-  const result = spawnSync(command, args, { cwd: root, env, encoding: "utf8", timeout: 180_000, maxBuffer: 2 * 1024 * 1024 });
+  const result = spawnSync(command, args, {
+    cwd: root,
+    env,
+    encoding: "utf8",
+    timeout: 180_000,
+    maxBuffer: 2 * 1024 * 1024,
+  });
   if (result.error || result.status !== 0) throw new Error("command-failed");
 }
 
@@ -52,7 +67,9 @@ async function waitForHttp(target, processRef) {
     try {
       const response = await fetch(target);
       if (response.ok) return;
-    } catch { /* Ignore transient startup or cleanup errors. */ }
+    } catch {
+      /* Ignore transient startup or cleanup errors. */
+    }
     await delay(250);
   }
   throw new Error("preview-not-ready");
@@ -180,7 +197,11 @@ function saveReport() {
     "## 2. Errors or issues",
     "",
     failure
-      ? "- Failure occurred during: " + currentStep + ". Safe diagnostic category: " + failureReason + ". Detailed exception text, file paths, browser logs, and page contents are omitted to avoid exposing private data."
+      ? "- Failure occurred during: " +
+        currentStep +
+        ". Safe diagnostic category: " +
+        failureReason +
+        ". Detailed exception text, file paths, browser logs, and page contents are omitted to avoid exposing private data."
       : "- No browser acceptance failures were detected.",
     "",
     "## 3. Suggested fixes or next steps",
@@ -228,19 +249,23 @@ async function main() {
   });
   await step("Start the production preview", () => waitForHttp(url, preview));
 
-  chromeProcess = spawn(chromePath, [
-    "--headless=new",
-    "--no-sandbox",
-    "--disable-gpu",
-    "--disable-dev-shm-usage",
-    "--no-first-run",
-    "--no-default-browser-check",
-    "--remote-debugging-port=0",
-    "--remote-allow-origins=*",
-    "--user-data-dir=" + profileDir,
-    "--download-default-directory=" + downloadDir,
-    "about:blank",
-  ], { stdio: "ignore" });
+  chromeProcess = spawn(
+    chromePath,
+    [
+      "--headless=new",
+      "--no-sandbox",
+      "--disable-gpu",
+      "--disable-dev-shm-usage",
+      "--no-first-run",
+      "--no-default-browser-check",
+      "--remote-debugging-port=0",
+      "--remote-allow-origins=*",
+      "--user-data-dir=" + profileDir,
+      "--download-default-directory=" + downloadDir,
+      "about:blank",
+    ],
+    { stdio: "ignore" },
+  );
 
   let debugPort = null;
   const activePortFile = path.join(profileDir, "DevToolsActivePort");
@@ -252,7 +277,9 @@ async function main() {
         debugPort = port;
         break;
       }
-    } catch { /* Ignore transient startup or cleanup errors. */ }
+    } catch {
+      /* Ignore transient startup or cleanup errors. */
+    }
     await delay(150);
   }
   if (!debugPort) throw new Error("browser-debug-port-unavailable");
@@ -263,14 +290,22 @@ async function main() {
   socket = new WebSocket(target.webSocketDebuggerUrl);
   await new Promise((resolve, reject) => {
     const timer = setTimeout(() => reject(new Error("websocket-timeout")), timeoutMs);
-    socket.addEventListener("open", () => {
-      clearTimeout(timer);
-      resolve();
-    }, { once: true });
-    socket.addEventListener("error", () => {
-      clearTimeout(timer);
-      reject(new Error("websocket-failed"));
-    }, { once: true });
+    socket.addEventListener(
+      "open",
+      () => {
+        clearTimeout(timer);
+        resolve();
+      },
+      { once: true },
+    );
+    socket.addEventListener(
+      "error",
+      () => {
+        clearTimeout(timer);
+        reject(new Error("websocket-failed"));
+      },
+      { once: true },
+    );
   });
   client = new DevTools(socket);
   await client.send("Page.enable");
@@ -323,7 +358,9 @@ async function main() {
     })()`);
     if (!settingsClicked) throw new Error("settings-navigation-not-found");
     await client.waitForText("Unlock your local vault");
-    const leaked = await client.evaluate("document.body.innerText.includes('BROWSER_TEST_PROFILE_CANARY') || document.body.innerText.includes('BROWSER_TEST_STUDIO_CANARY')");
+    const leaked = await client.evaluate(
+      "document.body.innerText.includes('BROWSER_TEST_PROFILE_CANARY') || document.body.innerText.includes('BROWSER_TEST_STUDIO_CANARY')",
+    );
     if (leaked) throw new Error("private-record-visible-while-locked");
     await client.fill("#vault-passphrase", "phase-two-test-passphrase-123");
     await client.clickButton("Unlock vault");
@@ -354,7 +391,11 @@ async function main() {
     if (keys.some((key) => !Object.hasOwn(envelope, key)) || Object.keys(envelope).length !== keys.length) {
       throw new Error("unexpected-envelope-shape");
     }
-    for (const marker of ["BROWSER_TEST_PROFILE_CANARY", "BROWSER_TEST_STUDIO_CANARY", "Synthetic test content only."]) {
+    for (const marker of [
+      "BROWSER_TEST_PROFILE_CANARY",
+      "BROWSER_TEST_STUDIO_CANARY",
+      "Synthetic test content only.",
+    ]) {
       if (serialized.includes(marker)) throw new Error("plaintext-found-in-indexeddb");
     }
     await client.clickButton("Download encrypted backup");
@@ -362,7 +403,11 @@ async function main() {
     encryptedBackupPath = await waitForFile(downloadDir);
     const backup = readFileSync(encryptedBackupPath, "utf8");
     JSON.parse(backup);
-    for (const marker of ["BROWSER_TEST_PROFILE_CANARY", "BROWSER_TEST_STUDIO_CANARY", "Synthetic test content only."]) {
+    for (const marker of [
+      "BROWSER_TEST_PROFILE_CANARY",
+      "BROWSER_TEST_STUDIO_CANARY",
+      "Synthetic test content only.",
+    ]) {
       if (backup.includes(marker)) throw new Error("plaintext-found-in-backup");
     }
   });
@@ -407,36 +452,65 @@ try {
   failure = true;
   const message = error instanceof Error ? error.message : "";
   const safeReasons = new Set([
-    "chrome-not-found", "command-failed", "preview-exited", "preview-not-ready", "browser-exited",
-    "browser-debug-port-unavailable", "browser-target-unavailable", "websocket-timeout", "websocket-failed",
-    "devtools-command-failed", "devtools-timeout", "browser-evaluation-failed", "input-not-found",
-    "button-not-found-or-disabled", "download-timeout", "encrypted-envelope-missing", "unexpected-envelope-shape",
-    "plaintext-found-in-indexeddb", "plaintext-found-in-backup", "backup-input-not-found", "restored-profile-mismatch",
-    "private-record-visible-while-locked", "settings-navigation-not-found",
+    "chrome-not-found",
+    "command-failed",
+    "preview-exited",
+    "preview-not-ready",
+    "browser-exited",
+    "browser-debug-port-unavailable",
+    "browser-target-unavailable",
+    "websocket-timeout",
+    "websocket-failed",
+    "devtools-command-failed",
+    "devtools-timeout",
+    "browser-evaluation-failed",
+    "input-not-found",
+    "button-not-found-or-disabled",
+    "download-timeout",
+    "encrypted-envelope-missing",
+    "unexpected-envelope-shape",
+    "plaintext-found-in-indexeddb",
+    "plaintext-found-in-backup",
+    "backup-input-not-found",
+    "restored-profile-mismatch",
+    "private-record-visible-while-locked",
+    "settings-navigation-not-found",
   ]);
-  failureReason = safeReasons.has(message) ? message : message.startsWith("condition-not-met") ? "expected UI state did not appear" : "unexpected browser-test failure";
+  failureReason = safeReasons.has(message)
+    ? message
+    : message.startsWith("condition-not-met")
+      ? "expected UI state did not appear"
+      : "unexpected browser-test failure";
   if (!results.some((item) => item.name === currentStep)) {
     results.push({ name: currentStep, status: "FAIL" });
   }
 } finally {
   try {
     if (socket?.readyState === WebSocket.OPEN) socket.close();
-  } catch { /* Ignore transient startup or cleanup errors. */ }
+  } catch {
+    /* Ignore transient startup or cleanup errors. */
+  }
   for (const processRef of [chromeProcess, preview]) {
     try {
       if (processRef && typeof processRef.kill === "function") processRef.kill("SIGTERM");
-    } catch { /* Ignore transient startup or cleanup errors. */ }
+    } catch {
+      /* Ignore transient startup or cleanup errors. */
+    }
   }
   await delay(200);
   if (tempDir) {
     try {
       rmSync(tempDir, { recursive: true, force: true });
-    } catch { /* Ignore transient startup or cleanup errors. */ }
+    } catch {
+      /* Ignore transient startup or cleanup errors. */
+    }
   }
   saveReport();
 }
 
 if (failure) {
-  process.stderr.write("Browser vault smoke test failed during " + currentStep + "; details omitted from output and report.\n");
+  process.stderr.write(
+    "Browser vault smoke test failed during " + currentStep + "; details omitted from output and report.\n",
+  );
   process.exitCode = 1;
 }
