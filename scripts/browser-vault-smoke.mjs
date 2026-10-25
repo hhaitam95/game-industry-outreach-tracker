@@ -12,6 +12,7 @@ const timeoutMs = 20_000;
 const results = [];
 let currentStep = "Browser setup";
 let failure = null;
+let failureReason = "none";
 let preview;
 let chromePath = null;
 let chromeProcess;
@@ -179,7 +180,7 @@ function saveReport() {
     "## 2. Errors or issues",
     "",
     failure
-      ? "- Failure occurred during: " + currentStep + ". Detailed exception text, file paths, browser logs, and page contents are omitted to avoid exposing private data."
+      ? "- Failure occurred during: " + currentStep + ". Safe diagnostic category: " + failureReason + ". Detailed exception text, file paths, browser logs, and page contents are omitted to avoid exposing private data."
       : "- No browser acceptance failures were detected.",
     "",
     "## 3. Suggested fixes or next steps",
@@ -294,12 +295,15 @@ async function main() {
     await client.waitForText("Candidate profile");
   });
 
-  await step("Save synthetic profile and application records", async () => {
+  await step("Save synthetic profile", async () => {
     await client.fill("#profile-display-name", "BROWSER_TEST_PROFILE_CANARY");
     await client.fill("#profile-headline", "Synthetic QA Profile");
     await client.fill("#profile-summary", "Synthetic test content only.");
     await client.clickButton("Encrypt and save profile");
-    await client.waitForText("Profile encrypted and saved locally.");
+    await client.waitForText("Profile encrypted and saved to this browser.");
+  });
+
+  await step("Add synthetic application", async () => {
     await client.fill("#application-studio", "BROWSER_TEST_STUDIO_CANARY");
     await client.fill("#application-role", "Browser QA Role");
     await client.fill("#application-url", "https://example.com/careers");
@@ -399,8 +403,18 @@ async function main() {
 
 try {
   await main();
-} catch {
+} catch (error) {
   failure = true;
+  const message = error instanceof Error ? error.message : "";
+  const safeReasons = new Set([
+    "chrome-not-found", "command-failed", "preview-exited", "preview-not-ready", "browser-exited",
+    "browser-debug-port-unavailable", "browser-target-unavailable", "websocket-timeout", "websocket-failed",
+    "devtools-command-failed", "devtools-timeout", "browser-evaluation-failed", "input-not-found",
+    "button-not-found-or-disabled", "download-timeout", "encrypted-envelope-missing", "unexpected-envelope-shape",
+    "plaintext-found-in-indexeddb", "plaintext-found-in-backup", "backup-input-not-found", "restored-profile-mismatch",
+    "private-record-visible-while-locked", "settings-navigation-not-found",
+  ]);
+  failureReason = safeReasons.has(message) ? message : message.startsWith("condition-not-met") ? "expected UI state did not appear" : "unexpected browser-test failure";
   if (!results.some((item) => item.name === currentStep)) {
     results.push({ name: currentStep, status: "FAIL" });
   }
