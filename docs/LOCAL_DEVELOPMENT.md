@@ -170,7 +170,7 @@ The script builds the static app with the GitHub Pages repository subpath, start
 2. Save a synthetic profile and application.
 3. Reload the app and verify it is locked before private records are shown.
 4. Verify an incorrect passphrase is rejected without revealing private records, then unlock using the correct passphrase and confirm the saved records return.
-5. Verify the wrong passphrase is rejected without showing private records, then unlock successfully. Inspect IndexedDB and the exported backup for exact AES-GCM envelope metadata, valid salt/IV/ciphertext lengths, and absence of dummy plaintext markers.
+5. Inspect IndexedDB and the exported backup for exact AES-GCM envelope metadata, valid salt/IV/ciphertext lengths, and absence of dummy plaintext markers.
 6. Lock/unlock again, delete the test vault, create a fresh vault, restore the exported backup, and verify the original backup passphrase unlocks the restored data.
 
 The report is written to `test-results/phase2-browser-smoke-report.md` with restrictive local file permissions. The test uses a temporary browser profile and synthetic values only; it does not read the existing browser profile or any CV. The report omits raw logs, source contents, file paths, passphrases, and record values. Chrome/Chromium must be installed; set `CHROME_BIN` if it is installed in a nonstandard location.

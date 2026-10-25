@@ -61,7 +61,6 @@ function run(command, args, env = process.env) {
   if (result.error || result.status !== 0) throw new Error("command-failed");
 }
 
-
 function validateEncryptedEnvelope(serialized) {
   if (typeof serialized !== "string" || serialized.length === 0) {
     throw new Error("unexpected-envelope-shape");
