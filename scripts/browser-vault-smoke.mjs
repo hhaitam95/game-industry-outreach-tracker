@@ -168,7 +168,19 @@ class DevTools {
   }
 
   async waitForText(text) {
-    await this.waitFor(`document.body?.innerText.includes(${JSON.stringify(text)}) ?? false`, "text");
+    const labels = {
+      "Your workspace": "workspace after reload",
+      "Private workspace storage": "settings after navigation",
+      "Unlock your local vault": "locked vault prompt",
+      BROWSER_TEST_STUDIO_CANARY: "application after unlock",
+      BROWSER_TEST_PROFILE_CANARY: "profile after unlock",
+      "Vault locked.": "lock confirmation",
+      "Backup restored.": "backup restoration",
+    };
+    await this.waitFor(
+      `document.body?.innerText.includes(${JSON.stringify(text)}) ?? false`,
+      labels[text] ?? "expected UI state",
+    );
   }
 }
 
@@ -347,7 +359,7 @@ async function main() {
     await client.waitForText("Application encrypted and saved locally.");
   });
 
-  await step("Reload and verify the vault locks before displaying records", async () => {
+  await step("Reload the app and return to Settings", async () => {
     await client.send("Page.reload");
     await client.waitForText("Your workspace");
     const settingsClicked = await client.evaluate(`(() => {
@@ -357,11 +369,18 @@ async function main() {
       return true;
     })()`);
     if (!settingsClicked) throw new Error("settings-navigation-not-found");
+    await client.waitForText("Private workspace storage");
+  });
+
+  await step("Verify the vault is locked after reload", async () => {
     await client.waitForText("Unlock your local vault");
     const leaked = await client.evaluate(
       "document.body.innerText.includes('BROWSER_TEST_PROFILE_CANARY') || document.body.innerText.includes('BROWSER_TEST_STUDIO_CANARY')",
     );
     if (leaked) throw new Error("private-record-visible-while-locked");
+  });
+
+  await step("Unlock the existing vault after reload", async () => {
     await client.fill("#vault-passphrase", "phase-two-test-passphrase-123");
     await client.clickButton("Unlock vault");
     await client.waitForText("BROWSER_TEST_STUDIO_CANARY");
@@ -476,11 +495,18 @@ try {
     "private-record-visible-while-locked",
     "settings-navigation-not-found",
   ]);
+  const safeWaitReasons = new Map([
+    ["condition-not-met-workspace after reload", "workspace after reload did not appear"],
+    ["condition-not-met-settings after navigation", "settings screen did not appear"],
+    ["condition-not-met-locked vault prompt", "locked vault prompt did not appear"],
+    ["condition-not-met-application after unlock", "application record did not appear after unlock"],
+    ["condition-not-met-profile after unlock", "profile record did not appear after unlock"],
+    ["condition-not-met-lock confirmation", "lock confirmation did not appear"],
+    ["condition-not-met-backup restoration", "backup restoration did not complete"],
+  ]);
   failureReason = safeReasons.has(message)
     ? message
-    : message.startsWith("condition-not-met")
-      ? "expected UI state did not appear"
-      : "unexpected browser-test failure";
+    : safeWaitReasons.get(message) ?? (message.startsWith("condition-not-met") ? "expected UI state did not appear" : "unexpected browser-test failure");
   if (!results.some((item) => item.name === currentStep)) {
     results.push({ name: currentStep, status: "FAIL" });
   }
