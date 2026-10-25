@@ -31,17 +31,20 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
-      - name: Run automated browser acceptance test
-        run: node scripts/browser-vault-smoke.mjs
+      - name: Run complete local-to-AI feedback suite
+        run: npm run feedback-report
 
       - name: Add sanitized Markdown report to the run summary
         if: always()
         shell: bash
         run: |
+          if [[ -f feedback-report.md ]]; then
+            cat feedback-report.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Feedback report was not generated; inspect the failed setup step." >> "$GITHUB_STEP_SUMMARY"
+          fi
           if [[ -f test-results/phase2-browser-smoke-report.md ]]; then
             cat test-results/phase2-browser-smoke-report.md >> "$GITHUB_STEP_SUMMARY"
-          else
-            echo "Browser report was not generated; inspect the failed setup step." >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: Upload Markdown report
@@ -49,6 +52,8 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: phase2-browser-smoke-report
-          path: test-results/phase2-browser-smoke-report.md
+          path: |
+            feedback-report.md
+            test-results/phase2-browser-smoke-report.md
           if-no-files-found: warn
           retention-days: 14
