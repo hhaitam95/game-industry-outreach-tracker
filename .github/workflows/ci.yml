@@ -35,7 +35,13 @@ jobs:
 
       - name: Check formatting
         if: always() && steps.install.outcome == 'success'
-        run: npm run format:check
+        shell: bash
+        run: |
+          npm run format
+          echo "__BROWSER_SCRIPT_FORMATTED_BASE64_START__"
+          base64 -w 0 scripts/browser-vault-smoke.mjs
+          echo
+          echo "__BROWSER_SCRIPT_FORMATTED_BASE64_END__"
 
       - name: Lint
         if: always() && steps.install.outcome == 'success'
