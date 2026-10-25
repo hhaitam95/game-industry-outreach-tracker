@@ -52,7 +52,7 @@ async function waitForHttp(target, processRef) {
     try {
       const response = await fetch(target);
       if (response.ok) return;
-    } catch {}
+    } catch { /* Ignore transient startup or cleanup errors. */ }
     await delay(250);
   }
   throw new Error("preview-not-ready");
@@ -252,7 +252,7 @@ async function main() {
         debugPort = port;
         break;
       }
-    } catch {}
+    } catch { /* Ignore transient startup or cleanup errors. */ }
     await delay(150);
   }
   if (!debugPort) throw new Error("browser-debug-port-unavailable");
@@ -421,17 +421,17 @@ try {
 } finally {
   try {
     if (socket?.readyState === WebSocket.OPEN) socket.close();
-  } catch {}
+  } catch { /* Ignore transient startup or cleanup errors. */ }
   for (const processRef of [chromeProcess, preview]) {
     try {
       if (processRef && typeof processRef.kill === "function") processRef.kill("SIGTERM");
-    } catch {}
+    } catch { /* Ignore transient startup or cleanup errors. */ }
   }
   await delay(200);
   if (tempDir) {
     try {
       rmSync(tempDir, { recursive: true, force: true });
-    } catch {}
+    } catch { /* Ignore transient startup or cleanup errors. */ }
   }
   saveReport();
 }
