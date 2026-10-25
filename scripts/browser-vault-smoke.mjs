@@ -13,7 +13,8 @@ const results = [];
 let currentStep = "Browser setup";
 let failure = null;
 let preview;
-let chrome;
+let chromePath = null;
+let chromeProcess;
 let socket;
 let tempDir;
 let client;
@@ -161,7 +162,7 @@ async function step(name, action) {
 
 function saveReport() {
   mkdirSync(path.dirname(reportPath), { recursive: true });
-  const passed = results.filter((item) => item.status === "PASS").length;
+  const passed = results.filter((item) => item.status.startsWith("PASS")).length;
   const lines = [
     "# Phase 2 Browser Acceptance Report",
     "",
@@ -202,9 +203,8 @@ function saveReport() {
 }
 
 async function main() {
-  const chromePath = findChrome();
+  chromePath = findChrome();
   if (!chromePath) throw new Error("chrome-not-found");
-  chrome = chromePath;
 
   if (process.env.SKIP_BROWSER_BUILD !== "1") {
     await step("Build the static app with the repository subpath", async () => {
@@ -227,8 +227,7 @@ async function main() {
   });
   await step("Start the production preview", () => waitForHttp(url, preview));
 
-  chrome = chromePath;
-  chrome = spawn(chromePath, [
+  chromeProcess = spawn(chromePath, [
     "--headless=new",
     "--no-sandbox",
     "--disable-gpu",
@@ -245,7 +244,7 @@ async function main() {
   let debugPort = null;
   const activePortFile = path.join(profileDir, "DevToolsActivePort");
   for (let attempt = 0; attempt < 80; attempt += 1) {
-    if (chrome.exitCode !== null) throw new Error("browser-exited");
+    if (chromeProcess.exitCode !== null) throw new Error("browser-exited");
     try {
       const port = Number(readFileSync(activePortFile, "utf8").split(/\r?\n/)[0]);
       if (Number.isInteger(port) && port > 0) {
@@ -277,6 +276,14 @@ async function main() {
   await client.send("Runtime.enable");
   await client.send("Page.setDownloadBehavior", { behavior: "allow", downloadPath: downloadDir });
   await client.send("Page.navigate", { url });
+  await client.waitForText("Your workspace");
+  const settingsClicked = await client.evaluate(`(() => {
+    const item = [...document.querySelectorAll(".nav-link")].find((element) => element.innerText.trim().includes("Settings"));
+    if (!item) return false;
+    item.click();
+    return true;
+  })()`);
+  if (!settingsClicked) throw new Error("settings-navigation-not-found");
   await client.waitForText("Private workspace storage");
 
   await step("Create a new encrypted vault", async () => {
@@ -303,6 +310,14 @@ async function main() {
 
   await step("Reload and verify the vault locks before displaying records", async () => {
     await client.send("Page.reload");
+    await client.waitForText("Your workspace");
+    const settingsClicked = await client.evaluate(`(() => {
+      const item = [...document.querySelectorAll(".nav-link")].find((element) => element.innerText.trim().includes("Settings"));
+      if (!item) return false;
+      item.click();
+      return true;
+    })()`);
+    if (!settingsClicked) throw new Error("settings-navigation-not-found");
     await client.waitForText("Unlock your local vault");
     const leaked = await client.evaluate("document.body.innerText.includes('BROWSER_TEST_PROFILE_CANARY') || document.body.innerText.includes('BROWSER_TEST_STUDIO_CANARY')");
     if (leaked) throw new Error("private-record-visible-while-locked");
@@ -393,7 +408,7 @@ try {
   try {
     if (socket?.readyState === WebSocket.OPEN) socket.close();
   } catch {}
-  for (const processRef of [chrome, preview]) {
+  for (const processRef of [chromeProcess, preview]) {
     try {
       if (processRef && typeof processRef.kill === "function") processRef.kill("SIGTERM");
     } catch {}
