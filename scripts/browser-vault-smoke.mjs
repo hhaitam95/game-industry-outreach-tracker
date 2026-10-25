@@ -506,7 +506,10 @@ try {
   ]);
   failureReason = safeReasons.has(message)
     ? message
-    : safeWaitReasons.get(message) ?? (message.startsWith("condition-not-met") ? "expected UI state did not appear" : "unexpected browser-test failure");
+    : (safeWaitReasons.get(message) ??
+      (message.startsWith("condition-not-met")
+        ? "expected UI state did not appear"
+        : "unexpected browser-test failure"));
   if (!results.some((item) => item.name === currentStep)) {
     results.push({ name: currentStep, status: "FAIL" });
   }
