@@ -168,7 +168,7 @@ function saveReport() {
     "",
     "- Scope: dummy-data-only browser smoke test for the encrypted local vault.",
     "- Runtime: " + safeVersion("node", ["--version"]),
-    "- Browser: " + (chrome ? safeVersion(chrome, ["--version"]) : "unavailable"),
+    "- Browser: " + (chromePath ? safeVersion(chromePath, ["--version"]) : "unavailable"),
     "- Result: **" + (failure ? "FAIL" : "PASS") + "**",
     "- Steps passed: " + passed + " / " + results.length,
     "",
