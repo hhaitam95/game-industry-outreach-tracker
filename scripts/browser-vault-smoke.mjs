@@ -384,7 +384,8 @@ async function main() {
     await client.fill("#vault-passphrase", "phase-two-test-passphrase-123");
     await client.clickButton("Unlock vault");
     await client.waitForText("BROWSER_TEST_STUDIO_CANARY");
-    await client.waitForText("BROWSER_TEST_PROFILE_CANARY");
+    const profileName = await client.evaluate("document.querySelector('#profile-display-name')?.value ?? ''");
+    if (profileName !== "BROWSER_TEST_PROFILE_CANARY") throw new Error("restored-profile-mismatch");
   });
 
   let encryptedBackupPath;
