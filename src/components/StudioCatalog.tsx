@@ -58,7 +58,9 @@ export default function StudioCatalog() {
                 <div>
                   <h3>{studio.name}</h3>
                   <span className="studio-type">
-                    {studio.businessType === "game-developer-publisher" ? "Developer · Publisher" : "Game developer"}
+                    {studio.businessType === "game-developer-publisher"
+                      ? "Developer · Publisher"
+                      : "Game developer"}
                   </span>
                 </div>
                 <span className="studio-reviewed">Reviewed {STUDIO_CATALOG_DATA.cataloguedOn}</span>

@@ -258,25 +258,23 @@ export function validateStudioCatalog(input) {
     };
   });
 
-  const ownershipRelationships = objectList(
-    input.ownershipRelationships,
-    "Ownership relationships",
-    100,
-  ).map((value) => {
-    const id = registerId(
-      value,
-      "Ownership relationship",
-      ["id", "studioId", "ownerName", "relationshipType", "sourceIds"],
-      seenIds,
-    );
-    return {
-      id,
-      studioId: validateStudioReference(value.studioId, "Ownership relationship"),
-      ownerName: text(value.ownerName, "Owner name", 180),
-      relationshipType: oneOf(value.relationshipType, OWNERSHIP_TYPES, "Ownership relationship type"),
-      sourceIds: validateSources(value.sourceIds, "Ownership relationship"),
-    };
-  });
+  const ownershipRelationships = objectList(input.ownershipRelationships, "Ownership relationships", 100).map(
+    (value) => {
+      const id = registerId(
+        value,
+        "Ownership relationship",
+        ["id", "studioId", "ownerName", "relationshipType", "sourceIds"],
+        seenIds,
+      );
+      return {
+        id,
+        studioId: validateStudioReference(value.studioId, "Ownership relationship"),
+        ownerName: text(value.ownerName, "Owner name", 180),
+        relationshipType: oneOf(value.relationshipType, OWNERSHIP_TYPES, "Ownership relationship type"),
+        sourceIds: validateSources(value.sourceIds, "Ownership relationship"),
+      };
+    },
+  );
 
   const games = objectList(input.games, "Games", 500).map((value) => {
     const id = registerId(value, "Game", ["id", "title", "sourceIds"], seenIds);
