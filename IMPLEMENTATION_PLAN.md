@@ -64,7 +64,7 @@
 
 ## Phase 3 — Studio and opportunity data model
 
-**Implementation status:** Initial data contract and four-record manual catalogue implemented on `feat/phase3-manual-studio-catalog`; verify standard CI and browser acceptance for the current commit before treating this increment as accepted.
+**Implementation status:** Implemented and accepted on `feat/phase3-manual-studio-catalog`. Standard CI passed run [40340001102](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340001102), and combined Phase 2/3 browser acceptance passed run [40340000974](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340000974), both for code commit `843d6c38954ed381f3cc30ba53f25c991ecfdf47`.
 
 ### Scope
 - Define canonical studio, site, ownership, game, credit, opportunity, application-route, source-evidence and change-event schemas.

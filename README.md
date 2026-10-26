@@ -2,7 +2,7 @@
 
 A personal, evidence-driven workspace for discovering video game studios and opportunities worldwide, assessing transferable technical skills, preparing tailored outreach, and tracking application outcomes.
 
-> **Current status:** Phase 2 encrypted browser-local workspace is implemented. The initial Phase 3 manual studio catalogue is implemented on `feat/phase3-manual-studio-catalog`; verify standard CI and browser acceptance for the current branch commit before treating Phase 3 as accepted.
+> **Current status:** Phase 2 encrypted browser-local workspace and Phase 3 manual studio catalogue are implemented on `feat/browser-local-private-data` and `feat/phase3-manual-studio-catalog`, respectively. Phase 3 standard CI and browser acceptance passed for code commit `843d6c38954ed381f3cc30ba53f25c991ecfdf47` (runs [40340001102](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340001102) and [40340000974](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340000974)). `main` remains unchanged.
 
 ## Current frontend shell
 

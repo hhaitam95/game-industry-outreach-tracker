@@ -185,10 +185,10 @@ This is a living decision record. Accepted decisions may be amended or supersede
 ## ADR-022 — Encrypted browser-local vault and backup envelope
 
 - **Date:** 2026-10-25
-- **Status:** Accepted implementation; browser acceptance tests pending
+- **Status:** Accepted implementation; automated browser acceptance passed
 - **Context:** Phase 2 needs private records without a server, paid service, or automatic cloud sync.
 - **Decision:** Store only versioned AES-256-GCM encrypted envelopes in IndexedDB. Derive a non-extractable key from the user passphrase with PBKDF2-HMAC-SHA-256 at 600,000 iterations. Use a fresh random IV for each encryption. Encrypted JSON export/import is bounded to 5 MiB. Strict schemas reject unknown fields and do not model raw resume contents. The user must confirm before import replaces local records.
-- **Consequences:** A lost passphrase cannot be recovered; exports need separate safe backup handling. The vault is browser/device local and is not protection from malicious scripts while unlocked. Cloud CI passed in run 40144691400; the dummy-record browser test remains the final acceptance gate before real personal data is used.
+- **Consequences:** A lost passphrase cannot be recovered; exports need separate safe backup handling. The vault is browser/device local and is not protection from malicious scripts while unlocked. The combined dummy-data browser acceptance passed in run [40340000974](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340000974); this demonstrates tested behavior, not a security audit, before real personal data is used.
 
 
 ## ADR-015 — Phase 3 starts with a small manual public studio catalogue

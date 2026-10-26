@@ -1,7 +1,7 @@
 # Project Handoff
 
-**Last updated:** 2026-10-25  
-**Project stage:** Phase 3 manual studio catalogue implemented on `feat/phase3-manual-studio-catalog`; verify cloud acceptance for the current commit  
+**Last updated:** 2026-10-26  
+**Project stage:** Phase 3 closed out on `feat/phase3-manual-studio-catalog`; standard CI and browser acceptance passed for code commit `843d6c38954ed381f3cc30ba53f25c991ecfdf47`  
 **Default branch:** main  
 **Baseline branch:** docs/project-foundation  
 **Architecture baseline:** architecture/pages-actions-cv
@@ -38,17 +38,17 @@ Build a personal tool to discover game studios/opportunities worldwide, verify o
 ## Current implementation state
 
 - Phase 1 adds the responsive React + TypeScript + Vite frontend shell, simple local navigation, placeholder screens, and a subpath-capable static build. GitHub Actions also starts Vite Preview with the repository base path and verifies the HTML shell plus generated JavaScript and CSS assets are served successfully.
-- Phase 1 standard CI passed for commit `a850adae5cb863b1f021618f22ac8d59c9771ec5` in run [40143560612](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40143560612). Phase 2 standard CI passed for the current implementation in run [40187348311](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40187348311); the complete feedback suite and automated browser acceptance report passed in run [40187348383](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40187348383).
+- Phase 1 standard CI passed for commit `a850adae5cb863b1f021618f22ac8d59c9771ec5` in run [40143560612](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40143560612). Phase 2 browser acceptance previously passed on `feat/browser-local-private-data` in run [40187348383](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40187348383); Phase 3 acceptance for the combined workspace is recorded below.
 - `npm run feedback-report` provides optional local diagnostics with fixed-category failure summaries; it omits raw diagnostic lines and filenames.
 - Phase 2 adds encrypted browser-local private profile/draft/application records and encrypted backup export/import; see the acceptance gates below.
 - Phase 3 adds a source-linked manual catalogue for CD PROJEKT RED, Naughty Dog, Santa Monica Studio, and Riot Games. The schema separately represents studios, sites, ownership relationships, games, credit roles, opportunities, application routes, source evidence, and change events.
 - Live studio/job discovery, scheduled polling, resume extraction/generation, and public deployment are not implemented.
-- The browser-acceptance workflow also checks the catalogue on `feat/phase3-manual-studio-catalog`; verify the result for the current commit.
+- Phase 3 code acceptance is green for commit `843d6c38954ed381f3cc30ba53f25c991ecfdf47`: standard CI run [40340001102](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340001102) and combined Phase 2/3 browser acceptance run [40340000974](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340000974) both passed.
 - Resume extraction/generation is specified but not implemented.
 - docs/resume-guidelines/ and docs/operations/ are present on the architecture baseline.
 - Local setup and the privacy-conscious feedback process are documented in `docs/LOCAL_DEVELOPMENT.md`.
-- The standard cloud workflow passes all 19 unit tests (3 navigation, 10 private-data/schema/crypto, 6 report-safety), formatting, lint, TypeScript checks, dependency audit (zero vulnerabilities), production build, privacy-boundary scan, and repository-subpath preview smoke test.
-- Automated browser acceptance passed 12/12 steps on the last verified revision using a temporary headless Chrome profile and synthetic data. The test script has since been hardened to check exact AES-GCM envelope metadata/byte lengths and UI rejection of an incorrect passphrase; verify the latest browser workflow run after these additions before treating the hardened checks as passed. The sanitized Markdown report is attached to each browser workflow run.
+- Standard cloud CI passes all 28 unit tests (3 navigation, 10 private-data/schema/crypto, 6 report-safety, 9 studio-catalogue), formatting, lint, TypeScript checks, dependency audit (zero vulnerabilities), production build, privacy-boundary scan, and repository-subpath preview smoke test.
+- Automated browser acceptance passed on the Phase 3 code revision using a temporary headless Chrome profile and synthetic data, including vault create/save/reload/lock/unlock, encrypted export/restore checks, incorrect-passphrase rejection, and the four-studio catalogue UI/source-link checks. The sanitized Markdown report is attached to the passing [Phase 2/3 browser workflow](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340000974). This is functional acceptance, not a security audit; no real personal data was used.
 - The earlier baseline install reported 15 npm advisories (2 low, 3 moderate, 10 high); the refreshed lockfile's full npm audit reported zero vulnerabilities, and the current CI dependency-audit step passes.
 - Public Pages deployment repository has not been created.
 - Cross-repository publish credential and exact deployment process remain undecided.
@@ -56,11 +56,11 @@ Build a personal tool to discover game studios/opportunities worldwide, verify o
 
 ## Next steps
 
-1. Phase 2 acceptance is complete for the tested flow: standard CI and automated browser acceptance both pass on `feat/browser-local-private-data`.
-2. Before using real personal data, understand the local-only storage, unrecoverable passphrase, browser-storage loss, and encrypted-backup limitations; the automated test used only synthetic data and is not a security audit.
-3. Review official source links and verify standard CI and the Phase 3 browser-acceptance run for `feat/phase3-manual-studio-catalog` before treating the milestone as accepted.
-4. Only then plan Phase 4 discovery adapters and a manually triggered fixture-backed registry scan. Do not enable schedule or publishing yet.
-5. Keep private application integration separate; the Phase 3 catalogue must not read or update encrypted application records.
+1. Phase 3 is closed out on `feat/phase3-manual-studio-catalog`; standard CI and combined browser acceptance passed for code commit `843d6c38954ed381f3cc30ba53f25c991ecfdf47` (runs [40340001102](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340001102) and [40340000974](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340000974)).
+2. Before entering real personal data, understand local-only storage, the unrecoverable passphrase, browser-storage loss, and encrypted-backup limitations; automated tests used synthetic data and are not a security audit.
+3. Phase 4 can begin with a manual, fixture-backed discovery scan and official-source adapters. Keep schedule and publishing disabled until the discovery path and public-data boundary have been reviewed.
+4. Keep private application integration separate; the Phase 3 catalogue does not read or update encrypted application records.
+5. `main` remains unchanged; continue work from the Phase 3 branch or a new feature branch based on it, according to the approved roadmap.
 
 ## Known trade-offs
 
