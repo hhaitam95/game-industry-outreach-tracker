@@ -526,7 +526,8 @@ const initialCatalog = {
       id: "cd-projekt-red",
       name: "CD PROJEKT RED",
       businessType: "game-developer-publisher",
-      summary: "A video-game development studio known for The Witcher and Cyberpunk; its official careers site lists teams across multiple projects and locations.",
+      summary:
+        "A video-game development studio known for The Witcher and Cyberpunk; its official careers site lists teams across multiple projects and locations.",
       officialWebsiteUrl: "https://www.cdprojektred.com/en/",
       sourceIds: ["source-cdpr-site", "source-cdpr-careers", "source-cdpr-group", "source-cdpr-games"],
     },
@@ -534,7 +535,8 @@ const initialCatalog = {
       id: "naughty-dog",
       name: "Naughty Dog",
       businessType: "game-developer",
-      summary: "A PlayStation first-party game developer known for The Last of Us and Uncharted; its company page also identifies Intergalactic: The Heretic Prophet as in development.",
+      summary:
+        "A PlayStation first-party game developer known for The Last of Us and Uncharted; its company page also identifies Intergalactic: The Heretic Prophet as in development.",
       officialWebsiteUrl: "https://www.naughtydog.com/",
       sourceIds: ["source-nd-site", "source-nd-about", "source-nd-careers"],
     },
@@ -550,7 +552,8 @@ const initialCatalog = {
       id: "riot-games",
       name: "Riot Games",
       businessType: "game-developer-publisher",
-      summary: "A game developer and publisher whose official career listings organize work around products including League of Legends, VALORANT, and Teamfight Tactics.",
+      summary:
+        "A game developer and publisher whose official career listings organize work around products including League of Legends, VALORANT, and Teamfight Tactics.",
       officialWebsiteUrl: "https://www.riotgames.com/en",
       sourceIds: ["source-riot-site", "source-riot-careers", "source-riot-about"],
     },
@@ -776,7 +779,12 @@ export const STUDIO_PROFILES = STUDIO_CATALOG_DATA.studios.map((studio) => ({
 
 /** @param {string} value */
 function normalizeSearch(value) {
-  return value.normalize("NFKD").replace(/\p{Diacritic}/gu, "").toLowerCase().replace(/\s+/g, " ").trim();
+  return value
+    .normalize("NFKD")
+    .replace(/\p{Diacritic}/gu, "")
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 /** @param {string} query */

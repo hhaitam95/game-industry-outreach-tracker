@@ -58,9 +58,7 @@ export default function StudioCatalog() {
                 <div>
                   <h3>{studio.name}</h3>
                   <span className="studio-type">
-                    {studio.businessType === "game-developer-publisher"
-                      ? "Developer · Publisher"
-                      : "Game developer"}
+                    {studio.businessType === "game-developer-publisher" ? "Developer · Publisher" : "Game developer"}
                   </span>
                 </div>
                 <span className="studio-reviewed">Reviewed {STUDIO_CATALOG_DATA.cataloguedOn}</span>
@@ -75,7 +73,8 @@ export default function StudioCatalog() {
                     <ul className="catalog-tag-list">
                       {studio.sites.map((site) => (
                         <li key={site.id}>
-                          {site.city}, {site.region ? site.region + ", " : ""}{site.country}
+                          {site.city}, {site.region ? site.region + ", " : ""}
+                          {site.country}
                           <span className="studio-site-kind">{site.siteType}</span>
                         </li>
                       ))}
@@ -143,7 +142,9 @@ export default function StudioCatalog() {
                         <a href={source.url} target="_blank" rel="noopener noreferrer">
                           {source.label}
                         </a>
-                        <span>{source.sourceType.replaceAll("-", " ")} · accessed {source.accessedOn}</span>
+                        <span>
+                          {source.sourceType.replaceAll("-", " ")} · accessed {source.accessedOn}
+                        </span>
                       </li>
                     );
                   })}
