@@ -1,0 +1,46 @@
+name: Discovery fixture tests
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: discovery-tests-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate-discovery:
+    name: Validate discovery runner
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Run discovery fixture and change-detection tests
+        run: python3 -m unittest discover -s tests -p 'test_discovery*.py' -v
+
+      - name: Run the four-source offline fixture scan
+        run: python3 scripts/discover_studios.py --mode fixture --registry config/studio-registry.json --fixture-dir tests/fixtures/discovery --output-dir "$RUNNER_TEMP/discovery-output"
+
+      - name: Validate generated public projection
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          from sys import path
+          path.insert(0, 'scripts')
+          from discovery.pipeline import validate_public_projection
+          output = Path('${{ runner.temp }}/discovery-output/public-opportunities.json')
+          value = json.loads(output.read_text(encoding='utf-8'))
+          validate_public_projection(value)
+          assert len(value['opportunities']) == 3
+          assert all('Fixture' in item['title'] for item in value['opportunities'])
+          print('Validated three synthetic roles against the strict public allowlist.')
+          PY

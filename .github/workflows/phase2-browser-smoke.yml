@@ -1,0 +1,62 @@
+name: Phase 2 and 3 Browser Acceptance
+
+on:
+  push:
+    branches:
+      - feat/browser-local-private-data
+      - feat/phase3-manual-studio-catalog
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: phase2-browser-acceptance-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  browser-vault:
+    name: Browser vault create, save, lock, export and restore
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Run complete local-to-AI feedback suite
+        env:
+          EXPECT_STUDIO_CATALOG: ${{ github.ref_name == 'feat/phase3-manual-studio-catalog' && '1' || '0' }}
+        run: npm run feedback-report
+
+      - name: Add sanitized Markdown report to the run summary
+        if: always()
+        shell: bash
+        run: |
+          if [[ -f feedback-report.md ]]; then
+            cat feedback-report.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Feedback report was not generated; inspect the failed setup step." >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [[ -f test-results/browser-acceptance-report.md ]]; then
+            cat test-results/browser-acceptance-report.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload Markdown report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: browser-acceptance-report
+          path: |
+            feedback-report.md
+            test-results/browser-acceptance-report.md
+          if-no-files-found: warn
+          retention-days: 14

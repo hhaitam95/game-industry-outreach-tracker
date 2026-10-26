@@ -1,0 +1,125 @@
+name: Frontend CI
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: frontend-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate frontend
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Install locked dependencies
+        id: install
+        run: npm ci
+
+      - name: Check formatting
+        if: always() && steps.install.outcome == 'success'
+        run: npm run format:check
+
+      - name: Lint
+        if: always() && steps.install.outcome == 'success'
+        run: npm run lint
+
+      - name: Type check
+        if: always() && steps.install.outcome == 'success'
+        run: npm run typecheck
+
+      - name: Run unit tests
+        if: always() && steps.install.outcome == 'success'
+        run: npm test
+
+      - name: Audit dependencies
+        if: always() && steps.install.outcome == 'success'
+        run: npm audit --audit-level=high
+
+      - name: Build static site with a repository subpath
+        id: build
+        if: always() && steps.install.outcome == 'success'
+        run: npm run build
+        env:
+          VITE_BASE_PATH: /game-industry-outreach-tracker/
+
+      - name: Check tracked paths and built artifacts for private-data leaks
+        if: steps.install.outcome == 'success' && steps.build.outcome == 'success'
+        run: npm run check:privacy
+
+      - name: Smoke-test preview and repository-subpath assets
+        if: steps.install.outcome == 'success' && steps.build.outcome == 'success'
+        shell: bash
+        env:
+          VITE_BASE_PATH: /game-industry-outreach-tracker/
+        run: |
+          set -euo pipefail
+
+          preview_log="$(mktemp)"
+          npm run preview -- --host 127.0.0.1 --port 4173 --strictPort >"$preview_log" 2>&1 &
+          preview_pid=$!
+
+          cleanup() {
+            kill "$preview_pid" 2>/dev/null || true
+            wait "$preview_pid" 2>/dev/null || true
+            rm -f "$preview_log"
+          }
+          trap cleanup EXIT
+
+          base_path="/game-industry-outreach-tracker/"
+          preview_url="http://127.0.0.1:4173${base_path}"
+          ready=false
+
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent --show-error "$preview_url" --output /tmp/preview-index.html 2>/dev/null; then
+              ready=true
+              break
+            fi
+            sleep 1
+          done
+
+          if [[ "$ready" != "true" ]]; then
+            cat "$preview_log"
+            echo "Vite preview did not serve ${preview_url}" >&2
+            exit 1
+          fi
+
+          grep -q '<div id="root"></div>' /tmp/preview-index.html
+
+          js_asset="$(grep -oE 'src="[^"]+\.js"' /tmp/preview-index.html | head -n 1 | cut -d '"' -f 2 || true)"
+          css_asset="$(grep -oE 'href="[^"]+\.css"' /tmp/preview-index.html | head -n 1 | cut -d '"' -f 2 || true)"
+
+          if [[ -z "$js_asset" || -z "$css_asset" ]]; then
+            cat /tmp/preview-index.html
+            echo "Expected generated JavaScript and CSS assets in preview HTML." >&2
+            exit 1
+          fi
+
+          if [[ "$js_asset" != "${base_path}assets/"*.js || "$css_asset" != "${base_path}assets/"*.css ]]; then
+            echo "Expected JavaScript and CSS URLs below ${base_path}; got JS=${js_asset}, CSS=${css_asset}" >&2
+            exit 1
+          fi
+
+          curl --fail --silent --show-error "http://127.0.0.1:4173${js_asset}" --output /tmp/preview-app.js
+          curl --fail --silent --show-error "http://127.0.0.1:4173${css_asset}" --output /tmp/preview-app.css
+          test -s /tmp/preview-app.js
+          test -s /tmp/preview-app.css
+
+          echo "Vite preview served the page, JavaScript, and CSS under ${base_path}."
