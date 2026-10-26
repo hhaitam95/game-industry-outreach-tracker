@@ -84,6 +84,8 @@
 
 ## Phase 4 — Daily GitHub Actions discovery
 
+**Implementation status:** First increment implemented in the review candidate on `feat/phase4-discovery-pipeline`; 29 Python fixture tests pass locally. The increment includes a curated four-studio source registry, conservative parser/state logic, an allowlisted public projection, and a manual-only workflow. This is not Phase 4 acceptance: complete repository CI and browser tests have not run on the candidate, no live scan has been reviewed, and daily scheduling/public publishing remain disabled.
+
 ### Scope
 - Implement Python source adapters and a curated registry file.
 - Implement workflow triggers: scheduled daily, workflow_dispatch, optionally push on registry changes.

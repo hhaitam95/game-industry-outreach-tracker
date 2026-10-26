@@ -4,6 +4,8 @@ Meaningful changes are recorded here. This file starts with the initial document
 
 ## Unreleased
 
+- Added the first Phase 4 discovery-pipeline increment on the candidate feature branch: a curated four-studio registry, standard-library Python runner, fixture-backed parsing/change-detection tests, conservative three-complete-scan absence logic, an allowlisted public projection, and guarded manual workflows. Local fixture suite: 29 tests passed. Daily schedule and public publishing remain disabled pending full CI and reviewed live-scan acceptance.
+
 - Closed out Phase 3 on `feat/phase3-manual-studio-catalog`: fixed Prettier formatting in the catalogue component/data module, removed temporary formatter diagnostics, and verified passing standard CI plus combined browser acceptance for code commit `843d6c38954ed381f3cc30ba53f25c991ecfdf47` (runs [40340001102](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340001102) and [40340000974](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340000974)). `main` was not changed.
 - Added the Phase 3 manual studio registry foundation: strict schemas for studios, sites, ownership, games, distinct studio credits, opportunities, application routes, source evidence, and change events; seeded four source-linked studios; and integrated a searchable catalogue UI. The public catalogue is separate from private application data and contains no live vacancy claims.
 - Added catalogue validation/search tests and extended headless-browser acceptance to verify the catalogue UI on the Phase 3 branch.

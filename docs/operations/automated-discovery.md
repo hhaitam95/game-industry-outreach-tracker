@@ -1,7 +1,9 @@
 # Automated Studio Discovery Design
 
-**Status:** Design specification; workflow code is not implemented  
+**Status:** Design plus first implementation increment; live-source behavior and scheduled operation are not yet accepted  
 **Last reviewed:** 2026-10-24
+
+**Implementation note (2026-10-26):** `scripts/discover_studios.py`, `scripts/discovery/pipeline.py`, `config/studio-registry.json`, fixture tests, and manual-only workflows now exist on `feat/phase4-discovery-pipeline`. The 29-test offline suite passes. No live scan has been reviewed; the link-only adapters deliberately do not infer closure from absence; the Santa Monica Studio adapter remains manual-review only. No schedule or publishing step is enabled.
 
 ## Purpose
 

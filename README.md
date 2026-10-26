@@ -2,15 +2,15 @@
 
 A personal, evidence-driven workspace for discovering video game studios and opportunities worldwide, assessing transferable technical skills, preparing tailored outreach, and tracking application outcomes.
 
-> **Current status:** Phase 2 encrypted browser-local workspace and Phase 3 manual studio catalogue are implemented on `feat/browser-local-private-data` and `feat/phase3-manual-studio-catalog`, respectively. Phase 3 standard CI and browser acceptance passed for code commit `843d6c38954ed381f3cc30ba53f25c991ecfdf47` (runs [40340001102](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340001102) and [40340000974](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340000974)). `main` remains unchanged.
+> **Current status:** Phases 1–3 are implemented and accepted. The first Phase 4 discovery-pipeline increment is on `feat/phase4-discovery-pipeline`: local fixture tests pass, but full repository CI and a reviewed live-source scan remain outstanding. Phase 3 standard CI and browser acceptance passed for code commit `843d6c38954ed381f3cc30ba53f25c991ecfdf47` (runs [40340001102](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340001102) and [40340000974](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340000974)). `main` remains unchanged.
 
 ## Current frontend shell
 
 - React + TypeScript with Vite for static site development and builds.
 - Responsive workspace layout with navigation for overview, studio research, resume review, outreach, applications, and settings.
 - The Studios & roles screen displays four manually sourced studio profiles, separate site/ownership/game-credit relationships, official career routes, and expandable source evidence.
-- The starter registry does not claim to list current vacancies; opportunity and change-event collections start empty.
-- Manual studio data is kept separate from encrypted private candidate/application records. No crawler or scheduled polling is included.
+- The Phase 3 starter catalogue does not claim to list current vacancies; vacancy observations are added only by the separate Phase 4 discovery pipeline.
+- Manual studio data is kept separate from encrypted private candidate/application records. The Phase 4 feature branch adds a fixture-tested, manually triggered runner; daily scheduling and publication are still disabled.
 - ESLint, Prettier, TypeScript checks, Node's built-in test runner, an automated Chrome/Chromium vault smoke test, and privacy-conscious Markdown feedback reports.
 - GitHub Actions validates formatting, lint, types, unit tests, dependency audit, privacy boundaries, the production build, and browser-level vault create/save/reload/lock/export/restore behavior.
 - Settings supports a passphrase-protected local vault, profile fields, basic application records, encrypted backup export/import, locking, and local deletion.
@@ -51,7 +51,8 @@ See [Local Development and Feedback Workflow](docs/LOCAL_DEVELOPMENT.md) for the
 - [Handoff](HANDOFF.md) — current state and next task.
 - [Resume guidance](docs/resume-guidelines/) — source-linked standards and role-specific guidance.
 - [Studio catalogue guide](docs/studio-catalog.md) — Phase 3 data semantics, evidence rules, and manual maintenance procedure.
-- [Automated discovery plan](docs/operations/automated-discovery.md) — planned daily workflow and change-detection behavior.
+- [Automated discovery plan](docs/operations/automated-discovery.md) — discovery design and conservative change-detection requirements.
+- [Phase 4 runner guide](docs/operations/phase4-discovery-runner.md) — initial runner usage, fixtures, safety rules, and remaining acceptance gates.
 
 ## Repository hygiene
 

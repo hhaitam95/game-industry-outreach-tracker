@@ -1,13 +1,14 @@
 # Project Handoff
 
 **Last updated:** 2026-10-26  
-**Project stage:** Phase 3 closed out on `feat/phase3-manual-studio-catalog`; standard CI and browser acceptance passed for code commit `843d6c38954ed381f3cc30ba53f25c991ecfdf47`  
+**Project stage:** Phase 3 accepted; Phase 4 discovery pipeline first increment implemented on `feat/phase4-discovery-pipeline` (pending commit/CI and a reviewed live scan)  
 **Default branch:** main  
 **Baseline branch:** docs/project-foundation  
 **Architecture baseline:** architecture/pages-actions-cv
 **Phase 1 implementation branch:** feat/static-frontend-shell  
 **Phase 2 implementation branch:** feat/browser-local-private-data  
 **Phase 3 implementation branch:** feat/phase3-manual-studio-catalog
+**Phase 4 implementation branch:** feat/phase4-discovery-pipeline
 
 ## Purpose
 
@@ -42,7 +43,9 @@ Build a personal tool to discover game studios/opportunities worldwide, verify o
 - `npm run feedback-report` provides optional local diagnostics with fixed-category failure summaries; it omits raw diagnostic lines and filenames.
 - Phase 2 adds encrypted browser-local private profile/draft/application records and encrypted backup export/import; see the acceptance gates below.
 - Phase 3 adds a source-linked manual catalogue for CD PROJEKT RED, Naughty Dog, Santa Monica Studio, and Riot Games. The schema separately represents studios, sites, ownership relationships, games, credit roles, opportunities, application routes, source evidence, and change events.
-- Live studio/job discovery, scheduled polling, resume extraction/generation, and public deployment are not implemented.
+- Phase 4 now has a standard-library Python discovery runner, a four-source curated registry, fixture-backed parsing/change-detection tests, a strict public-data projection, and manual-only GitHub Actions workflows. This is the first increment, not Phase 4 closeout: the local fixture suite passes 29 tests, but the full repository CI has not yet run on the patch and no live scan has been reviewed.
+- Daily scheduling and public publishing remain disabled. The manual live workflow is guarded to the reviewed default branch and only persists operational state to the dedicated `discovery-state` branch.
+- Resume extraction/generation and public deployment are not implemented.
 - Phase 3 code acceptance is green for commit `843d6c38954ed381f3cc30ba53f25c991ecfdf47`: standard CI run [40340001102](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340001102) and combined Phase 2/3 browser acceptance run [40340000974](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340000974) both passed.
 - Resume extraction/generation is specified but not implemented.
 - docs/resume-guidelines/ and docs/operations/ are present on the architecture baseline.
@@ -56,11 +59,11 @@ Build a personal tool to discover game studios/opportunities worldwide, verify o
 
 ## Next steps
 
-1. Phase 3 is closed out on `feat/phase3-manual-studio-catalog`; standard CI and combined browser acceptance passed for code commit `843d6c38954ed381f3cc30ba53f25c991ecfdf47` (runs [40340001102](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340001102) and [40340000974](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340000974)).
-2. Before entering real personal data, understand local-only storage, the unrecoverable passphrase, browser-storage loss, and encrypted-backup limitations; automated tests used synthetic data and are not a security audit.
-3. Phase 4 can begin with a manual, fixture-backed discovery scan and official-source adapters. Keep schedule and publishing disabled until the discovery path and public-data boundary have been reviewed.
-4. Keep private application integration separate; the Phase 3 catalogue does not read or update encrypted application records.
-5. `main` remains unchanged; continue work from the Phase 3 branch or a new feature branch based on it, according to the approved roadmap.
+1. Commit the reviewed Phase 4 increment on `feat/phase4-discovery-pipeline` only after explicit approval; `main` remains unchanged.
+2. Run the new discovery fixture workflow plus the complete existing frontend CI and browser acceptance checks on the candidate branch.
+3. After merge to `main), run one explicitly selected manual live scan and inspect source coverage, source failure summaries, public projection, and durable state behavior. The configured link adapters cannot prove listing completeness and must not close vacancies based on absence.
+4. Keep daily scheduling and public publishing disabled until live-source behavior and the public-data boundary have been reviewed. The separate public deployment repository and scoped publishing credentials do not yet exist.
+5. Before using real personal data, understand local-only storage, the unrecoverable vault passphrase, browser-storage loss, and encrypted-backup limitations. Automated acceptance uses synthetic data and is not a security audit.
 
 ## Known trade-offs
 

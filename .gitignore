@@ -48,6 +48,8 @@ backups/
 resume-uploads/
 private-resumes/
 outputs/resumes/
+outputs/discovery/
+.discovery-state/
 personal-data/
 *.db
 *.sqlite
