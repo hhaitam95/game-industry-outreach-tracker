@@ -2,62 +2,69 @@
 
 ## Purpose and trust boundary
 
-`src/data/public-opportunities.json` is a public, build-time input to the Phase 5a opportunity explorer. It is a reviewed projection, not a feed the browser refreshes. The frontend must not fetch career pages or job-role data at runtime. Do not put candidate profiles, CV data, personal notes, contacts, application history, credentials or secrets in this file.
+The tracked sample at `src/data/sample-public-opportunities.json` is a test/fallback dataset, not scan results. It contains 15 synthetic Riot-style titles, all `last-seen`, a plainly synthetic `generatedAt` date, and `example.com` placeholder posting links. The explorer must show **“Sample data - not a real scan”** when using it.
 
-`last-seen` means the configured source returned a role link at an observed time. It does not prove that the role remains open. Source listings can be incomplete; absence is not proof of closure. The UI must preserve this caveat.
+The generated `src/data/public-opportunities.json` is gitignored. It is a local, build-time input produced by `npm run data:sync`; it must not be committed. The authoritative generated public projection is stored on the `discovery-state` branch at `public/public-opportunities.json`, not on `main`. Never put candidate profiles, CV data, personal notes, contacts, application history, credentials or secrets in the public projection.
+
+The frontend does not fetch career sites or role data at runtime. The sync CLI can read a local file or HTTPS URL when explicitly run. A `last-seen` role was observed by a configured source at a recorded time; that does not prove the role remains open. Incomplete listings and absence are not closure evidence.
 
 ## Snapshot envelope
 
 The JSON root contains exactly these fields:
 
 - `schemaVersion`: integer `1`.
-- `generatedAt`: parseable date/time for the snapshot generation.
+- `generatedAt`: parseable date/time for snapshot generation.
 - `opportunities`: array of public role-link records.
 
-## Exact opportunity-field allowlist
+## Exact 16-field role allowlist
 
-Each role object contains exactly these 16 fields, matching the discovery projection validator in `scripts/discovery/projection.py`:
+Each role object contains exactly these fields, matching `PUBLIC_FIELDS` and `validate_public_projection` in `scripts/discovery/projection.py` and the shared JavaScript validator in `src/lib/opportunities/snapshot-validation.mjs`.
 
 | Field | Contract |
 | --- | --- |
 | `id` | Non-empty unique public role identifier within the snapshot. |
 | `studioId` | Stable studio identifier from the public catalogue. |
 | `studioName` | Public display name of the studio. |
-| `title` | Raw title/listing text; preserve exactly and do not overwrite with parsed values. |
+| `title` | Raw title/listing text; preserve it and do not overwrite it with parsed values. |
 | `url` | HTTPS posting/link URL without embedded credentials. |
-| `locations` | Source-projection array; an empty array is not a known location. |
-| `employmentType` | Source-projection array; an empty array is unknown/not listed. |
-| `datePosted` | Source-provided date or `null`; do not infer from other timestamps. |
+| `locations` | Source-projection array; an empty array means unknown/not listed. |
+| `employmentType` | Source-projection array; an empty array means unknown/not listed. |
+| `datePosted` | Source-provided date or `null`; do not infer it from other timestamps. |
 | `validThrough` | Explicit validity date or `null`; do not infer closure from absence. |
 | `status` | One of `announced`, `last-seen`, `stale`, `needs-review`, `unavailable`. |
-| `sourceUrl` | HTTPS official source URL without embedded credentials. |
+| `sourceUrl` | HTTPS source URL without embedded credentials. |
 | `firstSeenAt` | Original observation timestamp. |
 | `lastSeenAt` | Most recent recorded observation timestamp; not an open-status guarantee. |
 | `lastChangedAt` | Timestamp of the most recent recorded change. |
-| `observedAt` | Timestamp of the current observation represented by this record. |
+| `observedAt` | Timestamp of the observation represented by this record. |
 | `contentHash` | Public content fingerprint produced by the projection pipeline. |
 
-Unknown structured facts must remain unknown: empty `locations`/`employmentType` and null `datePosted`/`validThrough` render as “Not listed in source”. Do not add eligibility or candidate-related fields.
+The app validator rejects extra/missing root or role fields, unknown statuses, duplicate IDs, invalid HTTPS URLs, bad timestamps and invalid collection shapes. The sync script uses the same JavaScript validator and validates before touching the destination. The persistence job additionally validates the exact public projection through the repository's Python `validate_public_projection` function before writing to `discovery-state`.
 
 ## Title-derived clues and provenance
 
-The source provides the raw `title`, not a structured seniority, parsed city/country, contract flag, or relocation flag. Phase 5a derives those clues from the raw title only:
+The snapshot's source-provided fields include the raw title, not structured seniority, parsed city/country, contract or relocation flags. Phase 5a derives only explicit title clues:
 
-- location (only an unambiguous trailing `City, Country` or supported city-state pattern),
+- a trailing `City, Country` or supported city-state pattern,
 - seniority keywords,
-- a literal `(Contract)` mention,
-- a literal `Relocation` mention,
-- role family based on precise title phrases.
+- literal `(Contract)`,
+- literal `Relocation`,
+- role family from precise, unambiguous phrases.
 
-The UI must label these values “parsed from listing text”, preserve the raw title, and display unknown locations as “Not listed in source”. These clues never establish work authorization or hiring eligibility. Family classifications expose the exact matched phrase; unmatched titles are “Unclassified”. This is precision-oriented search assistance, not a fit score.
+All derived values are labelled **“parsed from listing text”**. The raw title is preserved; unknown locations display “Not listed in source”. No work authorization or hiring eligibility is inferred. Family classifications expose the matched phrase; unmatched roles are “Unclassified”. These are search hints, not fit scores.
 
-## Refreshing the snapshot
+## Automated data flow
 
-1. Open the completed owner-reviewed discovery workflow run [40569785573](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40569785573) and download `public-opportunities.json` from its `discovery-scan-report` artifact. Do not run a new scan or dispatch a workflow as part of this procedure without separate authorization.
-2. Inspect the artifact; it contains public role-link data only. Keep private candidate/application data out of it.
-3. Replace `src/data/public-opportunities.json` with that JSON without changing fields or status semantics. Remove the synthetic fixture marker in `src/lib/opportunities/snapshot.mjs` only when the reviewed real file is committed.
-4. Validate it. The test suite checks the committed snapshot and rejects unsupported/missing fields, status values, duplicate IDs and unsafe URLs. Run `npm test`, `npm run format:check`, `npm run lint`, `npm run typecheck`, and `npm run build` in the approved CI path; inspect all failures before committing.
-5. Review the title-derived golden cases against real snapshot titles, keeping the negative examples (“Recruiter”, “Revenue Accounting Manager”, and “Senior Finance Partner”) unclassified.
-6. Commit the new snapshot together with updated tests and `STATUS.md`. Keep it on the Phase 5a branch for review; do not publish or deploy it during this phase.
+1. The discovery workflow remains manually triggered by `workflow_dispatch` with fixture/live mode. It has **no schedule**. After this PR merges, the owner will run the live workflow once; do not dispatch it during this phase.
+2. The live-scan job generates `outputs/discovery/public-opportunities.json` and stages it as `state-artifact/public/public-opportunities.json` in the existing `discovery-state-handoff` artifact.
+3. The isolated persistence job downloads that artifact, checks out `main` only for the public projection validator with checkout credentials disabled, validates the private monitor-state schema and the exact public projection root/role keys, then writes `public/public-opportunities.json` to the `discovery-state` worktree.
+4. The persistence job commits the validated public projection on `discovery-state` along with monitoring-state changes. No generated role snapshot is written to `main`.
+5. To use the latest generated projection in a local app build, run `npm run data:sync`. The default source is `https://raw.githubusercontent.com/hhaitam95/game-industry-outreach-tracker/discovery-state/public/public-opportunities.json`.
+6. For an explicit local fixture or alternate HTTPS URL, run `npm run data:sync -- --from <path-or-https-url>`. Unit tests exercise only local source files and do not use the network.
+7. If the source cannot be read, JSON cannot be parsed, or validation fails, the script exits non-zero and does not create/overwrite the destination. The generated file remains gitignored. The app prefers it when present; if absent, the app falls back to the tracked sample and displays the sample banner. If a synced file exists but fails validation, the UI fails closed rather than silently substituting sample data.
 
-The current checked-in snapshot is explicitly synthetic and uses placeholder URLs. It is for implementation/testing only and must not be treated as real job data.
+## Manual refresh and approval limit
+
+Only an explicit owner-triggered live run refreshes the authoritative `discovery-state` projection. There is no scheduled workflow and no automatic poll. Keep schedules, publication and Pages deployment disabled unless separately approved. The app does not fetch career pages or remote role data at runtime.
+
+Never commit the generated `src/data/public-opportunities.json`; commit changes only to the sample, validator, sync tool, tests, documentation, reviewed app code and `STATUS.md`.

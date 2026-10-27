@@ -105,22 +105,22 @@
 
 ## Phase 5a — Studio research and snapshot explorer
 
-**Implementation status:** Core logic and UI implemented on `feat/phase5-studio-research` against a clearly labelled synthetic snapshot. The real discovery artifact and PR browser-acceptance run are still required before acceptance.
+**Implementation status:** Core logic, UI, a 15-role synthetic fallback, a shared snapshot validator, and the local sync CLI are implemented on `feat/phase5-studio-research`. Generated role data is gitignored locally and authoritative on `discovery-state`; PR browser acceptance is the final review gate.
 
 ### Scope
 - Preserve sourced studio profiles, verified careers routes, and evidence; display per-studio observed-link coverage without equating no observed links with no vacancies.
-- Consume an allowlisted public-projection JSON snapshot bundled at build time; never fetch career pages or role data at runtime.
-- Validate the exact 16 opportunity fields, statuses, HTTPS URLs and unique IDs; fail closed to a visible UI error if validation fails.
+- Prefer the gitignored, locally synced `src/data/public-opportunities.json` when present; otherwise use tracked `sample-public-opportunities.json` and visibly label it “Sample data - not a real scan”. Never fetch career pages or role data at runtime.
+- Validate the exact 16 opportunity fields, statuses, HTTPS URLs, timestamps and unique IDs with one validator shared by the UI and sync CLI; fail closed if a synced file is invalid. The sync CLI validates completely before writing.
 - Show snapshot date, source status, last-seen date and freshness; never present `last-seen` as proof a role is open.
 - Parse only explicit title clues, label each as `parsed from listing text`, and never infer work authorization or eligibility.
 - Classify by precise keyword phrases; filter/search and sort by target family, seniority and last-seen date, with option counts and a target-family preset.
 - Display source unknowns as “Not listed in source”; paginate 50 roles at a time.
 
 ### Exit criteria
-- The committed snapshot validates against the exact allowlist and status enum; invalid shape shows an error state.
+- The sample validates against the exact allowlist/status enum; the generated file remains ignored by Git and is synced from `discovery-state/public/public-opportunities.json` only after validation.
 - UI shows role counts, studio coverage/manual-check messages, title parsing provenance, snapshot freshness and the permanent last-seen disclaimer.
 - Unit tests cover validator, parser, classification, freshness, filters, counts, sorting and golden role-title examples from the reviewed snapshot.
-- Browser acceptance verifies the explorer, a reducing filter, visible snapshot date and absence of open/available claims.
+- Browser acceptance verifies explorer rendering, a reducing filter, visible snapshot date, sample fallback wording and no unsupported open/available claims.
 - The user can research a public role link without implying completeness or current availability; no runtime role-source requests occur.
 
 ## Phase 5b — Fit, skill-gap explanations and manual leads (deferred)
