@@ -1,9 +1,10 @@
 name: Phase 2 Browser Acceptance
 
 on:
+  pull_request:
   push:
     branches:
-      - feat/browser-local-private-data
+      - main
   workflow_dispatch:
 
 permissions:
@@ -33,7 +34,7 @@ jobs:
 
       - name: Run complete local-to-AI feedback suite
         env:
-          EXPECT_STUDIO_CATALOG: "0"
+          EXPECT_STUDIO_CATALOG: "1"
         run: npm run feedback-report
 
       - name: Add sanitized Markdown report to the run summary

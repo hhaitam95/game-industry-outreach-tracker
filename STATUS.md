@@ -20,14 +20,14 @@
 ## Step 1 — Stabilization checklist
 
 - [x] Item 1: Create this status manifest on the phase branch only.
-- [in progress] Item 2: `src/lib/studios/catalog.mjs` imports and validates `config/studio-registry.json`; career evidence/routes derive from it. Riot uses `/en/work-with-us/jobs` and the regression test covers enabled-source/verified-route matching. The formatting-only correction is committed as a one-line join of the three specified evidence conditions; no other catalogue code changed. Frontend CI validation for this commit is pending.
+- [in progress] Item 2: `src/lib/studios/catalog.mjs` imports and validates `config/studio-registry.json`; career evidence/routes derive from it. Riot uses `/en/work-with-us/jobs` and the regression test covers enabled-source/verified-route matching. The formatting-only correction is committed as a one-line join of the three specified evidence conditions; no other catalogue code changed. The browser acceptance workflow now runs on `pull_request`, pushes to `main`, and `workflow_dispatch`; `EXPECT_STUDIO_CATALOG` is `1`. CI validation is pending.
 - [x] Item 3: added a shared 32 MiB serialized-workspace cap and 48 MiB encrypted-envelope cap in `src/lib/private-data/limits.mjs`; schema validates serialized UTF-8 size, encryption/storage use the shared envelope limit, and the maximum configured workspace is tested through save/load with synthetic data. Discovery tests passed; Frontend CI failed only the item 2 Prettier check.
 - [x] Item 4: repeated identical failure status/category now emits no duplicate event; status or error-category changes emit a new event. Event-log truncation warns with `RuntimeWarning`; fixture tests cover repeat, transition, and truncation.
 - [x] Item 5: link-only roles use public status `last-seen` plus existing `lastSeenAt`; absence never closes them, and the projection validator accepts the status. Complete and incomplete listings now converge to `last-seen` without repeating transition events. Explicit closure or expired `validThrough` still removes roles from public projection. Choice recorded in `DECISIONS.md` as ADR-024.
 - [x] Item 6: moved implementation into `fetch.py`, `adapters.py`, `state.py`, and `projection.py`; `pipeline.py` now re-exports the prior API as a compatibility facade, and no existing test/import was edited.
-- [x] Item 7: `docs/LOCAL_DEVELOPMENT.md` now records 31 npm tests and the actual `test-results/browser-acceptance-report.md` path; the duplicate ADR is renumbered to ADR-023; stale branch-state/visibility claims are corrected; the Phase 2 browser workflow no longer triggers on a Phase 3 branch. `DECISIONS.md` records accepted default Gmail commit metadata, defers Pages hosting to Phase 8, and defers speculative routes.
+- [x] Item 7: `docs/LOCAL_DEVELOPMENT.md` records 31 npm tests and the actual `test-results/browser-acceptance-report.md` path; the duplicate ADR is renumbered to ADR-023; stale branch-state/visibility claims are corrected. The Phase 2 browser acceptance workflow trigger has been updated separately in this CI repair to `pull_request`, push to `main`, and `workflow_dispatch`, with `EXPECT_STUDIO_CATALOG` set to `1`. `DECISIONS.md` records accepted default commit metadata, defers Pages hosting to Phase 8, and defers speculative routes.
 - [x] Item 8: added the branch-cleanup proposal below using read-only branch comparisons against `main` at `f9a9cf6`. The two temporary branches with unique commits are preserved for review. No branch was deleted or changed.
-- [in progress] Step 1 exit: PR [#2](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/2) is merged. The formatting-only correction in `src/lib/studios/catalog.mjs` is committed; verify Frontend CI and the browser acceptance workflow before relying on the frontend CI gate for Phase 5.
+- [in progress] Step 1 exit: PR [#2](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/2) is merged. The formatting-only correction in `src/lib/studios/catalog.mjs` is committed, and the browser acceptance workflow now covers PRs/main pushes/manual dispatch while expecting the catalogue UI. Verify Frontend CI and browser acceptance before relying on the frontend CI gate for Phase 5.
 
 ## Phase 4 acceptance criteria
 
@@ -124,9 +124,14 @@ Baseline `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`:
 - Item 6 commit `55b1c62bc704cd14dc6fff4289b584674ebc83ce`: discovery fixture tests passed all 36 tests [run 40567557083](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40567557083); frontend tests passed all 31 tests, typecheck and build passed, but formatting check failed [run 40567557318](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40567557318).
 - Item 7 commit `0eab2175786e6f808ae904f444e473bc8125712b`: no new CI run was created for the docs/workflow-only changes; last code validation remains item 6 [Frontend CI run 40567557318](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40567557318) and [Discovery fixture tests run 40567557083](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40567557083).
 
+## Part A CI repair (2026-10-27)
+
+- Item 1 commit 43a4b04445736c7d6ae889b1979931bc16fea68b changes only the specified evidence-condition formatting in src/lib/studios/catalog.mjs plus this status file. At first status check, no check runs were attached to that commit yet. The prior PR-head Frontend CI run 40571351607 failed only at formatting; lint, 31 unit tests, typecheck, audit, and build passed. The discovery runner succeeded in run 40571351582.
+- Item 2 updates only .github/workflows/phase2-browser-smoke.yml trigger conditions and EXPECT_STUDIO_CATALOG, together with this status file. Pull-request CI and the browser acceptance run are pending for this commit.
+
 ## Open decisions and constraints
 
-- Canonical career URLs: registry is the shared source for verified catalogue routes; the functional regression tests pass. The formatting-only check is corrected in the current CI repair and awaits a green CI result.
+- Canonical career URLs: registry is the shared source for verified catalogue routes; the functional regression tests pass. The formatting-only check is corrected, and the browser acceptance workflow expectation/trigger update is committed; CI results are pending.
 - Storage: schema/encryption share a 32 MiB serialized workspace cap and 48 MiB encrypted envelope cap; synthetic maximum-size save/load test passes.
 - Link-only public status and closure semantics are recorded in ADR-024; link-only roles use `last-seen` and absence cannot close them.
 - Pipeline module boundaries: keep refactor behavior-preserving; existing tests must pass unchanged.
