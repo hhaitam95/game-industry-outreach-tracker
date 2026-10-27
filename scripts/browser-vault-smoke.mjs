@@ -395,7 +395,14 @@ async function main() {
       const before = await client.evaluate(
         "(() => { const count = document.querySelector('[data-testid=opportunity-results-count]'); const rows = [...document.querySelectorAll('[data-testid=opportunity-row]')]; const date = document.querySelector('[data-testid=snapshot-generated-at]'); const body = document.body.innerText.toLowerCase(); const prohibited = ['currently available', 'currently open', 'open roles', 'open positions', 'no vacancies', 'no openings', 'all roles are open', 'vacancies available']; return { rowCount: rows.length, total: Number(count?.dataset.total ?? -1), hasSnapshotDate: Boolean(date?.innerText.trim()), hasStandingNote: body.includes('does not prove a role is open'), claimsAvailability: prohibited.some((phrase) => body.includes(phrase)) }; })()",
       );
-      if (!before || before.rowCount < 2 || before.total < 2 || !before.hasSnapshotDate || !before.hasStandingNote || before.claimsAvailability) {
+      if (
+        !before ||
+        before.rowCount < 2 ||
+        before.total < 2 ||
+        !before.hasSnapshotDate ||
+        !before.hasStandingNote ||
+        before.claimsAvailability
+      ) {
         throw new Error("opportunity-explorer-initial-state-failed");
       }
       const clicked = await client.evaluate(
@@ -403,7 +410,8 @@ async function main() {
       );
       if (!clicked) throw new Error("opportunity-family-filter-not-found");
       await client.waitFor(
-        "document.querySelectorAll('[data-testid=opportunity-row]').length > 0 && document.querySelectorAll('[data-testid=opportunity-row]').length < " + before.rowCount,
+        "document.querySelectorAll('[data-testid=opportunity-row]').length > 0 && document.querySelectorAll('[data-testid=opportunity-row]').length < " +
+          before.rowCount,
         "opportunity-filter-reduces-results",
       );
       const after = await client.evaluate(

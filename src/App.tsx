@@ -156,8 +156,9 @@ function OverviewPage({ onNavigate }: { onNavigate: (pageId: string) => void }) 
         </div>
       </section>
       <p className="privacy-footnote">
-        Role links come from a bundled snapshot and are not proof a role remains open; career sites are not fetched at runtime. Private
-        candidate records created in Settings remain encrypted in this browser and are not synced to a server.
+        Role links come from a bundled snapshot and are not proof a role remains open; career sites are not fetched at
+        runtime. Private candidate records created in Settings remain encrypted in this browser and are not synced to a
+        server.
       </p>
     </div>
   );
