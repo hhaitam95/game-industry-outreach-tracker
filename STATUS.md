@@ -3,7 +3,7 @@
 **Last updated:** 2026-10-27
 **Current phase:** Step 1 — Stabilization, before Phase 4 acceptance.
 **Working branch:** `stabilize/baseline-fixes`
-**Last verified branch HEAD before item 8:** `0eab2175786e6f808ae904f444e473bc8125712b`
+**Last verified branch HEAD before PR status update:** `a212eabf39ae8b738743d41814654c2047c5a3dc`
 **Base/main:** `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`. Phase 1–4 implementation stack is present on main. Do not change main directly; the owner merges the eventual PR.
 **Phase status:** Phase 3 is accepted. Phase 4 has been merged but is not accepted. One prior live run completed and persisted state to `discovery-state`; source coverage/closure behavior still need acceptance. No further live run is authorized by this task.
 
@@ -27,7 +27,7 @@
 - [x] Item 6: moved implementation into `fetch.py`, `adapters.py`, `state.py`, and `projection.py`; `pipeline.py` now re-exports the prior API as a compatibility facade, and no existing test/import was edited.
 - [x] Item 7: `docs/LOCAL_DEVELOPMENT.md` now records 31 npm tests and the actual `test-results/browser-acceptance-report.md` path; the duplicate ADR is renumbered to ADR-023; stale branch-state/visibility claims are corrected; the Phase 2 browser workflow no longer triggers on a Phase 3 branch. `DECISIONS.md` records accepted default Gmail commit metadata, defers Pages hosting to Phase 8, and defers speculative routes.
 - [x] Item 8: added the branch-cleanup proposal below using read-only branch comparisons against `main` at `f9a9cf6`. The two temporary branches with unique commits are preserved for review. No branch was deleted or changed.
-- [blocked] Step 1 exit: items 1 and 3–8 are complete, with item 2 explicitly blocked on the recurring Prettier check in `catalog.mjs`. Discovery fixtures, frontend tests, typecheck, and build pass; overall Frontend CI remains red for that formatting check. Open one PR to surface the blocker; do not merge.
+- [blocked] Step 1 exit: PR [#2](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/2) is open and unmerged. Items 1 and 3–8 are complete; item 2 remains explicitly blocked on Prettier formatting in `catalog.mjs`. Discovery fixtures, frontend tests, typecheck, and build pass; overall Frontend CI remains red for that formatting check.
 
 ## Phase 4 acceptance criteria
 
@@ -147,4 +147,4 @@ The owner may consider deleting these stale branches after confirming no externa
 
 ## Next action:
 
-Open one PR from `stabilize/baseline-fixes` to `main`; do not merge it.
+Owner review of [PR #2](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/2); do not merge from this workflow.
