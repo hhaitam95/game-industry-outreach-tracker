@@ -285,3 +285,17 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Test plan:** Add a component-render test using Vite SSR and React DOM; retain offline unit tests and browser acceptance for interactive filtering.
 - **Rollback:** Revert the component extraction and test, preserving schema and discovery state.
 - **Closeout:** Review file sizes and report deviations in STATUS.md; acceptance depends on current CI for the final head.
+
+
+## ADR-034 — Separate discovery tests by responsibility and remove unused test configuration
+
+- **Date:** 2026-10-27
+- **Status:** Accepted
+- **Goal:** Keep the discovery test suite navigable and enforceable without changing its assertions or production behavior.
+- **Boundaries:** Test code organization and obsolete Python tool configuration only; no discovery source, data contract, workflow permissions, or operational state changes.
+- **Structure:** Shared helpers live in `tests/discovery_test_support.py`; parsing/adapters, state transitions, and boundary/workflow tests are separate unittest modules.
+- **Runner:** CI continues to use `python -m unittest discover -s tests -p 'test_*.py'`; pytest settings were removed because pytest is not run in CI.
+- **Failure modes:** Test discovery must include every moved class exactly once, and fixtures remain offline.
+- **Test plan:** Existing discovery tests are moved without changing method bodies; the discovery workflow and frontend/browser checks gate the refactor.
+- **Rollback:** Revert the test-module moves and configuration cleanup; no production code or discovery-state is changed.
+- **Closeout:** New test/support modules must remain below the approximate 300-line limit; record any deviation in STATUS.md.

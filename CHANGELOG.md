@@ -4,6 +4,7 @@ Meaningful changes are recorded here. Current branch/review state and verificati
 
 ## Unreleased
 
+- Split discovery tests into parser, state-transition, and public-boundary/workflow modules with a shared offline helper module; removed unused pytest configuration because CI enforces unittest discovery.
 - Split the opportunity explorer into orchestration, filter-controls and role-card components; added component-level render coverage for the sample-data banner and evidence/availability disclaimers.
 - Adopted standing engineering standards for future phases: design notes and definitions of done before code, single-source versioned contracts, inward-pointing architecture, deterministic failure-path tests, enforced CI gates, cohesive reviewed changes, same-commit documentation, automation, and evidence-based closeout reporting. The rules are maintained in AGENTS.md and IMPLEMENTATION_PLAN.md and apply from the current Phase 5 work onward.
 - Phase 5a adds a synthetic sample fallback, shared JavaScript snapshot validation, a validated local sync command, a static opportunity explorer with source/freshness labels, and validated persistence of generated public projections on the dedicated discovery-state branch. The app does not fetch career sources at runtime; discovery remains manual-only, with scheduling, publishing and deployment deferred.
