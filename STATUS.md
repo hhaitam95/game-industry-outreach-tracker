@@ -9,7 +9,7 @@
 - [x] Core title parsing, precision-oriented role-family classification, freshness, filters/counts, explorer UI and studio coverage messaging.
 - [x] Sample fallback design: 15 synthetic Riot-style titles in `src/data/sample-public-opportunities.json`, exact 16-field records, all `last-seen`, conspicuously synthetic date and placeholder posting URLs.
 - [in progress] Shared snapshot validator, Vite glob selection (synced file first; sample fallback only when absent), and local-file-only tested `data:sync` script. The generated `src/data/public-opportunities.json` is gitignored; generated public data belongs on `discovery-state`, not `main`.
-- [in progress] Approved edit to `.github/workflows/discover-studios.yml` only: stage the public projection in the handoff artifact, validate it in the isolated persistence job, and write `public/public-opportunities.json` onto `discovery-state`.
+- [x] Approved edit to `.github/workflows/discover-studios.yml` only: live-scan stages the projection in the handoff artifact; persistence checks out `main` read-only with checkout credentials disabled, validates exact root/role keys through `validate_public_projection`, and writes `public/public-opportunities.json` onto `discovery-state` in the same commit as monitor state. No permissions/secrets/triggers/schedules changed.
 - [ ] Docs and decisions must explain sample fallback, sync process and manual-dispatch-only limitation; then run CI, open one PR and stop. Do not merge or dispatch.
 
 ## Safety boundaries

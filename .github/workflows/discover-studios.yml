@@ -97,12 +97,14 @@ jobs:
           --state-file .discovery-state/state/discovery/monitor-state.json
           --output-dir outputs/discovery
 
-      - name: Stage state for isolated persistence job
+      - name: Stage state and public projection for isolated persistence job
         run: |
           set -euo pipefail
           test -s .discovery-state/state/discovery/monitor-state.json
-          mkdir -p state-artifact/state/discovery
+          test -s outputs/discovery/public-opportunities.json
+          mkdir -p state-artifact/state/discovery state-artifact/public
           cp .discovery-state/state/discovery/monitor-state.json state-artifact/state/discovery/monitor-state.json
+          cp outputs/discovery/public-opportunities.json state-artifact/public/public-opportunities.json
 
       - name: Upload short-lived private-state handoff artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -151,6 +153,13 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Check out reviewed code for the public projection validator
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          path: validator-code
+          persist-credentials: false
+
       - name: Check out discovery-state without exposing write credentials to the scanner
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -169,10 +178,30 @@ jobs:
           set -euo pipefail
           python3 - <<'PY'
           import json
+          import sys
+          from datetime import datetime
           from pathlib import Path
+
+          sys.path.insert(0, str(Path('validator-code').resolve()))
+          from scripts.discovery.projection import validate_public_projection
 
           source = Path('state-artifact/state/discovery/monitor-state.json')
           value = json.loads(source.read_text(encoding='utf-8'))
+          public_source = Path('state-artifact/public/public-opportunities.json')
+          public_value = json.loads(public_source.read_text(encoding='utf-8'))
+          if not isinstance(public_value, dict):
+              raise SystemExit('Public opportunity projection must be an object.')
+          if set(public_value) != {'schemaVersion', 'generatedAt', 'opportunities'}:
+              raise SystemExit('Public opportunity projection failed exact root-key validation.')
+          if public_value.get('schemaVersion') != 1 or not isinstance(public_value.get('generatedAt'), str):
+              raise SystemExit('Public opportunity projection has an unsupported schema version or generatedAt value.')
+          if not isinstance(public_value.get('opportunities'), list):
+              raise SystemExit('Public opportunity projection opportunities must be a list.')
+          try:
+              datetime.fromisoformat(public_value['generatedAt'].replace('Z', '+00:00'))
+          except ValueError as exc:
+              raise SystemExit('Public opportunity projection generatedAt must be a valid date/time.') from exc
+          validate_public_projection(public_value)
           allowed_root = {'schema_version', 'updated_at', 'sources', 'opportunities', 'events'}
           if set(value) != allowed_root or value.get('schema_version') != 1:
               raise SystemExit('Discovery state failed exact root-key/schema validation.')
@@ -193,14 +222,19 @@ jobs:
           destination = Path('.discovery-state/state/discovery/monitor-state.json')
           destination.parent.mkdir(parents=True, exist_ok=True)
           destination.write_text(json.dumps(value, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
-          print('Validated discovery state schema before persistence.')
+          public_destination = Path('.discovery-state/public/public-opportunities.json')
+          public_destination.parent.mkdir(parents=True, exist_ok=True)
+          public_temporary = public_destination.with_suffix('.json.tmp')
+          public_temporary.write_text(json.dumps(public_value, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+          public_temporary.replace(public_destination)
+          print('Validated private state and exact public projection contract before persistence.')
           PY
           git -C .discovery-state config user.name "github-actions[bot]"
           git -C .discovery-state config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git -C .discovery-state add state/discovery/monitor-state.json
+          git -C .discovery-state add state/discovery/monitor-state.json public/public-opportunities.json
           if git -C .discovery-state diff --cached --quiet; then
             echo "No durable monitoring-state changes to commit."
           else
-            git -C .discovery-state commit -m "chore: update private discovery monitoring state"
+            git -C .discovery-state commit -m "chore: update discovery state and public opportunity snapshot"
             git -C .discovery-state push origin HEAD:discovery-state
           fi
