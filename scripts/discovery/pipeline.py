@@ -6,6 +6,7 @@ import html
 import json
 import re
 import time
+import warnings
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -24,6 +25,7 @@ PUBLIC_FIELDS = {
 _PRIVATE_KEY_PARTS = ("resume", "candidate", "profile", "draft", "applicationstatus", "personal", "email", "notes")
 USER_AGENT = "GameIndustryOutreachTrackerDiscovery/0.1 (+manual official-source monitor; contact repository owner)"
 MAX_RESPONSE_BYTES = 3 * 1024 * 1024
+MAX_EVENTS = 1000
 DEFAULT_TIMEOUT_SECONDS = 15
 DEFAULT_RETRIES = 2
 CLOSURE_ABSENCE_THRESHOLD = 3
@@ -460,7 +462,20 @@ def apply_scan(state: dict[str, Any], registry: dict[str, Any], observations: di
             for job in current.values():
                 if job.get("source_id") == source_id and job.get("status") not in {"closed", "explicitly-closed"}:
                     job["status"] = "stale" if status in {"blocked", "unavailable"} else "needs-review"
-            events.append(_event(source_id, source_id, status if status in {"blocked", "unavailable"} else "needs-review", now, observation.get("error_message") or f"Source status: {status}"))
+            error_category = observation.get("error_category")
+            failure_state_changed = (
+                previous_source.get("status") != status or previous_source.get("error_category") != error_category
+            )
+            if failure_state_changed:
+                events.append(
+                    _event(
+                        source_id,
+                        source_id,
+                        status if status in {"blocked", "unavailable"} else "needs-review",
+                        now,
+                        observation.get("error_message") or f"Source status: {status}",
+                    )
+                )
             continue
         seen_ids: set[str] = set()
         for incoming in observation.get("jobs", []):
@@ -525,11 +540,18 @@ def apply_scan(state: dict[str, Any], registry: dict[str, Any], observations: di
                     job["status"] = "needs-review"
                     events.append(_event(source_id, job_id, "needs-review", now, f"Role missing from a complete listing ({count}/{CLOSURE_ABSENCE_THRESHOLD}); not closed."))
     # Bound append-only in-memory history; full run logs remain available in Actions.
+    if len(events) > MAX_EVENTS:
+        warnings.warn(
+            f"Discovery event history exceeded {MAX_EVENTS} entries; truncating the oldest events.",
+            RuntimeWarning,
+            stacklevel=2,
+        )
+        events = events[-MAX_EVENTS:]
     state["schema_version"] = SCHEMA_VERSION
     state["updated_at"] = now
     state["sources"] = source_state
     state["opportunities"] = current
-    state["events"] = events[-1000:]
+    state["events"] = events
     return state
 
 

@@ -184,6 +184,48 @@ class ChangeDetectionTests(unittest.TestCase):
             },
         )
 
+    def test_repeated_identical_source_failure_emits_only_one_event(self):
+        state = scan_once(empty_state(), source_observation([], complete=False, status="unavailable"), NOW)
+        state = scan_once(
+            state,
+            source_observation([], complete=False, status="unavailable"),
+            "2026-10-27T12:00:00Z",
+        )
+        failures = [
+            event for event in state["events"]
+            if event["source_id"] == "test-careers" and event["type"] in {"blocked", "unavailable", "needs-review"}
+        ]
+        self.assertEqual([event["type"] for event in failures], ["unavailable"])
+
+    def test_changed_source_failure_state_emits_a_new_event(self):
+        state = scan_once(empty_state(), source_observation([], complete=False, status="unavailable"), NOW)
+        changed_failure = source_observation([], complete=False, status="blocked")
+        changed_failure["error_category"] = "robots-denied"
+        state = scan_once(state, changed_failure, "2026-10-27T12:00:00Z")
+        failures = [
+            event for event in state["events"]
+            if event["source_id"] == "test-careers" and event["type"] in {"blocked", "unavailable", "needs-review"}
+        ]
+        self.assertEqual([event["type"] for event in failures], ["unavailable", "blocked"])
+
+    def test_truncated_event_history_emits_runtime_warning(self):
+        state = empty_state()
+        state["sources"]["test-careers"] = {
+            "source_id": "test-careers",
+            "status": "unavailable",
+            "error_category": "timeout-or-network-error",
+        }
+        state["events"] = [{"id": str(index)} for index in range(1_001)]
+        with self.assertWarnsRegex(RuntimeWarning, "truncat"):
+            result = scan_once(
+                state,
+                source_observation([], complete=False, status="unavailable"),
+                "2026-10-27T12:00:00Z",
+            )
+        self.assertEqual(len(result["events"]), 1_000)
+        self.assertEqual(result["events"][0]["id"], "1")
+        self.assertEqual(result["events"][-1]["id"], "1000")
+
     def test_incomplete_listing_does_not_increment_absence_counter(self):
         job = parsed_job()
         state = scan_once(empty_state(), source_observation([job]), NOW)
