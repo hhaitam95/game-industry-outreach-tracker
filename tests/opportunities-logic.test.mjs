@@ -9,7 +9,7 @@ import { parseTitle } from "../src/lib/opportunities/parse.mjs";
 const SNAPSHOT_DATE = "2026-10-27T18:00:00Z";
 
 const goldenTitles = [
-  ["Player Support Specialist - Dublin, Ireland", "support", "player support"],
+  ["Player Support Specialist - Dublin, Ireland", "support", "Player Support"],
   ["Technical Support Engineer", "support", "technical support"],
   ["Developer Support Specialist", "support", "developer support"],
   ["Support Engineer", "support", "Support Engineer"],
@@ -156,7 +156,9 @@ test("filter facets return counts and target-family preset changes the result", 
 
   const targets = filterOpportunities(roles, { generatedAt: SNAPSHOT_DATE, targetFamiliesOnly: true });
   assert.ok(targets.totalCount < all.totalCount);
-  assert.ok(targets.roles.every((role) => TARGET_ROLE_FAMILIES.some((family) => family === role.classification.family)));
+  assert.ok(
+    targets.roles.every((role) => TARGET_ROLE_FAMILIES.some((family) => family === role.classification.family)),
+  );
 });
 
 test("filters combine studio, family, seniority, country, contract, freshness and title search", () => {

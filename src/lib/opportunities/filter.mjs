@@ -42,7 +42,7 @@ function countValues(values) {
 /**
  * @param {PreparedOpportunity[]} roles
  * @param {OpportunityFilterOptions} options
- * @param {"studio" | "family" | "seniority" | "country" | "contract" | "freshness"} omittedFacet
+ * @param {"none" | "studio" | "family" | "seniority" | "country" | "contract" | "freshness"} omittedFacet
  */
 function matchesRoles(roles, options, omittedFacet) {
   return roles.filter((role) => {
@@ -56,14 +56,20 @@ function matchesRoles(roles, options, omittedFacet) {
     ) {
       return false;
     }
-    if (omittedFacet !== "contract" && typeof options.contract === "boolean" && role.parsed.contract !== options.contract) {
+    if (
+      omittedFacet !== "contract" &&
+      typeof options.contract === "boolean" &&
+      role.parsed.contract !== options.contract
+    ) {
       return false;
     }
     if (omittedFacet !== "freshness" && options.freshness && role.freshness.key !== options.freshness) return false;
     if (options.targetFamiliesOnly && !TARGET_ROLE_FAMILIES.some((family) => family === role.classification.family)) {
       return false;
     }
-    if (options.query && !role.title.toLocaleLowerCase().includes(options.query.trim().toLocaleLowerCase())) return false;
+    if (options.query && !role.title.toLocaleLowerCase().includes(options.query.trim().toLocaleLowerCase())) {
+      return false;
+    }
     return true;
   });
 }
@@ -84,7 +90,8 @@ export function filterOpportunities(opportunities, options = {}) {
     freshness: getRoleFreshness(role, generatedAt),
   }));
   const roles = matchesRoles(prepared, options, "none").sort((left, right) => {
-    const familyDiff = FAMILY_ORDER.indexOf(left.classification.family) - FAMILY_ORDER.indexOf(right.classification.family);
+    const familyDiff =
+      FAMILY_ORDER.indexOf(left.classification.family) - FAMILY_ORDER.indexOf(right.classification.family);
     if (familyDiff !== 0) return familyDiff;
     const seniorityDiff =
       (SENIORITY_RANK.get(left.parsed.seniority) ?? Number.MAX_SAFE_INTEGER) -
@@ -95,6 +102,7 @@ export function filterOpportunities(opportunities, options = {}) {
     return left.title.localeCompare(right.title);
   });
 
+  /** @param {"studio" | "family" | "seniority" | "country" | "contract" | "freshness"} facet */
   const countFacet = (facet) => matchesRoles(prepared, options, facet);
   const studioRows = countFacet("studio");
   const familyRows = countFacet("family");

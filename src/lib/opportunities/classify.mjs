@@ -1,4 +1,13 @@
-/** @typedef {"support" | "qa-test" | "build-release" | "devops-sre" | "tools-devex" | "technical-production" | "other" | "unclassified"} RoleFamily */
+/** @typedef {
+ *   "support" |
+ *   "qa-test" |
+ *   "build-release" |
+ *   "devops-sre" |
+ *   "tools-devex" |
+ *   "technical-production" |
+ *   "other" |
+ *   "unclassified"
+ * } RoleFamily */
 /** @typedef {{family: RoleFamily, label: string, matchedPhrase: string | null}} RoleClassification */
 
 /** @type {Array<{family: RoleFamily, label: string, target: boolean, patterns: RegExp[]}>} */

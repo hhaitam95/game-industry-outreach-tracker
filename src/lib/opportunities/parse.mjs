@@ -1,6 +1,22 @@
 /** @typedef {{city: string, country: string, label: string}} ParsedLocation */
-/** @typedef {"Intern/Junior" | "Mid (II)" | "Senior" | "Staff" | "Principal" | "Lead" | "Manager" | "Director/Head" | "Not stated"} ParsedSeniority */
-/** @typedef {{location: ParsedLocation | null, seniority: ParsedSeniority, contract: boolean, relocationMentioned: boolean, provenance: "parsed from listing text"}} ParsedTitle */
+/** @typedef {
+ *   "Intern/Junior" |
+ *   "Mid (II)" |
+ *   "Senior" |
+ *   "Staff" |
+ *   "Principal" |
+ *   "Lead" |
+ *   "Manager" |
+ *   "Director/Head" |
+ *   "Not stated"
+ * } ParsedSeniority */
+/** @typedef {{
+ *   location: ParsedLocation | null,
+ *   seniority: ParsedSeniority,
+ *   contract: boolean,
+ *   relocationMentioned: boolean,
+ *   provenance: "parsed from listing text"
+ * }} ParsedTitle */
 
 /** @type {Array<{label: ParsedSeniority, pattern: RegExp}>} */
 const SENIORITY_RULES = [
