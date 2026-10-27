@@ -201,7 +201,6 @@ function assertSourceReferences(ids, validSourceIds, label) {
   if (!ids.every((id) => validSourceIds.has(id))) throw new Error(label + " references missing source evidence.");
 }
 
-
 const REGISTRY_ROOT_KEYS = ["schema_version", "registry_reviewed_on", "description", "sources"];
 const REGISTRY_SOURCE_KEYS = ["id", "studio_id", "studio_name", "url", "source_type", "adapter", "enabled"];
 const REGISTRY_ADAPTERS = ["official-job-links", "manual-review"];
@@ -224,10 +223,7 @@ export function validateStudioRegistry(input) {
   const urls = new Set();
   const sources = entries.map((entry) => {
     const adapter = oneOf(entry.adapter, REGISTRY_ADAPTERS, "Registry adapter");
-    const adapterKeys =
-      adapter === "official-job-links"
-        ? ["job_url_regex", "allowed_job_hosts"]
-        : ["review_reason"];
+    const adapterKeys = adapter === "official-job-links" ? ["job_url_regex", "allowed_job_hosts"] : ["review_reason"];
     assertExactKeys(entry, [...REGISTRY_SOURCE_KEYS, ...adapterKeys], "Studio registry source");
 
     const id = identifier(entry.id, "Registry source ID");
@@ -321,7 +317,7 @@ export function assertEnabledRegistrySourcesHaveVerifiedRoutes(catalog, registry
       );
     });
     if (!hasMatchingRoute) {
-      throw new Error("Enabled registry source " + source.id + " has no matching verified catalogue route.");
+      throw new Error(`Enabled registry source "${source.id}" has no matching verified catalogue route.`);
     }
   }
   return true;

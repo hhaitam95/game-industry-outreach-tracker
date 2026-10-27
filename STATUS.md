@@ -98,7 +98,9 @@ Baseline `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`:
 - Phase 2/3 browser acceptance passed for `843d6c38954ed381f3cc30ba53f25c991ecfdf47`: [run 40340000974](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340000974).
 - Prior manual discovery run completed and persisted state: [run 40414813461](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40414813461). Coverage was incomplete; do not rerun without explicit owner authorization.
 - Item 1 status-only commit `8208b9cf864a64dca3ad79cd8440d3ea17d95ada`: Frontend CI passed [run 40564237677](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40564237677).
-- Item 2 first run: discovery fixture tests passed [run 40564524585](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40564524585); Frontend CI failed formatting and typecheck [run 40564524803](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40564524803). This follow-up corrects the registry validator's typing and formatting; its CI result is pending.
+- Item 2 first run: discovery fixture tests passed [run 40564524585](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40564524585); Frontend CI failed formatting and typecheck [run 40564524803](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40564524803).
+- Follow-up runs: discovery fixture tests passed [40564758294](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40564758294), [40564917343](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40564917343), [40565141597](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40565141597), [40565264651](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40565264651), and [40565813915](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40565813915). Frontend CI reported formatting-only failures on [40564757989](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40564757989), [40564917374](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40564917374), [40565141698](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40565141698), and [40565264728](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40565264728).
+- Initial consolidated-module run: discovery fixture tests passed [40565813915](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40565813915); Frontend CI failed formatting and a route-error assertion [40565814099](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40565814099).
 
 ## Open decisions and constraints
 
@@ -112,4 +114,4 @@ Baseline `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`:
 
 ## Next action:
 
-Validate the consolidated catalogue/registry implementation in CI; then proceed to item 3.
+Verify the formatting and route-error fixes in CI; then proceed to item 3.
