@@ -103,21 +103,34 @@
 - At least one owner-directed live run is reviewed on `main`, with each source's status and coverage limitations recorded.
 - The accepted operational mode is manual-only; a future schedule requires a separate decision after source coverage is improved and reviewed.
 
-## Phase 5 — Studio research and matching UI
+## Phase 5a — Studio research and snapshot explorer
+
+**Implementation status:** Core logic and UI implemented on `feat/phase5-studio-research` against a clearly labelled synthetic snapshot. The real discovery artifact and PR browser-acceptance run are still required before acceptance.
 
 ### Scope
-- Display scannable studio profiles, career routes, source evidence, and freshness/verification state.
-- Consume a reviewed allowlisted public-projection snapshot as a build-time bundled input; do not fetch career pages or role data from the browser at runtime.
-- Distinguish `last-seen`, `stale`, `needs-review`, and other states; never present `last-seen` as proof that a role is currently open.
-- Filter public studios/opportunities by country, role family, source/status, and fit.
-- Explain relevance and skill gaps transparently.
-- Track location and hiring eligibility as known/unknown/verified, not inferred.
-- Add manual review workflow for potential leads.
+- Preserve sourced studio profiles, verified careers routes, and evidence; display per-studio observed-link coverage without equating no observed links with no vacancies.
+- Consume an allowlisted public-projection JSON snapshot bundled at build time; never fetch career pages or role data at runtime.
+- Validate the exact 16 opportunity fields, statuses, HTTPS URLs and unique IDs; fail closed to a visible UI error if validation fails.
+- Show snapshot date, source status, last-seen date and freshness; never present `last-seen` as proof a role is open.
+- Parse only explicit title clues, label each as `parsed from listing text`, and never infer work authorization or eligibility.
+- Classify by precise keyword phrases; filter/search and sort by target family, seniority and last-seen date, with option counts and a target-family preset.
+- Display source unknowns as “Not listed in source”; paginate 50 roles at a time.
 
 ### Exit criteria
-- The user can research an opportunity and understand why it was found and why it may be relevant.
-- Public facts have source and freshness indicators.
-- Uncertain facts are visibly marked.
+- The committed snapshot validates against the exact allowlist and status enum; invalid shape shows an error state.
+- UI shows role counts, studio coverage/manual-check messages, title parsing provenance, snapshot freshness and the permanent last-seen disclaimer.
+- Unit tests cover validator, parser, classification, freshness, filters, counts, sorting and golden role-title examples from the reviewed snapshot.
+- Browser acceptance verifies the explorer, a reducing filter, visible snapshot date and absence of open/available claims.
+- The user can research a public role link without implying completeness or current availability; no runtime role-source requests occur.
+
+## Phase 5b — Fit, skill-gap explanations and manual leads (deferred)
+
+### Deferred scope
+- Explain fit and skill gaps using the candidate profile and the role.
+- Create and manage manual leads linked to candidate context.
+
+### Reason for deferral
+These features require the candidate profile and an active browser vault session. They are intentionally excluded from Phase 5a; do not implement profile-dependent ranking or a leads workflow in the public data layer.
 
 ## Phase 6 — Resume guidance and browser-side document workflow
 

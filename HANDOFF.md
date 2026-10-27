@@ -1,11 +1,32 @@
 # Project Handoff
 
 **Last updated:** 2026-10-27  
-**Project stage:** Phase 4 accepted for manual-only use with source-coverage limitations; Phase 5 is next. Step 1 PR #2 is merged, but the Prettier formatting blocker in `src/lib/studios/catalog.mjs` remains.  
-**Default branch:** `main` at `d052b51db38b8007cecc317e7ab90b1b8dc598d2`  
-**Working branch:** `docs/phase4-closeout-20261027`  
-**Architecture baseline:** `architecture/pages-actions-cv`  
+**Project stage:** Phase 5a UI and core logic implemented on the feature branch; the real public snapshot and PR browser-acceptance run remain pending.  
+**Default branch:** `main` at `07d8e15cec544e56a09fbcab44202dc7051753c6` (PR #3 merged).  
+**Working branch:** `feat/phase5-studio-research`  
 **Repository visibility:** Public. Do not commit personal records, contact details, resumes, application data, credentials, or secrets.
+
+## Current Phase 5a state
+
+- A synthetic 8-role `src/data/public-opportunities.json` is committed to exercise the strict 16-field snapshot validator. Its `example.com` URLs are placeholders; it is not a real job list.
+- `snapshot.mjs` validates exact fields/statuses, HTTPS source/posting URLs, timestamps and unique IDs. Invalid data returns an error state; browser UI data is bundled at build time.
+- Pure logic modules in `src/lib/opportunities/` parse title clues with explicit `parsed from listing text` provenance, classify only precise phrases, label freshness, and filter/sort with facet counts.
+- `OpportunityExplorer.tsx` is integrated into Studios & roles while the four studio profile cards remain. Current UI includes studio/family/seniority/country/contract/freshness filters, title search, target-family preset, coverage notes, a result count and a 50-row page limit.
+- Frontend CI and discovery fixture tests passed on [commit d2573b7](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/d2573b7839760ba5f3e56d591abe7d0793bcef4b): [Frontend CI](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40577176942) and [discovery fixtures](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40577176882).
+- Browser acceptance was extended in `scripts/browser-vault-smoke.mjs`, but it is triggered on PRs; do not dispatch the workflow manually. The final PR run must verify explorer rendering, snapshot date, filtering and wording.
+- Remaining owner input: upload the real `public-opportunities.json` from the `discovery-scan-report` artifact of run [40569785573](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40569785573). Replace the synthetic fixture only after validation, add golden tests from actual role titles, then complete docs/CI and open one PR. Do not merge the PR.
+
+## Non-negotiable boundaries
+
+- No runtime fetching of career pages or role data.
+- `last-seen` is not evidence that a role is open; source coverage is partial and closure cannot be inferred from absence.
+- Never infer work authorization or hiring eligibility. Location, seniority, contract and relocation hints are visibly parsed from the raw title.
+- No live scans, manual dispatch, schedules, publication, Pages deployment, visibility changes, workflow/permission/secret changes, new dependencies, branch deletion or history rewrite are approved.
+- Do not introduce private candidate data, CVs, drafts, application history, contact details, credentials or secrets into this public repository.
+
+## Handoff
+
+Read `README.md`, `IMPLEMENTATION_PLAN.md`, `DECISIONS.md`, `STATUS.md`, and `docs/public-data-contract.md` before continuing. The next step is the real snapshot upload; after it is validated, finish the golden tests, contract/docs, and browser acceptance through the single Phase 5a PR.
 
 ## Purpose
 
