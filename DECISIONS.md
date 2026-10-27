@@ -111,10 +111,10 @@ This is a living decision record. Accepted decisions may be amended or supersede
 ## ADR-013 — GitHub Pages for static public UI and sanitized data
 
 - **Date:** 2026-10-24
-- **Status:** Accepted direction; deployment repository still to be created
-- **Context:** The user wants zero-cost, simple hosting and has selected GitHub Pages, while the current specification repository is private and contains personal project context.
-- **Decision:** Keep the source/specification repository private. Use a separate public Pages deployment repository for static frontend assets and a sanitized public studio/opportunity dataset. GitHub Pages is not a private backend, and the public site must contain no candidate CV, profile, private drafts, application history, or secrets.
-- **Consequences:** The current repository cannot be published directly on GitHub Free Pages because a Pages source repository must be public on that plan. A publishing workflow will need a narrowly scoped cross-repository credential stored as an Actions secret. If this arrangement proves too complex, revisit the choice before changing repository visibility.
+- **Status:** Deferred to Phase 8; no deployment plan approved
+- **Context:** GitHub Pages is public static hosting. An earlier plan proposed a separate deployment repository because the source repository was assumed to be private; the repository is now public.
+- **Decision:** Defer the choice of Pages source, deployment target, and publishing architecture to Phase 8. This repository must continue to contain no private candidate records, resumes, drafts, application history, contact details, or secrets. No deployment, publishing, or visibility change is approved during stabilization.
+- **Consequences:** No publishing workflow or credential is to be created in this phase. Revisit source/target choice, allowlisted public fields, permissions, and artifacts during the Phase 8 privacy review.
 
 ## ADR-014 — Browser-local private data for the first release
 
@@ -151,10 +151,10 @@ This is a living decision record. Accepted decisions may be amended or supersede
 ## ADR-018 — Separate private development repository from public Pages deployment output
 
 - **Date:** 2026-10-24
-- **Status:** Accepted direction; operational details to be validated
-- **Context:** GitHub Free Pages requires a public source repository, but the current source repository should remain private.
-- **Decision:** Publish only built static files and the explicit public data contract to a separate public deployment repository. Use a narrowly scoped token stored in the private source repository's Actions secrets, never in frontend code, public data or logs. Include only verified public company/job facts in that output.
-- **Consequences:** Requires cross-repository deployment setup and a security review. If user prefers one repository, request explicit approval and a complete history/privacy review before changing visibility.
+- **Status:** Deferred to Phase 8
+- **Context:** A separate public deployment repository was previously proposed while the source repository was intended to be private. The repository is currently public, so that prior design is not a finalized hosting decision.
+- **Decision:** Do not create a separate deployment repository, publishing token, or publication workflow in this phase. At Phase 8, compare the available hosting options and obtain explicit owner approval before implementing one.
+- **Consequences:** Current work is limited to local/static implementation and validation; no public deployment or visibility change is approved.
 
 ## ADR-019 — No secrets or private resume content in static artifacts
 
@@ -187,11 +187,11 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Date:** 2026-10-25
 - **Status:** Accepted implementation; automated browser acceptance passed
 - **Context:** Phase 2 needs private records without a server, paid service, or automatic cloud sync.
-- **Decision:** Store only versioned AES-256-GCM encrypted envelopes in IndexedDB. Derive a non-extractable key from the user passphrase with PBKDF2-HMAC-SHA-256 at 600,000 iterations. Use a fresh random IV for each encryption. Encrypted JSON export/import is bounded to 5 MiB. Strict schemas reject unknown fields and do not model raw resume contents. The user must confirm before import replaces local records.
+- **Decision:** Store only versioned AES-256-GCM encrypted envelopes in IndexedDB. Derive a non-extractable key from the user passphrase with PBKDF2-HMAC-SHA-256 at 600,000 iterations. Use a fresh random IV for each encryption. Serialized workspaces are capped at 32 MiB UTF-8 and encrypted envelopes/exports at 48 MiB; the limits are shared across schema and encryption validation. Strict schemas reject unknown fields and do not model raw resume contents. The user must confirm before import replaces local records.
 - **Consequences:** A lost passphrase cannot be recovered; exports need separate safe backup handling. The vault is browser/device local and is not protection from malicious scripts while unlocked. The combined dummy-data browser acceptance passed in run [40340000974](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340000974); this demonstrates tested behavior, not a security audit, before real personal data is used.
 
 
-## ADR-015 — Phase 3 starts with a small manual public studio catalogue
+## ADR-023 — Phase 3 starts with a small manual public studio catalogue
 
 - **Date:** 2026-10-25
 - **Status:** Accepted
@@ -207,3 +207,12 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Context:** A link-only adapter can extract public job links, but a role disappearing from a link listing is not verifiable evidence that the job was closed. Marking such roles as announced would imply a current-open status that the collector cannot prove; closing them after absence would overstate evidence.
 - **Decision:** Publish observed roles from `official-job-links` sources with status `last-seen`, accompanied by the existing `lastSeenAt` timestamp. For these sources, absence from complete or incomplete link listings never increments the closure counter and never closes a role. Only explicit source closure or an expired `validThrough` value can close it. The public projection validator accepts `last-seen`; existing allowlisted fields remain unchanged.
 - **Consequences:** Users see when the role was last observed without a claim that it is currently open or verified closed. Link-only records remain visible until explicit closure or expiry evidence appears.
+
+
+## ADR-025 — Stabilization defaults and deferred scope
+
+- **Date:** 2026-10-27
+- **Status:** Accepted
+- **Context:** Step 1 is being developed on a public repository. The owner approved in-scope commits and explicitly accepted the GitHub write tool's default commit-author metadata for this repository, including the existing Gmail author metadata in commit history.
+- **Decision:** Use the default GitHub write-tool author for this repository; do not embed email addresses or personal contact details in tracked files. Defer Pages hosting/source-target selection and any deployment or publishing setup to Phase 8. Defer speculative-application routes until a later, explicitly scoped and source-backed phase; do not add inferred or unsupported routes. Schedules, live scans, publishing, deployment, and visibility changes remain outside the current approval.
+- **Consequences:** Stabilization may continue with synthetic fixtures and verified public source links, without expanding the public-data surface or making irreversible repository changes.

@@ -1,10 +1,9 @@
-name: Phase 2 and 3 Browser Acceptance
+name: Phase 2 Browser Acceptance
 
 on:
   push:
     branches:
       - feat/browser-local-private-data
-      - feat/phase3-manual-studio-catalog
   workflow_dispatch:
 
 permissions:
@@ -34,7 +33,7 @@ jobs:
 
       - name: Run complete local-to-AI feedback suite
         env:
-          EXPECT_STUDIO_CATALOG: ${{ github.ref_name == 'feat/phase3-manual-studio-catalog' && '1' || '0' }}
+          EXPECT_STUDIO_CATALOG: "0"
         run: npm run feedback-report
 
       - name: Add sanitized Markdown report to the run summary

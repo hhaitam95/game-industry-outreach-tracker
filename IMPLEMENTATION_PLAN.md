@@ -157,8 +157,8 @@
 ## Phase 8 — Public Pages deployment and privacy review
 
 ### Scope
-- Create/confirm a separate public deployment repository containing only static assets and sanitized public JSON.
-- Configure the private source repository workflow to publish the approved output using a narrowly scoped secret.
+- Decide whether to use this public repository as the Pages source or create a separate public deployment repository; this choice is deferred to Phase 8.
+- If deployment is approved, publish only static assets and sanitized public JSON through a narrowly scoped, reviewed workflow.
 - Apply least-privilege Actions permissions, pin third-party actions to reviewed commit SHAs where practical, and review build logs/artifacts for secrets.
 - Add restrictive client-side security policy where supported, bundle assets locally and avoid analytics/CDN scripts in private-data flows.
 - Test public-data allowlist, site URL/base path, public access, private local storage, encrypted export/import and restore.
@@ -166,7 +166,7 @@
 
 ### Exit criteria
 - The public site exposes no profile/CV/draft/application records or secrets.
-- The current source repository remains private.
+- The repository is currently public. The deployment target, publishing credentials, and final visibility/privacy model must be reviewed in Phase 8; no visibility change is part of this plan.
 - The deployed artifact builds and displays public data correctly.
 - Manual recovery and privacy checks pass.
 - Any real private data is introduced only after the privacy review.

@@ -3,7 +3,7 @@
 **Last updated:** 2026-10-27
 **Current phase:** Step 1 — Stabilization, before Phase 4 acceptance.
 **Working branch:** `stabilize/baseline-fixes`
-**Last verified branch HEAD before registry error-message fix:** `bca9fb6d94db2854917c8b49ddb918c787b4c018`
+**Last verified branch HEAD before item 7:** `55b1c62bc704cd14dc6fff4289b584674ebc83ce`
 **Base/main:** `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`. Phase 1–4 implementation stack is present on main. Do not change main directly; the owner merges the eventual PR.
 **Phase status:** Phase 3 is accepted. Phase 4 has been merged but is not accepted. One prior live run completed and persisted state to `discovery-state`; source coverage/closure behavior still need acceptance. No further live run is authorized by this task.
 
@@ -20,12 +20,12 @@
 ## Step 1 — Stabilization checklist
 
 - [x] Item 1: Create this status manifest on the phase branch only.
-- [ ] Item 2: `src/lib/studios/registry.mjs` validates `config/studio-registry.json`; catalogue career evidence/routes derive URLs from it. Riot's verified route now uses `/en/work-with-us/jobs`; regression tests reject enabled registry sources without matching verified routes. Initial Frontend CI failed formatting/typecheck in `registry.mjs`. The type fix restored lint, typecheck, unit tests and build; the next run failed only formatting, so this small follow-up wraps that callback.
+- [blocked] Item 2: `src/lib/studios/catalog.mjs` imports and validates `config/studio-registry.json`; career evidence/routes derive from it. Riot uses `/en/work-with-us/jobs` and the regression test covers enabled-source/verified-route matching. Discovery fixtures, frontend unit tests, typecheck, and build pass, but repeated Frontend CI runs still fail only Prettier formatting in `catalog.mjs`; keep this explicit blocker rather than making further speculative formatting edits.
 - [x] Item 3: added a shared 32 MiB serialized-workspace cap and 48 MiB encrypted-envelope cap in `src/lib/private-data/limits.mjs`; schema validates serialized UTF-8 size, encryption/storage use the shared envelope limit, and the maximum configured workspace is tested through save/load with synthetic data. Discovery tests passed; Frontend CI failed only the item 2 Prettier check.
 - [x] Item 4: repeated identical failure status/category now emits no duplicate event; status or error-category changes emit a new event. Event-log truncation warns with `RuntimeWarning`; fixture tests cover repeat, transition, and truncation.
 - [x] Item 5: link-only roles use public status `last-seen` plus existing `lastSeenAt`; absence never closes them, and the projection validator accepts the status. Complete and incomplete listings now converge to `last-seen` without repeating transition events. Explicit closure or expired `validThrough` still removes roles from public projection. Choice recorded in `DECISIONS.md` as ADR-024.
 - [x] Item 6: moved implementation into `fetch.py`, `adapters.py`, `state.py`, and `projection.py`; `pipeline.py` now re-exports the prior API as a compatibility facade, and no existing test/import was edited.
-- [ ] Item 7: Fix test-count and browser-report documentation, duplicate ADR-015, stale “main remains unchanged” wording, and the Phase 2 workflow branch trigger. In `DECISIONS.md`, record acceptance of the default commit author, defer Pages hosting to Phase 8, and defer speculative routes.
+- [x] Item 7: `docs/LOCAL_DEVELOPMENT.md` now records 31 npm tests and the actual `test-results/browser-acceptance-report.md` path; the duplicate ADR is renumbered to ADR-023; stale branch-state/visibility claims are corrected; the Phase 2 browser workflow no longer triggers on a Phase 3 branch. `DECISIONS.md` records accepted default Gmail commit metadata, defers Pages hosting to Phase 8, and defers speculative routes.
 - [ ] Item 8: Add a proposed branch-cleanup list here, including merged/duplicate branches and `tmp/phase1-closeout-20261025` (reported five commits ahead of main). Propose only; do not delete branches.
 - [ ] Step 1 exit: all items complete or explicitly documented as blocked; relevant tests and CI green; no private data/secrets; status current; one PR open; no merge performed.
 
@@ -106,13 +106,14 @@ Baseline `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`:
 - Item 4 commit `86000a968900355701da181d3d527a9f900a57d6`: discovery fixture tests passed [run 40566826197](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40566826197); Frontend CI failed only the known item 2 formatting check [run 40566826143](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40566826143).
 - Item 5 first run: discovery fixture tests passed [40567113529](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40567113529); Frontend CI failed only the known Prettier check [40567113389](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40567113389).
 - Item 5 follow-up: discovery fixture tests passed [40567259405](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40567259405); Frontend CI failed only the same formatting check [40567259389](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40567259389).
-- Item 6 CI is pending for the pipeline module split.
+- Item 6 commit `55b1c62bc704cd14dc6fff4289b584674ebc83ce`: discovery fixture tests passed all 36 tests [run 40567557083](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40567557083); frontend tests passed all 31 tests, typecheck and build passed, but formatting check failed [run 40567557318](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40567557318).
+- Item 7 CI is pending.
 
 ## Open decisions and constraints
 
-- Canonical career URLs: registry is intended to be the shared source for verified catalogue routes; implement in item 2.
-- Storage: align schema/encryption under one explicit serialized-workspace budget in item 3; verify actual safe maximum in tests.
-- Link-only public status and closure semantics: decide and record in item 5.
+- Canonical career URLs: registry is the shared source for verified catalogue routes; the functional regression tests pass, with the formatting-only check still blocked under item 2.
+- Storage: schema/encryption share a 32 MiB serialized workspace cap and 48 MiB encrypted envelope cap; synthetic maximum-size save/load test passes.
+- Link-only public status and closure semantics are recorded in ADR-024; link-only roles use `last-seen` and absence cannot close them.
 - Pipeline module boundaries: keep refactor behavior-preserving; existing tests must pass unchanged.
 - Pages hosting decision is deferred to Phase 8; speculative routes are deferred.
 - Branch cleanup is review-only. Do not delete branches.
@@ -120,4 +121,4 @@ Baseline `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`:
 
 ## Next action:
 
-Run CI for item 6; then complete documentation and branch-inventory cleanup in item 7 while retaining item 2 as explicitly blocked on formatting.
+Complete item 8: add a read-only branch-cleanup proposal to this file; do not delete branches.

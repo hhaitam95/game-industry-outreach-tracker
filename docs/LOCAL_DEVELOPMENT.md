@@ -98,7 +98,7 @@ Expected results:
 - `npm run format:check`: Prettier says all matched files use the expected style.
 - `npm run lint`: exits with code 0 and no lint errors.
 - `npm run typecheck`: exits with code 0 without TypeScript diagnostics.
-- `npm test`: reports 19 passing tests and 0 failures.
+- `npm test`: reports 31 passing tests and 0 failures on the current stabilization branch.
 - `npm run build`: creates `dist/` and reports a successful Vite production build.
 
 An empty successful output from lint or type checking is normal. Always check the command's exit code, not just whether it printed text.
@@ -136,7 +136,7 @@ The command:
 1. Reports whether a branch was detected, a short commit identifier, and Node/npm/Git versions; the branch name is omitted.
 2. Reports only the number of changed paths; filenames, branch names, diffs, and source files are omitted.
 3. Runs Git's whitespace check, formatting, lint, type checking, unit tests, the production build, the privacy-boundary scan, and the automated browser-vault smoke test.
-4. Writes `feedback-report.md` in the repository root and prints the same Markdown to the terminal. The browser test also writes `test-results/phase2-browser-smoke-report.md`. Both reports are ignored by Git.
+4. Writes `feedback-report.md` in the repository root and prints the same Markdown to the terminal. The browser test also writes `test-results/browser-acceptance-report.md`. Both reports are ignored by Git.
 
 Copy the entire report from the terminal, or open `feedback-report.md` and paste its contents into the conversation. If a check fails, the script adds only fixed diagnostic-category labels and suggests a next step. It never copies free-form diagnostic lines, which could contain personal details despite pattern-based redaction. It does not include raw logs, source content, test output, filenames, or diffs.
 
@@ -173,6 +173,6 @@ The script builds the static app with the GitHub Pages repository subpath, start
 5. Inspect IndexedDB and the exported backup for exact AES-GCM envelope metadata, valid salt/IV/ciphertext lengths, and absence of dummy plaintext markers.
 6. Lock/unlock again, delete the test vault, create a fresh vault, restore the exported backup, and verify the original backup passphrase unlocks the restored data.
 
-The report is written to `test-results/phase2-browser-smoke-report.md` with restrictive local file permissions. The test uses a temporary browser profile and synthetic values only; it does not read the existing browser profile or any CV. The report omits raw logs, source contents, file paths, passphrases, and record values. Chrome/Chromium must be installed; set `CHROME_BIN` if it is installed in a nonstandard location.
+The report is written to `test-results/browser-acceptance-report.md` with restrictive local file permissions. The test uses a temporary browser profile and synthetic values only; it does not read the existing browser profile or any CV. The report omits raw logs, source contents, file paths, passphrases, and record values. Chrome/Chromium must be installed; set `CHROME_BIN` if it is installed in a nonstandard location.
 
 The browser test is an acceptance smoke test, not a security audit. It does not establish protection against compromised browser software, malicious extensions, or malicious site code while the vault is unlocked.
