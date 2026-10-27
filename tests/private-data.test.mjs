@@ -4,6 +4,7 @@ import test from "node:test";
 import {
   createEncryptedSession,
   MAX_ENCRYPTED_BACKUP_BYTES,
+  MAX_WORKSPACE_SERIALIZED_BYTES,
   openEncryptedSession,
   PBKDF2_ITERATIONS,
   VAULT_FORMAT,
@@ -13,6 +14,83 @@ import { createIndexedDbVaultStore } from "../src/lib/private-data/indexed-db.mj
 
 const passphrase = "correct horse battery staple";
 const timestamp = "2026-10-25T00:00:00.000Z";
+
+/** @returns {IDBFactory} */
+function createMemoryIndexedDbFactory() {
+  const records = new Map();
+
+  return /** @type {IDBFactory} */ ({
+    open() {
+      const request = {};
+      queueMicrotask(() => {
+        request.result = {
+          objectStoreNames: { contains: () => true },
+          close() {},
+          transaction() {
+            const transaction = {};
+            transaction.objectStore = () => ({
+              put(value, key) {
+                records.set(key, value);
+                queueMicrotask(() => transaction.oncomplete?.());
+              },
+              get(key) {
+                const getRequest = {};
+                queueMicrotask(() => {
+                  getRequest.result = records.get(key);
+                  getRequest.onsuccess?.();
+                  transaction.oncomplete?.();
+                });
+                return getRequest;
+              },
+              delete(key) {
+                records.delete(key);
+                queueMicrotask(() => transaction.oncomplete?.());
+              },
+            });
+            return transaction;
+          },
+        };
+        request.onsuccess?.();
+      });
+      return request;
+    },
+  });
+}
+
+/** @returns {ReturnType<typeof createEmptyWorkspace>} */
+function maximumWorkspace() {
+  const workspace = createEmptyWorkspace(timestamp);
+  workspace.profile.displayName = "D".repeat(120);
+  workspace.profile.headline = "H".repeat(180);
+  workspace.profile.professionalSummary = "S".repeat(2_000);
+  workspace.profile.targetRoles = Array.from({ length: 30 }, () => "R".repeat(120));
+  workspace.profile.skills = Array.from({ length: 80 }, () => "K".repeat(100));
+  workspace.resumes = Array.from({ length: 100 }, (_, index) => ({
+    id: "resume-" + index,
+    label: "L".repeat(120),
+    kind: "pdf",
+    processedAt: timestamp,
+  }));
+  workspace.drafts = Array.from({ length: 500 }, (_, index) => ({
+    id: "draft-" + index,
+    title: "T".repeat(180),
+    body: "B".repeat(20_000),
+    updatedAt: timestamp,
+  }));
+  const urlPrefix = "https://example.com/";
+  const applicationUrl = urlPrefix + "x".repeat(2_000 - urlPrefix.length);
+  workspace.applications = Array.from({ length: 1_000 }, (_, index) => ({
+    id: "application-" + index,
+    studioName: "S".repeat(180),
+    roleTitle: "R".repeat(180),
+    status: "interested",
+    applicationUrl,
+    notes: "N".repeat(4_000),
+    createdAt: timestamp,
+    updatedAt: timestamp,
+  }));
+  return workspace;
+}
 
 function sampleWorkspace() {
   const workspace = createEmptyWorkspace(timestamp);
@@ -72,6 +150,23 @@ test("application URLs reject script schemes and embedded credentials", () => {
     updatedAt: timestamp,
   });
   assert.throws(() => validateWorkspaceData(workspace), /HTTPS or HTTP/i);
+});
+
+test("maximum configured workspace saves through the encrypted IndexedDB adapter", async () => {
+  const { session } = await createEncryptedSession(passphrase, webcrypto);
+  const workspace = validateWorkspaceData(maximumWorkspace());
+  const serializedBytes = new TextEncoder().encode(JSON.stringify(workspace)).byteLength;
+  assert.ok(serializedBytes <= MAX_WORKSPACE_SERIALIZED_BYTES);
+  assert.equal(workspace.drafts.length, 500);
+  assert.equal(workspace.drafts[0].body.length, 20_000);
+  assert.equal(workspace.applications.length, 1_000);
+  assert.equal(workspace.applications[0].notes.length, 4_000);
+
+  const envelope = await session.encrypt(workspace);
+  assert.ok(new TextEncoder().encode(envelope).byteLength <= MAX_ENCRYPTED_BACKUP_BYTES);
+  const store = createIndexedDbVaultStore(createMemoryIndexedDbFactory());
+  await store.save(envelope);
+  assert.equal(await store.load(), envelope);
 });
 
 test("vault uses AES-GCM-256 and the fixed PBKDF2-SHA-256 work factor", async () => {

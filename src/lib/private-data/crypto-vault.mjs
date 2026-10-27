@@ -1,10 +1,12 @@
 import { createEmptyWorkspace, validateWorkspaceData } from "./schema.mjs";
+import { MAX_ENCRYPTED_BACKUP_BYTES, MAX_WORKSPACE_SERIALIZED_BYTES } from "./limits.mjs";
+
+export { MAX_ENCRYPTED_BACKUP_BYTES, MAX_WORKSPACE_SERIALIZED_BYTES } from "./limits.mjs";
 
 export const VAULT_FORMAT = "game-industry-outreach-tracker/encrypted-vault";
 export const VAULT_FORMAT_VERSION = 1;
 export const PBKDF2_ITERATIONS = 600_000;
 export const MIN_PASSPHRASE_LENGTH = 12;
-export const MAX_ENCRYPTED_BACKUP_BYTES = 5 * 1024 * 1024;
 const SALT_BYTES = 16;
 const IV_BYTES = 12;
 const AAD = new TextEncoder().encode(VAULT_FORMAT + ":v" + VAULT_FORMAT_VERSION + ":AES-GCM-256");
@@ -53,7 +55,7 @@ function base64ToBytes(value, label) {
 /** @param {unknown} serialized */
 function validateEnvelope(serialized) {
   if (typeof serialized !== "string" || new TextEncoder().encode(serialized).byteLength > MAX_ENCRYPTED_BACKUP_BYTES) {
-    throw new Error("Encrypted backup is too large or is not valid text (maximum 5 MiB).");
+    throw new Error("Encrypted backup is too large or is not valid text (maximum allowed size).");
   }
   let parsed;
   try {
@@ -113,8 +115,8 @@ function makeSession(key, salt, provider) {
     async encrypt(input) {
       const workspace = validateWorkspaceData(input);
       const plaintext = new TextEncoder().encode(JSON.stringify(workspace));
-      if (plaintext.byteLength > MAX_ENCRYPTED_BACKUP_BYTES - 4096) {
-        throw new Error("Workspace is too large to store or export safely (maximum 5 MiB).");
+      if (plaintext.byteLength > MAX_WORKSPACE_SERIALIZED_BYTES) {
+        throw new Error("Workspace exceeds the serialized private-workspace size budget.");
       }
       const iv = provider.getRandomValues(new Uint8Array(IV_BYTES));
       const encrypted = await provider.subtle.encrypt(
@@ -137,7 +139,7 @@ function makeSession(key, salt, provider) {
         2,
       );
       if (new TextEncoder().encode(serialized).byteLength > MAX_ENCRYPTED_BACKUP_BYTES) {
-        throw new Error("Encrypted backup exceeds the 5 MiB size limit.");
+        throw new Error("Encrypted backup exceeds the configured size limit.");
       }
       return serialized;
     },
