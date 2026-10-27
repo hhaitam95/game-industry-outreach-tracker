@@ -21,7 +21,11 @@ import rawSnapshot from "../../data/public-opportunities.json" with { type: "jso
  * contentHash: string
  * }} PublicOpportunity */
 
-/** @typedef {{schemaVersion: 1, generatedAt: string, opportunities: PublicOpportunity[]}} PublicOpportunitySnapshot */
+/** @typedef {{
+ * schemaVersion: 1,
+ * generatedAt: string,
+ * opportunities: PublicOpportunity[]
+ * }} PublicOpportunitySnapshot */
 
 export const PUBLIC_OPPORTUNITY_FIELDS = Object.freeze([
   "id",
@@ -75,7 +79,7 @@ function assertHttpsUrl(value, label) {
   }
 }
 
-/** @param {unknown} value @param {string[]} keys @param {string} label */
+/** @param {unknown} value @param {readonly string[]} keys @param {string} label @returns {asserts value is Record<string, unknown>} */
 function assertExactKeys(value, keys, label) {
   if (value === null || typeof value !== "object" || Array.isArray(value)) {
     throw new Error(label + " must be an object.");
@@ -100,13 +104,23 @@ export function validateOpportunitySnapshot(input) {
     for (const key of Object.keys(entry)) {
       if (!FIELD_SET.has(key)) throw new Error(label + " contains an unsupported field.");
     }
-    if (typeof entry.id !== "string" || !entry.id.trim()) throw new Error(label + " ID must be non-empty text.");
+    if (typeof entry.id !== "string" || !entry.id.trim()) {
+      throw new Error(label + " ID must be non-empty text.");
+    }
     if (seenIds.has(entry.id)) throw new Error("Duplicate public opportunity ID: " + entry.id);
     seenIds.add(entry.id);
-    if (typeof entry.studioId !== "string" || !entry.studioId.trim()) throw new Error(label + " studioId must be non-empty text.");
-    if (typeof entry.studioName !== "string" || !entry.studioName.trim()) throw new Error(label + " studioName must be non-empty text.");
-    if (typeof entry.title !== "string" || !entry.title.trim()) throw new Error(label + " title must be non-empty text.");
-    if (!STATUS_SET.has(entry.status)) throw new Error(label + " has an unsupported public opportunity status.");
+    if (typeof entry.studioId !== "string" || !entry.studioId.trim()) {
+      throw new Error(label + " studioId must be non-empty text.");
+    }
+    if (typeof entry.studioName !== "string" || !entry.studioName.trim()) {
+      throw new Error(label + " studioName must be non-empty text.");
+    }
+    if (typeof entry.title !== "string" || !entry.title.trim()) {
+      throw new Error(label + " title must be non-empty text.");
+    }
+    if (typeof entry.status !== "string" || !STATUS_SET.has(entry.status)) {
+      throw new Error(label + " has an unsupported public opportunity status.");
+    }
     assertHttpsUrl(entry.url, label + " url");
     assertHttpsUrl(entry.sourceUrl, label + " sourceUrl");
     if (!Array.isArray(entry.locations)) throw new Error(label + " locations must be a list.");

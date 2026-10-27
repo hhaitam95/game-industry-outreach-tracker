@@ -10,7 +10,7 @@
 
 - [x] Item 1 implementation: added a small synthetic `src/data/public-opportunities.json` using the same versioned root and exact 16-field opportunity allowlist as the discovery projection.
 - [x] Added `src/lib/opportunities/snapshot.mjs` with exact-key validation, allowed-status checks, HTTPS URL checks, unique IDs, timestamp validation, and a caught error result for the UI. `IS_SYNTHETIC_SNAPSHOT` stays true until the owner supplies the real artifact.
-- [in progress] Item 1 CI validation is pending for commit.
+- [in progress] First CI for commit [d1fbc414](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/d1fbc4145bb17eb4d5074ed229840d44755e7099): discovery fixtures passed [run 40573950788](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40573950788); Frontend CI failed at Prettier and JSDoc/TypeScript narrowing [run 40573950815](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40573950815). This follow-up fixes the validator typing and formatting issues; its CI result is pending.
 
 ## Working agreement and approval scope
 
