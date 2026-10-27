@@ -14,6 +14,7 @@ from discovery_test_support import (
     FIXTURES,
     REGISTRY,
     ROOT,
+    NOW,
     SameHostHTTPSRedirectHandler,
     empty_state,
     fetch_source,

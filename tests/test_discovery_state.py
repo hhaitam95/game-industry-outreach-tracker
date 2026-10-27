@@ -15,6 +15,7 @@ from discovery_test_support import (
     public_projection,
     scan_once,
     source_observation,
+    validate_public_projection,
 )
 
 
