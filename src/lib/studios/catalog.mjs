@@ -310,9 +310,7 @@ export function assertEnabledRegistrySourcesHaveVerifiedRoutes(catalog, registry
       return route.sourceIds.some((sourceId) =>
         catalog.sources.some(
           (evidence) =>
-            evidence.id === sourceId &&
-            evidence.url === source.url &&
-            evidence.sourceType === "official-careers",
+            evidence.id === sourceId && evidence.url === source.url && evidence.sourceType === "official-careers",
         ),
       );
     });

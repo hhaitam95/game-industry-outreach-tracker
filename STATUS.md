@@ -1,14 +1,14 @@
 # Project Status
 
 **Last updated:** 2026-10-27
-**Current phase:** Phase 4 accepted for manual-only use with source-coverage limitations; Phase 5 is next.
+**Current phase:** Phase 4 accepted for manual-only use with source-coverage limitations; Part A CI repair is in progress before Phase 5.
 **Working branch:** `docs/phase4-closeout-20261027`
 **Base/main:** `d052b51db38b8007cecc317e7ab90b1b8dc598d2` (PR #2 merged). The owner reviews and merges this closeout PR; do not change `main` directly.
-**Phase status:** Phase 3 remains accepted. Phase 4's owner-directed live run completed on `main` at [run #40569785573](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40569785573). The pipeline is accepted for manual-only use, not for scheduled monitoring: Riot returned 183 role links but no complete-listing evidence; CD PROJEKT RED and Naughty Dog need adapter review; Santa Monica Studio remains manual-review-only. Scheduled runs, public publishing, and Pages deployment remain disabled. Frontend CI still has a separate Prettier blocker in `src/lib/studios/catalog.mjs`.
+**Phase status:** Phase 3 remains accepted. Phase 4's owner-directed live run completed on `main` at [run #40569785573](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40569785573). The pipeline is accepted for manual-only use, not for scheduled monitoring: Riot returned 183 role links but no complete-listing evidence; CD PROJEKT RED and Naughty Dog need adapter review; Santa Monica Studio remains manual-review-only. Scheduled runs, public publishing, and Pages deployment remain disabled. The single known Prettier formatting issue in `src/lib/studios/catalog.mjs` is corrected in the current commit; Frontend CI rerun is pending. The browser acceptance trigger and catalogue expectation update are the next approved CI repair item.
 
 ## Working agreement and approval scope
 
-- The stabilization PR was merged; this follow-up contains only evidence-backed closeout documentation. Keep this work on `docs/phase4-closeout-20261027` and let the owner merge the resulting PR.
+- The stabilization PR was merged; this follow-up contains evidence-backed closeout documentation and the specifically approved CI repair. Keep this work on `docs/phase4-closeout-20261027`; the owner merges the resulting PR.
 - One owner-directed live run was explicitly authorized and completed: [run #40569785573](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40569785573). Do not run another scan or dispatch another workflow without renewed explicit owner authorization.
 - Not approved: direct changes to `main`; enabling schedules; publishing data or deploying Pages; changing repository visibility; force-pushes/history rewrites; deleting branches; dependencies outside scope; or secrets/workflow-permission changes.
 - Do not manually alter `discovery-state`. The approved workflow updated it through its isolated persistence job. The repository is public, so this branch must contain only public role observations and operational state—never candidate data.
@@ -20,14 +20,14 @@
 ## Step 1 — Stabilization checklist
 
 - [x] Item 1: Create this status manifest on the phase branch only.
-- [blocked] Item 2: `src/lib/studios/catalog.mjs` imports and validates `config/studio-registry.json`; career evidence/routes derive from it. Riot uses `/en/work-with-us/jobs` and the regression test covers enabled-source/verified-route matching. Discovery fixtures, frontend unit tests, typecheck, and build pass, but repeated Frontend CI runs still fail only Prettier formatting in `catalog.mjs`; keep this explicit blocker rather than making further speculative formatting edits.
+- [in progress] Item 2: `src/lib/studios/catalog.mjs` imports and validates `config/studio-registry.json`; career evidence/routes derive from it. Riot uses `/en/work-with-us/jobs` and the regression test covers enabled-source/verified-route matching. The formatting-only correction is committed as a one-line join of the three specified evidence conditions; no other catalogue code changed. Frontend CI validation for this commit is pending.
 - [x] Item 3: added a shared 32 MiB serialized-workspace cap and 48 MiB encrypted-envelope cap in `src/lib/private-data/limits.mjs`; schema validates serialized UTF-8 size, encryption/storage use the shared envelope limit, and the maximum configured workspace is tested through save/load with synthetic data. Discovery tests passed; Frontend CI failed only the item 2 Prettier check.
 - [x] Item 4: repeated identical failure status/category now emits no duplicate event; status or error-category changes emit a new event. Event-log truncation warns with `RuntimeWarning`; fixture tests cover repeat, transition, and truncation.
 - [x] Item 5: link-only roles use public status `last-seen` plus existing `lastSeenAt`; absence never closes them, and the projection validator accepts the status. Complete and incomplete listings now converge to `last-seen` without repeating transition events. Explicit closure or expired `validThrough` still removes roles from public projection. Choice recorded in `DECISIONS.md` as ADR-024.
 - [x] Item 6: moved implementation into `fetch.py`, `adapters.py`, `state.py`, and `projection.py`; `pipeline.py` now re-exports the prior API as a compatibility facade, and no existing test/import was edited.
 - [x] Item 7: `docs/LOCAL_DEVELOPMENT.md` now records 31 npm tests and the actual `test-results/browser-acceptance-report.md` path; the duplicate ADR is renumbered to ADR-023; stale branch-state/visibility claims are corrected; the Phase 2 browser workflow no longer triggers on a Phase 3 branch. `DECISIONS.md` records accepted default Gmail commit metadata, defers Pages hosting to Phase 8, and defers speculative routes.
 - [x] Item 8: added the branch-cleanup proposal below using read-only branch comparisons against `main` at `f9a9cf6`. The two temporary branches with unique commits are preserved for review. No branch was deleted or changed.
-- [blocked] Step 1 exit: PR [#2](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/2) is merged, but item 2 remains blocked on Prettier formatting in `src/lib/studios/catalog.mjs`. Discovery fixtures, frontend tests, typecheck, and build have passed; overall Frontend CI remains red for that formatting check. Track and fix this before relying on the frontend CI gate for Phase 5.
+- [in progress] Step 1 exit: PR [#2](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/2) is merged. The formatting-only correction in `src/lib/studios/catalog.mjs` is committed; verify Frontend CI and the browser acceptance workflow before relying on the frontend CI gate for Phase 5.
 
 ## Phase 4 acceptance criteria
 
@@ -126,7 +126,7 @@ Baseline `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`:
 
 ## Open decisions and constraints
 
-- Canonical career URLs: registry is the shared source for verified catalogue routes; the functional regression tests pass, with the formatting-only check still blocked under item 2.
+- Canonical career URLs: registry is the shared source for verified catalogue routes; the functional regression tests pass. The formatting-only check is corrected in the current CI repair and awaits a green CI result.
 - Storage: schema/encryption share a 32 MiB serialized workspace cap and 48 MiB encrypted envelope cap; synthetic maximum-size save/load test passes.
 - Link-only public status and closure semantics are recorded in ADR-024; link-only roles use `last-seen` and absence cannot close them.
 - Pipeline module boundaries: keep refactor behavior-preserving; existing tests must pass unchanged.
