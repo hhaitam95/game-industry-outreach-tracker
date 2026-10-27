@@ -1,3 +1,5 @@
+import { assertEnabledRegistrySourcesHaveVerifiedRoutes, getCareerRegistrySource } from "./registry.mjs";
+
 export const CATALOG_SCHEMA_VERSION = 1;
 export const STUDIO_CREDIT_ROLES = Object.freeze([
   "developer",
@@ -34,6 +36,35 @@ export const CHANGE_EVENT_TYPES = Object.freeze([
 ]);
 
 const CATALOGUED_ON = "2026-10-25";
+
+/** @param {string} studioId @param {string} sourceId */
+function careerSourceEvidence(studioId, sourceId) {
+  const source = getCareerRegistrySource(studioId);
+  return {
+    id: sourceId,
+    label: source.studio_name + " careers",
+    url: source.url,
+    publisher: source.studio_name,
+    sourceType: source.source_type,
+    accessedOn: CATALOGUED_ON,
+  };
+}
+
+/** @param {string} studioId @param {string} routeId @param {string} sourceId */
+function careerApplicationRoute(studioId, routeId, sourceId) {
+  const source = getCareerRegistrySource(studioId);
+  return {
+    id: routeId,
+    studioId,
+    label: "Official careers and vacancies",
+    routeType: "careers",
+    status: "verified",
+    url: source.url,
+    sourceIds: [sourceId],
+    verifiedOn: CATALOGUED_ON,
+  };
+}
+
 const SOURCE_TYPES = ["official-site", "official-careers", "official-company", "official-publisher"];
 const SITE_TYPES = ["headquarters", "studio", "office"];
 const OWNERSHIP_TYPES = ["wholly-owned-subsidiary-of", "majority-owned-by", "member-of", "operated-by", "other"];
@@ -408,14 +439,7 @@ const initialCatalog = {
       sourceType: "official-site",
       accessedOn: CATALOGUED_ON,
     },
-    {
-      id: "source-cdpr-careers",
-      label: "CD PROJEKT RED careers",
-      url: "https://www.cdprojektred.com/en/jobs",
-      publisher: "CD PROJEKT RED",
-      sourceType: "official-careers",
-      accessedOn: CATALOGUED_ON,
-    },
+    careerSourceEvidence("cd-projekt-red", "source-cdpr-careers"),
     {
       id: "source-cdpr-group",
       label: "CD PROJEKT RED Capital Group",
@@ -456,14 +480,7 @@ const initialCatalog = {
       sourceType: "official-company",
       accessedOn: CATALOGUED_ON,
     },
-    {
-      id: "source-nd-careers",
-      label: "Naughty Dog careers",
-      url: "https://www.naughtydog.com/careers",
-      publisher: "Naughty Dog",
-      sourceType: "official-careers",
-      accessedOn: CATALOGUED_ON,
-    },
+    careerSourceEvidence("naughty-dog", "source-nd-careers"),
     {
       id: "source-sms-site",
       label: "Santa Monica Studio official website",
@@ -472,14 +489,7 @@ const initialCatalog = {
       sourceType: "official-site",
       accessedOn: CATALOGUED_ON,
     },
-    {
-      id: "source-sms-careers",
-      label: "Santa Monica Studio careers",
-      url: "https://sms.playstation.com/careers/",
-      publisher: "Santa Monica Studio / PlayStation",
-      sourceType: "official-careers",
-      accessedOn: CATALOGUED_ON,
-    },
+    careerSourceEvidence("santa-monica-studio", "source-sms-careers"),
     {
       id: "source-sms-about",
       label: "Santa Monica Studio official studio history",
@@ -504,14 +514,7 @@ const initialCatalog = {
       sourceType: "official-site",
       accessedOn: CATALOGUED_ON,
     },
-    {
-      id: "source-riot-careers",
-      label: "Riot Games careers and job listings",
-      url: "https://www.riotgames.com/en/work-with-us",
-      publisher: "Riot Games",
-      sourceType: "official-careers",
-      accessedOn: CATALOGUED_ON,
-    },
+    careerSourceEvidence("riot-games", "source-riot-careers"),
     {
       id: "source-riot-about",
       label: "Riot Games official company and games overview",
@@ -706,46 +709,10 @@ const initialCatalog = {
   ],
   opportunities: [],
   applicationRoutes: [
-    {
-      id: "route-cdpr-careers",
-      studioId: "cd-projekt-red",
-      label: "Official careers and vacancies",
-      routeType: "careers",
-      status: "verified",
-      url: "https://www.cdprojektred.com/en/jobs",
-      sourceIds: ["source-cdpr-careers"],
-      verifiedOn: CATALOGUED_ON,
-    },
-    {
-      id: "route-naughty-dog-careers",
-      studioId: "naughty-dog",
-      label: "Official careers and vacancies",
-      routeType: "careers",
-      status: "verified",
-      url: "https://www.naughtydog.com/careers",
-      sourceIds: ["source-nd-careers"],
-      verifiedOn: CATALOGUED_ON,
-    },
-    {
-      id: "route-santa-monica-careers",
-      studioId: "santa-monica-studio",
-      label: "Official careers and vacancies",
-      routeType: "careers",
-      status: "verified",
-      url: "https://sms.playstation.com/careers/",
-      sourceIds: ["source-sms-careers"],
-      verifiedOn: CATALOGUED_ON,
-    },
-    {
-      id: "route-riot-careers",
-      studioId: "riot-games",
-      label: "Official careers and vacancies",
-      routeType: "careers",
-      status: "verified",
-      url: "https://www.riotgames.com/en/work-with-us",
-      sourceIds: ["source-riot-careers"],
-      verifiedOn: CATALOGUED_ON,
-    },
+    careerApplicationRoute("cd-projekt-red", "route-cdpr-careers", "source-cdpr-careers"),
+    careerApplicationRoute("naughty-dog", "route-naughty-dog-careers", "source-nd-careers"),
+    careerApplicationRoute("santa-monica-studio", "route-santa-monica-careers", "source-sms-careers"),
+    careerApplicationRoute("riot-games", "route-riot-careers", "source-riot-careers"),
   ],
   changeEvents: [],
 };
@@ -759,7 +726,9 @@ function deepFreeze(value) {
   return value;
 }
 
-export const STUDIO_CATALOG_DATA = deepFreeze(validateStudioCatalog(initialCatalog));
+const validatedCatalog = validateStudioCatalog(initialCatalog);
+assertEnabledRegistrySourcesHaveVerifiedRoutes(validatedCatalog);
+export const STUDIO_CATALOG_DATA = deepFreeze(validatedCatalog);
 
 /** @type {StudioProfile[]} */
 export const STUDIO_PROFILES = STUDIO_CATALOG_DATA.studios.map((studio) => ({
