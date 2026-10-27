@@ -500,7 +500,15 @@ def apply_scan(state: dict[str, Any], registry: dict[str, Any], observations: di
                 "last_changed_at": now if previous and previous.get("content_hash") != incoming["contentHash"] else previous.get("last_changed_at", now) if previous else now,
                 "observed_at": now,
                 "content_hash": incoming["contentHash"],
-                "status": "explicitly-closed" if explicit_close else ("closed" if incoming.get("validThrough") and incoming["validThrough"] < now[:10] else "announced"),
+                "status": (
+                    "explicitly-closed"
+                    if explicit_close
+                    else "closed"
+                    if incoming.get("validThrough") and incoming["validThrough"] < now[:10]
+                    else "last-seen"
+                    if source.get("adapter") == "official-job-links"
+                    else "announced"
+                ),
                 "missing_successful_scans": 0,
             }
             if previous:
@@ -524,11 +532,39 @@ def apply_scan(state: dict[str, Any], registry: dict[str, Any], observations: di
                     continue
                 job["missing_successful_scans"] = 0
                 if job_id not in seen_ids and job.get("status") not in {"closed", "explicitly-closed", "needs-review"}:
-                    job["status"] = "needs-review"
-                    events.append(_event(source_id, job_id, "needs-review", now, f"Role was not present on an incomplete listing: {job.get('title', 'Untitled role')}"))
+                    if source.get("adapter") == "official-job-links":
+                        job["status"] = "last-seen"
+                        events.append(
+                            _event(
+                                source_id,
+                                job_id,
+                                "needs-review",
+                                now,
+                                "Role was not present on a link-only listing; closure is not verified.",
+                                ["status"],
+                            )
+                        )
+                    else:
+                        job["status"] = "needs-review"
+                        events.append(_event(source_id, job_id, "needs-review", now, f"Role was not present on an incomplete listing: {job.get('title', 'Untitled role')}"))
         if observation.get("listing_complete"):
             for job_id, job in list(current.items()):
                 if job.get("source_id") != source_id or job_id in seen_ids or job.get("status") in {"closed", "explicitly-closed"}:
+                    continue
+                if source.get("adapter") == "official-job-links":
+                    if job.get("status") != "last-seen":
+                        job["status"] = "last-seen"
+                        events.append(
+                            _event(
+                                source_id,
+                                job_id,
+                                "needs-review",
+                                now,
+                                "Role is absent from a link-only listing; closure is not verified.",
+                                ["status"],
+                            )
+                        )
+                    job["missing_successful_scans"] = 0
                     continue
                 count = int(job.get("missing_successful_scans", 0)) + 1
                 job["missing_successful_scans"] = count
@@ -596,7 +632,7 @@ def validate_public_projection(value: dict[str, Any]) -> None:
         for key in item:
             if any(part in key.lower().replace("_", "") for part in _PRIVATE_KEY_PARTS):
                 raise ValueError(f"Public projection contains a prohibited field: {key}")
-        if item.get("status") not in {"announced", "stale", "needs-review", "unavailable"}:
+        if item.get("status") not in {"announced", "last-seen", "stale", "needs-review", "unavailable"}:
             raise ValueError("Public projection has an unsupported public opportunity status.")
         for key in ("url", "sourceUrl"):
             if not canonical_url(item.get(key, "")):

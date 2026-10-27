@@ -21,9 +21,9 @@
 
 - [x] Item 1: Create this status manifest on the phase branch only.
 - [ ] Item 2: `src/lib/studios/registry.mjs` validates `config/studio-registry.json`; catalogue career evidence/routes derive URLs from it. Riot's verified route now uses `/en/work-with-us/jobs`; regression tests reject enabled registry sources without matching verified routes. Initial Frontend CI failed formatting/typecheck in `registry.mjs`. The type fix restored lint, typecheck, unit tests and build; the next run failed only formatting, so this small follow-up wraps that callback.
-- [x] Item 3: added a shared 32 MiB serialized-workspace cap and 48 MiB encrypted-envelope cap in `src/lib/private-data/limits.mjs`; schema validates serialized UTF-8 size, encryption/storage use the shared envelope limit, and the maximum configured workspace is tested through save/load with synthetic data. CI is pending.
+- [x] Item 3: added a shared 32 MiB serialized-workspace cap and 48 MiB encrypted-envelope cap in `src/lib/private-data/limits.mjs`; schema validates serialized UTF-8 size, encryption/storage use the shared envelope limit, and the maximum configured workspace is tested through save/load with synthetic data. Discovery tests passed; Frontend CI failed only the item 2 Prettier check.
 - [x] Item 4: repeated identical failure status/category now emits no duplicate event; status or error-category changes emit a new event. Event-log truncation warns with `RuntimeWarning`; fixture tests cover repeat, transition, and truncation.
-- [ ] Item 5: Ensure roles from link-only sources are not projected as `announced` without a verifiable closure path. Choose the smallest truthful public status meaning “last seen [date], not verified closed”; update validator/tests and record the decision in `DECISIONS.md`.
+- [x] Item 5: link-only roles use public status `last-seen` plus existing `lastSeenAt`; absence never closes them, and the projection validator accepts the status. Explicit closure or expired `validThrough` still removes roles from public projection. Choice recorded in `DECISIONS.md` as ADR-024.
 - [ ] Item 6: Split `scripts/discovery/pipeline.py` into fetch, adapters, state, and projection modules; existing tests must pass without changes.
 - [ ] Item 7: Fix test-count and browser-report documentation, duplicate ADR-015, stale “main remains unchanged” wording, and the Phase 2 workflow branch trigger. In `DECISIONS.md`, record acceptance of the default commit author, defer Pages hosting to Phase 8, and defer speculative routes.
 - [ ] Item 8: Add a proposed branch-cleanup list here, including merged/duplicate branches and `tmp/phase1-closeout-20261025` (reported five commits ahead of main). Propose only; do not delete branches.
@@ -61,8 +61,8 @@
 - [x] Validation rejects invalid IDs, duplicate names, unsupported fields/statuses, unsafe URLs, broken references, and verified routes without matching evidence.
 
 ### Phase 4 — GitHub Actions discovery
-- [ ] Fixture tests cover new/updated/closed/stale/blocked behavior.
-- [ ] Failed fetches never close roles; link-only roles are not marked announced without a verifiable closure path.
+- [ ] Fixture tests cover new/updated/closed/stale/blocked behavior, including link-only `last-seen` semantics.
+- [ ] Failed fetches never close roles; link-only roles use `last-seen` and are never closed by absence.
 - [ ] Projection uses only approved public fields.
 - [ ] Schedule stays disabled pending owner acceptance.
 - [ ] Owner runs the agreed single manual verification after merge.
@@ -100,9 +100,11 @@ Baseline `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`:
 - Item 1 status-only commit `8208b9cf864a64dca3ad79cd8440d3ea17d95ada`: Frontend CI passed [run 40564237677](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40564237677).
 - Item 2 first run: discovery fixture tests passed [run 40564524585](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40564524585); Frontend CI failed formatting and typecheck [run 40564524803](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40564524803).
 - Latest consolidated item 2 attempt: discovery fixture tests passed [run 40565813915](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40565813915); Frontend CI failed formatting and the route-error assertion [run 40565814099](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40565814099). The subsequent route-message fix passed the test-only failure but still failed formatting [Frontend CI run 40566046969](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40566046969); discovery fixture tests passed [run 40566046878](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40566046878).
-- Item 3 commit `919171c19cc8e4d2e8160ff23bbf8b2babde6e1c`: discovery fixture tests passed [run 40566577393](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40566577393); Frontend CI failed only the known Prettier check in `catalog.mjs`, while typecheck, unit tests, dependency audit and build passed [run 40566577410](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40566577410). Item 4 CI is pending.
+- Item 3 commit `919171c19cc8e4d2e8160ff23bbf8b2babde6e1c`: discovery fixture tests passed [run 40566577393](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40566577393); Frontend CI failed only the known Prettier check in `catalog.mjs`, while typecheck, unit tests, dependency audit and build passed [run 40566577410](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40566577410).
 - Follow-up runs: discovery fixture tests passed [40564758294](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40564758294), [40564917343](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40564917343), [40565141597](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40565141597), [40565264651](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40565264651), and [40565813915](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40565813915). Frontend CI reported formatting-only failures on [40564757989](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40564757989), [40564917374](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40564917374), [40565141698](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40565141698), and [40565264728](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40565264728).
 - Initial consolidated-module run: discovery fixture tests passed [40565813915](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40565813915); Frontend CI failed formatting and a route-error assertion [40565814099](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40565814099).
+- Item 4 commit `86000a968900355701da181d3d527a9f900a57d6`: discovery fixture tests passed [run 40566826197](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40566826197); Frontend CI failed only the known item 2 formatting check [run 40566826143](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40566826143).
+- Item 5 CI is pending for commit to be created.
 
 ## Open decisions and constraints
 
@@ -116,4 +118,4 @@ Baseline `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`:
 
 ## Next action:
 
-Run CI for item 4; proceed to item 5 while retaining the item 2 formatting blocker.
+Run item 5 CI; then split the discovery pipeline for item 6 while retaining item 2 as explicitly blocked on formatting.

@@ -62,6 +62,25 @@ def single_registry() -> dict:
     return {"schema_version": 1, "sources": [{"id": "test-careers", "studio_id": "test-studio", "studio_name": "Test Studio", "url": "https://careers.example.com/", "source_type": "official-careers", "adapter": "jsonld-career-listing", "allowed_job_hosts": ["jobs.example.com"], "enabled": True}]}
 
 
+def link_only_registry() -> dict:
+    return {
+        "schema_version": 1,
+        "sources": [
+            {
+                "id": "test-careers",
+                "studio_id": "test-studio",
+                "studio_name": "Test Studio",
+                "url": "https://careers.example.com/",
+                "source_type": "official-careers",
+                "adapter": "official-job-links",
+                "job_url_regex": r"^/role/\d+$",
+                "allowed_job_hosts": ["careers.example.com", "jobs.example.com"],
+                "enabled": True,
+            }
+        ],
+    }
+
+
 def scan_once(state: dict, observation: dict, now: str) -> dict:
     return apply_scan(state, single_registry(), {"test-careers": observation}, now)
 
@@ -156,6 +175,56 @@ class ChangeDetectionTests(unittest.TestCase):
         self.assertEqual(second["opportunities"][job["id"]]["first_seen_at"], NOW)
         self.assertEqual(second["opportunities"][job["id"]]["status"], "announced")
         self.assertEqual(len([e for e in second["events"] if e["type"] == "created"]), 1)
+
+    def test_link_only_role_is_projected_as_last_seen_not_announced(self):
+        registry = link_only_registry()
+        job = parsed_job()
+        state = apply_scan(empty_state(), registry, {"test-careers": source_observation([job])}, NOW)
+        stored = state["opportunities"][job["id"]]
+        self.assertEqual(stored["status"], "last-seen")
+        self.assertEqual(stored["last_seen_at"], NOW)
+
+        projection = public_projection(state)
+        self.assertEqual(len(projection["opportunities"]), 1)
+        self.assertEqual(projection["opportunities"][0]["status"], "last-seen")
+        self.assertEqual(projection["opportunities"][0]["lastSeenAt"], NOW)
+        validate_public_projection(projection)
+
+    def test_link_only_role_never_closes_from_complete_listing_absence(self):
+        registry = link_only_registry()
+        job = parsed_job()
+        state = apply_scan(empty_state(), registry, {"test-careers": source_observation([job])}, NOW)
+
+        for day in range(27, 33):
+            state = apply_scan(
+                state,
+                registry,
+                {"test-careers": source_observation([], complete=True)},
+                f"2026-10-{day:02d}T12:00:00Z",
+            )
+
+        stored = state["opportunities"][job["id"]]
+        self.assertEqual(stored["status"], "last-seen")
+        self.assertEqual(stored["last_seen_at"], NOW)
+        self.assertEqual(stored["missing_successful_scans"], 0)
+        projection = public_projection(state)
+        self.assertEqual(len(projection["opportunities"]), 1)
+        self.assertEqual(projection["opportunities"][0]["status"], "last-seen")
+        self.assertEqual(projection["opportunities"][0]["lastSeenAt"], NOW)
+
+    def test_link_only_role_can_only_close_with_explicit_or_expiry_evidence(self):
+        registry = link_only_registry()
+        explicit_close = parsed_job()
+        explicit_close["sourceClosed"] = True
+        closed = apply_scan(empty_state(), registry, {"test-careers": source_observation([explicit_close])}, NOW)
+        self.assertEqual(closed["opportunities"][explicit_close["id"]]["status"], "explicitly-closed")
+        self.assertEqual(public_projection(closed)["opportunities"], [])
+
+        expired = parsed_job(url="https://jobs.example.com/role/2")
+        expired["validThrough"] = "2026-01-30"
+        expired_state = apply_scan(empty_state(), registry, {"test-careers": source_observation([expired])}, NOW)
+        self.assertEqual(expired_state["opportunities"][expired["id"]]["status"], "closed")
+        self.assertEqual(public_projection(expired_state)["opportunities"], [])
 
     def test_material_change_emits_update_event(self):
         first_job = parsed_job()

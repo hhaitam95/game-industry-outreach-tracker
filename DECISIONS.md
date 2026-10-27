@@ -198,3 +198,12 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Context:** Realistic studio records are needed to exercise the UI and data model, but automated research is premature before relationships, source evidence, and schema validation are reliable. Personal applications already live in the encrypted browser-local workspace.
 - **Decision:** Start with four manually curated studio records (CD PROJEKT RED, Naughty Dog, Santa Monica Studio, and Riot Games). Store studios, sites, ownership relationships, games, credit roles, opportunities, application routes, source evidence, and change events as distinct entities with stable IDs and validation. Every seeded studio and verified career route must link to direct official source evidence. Keep opportunities and change events empty until observed, and keep the public registry separate from private candidate/application records.
 - **Consequences:** The UI can display sourced details without pretending to discover live openings. Manual source refresh is required; the catalogue is neither comprehensive nor continuously monitored. Any future integration between public studios and private application records must be designed and approved separately.
+
+
+## ADR-024 — Link-only opportunity status is last-seen
+
+- **Date:** 2026-10-27
+- **Status:** Accepted
+- **Context:** A link-only adapter can extract public job links, but a role disappearing from a link listing is not verifiable evidence that the job was closed. Marking such roles as announced would imply a current-open status that the collector cannot prove; closing them after absence would overstate evidence.
+- **Decision:** Publish observed roles from `official-job-links` sources with status `last-seen`, accompanied by the existing `lastSeenAt` timestamp. For these sources, absence from complete or incomplete link listings never increments the closure counter and never closes a role. Only explicit source closure or an expired `validThrough` value can close it. The public projection validator accepts `last-seen`; existing allowlisted fields remain unchanged.
+- **Consequences:** Users see when the role was last observed without a claim that it is currently open or verified closed. Link-only records remain visible until explicit closure or expiry evidence appears.
