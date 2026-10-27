@@ -186,7 +186,10 @@ export function assertEnabledRegistrySourcesHaveVerifiedRoutes(catalog, registry
       if (route.studioId !== source.studio_id || route.status !== "verified" || route.url !== source.url) return false;
       return route.sourceIds.some((sourceId) =>
         catalog.sources.some(
-          (evidence) => evidence.id === sourceId && evidence.url === source.url && evidence.sourceType === "official-careers",
+          (evidence) =>
+            evidence.id === sourceId &&
+            evidence.url === source.url &&
+            evidence.sourceType === "official-careers",
         ),
       );
     });

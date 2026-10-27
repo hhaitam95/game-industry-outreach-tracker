@@ -3,7 +3,7 @@
 **Last updated:** 2026-10-27
 **Current phase:** Step 1 — Stabilization, before Phase 4 acceptance.
 **Working branch:** `stabilize/baseline-fixes`
-**Last verified branch HEAD before item 2 CI follow-up:** `a56bff829defade39db149743f043a5879694342`
+**Last verified branch HEAD before formatting-only CI follow-up:** `5397f67985492b36573d22807c3bf5b62cc66496`
 **Base/main:** `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`. Phase 1–4 implementation stack is present on main. Do not change main directly; the owner merges the eventual PR.
 **Phase status:** Phase 3 is accepted. Phase 4 has been merged but is not accepted. One prior live run completed and persisted state to `discovery-state`; source coverage/closure behavior still need acceptance. No further live run is authorized by this task.
 
@@ -20,7 +20,7 @@
 ## Step 1 — Stabilization checklist
 
 - [x] Item 1: Create this status manifest on the phase branch only.
-- [ ] Item 2: `src/lib/studios/registry.mjs` validates `config/studio-registry.json`; catalogue career evidence/routes derive URLs from it. Riot's verified route now uses `/en/work-with-us/jobs`; regression tests reject enabled registry sources without matching verified routes. Initial Frontend CI failed formatting/typecheck in `registry.mjs`; follow-up fix is being validated.
+- [ ] Item 2: `src/lib/studios/registry.mjs` validates `config/studio-registry.json`; catalogue career evidence/routes derive URLs from it. Riot's verified route now uses `/en/work-with-us/jobs`; regression tests reject enabled registry sources without matching verified routes. Initial Frontend CI failed formatting/typecheck in `registry.mjs`. The type fix restored lint, typecheck, unit tests and build; the next run failed only formatting, so this small follow-up wraps that callback.
 - [ ] Item 3: Align schema and encryption workspace-size budgets; add a maximum-size workspace save test.
 - [ ] Item 4: Emit source-failure events only when failure state changes; warn when event history is truncated.
 - [ ] Item 5: Ensure roles from link-only sources are not projected as `announced` without a verifiable closure path. Choose the smallest truthful public status meaning “last seen [date], not verified closed”; update validator/tests and record the decision in `DECISIONS.md`.
