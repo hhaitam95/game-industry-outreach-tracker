@@ -134,7 +134,7 @@ export default function OpportunityExplorer() {
                 Derived country
                 <select aria-label="Filter by country" id="opportunity-country-filter" value={country} onChange={(event) => { setCountry(event.target.value); resetPage(); }}>
                   <option value="">Any country</option>
-                  {Object.entries(results.counts.countries).sort(([a], [b]) => a.localeCompare(b)).map(([item, count]) => <option key={item} value={item}>{item} ({count})</option>)}
+                  {Object.entries(results.counts.countries).sort(([a], [b]) => a.localeCompare(b)).map(([item, count]) => <option key={item} value={item}>{item} ({Number(count)})</option>)}
                 </select>
               </label>
               <label htmlFor="opportunity-contract-filter">
