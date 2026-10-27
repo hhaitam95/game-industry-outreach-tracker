@@ -190,6 +190,29 @@ class ChangeDetectionTests(unittest.TestCase):
         self.assertEqual(projection["opportunities"][0]["lastSeenAt"], NOW)
         validate_public_projection(projection)
 
+    def test_link_only_incomplete_listing_uses_last_seen_without_repeat_events(self):
+        registry = link_only_registry()
+        job = parsed_job()
+        state = apply_scan(empty_state(), registry, {"test-careers": source_observation([job])}, NOW)
+        first_absence = apply_scan(
+            state,
+            registry,
+            {"test-careers": source_observation([], complete=False)},
+            "2026-10-27T12:00:00Z",
+        )
+        self.assertEqual(first_absence["opportunities"][job["id"]]["status"], "last-seen")
+        transition_events = len(first_absence["events"])
+
+        second_absence = apply_scan(
+            first_absence,
+            registry,
+            {"test-careers": source_observation([], complete=False)},
+            "2026-10-28T12:00:00Z",
+        )
+        self.assertEqual(second_absence["opportunities"][job["id"]]["status"], "last-seen")
+        self.assertEqual(len(second_absence["events"]), transition_events)
+        self.assertEqual(second_absence["opportunities"][job["id"]]["last_seen_at"], NOW)
+
     def test_link_only_role_never_closes_from_complete_listing_absence(self):
         registry = link_only_registry()
         job = parsed_job()

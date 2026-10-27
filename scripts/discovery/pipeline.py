@@ -531,20 +531,21 @@ def apply_scan(state: dict[str, Any], registry: dict[str, Any], observations: di
                 if job.get("source_id") != source_id:
                     continue
                 job["missing_successful_scans"] = 0
-                if job_id not in seen_ids and job.get("status") not in {"closed", "explicitly-closed", "needs-review"}:
+                if job_id not in seen_ids and job.get("status") not in {"closed", "explicitly-closed"}:
                     if source.get("adapter") == "official-job-links":
-                        job["status"] = "last-seen"
-                        events.append(
-                            _event(
-                                source_id,
-                                job_id,
-                                "needs-review",
-                                now,
-                                "Role was not present on a link-only listing; closure is not verified.",
-                                ["status"],
+                        if job.get("status") != "last-seen":
+                            job["status"] = "last-seen"
+                            events.append(
+                                _event(
+                                    source_id,
+                                    job_id,
+                                    "needs-review",
+                                    now,
+                                    "Role was not present on a link-only listing; closure is not verified.",
+                                    ["status"],
+                                )
                             )
-                        )
-                    else:
+                    elif job.get("status") != "needs-review":
                         job["status"] = "needs-review"
                         events.append(_event(source_id, job_id, "needs-review", now, f"Role was not present on an incomplete listing: {job.get('title', 'Untitled role')}"))
         if observation.get("listing_complete"):
