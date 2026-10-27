@@ -10,8 +10,8 @@ const SNAPSHOT_DATE = "2026-10-27T18:00:00Z";
 
 const goldenTitles = [
   ["Player Support Specialist - Dublin, Ireland", "support", "Player Support"],
-  ["Technical Support Engineer", "support", "technical support"],
-  ["Developer Support Specialist", "support", "developer support"],
+  ["Technical Support Engineer", "support", "Technical Support"],
+  ["Developer Support Specialist", "support", "Developer Support"],
   ["Support Engineer", "support", "Support Engineer"],
   ["IT Support Technician", "support", "IT Support"],
   ["QA Engineer II", "qa-test", "QA Engineer"],
