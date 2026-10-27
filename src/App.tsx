@@ -3,9 +3,10 @@ import { getNavItem, NAV_ITEMS } from "./lib/navigation.mjs";
 import PrivateDataSettings from "./components/PrivateDataSettings";
 import StudioCatalog from "./components/StudioCatalog";
 import { STUDIO_PROFILES } from "./lib/studios/catalog.mjs";
+import { IS_SYNTHETIC_SNAPSHOT, OPPORTUNITY_SNAPSHOT } from "./lib/opportunities/snapshot.mjs";
 
 const pageRoadmap: Record<string, string> = {
-  studios: "Phases 3–5",
+  studios: "Phase 5a",
   resume: "Phase 6",
   outreach: "Phase 7",
   applications: "Phase 7",
@@ -105,7 +106,16 @@ function OverviewPage({ onNavigate }: { onNavigate: (pageId: string) => void }) 
             icon="studios"
             value={String(STUDIO_PROFILES.length)}
           />
-          <StatCard label="Opportunities" detail="Potential roles and routes" icon="search" />
+          <StatCard
+            label="Opportunities"
+            detail={
+              OPPORTUNITY_SNAPSHOT
+                ? `${OPPORTUNITY_SNAPSHOT.opportunities.length} role links last seen in the snapshot; not proof a role is open${IS_SYNTHETIC_SNAPSHOT ? " · synthetic test data" : ""}`
+                : "Snapshot validation failed; open Studios & roles for the error state"
+            }
+            icon="search"
+            value={OPPORTUNITY_SNAPSHOT ? String(OPPORTUNITY_SNAPSHOT.opportunities.length) : "—"}
+          />
           <StatCard label="Outreach drafts" detail="Prepared for your review" icon="outreach" />
           <StatCard label="Applications" detail="Tracked submissions" icon="applications" />
         </div>
@@ -146,7 +156,7 @@ function OverviewPage({ onNavigate }: { onNavigate: (pageId: string) => void }) 
         </div>
       </section>
       <p className="privacy-footnote">
-        The studio catalogue is manually sourced; live vacancy discovery and polling are not implemented yet. Private
+        Role links come from a bundled snapshot and are not proof a role remains open; career sites are not fetched at runtime. Private
         candidate records created in Settings remain encrypted in this browser and are not synced to a server.
       </p>
     </div>
@@ -215,7 +225,7 @@ export default function App() {
         <div className="sidebar-bottom">
           <div className="sidebar-status">
             <span className="status-dot" />
-            <span>Phase 3 studio registry</span>
+            <span>Phase 5a studio research</span>
           </div>
           <p>Built around evidence, privacy, and human control.</p>
         </div>
@@ -232,7 +242,7 @@ export default function App() {
           </div>
           <span className="phase-badge">
             <span className="phase-badge-dot" />
-            Phase 3 · Studio catalogue
+            Phase 5a · Studio research
           </span>
         </header>
         <div className="page-content">

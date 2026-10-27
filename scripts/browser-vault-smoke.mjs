@@ -239,7 +239,7 @@ function saveReport() {
   const lines = [
     "# Browser Acceptance Report",
     "",
-    "- Scope: synthetic-data browser test for the encrypted local vault; the Phase 3 catalogue is checked when enabled.",
+    "- Scope: synthetic-data browser test for the encrypted local vault, studio catalogue and Phase 5a opportunity explorer when enabled.",
     "- Runtime: " + safeVersion("node", ["--version"]),
     "- Browser: " + (chromePath ? safeVersion(chromePath, ["--version"]) : "unavailable"),
     "- Result: **" + (failure ? "FAIL" : "PASS") + "**",
@@ -385,6 +385,32 @@ async function main() {
         !summary.noVacancyClaim
       ) {
         throw new Error("studio-catalogue-acceptance-failed");
+      }
+    });
+  }
+
+  if (process.env.EXPECT_STUDIO_CATALOG === "1") {
+    await step("Verify Phase 5a opportunity explorer and filtering", async () => {
+      await client.waitForText("Opportunity explorer");
+      const before = await client.evaluate(
+        "(() => { const count = document.querySelector('[data-testid=opportunity-results-count]'); const rows = [...document.querySelectorAll('[data-testid=opportunity-row]')]; const date = document.querySelector('[data-testid=snapshot-generated-at]'); const body = document.body.innerText.toLowerCase(); const prohibited = ['currently available', 'currently open', 'open roles', 'open positions', 'no vacancies', 'no openings', 'all roles are open', 'vacancies available']; return { rowCount: rows.length, total: Number(count?.dataset.total ?? -1), hasSnapshotDate: Boolean(date?.innerText.trim()), hasStandingNote: body.includes('does not prove a role is open'), claimsAvailability: prohibited.some((phrase) => body.includes(phrase)) }; })()",
+      );
+      if (!before || before.rowCount < 2 || before.total < 2 || !before.hasSnapshotDate || !before.hasStandingNote || before.claimsAvailability) {
+        throw new Error("opportunity-explorer-initial-state-failed");
+      }
+      const clicked = await client.evaluate(
+        "(() => { const button = document.querySelector('[data-testid=family-filter-qa-test]'); if (!button || button.disabled) return false; button.click(); return true; })()",
+      );
+      if (!clicked) throw new Error("opportunity-family-filter-not-found");
+      await client.waitFor(
+        "document.querySelectorAll('[data-testid=opportunity-row]').length > 0 && document.querySelectorAll('[data-testid=opportunity-row]').length < " + before.rowCount,
+        "opportunity-filter-reduces-results",
+      );
+      const after = await client.evaluate(
+        "(() => ({ rows: document.querySelectorAll('[data-testid=opportunity-row]').length, count: Number(document.querySelector('[data-testid=opportunity-results-count]')?.dataset.total ?? -1) }))()",
+      );
+      if (!after || after.rows >= before.rowCount || after.rows !== after.count) {
+        throw new Error("opportunity-filter-did-not-reduce-results");
       }
     });
   }

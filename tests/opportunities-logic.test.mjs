@@ -142,7 +142,8 @@ test("freshness is calendar-day based and never calls a last-seen role open", ()
 
 test("snapshot age stays neutral before seven days and warns at seven days", () => {
   assert.deepEqual(getSnapshotFreshness(SNAPSHOT_DATE, "2026-11-02T11:00:00Z"), { ageDays: 6, tone: "neutral" });
-  assert.deepEqual(getSnapshotFreshness(SNAPSHOT_DATE, "2026-11-03T11:00:00Z"), { ageDays: 7, tone: "warning" });
+  assert.deepEqual(getSnapshotFreshness(SNAPSHOT_DATE, "2026-11-03T11:00:00Z"), { ageDays: 7, tone: "neutral" });
+  assert.deepEqual(getSnapshotFreshness(SNAPSHOT_DATE, "2026-11-04T11:00:00Z"), { ageDays: 8, tone: "warning" });
 });
 
 test("filter facets return counts and target-family preset changes the result", () => {

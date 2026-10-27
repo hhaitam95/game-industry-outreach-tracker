@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
 import { STUDIO_CATALOG_DATA, STUDIO_PROFILES, searchStudioProfiles } from "../lib/studios/catalog.mjs";
+import OpportunityExplorer from "./OpportunityExplorer";
+import { OPPORTUNITY_SNAPSHOT } from "../lib/opportunities/snapshot.mjs";
 
 const creditLabels: Record<string, string> = {
   developer: "Developer",
@@ -17,11 +19,11 @@ export default function StudioCatalog() {
   return (
     <section className="catalog-page" aria-labelledby="studio-catalog-title">
       <div className="catalog-intro">
-        <span className="eyebrow">PHASE 3 · MANUAL STUDIO REGISTRY</span>
+        <span className="eyebrow">PHASE 5A · STUDIO RESEARCH</span>
         <h2 id="studio-catalog-title">A small, sourced starting list</h2>
         <p>
           Four hand-curated studios with official websites, career entry points, known titles, locations, and source
-          evidence. This is a studio registry, not a live list of vacancies.
+          evidence. Role links below come from a bundled snapshot and do not prove that a role is open.
         </p>
       </div>
 
@@ -52,7 +54,11 @@ export default function StudioCatalog() {
         </div>
       ) : (
         <div className="catalog-grid">
-          {studios.map((studio) => (
+          {studios.map((studio) => {
+            const opportunityCount =
+              OPPORTUNITY_SNAPSHOT?.opportunities.filter((role) => role.studioId === studio.id).length ?? null;
+            const verifiedCareersRoute = studio.routes.find((route) => route.status === "verified");
+            return (
             <article className="studio-card" key={studio.id}>
               <div className="studio-card-heading">
                 <div>
@@ -131,6 +137,30 @@ export default function StudioCatalog() {
                 ))}
               </div>
 
+              <div className="studio-opportunity-coverage" aria-label={studio.name + " opportunity coverage"}>
+                {opportunityCount === null ? (
+                  <>
+                    <p><strong>Manual check needed.</strong> The opportunity snapshot is unavailable; check the official careers page directly.</p>
+                    {verifiedCareersRoute ? (
+                      <a href={verifiedCareersRoute.url} target="_blank" rel="noopener noreferrer">
+                        {verifiedCareersRoute.label}
+                      </a>
+                    ) : null}
+                  </>
+                ) : opportunityCount > 0 ? (
+                  <p>Link monitoring: {opportunityCount} roles last seen (partial; closure cannot be detected)</p>
+                ) : (
+                  <>
+                    <p><strong>Manual check needed.</strong> No roles observed from this source. Check the careers page directly.</p>
+                    {verifiedCareersRoute ? (
+                      <a href={verifiedCareersRoute.url} target="_blank" rel="noopener noreferrer">
+                        {verifiedCareersRoute.label}
+                      </a>
+                    ) : null}
+                  </>
+                )}
+              </div>
+
               <details className="studio-sources">
                 <summary>Evidence and sources ({studio.sourceIds.length})</summary>
                 <ul>
@@ -151,14 +181,16 @@ export default function StudioCatalog() {
                 </ul>
               </details>
             </article>
-          ))}
+            );
+          })}
         </div>
       )}
 
       <p className="catalog-boundary-note">
-        Catalogue data is manually maintained. No websites are crawled, no vacancies are inferred from career links, and
-        no private profile, draft, or application record is read or changed by this page.
+        The studio catalogue is manually maintained. The explorer uses a bundled snapshot and never fetches career sites
+        or role data at runtime. Snapshot status and last-seen dates do not prove that a role is open.
       </p>
+      <OpportunityExplorer />
     </section>
   );
 }

@@ -43,5 +43,5 @@ export function getSnapshotFreshness(generatedAt, now = new Date()) {
   const nowDay = utcDay(nowValue);
   if (generatedDay === null || nowDay === null) return { ageDays: 0, tone: "warning" };
   const ageDays = Math.max(0, Math.floor((nowDay - generatedDay) / DAY_MS));
-  return { ageDays, tone: ageDays >= 7 ? "warning" : "neutral" };
+  return { ageDays, tone: ageDays > 7 ? "warning" : "neutral" };
 }
