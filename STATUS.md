@@ -31,4 +31,4 @@ No runtime fetch of career pages/role data. `last-seen` is not proof a role is o
 
 ## Next action
 
-Create the single Phase 5a PR, verify its checks/browser acceptance, and stop without merging.
+PR [#4](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/4) is open and unmerged. Its first browser run [40579925245](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40579925245) passed 3/4 steps: vault setup/build and studio catalogue passed, but the new explorer assertion failed because the disclaimer check omitted the word “that”. This commit corrects that wording match; verify the PR rerun, then stop without merging.
