@@ -194,7 +194,7 @@ export function assertEnabledRegistrySourcesHaveVerifiedRoutes(catalog, registry
       );
     });
     if (!hasMatchingRoute) {
-      throw new Error('Enabled registry source "' + source.id + '" has no matching verified catalogue route.');
+      throw new Error("Enabled registry source \\"" + source.id + "\\" has no matching verified catalogue route.");
     }
   }
   return true;
