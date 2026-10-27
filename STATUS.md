@@ -1,10 +1,16 @@
 # Project Status
 
 **Last updated:** 2026-10-27
-**Current phase:** Phase 4 accepted for manual-only use with source-coverage limitations; Part A CI repair is complete and PR #3 is ready for owner merge. Phase 5 starts after that merge.
-**Working branch:** `docs/phase4-closeout-20261027`
-**Base/main:** `d052b51db38b8007cecc317e7ab90b1b8dc598d2` (PR #2 merged). The owner reviews and merges this closeout PR; do not change `main` directly.
+**Current phase:** Phase 4 accepted for manual-only use; Phase 5a is in progress on `feat/phase5-studio-research`.
+**Working branch:** `feat/phase5-studio-research`
+**Base/main:** `07d8e15cec544e56a09fbcab44202dc7051753c6` (PR #3 merged). Phase 5 work remains on the feature branch; do not change `main` directly.
 **Phase status:** Phase 3 remains accepted. Phase 4's owner-directed live run completed on `main` at [run #40569785573](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40569785573). The pipeline is accepted for manual-only use, not for scheduled monitoring: Riot returned 183 role links but no complete-listing evidence; CD PROJEKT RED and Naughty Dog need adapter review; Santa Monica Studio remains manual-review-only. Scheduled runs, public publishing, and Pages deployment remain disabled. The Prettier formatting issue in `src/lib/studios/catalog.mjs` is fixed. Frontend CI, discovery fixtures, and browser acceptance are green on the trigger-fix commit; run links and per-commit results are recorded below.
+
+## Phase 5a progress
+
+- [x] Item 1 implementation: added a small synthetic `src/data/public-opportunities.json` using the same versioned root and exact 16-field opportunity allowlist as the discovery projection.
+- [x] Added `src/lib/opportunities/snapshot.mjs` with exact-key validation, allowed-status checks, HTTPS URL checks, unique IDs, timestamp validation, and a caught error result for the UI. `IS_SYNTHETIC_SNAPSHOT` stays true until the owner supplies the real artifact.
+- [in progress] Item 1 CI validation is pending for commit.
 
 ## Working agreement and approval scope
 
@@ -169,3 +175,4 @@ The owner may consider deleting these stale branches after confirming no externa
 ## Next action:
 
 Owner review and merge of the Phase 4 closeout PR. Next implementation milestone: Phase 5 build-time integration of a reviewed, allowlisted projection; no runtime career-site fetches.
+
