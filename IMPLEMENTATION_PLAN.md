@@ -134,7 +134,7 @@ The binding implementation rules are in [AGENTS.md](AGENTS.md), with the policy 
 - The sample validates against the exact allowlist/status enum; the generated file remains ignored by Git and is synced from `discovery-state/public/public-opportunities.json` only after validation.
 - UI shows role counts, studio coverage/manual-check messages, title parsing provenance, snapshot freshness and the permanent last-seen disclaimer.
 - Unit tests cover validator, parser, classification, freshness, filters, counts, sorting and golden role-title examples from the reviewed snapshot.
-- Browser acceptance verifies explorer rendering, a reducing filter, visible snapshot date, sample fallback wording and no unsupported open/available claims.
+- Component-level render tests verify the explorer's sample-data and uncertainty labels; browser acceptance verifies explorer rendering, a reducing filter, visible snapshot date, sample fallback wording and no unsupported open/available claims.
 - The user can research a public role link without implying completeness or current availability; no runtime role-source requests occur.
 
 ## Phase 5b — Fit, skill-gap explanations and manual leads (deferred)

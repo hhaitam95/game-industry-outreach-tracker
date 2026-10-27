@@ -10,7 +10,7 @@
 - Follow the standing rules in [AGENTS.md](AGENTS.md) and [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md): design note plus definition of done before each phase/unit; record deviations after implementation.
 - This file is the single source for current branch/review state and volatile verification details. Elsewhere, avoid repeating branch state, SHAs, run IDs, or test counts.
 - For the current phase review, use the [latest PR check status](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/4/checks). Historical run records below describe the commits named in those entries, not later heads.
-- **Standards audit still required before Phase 5a acceptance:** verify the Python projection path and JavaScript loader/sync path consume one versioned public-opportunity schema, add contract tests in each consuming language, check meaningful UI logic has component-level tests, and review new module sizes. Do not mark Phase 5a accepted until gaps are either fixed in a cohesive unit or explicitly documented.
+- **Standards audit:** JavaScript and Python consume the shared JSON Schema, with shared public/invalid fixtures. The explorer has been split into orchestration, filters, and role-card components, and a component render test is being added. Current module sizes and CI on the latest head still need verification.
 
 ## Phase 5a scope delivered
 

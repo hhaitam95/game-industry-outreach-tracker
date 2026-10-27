@@ -272,3 +272,16 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Test plan:** Both languages validate the same historical public-data golden fixture and reject the same invalid-status fixture, with additional type/date/URL and failure-path cases.
 - **Rollback:** Revert the schema and its consumers/tests/docs together; do not modify or erase discovery-state.
 - **Closeout:** Keep fixtures offline; document that historical public links are schema evidence only, not current availability.
+
+
+## ADR-031 — Keep the opportunity explorer modular and component-tested
+
+- **Date:** 2026-10-27
+- **Status:** Accepted
+- **Goal:** Keep the explorer comprehensible and verify its rendered user-facing trust boundary below the existing browser workflow.
+- **Boundaries:** Preserve filtering, sorting, pagination, labels and snapshot-loading behavior; no product feature or data contract changes.
+- **Architecture:** The explorer owns state and orchestration; filter controls and opportunity cards are focused components; parsing/classification/filtering remain pure domain modules.
+- **Failure modes:** Invalid snapshots still fail closed; sample data remains visibly synthetic; parsed clues remain labelled and never imply current availability.
+- **Test plan:** Add a component-render test using Vite SSR and React DOM; retain offline unit tests and browser acceptance for interactive filtering.
+- **Rollback:** Revert the component extraction and test, preserving schema and discovery state.
+- **Closeout:** Review file sizes and report deviations in STATUS.md; acceptance depends on current CI for the final head.
