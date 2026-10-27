@@ -15,13 +15,11 @@ const FAMILIES = [
   { family: "unclassified", label: "Unclassified" },
 ];
 
-/** @param {string | null | undefined} value */
-function displayDate(value) {
+function displayDate(value: string | null | undefined) {
   return value && Number.isFinite(Date.parse(value)) ? value.slice(0, 10) : "Not listed in source";
 }
 
-/** @param {string} status */
-function displayStatus(status) {
+function displayStatus(status: string) {
   return status === "last-seen" ? "Last seen" : status.replaceAll("-", " ");
 }
 
@@ -32,7 +30,7 @@ export default function OpportunityExplorer() {
   const [seniority, setSeniority] = useState("");
   const [country, setCountry] = useState("");
   const [contract, setContract] = useState("");
-  const [freshness, setFreshness] = useState("");
+  const [freshness, setFreshness] = useState<"" | "latest" | "older">("");
   const [targetOnly, setTargetOnly] = useState(false);
   const [visibleLimit, setVisibleLimit] = useState(50);
 
@@ -55,7 +53,7 @@ export default function OpportunityExplorer() {
       }),
     [allRoles, generatedAt, studioId, family, seniority, country, contract, freshness, query, targetOnly],
   );
-  const allFamilyCount = Object.values(results.counts.roleFamilies).reduce((sum, value) => sum + value, 0);
+  const allFamilyCount = Object.values(results.counts.roleFamilies).reduce<number>((sum, value) => sum + Number(value), 0);
   const invalidSnapshot = snapshot === null || OPPORTUNITY_SNAPSHOT_ERROR !== null;
   const resetPage = () => setVisibleLimit(50);
 
@@ -122,14 +120,14 @@ export default function OpportunityExplorer() {
                 Studio
                 <select aria-label="Filter by studio" id="opportunity-studio-filter" value={studioId} onChange={(event) => { setStudioId(event.target.value); resetPage(); }}>
                   <option value="">All studios ({allRoles.length})</option>
-                  {STUDIO_PROFILES.map((studio) => <option key={studio.id} value={studio.id}>{studio.name} ({results.counts.studios[studio.name] ?? 0})</option>)}
+                  {STUDIO_PROFILES.map((studio) => <option key={studio.id} value={studio.id}>{studio.name} ({Number(results.counts.studios[studio.name] ?? 0)})</option>)}
                 </select>
               </label>
               <label htmlFor="opportunity-seniority-filter">
                 Seniority
                 <select aria-label="Filter by seniority" id="opportunity-seniority-filter" value={seniority} onChange={(event) => { setSeniority(event.target.value); resetPage(); }}>
                   <option value="">Any seniority</option>
-                  {SENIORITY_ORDER.map((item) => <option key={item} value={item}>{item} ({results.counts.seniorities[item] ?? 0})</option>)}
+                  {SENIORITY_ORDER.map((item) => <option key={item} value={item}>{item} ({Number(results.counts.seniorities[item] ?? 0)})</option>)}
                 </select>
               </label>
               <label htmlFor="opportunity-country-filter">
@@ -149,7 +147,7 @@ export default function OpportunityExplorer() {
               </label>
               <label htmlFor="opportunity-freshness-filter">
                 Freshness
-                <select aria-label="Filter by freshness" id="opportunity-freshness-filter" value={freshness} onChange={(event) => { setFreshness(event.target.value); resetPage(); }}>
+                <select aria-label="Filter by freshness" id="opportunity-freshness-filter" value={freshness} onChange={(event) => { setFreshness(event.target.value as "" | "latest" | "older"); resetPage(); }}>
                   <option value="">Any freshness ({results.totalCount})</option>
                   <option value="latest">Seen in latest scan ({results.counts.freshness.latest})</option>
                   <option value="older">Not seen in latest scan ({results.counts.freshness.older})</option>

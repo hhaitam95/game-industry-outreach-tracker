@@ -23,7 +23,7 @@ export default function StudioCatalog() {
         <h2 id="studio-catalog-title">A small, sourced starting list</h2>
         <p>
           Four hand-curated studios with official websites, career entry points, known titles, locations, and source
-          evidence. Role links below come from a bundled snapshot and do not prove that a role is open.
+          evidence. Role links below come from a bundled snapshot and do not prove that a role is open. This is a studio registry, not a live list of vacancies.
         </p>
       </div>
 
