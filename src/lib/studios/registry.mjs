@@ -6,7 +6,11 @@ const OPTIONAL_SOURCE_KEYS = ["job_url_regex", "allowed_job_hosts", "review_reas
 const SOURCE_TYPES = new Set(["official-careers"]);
 const ADAPTERS = new Set(["official-job-links", "manual-review"]);
 
-/** @param {unknown} value */
+/** @typedef {{id:string,studio_id:string,studio_name:string,url:string,source_type:"official-careers",adapter:"official-job-links"|"manual-review",enabled:boolean,job_url_regex?:string,allowed_job_hosts?:string[],review_reason?:string}} CareerRegistrySource */
+/** @typedef {{schema_version:1,registry_reviewed_on:string,description:string,sources:CareerRegistrySource[]}} StudioRegistry */
+/** @typedef {{sources:Array<{id:string,url:string,sourceType:string}>,applicationRoutes:Array<{studioId:string,status:string,url:string,sourceIds:string[]}>}} RouteCatalog */
+
+/** @param {unknown} value @returns {value is Record<string, unknown>} */
 function isRecord(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
@@ -63,10 +67,13 @@ function deepFreeze(value) {
   return value;
 }
 
-/** @param {unknown} input */
+/** @param {unknown} input @returns {StudioRegistry} */
 export function validateStudioRegistry(input) {
   if (!isRecord(input)) throw new Error("Studio registry must be an object.");
-  if (Object.keys(input).some((key) => !ROOT_KEYS.includes(key)) || ROOT_KEYS.some((key) => !Object.hasOwn(input, key))) {
+  if (
+    Object.keys(input).some((key) => !ROOT_KEYS.includes(key)) ||
+    ROOT_KEYS.some((key) => !Object.hasOwn(input, key))
+  ) {
     throw new Error("Studio registry has missing or unsupported fields.");
   }
   if (input.schema_version !== 1) throw new Error("Unsupported studio registry schema version.");
@@ -78,7 +85,8 @@ export function validateStudioRegistry(input) {
 
   const ids = new Set();
   const studioIds = new Set();
-  const sources = input.sources.map((entry) => {
+  const entries = /** @type {unknown[]} */ (input.sources);
+  const sources = entries.map((entry) => {
     if (!isRecord(entry)) throw new Error("Studio registry source entries must be objects.");
     const allowedKeys = [...REQUIRED_SOURCE_KEYS, ...OPTIONAL_SOURCE_KEYS];
     if (
@@ -97,21 +105,25 @@ export function validateStudioRegistry(input) {
 
     const studioName = requireText(entry.studio_name, "Registry studio name");
     const url = requireHttpsUrl(entry.url, "Registry source URL");
-    if (!SOURCE_TYPES.has(entry.source_type)) throw new Error("Registry source has an unsupported source type.");
-    if (!ADAPTERS.has(entry.adapter)) throw new Error("Registry source has an unsupported adapter.");
+    if (typeof entry.source_type !== "string" || !SOURCE_TYPES.has(entry.source_type)) {
+      throw new Error("Registry source has an unsupported source type.");
+    }
+    if (typeof entry.adapter !== "string" || !ADAPTERS.has(entry.adapter)) {
+      throw new Error("Registry source has an unsupported adapter.");
+    }
     if (typeof entry.enabled !== "boolean") throw new Error("Registry enabled flag must be boolean.");
 
-    const source = {
+    const source = /** @type {CareerRegistrySource} */ ({
       id,
       studio_id: studioId,
       studio_name: studioName,
       url,
-      source_type: entry.source_type,
-      adapter: entry.adapter,
+      source_type: /** @type {"official-careers"} */ (entry.source_type),
+      adapter: /** @type {"official-job-links" | "manual-review"} */ (entry.adapter),
       enabled: entry.enabled,
-    };
+    });
 
-    if (entry.adapter === "official-job-links") {
+    if (source.adapter === "official-job-links") {
       const jobUrlRegex = requireText(entry.job_url_regex, "Registry job URL pattern");
       try {
         new RegExp(jobUrlRegex);
@@ -121,7 +133,8 @@ export function validateStudioRegistry(input) {
       if (!Array.isArray(entry.allowed_job_hosts) || entry.allowed_job_hosts.length === 0) {
         throw new Error("Link adapter requires at least one allowed job host.");
       }
-      const hosts = entry.allowed_job_hosts.map((host) => requireText(host, "Allowed job host"));
+      const hostEntries = /** @type {unknown[]} */ (entry.allowed_job_hosts);
+      const hosts = hostEntries.map((host) => requireText(host, "Allowed job host"));
       if (hosts.some((host) => !/^[a-z0-9.-]+$/i.test(host))) {
         throw new Error("Allowed job hosts must be hostnames.");
       }
@@ -147,7 +160,7 @@ export function validateStudioRegistry(input) {
 
 export const STUDIO_REGISTRY = validateStudioRegistry(rawStudioRegistry);
 
-/** @param {string} studioId */
+/** @param {string} studioId @returns {CareerRegistrySource} */
 export function getCareerRegistrySource(studioId) {
   const matches = STUDIO_REGISTRY.sources.filter((source) => source.studio_id === studioId);
   if (matches.length !== 1) {
@@ -159,7 +172,7 @@ export function getCareerRegistrySource(studioId) {
 /**
  * Every enabled career source must be represented by a verified catalogue route
  * backed by matching official-careers source evidence.
- * @param {{sources:Array<{id:string,url:string,sourceType:string}>,applicationRoutes:Array<{studioId:string,status:string,url:string,sourceIds:string[]}>}} catalog
+ * @param {RouteCatalog} catalog
  * @param {unknown} [registryInput]
  */
 export function assertEnabledRegistrySourcesHaveVerifiedRoutes(catalog, registryInput = STUDIO_REGISTRY) {
@@ -172,7 +185,9 @@ export function assertEnabledRegistrySourcesHaveVerifiedRoutes(catalog, registry
     const hasMatchingRoute = catalog.applicationRoutes.some((route) => {
       if (route.studioId !== source.studio_id || route.status !== "verified" || route.url !== source.url) return false;
       return route.sourceIds.some((sourceId) =>
-        catalog.sources.some((evidence) => evidence.id === sourceId && evidence.url === source.url && evidence.sourceType === "official-careers"),
+        catalog.sources.some(
+          (evidence) => evidence.id === sourceId && evidence.url === source.url && evidence.sourceType === "official-careers",
+        ),
       );
     });
     if (!hasMatchingRoute) {
