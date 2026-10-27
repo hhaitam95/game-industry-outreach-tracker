@@ -1,6 +1,6 @@
 # Phase 4 discovery runner — initial implementation
 
-**Status:** Manual workflow implemented; scheduled execution and public publication remain gated.
+**Status:** Accepted for manual-only use with explicit coverage limits. The reviewed live run is [#40569785573](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40569785573); scheduled execution and public publication remain gated.
 
 ## What is monitored
 
@@ -13,8 +13,8 @@
 - Workflow: Actions → **Studio discovery pipeline** → Run workflow; use `fixture` first. Choose `live` only for an explicit source check.
 - Fixture mode uses only synthetic examples and never writes persistent state, even if a `--state-file` argument is passed.
 - Live mode fetches only configured HTTPS URLs, uses a bounded response size and timeout/retries, rejects HTTP downgrades and cross-host redirects before following them, and does not bypass access controls. HTTP 403/429/451 is reported as blocked.
-- The `discovery-state` branch holds only the operational scan state. Do not put candidate profile, CV, drafts, or application history there.
-- The current workflow is manually triggered only. Do not add a daily schedule until at least one manual live run has been reviewed for parser coverage and error handling.
+- The `discovery-state` branch holds only public role observations and operational scan metadata. This repository is public, so the branch is not a privacy boundary; never put candidate profiles, CVs, drafts, or application history there.
+- The workflow is manually triggered only. The one reviewed live run confirmed safe operational behavior but not full source coverage. Do not add a daily schedule until the incomplete adapters/listings are reviewed and the owner separately approves it.
 
 ## Conservative observation rules
 
@@ -26,9 +26,22 @@
 - Public output is an explicit allowlist projection and is validated against exact keys. Candidate/private operational data and description excerpts are excluded.
 - `outputs/discovery/` is a generated local artifact; the workflow summary lists counts/status categories, not downloaded pages.
 
+## Reviewed live run (2026-10-27)
+
+Run [#40569785573](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40569785573) used `main` commit `d052b51` and completed successfully. This means the workflow executed and persisted validated state; it does not mean all source adapters yielded usable vacancies.
+
+| Source | Result | Observations | Follow-up |
+|---|---|---:|---|
+| CD PROJEKT RED | `needs-review` / `no-matching-role-links` | 0 | Review official role URL pattern and adapter; do not interpret as empty vacancies |
+| Naughty Dog | `needs-review` / `no-matching-role-links` | 0 | Review official role URL pattern and adapter; do not interpret as empty vacancies |
+| Santa Monica Studio | `needs-review` / `adapter-required` | 0 | Continue manual review until a permitted, reviewed adapter exists |
+| Riot Games | `success`, `listing_complete=false` | 183 | Link extraction works, but listing completeness cannot be inferred |
+
+The generated projection included 185 Riot records: 183 in the current link result plus two earlier observations preserved because absence in a link-only/incomplete listing cannot prove closure. All records are `last-seen`, not claims that a role is currently open. A structural check of ten sample records found no duplicate IDs or missing titles/URLs and confirmed the configured official HTTPS host/path. The projection validates against the exact 16-field allowlist and remained an Actions artifact; it was not committed or published.
+
 ## Current limitations and gates
 
 - The three link-based adapters recognize only source-specific URL patterns on allowlisted official hosts. They intentionally cannot prove a complete listing, so they cannot auto-close roles by absence. Sites that render jobs only with client-side scripts or vendor-specific APIs are reported for review, not scraped with a browser or bypassed.
 - Some careers pages may not expose `ItemList` evidence even when jobs are visible. Those runs cannot support absence-based closure, which is deliberate.
-- The public projection is generated but not published: the separate public deployment repository and least-privilege publish credential do not yet exist.
+- The public projection is generated only as a short-lived artifact; it is not committed or published. The separate hosting/publication decision and any least-privilege publishing design remain deferred to Phase 8.
 - No daily schedule is enabled. The private state branch is written only by an explicitly selected live workflow run.

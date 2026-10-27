@@ -6,7 +6,7 @@
 ## Delivery principles
 
 - Build a complete, useful path in incremental steps.
-- Keep the source/specification repository private.
+- The repository is currently public; keep all private candidate/application records, CV content, contact details, credentials, and secrets out of every branch and artifact. Revisit repository/deployment privacy only in Phase 8.
 - Use GitHub Pages only for public static frontend assets and sanitized public studio/opportunity data.
 - Keep all personal CV, profile, draft and application data out of public repositories.
 - The initial release must not require a paid AI API.
@@ -82,35 +82,33 @@
 - The UI displays sourced studio details, direct career links, distinct credit roles, and unknown ownership where no relationship is sourced.
 - Validation rejects invalid IDs, duplicate studio names, unsupported fields/statuses, unsafe URLs, broken entity references, and verified routes without direct matching evidence.
 
-## Phase 4 — Daily GitHub Actions discovery
+## Phase 4 — Manual GitHub Actions discovery
 
-**Implementation status:** First increment implemented in the review candidate on `feat/phase4-discovery-pipeline`; 29 Python fixture tests pass locally. The increment includes a curated four-studio source registry, conservative parser/state logic, an allowlisted public projection, and a manual-only workflow. This is not Phase 4 acceptance: complete repository CI and browser tests have not run on the candidate, no live scan has been reviewed, and daily scheduling/public publishing remain disabled.
+**Implementation status:** Accepted for manual-only, best-effort monitoring after the reviewed live run [#40569785573](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40569785573) on `main` commit `d052b51`. The run persisted the validated operational state and uploaded a sanitized projection artifact. Coverage is still limited: Riot returned 183 links without complete-listing evidence; CD PROJEKT RED and Naughty Dog returned `needs-review/no-matching-role-links`; Santa Monica Studio remains `adapter-required`. The schedule and publication are intentionally disabled.
 
 ### Scope
-- Implement Python source adapters and a curated registry file.
-- Implement workflow triggers: scheduled daily, workflow_dispatch, optionally push on registry changes.
-- Run at a non-top-of-hour time in Europe/Budapest; use bounded concurrency, timeout and retries.
-- Check official vacancies and speculative/application routes for registered studios.
-- Use public APIs/ATS endpoints, structured data, feeds or official pages where permitted.
-- Record normalized observations, source evidence, errors and last successful observations in a dedicated private discovery-state branch so main does not receive routine scan-state commits.
-- Implement stable-ID and field/hash change detection.
-- Add guarded closure/stale logic and “unavailable / needs review” states.
-- Add manual review for dynamic, blocked or inconsistent sources; never bypass restrictions.
-- Validate public output against an allowlist and publish only sanitized files to the separate public Pages repository.
-- Store cross-repository publish credential in GitHub Actions secrets with minimum scope; never inject it into client assets.
-- Keep routine state updates on the private discovery-state branch; publish to the public Pages repository only when the normalized public dataset changes. Avoid no-op public commits; retain manual dispatch and Action run summaries.
+- Maintain a curated registry of official career URLs and registry-owned host/path allowlists.
+- Use manual `workflow_dispatch` for deterministic fixture runs and owner-authorized live checks; do not add a schedule as part of Phase 4.
+- Run bounded, conservative requests to official public sources only. Respect access controls, response limits, timeouts, redirects, and rate limits.
+- Record observations, provenance, freshness, and failure categories in the dedicated `discovery-state` branch without routine scan-state commits to `main`. Because this branch lives in a public repository, it must contain only public job records and operational metadata, never private candidate/application data.
+- Use stable IDs and change detection; never infer closure from a failed fetch, a missing link, an incomplete listing, or a source requiring manual review.
+- Keep dynamic, blocked, or inconsistent sources in `needs-review` until a permitted, reviewed adapter is available.
+- Generate a strict allowlisted public projection as a short-lived Actions artifact for review. Do not commit, publish, or deploy this artifact in Phase 4; publication and hosting decisions remain in Phase 8.
+- Keep the manual workflow's concurrency/timeout and separated state-persistence protections.
 
 ### Exit criteria
-- Local/fixture tests cover new/updated/closed/stale/blocked cases.
-- A failed fetch never closes a role.
-- First manual run successfully processes a small known list.
-- Only approved public company/role fields are published.
-- Daily schedule is enabled only after workflow is on default branch and manual test succeeds.
+- Fixture tests cover new, updated, explicitly closed, stale, blocked, and link-only `last-seen` behavior.
+- Failed fetches and incomplete listings preserve existing records and never create false closure events.
+- Public projection validation accepts exactly the approved public fields and excludes operational/private candidate data.
+- At least one owner-directed live run is reviewed on `main`, with each source's status and coverage limitations recorded.
+- The accepted operational mode is manual-only; a future schedule requires a separate decision after source coverage is improved and reviewed.
 
 ## Phase 5 — Studio research and matching UI
 
 ### Scope
-- Display scannable studio profiles, career routes, source evidence and verification state.
+- Display scannable studio profiles, career routes, source evidence, and freshness/verification state.
+- Consume a reviewed allowlisted public-projection snapshot as a build-time bundled input; do not fetch career pages or role data from the browser at runtime.
+- Distinguish `last-seen`, `stale`, `needs-review`, and other states; never present `last-seen` as proof that a role is currently open.
 - Filter public studios/opportunities by country, role family, source/status, and fit.
 - Explain relevance and skill gaps transparently.
 - Track location and hiring eligibility as known/unknown/verified, not inferred.
@@ -196,4 +194,4 @@
 
 ## Immediate next coding task
 
-Cloud CI is green for feat/browser-local-private-data. Perform the dummy-data browser smoke test documented in docs/LOCAL_DEVELOPMENT.md before introducing real CV/application content. Phase 3 can then define studio/opportunity schemas and seed a small sourced public dataset. Do not build the crawler or enable scheduled polling as part of Phase 2.
+Phase 5: design the build-time input path for the allowlisted discovery projection and implement the studio/opportunity research UI with source and freshness labels. Start with a reviewed or deterministically generated public snapshot after checking its fields; do not add runtime fetches from official career sites, schedule discovery, publish artifacts, or deploy Pages. Resolve the outstanding Prettier failure in `src/lib/studios/catalog.mjs` so frontend CI is usable as a gate.
