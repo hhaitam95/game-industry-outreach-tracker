@@ -3,7 +3,7 @@
 **Last updated:** 2026-10-27
 **Current phase:** Step 1 — Stabilization, before Phase 4 acceptance.
 **Working branch:** `stabilize/baseline-fixes`
-**Last verified branch HEAD before item 7:** `55b1c62bc704cd14dc6fff4289b584674ebc83ce`
+**Last verified branch HEAD before item 8:** `0eab2175786e6f808ae904f444e473bc8125712b`
 **Base/main:** `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`. Phase 1–4 implementation stack is present on main. Do not change main directly; the owner merges the eventual PR.
 **Phase status:** Phase 3 is accepted. Phase 4 has been merged but is not accepted. One prior live run completed and persisted state to `discovery-state`; source coverage/closure behavior still need acceptance. No further live run is authorized by this task.
 
@@ -26,8 +26,8 @@
 - [x] Item 5: link-only roles use public status `last-seen` plus existing `lastSeenAt`; absence never closes them, and the projection validator accepts the status. Complete and incomplete listings now converge to `last-seen` without repeating transition events. Explicit closure or expired `validThrough` still removes roles from public projection. Choice recorded in `DECISIONS.md` as ADR-024.
 - [x] Item 6: moved implementation into `fetch.py`, `adapters.py`, `state.py`, and `projection.py`; `pipeline.py` now re-exports the prior API as a compatibility facade, and no existing test/import was edited.
 - [x] Item 7: `docs/LOCAL_DEVELOPMENT.md` now records 31 npm tests and the actual `test-results/browser-acceptance-report.md` path; the duplicate ADR is renumbered to ADR-023; stale branch-state/visibility claims are corrected; the Phase 2 browser workflow no longer triggers on a Phase 3 branch. `DECISIONS.md` records accepted default Gmail commit metadata, defers Pages hosting to Phase 8, and defers speculative routes.
-- [ ] Item 8: Add a proposed branch-cleanup list here, including merged/duplicate branches and `tmp/phase1-closeout-20261025` (reported five commits ahead of main). Propose only; do not delete branches.
-- [ ] Step 1 exit: all items complete or explicitly documented as blocked; relevant tests and CI green; no private data/secrets; status current; one PR open; no merge performed.
+- [x] Item 8: added the branch-cleanup proposal below using read-only branch comparisons against `main` at `f9a9cf6`. The two temporary branches with unique commits are preserved for review. No branch was deleted or changed.
+- [blocked] Step 1 exit: items 1 and 3–8 are complete, with item 2 explicitly blocked on the recurring Prettier check in `catalog.mjs`. Discovery fixtures, frontend tests, typecheck, and build pass; overall Frontend CI remains red for that formatting check. Open one PR to surface the blocker; do not merge.
 
 ## Phase 4 acceptance criteria
 
@@ -107,7 +107,7 @@ Baseline `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`:
 - Item 5 first run: discovery fixture tests passed [40567113529](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40567113529); Frontend CI failed only the known Prettier check [40567113389](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40567113389).
 - Item 5 follow-up: discovery fixture tests passed [40567259405](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40567259405); Frontend CI failed only the same formatting check [40567259389](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40567259389).
 - Item 6 commit `55b1c62bc704cd14dc6fff4289b584674ebc83ce`: discovery fixture tests passed all 36 tests [run 40567557083](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40567557083); frontend tests passed all 31 tests, typecheck and build passed, but formatting check failed [run 40567557318](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40567557318).
-- Item 7 CI is pending.
+- Item 7 commit `0eab2175786e6f808ae904f444e473bc8125712b`: no new CI run was created for the docs/workflow-only changes; last code validation remains item 6 [Frontend CI run 40567557318](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40567557318) and [Discovery fixture tests run 40567557083](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40567557083).
 
 ## Open decisions and constraints
 
@@ -119,6 +119,32 @@ Baseline `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`:
 - Branch cleanup is review-only. Do not delete branches.
 - After the owner merges Step 1, Phase 4 acceptance requires the single owner-directed manual run described above; schedules remain disabled.
 
+
+## Proposed branch cleanup (review-only; no branches deleted)
+
+All ahead/behind figures below are read-only comparisons against `main` at `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`. This is a proposal only; no branch ref or visibility setting has been changed.
+
+### Duplicate or fully merged candidates for owner review
+
+- `feat/phase4-source-adapter-remediation` — identical tip to `main` (`f9a9cf6`; 0 ahead, 0 behind).
+- `feat/browser-local-vault` and `feat/static-frontend-shell` — identical tip `a850adae`; both 0 ahead and 30 behind `main`.
+- `feat/browser-local-private-data` and `feat/phase3-studio-catalog` — identical tip `cb9f8d3e`; both 0 ahead and 9 behind `main`.
+- `architecture/pages-actions-cv` — 0 ahead, 37 behind.
+- `docs/project-foundation` — 0 ahead, 38 behind.
+- `feat/phase3-manual-studio-catalog` — 0 ahead, 2 behind.
+- `feat/phase4-discovery-pipeline` — 0 ahead, 1 behind.
+- `tmp/phase1-remediation-20261024` — 0 ahead, 33 behind.
+
+The owner may consider deleting these stale branches after confirming no external work depends on them. Do not delete them as part of this phase.
+
+### Preserve for review or operational reasons
+
+- `tmp/eslint10-upgrade-20261024` — 3 commits ahead and 33 behind; has unique commits.
+- `tmp/phase1-closeout-20261025` — 5 commits ahead and 32 behind; has unique commits and should be reviewed rather than deleted.
+- `discovery-state` — preserve operational state; do not reset, rewrite, or delete.
+- `stabilize/baseline-fixes` — active branch for this stabilization PR; preserve.
+- `main` — protected by the owner's merge gate; do not change directly.
+
 ## Next action:
 
-Complete item 8: add a read-only branch-cleanup proposal to this file; do not delete branches.
+Open one PR from `stabilize/baseline-fixes` to `main`; do not merge it.
