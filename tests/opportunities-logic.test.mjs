@@ -55,7 +55,7 @@ test("golden title rules prioritize precise role-family phrases over generic tea
 
 test("every synthetic snapshot title receives deterministic classification and parsing", () => {
   assert.equal(IS_SYNTHETIC_SNAPSHOT, true);
-  assert.equal(OPPORTUNITY_SNAPSHOT.opportunities.length, 8);
+  assert.equal(OPPORTUNITY_SNAPSHOT.opportunities.length, 15);
   for (const role of OPPORTUNITY_SNAPSHOT.opportunities) {
     assert.equal(typeof role.title, "string");
     assert.equal(parseTitle(role.title).provenance, "parsed from listing text");
@@ -149,11 +149,11 @@ test("snapshot age stays neutral before seven days and warns at seven days", () 
 test("filter facets return counts and target-family preset changes the result", () => {
   const roles = OPPORTUNITY_SNAPSHOT.opportunities;
   const all = filterOpportunities(roles, { generatedAt: SNAPSHOT_DATE });
-  assert.equal(all.totalCount, 8);
+  assert.equal(all.totalCount, 15);
   assert.ok(all.counts.roleFamilies.support >= 1);
   assert.ok(all.counts.seniorities.Senior >= 1);
   assert.ok(all.counts.countries.Singapore >= 1);
-  assert.equal(all.counts.freshness.latest + all.counts.freshness.older, 8);
+  assert.equal(all.counts.freshness.latest + all.counts.freshness.older, 15);
 
   const targets = filterOpportunities(roles, { generatedAt: SNAPSHOT_DATE, targetFamiliesOnly: true });
   assert.ok(targets.totalCount < all.totalCount);

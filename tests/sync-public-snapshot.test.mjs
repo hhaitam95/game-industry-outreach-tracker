@@ -22,7 +22,7 @@ test("loader selects the synced snapshot when present and the sample only when a
   );
   assert.equal(invalidLive.origin, "live");
   assert.equal(invalidLive.snapshot, null);
-  assert.match(invalidLive.error, /schema version/);
+  assert.match(invalidLive.error, /missing or unsupported fields/);
 });
 
 test("sync script validates a local file and writes the normalized snapshot without network access", async () => {

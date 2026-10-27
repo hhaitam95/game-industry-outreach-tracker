@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 import { readFile, mkdir, rename, rm, writeFile } from "node:fs/promises";
 import { resolve, dirname } from "node:path";
-import { pathToFileURL } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { validateOpportunitySnapshot } from "../src/lib/opportunities/snapshot-validation.mjs";
 
 export const DEFAULT_SNAPSHOT_URL =
   "https://raw.githubusercontent.com/hhaitam95/game-industry-outreach-tracker/discovery-state/public/public-opportunities.json";
-export const DEFAULT_DESTINATION = resolve("src/data/public-opportunities.json");
+export const DEFAULT_DESTINATION = fileURLToPath(new URL("../src/data/public-opportunities.json", import.meta.url));
 
 /** @param {string} source */
 async function readSource(source) {

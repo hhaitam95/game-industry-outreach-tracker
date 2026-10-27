@@ -110,7 +110,7 @@ function OverviewPage({ onNavigate }: { onNavigate: (pageId: string) => void }) 
             label="Opportunities"
             detail={
               OPPORTUNITY_SNAPSHOT
-                ? `${OPPORTUNITY_SNAPSHOT.opportunities.length} role links last seen in the snapshot; not proof a role is open${IS_SYNTHETIC_SNAPSHOT ? " · synthetic test data" : ""}`
+                ? `${OPPORTUNITY_SNAPSHOT.opportunities.length} role links last seen in the snapshot; not proof a role is open${IS_SYNTHETIC_SNAPSHOT ? " · sample data, not a real scan" : ""}`
                 : "Snapshot validation failed; open Studios & roles for the error state"
             }
             icon="search"

@@ -24,7 +24,7 @@
 
 - Prior core/UI/docs baseline [d2573b78](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/d2573b7839760ba5f3e56d591abe7d0793bcef4b): Frontend CI [40577176942](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40577176942) and discovery fixtures [40577176882](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40577176882) passed.
 - Docs baseline [c8ac0baa](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/c8ac0baa57293a34eb343e9fca0d2aa9927d52ba): Frontend CI [40577623431](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40577623431) and discovery fixtures [40577623744](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40577623744) passed.
-- Sync/sample implementation CI is pending.
+- Sync/sample commit [7e83d3e7](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/7e83d3e718b88b7de805984fc2a1631ad0a31b1c): discovery fixtures passed [40578412921](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40578412921). Frontend CI [40578412973](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40578412973) exposed type references to the old snapshot module, three stale 8-role assertions, and formatting differences. This follow-up fixes those and previews exact formatter output; CI pending.
 
 ## Next action
 
