@@ -26,12 +26,29 @@
  * }} PublicOpportunitySnapshot */
 
 export const PUBLIC_OPPORTUNITY_FIELDS = Object.freeze([
-  "id", "studioId", "studioName", "title", "url", "locations", "employmentType", "datePosted",
-  "validThrough", "status", "sourceUrl", "firstSeenAt", "lastSeenAt", "lastChangedAt", "observedAt",
+  "id",
+  "studioId",
+  "studioName",
+  "title",
+  "url",
+  "locations",
+  "employmentType",
+  "datePosted",
+  "validThrough",
+  "status",
+  "sourceUrl",
+  "firstSeenAt",
+  "lastSeenAt",
+  "lastChangedAt",
+  "observedAt",
   "contentHash",
 ]);
 export const PUBLIC_OPPORTUNITY_STATUSES = Object.freeze([
-  "announced", "last-seen", "stale", "needs-review", "unavailable",
+  "announced",
+  "last-seen",
+  "stale",
+  "needs-review",
+  "unavailable",
 ]);
 const SNAPSHOT_FIELDS = Object.freeze(["schemaVersion", "generatedAt", "opportunities"]);
 const STATUS_SET = new Set(PUBLIC_OPPORTUNITY_STATUSES);
@@ -86,9 +103,12 @@ export function validateOpportunitySnapshot(input) {
     if (typeof entry.id !== "string" || !entry.id.trim()) throw new Error(label + " ID must be non-empty text.");
     if (seenIds.has(entry.id)) throw new Error("Duplicate public opportunity ID: " + entry.id);
     seenIds.add(entry.id);
-    if (typeof entry.studioId !== "string" || !entry.studioId.trim()) throw new Error(label + " studioId must be non-empty text.");
-    if (typeof entry.studioName !== "string" || !entry.studioName.trim()) throw new Error(label + " studioName must be non-empty text.");
-    if (typeof entry.title !== "string" || !entry.title.trim()) throw new Error(label + " title must be non-empty text.");
+    if (typeof entry.studioId !== "string" || !entry.studioId.trim())
+      throw new Error(label + " studioId must be non-empty text.");
+    if (typeof entry.studioName !== "string" || !entry.studioName.trim())
+      throw new Error(label + " studioName must be non-empty text.");
+    if (typeof entry.title !== "string" || !entry.title.trim())
+      throw new Error(label + " title must be non-empty text.");
     if (typeof entry.status !== "string" || !STATUS_SET.has(entry.status)) {
       throw new Error(label + " has an unsupported public opportunity status.");
     }

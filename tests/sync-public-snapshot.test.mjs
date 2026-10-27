@@ -8,7 +8,10 @@ import { syncPublicSnapshot } from "../scripts/sync-public-snapshot.mjs";
 import { loadBundledOpportunitySnapshot } from "../src/lib/opportunities/snapshot.mjs";
 
 test("loader selects the synced snapshot when present and the sample only when absent", () => {
-  const live = loadBundledOpportunitySnapshot({ "../../data/public-opportunities.json": sampleSnapshot }, sampleSnapshot);
+  const live = loadBundledOpportunitySnapshot(
+    { "../../data/public-opportunities.json": sampleSnapshot },
+    sampleSnapshot,
+  );
   assert.equal(live.origin, "live");
   assert.equal(live.snapshot.opportunities.length, 15);
 
@@ -45,7 +48,11 @@ test("sync script writes nothing when JSON or snapshot validation fails", async 
   const source = join(directory, "invalid.json");
   const destination = join(directory, "generated.json");
   try {
-    await writeFile(source, JSON.stringify({ schemaVersion: 1, generatedAt: "2000-01-01T00:00:00Z", opportunities: [{ status: "open" }] }), "utf8");
+    await writeFile(
+      source,
+      JSON.stringify({ schemaVersion: 1, generatedAt: "2000-01-01T00:00:00Z", opportunities: [{ status: "open" }] }),
+      "utf8",
+    );
     await assert.rejects(syncPublicSnapshot({ from: source, destination }), /missing or unsupported fields/);
     await assert.rejects(access(destination));
 

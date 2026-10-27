@@ -87,8 +87,8 @@ export default function OpportunityExplorer() {
 
       {IS_SYNTHETIC_SNAPSHOT && !invalidSnapshot ? (
         <p className="snapshot-synthetic-note" role="note">
-          Sample data - not a real scan. These are synthetic examples with placeholder links, not real job postings. Use the
-          sync command only after the owner-run discovery workflow has completed successfully.
+          Sample data - not a real scan. These are synthetic examples with placeholder links, not real job postings. Use
+          the sync command only after the owner-run discovery workflow has completed successfully.
         </p>
       ) : null}
 

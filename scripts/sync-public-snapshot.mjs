@@ -68,7 +68,9 @@ if (process.argv[1] && pathToFileURL(resolve(process.argv[1])).href === import.m
     const result = await syncPublicSnapshot(parseArgs(process.argv.slice(2)));
     process.stdout.write("Validated " + result.roleCount + " public role links into " + result.destination + ".\n");
   } catch (error) {
-    process.stderr.write("Public snapshot sync failed: " + (error instanceof Error ? error.message : "Unknown error") + "\n");
+    process.stderr.write(
+      "Public snapshot sync failed: " + (error instanceof Error ? error.message : "Unknown error") + "\n",
+    );
     process.exitCode = 1;
   }
 }
