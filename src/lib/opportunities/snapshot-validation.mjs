@@ -65,7 +65,7 @@ function matchesType(value, expected) {
 function validateFormat(value, format, label) {
   if (format === "date-time") {
     const rfc3339 = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/;
-    if (!rfc3339.test(value) || !Number.isFinite(Date.parse(value))) {
+    if (!rfc3339.test(value)) {
       throw new Error(label + " must be an RFC 3339 date-time with a timezone.");
     }
 
@@ -73,6 +73,10 @@ function validateFormat(value, format, label) {
     const parsedDate = new Date(datePart + "T00:00:00.000Z");
     if (!Number.isFinite(parsedDate.getTime()) || parsedDate.toISOString().slice(0, 10) !== datePart) {
       throw new Error(label + " must contain a valid calendar date.");
+    }
+
+    if (!Number.isFinite(Date.parse(value))) {
+      throw new Error(label + " must be a valid RFC 3339 date-time.");
     }
   } else if (format === "date") {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
