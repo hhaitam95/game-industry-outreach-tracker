@@ -24,7 +24,7 @@
 - [x] Item 3: added a shared 32 MiB serialized-workspace cap and 48 MiB encrypted-envelope cap in `src/lib/private-data/limits.mjs`; schema validates serialized UTF-8 size, encryption/storage use the shared envelope limit, and the maximum configured workspace is tested through save/load with synthetic data. Discovery tests passed; Frontend CI failed only the item 2 Prettier check.
 - [x] Item 4: repeated identical failure status/category now emits no duplicate event; status or error-category changes emit a new event. Event-log truncation warns with `RuntimeWarning`; fixture tests cover repeat, transition, and truncation.
 - [x] Item 5: link-only roles use public status `last-seen` plus existing `lastSeenAt`; absence never closes them, and the projection validator accepts the status. Complete and incomplete listings now converge to `last-seen` without repeating transition events. Explicit closure or expired `validThrough` still removes roles from public projection. Choice recorded in `DECISIONS.md` as ADR-024.
-- [ ] Item 6: Split `scripts/discovery/pipeline.py` into fetch, adapters, state, and projection modules; existing tests must pass without changes.
+- [x] Item 6: moved implementation into `fetch.py`, `adapters.py`, `state.py`, and `projection.py`; `pipeline.py` now re-exports the prior API as a compatibility facade, and no existing test/import was edited.
 - [ ] Item 7: Fix test-count and browser-report documentation, duplicate ADR-015, stale “main remains unchanged” wording, and the Phase 2 workflow branch trigger. In `DECISIONS.md`, record acceptance of the default commit author, defer Pages hosting to Phase 8, and defer speculative routes.
 - [ ] Item 8: Add a proposed branch-cleanup list here, including merged/duplicate branches and `tmp/phase1-closeout-20261025` (reported five commits ahead of main). Propose only; do not delete branches.
 - [ ] Step 1 exit: all items complete or explicitly documented as blocked; relevant tests and CI green; no private data/secrets; status current; one PR open; no merge performed.
@@ -104,7 +104,9 @@ Baseline `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`:
 - Follow-up runs: discovery fixture tests passed [40564758294](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40564758294), [40564917343](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40564917343), [40565141597](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40565141597), [40565264651](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40565264651), and [40565813915](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40565813915). Frontend CI reported formatting-only failures on [40564757989](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40564757989), [40564917374](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40564917374), [40565141698](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40565141698), and [40565264728](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40565264728).
 - Initial consolidated-module run: discovery fixture tests passed [40565813915](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40565813915); Frontend CI failed formatting and a route-error assertion [40565814099](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40565814099).
 - Item 4 commit `86000a968900355701da181d3d527a9f900a57d6`: discovery fixture tests passed [run 40566826197](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40566826197); Frontend CI failed only the known item 2 formatting check [run 40566826143](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40566826143).
-- Item 5 CI is pending for commit to be created.
+- Item 5 first run: discovery fixture tests passed [40567113529](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40567113529); Frontend CI failed only the known Prettier check [40567113389](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40567113389).
+- Item 5 follow-up: discovery fixture tests passed [40567259405](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40567259405); Frontend CI failed only the same formatting check [40567259389](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40567259389).
+- Item 6 CI is pending for the pipeline module split.
 
 ## Open decisions and constraints
 
@@ -118,4 +120,4 @@ Baseline `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`:
 
 ## Next action:
 
-Run CI for the item 5 incomplete-listing follow-up; then split the discovery pipeline for item 6 while retaining item 2 as explicitly blocked on formatting.
+Run CI for item 6; then complete documentation and branch-inventory cleanup in item 7 while retaining item 2 as explicitly blocked on formatting.
