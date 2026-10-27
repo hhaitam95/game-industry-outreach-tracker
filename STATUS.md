@@ -10,7 +10,7 @@
 - Follow the standing rules in [AGENTS.md](AGENTS.md) and [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md): design note plus definition of done before each phase/unit; record deviations after implementation.
 - This file is the single source for current branch/review state and volatile verification details. Elsewhere, avoid repeating branch state, SHAs, run IDs, or test counts.
 - For the current phase review, use the [latest PR check status](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/4/checks). Historical run records below describe the commits named in those entries, not later heads.
-- **Standards audit:** JavaScript and Python consume the shared JSON Schema, with shared public/invalid fixtures. The explorer has been split into orchestration, filters, and role-card components, and a component render test is being added. Current module sizes and CI on the latest head still need verification.
+- **Standards audit:** JavaScript and Python consume the shared JSON Schema and share public/invalid fixtures. The explorer is split into orchestration, filter controls, and role-card components; an SSR component test checks sample-data and trust-boundary labels. The first validation cycle found missing JS helper annotations, an invalid test date, and formatter differences; this corrective commit addresses those issues. Use the current PR check panel to verify the resulting head; historical results below apply only to their named commits.
 
 ## Phase 5a scope delivered
 

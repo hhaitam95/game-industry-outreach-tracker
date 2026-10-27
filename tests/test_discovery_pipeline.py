@@ -5,6 +5,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from datetime import datetime, timedelta
 from email.message import Message
 from pathlib import Path
 from urllib.error import HTTPError
@@ -218,12 +219,14 @@ class ChangeDetectionTests(unittest.TestCase):
         job = parsed_job()
         state = apply_scan(empty_state(), registry, {"test-careers": source_observation([job])}, NOW)
 
-        for day in range(27, 33):
+        first_scan = datetime.fromisoformat(NOW.replace("Z", "+00:00"))
+        for offset in range(1, 7):
+            scan_time = first_scan + timedelta(days=offset)
             state = apply_scan(
                 state,
                 registry,
                 {"test-careers": source_observation([], complete=True)},
-                f"2026-10-{day:02d}T12:00:00Z",
+                scan_time.strftime("%Y-%m-%dT%H:%M:%SZ"),
             )
 
         stored = state["opportunities"][job["id"]]
@@ -376,6 +379,11 @@ class BoundaryAndWorkflowTests(unittest.TestCase):
     def test_shared_schema_rejects_bad_timestamps_types_and_extra_fields(self):
         golden_path = ROOT / "tests" / "fixtures" / "public-opportunities" / "real-snapshot-golden.json"
         golden = json.loads(golden_path.read_text(encoding="utf-8"))
+
+        bad_generated_at = json.loads(json.dumps(golden))
+        bad_generated_at["generatedAt"] = "2026-10-32T12:00:00Z"
+        with self.assertRaisesRegex(ValueError, "valid date-time"):
+            validate_public_projection(bad_generated_at)
 
         bad_timestamp = json.loads(json.dumps(golden))
         bad_timestamp["opportunities"][0]["lastSeenAt"] = "not-a-date"

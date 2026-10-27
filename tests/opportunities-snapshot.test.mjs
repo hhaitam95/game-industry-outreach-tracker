@@ -48,6 +48,10 @@ test("schema validation rejects extra/missing fields, duplicate IDs, bad types, 
   const badType = JSON.parse(JSON.stringify(sampleSnapshot));
   badType.opportunities[0].locations = "not-an-array";
   assert.throws(() => validateOpportunitySnapshot(badType), /invalid type/);
+  const impossibleTimestamp = JSON.parse(JSON.stringify(sampleSnapshot));
+  impossibleTimestamp.generatedAt = "2026-10-32T12:00:00Z";
+  assert.throws(() => validateOpportunitySnapshot(impossibleTimestamp), /valid calendar date/);
+
   const badTimestamp = JSON.parse(JSON.stringify(sampleSnapshot));
   badTimestamp.opportunities[0].lastSeenAt = "not-a-date";
   assert.throws(() => validateOpportunitySnapshot(badTimestamp), /RFC 3339 date-time/);

@@ -17,7 +17,7 @@ type Props = {
 
 export default function OpportunityRoleCard({ role, synthetic }: Props) {
   return (
-    <article className="opportunity-row" data-testid="opportunity-row" key={role.id}>
+    <article className="opportunity-row" data-testid="opportunity-row">
       <div className="opportunity-row-heading">
         <div className="opportunity-row-title">
           <h3>{role.title}</h3>
@@ -65,9 +65,7 @@ export default function OpportunityRoleCard({ role, synthetic }: Props) {
       <div className="opportunity-row-footer">
         <div className="opportunity-derived-tags">
           {role.parsed.contract ? <span>Contract mention (parsed from listing text)</span> : null}
-          {role.parsed.relocationMentioned ? (
-            <span>Relocation mention (parsed from listing text)</span>
-          ) : null}
+          {role.parsed.relocationMentioned && <span>Relocation mention (parsed from listing text)</span>}
         </div>
         <a className="opportunity-posting-link" href={role.url} target="_blank" rel="noopener noreferrer">
           {synthetic ? "Open placeholder URL" : "Open official posting"} <span aria-hidden="true">↗</span>
