@@ -2,7 +2,7 @@
 
 A personal, evidence-driven workspace for discovering video game studios and opportunities worldwide, assessing transferable technical skills, preparing tailored outreach, and tracking application outcomes.
 
-> **Current status:** The Phase 1–4 implementation stack is present on `main` at `f9a9cf6`. Phase 3 is accepted; Phase 4 is merged but still awaiting acceptance. Stabilization is in progress on `stabilize/baseline-fixes`. The latest discovery fixture suite passed 36 tests; the frontend suite reports 31 passing tests, but overall Frontend CI remains blocked by a Prettier check in `src/lib/studios/catalog.mjs` (tracked in `STATUS.md`). One earlier live scan has already occurred; do not rerun it as part of stabilization. Scheduling and publishing remain disabled. This repository is public, so private records, resumes, contact details, and credentials must never be committed.
+> **Current status:** Phase 3 is accepted. Phase 4 is accepted for manual-only discovery with explicit source limitations after live run [40569785573](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40569785573) on `main` commit `d052b51`: Riot returned 183 links without complete-listing evidence; CD PROJEKT RED and Naughty Dog need adapter review; Santa Monica Studio remains manual-review-only. Discovery fixtures pass, but Frontend CI still has a Prettier blocker in `src/lib/studios/catalog.mjs`. Schedules, publishing, and deployment remain disabled. This repository is public; private records, resumes, contact details, and credentials must never be committed.
 
 ## Current frontend shell
 
@@ -10,7 +10,7 @@ A personal, evidence-driven workspace for discovering video game studios and opp
 - Responsive workspace layout with navigation for overview, studio research, resume review, outreach, applications, and settings.
 - The Studios & roles screen displays four manually sourced studio profiles, separate site/ownership/game-credit relationships, official career routes, and expandable source evidence.
 - The Phase 3 starter catalogue does not claim to list current vacancies; vacancy observations are added only by the separate Phase 4 discovery pipeline.
-- Manual studio data is kept separate from encrypted private candidate/application records. The Phase 4 feature branch adds a fixture-tested, manually triggered runner; daily scheduling and publication are still disabled.
+- Manual studio data is kept separate from encrypted private candidate/application records. The Phase 4 runner is on `main` and has been reviewed for manual-only use; daily scheduling and publication remain disabled due to source-coverage limitations.
 - ESLint, Prettier, TypeScript checks, Node's built-in test runner, an automated Chrome/Chromium vault smoke test, and privacy-conscious Markdown feedback reports.
 - GitHub Actions validates formatting, lint, types, unit tests, dependency audit, privacy boundaries, the production build, and browser-level vault create/save/reload/lock/export/restore behavior.
 - Settings supports a passphrase-protected local vault, profile fields, basic application records, encrypted backup export/import, locking, and local deletion.

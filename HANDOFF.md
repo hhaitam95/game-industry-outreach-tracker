@@ -1,9 +1,9 @@
 # Project Handoff
 
 **Last updated:** 2026-10-27  
-**Project stage:** Phase 3 accepted; Phase 4 implementation is merged to `main` but remains unaccepted. Step 1 stabilization is being built on `stabilize/baseline-fixes`; see `STATUS.md`.  
-**Default branch:** `main` at `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`  
-**Working branch:** `stabilize/baseline-fixes`  
+**Project stage:** Phase 4 accepted for manual-only use with source-coverage limitations; Phase 5 is next. Step 1 PR #2 is merged, but the Prettier formatting blocker in `src/lib/studios/catalog.mjs` remains.  
+**Default branch:** `main` at `d052b51db38b8007cecc317e7ab90b1b8dc598d2`  
+**Working branch:** `docs/phase4-closeout-20261027`  
 **Architecture baseline:** `architecture/pages-actions-cv`  
 **Repository visibility:** Public. Do not commit personal records, contact details, resumes, application data, credentials, or secrets.
 
@@ -40,14 +40,15 @@ Build a personal tool to discover game studios/opportunities worldwide, verify o
 - `npm run feedback-report` provides optional local diagnostics with fixed-category failure summaries; it omits raw diagnostic lines and filenames.
 - Phase 2 adds encrypted browser-local private profile/draft/application records and encrypted backup export/import; see the acceptance gates below.
 - Phase 3 adds a source-linked manual catalogue for CD PROJEKT RED, Naughty Dog, Santa Monica Studio, and Riot Games. The schema separately represents studios, sites, ownership relationships, games, credit roles, opportunities, application routes, source evidence, and change events.
-- Phase 4 has a standard-library discovery runner, curated registry, offline fixture suite, and strict public projection. The current fixture suite passes 36 tests. Phase 4 is not accepted: link-only roles now use `last-seen`, schedules remain disabled, and one earlier manual live run had imperfect coverage. The owner will perform the agreed single manual verification only after the stabilization PR is merged.
-- Daily scheduling and public publishing remain disabled. The manual live workflow is guarded to the reviewed default branch and only persists operational state to the dedicated `discovery-state` branch.
+- Phase 4 is accepted for manual-only monitoring with limits after owner-directed live run [40569785573](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40569785573) on merged `main` commit `d052b51`. Discovery fixture tests passed (36 tests); the live scan and validated-state persistence jobs succeeded.
+- Live results: Riot Games produced 183 links, but completeness is false; two prior Riot records were retained, yielding 185 projected records, all `last-seen`. CD PROJEKT RED and Naughty Dog returned `needs-review/no-matching-role-links`; Santa Monica Studio remains `needs-review/adapter-required`. The artifact is not committed or published.
+- Scheduling, publishing, and deployment remain disabled. The `discovery-state` branch is in this public repository and must contain only public role observations and operational state, never candidate/application data.
 - Resume extraction/generation and public deployment are not implemented.
 - Phase 3 code acceptance is green for commit `843d6c38954ed381f3cc30ba53f25c991ecfdf47`: standard CI run [40340001102](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340001102) and combined Phase 2/3 browser acceptance run [40340000974](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340000974) both passed.
 - Resume extraction/generation is specified but not implemented.
 - docs/resume-guidelines/ and docs/operations/ are present on the architecture baseline.
 - Local setup and the privacy-conscious feedback process are documented in `docs/LOCAL_DEVELOPMENT.md`.
-- Latest Frontend CI on stabilization commit `55b1c62` reports 31 passing npm tests, successful TypeScript checks, and successful production build; overall CI remains blocked only by Prettier formatting in `src/lib/studios/catalog.mjs`. Discovery fixture CI passes all 36 Python tests. See `STATUS.md` for run links and retries.
+- Frontend CI on merged `main` commit `d052b51` still fails only the Prettier check in `src/lib/studios/catalog.mjs` ([run 40569583825](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40569583825)); its other reported checks pass. Discovery fixture tests passed [run 40569583856](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40569583856) and again inside the live workflow [run 40569785573](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40569785573).
 - Automated browser acceptance passed on the Phase 3 code revision using a temporary headless Chrome profile and synthetic data, including vault create/save/reload/lock/unlock, encrypted export/restore checks, incorrect-passphrase rejection, and the four-studio catalogue UI/source-link checks. The sanitized Markdown report is attached to the passing [Phase 2/3 browser workflow](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340000974). This is functional acceptance, not a security audit; no real personal data was used.
 - The earlier baseline install reported 15 npm advisories (2 low, 3 moderate, 10 high); the refreshed lockfile's full npm audit reported zero vulnerabilities, and the current CI dependency-audit step passes.
 - Pages hosting and deployment target are deferred to Phase 8; no deployment repository or publishing workflow is approved yet.
@@ -56,11 +57,12 @@ Build a personal tool to discover game studios/opportunities worldwide, verify o
 
 ## Next steps
 
-1. Complete the stabilization checklist on `stabilize/baseline-fixes`; the owner will merge the single PR after all items are completed or explicitly blocked.
-2. Resolve the remaining documented Frontend CI formatting blocker or retain it as an explicit blocker in `STATUS.md`; the fixture suite and frontend tests/build must remain passing.
-3. After the owner merges the stabilization PR, the owner performs one manual live scan on `main` to check CD PROJEKT RED and Naughty Dog, then reviews source coverage, source failures, public projection and durable state.
-4. Keep scheduling, publishing, and deployment disabled until the owner accepts the relevant gates in a later phase; Pages hosting is deferred to Phase 8.
+1. Review and merge the Phase 4 closeout PR; do not change `main` directly.
+2. Treat Phase 4 as manual-only until the CD PROJEKT RED and Naughty Dog link adapters are reviewed and Santa Monica Studio has a permitted, reviewed adapter. Do not enable the schedule or publish/deploy the report.
+3. Resolve the separate Prettier blocker in `src/lib/studios/catalog.mjs` before relying on green frontend CI for Phase 5.
+4. Start Phase 5 by integrating a reviewed, allowlisted projection as a build-time bundled input; the browser must not fetch career pages at runtime. Display source freshness and `last-seen` honestly, without presenting it as proof a role is currently open.
 5. Before using real personal data, understand local-only storage, the unrecoverable vault passphrase, browser-storage loss, and encrypted-backup limitations. Automated acceptance uses synthetic data and is not a security audit.
+
 
 ## Known trade-offs
 

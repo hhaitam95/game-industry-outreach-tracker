@@ -1,18 +1,18 @@
 # Project Status
 
 **Last updated:** 2026-10-27
-**Current phase:** Step 1 — Stabilization, before Phase 4 acceptance.
-**Working branch:** `stabilize/baseline-fixes`
-**Last verified branch HEAD before PR status update:** `a212eabf39ae8b738743d41814654c2047c5a3dc`
-**Base/main:** `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`. Phase 1–4 implementation stack is present on main. Do not change main directly; the owner merges the eventual PR.
-**Phase status:** Phase 3 is accepted. Phase 4 has been merged but is not accepted. One prior live run completed and persisted state to `discovery-state`; source coverage/closure behavior still need acceptance. No further live run is authorized by this task.
+**Current phase:** Phase 4 accepted for manual-only use with source-coverage limitations; Phase 5 is next.
+**Working branch:** `docs/phase4-closeout-20261027`
+**Base/main:** `d052b51db38b8007cecc317e7ab90b1b8dc598d2` (PR #2 merged). The owner reviews and merges this closeout PR; do not change `main` directly.
+**Phase status:** Phase 3 remains accepted. Phase 4's owner-directed live run completed on `main` at [run #40569785573](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40569785573). The pipeline is accepted for manual-only use, not for scheduled monitoring: Riot returned 183 role links but no complete-listing evidence; CD PROJEKT RED and Naughty Dog need adapter review; Santa Monica Studio remains manual-review-only. Scheduled runs, public publishing, and Pages deployment remain disabled. Frontend CI still has a separate Prettier blocker in `src/lib/studios/catalog.mjs`.
 
 ## Working agreement and approval scope
 
-- The owner approves commits and pushes to `stabilize/baseline-fixes` for the listed scope. Do not ask before each in-scope commit. Build and report each item separately.
-- Open one PR when Step 1 is complete or any remaining issue is explicitly blocked; then stop and let the owner merge.
-- Not approved without asking: direct changes to `main`; live scans or workflow dispatch; enabling schedules; publishing data or deploying Pages; changing repository visibility; force-pushes or history rewrites; deleting branches; dependencies outside scope; or changing secrets/workflow permissions.
-- Keep `discovery-state` unchanged. Do not run another live scan, publish data, or enable schedules. Keep scheduled discovery disabled.
+- The stabilization PR was merged; this follow-up contains only evidence-backed closeout documentation. Keep this work on `docs/phase4-closeout-20261027` and let the owner merge the resulting PR.
+- One owner-directed live run was explicitly authorized and completed: [run #40569785573](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40569785573). Do not run another scan or dispatch another workflow without renewed explicit owner authorization.
+- Not approved: direct changes to `main`; enabling schedules; publishing data or deploying Pages; changing repository visibility; force-pushes/history rewrites; deleting branches; dependencies outside scope; or secrets/workflow-permission changes.
+- Do not manually alter `discovery-state`. The approved workflow updated it through its isolated persistence job. The repository is public, so this branch must contain only public role observations and operational state—never candidate data.
+
 - Update this file in every implementation commit and report CI for each commit. Commit after each completed item so progress survives interruptions.
 - Repository is public. Do not commit personal data, contact details, resumes, profile details, private drafts/application records, credentials, tokens, or keys.
 - The owner accepts the GitHub write tool's default commit author for this repository; no personal data should be added to file contents. Check every commit for sensitive content before pushing.
@@ -27,16 +27,28 @@
 - [x] Item 6: moved implementation into `fetch.py`, `adapters.py`, `state.py`, and `projection.py`; `pipeline.py` now re-exports the prior API as a compatibility facade, and no existing test/import was edited.
 - [x] Item 7: `docs/LOCAL_DEVELOPMENT.md` now records 31 npm tests and the actual `test-results/browser-acceptance-report.md` path; the duplicate ADR is renumbered to ADR-023; stale branch-state/visibility claims are corrected; the Phase 2 browser workflow no longer triggers on a Phase 3 branch. `DECISIONS.md` records accepted default Gmail commit metadata, defers Pages hosting to Phase 8, and defers speculative routes.
 - [x] Item 8: added the branch-cleanup proposal below using read-only branch comparisons against `main` at `f9a9cf6`. The two temporary branches with unique commits are preserved for review. No branch was deleted or changed.
-- [blocked] Step 1 exit: PR [#2](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/2) is open and unmerged. Items 1 and 3–8 are complete; item 2 remains explicitly blocked on Prettier formatting in `catalog.mjs`. Discovery fixtures, frontend tests, typecheck, and build pass; overall Frontend CI remains red for that formatting check.
+- [blocked] Step 1 exit: PR [#2](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/2) is merged, but item 2 remains blocked on Prettier formatting in `src/lib/studios/catalog.mjs`. Discovery fixtures, frontend tests, typecheck, and build have passed; overall Frontend CI remains red for that formatting check. Track and fix this before relying on the frontend CI gate for Phase 5.
 
 ## Phase 4 acceptance criteria
 
-- [ ] Fixture tests cover new, updated, closed, stale, and blocked cases.
-- [ ] A failed fetch never closes a role.
-- [ ] The public projection never publishes a role as `announced` without a verifiable closure path.
-- [ ] The projection contains only allowlisted public fields.
-- [ ] The schedule stays disabled.
-- [ ] Owner action after Step 1 is merged: one manual live run on main to check CD PROJEKT RED and Naughty Dog. This is an owner follow-up, not authorized for this work session.
+- [x] Fixture tests cover new, updated, closed, stale, blocked, and link-only `last-seen` behavior; 36 discovery fixture tests passed in the live workflow.
+- [x] A failed fetch or missing role link never closes a role; CD PROJEKT RED and Naughty Dog were flagged for review rather than treated as empty listings.
+- [x] Link-only roles use `last-seen`, not `announced`; absence from an incomplete listing cannot close them.
+- [x] The public projection contains only the exact 17-field allowlist and excludes private candidate/application fields.
+- [x] Scheduled execution remains disabled.
+- [x] The owner-directed manual live run was completed on `main` at [run #40569785573](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40569785573).
+
+**Acceptance boundary:** Phase 4 is accepted for manual-only, best-effort monitoring with explicit source limitations. The workflow run succeeded operationally, but it did not establish complete four-studio coverage. Do not enable a schedule or publish this projection until adapter coverage, freshness semantics, and the required approvals have been reviewed.
+
+## Phase 4 live-run findings (2026-10-27)
+
+- Commit: `d052b51db38b8007cecc317e7ab90b1b8dc598d2`; [workflow run #40569785573](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40569785573) completed successfully, including the scan, sanitized-artifact upload, and isolated state-persistence job.
+- CD PROJEKT RED: `needs-review`, 0 links, `no-matching-role-links`; no closure inference.
+- Naughty Dog: `needs-review`, 0 links, `no-matching-role-links`; no closure inference.
+- Santa Monica Studio: `needs-review`, 0 links, `adapter-required`; it remains manual-review-only.
+- Riot Games: `success`, 183 links extracted, `listing_complete=false`. The observed records are useful role leads, not proof that the source listing was exhaustive or that roles are currently open.
+- The projection contains 185 Riot records: 183 returned in this run plus two previously recorded roles preserved because link-only listing absence cannot establish closure. All 185 have status `last-seen`. A ten-record structural sample check found no duplicate IDs or missing titles/URLs; sampled URLs use the configured HTTPS Riot host/path. This is a structural check, not a claim that every destination was freshly live-verified.
+- Projection shape verified: each record contains exactly `id`, `studioId`, `studioName`, `title`, `url`, `locations`, `employmentType`, `datePosted`, `validThrough`, `status`, `sourceUrl`, `firstSeenAt`, `lastSeenAt`, `lastChangedAt`, `observedAt`, and `contentHash`. The generated projection was an Actions artifact only; it was not committed, published, or deployed.
 
 ## Phase exit checklist from IMPLEMENTATION_PLAN.md
 
@@ -61,11 +73,14 @@
 - [x] Validation rejects invalid IDs, duplicate names, unsupported fields/statuses, unsafe URLs, broken references, and verified routes without matching evidence.
 
 ### Phase 4 — GitHub Actions discovery
-- [ ] Fixture tests cover new/updated/closed/stale/blocked behavior, including link-only `last-seen` semantics.
-- [ ] Failed fetches never close roles; link-only roles use `last-seen` and are never closed by absence.
-- [ ] Projection uses only approved public fields.
-- [ ] Schedule stays disabled pending owner acceptance.
-- [ ] Owner runs the agreed single manual verification after merge.
+
+- [x] Fixture tests cover new/updated/closed/stale/blocked behaviors, link-only `last-seen` semantics, and conservative failure handling.
+- [x] Failed sources do not cause role closure; explicit closure/expiry evidence is required for link-only roles.
+- [x] The public projection validates exact allowlisted keys and no private application fields.
+- [x] One manual live run was reviewed on `main`; see the run findings above.
+- [x] Schedule remains disabled.
+- [ ] Complete automated coverage for all four studios. CD PROJEKT RED and Naughty Dog currently need role-link adapter review, and Santa Monica Studio needs a permitted adapter; this is an explicit limitation, not a successful all-studio crawl.
+
 
 ### Phase 5 — Studio research and matching UI
 - [ ] User can research an opportunity and understand why it may be relevant.
@@ -117,12 +132,12 @@ Baseline `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`:
 - Pipeline module boundaries: keep refactor behavior-preserving; existing tests must pass unchanged.
 - Pages hosting decision is deferred to Phase 8; speculative routes are deferred.
 - Branch cleanup is review-only. Do not delete branches.
-- After the owner merges Step 1, Phase 4 acceptance requires the single owner-directed manual run described above; schedules remain disabled.
+- The one owner-directed manual run is complete. Do not repeat it without explicit authorization; schedules, publication, and deployment remain disabled.
 
 
 ## Proposed branch cleanup (review-only; no branches deleted)
 
-All ahead/behind figures below are read-only comparisons against `main` at `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`. This is a proposal only; no branch ref or visibility setting has been changed.
+The ahead/behind figures below were collected against `main` at `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`, before PR #2 was merged. They are now stale and must be recomputed before any future cleanup. This remains a review-only proposal; no branch ref or visibility setting has been changed.
 
 ### Duplicate or fully merged candidates for owner review
 
@@ -147,4 +162,4 @@ The owner may consider deleting these stale branches after confirming no externa
 
 ## Next action:
 
-Owner review of [PR #2](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/2); do not merge from this workflow.
+Owner review and merge of the Phase 4 closeout PR. Next implementation milestone: Phase 5 build-time integration of a reviewed, allowlisted projection; no runtime career-site fetches.

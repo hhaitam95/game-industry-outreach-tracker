@@ -216,3 +216,12 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Context:** Step 1 is being developed on a public repository. The owner approved in-scope commits and explicitly accepted the GitHub write tool's default commit-author metadata for this repository, including the existing Gmail author metadata in commit history.
 - **Decision:** Use the default GitHub write-tool author for this repository; do not embed email addresses or personal contact details in tracked files. Defer Pages hosting/source-target selection and any deployment or publishing setup to Phase 8. Defer speculative-application routes until a later, explicitly scoped and source-backed phase; do not add inferred or unsupported routes. Schedules, live scans, publishing, deployment, and visibility changes remain outside the current approval.
 - **Consequences:** Stabilization may continue with synthetic fixtures and verified public source links, without expanding the public-data surface or making irreversible repository changes.
+
+
+## ADR-026 — Accept Phase 4 for manual-only monitoring with explicit coverage limits
+
+- **Date:** 2026-10-27
+- **Status:** Accepted
+- **Context:** The Phase 4 pipeline passed its fixture suite and a single owner-directed live run on merged `main` commit `d052b51` ([run #40569785573](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40569785573)). The run produced useful Riot Games role links, but the careers listing did not prove completeness. CD PROJEKT RED and Naughty Dog returned no matching configured role links, and Santa Monica Studio still requires a permitted adapter.
+- **Decision:** Accept Phase 4 for manual-only best-effort monitoring. Keep link-only roles at `last-seen`; never close roles due to an incomplete or failed source; retain exact public-field allowlisting; and keep schedules, publication, and deployment disabled. Treat unsuccessful/unparseable sources as `needs-review`, not empty listings. Phase 5 consumes a reviewed, allowlisted projection bundled at build time and does not fetch career sources at runtime.
+- **Consequences:** The current scan is not a comprehensive four-studio result and does not prove that any projected role is currently open. Source-specific adapter review remains needed. The public projection exists as a short-lived Actions artifact only; the separate deployment/publication decision remains deferred to Phase 8.
