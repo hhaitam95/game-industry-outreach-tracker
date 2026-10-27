@@ -2,7 +2,7 @@
 
 A personal, evidence-driven workspace for discovering video game studios and opportunities worldwide, assessing transferable technical skills, preparing tailored outreach, and tracking application outcomes.
 
-> **Current status:** Phase 4 is accepted for manual-only, best-effort discovery. Phase 5a now includes 15 clearly synthetic sample roles, a strict snapshot validator, title parsing/classification, freshness and filters, and `npm run data:sync`. The generated `src/data/public-opportunities.json` is gitignored; the authoritative generated projection is stored on `discovery-state`, not `main`. Frontend CI and discovery fixtures pass on [commit 78d2fd8](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/78d2fd8e5f08b2efd3446579cae6e765bc7c3a06). The app never fetches career sources at runtime. The discovery workflow remains manual `workflow_dispatch` only, with no schedule; the owner will run it once after merge. Publishing and Pages deployment remain disabled. This is a public repository: private records, resumes, contact details and credentials must never be committed.
+> **Project status and verification evidence:** [STATUS.md](STATUS.md) is the single source of truth for the current phase, review state, checks, and next action. This public repository must never contain private candidate records, resumes, contact details, credentials, or secrets.
 
 ## Current frontend shell
 

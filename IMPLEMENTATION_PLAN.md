@@ -14,6 +14,20 @@
 - Test parsing, state changes, public-data sanitization and browser-only privacy behavior before real use.
 - Ask explicitly before commits and report diffs/tests.
 
+## Standing engineering standards and phase gates
+
+The binding implementation rules are in [AGENTS.md](AGENTS.md), with the policy recorded in [DECISIONS.md](DECISIONS.md). They apply to every remaining phase and every cohesive unit of work:
+
+1. **Before work:** Publish a short numbered design note in the decision log (goal, boundaries, contracts, failure modes, test plan, rollback) and a clear definition of done before code.
+2. **Design and architecture:** Keep pure domain logic independent of I/O and UI; separate schema/validation, domain logic, adapters and components. Prefer typed, single-responsibility modules around 300 lines.
+3. **One data contract:** Use one versioned schema file for each boundary; every consumer reads it and each consuming language has contract tests. Strictly validate and fail closed with explicit public-field allowlists.
+4. **Derive, do not duplicate:** Derive flags, labels, counts and coverage from provenance/data. Do not duplicate validation, introduce manual origin flags, or present parsed clues as source facts.
+5. **Evidence-led tests:** Cover success, invalid input and failure-preservation paths with deterministic tests, including reviewed public-data golden cases and synthetic fixtures. Test complex UI logic at component level.
+6. **Quality gates:** Read and follow configured style rules before editing. Every configured formatter, linter, type checker and test runner must run in CI or be removed. Never push diagnostic commits; inspect full logs, fix failures together, and allow at most two CI cycles per unit before documenting the simplest safe fallback.
+7. **Review and docs:** Avoid unrelated formatting/refactors, keep PRs cohesive and squash-merge, self-review the complete diff, and update behaviour docs in the same commit. STATUS.md alone tracks volatile state and verification evidence.
+8. **Privacy and recovery:** Do not commit secrets/personal data. Make operations idempotent and failures visible; preserve the last known state under uncertainty.
+9. **Closeout:** After work, document deviations and reasons. Report actual checks/results and limitations; a phase is done only when relevant CI is green for the final commit, new logic is tested, docs are current, and the diff contains no secrets or personal data.
+
 ## Phase 0 — Requirements and architecture documentation
 
 ### Scope
@@ -30,7 +44,7 @@
 
 ## Phase 1 — Static frontend shell and safe local project setup
 
-**Implementation status:** Implemented on `feat/static-frontend-shell`. Standard GitHub Actions run 40143560612 passed formatting, lint, type checks, nine unit tests, dependency audit, the repository-subpath production build, and a Vite Preview HTTP smoke test for the HTML shell and generated JavaScript/CSS assets. Visual browser review was not part of Phase 1 acceptance.
+**Implementation status:** Implemented; current verification evidence and remaining limitations are maintained in [STATUS.md](STATUS.md).
 
 ### Scope
 - Initialize the chosen frontend toolchain (proposed TypeScript + Vite, lightweight component architecture).
@@ -47,7 +61,7 @@
 
 ## Phase 2 — Browser-local private data foundation
 
-**Implementation status:** Implemented and browser-acceptance-tested on `feat/browser-local-private-data`. Standard cloud CI and the automated dummy-data browser test pass. The browser test verifies vault creation, save/reload/lock/unlock, encrypted IndexedDB/export contents, backup restore, and the imported passphrase.
+**Implementation status:** Implemented; current verification evidence and remaining limitations are maintained in [STATUS.md](STATUS.md).
 
 ### Scope
 - Define local profile, resume metadata, draft and application record schemas.
@@ -64,7 +78,7 @@
 
 ## Phase 3 — Studio and opportunity data model
 
-**Implementation status:** Implemented and accepted on `feat/phase3-manual-studio-catalog`. Standard CI passed run [40340001102](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340001102), and combined Phase 2/3 browser acceptance passed run [40340000974](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340000974), both for code commit `843d6c38954ed381f3cc30ba53f25c991ecfdf47`.
+**Implementation status:** Implemented; current verification evidence and remaining limitations are maintained in [STATUS.md](STATUS.md).
 
 ### Scope
 - Define canonical studio, site, ownership, game, credit, opportunity, application-route, source-evidence and change-event schemas.
@@ -84,7 +98,7 @@
 
 ## Phase 4 — Manual GitHub Actions discovery
 
-**Implementation status:** Accepted for manual-only, best-effort monitoring after the reviewed live run [#40569785573](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40569785573) on `main` commit `d052b51`. The run persisted the validated operational state and uploaded a sanitized projection artifact. Coverage is still limited: Riot returned 183 links without complete-listing evidence; CD PROJEKT RED and Naughty Dog returned `needs-review/no-matching-role-links`; Santa Monica Studio remains `adapter-required`. The schedule and publication are intentionally disabled.
+**Implementation status:** Accepted for manual-only best-effort monitoring, with source limitations tracked in [STATUS.md](STATUS.md).
 
 ### Scope
 - Maintain a curated registry of official career URLs and registry-owned host/path allowlists.
@@ -105,7 +119,7 @@
 
 ## Phase 5a — Studio research and snapshot explorer
 
-**Implementation status:** Core logic, UI, a 15-role synthetic fallback, a shared snapshot validator, and the local sync CLI are implemented on `feat/phase5-studio-research`. Generated role data is gitignored locally and authoritative on `discovery-state`; PR browser acceptance is the final review gate.
+**Implementation status:** The research UI, snapshot validation/sync path, and discovery-state persistence flow are implemented; current review and verification state live in [STATUS.md](STATUS.md).
 
 ### Scope
 - Preserve sourced studio profiles, verified careers routes, and evidence; display per-studio observed-link coverage without equating no observed links with no vacancies.
@@ -205,6 +219,6 @@ These features require the candidate profile and an active browser vault session
 - External sites are accessed within terms and reasonable rate limits.
 - Documentation and HANDOFF.md are updated at each meaningful milestone.
 
-## Immediate next coding task
+## Next phase entry gate
 
-Phase 5: design the build-time input path for the allowlisted discovery projection and implement the studio/opportunity research UI with source and freshness labels. Start with a reviewed or deterministically generated public snapshot after checking its fields; do not add runtime fetches from official career sites, schedule discovery, publish artifacts, or deploy Pages. Resolve the outstanding Prettier failure in `src/lib/studios/catalog.mjs` so frontend CI is usable as a gate.
+Phase 5b remains deferred until Phase 5a has been accepted. Before starting any new phase or cohesive unit, publish its design note and definition of done before code, then record deviations after implementation. Current branch/review state, verification evidence and next action are maintained only in [STATUS.md](STATUS.md).

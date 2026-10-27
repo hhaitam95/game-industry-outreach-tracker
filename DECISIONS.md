@@ -243,3 +243,18 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Context:** The public opportunity projection is generated from owner-triggered discovery runs. Committing the generated snapshot to `main` would mix generated observations with reviewed application source and force generated data into ordinary code review. The frontend is static and must not fetch role data from career websites at runtime.
 - **Decision:** Keep `src/data/public-opportunities.json` as a gitignored local build input. The tracked `src/data/sample-public-opportunities.json` is the deterministic fallback for tests and for builds without a synced projection. The `data:sync` command fetches the validated projection from `discovery-state/public/public-opportunities.json` (or accepts a local file/HTTPS URL), validates before writing, and does not commit it. The manual discovery workflow writes the validated generated projection to `public/public-opportunities.json` on `discovery-state`, alongside operational monitoring state. Keep the discovery workflow on `workflow_dispatch` only; do not add a schedule.
 - **Consequences:** `main` tracks code and the explicit sample only, not generated role observations. The UI says “Sample data - not a real scan” when the synced file is absent. Fresh data becomes available to a local build after the owner runs `npm run data:sync`; the app itself performs no remote data fetch. Future scheduling requires separate approval.
+
+
+## ADR-029 — Standing engineering standards for remaining phases
+
+- **Date:** 2026-10-27
+- **Status:** Accepted
+- **Goal:** Make implementation quality predictable across every remaining phase, starting with the in-flight Phase 5a review.
+- **Boundaries:** Apply the standards to engineering process and implementation; do not implicitly expand product scope, merge PRs, run live discovery, enable schedules, publish, deploy, or alter permissions.
+- **Contracts and architecture:** One versioned schema per boundary, shared by consumers and tested in every consuming language; pure domain logic, then I/O adapters, then UI.
+- **Failure handling:** Strict validation fails closed; operations are idempotent; failed or uncertain input preserves the last known good state and raises a visible review signal.
+- **Test plan:** Deterministic success/negative/failure tests, public-data golden fixtures, synthetic fixtures, component tests for meaningful UI logic, and CI checks tied to the final commit.
+- **Delivery:** Design note and definition of done before each phase/unit; cohesive PRs, self-reviewed diff, same-commit behaviour docs, and a single STATUS.md source for volatile verification state.
+- **CI rule:** Read configuration before editing; do not use CI as a formatter/linter REPL. Fix all logged failures in one planned change and allow at most two CI cycles per unit.
+- **Rollback:** Revert the cohesive change while preserving existing source data, discovery state, branches, and open review decisions.
+- **Closeout:** Record deviations and reasons; report verified evidence and limitations without claiming unobserved success.
