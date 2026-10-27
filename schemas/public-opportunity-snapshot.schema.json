@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Public opportunity snapshot",
+  "description": "Versioned allowlisted public data contract. The x-uniqueBy keyword requires unique opportunity IDs within each snapshot.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "generatedAt",
+    "opportunities"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "opportunities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/publicOpportunity"
+      },
+      "x-uniqueBy": "id"
+    }
+  },
+  "$defs": {
+    "publicOpportunity": {
+      "title": "Public opportunity record",
+      "type": "object",
+      "required": [
+        "id",
+        "studioId",
+        "studioName",
+        "title",
+        "url",
+        "locations",
+        "employmentType",
+        "datePosted",
+        "validThrough",
+        "status",
+        "sourceUrl",
+        "firstSeenAt",
+        "lastSeenAt",
+        "lastChangedAt",
+        "observedAt",
+        "contentHash"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "studioId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "studioName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "employmentType": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "datePosted": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "validThrough": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "announced",
+            "last-seen",
+            "stale",
+            "needs-review",
+            "unavailable"
+          ]
+        },
+        "sourceUrl": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "firstSeenAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastSeenAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastChangedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "observedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "contentHash": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

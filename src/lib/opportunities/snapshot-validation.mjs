@@ -1,124 +1,94 @@
+import publicSnapshotSchema from "../../../schemas/public-opportunity-snapshot.schema.json" with { type: "json" };
+
 /** @typedef {"announced" | "last-seen" | "stale" | "needs-review" | "unavailable"} PublicOpportunityStatus */
+/** @typedef {{ id: string, studioId: string, studioName: string, title: string, url: string, locations: string[], employmentType: string[], datePosted: string | null, validThrough: string | null, status: PublicOpportunityStatus, sourceUrl: string, firstSeenAt: string, lastSeenAt: string, lastChangedAt: string, observedAt: string, contentHash: string }} PublicOpportunity */
+/** @typedef {{ schemaVersion: 1, generatedAt: string, opportunities: PublicOpportunity[] }} PublicOpportunitySnapshot */
 
-/** @typedef {{
- * id: string,
- * studioId: string,
- * studioName: string,
- * title: string,
- * url: string,
- * locations: unknown[],
- * employmentType: unknown[],
- * datePosted: string | null,
- * validThrough: string | null,
- * status: PublicOpportunityStatus,
- * sourceUrl: string,
- * firstSeenAt: string,
- * lastSeenAt: string,
- * lastChangedAt: string,
- * observedAt: string,
- * contentHash: string
- * }} PublicOpportunity */
+const ROOT_SCHEMA = /** @type {Record<string, any>} */ (publicSnapshotSchema);
+const OPPORTUNITY_SCHEMA = ROOT_SCHEMA.$defs.publicOpportunity;
 
-/** @typedef {{
- * schemaVersion: 1,
- * generatedAt: string,
- * opportunities: PublicOpportunity[]
- * }} PublicOpportunitySnapshot */
+export const PUBLIC_OPPORTUNITY_FIELDS = Object.freeze(Object.keys(OPPORTUNITY_SCHEMA.properties));
+export const PUBLIC_OPPORTUNITY_STATUSES = Object.freeze([...OPPORTUNITY_SCHEMA.properties.status.enum]);
 
-export const PUBLIC_OPPORTUNITY_FIELDS = Object.freeze([
-  "id",
-  "studioId",
-  "studioName",
-  "title",
-  "url",
-  "locations",
-  "employmentType",
-  "datePosted",
-  "validThrough",
-  "status",
-  "sourceUrl",
-  "firstSeenAt",
-  "lastSeenAt",
-  "lastChangedAt",
-  "observedAt",
-  "contentHash",
-]);
-export const PUBLIC_OPPORTUNITY_STATUSES = Object.freeze([
-  "announced",
-  "last-seen",
-  "stale",
-  "needs-review",
-  "unavailable",
-]);
-const SNAPSHOT_FIELDS = Object.freeze(["schemaVersion", "generatedAt", "opportunities"]);
-const STATUS_SET = new Set(PUBLIC_OPPORTUNITY_STATUSES);
-const FIELD_SET = new Set(PUBLIC_OPPORTUNITY_FIELDS);
+function resolveSchemaReference(reference) {
+  if (!reference.startsWith("#/")) throw new Error("Unsupported public snapshot schema reference.");
+  return reference.slice(2).split("/").map((part) => part.replaceAll("~1", "/").replaceAll("~0", "~"))
+    .reduce((current, key) => current[key], ROOT_SCHEMA);
+}
 
-/** @param {unknown} value @param {string} label */
-function assertTimestamp(value, label) {
-  if (typeof value !== "string" || !value.trim() || !Number.isFinite(Date.parse(value))) {
-    throw new Error(label + " must be a parseable date or timestamp.");
+function matchesType(value, expected) {
+  const matches = {
+    object: value !== null && typeof value === "object" && !Array.isArray(value),
+    array: Array.isArray(value), string: typeof value === "string", integer: Number.isInteger(value),
+    number: typeof value === "number" && Number.isFinite(value), boolean: typeof value === "boolean", null: value === null,
+  };
+  return matches[expected] === true;
+}
+
+function validateFormat(value, format, label) {
+  if (format === "date-time") {
+    const rfc3339 = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/;
+    if (!rfc3339.test(value) || !Number.isFinite(Date.parse(value))) throw new Error(label + " must be an RFC 3339 date-time with a timezone.");
+  } else if (format === "date") {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) throw new Error(label + " must be an ISO date.");
+    const parsed = new Date(value + "T00:00:00.000Z");
+    if (!Number.isFinite(parsed.getTime()) || parsed.toISOString().slice(0, 10) !== value) throw new Error(label + " must be a valid ISO date.");
+  } else if (format === "uri") {
+    let parsed;
+    try { parsed = new URL(value); } catch { throw new Error(label + " must be a valid HTTPS URL."); }
+    if (parsed.protocol !== "https:" || !parsed.hostname || parsed.username || parsed.password) throw new Error(label + " must be an HTTPS URL without embedded credentials.");
   }
 }
 
-/** @param {unknown} value @param {string} label */
-function assertHttpsUrl(value, label) {
-  if (typeof value !== "string" || !value.trim()) throw new Error(label + " must be an HTTPS URL.");
-  let parsed;
-  try {
-    parsed = new URL(value);
-  } catch {
-    throw new Error(label + " must be a valid HTTPS URL.");
+/** Minimal interpreter for the JSON Schema keywords used by this public snapshot contract. */
+/** @param {unknown} value @param {Record<string, any>} schema @param {string} label */
+function validateAgainstSchema(value, schema, label) {
+  if (schema.$ref) {
+    validateAgainstSchema(value, resolveSchemaReference(schema.$ref), label);
+    return;
   }
-  if (parsed.protocol !== "https:" || parsed.hostname.length === 0 || parsed.username || parsed.password) {
-    throw new Error(label + " must be an HTTPS URL without embedded credentials.");
+  if (schema.type) {
+    const expectedTypes = Array.isArray(schema.type) ? schema.type : [schema.type];
+    if (!expectedTypes.some((type) => matchesType(value, type))) throw new Error(label + " has an invalid type.");
   }
-}
-
-/** @param {unknown} value @param {readonly string[]} keys @param {string} label @returns {asserts value is Record<string, unknown>} */
-function assertExactKeys(value, keys, label) {
-  if (value === null || typeof value !== "object" || Array.isArray(value)) {
-    throw new Error(label + " must be an object.");
+  if ("const" in schema && value !== schema.const) throw new Error(label + " has an unsupported constant value.");
+  if (schema.enum && !schema.enum.includes(value)) throw new Error(label + " has an unsupported value.");
+  if (typeof value === "string") {
+    if (schema.minLength !== undefined && value.length < schema.minLength) throw new Error(label + " must not be empty.");
+    if (schema.pattern && !new RegExp(schema.pattern).test(value)) throw new Error(label + " does not match its required pattern.");
+    if (schema.format) validateFormat(value, schema.format, label);
   }
-  const actual = Object.keys(value);
-  if (actual.length !== keys.length || actual.some((key) => !keys.includes(key))) {
-    throw new Error(label + " has missing or unsupported fields.");
+  if (Array.isArray(value) && schema.items) {
+    value.forEach((item, index) => validateAgainstSchema(item, schema.items, label + "[" + index + "]"));
+    if (schema["x-uniqueBy"]) {
+      const key = schema["x-uniqueBy"];
+      const seen = new Set();
+      for (const item of value) {
+        if (item !== null && typeof item === "object" && !Array.isArray(item)) {
+          const identity = item[key];
+          if (seen.has(identity)) throw new Error("Duplicate public opportunity ID: " + String(identity));
+          seen.add(identity);
+        }
+      }
+    }
+  }
+  if (value !== null && typeof value === "object" && !Array.isArray(value) && schema.properties) {
+    for (const key of schema.required ?? []) {
+      if (!Object.hasOwn(value, key)) throw new Error(label + " has missing or unsupported fields.");
+    }
+    if (schema.additionalProperties === false) {
+      const allowed = new Set(Object.keys(schema.properties));
+      if (Object.keys(value).some((key) => !allowed.has(key))) throw new Error(label + " has missing or unsupported fields.");
+    }
+    for (const [key, child] of Object.entries(value)) {
+      if (Object.hasOwn(schema.properties, key)) validateAgainstSchema(child, schema.properties[key], label + "." + key);
+    }
   }
 }
 
 /** @param {unknown} input @returns {PublicOpportunitySnapshot} */
 export function validateOpportunitySnapshot(input) {
-  assertExactKeys(input, SNAPSHOT_FIELDS, "Opportunity snapshot");
-  if (input.schemaVersion !== 1) throw new Error("Unsupported opportunity snapshot schema version.");
-  assertTimestamp(input.generatedAt, "Snapshot generatedAt");
-  if (!Array.isArray(input.opportunities)) throw new Error("Snapshot opportunities must be a list.");
-
-  const seenIds = new Set();
-  input.opportunities.forEach((entry, index) => {
-    const label = "Opportunity at index " + index;
-    assertExactKeys(entry, PUBLIC_OPPORTUNITY_FIELDS, label);
-    for (const key of Object.keys(entry)) {
-      if (!FIELD_SET.has(key)) throw new Error(label + " contains an unsupported field.");
-    }
-    if (typeof entry.id !== "string" || !entry.id.trim()) throw new Error(label + " ID must be non-empty text.");
-    if (seenIds.has(entry.id)) throw new Error("Duplicate public opportunity ID: " + entry.id);
-    seenIds.add(entry.id);
-    if (typeof entry.studioId !== "string" || !entry.studioId.trim())
-      throw new Error(label + " studioId must be non-empty text.");
-    if (typeof entry.studioName !== "string" || !entry.studioName.trim())
-      throw new Error(label + " studioName must be non-empty text.");
-    if (typeof entry.title !== "string" || !entry.title.trim())
-      throw new Error(label + " title must be non-empty text.");
-    if (typeof entry.status !== "string" || !STATUS_SET.has(entry.status)) {
-      throw new Error(label + " has an unsupported public opportunity status.");
-    }
-    assertHttpsUrl(entry.url, label + " url");
-    assertHttpsUrl(entry.sourceUrl, label + " sourceUrl");
-    if (!Array.isArray(entry.locations)) throw new Error(label + " locations must be a list.");
-    if (!Array.isArray(entry.employmentType)) throw new Error(label + " employmentType must be a list.");
-    assertTimestamp(entry.lastSeenAt, label + " lastSeenAt");
-  });
-
+  validateAgainstSchema(input, ROOT_SCHEMA, "Opportunity snapshot");
   return /** @type {PublicOpportunitySnapshot} */ (input);
 }
 
