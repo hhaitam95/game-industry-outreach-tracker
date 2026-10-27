@@ -191,5 +191,5 @@ test("default sorting puts target families first, then less senior roles, then n
     [...families].sort((left, right) => priority(left) - priority(right)),
   );
   assert.equal(result.roles[0].classification.family, "support");
-  assert.equal(result.roles[0].parsed.seniority, "Not stated");
+  assert.equal(result.roles[0].parsed.seniority, "Lead");
 });

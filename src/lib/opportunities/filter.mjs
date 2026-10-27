@@ -2,7 +2,9 @@ import { classifyRoleFamily, TARGET_ROLE_FAMILIES } from "./classify.mjs";
 import { getRoleFreshness } from "./freshness.mjs";
 import { parseTitle, SENIORITY_ORDER } from "./parse.mjs";
 
-/** @typedef {Record<string, any> & {
+/** @typedef {Record<string, any> & {title: string, studioId: string, studioName: string, lastSeenAt: string}} OpportunitySourceRecord */
+
+/** @typedef {OpportunitySourceRecord & {
  * parsed: import("./parse.mjs").ParsedTitle,
  * classification: import("./classify.mjs").RoleClassification,
  * freshness: ReturnType<typeof getRoleFreshness>
@@ -72,7 +74,7 @@ function matchesRoles(roles, options, omittedFacet) {
 /**
  * Filter and rank the bundled snapshot. Facet counts are recomputed while
  * ignoring that facet's own selection, but respecting all other filters.
- * @param {Array<Record<string, any>>} opportunities
+ * @param {OpportunitySourceRecord[]} opportunities
  * @param {OpportunityFilterOptions} [options]
  * @returns {{roles: PreparedOpportunity[], totalCount: number, counts: Record<string, any>}}
  */

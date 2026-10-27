@@ -2,6 +2,7 @@ import { spawnSync } from "node:child_process";
 import test from "node:test";
 
 const paths = [
+  "src/components/OpportunityExplorer.tsx",
   "src/lib/opportunities/snapshot-validation.mjs",
   "scripts/sync-public-snapshot.mjs",
   "tests/sync-public-snapshot.test.mjs",
