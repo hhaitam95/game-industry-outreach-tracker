@@ -3,7 +3,7 @@
 **Last updated:** 2026-10-27
 **Current phase:** Step 1 — Stabilization, before Phase 4 acceptance.
 **Working branch:** `stabilize/baseline-fixes`
-**Last verified branch HEAD before quote-style formatting follow-up:** `c0b2180c468a3ff5b612853b31c64ac3433531ad`
+**Last verified branch HEAD before registry error-message fix:** `bca9fb6d94db2854917c8b49ddb918c787b4c018`
 **Base/main:** `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`. Phase 1–4 implementation stack is present on main. Do not change main directly; the owner merges the eventual PR.
 **Phase status:** Phase 3 is accepted. Phase 4 has been merged but is not accepted. One prior live run completed and persisted state to `discovery-state`; source coverage/closure behavior still need acceptance. No further live run is authorized by this task.
 
