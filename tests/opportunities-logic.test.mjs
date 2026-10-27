@@ -185,7 +185,10 @@ test("default sorting puts target families first, then less senior roles, then n
     const index = TARGET_ROLE_FAMILIES.indexOf(family);
     return index === -1 ? TARGET_ROLE_FAMILIES.length : index;
   };
-  assert.deepEqual(families, [...families].sort((left, right) => priority(left) - priority(right)));
+  assert.deepEqual(
+    families,
+    [...families].sort((left, right) => priority(left) - priority(right)),
+  );
   assert.equal(result.roles[0].classification.family, "support");
   assert.equal(result.roles[0].parsed.seniority, "Not stated");
 });

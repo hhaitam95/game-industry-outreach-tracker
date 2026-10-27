@@ -119,13 +119,7 @@ export const ROLE_FAMILY_RULES = [
   },
 ];
 
-export const TARGET_ROLE_FAMILIES = Object.freeze([
-  "support",
-  "qa-test",
-  "build-release",
-  "devops-sre",
-  "tools-devex",
-]);
+export const TARGET_ROLE_FAMILIES = Object.freeze(["support", "qa-test", "build-release", "devops-sre", "tools-devex"]);
 
 /**
  * Match only phrases that indicate the role family, not broad team words.

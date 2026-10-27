@@ -20,12 +20,7 @@ import { parseTitle, SENIORITY_ORDER } from "./parse.mjs";
  * generatedAt?: string
  * }} OpportunityFilterOptions */
 
-const FAMILY_ORDER = Object.freeze([
-  ...TARGET_ROLE_FAMILIES,
-  "technical-production",
-  "other",
-  "unclassified",
-]);
+const FAMILY_ORDER = Object.freeze([...TARGET_ROLE_FAMILIES, "technical-production", "other", "unclassified"]);
 const SENIORITY_RANK = new Map(SENIORITY_ORDER.map((seniority, index) => [seniority, index]));
 
 /** @param {unknown[]} values */

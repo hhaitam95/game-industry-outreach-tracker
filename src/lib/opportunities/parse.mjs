@@ -75,7 +75,10 @@ function isCountryAlias(value) {
 
 /** @param {string} suffix @returns {ParsedLocation | null} */
 function parseLocationSuffix(suffix) {
-  const parts = suffix.split(",").map((part) => part.trim()).filter(Boolean);
+  const parts = suffix
+    .split(",")
+    .map((part) => part.trim())
+    .filter(Boolean);
   if (parts.length === 1 && CITY_STATES.has(parts[0].toLowerCase())) {
     const city = parts[0];
     const country = normalizeCountry(city);
