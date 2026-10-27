@@ -34,7 +34,7 @@
 - [x] Fixture tests cover new, updated, closed, stale, blocked, and link-only `last-seen` behavior; 36 discovery fixture tests passed in the live workflow.
 - [x] A failed fetch or missing role link never closes a role; CD PROJEKT RED and Naughty Dog were flagged for review rather than treated as empty listings.
 - [x] Link-only roles use `last-seen`, not `announced`; absence from an incomplete listing cannot close them.
-- [x] The public projection contains only the exact 17-field allowlist and excludes private candidate/application fields.
+- [x] The public projection contains only the exact 16-field allowlist and excludes private candidate/application fields.
 - [x] Scheduled execution remains disabled.
 - [x] The owner-directed manual live run was completed on `main` at [run #40569785573](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40569785573).
 

@@ -37,7 +37,7 @@ Run [#40569785573](https://github.com/hhaitam95/game-industry-outreach-tracker/a
 | Santa Monica Studio | `needs-review` / `adapter-required` | 0 | Continue manual review until a permitted, reviewed adapter exists |
 | Riot Games | `success`, `listing_complete=false` | 183 | Link extraction works, but listing completeness cannot be inferred |
 
-The generated projection included 185 Riot records: 183 in the current link result plus two earlier observations preserved because absence in a link-only/incomplete listing cannot prove closure. All records are `last-seen`, not claims that a role is currently open. A structural check of ten sample records found no duplicate IDs or missing titles/URLs and confirmed the configured official HTTPS host/path. The projection validates against the exact 17-field allowlist and remained an Actions artifact; it was not committed or published.
+The generated projection included 185 Riot records: 183 in the current link result plus two earlier observations preserved because absence in a link-only/incomplete listing cannot prove closure. All records are `last-seen`, not claims that a role is currently open. A structural check of ten sample records found no duplicate IDs or missing titles/URLs and confirmed the configured official HTTPS host/path. The projection validates against the exact 16-field allowlist and remained an Actions artifact; it was not committed or published.
 
 ## Current limitations and gates
 
