@@ -359,6 +359,39 @@ class ChangeDetectionTests(unittest.TestCase):
 
 
 class BoundaryAndWorkflowTests(unittest.TestCase):
+    def test_shared_schema_accepts_historical_public_golden_records(self):
+        golden_path = ROOT / "tests" / "fixtures" / "public-opportunities" / "real-snapshot-golden.json"
+        golden = json.loads(golden_path.read_text(encoding="utf-8"))
+        validate_public_projection(golden)
+        self.assertEqual(len(golden["opportunities"]), 5)
+        self.assertTrue(all(role["status"] == "last-seen" for role in golden["opportunities"]))
+        self.assertTrue(any("DevOps" in role["title"] for role in golden["opportunities"]))
+
+    def test_python_rejects_the_same_invalid_contract_fixture_as_javascript(self):
+        invalid_path = ROOT / "tests" / "fixtures" / "public-opportunities" / "invalid-status.json"
+        invalid = json.loads(invalid_path.read_text(encoding="utf-8"))
+        with self.assertRaisesRegex(ValueError, "unsupported value"):
+            validate_public_projection(invalid)
+
+    def test_shared_schema_rejects_bad_timestamps_types_and_extra_fields(self):
+        golden_path = ROOT / "tests" / "fixtures" / "public-opportunities" / "real-snapshot-golden.json"
+        golden = json.loads(golden_path.read_text(encoding="utf-8"))
+
+        bad_timestamp = json.loads(json.dumps(golden))
+        bad_timestamp["opportunities"][0]["lastSeenAt"] = "not-a-date"
+        with self.assertRaisesRegex(ValueError, "RFC 3339"):
+            validate_public_projection(bad_timestamp)
+
+        bad_type = json.loads(json.dumps(golden))
+        bad_type["opportunities"][0]["locations"] = "not-an-array"
+        with self.assertRaisesRegex(ValueError, "invalid type"):
+            validate_public_projection(bad_type)
+
+        extra_field = json.loads(json.dumps(golden))
+        extra_field["opportunities"][0]["candidateNotes"] = "must never publish"
+        with self.assertRaisesRegex(ValueError, "missing or unsupported fields"):
+            validate_public_projection(extra_field)
+
     def test_public_projection_is_allowlisted_and_has_no_private_state(self):
         job = parsed_job()
         state = scan_once(empty_state(), source_observation([job]), NOW)

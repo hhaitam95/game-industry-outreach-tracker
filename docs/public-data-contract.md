@@ -10,6 +10,8 @@ The frontend does not fetch career sites or role data at runtime. The sync CLI c
 
 ## Snapshot envelope
 
+The normative schema is `schemas/public-opportunity-snapshot.schema.json` (JSON Schema Draft 2020-12). JavaScript and Python load this file directly; neither consumer maintains a second field or status allowlist. Contract tests in both languages use the same valid and invalid fixtures, alongside the synthetic app fallback.
+
 The JSON root contains exactly these fields:
 
 - `schemaVersion`: integer `1`.
@@ -18,7 +20,7 @@ The JSON root contains exactly these fields:
 
 ## Exact 16-field role allowlist
 
-Each role object contains exactly these fields, matching `PUBLIC_FIELDS` and `validate_public_projection` in `scripts/discovery/projection.py` and the shared JavaScript validator in `src/lib/opportunities/snapshot-validation.mjs`.
+Each role object contains exactly these fields, defined by `$defs.publicOpportunity.properties` in the shared JSON Schema.
 
 | Field | Contract |
 | --- | --- |
@@ -39,7 +41,9 @@ Each role object contains exactly these fields, matching `PUBLIC_FIELDS` and `va
 | `observedAt` | Timestamp of the observation represented by this record. |
 | `contentHash` | Public content fingerprint produced by the projection pipeline. |
 
-The app validator rejects extra/missing root or role fields, unknown statuses, duplicate IDs, invalid HTTPS URLs, bad timestamps and invalid collection shapes. The sync script uses the same JavaScript validator and validates before touching the destination. The persistence job additionally validates the exact public projection through the repository's Python `validate_public_projection` function before writing to `discovery-state`.
+Both validators interpret the shared schema, including exact fields, status enum, collection shapes, RFC 3339 timestamps, ISO dates, HTTPS URLs without credentials, and unique role IDs (`x-uniqueBy`). The sync script uses the JavaScript validator and validates before touching the destination. The persistence job uses the same schema in Python before writing to `discovery-state`.
+
+A historical five-record public-data fixture under `tests/fixtures/public-opportunities/` was captured from a reviewed public scan on 2026-10-27 and reduced to representative records. It exists only as offline contract test data; it is not a complete snapshot and must never be presented as current job availability. An invalid-status fixture is shared between the JavaScript and Python tests.
 
 ## Title-derived clues and provenance
 

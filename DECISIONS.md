@@ -258,3 +258,17 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **CI rule:** Read configuration before editing; do not use CI as a formatter/linter REPL. Fix all logged failures in one planned change and allow at most two CI cycles per unit.
 - **Rollback:** Revert the cohesive change while preserving existing source data, discovery state, branches, and open review decisions.
 - **Closeout:** Record deviations and reasons; report verified evidence and limitations without claiming unobserved success.
+
+
+## ADR-030 — Shared JSON Schema for public opportunity snapshots
+
+- **Date:** 2026-10-27
+- **Status:** Accepted
+- **Goal:** Eliminate duplicated public opportunity field/status definitions across the frontend/sync CLI and discovery runner.
+- **Boundaries:** Standardize validation of the versioned public snapshot envelope and records; do not change the product field allowlist, source collection behavior, or job-status semantics.
+- **Data contract:** `schemas/public-opportunity-snapshot.schema.json` is authoritative for the root, exact 16-field record shape, types, status enum, dates, timestamps, HTTPS URL patterns, and unique record IDs.
+- **Consumers:** JavaScript and Python load the same schema. Their small validators implement only the schema vocabulary used by this contract; they do not declare a second copy of the field/status rules.
+- **Failure modes:** Invalid shape, unsupported status, unsafe URL, duplicate ID, invalid type, or malformed date/time fails closed; sync and persistence preserve last-known-good output on failure.
+- **Test plan:** Both languages validate the same historical public-data golden fixture and reject the same invalid-status fixture, with additional type/date/URL and failure-path cases.
+- **Rollback:** Revert the schema and its consumers/tests/docs together; do not modify or erase discovery-state.
+- **Closeout:** Keep fixtures offline; document that historical public links are schema evidence only, not current availability.
