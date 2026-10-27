@@ -2,7 +2,7 @@
 
 A personal, evidence-driven workspace for discovering video game studios and opportunities worldwide, assessing transferable technical skills, preparing tailored outreach, and tracking application outcomes.
 
-> **Current status:** Phases 1–3 are implemented and accepted. The first Phase 4 discovery-pipeline increment is on `feat/phase4-discovery-pipeline`: local fixture tests pass, but full repository CI and a reviewed live-source scan remain outstanding. Phase 3 standard CI and browser acceptance passed for code commit `843d6c38954ed381f3cc30ba53f25c991ecfdf47` (runs [40340001102](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340001102) and [40340000974](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340000974)). `main` remains unchanged.
+> **Current status:** The Phase 1–4 implementation stack is present on `main` at `f9a9cf6`. Phase 3 is accepted; Phase 4 is merged but still awaiting acceptance. Stabilization is in progress on `stabilize/baseline-fixes`. The latest discovery fixture suite passed 36 tests; the frontend suite reports 31 passing tests, but overall Frontend CI remains blocked by a Prettier check in `src/lib/studios/catalog.mjs` (tracked in `STATUS.md`). One earlier live scan has already occurred; do not rerun it as part of stabilization. Scheduling and publishing remain disabled. This repository is public, so private records, resumes, contact details, and credentials must never be committed.
 
 ## Current frontend shell
 
@@ -20,7 +20,7 @@ A personal, evidence-driven workspace for discovering video game studios and opp
 
 - Discover relevant advertised roles and verified speculative-application routes worldwide.
 - Build source-backed studio profiles with ownership, locations, games, and explicit development/publishing credit relationships.
-- Monitor registered studios with a daily/manual GitHub Actions discovery workflow.
+- Monitor registered studios with a manual GitHub Actions discovery workflow; scheduling remains disabled pending owner acceptance.
 - Explain role relevance, transferable skills, gaps, and unknowns.
 - Process resumes in the browser, analyze them against an opportunity, and generate reviewed DOCX/PDF versions.
 - Maintain sourced resume guidance in the repository.
@@ -30,7 +30,7 @@ A personal, evidence-driven workspace for discovering video game studios and opp
 
 ## Hosting and privacy model
 
-GitHub Pages is a public static host, not a private server-side application. The current source repository remains private. The planned Pages release will publish only a static build and an allowlisted public studio/opportunity feed to a separate public deployment repository.
+GitHub Pages is a public static host, not a private server-side application. This repository is public. Any future Pages host, deployment target, or publishing workflow is deferred to Phase 8 and requires a separate privacy review and owner approval. No deployment or publication is approved in the current phase.
 
 Private candidate profile data, resume content, personal drafts, and application history must never be committed or published. Profile and tracker records use encrypted browser-local records with user-controlled encrypted export/import. Original CVs and extracted resume text are not stored, and this is not automatic cloud sync. A private backend would require a future decision.
 

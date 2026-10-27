@@ -6,8 +6,11 @@ import {
   STUDIO_CATALOG_DATA,
   STUDIO_CREDIT_ROLES,
   STUDIO_PROFILES,
+  STUDIO_REGISTRY,
+  assertEnabledRegistrySourcesHaveVerifiedRoutes,
   searchStudioProfiles,
   validateStudioCatalog,
+  validateStudioRegistry,
 } from "../src/lib/studios/catalog.mjs";
 
 test("starter registry contains four uniquely identified studios", () => {
@@ -112,4 +115,27 @@ test("route statuses explicitly distinguish verified from unknown or stale", () 
   const changed = structuredClone(STUDIO_CATALOG_DATA);
   changed.applicationRoutes[0].status = "stale";
   assert.equal(validateStudioCatalog(changed).applicationRoutes[0].status, "stale");
+});
+
+test("catalogue career routes stay aligned with enabled sources from validated registry", () => {
+  assert.doesNotThrow(() => assertEnabledRegistrySourcesHaveVerifiedRoutes(STUDIO_CATALOG_DATA));
+  for (const source of STUDIO_REGISTRY.sources.filter((entry) => entry.enabled)) {
+    const route = STUDIO_CATALOG_DATA.applicationRoutes.find(
+      (entry) => entry.studioId === source.studio_id && entry.status === "verified" && entry.url === source.url,
+    );
+    assert.ok(route, "expected a verified catalogue route for " + source.id);
+  }
+
+  const missingRoute = structuredClone(STUDIO_CATALOG_DATA);
+  missingRoute.applicationRoutes = missingRoute.applicationRoutes.filter((route) => route.studioId !== "riot-games");
+  assert.throws(
+    () => assertEnabledRegistrySourcesHaveVerifiedRoutes(missingRoute),
+    /Enabled registry source "riot-games-careers" has no matching verified catalogue route/,
+  );
+});
+
+test("validated studio registry rejects invalid career URLs", () => {
+  const invalidRegistry = structuredClone(STUDIO_REGISTRY);
+  invalidRegistry.sources[0].url = "http://www.cdprojektred.com/en/jobs";
+  assert.throws(() => validateStudioRegistry(invalidRegistry), /HTTPS URL/);
 });

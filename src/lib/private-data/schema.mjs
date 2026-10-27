@@ -1,3 +1,5 @@
+import { MAX_WORKSPACE_SERIALIZED_BYTES } from "./limits.mjs";
+
 export const WORKSPACE_SCHEMA_VERSION = 1;
 export const APPLICATION_STATUSES = Object.freeze([
   "interested",
@@ -85,7 +87,11 @@ function safeApplicationUrl(value) {
   if (!["https:", "http:"].includes(url.protocol) || url.username || url.password) {
     throw new Error("Application URL must be a public HTTPS or HTTP URL without embedded credentials.");
   }
-  return url.toString();
+  const normalizedUrl = url.toString();
+  if (normalizedUrl.length > 2_000) {
+    throw new Error("Application URL must be at most 2,000 characters after normalization.");
+  }
+  return normalizedUrl;
 }
 
 /** @param {unknown} value */
@@ -186,7 +192,7 @@ export function validateWorkspaceData(input) {
   if (!Array.isArray(input.applications) || input.applications.length > 1_000) {
     throw new Error("Applications must be a list with at most 1,000 items.");
   }
-  return {
+  const workspace = {
     schemaVersion: WORKSPACE_SCHEMA_VERSION,
     updatedAt: timestamp(input.updatedAt, "Workspace updatedAt"),
     profile: validateProfile(input.profile),
@@ -194,4 +200,9 @@ export function validateWorkspaceData(input) {
     drafts: input.drafts.map(validateDraft),
     applications: input.applications.map(validateApplication),
   };
+  const serializedBytes = new TextEncoder().encode(JSON.stringify(workspace)).byteLength;
+  if (serializedBytes > MAX_WORKSPACE_SERIALIZED_BYTES) {
+    throw new Error("Private workspace exceeds the serialized-size budget.");
+  }
+  return workspace;
 }
