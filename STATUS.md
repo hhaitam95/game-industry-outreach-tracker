@@ -1,7 +1,7 @@
 # Project Status
 
 **Last updated:** 2026-10-27  
-**Current phase:** Phase 5a sample fallback, validated sync CLI, explorer and discovery-state persistence flow implemented; final PR browser acceptance is the remaining review gate.  
+**Current phase:** Phase 5a sample fallback, validated sync CLI, explorer and discovery-state persistence flow implemented; PR #4 is open and unmerged.  
 **Working branch:** `feat/phase5-studio-research`  
 **Base/main:** `07d8e15cec544e56a09fbcab44202dc7051753c6` (PR #3 merged). No changes to `main`.
 
@@ -13,7 +13,7 @@
 - [x] `npm run data:sync -- --from <path|https-url>` validated with local-file-only unit tests. Default URL is `discovery-state/public/public-opportunities.json`. A failed read/parse/validation writes nothing; generated destination is gitignored.
 - [x] Only `.github/workflows/discover-studios.yml` changed among workflows: live scan stages projection in existing handoff artifact; persistence validates exact root/role fields with `validate_public_projection` and writes `public/public-opportunities.json` on `discovery-state`, not `main`.
 - [x] README, handoff, changelog, implementation plan, public-data contract and ADR-028 document sample fallback, data flow and dispatch-only boundary.
-- [ ] Open one PR, verify PR-triggered browser acceptance (explorer/filter/snapshot date/wording), and stop without merging.
+- [x] One PR opened: [#4](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/4). Frontend CI, discovery fixtures and PR-triggered browser acceptance passed on commit `de7160b0`; do not open another PR or merge.
 
 ## Safety boundary
 
@@ -27,8 +27,9 @@ No runtime fetch of career pages/role data. `last-seen` is not proof a role is o
 - `3c85a962` exact formatting and temporary-helper removal: Frontend CI passed [40579250442](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40579250442); discovery fixtures passed [40579250434](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40579250434).
 - `78d2fd8e` discovery-state workflow update: Frontend CI passed [40579393533](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40579393533); discovery fixtures passed [40579393531](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40579393531).
 - `1b2ab464` contract/docs/decision updates: Frontend CI passed [40579640563](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40579640563); discovery fixtures passed [40579640520](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40579640520).
-- This CI-history/status audit is the final pre-PR commit; its own CI will be reported in the PR summary.
+- `eb15a5e4` final pre-PR code/docs commit: Frontend CI passed [40579829107](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40579829107); discovery fixtures passed [40579829169](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40579829169).
+- `de7160b0` browser assertion wording fix: push Frontend CI passed [40580210104](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40580210104); push discovery fixtures passed [40580210184](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40580210184); PR Frontend CI passed [40580220890](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40580220890); PR discovery fixtures passed [40580220881](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40580220881); PR browser acceptance passed [40580220935](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40580220935). The initial browser failure [40579925245](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40579925245) was an assertion mismatch on the disclaimer wording and is fixed.
 
 ## Next action
 
-PR [#4](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/4) is open and unmerged. Its first browser run [40579925245](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40579925245) passed 3/4 steps: vault setup/build and studio catalogue passed, but the new explorer assertion failed because the disclaimer check omitted the word “that”. This commit corrects that wording match; verify the PR rerun, then stop without merging.
+PR [#4](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/4) is open and unmerged. Its corrected PR checks are green: Frontend CI [40580220890](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40580220890), discovery fixtures [40580220881](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40580220881), and browser acceptance [40580220935](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40580220935). No live workflow was dispatched. Stop here without merging.
