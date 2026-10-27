@@ -112,4 +112,4 @@ Baseline `f9a9cf61466d3de0dd9a77b079ceddd57fca5da8`:
 
 ## Next action:
 
-Re-run Frontend CI for item 2; when green, proceed to item 3.
+Validate the consolidated catalogue/registry implementation in CI; then proceed to item 3.

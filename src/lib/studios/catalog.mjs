@@ -1,4 +1,4 @@
-import { assertEnabledRegistrySourcesHaveVerifiedRoutes, getCareerRegistrySource } from "./registry.mjs";
+import rawStudioRegistry from "../../../config/studio-registry.json" with { type: "json" };
 
 export const CATALOG_SCHEMA_VERSION = 1;
 export const STUDIO_CREDIT_ROLES = Object.freeze([
@@ -199,6 +199,132 @@ function objectList(input, label, maxItems) {
 /** @param {string[]} ids @param {Set<string>} validSourceIds @param {string} label */
 function assertSourceReferences(ids, validSourceIds, label) {
   if (!ids.every((id) => validSourceIds.has(id))) throw new Error(label + " references missing source evidence.");
+}
+
+
+const REGISTRY_ROOT_KEYS = ["schema_version", "registry_reviewed_on", "description", "sources"];
+const REGISTRY_SOURCE_KEYS = ["id", "studio_id", "studio_name", "url", "source_type", "adapter", "enabled"];
+const REGISTRY_ADAPTERS = ["official-job-links", "manual-review"];
+
+/** @typedef {Record<string, unknown> & {id:string,studio_id:string,studio_name:string,url:string,source_type:string,adapter:string,enabled:boolean,job_url_regex?:string,allowed_job_hosts?:string[],review_reason?:string}} CareerRegistrySource */
+/** @typedef {{schema_version:number,registry_reviewed_on:string,description:string,sources:CareerRegistrySource[]}} StudioRegistry */
+/** @typedef {{sources:Array<{id:string,url:string,sourceType:string}>,applicationRoutes:Array<{studioId:string,status:string,url:string,sourceIds:string[]}>}} RouteCatalog */
+
+/** @param {unknown} input @returns {StudioRegistry} */
+export function validateStudioRegistry(input) {
+  assertExactKeys(input, REGISTRY_ROOT_KEYS, "Studio registry");
+  if (input.schema_version !== 1) throw new Error("Unsupported studio registry schema version.");
+  const registryReviewedOn = calendarDate(input.registry_reviewed_on, "Registry review date");
+  const description = text(input.description, "Registry description", 500);
+  const entries = objectList(input.sources, "Studio registry sources", 200);
+  if (entries.length === 0) throw new Error("Studio registry sources must not be empty.");
+
+  const ids = new Set();
+  const studioIds = new Set();
+  const urls = new Set();
+  const sources = entries.map((entry) => {
+    const adapter = oneOf(entry.adapter, REGISTRY_ADAPTERS, "Registry adapter");
+    const adapterKeys =
+      adapter === "official-job-links"
+        ? ["job_url_regex", "allowed_job_hosts"]
+        : ["review_reason"];
+    assertExactKeys(entry, [...REGISTRY_SOURCE_KEYS, ...adapterKeys], "Studio registry source");
+
+    const id = identifier(entry.id, "Registry source ID");
+    const studio_id = identifier(entry.studio_id, "Registry studio ID");
+    if (ids.has(id)) throw new Error("Duplicate registry source ID.");
+    if (studioIds.has(studio_id)) throw new Error("Duplicate registry studio ID.");
+    ids.add(id);
+    studioIds.add(studio_id);
+
+    const studio_name = text(entry.studio_name, "Registry studio name", 180);
+    const url = httpsUrl(entry.url, "Registry source URL");
+    if (urls.has(url)) throw new Error("Duplicate registry source URL.");
+    urls.add(url);
+    const source_type = oneOf(entry.source_type, ["official-careers"], "Registry source type");
+    if (typeof entry.enabled !== "boolean") throw new Error("Registry enabled flag must be boolean.");
+
+    const source = /** @type {CareerRegistrySource} */ ({
+      id,
+      studio_id,
+      studio_name,
+      url,
+      source_type,
+      adapter,
+      enabled: entry.enabled,
+    });
+
+    if (adapter === "official-job-links") {
+      const job_url_regex = text(entry.job_url_regex, "Registry job URL pattern", 500);
+      try {
+        new RegExp(job_url_regex);
+      } catch {
+        throw new Error("Registry job URL pattern must be a valid regular expression.");
+      }
+      const allowed_job_hosts = stringList(entry.allowed_job_hosts, "Allowed job hosts", 20);
+      if (allowed_job_hosts.some((host) => !/^[a-z0-9.-]+$/i.test(host))) {
+        throw new Error("Allowed job hosts must be hostnames.");
+      }
+      if (!allowed_job_hosts.includes(new URL(url).hostname)) {
+        throw new Error("Allowed job hosts must include the career source hostname.");
+      }
+      source.job_url_regex = job_url_regex;
+      source.allowed_job_hosts = allowed_job_hosts;
+    } else {
+      source.review_reason = text(entry.review_reason, "Manual-review reason", 1_000);
+    }
+
+    return source;
+  });
+
+  return deepFreeze({
+    schema_version: 1,
+    registry_reviewed_on: registryReviewedOn,
+    description,
+    sources,
+  });
+}
+
+export const STUDIO_REGISTRY = validateStudioRegistry(rawStudioRegistry);
+
+/** @param {string} studioId @returns {CareerRegistrySource} */
+function getCareerRegistrySource(studioId) {
+  const matches = STUDIO_REGISTRY.sources.filter((source) => source.studio_id === studioId);
+  if (matches.length !== 1) {
+    throw new Error("Expected exactly one validated career registry source for studio " + studioId + ".");
+  }
+  return matches[0];
+}
+
+/**
+ * Every enabled career source must be represented by a verified catalogue route
+ * backed by matching official-careers source evidence.
+ * @param {RouteCatalog} catalog
+ * @param {unknown} [registryInput]
+ */
+export function assertEnabledRegistrySourcesHaveVerifiedRoutes(catalog, registryInput = STUDIO_REGISTRY) {
+  const registry = registryInput === STUDIO_REGISTRY ? STUDIO_REGISTRY : validateStudioRegistry(registryInput);
+  if (!Array.isArray(catalog.sources) || !Array.isArray(catalog.applicationRoutes)) {
+    throw new Error("Studio catalogue must provide sources and application routes.");
+  }
+
+  for (const source of registry.sources.filter((entry) => entry.enabled)) {
+    const hasMatchingRoute = catalog.applicationRoutes.some((route) => {
+      if (route.studioId !== source.studio_id || route.status !== "verified" || route.url !== source.url) return false;
+      return route.sourceIds.some((sourceId) =>
+        catalog.sources.some(
+          (evidence) =>
+            evidence.id === sourceId &&
+            evidence.url === source.url &&
+            evidence.sourceType === "official-careers",
+        ),
+      );
+    });
+    if (!hasMatchingRoute) {
+      throw new Error("Enabled registry source " + source.id + " has no matching verified catalogue route.");
+    }
+  }
+  return true;
 }
 
 /** @param {unknown} input @returns {StudioCatalogData} */

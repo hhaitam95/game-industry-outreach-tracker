@@ -1,18 +1,16 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
-  assertEnabledRegistrySourcesHaveVerifiedRoutes,
-  STUDIO_REGISTRY,
-  validateStudioRegistry,
-} from "../src/lib/studios/registry.mjs";
-import {
   APPLICATION_ROUTE_STATUSES,
   CATALOG_SCHEMA_VERSION,
   STUDIO_CATALOG_DATA,
   STUDIO_CREDIT_ROLES,
   STUDIO_PROFILES,
+  STUDIO_REGISTRY,
+  assertEnabledRegistrySourcesHaveVerifiedRoutes,
   searchStudioProfiles,
   validateStudioCatalog,
+  validateStudioRegistry,
 } from "../src/lib/studios/catalog.mjs";
 
 test("starter registry contains four uniquely identified studios", () => {
