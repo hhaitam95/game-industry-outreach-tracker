@@ -330,3 +330,10 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Test plan:** Pure unit tests for normal/empty/long input, case/Unicode normalization, token boundaries, matches and non-matches, limitations, and no unsupported conclusions; component-render tests for privacy/source caveats and review language; browser acceptance with synthetic profile/resume/role inputs; all exact-head frontend, privacy, browser, and discovery CI.
 - **Definition of done:** The Resume Lab presents understandable baseline findings and explicit profile/role evidence; the current snapshot's synthetic/last-seen caveats remain visible; the user can clear the extracted text and role text; no resume content or report is persisted, logged, uploaded, or placed in public files; all acceptance checks pass on the final Phase 6b commit.
 - **Rollback:** Revert the Phase 6b analysis module, UI/context integration, tests, and docs together; do not alter the encrypted workspace schema, existing vault data, public snapshot, or discovery-state.
+
+
+## Implementation note — Phase 6 CI repair (2026-10-29)
+
+- After two exact-head CI repair passes, the formatter-diagnostic step isolated the remaining format failure to the JSX opening-tag indentation in `src/components/ResumeLab.tsx`.
+- Apply the exact logged Prettier diff directly. The diagnostic step is observability only; it does not commit formatter output or modify the checked-out branch.
+- Treat the automatically triggered checks after this exact correction as the final acceptance gate for Part 1, not as another exploratory formatting iteration. If a non-formatting blocker remains, stop guessing and record the simplest safe disposition here before changing more code.
