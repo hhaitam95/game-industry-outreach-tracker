@@ -45,7 +45,9 @@ export async function extractPdfText(arrayBuffer) {
         .map((item) => (item.hasEOL ? item.str + "\n" : item.str + " "))
         .join("");
       length += pageText.length;
-      if (length > MAX_RESUME_TEXT_CHARS) throw new ResumeExtractionError("output-too-large");
+      if (length > MAX_RESUME_TEXT_CHARS) {
+        throw new ResumeExtractionError("output-too-large");
+      }
       pageTexts.push(pageText);
       page.cleanup();
     }

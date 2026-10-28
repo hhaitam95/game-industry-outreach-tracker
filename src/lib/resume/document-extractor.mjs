@@ -74,7 +74,10 @@ export function getResumeWarningMessage(code) {
   return "Some text may not have been extracted. Review the result before relying on it.";
 }
 
-/** @param {string} code @returns {code is ResumeWarningCode} */
+/**
+ * @param {string} code
+ * @returns {code is ResumeWarningCode}
+ */
 function isResumeWarningCode(code) {
   return Object.hasOwn(WARNING_MESSAGES, code);
 }
@@ -165,8 +168,8 @@ function safeDisplayFileName(name) {
  * production parsers are dynamically loaded from locally bundled packages only.
  * @param {File | ResumeFileLike} file
  * @param {{
- *   extractDocxText?: (bytes: ArrayBuffer) => Promise<{text: string, warnings?: string[]}>,
- *   extractPdfText?: (bytes: ArrayBuffer) => Promise<{text: string, pageCount: number, warnings?: string[]}>
+ *   extractDocxText?: (bytes: ArrayBuffer) => Promise<{ text: string, warnings?: string[] }>,
+ *   extractPdfText?: (bytes: ArrayBuffer) => Promise<{ text: string, pageCount: number, warnings?: string[] }>
  * }} [parsers]
  */
 export async function extractResumeDocument(file, parsers = {}) {
@@ -179,7 +182,7 @@ export async function extractResumeDocument(file, parsers = {}) {
     throw new ResumeExtractionError("file-read-failed");
   }
 
-  /** @type {{text: string, pageCount?: number, warnings?: string[]}} */
+  /** @type {{ text: string, pageCount?: number, warnings?: string[] }} */
   let parsed;
   if (kind === "txt") {
     try {
@@ -192,7 +195,8 @@ export async function extractResumeDocument(file, parsers = {}) {
       const needsDocxParser = kind === "docx" && typeof parsers.extractDocxText !== "function";
       const needsPdfParser = kind === "pdf" && typeof parsers.extractPdfText !== "function";
       /** @type {Partial<typeof import("./browser-document-parsers.mjs")>} */
-      const defaults = needsDocxParser || needsPdfParser ? await import("./browser-document-parsers.mjs") : {};
+      const defaults =
+        needsDocxParser || needsPdfParser ? await import("./browser-document-parsers.mjs") : {};
       if (kind === "docx") {
         const parser = parsers.extractDocxText ?? defaults.extractDocxText;
         if (typeof parser !== "function") throw new ResumeExtractionError("parser-failed");
