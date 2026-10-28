@@ -30,7 +30,9 @@ export async function extractPdfText(arrayBuffer) {
   });
   try {
     const document = await loadingTask.promise;
-    if (document.numPages > MAX_RESUME_PDF_PAGES) throw new ResumeExtractionError("too-many-pages");
+    if (document.numPages > MAX_RESUME_PDF_PAGES) {
+      throw new ResumeExtractionError("too-many-pages");
+    }
 
     /** @type {string[]} */
     const pageTexts = [];
@@ -40,16 +42,29 @@ export async function extractPdfText(arrayBuffer) {
       const content = await page.getTextContent();
       const pageText = content.items
         .filter((item) => "str" in item)
-        .map((item) => (item.hasEOL ? item.str + "\n" : item.str + " "))
+        .map((item) => {
+          if (item.hasEOL) {
+            return item.str + "\n";
+          }
+          return item.str + " ";
+        })
         .join("");
       length += pageText.length;
-      if (length > MAX_RESUME_TEXT_CHARS) throw new ResumeExtractionError("output-too-large");
+      if (length > MAX_RESUME_TEXT_CHARS) {
+        throw new ResumeExtractionError("output-too-large");
+      }
       pageTexts.push(pageText);
       page.cleanup();
     }
-    return { text: pageTexts.join("\n"), pageCount: document.numPages, warnings: [] };
+    return {
+      text: pageTexts.join("\n"),
+      pageCount: document.numPages,
+      warnings: [],
+    };
   } catch (error) {
-    if (error instanceof ResumeExtractionError) throw error;
+    if (error instanceof ResumeExtractionError) {
+      throw error;
+    }
     throw new ResumeExtractionError("parser-failed");
   } finally {
     try {
