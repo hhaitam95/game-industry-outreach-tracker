@@ -304,7 +304,7 @@ This is a living decision record. Accepted decisions may be amended or supersede
 ## ADR-037 — Phase 6a browser-local resume intake and extraction
 
 - **Date:** 2026-10-28
-- **Status:** Accepted for Phase 6a; this does not approve the remainder of Phase 6.
+- **Status:** Implementation delivered; acceptance pending exact-head CI. This does not approve the remainder of Phase 6.
 - **Goal:** Replace the Resume Lab placeholder with local document intake and text extraction, and expose repository-managed resume guidance in the bundled app.
 - **Boundaries:** DOCX raw text, text-based PDF text layers, and UTF-8 TXT only. No OCR, fit analysis, role comparison, editing, file generation, AI API, or automatic external handoff in this slice.
 - **Contracts:** One pure extraction module owns accepted file kinds, extension/MIME checks, a 10 MiB input cap, 100-page PDF cap, 150,000-character output cap, normalized text, safe error codes, and warning categories.
@@ -314,3 +314,19 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Test plan:** Pure unit tests, component-render test, synthetic DOCX/PDF/TXT browser acceptance, privacy-boundary checks, and all frontend/discovery CI.
 - **Rollback:** Revert the Phase 6a component/service/dependency/docs/test set together; preserve Phase 5a and discovery-state.
 - **Definition of done:** Phase 6a exit criteria in IMPLEMENTATION_PLAN.md pass on the exact tested commit. Phase 6b/6c remain separately gated.
+
+## ADR-038 — Phase 6b deterministic resume checks and evidence-aware comparison
+
+- **Date:** 2026-10-28
+- **Status:** Approved for implementation
+- **Goal:** Add a transparent, deterministic baseline review and comparison against the candidate's saved profile and one selected public role or manually supplied role requirements.
+- **Boundaries:** Use only browser-local extracted resume text, the active encrypted-vault profile, the selected opportunity's public fields, and role text the user chooses to paste. Do not add AI APIs, network fetches, scoring/ranking, eligibility inference, automatic applications, or persistence of resume text/analysis/role descriptions.
+- **Data contract:** Put pure analysis in src/lib/resume/analysis.mjs. Inputs are explicit value objects; outputs are bounded finding codes, labels, evidence terms, and counts. Never put raw resume lines, names, email addresses, phone numbers, or pasted role descriptions into diagnostic logs or durable records.
+- **Role limits:** The public opportunity snapshot has role titles and metadata, not complete job requirements. When there is no user-pasted description, compare only against the selected role title and label that limitation. A synthetic snapshot must remain visibly synthetic; last-seen is not proof of current availability. The user-pasted description remains in component memory only.
+- **Profile access:** While the encrypted vault is unlocked, make the projected profile available to Resume Lab in app memory. Keep the workspace schema unchanged. Explicit lock/delete clears the shared profile projection; page reload/close clears all app memory. Unsaved profile edits may be used only as visibly in-memory context and are not written unless the user saves them.
+- **Comparison semantics:** Exact normalized phrase/token presence only. “Not found” means no matching text was detected, not that the candidate lacks the skill. Never infer missing competence, authorization, sponsorship, salary, or role eligibility. Do not show fit percentages or a single match score.
+- **Baseline checks:** Provide word/character/line counts, bounded section-heading detection, link/contact-pattern counts without echoing matched values, and explicit informational/review labels. These checks guide human review; they do not declare a resume valid or invalid.
+- **Failure modes:** Empty input, unavailable/locked profile, invalid role selection, excessively long input, and an empty or malformed pasted description must yield deterministic, safe UI states. Analysis must preserve the successful extraction; no raw diagnostics or excerpts are logged or persisted.
+- **Test plan:** Pure unit tests for normal/empty/long input, case/Unicode normalization, token boundaries, matches and non-matches, limitations, and no unsupported conclusions; component-render tests for privacy/source caveats and review language; browser acceptance with synthetic profile/resume/role inputs; all exact-head frontend, privacy, browser, and discovery CI.
+- **Definition of done:** The Resume Lab presents understandable baseline findings and explicit profile/role evidence; the current snapshot's synthetic/last-seen caveats remain visible; the user can clear the extracted text and role text; no resume content or report is persisted, logged, uploaded, or placed in public files; all acceptance checks pass on the final Phase 6b commit.
+- **Rollback:** Revert the Phase 6b analysis module, UI/context integration, tests, and docs together; do not alter the encrypted workspace schema, existing vault data, public snapshot, or discovery-state.
