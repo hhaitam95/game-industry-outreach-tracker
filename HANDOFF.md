@@ -13,6 +13,13 @@
 - The explorer preserves the studio cards and filters by studio, role family, title, seniority, country, contract, and freshness. It explains source/derived values, shows snapshot freshness and last-seen uncertainty, and performs no runtime career-site fetches.
 - Fit/skill-gap explanations and manual leads remain deferred to Phase 5b until a candidate profile and active browser-vault session exist.
 
+## Phase 6a resume lab foundation
+
+- Resume Lab provides local-only DOCX, text-based PDF and UTF-8 TXT extraction with visible warnings and conservative file/page/text limits.
+- Resume-guidance Markdown is bundled at build time; it is not fetched at runtime.
+- Extracted text is read-only and held in component state only. It is not saved to the encrypted workspace, logged, or uploaded. Scanned PDFs require a text-based copy because OCR is not enabled.
+- Profile/role comparison, deterministic findings, structured editing/diff, DOCX/PDF export, and manual ChatGPT handoff remain later Phase 6 slices.
+
 ## Review boundary
 
 - Consult [STATUS.md](STATUS.md) and the current [Phase 5a pull-request checks](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/4/checks) for current verification evidence.

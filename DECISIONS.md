@@ -299,3 +299,18 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Test plan:** Existing discovery tests are moved without changing method bodies; the discovery workflow and frontend/browser checks gate the refactor.
 - **Rollback:** Revert the test-module moves and configuration cleanup; no production code or discovery-state is changed.
 - **Closeout:** New test/support modules must remain below the approximate 300-line limit; record any deviation in STATUS.md.
+
+
+## ADR-037 — Phase 6a browser-local resume intake and extraction
+
+- **Date:** 2026-10-28
+- **Status:** Accepted for Phase 6a; this does not approve the remainder of Phase 6.
+- **Goal:** Replace the Resume Lab placeholder with local document intake and text extraction, and expose repository-managed resume guidance in the bundled app.
+- **Boundaries:** DOCX raw text, text-based PDF text layers, and UTF-8 TXT only. No OCR, fit analysis, role comparison, editing, file generation, AI API, or automatic external handoff in this slice.
+- **Contracts:** One pure extraction module owns accepted file kinds, extension/MIME checks, a 10 MiB input cap, 100-page PDF cap, 150,000-character output cap, normalized text, safe error codes, and warning categories.
+- **Dependencies:** Pin Mammoth 1.13.0 for raw DOCX text and pdfjs-dist 6.4.299 for PDF text. Bundle both packages and the PDF worker locally; never render DOCX-derived HTML.
+- **Privacy:** Original files and extracted text stay in the Resume Lab component state only. Do not write them to the private workspace schema, IndexedDB, logs, reports, URLs, or repository as user data.
+- **Failure modes:** Unsupported/damaged/encrypted files fail with safe messages; scanned PDFs without selectable text yield an explicit OCR limitation; failures preserve the previous successful extraction.
+- **Test plan:** Pure unit tests, component-render test, synthetic DOCX/PDF/TXT browser acceptance, privacy-boundary checks, and all frontend/discovery CI.
+- **Rollback:** Revert the Phase 6a component/service/dependency/docs/test set together; preserve Phase 5a and discovery-state.
+- **Definition of done:** Phase 6a exit criteria in IMPLEMENTATION_PLAN.md pass on the exact tested commit. Phase 6b/6c remain separately gated.

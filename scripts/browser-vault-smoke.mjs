@@ -227,6 +227,32 @@ class DevTools {
   }
 }
 
+async function chooseSyntheticResume({ name, type, base64, text }) {
+  const bytesExpression = base64
+    ? `Uint8Array.from(atob(${JSON.stringify(base64)}), (character) => character.charCodeAt(0))`
+    : `new TextEncoder().encode(${JSON.stringify(text ?? "")})`;
+  const selected = await client.evaluate(`(() => {
+    const input = document.querySelector('[data-testid="resume-file-input"]');
+    if (!input || input.disabled) return false;
+    const bytes = ${bytesExpression};
+    const transfer = new DataTransfer();
+    transfer.items.add(new File([bytes], ${JSON.stringify(name)}, { type: ${JSON.stringify(type)} }));
+    input.files = transfer.files;
+    input.dispatchEvent(new Event("change", { bubbles: true }));
+    return true;
+  })()`);
+  if (!selected) throw new Error("resume-file-input-not-found");
+}
+
+async function waitForResumeText(kind, expected) {
+  await client.waitFor(
+    `document.querySelector('[data-testid="resume-result-kind"]')?.dataset.kind === ${JSON.stringify(kind)} &&
+      document.querySelector('[data-testid="resume-status"]')?.dataset.status === "ready" &&
+      document.querySelector('[data-testid="resume-extracted-text"]')?.value.includes(${JSON.stringify(expected)})`,
+    "resume-" + kind + "-text-extracted",
+  );
+}
+
 async function step(name, action) {
   currentStep = name;
   await action();
@@ -420,6 +446,102 @@ async function main() {
       if (!after || after.rows >= before.rowCount || after.rows !== after.count) {
         throw new Error("opportunity-filter-did-not-reduce-results");
       }
+    });
+  }
+
+  if (process.env.EXPECT_RESUME_LAB === "1") {
+    await step("Verify Phase 6a local TXT, DOCX, and PDF extraction plus bundled guidance", async () => {
+      await client.clickButton("Resume lab");
+      await client.waitForText("Review a resume without uploading it");
+      const initial = await client.evaluate(`(() => ({
+        input: Boolean(document.querySelector('[data-testid="resume-file-input"]')),
+        guidance: Boolean(document.querySelector('[data-testid="resume-guidance-sources"]')),
+        privacyNote: document.querySelector('[data-testid="resume-privacy-note"]')?.innerText.toLowerCase() ?? ""
+      }))()`);
+      if (!initial?.input || !initial.guidance || !initial.privacyNote.includes("not uploaded")) {
+        throw new Error("resume-lab-initial-state-failed");
+      }
+
+      await client.evaluate(`(() => {
+        window.__resumeOutboundAttempts = [];
+        const nativeFetch = window.fetch.bind(window);
+        window.fetch = (...args) => {
+          const request = args[0];
+          const method = (args[1]?.method ?? request?.method ?? "GET").toUpperCase();
+          if (!["GET", "HEAD", "OPTIONS"].includes(method)) window.__resumeOutboundAttempts.push("fetch");
+          return nativeFetch(...args);
+        };
+        const nativeOpen = XMLHttpRequest.prototype.open;
+        XMLHttpRequest.prototype.open = function(method, ...args) {
+          this.__resumeMethod = String(method).toUpperCase();
+          return nativeOpen.call(this, method, ...args);
+        };
+        const nativeSend = XMLHttpRequest.prototype.send;
+        XMLHttpRequest.prototype.send = function(...args) {
+          if (this.__resumeMethod && !["GET", "HEAD", "OPTIONS"].includes(this.__resumeMethod)) {
+            window.__resumeOutboundAttempts.push("xhr");
+          }
+          return nativeSend.apply(this, args);
+        };
+        if (navigator.sendBeacon) {
+          const nativeBeacon = navigator.sendBeacon.bind(navigator);
+          navigator.sendBeacon = (...args) => {
+            window.__resumeOutboundAttempts.push("beacon");
+            return nativeBeacon(...args);
+          };
+        }
+        return true;
+      })()`);
+
+      await chooseSyntheticResume({
+        name: "synthetic-resume.txt",
+        type: "text/plain",
+        text: "Synthetic Resume Fixture\nExperience: Technical support and diagnostics.\nSkills: TypeScript, Python, REST APIs.",
+      });
+      await waitForResumeText("txt", "Skills: TypeScript, Python");
+
+      const docxBase64 = readFileSync(
+        path.join(root, "tests/fixtures/resumes/synthetic-resume.docx.b64"),
+        "utf8",
+      ).trim();
+      await chooseSyntheticResume({
+        name: "synthetic-resume.docx",
+        type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        base64: docxBase64,
+      });
+      await waitForResumeText("docx", "Skills: TypeScript, Python");
+
+      const pdfBase64 = readFileSync(
+        path.join(root, "tests/fixtures/resumes/synthetic-resume.pdf.b64"),
+        "utf8",
+      ).trim();
+      await chooseSyntheticResume({ name: "synthetic-resume.pdf", type: "application/pdf", base64: pdfBase64 });
+      await waitForResumeText("pdf", "Skills: TypeScript, Python");
+
+      const noUpload = await client.evaluate(`(() => ({
+        attempts: window.__resumeOutboundAttempts?.length ?? -1,
+        extracted: document.querySelector('[data-testid="resume-extracted-text"]')?.value ?? ""
+      }))()`);
+      if (!noUpload || noUpload.attempts !== 0 || !noUpload.extracted.includes("Synthetic Resume Fixture")) {
+        throw new Error("resume-local-only-boundary-failed");
+      }
+
+      await chooseSyntheticResume({
+        name: "unsupported-resume.doc",
+        type: "application/msword",
+        text: "Not a supported format",
+      });
+      await client.waitForText("Choose a DOCX, text-based PDF, or UTF-8 text file.");
+      const previousExtractionKept = await client.evaluate(
+        "document.querySelector('[data-testid=\"resume-result-kind\"]')?.dataset.kind === 'pdf' && document.querySelector('[data-testid=\"resume-extracted-text\"]')?.value.includes('Synthetic Resume Fixture')",
+      );
+      if (!previousExtractionKept) throw new Error("resume-failure-did-not-preserve-previous-extraction");
+
+      await client.clickButton("Clear extracted text");
+      const cleared = await client.evaluate(
+        "!document.querySelector('[data-testid=\"resume-extracted-text\"]') && !document.querySelector('[data-testid=\"resume-extraction\"]')",
+      );
+      if (!cleared) throw new Error("resume-reset-did-not-clear-text");
     });
   }
 

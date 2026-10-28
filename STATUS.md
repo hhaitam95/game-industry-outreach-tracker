@@ -1,8 +1,8 @@
 # Project Status
 
-**Last updated:** 2026-10-27  
-**Current phase:** Phase 5a sample fallback, validated sync CLI, explorer and discovery-state persistence flow implemented; PR #4 is open and unmerged.  
-**Working branch:** `feat/phase5-studio-research`  
+**Last updated:** 2026-10-28  
+**Current phase:** Phase 6a browser-local Resume Lab foundation prepared for review on a stacked branch; Phase 5a PR #4 remains open and unmerged.  
+**Working branch:** `feat/phase6-resume-lab` (stacked on `feat/phase5-studio-research`)  
 **Base/main:** `07d8e15cec544e56a09fbcab44202dc7051753c6` (PR #3 merged). No changes to `main`.
 
 ## Engineering standards for remaining work
@@ -10,7 +10,15 @@
 - Follow the standing rules in [AGENTS.md](AGENTS.md) and [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md): design note plus definition of done before each phase/unit; record deviations after implementation.
 - This file is the single source for current branch/review state and volatile verification details. Elsewhere, avoid repeating branch state, SHAs, run IDs, or test counts.
 - For the current phase review, use the [latest PR check status](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/4/checks). Historical run records below describe the commits named in those entries, not later heads.
-- **Standards audit:** The JavaScript loader/sync CLI and Python discovery projection consume one versioned public-opportunity JSON Schema. Shared valid/invalid golden fixtures run in both languages. The explorer is split into orchestration, filter controls, and role-card components with SSR/component and browser-interaction coverage. Discovery tests are split into parser, state-transition, and boundary/workflow modules below the ~300-line target; unused pytest/Ruff configuration was removed because CI runs unittest discovery. Current check evidence is in the [PR checks view](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/4/checks).
+- **Standards audit:** Phase 5a retains its verified checks below. Phase 6a separates the pure extraction contract, locally bundled document adapters, guidance content and UI. The proposed dependencies are pinned (Mammoth 1.13.0 and pdfjs-dist 6.4.299); the private workspace schema is unchanged and extracted text is not persisted. Cloud checks for the Phase 6a tree are pending a reviewable commit and must pass on that exact head before acceptance. Phase 5a checks remain visible in the [PR #4 check view](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/4/checks).
+
+## Phase 6a scope and acceptance
+
+- **Design and definition of done:** [Issue #5 — browser-local resume intake and extraction](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/5).
+- **Scope:** bundled guidance; local DOCX/PDF/TXT text extraction; fixed safe warnings; 10 MiB file, 100-page PDF, and 150,000-character output limits; synthetic browser fixtures and privacy-boundary checks.
+- **Deferred:** deterministic baseline checks and role comparison (Phase 6b); editable structured content/diff, DOCX/PDF generation, and manual ChatGPT handoff (Phase 6c).
+- **Verification:** the proposed Phase 6a tree has not been validated by CI. The local environment cannot install project dependencies here (Node/npm versions are below the repository requirement and network access is unavailable). Cloud CI must run against the resulting commit, and this slice is not accepted until exact-head checks pass.
+- **Not performed:** no live discovery dispatch, schedule enablement, publication, Pages deployment, repository visibility/permission change, or merge.
 
 ## Phase 5a closeout — verification evidence
 
@@ -32,9 +40,13 @@
 - [x] README, handoff, changelog, implementation plan, public-data contract and ADR-028 document sample fallback, data flow and dispatch-only boundary.
 - [x] One PR opened: [#4](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/4). Frontend CI, discovery fixtures and PR-triggered browser acceptance passed on commit `de7160b0`; do not open another PR or merge.
 
-## Safety boundary
+## Phase 5a safety boundary
 
-No runtime fetch of career pages/role data. `last-seen` is not proof a role is open; no hiring eligibility/work authorization is inferred. Discovery remains `workflow_dispatch` only with no schedule. No workflow dispatch/live scan, publication, Pages deployment, visibility/permissions/secrets change, new dependency, force-push, history rewrite, or branch deletion is approved. Fit/skill-gap explanations and manual leads are deferred to Phase 5b until a candidate profile and active vault session exist.
+No runtime fetch of career pages/role data. `last-seen` is not proof a role is open; no hiring eligibility/work authorization is inferred. Discovery remains `workflow_dispatch` only with no schedule. No live workflow dispatch, publication, Pages deployment, visibility/permissions/secrets change, force-push, history rewrite, or branch deletion is authorized.
+
+## Phase 6a safety boundary
+
+The user-selected original and extracted text remain in the active Resume Lab component state only. No CV upload, raw-text vault persistence, logging, OCR, AI API, generated document, merge, discovery-state change, schedule, publication, or deployment is included. The two new dependencies are for local text extraction only; the final commit is not authorized until the user reviews the change summary and explicitly approves it.
 
 ## CI per implementation commit
 
@@ -49,4 +61,4 @@ No runtime fetch of career pages/role data. `last-seen` is not proof a role is o
 
 ## Next action
 
-Phase 5a is implemented, tested, and ready for owner review in [PR #4](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/4). The PR remains open and unmerged. Decide whether to merge; after an approved merge, run the discovery workflow manually once and review source coverage/last-seen records before using `npm run data:sync`. Do not enable schedules, publishing, or Pages deployment without their separately documented approval. Phase 5b (fit/skill-gap explanations and manual leads) remains deferred until its candidate-profile/vault design note and definition of done are reviewed.
+Run frontend, discovery and browser-acceptance gates against the Phase 6a implementation commit; do not accept the slice until the current tested head is green. Keep PR #4 open and unmerged; the Phase 6 branch is stacked on the Phase 5 branch. Phase 6b/6c remain deferred. No live discovery dispatch, schedule, publication or deployment is part of this slice.

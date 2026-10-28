@@ -4,6 +4,8 @@
 **Last reviewed:** 2026-10-24  
 **Status:** Initial synthesized guidance; review periodically
 
+**App integration:** Phase 6a bundles these Markdown documents with Vite raw imports at build time. The Resume Lab does not fetch guidance from a server at runtime.
+
 This repository maintains a concise, source-linked reference library for the resume analysis and generation workflow. It is guidance, not a universal standard. Employer instructions, local job-market conventions, role type and the candidate's actual evidence take precedence.
 
 ## Files

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getNavItem, NAV_ITEMS } from "./lib/navigation.mjs";
 import PrivateDataSettings from "./components/PrivateDataSettings";
 import StudioCatalog from "./components/StudioCatalog";
+import ResumeLab from "./components/ResumeLab";
 import { STUDIO_PROFILES } from "./lib/studios/catalog.mjs";
 import { IS_SYNTHETIC_SNAPSHOT, OPPORTUNITY_SNAPSHOT } from "./lib/opportunities/snapshot.mjs";
 
@@ -226,7 +227,7 @@ export default function App() {
         <div className="sidebar-bottom">
           <div className="sidebar-status">
             <span className="status-dot" />
-            <span>Phase 5a studio research</span>
+            <span>Phase 6a resume lab</span>
           </div>
           <p>Built around evidence, privacy, and human control.</p>
         </div>
@@ -243,7 +244,7 @@ export default function App() {
           </div>
           <span className="phase-badge">
             <span className="phase-badge-dot" />
-            Phase 5a · Studio research
+            Phase 6a · Resume Lab
           </span>
         </header>
         <div className="page-content">
@@ -251,6 +252,8 @@ export default function App() {
             <OverviewPage onNavigate={setActivePageId} />
           ) : activeItem.id === "studios" ? (
             <StudioCatalog />
+          ) : activeItem.id === "resume" ? (
+            <ResumeLab />
           ) : activeItem.id === "settings" ? (
             <PrivateDataSettings />
           ) : (
