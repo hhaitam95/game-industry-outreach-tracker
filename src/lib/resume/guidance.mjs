@@ -7,7 +7,7 @@ import sources from "../../../docs/resume-guidelines/SOURCES.md?raw";
 
 export const RESUME_GUIDANCE_VERSION = "1.0 draft · reviewed 2026-10-24";
 
-/** @type {Array<{id: string, title: string, relevance: string, markdown: string}>} */
+/** @type {ReadonlyArray<{id: string, title: string, relevance: string, markdown: string}>} */
 export const RESUME_GUIDANCE_DOCUMENTS = Object.freeze([
   { id: "overview", title: "How to use this guidance", relevance: "General process and caveats", markdown: overview },
   {

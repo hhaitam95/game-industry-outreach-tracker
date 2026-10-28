@@ -42,9 +42,14 @@ const WARNING_MESSAGES = Object.freeze({
 });
 
 /** @typedef {keyof typeof ERROR_MESSAGES} ResumeExtractionErrorCode */
-/** @typedef {
- *   "docx-structure-warning" | "pdf-parser-warning" | "no-selectable-text" | "empty-document"
- * } ResumeWarningCode */
+/** @typedef {keyof typeof WARNING_MESSAGES} ResumeWarningCode */
+/**
+ * @typedef {Object} ResumeFileLike
+ * @property {string} name
+ * @property {string} [type]
+ * @property {number} size
+ * @property {() => Promise<ArrayBuffer>} arrayBuffer
+ */
 
 /** @param {ResumeExtractionErrorCode} code */
 export class ResumeExtractionError extends Error {
@@ -65,21 +70,36 @@ export function getResumeExtractionErrorMessage(error) {
 
 /** @param {string} code */
 export function getResumeWarningMessage(code) {
-  return WARNING_MESSAGES[code] ?? "Some text may not have been extracted. Review the result before relying on it.";
+  if (isResumeWarningCode(code)) return WARNING_MESSAGES[code];
+  return "Some text may not have been extracted. Review the result before relying on it.";
+}
+
+/** @param {string} code @returns {code is ResumeWarningCode} */
+function isResumeWarningCode(code) {
+  return Object.hasOwn(WARNING_MESSAGES, code);
+}
+
+/**
+ * @param {unknown} file
+ * @returns {file is ResumeFileLike}
+ */
+function isResumeFileLike(file) {
+  return (
+    file !== null &&
+    typeof file === "object" &&
+    "name" in file &&
+    typeof file.name === "string" &&
+    "size" in file &&
+    typeof file.size === "number" &&
+    Number.isFinite(file.size) &&
+    "arrayBuffer" in file &&
+    typeof file.arrayBuffer === "function"
+  );
 }
 
 /** @param {unknown} file @returns {"docx" | "pdf" | "txt"} */
 export function classifyResumeFile(file) {
-  if (
-    file === null ||
-    typeof file !== "object" ||
-    typeof file.name !== "string" ||
-    typeof file.size !== "number" ||
-    !Number.isFinite(file.size) ||
-    typeof file.arrayBuffer !== "function"
-  ) {
-    throw new ResumeExtractionError("invalid-file");
-  }
+  if (!isResumeFileLike(file)) throw new ResumeExtractionError("invalid-file");
   if (file.size <= 0) throw new ResumeExtractionError("empty-file");
   if (file.size > MAX_RESUME_FILE_BYTES) throw new ResumeExtractionError("file-too-large");
 
@@ -98,9 +118,7 @@ export function classifyResumeFile(file) {
 /** @param {string} value @returns {string} */
 export function normalizeExtractedText(value) {
   if (typeof value !== "string") throw new ResumeExtractionError("parser-failed");
-  const text = value
-    .replace(/\r\n?/g, "\n")
-    .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, "")
+  const text = stripControlCharacters(value.replace(/\r\n?/g, "\n"), true)
     .split("\n")
     .map((line) => line.replace(/[\t ]+$/g, ""))
     .join("\n")
@@ -112,20 +130,40 @@ export function normalizeExtractedText(value) {
 
 /** @param {unknown} value */
 function safePageCount(value) {
-  return Number.isInteger(value) && value >= 1 && value <= MAX_RESUME_PDF_PAGES ? value : null;
+  if (typeof value !== "number" || !Number.isInteger(value)) return null;
+  return value >= 1 && value <= MAX_RESUME_PDF_PAGES ? value : null;
+}
+
+/**
+ * Remove C0 control characters and DEL, optionally preserving tab/newline/carriage return.
+ * @param {string} value
+ * @param {boolean} [preserveWhitespaceControls]
+ * @returns {string}
+ */
+function stripControlCharacters(value, preserveWhitespaceControls = false) {
+  return Array.from(value)
+    .filter((character) => {
+      const codePoint = character.codePointAt(0);
+      if (codePoint === undefined || codePoint === 0x7f) return false;
+      if (codePoint < 0x20) {
+        return preserveWhitespaceControls && (codePoint === 0x09 || codePoint === 0x0a || codePoint === 0x0d);
+      }
+      return true;
+    })
+    .join("");
 }
 
 /** @param {string} name */
 function safeDisplayFileName(name) {
   const leaf = name.split(/[\\/]/).pop() ?? "";
-  const safe = leaf.replace(/[\u0000-\u001f\u007f]/g, "").slice(0, 120).trim();
+  const safe = stripControlCharacters(leaf).slice(0, 120).trim();
   return safe || "Selected document";
 }
 
 /**
  * Read a user-selected local document in memory. Parser implementations are injectable for deterministic tests;
  * production parsers are dynamically loaded from locally bundled packages only.
- * @param {File | {name: string, type: string, size: number, arrayBuffer: () => Promise<ArrayBuffer>}} file
+ * @param {File | ResumeFileLike} file
  * @param {{
  *   extractDocxText?: (bytes: ArrayBuffer) => Promise<{text: string, warnings?: string[]}>,
  *   extractPdfText?: (bytes: ArrayBuffer) => Promise<{text: string, pageCount: number, warnings?: string[]}>
@@ -176,7 +214,7 @@ export async function extractResumeDocument(file, parsers = {}) {
   const pageCount = kind === "pdf" ? safePageCount(parsed.pageCount) : null;
   const text = normalizeExtractedText(parsed.text);
   const warnings = Array.isArray(parsed.warnings)
-    ? [...new Set(parsed.warnings.filter((code) => Object.hasOwn(WARNING_MESSAGES, code)))]
+    ? [...new Set(parsed.warnings.filter(isResumeWarningCode))]
     : [];
   if (!text) warnings.push(kind === "pdf" ? "no-selectable-text" : "empty-document");
   const uniqueWarnings = [...new Set(warnings)];

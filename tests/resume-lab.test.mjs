@@ -17,7 +17,7 @@ test("ResumeLab bundles source-linked guidance and states local-only extraction 
     assert.match(markup, /Review a resume without uploading it/);
     assert.match(markup, /data-testid="resume-file-input"/);
     assert.match(markup, /DOCX, text-based PDF, or UTF-8 TXT/);
-    assert.match(markup, /No selectable text was found/);
+    assert.match(markup, /Scanned\/image-only PDFs need OCR, which is intentionally not enabled/);
     assert.match(markup, /Resume guidance library/);
     assert.match(markup, /Penn State Engineering/);
     assert.match(markup, /pdfjs-dist/);

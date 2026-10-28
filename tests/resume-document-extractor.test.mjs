@@ -4,6 +4,7 @@ import {
   classifyResumeFile,
   extractResumeDocument,
   getResumeExtractionErrorMessage,
+  getResumeWarningMessage,
   MAX_RESUME_FILE_BYTES,
   MAX_RESUME_PDF_PAGES,
   MAX_RESUME_TEXT_CHARS,
@@ -108,6 +109,7 @@ test("empty PDFs are reported as having no selectable text, not as success", asy
   assert.equal(result.status, "warning");
   assert.equal(result.pageCount, 2);
   assert.deepEqual(result.warnings, ["no-selectable-text"]);
+  assert.match(getResumeWarningMessage(result.warnings[0]), /No selectable text was found/);
 });
 
 test("page, output-length, and parser-error limits fail closed", async () => {

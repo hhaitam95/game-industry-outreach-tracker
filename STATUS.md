@@ -1,7 +1,7 @@
 # Project Status
 
 **Last updated:** 2026-10-28  
-**Current phase:** Phase 6a browser-local Resume Lab foundation prepared for review on a stacked branch; Phase 5a PR #4 remains open and unmerged.  
+**Current phase:** Phase 6a browser-local Resume Lab foundation under CI repair and acceptance review on a stacked branch; Phase 5a PR #4 remains open and unmerged.  
 **Working branch:** `feat/phase6-resume-lab` (stacked on `feat/phase5-studio-research`)  
 **Base/main:** `07d8e15cec544e56a09fbcab44202dc7051753c6` (PR #3 merged). No changes to `main`.
 
@@ -10,14 +10,14 @@
 - Follow the standing rules in [AGENTS.md](AGENTS.md) and [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md): design note plus definition of done before each phase/unit; record deviations after implementation.
 - This file is the single source for current branch/review state and volatile verification details. Elsewhere, avoid repeating branch state, SHAs, run IDs, or test counts.
 - For the current phase review, use the [latest PR check status](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/4/checks). Historical run records below describe the commits named in those entries, not later heads.
-- **Standards audit:** Phase 5a retains its verified checks below. Phase 6a separates the pure extraction contract, locally bundled document adapters, guidance content and UI. The proposed dependencies are pinned (Mammoth 1.13.0 and pdfjs-dist 6.4.299); the private workspace schema is unchanged and extracted text is not persisted. Cloud checks for the Phase 6a tree are pending a reviewable commit and must pass on that exact head before acceptance. Phase 5a checks remain visible in the [PR #4 check view](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/4/checks).
+- **Standards audit:** Phase 5a retains its verified checks below. Phase 6a separates the pure extraction contract, locally bundled document adapters, guidance content and UI. The pinned dependencies are Mammoth 1.13.0 and pdfjs-dist 6.4.299; the private workspace schema is unchanged and extracted text is not persisted. The first exact-head frontend check exposed formatting, lint, type and component-test failures; the lockfile follow-up restored dependency installation. Phase 6a remains unaccepted until current-head frontend/discovery checks and browser acceptance pass. Phase 5a checks remain visible in the [PR #4 check view](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/4/checks).
 
 ## Phase 6a scope and acceptance
 
 - **Design and definition of done:** [Issue #5 — browser-local resume intake and extraction](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/5).
 - **Scope:** bundled guidance; local DOCX/PDF/TXT text extraction; fixed safe warnings; 10 MiB file, 100-page PDF, and 150,000-character output limits; synthetic browser fixtures and privacy-boundary checks.
 - **Deferred:** deterministic baseline checks and role comparison (Phase 6b); editable structured content/diff, DOCX/PDF generation, and manual ChatGPT handoff (Phase 6c).
-- **Verification:** the proposed Phase 6a tree has not been validated by CI. The local environment cannot install project dependencies here (Node/npm versions are below the repository requirement and network access is unavailable). Cloud CI must run against the resulting commit, and this slice is not accepted until exact-head checks pass.
+- **Verification:** lockfile follow-up commit [0bbd80a](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/0bbd80adbe586bc53a61ba991805a8c28e8a716c) passed discovery fixture tests ([run 40729266004](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40729266004)) and restored `npm ci`; frontend CI on that prior head failed formatting, lint, type-checking and the Resume Lab component test ([run 40729265741](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40729265741)). The local environment cannot resolve GitHub for cloning or install dependencies. Phase 6a is not accepted until the repair head passes exact-head frontend/discovery CI and browser acceptance.
 - **Not performed:** no live discovery dispatch, schedule enablement, publication, Pages deployment, repository visibility/permission change, or merge.
 
 ## Phase 5a closeout — verification evidence
@@ -46,7 +46,7 @@ No runtime fetch of career pages/role data. `last-seen` is not proof a role is o
 
 ## Phase 6a safety boundary
 
-The user-selected original and extracted text remain in the active Resume Lab component state only. No CV upload, raw-text vault persistence, logging, OCR, AI API, generated document, merge, discovery-state change, schedule, publication, or deployment is included. The two new dependencies are for local text extraction only; the final commit is not authorized until the user reviews the change summary and explicitly approves it.
+The user-selected original and extracted text remain in the active Resume Lab component state only. No CV upload, raw-text vault persistence, logging, OCR, AI API, generated document, merge, discovery-state change, schedule, publication, or deployment is included. The two new dependencies are for local text extraction only. Phase 6a remains unaccepted pending the full current-head verification gate.
 
 ## CI per implementation commit
 

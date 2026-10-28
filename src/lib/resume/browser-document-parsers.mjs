@@ -26,13 +26,10 @@ export async function extractDocxText(arrayBuffer) {
 export async function extractPdfText(arrayBuffer) {
   const loadingTask = getDocument({
     data: new Uint8Array(arrayBuffer),
-    isEvalSupported: false,
     useWorkerFetch: false,
   });
-  /** @type {Awaited<typeof loadingTask.promise> | null} */
-  let document = null;
   try {
-    document = await loadingTask.promise;
+    const document = await loadingTask.promise;
     if (document.numPages > MAX_RESUME_PDF_PAGES) throw new ResumeExtractionError("too-many-pages");
 
     /** @type {string[]} */
@@ -56,8 +53,7 @@ export async function extractPdfText(arrayBuffer) {
     throw new ResumeExtractionError("parser-failed");
   } finally {
     try {
-      if (document) await document.destroy();
-      else await loadingTask.destroy();
+      await loadingTask.destroy();
     } catch {
       // Cleanup errors are deliberately not exposed or logged.
     }

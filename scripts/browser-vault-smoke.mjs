@@ -515,7 +515,11 @@ async function main() {
         path.join(root, "tests/fixtures/resumes/synthetic-resume.pdf.b64"),
         "utf8",
       ).trim();
-      await chooseSyntheticResume({ name: "synthetic-resume.pdf", type: "application/pdf", base64: pdfBase64 });
+      await chooseSyntheticResume({
+        name: "synthetic-resume.pdf",
+        type: "application/pdf",
+        base64: pdfBase64,
+      });
       await waitForResumeText("pdf", "Skills: TypeScript, Python");
 
       const noUpload = await client.evaluate(`(() => ({
