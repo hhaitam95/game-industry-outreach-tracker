@@ -22,7 +22,10 @@ test("ResumeLab bundles source-linked guidance and states local-only extraction 
     assert.match(markup, /Penn State Engineering/);
     assert.match(markup, /pdfjs-dist/);
     assert.match(markup, /Mammoth/);
-    assert.match(markup, /does not yet analyse fit, edit resume content, or export/);
+    assert.match(markup, /Baseline checks and role comparison/);
+    assert.match(markup, /No fit score/);
+    assert.match(markup, /Sample data - not a real scan/);
+    assert.match(markup, /pasted role text, extracted resume, profile projection, and findings remain in browser memory only/);
     assert.doesNotMatch(markup, /<script|onerror=/i);
   } finally {
     await server.close();

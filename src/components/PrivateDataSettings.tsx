@@ -12,6 +12,7 @@ function describeError(error: unknown) {
 }
 
 type PrivateWorkspace = ReturnType<typeof validateWorkspaceData>;
+type WorkspaceProfile = PrivateWorkspace["profile"];
 
 function downloadBackup(contents: string) {
   const url = URL.createObjectURL(new Blob([contents], { type: "application/json;charset=utf-8" }));
@@ -24,7 +25,11 @@ function downloadBackup(contents: string) {
   window.setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-export default function PrivateDataSettings() {
+export default function PrivateDataSettings({
+  onProfileChange,
+}: {
+  onProfileChange: (profile: WorkspaceProfile | null) => void;
+}) {
   const storeRef = useRef<ReturnType<typeof createIndexedDbVaultStore> | null>(null);
   if (!storeRef.current) storeRef.current = createIndexedDbVaultStore();
   const store = storeRef.current;
@@ -63,6 +68,7 @@ export default function PrivateDataSettings() {
   }, [store]);
 
   function updateProfile(field: "displayName" | "headline" | "professionalSummary", value: string) {
+    const nextProfile = workspace ? { ...workspace.profile, [field]: value } : null;
     setWorkspace((current) =>
       current
         ? {
@@ -71,6 +77,26 @@ export default function PrivateDataSettings() {
           }
         : current,
     );
+    if (nextProfile) onProfileChange(nextProfile);
+    setDirty(true);
+    setNotice("Unsaved changes — save the profile before locking or leaving this page.");
+  }
+
+  function updateProfileList(field: "targetRoles" | "skills", value: string) {
+    const items = value
+      .split(/\r?\n/u)
+      .map((item) => item.trim())
+      .filter(Boolean);
+    const nextProfile = workspace ? { ...workspace.profile, [field]: items } : null;
+    setWorkspace((current) =>
+      current
+        ? {
+            ...current,
+            profile: { ...current.profile, [field]: items },
+          }
+        : current,
+    );
+    if (nextProfile) onProfileChange(nextProfile);
     setDirty(true);
     setNotice("Unsaved changes — save the profile before locking or leaving this page.");
   }
@@ -87,6 +113,7 @@ export default function PrivateDataSettings() {
       const updated = validateWorkspaceData({ ...nextWorkspace, updatedAt: new Date().toISOString() });
       await store.save(await session.encrypt(updated));
       setWorkspace(updated);
+      onProfileChange(updated.profile);
       setDirty(false);
       setVaultExists(true);
       setNotice(successMessage);
@@ -111,6 +138,7 @@ export default function PrivateDataSettings() {
         const opened = await openEncryptedSession(encryptedEnvelope, passphrase);
         setSession(opened.session);
         setWorkspace(opened.data);
+        onProfileChange(opened.data.profile);
         setDirty(false);
         setNotice("Vault unlocked. Private records are held in this page's memory until you lock it or close the tab.");
       } else {
@@ -118,6 +146,7 @@ export default function PrivateDataSettings() {
         await store.save(created.envelope);
         setSession(created.session);
         setWorkspace(created.data);
+        onProfileChange(created.data.profile);
         setVaultExists(true);
         setDirty(false);
         setNotice("Encrypted local vault created. Download an encrypted backup before adding important records.");
@@ -212,6 +241,7 @@ export default function PrivateDataSettings() {
       await store.save(serialized);
       setSession(restored.session);
       setWorkspace(validated);
+      onProfileChange(validated.profile);
       setBackupPassphrase("");
       setDirty(false);
       setVaultExists(true);
@@ -228,6 +258,7 @@ export default function PrivateDataSettings() {
     if (dirty && !window.confirm("You have unsaved edits. Locking discards them. Lock anyway?")) return;
     setSession(null);
     setWorkspace(null);
+    onProfileChange(null);
     setDirty(false);
     setPassphrase("");
     setBackupPassphrase("");
@@ -249,6 +280,7 @@ export default function PrivateDataSettings() {
       await store.clear();
       setSession(null);
       setWorkspace(null);
+      onProfileChange(null);
       setVaultExists(false);
       setDirty(false);
       setPassphrase("");
@@ -374,6 +406,28 @@ export default function PrivateDataSettings() {
                 rows={4}
                 value={workspace.profile.professionalSummary}
               />
+              <label htmlFor="profile-target-roles">Target roles (one per line, up to 30)</label>
+              <textarea
+                id="profile-target-roles"
+                maxLength={3629}
+                onChange={(event) => updateProfileList("targetRoles", event.target.value)}
+                placeholder={"Developer Support Specialist\nTechnical Artist"}
+                rows={3}
+                value={workspace.profile.targetRoles.join("\n")}
+              />
+              <label htmlFor="profile-skills">Skills (one per line, up to 80)</label>
+              <textarea
+                id="profile-skills"
+                maxLength={8079}
+                onChange={(event) => updateProfileList("skills", event.target.value)}
+                placeholder={"Python\nREST APIs\nKibana"}
+                rows={4}
+                value={workspace.profile.skills.join("\n")}
+              />
+              <p className="resume-helper-text">
+                Resume comparison checks exact text mentions only. A missing mention does not mean you lack the skill.
+                Save the profile to encrypt these fields in this browser.
+              </p>
               <div className="vault-actions">
                 <button className="button button-primary" disabled={busy || !dirty} type="submit">
                   {busy ? "Saving…" : "Encrypt and save profile"}

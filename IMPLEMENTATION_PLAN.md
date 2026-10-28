@@ -152,8 +152,8 @@ These features require the candidate profile and an active browser vault session
 
 ### Delivery slices
 - **Phase 6a:** build-time bundled guidance; local DOCX/PDF/TXT intake and text extraction; safe failure/warning states; strict file/page/text limits; no text persistence or network upload.
-- **Phase 6b:** deterministic baseline checks and role/profile comparison with evidence-aware findings.
-- **Phase 6c:** editable structured content and before/after diff, local DOCX/PDF generation, and optional manual ChatGPT handoff after a separate disclosure/redaction step.
+- **Phase 6b:** deterministic baseline checks and role/profile comparison with evidence-aware findings. Use literal mention detection only; missing text is not evidence that a skill is absent, and never calculate a fit score.
+- **Phase 6c:** editable structured content and before/after diff, local DOCX/PDF generation, and optional manual ChatGPT handoff after a separate disclosure/redaction step. Do not persist generated resume content by default.
 
 ### Scope
 - Maintain docs/resume-guidelines/ as versioned, source-linked rules.
@@ -165,6 +165,12 @@ These features require the candidate profile and an active browser vault session
 - Generate downloadable DOCX and PDF without a server.
 - Keep original files unchanged and do not upload them to GitHub.
 - Add optional manual ChatGPT prompt/copy/paste flow with disclosure warning and redaction choices.
+
+### Phase 6b exit criteria
+- Baseline analysis reports only reproducible counts, section detections and count-only contact/link indicators.
+- Profile skill and target-role comparisons use the active vault profile projection; lock/delete clears the projection from app state.
+- Opportunity comparisons clearly distinguish synthetic sample records and last-seen statuses; no live-page fetch or fit score is introduced.
+- Role descriptions and analysis remain in component memory and are cleared when the Resume Lab is left or reset.
 
 ### Full Phase 6 exit criteria
 - Supported sample CV files can be processed locally and export valid DOCX/PDF.

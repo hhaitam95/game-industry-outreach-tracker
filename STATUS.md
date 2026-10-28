@@ -29,6 +29,12 @@
 - Phase 6c remains outstanding: editable structured resume proposal/diff, download generation and optional manual AI handoff are not included in Phase 6b.
 - No live discovery dispatch, schedule enablement, publishing, Pages deployment, repo visibility/permissions change, or merge is performed.
 
+## Phase 6b implementation status
+
+- **Scope implemented:** deterministic baseline counts; common section-heading detection; count-only email/phone/URL indicators; exact profile-skill mentions; target-role phrase comparison; representative terms from selected role title and optional manually pasted role text.
+- **Privacy:** Resume text, role description, analysis result, and the current profile projection stay in browser memory. No raw resume excerpts or contact values are displayed in analysis findings; no AI API, backend, external fetch, or vault schema change is introduced.
+- **Known limitation:** The Phase 6a Prettier check remains a blocker to green end-to-end CI. Phase 6b is not accepted until all frontend, privacy, browser acceptance, and discovery checks pass on one exact head.
+
 ## Phase 5a closeout — verification evidence
 
 - **Verified implementation revision:** `18197aede79481483bd7b70744124f12f07a843b`.

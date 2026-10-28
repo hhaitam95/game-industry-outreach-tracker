@@ -13,12 +13,20 @@
 - The explorer preserves the studio cards and filters by studio, role family, title, seniority, country, contract, and freshness. It explains source/derived values, shows snapshot freshness and last-seen uncertainty, and performs no runtime career-site fetches.
 - Fit/skill-gap explanations and manual leads remain deferred to Phase 5b until a candidate profile and active browser-vault session exist.
 
+## Phase 6b deterministic resume checks and comparison
+
+- Phase 6b adds baseline word/character/line counts, cautious section-heading detection, and count-only email/phone/URL patterns with no matched values echoed.
+- When unlocked, the vault's candidate profile projection is held in App memory so the Resume Lab can compare exact skill mentions and target-role phrases. Locking or deleting the vault clears that projection; raw resume text and the role description are not persisted.
+- Role comparison reads either a selected public snapshot title or a manually pasted description. The app does not fetch career pages at runtime. Current sample roles are synthetic and last-seen links never prove current availability.
+- Matching is literal and explanatory only: a missing term does not mean the user lacks a skill. There are no fit scores, AI calls, eligibility conclusions, or external submissions.
+- Phase 6a's formatter gate remains unresolved on the prior slice; see STATUS.md. Phase 6b must not be described as accepted until all exact-head gates pass.
+
 ## Phase 6a resume lab foundation
 
 - Resume Lab provides local-only DOCX, text-based PDF and UTF-8 TXT extraction with visible warnings and conservative file/page/text limits.
 - Resume-guidance Markdown is bundled at build time; it is not fetched at runtime.
 - Extracted text is read-only and held in component state only. It is not saved to the encrypted workspace, logged, or uploaded. Scanned PDFs require a text-based copy because OCR is not enabled.
-- Profile/role comparison, deterministic findings, structured editing/diff, DOCX/PDF export, and manual ChatGPT handoff remain later Phase 6 slices.
+- Structured editing/diff, DOCX/PDF export, and manual ChatGPT handoff remain Phase 6c work.
 
 ## Review boundary
 

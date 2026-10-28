@@ -1794,3 +1794,116 @@ button:focus-visible {
     align-self: flex-start;
   }
 }
+
+
+.resume-analysis-form {
+  display: grid;
+  gap: 16px;
+  margin-top: 18px;
+}
+.resume-analysis-field {
+  display: grid;
+  gap: 8px;
+  color: #586558;
+  font-size: 12px;
+  font-weight: 650;
+}
+.resume-analysis-field input,
+.resume-analysis-field select,
+.resume-analysis-field textarea {
+  width: 100%;
+  border: 1px solid #dfe5dd;
+  border-radius: 9px;
+  padding: 11px 12px;
+  background: #fcfdfb;
+  color: var(--ink);
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.resume-analysis-field textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+.resume-analysis-field :is(input, select, textarea):focus-visible {
+  outline: 3px solid rgb(99 134 109 / 35%);
+  outline-offset: 2px;
+}
+.resume-analysis-results {
+  margin-top: 22px;
+  border-top: 1px solid #eef1ec;
+  padding-top: 20px;
+}
+.resume-analysis-results h3 {
+  margin: 20px 0 10px;
+  font-size: 14px;
+}
+.resume-analysis-results h3:first-child {
+  margin-top: 0;
+}
+.resume-analysis-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+.resume-analysis-stats > div {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  border: 1px solid #e5e9e3;
+  border-radius: 10px;
+  background: #fafbf9;
+  padding: 12px;
+}
+.resume-analysis-stats span {
+  color: var(--muted);
+  font-size: 10px;
+}
+.resume-analysis-stats strong {
+  color: var(--ink);
+  font-size: 20px;
+  overflow-wrap: anywhere;
+}
+.resume-analysis-list {
+  display: grid;
+  gap: 8px;
+  padding: 0;
+  margin: 12px 0;
+  list-style: none;
+}
+.resume-analysis-list li {
+  display: grid;
+  grid-template-columns: minmax(110px, 0.7fr) minmax(0, 1fr);
+  gap: 5px 12px;
+  border: 1px solid #e5e9e3;
+  border-radius: 9px;
+  background: #fcfdfb;
+  padding: 11px 13px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.resume-analysis-list li strong {
+  color: #374738;
+  overflow-wrap: anywhere;
+}
+.resume-analysis-list li span {
+  color: #5d6c5c;
+  overflow-wrap: anywhere;
+}
+.resume-analysis-list li small {
+  grid-column: 2;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.6;
+}
+@media (max-width: 760px) {
+  .resume-analysis-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .resume-analysis-list li {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .resume-analysis-list li small {
+    grid-column: 1;
+  }
+}

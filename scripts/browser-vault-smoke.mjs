@@ -567,8 +567,54 @@ async function main() {
     await client.fill("#profile-display-name", "BROWSER_TEST_PROFILE_CANARY");
     await client.fill("#profile-headline", "Synthetic QA Profile");
     await client.fill("#profile-summary", "Synthetic test content only.");
+    await client.fill("#profile-target-roles", "Developer Support Specialist\nTechnical Artist");
+    await client.fill("#profile-skills", "TypeScript\nPython\nREST APIs\nKibana");
     await client.clickButton("Encrypt and save profile");
     await client.waitForText("Profile encrypted and saved to this browser.");
+  });
+
+  await step("Verify baseline checks and private profile comparison stay in memory", async () => {
+    const resumeClicked = await client.evaluate(`(() => {
+      const item = [...document.querySelectorAll(".nav-link")].find((element) => element.innerText.trim().toLowerCase().includes("resume lab"));
+      if (!item) return false;
+      item.click();
+      return true;
+    })()`);
+    if (!resumeClicked) throw new Error("resume-navigation-not-found");
+    await client.waitForText("Review a resume without uploading it");
+    await chooseSyntheticResume({
+      name: "synthetic-analysis-resume.txt",
+      type: "text/plain",
+      text: "Synthetic Analysis Resume\nProfessional Summary\nPython and REST APIs.\nExperience\nTypeScript diagnostics and support.",
+    });
+    await waitForResumeText("txt", "TypeScript diagnostics");
+    await client.fill(
+      '[data-testid="resume-analysis-role-description"]',
+      "Responsibilities: Python, REST APIs, Jira, Kubernetes, CI/CD. Experience with technical support.",
+    );
+    await client.clickButton("Run baseline review");
+    await client.waitForText("Baseline counts");
+    await client.waitForText("Exact text mention found");
+    await client.waitForText("No exact text mention detected");
+    const analysisState = await client.evaluate(`() => {
+      const results = document.querySelector('[data-testid="resume-analysis-results"]');
+      return {
+        profileAvailable: Boolean(document.querySelector('[data-testid="resume-analysis-profile-status"]')?.innerText.includes("Using the current in-memory profile")),
+        skillMention: Boolean(results?.innerText.includes("Python")),
+        noFitScore: !results?.innerText.toLowerCase().includes("fit score:"),
+        rawResumeExcluded: !results?.innerText.includes("Synthetic Analysis Resume") && !results?.innerText.includes("TypeScript diagnostics"),
+        outboundAttempts: window.__resumeOutboundAttempts?.length ?? -1
+      };
+    }`);
+    if (!analysisState?.profileAvailable || !analysisState.skillMention || !analysisState.noFitScore || !analysisState.rawResumeExcluded || analysisState.outboundAttempts !== 0) {
+      throw new Error("resume-analysis-privacy-or-result-check-failed");
+    }
+    await client.clickButton("Clear extracted text");
+    await client.waitForText("Selected file, extracted text, role description and analysis cleared from this screen.");
+    const clearedAnalysis = await client.evaluate(
+      "!document.querySelector('[data-testid=\\"resume-analysis-results\\"]') && document.querySelector('[data-testid=\\"resume-analysis-role-description\\"]')?.value === ''",
+    );
+    if (!clearedAnalysis) throw new Error("resume-analysis-clear-did-not-reset-private-inputs");
   });
 
   await step("Add synthetic application", async () => {
