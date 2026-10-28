@@ -606,7 +606,13 @@ async function main() {
         outboundAttempts: window.__resumeOutboundAttempts?.length ?? -1
       };
     }`);
-    if (!analysisState?.profileAvailable || !analysisState.skillMention || !analysisState.noFitScore || !analysisState.rawResumeExcluded || analysisState.outboundAttempts !== 0) {
+    if (
+      !analysisState?.profileAvailable ||
+      !analysisState.skillMention ||
+      !analysisState.noFitScore ||
+      !analysisState.rawResumeExcluded ||
+      analysisState.outboundAttempts !== 0
+    ) {
       throw new Error("resume-analysis-privacy-or-result-check-failed");
     }
     await client.clickButton("Clear extracted text");

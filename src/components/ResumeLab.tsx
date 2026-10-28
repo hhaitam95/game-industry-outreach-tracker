@@ -201,10 +201,10 @@ export default function ResumeLab({ profile = null }: { profile?: ResumeProfile 
       </section>
 
       <section
-          className="resume-lab-card"
-          aria-labelledby="resume-analysis-title"
-          data-testid="resume-analysis-section"
-        >
+      className="resume-lab-card"
+      aria-labelledby="resume-analysis-title"
+      data-testid="resume-analysis-section"
+    >
         <div className="section-heading">
           <div>
             <span className="eyebrow">PHASE 6B · DETERMINISTIC REVIEW</span>

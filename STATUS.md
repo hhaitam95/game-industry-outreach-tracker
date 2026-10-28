@@ -65,6 +65,11 @@ No runtime fetch of career pages/role data. `last-seen` is not proof a role is o
 
 The user-selected original and extracted text remain in the active Resume Lab component state only. No CV upload, raw-text vault persistence, logging, OCR, AI API, generated document, merge, discovery-state change, schedule, publication, or deployment is included. The two new dependencies are for local text extraction only. Phase 6a remains unaccepted pending the full current-head verification gate.
 
+## Phase 6a+6b Part 1 CI evidence
+
+- Repair commit `d8b1cb34b1bbcdf5e5c71b64320721ecd6e4bb80`: Frontend CI push [run 40786353689](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40786353689) and PR [run 40786376220](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40786376220) found Prettier differences in `src/components/ResumeLab.tsx`, `src/lib/resume/analysis.mjs`, and `scripts/browser-vault-smoke.mjs`. The formatter-diagnostic step succeeded and logged the exact diff. Lint, typecheck, all 67 unit tests, dependency audit, and production build passed; privacy-boundary and preview checks were skipped because formatting failed. Discovery fixture tests passed on push [run 40786353516](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40786353516) and PR [run 40786376222](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40786376222).
+- This follow-up applies only the formatter diff observed in that first cycle and records the results above. Exact-head CI for this follow-up is pending; no acceptance is claimed yet.
+
 ## CI per implementation commit
 
 - `7e83d3e7` sample/sync initial commit: discovery fixtures passed [40578412921](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40578412921); Frontend CI failed on type references, stale 8-role assertions and formatting [40578412973](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40578412973).
