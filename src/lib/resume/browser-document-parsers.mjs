@@ -1,11 +1,7 @@
 import mammoth from "mammoth";
 import { getDocument, GlobalWorkerOptions } from "pdfjs-dist";
 import pdfWorkerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
-import {
-  MAX_RESUME_PDF_PAGES,
-  MAX_RESUME_TEXT_CHARS,
-  ResumeExtractionError,
-} from "./document-extractor.mjs";
+import { MAX_RESUME_PDF_PAGES, MAX_RESUME_TEXT_CHARS, ResumeExtractionError } from "./document-extractor.mjs";
 
 GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
 

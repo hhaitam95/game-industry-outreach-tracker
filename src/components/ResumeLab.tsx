@@ -200,7 +200,11 @@ export default function ResumeLab({ profile = null }: { profile?: ResumeProfile 
         ) : null}
       </section>
 
-      <section className="resume-lab-card" aria-labelledby="resume-analysis-title" data-testid="resume-analysis-section">
+      <section
+          className="resume-lab-card"
+          aria-labelledby="resume-analysis-title"
+          data-testid="resume-analysis-section"
+        >
         <div className="section-heading">
           <div>
             <span className="eyebrow">PHASE 6B · DETERMINISTIC REVIEW</span>
@@ -286,8 +290,8 @@ export default function ResumeLab({ profile = null }: { profile?: ResumeProfile 
             />
           </label>
           <p className="resume-helper-text" data-testid="resume-analysis-privacy-note">
-            The pasted role text, extracted resume, profile projection, and findings remain in browser memory only.
-            No career page is fetched automatically, and nothing is uploaded or written into your vault.
+            The pasted role text, extracted resume, profile projection, and findings remain in browser memory only. No
+            career page is fetched automatically, and nothing is uploaded or written into your vault.
           </p>
           {profile ? (
             <p className="resume-message" role="status" data-testid="resume-analysis-profile-status">
@@ -296,7 +300,11 @@ export default function ResumeLab({ profile = null }: { profile?: ResumeProfile 
               projection.
             </p>
           ) : (
-            <p className="resume-message resume-message-warning" role="note" data-testid="resume-analysis-profile-status">
+            <p
+              className="resume-message resume-message-warning"
+              role="note"
+              data-testid="resume-analysis-profile-status"
+            >
               The saved profile is unavailable while the vault is locked. Baseline checks and role-text comparison can
               still run; unlock the vault in Settings to include your saved skills and target roles.
             </p>
@@ -423,7 +431,11 @@ export default function ResumeLab({ profile = null }: { profile?: ResumeProfile 
                 </p>
               )}
               {!analysis.role.descriptionProvided && analysis.role.title ? (
-                <p className="resume-message resume-message-warning" role="note" data-testid="resume-analysis-title-only">
+                <p
+                  className="resume-message resume-message-warning"
+                  role="note"
+                  data-testid="resume-analysis-title-only"
+                >
                   The snapshot supplies only a role title and metadata, not the full job description. This comparison
                   uses the title only; paste a verified description for a broader text scan.
                 </p>

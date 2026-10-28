@@ -7,14 +7,7 @@ const URL_PATTERN = /\b(?:https?:\/\/|www\.)[^\s<>()]+/giu;
 const PHONE_LIKE_PATTERN = /\+?\d[\d\s().-]{6,}\d/gu;
 const WORD_PATTERN = /[\p{L}\p{N}]+(?:[+#][\p{L}\p{N}]+)*/gu;
 
-const STOP_WORDS = new Set([
-  "about", "after", "also", "and", "are", "as", "at", "be", "because", "been", "being", "but", "by", "can",
-  "candidate", "company", "experience", "for", "from", "have", "having", "how", "in", "include", "including",
-  "into", "is", "it", "job", "join", "like", "looking", "more", "our", "position", "preferred", "provide",
-  "required", "requirements", "responsibilities", "role", "such", "team", "teams", "that", "the", "their",
-  "them", "there", "these", "they", "this", "those", "to", "what", "when", "where", "which", "who", "will",
-  "with", "work", "working", "years", "you", "your",
-]);
+const STOP_WORDS = new Set("about after also and are as at be because been being but by can candidate company experience for from have having how in include including into is it job join like looking more our position preferred provide required requirements responsibilities role such team teams that the their them there these they this those to what when where which who will with work working years you your".split(" "));
 
 const SECTION_GROUPS = Object.freeze([
   { label: "Summary", aliases: ["summary", "professional summary", "profile", "objective", "career objective"] },

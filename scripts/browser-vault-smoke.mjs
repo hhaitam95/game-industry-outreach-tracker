@@ -612,7 +612,7 @@ async function main() {
     await client.clickButton("Clear extracted text");
     await client.waitForText("Selected file, extracted text, role description and analysis cleared from this screen.");
     const clearedAnalysis = await client.evaluate(
-      "!document.querySelector('[data-testid=\\"resume-analysis-results\\"]') && document.querySelector('[data-testid=\\"resume-analysis-role-description\\"]')?.value === ''",
+      `!document.querySelector('[data-testid="resume-analysis-results"]') && document.querySelector('[data-testid="resume-analysis-role-description"]')?.value === ''`,
     );
     if (!clearedAnalysis) throw new Error("resume-analysis-clear-did-not-reset-private-inputs");
   });

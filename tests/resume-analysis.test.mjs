@@ -79,7 +79,10 @@ test("absence of terms is not phrased as a skill or eligibility judgment", () =>
   });
 
   assert.deepEqual(result.profile.skillMentions, [{ label: "Kubernetes", found: false }]);
-  assert.equal(result.role.terms.some((item) => !item.found), true);
+  assert.equal(
+    result.role.terms.some((item) => !item.found),
+    true,
+  );
   assert.equal(JSON.stringify(result).includes("not qualified"), false);
   assert.equal(JSON.stringify(result).includes("ineligible"), false);
 });

@@ -1,9 +1,11 @@
 # Project Status
 
-**Last updated:** 2026-10-28  
-**Current phase:** Phase 6b deterministic resume analysis under implementation; Phase 6a code is present but still awaiting its full acceptance gate. PR #4 (Phase 5a) and PR #6 (Phase 6a) remain open and unmerged.  
+**Last updated:** 2026-10-29  
+**Current phase:** Phase 6a+6b CI repair and acceptance. PR #4 (Phase 5a) and PR #6 (combined Phase 6a+6b) remain owner-controlled and unmerged.  
 **Working branch:** feat/phase6b-resume-analysis (stacked on feat/phase6-resume-lab, which is stacked on feat/phase5-studio-research)  
 **Base/main:** 07d8e15cec544e56a09fbcab44202dc7051753c6 (unchanged; no direct changes to main).
+
+**Merge plan:** The owner merges PR #4 with a regular merge commit, not squash, to preserve the Phase 6 ancestry. After PR #4 merges, retarget PR #6 to `main`. Keep both PRs unmerged by the implementation agent.
 
 ## Engineering standards for remaining work
 
@@ -11,12 +13,12 @@
 - This file is the single source for volatile branch/review/run details. Other docs should point here instead of duplicating moving SHAs or run IDs.
 - Keep each delivery slice in its own branch and draft PR, stacked in order. Do not merge any PR as part of implementation.
 - Current source repository visibility is public. Never commit private candidate records, resumes, drafts, applications, contact details, credentials, or secrets.
-- Avoid using CI as a formatter/linter REPL. Phase 6a has exceeded the preferred two-cycle repair limit; use the recorded blocker below, do not claim acceptance until resolved.
+- Avoid using CI as a formatter/linter REPL. When format checking fails, use the formatter-diff diagnostic step added immediately after it, then make the exact formatted fixes in one commit. At most two CI cycles per unit; after that, take the simplest route and log it in DECISIONS.md.
 
 ## Phase 6a acceptance status
 
 - **Scope delivered in code:** bundled guidance and local-only DOCX/PDF/TXT text extraction; safe warnings; 10 MiB input, 100-page PDF and 150,000-character output limits; synthetic parser fixtures.
-- **Current blocker:** The format check still flags only src/lib/resume/browser-document-parsers.mjs on the latest checked Phase 6a head. The formatter result is not yet resolved. This is documented as an open acceptance blocker rather than guessed at further.
+- **Current repair:** Part 1 corrects the known Prettier-sensitive formatting and the browser smoke-test evaluation syntax. Exact-head CI is pending on this repair commit; do not claim acceptance until frontend, privacy-boundary, static-preview, browser acceptance, and discovery checks all pass.
 - **Verified on the latest Phase 6a CI:** lint, type check, 59 frontend unit tests, dependency audit, and production build pass. Discovery fixture tests pass. The browser acceptance workflow reports failure at the combined feedback-suite gate because it includes the same formatting failure; earlier within that suite, the actual synthetic browser-vault/resume smoke test and privacy-boundary check passed.
 - **Acceptance decision:** Phase 6a remains unaccepted until formatting, frontend, privacy-boundary, static-preview, browser acceptance, and discovery checks all pass on one exact head. Do not label Phase 6 complete while this remains open.
 - **Links:** [Phase 6a draft PR #6](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/6); latest known [frontend CI](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40766780565); [browser acceptance](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40766780580); [discovery fixtures](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40766780595).
@@ -33,7 +35,7 @@
 
 - **Scope implemented:** deterministic baseline counts; common section-heading detection; count-only email/phone/URL indicators; exact profile-skill mentions; target-role phrase comparison; representative terms from selected role title and optional manually pasted role text.
 - **Privacy:** Resume text, role description, analysis result, and the current profile projection stay in browser memory. No raw resume excerpts or contact values are displayed in analysis findings; no AI API, backend, external fetch, or vault schema change is introduced.
-- **Known limitation:** The Phase 6a Prettier check remains a blocker to green end-to-end CI. Phase 6b is not accepted until all frontend, privacy, browser acceptance, and discovery checks pass on one exact head.
+- **Known limitation:** The previously recorded formatter blocker is addressed in the Part 1 repair commit; exact-head CI is pending. Phase 6a+6b are not accepted until frontend, privacy, browser acceptance, and discovery checks pass on one exact PR head.
 
 ## Phase 5a closeout — verification evidence
 
