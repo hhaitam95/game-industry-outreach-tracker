@@ -30,7 +30,9 @@ export async function extractPdfText(arrayBuffer) {
   });
   try {
     const document = await loadingTask.promise;
-    if (document.numPages > MAX_RESUME_PDF_PAGES) throw new ResumeExtractionError("too-many-pages");
+    if (document.numPages > MAX_RESUME_PDF_PAGES) {
+      throw new ResumeExtractionError("too-many-pages");
+    }
 
     /** @type {string[]} */
     const pageTexts = [];

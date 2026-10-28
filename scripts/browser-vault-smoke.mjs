@@ -511,10 +511,7 @@ async function main() {
       });
       await waitForResumeText("docx", "Skills: TypeScript, Python");
 
-      const pdfBase64 = readFileSync(
-        path.join(root, "tests/fixtures/resumes/synthetic-resume.pdf.b64"),
-        "utf8",
-      ).trim();
+      const pdfBase64 = readFileSync(path.join(root, "tests/fixtures/resumes/synthetic-resume.pdf.b64"), "utf8").trim();
       await chooseSyntheticResume({
         name: "synthetic-resume.pdf",
         type: "application/pdf",

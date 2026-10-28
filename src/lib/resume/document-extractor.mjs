@@ -51,8 +51,8 @@ const WARNING_MESSAGES = Object.freeze({
  * @property {() => Promise<ArrayBuffer>} arrayBuffer
  */
 
-/** @param {ResumeExtractionErrorCode} code */
 export class ResumeExtractionError extends Error {
+  /** @param {ResumeExtractionErrorCode} code */
   constructor(code) {
     super(ERROR_MESSAGES[code] ?? ERROR_MESSAGES["parser-failed"]);
     this.name = "ResumeExtractionError";
