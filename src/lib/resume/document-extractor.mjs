@@ -195,8 +195,7 @@ export async function extractResumeDocument(file, parsers = {}) {
       const needsDocxParser = kind === "docx" && typeof parsers.extractDocxText !== "function";
       const needsPdfParser = kind === "pdf" && typeof parsers.extractPdfText !== "function";
       /** @type {Partial<typeof import("./browser-document-parsers.mjs")>} */
-      const defaults =
-        needsDocxParser || needsPdfParser ? await import("./browser-document-parsers.mjs") : {};
+      const defaults = needsDocxParser || needsPdfParser ? await import("./browser-document-parsers.mjs") : {};
       if (kind === "docx") {
         const parser = parsers.extractDocxText ?? defaults.extractDocxText;
         if (typeof parser !== "function") throw new ResumeExtractionError("parser-failed");
@@ -217,9 +216,7 @@ export async function extractResumeDocument(file, parsers = {}) {
   }
   const pageCount = kind === "pdf" ? safePageCount(parsed.pageCount) : null;
   const text = normalizeExtractedText(parsed.text);
-  const warnings = Array.isArray(parsed.warnings)
-    ? [...new Set(parsed.warnings.filter(isResumeWarningCode))]
-    : [];
+  const warnings = Array.isArray(parsed.warnings) ? [...new Set(parsed.warnings.filter(isResumeWarningCode))] : [];
   if (!text) warnings.push(kind === "pdf" ? "no-selectable-text" : "empty-document");
   const uniqueWarnings = [...new Set(warnings)];
 
