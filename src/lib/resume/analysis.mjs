@@ -13,7 +13,7 @@ const STOP_WORDS = new Set(
   ),
 );
 
-const SECTION_GROUPS = Object.freeze([
+export const RESUME_SECTION_GROUPS = Object.freeze([
   { label: "Summary", aliases: ["summary", "professional summary", "profile", "objective", "career objective"] },
   {
     label: "Experience",
@@ -86,7 +86,7 @@ function detectSections(text) {
     const heading = normalizeForMatching(line.replace(/^\s*(?:\d{1,2}[.)\-:]\s*)?/u, ""));
     if (heading) headings.add(heading);
   }
-  return SECTION_GROUPS.filter((section) => section.aliases.some((alias) => headings.has(alias))).map(
+  return RESUME_SECTION_GROUPS.filter((section) => section.aliases.some((alias) => headings.has(alias))).map(
     (section) => section.label,
   );
 }

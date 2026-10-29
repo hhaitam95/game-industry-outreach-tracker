@@ -265,7 +265,7 @@ function saveReport() {
   const lines = [
     "# Browser Acceptance Report",
     "",
-    "- Scope: synthetic-data browser test for the encrypted local vault, studio catalogue and Phase 5a opportunity explorer when enabled.",
+    "- Scope: synthetic-data browser test for the encrypted local vault, studio catalogue, opportunity explorer, and Resume Lab editor/export flow.",
     "- Runtime: " + safeVersion("node", ["--version"]),
     "- Browser: " + (chromePath ? safeVersion(chromePath, ["--version"]) : "unavailable"),
     "- Result: **" + (failure ? "FAIL" : "PASS") + "**",
@@ -466,7 +466,7 @@ async function main() {
   }
 
   if (process.env.EXPECT_RESUME_LAB === "1") {
-    await step("Verify Phase 6a local TXT, DOCX, and PDF extraction plus bundled guidance", async () => {
+    await step("Verify Resume Lab initial state and outbound monitoring", async () => {
       await client.clickButton("Resume lab");
       await client.waitForText("Review a resume without uploading it");
       const initial = await client.evaluate(`(() => ({
@@ -508,14 +508,18 @@ async function main() {
         }
         return true;
       })()`);
+    });
 
+    await step("Extract synthetic TXT resume", async () => {
       await chooseSyntheticResume({
         name: "synthetic-resume.txt",
         type: "text/plain",
-        text: "Synthetic Resume Fixture\nExperience: Technical support and diagnostics.\nSkills: TypeScript, Python, REST APIs.",
+        text: "Synthetic Resume Fixture\\nExperience: Technical support and diagnostics.\\nSkills: TypeScript, Python, REST APIs.",
       });
       await waitForResumeText("txt", "Skills: TypeScript, Python");
+    });
 
+    await step("Extract synthetic DOCX resume", async () => {
       const docxBase64 = readFileSync(
         path.join(root, "tests/fixtures/resumes/synthetic-resume.docx.b64"),
         "utf8",
@@ -526,7 +530,9 @@ async function main() {
         base64: docxBase64,
       });
       await waitForResumeText("docx", "Skills: TypeScript, Python");
+    });
 
+    await step("Extract synthetic PDF resume", async () => {
       const pdfBase64 = readFileSync(path.join(root, "tests/fixtures/resumes/synthetic-resume.pdf.b64"), "utf8").trim();
       await chooseSyntheticResume({
         name: "synthetic-resume.pdf",
@@ -534,7 +540,87 @@ async function main() {
         base64: pdfBase64,
       });
       await waitForResumeText("pdf", "Skills: TypeScript, Python");
+    });
 
+    await step("Verify Phase 6c editor and export controls render", async () => {
+      await client.waitFor(
+        `Boolean(document.querySelector('[data-testid="resume-editor"]') &&
+          document.querySelector('[data-testid="resume-export-docx"]') &&
+          document.querySelector('[data-testid="resume-export-pdf"]') &&
+          document.querySelector('[data-testid="resume-diff"]'))`,
+        "resume-structured-editor-rendered",
+      );
+    });
+
+    await step("Verify manual AI handoff disclosure defaults", async () => {
+      await client.clickButton("Review manual AI handoff");
+      await client.waitFor(
+        `Boolean(document.querySelector('[data-testid="resume-handoff-panel"]'))`,
+        "resume-handoff-disclosure-opened",
+      );
+      const editorReady = await client.evaluate(`(() => ({
+        blocks: document.querySelectorAll('[data-testid="resume-editor-block"]').length,
+        copyDisabled: document.querySelector('[data-testid="resume-handoff-copy"]')?.disabled ?? false,
+        preview: document.querySelector('[data-testid="resume-handoff-preview"]')?.value ?? ""
+      }))()`);
+      if (!editorReady || editorReady.blocks < 1 || editorReady.copyDisabled !== true || editorReady.preview !== "") {
+        throw new Error("resume-export-ui-incomplete");
+      }
+    });
+
+    await step("Verify section changes are explicit in the before/after diff", async () => {
+      const changed = await client.evaluate(`(() => {
+        const select = document.querySelector('select[aria-label="Section for block 1"]');
+        if (!select) return false;
+        const setter = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, "value")?.set;
+        if (!setter) return false;
+        setter.call(select, "Summary");
+        select.dispatchEvent(new Event("change", { bubbles: true }));
+        const diff = document.querySelector('[data-testid="resume-diff"]');
+        if (diff) diff.open = true;
+        return true;
+      })()`);
+      if (!changed) throw new Error("resume-section-select-not-found");
+      await client.waitFor(
+        `Boolean(document.querySelector('[data-testid="resume-diff-section-change"]')?.innerText.includes("Other → Summary"))`,
+        "resume-section-change-label-rendered",
+      );
+    });
+
+    await step("Verify failed AI paste preserves input for correction", async () => {
+      const submitted = await client.evaluate(`(() => {
+        const field = document.querySelector('[data-testid="resume-ai-paste"]');
+        const button = document.querySelector('[data-testid="resume-ai-paste-add"]');
+        const setter = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, "value")?.set;
+        if (!field || !button || !setter) return false;
+        setter.call(field, "x".repeat(150001));
+        field.dispatchEvent(new Event("input", { bubbles: true }));
+        field.dispatchEvent(new Event("change", { bubbles: true }));
+        button.click();
+        return true;
+      })()`);
+      if (!submitted) throw new Error("resume-ai-paste-controls-not-found");
+      await client.waitFor(
+        `Boolean(document.querySelector('[data-testid="resume-ai-paste"]')?.value.length === 150001 &&
+          document.querySelector('[data-testid="resume-editor-error"]')?.innerText.includes("previous version was kept"))`,
+        "resume-ai-paste-failure-preserved",
+      );
+      await client.evaluate(`(() => {
+        const field = document.querySelector('[data-testid="resume-ai-paste"]');
+        const setter = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, "value")?.set;
+        if (!field || !setter) return false;
+        setter.call(field, "");
+        field.dispatchEvent(new Event("input", { bubbles: true }));
+        field.dispatchEvent(new Event("change", { bubbles: true }));
+        return true;
+      })()`);
+      await client.waitFor(
+        `Boolean(document.querySelector('[data-testid="resume-ai-paste"]')?.value.length === 0)`,
+        "resume-ai-paste-test-cleanup",
+      );
+    });
+
+    await step("Verify local-only boundary, failed extraction preservation, and clearing", async () => {
       const noUpload = await client.evaluate(`(() => ({
         attempts: window.__resumeOutboundAttempts?.length ?? -1,
         extracted: document.querySelector('[data-testid="resume-extracted-text"]')?.value ?? ""
@@ -550,13 +636,13 @@ async function main() {
       });
       await client.waitForText("Choose a DOCX, text-based PDF, or UTF-8 text file.");
       const previousExtractionKept = await client.evaluate(
-        "document.querySelector('[data-testid=\"resume-result-kind\"]')?.dataset.kind === 'pdf' && document.querySelector('[data-testid=\"resume-extracted-text\"]')?.value.includes('Synthetic Resume Fixture')",
+        "document.querySelector('[data-testid=\\\"resume-result-kind\\\"]')?.dataset.kind === 'pdf' && document.querySelector('[data-testid=\\\"resume-extracted-text\\\"]')?.value.includes('Synthetic Resume Fixture')",
       );
       if (!previousExtractionKept) throw new Error("resume-failure-did-not-preserve-previous-extraction");
 
       await client.clickButton("Clear extracted text");
       const cleared = await client.evaluate(
-        "!document.querySelector('[data-testid=\"resume-extracted-text\"]') && !document.querySelector('[data-testid=\"resume-extraction\"]')",
+        "!document.querySelector('[data-testid=\\\"resume-extracted-text\\\"]') && !document.querySelector('[data-testid=\\\"resume-extraction\\\"]')",
       );
       if (!cleared) throw new Error("resume-reset-did-not-clear-text");
     });
@@ -587,6 +673,115 @@ async function main() {
     await client.fill("#profile-skills", "TypeScript\nPython\nREST APIs\nKibana");
     await client.clickButton("Encrypt and save profile");
     await client.waitForText("Profile encrypted and saved to this browser.");
+  });
+
+  await step("Verify versioned outreach and manual application lifecycle", async () => {
+    await client.evaluate(
+      "(() => { if (window.__phase7OutboundAttempts) return true; window.__phase7OutboundAttempts = []; const nativeFetch = window.fetch.bind(window); window.fetch = (...args) => { const request = args[0]; const method = (args[1]?.method ?? request?.method ?? 'GET').toUpperCase(); if (!['GET', 'HEAD', 'OPTIONS'].includes(method)) window.__phase7OutboundAttempts.push('fetch'); return nativeFetch(...args); }; const nativeOpen = XMLHttpRequest.prototype.open; XMLHttpRequest.prototype.open = function(method, ...args) { this.__phase7Method = String(method).toUpperCase(); return nativeOpen.call(this, method, ...args); }; const nativeSend = XMLHttpRequest.prototype.send; XMLHttpRequest.prototype.send = function(...args) { if (this.__phase7Method && !['GET', 'HEAD', 'OPTIONS'].includes(this.__phase7Method)) window.__phase7OutboundAttempts.push('xhr'); return nativeSend.apply(this, args); }; return true; })()",
+    );
+    currentStep = "Phase 7 navigation to Outreach";
+    const outreachClicked = await client.evaluate(
+      "(() => { const item = [...document.querySelectorAll('.nav-link')].find((element) => element.innerText.trim() === 'Outreach'); if (!item) return false; item.click(); return true; })()",
+    );
+    if (!outreachClicked) throw new Error("phase7-outreach-navigation-not-found");
+    currentStep = "Phase 7 Outreach initial render";
+    await client.waitForText("Write a thoughtful introduction, not a mass message.");
+
+    currentStep = "Phase 7 studio selection";
+    const studioSelected = await client.evaluate(
+      "(() => { const label = [...document.querySelectorAll('.phase7-form-grid label')].find((item) => item.innerText.trim().startsWith('Studio')); const select = label?.querySelector('select'); const setter = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, 'value')?.set; if (!select || !setter) return false; setter.call(select, 'cd-projekt-red'); select.dispatchEvent(new Event('change', { bubbles: true })); return true; })()",
+    );
+    if (!studioSelected) throw new Error("phase7-studio-select-not-found");
+    await client.fill(
+      '[data-testid="outreach-motivation"]',
+      "I admire the team's mix of game development and technical problem solving.",
+    );
+    currentStep = "Phase 7 generate editable template";
+    await client.clickButton("Generate editable template");
+    currentStep = "Phase 7 generated message appears";
+    await client.waitFor(
+      `Boolean(document.querySelector('[data-testid="outreach-draft-body"]')?.value.includes("What draws me to your team is:"))`,
+      "phase7-generated-message-in-textarea",
+    );
+    currentStep = "Phase 7 save first draft version";
+    await client.clickButton("Save draft version");
+    currentStep = "Phase 7 first draft save confirmation";
+    await client.waitForText("Draft version 1 encrypted and saved locally.");
+    currentStep = "Phase 7 save second reviewed version";
+    await client.clickButton("Mark reviewed & save version");
+    currentStep = "Phase 7 second draft save confirmation";
+    await client.waitForText("Draft version 2 encrypted and saved locally.");
+    currentStep = "Phase 7 create lead from saved draft";
+    await client.clickButton("Create interested lead from saved version");
+    currentStep = "Phase 7 lead save confirmation";
+    await client.waitForText("Lead saved locally as interested.");
+
+    currentStep = "Phase 7 navigation to Applications";
+    const applicationsClicked = await client.evaluate(
+      "(() => { const item = [...document.querySelectorAll('.nav-link')].find((element) => element.innerText.trim() === 'Applications'); if (!item) return false; item.click(); return true; })()",
+    );
+    if (!applicationsClicked) throw new Error("phase7-applications-navigation-not-found");
+    currentStep = "Phase 7 Applications initial render";
+    await client.waitForText("Track what actually happened.");
+    currentStep = "Phase 7 lead record visible";
+    await client.waitForText("CD PROJEKT RED");
+
+    currentStep = "Phase 7 manual applied status confirmation";
+    const appliedSelected = await client.evaluate(
+      "(() => { const select = document.querySelector('[data-testid=application-status]'); const setter = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, 'value')?.set; if (!select || !setter) return false; setter.call(select, 'applied'); select.dispatchEvent(new Event('change', { bubbles: true })); return true; })()",
+    );
+    if (!appliedSelected) throw new Error("phase7-application-status-not-found");
+    currentStep = "Phase 7 submitted status confirmation visible";
+    await client.waitForText("Manual submission confirmation recorded.");
+
+    currentStep = "Phase 7 select response activity";
+    const responseSelected = await client.evaluate(
+      "(() => { const select = document.querySelector('[data-testid=application-activity-type]'); const setter = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, 'value')?.set; if (!select || !setter) return false; setter.call(select, 'response'); select.dispatchEvent(new Event('change', { bubbles: true })); const details = document.querySelector('.phase7-activity'); if (details) details.open = true; return Boolean(select); })()",
+    );
+    if (!responseSelected) throw new Error("phase7-activity-type-not-found");
+    await client.fill('[data-testid="application-activity-note"]', "Synthetic recruiter response recorded.");
+    currentStep = "Phase 7 save response activity";
+    await client.clickButton("Add activity");
+    currentStep = "Phase 7 response activity visible";
+    await client.waitForText("Synthetic recruiter response recorded.");
+
+    currentStep = "Phase 7 set follow-up date";
+    const followUpSet = await client.evaluate(
+      "(() => { const input = document.querySelector('[data-testid=application-follow-up-date]'); const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')?.set; if (!input || !setter) return false; setter.call(input, '2026-11-02'); input.dispatchEvent(new Event('input', { bubbles: true })); input.dispatchEvent(new Event('change', { bubbles: true })); return true; })()",
+    );
+    if (!followUpSet) throw new Error("phase7-follow-up-date-not-found");
+    currentStep = "Phase 7 follow-up save confirmation";
+    await client.waitForText("Follow-up date saved locally.");
+
+    currentStep = "Phase 7 no-outbound and applied-state assertion";
+    const outcome = await client.evaluate(
+      "(() => ({ status: document.querySelector('[data-testid=application-status]')?.value ?? '', outboundAttempts: window.__phase7OutboundAttempts?.length ?? -1 }))()",
+    );
+    if (!outcome || outcome.status !== "applied" || outcome.outboundAttempts !== 0) {
+      throw new Error("phase7-application-state-or-privacy-check-failed");
+    }
+
+    currentStep = "Phase 7 return to Outreach";
+    const backToOutreach = await client.evaluate(
+      "(() => { const item = [...document.querySelectorAll('.nav-link')].find((element) => element.innerText.trim() === 'Outreach'); if (!item) return false; item.click(); return true; })()",
+    );
+    if (!backToOutreach) throw new Error("phase7-outreach-return-not-found");
+    currentStep = "Phase 7 version history visible";
+    await client.waitForText("Version 2");
+    currentStep = "Phase 7 persisted draft version count";
+    const storedVersions = await client.evaluate(
+      "document.querySelectorAll('[data-testid=outreach-draft-row]').length",
+    );
+    if (storedVersions < 2) throw new Error("phase7-draft-version-history-incomplete");
+    const noOutbound = await client.evaluate("window.__phase7OutboundAttempts?.length ?? -1");
+    if (noOutbound !== 0) throw new Error("phase7-outbound-privacy-boundary-failed");
+    currentStep = "Phase 7 return to Settings";
+    const settingsClicked = await client.evaluate(
+      "(() => { const item = [...document.querySelectorAll('.nav-link')].find((element) => element.innerText.trim() === 'Settings'); if (!item) return false; item.click(); return true; })()",
+    );
+    if (!settingsClicked) throw new Error("settings-navigation-not-found");
+    currentStep = "Phase 7 Settings return render";
+    await client.waitForText("Private workspace storage");
   });
 
   await step("Verify baseline checks and private profile comparison stay in memory", async () => {
@@ -691,6 +886,25 @@ async function main() {
     await client.waitForText("BROWSER_TEST_STUDIO_CANARY");
     const profileName = await client.evaluate("document.querySelector('#profile-display-name')?.value ?? ''");
     if (profileName !== "BROWSER_TEST_PROFILE_CANARY") throw new Error("restored-profile-mismatch");
+    const phase7ApplicationsClicked = await client.evaluate(
+      "(() => { const item = [...document.querySelectorAll('.nav-link')].find((element) => element.innerText.trim() === 'Applications'); if (!item) return false; item.click(); return true; })()",
+    );
+    if (!phase7ApplicationsClicked) throw new Error("phase7-applications-navigation-not-found");
+    await client.waitForText("Track what actually happened.");
+    const targetRecordReady = await client.evaluate(
+      "(() => { const record = [...document.querySelectorAll('[data-testid=application-record]')].find((item) => item.innerText.includes('CD PROJEKT RED')); if (!record) return false; const details = record.querySelector('.phase7-activity'); if (!details) return false; details.open = true; return Boolean(record.querySelector('[data-testid=application-status]')); })()",
+    );
+    if (!targetRecordReady) throw new Error("phase7-restored-record-not-found");
+    await client.waitForText("Synthetic recruiter response recorded.");
+    const restoredStatus = await client.evaluate(
+      "(() => { const record = [...document.querySelectorAll('[data-testid=application-record]')].find((item) => item.innerText.includes('CD PROJEKT RED')); return record?.querySelector('[data-testid=application-status]')?.value ?? ''; })()",
+    );
+    if (restoredStatus !== "applied") throw new Error("phase7-application-state-not-restored");
+    const phase7SettingsClicked = await client.evaluate(
+      "(() => { const item = [...document.querySelectorAll('.nav-link')].find((element) => element.innerText.trim() === 'Settings'); if (!item) return false; item.click(); return true; })()",
+    );
+    if (!phase7SettingsClicked) throw new Error("settings-navigation-not-found");
+    await client.waitForText("Encrypted backup and recovery");
   });
 
   let encryptedBackupPath;
@@ -718,6 +932,9 @@ async function main() {
       "Synthetic QA Profile",
       "Browser QA Role",
       "Synthetic test content only.",
+      "Synthetic recruiter response recorded.",
+      "I admire the team's mix of game development and technical problem solving.",
+      "Hello CD PROJEKT RED team",
       "https://example.com/careers",
     ]) {
       if (serialized.includes(marker)) throw new Error("plaintext-found-in-indexeddb");
@@ -798,7 +1015,28 @@ try {
     "backup-input-not-found",
     "restored-profile-mismatch",
     "private-record-visible-while-locked",
+    "phase7-outreach-navigation-not-found",
+    "phase7-studio-select-not-found",
+    "phase7-applications-navigation-not-found",
+    "phase7-application-status-not-found",
+    "phase7-activity-type-not-found",
+    "phase7-follow-up-date-not-found",
+    "phase7-application-state-or-privacy-check-failed",
+    "phase7-application-state-not-restored",
+    "phase7-restored-record-not-found",
+    "phase7-draft-version-history-incomplete",
+    "phase7-outbound-privacy-boundary-failed",
+    "phase7-outreach-return-not-found",
     "settings-navigation-not-found",
+    "resume-lab-initial-state-failed",
+    "resume-file-input-not-found",
+    "resume-export-ui-incomplete",
+    "resume-section-select-not-found",
+    "resume-ai-paste-controls-not-found",
+    "resume-local-only-boundary-failed",
+    "resume-failure-did-not-preserve-previous-extraction",
+    "resume-reset-did-not-clear-text",
+    "resume-navigation-not-found",
   ]);
   const safeWaitReasons = new Map([
     ["condition-not-met-workspace after reload", "workspace after reload did not appear"],
@@ -807,8 +1045,20 @@ try {
     ["condition-not-met-application after unlock", "application record did not appear after unlock"],
     ["condition-not-met-profile after unlock", "profile record did not appear after unlock"],
     ["condition-not-met-lock confirmation", "lock confirmation did not appear"],
+    [
+      "condition-not-met-resume-structured-editor-rendered",
+      "structured editor/export controls did not appear after PDF extraction",
+    ],
+    ["condition-not-met-resume-handoff-disclosure-opened", "manual handoff disclosure did not open"],
+    ["condition-not-met-resume-section-change-label-rendered", "section-change label did not appear in the diff"],
+    ["condition-not-met-resume-ai-paste-failure-preserved", "failed AI-paste content was not preserved"],
+    ["condition-not-met-resume-ai-paste-test-cleanup", "synthetic AI-paste test input could not be cleared"],
     ["condition-not-met-incorrect passphrase rejection", "incorrect passphrase was not rejected in the UI"],
     ["condition-not-met-backup restoration", "backup restoration did not complete"],
+    [
+      "condition-not-met-phase7-generated-message-in-textarea",
+      "generated message did not appear in the editable draft field",
+    ],
   ]);
   failureReason = safeReasons.has(message)
     ? message

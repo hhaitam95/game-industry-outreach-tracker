@@ -4,6 +4,15 @@
 
 **Repository visibility:** Public. Never commit private candidate records, CVs, application history, contact details, credentials, or secrets.
 
+## Phase 7 implementation
+
+- Working branch: `feat/phase7-outreach-tracker`; design/acceptance: ADR-050 in DECISIONS.md and Phase 7 in IMPLEMENTATION_PLAN.md.
+- Outreach provides deterministic editable templates from user motivation, approved saved profile facts, and sourced studio context; pre-send checks are heuristic prompts, not fact checks.
+- Every saved edit creates a new private draft revision with profile timestamp, CV label (metadata only), guidance version and source context.
+- Applications tracks interested leads, manually confirmed submission, statuses, responses, interviews, outcomes, activity history and follow-up dates.
+- Personal data remains in the encrypted browser-local vault. There is no auto-send/submit, AI API, backend or localStorage persistence. Legacy v1 vault data is validated and migrated in memory to schema v2 on unlock; next save exports the new validated schema.
+- Phase 7 implementation is complete and verified on its feature head. [PR #8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8) remains open as a draft and unmerged for owner review; STATUS.md records exact-head evidence and the current verification boundary.
+
 ## Phase 8 — Same-repository GitHub Pages release
 
 - ADR-055 supersedes ADR-054 and selects the original `hhaitam95/game-industry-outreach-tracker` repository for source, tests, docs, and Pages deployment workflow.
@@ -29,19 +38,19 @@
 - When unlocked, the vault's candidate profile projection is held in App memory so the Resume Lab can compare exact skill mentions and target-role phrases. Locking or deleting the vault clears that projection; raw resume text and the role description are not persisted.
 - Role comparison reads either a selected public snapshot title or a manually pasted description. The app does not fetch career pages at runtime. Current sample roles are synthetic and last-seen links never prove current availability.
 - Matching is literal and explanatory only: a missing term does not mean the user lacks a skill. There are no fit scores, AI calls, eligibility conclusions, or external submissions.
-- Phase 6a+6b previously passed exact-head frontend, browser acceptance, and discovery checks; see STATUS.md for the historical evidence. Phase 6c and Phase 7 remain separate owner-controlled PRs #7 and #8 until merged.
+- Phase 6a/6b subsequently passed their required exact-head checks and were merged into main. See STATUS.md for final acceptance evidence.
 
 ## Phase 6a resume lab foundation
 
 - Resume Lab provides local-only DOCX, text-based PDF and UTF-8 TXT extraction with visible warnings and conservative file/page/text limits.
 - Resume-guidance Markdown is bundled at build time; it is not fetched at runtime.
 - Extracted text is read-only and held in component state only. It is not saved to the encrypted workspace, logged, or uploaded. Scanned PDFs require a text-based copy because OCR is not enabled.
-- Structured editing/diff, DOCX/PDF export, and manual ChatGPT handoff remain Phase 6c work.
+- Phase 6c provides structured resume editing with imported baselines and provenance, add/remove/reorder, before/after review, local DOCX export, browser-print PDF, and selective/redacted manual AI handoff. ADR-049 also fixes failed-paste data loss, makes section changes explicit in the diff, and preserves text when too many headings prevent safe structuring. Frontend CI, discovery fixtures, and browser acceptance passed on verified implementation/test head `9c60dccc`; PR #7 has since been squash-merged into main. See STATUS.md for current verification evidence.
 
 ## Review boundary
 
-- Consult [STATUS.md](STATUS.md) and the current [Phase 5a pull-request checks](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/4/checks) for current verification evidence.
-- Keep the merge decision and any live run owner-controlled.
+- Consult [STATUS.md](STATUS.md) for current verification evidence.
+- Keep live discovery and publication owner-controlled; they remain manual actions.
 - Discovery remains manual-dispatch-only. No schedule, publication, Pages deployment, or repository visibility change is approved.
 
 ## Engineering workflow

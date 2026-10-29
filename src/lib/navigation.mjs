@@ -25,13 +25,13 @@ export const NAV_ITEMS = [
     id: "outreach",
     label: "Outreach",
     icon: "outreach",
-    description: "Prepare thoughtful, evidence-backed introductions.",
+    description: "Create sourced, editable outreach drafts and review them before you copy or send anything yourself.",
   },
   {
     id: "applications",
     label: "Applications",
     icon: "applications",
-    description: "Keep track of submissions, replies, and next steps.",
+    description: "Privately track manually confirmed submissions, replies, interviews, follow-ups and outcomes.",
   },
   {
     id: "settings",

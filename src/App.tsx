@@ -231,7 +231,7 @@ export default function App() {
         <div className="sidebar-bottom">
           <div className="sidebar-status">
             <span className="status-dot" />
-            <span>Phase 6 resume workspace</span>
+            <span>Phase 7 outreach workflow</span>
           </div>
           <p>Built around evidence, privacy, and human control.</p>
         </div>
@@ -248,12 +248,19 @@ export default function App() {
           </div>
           <span className="phase-badge">
             <span className="phase-badge-dot" />
-            Phase 6b · Resume Review
+            Phase 7 · Outreach & Applications
           </span>
         </header>
         <div className="page-content">
-          <div hidden={activeItem.id !== "settings"} data-testid="private-data-settings-host">
-            <PrivateDataSettings onProfileChange={setResumeProfile} />
+          <div
+            hidden={!["settings", "outreach", "applications"].includes(activeItem.id)}
+            data-testid="private-data-settings-host"
+          >
+            <PrivateDataSettings
+              activePageId={activeItem.id}
+              onNavigate={setActivePageId}
+              onProfileChange={setResumeProfile}
+            />
           </div>
           {isOverview ? (
             <OverviewPage onNavigate={setActivePageId} />
@@ -261,7 +268,7 @@ export default function App() {
             <StudioCatalog />
           ) : activeItem.id === "resume" ? (
             <ResumeLab profile={resumeProfile} />
-          ) : activeItem.id === "settings" ? null : (
+          ) : ["settings", "outreach", "applications"].includes(activeItem.id) ? null : (
             <PlaceholderPage pageId={activePageId} onNavigate={setActivePageId} />
           )}
         </div>

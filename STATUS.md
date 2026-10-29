@@ -1,24 +1,24 @@
 # Project Status
 
 **Last updated:** 2026-10-29  
-**Current phase:** Phase 8 same-repository GitHub Pages release — implementation and required CI checks are green; the live Pages setting/publication remain pending.  
+**Current phase:** Phase 8 same-repository GitHub Pages release — PR #7 and PR #8 are merged; Phase 8 is being reconciled with the updated main and must pass exact-head CI before merge. The site is not deployed.  
 **Working branch:** `feat/phase8-pages-privacy`  
-**Current PR:** [#9 — Phase 8: same-repository Pages release and privacy checks](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/9). Do not merge until prerequisite PRs #7 and #8 are owner-merged and this branch is reconciled with updated `main`.  
-**Verified implementation commit:** `7a97a2e13235cb7a4cdb55956af5e8314ffa5012`. The later status-only follow-up does not change executable code or the workflow configuration.  
-**Base/main:** `main` has not been changed by this implementation branch.
+**Current PR:** [#9 — Phase 8: same-repository Pages release and privacy checks](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/9).  
+**Phase 6c:** [PR #7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7) was squash-merged in `0c70b9e`. Its original exact-head frontend, browser acceptance, and discovery fixture checks passed.  
+**Phase 7:** [PR #8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8) was squash-merged in `32294b7` after reconciliation commit `9493d91`; its frontend, browser acceptance, and discovery fixture checks passed on that reconciled branch head.  
+**Phase 8 base:** `32294b7de99838fcb3f476feddea94ac42c82361`. The Pages workflow/docs must be reconciled against this base and all required checks rerun before merge.  
+**Pages setting:** The owner confirmed the repository's Pages source is configured for GitHub Actions.
 
 ## Phase 8 implementation and acceptance status
 
-- **Design decision:** ADR-055 supersedes ADR-054's separate output-only repository choice; source, docs, tests and publishing workflow stay in the original repository.
-- **Frontend CI:** passed on implementation commit `7a97a2e13235cb7a4cdb55956af5e8314ffa5012` — [run 40881160156](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40881160156). Formatting, lint, typecheck, unit tests, dependency audit, production build, privacy guard, static-artifact check and repository-subpath asset smoke test passed.
-- **Browser acceptance:** passed on the same implementation commit — [run 40881160199](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40881160199).
-- **Discovery fixtures:** passed on the same implementation commit — [run 40881160159](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40881160159).
-- **Workflow configuration:** manual `workflow_dispatch` only; `validate-only` is the default; explicit `publish` is restricted to `main`. The build job is read-only, and only the deploy job receives `pages: write` and `id-token: write`. Only the validated `dist/` artifact is uploaded.
-- **Not yet exercised:** the new Pages workflow itself has not been manually dispatched. Because the workflow is on an open PR, first merge remains blocked by PRs #7 and #8 and owner-controlled review; after the code reaches `main`, run `validate-only` and review it before choosing `publish`.
-- **One-time external setup:** the owner must set this repository's Settings → Pages → Source = GitHub Actions. The connected tools cannot change Pages settings or dispatch workflows. No second repository or deployment secret is required.
-- **Not deployed:** no publish workflow has been dispatched and no site has been verified live. There is no schedule, push trigger, or discovery-completion trigger.
-- **Merge order:** PRs [#7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7) and [#8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8) remain owner-controlled prerequisites. Reconcile Phase 8 with updated `main` and rerun exact-head checks before the owner merges PR #9.
-- **Exit criteria:** Pages source is configured; checks and a manual `validate-only` run pass; explicit publication from `main` succeeds; the canonical URL/assets and public data are reviewed. Until then, the site is not deployed.
+- **Design decision:** ADR-055 supersedes ADR-054; source, tests, documentation, public-data contract and publication workflow remain in the original repository.
+- **Selected deployment:** Manual `workflow_dispatch` only. `validate-only` is the default. Explicit `publish` is allowed from `main` only, uploads only the validated `dist/` artifact, and uses separate read-only build and least-privilege deployment jobs. No cross-repository token or second repository is used.
+- **Privacy boundary:** Existing public snapshot schema validation, repository privacy check, generated-artifact checker, CSP/local-asset checks and repository-subpath smoke test remain required. Private profile/CV/draft/application data remains browser-local and is never a build input.
+- **Previous Phase 8 head evidence:** Frontend CI passed [40881433499](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40881433499), browser acceptance passed [40881433653](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40881433653), and discovery fixtures passed [40881433603](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40881433603) on the pre-reconciliation Phase 8 head. These runs do not replace validation of the reconciled tree.
+- **Deployment not yet verified:** The Pages workflow has not been manually dispatched; no public URL/assets or live site have been verified. Run `validate-only` first and then explicitly publish from `main` once merged and reviewed. No schedule, push trigger, or discovery-completion publication exists.
+- **Remaining external actions:** The Pages source setting is configured according to the owner. The connected GitHub tools cannot dispatch a workflow, so the first validation/publication must be started from Actions in GitHub if no dispatch action becomes available.
+- **Merge order:** PR #7 and PR #8 are merged. Review the current PR #9 head and exact-head checks before merging it.
+- **Exit criteria:** All required checks pass on the reconciled Phase 8 head; Pages validation and publication succeed; the canonical URL/assets and public data are reviewed; then move to Phase 9 launch acceptance, feedback and stabilization.
 
 **Status policy:** This file is the sole source for volatile branch/review state and verification evidence. Other documents should point here rather than duplicate changing SHAs or run IDs.
 
@@ -36,7 +36,7 @@
 - **Design and definition of done:** ADR-038 in DECISIONS.md.
 - The role snapshot contains titles and metadata, not full job requirements. In the absence of user-pasted role text, matching is limited to the selected title. Synthetic sample roles and last-seen status must not be presented as confirmed vacancies.
 - Resume text, pasted role description, private profile projection and analysis remain in browser memory. Do not persist them, log them, upload them, or add them to the public snapshot.
-- Phase 6c remains outstanding: editable structured resume proposal/diff, download generation and optional manual AI handoff are not included in Phase 6b.
+- Phase 6c is now merged and implemented: structured resume editing with provenance and before/after review, local DOCX export, browser-print PDF, and optional selective/redacted manual AI handoff.
 - No live discovery dispatch, schedule enablement, publishing, Pages deployment, repo visibility/permissions change, or merge is performed.
 
 ## Phase 6b implementation status
