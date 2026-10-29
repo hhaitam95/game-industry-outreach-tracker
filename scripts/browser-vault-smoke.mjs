@@ -1055,7 +1055,6 @@ async function main() {
       throw new Error("role-handoff-save-or-submission-boundary-failed");
     }
   });
-
 }
 
 try {
