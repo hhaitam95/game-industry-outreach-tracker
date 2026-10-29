@@ -256,7 +256,7 @@ export default function ApplicationsWorkspace({ workspace, onSaveWorkspace }: Pr
                     <span className="phase7-meta">Added {new Date(application.createdAt).toLocaleDateString()} · Updated {new Date(application.updatedAt).toLocaleDateString()}</span>
                   </div>
                   <label className="phase7-status-field">Status
-                    <select aria-label={"Status for " + application.studioName + " — " + application.roleTitle} value={application.status} onChange={(event) => void changeStatus(application, event.target.value)}>
+                    <select aria-label={"Status for " + application.studioName + " — " + application.roleTitle} data-testid="application-status" value={application.status} onChange={(event) => void changeStatus(application, event.target.value)}>
                       {APPLICATION_STATUSES.map((status) => <option key={status} value={status}>{STATUS_LABELS[status as ApplicationStatus]}</option>)}
                     </select>
                   </label>
@@ -270,7 +270,7 @@ export default function ApplicationsWorkspace({ workspace, onSaveWorkspace }: Pr
                 ) : null}
                 <div className="phase7-followup">
                   <label>Next follow-up date
-                    <input type="date" value={application.nextFollowUpAt ?? ""} onChange={(event) => void changeFollowUp(application, event.target.value)} />
+                    <input type="date" data-testid="application-follow-up-date" value={application.nextFollowUpAt ?? ""} onChange={(event) => void changeFollowUp(application, event.target.value)} />
                   </label>
                   {application.nextFollowUpAt ? <span className={application.nextFollowUpAt <= today ? "phase7-due" : "phase7-meta"}>{application.nextFollowUpAt <= today ? "Follow-up due" : "Upcoming follow-up"}</span> : <span className="phase7-meta">No follow-up date</span>}
                 </div>
@@ -278,14 +278,14 @@ export default function ApplicationsWorkspace({ workspace, onSaveWorkspace }: Pr
                   <summary>Activity history ({application.history.length})</summary>
                   <form className="phase7-activity-form" onSubmit={(event) => void addActivity(event, application)}>
                     <label>Activity type
-                      <select value={activityTypes[application.id] ?? "note"} onChange={(event) => setActivityTypes((current) => ({ ...current, [application.id]: event.target.value as ActivityType }))}>
+                      <select data-testid="application-activity-type" value={activityTypes[application.id] ?? "note"} onChange={(event) => setActivityTypes((current) => ({ ...current, [application.id]: event.target.value as ActivityType }))}>
                         {Object.entries(ACTIVITY_LABELS).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
                       </select>
                     </label>
                     <label>What happened?
-                      <textarea maxLength={2000} rows={2} value={activityNotes[application.id] ?? ""} onChange={(event) => setActivityNotes((current) => ({ ...current, [application.id]: event.target.value }))} placeholder="Record a reply, follow-up, interview, outcome, or note." />
+                      <textarea maxLength={2000} rows={2} data-testid="application-activity-note" value={activityNotes[application.id] ?? ""} onChange={(event) => setActivityNotes((current) => ({ ...current, [application.id]: event.target.value }))} placeholder="Record a reply, follow-up, interview, outcome, or note." />
                     </label>
-                    <button className="button button-secondary" type="submit" disabled={!(activityNotes[application.id] ?? "").trim() || application.history.length >= 200}>Add activity</button>
+                    <button className="button button-secondary" type="submit" data-testid="application-activity-submit" disabled={!(activityNotes[application.id] ?? "").trim() || application.history.length >= 200}>Add activity</button>
                   </form>
                   {application.history.length ? (
                     <ol className="phase7-timeline">
