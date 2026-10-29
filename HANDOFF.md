@@ -28,19 +28,19 @@
 - When unlocked, the vault's candidate profile projection is held in App memory so the Resume Lab can compare exact skill mentions and target-role phrases. Locking or deleting the vault clears that projection; raw resume text and the role description are not persisted.
 - Role comparison reads either a selected public snapshot title or a manually pasted description. The app does not fetch career pages at runtime. Current sample roles are synthetic and last-seen links never prove current availability.
 - Matching is literal and explanatory only: a missing term does not mean the user lacks a skill. There are no fit scores, AI calls, eligibility conclusions, or external submissions.
-- Phase 6a's formatter gate remains unresolved on the prior slice; see STATUS.md. Phase 6b must not be described as accepted until all exact-head gates pass.
+- Phase 6a/6b subsequently passed their required exact-head checks and were merged into main. See STATUS.md for final acceptance evidence.
 
 ## Phase 6a resume lab foundation
 
 - Resume Lab provides local-only DOCX, text-based PDF and UTF-8 TXT extraction with visible warnings and conservative file/page/text limits.
 - Resume-guidance Markdown is bundled at build time; it is not fetched at runtime.
 - Extracted text is read-only and held in component state only. It is not saved to the encrypted workspace, logged, or uploaded. Scanned PDFs require a text-based copy because OCR is not enabled.
-- Phase 6c provides structured resume editing with imported baselines and provenance, add/remove/reorder, before/after review, local DOCX export, browser-print PDF, and selective/redacted manual AI handoff. ADR-049 also fixes failed-paste data loss, makes section changes explicit in the diff, and preserves text when too many headings prevent safe structuring. Frontend CI, discovery fixtures, and browser acceptance passed on verified implementation/test head `9c60dccc`. See STATUS.md and the [current PR #7 checks](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7/checks); PR #7 remains draft and unmerged pending owner review.
+- Phase 6c provides structured resume editing with imported baselines and provenance, add/remove/reorder, before/after review, local DOCX export, browser-print PDF, and selective/redacted manual AI handoff. ADR-049 also fixes failed-paste data loss, makes section changes explicit in the diff, and preserves text when too many headings prevent safe structuring. Frontend CI, discovery fixtures, and browser acceptance passed on verified implementation/test head `9c60dccc`; PR #7 has since been squash-merged into main. See STATUS.md for current verification evidence.
 
 ## Review boundary
 
-- Consult [STATUS.md](STATUS.md) and the current [Phase 6c pull-request checks](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7/checks) for current verification evidence.
-- Keep any future merge decision and any live discovery run owner-controlled.
+- Consult [STATUS.md](STATUS.md) for current verification evidence.
+- Keep live discovery and publication owner-controlled; they remain manual actions.
 - Discovery remains manual-dispatch-only. No schedule, publication, Pages deployment, or repository visibility change is approved.
 
 ## Engineering workflow

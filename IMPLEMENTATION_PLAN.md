@@ -216,7 +216,7 @@ Design: ADR-045 in DECISIONS.md; review hardening and regression coverage: ADR-0
 - Unit/component tests cover deterministic templates, heuristic checks, sourced context, review controls, activity history, and follow-up controls.
 - Browser acceptance covers two saved versions, lead creation, manual confirmation of submission, response logging, follow-up scheduling, no outbound mutation requests, reload persistence, and encrypted backup compatibility.
 - Formatting, lint, typecheck, unit/component tests, audit, static build, privacy boundary, repository-subpath smoke, browser acceptance, and discovery fixtures pass on the exact final branch head.
-- Documentation records the exact tested commit, actual CI outcomes, remaining limitations, and that PR #8 remains owner-controlled and unmerged.
+- Documentation records the exact tested commit, actual CI outcomes, remaining limitations, and reconciliation of PR #8 against the Phase 6c squash merge. See STATUS.md for current verification and review state.
 
 ## Phase 8 — Public Pages deployment and privacy review
 

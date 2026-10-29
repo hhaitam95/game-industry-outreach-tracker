@@ -38,7 +38,7 @@ Follow [AGENTS.md](AGENTS.md) and [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.m
 - **Design and definition of done:** ADR-038 in DECISIONS.md.
 - The role snapshot contains titles and metadata, not full job requirements. In the absence of user-pasted role text, matching is limited to the selected title. Synthetic sample roles and last-seen status must not be presented as confirmed vacancies.
 - Resume text, pasted role description, private profile projection and analysis remain in browser memory. Do not persist them, log them, upload them, or add them to the public snapshot.
-- Phase 6c remains outstanding: editable structured resume proposal/diff, download generation and optional manual AI handoff are not included in Phase 6b.
+- Phase 6c is now merged: editable structured resume blocks with provenance/diff, local DOCX export, browser-print PDF, and selective/redacted manual AI handoff are implemented. This older Phase 6b section is retained as historical scope context.
 - No live discovery dispatch, schedule enablement, publishing, Pages deployment, repo visibility/permissions change, or merge is performed.
 
 ## Phase 6b implementation status
