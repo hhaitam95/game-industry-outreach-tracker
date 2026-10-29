@@ -7,6 +7,7 @@ import { validateWorkspaceData } from "../lib/private-data/schema.mjs";
 
 type Workspace = ReturnType<typeof validateWorkspaceData>;
 type DraftRecord = Workspace["drafts"][number];
+type ApplicationRecord = Workspace["applications"][number];
 type Purpose = "role-application" | "speculative-introduction" | "networking";
 type ReviewStatus = "draft" | "reviewed" | "ready-for-user";
 
@@ -189,7 +190,7 @@ export default function OutreachWorkspace({ workspace, onSaveWorkspace }: Props)
       return;
     }
     const now = nowIso();
-    const app = {
+    const app: ApplicationRecord = {
       id: crypto.randomUUID(),
       studioName: saved.studioName,
       roleTitle: saved.roleTitle.trim() || "Speculative outreach",
