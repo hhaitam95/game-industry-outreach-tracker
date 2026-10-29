@@ -259,6 +259,22 @@ async function waitForResumeText(kind, expected) {
 }
 
 async function step(name, action) {
+  const legacyResumeAndOutreachSteps = new Set([
+    "Verify versioned outreach and manual application lifecycle",
+    "Verify baseline checks and private profile comparison stay in memory",
+  ]);
+  const legacyRoleHandoffSteps = new Set([
+    "Start isolated role-handoff test fixture",
+    "Verify role-card handoff requires explicit lead save",
+  ]);
+  if (process.env.EXPECT_RESUME_LAB !== "1" && legacyResumeAndOutreachSteps.has(name)) {
+    results.push({ name, status: "SKIP (outside current acceptance scope)" });
+    return;
+  }
+  if (process.env.EXPECT_ROLE_HANDOFF !== "1" && legacyRoleHandoffSteps.has(name)) {
+    results.push({ name, status: "SKIP (outside current acceptance scope)" });
+    return;
+  }
   currentStep = name;
   await action();
   results.push({ name, status: "PASS" });
@@ -270,7 +286,7 @@ function saveReport() {
   const lines = [
     "# Browser Acceptance Report",
     "",
-    "- Scope: synthetic-data browser test for the encrypted local vault, default speculative-application UI, Resume Lab editor/export flow, and retained role-handoff compatibility fixture.",
+    "- Scope: synthetic-data browser test for the speculative-route directory and encrypted local application tracker.",
     "- Runtime: " + safeVersion("node", ["--version"]),
     "- Browser: " + (chromePath ? safeVersion(chromePath, ["--version"]) : "unavailable"),
     "- Result: **" + (failure ? "FAIL" : "PASS") + "**",
@@ -671,7 +687,7 @@ async function main() {
     await client.waitForText("Profile encrypted and saved to this browser.");
   });
 
-  if (process.env.EXPECT_RESUME_LAB === "1") await step("Verify versioned outreach and manual application lifecycle", async () => {
+  await step("Verify versioned outreach and manual application lifecycle", async () => {
     await client.evaluate(
       "(() => { if (window.__phase7OutboundAttempts) return true; window.__phase7OutboundAttempts = []; const nativeFetch = window.fetch.bind(window); window.fetch = (...args) => { const request = args[0]; const method = (args[1]?.method ?? request?.method ?? 'GET').toUpperCase(); if (!['GET', 'HEAD', 'OPTIONS'].includes(method)) window.__phase7OutboundAttempts.push('fetch'); return nativeFetch(...args); }; const nativeOpen = XMLHttpRequest.prototype.open; XMLHttpRequest.prototype.open = function(method, ...args) { this.__phase7Method = String(method).toUpperCase(); return nativeOpen.call(this, method, ...args); }; const nativeSend = XMLHttpRequest.prototype.send; XMLHttpRequest.prototype.send = function(...args) { if (this.__phase7Method && !['GET', 'HEAD', 'OPTIONS'].includes(this.__phase7Method)) window.__phase7OutboundAttempts.push('xhr'); return nativeSend.apply(this, args); }; return true; })()",
     );
@@ -780,7 +796,7 @@ async function main() {
     await client.waitForText("Private workspace storage");
   });
 
-  if (process.env.EXPECT_RESUME_LAB === "1") await step("Verify baseline checks and private profile comparison stay in memory", async () => {
+  await step("Verify baseline checks and private profile comparison stay in memory", async () => {
     const resumeClicked = await client.evaluate(`(() => {
       const item = [...document.querySelectorAll(".nav-link")].find((element) => element.innerText.trim().toLowerCase().includes("resume lab"));
       if (!item) return false;
@@ -972,7 +988,7 @@ async function main() {
     await client.clickButton("Unlock vault");
     await client.waitForText("BROWSER_TEST_STUDIO_CANARY");
   });
-  if (process.env.EXPECT_ROLE_HANDOFF === "1") await step("Start isolated role-handoff test fixture", async () => {
+  await step("Start isolated role-handoff test fixture", async () => {
     fixtureServer = spawn("npm", ["run", "dev", "--", "--host", "127.0.0.1", "--port", "4174", "--strictPort"], {
       cwd: root,
       env: { ...process.env, VITE_BASE_PATH: "/" },
@@ -981,7 +997,7 @@ async function main() {
     await waitForHttp(roleHandoffUrl, fixtureServer);
   });
 
-  if (process.env.EXPECT_ROLE_HANDOFF === "1") await step("Verify role-card handoff requires explicit lead save", async () => {
+  await step("Verify role-card handoff requires explicit lead save", async () => {
     await client.send("Page.navigate", { url: roleHandoffUrl });
     await client.waitForText("Role handoff test fixture");
     await client.clickButton("Review role against your profile");
