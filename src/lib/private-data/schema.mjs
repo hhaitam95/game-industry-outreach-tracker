@@ -211,7 +211,11 @@ function validateLegacyDraft(value) {
 /** @param {unknown} value @returns {OutreachDraft} */
 function validateDraft(value) {
   assertExactKeys(value, DRAFT_KEYS, "Outreach draft");
-  if (typeof value.versionNumber !== "number" || !Number.isSafeInteger(value.versionNumber) || value.versionNumber < 1) {
+  if (
+    typeof value.versionNumber !== "number" ||
+    !Number.isSafeInteger(value.versionNumber) ||
+    value.versionNumber < 1
+  ) {
     throw new Error("Draft version number must be a positive integer.");
   }
   if (typeof value.purpose !== "string" || !DRAFT_PURPOSES.includes(value.purpose)) {
