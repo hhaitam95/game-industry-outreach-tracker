@@ -4,6 +4,7 @@ Meaningful changes are recorded here. Current branch/review state and verificati
 
 ## Unreleased
 
+- Replaced the lone non-canonical dependency tarball URL with `registry.npmjs.org` without changing its integrity hash; added offline registry-origin tests and an enforced Frontend CI check.
 - Updated the Phase 6 browser smoke flow to navigate to Settings before adding and checking the synthetic application record; no application behavior changed.
 - Fixed the Phase 6 browser smoke harness so the baseline-analysis privacy/result check invokes and reads its assertion result; product behavior and persistence boundaries are unchanged.
 - Phase 6b adds deterministic, browser-memory-only resume baseline counts and explicit text-term comparisons against the unlocked profile and selected/manual role text. It does not calculate a fit score, infer eligibility, persist analysis, or invoke an AI API.

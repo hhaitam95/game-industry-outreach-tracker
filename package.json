@@ -14,7 +14,8 @@
     "test": "node --test tests/*.test.mjs",
     "feedback-report": "node scripts/feedback-report.mjs",
     "check:privacy": "node scripts/check-public-data-boundary.mjs",
-    "data:sync": "node scripts/sync-public-snapshot.mjs"
+    "data:sync": "node scripts/sync-public-snapshot.mjs",
+    "check:lockfile-registry": "node scripts/check-lockfile-registry.mjs"
   },
   "dependencies": {
     "react": "^18.2.0",

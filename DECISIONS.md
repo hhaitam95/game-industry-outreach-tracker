@@ -363,3 +363,15 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Test plan:** Current PR browser acceptance plus frontend CI and discovery fixture checks on the same commit.
 - **Definition of done:** All browser acceptance steps pass and the application record is visible after navigation to Settings.
 - **Rollback:** Revert only the smoke-harness navigation and this note if evidence disproves the finding.
+
+## ADR-041 — Lockfile tarballs must use the canonical npm registry
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation
+- **Goal:** Prevent registry-mirror URLs from entering the public dependency lockfile.
+- **Boundary:** Preserve package versions and integrity hashes; change the one mirror URL and add a standard-library validator, tests, and CI check.
+- **Contract:** A resolved tarball must use HTTPS with the exact origin `https://registry.npmjs.org`; reject malformed URLs, credentials, HTTP and lookalike hosts.
+- **Failure mode:** The check exits nonzero and reports only the lockfile package path and a fixed reason, never the full URL.
+- **Test plan:** Deterministic offline tests for allowed URLs, mirror/lookalike hosts, HTTP, credentials, malformed values and malformed lockfile shape; execute in Frontend CI.
+- **Definition of done:** All 194 current resolved URLs validate against the canonical origin, unchanged integrity hashes, test suite and CI step pass.
+- **Rollback:** Revert the registry validator/test/CI/package changes and URL substitution as one commit; retain the previous lockfile integrity hashes.
