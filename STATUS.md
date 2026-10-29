@@ -1,23 +1,26 @@
 # Project Status
 
 **Last updated:** 2026-10-29  
-**Current phase:** Phase 7 implementation is complete and verified for owner review. Phase 5 and Phase 6a/6b are merged into `main`; Phase 6c remains isolated in draft PR #7 and is not a dependency of Phase 7.  
-**Working branch:** `feat/phase7-outreach-tracker`  
-**Verified feature/test head:** `f0637023a23c76a3b1332aa492031917b4d5b53c`. This closeout commit changes documentation only.  
-**Design:** ADR-050 through ADR-053 in DECISIONS.md.  
-**Base/main:** `d56637e921fdb2e23f67e15aa3a518d6477c6842`; no direct changes to `main`.  
-**Review state:** [PR #8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8) is open as a draft and remains unmerged. The owner retains the review and merge decision.
+**Current phase:** Phase 7 outreach drafting and application tracking is being merged after Phase 6c resume editing/export; Phase 8 publication remains the final release gate before Phase 9 stabilization and feedback cycles.  
+**Working branch:** `main` (current delivery state)  
+**Phase 6c:** [PR #7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7) has been squash-merged after its exact-head checks passed.  
+**Phase 7:** [PR #8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8) is being reconciled with the Phase 6c squash commit; original feature checks passed, and exact-head checks must run after reconciliation.  
 
 ## Current verification
 
-- **Frontend CI:** passed on feature head `f063702` — [run 40869635199](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40869635199) and [run 40869627962](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40869627962).
-- **Discovery fixture tests:** passed — [run 40869635187](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40869635187) and [run 40869627958](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40869627958).
-- **Browser acceptance:** passed — [run 40869635290](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40869635290). The synthetic flow covers generated and versioned drafts, creating a lead, explicit submission confirmation, recording a response, scheduling a follow-up, reload/backup persistence, and the no-outbound-mutation boundary.
-- The verified feature adds strict private-workspace v2 validation with a v1 migration, deterministic editable outreach drafts and heuristic pre-send checks, append-only draft revisions, and a private application/activity/follow-up tracker. All private records continue to use the encrypted browser-local vault.
-- This documentation-only closeout does not change application behavior. Check the [current PR #8 checks](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8/checks) for validation triggered by this documentation commit.
-- No automatic mail or application submission, paid AI API, backend, dependency, workflow permission/trigger change, live discovery run, scheduled discovery, publication, Pages deployment, or merge was performed.
+- **Phase 7 original feature head:** Frontend CI passed [40871039135](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40871039135), browser acceptance passed [40871039106](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40871039106), and discovery fixtures passed [40871039110](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40871039110). These checks predate reconciliation with the Phase 6c squash commit; re-run on the reconciled head before merging Phase 7.
+
+
+- **Frontend CI:** passed — [run 40864491781](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864491781) and [run 40864482921](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864482921), including formatting, lint, typecheck, unit tests, dependency audit, build, privacy checks and repository-subpath smoke.
+- **Discovery fixture tests:** passed — [run 40864491922](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864491922) and [run 40864482908](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864482908).
+- **Browser acceptance:** passed — [run 40864491787](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864491787), covering the existing vault regression flow and synthetic Phase 6c edit/export/redaction regressions.
+- The feature provides structured resume editing with imported baselines and provenance, edit/add/remove/reorder, before/after review, term-only review prompts, local DOCX generation, browser-print PDF, and optional selective/redacted manual AI handoff. Resume content remains in page memory and is not persisted or uploaded.
+- This documentation-only closeout does not change application behavior. Check the [current PR #7 checks](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7/checks) for validation triggered by this documentation commit.
+- No real CV/profile/application data or secrets were added. No manual workflow dispatch/rerun, workflow trigger/permission change, dependency change, merge, main-branch change, publication, or deployment was performed.
 
 ## Engineering standards
+
+Follow [AGENTS.md](AGENTS.md) and [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md): design before code, focused modules, failure-path tests, exact-head verification, no CI-as-a-REPL, and at most two CI cycles per cohesive unit. Keep this file as the single source for volatile branch/review/check state; other documents link here.
 
 Follow [AGENTS.md](AGENTS.md) and [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md): record design before code, keep contracts and layers focused, test positive/negative/failure paths, inspect full diffs, avoid CI-as-a-REPL, and use no more than two CI cycles per cohesive implementation unit. Keep this file as the single source for volatile branch/review/check state; other documents link here.
 
@@ -27,7 +30,7 @@ Follow [AGENTS.md](AGENTS.md) and [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.m
 - **Acceptance result:** The requested Part 1 corrections are present on exact head `d4ef4c82fde4b80ffd1cb26792719602c0d25afd`. Frontend CI passed [PR run 40845263877](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40845263877), browser acceptance passed [PR run 40845264018](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40845264018), and discovery fixtures passed [PR run 40845263896](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40845263896). The 6b push runs also passed: [Frontend CI 40845253383](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40845253383) and [discovery fixtures 40845253412](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40845253412).
 - **Part 1 details checked:** the browser-clear evaluator uses a template literal; stop words remain one space-delimited string; the parser import is one line; specified JSX attributes are formatted one per line; privacy copy and both assertion wraps match the requested shape; CI prints an exact Prettier diff on format-check failure.
 - **Prior repair diagnostics:** `a8c74f96` fixed the uninvoked analysis-state evaluator; `154bc097` fixed Settings navigation in the browser smoke. The failures were test-harness issues, not product runtime defects; the subsequent exact-head runs linked above pass.
-- **Acceptance decision:** Phase 6a+6b Part 1 meets its current CI gate on `154bc097`. Do not label Phase 6 complete overall; Part 2 hygiene and Phase 6c are still outstanding.
+- **Acceptance decision:** This is historical evidence from the earlier Phase 6a/6b branch state. Parser/registry hygiene and CSP were subsequently completed; Phase 6a/6b are now merged to main. Phase 6c is the active implementation slice.
 - **Links:** [Phase 6a+6b draft PR #6](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/6); current PR-head checks: [Frontend CI](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40842791525), [browser acceptance](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40842791518), [discovery fixtures](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40842791533).
 
 ## Phase 6b implementation boundary

@@ -15,7 +15,7 @@ A personal, evidence-driven workspace for discovering video game studios and opp
 - GitHub Actions validates formatting, lint, types, unit tests, dependency audit, privacy boundaries, the production build, and browser-level vault create/save/reload/lock/export/restore behavior.
 - Phase 7 (this branch) adds a versioned encrypted-workspace schema with v1 migration, editable and versioned outreach drafts, heuristic pre-send checks, and application/activity/follow-up tracking. Submissions require explicit user confirmation; the app never sends outreach, invokes an AI API, or uploads private records.
 - Settings supports a passphrase-protected local vault, profile fields, basic application records, encrypted backup export/import, locking, and local deletion.
-- Phase 6a/6b provide browser-local DOCX/PDF/TXT extraction, source-linked resume guidance, and deterministic profile/role comparison. Original files and extracted text stay in tab memory and are not saved or uploaded. Phase 6c is tracked separately in draft PR #7 and is not included in this branch.
+- Phase 6 adds browser-local DOCX/PDF/TXT extraction, deterministic review, editable structured blocks with provenance and before/after diff, locally generated DOCX, browser print/Save as PDF, and an optional explicitly disclosed/redacted manual AI handoff. Original files and edits stay in page memory unless the user requests an export; no resume text is uploaded or stored in the vault by this workflow. There is no server-side runtime, remote sync, raw CV storage, or automatic outbound communication.
 
 ## Product goals
 
