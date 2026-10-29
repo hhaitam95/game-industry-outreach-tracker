@@ -34,3 +34,53 @@ test("ResumeLab bundles source-linked guidance and states local-only extraction 
     await server.close();
   }
 });
+
+test("ResumeEditorPanel exposes structured editing, review, local export, and explicit handoff controls", async () => {
+  const server = await createServer({
+    configFile: "vite.config.ts",
+    server: { middlewareMode: true },
+    appType: "custom",
+    logLevel: "silent",
+  });
+  try {
+    const module = await server.ssrLoadModule("/src/components/ResumeEditorPanel.tsx");
+    const markup = renderToStaticMarkup(
+      React.createElement(module.ResumeEditorPanel, {
+        sourceText: "Professional Summary\nSynthetic support engineer.\nSkills\nPython, REST APIs",
+        profile: {
+          id: "profile-primary",
+          displayName: "Synthetic Profile",
+          headline: "Synthetic engineer",
+          professionalSummary: "Synthetic profile evidence",
+          targetRoles: ["Developer Support"],
+          skills: ["Python"],
+          updatedAt: "2026-01-01T00:00:00.000Z",
+        },
+      }),
+    );
+    assert.match(markup, /data-testid="resume-editor"/);
+    assert.match(markup, /data-testid="resume-editor-content-block-1"/);
+    assert.match(markup, /data-testid="resume-export-docx"/);
+    assert.match(markup, /data-testid="resume-export-pdf"/);
+    assert.ok(markup.includes("Review before / after changes"));
+    assert.match(markup, /Review manual AI handoff/);
+    assert.match(markup, /does not connect to ChatGPT/);
+    assert.doesNotMatch(markup, /Synthetic profile evidence/);
+
+    const oversizedStructure = Array.from(
+      { length: 41 },
+      (_, index) => "Skills\nSynthetic section " + (index + 1),
+    ).join("\n");
+    const fallbackMarkup = renderToStaticMarkup(
+      React.createElement(module.ResumeEditorPanel, {
+        sourceText: oversizedStructure,
+        profile: null,
+      }),
+    );
+    assert.match(fallbackMarkup, /data-testid="resume-editor"/);
+    assert.match(fallbackMarkup, /Synthetic section 41/);
+    assert.equal((fallbackMarkup.match(/data-testid="resume-editor-block"/g) ?? []).length, 1);
+  } finally {
+    await server.close();
+  }
+});

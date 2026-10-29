@@ -461,3 +461,73 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Push CI:** Frontend CI passed [40849588956](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849588956) and [40849594611](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849594611); discovery fixtures passed [40849588962](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849588962) and [40849594640](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849594640).
 - **PR CI:** Frontend CI passed [40849604007](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849604007), discovery fixtures passed [40849604001](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849604001), and browser acceptance passed on run [40849603965, attempt 2](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849603965). The first browser attempt failed before app interaction with `browser-debug-port-unavailable`; no code changed before the successful retry.
 - The browser assertion checked every policy directive after the page rendered; the existing full browser suite then passed. No CSP rollback or Phase 8 deferral is needed.
+
+
+## ADR-045 — Phase 6c structured resume editing, review diff, export, and manual handoff
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation
+- **Goal:** Turn locally extracted text into editable, structured resume blocks with visible provenance and before/after review, then export a generated DOCX or browser-print PDF without persisting resume content.
+- **Boundaries:** No server, network upload, AI API, automatic application, claim of preserving original layout, OCR, fit score, or vault schema change. Editing/export data lives in component memory until the user initiates download or explicit manual copy.
+- **Data contract:** Add a versioned, strictly validated in-memory model in src/lib/resume/resume-model.mjs. Blocks have a stable local ID, allowlisted section, bounded plain-text content, origin (imported, typed, or ai-paste), original content when imported, and a modified flag. Unknown fields, invalid origins, duplicate IDs, excessive block count/length, and malformed inputs fail closed.
+- **Structure/provenance:** Split only on recognized section headings; do not infer employer/date/role boundaries or rewrite bullets. Unrecognized text stays in an explicit Other block. Compare current blocks to their imported baseline and flag meaningful terms absent from the original extracted resume and active profile projection. A flag means verify this wording, not a factual verdict; exports are not blocked.
+- **DOCX contract:** Generate a simple, single-column Office Open XML document locally with a minimal standards-based ZIP writer; no new runtime dependency. Keep document metadata generic, use plain-text XML escaping and paragraph styles, and verify resulting ZIP/XML and text round-trip with the existing Mammoth extractor in tests.
+- **PDF contract:** Render the current structured version in a dedicated print sheet and call the browser print dialog only from the user’s button. Print CSS hides navigation, editing controls, and unrelated content. PDF output is browser-controlled; the UI explains the user should select Save as PDF and review the result.
+- **Manual AI handoff:** A separate disclosure step lists the exact selected content to be copied. Email, phone-like and URL patterns can be redacted by default/toggle; copying is user-initiated, pasted AI text receives ai-paste provenance and is never fetched or posted by the app.
+- **Failure/privacy tests:** Test valid and invalid model shapes, section split/fallback, diff, unsupported-term flags, Unicode XML/ZIP correctness, malformed content, export parser round-trip, and redaction. Browser/component tests check edit, clear/navigation state, print sheet, copy disclosure, and that no resume text enters network/storage/logging paths. Synthetic fixtures only.
+- **Definition of done:** Phase 6a/6b behavior remains unchanged; edit/add/remove/reorder of structured blocks works; imported/typed/AI provenance and before/after diff are visible; unsupported-term prompts are explainable; generated DOCX round-trips; print view supports local Save as PDF; disclosure/redaction precedes copy; all exact-head CI gates pass and STATUS/HANDOFF reflect evidence.
+- **Rollback:** Revert the Phase 6c code, tests and UI as a single feature unit while retaining this accepted decision and documenting the rollback.
+
+## ADR-046 — Phase 6c initial verification deferral after two CI cycles
+
+- **Date:** 2026-10-29
+- **Status:** Historical deferral; follow-up verification unit supersedes the unresolved browser issue.
+- **Context:** The original implementation unit used two CI cycles and still had a browser acceptance failure. The engineering standard prohibited additional speculative cycles in that unit.
+- **Evidence:** Head `56cd232` failed formatting/test syntax/typechecking; head `f5480bf` passed lint, typecheck, build, privacy checks and discovery fixtures, while formatting, a synthetic section-split test and browser acceptance still failed.
+- **Decision:** Stop work in the original implementation unit after two cycles. A separately scoped browser diagnosis unit (ADR-047) later identified and corrected two non-boolean DevTools wait predicates (ADR-048). No workflow was manually dispatched or rerun.
+- **Outcome:** The browser-specific issue is now resolved by exact-head evidence in ADR-048. This historical record is retained to explain why the work was split into separate units.
+
+## ADR-047 — Isolate Phase 6c browser acceptance checkpoints
+
+- **Date:** 2026-10-29
+- **Status:** Resolved; superseded for the final predicate correction by ADR-048.
+- **Context:** The PR browser job reported a failure inside one broad Resume Lab step. The initial safe report identified a DevTools protocol-command failure but could not distinguish extraction, editor rendering, handoff disclosure, or local-only boundary checks.
+- **Decision:** Split the browser test into named synthetic-data checkpoints, extending the fixed safe-reason allowlist only for fixed assertion names and expected UI states. No raw exceptions, source content, page content or browser logs are exposed. Acceptance assertions were preserved.
+- **Cycle 1 evidence:** [Run 40854862156](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40854862156) passed the initial state and TXT/DOCX/PDF extraction, then isolated failure at editor/export rendering. The matching wait predicate returned a DOM element where the harness requires a by-value serializable result.
+- **Cycle 2 evidence:** [Run 40855085679](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40855085679) passed 9/10 checkpoints. Editor rendering passed after making that predicate boolean; it then exposed the same issue in the handoff-panel predicate.
+- **Outcome:** The second predicate correction is recorded in ADR-048. The diagnostic unit stayed within two CI cycles and made no workflow or permission changes.
+
+## ADR-048 — Return serializable booleans from all Phase 6c wait predicates
+
+- **Date:** 2026-10-29
+- **Status:** Accepted; exact-head CI and browser acceptance passed.
+- **Context:** The handoff-disclosure browser checkpoint also returned a DOM element from a DevTools `Runtime.evaluate` expression configured for by-value results.
+- **Decision:** Wrap DOM-presence wait predicates in `Boolean(...)`, and audit the wait expressions added for Phase 6c so they return scalar booleans rather than DOM nodes. Preserve every assertion and privacy check.
+- **Verification:** The implementation code was verified on [head 5752946](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/57529467913053b8f48902c7e283fd6b8fabe951). [Frontend CI](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40855486074), [browser acceptance](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40855486084), and [discovery fixtures](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40855486192) passed on the exact head. Push-triggered Frontend CI and discovery fixtures also passed ([40855478878](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40855478878), [40855478906](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40855478906)).
+- **Browser evidence:** The accepted artifact reports 22/22 synthetic-data checkpoints passed, including TXT/DOCX/PDF extraction, structured editor/export controls, handoff disclosure, local-only boundary, failed-extraction preservation, clearing, and the existing encrypted-vault lock/unlock/backup paths.
+- **Privacy and review:** Fixtures contain synthetic data only; no real CV/profile data is committed. PR #7 remains open and unmerged; the owner retains readiness and merge decisions.
+
+
+## ADR-049 — Phase 6c review hardening: preserve failed edits and bound parser fallback
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation
+- **Goal:** Close three review findings before Phase 6 is marked complete: preserve pasted AI text when a block addition fails, make section changes explicit in the before/after review, and prevent excessive recognized headings from crashing the editor.
+- **Boundaries:** Keep Phase 6c on `feat/phase6c-resume-export`; do not merge or change `main`, workflow triggers/permissions, dependencies, vault schema, or data/privacy boundaries.
+- **Behavior:** Clear the AI-paste input only after a successful model update. Show both previous and current section labels when a section is changed. If recognized headings would exceed the 40-block limit, preserve the complete input as one `Other` block instead of throwing away the draft or crashing render.
+- **Data contract:** Keep the versioned resume model and existing 40-block/150,000-character limits. The overflow fallback is deterministic and carries the original text unchanged (apart from the parser's existing outer trim); it must not infer additional section boundaries.
+- **Failure modes:** Invalid or over-limit edits retain the prior document and retain pasted text for correction. Unsupported text remains visible; no resume contents enter persistence, logs, URLs, or network requests.
+- **Test plan:** Add synthetic unit tests for more-than-40 heading fallback and failure-safe model behavior where practical; extend browser acceptance to exercise section-label diff rendering and failed AI-paste preservation; keep existing DOCX, print, redaction, privacy, vault and discovery checks intact.
+- **Definition of done:** Formatting, lint, typecheck, unit/component tests, audit, production build, privacy checks, subpath browser acceptance, and discovery fixtures pass on the final exact branch head; STATUS.md and HANDOFF.md reflect the actual commit/check evidence.
+- **Rollback:** Revert the review-hardening implementation and tests as one unit, preserving this decision record and documenting the reason.
+
+
+### ADR-049 implementation outcome
+
+- **Implementation/test head:** [9c07e20](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/9c07e205f5423842c7b379476e20712eee617725).
+- Fixed AI-paste input clearing only after successful addition; section changes now show both the previous and current section in the diff; more than 40 recognized headings deterministically fall back to one `Other` block preserving all source text.
+- Added unit/component regression coverage and two interactive browser acceptance checkpoints for section-change disclosure and failed AI-paste preservation.
+- **Frontend CI:** passed [run 40864202641](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864202641); formatting, lint, typecheck, unit tests, audit, build, privacy checks and repository-subpath smoke all passed.
+- **Discovery fixtures:** passed [run 40864202592](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864202592).
+- **Browser acceptance:** passed [run 40864202680](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864202680), 24/24 synthetic-data checkpoints.
+- No manual workflow dispatch or rerun, workflow/permission change, dependency change, main-branch change, or personal data was introduced.

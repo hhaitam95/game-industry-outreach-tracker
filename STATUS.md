@@ -1,19 +1,25 @@
 # Project Status
 
 **Last updated:** 2026-10-29  
-**Current phase:** Part 1 is green; Phase 6 parser/registry hygiene and CSP are implemented and verified on exact code head `b3b196da`. Frontend CI, browser acceptance (retry attempt 2), and discovery fixtures passed. Phase 6c remains gated on the owner merging PR #4 with a regular merge, retargeting PR #6 to `main`, and then merging PR #6.
-**Working branch:** feat/phase6b-resume-analysis (fast-forwarded into the PR #6 branch after each cohesive commit)  
-**Base/main:** 07d8e15cec544e56a09fbcab44202dc7051753c6 (unchanged; no direct changes to main).
+**Current phase:** Phase 6c implementation is complete and verified for owner review. Phase 5 and Phase 6a/6b are merged into `main`; Phase 6c remains isolated on its feature branch pending the owner's review/merge decision.  
+**Working branch:** `feat/phase6c-resume-export`  
+**Verified implementation/test head:** `9c60dccc6991dcd9ca38a820a9aecef13ce2a8b3`. This closeout commit changes documentation only.  
+**Design:** ADR-049 in DECISIONS.md.  
+**Base/main:** `d56637e921fdb2e23f67e15aa3a518d6477c6842`; no direct changes to `main`.  
+**Review state:** [PR #7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7) remains open as a draft and unmerged. The owner retains the readiness and merge decision.
 
-**Merge plan:** The owner merges PR #4 with a regular merge commit, not squash, to preserve the Phase 6 ancestry. After PR #4 merges, retarget PR #6 to `main`. Keep both PRs unmerged by the implementation agent.
+## Current verification
 
-## Engineering standards for remaining work
+- **Frontend CI:** passed — [run 40864491781](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864491781) and [run 40864482921](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864482921), including formatting, lint, typecheck, unit tests, dependency audit, build, privacy checks and repository-subpath smoke.
+- **Discovery fixture tests:** passed — [run 40864491922](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864491922) and [run 40864482908](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864482908).
+- **Browser acceptance:** passed — [run 40864491787](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864491787), covering the existing vault regression flow and synthetic Phase 6c edit/export/redaction regressions.
+- The feature provides structured resume editing with imported baselines and provenance, edit/add/remove/reorder, before/after review, term-only review prompts, local DOCX generation, browser-print PDF, and optional selective/redacted manual AI handoff. Resume content remains in page memory and is not persisted or uploaded.
+- This documentation-only closeout does not change application behavior. Check the [current PR #7 checks](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7/checks) for validation triggered by this documentation commit.
+- No real CV/profile/application data or secrets were added. No manual workflow dispatch/rerun, workflow trigger/permission change, dependency change, merge, main-branch change, publication, or deployment was performed.
 
-- Follow AGENTS.md and IMPLEMENTATION_PLAN.md: publish a design note and definition of done before code; keep pure domain logic separate from I/O/UI; test success and failure paths; update docs with implementation.
-- This file is the single source for volatile branch/review/run details. Other docs should point here instead of duplicating moving SHAs or run IDs.
-- Keep each delivery slice in its own branch and draft PR, stacked in order. Do not merge any PR as part of implementation.
-- Current source repository visibility is public. Never commit private candidate records, resumes, drafts, applications, contact details, credentials, or secrets.
-- Avoid using CI as a formatter/linter REPL. When format checking fails, use the formatter-diff diagnostic step added immediately after it, then make the exact formatted fixes in one commit. At most two CI cycles per unit; after that, take the simplest route and log it in DECISIONS.md.
+## Engineering standards
+
+Follow [AGENTS.md](AGENTS.md) and [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md): design before code, focused modules, failure-path tests, exact-head verification, no CI-as-a-REPL, and at most two CI cycles per cohesive unit. Keep this file as the single source for volatile branch/review/check state; other documents link here.
 
 ## Phase 6a acceptance status
 
@@ -21,7 +27,7 @@
 - **Acceptance result:** The requested Part 1 corrections are present on exact head `d4ef4c82fde4b80ffd1cb26792719602c0d25afd`. Frontend CI passed [PR run 40845263877](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40845263877), browser acceptance passed [PR run 40845264018](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40845264018), and discovery fixtures passed [PR run 40845263896](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40845263896). The 6b push runs also passed: [Frontend CI 40845253383](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40845253383) and [discovery fixtures 40845253412](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40845253412).
 - **Part 1 details checked:** the browser-clear evaluator uses a template literal; stop words remain one space-delimited string; the parser import is one line; specified JSX attributes are formatted one per line; privacy copy and both assertion wraps match the requested shape; CI prints an exact Prettier diff on format-check failure.
 - **Prior repair diagnostics:** `a8c74f96` fixed the uninvoked analysis-state evaluator; `154bc097` fixed Settings navigation in the browser smoke. The failures were test-harness issues, not product runtime defects; the subsequent exact-head runs linked above pass.
-- **Acceptance decision:** Phase 6a+6b Part 1 meets its current CI gate on `154bc097`. Do not label Phase 6 complete overall; Part 2 hygiene and Phase 6c are still outstanding.
+- **Acceptance decision:** This is historical evidence from the earlier Phase 6a/6b branch state. Parser/registry hygiene and CSP were subsequently completed; Phase 6a/6b are now merged to main. Phase 6c is the active implementation slice.
 - **Links:** [Phase 6a+6b draft PR #6](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/6); current PR-head checks: [Frontend CI](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40842791525), [browser acceptance](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40842791518), [discovery fixtures](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40842791533).
 
 ## Phase 6b implementation boundary
