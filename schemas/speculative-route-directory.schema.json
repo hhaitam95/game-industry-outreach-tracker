@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Speculative-application route directory",
+  "description": "Strict, versioned public contract. Route evidence is reviewed by a human; the schema validates record shape, not official-site claims.",
+  "type": "object",
+  "required": ["schemaVersion", "generatedAt", "studios", "routes"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "studios": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": { "$ref": "#/$defs/studio" },
+      "x-uniqueBy": "id"
+    },
+    "routes": {
+      "type": "array",
+      "maxItems": 10000,
+      "items": { "$ref": "#/$defs/speculativeRoute" },
+      "x-uniqueBy": "id"
+    }
+  },
+  "$defs": {
+    "studio": {
+      "title": "Minimal studio entity",
+      "type": "object",
+      "required": ["id", "name", "officialWebsiteUrl", "homeCountryCode"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "name": { "type": "string", "minLength": 1, "maxLength": 180 },
+        "officialWebsiteUrl": {
+          "type": "string",
+          "maxLength": 2000,
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "homeCountryCode": {
+          "type": ["string", "null"],
+          "pattern": "^[A-Z]{2}$"
+        }
+      }
+    },
+    "speculativeRoute": {
+      "title": "Speculative-application route",
+      "type": "object",
+      "required": [
+        "id",
+        "studioId",
+        "routeUrl",
+        "evidenceUrl",
+        "routeType",
+        "status",
+        "countryScope",
+        "countryCodes",
+        "language",
+        "disciplineTags",
+        "workModel",
+        "matchedPhraseCategory",
+        "evidenceSummary",
+        "contentHash",
+        "firstSeenAt",
+        "lastCheckedAt",
+        "lastVerifiedAt"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "studioId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "routeUrl": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000,
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "evidenceUrl": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000,
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "routeType": {
+          "type": "string",
+          "enum": ["dedicated-page", "ats-posting", "email-invite", "talent-community"]
+        },
+        "status": {
+          "type": "string",
+          "enum": ["candidate", "verified", "needs-review", "stale"]
+        },
+        "countryScope": {
+          "type": "string",
+          "enum": ["worldwide", "country-limited", "unknown"]
+        },
+        "countryCodes": {
+          "type": "array",
+          "maxItems": 100,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[A-Z]{2}$" }
+        },
+        "language": {
+          "type": ["string", "null"],
+          "maxLength": 35,
+          "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$"
+        },
+        "disciplineTags": {
+          "type": "array",
+          "maxItems": 20,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "art",
+              "animation",
+              "engineering",
+              "design",
+              "production",
+              "audio",
+              "quality-assurance",
+              "narrative",
+              "other"
+            ]
+          }
+        },
+        "workModel": {
+          "type": "string",
+          "enum": ["remote", "hybrid", "onsite", "not-stated"]
+        },
+        "matchedPhraseCategory": {
+          "type": "string",
+          "enum": [
+            "explicit-speculative-application",
+            "unsolicited-application",
+            "general-application-invitation",
+            "talent-pool-invitation"
+          ]
+        },
+        "evidenceSummary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "contentHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "firstSeenAt": { "type": "string", "format": "date-time" },
+        "lastCheckedAt": { "type": "string", "format": "date-time" },
+        "lastVerifiedAt": { "type": ["string", "null"], "format": "date-time" }
+      }
+    }
+  }
+}
