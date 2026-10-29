@@ -46,11 +46,7 @@ export function buildOutreachDraft(input) {
     : headline
       ? "I'm a " + headline + "."
       : "I'm reaching out to introduce myself.";
-  const lines = [
-    "Hello " + studioName + " team,",
-    "",
-    introduction,
-  ];
+  const lines = ["Hello " + studioName + " team,", "", introduction];
   if (summary) lines.push("", summary);
   lines.push(
     "",
@@ -84,7 +80,9 @@ export function checkOutreachDraft(input) {
     ...(Array.isArray(profile.skills) ? profile.skills : []),
     ...(Array.isArray(profile.targetRoles) ? profile.targetRoles : []),
   ].filter((item) => typeof item === "string" && item.trim().length >= 3);
-  const matchedFacts = [...new Set(facts.map((item) => item.trim()).filter((item) => normalizedBody.includes(normalize(item))))];
+  const matchedFacts = [
+    ...new Set(facts.map((item) => item.trim()).filter((item) => normalizedBody.includes(normalize(item)))),
+  ];
   const genericPhrases = GENERIC_PHRASES.filter((phrase) => normalizedBody.includes(normalize(phrase)));
   const contactPatterns = {
     email: (body.match(EMAIL_PATTERN) ?? []).length,
@@ -98,32 +96,40 @@ export function checkOutreachDraft(input) {
       id: "personalization",
       label: "Studio personalization",
       status: studioName && normalizedBody.includes(normalize(studioName)) ? "pass" : "warning",
-      message: studioName && normalizedBody.includes(normalize(studioName))
-        ? "The studio name appears in the draft."
-        : "Name the studio naturally and verify that the message is specific to it.",
+      message:
+        studioName && normalizedBody.includes(normalize(studioName))
+          ? "The studio name appears in the draft."
+          : "Name the studio naturally and verify that the message is specific to it.",
     },
     {
       id: "role-relevance",
       label: "Role relevance",
       status: roleTitle ? (normalizedBody.includes(normalize(roleTitle)) ? "pass" : "warning") : "review",
       message: roleTitle
-        ? (normalizedBody.includes(normalize(roleTitle)) ? "The selected role appears in the draft." : "The selected role is not mentioned; add role-specific context if appropriate.")
+        ? normalizedBody.includes(normalize(roleTitle))
+          ? "The selected role appears in the draft."
+          : "The selected role is not mentioned; add role-specific context if appropriate."
         : "No role was selected. Confirm that a speculative introduction is the right route.",
     },
     {
       id: "motivation",
       label: "Specific motivation",
-      status: motivation && normalizedBody.includes(normalize(motivation)) && motivation.length >= 25 ? "pass" : "warning",
-      message: motivation && normalizedBody.includes(normalize(motivation)) && motivation.length >= 25
-        ? "Your stated reason is included. Check that it is genuine and specific."
-        : "Add and review a concrete reason for contacting this team; the check cannot judge sincerity.",
+      status:
+        motivation && normalizedBody.includes(normalize(motivation)) && motivation.length >= 25 ? "pass" : "warning",
+      message:
+        motivation && normalizedBody.includes(normalize(motivation)) && motivation.length >= 25
+          ? "Your stated reason is included. Check that it is genuine and specific."
+          : "Add and review a concrete reason for contacting this team; the check cannot judge sincerity.",
     },
     {
       id: "factual-grounding",
       label: "Approved profile facts",
       status: matchedFacts.length ? "review" : "warning",
       message: matchedFacts.length
-        ? matchedFacts.length + " approved profile phrase(s) matched: " + matchedFacts.slice(0, 5).join(", ") + ". Phrase matching is not fact-checking."
+        ? matchedFacts.length +
+          " approved profile phrase(s) matched: " +
+          matchedFacts.slice(0, 5).join(", ") +
+          ". Phrase matching is not fact-checking."
         : "No approved profile phrase matched. Verify every personal claim and remove unsupported achievements.",
     },
     {
@@ -131,30 +137,41 @@ export function checkOutreachDraft(input) {
       label: "Generic wording",
       status: genericPhrases.length ? "warning" : "pass",
       message: genericPhrases.length
-        ? "Review generic phrase(s): " + genericPhrases.join("; ") + ". Replace them with concrete context where possible."
+        ? "Review generic phrase(s): " +
+          genericPhrases.join("; ") +
+          ". Replace them with concrete context where possible."
         : "No listed generic phrase was detected; still read the message for specificity.",
     },
     {
       id: "tone",
       label: "Tone and readability",
       status: excessiveExclamation || allCapsWords.length >= 3 ? "warning" : "review",
-      message: excessiveExclamation || allCapsWords.length >= 3
-        ? "Check emphatic punctuation or all-caps wording for a professional tone."
-        : "Read the full draft aloud and confirm it sounds like you.",
+      message:
+        excessiveExclamation || allCapsWords.length >= 3
+          ? "Check emphatic punctuation or all-caps wording for a professional tone."
+          : "Read the full draft aloud and confirm it sounds like you.",
     },
     {
       id: "privacy",
       label: "Contact and link review",
       status: contactPatterns.email || contactPatterns.phone || contactPatterns.url ? "review" : "pass",
-      message: contactPatterns.email || contactPatterns.phone || contactPatterns.url
-        ? "Detected " + contactPatterns.email + " email-like value(s), " + contactPatterns.phone + " phone-like value(s), and " + contactPatterns.url + " URL(s). Confirm each disclosure is intentional."
-        : "No common email, phone, or URL pattern was detected.",
+      message:
+        contactPatterns.email || contactPatterns.phone || contactPatterns.url
+          ? "Detected " +
+            contactPatterns.email +
+            " email-like value(s), " +
+            contactPatterns.phone +
+            " phone-like value(s), and " +
+            contactPatterns.url +
+            " URL(s). Confirm each disclosure is intentional."
+          : "No common email, phone, or URL pattern was detected.",
     },
     {
       id: "human-control",
       label: "Final human review",
       status: "review",
-      message: "This checklist is heuristic only. Review every claim and recipient; the app never sends or submits anything.",
+      message:
+        "This checklist is heuristic only. Review every claim and recipient; the app never sends or submits anything.",
     },
   ];
   return { checks, matchedProfileFacts: matchedFacts, genericPhrases, contactPatterns };
