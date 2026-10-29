@@ -22,7 +22,7 @@ test("structureResumeText recognizes known headings and keeps unrecognized text 
       "Experience: Maintained Python services.",
       "Skills",
       "Python, REST APIs",
-    ].join("\\n"),
+    ].join("\n"),
   );
   assert.deepEqual(
     document.blocks.map((block) => block.section),
@@ -48,10 +48,7 @@ test("model validates exact keys, origins, duplicate IDs, and length limits", ()
     () => validateResumeDocument({ ...base, blocks: [{ ...base.blocks[0], origin: "unknown" }] }),
     /origin is unsupported/i,
   );
-  assert.throws(
-    () => validateResumeDocument({ ...base, blocks: [base.blocks[0], base.blocks[0]] }),
-    /duplicate IDs/i,
-  );
+  assert.throws(() => validateResumeDocument({ ...base, blocks: [base.blocks[0], base.blocks[0]] }), /duplicate IDs/i);
   assert.throws(() => structureResumeText("x".repeat(MAX_RESUME_TEXT_CHARS + 1)), /supported limit/i);
   assert.throws(() => updateResumeBlock(base, base.blocks[0].id, { origin: "typed" }), /unsupported field/i);
 });
@@ -64,9 +61,18 @@ test("updates, additions, removal, and reorder are visible in the review diff", 
   document = addResumeBlock(document, "Projects", "typed", "Synthetic project description");
   document = moveResumeBlock(document, skillsId, -1);
   const diff = getResumeDiff(document);
-  assert.equal(diff.some((entry) => entry.id === summaryId && entry.status === "modified"), true);
-  assert.equal(diff.some((entry) => entry.status === "reordered"), true);
-  assert.equal(diff.some((entry) => entry.status === "added"), true);
+  assert.equal(
+    diff.some((entry) => entry.id === summaryId && entry.status === "modified"),
+    true,
+  );
+  assert.equal(
+    diff.some((entry) => entry.status === "reordered"),
+    true,
+  );
+  assert.equal(
+    diff.some((entry) => entry.status === "added"),
+    true,
+  );
   document = removeResumeBlock(document, summaryId);
   assert.equal(
     getResumeDiff(document).some((entry) => entry.id === summaryId && entry.status === "removed"),

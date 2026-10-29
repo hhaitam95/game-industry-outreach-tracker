@@ -4,16 +4,11 @@ export const RESUME_MODEL_VERSION = 1;
 export const MAX_RESUME_BLOCKS = 40;
 export const MAX_RESUME_TEXT_CHARS = 150_000;
 
-export const RESUME_SECTIONS = Object.freeze([
-  ...RESUME_SECTION_GROUPS.map((section) => section.label),
-  "Other",
-]);
+export const RESUME_SECTIONS = Object.freeze([...RESUME_SECTION_GROUPS.map((section) => section.label), "Other"]);
 const VALID_SECTIONS = new Set(RESUME_SECTIONS);
 const VALID_ORIGINS = new Set(["imported", "typed", "ai-paste"]);
 const SECTION_ALIASES = new Map(
-  RESUME_SECTION_GROUPS.flatMap((section) =>
-    section.aliases.map((alias) => [normalizeHeading(alias), section.label]),
-  ),
+  RESUME_SECTION_GROUPS.flatMap((section) => section.aliases.map((alias) => [normalizeHeading(alias), section.label])),
 );
 
 const STOP_WORDS = new Set(
@@ -295,10 +290,7 @@ export function addResumeBlock(input, section = "Other", origin = "typed", conte
     throw new Error("Resume block content exceeds the supported limit.");
   }
   if (document.blocks.length >= MAX_RESUME_BLOCKS) throw new Error("Resume document contains too many blocks.");
-  if (
-    document.blocks.reduce((sum, block) => sum + block.content.length, 0) + content.length >
-    MAX_RESUME_TEXT_CHARS
-  ) {
+  if (document.blocks.reduce((sum, block) => sum + block.content.length, 0) + content.length > MAX_RESUME_TEXT_CHARS) {
     throw new Error("Resume document exceeds the supported text limit.");
   }
   let candidateId = document.nextId;
@@ -394,18 +386,11 @@ export function getResumeDiff(input) {
 
 /** @param {string} value */
 function meaningfulTokens(value) {
-  const normalized = value
-    .normalize("NFKD")
-    .replace(/\p{M}/gu, "")
-    .toLocaleLowerCase("en-US");
+  const normalized = value.normalize("NFKD").replace(/\p{M}/gu, "").toLocaleLowerCase("en-US");
   const tokens = new Map();
   for (const match of normalized.matchAll(/[\p{L}\p{N}]+(?:[+#][\p{L}\p{N}]+)*/gu)) {
     const token = match[0];
-    if (
-      STOP_WORDS.has(token) ||
-      (token.length < 3 && token !== "c++" && token !== "c#") ||
-      tokens.has(token)
-    ) {
+    if (STOP_WORDS.has(token) || (token.length < 3 && token !== "c++" && token !== "c#") || tokens.has(token)) {
       continue;
     }
     tokens.set(token, token);

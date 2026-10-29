@@ -35,7 +35,6 @@ test("ResumeLab bundles source-linked guidance and states local-only extraction 
   }
 });
 
-
 test("ResumeEditorPanel exposes structured editing, review, local export, and explicit handoff controls", async () => {
   const server = await createServer({
     configFile: "vite.config.ts",

@@ -26,13 +26,7 @@ const DEFAULT_REDACTIONS: RedactionOptions = {
 
 function profileEvidenceText(profile: ResumeProfile | null) {
   if (!profile) return "";
-  return [
-    profile.displayName,
-    profile.headline,
-    profile.professionalSummary,
-    ...profile.skills,
-    ...profile.targetRoles,
-  ]
+  return [profile.displayName, profile.headline, profile.professionalSummary, ...profile.skills, ...profile.targetRoles]
     .filter((value): value is string => typeof value === "string" && value.trim().length > 0)
     .join("\n");
 }
@@ -100,10 +94,7 @@ export function ResumeEditorPanel({ sourceText, profile }: Props) {
         .trim(),
     [document, selectedForHandoff],
   );
-  const handoffPreview = useMemo(
-    () => redactResumeText(handoffSource, redactions),
-    [handoffSource, redactions],
-  );
+  const handoffPreview = useMemo(() => redactResumeText(handoffSource, redactions), [handoffSource, redactions]);
 
   function applyEdit(edit: (current: StructuredResumeDocument) => StructuredResumeDocument) {
     try {
@@ -112,8 +103,8 @@ export function ResumeEditorPanel({ sourceText, profile }: Props) {
       setNotice("");
     } catch {
       setError(
-      "That edit exceeds the supported document limits or contains invalid input. The previous version was kept.",
-    );
+        "That edit exceeds the supported document limits or contains invalid input. The previous version was kept.",
+      );
     }
   }
 
@@ -130,13 +121,9 @@ export function ResumeEditorPanel({ sourceText, profile }: Props) {
 
   function addAiPaste() {
     if (!aiPaste.trim()) return;
-    applyEdit(
-      (current) => addResumeBlock(current, "Other", "ai-paste", aiPaste.trim()) as StructuredResumeDocument,
-    );
+    applyEdit((current) => addResumeBlock(current, "Other", "ai-paste", aiPaste.trim()) as StructuredResumeDocument);
     setAiPaste("");
-    setNotice(
-      "Pasted suggestions were added as AI-pasted text. Review every claim before using or exporting them.",
-    );
+    setNotice("Pasted suggestions were added as AI-pasted text. Review every claim before using or exporting them.");
   }
 
   function toggleRedaction(field: keyof RedactionOptions, checked: boolean) {
@@ -289,10 +276,11 @@ export function ResumeEditorPanel({ sourceText, profile }: Props) {
                 aria-label={"Section for block " + (index + 1)}
                 value={block.section}
                 onChange={(event) =>
-                  applyEdit((current) =>
-                    updateResumeBlock(current, block.id, {
-                      section: event.currentTarget.value as ResumeSection,
-                    }) as StructuredResumeDocument,
+                  applyEdit(
+                    (current) =>
+                      updateResumeBlock(current, block.id, {
+                        section: event.currentTarget.value as ResumeSection,
+                      }) as StructuredResumeDocument,
                   )
                 }
               >
@@ -311,8 +299,11 @@ export function ResumeEditorPanel({ sourceText, profile }: Props) {
                 rows={Math.min(12, Math.max(4, block.content.split("\n").length))}
                 value={block.content}
                 onChange={(event) =>
-                  applyEdit((current) =>
-                    updateResumeBlock(current, block.id, { content: event.currentTarget.value }) as StructuredResumeDocument,
+                  applyEdit(
+                    (current) =>
+                      updateResumeBlock(current, block.id, {
+                        content: event.currentTarget.value,
+                      }) as StructuredResumeDocument,
                   )
                 }
               />
@@ -356,7 +347,9 @@ export function ResumeEditorPanel({ sourceText, profile }: Props) {
               .filter((item) => item.status !== "unchanged")
               .map((item) => (
                 <article className="resume-editor-diff-item" key={item.id}>
-                  <strong>{item.status[0].toUpperCase() + item.status.slice(1)} · {item.section}</strong>
+                  <strong>
+                    {item.status[0].toUpperCase() + item.status.slice(1)} · {item.section}
+                  </strong>
                   {item.beforeContent !== null ? (
                     <div>
                       <span>Before</span>

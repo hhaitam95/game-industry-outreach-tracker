@@ -477,3 +477,15 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Failure/privacy tests:** Test valid and invalid model shapes, section split/fallback, diff, unsupported-term flags, Unicode XML/ZIP correctness, malformed content, export parser round-trip, and redaction. Browser/component tests check edit, clear/navigation state, print sheet, copy disclosure, and that no resume text enters network/storage/logging paths. Synthetic fixtures only.
 - **Definition of done:** Phase 6a/6b behavior remains unchanged; edit/add/remove/reorder of structured blocks works; imported/typed/AI provenance and before/after diff are visible; unsupported-term prompts are explainable; generated DOCX round-trips; print view supports local Save as PDF; disclosure/redaction precedes copy; all exact-head CI gates pass and STATUS/HANDOFF reflect evidence.
 - **Rollback:** Revert the Phase 6c code, tests and UI as a single feature unit while retaining this accepted decision and documenting the rollback.
+
+
+## ADR-046 — Phase 6c verification deferral after two CI cycles
+
+- **Date:** 2026-10-29
+- **Status:** Deferred; Phase 6c is not accepted.
+- **Context:** The standing engineering standard limits each cohesive implementation unit to two CI cycles and requires the simplest safe route plus a documented limitation afterward.
+- **Evidence:** The first Phase 6c implementation head failed formatter checks, a component-test syntax check, and type checking; discovery fixtures passed. The second head passed lint, typecheck, production build, privacy boundary and discovery fixtures, while Frontend CI still failed formatting and one synthetic test; browser acceptance also failed with the safe feedback report withholding the specific browser-test diagnostic.
+- **Decision:** Apply the exact Prettier diagnostic changes and fix the known newline fixture in a single closeout commit, then stop without a third CI cycle. Do not mark Phase 6c complete, do not mark its draft PR ready, and do not merge until a separately authorized verification unit checks the new head.
+- **Known open check:** The browser acceptance failure on the second head is not sufficiently diagnosed by the safe report. No browser-code change is guessed at to silence it.
+- **Definition of done remains outstanding:** All formatter, unit/component, privacy/build and browser/discovery checks must pass on one exact Phase 6c head. Current implementation changes are not verified by CI because the two-cycle cap was reached.
+- **Rollback:** Keep PR #7 draft and unmerged; revert the feature unit if the owner chooses not to continue after the verification limitation is reviewed.
