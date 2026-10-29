@@ -213,7 +213,7 @@ class DevTools {
 
   async waitForText(text) {
     const labels = {
-      "Your workspace": "workspace after reload",
+      "Speculative applications": "workspace after reload",
       "Private workspace storage": "settings after navigation",
       "Unlock your local vault": "locked vault prompt",
       BROWSER_TEST_STUDIO_CANARY: "application after unlock",
@@ -865,7 +865,7 @@ async function main() {
 
   await step("Reload the app and return to Settings", async () => {
     await client.send("Page.reload");
-    await client.waitForText("Your workspace");
+    await client.waitForText("Speculative applications");
     const settingsClicked = await client.evaluate(`(() => {
       const item = [...document.querySelectorAll(".nav-link")].find((element) => element.innerText.trim().includes("Settings"));
       if (!item) return false;
