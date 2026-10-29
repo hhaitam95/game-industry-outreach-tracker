@@ -555,7 +555,7 @@ async function main() {
     await step("Verify manual AI handoff disclosure defaults", async () => {
       await client.clickButton("Review manual AI handoff");
       await client.waitFor(
-        `document.querySelector('[data-testid="resume-handoff-panel"]')`,
+        `Boolean(document.querySelector('[data-testid="resume-handoff-panel"]'))`,
         "resume-handoff-disclosure-opened",
       );
       const editorReady = await client.evaluate(`(() => ({
