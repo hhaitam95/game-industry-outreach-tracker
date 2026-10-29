@@ -252,8 +252,15 @@ export default function App() {
           </span>
         </header>
         <div className="page-content">
-          <div hidden={!["settings", "outreach", "applications"].includes(activeItem.id)} data-testid="private-data-settings-host">
-            <PrivateDataSettings activePageId={activeItem.id} onNavigate={setActivePageId} onProfileChange={setResumeProfile} />
+          <div
+            hidden={!["settings", "outreach", "applications"].includes(activeItem.id)}
+            data-testid="private-data-settings-host"
+          >
+            <PrivateDataSettings
+              activePageId={activeItem.id}
+              onNavigate={setActivePageId}
+              onProfileChange={setResumeProfile}
+            />
           </div>
           {isOverview ? (
             <OverviewPage onNavigate={setActivePageId} />
