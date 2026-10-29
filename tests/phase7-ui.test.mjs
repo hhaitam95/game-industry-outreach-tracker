@@ -88,7 +88,7 @@ test("OutreachWorkspace renders sourced context, editable drafting, reviews and 
     assert.match(markup, /PRE-SEND REVIEW/);
     assert.match(markup, /PRIVATE VERSION HISTORY/);
     assert.match(markup, /Synthetic CV label/);
-    assert.match(markup, /Verified route/);
+    assert.match(markup, /Choose a studio/);
     assert.match(markup, /does not send messages or contact any service/);
     assert.doesNotMatch(markup, /<script|onerror=/i);
   } finally {
