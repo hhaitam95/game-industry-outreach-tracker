@@ -219,7 +219,7 @@ There is no personal salary floor. Compensation is not a discovery or filtering 
 
 ## 13. Data, privacy, and security
 
-- Keep the current source/specification repository private unless the user explicitly approves a change in visibility after a full privacy review.
+- The source/specification repository is currently public; Phase 8 does not change visibility. Keep all private candidate data out of every branch, artifact, and public output.
 - GitHub Pages is a public static host for this design. GitHub Free Pages requires a public source repository, and published site content is publicly accessible. Do not deploy private user data or secret values to it.
 - Prefer a separate public deployment repository containing only static frontend assets and sanitized public studio/opportunity data. Keep private profile facts, resume contents, drafts, application history, and named contact notes out of that repository.
 - The browser should not send an uploaded resume or private profile data to any backend by default. Use client-side file processing and no third-party analytics/CDN scripts in the initial privacy-sensitive workflow.

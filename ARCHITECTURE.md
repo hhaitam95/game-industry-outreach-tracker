@@ -21,13 +21,13 @@ GitHub Pages serves static HTML, CSS and JavaScript. It does not run Python or s
 - https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages
 - https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site
 
-The current source/specification repository is private and contains project context. Do not switch it to public by default. The proposed zero-cost arrangement is:
-1. Keep this source repository private.
-2. Create a separate public deployment repository containing built static assets and sanitized public studio/opportunity JSON.
-3. Run the discovery/build pipeline in the private source repository; maintain durable check history on a dedicated discovery-state branch; publish an allowlisted static artifact/data set to the public deployment repository only when public data materially changes.
-4. Keep all candidate-specific data in browser-local encrypted storage/export, not in repository data or the static website's files.
+The source/specification repository `hhaitam95/game-industry-outreach-tracker` is currently public; Phase 8 does not change its visibility. Do not assume source privacy, and never place private candidate records, resumes, drafts, application history, credentials, or secrets in this repository.
 
-A second repository and a narrowly scoped deployment token add complexity. This is a deliberate privacy compromise. If the user later agrees to make source code public after a privacy/history review, a single public repository may be simpler, but it must never contain private candidate data.
+The approved Phase 8 hosting direction is a separate public Pages repository: `hhaitam95/game-industry-outreach-tracker-site`. It must contain only generated static build output and the validated public opportunity snapshot. The source repository remains the canonical code and validation location; the public target is an output-only repository, not a second source tree.
+
+The publication workflow is manual-only and defaults to validation without publishing. A publication run requires an explicit publish selection, an existing target repository configured for GitHub Pages, and a narrowly scoped target-repository token stored as an Actions secret. No push trigger, schedule, live-discovery dispatch, or completion-triggered publication is introduced. The target repository and secret are not yet provisioned, so this decision does not claim a live deployment.
+
+Keep all candidate-specific data in browser-local encrypted storage/export, not in repository data or the static website's files.
 
 GitHub Pages is a public website, not a private dashboard. Browser-local data is not automatic cloud sync. If genuine private multi-device storage becomes a requirement, use a separate authenticated backend and persistent storage; Pages can remain the frontend.
 
@@ -56,7 +56,7 @@ The previous Streamlit/SQLite proposal is superseded for the user-facing hosted 
 ## 4. Deployment and data flow
 
 ### Public data pipeline
-Curated registry on main → scheduled Action → source adapters → normalized observations → change detection → durable private state on discovery-state branch → validated public data contract → build static assets → publish sanitized files to Pages repository only when its public projection changes.
+Curated registry on main → owner-triggered Action → source adapters → normalized observations → change detection → durable monitoring state on discovery-state branch → validated public data contract → manually gated static build → publish allowlisted output to the Pages repository only after explicit owner selection.
 
 The source repo may retain operational state and richer research notes. The public deployment output must be created using an explicit allowlist, not by copying the whole source repository. Only public company facts, approved official career-route facts, public vacancy metadata, source URLs, verification state, and public change events may be published. Personal application state, private profile data, uploaded resume text, draft messages, private notes, and named personal contact notes must not be included.
 
@@ -216,8 +216,7 @@ Security controls:
 
 ## 15. Open decisions
 
-- Name/create the public Pages deployment repository and choose its publication flow.
-- Confirm whether two-repository publication overhead is acceptable or whether a different hosting plan is chosen.
+- Provision `hhaitam95/game-industry-outreach-tracker-site`, configure GitHub Pages to serve its `main` branch root, and add a fine-grained `PUBLIC_PAGES_TOKEN` Actions secret in the source repository. The token must be scoped to this one target repository with Contents read/write only.
 - Choose document libraries after testing sample DOCX/PDF formats and licensing.
 - Define exact public JSON schema and initial studio registry.
 - Review the implemented IndexedDB/AES-GCM vault and encrypted-backup recovery UX after browser testing.

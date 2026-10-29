@@ -35,7 +35,7 @@ The binding implementation rules are in [AGENTS.md](AGENTS.md), with the policy 
 - Document GitHub Pages constraints, public deployment split, Actions monitoring, change detection and CV workflow.
 - Add resume guidance sources and synthesized guidelines.
 - Establish repository hygiene, AI-agent instructions, decision records, and handoff.
-- Keep current code and personal context in the private source repository.
+- Keep source code and non-sensitive project context in the source repository; because it is public, keep all personal context out of it.
 
 ### Exit criteria
 - Architecture and privacy boundaries are documented.
@@ -194,20 +194,28 @@ These features require the candidate profile and an active browser vault session
 
 ## Phase 8 — Public Pages deployment and privacy review
 
-### Scope
-- Decide whether to use this public repository as the Pages source or create a separate public deployment repository; this choice is deferred to Phase 8.
-- If deployment is approved, publish only static assets and sanitized public JSON through a narrowly scoped, reviewed workflow.
-- Apply least-privilege Actions permissions, pin third-party actions to reviewed commit SHAs where practical, and review build logs/artifacts for secrets.
-- Add restrictive client-side security policy where supported, bundle assets locally and avoid analytics/CDN scripts in private-data flows.
-- Test public-data allowlist, site URL/base path, public access, private local storage, encrypted export/import and restore.
-- Document that the site is public and browser data is per-device, not cloud sync.
+**Selected architecture:** Separate output-only public repository, `hhaitam95/game-industry-outreach-tracker-site`. The source repository is already public; this phase does not change repository visibility.
 
-### Exit criteria
-- The public site exposes no profile/CV/draft/application records or secrets.
-- The repository is currently public. The deployment target, publishing credentials, and final visibility/privacy model must be reviewed in Phase 8; no visibility change is part of this plan.
-- The deployed artifact builds and displays public data correctly.
-- Manual recovery and privacy checks pass.
-- Any real private data is introduced only after the privacy review.
+### Scope
+- Keep source code, tests, private-data logic, and project docs in this repository; publish only Vite `dist/` output after the existing strict public opportunity schema has validated the bundled snapshot.
+- Add a manual-only publication workflow. Its default run validates/builds without publication; only an explicit publish choice can enter the cross-repository publish job.
+- During an explicitly requested publication run, validate the existing `discovery-state` snapshot via the shared schema before building. Never dispatch discovery or start a schedule from the Pages workflow.
+- Use a target-scoped `PUBLIC_PAGES_TOKEN` Actions secret, `contents: read` for the source workflow's `GITHUB_TOKEN`, and reviewed SHA-pinned actions. Never pass credentials to build-time variables or static artifacts.
+- Validate generated assets and repository subpath; retain the CSP, local assets, and absence of analytics/CDN scripts.
+- Test public-data allowlist, artifact boundary, encrypted browser-local storage, encrypted export/import, restore, and the browser acceptance flow.
+- Document that Pages content is public and browser data is per-device, not cloud sync.
+
+### Definition of done
+- ADR-054 and the hosting/data-flow decision are documented before implementation.
+- The manual-only workflow passes frontend CI, browser acceptance, discovery fixtures, output-boundary checks, and a repository-subpath production build on one exact commit.
+- The published repository contains only built static files plus the validated public snapshot; no candidate profile, CV text, private drafts, application history, contact notes, credentials, or tokens are present.
+- The output-only target repository exists, uses GitHub Pages from its `main` branch root, and is writeable only through the narrowly scoped secret.
+- A manually selected publication run succeeds, the site and its assets load at the expected public URL, and privacy/recovery checks pass.
+- There is no workflow schedule or trigger from discovery completion; no publication occurs in validation-only mode.
+- The last known good publication and rollback procedure are documented.
+
+### External setup dependency
+The connected GitHub tools used for implementation do not expose repository creation, Actions-secret writes, or Pages-settings configuration. Those three target setup actions must be completed by the owner through GitHub settings before a real publication can run. Until then, report Phase 8 as implementation-ready but not deployed.
 
 ## Phase 9 — Optional improvements
 
