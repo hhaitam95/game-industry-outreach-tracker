@@ -107,7 +107,7 @@ test("ApplicationsWorkspace renders status confirmation controls, history, links
     assert.match(markup, /data-testid="application-activity-note"/);
     assert.match(markup, /Synthetic tracker note/);
     assert.match(markup, /Synthetic activity only/);
-    assert.match(markup, /user.*confirm.*submission|confirm.*personally submitted/i);
+    assert.match(markup, /requires you to confirm a real submission/i);
     assert.match(markup, /No .*sent|never inferred|will not submit/i);
     assert.doesNotMatch(markup, /<script|onerror=/i);
   } finally {
