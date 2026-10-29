@@ -209,7 +209,12 @@ export function structureResumeText(input) {
   else if (leading.some((item) => item.trim())) pushBlock("Other", leading);
 
   if (parsed.length === 0) parsed.push({ section: "Other", content: input.trim() });
-  if (parsed.length > MAX_RESUME_BLOCKS) throw new Error("Resume text contains too many sections.");
+  if (parsed.length > MAX_RESUME_BLOCKS) {
+    // A large number of recognized headings is ambiguous input, not a reason to discard the draft.
+    // Preserve all text in one editable fallback block instead of crashing the editor.
+    parsed.length = 0;
+    parsed.push({ section: "Other", content: input.trim() });
+  }
 
   const blocks = parsed.map((item, index) => ({
     id: "block-" + (index + 1),
