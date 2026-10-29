@@ -6,6 +6,9 @@ import {
 } from "../lib/private-data/crypto-vault.mjs";
 import { createIndexedDbVaultStore } from "../lib/private-data/indexed-db.mjs";
 import { validateWorkspaceData } from "../lib/private-data/schema.mjs";
+import OutreachWorkspace from "./OutreachWorkspace";
+import ApplicationsWorkspace from "./ApplicationsWorkspace";
+import "./phase7.css";
 
 function describeError(error: unknown) {
   return error instanceof Error ? error.message : "The requested action could not be completed.";
@@ -27,8 +30,10 @@ function downloadBackup(contents: string) {
 
 export default function PrivateDataSettings({
   onProfileChange,
+  activePageId,
 }: {
   onProfileChange: (profile: WorkspaceProfile | null) => void;
+  activePageId: string;
 }) {
   const storeRef = useRef<ReturnType<typeof createIndexedDbVaultStore> | null>(null);
   if (!storeRef.current) storeRef.current = createIndexedDbVaultStore();
@@ -297,30 +302,46 @@ export default function PrivateDataSettings({
 
   return (
     <div className="private-data-page page-stack">
-      <section className="private-data-intro">
-        <div className="section-heading">
-          <div>
-            <span className="eyebrow">PHASE 2 · PRIVATE DATA FOUNDATION</span>
-            <h2>Private workspace storage</h2>
+      {activePageId === "settings" ? (
+        <section className="private-data-intro">
+          <div className="section-heading">
+            <div>
+              <span className="eyebrow">PHASE 2 · PRIVATE DATA FOUNDATION</span>
+              <h2>Private workspace storage</h2>
+            </div>
+            <span className={unlocked ? "vault-state vault-state-open" : "vault-state"}>
+              <span aria-hidden="true" className="vault-state-dot" />
+              {unlocked ? "Unlocked in memory" : vaultExists ? "Locked" : "Not set up"}
+            </span>
           </div>
-          <span className={unlocked ? "vault-state vault-state-open" : "vault-state"}>
-            <span aria-hidden="true" className="vault-state-dot" />
-            {unlocked ? "Unlocked in memory" : vaultExists ? "Locked" : "Not set up"}
-          </span>
-        </div>
-        <p>
-          Profile and tracker records are encrypted before being written to this browser's IndexedDB. The passphrase is
-          not saved, and decrypted records stay in memory only while unlocked.
-        </p>
-        <ul className="privacy-facts">
-          <li>AES-256-GCM encryption with a passphrase-derived key (PBKDF2-SHA-256, 600,000 iterations).</li>
-          <li>Only encrypted envelopes are stored locally; the key and decrypted workspace are not persisted.</li>
-          <li>
-            Raw CV files and extracted resume text are not stored. Resume metadata is optional and contains no original
-            file contents.
-          </li>
-        </ul>
-      </section>
+          <p>
+            Profile and tracker records are encrypted before being written to this browser's IndexedDB. The passphrase is
+            not saved, and decrypted records stay in memory only while unlocked.
+          </p>
+          <ul className="privacy-facts">
+            <li>AES-256-GCM encryption with a passphrase-derived key (PBKDF2-SHA-256, 600,000 iterations).</li>
+            <li>Only encrypted envelopes are stored locally; the key and decrypted workspace are not persisted.</li>
+            <li>
+              Raw CV files and extracted resume text are not stored. Resume metadata is optional and contains no original
+              file contents.
+            </li>
+          </ul>
+        </section>
+      ) : (
+        <section className="private-data-intro phase7-vault-context">
+          <div className="section-heading">
+            <div>
+              <span className="eyebrow">PRIVATE WORKSPACE · PHASE 7</span>
+              <h2>{activePageId === "outreach" ? "Outreach" : "Applications"}</h2>
+            </div>
+            <span className={unlocked ? "vault-state vault-state-open" : "vault-state"}>
+              <span aria-hidden="true" className="vault-state-dot" />
+              {unlocked ? "Unlocked in memory" : vaultExists ? "Locked" : "Not set up"}
+            </span>
+          </div>
+          <p>Personal drafts, context, follow-ups and application history are encrypted in this browser. Unlock the same local vault to access them; nothing is synced to a server.</p>
+        </section>
+      )}
 
       {error ? (
         <p className="vault-message vault-message-error" role="alert">
@@ -374,6 +395,7 @@ export default function PrivateDataSettings({
           ) : null}
         </section>
       ) : workspace ? (
+        activePageId === "settings" ? (
         <>
           <section className="private-data-card">
             <div className="section-heading">
@@ -552,8 +574,14 @@ export default function PrivateDataSettings({
             </div>
           </section>
         </>
+        ) : activePageId === "outreach" ? (
+          <OutreachWorkspace workspace={workspace} onSaveWorkspace={persistWorkspace} />
+        ) : (
+          <ApplicationsWorkspace workspace={workspace} onSaveWorkspace={persistWorkspace} />
+        )
       ) : null}
 
+      {activePageId === "settings" ? (
       <section className="private-data-card private-data-caveats">
         <h3>Before using real personal data</h3>
         <p>
@@ -562,6 +590,7 @@ export default function PrivateDataSettings({
           passphrase cannot be recovered. Keep original resumes outside the app. No data is synced to a server.
         </p>
       </section>
+      ) : null}
     </div>
   );
 }
