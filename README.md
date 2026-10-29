@@ -13,8 +13,9 @@ A personal, evidence-driven workspace for discovering video game studios and opp
 - Manual studio data is kept separate from encrypted private candidate/application records. The Phase 4 runner is on `main` and has been reviewed for manual-only use; daily scheduling and publication remain disabled due to source-coverage limitations.
 - ESLint, Prettier, TypeScript checks, Node's built-in test runner, an automated Chrome/Chromium vault smoke test, and privacy-conscious Markdown feedback reports.
 - GitHub Actions validates formatting, lint, types, unit tests, dependency audit, privacy boundaries, the production build, and browser-level vault create/save/reload/lock/export/restore behavior.
+- Phase 7 (this branch) adds a versioned encrypted-workspace schema with v1 migration, editable and versioned outreach drafts, heuristic pre-send checks, and application/activity/follow-up tracking. Submissions require explicit user confirmation; the app never sends outreach, invokes an AI API, or uploads private records.
 - Settings supports a passphrase-protected local vault, profile fields, basic application records, encrypted backup export/import, locking, and local deletion.
-- Phase 6a adds browser-local DOCX/PDF/TXT text extraction and a build-time bundled resume-guidance library. Original files and extracted text stay in the active page memory and are not saved or uploaded. Role analysis, editing and document export remain pending. There is no server-side runtime, remote sync, raw CV storage, or automatic outbound communication.
+- Phase 6a/6b provide browser-local DOCX/PDF/TXT extraction, source-linked resume guidance, and deterministic profile/role comparison. Original files and extracted text stay in tab memory and are not saved or uploaded. Phase 6c is tracked separately in draft PR #7 and is not included in this branch.
 
 ## Product goals
 
