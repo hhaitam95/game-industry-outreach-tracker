@@ -168,7 +168,10 @@ export function OverviewPage({
             <span className="roadmap-number">01</span>
             <div>
               <h3>Discover studios</h3>
-              <p>Find official routes that explicitly welcome speculative applications; generic careers pages do not qualify.</p>
+              <p>
+                Find official routes that explicitly welcome speculative applications; generic careers pages do not
+                qualify.
+              </p>
             </div>
             <span className="roadmap-phase">Research</span>
           </div>

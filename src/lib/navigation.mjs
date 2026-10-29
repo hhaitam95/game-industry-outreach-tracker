@@ -25,13 +25,15 @@ export const NAV_ITEMS = [
     id: "outreach",
     label: "Outreach",
     icon: "outreach",
-    description: "Prepare a tailored speculative-application introduction and review it before you copy or send it yourself.",
+    description:
+      "Prepare a tailored speculative-application introduction and review it before you copy or send it yourself.",
   },
   {
     id: "applications",
     label: "Applications",
     icon: "applications",
-    description: "Privately track planned or submitted speculative applications, replies, interviews, follow-ups and outcomes.",
+    description:
+      "Privately track planned or submitted speculative applications, replies, interviews, follow-ups and outcomes.",
   },
   {
     id: "settings",

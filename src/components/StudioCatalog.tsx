@@ -177,8 +177,8 @@ export default function StudioCatalog({
                     ) : (
                       <>
                         <p>
-                          <strong>Manual check needed.</strong> No roles observed from this source. Check the careers page
-                          directly.
+                          <strong>Manual check needed.</strong> No roles observed from this source. Check the careers
+                          page directly.
                         </p>
                         {verifiedCareersRoute ? (
                           <a href={verifiedCareersRoute.url} target="_blank" rel="noopener noreferrer">
