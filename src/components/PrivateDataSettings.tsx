@@ -191,6 +191,18 @@ export default function PrivateDataSettings({
           notes: "",
           createdAt: now,
           updatedAt: now,
+          studioId: "",
+          opportunityId: "",
+          outreachDraftId: "",
+          nextFollowUpAt: null,
+          history: [
+            {
+              id: crypto.randomUUID(),
+              type: "note",
+              occurredAt: now,
+              note: "Lead created manually in Settings. No submission is implied.",
+            },
+          ],
         },
         ...workspace.applications,
       ],
