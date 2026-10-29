@@ -403,3 +403,10 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Known limit:** The test seam can shorten but never extend the production timeout. DOCX termination relies on the dedicated worker so a parser that does not yield cannot block the UI past its deadline.
 - **Rollback:** Revert the timeout module, worker, parser wiring/tests and documentation as one unit.
 
+
+### ADR-042 implementation note — first CI cycle
+
+- The first parser-hardening CI cycle reported 75 passing unit tests, passing lint, and 0 high-severity audit findings; Frontend CI failed on one Prettier wrap and two type-check issues.
+- The DOCX worker callback now has an explicit result type; the timeout test uses the exact Prettier line wrapping.
+- The pinned dependency is pdfjs-dist 6.4.299. Its v6.4.299 `src/display/api.js` no longer defines or consumes `isEvalSupported` as a document initialization option. The option is omitted rather than added through a cast that would imply a security setting with no supported effect. `enableXfa: false` is retained, PDF loading-task cleanup remains in `finally`, and the timeout/error mapping is unchanged.
+- This is the second and final CI cycle for this unit. If further problems appear, stop after the exact formatter/type corrections and document any deferral instead of starting a third cycle.

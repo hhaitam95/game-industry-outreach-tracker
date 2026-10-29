@@ -1,7 +1,7 @@
 # Project Status
 
 **Last updated:** 2026-10-29  
-**Current phase:** Phase 6 Part 2 parser hardening. Lockfile registry hygiene is green on exact head `906ca938`; PR #4 (Phase 5a) and PR #6 (Phase 6a+6b) remain owner-controlled and unmerged.  
+**Current phase:** Phase 6 Part 2 parser hardening, CI cycle 2. Lockfile registry hygiene is green on `906ca938`; parser changes are on `cd873133` with the follow-up correcting first-cycle format/type issues. PR #4 and #6 remain owner-controlled and unmerged.  
 **Working branch:** feat/phase6b-resume-analysis (stacked on feat/phase6-resume-lab, which is stacked on feat/phase5-studio-research)  
 **Base/main:** 07d8e15cec544e56a09fbcab44202dc7051753c6 (unchanged; no direct changes to main).
 
@@ -64,6 +64,12 @@ No runtime fetch of career pages/role data. `last-seen` is not proof a role is o
 ## Phase 6a safety boundary
 
 The user-selected original and extracted text remain in the active Resume Lab component state only. No CV upload, raw-text vault persistence, logging, OCR, AI API, generated document, merge, discovery-state change, schedule, publication, or deployment is included. The dependencies are for local text extraction only. Phase 6a+6b Part 1 CI acceptance is green; full Phase 6 completion still depends on the remaining Part 2 hygiene and owner-controlled review/merge sequence.
+
+## Phase 6 Part 2 hygiene evidence
+
+- **Lockfile registry unit:** final commit `906ca938` is green on frontend CI, browser acceptance and discovery fixtures; 194 resolved URLs use the canonical npm registry and the existing integrity hash is unchanged.
+- **Parser hardening, first CI cycle:** 75 tests passed, lint passed, `npm audit` found 0 vulnerabilities, and discovery fixtures passed [6b run 40844685096](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40844685096). Frontend CI failed only format/typecheck: Prettier requested one line wrap in the new timeout test, the DOCX worker callback needed a result type, and pdfjs-dist 6.4.299 does not define `isEvalSupported` on `DocumentInitParameters` ([6b run 40844685031](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40844685031), [6a run 40844690854](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40844690854), [PR CI run 40844699873](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40844699873)). Browser acceptance on that head also failed at the CI gate [run 40844699974](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40844699974).
+- **Cycle-2 correction:** Apply the exact Prettier wrap, type the worker result callback, and omit the obsolete `isEvalSupported` option rather than forcing an unsupported/no-op property. The pinned PDF.js source at [v6.4.299 `src/display/api.js`](https://github.com/mozilla/pdf.js/blob/v6.4.299/src/display/api.js) contains no such initialization option; keep the supported `enableXfa: false`, the 30-second bound and `loadingTask.destroy()` in `finally`. Exact-head verification is pending for this second and final CI cycle.
 
 ## Phase 6a+6b Part 1 CI evidence
 

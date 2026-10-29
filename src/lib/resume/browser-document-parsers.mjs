@@ -28,6 +28,7 @@ export function extractDocxText(arrayBuffer) {
       cleanup();
       reject(new ResumeExtractionError("parser-failed"));
     };
+    /** @param {{ text: string, warnings: string[] }} result */
     const succeed = (result) => {
       if (settled) return;
       cleanup();
@@ -72,7 +73,6 @@ export function extractDocxText(arrayBuffer) {
 export async function extractPdfText(arrayBuffer) {
   const loadingTask = getDocument({
     data: new Uint8Array(arrayBuffer),
-    isEvalSupported: false,
     enableXfa: false,
     useWorkerFetch: false,
   });

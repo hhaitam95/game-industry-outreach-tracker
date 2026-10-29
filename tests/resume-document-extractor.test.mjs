@@ -151,8 +151,7 @@ test("DOCX and PDF parser timeouts map to the existing safe parser-failed catego
     new Uint8Array([1]),
   );
   const pdf = localFile("slow.pdf", "application/pdf", new Uint8Array([1]));
-  const safeMessage =
-    "The document could not be read. It may be damaged, encrypted, or use unsupported features.";
+  const safeMessage = "The document could not be read. It may be damaged, encrypted, or use unsupported features.";
 
   await assert.rejects(
     () =>
