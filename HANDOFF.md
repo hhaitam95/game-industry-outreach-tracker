@@ -4,6 +4,18 @@
 
 **Repository visibility:** Public. Never commit private candidate records, CVs, application history, contact details, credentials, or secrets.
 
+
+## Phase 8 — Public Pages release
+
+- Read [STATUS.md](STATUS.md) for the current verified code head, pull requests and CI run links.
+- ADR-054 selected `hhaitam95/game-industry-outreach-tracker-site` as an output-only public Pages repository. The source repository remains public and its visibility is unchanged.
+- `.github/workflows/publish-pages.yml` is `workflow_dispatch` only. `validate-only` is the default and does not sync current discovery data or write to the target. The explicit `publish` mode validates the existing public snapshot, builds and checks static output, then publishes to target `main`.
+- `scripts/check-pages-artifact.mjs` rejects known private file types/paths, recognized credential patterns, missing local JS/CSS assets, missing CSP, symbolic links and external/unsafe HTML script/link references. Synthetic tests cover success and failure cases. These checks are guardrails, not a replacement for reviewing public content.
+- The deploy token is checked out only after dependency installation, tests, build, privacy validation, artifact validation and a repository-path smoke test have passed. Keep `PUBLIC_PAGES_TOKEN` limited to the target repository's Contents read/write permission, expiring and stored only as an Actions secret.
+- **External blocker:** the target repository and secret are not configured; the connected tooling cannot create repositories, configure Pages or write secrets. No publication has been run and no site is live.
+- The owner must create the target repository, enable Pages from `main` root, add the narrow `PUBLIC_PAGES_TOKEN` secret and merge the prerequisite PRs #7 and #8 first. After reconciling Phase 8 with the updated `main`, check the current PR head before any merge. Only then manually dispatch the release workflow in `publish` mode.
+- Do not enable schedules, add push triggers, dispatch live discovery, publish private application data, or change source-repo visibility as part of this phase.
+
 ## Phase 5a implementation
 
 - `src/data/sample-public-opportunities.json` contains synthetic Riot-style roles, the exact 16-field public record shape, `last-seen` statuses, a conspicuously synthetic timestamp, and placeholder posting URLs.
@@ -19,7 +31,7 @@
 - When unlocked, the vault's candidate profile projection is held in App memory so the Resume Lab can compare exact skill mentions and target-role phrases. Locking or deleting the vault clears that projection; raw resume text and the role description are not persisted.
 - Role comparison reads either a selected public snapshot title or a manually pasted description. The app does not fetch career pages at runtime. Current sample roles are synthetic and last-seen links never prove current availability.
 - Matching is literal and explanatory only: a missing term does not mean the user lacks a skill. There are no fit scores, AI calls, eligibility conclusions, or external submissions.
-- Phase 6a's formatter gate remains unresolved on the prior slice; see STATUS.md. Phase 6b must not be described as accepted until all exact-head gates pass.
+- Phase 6a+6b previously passed exact-head frontend, browser acceptance, and discovery checks; see STATUS.md for the historical evidence. Phase 6c and Phase 7 remain separate owner-controlled PRs #7 and #8 until merged.
 
 ## Phase 6a resume lab foundation
 

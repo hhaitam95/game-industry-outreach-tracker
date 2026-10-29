@@ -1,11 +1,25 @@
 # Project Status
 
 **Last updated:** 2026-10-29  
-**Current phase:** Part 1 is green; Phase 6 parser/registry hygiene and CSP are implemented and verified on exact code head `b3b196da`. Frontend CI, browser acceptance (retry attempt 2), and discovery fixtures passed. Phase 6c remains gated on the owner merging PR #4 with a regular merge, retargeting PR #6 to `main`, and then merging PR #6.
-**Working branch:** feat/phase6b-resume-analysis (fast-forwarded into the PR #6 branch after each cohesive commit)  
-**Base/main:** 07d8e15cec544e56a09fbcab44202dc7051753c6 (unchanged; no direct changes to main).
+**Current phase:** Phase 8 public Pages release — implementation is green on the verified code head, while external hosting setup/publication remains pending.  
+**Working branch:** `feat/phase8-pages-privacy`  
+**Current PR:** [#9 — Phase 8: gated public Pages release and privacy checks](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/9) (draft until status/handoff refresh is verified).  
+**Verified implementation head:** `9b37f8061d2f1813eea94c6eb5b305afabf2d912`. The next commit is documentation-only and does not change executable code.  
+**Base/main:** `d56637e921fdb2e23f67e15aa3a518d6477c6842` (unchanged; no direct changes to main).
 
-**Merge plan:** The owner merges PR #4 with a regular merge commit, not squash, to preserve the Phase 6 ancestry. After PR #4 merges, retarget PR #6 to `main`. Keep both PRs unmerged by the implementation agent.
+## Phase 8 implementation and acceptance status
+
+- **Design first:** ADR-054 was committed before implementation in [`3c7dc27f`](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/3c7dc27f1b1274543fbb0c4af5c12ee7a9b9d85e).
+- **Implementation:** manual-only Pages release workflow with default `validate-only`, explicit `publish` mode, schema-validated snapshot sync for publish mode only, a generated-artifact privacy checker, synthetic failure-path tests, CSP/local-asset checks, and a runbook. Target token checkout occurs after all dependency/build/privacy checks.
+- **Frontend CI:** passed [run 40874413179](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40874413179); the parallel push run also passed [40874405351](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40874405351).
+- **Browser acceptance:** passed [run 40874412886](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40874412886).
+- **Discovery fixtures:** passed [run 40874412749](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40874412749); the parallel push run also passed [40874405380](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40874405380).
+- **Verification scope:** frontend format, lint, typecheck, unit tests, npm audit, production build, existing repository/privacy check, new Pages artifact check and repository-path asset smoke test all passed on the verified code head above. Browser acceptance and discovery tests also passed.
+- **External setup still pending:** `hhaitam95/game-industry-outreach-tracker-site` does not exist yet. The connected GitHub tools cannot create the repository, change Pages settings, or add Actions secrets. The owner must create the public target, configure Pages for `main` root, create an expiring fine-grained target-only Contents read/write token, and add it to the source repo as `PUBLIC_PAGES_TOKEN`.
+- **Not deployed:** no publish workflow was dispatched and no public site was deployed. The workflow has no schedule, push trigger, or discovery-completion trigger. Do not select `publish` until the target repository and secret exist and PRs #7 and #8 are merged by the owner.
+- **Phase 8 exit decision:** code implementation and CI acceptance are complete; production deployment/privacy verification are not complete until the owner-controlled setup and first explicit publication pass.
+
+**Open earlier PRs:** PR [#7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7) remains draft/unmerged; PR [#8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8) remains open/unmerged. Owner keeps merge control. After those PRs are merged, reconcile this branch with the updated `main` and re-run exact-head checks before merging PR #9.
 
 ## Engineering standards for remaining work
 
