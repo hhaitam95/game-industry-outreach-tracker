@@ -1,22 +1,24 @@
 # Project Status
 
 **Last updated:** 2026-10-29  
-**Current phase:** Phase 8 same-repository GitHub Pages release — ADR-055 supersedes the separate-repository proposal; the revised workflow and docs require exact-head validation. No site is deployed.  
+**Current phase:** Phase 8 same-repository GitHub Pages release — implementation and required CI checks are green; the live Pages setting/publication remain pending.  
 **Working branch:** `feat/phase8-pages-privacy`  
-**Current PR:** [#9 — Phase 8: gated public Pages release and privacy checks](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/9). Do not merge until prerequisite PRs #7 and #8 are owner-merged and this branch is reconciled with updated `main`.  
-**Previously verified code:** The earlier checks covered the superseded cross-repository workflow and are historical only; they do not validate the ADR-055 change. Consult the current PR checks for the exact reviewed head.  
+**Current PR:** [#9 — Phase 8: same-repository Pages release and privacy checks](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/9). Do not merge until prerequisite PRs #7 and #8 are owner-merged and this branch is reconciled with updated `main`.  
+**Verified implementation commit:** `7a97a2e13235cb7a4cdb55956af5e8314ffa5012`. The later status-only follow-up does not change executable code or the workflow configuration.  
 **Base/main:** `main` has not been changed by this implementation branch.
 
 ## Phase 8 implementation and acceptance status
 
-- **Design decision:** ADR-055 is recorded and supersedes ADR-054's separate output-only repository choice.
-- **Selected implementation:** The manual-only release workflow defaults to `validate-only`; only an explicit `publish` selection from `main` can upload the checked Vite `dist/` artifact and deploy it using GitHub Pages Actions. No cross-repository token or second repository is used.
-- **Privacy boundary:** The existing public-data schema, repository privacy guard, generated-artifact checker, CSP/local-asset checks, and same-repository base-path smoke test remain required. Private profile/CV/draft/application data stays browser-local.
-- **Validation status:** Exact-head Frontend CI, browser acceptance, and discovery fixtures must be rerun for the revised workflow and documentation. Do not reuse the prior cross-repository implementation's green status as acceptance for this revision.
-- **One-time external setup:** The only required GitHub setting is this repository's Settings → Pages → Source = GitHub Actions. The connected tools cannot change Pages settings or dispatch a workflow. No target repository or deployment secret is required.
-- **Not deployed:** No publish workflow has been dispatched and no site has been verified live. The workflow has no schedule, push trigger, or discovery-completion trigger.
+- **Design decision:** ADR-055 supersedes ADR-054's separate output-only repository choice; source, docs, tests and publishing workflow stay in the original repository.
+- **Frontend CI:** passed on implementation commit `7a97a2e13235cb7a4cdb55956af5e8314ffa5012` — [run 40881160156](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40881160156). Formatting, lint, typecheck, unit tests, dependency audit, production build, privacy guard, static-artifact check and repository-subpath asset smoke test passed.
+- **Browser acceptance:** passed on the same implementation commit — [run 40881160199](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40881160199).
+- **Discovery fixtures:** passed on the same implementation commit — [run 40881160159](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40881160159).
+- **Workflow configuration:** manual `workflow_dispatch` only; `validate-only` is the default; explicit `publish` is restricted to `main`. The build job is read-only, and only the deploy job receives `pages: write` and `id-token: write`. Only the validated `dist/` artifact is uploaded.
+- **Not yet exercised:** the new Pages workflow itself has not been manually dispatched. Because the workflow is on an open PR, first merge remains blocked by PRs #7 and #8 and owner-controlled review; after the code reaches `main`, run `validate-only` and review it before choosing `publish`.
+- **One-time external setup:** the owner must set this repository's Settings → Pages → Source = GitHub Actions. The connected tools cannot change Pages settings or dispatch workflows. No second repository or deployment secret is required.
+- **Not deployed:** no publish workflow has been dispatched and no site has been verified live. There is no schedule, push trigger, or discovery-completion trigger.
 - **Merge order:** PRs [#7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7) and [#8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8) remain owner-controlled prerequisites. Reconcile Phase 8 with updated `main` and rerun exact-head checks before the owner merges PR #9.
-- **Exit criteria:** Pages source is configured; exact-head CI and browser acceptance pass; an explicit publish from `main` succeeds; the canonical URL/assets and public data are reviewed. Until then, implementation and deployment acceptance remain pending.
+- **Exit criteria:** Pages source is configured; checks and a manual `validate-only` run pass; explicit publication from `main` succeeds; the canonical URL/assets and public data are reviewed. Until then, the site is not deployed.
 
 **Status policy:** This file is the sole source for volatile branch/review state and verification evidence. Other documents should point here rather than duplicate changing SHAs or run IDs.
 
