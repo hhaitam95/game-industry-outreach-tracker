@@ -4,7 +4,9 @@ Meaningful changes are recorded here. Current branch/review state and verificati
 
 ## Unreleased
 
-- Proposed Phase 5b refinement: add profile-aware role review with literal evidence and explicit uncertainty, temporary pasted-description comparison, manual lead prefill, live encrypted-vault Overview counts, and clearer task-focused labels. The new branch requires exact-head CI and owner review before merge.
+- ADR-058 source remediation points Naughty Dog discovery at its official /openings page, strengthens synthetic CD PROJEKT RED/Naughty Dog fixtures, and adds offline source-coverage regression tests. CD PROJEKT RED remains under review until a separately authorized live check verifies listing extraction; Riot remains incomplete and Santa Monica remains manual-review.
+
+- PR #13 delivers profile-aware role review with literal evidence and explicit uncertainty, temporary pasted-description comparison, manual lead prefill, live encrypted-vault Overview counts, and clearer task-focused labels.
 - Phase 9 adds public issue forms and a post-launch feedback/stabilization process. Stable `v1.0.0` remains gated on manual Pages publication, real-browser acceptance, a clean privacy boundary, and no unresolved launch blockers.
 
 - Hardened Phase 6c resume editing: failed AI-paste additions retain user input, section moves are explicit in the before/after diff, and excessive recognized headings fall back to one text-preserving Other block. Added synthetic unit/component and browser regression coverage.

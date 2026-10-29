@@ -6,6 +6,13 @@
 
 `config/studio-registry.json` contains a small curated registry of official career URLs for CD PROJEKT RED, Naughty Dog, Santa Monica Studio, and Riot Games. This is monitoring of known sources, not global studio discovery. The initial adapters read configured official HTML pages and recognize only role-detail links matching registry-owned host/path allowlists. A JSON-LD adapter is also available for sources that provide Schema.org `JobPosting` records and complete `ItemList` evidence. It does not infer a vacancy merely from a career page or generic navigation link.
 
+## Source adapter review (2026-10-29)
+
+- Naughty Dog's official public listing route is now configured as https://www.naughtydog.com/openings. It exposes role-detail links on www.naughtydog.com under /greenhouse/job/<id>. The configured host/path allowlist is unchanged. The synthetic fixture exercises duplicate, malformed, off-host, and generic-navigation links.
+- CD PROJEKT RED retains its existing official /en/jobs/<id>-<slug> pattern. The previous live scan found no matching links, so this change tests that path shape with synthetic data but does not claim the live listing adapter is fixed. Keep the source in needs-review until a separately authorized live check confirms extraction from the public listing.
+- Riot Games remains link-only with listing_complete=false; Santa Monica Studio remains manual-review with adapter-required.
+- Fixture checks do not fetch websites, update persisted monitoring state, prove vacancies are open, or authorize a live scan. No live discovery or publication is performed by this change.
+
 ## Safe execution
 
 - Local/offline command: `python3 scripts/discover_studios.py --mode fixture`
