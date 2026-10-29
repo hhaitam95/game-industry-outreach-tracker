@@ -1,15 +1,15 @@
 # Project Status
 
 **Last updated:** 2026-10-29  
-**Current phase:** Phase 9 launch acceptance and Phase 4 source-coverage remediation. Profile-aware role review and explicit lead handoff were merged in PR #13. The site is published; owner acceptance of live-browser workflows and reliable source extraction remain outstanding.  
-**Current refinement branch:** feat/phase4-source-adapter-remediation-20261029, reviewed through [PR #14](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/14). ADR-058 is accepted; use PR #14 for exact-head review and check status.  
-**Verified main head:** 213033a466d334a1dbdc9ecda9c65e5a07e415e6.  
-**Completed PRs:** [#7 Phase 6c](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7), [#8 Phase 7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8), [#9 Phase 8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/9), [#10 Phase 9 feedback framework](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/10), and [#13 profile-aware role review](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/13) are merged.  
+**Current phase:** Phase 9 launch acceptance and Phase 4 source-coverage follow-up. PR #14 is merged; live source verification remains outstanding. The website is published, while owner acceptance of real-browser workflows and the private-data boundary is still pending.  
+**Latest source-adapter change:** [PR #14](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/14) was squash-merged into `main` as [`1a277b9`](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/1a277b92f32fced0185bf041342ae1a73cf744f6).  
+**Verified main baseline for this closeout:** `1a277b92f32fced0185bf041342ae1a73cf744f6` (the `main` head after PR #14, before this status-only follow-up).  
+**Completed PRs:** [#7 Phase 6c](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7), [#8 Phase 7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8), [#9 Phase 8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/9), [#10 Phase 9 feedback framework](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/10), [#13 profile-aware role review](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/13), and [#14 source-adapter remediation](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/14) are merged.  
 **Source-adapter design:** [ADR-058 — Remediation of official studio career-source adapters](DECISIONS.md#adr-058--remediation-of-official-studio-career-source-adapters).  
 **Launch acceptance:** [Issue #11](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/11) stays open until the live URL/assets, privacy boundary, and core user workflows are accepted.  
 **Feedback entry point:** [Open public issue forms](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/new/choose).
 
-- **PR #14 safety boundary:** No live discovery, snapshot persistence, schedule, or Pages publication has been run as part of PR #14.
+- **Source-verification boundary:** No live discovery scan has been run since the PR #14 source-route change. Naughty Dog's updated URL and CD PROJEKT RED extraction still need a separately authorized manual live check. Discovery remains manual-only; no schedule or Pages publication was triggered by PR #14.
 
 ## Latest verified automation and deployment
 
@@ -18,7 +18,7 @@
 - **Pages validation:** [run 40914281662](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40914281662) passed formatting, lint, typecheck, tests, audit, build, privacy/artifact checks, and repository-base asset smoke test.
 - **Pages publication:** [run 40914488893](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40914488893) succeeded, including data sync, artifact upload, and deployment. The site is published at [the Pages URL](https://hhaitam95.github.io/game-industry-outreach-tracker/); real-browser route/assets/privacy and workflow acceptance are still pending.
 - **PR #13 required CI:** Frontend CI [40925872597](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40925872597), browser acceptance [40925872591](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40925872591), and discovery fixture tests [40925872684](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40925872684) passed on PR #13's exact reviewed head before squash merge. These runs do not validate PR #14.
-- **PR #14 checks:** review all required exact-head checks on [PR #14](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/14). Prior main/PR #13 checks do not validate the source-adapter changes; fixture-only tests are not a substitute for a separately authorized live scan.
+- **PR #14 validation and merge:** Frontend CI [40930346452](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40930346452), discovery fixtures [40930345845](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40930345845), and browser acceptance [40930345697](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40930345697) all passed on implementation head `61c9301c3dc5a64bf5a9a7e650c0731e912a7c1b`. PR #14 was then squash-merged as `1a277b92f32fced0185bf041342ae1a73cf744f6`. These checks validate the implementation and browser regression suite, not live job-source extraction.
 
 ## Phase 9 — Stable release gate
 
