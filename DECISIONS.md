@@ -375,3 +375,9 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Test plan:** Deterministic offline tests for allowed URLs, mirror/lookalike hosts, HTTP, credentials, malformed values and malformed lockfile shape; execute in Frontend CI.
 - **Definition of done:** All 194 current resolved URLs validate against the canonical origin, unchanged integrity hashes, test suite and CI step pass.
 - **Rollback:** Revert the registry validator/test/CI/package changes and URL substitution as one commit; retain the previous lockfile integrity hashes.
+
+### ADR-041 implementation note — first CI cycle
+
+- Registry validation, the registry check script, and all seven new allowlist tests passed; all 74 unit tests, lint, type check, audit, and build also passed.
+- `format:check` failed only because Prettier compacted three nested assertion calls in `tests/lockfile-registry.test.mjs`; CI printed the exact formatting-only diff.
+- The test file was adjusted to match that diff. This is the second and final CI cycle for this unit; no dependencies, workflow triggers, or permissions were changed.

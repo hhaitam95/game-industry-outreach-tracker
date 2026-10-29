@@ -23,31 +23,23 @@ test("rejects mirror registries", () => {
   const violations = findUnexpectedRegistryUrls(
     lockfileWithResolved("https://registry.npmmirror.com/example/-/example-1.0.0.tgz"),
   );
-  assert.deepEqual(violations, [
-    { packagePath: "node_modules/example", reason: "unsupported-origin" },
-  ]);
+  assert.deepEqual(violations, [{ packagePath: "node_modules/example", reason: "unsupported-origin" }]);
 });
 
 test("rejects deceptive registry host suffixes and HTTP URLs", () => {
   assert.deepEqual(
-    findUnexpectedRegistryUrls(
-      lockfileWithResolved("https://registry.npmjs.org.attacker.example/example.tgz"),
-    ),
+    findUnexpectedRegistryUrls(lockfileWithResolved("https://registry.npmjs.org.attacker.example/example.tgz")),
     [{ packagePath: "node_modules/example", reason: "unsupported-origin" }],
   );
   assert.deepEqual(
-    findUnexpectedRegistryUrls(
-      lockfileWithResolved("http://registry.npmjs.org/example/-/example-1.0.0.tgz"),
-    ),
+    findUnexpectedRegistryUrls(lockfileWithResolved("http://registry.npmjs.org/example/-/example-1.0.0.tgz")),
     [{ packagePath: "node_modules/example", reason: "insecure-protocol" }],
   );
 });
 
 test("rejects credentials even when the URL origin matches", () => {
   assert.deepEqual(
-    findUnexpectedRegistryUrls(
-      lockfileWithResolved("https://user:password@registry.npmjs.org/example.tgz"),
-    ),
+    findUnexpectedRegistryUrls(lockfileWithResolved("https://user:password@registry.npmjs.org/example.tgz")),
     [{ packagePath: "node_modules/example", reason: "unsupported-origin" }],
   );
 });
