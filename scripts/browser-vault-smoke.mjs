@@ -213,7 +213,7 @@ class DevTools {
 
   async waitForText(text) {
     const labels = {
-      "Your workspace": "workspace after reload",
+      "Speculative applications": "workspace after reload",
       "Private workspace storage": "settings after navigation",
       "Unlock your local vault": "locked vault prompt",
       BROWSER_TEST_STUDIO_CANARY: "application after unlock",
@@ -259,6 +259,22 @@ async function waitForResumeText(kind, expected) {
 }
 
 async function step(name, action) {
+  const legacyResumeAndOutreachSteps = new Set([
+    "Verify versioned outreach and manual application lifecycle",
+    "Verify baseline checks and private profile comparison stay in memory",
+  ]);
+  const legacyRoleHandoffSteps = new Set([
+    "Start isolated role-handoff test fixture",
+    "Verify role-card handoff requires explicit lead save",
+  ]);
+  if (process.env.EXPECT_RESUME_LAB !== "1" && legacyResumeAndOutreachSteps.has(name)) {
+    results.push({ name, status: "SKIP (outside current acceptance scope)" });
+    return;
+  }
+  if (process.env.EXPECT_ROLE_HANDOFF !== "1" && legacyRoleHandoffSteps.has(name)) {
+    results.push({ name, status: "SKIP (outside current acceptance scope)" });
+    return;
+  }
   currentStep = name;
   await action();
   results.push({ name, status: "PASS" });
@@ -270,7 +286,7 @@ function saveReport() {
   const lines = [
     "# Browser Acceptance Report",
     "",
-    "- Scope: synthetic-data browser test for the encrypted local vault, default speculative-application UI, Resume Lab editor/export flow, and retained role-handoff compatibility fixture.",
+    "- Scope: synthetic-data browser test for the speculative-route directory and encrypted local application tracker.",
     "- Runtime: " + safeVersion("node", ["--version"]),
     "- Browser: " + (chromePath ? safeVersion(chromePath, ["--version"]) : "unavailable"),
     "- Result: **" + (failure ? "FAIL" : "PASS") + "**",
@@ -401,7 +417,7 @@ async function main() {
   await client.send("Runtime.enable");
   await client.send("Page.setDownloadBehavior", { behavior: "allow", downloadPath: downloadDir });
   await client.send("Page.navigate", { url });
-  await client.waitForText("Your workspace");
+  await client.waitForText("Speculative applications");
   const cspDirectives = await client.evaluate(`(() => {
     const policy = document.querySelector('meta[http-equiv="Content-Security-Policy"]')?.content ?? "";
     return {
@@ -420,46 +436,43 @@ async function main() {
   }
 
   if (process.env.EXPECT_SPECULATIVE_DIRECTORY === "1") {
-    await step("Verify speculative-application directory and official-site links", async () => {
+    await step("Verify the curated speculative application list and tracking entry point", async () => {
       await client.clickButton("Speculative applications");
-      await client.waitForText("Studio research, before route verification");
-      const summary = await client.evaluate(
-        "(() => { const cards = [...document.querySelectorAll('.studio-card')]; const actions = [...document.querySelectorAll('.studio-card .studio-actions a')]; const allLinks = [...document.querySelectorAll('.studio-card a')]; const body = document.body.innerText; const legacyCopy = /Opportunity explorer|roles last seen|No roles observed|Official careers and vacancies/i.test(body); return { cardCount: cards.length, hasFourStudioNames: ['CD PROJEKT RED', 'Naughty Dog', 'Santa Monica Studio', 'Riot Games'].every((name) => body.includes(name)), officialWebsiteCount: actions.filter((link) => link.innerText.includes('Official website')).length, allLinksUseHttps: allLinks.length >= 8 && allLinks.every((link) => link.href.startsWith('https://')), legacyCopy, verifiedRouteBadges: document.querySelectorAll('.route-status').length, opportunityRows: document.querySelectorAll('[data-testid=opportunity-row]').length }; })()",
+      await client.waitForText("Open application page");
+      const directoryState = await client.evaluate(
+        "(() => { const routeLinks = [...document.querySelectorAll('.route-directory-links a')]; return { search: Boolean(document.querySelector('#route-search')), routeCards: document.querySelectorAll('[data-testid=speculative-route-card]').length, trackButtons: document.querySelectorAll('[data-testid=track-application-route]').length, officialLinks: routeLinks.length > 0 && routeLinks.every((link) => link.href.startsWith('https://')), showsSupermassive: document.body.innerText.includes('Supermassive Games'), sampleNotice: Boolean(document.querySelector('[data-testid=route-directory-sample-notice]')), studioCards: document.querySelectorAll('.studio-card').length }; })()",
       );
       if (
-        !summary ||
-        summary.cardCount !== 4 ||
-        !summary.hasFourStudioNames ||
-        summary.officialWebsiteCount !== 4 ||
-        !summary.allLinksUseHttps ||
-        summary.legacyCopy ||
-        summary.verifiedRouteBadges !== 0 ||
-        summary.opportunityRows !== 0
+        !directoryState ||
+        !directoryState.search ||
+        directoryState.routeCards < 10 ||
+        directoryState.trackButtons < 10 ||
+        !directoryState.officialLinks ||
+        !directoryState.showsSupermassive ||
+        directoryState.sampleNotice ||
+        directoryState.studioCards !== 0
       ) {
-        throw new Error("speculative-directory-default-state-failed");
+        throw new Error("speculative-directory-core-workflow-failed");
       }
     });
   }
 
   if (process.env.EXPECT_SPECULATIVE_DIRECTORY === "1") {
-    await step("Verify legacy role explorer and Overview count are hidden by default", async () => {
-      const studioState = await client.evaluate(
-        "(() => ({ body: document.body.innerText, rows: document.querySelectorAll('[data-testid=opportunity-row]').length }))()",
+    await step("Verify the app exposes only the two core workflows and settings", async () => {
+      const state = await client.evaluate(
+        "(() => ({ navLabels: [...document.querySelectorAll('nav.main-navigation button')].map((button) => button.innerText.trim()), body: document.body.innerText, studioCards: document.querySelectorAll('.studio-card').length, opportunityRows: document.querySelectorAll('[data-testid=opportunity-row]').length }))()",
       );
+      const expectedNavigation = ["Speculative applications", "Applications", "Settings"];
       if (
-        !studioState ||
-        /Opportunity explorer|roles last seen|No roles observed|Official careers and vacancies/i.test(
-          studioState.body,
-        ) ||
-        studioState.rows > 0
+        !state ||
+        state.navLabels.length !== expectedNavigation.length ||
+        !expectedNavigation.every((label) => state.navLabels.includes(label)) ||
+        ["Overview", "Resume lab", "Outreach"].some((label) => state.navLabels.includes(label)) ||
+        state.studioCards !== 0 ||
+        state.opportunityRows !== 0 ||
+        /Opportunity explorer|roles last seen|No roles observed|Official careers and vacancies/i.test(state.body)
       ) {
-        throw new Error("legacy-role-explorer-visible-with-feature-disabled");
-      }
-      await client.clickButton("Overview");
-      await client.waitForText("The big picture");
-      const overviewText = await client.evaluate("document.querySelector('.page-content')?.innerText ?? ''");
-      if (/Opportunities|role links last seen|roles last seen|vacancies available/i.test(overviewText)) {
-        throw new Error("legacy-role-count-visible-with-feature-disabled");
+        throw new Error("speculative-directory-scope-failed");
       }
     });
   }
@@ -852,7 +865,7 @@ async function main() {
 
   await step("Reload the app and return to Settings", async () => {
     await client.send("Page.reload");
-    await client.waitForText("Your workspace");
+    await client.waitForText("Speculative applications");
     const settingsClicked = await client.evaluate(`(() => {
       const item = [...document.querySelectorAll(".nav-link")].find((element) => element.innerText.trim().includes("Settings"));
       if (!item) return false;
@@ -885,20 +898,16 @@ async function main() {
     await client.waitForText("BROWSER_TEST_STUDIO_CANARY");
     const profileName = await client.evaluate("document.querySelector('#profile-display-name')?.value ?? ''");
     if (profileName !== "BROWSER_TEST_PROFILE_CANARY") throw new Error("restored-profile-mismatch");
-    const phase7ApplicationsClicked = await client.evaluate(
+    const applicationsClicked = await client.evaluate(
       "(() => { const item = [...document.querySelectorAll('.nav-link')].find((element) => element.innerText.trim() === 'Applications'); if (!item) return false; item.click(); return true; })()",
     );
-    if (!phase7ApplicationsClicked) throw new Error("phase7-applications-navigation-not-found");
+    if (!applicationsClicked) throw new Error("applications-navigation-not-found");
     await client.waitForText("Track what actually happened.");
-    const targetRecordReady = await client.evaluate(
-      "(() => { const record = [...document.querySelectorAll('[data-testid=application-record]')].find((item) => item.innerText.includes('CD PROJEKT RED')); if (!record) return false; const details = record.querySelector('.phase7-activity'); if (!details) return false; details.open = true; return Boolean(record.querySelector('[data-testid=application-status]')); })()",
+    await client.waitForText("BROWSER_TEST_STUDIO_CANARY");
+    const restoredApplication = await client.evaluate(
+      "(() => { const record = [...document.querySelectorAll('[data-testid=application-record]')].find((item) => item.innerText.includes('BROWSER_TEST_STUDIO_CANARY')); const link = record?.querySelector('.phase7-source-link a'); return Boolean(record && record.innerText.includes('Browser QA Role') && link?.href === 'https://example.com/careers'); })()",
     );
-    if (!targetRecordReady) throw new Error("phase7-restored-record-not-found");
-    await client.waitForText("Synthetic recruiter response recorded.");
-    const restoredStatus = await client.evaluate(
-      "(() => { const record = [...document.querySelectorAll('[data-testid=application-record]')].find((item) => item.innerText.includes('CD PROJEKT RED')); return record?.querySelector('[data-testid=application-status]')?.value ?? ''; })()",
-    );
-    if (restoredStatus !== "applied") throw new Error("phase7-application-state-not-restored");
+    if (!restoredApplication) throw new Error("application-record-not-restored");
     const phase7SettingsClicked = await client.evaluate(
       "(() => { const item = [...document.querySelectorAll('.nav-link')].find((element) => element.innerText.trim() === 'Settings'); if (!item) return false; item.click(); return true; })()",
     );
@@ -930,10 +939,6 @@ async function main() {
       "BROWSER_TEST_STUDIO_CANARY",
       "Synthetic QA Profile",
       "Browser QA Role",
-      "Synthetic test content only.",
-      "Synthetic recruiter response recorded.",
-      "I admire the team's mix of game development and technical problem solving.",
-      "Hello CD PROJEKT RED team",
       "https://example.com/careers",
     ]) {
       if (serialized.includes(marker)) throw new Error("plaintext-found-in-indexeddb");
@@ -943,11 +948,7 @@ async function main() {
     encryptedBackupPath = await waitForFile(downloadDir);
     const backup = readFileSync(encryptedBackupPath, "utf8");
     validateEncryptedEnvelope(backup);
-    for (const marker of [
-      "BROWSER_TEST_PROFILE_CANARY",
-      "BROWSER_TEST_STUDIO_CANARY",
-      "Synthetic test content only.",
-    ]) {
+    for (const marker of ["BROWSER_TEST_PROFILE_CANARY", "BROWSER_TEST_STUDIO_CANARY"]) {
       if (backup.includes(marker)) throw new Error("plaintext-found-in-backup");
     }
   });
@@ -1092,6 +1093,8 @@ try {
     "phase7-outbound-privacy-boundary-failed",
     "phase7-outreach-return-not-found",
     "settings-navigation-not-found",
+    "applications-navigation-not-found",
+    "application-record-not-restored",
     "resume-lab-initial-state-failed",
     "resume-file-input-not-found",
     "resume-export-ui-incomplete",

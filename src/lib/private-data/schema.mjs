@@ -1,6 +1,6 @@
 import { MAX_WORKSPACE_SERIALIZED_BYTES } from "./limits.mjs";
 
-export const WORKSPACE_SCHEMA_VERSION = 2;
+export const WORKSPACE_SCHEMA_VERSION = 3;
 export const APPLICATION_STATUSES = Object.freeze([
   "interested",
   "applied",
@@ -61,7 +61,10 @@ const APPLICATION_KEYS = [
   "nextFollowUpAt",
   "history",
 ];
-const WORKSPACE_KEYS = ["schemaVersion", "updatedAt", "profile", "resumes", "drafts", "applications"];
+const WORKSPACE_V1_KEYS = ["schemaVersion", "updatedAt", "profile", "resumes", "drafts", "applications"];
+const WORKSPACE_V2_KEYS = ["schemaVersion", "updatedAt", "profile", "resumes", "drafts", "applications"];
+const WORKSPACE_KEYS = [...WORKSPACE_V2_KEYS, "routeMarkers"];
+const ROUTE_MARKER_KEYS = ["id", "routeId", "studioId", "studioName", "routeUrl", "status", "createdAt", "updatedAt"];
 
 /** @typedef {"interested" | "applied" | "interview" | "rejected" | "offered" | "withdrawn"} ApplicationStatus */
 /** @typedef {"role-application" | "speculative-introduction" | "networking"} DraftPurpose */
@@ -74,7 +77,9 @@ const WORKSPACE_KEYS = ["schemaVersion", "updatedAt", "profile", "resumes", "dra
 /** @typedef {{id: string, studioName: string, roleTitle: string, status: ApplicationStatus, applicationUrl: string, notes: string, createdAt: string, updatedAt: string}} LegacyApplicationData */
 /** @typedef {{id: string, type: ApplicationActivityType, occurredAt: string, note: string}} ApplicationActivity */
 /** @typedef {{id: string, studioName: string, roleTitle: string, status: ApplicationStatus, applicationUrl: string, notes: string, createdAt: string, updatedAt: string, studioId: string, opportunityId: string, outreachDraftId: string, nextFollowUpAt: string | null, history: ApplicationActivity[]}} ApplicationData */
-/** @typedef {{schemaVersion: 2, updatedAt: string, profile: ProfileData, resumes: ResumeMetadata[], drafts: OutreachDraft[], applications: ApplicationData[]}} WorkspaceData */
+/** @typedef {"planned" | "applied"} RouteMarkerStatus */
+/** @typedef {{id: string, routeId: string, studioId: string, studioName: string, routeUrl: string, status: RouteMarkerStatus, createdAt: string, updatedAt: string}} RouteMarkerData */
+/** @typedef {{schemaVersion: 3, updatedAt: string, profile: ProfileData, resumes: ResumeMetadata[], drafts: OutreachDraft[], applications: ApplicationData[], routeMarkers: RouteMarkerData[]}} WorkspaceData */
 
 /** @param {unknown} value @returns {value is Record<string, unknown>} */
 function isPlainRecord(value) {
@@ -107,6 +112,34 @@ function boundedString(value, label, maxLength, { allowEmpty = true } = {}) {
 /** @param {unknown} value @param {string} label */
 function identifier(value, label) {
   return boundedString(value, label, 100, { allowEmpty: false });
+}
+
+/** @param {unknown} value @param {string} label */
+function slugIdentifier(value, label) {
+  const result = identifier(value, label);
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(result)) {
+    throw new Error(label + " must be a lowercase hyphenated identifier.");
+  }
+  return result;
+}
+
+/** @param {unknown} value */
+function safeHttpsRouteUrl(value) {
+  const urlText = boundedString(value, "Speculative route URL", 2_000, { allowEmpty: false });
+  let url;
+  try {
+    url = new URL(urlText);
+  } catch {
+    throw new Error("Speculative route URL must be a valid HTTPS URL.");
+  }
+  if (url.protocol !== "https:" || !url.hostname || url.username || url.password) {
+    throw new Error("Speculative route URL must be HTTPS without embedded credentials.");
+  }
+  const normalizedUrl = url.toString();
+  if (normalizedUrl.length > 2_000) {
+    throw new Error("Speculative route URL must be at most 2,000 characters after normalization.");
+  }
+  return normalizedUrl;
 }
 
 /** @param {unknown} value @param {string} label */
@@ -277,6 +310,24 @@ function validateActivity(value) {
   };
 }
 
+/** @param {unknown} value @returns {RouteMarkerData} */
+function validateRouteMarker(value) {
+  assertExactKeys(value, ROUTE_MARKER_KEYS, "Private route marker");
+  if (value.status !== "planned" && value.status !== "applied") {
+    throw new Error("Private route marker status must be planned or applied.");
+  }
+  return {
+    id: identifier(value.id, "Route marker ID"),
+    routeId: slugIdentifier(value.routeId, "Route ID"),
+    studioId: slugIdentifier(value.studioId, "Studio ID"),
+    studioName: boundedString(value.studioName, "Route marker studio name", 180, { allowEmpty: false }),
+    routeUrl: safeHttpsRouteUrl(value.routeUrl),
+    status: /** @type {RouteMarkerStatus} */ (value.status),
+    createdAt: timestamp(value.createdAt, "Route marker createdAt"),
+    updatedAt: timestamp(value.updatedAt, "Route marker updatedAt"),
+  };
+}
+
 /** @param {unknown} value @returns {ApplicationData} */
 function validateApplication(value) {
   assertExactKeys(value, APPLICATION_KEYS, "Application");
@@ -303,9 +354,9 @@ function validateApplication(value) {
   };
 }
 
-/** @param {unknown} input @returns {WorkspaceData} */
+/** @param {unknown} input @returns {Record<string, unknown>} */
 function migrateV1Workspace(input) {
-  assertExactKeys(input, WORKSPACE_KEYS, "Private workspace");
+  assertExactKeys(input, WORKSPACE_V1_KEYS, "Private workspace");
   if (input.schemaVersion !== 1) throw new Error("This private workspace uses an unsupported data version.");
   if (!Array.isArray(input.resumes) || input.resumes.length > 100) {
     throw new Error("Resume metadata must be a list with at most 100 items.");
@@ -341,7 +392,7 @@ function migrateV1Workspace(input) {
     history: [],
   }));
   return {
-    schemaVersion: /** @type {2} */ (WORKSPACE_SCHEMA_VERSION),
+    schemaVersion: /** @type {2} */ (2),
     updatedAt: timestamp(input.updatedAt, "Workspace updatedAt"),
     profile: validateProfile(input.profile),
     resumes: input.resumes.map(validateResumeMetadata),
@@ -350,12 +401,19 @@ function migrateV1Workspace(input) {
   };
 }
 
+/** @param {unknown} input @returns {Record<string, unknown>} */
+function migrateV2Workspace(input) {
+  assertExactKeys(input, WORKSPACE_V2_KEYS, "Private workspace");
+  if (input.schemaVersion !== 2) throw new Error("This private workspace uses an unsupported data version.");
+  return { ...input, schemaVersion: 3, routeMarkers: [] };
+}
+
 /** Create a blank local workspace. It contains no real profile or application data. */
 /** @param {string} [now] @returns {WorkspaceData} */
 export function createEmptyWorkspace(now = new Date().toISOString()) {
   const safeNow = timestamp(now, "Workspace timestamp");
   return {
-    schemaVersion: /** @type {2} */ (WORKSPACE_SCHEMA_VERSION),
+    schemaVersion: /** @type {3} */ (WORKSPACE_SCHEMA_VERSION),
     updatedAt: safeNow,
     profile: {
       id: "profile-primary",
@@ -369,12 +427,13 @@ export function createEmptyWorkspace(now = new Date().toISOString()) {
     resumes: [],
     drafts: [],
     applications: [],
+    routeMarkers: [],
   };
 }
 
 /**
- * Validate and copy a workspace payload. Version 1 vault data is validated and migrated
- * in memory to version 2; the caller's next explicit save writes the migrated shape encrypted.
+ * Validate and copy a workspace payload. Version 1/v2 vault data is validated and migrated
+ * in memory to version 3; the next explicit save writes the migrated shape encrypted.
  * @param {unknown} input
  * @returns {WorkspaceData}
  */
@@ -382,6 +441,10 @@ export function validateWorkspaceData(input) {
   if (!isPlainRecord(input)) throw new Error("Private workspace must be an object.");
   if (input.schemaVersion === 1) {
     const migrated = migrateV1Workspace(input);
+    return validateWorkspaceData(migrated);
+  }
+  if (input.schemaVersion === 2) {
+    const migrated = migrateV2Workspace(input);
     return validateWorkspaceData(migrated);
   }
   assertExactKeys(input, WORKSPACE_KEYS, "Private workspace");
@@ -397,19 +460,33 @@ export function validateWorkspaceData(input) {
   if (!Array.isArray(input.applications) || input.applications.length > 1_000) {
     throw new Error("Applications must be a list with at most 1,000 items.");
   }
+  if (!Array.isArray(input.routeMarkers) || input.routeMarkers.length > 1_000) {
+    throw new Error("Private route markers must be a list with at most 1,000 items.");
+  }
 
   const workspace = {
-    schemaVersion: /** @type {2} */ (WORKSPACE_SCHEMA_VERSION),
+    schemaVersion: /** @type {3} */ (WORKSPACE_SCHEMA_VERSION),
     updatedAt: timestamp(input.updatedAt, "Workspace updatedAt"),
     profile: validateProfile(input.profile),
     resumes: input.resumes.map(validateResumeMetadata),
     drafts: input.drafts.map(validateDraft),
     applications: input.applications.map(validateApplication),
+    routeMarkers: input.routeMarkers.map(validateRouteMarker),
   };
   const allIds = new Set([workspace.profile.id]);
-  for (const record of [...workspace.resumes, ...workspace.drafts, ...workspace.applications]) {
+  for (const record of [
+    ...workspace.resumes,
+    ...workspace.drafts,
+    ...workspace.applications,
+    ...workspace.routeMarkers,
+  ]) {
     if (allIds.has(record.id)) throw new Error("Private workspace record IDs must be unique.");
     allIds.add(record.id);
+  }
+  const routeIds = new Set();
+  for (const marker of workspace.routeMarkers) {
+    if (routeIds.has(marker.routeId)) throw new Error("A route can have only one private marker.");
+    routeIds.add(marker.routeId);
   }
   const draftById = new Map(workspace.drafts.map((draft) => [draft.id, draft]));
   for (const draft of workspace.drafts) {

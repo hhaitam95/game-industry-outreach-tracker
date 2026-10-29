@@ -4,7 +4,7 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { createServer } from "vite";
 
-test("default Overview and directory hide legacy role-explorer UI", async () => {
+test("default app is a speculative-route directory with the existing application tracker", async () => {
   const server = await createServer({
     configFile: "vite.config.ts",
     server: { middlewareMode: true },
@@ -12,61 +12,26 @@ test("default Overview and directory hide legacy role-explorer UI", async () => 
     logLevel: "silent",
   });
   try {
-    const [appModule, catalogModule, navigationModule] = await Promise.all([
+    const [appModule, navigationModule, featureModule] = await Promise.all([
       server.ssrLoadModule("/src/App.tsx"),
-      server.ssrLoadModule("/src/components/StudioCatalog.tsx"),
       server.ssrLoadModule("/src/lib/navigation.mjs"),
+      server.ssrLoadModule("/src/config/features.mjs"),
     ]);
-    const overview = renderToStaticMarkup(
-      React.createElement(appModule.OverviewPage, {
-        onNavigate: () => undefined,
-        workspaceSummary: null,
-      }),
-    );
-    const directory = renderToStaticMarkup(
-      React.createElement(catalogModule.default, { features: { roleExplorer: false } }),
-    );
+    const app = renderToStaticMarkup(React.createElement(appModule.default));
+    const mainNavigation = app.match(/<nav[^>]*class="main-navigation"[^>]*>(.*?)<\/nav>/)?.[1] ?? "";
 
     assert.equal(navigationModule.NAV_ITEMS.find((item) => item.id === "studios")?.label, "Speculative applications");
-    assert.match(overview, /Build a worldwide, evidence-backed directory/);
-    assert.doesNotMatch(overview, /Opportunities|role links last seen|Studios &amp; roles/);
-    assert.doesNotMatch(
-      directory,
-      /Opportunity explorer|roles last seen|No roles observed|Official careers and vacancies/,
-    );
-    assert.match(directory, /generic careers page is not evidence of speculative-application acceptance/);
-  } finally {
-    await server.close();
-  }
-});
-
-test("injected enabled state restores the retained role explorer and Overview count", async () => {
-  const server = await createServer({
-    configFile: "vite.config.ts",
-    server: { middlewareMode: true },
-    appType: "custom",
-    logLevel: "silent",
-  });
-  try {
-    const [appModule, catalogModule] = await Promise.all([
-      server.ssrLoadModule("/src/App.tsx"),
-      server.ssrLoadModule("/src/components/StudioCatalog.tsx"),
-    ]);
-    const overview = renderToStaticMarkup(
-      React.createElement(appModule.OverviewPage, {
-        onNavigate: () => undefined,
-        workspaceSummary: null,
-        roleExplorerEnabled: true,
-      }),
-    );
-    const directory = renderToStaticMarkup(
-      React.createElement(catalogModule.default, { features: { roleExplorer: true } }),
-    );
-
-    assert.match(overview, /Opportunities/);
-    assert.match(overview, /role links last seen/);
-    assert.match(directory, /Opportunity explorer/);
-    assert.match(directory, /roles last seen/);
+    assert.equal(featureModule.FEATURES.roleExplorer, false);
+    assert.equal(featureModule.isRoleExplorerEnabled(), false);
+    assert.match(app, /Speculative applications/);
+    assert.match(app, /Supermassive Games/);
+    assert.match(app, /Add to application tracker/);
+    assert.match(app, /Applications/);
+    assert.match(app, /Settings/);
+    assert.match(mainNavigation, /Speculative applications/);
+    assert.match(mainNavigation, /Applications/);
+    assert.match(mainNavigation, /Settings/);
+    assert.doesNotMatch(mainNavigation, /Resume lab|Outreach|Overview|Opportunity explorer/);
   } finally {
     await server.close();
   }
