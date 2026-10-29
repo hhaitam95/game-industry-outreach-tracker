@@ -66,6 +66,20 @@ test("ResumeEditorPanel exposes structured editing, review, local export, and ex
     assert.match(markup, /Review manual AI handoff/);
     assert.match(markup, /does not connect to ChatGPT/);
     assert.doesNotMatch(markup, /Synthetic profile evidence/);
+
+    const oversizedStructure = Array.from(
+      { length: 41 },
+      (_, index) => "Skills\\nSynthetic section " + (index + 1),
+    ).join("\\n");
+    const fallbackMarkup = renderToStaticMarkup(
+      React.createElement(module.ResumeEditorPanel, {
+        sourceText: oversizedStructure,
+        profile: null,
+      }),
+    );
+    assert.match(fallbackMarkup, /data-testid="resume-editor"/);
+    assert.match(fallbackMarkup, /Synthetic section 41/);
+    assert.equal((fallbackMarkup.match(/data-testid="resume-editor-block"/g) ?? []).length, 1);
   } finally {
     await server.close();
   }
