@@ -477,3 +477,16 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Test plan:** Cover schema v1→v2 migration, invalid shapes/bounds, immutable version lineage, deterministic check results, app lifecycle and event validation, save failure and vault lock/unlock/backup regression. Browser acceptance must exercise the end-to-end draft/version/manual application workflow with synthetic records and verify no outbound transmission.
 - **Definition of done:** Formatting, lint, typecheck, unit tests, audit, build, privacy boundary, repository-subpath smoke, browser acceptance and discovery fixtures pass on the exact final feature head; STATUS.md/HANDOFF.md/CHANGELOG.md/IMPLEMENTATION_PLAN.md reflect evidence and limitations.
 - **Rollback:** Revert the Phase 7 implementation and schema migration as one feature unit; retain this ADR and document why the feature was rolled back.
+
+
+## ADR-051 — Phase 7 typed-contract and component-fixture verification follow-up
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation
+- **Context:** The initial Phase 7 implementation unit reached its two planned CI cycles. On the second exact-head check, feature behavior had been implemented, but TypeScript exposed widened string literals in new application/migration records and one server-rendered test asserted a career-route label before selecting a studio. Two files added since the first formatter output also need the configured formatting applied.
+- **Goal:** Close only these observed validation issues without changing product scope or privacy behavior.
+- **Boundaries:** Fix literal typing for schema-v2 migrations and newly created application/activity records; correct the UI fixture expectation to assert what the default render actually displays; apply configured Prettier to the newly touched files. No new feature, dependency, workflow change, external request, or main merge.
+- **Failure behavior:** Keep schema validation strict. Use typed allowed literals rather than broad casts that could admit unsupported status/purpose values.
+- **Test plan:** Re-run Frontend CI, browser acceptance and discovery fixtures on the final branch head. Confirm the browser workflow gets past the production build before interpreting any UI checkpoint outcome.
+- **Definition of done:** All three automatic checks pass for this isolated fix unit and the exact tested head is recorded in STATUS.md.
+- **Rollback:** Revert this narrow typing/fixture correction and preserve ADR-051 if the changes cause a broader compatibility issue.
