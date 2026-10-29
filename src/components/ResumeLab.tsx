@@ -114,9 +114,9 @@ export default function ResumeLab({ profile = null }: { profile?: ResumeProfile 
           <span className="eyebrow">PHASE 6A · BROWSER-LOCAL DOCUMENT INTAKE</span>
           <h2>Review a resume without uploading it</h2>
           <p>
-            This workspace extracts DOCX, text-based PDF and UTF-8 TXT files, offers transparent baseline checks, and lets you
-            create an editable structured draft with local DOCX export or browser Print / Save as PDF. It does not score
-            fit, infer eligibility, contact an AI service, or claim to preserve the original layout.
+            This workspace extracts DOCX, text-based PDF and UTF-8 TXT files, offers transparent baseline checks, and
+            lets you create an editable structured draft with local DOCX export or browser Print / Save as PDF. It does
+            not score fit, infer eligibility, contact an AI service, or claim to preserve the original layout.
           </p>
         </div>
         <span className="resume-guidance-version" data-testid="resume-guidance-version">

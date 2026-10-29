@@ -63,7 +63,7 @@ test("ResumeEditorPanel exposes structured editing, review, local export, and ex
     assert.match(markup, /data-testid="resume-editor-content-block-1"/);
     assert.match(markup, /data-testid="resume-export-docx"/);
     assert.match(markup, /data-testid="resume-export-pdf"/);
-    assert.match(markup, /Review before \\/ after changes/);
+    assert.ok(markup.includes("Review before / after changes"));
     assert.match(markup, /Review manual AI handoff/);
     assert.match(markup, /does not connect to ChatGPT/);
     assert.doesNotMatch(markup, /Synthetic profile evidence/);

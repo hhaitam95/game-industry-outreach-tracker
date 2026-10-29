@@ -111,7 +111,9 @@ export function ResumeEditorPanel({ sourceText, profile }: Props) {
       setError("");
       setNotice("");
     } catch {
-      setError("That edit exceeds the supported document limits or contains invalid input. The previous version was kept.");
+      setError(
+      "That edit exceeds the supported document limits or contains invalid input. The previous version was kept.",
+    );
     }
   }
 
@@ -128,9 +130,13 @@ export function ResumeEditorPanel({ sourceText, profile }: Props) {
 
   function addAiPaste() {
     if (!aiPaste.trim()) return;
-    applyEdit((current) => addResumeBlock(current, "Other", "ai-paste", aiPaste.trim()) as StructuredResumeDocument);
+    applyEdit(
+      (current) => addResumeBlock(current, "Other", "ai-paste", aiPaste.trim()) as StructuredResumeDocument,
+    );
     setAiPaste("");
-    setNotice("Pasted suggestions were added as AI-pasted text. Review every claim before using or exporting them.");
+    setNotice(
+      "Pasted suggestions were added as AI-pasted text. Review every claim before using or exporting them.",
+    );
   }
 
   function toggleRedaction(field: keyof RedactionOptions, checked: boolean) {
@@ -166,7 +172,11 @@ export function ResumeEditorPanel({ sourceText, profile }: Props) {
   }
 
   return (
-    <section className="resume-lab-card resume-editor" aria-labelledby="resume-editor-title" data-testid="resume-editor">
+    <section
+      className="resume-lab-card resume-editor"
+      aria-labelledby="resume-editor-title"
+      data-testid="resume-editor"
+    >
       <div className="section-heading">
         <div>
           <span className="eyebrow">PHASE 6C · EDIT AND EXPORT</span>
@@ -185,7 +195,12 @@ export function ResumeEditorPanel({ sourceText, profile }: Props) {
       </p>
 
       <div className="resume-editor-actions">
-        <button className="button button-secondary" type="button" data-testid="resume-editor-add" onClick={addTypedBlock}>
+        <button
+          className="button button-secondary"
+          type="button"
+          data-testid="resume-editor-add"
+          onClick={addTypedBlock}
+        >
           Add a block
         </button>
         <button
@@ -303,7 +318,11 @@ export function ResumeEditorPanel({ sourceText, profile }: Props) {
               />
             </label>
             {warningTerms.has(block.id) ? (
-              <p className="resume-message resume-message-warning" role="note" data-testid="resume-editor-claim-warning">
+              <p
+                className="resume-message resume-message-warning"
+                role="note"
+                data-testid="resume-editor-claim-warning"
+              >
                 Check wording absent from both the imported resume and the current profile:{" "}
                 <strong>{warningTerms.get(block.id)?.join(", ")}</strong>. This heuristic can flag harmless wording and
                 cannot verify facts. Confirm every claim yourself; exports remain available.
@@ -405,7 +424,13 @@ export function ResumeEditorPanel({ sourceText, profile }: Props) {
             </div>
             <label className="resume-editor-field" htmlFor="resume-handoff-preview">
               Exact reviewed content to copy
-              <textarea id="resume-handoff-preview" data-testid="resume-handoff-preview" value={handoffPreview} readOnly rows={8} />
+              <textarea
+                id="resume-handoff-preview"
+                data-testid="resume-handoff-preview"
+                value={handoffPreview}
+                readOnly
+                rows={8}
+              />
             </label>
             <button
               type="button"

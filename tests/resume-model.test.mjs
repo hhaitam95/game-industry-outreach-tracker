@@ -15,7 +15,14 @@ import {
 
 test("structureResumeText recognizes known headings and keeps unrecognized text in Other", () => {
   const document = structureResumeText(
-    "Synthetic Person\nProfessional Summary\nTechnical support and incident response.\nExperience: Maintained Python services.\nSkills\nPython, REST APIs",
+    [
+      "Synthetic Person",
+      "Professional Summary",
+      "Technical support and incident response.",
+      "Experience: Maintained Python services.",
+      "Skills",
+      "Python, REST APIs",
+    ].join("\\n"),
   );
   assert.deepEqual(
     document.blocks.map((block) => block.section),
@@ -61,7 +68,10 @@ test("updates, additions, removal, and reorder are visible in the review diff", 
   assert.equal(diff.some((entry) => entry.status === "reordered"), true);
   assert.equal(diff.some((entry) => entry.status === "added"), true);
   document = removeResumeBlock(document, summaryId);
-  assert.equal(getResumeDiff(document).some((entry) => entry.id === summaryId && entry.status === "removed"), true);
+  assert.equal(
+    getResumeDiff(document).some((entry) => entry.id === summaryId && entry.status === "removed"),
+    true,
+  );
 });
 
 test("unsupported wording warnings return only terms absent from source and profile", () => {

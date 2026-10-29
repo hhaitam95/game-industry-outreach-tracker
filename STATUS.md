@@ -6,7 +6,7 @@
 **Base/main:** d56637e921fdb2e23f67e15aa3a518d6477c6842 (merge commit for PR #6, after PR #4's regular merge). No direct commits to main.
 
 **Review state:** PR #4 is merged; PR #6 is merged to main. Phase 6c is a separate branch and review unit; no Phase 6c PR has been opened yet.  
-**Phase 6c progress:** ADR-045/design-first gate is complete. Pure model, provenance/diff helpers, term warnings, manual-handoff redaction and local DOCX package generation are implemented with synthetic tests. The editor UI, browser print/Save as PDF, redaction/copy/paste flow, and browser smoke coverage are integrated. Exact-head checks for this implementation commit are pending; do not call Phase 6 complete until they pass.
+**Phase 6c progress:** ADR-045/design-first gate is complete. The pure model, DOCX package generator, editor, before/after diff, redaction and browser-print workflow are committed. First exact-head Frontend CI failed due to formatter warnings, malformed test assertion syntax, and JSDoc type errors ([run 40852546889](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40852546889)); 82/83 unit tests passed before the malformed test file prevented its component test from loading. The DOCX/Mammoth round-trip and all pure-model tests passed in that run. Corrective changes are in this commit; the second and final CI cycle is pending.
 
 ## Engineering standards for remaining work
 

@@ -48,7 +48,9 @@ function createStoredZip(files) {
   for (const file of files) {
     const name = UTF8.encode(file.name);
     const content = UTF8.encode(file.content);
-    if (name.length > 65535 || content.length > MAX_DOCX_BYTES) throw new Error("DOCX package exceeds the supported limit.");
+    if (name.length > 65535 || content.length > MAX_DOCX_BYTES) {
+      throw new Error("DOCX package exceeds the supported limit.");
+    }
     const checksum = crc32(content);
 
     const local = new Uint8Array(30 + name.length + content.length);

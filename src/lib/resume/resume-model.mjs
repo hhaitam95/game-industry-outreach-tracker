@@ -4,11 +4,16 @@ export const RESUME_MODEL_VERSION = 1;
 export const MAX_RESUME_BLOCKS = 40;
 export const MAX_RESUME_TEXT_CHARS = 150_000;
 
-export const RESUME_SECTIONS = Object.freeze([...RESUME_SECTION_GROUPS.map((section) => section.label), "Other"]);
+export const RESUME_SECTIONS = Object.freeze([
+  ...RESUME_SECTION_GROUPS.map((section) => section.label),
+  "Other",
+]);
 const VALID_SECTIONS = new Set(RESUME_SECTIONS);
 const VALID_ORIGINS = new Set(["imported", "typed", "ai-paste"]);
 const SECTION_ALIASES = new Map(
-  RESUME_SECTION_GROUPS.flatMap((section) => section.aliases.map((alias) => [normalizeHeading(alias), section.label])),
+  RESUME_SECTION_GROUPS.flatMap((section) =>
+    section.aliases.map((alias) => [normalizeHeading(alias), section.label]),
+  ),
 );
 
 const STOP_WORDS = new Set(
@@ -23,9 +28,13 @@ const STOP_WORDS = new Set(
  * @typedef {{id: string, section: ResumeSection, content: string, origin: ResumeBlockOrigin, originalContent: string, modified: boolean}} ResumeBlock
  * @typedef {{id: string, section: ResumeSection, content: string}} ResumeBaselineBlock
  * @typedef {{version: 1, nextId: number, baseline: ResumeBaselineBlock[], blocks: ResumeBlock[]}} ResumeDocument
+ * @typedef {{id: string, section: ResumeSection, status: "unchanged" | "modified" | "reordered" | "removed" | "added", beforeSection: ResumeSection | null, afterSection: ResumeSection | null, beforeContent: string | null, afterContent: string | null}} ResumeDiff
  */
 
-/** @param {unknown} value */
+/**
+ * @param {unknown} value
+ * @returns {value is Record<string, unknown>}
+ */
 function isRecord(value) {
   return Boolean(value && typeof value === "object" && !Array.isArray(value));
 }
@@ -51,16 +60,24 @@ function normalizeHeading(value) {
     .trim();
 }
 
-/** @param {string} value */
+/**
+ * @param {string} value
+ * @returns {{section: ResumeSection, remainder: string} | null}
+ */
 function detectHeading(value) {
   const line = value.replace(/^\s*(?:\d{1,2}[.)\-:]\s*)?/u, "").trim();
   const colonIndex = line.indexOf(":");
   if (colonIndex > 0) {
     const section = SECTION_ALIASES.get(normalizeHeading(line.slice(0, colonIndex)));
-    if (section) return { section, remainder: line.slice(colonIndex + 1).trim() };
+    if (section) {
+      return {
+        section: /** @type {ResumeSection} */ (section),
+        remainder: line.slice(colonIndex + 1).trim(),
+      };
+    }
   }
   const section = SECTION_ALIASES.get(normalizeHeading(line));
-  return section ? { section, remainder: "" } : null;
+  return section ? { section: /** @type {ResumeSection} */ (section), remainder: "" } : null;
 }
 
 /**
@@ -72,7 +89,9 @@ export function validateResumeDocument(input) {
   if (!isRecord(input)) throw new Error("Resume document is invalid.");
   assertExactKeys(input, ["version", "nextId", "baseline", "blocks"], "Resume document");
   if (input.version !== RESUME_MODEL_VERSION) throw new Error("Resume document version is unsupported.");
-  if (!Number.isSafeInteger(input.nextId) || input.nextId < 1) throw new Error("Resume document counter is invalid.");
+  if (typeof input.nextId !== "number" || !Number.isSafeInteger(input.nextId) || input.nextId < 1) {
+    throw new Error("Resume document counter is invalid.");
+  }
   if (!Array.isArray(input.baseline) || !Array.isArray(input.blocks)) {
     throw new Error("Resume document block lists are invalid.");
   }
@@ -80,18 +99,21 @@ export function validateResumeDocument(input) {
     throw new Error("Resume document contains too many blocks.");
   }
 
+  /** @param {unknown} section */
   const validateSection = (section) => {
     if (typeof section !== "string" || !VALID_SECTIONS.has(section)) {
       throw new Error("Resume section is unsupported.");
     }
     return /** @type {ResumeSection} */ (section);
   };
+  /** @param {unknown} id */
   const validateId = (id) => {
     if (typeof id !== "string" || !/^[a-zA-Z0-9_-]{1,80}$/u.test(id)) {
       throw new Error("Resume block ID is invalid.");
     }
     return id;
   };
+  /** @param {unknown} content */
   const validateContent = (content) => {
     if (typeof content !== "string" || content.length > MAX_RESUME_TEXT_CHARS) {
       throw new Error("Resume block content exceeds the supported limit.");
@@ -99,9 +121,13 @@ export function validateResumeDocument(input) {
     return content;
   };
 
+  /** @type {unknown[]} */
+  const baselineInput = input.baseline;
+  /** @type {unknown[]} */
+  const blockInput = input.blocks;
   const baselineIds = new Set();
   let baselineLength = 0;
-  const baseline = input.baseline.map((item) => {
+  const baseline = baselineInput.map((item) => {
     if (!isRecord(item)) throw new Error("Resume baseline block is invalid.");
     assertExactKeys(item, ["id", "section", "content"], "Resume baseline block");
     const id = validateId(item.id);
@@ -115,7 +141,7 @@ export function validateResumeDocument(input) {
 
   const blockIds = new Set();
   let totalLength = 0;
-  const blocks = input.blocks.map((item) => {
+  const blocks = blockInput.map((item) => {
     if (!isRecord(item)) throw new Error("Resume block is invalid.");
     assertExactKeys(item, ["id", "section", "content", "origin", "originalContent", "modified"], "Resume block");
     const id = validateId(item.id);
@@ -164,6 +190,7 @@ export function structureResumeText(input) {
   let current = null;
   /** @type {string[]} */
   let leading = [];
+  /** @param {ResumeSection} section @param {string[]} lines */
   const pushBlock = (section, lines) => {
     const content = lines.join("\n").trim();
     if (content || section !== "Other") parsed.push({ section, content });
@@ -223,22 +250,20 @@ export function updateResumeBlock(input, id, patch) {
   if (!exists) throw new Error("Resume block was not found.");
   const nextBlocks = document.blocks.map((block) => {
     if (block.id !== id) return block;
-    const section =
-      patch.section === undefined
-        ? block.section
-        : typeof patch.section === "string" && VALID_SECTIONS.has(patch.section)
-          ? /** @type {ResumeSection} */ (patch.section)
-          : (() => {
-              throw new Error("Resume section is unsupported.");
-            })();
-    const content =
-      patch.content === undefined
-        ? block.content
-        : typeof patch.content === "string" && patch.content.length <= MAX_RESUME_TEXT_CHARS
-          ? patch.content
-          : (() => {
-              throw new Error("Resume block content exceeds the supported limit.");
-            })();
+    let section = block.section;
+    if (patch.section !== undefined) {
+      if (typeof patch.section !== "string" || !VALID_SECTIONS.has(patch.section)) {
+        throw new Error("Resume section is unsupported.");
+      }
+      section = /** @type {ResumeSection} */ (patch.section);
+    }
+    let content = block.content;
+    if (patch.content !== undefined) {
+      if (typeof patch.content !== "string" || patch.content.length > MAX_RESUME_TEXT_CHARS) {
+        throw new Error("Resume block content exceeds the supported limit.");
+      }
+      content = patch.content;
+    }
     const baseline = document.baseline.find((item) => item.id === id);
     return {
       ...block,
@@ -260,13 +285,20 @@ export function updateResumeBlock(input, id, patch) {
  */
 export function addResumeBlock(input, section = "Other", origin = "typed", content = "") {
   const document = validateResumeDocument(input);
-  if (!VALID_SECTIONS.has(section) || typeof section !== "string") throw new Error("Resume section is unsupported.");
-  if (!VALID_ORIGINS.has(origin) || typeof origin !== "string") throw new Error("Resume block origin is unsupported.");
+  if (typeof section !== "string" || !VALID_SECTIONS.has(section)) {
+    throw new Error("Resume section is unsupported.");
+  }
+  if (typeof origin !== "string" || !VALID_ORIGINS.has(origin)) {
+    throw new Error("Resume block origin is unsupported.");
+  }
   if (typeof content !== "string" || content.length > MAX_RESUME_TEXT_CHARS) {
     throw new Error("Resume block content exceeds the supported limit.");
   }
   if (document.blocks.length >= MAX_RESUME_BLOCKS) throw new Error("Resume document contains too many blocks.");
-  if (document.blocks.reduce((sum, block) => sum + block.content.length, 0) + content.length > MAX_RESUME_TEXT_CHARS) {
+  if (
+    document.blocks.reduce((sum, block) => sum + block.content.length, 0) + content.length >
+    MAX_RESUME_TEXT_CHARS
+  ) {
     throw new Error("Resume document exceeds the supported text limit.");
   }
   let candidateId = document.nextId;
@@ -307,12 +339,16 @@ export function moveResumeBlock(input, id, direction) {
   return validateResumeDocument({ ...document, blocks });
 }
 
-/** @param {unknown} input */
+/**
+ * @param {unknown} input
+ * @returns {ResumeDiff[]}
+ */
 export function getResumeDiff(input) {
   const document = validateResumeDocument(input);
   const currentIndex = new Map(document.blocks.map((block, index) => [block.id, index]));
   const baselineIndex = new Map(document.baseline.map((block, index) => [block.id, index]));
   const currentById = new Map(document.blocks.map((block) => [block.id, block]));
+  /** @type {ResumeDiff[]} */
   const diff = document.baseline.map((before) => {
     const after = currentById.get(before.id);
     const index = currentIndex.get(before.id);
@@ -327,6 +363,7 @@ export function getResumeDiff(input) {
         afterContent: null,
       };
     }
+    /** @type {ResumeDiff["status"]} */
     let status = "unchanged";
     if (before.section !== after.section || before.content !== after.content) status = "modified";
     else if (index !== baselineIndex.get(before.id)) status = "reordered";
@@ -364,7 +401,13 @@ function meaningfulTokens(value) {
   const tokens = new Map();
   for (const match of normalized.matchAll(/[\p{L}\p{N}]+(?:[+#][\p{L}\p{N}]+)*/gu)) {
     const token = match[0];
-    if (STOP_WORDS.has(token) || (token.length < 3 && token !== "c++" && token !== "c#") || tokens.has(token)) continue;
+    if (
+      STOP_WORDS.has(token) ||
+      (token.length < 3 && token !== "c++" && token !== "c#") ||
+      tokens.has(token)
+    ) {
+      continue;
+    }
     tokens.set(token, token);
   }
   return tokens;
