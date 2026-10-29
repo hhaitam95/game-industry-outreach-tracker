@@ -520,3 +520,14 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Test plan:** Add synthetic unit tests for more-than-40 heading fallback and failure-safe model behavior where practical; extend browser acceptance to exercise section-label diff rendering and failed AI-paste preservation; keep existing DOCX, print, redaction, privacy, vault and discovery checks intact.
 - **Definition of done:** Formatting, lint, typecheck, unit/component tests, audit, production build, privacy checks, subpath browser acceptance, and discovery fixtures pass on the final exact branch head; STATUS.md and HANDOFF.md reflect the actual commit/check evidence.
 - **Rollback:** Revert the review-hardening implementation and tests as one unit, preserving this decision record and documenting the reason.
+
+
+### ADR-049 implementation outcome
+
+- **Implementation/test head:** [9c07e20](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/9c07e205f5423842c7b379476e20712eee617725).
+- Fixed AI-paste input clearing only after successful addition; section changes now show both the previous and current section in the diff; more than 40 recognized headings deterministically fall back to one `Other` block preserving all source text.
+- Added unit/component regression coverage and two interactive browser acceptance checkpoints for section-change disclosure and failed AI-paste preservation.
+- **Frontend CI:** passed [run 40864202641](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864202641); formatting, lint, typecheck, unit tests, audit, build, privacy checks and repository-subpath smoke all passed.
+- **Discovery fixtures:** passed [run 40864202592](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864202592).
+- **Browser acceptance:** passed [run 40864202680](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864202680), 24/24 synthetic-data checkpoints.
+- No manual workflow dispatch or rerun, workflow/permission change, dependency change, main-branch change, or personal data was introduced.
