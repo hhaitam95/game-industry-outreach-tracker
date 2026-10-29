@@ -32,11 +32,11 @@ test("directory model joins studio names and filters by metadata", () => {
     status: "candidate",
     countryScope: "unknown",
     discipline: "art",
-    query: "synthetic studio 03",
+    query: "synthetic studio 02",
   });
   assert.equal(filtered.totalCount, 1);
-  assert.equal(filtered.items[0].studioName, "Synthetic Studio 03");
-  assert.equal(filtered.items[0].id, "synthetic-route-03");
+  assert.equal(filtered.items[0].studioName, "Synthetic Studio 02");
+  assert.equal(filtered.items[0].id, "synthetic-route-02");
 });
 
 test("directory model search spans evidence, route type, and route URLs", () => {

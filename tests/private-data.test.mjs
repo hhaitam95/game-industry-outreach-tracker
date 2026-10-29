@@ -307,7 +307,6 @@ test("IndexedDB adapter refuses plaintext data before opening storage", async ()
   await assert.rejects(store.save("not encrypted"), /only encrypted workspace envelopes/i);
 });
 
-
 test("workspace v2 migrates to v3 without changing legacy data", () => {
   const original = sampleWorkspace();
   const v2 = JSON.parse(JSON.stringify(original));
@@ -327,7 +326,12 @@ test("legacy workspace v1 migrates through v2 to v3 preserving draft and applica
   v1.schemaVersion = 1;
   delete v1.routeMarkers;
   v1.drafts = [
-    { id: "legacy-draft-1", title: "Legacy introduction", body: "Preserve exact legacy draft text.", updatedAt: timestamp },
+    {
+      id: "legacy-draft-1",
+      title: "Legacy introduction",
+      body: "Preserve exact legacy draft text.",
+      updatedAt: timestamp,
+    },
   ];
   v1.applications = [
     {

@@ -434,7 +434,7 @@ async function main() {
         !directoryState.sort ||
         directoryState.routeCards < 1 ||
         !directoryState.markerControlsDisabled ||
-        !directoryState.sampleNotice.includes('not real studios or verified')
+        !directoryState.sampleNotice.includes("not real studios or verified")
       ) {
         throw new Error("speculative-route-directory-trust-boundary-failed");
       }

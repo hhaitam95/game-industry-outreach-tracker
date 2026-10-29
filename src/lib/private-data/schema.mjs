@@ -64,16 +64,7 @@ const APPLICATION_KEYS = [
 const WORKSPACE_V1_KEYS = ["schemaVersion", "updatedAt", "profile", "resumes", "drafts", "applications"];
 const WORKSPACE_V2_KEYS = ["schemaVersion", "updatedAt", "profile", "resumes", "drafts", "applications"];
 const WORKSPACE_KEYS = [...WORKSPACE_V2_KEYS, "routeMarkers"];
-const ROUTE_MARKER_KEYS = [
-  "id",
-  "routeId",
-  "studioId",
-  "studioName",
-  "routeUrl",
-  "status",
-  "createdAt",
-  "updatedAt",
-];
+const ROUTE_MARKER_KEYS = ["id", "routeId", "studioId", "studioName", "routeUrl", "status", "createdAt", "updatedAt"];
 
 /** @typedef {"interested" | "applied" | "interview" | "rejected" | "offered" | "withdrawn"} ApplicationStatus */
 /** @typedef {"role-application" | "speculative-introduction" | "networking"} DraftPurpose */
@@ -483,7 +474,12 @@ export function validateWorkspaceData(input) {
     routeMarkers: input.routeMarkers.map(validateRouteMarker),
   };
   const allIds = new Set([workspace.profile.id]);
-  for (const record of [...workspace.resumes, ...workspace.drafts, ...workspace.applications, ...workspace.routeMarkers]) {
+  for (const record of [
+    ...workspace.resumes,
+    ...workspace.drafts,
+    ...workspace.applications,
+    ...workspace.routeMarkers,
+  ]) {
     if (allIds.has(record.id)) throw new Error("Private workspace record IDs must be unique.");
     allIds.add(record.id);
   }

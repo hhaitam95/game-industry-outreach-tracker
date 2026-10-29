@@ -49,7 +49,7 @@ function formatDate(value: string | null) {
   );
 }
 
-function markerInput(route: DirectoryRoute, studioName: string) {
+function markerInput(route: Pick<DirectoryRoute, "id" | "studioId" | "routeUrl">, studioName: string) {
   return {
     routeId: route.id,
     studioId: route.studioId,
@@ -266,11 +266,7 @@ export default function SpeculativeRouteDirectory({
                 const marker = routeTracking?.markers.find((item) => item.routeId === route.id);
                 const trackingDisabled = isSynthetic || !routeTracking || !canTrack || savingRouteId === route.id;
                 return (
-                  <article
-                    className="route-directory-card"
-                    data-testid="speculative-route-card"
-                    key={route.id}
-                  >
+                  <article className="route-directory-card" data-testid="speculative-route-card" key={route.id}>
                     <div className="route-directory-card-heading">
                       <div>
                         <h3>{route.studioName}</h3>
@@ -284,7 +280,9 @@ export default function SpeculativeRouteDirectory({
                     <dl className="route-directory-metadata">
                       <div>
                         <dt>Route type</dt>
-                        <dd>{ROUTE_TYPE_LABELS[route.routeType as Exclude<RouteTypeFilter, "all">] ?? route.routeType}</dd>
+                        <dd>
+                          {ROUTE_TYPE_LABELS[route.routeType as Exclude<RouteTypeFilter, "all">] ?? route.routeType}
+                        </dd>
                       </div>
                       <div>
                         <dt>Country scope</dt>
@@ -421,7 +419,11 @@ export default function SpeculativeRouteDirectory({
             </button>
           </div>
 
-          {feedback ? <p className="route-directory-feedback" role="status">{feedback}</p> : null}
+          {feedback ? (
+            <p className="route-directory-feedback" role="status">
+              {feedback}
+            </p>
+          ) : null}
         </>
       )}
 
@@ -436,8 +438,12 @@ export default function SpeculativeRouteDirectory({
             <article className="route-directory-orphan-row" key={marker.id}>
               <div>
                 <strong>{marker.studioName}</strong>
-                <p>{marker.routeId} · {marker.status}</p>
-                <a href={marker.routeUrl} rel="noopener noreferrer" target="_blank">Open saved route</a>
+                <p>
+                  {marker.routeId} · {marker.status}
+                </p>
+                <a href={marker.routeUrl} rel="noopener noreferrer" target="_blank">
+                  Open saved route
+                </a>
               </div>
               <button
                 className="button button-secondary"

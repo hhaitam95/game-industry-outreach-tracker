@@ -76,6 +76,7 @@ test("workspace v1 migration preserves legacy profile, drafts, resumes, and appl
       },
     ],
   };
+  delete v1.routeMarkers;
   const migrated = validateWorkspaceData(v1);
   assert.equal(migrated.schemaVersion, WORKSPACE_SCHEMA_VERSION);
   assert.equal(migrated.profile.displayName, "Synthetic Candidate");

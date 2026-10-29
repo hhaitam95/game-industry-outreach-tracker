@@ -56,23 +56,26 @@ export default function PrivateDataSettings({
   if (!storeRef.current) storeRef.current = createIndexedDbVaultStore();
   const store = storeRef.current;
 
-  const reportWorkspaceSummary = useCallback((current: PrivateWorkspace | null) => {
-    if (!current) {
-      onWorkspaceSummaryChange(null);
-      return;
-    }
-    const today = new Date().toISOString().slice(0, 10);
-    const activeApplications = current.applications.filter(
-      (application) => !["rejected", "withdrawn"].includes(application.status),
-    );
-    onWorkspaceSummaryChange({
-      draftCount: current.drafts.length,
-      applicationCount: current.applications.length,
-      dueFollowUpCount: activeApplications.filter(
-        (application) => application.nextFollowUpAt && application.nextFollowUpAt <= today,
-      ).length,
-    });
-  }, [onWorkspaceSummaryChange]);
+  const reportWorkspaceSummary = useCallback(
+    (current: PrivateWorkspace | null) => {
+      if (!current) {
+        onWorkspaceSummaryChange(null);
+        return;
+      }
+      const today = new Date().toISOString().slice(0, 10);
+      const activeApplications = current.applications.filter(
+        (application) => !["rejected", "withdrawn"].includes(application.status),
+      );
+      onWorkspaceSummaryChange({
+        draftCount: current.drafts.length,
+        applicationCount: current.applications.length,
+        dueFollowUpCount: activeApplications.filter(
+          (application) => application.nextFollowUpAt && application.nextFollowUpAt <= today,
+        ).length,
+      });
+    },
+    [onWorkspaceSummaryChange],
+  );
 
   const [storageReady, setStorageReady] = useState<boolean | null>(null);
   const [vaultExists, setVaultExists] = useState(false);
@@ -141,54 +144,63 @@ export default function PrivateDataSettings({
     setNotice("Unsaved changes — save the profile before locking or leaving this page.");
   }
 
-  const persistWorkspace = useCallback(async (nextWorkspace: PrivateWorkspace, successMessage: string) => {
-    if (!session) {
-      setError("Unlock the local vault before saving.");
-      return false;
-    }
-    setBusy(true);
-    setError("");
-    setNotice("");
-    try {
-      const updated = validateWorkspaceData({ ...nextWorkspace, updatedAt: new Date().toISOString() });
-      await store.save(await session.encrypt(updated));
-      setWorkspace(updated);
-      onProfileChange(updated.profile);
-      reportWorkspaceSummary(updated);
-      setDirty(false);
-      setVaultExists(true);
-      setNotice(successMessage);
-      return true;
-    } catch (saveError) {
-      setError(describeError(saveError));
-      return false;
-    } finally {
-      setBusy(false);
-    }
-  }, [session, store, onProfileChange, reportWorkspaceSummary]);
+  const persistWorkspace = useCallback(
+    async (nextWorkspace: PrivateWorkspace, successMessage: string) => {
+      if (!session) {
+        setError("Unlock the local vault before saving.");
+        return false;
+      }
+      setBusy(true);
+      setError("");
+      setNotice("");
+      try {
+        const updated = validateWorkspaceData({ ...nextWorkspace, updatedAt: new Date().toISOString() });
+        await store.save(await session.encrypt(updated));
+        setWorkspace(updated);
+        onProfileChange(updated.profile);
+        reportWorkspaceSummary(updated);
+        setDirty(false);
+        setVaultExists(true);
+        setNotice(successMessage);
+        return true;
+      } catch (saveError) {
+        setError(describeError(saveError));
+        return false;
+      } finally {
+        setBusy(false);
+      }
+    },
+    [session, store, onProfileChange, reportWorkspaceSummary],
+  );
 
-  const setRouteMarker = useCallback(async (
-    route: SpeculativeRouteMarkerInput,
-    status: PrivateRouteMarkerStatus | null,
-  ) => {
-    if (!workspace || !session) {
-      setError("Unlock the local vault before saving private route markers.");
-      return false;
-    }
-    const now = new Date().toISOString();
-    const existing = workspace.routeMarkers.find((marker) => marker.routeId === route.routeId);
-    const routeMarkers = status === null
-      ? workspace.routeMarkers.filter((marker) => marker.routeId !== route.routeId)
-      : existing
-        ? workspace.routeMarkers.map((marker) =>
-            marker.routeId === route.routeId ? { ...marker, ...route, status, updatedAt: now } : marker,
-          )
-        : [{ id: crypto.randomUUID(), ...route, status, createdAt: now, updatedAt: now }, ...workspace.routeMarkers];
-    return persistWorkspace(
-      { ...workspace, routeMarkers },
-      status ? "Private route marker encrypted and saved locally." : "Private route marker removed and saved locally.",
-    );
-  }, [workspace, session, persistWorkspace]);
+  const setRouteMarker = useCallback(
+    async (route: SpeculativeRouteMarkerInput, status: PrivateRouteMarkerStatus | null) => {
+      if (!workspace || !session) {
+        setError("Unlock the local vault before saving private route markers.");
+        return false;
+      }
+      const now = new Date().toISOString();
+      const existing = workspace.routeMarkers.find((marker) => marker.routeId === route.routeId);
+      const routeMarkers =
+        status === null
+          ? workspace.routeMarkers.filter((marker) => marker.routeId !== route.routeId)
+          : existing
+            ? workspace.routeMarkers.map((marker) =>
+                marker.routeId === route.routeId ? { ...marker, ...route, status, updatedAt: now } : marker,
+              )
+            : [
+                { id: crypto.randomUUID(), ...route, status, createdAt: now, updatedAt: now },
+                ...workspace.routeMarkers,
+              ];
+      return persistWorkspace(
+        { ...workspace, routeMarkers },
+        status
+          ? "Private route marker encrypted and saved locally."
+          : "Private route marker removed and saved locally.",
+      );
+    },
+    [workspace, session, persistWorkspace],
+  );
 
   useEffect(() => {
     if (!workspace || !session) {

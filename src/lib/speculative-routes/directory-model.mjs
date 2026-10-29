@@ -20,7 +20,11 @@ function compareRoutes(left, right, sort) {
     return Date.parse(left.lastCheckedAt) - Date.parse(right.lastCheckedAt) || compareText(left.id, right.id);
   }
   if (sort === "status-asc") {
-    return compareText(left.status, right.status) || compareText(left.studioName, right.studioName) || compareText(left.id, right.id);
+    return (
+      compareText(left.status, right.status) ||
+      compareText(left.studioName, right.studioName) ||
+      compareText(left.id, right.id)
+    );
   }
   return Date.parse(right.lastCheckedAt) - Date.parse(left.lastCheckedAt) || compareText(left.id, right.id);
 }
@@ -46,9 +50,8 @@ export function selectSpeculativeRoutes(directory, options = {}) {
   const studioById = new Map(directory.studios.map((studio) => [studio.id, studio.name]));
   const studioUrlById = new Map(directory.studios.map((studio) => [studio.id, studio.officialWebsiteUrl]));
   const normalizedQuery = query.trim().toLocaleLowerCase("en");
-  const normalizedPageSize = Number.isInteger(pageSize) && pageSize >= 1 && pageSize <= 100
-    ? pageSize
-    : ROUTE_DIRECTORY_PAGE_SIZE;
+  const normalizedPageSize =
+    Number.isInteger(pageSize) && pageSize >= 1 && pageSize <= 100 ? pageSize : ROUTE_DIRECTORY_PAGE_SIZE;
 
   const matching = directory.routes
     .map((route) => ({
@@ -77,7 +80,9 @@ export function selectSpeculativeRoutes(directory, options = {}) {
         route.workModel,
         route.matchedPhraseCategory,
         route.evidenceSummary,
-      ].join(" ").toLocaleLowerCase("en");
+      ]
+        .join(" ")
+        .toLocaleLowerCase("en");
       return haystack.includes(normalizedQuery);
     })
     .sort((left, right) => compareRoutes(left, right, sort));

@@ -22,7 +22,6 @@ export type PrivateWorkspaceSummary = {
   dueFollowUpCount: number;
 };
 
-
 export type PrivateRouteMarkerStatus = "planned" | "applied";
 
 export type PrivateRouteMarker = {
@@ -45,8 +44,5 @@ export type SpeculativeRouteMarkerInput = {
 
 export type PrivateRouteTrackingState = {
   markers: PrivateRouteMarker[];
-  setMarker: (
-    route: SpeculativeRouteMarkerInput,
-    status: PrivateRouteMarkerStatus | null,
-  ) => Promise<boolean>;
+  setMarker: (route: SpeculativeRouteMarkerInput, status: PrivateRouteMarkerStatus | null) => Promise<boolean>;
 };
