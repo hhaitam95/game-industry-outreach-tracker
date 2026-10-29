@@ -37,6 +37,7 @@ function draft(overrides = {}) {
     studioName: "CD PROJEKT RED",
     roleTitle: "Developer Support Specialist",
     opportunityId: "",
+    sourceUrl: "",
     purpose: "role-application",
     profileUpdatedAt: NOW,
     resumeLabel: "Support CV · 2026-10",
