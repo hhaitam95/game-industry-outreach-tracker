@@ -1,14 +1,15 @@
 # Project Status
 
 **Last updated:** 2026-10-29  
-**Current phase:** Phase 6c implementation is complete and verified for review; Phase 5 and Phase 6a/6b are merged into `main`. Phase 6c remains isolated on its feature branch until the owner chooses whether to advance the PR.  
+**Current phase:** Phase 6 implementation is complete and verified for owner review. Phase 5 and Phase 6a/6b are merged into `main`; Phase 6c remains isolated on its feature branch.  
 **Working branch:** `feat/phase6c-resume-export`  
-**Verified implementation head:** [5752946](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/57529467913053b8f48902c7e283fd6b8fabe951); the following closeout change is documentation-only. No direct commits to `main`.
+**Verified implementation/test head:** [9c07e20](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/9c07e205f5423842c7b379476e20712eee617725). Subsequent closeout changes are documentation-only; no direct commits to `main`.
 
-**Review state:** PR #4 and PR #6 are merged. [PR #7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7) is open and unmerged; the owner controls readiness and the merge decision.  
-**Phase 6c acceptance:** All checks passed on exact implementation head `5752946`: [Frontend CI PR run 40855486074](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40855486074), [browser acceptance 40855486084](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40855486084), and [discovery fixtures 40855486192](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40855486192). Push-triggered Frontend CI and discovery checks also passed ([40855478878](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40855478878), [40855478906](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40855478906)).
-**Browser evidence:** The sanitized acceptance report confirms 22/22 synthetic-data checkpoints passed, including TXT/DOCX/PDF extraction, Phase 6c editor/export controls, handoff disclosure, the local-only boundary, previous-extraction preservation, clearing, and the existing encrypted-vault lock/unlock/backup flows. No real resume/profile data was used.
-**Closeout:** ADR-046 records the original two-cycle deferral; ADR-047 documents checkpoint isolation; ADR-048 records the boolean predicate correction and passing verification. The closeout commit below updates only project documentation.
+**Review state:** [PR #7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7) remains draft and unmerged. Owner retains the readiness and merge decision.  
+**Phase 6c review findings:** Resolved failed AI-paste clearing, added explicit before/after section labels, and made excessive recognized headings fall back to one text-preserving `Other` block. Unit/component and interactive browser regression tests were added.
+**Exact-head verification:** [Frontend CI 40864202641](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864202641) passed, including formatting, lint, typecheck, unit tests, audit, build, privacy checks and repository-subpath smoke. [Discovery fixtures 40864202592](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864202592) passed. [Browser acceptance 40864202680](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864202680) passed 24/24 synthetic-data checkpoints, including the two new review regressions.
+**Privacy and scope:** No real CV/profile/application data or secrets were added. No manual workflow dispatch/rerun, workflow permission/trigger change, dependency change, merge, or main-branch change was performed. The public repository/local-only data boundary remains unchanged.
+
 ## Engineering standards for remaining work
 
 - Follow AGENTS.md and IMPLEMENTATION_PLAN.md: design before code, keep pure domain logic separate from I/O/UI, test success and failure paths, and update docs with implementation.
