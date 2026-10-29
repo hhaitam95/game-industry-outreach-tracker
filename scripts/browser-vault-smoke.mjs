@@ -950,7 +950,10 @@ try {
     ["condition-not-met-lock confirmation", "lock confirmation did not appear"],
     ["condition-not-met-incorrect passphrase rejection", "incorrect passphrase was not rejected in the UI"],
     ["condition-not-met-backup restoration", "backup restoration did not complete"],
-    ["condition-not-met-phase7-generated-message-in-textarea", "generated message did not appear in the editable draft field"],
+    [
+      "condition-not-met-phase7-generated-message-in-textarea",
+      "generated message did not appear in the editable draft field",
+    ],
   ]);
   failureReason = safeReasons.has(message)
     ? message
