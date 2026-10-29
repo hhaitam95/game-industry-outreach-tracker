@@ -34,6 +34,15 @@ test("structureResumeText recognizes known headings and keeps unrecognized text 
   assert.equal(document.baseline.length, document.blocks.length);
 });
 
+test("structureResumeText preserves all text in Other when recognized headings exceed the block limit", () => {
+  const source = Array.from({ length: 41 }, (_, index) => "Skills\nSynthetic section " + (index + 1)).join("\n");
+  const document = structureResumeText(source);
+  assert.equal(document.blocks.length, 1);
+  assert.equal(document.blocks[0].section, "Other");
+  assert.equal(document.blocks[0].content, source);
+  assert.match(document.blocks[0].content, /Synthetic section 41/);
+});
+
 test("structureResumeText preserves all text when no supported headings are present", () => {
   const document = structureResumeText("Synthetic evidence only\nFirst line\nSecond line");
   assert.equal(document.blocks.length, 1);
