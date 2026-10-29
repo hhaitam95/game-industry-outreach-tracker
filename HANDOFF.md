@@ -19,9 +19,17 @@
 - `.github/workflows/publish-pages.yml` is `workflow_dispatch` only. `validate-only` is the default and uses synthetic sample data; it does not upload an artifact or deploy. The explicit `publish` mode is allowed only from `main`, validates the existing public snapshot, checks the build/privacy boundary, uploads only `dist/`, then calls the official Pages deployment action.
 - The build job has `contents: read`. Only the separate deploy job receives `pages: write` and `id-token: write`. No second repository, personal access token, or deployment secret is required.
 - `scripts/check-pages-artifact.mjs` rejects known private file types/paths, recognized credential patterns, missing local JS/CSS assets, missing CSP, symbolic links and external/unsafe HTML script/link references. Synthetic tests cover success and failure cases. These checks are guardrails, not a replacement for reviewing public content.
-- **One-time setting:** in the original repository, open Settings → Pages and set Source to GitHub Actions. Connected tools cannot change this setting or dispatch a workflow. No site is live until a successful manual publish and URL/privacy review.
+- **Pages setting:** the owner confirmed this repository's Settings → Pages source is configured as GitHub Actions. The connected GitHub integration does not expose workflow dispatch, so start `Public Pages release` from Actions manually: run `validate-only`, review the checks, then select `publish` from `main`. No site is live until publication succeeds and the public URL/privacy boundary are reviewed.
 - Do not enable schedules, add push triggers, dispatch live discovery, publish private application data, or change repository visibility.
 - Read [STATUS.md](STATUS.md) for current PR, checks, review order and next action.
+
+## Phase 9 — Launch feedback and stabilization
+
+- ADR-056 defines the launch acceptance gate, public feedback loop, rollback path, and stable release rules.
+- Use the GitHub Issue Forms linked from README for one bug or enhancement per issue. Reports are public; never include personal CV/profile/application material, vault exports, correspondence, credentials, or unredacted screenshots.
+- Triage reported items into launch blockers, defects/regressions, usability polish, and later-version ideas. Deliver small reviewed changes, run CI/privacy/browser checks, manually publish, then have the owner retest the deployed scenario.
+- Do not tag `v1.0.0` until the public URL/assets and core user flows are accepted, all required CI is green, no launch blockers remain, and limitations are documented. Ideas outside the stable scope remain backlog items for a future version.
+- Read [STATUS.md](STATUS.md) for the current branch/checks and deployment state.
 
 ## Phase 5a implementation
 

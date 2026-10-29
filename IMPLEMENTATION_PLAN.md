@@ -243,19 +243,38 @@ Design: ADR-045 in DECISIONS.md; review hardening and regression coverage: ADR-0
 ### External setup dependency
 The connected GitHub tools used for implementation do not expose GitHub Pages settings or a workflow-dispatch action. The owner must set this repository's Settings → Pages → Source to GitHub Actions before the first live publish; no repository creation or publishing secret is needed. The site must not be described as deployed until a successful publication and URL/privacy check have actually completed.
 
-## Phase 9 — Optional improvements
+## Phase 9 — Launch acceptance, feedback, and stabilization
 
-### Scope
-- Optional salary estimates, only when defensible source data exists.
-- Better discovery coverage, source adapters and confidence metrics.
-- Optional backend for private multi-device synchronization, subject to a new security/cost decision.
-- Optional AI API integration, subject to separate cost, privacy and deployment approval.
-- Advanced analytics and historical ownership/credit changes.
+**Selected approach:** Exercise the real published site, capture feedback in public GitHub Issues using issue forms, fix launch-critical issues in small batches, and cut a stable `v1.0.0` release only after the acceptance gate passes. This phase does not automatically mark the application stable simply because it builds.
 
-### Exit criteria
-- New features address measured limitations.
-- Every paid service is explicitly approved.
-- No optional feature compromises privacy, factuality or human control.
+### Design and scope
+- ADR-056 defines the feedback, privacy, triage, iteration, rollback, and stable-release boundaries before implementation.
+- Add GitHub Issue Forms for bugs/regressions and product feedback/enhancements, plus `docs/operations/feedback-and-stability.md` explaining how to test, report, triage, prioritize, and close feedback.
+- Add a clear README link to the feedback entry point. State that issues are public and prohibit CVs, resume text, private profile details, application history, correspondence, vault exports, credentials, and identifying screenshots.
+- Keep feature ideas separate from defects. Triage into launch blocker, defect/regression, usability polish, and later-version backlog. Prefer a small number of bounded feedback cycles rather than broad rewrites.
+- For each fix batch: create a focused branch/PR, run all required CI/browser/privacy checks, merge only after validation, manually deploy, and retest the reported behavior.
+- Do not introduce paid services/dependencies, backend/cloud storage, scheduled discovery, automatic email/application submission, or broader product features during stabilization.
+
+### Launch acceptance gate
+- [ ] Owner manually runs the Pages workflow's `validate-only` mode, reviews its checks, then explicitly runs `publish` from `main`.
+- [ ] Public URL `https://hhaitam95.github.io/game-industry-outreach-tracker/` loads with valid local JavaScript/CSS assets and correct repository-base routing.
+- [ ] Public studio/opportunity data shows source/provenance and freshness caveats; only the validated static artifact is published.
+- [ ] Core flows are tested in the real browser: studio/role exploration, vault setup/lock/unlock and encrypted backup/restore, local resume parsing/editing/export, outreach draft creation/versioning, and application tracking. Any remaining unimplemented or sample-only behavior is recorded plainly.
+- [ ] No private candidate data is present in the site, repository artifacts, issue reports, or workflow logs.
+- [ ] Frontend CI, browser acceptance, discovery fixtures, privacy checks and production asset smoke tests pass on the final reviewed implementation.
+- [ ] No unresolved launch-blocking defects remain. Non-blocking issues and known limitations are documented.
+- [ ] A stable `v1.0.0` release/tag and concise release notes are created only after the acceptance gate is satisfied.
+
+### Feedback-cycle process
+1. Owner tests the deployed build and submits one public issue per defect or improvement using the matching form.
+2. Triage severity and scope. Privacy/security issues and core-flow failures block the stable release; enhancements not necessary for launch remain in the later-version backlog.
+3. Select a small batch, implement it in a reviewed PR, run all checks, merge, publish manually, and ask the owner to retest that scenario.
+4. Repeat until the release gate passes; do not close an issue merely because code merged. Close after the owner confirms the deployed behavior or the item is explicitly deferred with rationale.
+
+### Rollback and later versions
+- If deployment or a core workflow regresses, revert the responsible source change in a reviewed PR and manually deploy the last known-good revision. Keep the release tag immutable.
+- After `v1.0.0`, new ideas are logged and prioritized as a later version (for example, a compatible minor release); they do not silently expand the stable release scope.
+- Update CHANGELOG.md, STATUS.md, HANDOFF.md, and release notes with actual outcomes and known limitations.
 
 ## Cross-cutting acceptance checks
 

@@ -4,6 +4,8 @@ Meaningful changes are recorded here. Current branch/review state and verificati
 
 ## Unreleased
 
+- Phase 9 adds public issue forms and a post-launch feedback/stabilization process. Stable `v1.0.0` remains gated on manual Pages publication, real-browser acceptance, a clean privacy boundary, and no unresolved launch blockers.
+
 - Hardened Phase 6c resume editing: failed AI-paste additions retain user input, section moves are explicit in the before/after diff, and excessive recognized headings fall back to one text-preserving Other block. Added synthetic unit/component and browser regression coverage.
 - Phase 7 adds a v2 encrypted-workspace model with strict v1 migration, reviewable outreach draft revisions, heuristic pre-send checks, and private application status/activity/follow-up tracking. No automatic sending/submission, paid AI API, backend, or personal data in repository files.
 - Phase 8 supersedes the separate-repository proposal with same-repository GitHub Pages deployment through an Actions artifact. The manual workflow defaults to validation-only, requires an explicit publish selection on main, uses separate least-privilege build/deploy jobs, and enforces a static-artifact privacy gate. A live site is not deployed until the owner selects GitHub Actions as the repository's Pages source and a publish run succeeds.

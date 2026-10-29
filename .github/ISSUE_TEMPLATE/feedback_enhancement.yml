@@ -1,0 +1,72 @@
+name: Product feedback or enhancement
+description: Suggest a usability improvement, enhancement, or idea for a later version.
+title: "[Feedback] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Privacy notice:** This is a public repository and your issue will be public. Do not include your CV/resume, private profile or application details, recruiter correspondence, vault exports, credentials, or screenshots containing personal information. Describe the task generically and use synthetic examples.
+  - type: dropdown
+    id: category
+    attributes:
+      label: Feedback type
+      options:
+        - Usability polish
+        - Accessibility improvement
+        - Existing workflow enhancement
+        - New feature idea
+        - Future-version idea
+        - Other feedback
+    validations:
+      required: true
+  - type: textarea
+    id: task
+    attributes:
+      label: What were you trying to do?
+      description: Describe the user task without personal candidate details.
+      placeholder: I wanted to...
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Current experience or limitation
+      description: What feels confusing, slow, incomplete, or missing?
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: What would a good result look like?
+    validations:
+      required: true
+  - type: textarea
+    id: value
+    attributes:
+      label: User impact
+      description: Who benefits and how does this improve the workflow?
+    validations:
+      required: false
+  - type: dropdown
+    id: timing
+    attributes:
+      label: Release relevance
+      description: Help us distinguish stabilization work from later ideas. Final triage may change this.
+      options:
+        - Blocks launch or a core workflow
+        - Should be fixed during initial stabilization
+        - Useful polish, but not launch blocking
+        - Later-version idea
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Example acceptance criteria
+      description: Optional observable behaviors that would show the improvement is complete.
+      placeholder: |
+        - When I...
+        - The app should...
+    validations:
+      required: false
