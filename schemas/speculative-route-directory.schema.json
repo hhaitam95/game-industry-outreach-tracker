@@ -126,7 +126,17 @@
           "uniqueItems": true,
           "items": {
             "type": "string",
-            "enum": ["art", "animation", "engineering", "design", "production", "audio", "quality-assurance", "narrative", "other"]
+            "enum": [
+              "art",
+              "animation",
+              "engineering",
+              "design",
+              "production",
+              "audio",
+              "quality-assurance",
+              "narrative",
+              "other"
+            ]
           }
         },
         "workModel": {

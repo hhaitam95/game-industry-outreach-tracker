@@ -15,7 +15,9 @@ const ROUTE_SCHEMA = ROOT_SCHEMA.$defs.speculativeRoute;
 export const SPECULATIVE_ROUTE_DIRECTORY_SCHEMA_VERSION = 1;
 export const SPECULATIVE_ROUTE_TYPES = Object.freeze([...ROUTE_SCHEMA.properties.routeType.enum]);
 export const SPECULATIVE_ROUTE_STATUSES = Object.freeze([...ROUTE_SCHEMA.properties.status.enum]);
-export const SPECULATIVE_ROUTE_PHRASE_CATEGORIES = Object.freeze([...ROUTE_SCHEMA.properties.matchedPhraseCategory.enum]);
+export const SPECULATIVE_ROUTE_PHRASE_CATEGORIES = Object.freeze([
+  ...ROUTE_SCHEMA.properties.matchedPhraseCategory.enum,
+]);
 
 /** @param {string} reference @returns {Record<string, any>} */
 function resolveSchemaReference(reference) {
