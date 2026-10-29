@@ -1,6 +1,6 @@
 import { MAX_WORKSPACE_SERIALIZED_BYTES } from "./limits.mjs";
 
-export const WORKSPACE_SCHEMA_VERSION = 1;
+export const WORKSPACE_SCHEMA_VERSION = 2;
 export const APPLICATION_STATUSES = Object.freeze([
   "interested",
   "applied",
@@ -9,11 +9,40 @@ export const APPLICATION_STATUSES = Object.freeze([
   "offered",
   "withdrawn",
 ]);
+export const DRAFT_PURPOSES = Object.freeze(["role-application", "speculative-introduction", "networking"]);
+export const DRAFT_REVIEW_STATUSES = Object.freeze(["draft", "reviewed", "ready-for-user"]);
+export const APPLICATION_ACTIVITY_TYPES = Object.freeze([
+  "note",
+  "response",
+  "follow-up",
+  "interview",
+  "outcome",
+  "status-change",
+  "submitted",
+]);
 
 const PROFILE_KEYS = ["id", "displayName", "headline", "professionalSummary", "targetRoles", "skills", "updatedAt"];
 const RESUME_KEYS = ["id", "label", "kind", "processedAt"];
-const DRAFT_KEYS = ["id", "title", "body", "updatedAt"];
-const APPLICATION_KEYS = [
+const LEGACY_DRAFT_KEYS = ["id", "title", "body", "updatedAt"];
+const DRAFT_KEYS = [
+  "id",
+  "seriesId",
+  "versionNumber",
+  "previousVersionId",
+  "title",
+  "body",
+  "updatedAt",
+  "studioId",
+  "studioName",
+  "roleTitle",
+  "opportunityId",
+  "purpose",
+  "profileUpdatedAt",
+  "resumeLabel",
+  "guidanceVersion",
+  "reviewStatus",
+];
+const LEGACY_APPLICATION_KEYS = [
   "id",
   "studioName",
   "roleTitle",
@@ -22,6 +51,14 @@ const APPLICATION_KEYS = [
   "notes",
   "createdAt",
   "updatedAt",
+];
+const APPLICATION_KEYS = [
+  ...LEGACY_APPLICATION_KEYS,
+  "studioId",
+  "opportunityId",
+  "outreachDraftId",
+  "nextFollowUpAt",
+  "history",
 ];
 const WORKSPACE_KEYS = ["schemaVersion", "updatedAt", "profile", "resumes", "drafts", "applications"];
 
@@ -34,22 +71,22 @@ function isPlainRecord(value) {
 
 /** @param {unknown} value @param {string[]} keys @param {string} label @returns {asserts value is Record<string, unknown>} */
 function assertExactKeys(value, keys, label) {
-  if (!isPlainRecord(value)) throw new Error(`${label} must be an object.`);
+  if (!isPlainRecord(value)) throw new Error(label + " must be an object.");
   const allowed = new Set(keys);
   for (const key of Object.keys(value)) {
-    if (!allowed.has(key)) throw new Error(`${label} contains an unsupported field.`);
+    if (!allowed.has(key)) throw new Error(label + " contains an unsupported field.");
   }
   for (const key of keys) {
-    if (!Object.hasOwn(value, key)) throw new Error(`${label} is missing a required field.`);
+    if (!Object.hasOwn(value, key)) throw new Error(label + " is missing a required field.");
   }
 }
 
 /** @param {unknown} value @param {string} label @param {number} maxLength @param {{allowEmpty?: boolean}} [options] */
 function boundedString(value, label, maxLength, { allowEmpty = true } = {}) {
   if (typeof value !== "string" || value.length > maxLength) {
-    throw new Error(`${label} must be text of at most ${maxLength} characters.`);
+    throw new Error(label + " must be text of at most " + maxLength + " characters.");
   }
-  if (!allowEmpty && value.trim().length === 0) throw new Error(`${label} is required.`);
+  if (!allowEmpty && value.trim().length === 0) throw new Error(label + " is required.");
   return value;
 }
 
@@ -61,7 +98,30 @@ function identifier(value, label) {
 /** @param {unknown} value @param {string} label */
 function timestamp(value, label) {
   if (typeof value !== "string" || value.length > 50 || !Number.isFinite(Date.parse(value))) {
-    throw new Error(`${label} must be a valid timestamp.`);
+    throw new Error(label + " must be a valid timestamp.");
+  }
+  return value;
+}
+
+/** @param {unknown} value @param {string} label */
+function optionalTimestamp(value, label) {
+  return value === null ? null : timestamp(value, label);
+}
+
+/** @param {unknown} value @param {string} label */
+function optionalIdentifier(value, label) {
+  return value === null ? null : identifier(value, label);
+}
+
+/** @param {unknown} value @param {string} label */
+function optionalDate(value, label) {
+  if (value === null) return null;
+  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    throw new Error(label + " must be an ISO calendar date or null.");
+  }
+  const parsed = new Date(value + "T00:00:00.000Z");
+  if (!Number.isFinite(parsed.getTime()) || parsed.toISOString().slice(0, 10) !== value) {
+    throw new Error(label + " must be a valid ISO calendar date or null.");
   }
   return value;
 }
@@ -69,7 +129,7 @@ function timestamp(value, label) {
 /** @param {unknown} value @param {string} label @param {{maxItems: number, maxItemLength: number}} limits */
 function stringList(value, label, { maxItems, maxItemLength }) {
   if (!Array.isArray(value) || value.length > maxItems) {
-    throw new Error(`${label} must be a list with at most ${maxItems} items.`);
+    throw new Error(label + " must be a list with at most " + maxItems + " items.");
   }
   return value.map((item) => boundedString(item, label, maxItemLength, { allowEmpty: false }));
 }
@@ -124,8 +184,8 @@ function validateResumeMetadata(value) {
 }
 
 /** @param {unknown} value */
-function validateDraft(value) {
-  assertExactKeys(value, DRAFT_KEYS, "Outreach draft");
+function validateLegacyDraft(value) {
+  assertExactKeys(value, LEGACY_DRAFT_KEYS, "Outreach draft");
   return {
     id: identifier(value.id, "Draft ID"),
     title: boundedString(value.title, "Draft title", 180, { allowEmpty: false }),
@@ -135,8 +195,40 @@ function validateDraft(value) {
 }
 
 /** @param {unknown} value */
-function validateApplication(value) {
-  assertExactKeys(value, APPLICATION_KEYS, "Application");
+function validateDraft(value) {
+  assertExactKeys(value, DRAFT_KEYS, "Outreach draft");
+  if (!Number.isSafeInteger(value.versionNumber) || value.versionNumber < 1) {
+    throw new Error("Draft version number must be a positive integer.");
+  }
+  if (typeof value.purpose !== "string" || !DRAFT_PURPOSES.includes(value.purpose)) {
+    throw new Error("Draft purpose is unsupported.");
+  }
+  if (typeof value.reviewStatus !== "string" || !DRAFT_REVIEW_STATUSES.includes(value.reviewStatus)) {
+    throw new Error("Draft review status is unsupported.");
+  }
+  return {
+    id: identifier(value.id, "Draft ID"),
+    seriesId: identifier(value.seriesId, "Draft series ID"),
+    versionNumber: value.versionNumber,
+    previousVersionId: optionalIdentifier(value.previousVersionId, "Previous draft ID"),
+    title: boundedString(value.title, "Draft title", 180, { allowEmpty: false }),
+    body: boundedString(value.body, "Draft body", 20_000),
+    updatedAt: timestamp(value.updatedAt, "Draft updatedAt"),
+    studioId: boundedString(value.studioId, "Draft studio ID", 100),
+    studioName: boundedString(value.studioName, "Draft studio name", 180),
+    roleTitle: boundedString(value.roleTitle, "Draft role title", 180),
+    opportunityId: boundedString(value.opportunityId, "Draft opportunity ID", 100),
+    purpose: value.purpose,
+    profileUpdatedAt: optionalTimestamp(value.profileUpdatedAt, "Draft profile timestamp"),
+    resumeLabel: boundedString(value.resumeLabel, "Resume label", 120),
+    guidanceVersion: boundedString(value.guidanceVersion, "Guidance version", 120, { allowEmpty: false }),
+    reviewStatus: value.reviewStatus,
+  };
+}
+
+/** @param {unknown} value */
+function validateLegacyApplication(value) {
+  assertExactKeys(value, LEGACY_APPLICATION_KEYS, "Application");
   if (typeof value.status !== "string" || !APPLICATION_STATUSES.includes(value.status)) {
     throw new Error("Application has an unsupported status.");
   }
@@ -149,6 +241,92 @@ function validateApplication(value) {
     notes: boundedString(value.notes, "Application notes", 4_000),
     createdAt: timestamp(value.createdAt, "Application createdAt"),
     updatedAt: timestamp(value.updatedAt, "Application updatedAt"),
+  };
+}
+
+/** @param {unknown} value */
+function validateActivity(value) {
+  assertExactKeys(value, ["id", "type", "occurredAt", "note"], "Application activity");
+  if (typeof value.type !== "string" || !APPLICATION_ACTIVITY_TYPES.includes(value.type)) {
+    throw new Error("Application activity type is unsupported.");
+  }
+  return {
+    id: identifier(value.id, "Activity ID"),
+    type: value.type,
+    occurredAt: timestamp(value.occurredAt, "Activity timestamp"),
+    note: boundedString(value.note, "Activity note", 2_000, { allowEmpty: false }),
+  };
+}
+
+/** @param {unknown} value */
+function validateApplication(value) {
+  assertExactKeys(value, APPLICATION_KEYS, "Application");
+  if (typeof value.status !== "string" || !APPLICATION_STATUSES.includes(value.status)) {
+    throw new Error("Application has an unsupported status.");
+  }
+  if (!Array.isArray(value.history) || value.history.length > 200) {
+    throw new Error("Application history must contain at most 200 events.");
+  }
+  return {
+    id: identifier(value.id, "Application ID"),
+    studioName: boundedString(value.studioName, "Studio name", 180, { allowEmpty: false }),
+    roleTitle: boundedString(value.roleTitle, "Role title", 180, { allowEmpty: false }),
+    status: value.status,
+    applicationUrl: safeApplicationUrl(value.applicationUrl),
+    notes: boundedString(value.notes, "Application notes", 4_000),
+    createdAt: timestamp(value.createdAt, "Application createdAt"),
+    updatedAt: timestamp(value.updatedAt, "Application updatedAt"),
+    studioId: boundedString(value.studioId, "Application studio ID", 100),
+    opportunityId: boundedString(value.opportunityId, "Application opportunity ID", 100),
+    outreachDraftId: boundedString(value.outreachDraftId, "Application draft ID", 100),
+    nextFollowUpAt: optionalDate(value.nextFollowUpAt, "Next follow-up date"),
+    history: value.history.map(validateActivity),
+  };
+}
+
+/** @param {unknown} input */
+function migrateV1Workspace(input) {
+  assertExactKeys(input, WORKSPACE_KEYS, "Private workspace");
+  if (input.schemaVersion !== 1) throw new Error("This private workspace uses an unsupported data version.");
+  if (!Array.isArray(input.resumes) || input.resumes.length > 100) {
+    throw new Error("Resume metadata must be a list with at most 100 items.");
+  }
+  if (!Array.isArray(input.drafts) || input.drafts.length > 500) {
+    throw new Error("Outreach drafts must be a list with at most 500 items.");
+  }
+  if (!Array.isArray(input.applications) || input.applications.length > 1_000) {
+    throw new Error("Applications must be a list with at most 1,000 items.");
+  }
+  const drafts = input.drafts.map(validateLegacyDraft).map((draft) => ({
+    ...draft,
+    seriesId: draft.id,
+    versionNumber: 1,
+    previousVersionId: null,
+    studioId: "",
+    studioName: "",
+    roleTitle: "",
+    opportunityId: "",
+    purpose: "speculative-introduction",
+    profileUpdatedAt: null,
+    resumeLabel: "",
+    guidanceVersion: "legacy-v1",
+    reviewStatus: "draft",
+  }));
+  const applications = input.applications.map(validateLegacyApplication).map((application) => ({
+    ...application,
+    studioId: "",
+    opportunityId: "",
+    outreachDraftId: "",
+    nextFollowUpAt: null,
+    history: [],
+  }));
+  return {
+    schemaVersion: WORKSPACE_SCHEMA_VERSION,
+    updatedAt: timestamp(input.updatedAt, "Workspace updatedAt"),
+    profile: validateProfile(input.profile),
+    resumes: input.resumes.map(validateResumeMetadata),
+    drafts,
+    applications,
   };
 }
 
@@ -175,10 +353,16 @@ export function createEmptyWorkspace(now = new Date().toISOString()) {
 }
 
 /**
- * Validate and copy a workspace payload. The exact-key checks reject unknown fields, including accidental raw CV text.
+ * Validate and copy a workspace payload. Version 1 vault data is validated and migrated
+ * in memory to version 2; the caller's next explicit save writes the migrated shape encrypted.
  * @param {unknown} input
  */
 export function validateWorkspaceData(input) {
+  if (!isPlainRecord(input)) throw new Error("Private workspace must be an object.");
+  if (input.schemaVersion === 1) {
+    const migrated = migrateV1Workspace(input);
+    return validateWorkspaceData(migrated);
+  }
   assertExactKeys(input, WORKSPACE_KEYS, "Private workspace");
   if (input.schemaVersion !== WORKSPACE_SCHEMA_VERSION) {
     throw new Error("This private workspace uses an unsupported data version.");
@@ -192,6 +376,7 @@ export function validateWorkspaceData(input) {
   if (!Array.isArray(input.applications) || input.applications.length > 1_000) {
     throw new Error("Applications must be a list with at most 1,000 items.");
   }
+
   const workspace = {
     schemaVersion: WORKSPACE_SCHEMA_VERSION,
     updatedAt: timestamp(input.updatedAt, "Workspace updatedAt"),
@@ -200,6 +385,25 @@ export function validateWorkspaceData(input) {
     drafts: input.drafts.map(validateDraft),
     applications: input.applications.map(validateApplication),
   };
+  const allIds = new Set([workspace.profile.id]);
+  for (const record of [...workspace.resumes, ...workspace.drafts, ...workspace.applications]) {
+    if (allIds.has(record.id)) throw new Error("Private workspace record IDs must be unique.");
+    allIds.add(record.id);
+  }
+  const draftById = new Map(workspace.drafts.map((draft) => [draft.id, draft]));
+  for (const draft of workspace.drafts) {
+    if (draft.previousVersionId) {
+      const parent = draftById.get(draft.previousVersionId);
+      if (!parent || parent.seriesId !== draft.seriesId || parent.versionNumber >= draft.versionNumber) {
+        throw new Error("Draft version history references an invalid previous version.");
+      }
+    }
+  }
+  for (const application of workspace.applications) {
+    if (application.outreachDraftId && !draftById.has(application.outreachDraftId)) {
+      throw new Error("Application references an unknown outreach draft.");
+    }
+  }
   const serializedBytes = new TextEncoder().encode(JSON.stringify(workspace)).byteLength;
   if (serializedBytes > MAX_WORKSPACE_SERIALIZED_BYTES) {
     throw new Error("Private workspace exceeds the serialized-size budget.");
