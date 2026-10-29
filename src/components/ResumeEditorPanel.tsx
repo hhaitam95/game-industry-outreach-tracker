@@ -96,15 +96,17 @@ export function ResumeEditorPanel({ sourceText, profile }: Props) {
   );
   const handoffPreview = useMemo(() => redactResumeText(handoffSource, redactions), [handoffSource, redactions]);
 
-  function applyEdit(edit: (current: StructuredResumeDocument) => StructuredResumeDocument) {
+  function applyEdit(edit: (current: StructuredResumeDocument) => StructuredResumeDocument): boolean {
     try {
       setDocument(edit(document));
       setError("");
       setNotice("");
+      return true;
     } catch {
       setError(
         "That edit exceeds the supported document limits or contains invalid input. The previous version was kept.",
       );
+      return false;
     }
   }
 
@@ -121,7 +123,10 @@ export function ResumeEditorPanel({ sourceText, profile }: Props) {
 
   function addAiPaste() {
     if (!aiPaste.trim()) return;
-    applyEdit((current) => addResumeBlock(current, "Other", "ai-paste", aiPaste.trim()) as StructuredResumeDocument);
+    const added = applyEdit(
+      (current) => addResumeBlock(current, "Other", "ai-paste", aiPaste.trim()) as StructuredResumeDocument,
+    );
+    if (!added) return;
     setAiPaste("");
     setNotice("Pasted suggestions were added as AI-pasted text. Review every claim before using or exporting them.");
   }
@@ -350,6 +355,13 @@ export function ResumeEditorPanel({ sourceText, profile }: Props) {
                   <strong>
                     {item.status[0].toUpperCase() + item.status.slice(1)} · {item.section}
                   </strong>
+                  {item.beforeSection !== null &&
+                  item.afterSection !== null &&
+                  item.beforeSection !== item.afterSection ? (
+                    <p className="resume-editor-section-change" data-testid="resume-diff-section-change">
+                      Section: {item.beforeSection} → {item.afterSection}
+                    </p>
+                  ) : null}
                   {item.beforeContent !== null ? (
                     <div>
                       <span>Before</span>
