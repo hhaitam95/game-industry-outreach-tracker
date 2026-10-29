@@ -18,45 +18,51 @@ function syntheticWorkspace() {
     skills: ["Python", "REST APIs"],
     updatedAt: NOW,
   };
-  workspace.drafts = [{
-    id: "draft-ui-1",
-    seriesId: "series-ui-1",
-    versionNumber: 1,
-    previousVersionId: null,
-    title: "Synthetic Studio — Developer Support",
-    body: "Synthetic message only.",
-    updatedAt: NOW,
-    studioId: "cd-projekt-red",
-    studioName: "CD PROJEKT RED",
-    roleTitle: "Developer Support Specialist",
-    opportunityId: "",
-    sourceUrl: "https://example.com/careers",
-    purpose: "role-application",
-    profileUpdatedAt: NOW,
-    resumeLabel: "Synthetic CV label",
-    guidanceVersion: "Synthetic guidance version",
-    reviewStatus: "reviewed",
-  }];
-  workspace.applications = [{
-    id: "application-ui-1",
-    studioName: "CD PROJEKT RED",
-    roleTitle: "Developer Support Specialist",
-    status: "interested",
-    applicationUrl: "https://example.com/careers",
-    notes: "Synthetic tracker note.",
-    createdAt: NOW,
-    updatedAt: NOW,
-    studioId: "cd-projekt-red",
-    opportunityId: "",
-    outreachDraftId: "draft-ui-1",
-    nextFollowUpAt: "2026-11-02",
-    history: [{
-      id: "activity-ui-1",
-      type: "note",
-      occurredAt: NOW,
-      note: "Synthetic activity only.",
-    }],
-  }];
+  workspace.drafts = [
+    {
+      id: "draft-ui-1",
+      seriesId: "series-ui-1",
+      versionNumber: 1,
+      previousVersionId: null,
+      title: "Synthetic Studio — Developer Support",
+      body: "Synthetic message only.",
+      updatedAt: NOW,
+      studioId: "cd-projekt-red",
+      studioName: "CD PROJEKT RED",
+      roleTitle: "Developer Support Specialist",
+      opportunityId: "",
+      sourceUrl: "https://example.com/careers",
+      purpose: "role-application",
+      profileUpdatedAt: NOW,
+      resumeLabel: "Synthetic CV label",
+      guidanceVersion: "Synthetic guidance version",
+      reviewStatus: "reviewed",
+    },
+  ];
+  workspace.applications = [
+    {
+      id: "application-ui-1",
+      studioName: "CD PROJEKT RED",
+      roleTitle: "Developer Support Specialist",
+      status: "interested",
+      applicationUrl: "https://example.com/careers",
+      notes: "Synthetic tracker note.",
+      createdAt: NOW,
+      updatedAt: NOW,
+      studioId: "cd-projekt-red",
+      opportunityId: "",
+      outreachDraftId: "draft-ui-1",
+      nextFollowUpAt: "2026-11-02",
+      history: [
+        {
+          id: "activity-ui-1",
+          type: "note",
+          occurredAt: NOW,
+          note: "Synthetic activity only.",
+        },
+      ],
+    },
+  ];
   return validateWorkspaceData(workspace);
 }
 
@@ -69,10 +75,12 @@ test("OutreachWorkspace renders sourced context, editable drafting, reviews and 
   });
   try {
     const module = await server.ssrLoadModule("/src/components/OutreachWorkspace.tsx");
-    const markup = renderToStaticMarkup(React.createElement(module.default, {
-      workspace: syntheticWorkspace(),
-      onSaveWorkspace: async () => true,
-    }));
+    const markup = renderToStaticMarkup(
+      React.createElement(module.default, {
+        workspace: syntheticWorkspace(),
+        onSaveWorkspace: async () => true,
+      }),
+    );
     assert.match(markup, /data-testid="outreach-workspace"/);
     assert.match(markup, /data-testid="outreach-draft-body"/);
     assert.match(markup, /data-testid="outreach-motivation"/);
@@ -97,10 +105,12 @@ test("ApplicationsWorkspace renders status confirmation controls, history, links
   });
   try {
     const module = await server.ssrLoadModule("/src/components/ApplicationsWorkspace.tsx");
-    const markup = renderToStaticMarkup(React.createElement(module.default, {
-      workspace: syntheticWorkspace(),
-      onSaveWorkspace: async () => true,
-    }));
+    const markup = renderToStaticMarkup(
+      React.createElement(module.default, {
+        workspace: syntheticWorkspace(),
+        onSaveWorkspace: async () => true,
+      }),
+    );
     assert.match(markup, /data-testid="applications-workspace"/);
     assert.match(markup, /data-testid="application-status"/);
     assert.match(markup, /data-testid="application-follow-up-date"/);
