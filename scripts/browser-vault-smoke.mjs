@@ -905,7 +905,7 @@ async function main() {
     await client.waitForText("Track what actually happened.");
     await client.waitForText("BROWSER_TEST_STUDIO_CANARY");
     const restoredApplication = await client.evaluate(
-      "(() => { const record = [...document.querySelectorAll('[data-testid=application-record]')].find((item) => item.innerText.includes('BROWSER_TEST_STUDIO_CANARY')); return Boolean(record && record.innerText.includes('Browser QA Role') && record.innerText.includes('https://example.com/careers')); })()",
+      "(() => { const record = [...document.querySelectorAll('[data-testid=application-record]')].find((item) => item.innerText.includes('BROWSER_TEST_STUDIO_CANARY')); const link = record?.querySelector('.phase7-source-link a'); return Boolean(record && record.innerText.includes('Browser QA Role') && link?.href === 'https://example.com/careers'); })()",
     );
     if (!restoredApplication) throw new Error("application-record-not-restored");
     const phase7SettingsClicked = await client.evaluate(
