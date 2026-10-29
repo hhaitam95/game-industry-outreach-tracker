@@ -1,33 +1,29 @@
 # Game Industry Outreach Tracker
 
-A personal, evidence-driven workspace for discovering video game studios and opportunities worldwide, assessing transferable technical skills, preparing tailored outreach, and tracking application outcomes.
+A worldwide, evidence-driven directory of video-game companies that explicitly accept **speculative applications**: applications made without a specific advertised job or deadline. The directory links to official studio websites or their own applicant-tracking pages so each entry can be checked at its source.
 
-> **Project status and verification evidence:** [STATUS.md](STATUS.md) is the single source of truth for the current phase, review state, checks, and next action. This public repository must never contain private candidate records, resumes, contact details, credentials, or secrets.
+A route is not verified merely because a studio has a careers page. It must be reachable and explicitly invite applications without a particular vacancy or closing date. Aggregators may suggest a studio to investigate, but never count as verification evidence. Internship/graduate schemes with deadlines, recruitment agencies, and generic “see our jobs” pages do not qualify.
 
-## Current frontend shell
+> **Privacy:** This public repository must never contain private candidate records, resumes, contact details, recruiter correspondence, credentials, or secrets. [STATUS.md](STATUS.md) is the single source of current milestone and verification state.
 
-- React + TypeScript with Vite for static site development and builds.
-- Responsive workspace layout with navigation for overview, studio research, resume review, outreach, applications, and settings.
-- The Studios & roles screen displays four manually sourced studio profiles, separate site/ownership/game-credit relationships, official career routes, and expandable source evidence. The catalogue and role snapshot are a limited starting point, not global studio/job coverage.
-- Studios & roles combines the manually sourced studio profile cards with a build-time bundled, allowlisted public-opportunity snapshot. Role records are observed links from configured sources, not proof a vacancy is open; provenance and freshness are shown, and profile comparison is available only while the local vault is unlocked. The sample fallback is clearly labelled and its placeholder links are not real vacancies.
-- Manual studio data is separate from encrypted private candidate/application records. Discovery remains manually triggered; a successful scan does not imply full listing coverage. The latest scan persisted 189 observed links (185 from Riot Games), all marked `last-seen`; the other configured sources need review. Pages publication is manual and restricted to a validated static build.
-- ESLint, Prettier, TypeScript checks, Node's built-in test runner, an automated Chrome/Chromium vault smoke test, and privacy-conscious Markdown feedback reports.
-- GitHub Actions validates formatting, lint, types, unit tests, dependency audit, privacy boundaries, the production build, and browser-level vault create/save/reload/lock/export/restore behavior.
-- The encrypted workspace supports a versioned schema with v1 migration, editable and versioned outreach drafts, heuristic pre-send checks, and application/activity/follow-up tracking. Submissions require explicit user confirmation; the app never sends outreach, invokes an AI API, or uploads private records.
-- Settings supports a passphrase-protected local vault, profile fields, basic application records, encrypted backup export/import, locking, and local deletion.
-- Phase 6 adds browser-local DOCX/PDF/TXT extraction, deterministic review, editable structured blocks with provenance and before/after diff, locally generated DOCX, browser print/Save as PDF, and an optional explicitly disclosed/redacted manual AI handoff. Original files and edits stay in page memory unless the user requests an export; no resume text is uploaded or stored in the vault by this workflow. There is no server-side runtime, remote sync, raw CV storage, or automatic outbound communication.
+## Current product direction
 
-## Product goals
+- **Worldwide directory:** find game studios with official, evidence-backed speculative-application routes. A smaller verified set is preferable to a larger uncertain one.
+- **Evidence and freshness:** preserve the official URL, route type, evidence category, a short original paraphrase, content hash and check dates; distinguish candidates from human-verified routes, routes needing review, and routes that have become stale.
+- **Four route types:** dedicated application page, permanent speculative/open/general/unsolicited ATS posting, official email invitation (store only the page URL, never the email address), and talent-community signup shown separately.
+- **Strict exclusions:** ordinary job postings, generic careers pages, timed internship/graduate schemes, agencies and aggregator-only claims are not verified speculative routes.
+- **Manual applications:** the owner researches, adapts the resume/introduction and submits personally. The application never sends email or submits an application automatically, and never promises a response.
+- **Role explorer retained but disabled:** legacy standard-role components, data and tests remain for later reuse. One config module defines `FEATURES.roleExplorer = false`; its UI, Overview counts, and associated copy are hidden by default.
+- **Honest current UI:** the existing starter studio profiles are research context, not verified speculative-application routes. A generic careers page is not presented as proof of acceptance. The route schema, curated records and directory filters arrive in later milestones.
+- **Supporting tools:** the browser-local encrypted tracker, resume processing, draft preparation and application follow-up remain supporting workflows; private records are never committed or uploaded.
+- **Discovery automation:** GitHub Actions remains manual-dispatch-only. No schedule, live scan, or deployment runs automatically as part of these milestones.
 
-- Discover relevant advertised roles and verified speculative-application routes worldwide.
-- Build source-backed studio profiles with ownership, locations, games, and explicit development/publishing credit relationships.
-- Monitor registered studios with a manual GitHub Actions discovery workflow; scheduling remains disabled pending owner acceptance.
-- Explain role relevance, transferable skills, gaps, and unknowns.
-- Process resumes in the browser, analyze them against an opportunity, and generate reviewed DOCX/PDF versions.
-- Maintain sourced resume guidance in the repository.
-- Prepare personalized outreach and pre-send checks; the user sends messages manually.
-- Track responses, follow-ups, and outcomes.
-- Start without paid AI API access.
+## Current technical baseline
+
+- React, TypeScript and Vite for a static GitHub Pages interface.
+- Deterministic Node tests, ESLint, Prettier, TypeScript checks, dependency audit, artifact/privacy gates and browser-based encrypted-vault acceptance in GitHub Actions.
+- The existing discovery pipeline will be reused for conservative official-route verification. It must respect robots.txt, rate limits and access controls; a blocked or changed source becomes `needs-review`, never silently deleted.
+- GitHub Pages publishes only a validated static artifact from this repository. The existing `scripts/check-pages-artifact.mjs` and its tests are retained for M7.
 
 ## Hosting and privacy model
 
@@ -46,7 +42,9 @@ See [Local Development and Feedback Workflow](docs/LOCAL_DEVELOPMENT.md) for the
 - [Project specifications](PROJECT_SPECS.md) — product scope, requirements, and acceptance criteria.
 - [Architecture](ARCHITECTURE.md) — static hosting, discovery pipeline, data model, resume processing, and privacy.
 - [Implementation plan](IMPLEMENTATION_PLAN.md) — phases and exit criteria.
-- [Decisions](DECISIONS.md) — accepted and open decisions.
+- [Refocus decision (ADR-059)](docs/decisions/ADR-059-speculative-application-directory.md) — current product goal and route-evidence policy.
+- [M1 design (ADR-060)](docs/decisions/ADR-060-m1-role-explorer-flag-and-reframing.md) — disabled-by-default legacy explorer and product wording.
+- [Historical decisions](DECISIONS.md) — earlier architecture and implementation decisions.
 - [AI-agent instructions](AGENTS.md) — operating rules and security requirements.
 - [Changelog](CHANGELOG.md) — meaningful project changes.
 - [Handoff](HANDOFF.md) — current state and next task.

@@ -4,71 +4,70 @@
 **Review version:** 0.3  
 **Last updated:** 2026-10-24
 
-## 1. Project story
+## 1. Product story
 
-The candidate has an established technical background in software support and troubleshooting but finds relatively few conventional job postings that provide a credible transition into game development. Relevant opportunities may appear under unfamiliar titles, at studios with appropriate technical teams, or through speculative applications rather than advertised vacancies.
+This project is a worldwide directory of video-game companies that explicitly accept speculative applications. A speculative application is submitted without applying to a specific advertised job, has no deadline tied to a particular vacancy, and gives an applicant a route to introduce themselves even when they do not fit current listings. The owner researches, prepares and submits each application manually.
 
-The application should reduce the time and repeated effort required to discover studios, verify application routes, understand each studio, evaluate potential fit, analyze a CV, write credible personalized outreach, and track conversations.
+The directory is evidence-driven, not a general job board. A verified route must be fetched from the studio’s own website or its own applicant-tracking page, remain reachable, explicitly invite applications without a specific vacancy, and show no closing date/deadline. Search results and aggregators are discovery hints only.
 
-The product is a personal opportunity-discovery and professional-outreach system, not a bulk-email sender and not a guarantee of employment.
+## 2. Primary user and success criteria
 
-## 2. Primary user and goals
+The initial product is for one user who wants to approach studios worldwide through credible speculative applications.
 
-The initial product is for one user. The candidate profile is editable and should contain professional facts, interests, preferences, constraints, and communication guidance.
+Success means making the evidence-backed route directory useful, broad, fresh, honest about uncertainty, and straightforward to filter and track. The M4 research target is 150 verified routes across at least 15 countries; a smaller verified set with documented reasons is preferable to padding the count. A response or job offer is never promised or used as a technical acceptance criterion.
 
-Primary user story:
+## 3. Route definitions and lifecycle
 
-> As a technical professional seeking to transition into the video game industry, I want to discover relevant studios and opportunities worldwide, understand how my existing skills could contribute, and prepare personalized professional outreach, so that I can create opportunities beyond conventional job applications and manage the process systematically.
+### Qualifying route types
 
-Success means helping the user move from discovery to a researched, reviewed, ready-to-send introduction with less repetitive manual work. A reply or job offer is not guaranteed and is not a controllable acceptance criterion.
+- `dedicated-page`: official standalone page inviting speculative applications.
+- `ats-posting`: permanent official ATS posting titled/categorised as speculative, unsolicited, open, general or equivalent, with no deadline and a confirmed match between the ATS organisation and studio.
+- `email-invite`: an official page explicitly invites speculative applications by email. Commit only the page URL, never the email address.
+- `talent-community`: talent-pool signup, shown separately from direct speculative-application routes.
 
-## 3. Product principles
+### Exclusions
 
-1. **Global by default:** Do not restrict discovery to a predetermined country list.
-2. **Evidence over assumptions:** Important external claims need traceable sources and freshness metadata.
-3. **Explicit uncertainty:** Distinguish verified facts, plausible leads, unknown information, and outdated claims.
-4. **Human-controlled outreach:** The user reviews and sends every email or application manually.
-5. **No invented credentials:** Never invent skills, work history, achievements, personal game preferences, credits, contacts, or salary facts.
-6. **Flexible role discovery:** Match transferable skills and plausible stretch opportunities, not just exact job-title strings.
-7. **Cost-conscious:** The first usable release must not require paid AI API access.
-8. **Privacy by design:** Treat candidate information, CVs, correspondence, and application history as private.
-9. **Living requirements:** Scope and decisions can evolve through documented changes.
-10. **Practical over elaborate:** Prioritize an end-to-end useful workflow before broad crawling or advanced AI.
+Timed internship or graduate programmes, standard job listings, generic “see our jobs” pages, recruitment agencies, and aggregator-only evidence do not qualify. An official career URL is not enough unless the page explicitly invites speculative applications.
 
-## 4. Scope
+### Lifecycle states
 
-### In scope
+- `candidate`: automatically detected, never treated as verified.
+- `verified`: human-confirmed with official evidence and dates.
+- `needs-review`: failed fetch, blocked page, or changed/missing evidence.
+- `stale`: not re-verified within 90 days.
 
-- Editable candidate profile and approved professional story/disclosure settings.
-- Global game-studio discovery, advertised opportunities, speculative application routes, and manual lead entry.
-- Evidence-backed studio profiles: sites, business type, ownership, notable games, distinct development/publishing/porting credits, career channels and verification dates.
-- Scheduled and manually triggered GitHub Actions discovery with normalized snapshots and change events.
-- Static browser interface deployed with GitHub Pages, backed by public studio/opportunity data only.
-- Browser-side resume upload, text extraction, rules-based comparison, preview, and downloadable tailored DOCX/PDF generation.
-- Repository-managed, source-linked resume guidance material.
-- Optional manual AI handoff: user can copy a context-specific prompt to ChatGPT and paste reviewed suggestions back.
-- Transparent role-family matching, transferable-skill analysis, gap/unknown identification, and employment-feasibility notes.
-- Studio-specific email/application drafting and pre-send review.
-- Client-side private profile, CV-derived content, drafts, and application history with encrypted local persistence/export/import.
-- Manual tracking of submissions, responses, reminders, and outcomes.
-- Optional sourced salary estimates that do not filter or rank opportunities.
-- Public source repository with same-repository GitHub Pages Actions deployment, tests, backups and maintainable documentation.
+Never auto-delete a verified route. A failed fetch never proves the route closed. Two consecutive successful checks missing the phrase move a verified route to `needs-review`; check-age moves it to stale according to the state rules.
 
-### Out of scope for the first release
+### Evidence contract
 
-- A server-side application or private cloud database hosted directly by GitHub Pages.
-- Automatic AI API calls from the static frontend.
-- Automatic emailing or job-application submission.
-- Storing resumes, private drafts, personal application history, secret keys, or personal contact notes in the public Pages repository/data feed.
-- Promise of exhaustive discovery of every studio worldwide.
-- Bypassing access controls, CAPTCHA or anti-bot protections.
-- Paid AI, search or hosting services as a hard first-release dependency.
-- A multi-user SaaS product.
-- Guaranteed employment, responses, or international hiring eligibility.
+Store facts, not page content: official URL, route type, matched phrase category, original paraphrase (max 200 characters), content hash, and the route contract’s country, language and timestamps. Fetch every candidate page before listing it; respect robots.txt, identify the user agent, rate-limit requests, and never use logins or bypass bot protection. Missing evidence or unsafe URLs fail closed.
 
-## 5. Candidate profile requirements
+## 4. Product principles and scope
 
-The profile should be editable and should separate private context from information approved for outward-facing messages.
+1. **Worldwide by default:** do not apply a country allowlist to directory search.
+2. **Official evidence first:** every verified claim must be grounded in a directly fetched official route.
+3. **Explicit uncertainty:** candidate, verified, needs-review and stale mean different things and must be visible.
+4. **Manual submission:** no automatic email or application submission; never guarantee a response.
+5. **Privacy by design:** do not commit personal profile data, CVs, application history, contact notes, recruiter email addresses, credentials or secrets.
+6. **Conservative discovery:** aggregators are hints only; failed pages never cause deletion; no scraping of social networks or unlicensed studio lists.
+7. **Legacy roles disabled:** the previous standard-role explorer remains in source code for compatibility, with `FEATURES.roleExplorer = false` by default. It is not the product’s directory or success metric.
+8. **Incremental delivery:** M0–M8 are the current milestone order; each milestone has one PR, a prior design note, documented acceptance criteria and exact-head CI evidence.
+
+### Current and planned milestones
+
+- **M0:** land/reconcile existing work; refocus ADR; keep Pages artifact/privacy checks.
+- **M1:** default-off legacy role explorer and consistent product language.
+- **M2:** one versioned SpeculativeRoute schema, matching JS/Python validators, curated JSON data and safe sample fallback.
+- **M3:** directory filters, visible evidence/freshness states, pagination and encrypted-vault Applied/Planned marker with schema v3 migration.
+- **M4:** bounded batches of direct-official-source route research, up to 30 entries per PR, with rejects and independent 10% re-checks.
+- **M5:** manual route health checks and documented public ATS adapters, writing state only to `discovery-state`.
+- **M6:** bounded candidate discovery and licensed public studio-universe sources, with conversion/freshness metrics.
+- **M7:** reuse the same-repository Pages artifact workflow and privacy checker; deploy manually only.
+- **M8:** adapt outreach and resume tools for speculative applications and close out evidence, privacy, feature-flag and CI checks.
+
+## 5. Supporting-workflow requirements (secondary scope for M8)
+
+The profile should be editable and should separate private context from information approved for outward-facing messages. These tools support a verified route directory; they do not change the route qualification rules above.
 
 Capture, as relevant:
 - Professional summary, job history, education, certifications, languages, and work experience.
@@ -83,7 +82,9 @@ Capture, as relevant:
 
 The profile must not expose private circumstances automatically. For any draft, the system should distinguish internal matching context from information approved to share with an employer.
 
-## 6. Studio and opportunity discovery
+## 6. Retained legacy advertised-opportunity model (disabled by default)
+
+This section documents the prior standard-role model retained in code for compatibility. It is not a qualifying directory source and must remain hidden when `FEATURES.roleExplorer` is false.
 
 The discovery process should support separate routes:
 

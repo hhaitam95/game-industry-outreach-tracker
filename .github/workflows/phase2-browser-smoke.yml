@@ -34,7 +34,7 @@ jobs:
 
       - name: Run complete local-to-AI feedback suite
         env:
-          EXPECT_STUDIO_CATALOG: "1"
+          EXPECT_SPECULATIVE_DIRECTORY: "1"
           EXPECT_RESUME_LAB: "1"
         run: npm run feedback-report
 
