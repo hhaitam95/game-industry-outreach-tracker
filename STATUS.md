@@ -1,12 +1,12 @@
 # Project Status
 
 **Last updated:** 2026-10-29  
-**Current phase:** Phase 8 same-repository GitHub Pages release — PR #7 and PR #8 are merged; Phase 8 is being reconciled with the updated main and must pass exact-head CI before merge. The site is not deployed.  
+**Current phase:** Phase 8 same-repository GitHub Pages release — PR #7 and PR #8 are merged; the reconciled Phase 8 implementation has passed its required CI checks. The site is not deployed.  
 **Working branch:** `feat/phase8-pages-privacy`  
 **Current PR:** [#9 — Phase 8: same-repository Pages release and privacy checks](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/9).  
 **Phase 6c:** [PR #7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7) was squash-merged in `0c70b9e`. Its original exact-head frontend, browser acceptance, and discovery fixture checks passed.  
 **Phase 7:** [PR #8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8) was squash-merged in `32294b7` after reconciliation commit `9493d91`; its frontend, browser acceptance, and discovery fixture checks passed on that reconciled branch head.  
-**Phase 8 base:** `32294b7de99838fcb3f476feddea94ac42c82361`. The Pages workflow/docs must be reconciled against this base and all required checks rerun before merge.  
+**Phase 8 base:** `32294b7de99838fcb3f476feddea94ac42c82361`. Phase 8 implementation commit `840b51d` includes this merged base and passed all required checks.  
 **Pages setting:** The owner confirmed the repository's Pages source is configured for GitHub Actions.
 
 ## Phase 8 implementation and acceptance status
@@ -14,11 +14,11 @@
 - **Design decision:** ADR-055 supersedes ADR-054; source, tests, documentation, public-data contract and publication workflow remain in the original repository.
 - **Selected deployment:** Manual `workflow_dispatch` only. `validate-only` is the default. Explicit `publish` is allowed from `main` only, uploads only the validated `dist/` artifact, and uses separate read-only build and least-privilege deployment jobs. No cross-repository token or second repository is used.
 - **Privacy boundary:** Existing public snapshot schema validation, repository privacy check, generated-artifact checker, CSP/local-asset checks and repository-subpath smoke test remain required. Private profile/CV/draft/application data remains browser-local and is never a build input.
-- **Previous Phase 8 head evidence:** Frontend CI passed [40881433499](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40881433499), browser acceptance passed [40881433653](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40881433653), and discovery fixtures passed [40881433603](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40881433603) on the pre-reconciliation Phase 8 head. These runs do not replace validation of the reconciled tree.
+- **Reconciled-head verification:** Frontend CI passed on `840b51d` — [run 40885062992](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40885062992); browser acceptance passed — [run 40885063015](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40885063015); discovery fixtures passed — [run 40885063116](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40885063116). These runs cover the Phase 8 branch reconciled with the merged Phase 6c and Phase 7 changes. This status-only follow-up does not change executable code or workflow configuration.
 - **Deployment not yet verified:** The Pages workflow has not been manually dispatched; no public URL/assets or live site have been verified. Run `validate-only` first and then explicitly publish from `main` once merged and reviewed. No schedule, push trigger, or discovery-completion publication exists.
 - **Remaining external actions:** The Pages source setting is configured according to the owner. The connected GitHub tools cannot dispatch a workflow, so the first validation/publication must be started from Actions in GitHub if no dispatch action becomes available.
-- **Merge order:** PR #7 and PR #8 are merged. Review the current PR #9 head and exact-head checks before merging it.
-- **Exit criteria:** All required checks pass on the reconciled Phase 8 head; Pages validation and publication succeed; the canonical URL/assets and public data are reviewed; then move to Phase 9 launch acceptance, feedback and stabilization.
+- **Merge order:** PR #7 and PR #8 are merged. PR #9 passed all required checks on reconciled implementation commit `840b51d`; check its latest status-only follow-up before the authorized final merge.
+- **Exit criteria:** Required CI passes; the Pages workflow is manually validated and published; the canonical URL/assets and public data are reviewed; then move to Phase 9 launch acceptance, feedback and stabilization.
 
 **Status policy:** This file is the sole source for volatile branch/review state and verification evidence. Other documents should point here rather than duplicate changing SHAs or run IDs.
 
