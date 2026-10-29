@@ -326,11 +326,11 @@ function migrateV1Workspace(input) {
     roleTitle: "",
     opportunityId: "",
     sourceUrl: "",
-    purpose: "speculative-introduction",
+    purpose: /** @type {DraftPurpose} */ ("speculative-introduction"),
     profileUpdatedAt: null,
     resumeLabel: "",
     guidanceVersion: "legacy-v1",
-    reviewStatus: "draft",
+    reviewStatus: /** @type {DraftReviewStatus} */ ("draft"),
   }));
   const applications = input.applications.map(validateLegacyApplication).map((application) => ({
     ...application,
@@ -341,7 +341,7 @@ function migrateV1Workspace(input) {
     history: [],
   }));
   return {
-    schemaVersion: WORKSPACE_SCHEMA_VERSION,
+    schemaVersion: /** @type {2} */ (WORKSPACE_SCHEMA_VERSION),
     updatedAt: timestamp(input.updatedAt, "Workspace updatedAt"),
     profile: validateProfile(input.profile),
     resumes: input.resumes.map(validateResumeMetadata),
@@ -355,7 +355,7 @@ function migrateV1Workspace(input) {
 export function createEmptyWorkspace(now = new Date().toISOString()) {
   const safeNow = timestamp(now, "Workspace timestamp");
   return {
-    schemaVersion: WORKSPACE_SCHEMA_VERSION,
+    schemaVersion: /** @type {2} */ (WORKSPACE_SCHEMA_VERSION),
     updatedAt: safeNow,
     profile: {
       id: "profile-primary",
@@ -399,7 +399,7 @@ export function validateWorkspaceData(input) {
   }
 
   const workspace = {
-    schemaVersion: WORKSPACE_SCHEMA_VERSION,
+    schemaVersion: /** @type {2} */ (WORKSPACE_SCHEMA_VERSION),
     updatedAt: timestamp(input.updatedAt, "Workspace updatedAt"),
     profile: validateProfile(input.profile),
     resumes: input.resumes.map(validateResumeMetadata),
