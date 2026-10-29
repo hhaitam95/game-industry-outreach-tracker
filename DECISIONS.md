@@ -506,3 +506,17 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Verification:** The implementation code was verified on [head 5752946](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/57529467913053b8f48902c7e283fd6b8fabe951). [Frontend CI](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40855486074), [browser acceptance](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40855486084), and [discovery fixtures](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40855486192) passed on the exact head. Push-triggered Frontend CI and discovery fixtures also passed ([40855478878](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40855478878), [40855478906](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40855478906)).
 - **Browser evidence:** The accepted artifact reports 22/22 synthetic-data checkpoints passed, including TXT/DOCX/PDF extraction, structured editor/export controls, handoff disclosure, local-only boundary, failed-extraction preservation, clearing, and the existing encrypted-vault lock/unlock/backup paths.
 - **Privacy and review:** Fixtures contain synthetic data only; no real CV/profile data is committed. PR #7 remains open and unmerged; the owner retains readiness and merge decisions.
+
+
+## ADR-049 — Phase 6c review hardening: preserve failed edits and bound parser fallback
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation
+- **Goal:** Close three review findings before Phase 6 is marked complete: preserve pasted AI text when a block addition fails, make section changes explicit in the before/after review, and prevent excessive recognized headings from crashing the editor.
+- **Boundaries:** Keep Phase 6c on `feat/phase6c-resume-export`; do not merge or change `main`, workflow triggers/permissions, dependencies, vault schema, or data/privacy boundaries.
+- **Behavior:** Clear the AI-paste input only after a successful model update. Show both previous and current section labels when a section is changed. If recognized headings would exceed the 40-block limit, preserve the complete input as one `Other` block instead of throwing away the draft or crashing render.
+- **Data contract:** Keep the versioned resume model and existing 40-block/150,000-character limits. The overflow fallback is deterministic and carries the original text unchanged (apart from the parser's existing outer trim); it must not infer additional section boundaries.
+- **Failure modes:** Invalid or over-limit edits retain the prior document and retain pasted text for correction. Unsupported text remains visible; no resume contents enter persistence, logs, URLs, or network requests.
+- **Test plan:** Add synthetic unit tests for more-than-40 heading fallback and failure-safe model behavior where practical; extend browser acceptance to exercise section-label diff rendering and failed AI-paste preservation; keep existing DOCX, print, redaction, privacy, vault and discovery checks intact.
+- **Definition of done:** Formatting, lint, typecheck, unit/component tests, audit, production build, privacy checks, subpath browser acceptance, and discovery fixtures pass on the final exact branch head; STATUS.md and HANDOFF.md reflect the actual commit/check evidence.
+- **Rollback:** Revert the review-hardening implementation and tests as one unit, preserving this decision record and documenting the reason.
