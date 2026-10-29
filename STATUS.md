@@ -1,7 +1,7 @@
 # Project Status
 
 **Last updated:** 2026-10-29  
-**Current phase:** Part 1 CI gate is green on exact head `d4ef4c82`. Registry-origin and parser-timeout hygiene are implemented; ADR-043 records the behavior-preserving ResumeLab split design before code. Phase 6c remains gated on the owner merging PR #6.  
+**Current phase:** Behavior-preserving ResumeLab split implemented under ADR-043; exact-head CI verification is pending. Part 1 and parser/registry hygiene were green on the preceding exact head. Phase 6c remains gated on the owner merging PR #6.
 **Working branch:** feat/phase6b-resume-analysis (fast-forwarded into the PR #6 branch after each cohesive commit)  
 **Base/main:** 07d8e15cec544e56a09fbcab44202dc7051753c6 (unchanged; no direct changes to main).
 
@@ -96,3 +96,10 @@ The user-selected original and extracted text remain in the active Resume Lab co
 ## Next action
 
 Validate parser hardening on the current commit. The unit uses a bounded parser wait, safe existing error categories, a killable DOCX worker, and PDF.js cleanup. Follow with the behavior-preserving ResumeLab split and CSP review, at most two CI cycles per unit. Do not create Phase 6c until the owner merges PR #6; keep PR #4/#6 unmerged here.
+
+
+## Phase 6 Part 2 — behavior-preserving ResumeLab split
+
+- **Design:** ADR-043 was committed before code. The split preserves rendered copy, ordering, selectors/test IDs, accessibility attributes, CSS classes, event semantics and component-owned in-memory state behavior.
+- **Implementation:** Analysis presentation moved to `src/components/ResumeAnalysisPanel.tsx`, guidance presentation to `src/components/ResumeGuidancePanel.tsx`, and inferred prop types to `src/components/resume-lab.types.ts`. `ResumeLab.tsx` retains local file extraction, state and state-transition handlers.
+- **Verification at implementation commit:** CI is triggered for this exact head. Record exact run IDs and outcomes here after completion; do not use formatting-only commits to discover Prettier output.

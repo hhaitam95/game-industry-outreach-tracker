@@ -415,7 +415,7 @@ This is a living decision record. Accepted decisions may be amended or supersede
 ## ADR-043 — Behavior-preserving ResumeLab component split
 
 - **Date:** 2026-10-29
-- **Status:** Accepted for implementation
+- **Status:** Implemented; exact-head CI results are tracked in `STATUS.md`.
 - **Context:** `src/components/ResumeLab.tsx` combines local file intake, deterministic role/resume comparison, and the bundled guidance display in one 484-line component.
 - **Decision:** Extract the deterministic analysis presentation into `ResumeAnalysisPanel.tsx` and the guidance presentation into `ResumeGuidancePanel.tsx`. Keep file extraction, state ownership, and state transitions in `ResumeLab.tsx`; add a small shared type module only if needed to keep props typed without runtime coupling.
 - **No-behavior-change contract:** Preserve user-visible copy, render order, IDs, data-testid values, CSS classes, accessibility attributes, parsing and analysis calls, event semantics, clear behavior, and the in-memory privacy boundary. This is a JSX/component-boundary refactor only.
@@ -429,3 +429,9 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Verified exact head:** d4ef4c82fde4b80ffd1cb26792719602c0d25afd.
 - Frontend CI, browser acceptance, and discovery fixtures passed on the PR head; the two corresponding branch-push CI jobs also passed. See the exact run links in `STATUS.md`.
 - The second and final CI cycle resolved the formatter/type issues. No third cycle or unsupported `isEvalSupported` compatibility cast was added.
+
+
+### ADR-043 implementation note
+
+- Extracted analysis rendering to `ResumeAnalysisPanel.tsx` and guidance rendering to `ResumeGuidancePanel.tsx`; `ResumeLab.tsx` retains state, file intake, and state-transition handlers. Shared inferred types are in `resume-lab.types.ts`.
+- No intended changes to visible copy, DOM identifiers, styles, interaction semantics, or data/privacy behavior. Exact-head CI verification is pending and will be recorded in `STATUS.md`.
