@@ -1,30 +1,82 @@
-import mammoth from "mammoth";
 import { getDocument, GlobalWorkerOptions } from "pdfjs-dist";
 import pdfWorkerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 import { MAX_RESUME_PDF_PAGES, MAX_RESUME_TEXT_CHARS, ResumeExtractionError } from "./document-extractor.mjs";
+import { RESUME_PARSE_TIMEOUT_MS, withParseTimeout } from "./parse-timeout.mjs";
 
 GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
 
-/** @param {ArrayBuffer} arrayBuffer */
-export async function extractDocxText(arrayBuffer) {
-  try {
-    const result = await mammoth.extractRawText({ arrayBuffer });
-    return {
-      text: result.value,
-      warnings: result.messages.length ? ["docx-structure-warning"] : [],
+/**
+ * Extract DOCX text in a dedicated worker so the timeout can terminate parser execution.
+ * @param {ArrayBuffer} arrayBuffer
+ * @returns {Promise<{ text: string, warnings: string[] }>}
+ */
+export function extractDocxText(arrayBuffer) {
+  return new Promise((resolve, reject) => {
+    let settled = false;
+    /** @type {ReturnType<typeof setTimeout> | undefined} */
+    let timeoutId;
+    /** @type {Worker | undefined} */
+    let worker;
+
+    const cleanup = () => {
+      settled = true;
+      if (timeoutId !== undefined) clearTimeout(timeoutId);
+      worker?.terminate();
     };
-  } catch {
-    throw new ResumeExtractionError("parser-failed");
-  }
+    const fail = () => {
+      if (settled) return;
+      cleanup();
+      reject(new ResumeExtractionError("parser-failed"));
+    };
+    const succeed = (result) => {
+      if (settled) return;
+      cleanup();
+      resolve(result);
+    };
+
+    try {
+      worker = new Worker(new URL("./docx-parser.worker.mjs", import.meta.url), { type: "module" });
+    } catch {
+      fail();
+      return;
+    }
+
+    timeoutId = setTimeout(fail, RESUME_PARSE_TIMEOUT_MS);
+    worker.onmessage = (event) => {
+      const response = event.data;
+      if (
+        !response ||
+        response.ok !== true ||
+        typeof response.text !== "string" ||
+        typeof response.hasWarnings !== "boolean"
+      ) {
+        fail();
+        return;
+      }
+      succeed({
+        text: response.text,
+        warnings: response.hasWarnings ? ["docx-structure-warning"] : [],
+      });
+    };
+    worker.onerror = fail;
+
+    try {
+      worker.postMessage(arrayBuffer, [arrayBuffer]);
+    } catch {
+      fail();
+    }
+  });
 }
 
 /** @param {ArrayBuffer} arrayBuffer */
 export async function extractPdfText(arrayBuffer) {
   const loadingTask = getDocument({
     data: new Uint8Array(arrayBuffer),
+    isEvalSupported: false,
+    enableXfa: false,
     useWorkerFetch: false,
   });
-  try {
+  const parseDocument = async () => {
     const document = await loadingTask.promise;
     if (document.numPages > MAX_RESUME_PDF_PAGES) {
       throw new ResumeExtractionError("too-many-pages");
@@ -57,6 +109,10 @@ export async function extractPdfText(arrayBuffer) {
       pageCount: document.numPages,
       warnings: [],
     };
+  };
+
+  try {
+    return await withParseTimeout(parseDocument(), RESUME_PARSE_TIMEOUT_MS);
   } catch (error) {
     if (error instanceof ResumeExtractionError) {
       throw error;

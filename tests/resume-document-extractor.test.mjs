@@ -143,3 +143,42 @@ test("page, output-length, and parser-error limits fail closed", async () => {
     /could not be read/,
   );
 });
+
+test("DOCX and PDF parser timeouts map to the existing safe parser-failed category", async () => {
+  const docx = localFile(
+    "slow.docx",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    new Uint8Array([1]),
+  );
+  const pdf = localFile("slow.pdf", "application/pdf", new Uint8Array([1]));
+  const safeMessage =
+    "The document could not be read. It may be damaged, encrypted, or use unsupported features.";
+
+  await assert.rejects(
+    () =>
+      extractResumeDocument(docx, {
+        extractDocxText: () => new Promise(() => {}),
+        parseTimeoutMs: 5,
+      }),
+    (error) => {
+      assert.equal(error.code, "parser-failed");
+      assert.equal(getResumeExtractionErrorMessage(error), safeMessage);
+      assert.doesNotMatch(error.message, /timeout/i);
+      return true;
+    },
+  );
+
+  await assert.rejects(
+    () =>
+      extractResumeDocument(pdf, {
+        extractPdfText: () => new Promise(() => {}),
+        parseTimeoutMs: 5,
+      }),
+    (error) => {
+      assert.equal(error.code, "parser-failed");
+      assert.equal(getResumeExtractionErrorMessage(error), safeMessage);
+      assert.doesNotMatch(error.message, /timeout/i);
+      return true;
+    },
+  );
+});

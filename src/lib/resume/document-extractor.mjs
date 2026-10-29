@@ -1,3 +1,5 @@
+import { RESUME_PARSE_TIMEOUT_MS, withParseTimeout } from "./parse-timeout.mjs";
+
 export const MAX_RESUME_FILE_BYTES = 10 * 1024 * 1024;
 export const MAX_RESUME_PDF_PAGES = 100;
 export const MAX_RESUME_TEXT_CHARS = 150_000;
@@ -169,11 +171,17 @@ function safeDisplayFileName(name) {
  * @param {File | ResumeFileLike} file
  * @param {{
  *   extractDocxText?: (bytes: ArrayBuffer) => Promise<{ text: string, warnings?: string[] }>,
- *   extractPdfText?: (bytes: ArrayBuffer) => Promise<{ text: string, pageCount: number, warnings?: string[] }>
+ *   extractPdfText?: (bytes: ArrayBuffer) => Promise<{ text: string, pageCount: number, warnings?: string[] }>,
+ *   parseTimeoutMs?: number
  * }} [parsers]
  */
 export async function extractResumeDocument(file, parsers = {}) {
   const kind = classifyResumeFile(file);
+  const requestedParseTimeoutMs =
+    typeof parsers.parseTimeoutMs === "number" && Number.isFinite(parsers.parseTimeoutMs)
+      ? parsers.parseTimeoutMs
+      : RESUME_PARSE_TIMEOUT_MS;
+  const parseTimeoutMs = Math.max(1, Math.min(RESUME_PARSE_TIMEOUT_MS, requestedParseTimeoutMs));
   /** @type {ArrayBuffer} */
   let bytes;
   try {
@@ -199,11 +207,11 @@ export async function extractResumeDocument(file, parsers = {}) {
       if (kind === "docx") {
         const parser = parsers.extractDocxText ?? defaults.extractDocxText;
         if (typeof parser !== "function") throw new ResumeExtractionError("parser-failed");
-        parsed = await parser(bytes);
+        parsed = await withParseTimeout(parser(bytes), parseTimeoutMs);
       } else {
         const parser = parsers.extractPdfText ?? defaults.extractPdfText;
         if (typeof parser !== "function") throw new ResumeExtractionError("parser-failed");
-        parsed = await parser(bytes);
+        parsed = await withParseTimeout(parser(bytes), parseTimeoutMs);
       }
     } catch (error) {
       if (error instanceof ResumeExtractionError) throw error;

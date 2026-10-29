@@ -4,6 +4,7 @@ Meaningful changes are recorded here. Current branch/review state and verificati
 
 ## Unreleased
 
+- Bounded DOCX/PDF resume parsing to 30 seconds, moved Mammoth into a terminable worker, disabled PDF.js eval/XFA support, and kept parser timeouts on the existing safe error category.
 - Replaced the lone non-canonical dependency tarball URL with `registry.npmjs.org` without changing its integrity hash; added offline registry-origin tests and an enforced Frontend CI check. Applied the exact formatter-diff correction to the new test file in the follow-up.
 - Updated the Phase 6 browser smoke flow to navigate to Settings before adding and checking the synthetic application record; no application behavior changed.
 - Fixed the Phase 6 browser smoke harness so the baseline-analysis privacy/result check invokes and reads its assertion result; product behavior and persistence boundaries are unchanged.

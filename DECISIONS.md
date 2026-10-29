@@ -381,3 +381,25 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - Registry validation, the registry check script, and all seven new allowlist tests passed; all 74 unit tests, lint, type check, audit, and build also passed.
 - `format:check` failed only because Prettier compacted three nested assertion calls in `tests/lockfile-registry.test.mjs`; CI printed the exact formatting-only diff.
 - The test file was adjusted to match that diff. This is the second and final CI cycle for this unit; no dependencies, workflow triggers, or permissions were changed.
+
+
+### ADR-041 outcome
+
+- **Verified commit:** 906ca9388a3665e51b0fef1a7ad4870b4a2f9365.
+- The registry validator, seven dedicated tests, full unit suite, format/lint/typecheck/audit/build, browser acceptance, and discovery fixtures passed on the final PR head. The one formatter-only failure was corrected using the diagnostic diff on CI cycle 2.
+- All 194 resolved package URLs use https://registry.npmjs.org; the replaced package integrity hash is unchanged.
+
+## ADR-042 — Bound resume parsing and terminate timed-out workers
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation
+- **Goal:** Bound DOCX and PDF parsing to 30 seconds while retaining the current safe error vocabulary.
+- **DOCX design:** Run Mammoth in a dedicated module worker; terminate the worker on completion, failure, or timeout. Transfer only the selected file bytes; return extracted text and an allowlisted warning flag, never raw diagnostics.
+- **PDF design:** Set PDF.js isEvalSupported to false and enableXfa to false; bound the document-load and text-extraction operation; call loadingTask.destroy() from finally for success, parser error, page/output limits, and timeout.
+- **Error contract:** Map timeout and unknown parser failures to existing parser-failed; preserve existing too-many-pages and output-too-large. No new public error category or raw library message.
+- **Test plan:** Deterministically stall injected DOCX and PDF parser promises with a short test-only timeout and assert the existing safe category/message; browser acceptance continues to extract synthetic DOCX and PDF samples.
+- **Privacy boundary:** In-memory only; no OCR, storage, network API, or real resume data.
+- **Definition of done:** Unit, formatter, lint, typecheck, build, browser acceptance and discovery fixtures pass on the same PR head.
+- **Known limit:** The test seam can shorten but never extend the production timeout. DOCX termination relies on the dedicated worker so a parser that does not yield cannot block the UI past its deadline.
+- **Rollback:** Revert the timeout module, worker, parser wiring/tests and documentation as one unit.
+
