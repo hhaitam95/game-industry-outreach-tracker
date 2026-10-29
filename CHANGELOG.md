@@ -4,6 +4,8 @@ Meaningful changes are recorded here. Current branch/review state and verificati
 
 ## Unreleased
 
+- M4 research branch expands the official speculative/open-application directory from 12 to 40 route records with 28 additional entries across North America, Europe, Australia and the Middle East; repairs LIQUIDBULLET’s saved route URL to its live official careers page. Eligibility/work-model and unusual compensation/adult-content caveats are included in summaries. CI and review remain pending; no crawler, schedule, submission automation, or publication was added.
+
 - ADR-058 source remediation points Naughty Dog discovery at its official /openings page, strengthens synthetic CD PROJEKT RED/Naughty Dog fixtures, and adds offline source-coverage regression tests. CD PROJEKT RED remains under review until a separately authorized live check verifies listing extraction; Riot remains incomplete and Santa Monica remains manual-review.
 
 - PR #13 delivers profile-aware role review with literal evidence and explicit uncertainty, temporary pasted-description comparison, manual lead prefill, live encrypted-vault Overview counts, and clearer task-focused labels.

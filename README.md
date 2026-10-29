@@ -13,7 +13,7 @@ The tool has only two jobs:
 1. **Find speculative-application routes worldwide.** List official studio pages or the studio's own application-system pages that invite candidates to apply without a specific advertised vacancy. A generic careers page is not enough.
 2. **Track applications.** Open the official route, apply manually, then add it to the existing private tracker and update its status yourself.
 
-The directory currently starts with 12 official routes checked on 29 October 2026. This is a first researched batch, not a claim of complete worldwide coverage. Broadening discovery is the next priority.
+The M4 research branch expands the list to 40 curated official routes: the original 12 plus 28 additions across North America, Europe, Australia and the Middle East. Some records include important work-authorisation, language, location, compensation or adult-content caveats. This is broader coverage, not a claim of completeness; M4 validation and merge are pending.
 
 The page shows each studio, the route, a short explanation of why it qualifies, known eligibility restrictions and the latest check date. Search is deliberately simple. The **Add to application tracker** action pre-fills the existing tracker; it does not send an email or submit an application.
 
@@ -27,7 +27,7 @@ Only three sections are exposed in the primary navigation: **Speculative applica
 - A validated JSON directory of official routes. Each route includes an official URL, evidence summary, current status, country restrictions where known, and check date.
 - The application tracker reuses the existing encrypted browser-local workspace. Tracking a route only pre-fills a record; the user saves it and submits externally.
 - Format, lint, typecheck, unit-test, dependency-audit, browser-acceptance and static-artifact/privacy checks run in GitHub Actions.
-- **Not implemented yet:** a truly broad automated web-discovery crawler. The current 12 routes are researched and checked directly. Next discovery work must find candidates across search engines and official sites, deduplicate them, and verify qualifying evidence before adding them to the directory. No crawler can promise literally every internet page.
+- **Not implemented yet:** a truly broad automated web-discovery crawler. The 40 routes are a hand-researched starter set, not an exhaustive global list. Each candidate must be deduplicated and checked against qualifying official evidence before inclusion. No crawler can promise literally every internet page.
 
 ## Hosting and privacy model
 

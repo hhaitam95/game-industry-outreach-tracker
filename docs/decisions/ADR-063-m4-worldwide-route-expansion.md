@@ -12,7 +12,7 @@ Expand the directory with a curated batch of up to 30 currently evidenced offici
 
 - Add only official studio pages or studio-controlled applicant-tracking routes that explicitly invite applications without a matching advertised vacancy.
 - Re-open each destination during research. A generic careers page, aggregator-only claim, or specific vacancy is not enough.
-- Record a short original evidence paraphrase and the official route/evidence URL. Keep unknown country eligibility and working arrangements as unknown/not-stated instead of inferring global eligibility from a remote label.
+- Record a short original evidence paraphrase and the official route/evidence URL. For this batch, `contentHash` fingerprints the reviewed evidence-summary text; it is not represented as a raw page-body hash, and no scraped page body is stored. Keep unknown country eligibility and working arrangements as unknown/not-stated instead of inferring global eligibility from a remote label.
 - Make material conditions visible in the evidence summary, including work-authorisation/language requirements, project-based profit share without guaranteed upfront pay, or adult-content work.
 - Correct an existing route if its saved URL no longer works and an official replacement route is evidenced; preserve the same route identity.
 - Do not store scraped page bodies, candidate personal information, or private tracker data in the public repository.
