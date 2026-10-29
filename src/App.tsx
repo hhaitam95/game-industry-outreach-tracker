@@ -1,10 +1,16 @@
 import { useCallback, useState } from "react";
-import type { PrivateWorkspaceSummary, RoleLeadPrefill, RoleLeadPrefillData } from "./components/workspace.types";
+import type {
+  PrivateRouteTrackingState,
+  PrivateWorkspaceSummary,
+  RoleLeadPrefill,
+  RoleLeadPrefillData,
+} from "./components/workspace.types";
 import type { validateWorkspaceData } from "./lib/private-data/schema.mjs";
 import { getNavItem, NAV_ITEMS } from "./lib/navigation.mjs";
 import { FEATURES, isRoleExplorerEnabled } from "./config/features.mjs";
 import PrivateDataSettings from "./components/PrivateDataSettings";
 import StudioCatalog from "./components/StudioCatalog";
+import SpeculativeRouteDirectory from "./components/SpeculativeRouteDirectory";
 import ResumeLab from "./components/ResumeLab";
 import { STUDIO_PROFILES } from "./lib/studios/catalog.mjs";
 import { IS_SYNTHETIC_SNAPSHOT, OPPORTUNITY_SNAPSHOT } from "./lib/opportunities/snapshot.mjs";
@@ -230,6 +236,7 @@ export default function App({ features = FEATURES }: { features?: typeof FEATURE
   const [activePageId, setActivePageId] = useState("overview");
   const [resumeProfile, setResumeProfile] = useState<WorkspaceProfile | null>(null);
   const [workspaceSummary, setWorkspaceSummary] = useState<PrivateWorkspaceSummary | null>(null);
+  const [routeTracking, setRouteTracking] = useState<PrivateRouteTrackingState | null>(null);
   const [pendingLead, setPendingLead] = useState<RoleLeadPrefill | null>(null);
   const consumePendingLead = useCallback(() => setPendingLead(null), []);
   const handleTrackAsLead = useCallback((lead: RoleLeadPrefillData) => {
@@ -303,6 +310,7 @@ export default function App({ features = FEATURES }: { features?: typeof FEATURE
               onNavigate={setActivePageId}
               onProfileChange={setResumeProfile}
               onWorkspaceSummaryChange={setWorkspaceSummary}
+              onRouteTrackingStateChange={setRouteTracking}
               initialLead={pendingLead}
               onLeadPrefillConsumed={consumePendingLead}
             />
@@ -314,12 +322,18 @@ export default function App({ features = FEATURES }: { features?: typeof FEATURE
               roleExplorerEnabled={roleExplorerEnabled}
             />
           ) : activeItem.id === "studios" ? (
-            <StudioCatalog
-              profile={resumeProfile}
-              onTrackAsLead={handleTrackAsLead}
-              onOpenSettings={() => setActivePageId("settings")}
-              features={features}
-            />
+            <>
+              <SpeculativeRouteDirectory
+                routeTracking={routeTracking}
+                onOpenSettings={() => setActivePageId("settings")}
+              />
+              <StudioCatalog
+                profile={resumeProfile}
+                onTrackAsLead={handleTrackAsLead}
+                onOpenSettings={() => setActivePageId("settings")}
+                features={features}
+              />
+            </>
           ) : activeItem.id === "resume" ? (
             <ResumeLab profile={resumeProfile} />
           ) : ["settings", "outreach", "applications"].includes(activeItem.id) ? null : (

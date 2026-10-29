@@ -2,7 +2,7 @@
 
 **Status:** Approved baseline with static-hosting and browser-resume decisions; living document  
 **Review version:** 0.3  
-**Last updated:** 2026-10-24
+**Last updated:** 2026-10-29
 
 ## 1. Product story
 
@@ -41,6 +41,8 @@ Never auto-delete a verified route. A failed fetch never proves the route closed
 ### Evidence contract
 
 Store facts, not page content: official URL, route type, matched phrase category, original paraphrase (max 200 characters), content hash, and the route contract’s country, language and timestamps. Fetch every candidate page before listing it; respect robots.txt, identify the user agent, rate-limit requests, and never use logins or bypass bot protection. Missing evidence or unsafe URLs fail closed.
+
+The M3 UI uses only the validated M2 route directory and provides deterministic search, filters, sorting, pagination and visible evidence/freshness fields. A “Planned” or “Applied” route marker is a private manual label in the encrypted v3 workspace, not proof of submission. v1 and v2 vaults migrate in memory to v3 while preserving existing records; markers survive even when a route is absent from the current public dataset. Synthetic sample data is explicitly labelled and cannot be marked.
 
 ## 4. Product principles and scope
 

@@ -422,6 +422,22 @@ async function main() {
   if (process.env.EXPECT_SPECULATIVE_DIRECTORY === "1") {
     await step("Verify speculative-application directory and official-site links", async () => {
       await client.clickButton("Speculative applications");
+      await client.waitForText("Route directory");
+      await client.waitForText("Synthetic sample data");
+      const directoryState = await client.evaluate(
+        "(() => ({ search: Boolean(document.querySelector('#route-search')), statusFilter: Boolean(document.querySelector('#route-status-filter')), sort: Boolean(document.querySelector('#route-sort')), routeCards: document.querySelectorAll('[data-testid=speculative-route-card]').length, markerControlsDisabled: [...document.querySelectorAll('[data-testid=route-marker-select]')].every((control) => control.disabled), sampleNotice: document.querySelector('[data-testid=route-directory-sample-notice]')?.innerText ?? '' }))()",
+      );
+      if (
+        !directoryState ||
+        !directoryState.search ||
+        !directoryState.statusFilter ||
+        !directoryState.sort ||
+        directoryState.routeCards < 1 ||
+        !directoryState.markerControlsDisabled ||
+        !directoryState.sampleNotice.includes('not real studios or verified')
+      ) {
+        throw new Error("speculative-route-directory-trust-boundary-failed");
+      }
       await client.waitForText("Studio research, before route verification");
       const summary = await client.evaluate(
         "(() => { const cards = [...document.querySelectorAll('.studio-card')]; const actions = [...document.querySelectorAll('.studio-card .studio-actions a')]; const allLinks = [...document.querySelectorAll('.studio-card a')]; const body = document.body.innerText; const legacyCopy = /Opportunity explorer|roles last seen|No roles observed|Official careers and vacancies/i.test(body); return { cardCount: cards.length, hasFourStudioNames: ['CD PROJEKT RED', 'Naughty Dog', 'Santa Monica Studio', 'Riot Games'].every((name) => body.includes(name)), officialWebsiteCount: actions.filter((link) => link.innerText.includes('Official website')).length, allLinksUseHttps: allLinks.length >= 8 && allLinks.every((link) => link.href.startsWith('https://')), legacyCopy, verifiedRouteBadges: document.querySelectorAll('.route-status').length, opportunityRows: document.querySelectorAll('[data-testid=opportunity-row]').length }; })()",

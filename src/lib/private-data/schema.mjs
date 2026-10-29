@@ -363,7 +363,7 @@ function validateApplication(value) {
   };
 }
 
-/** @param {unknown} input @returns {WorkspaceData} */
+/** @param {unknown} input @returns {Record<string, unknown>} */
 function migrateV1Workspace(input) {
   assertExactKeys(input, WORKSPACE_V1_KEYS, "Private workspace");
   if (input.schemaVersion !== 1) throw new Error("This private workspace uses an unsupported data version.");

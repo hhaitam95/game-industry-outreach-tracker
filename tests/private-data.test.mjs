@@ -167,6 +167,16 @@ function sampleWorkspace() {
     kind: "pdf",
     processedAt: timestamp,
   });
+  workspace.routeMarkers.push({
+    id: "route-marker-test-1",
+    routeId: "synthetic-route-canary",
+    studioId: "synthetic-studio-canary",
+    studioName: "PRIVATE_MARKED_STUDIO_CANARY_8348",
+    routeUrl: "https://example.com/speculative-route",
+    status: "planned",
+    createdAt: timestamp,
+    updatedAt: timestamp,
+  });
   return validateWorkspaceData(workspace);
 }
 
@@ -250,6 +260,7 @@ test("encrypted backup does not reveal private record values", async () => {
     "PRIVATE_STUDIO_CANARY_8348",
     "PRIVATE_NOTE_CANARY_8348",
     "PRIVATE_DRAFT_CANARY_8348",
+    "PRIVATE_MARKED_STUDIO_CANARY_8348",
   ]) {
     assert.equal(backup.includes(marker), false);
   }
@@ -294,4 +305,70 @@ test("IndexedDB adapter refuses plaintext data before opening storage", async ()
     /only encrypted workspace envelopes/i,
   );
   await assert.rejects(store.save("not encrypted"), /only encrypted workspace envelopes/i);
+});
+
+
+test("workspace v2 migrates to v3 without changing legacy data", () => {
+  const original = sampleWorkspace();
+  const v2 = JSON.parse(JSON.stringify(original));
+  v2.schemaVersion = 2;
+  delete v2.routeMarkers;
+  const migrated = validateWorkspaceData(v2);
+  assert.equal(migrated.schemaVersion, 3);
+  assert.deepEqual(migrated.routeMarkers, []);
+  assert.deepEqual(migrated.profile, v2.profile);
+  assert.deepEqual(migrated.resumes, v2.resumes);
+  assert.deepEqual(migrated.drafts, v2.drafts);
+  assert.deepEqual(migrated.applications, v2.applications);
+});
+
+test("legacy workspace v1 migrates through v2 to v3 preserving draft and application text", () => {
+  const v1 = JSON.parse(JSON.stringify(createEmptyWorkspace(timestamp)));
+  v1.schemaVersion = 1;
+  delete v1.routeMarkers;
+  v1.drafts = [
+    { id: "legacy-draft-1", title: "Legacy introduction", body: "Preserve exact legacy draft text.", updatedAt: timestamp },
+  ];
+  v1.applications = [
+    {
+      id: "legacy-application-1",
+      studioName: "Legacy Studio",
+      roleTitle: "Technical Artist",
+      status: "interested",
+      applicationUrl: "https://example.com/speculative",
+      notes: "Preserve private notes exactly.",
+      createdAt: timestamp,
+      updatedAt: timestamp,
+    },
+  ];
+  const migrated = validateWorkspaceData(v1);
+  assert.equal(migrated.schemaVersion, 3);
+  assert.deepEqual(migrated.routeMarkers, []);
+  assert.equal(migrated.drafts[0].body, "Preserve exact legacy draft text.");
+  assert.equal(migrated.drafts[0].seriesId, "legacy-draft-1");
+  assert.equal(migrated.applications[0].notes, "Preserve private notes exactly.");
+  assert.equal(migrated.applications[0].status, "interested");
+  assert.equal(migrated.applications[0].studioName, "Legacy Studio");
+});
+
+test("private route markers require safe HTTPS URLs, known statuses, unique IDs and unique route IDs", () => {
+  const invalidHttp = JSON.parse(JSON.stringify(sampleWorkspace()));
+  invalidHttp.routeMarkers[0].routeUrl = "http://example.com/speculative";
+  assert.throws(() => validateWorkspaceData(invalidHttp), /must be HTTPS/i);
+
+  const invalidCredentials = JSON.parse(JSON.stringify(sampleWorkspace()));
+  invalidCredentials.routeMarkers[0].routeUrl = "https://user:password@example.com/speculative";
+  assert.throws(() => validateWorkspaceData(invalidCredentials), /embedded credentials/i);
+
+  const invalidStatus = JSON.parse(JSON.stringify(sampleWorkspace()));
+  invalidStatus.routeMarkers[0].status = "submitted";
+  assert.throws(() => validateWorkspaceData(invalidStatus), /planned or applied/i);
+
+  const duplicateRoute = JSON.parse(JSON.stringify(sampleWorkspace()));
+  duplicateRoute.routeMarkers.push({ ...duplicateRoute.routeMarkers[0], id: "route-marker-test-2", status: "applied" });
+  assert.throws(() => validateWorkspaceData(duplicateRoute), /only one private marker/i);
+
+  const duplicateRecordId = JSON.parse(JSON.stringify(sampleWorkspace()));
+  duplicateRecordId.routeMarkers[0].id = duplicateRecordId.applications[0].id;
+  assert.throws(() => validateWorkspaceData(duplicateRecordId), /record IDs must be unique/i);
 });

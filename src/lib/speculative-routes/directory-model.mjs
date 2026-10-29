@@ -44,6 +44,7 @@ export function selectSpeculativeRoutes(directory, options = {}) {
     pageSize = ROUTE_DIRECTORY_PAGE_SIZE,
   } = options;
   const studioById = new Map(directory.studios.map((studio) => [studio.id, studio.name]));
+  const studioUrlById = new Map(directory.studios.map((studio) => [studio.id, studio.officialWebsiteUrl]));
   const normalizedQuery = query.trim().toLocaleLowerCase("en");
   const normalizedPageSize = Number.isInteger(pageSize) && pageSize >= 1 && pageSize <= 100
     ? pageSize
@@ -62,6 +63,7 @@ export function selectSpeculativeRoutes(directory, options = {}) {
       if (!normalizedQuery) return true;
       const haystack = [
         route.studioName,
+        studioUrlById.get(route.studioId) ?? "",
         route.id,
         route.studioId,
         route.routeUrl,

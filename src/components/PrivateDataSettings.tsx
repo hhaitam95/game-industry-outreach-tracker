@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import {
   createEncryptedSession,
   MAX_ENCRYPTED_BACKUP_BYTES,
@@ -6,7 +6,13 @@ import {
 } from "../lib/private-data/crypto-vault.mjs";
 import { createIndexedDbVaultStore } from "../lib/private-data/indexed-db.mjs";
 import { validateWorkspaceData } from "../lib/private-data/schema.mjs";
-import type { PrivateWorkspaceSummary, RoleLeadPrefill } from "./workspace.types";
+import type {
+  PrivateRouteMarkerStatus,
+  PrivateRouteTrackingState,
+  PrivateWorkspaceSummary,
+  RoleLeadPrefill,
+  SpeculativeRouteMarkerInput,
+} from "./workspace.types";
 import OutreachWorkspace from "./OutreachWorkspace";
 import ApplicationsWorkspace from "./ApplicationsWorkspace";
 import "./phase7.css";
@@ -32,6 +38,7 @@ function downloadBackup(contents: string) {
 export default function PrivateDataSettings({
   onProfileChange,
   onWorkspaceSummaryChange = () => undefined,
+  onRouteTrackingStateChange = () => undefined,
   activePageId,
   onNavigate,
   initialLead = null,
@@ -39,6 +46,7 @@ export default function PrivateDataSettings({
 }: {
   onProfileChange: (profile: WorkspaceProfile | null) => void;
   onWorkspaceSummaryChange?: (summary: PrivateWorkspaceSummary | null) => void;
+  onRouteTrackingStateChange?: (state: PrivateRouteTrackingState | null) => void;
   activePageId: string;
   onNavigate: (pageId: string) => void;
   initialLead?: RoleLeadPrefill | null;
@@ -48,7 +56,7 @@ export default function PrivateDataSettings({
   if (!storeRef.current) storeRef.current = createIndexedDbVaultStore();
   const store = storeRef.current;
 
-  function reportWorkspaceSummary(current: PrivateWorkspace | null) {
+  const reportWorkspaceSummary = useCallback((current: PrivateWorkspace | null) => {
     if (!current) {
       onWorkspaceSummaryChange(null);
       return;
@@ -64,7 +72,7 @@ export default function PrivateDataSettings({
         (application) => application.nextFollowUpAt && application.nextFollowUpAt <= today,
       ).length,
     });
-  }
+  }, [onWorkspaceSummaryChange]);
 
   const [storageReady, setStorageReady] = useState<boolean | null>(null);
   const [vaultExists, setVaultExists] = useState(false);
@@ -133,7 +141,7 @@ export default function PrivateDataSettings({
     setNotice("Unsaved changes — save the profile before locking or leaving this page.");
   }
 
-  async function persistWorkspace(nextWorkspace: PrivateWorkspace, successMessage: string) {
+  const persistWorkspace = useCallback(async (nextWorkspace: PrivateWorkspace, successMessage: string) => {
     if (!session) {
       setError("Unlock the local vault before saving.");
       return false;
@@ -157,7 +165,38 @@ export default function PrivateDataSettings({
     } finally {
       setBusy(false);
     }
-  }
+  }, [session, store, onProfileChange, reportWorkspaceSummary]);
+
+  const setRouteMarker = useCallback(async (
+    route: SpeculativeRouteMarkerInput,
+    status: PrivateRouteMarkerStatus | null,
+  ) => {
+    if (!workspace || !session) {
+      setError("Unlock the local vault before saving private route markers.");
+      return false;
+    }
+    const now = new Date().toISOString();
+    const existing = workspace.routeMarkers.find((marker) => marker.routeId === route.routeId);
+    const routeMarkers = status === null
+      ? workspace.routeMarkers.filter((marker) => marker.routeId !== route.routeId)
+      : existing
+        ? workspace.routeMarkers.map((marker) =>
+            marker.routeId === route.routeId ? { ...marker, ...route, status, updatedAt: now } : marker,
+          )
+        : [{ id: crypto.randomUUID(), ...route, status, createdAt: now, updatedAt: now }, ...workspace.routeMarkers];
+    return persistWorkspace(
+      { ...workspace, routeMarkers },
+      status ? "Private route marker encrypted and saved locally." : "Private route marker removed and saved locally.",
+    );
+  }, [workspace, session, persistWorkspace]);
+
+  useEffect(() => {
+    if (!workspace || !session) {
+      onRouteTrackingStateChange(null);
+      return;
+    }
+    onRouteTrackingStateChange({ markers: workspace.routeMarkers, setMarker: setRouteMarker });
+  }, [workspace, session, setRouteMarker, onRouteTrackingStateChange]);
 
   async function handleCreateOrUnlock(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -635,14 +674,14 @@ export default function PrivateDataSettings({
           </section>
         ) : activePageId === "outreach" ? (
           <OutreachWorkspace workspace={workspace} onSaveWorkspace={persistWorkspace} />
-        ) : (
+        ) : activePageId === "applications" ? (
           <ApplicationsWorkspace
             workspace={workspace}
             onSaveWorkspace={persistWorkspace}
             initialLead={initialLead}
             onLeadPrefillConsumed={onLeadPrefillConsumed}
           />
-        )
+        ) : null
       ) : null}
 
       {activePageId === "settings" ? (
