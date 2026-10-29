@@ -1,15 +1,86 @@
 const STOP_WORDS = new Set([
-  "a", "an", "and", "are", "as", "at", "be", "by", "can", "candidate", "candidates", "could",
-  "for", "from", "have", "has", "in", "including", "into", "is", "it", "its", "may", "must", "of",
-  "on", "or", "our", "please", "position", "preferred", "proven", "role", "roles", "should", "strong",
-  "such", "team", "teams", "that", "the", "their", "this", "to", "understanding", "using", "various",
-  "we", "will", "with", "work", "working", "you", "your", "years", "experience", "ability", "responsibilities",
-  "requirements", "required", "skills", "knowledge", "opportunity", "environment", "excellent", "good",
-  "help", "ensure", "supporting", "support", "develop", "development", "across", "within", "based", "new", "use",
+  "a",
+  "an",
+  "and",
+  "are",
+  "as",
+  "at",
+  "be",
+  "by",
+  "can",
+  "candidate",
+  "candidates",
+  "could",
+  "for",
+  "from",
+  "have",
+  "has",
+  "in",
+  "including",
+  "into",
+  "is",
+  "it",
+  "its",
+  "may",
+  "must",
+  "of",
+  "on",
+  "or",
+  "our",
+  "please",
+  "position",
+  "preferred",
+  "proven",
+  "role",
+  "roles",
+  "should",
+  "strong",
+  "such",
+  "team",
+  "teams",
+  "that",
+  "the",
+  "their",
+  "this",
+  "to",
+  "understanding",
+  "using",
+  "various",
+  "we",
+  "will",
+  "with",
+  "work",
+  "working",
+  "you",
+  "your",
+  "years",
+  "experience",
+  "ability",
+  "responsibilities",
+  "requirements",
+  "required",
+  "skills",
+  "knowledge",
+  "opportunity",
+  "environment",
+  "excellent",
+  "good",
+  "help",
+  "ensure",
+  "supporting",
+  "support",
+  "develop",
+  "development",
+  "across",
+  "within",
+  "based",
+  "new",
+  "use",
 ]);
 
 const MAX_ROLE_DESCRIPTION_LENGTH = 150_000;
 
+/** @param {string} value */
 function normalizeSearchText(value) {
   return String(value ?? "")
     .normalize("NFKD")
@@ -20,6 +91,7 @@ function normalizeSearchText(value) {
     .trim();
 }
 
+/** @param {string[]} values @returns {string[]} */
 function uniqueStrings(values) {
   const seen = new Set();
   return values
@@ -33,13 +105,16 @@ function uniqueStrings(values) {
     });
 }
 
+/** @param {string} description @param {string} profileText @returns {string[]} */
 function extractRoleTerms(description, profileText) {
   const profileNormalized = " " + normalizeSearchText(profileText) + " ";
   const tokens = description.match(/[a-z][a-z0-9+#./-]{1,}/giu) ?? [];
   return uniqueStrings(tokens.map((token) => token.replace(/^[./-]+|[./-]+$/gu, "")))
     .filter((token) => {
       const normalized = normalizeSearchText(token);
-      return normalized.length >= 3 && !STOP_WORDS.has(normalized) && !profileNormalized.includes(" " + normalized + " ");
+      return (
+        normalized.length >= 3 && !STOP_WORDS.has(normalized) && !profileNormalized.includes(" " + normalized + " ")
+      );
     })
     .slice(0, 12);
 }
@@ -48,6 +123,7 @@ function extractRoleTerms(description, profileText) {
  * Compare literal phrases from the local profile with the role title and an optional description pasted by the user.
  * Terms not found are prompts for review, never claims that the candidate lacks a skill.
  * @param {{ roleTitle: string, roleDescription?: string, profile?: { headline?: string, professionalSummary?: string, targetRoles?: string[], skills?: string[] } | null }} input
+ * @returns {{ hasProfile: boolean, hasRoleDescription: boolean, matchedSkills: string[], matchedTargetRoles: string[], termsNotMentioned: string[], evidenceUsed: string[] }}
  */
 export function analyzeRoleAgainstProfile({ roleTitle, roleDescription = "", profile = null }) {
   if (typeof roleTitle !== "string" || roleTitle.length > 300) {
@@ -56,24 +132,39 @@ export function analyzeRoleAgainstProfile({ roleTitle, roleDescription = "", pro
   if (typeof roleDescription !== "string" || roleDescription.length > MAX_ROLE_DESCRIPTION_LENGTH) {
     throw new Error("Role description must be text of at most 150,000 characters.");
   }
+  const candidateProfile = profile ?? {
+    headline: "",
+    professionalSummary: "",
+    targetRoles: [],
+    skills: [],
+  };
   const hasProfile = Boolean(
     profile &&
-      [profile.headline, profile.professionalSummary, ...(profile.targetRoles ?? []), ...(profile.skills ?? [])].some(
-        (value) => typeof value === "string" && value.trim(),
-      ),
+      [
+        candidateProfile.headline,
+        candidateProfile.professionalSummary,
+        ...(candidateProfile.targetRoles ?? []),
+        ...(candidateProfile.skills ?? []),
+      ].some((value) => typeof value === "string" && value.trim()),
   );
   const profileText = hasProfile
-    ? [profile.headline, profile.professionalSummary, ...(profile.targetRoles ?? []), ...(profile.skills ?? [])]
+    ? [
+        candidateProfile.headline,
+        candidateProfile.professionalSummary,
+        ...(candidateProfile.targetRoles ?? []),
+        ...(candidateProfile.skills ?? []),
+      ]
         .filter((value) => typeof value === "string")
         .join("\n")
     : "";
   const normalizedRoleText = " " + normalizeSearchText([roleTitle, roleDescription].join("\n")) + " ";
+  /** @param {string} value */
   const literalMatch = (value) => {
     const normalized = normalizeSearchText(value);
     return normalized.length > 1 && normalizedRoleText.includes(" " + normalized + " ");
   };
-  const skills = hasProfile ? uniqueStrings(profile.skills ?? []) : [];
-  const targetRoles = hasProfile ? uniqueStrings(profile.targetRoles ?? []) : [];
+  const skills = hasProfile ? uniqueStrings(candidateProfile.skills ?? []) : [];
+  const targetRoles = hasProfile ? uniqueStrings(candidateProfile.targetRoles ?? []) : [];
   return {
     hasProfile,
     hasRoleDescription: Boolean(roleDescription.trim()),

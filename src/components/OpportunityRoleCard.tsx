@@ -32,8 +32,7 @@ export default function OpportunityRoleCard({
   const [reviewOpen, setReviewOpen] = useState(false);
   const [roleDescription, setRoleDescription] = useState("");
   const review = useMemo(
-    () =>
-      reviewOpen ? analyzeRoleAgainstProfile({ roleTitle: role.title, roleDescription, profile }) : null,
+    () => (reviewOpen ? analyzeRoleAgainstProfile({ roleTitle: role.title, roleDescription, profile }) : null),
     [reviewOpen, role.title, roleDescription, profile],
   );
 
@@ -128,8 +127,8 @@ export default function OpportunityRoleCard({
           aria-label={"Role review for " + role.title}
         >
           <p className="role-review-privacy" role="note">
-            This review runs in this browser tab. The profile is read from your unlocked local vault; pasted role text is
-            temporary and is not saved, sent, or added to public opportunity data.
+            This review runs in this browser tab. The profile is read from your unlocked local vault; pasted role text
+            is temporary and is not saved, sent, or added to public opportunity data.
           </p>
           {!profile ? (
             <div className="role-review-locked">
@@ -165,7 +164,9 @@ export default function OpportunityRoleCard({
               <div className="role-review-grid">
                 <section>
                   <h4>Relevant phrases found</h4>
-                  <p>Literal mentions from your saved target roles and listed skills that also appear in the role text.</p>
+                  <p>
+                    Literal mentions from your saved target roles and listed skills that also appear in the role text.
+                  </p>
                   {review && review.matchedTargetRoles.length + review.matchedSkills.length > 0 ? (
                     <ul>
                       {review.matchedTargetRoles.map((item) => (
@@ -181,7 +182,8 @@ export default function OpportunityRoleCard({
                     </ul>
                   ) : (
                     <p className="role-review-muted">
-                      No literal target-role or skill matches found in the available text. This is not proof of poor fit.
+                      No literal target-role or skill matches found in the available text. This is not proof of poor
+                      fit.
                     </p>
                   )}
                 </section>

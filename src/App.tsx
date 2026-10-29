@@ -131,7 +131,9 @@ function OverviewPage({
           />
           <StatCard
             label="Outreach drafts"
-            detail={workspaceSummary ? "Saved versions in your unlocked vault" : "Unlock Settings to view private totals"}
+            detail={
+              workspaceSummary ? "Saved versions in your unlocked vault" : "Unlock Settings to view private totals"
+            }
             icon="outreach"
             value={workspaceSummary ? String(workspaceSummary.draftCount) : "—"}
           />

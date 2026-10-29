@@ -40,7 +40,10 @@ test("role review explains missing evidence only when a description is supplied"
 
 test("role review validates input bounds", () => {
   assert.throws(() => analyzeRoleAgainstProfile({ roleTitle: "x".repeat(301), profile }), /Role title/);
-  assert.throws(() => analyzeRoleAgainstProfile({ roleTitle: "Test", roleDescription: "x".repeat(150_001), profile }), /Role description/);
+  assert.throws(
+    () => analyzeRoleAgainstProfile({ roleTitle: "Test", roleDescription: "x".repeat(150_001), profile }),
+    /Role description/,
+  );
 });
 
 test("role review avoids substring-only skill matches", () => {
