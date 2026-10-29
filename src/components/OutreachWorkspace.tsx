@@ -45,8 +45,6 @@ export default function OutreachWorkspace({ workspace, onSaveWorkspace }: Props)
   const studio = STUDIO_PROFILES.find((item) => item.id === studioId) ?? null;
   const careerRoute = studio?.routes.find((item) => item.status === "verified") ?? studio?.routes[0] ?? null;
   const availableOpportunities = !IS_SYNTHETIC_SNAPSHOT ? (OPPORTUNITY_SNAPSHOT?.opportunities ?? []) : [];
-  const selectedOpportunity =
-    availableOpportunities.find((item) => item.id === opportunityId) ?? null;
   const activeSavedDraft = workspace.drafts.find((item) => item.id === editingDraftId) ?? null;
 
   const review = useMemo(() => {
@@ -251,7 +249,7 @@ export default function OutreachWorkspace({ workspace, onSaveWorkspace }: Props)
         <div className="phase7-form-grid">
           <label>
             Studio
-            <select value={studioId} onChange={(event) => { setStudioId(event.target.value); setOpportunityId(""); }}>
+            <select value={studioId} onChange={(event) => { setStudioId(event.target.value); setOpportunityId(""); setSourceUrl(""); }}>
               <option value="">Choose a studio…</option>
               {STUDIO_PROFILES.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
             </select>
@@ -272,7 +270,7 @@ export default function OutreachWorkspace({ workspace, onSaveWorkspace }: Props)
           </label>
           <label className="phase7-full-width">
             Specific reason for contacting this team
-            <textarea maxLength={2000} rows={3} required value={motivation} onChange={(event) => setMotivation(event.target.value)} placeholder="Mention a project, team focus, technical problem, or other genuine reason you can explain." />
+            <textarea maxLength={2000} rows={3} required value={motivation} data-testid="outreach-motivation" onChange={(event) => setMotivation(event.target.value)} placeholder="Mention a project, team focus, technical problem, or other genuine reason you can explain." />
           </label>
           <label className="phase7-full-width">
             Resume label (optional metadata only)
@@ -336,10 +334,10 @@ export default function OutreachWorkspace({ workspace, onSaveWorkspace }: Props)
           </label>
         </div>
         <div className="phase7-actions">
-          <button className="button button-secondary" type="button" onClick={generateTemplate} disabled={!studioId}>Generate editable template</button>
+          <button className="button button-secondary" type="button" data-testid="outreach-generate-template" onClick={generateTemplate} disabled={!studioId}>Generate editable template</button>
           <button className="button button-secondary" type="button" onClick={startNewDraft}>Start new draft</button>
-          <button className="button button-primary" type="button" onClick={() => void saveDraft("draft")} disabled={!title.trim() || !body.trim() || !studioId}>Save draft version</button>
-          <button className="button button-primary" type="button" onClick={() => void saveDraft("reviewed")} disabled={!title.trim() || !body.trim() || !studioId}>Mark reviewed & save version</button>
+          <button className="button button-primary" type="button" data-testid="outreach-save-draft" onClick={() => void saveDraft("draft")} disabled={!title.trim() || !body.trim() || !studioId}>Save draft version</button>
+          <button className="button button-primary" type="button" data-testid="outreach-save-reviewed" onClick={() => void saveDraft("reviewed")} disabled={!title.trim() || !body.trim() || !studioId}>Mark reviewed & save version</button>
           <button className="button button-secondary" type="button" onClick={() => void copyDraft()} disabled={!body.trim()}>Copy reviewed text</button>
         </div>
         {editingDraftId ? (
@@ -388,7 +386,7 @@ export default function OutreachWorkspace({ workspace, onSaveWorkspace }: Props)
         {recentDrafts.length ? (
           <div className="phase7-saved-list">
             {recentDrafts.map((draft) => (
-              <article className="phase7-saved-row" key={draft.id}>
+              <article className="phase7-saved-row" key={draft.id} data-testid="outreach-draft-row">
                 <div>
                   <strong>{draft.title}</strong>
                   <p>{draft.studioName || "Studio not recorded"}{draft.roleTitle ? " · " + draft.roleTitle : ""}</p>
@@ -396,7 +394,7 @@ export default function OutreachWorkspace({ workspace, onSaveWorkspace }: Props)
                   <p>Profile snapshot: {draft.profileUpdatedAt ? new Date(draft.profileUpdatedAt).toLocaleDateString() : "legacy/unknown"} · Resume label: {draft.resumeLabel || "not recorded"} · Guidance: {draft.guidanceVersion}</p>
                   {draft.sourceUrl ? <p><a href={draft.sourceUrl} target="_blank" rel="noreferrer">Open saved role/application source</a></p> : null}
                 </div>
-                <button className="button button-secondary" type="button" onClick={() => loadDraft(draft)}>Load revision</button>
+                <button className="button button-secondary" type="button" data-testid="outreach-load-draft" onClick={() => loadDraft(draft)}>Load revision</button>
               </article>
             ))}
           </div>
