@@ -63,16 +63,18 @@ test("workspace v1 migration preserves legacy profile, drafts, resumes, and appl
     schemaVersion: 1,
     resumes: [{ id: "resume-1", label: "Old CV label", kind: "docx", processedAt: NOW }],
     drafts: [{ id: "legacy-draft", title: "Old draft", body: "Synthetic old body", updatedAt: NOW }],
-    applications: [{
-      id: "legacy-application",
-      studioName: "Synthetic Studio",
-      roleTitle: "Support Engineer",
-      status: "interested",
-      applicationUrl: "https://example.com/careers",
-      notes: "Legacy notes",
-      createdAt: NOW,
-      updatedAt: NOW,
-    }],
+    applications: [
+      {
+        id: "legacy-application",
+        studioName: "Synthetic Studio",
+        roleTitle: "Support Engineer",
+        status: "interested",
+        applicationUrl: "https://example.com/careers",
+        notes: "Legacy notes",
+        createdAt: NOW,
+        updatedAt: NOW,
+      },
+    ],
   };
   const migrated = validateWorkspaceData(v1);
   assert.equal(migrated.schemaVersion, WORKSPACE_SCHEMA_VERSION);
@@ -89,25 +91,24 @@ test("workspace v1 migration preserves legacy profile, drafts, resumes, and appl
 
 test("workspace v2 validates draft lineage and application activity links", () => {
   const workspace = withProfile();
-  workspace.drafts = [
-    draft({ id: "draft-1", versionNumber: 1, previousVersionId: null }),
-    draft(),
+  workspace.drafts = [draft({ id: "draft-1", versionNumber: 1, previousVersionId: null }), draft()];
+  workspace.applications = [
+    {
+      id: "application-1",
+      studioName: "CD PROJEKT RED",
+      roleTitle: "Developer Support Specialist",
+      status: "interview",
+      applicationUrl: "https://example.com/careers",
+      notes: "",
+      createdAt: NOW,
+      updatedAt: NOW,
+      studioId: "cd-projekt-red",
+      opportunityId: "",
+      outreachDraftId: "draft-2",
+      nextFollowUpAt: "2026-11-02",
+      history: [activity({ type: "interview", note: "Synthetic interview update." })],
+    },
   ];
-  workspace.applications = [{
-    id: "application-1",
-    studioName: "CD PROJEKT RED",
-    roleTitle: "Developer Support Specialist",
-    status: "interview",
-    applicationUrl: "https://example.com/careers",
-    notes: "",
-    createdAt: NOW,
-    updatedAt: NOW,
-    studioId: "cd-projekt-red",
-    opportunityId: "",
-    outreachDraftId: "draft-2",
-    nextFollowUpAt: "2026-11-02",
-    history: [activity({ type: "interview", note: "Synthetic interview update." })],
-  }];
   const validated = validateWorkspaceData(workspace);
   assert.equal(validated.drafts.length, 2);
   assert.equal(validated.applications[0].outreachDraftId, "draft-2");
@@ -118,32 +119,86 @@ test("workspace v2 validates draft lineage and application activity links", () =
 test("workspace rejects invalid lineage, unknown fields, bad status and malformed activity", () => {
   const workspace = withProfile();
   workspace.drafts = [draft({ previousVersionId: null })];
-  assert.throws(() => validateWorkspaceData({ ...workspace, drafts: [{ ...workspace.drafts[0], unapproved: true }] }), /unsupported field/i);
-  assert.throws(() => validateWorkspaceData({ ...workspace, drafts: [draft({ previousVersionId: "missing" })] }), /previous version/i);
-  assert.throws(() => validateWorkspaceData({
-    ...workspace,
-    applications: [{
-      id: "app-1", studioName: "Studio", roleTitle: "Role", status: "sent", applicationUrl: "",
-      notes: "", createdAt: NOW, updatedAt: NOW, studioId: "", opportunityId: "", outreachDraftId: "",
-      nextFollowUpAt: null, history: [],
-    }],
-  }), /unsupported/i);
-  assert.throws(() => validateWorkspaceData({
-    ...workspace,
-    applications: [{
-      id: "app-1", studioName: "Studio", roleTitle: "Role", status: "interested", applicationUrl: "",
-      notes: "", createdAt: NOW, updatedAt: NOW, studioId: "", opportunityId: "", outreachDraftId: "",
-      nextFollowUpAt: "2026-02-30", history: [],
-    }],
-  }), /calendar date/i);
-  assert.throws(() => validateWorkspaceData({
-    ...workspace,
-    applications: [{
-      id: "app-1", studioName: "Studio", roleTitle: "Role", status: "interested", applicationUrl: "",
-      notes: "", createdAt: NOW, updatedAt: NOW, studioId: "", opportunityId: "", outreachDraftId: "",
-      nextFollowUpAt: null, history: [activity({ type: "imagined" })],
-    }],
-  }), /activity type/i);
+  assert.throws(
+    () => validateWorkspaceData({ ...workspace, drafts: [{ ...workspace.drafts[0], unapproved: true }] }),
+    /unsupported field/i,
+  );
+  assert.throws(
+    () => validateWorkspaceData({ ...workspace, drafts: [draft({ previousVersionId: "missing" })] }),
+    /previous version/i,
+  );
+  assert.throws(
+    () =>
+      validateWorkspaceData({
+        ...workspace,
+        applications: [
+          {
+            id: "app-1",
+            studioName: "Studio",
+            roleTitle: "Role",
+            status: "sent",
+            applicationUrl: "",
+            notes: "",
+            createdAt: NOW,
+            updatedAt: NOW,
+            studioId: "",
+            opportunityId: "",
+            outreachDraftId: "",
+            nextFollowUpAt: null,
+            history: [],
+          },
+        ],
+      }),
+    /unsupported/i,
+  );
+  assert.throws(
+    () =>
+      validateWorkspaceData({
+        ...workspace,
+        applications: [
+          {
+            id: "app-1",
+            studioName: "Studio",
+            roleTitle: "Role",
+            status: "interested",
+            applicationUrl: "",
+            notes: "",
+            createdAt: NOW,
+            updatedAt: NOW,
+            studioId: "",
+            opportunityId: "",
+            outreachDraftId: "",
+            nextFollowUpAt: "2026-02-30",
+            history: [],
+          },
+        ],
+      }),
+    /calendar date/i,
+  );
+  assert.throws(
+    () =>
+      validateWorkspaceData({
+        ...workspace,
+        applications: [
+          {
+            id: "app-1",
+            studioName: "Studio",
+            roleTitle: "Role",
+            status: "interested",
+            applicationUrl: "",
+            notes: "",
+            createdAt: NOW,
+            updatedAt: NOW,
+            studioId: "",
+            opportunityId: "",
+            outreachDraftId: "",
+            nextFollowUpAt: null,
+            history: [activity({ type: "imagined" })],
+          },
+        ],
+      }),
+    /activity type/i,
+  );
   assert.ok(APPLICATION_STATUSES.includes("applied"));
 });
 
@@ -166,7 +221,8 @@ test("deterministic outreach template uses only explicit profile facts and user 
 
 test("draft review returns actionable heuristic checks without claiming fact verification", () => {
   const workspace = withProfile();
-  const body = "Hello CD PROJEKT RED team. I'm a Technical support engineer. I support internal tools and investigate production incidents. What draws me to your team is: I admire your game development and technical problem solving. I'd welcome a conversation about the Developer Support Specialist opportunity.";
+  const body =
+    "Hello CD PROJEKT RED team. I'm a Technical support engineer. I support internal tools and investigate production incidents. What draws me to your team is: I admire your game development and technical problem solving. I'd welcome a conversation about the Developer Support Specialist opportunity.";
   const review = checkOutreachDraft({
     body,
     studioName: "CD PROJEKT RED",
