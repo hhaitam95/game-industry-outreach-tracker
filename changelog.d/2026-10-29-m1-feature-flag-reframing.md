@@ -5,4 +5,4 @@
 - Renamed the directory navigation item to “Speculative applications” and updated the Overview copy to describe official evidence and manual applications.
 - Reframed README, product specifications, architecture, implementation plan and handoff around the M0–M8 route-directory roadmap.
 - Added tests for both flag states and the default UI boundary.
-- Updated browser acceptance to validate the default-off speculative directory and its hidden legacy explorer, with loopback-only DevTools readiness checks. Discovery remains manual-only; no schedules or publishing were enabled.
+- Updated browser acceptance to validate the default-off speculative directory and its hidden legacy explorer, with loopback-only DevTools readiness checks. The updated browser run passed 27/27 synthetic-data steps. Discovery remains manual-only; no schedules or publishing were enabled.

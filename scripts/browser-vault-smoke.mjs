@@ -448,7 +448,9 @@ async function main() {
       );
       if (
         !studioState ||
-        /Opportunity explorer|roles last seen|No roles observed|Official careers and vacancies/i.test(studioState.body) ||
+        /Opportunity explorer|roles last seen|No roles observed|Official careers and vacancies/i.test(
+          studioState.body,
+        ) ||
         studioState.rows > 0
       ) {
         throw new Error("legacy-role-explorer-visible-with-feature-disabled");
