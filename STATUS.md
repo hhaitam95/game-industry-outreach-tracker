@@ -6,7 +6,7 @@
 **Base/main:** d56637e921fdb2e23f67e15aa3a518d6477c6842 (merge commit for PR #6, after PR #4's regular merge). No direct commits to main.
 
 **Review state:** PR #4 is merged; PR #6 is merged to main. Phase 6c is a separate branch and review unit; no Phase 6c PR has been opened yet.  
-**Phase 6c gate:** ADR-045 and the scope/definition of done in IMPLEMENTATION_PLAN.md were committed before code. Exact-head Phase 6c checks are pending until implementation changes are committed.
+**Phase 6c progress:** ADR-045 and the acceptance gate were committed before code. The pure structured model, provenance/diff helpers, redaction helper, and minimal DOCX package generator are now committed; automated checks for this exact head are pending. UI integration, browser acceptance coverage, and PDF print sheet remain to be implemented.
 
 ## Engineering standards for remaining work
 
