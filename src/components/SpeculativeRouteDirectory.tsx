@@ -80,17 +80,13 @@ export default function SpeculativeRouteDirectory({
         <span className="eyebrow">WORLDWIDE · OFFICIAL SOURCES</span>
         <h2 id="route-directory-title">Speculative applications</h2>
         <p>
-          Game studios that invite applications beyond their advertised vacancies. Open the official route
-          to check the current instructions, then add it to your application tracker when you are ready.
+          Game studios that invite applications beyond their advertised vacancies. Open the official route to check the
+          current instructions, then add it to your application tracker when you are ready.
         </p>
       </div>
 
       {isSynthetic ? (
-        <div
-          className="route-directory-notice"
-          role="note"
-          data-testid="route-directory-sample-notice"
-        >
+        <div className="route-directory-notice" role="note" data-testid="route-directory-sample-notice">
           <strong>Sample data only</strong>
           <p>
             These illustrative records are not real opportunities. They cannot be added to your application tracker.
@@ -132,23 +128,17 @@ export default function SpeculativeRouteDirectory({
                 const studio = directory.studios.find((item) => item.id === route.studioId);
                 const blockedBySample = isSynthetic;
                 return (
-                  <article
-                    className="route-directory-card"
-                    data-testid="speculative-route-card"
-                    key={route.id}
-                  >
+                  <article className="route-directory-card" data-testid="speculative-route-card" key={route.id}>
                     <div className="route-directory-card-heading">
                       <div>
                         <h3>{route.studioName}</h3>
                         <p className="route-directory-id">
                           {studio?.homeCountryCode
-                            ? COUNTRY_NAMES[studio.homeCountryCode] ?? studio.homeCountryCode
+                            ? (COUNTRY_NAMES[studio.homeCountryCode] ?? studio.homeCountryCode)
                             : "Studio location not recorded"}
                         </p>
                       </div>
-                      <span
-                        className={"route-directory-status route-directory-status-" + route.status}
-                      >
+                      <span className={"route-directory-status route-directory-status-" + route.status}>
                         {statusLabel(route.status)}
                       </span>
                     </div>
@@ -173,9 +163,7 @@ export default function SpeculativeRouteDirectory({
                       <p>{route.evidenceSummary}</p>
                     </div>
 
-                    <p className="route-directory-date">
-                      Official page checked {formatDate(route.lastCheckedAt)}
-                    </p>
+                    <p className="route-directory-date">Official page checked {formatDate(route.lastCheckedAt)}</p>
 
                     <div className="route-directory-links">
                       <a href={route.routeUrl} rel="noopener noreferrer" target="_blank">

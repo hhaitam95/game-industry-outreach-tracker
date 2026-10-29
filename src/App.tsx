@@ -105,10 +105,7 @@ export default function App() {
         </header>
 
         <div className="page-content">
-          <div
-            hidden={!["settings", "applications"].includes(activeItem.id)}
-            data-testid="private-data-settings-host"
-          >
+          <div hidden={!["settings", "applications"].includes(activeItem.id)} data-testid="private-data-settings-host">
             <PrivateDataSettings
               activePageId={activeItem.id}
               onNavigate={setActivePageId}
@@ -117,9 +114,7 @@ export default function App() {
               onLeadPrefillConsumed={consumePendingLead}
             />
           </div>
-          {activeItem.id === "studios" ? (
-            <SpeculativeRouteDirectory onTrackRoute={handleTrackRoute} />
-          ) : null}
+          {activeItem.id === "studios" ? <SpeculativeRouteDirectory onTrackRoute={handleTrackRoute} /> : null}
         </div>
 
         <footer className="app-footer">
