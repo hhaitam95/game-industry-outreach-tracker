@@ -329,15 +329,15 @@ export default function PrivateDataSettings({
             </span>
           </div>
           <p>
-            Profile and tracker records are encrypted before being written to this browser's IndexedDB. The passphrase is
-            not saved, and decrypted records stay in memory only while unlocked.
+            Profile and tracker records are encrypted before being written to this browser's IndexedDB. The passphrase
+            is not saved, and decrypted records stay in memory only while unlocked.
           </p>
           <ul className="privacy-facts">
             <li>AES-256-GCM encryption with a passphrase-derived key (PBKDF2-SHA-256, 600,000 iterations).</li>
             <li>Only encrypted envelopes are stored locally; the key and decrypted workspace are not persisted.</li>
             <li>
-              Raw CV files and extracted resume text are not stored. Resume metadata is optional and contains no original
-              file contents.
+              Raw CV files and extracted resume text are not stored. Resume metadata is optional and contains no
+              original file contents.
             </li>
           </ul>
         </section>
@@ -353,7 +353,10 @@ export default function PrivateDataSettings({
               {unlocked ? "Unlocked in memory" : vaultExists ? "Locked" : "Not set up"}
             </span>
           </div>
-          <p>Personal drafts, context, follow-ups and application history are encrypted in this browser. Unlock the same local vault to access them; nothing is synced to a server.</p>
+          <p>
+            Personal drafts, context, follow-ups and application history are encrypted in this browser. Unlock the same
+            local vault to access them; nothing is synced to a server.
+          </p>
         </section>
       )}
 
@@ -410,189 +413,194 @@ export default function PrivateDataSettings({
         </section>
       ) : workspace ? (
         activePageId === "settings" ? (
-        <>
-          <section className="private-data-card">
-            <div className="section-heading">
-              <div>
-                <h3>Candidate profile</h3>
-                <p>Use dummy information first to validate storage and recovery before adding real data.</p>
+          <>
+            <section className="private-data-card">
+              <div className="section-heading">
+                <div>
+                  <h3>Candidate profile</h3>
+                  <p>Use dummy information first to validate storage and recovery before adding real data.</p>
+                </div>
+                <span className="record-count">Private record</span>
               </div>
-              <span className="record-count">Private record</span>
-            </div>
-            <form className="vault-form" onSubmit={handleSaveProfile}>
-              <label htmlFor="profile-display-name">Display name</label>
-              <input
-                id="profile-display-name"
-                maxLength={120}
-                onChange={(event) => updateProfile("displayName", event.target.value)}
-                value={workspace.profile.displayName}
-              />
-              <label htmlFor="profile-headline">Professional headline</label>
-              <input
-                id="profile-headline"
-                maxLength={180}
-                onChange={(event) => updateProfile("headline", event.target.value)}
-                value={workspace.profile.headline}
-              />
-              <label htmlFor="profile-summary">Professional summary</label>
-              <textarea
-                id="profile-summary"
-                maxLength={2000}
-                onChange={(event) => updateProfile("professionalSummary", event.target.value)}
-                rows={4}
-                value={workspace.profile.professionalSummary}
-              />
-              <label htmlFor="profile-target-roles">Target roles (one per line, up to 30)</label>
-              <textarea
-                id="profile-target-roles"
-                maxLength={3629}
-                onChange={(event) => updateProfileList("targetRoles", event.target.value)}
-                placeholder={"Developer Support Specialist\nTechnical Artist"}
-                rows={3}
-                value={workspace.profile.targetRoles.join("\n")}
-              />
-              <label htmlFor="profile-skills">Skills (one per line, up to 80)</label>
-              <textarea
-                id="profile-skills"
-                maxLength={8079}
-                onChange={(event) => updateProfileList("skills", event.target.value)}
-                placeholder={"Python\nREST APIs\nKibana"}
-                rows={4}
-                value={workspace.profile.skills.join("\n")}
-              />
-              <p className="resume-helper-text">
-                Resume comparison checks exact text mentions only. A missing mention does not mean you lack the skill.
-                Save the profile to encrypt these fields in this browser.
-              </p>
-              <div className="vault-actions">
-                <button className="button button-primary" disabled={busy || !dirty} type="submit">
-                  {busy ? "Saving…" : "Encrypt and save profile"}
+              <form className="vault-form" onSubmit={handleSaveProfile}>
+                <label htmlFor="profile-display-name">Display name</label>
+                <input
+                  id="profile-display-name"
+                  maxLength={120}
+                  onChange={(event) => updateProfile("displayName", event.target.value)}
+                  value={workspace.profile.displayName}
+                />
+                <label htmlFor="profile-headline">Professional headline</label>
+                <input
+                  id="profile-headline"
+                  maxLength={180}
+                  onChange={(event) => updateProfile("headline", event.target.value)}
+                  value={workspace.profile.headline}
+                />
+                <label htmlFor="profile-summary">Professional summary</label>
+                <textarea
+                  id="profile-summary"
+                  maxLength={2000}
+                  onChange={(event) => updateProfile("professionalSummary", event.target.value)}
+                  rows={4}
+                  value={workspace.profile.professionalSummary}
+                />
+                <label htmlFor="profile-target-roles">Target roles (one per line, up to 30)</label>
+                <textarea
+                  id="profile-target-roles"
+                  maxLength={3629}
+                  onChange={(event) => updateProfileList("targetRoles", event.target.value)}
+                  placeholder={"Developer Support Specialist\nTechnical Artist"}
+                  rows={3}
+                  value={workspace.profile.targetRoles.join("\n")}
+                />
+                <label htmlFor="profile-skills">Skills (one per line, up to 80)</label>
+                <textarea
+                  id="profile-skills"
+                  maxLength={8079}
+                  onChange={(event) => updateProfileList("skills", event.target.value)}
+                  placeholder={"Python\nREST APIs\nKibana"}
+                  rows={4}
+                  value={workspace.profile.skills.join("\n")}
+                />
+                <p className="resume-helper-text">
+                  Resume comparison checks exact text mentions only. A missing mention does not mean you lack the skill.
+                  Save the profile to encrypt these fields in this browser.
+                </p>
+                <div className="vault-actions">
+                  <button className="button button-primary" disabled={busy || !dirty} type="submit">
+                    {busy ? "Saving…" : "Encrypt and save profile"}
+                  </button>
+                  <span className="muted-note">{dirty ? "Unsaved edits" : "No unsaved edits"}</span>
+                </div>
+              </form>
+            </section>
+
+            <section className="private-data-card">
+              <div className="section-heading">
+                <div>
+                  <h3>Applications</h3>
+                  <p>Add a dummy record to test local saving, unlock, and backup restoration.</p>
+                </div>
+                <span className="record-count">{workspace.applications.length} record(s)</span>
+              </div>
+              <form className="vault-form" onSubmit={handleAddApplication}>
+                <label htmlFor="application-studio">Studio</label>
+                <input
+                  autoComplete="off"
+                  id="application-studio"
+                  maxLength={180}
+                  onChange={(event) => setStudioName(event.target.value)}
+                  required
+                  value={studioName}
+                />
+                <label htmlFor="application-role">Role title</label>
+                <input
+                  autoComplete="off"
+                  id="application-role"
+                  maxLength={180}
+                  onChange={(event) => setRoleTitle(event.target.value)}
+                  required
+                  value={roleTitle}
+                />
+                <label htmlFor="application-url">Official application URL (optional)</label>
+                <input
+                  autoComplete="url"
+                  id="application-url"
+                  maxLength={2000}
+                  onChange={(event) => setApplicationUrl(event.target.value)}
+                  placeholder="https://…"
+                  type="url"
+                  value={applicationUrl}
+                />
+                <button
+                  className="button button-primary"
+                  disabled={busy || !studioName.trim() || !roleTitle.trim()}
+                  type="submit"
+                >
+                  Encrypt and add application
                 </button>
-                <span className="muted-note">{dirty ? "Unsaved edits" : "No unsaved edits"}</span>
-              </div>
-            </form>
-          </section>
+              </form>
+              {workspace.applications.length ? (
+                <div className="private-record-list" aria-label="Saved applications">
+                  {workspace.applications.map((application) => (
+                    <article className="private-record-row" key={application.id}>
+                      <div>
+                        <h4>{application.studioName}</h4>
+                        <p>{application.roleTitle}</p>
+                        {application.applicationUrl ? (
+                          <p className="private-record-url">{application.applicationUrl}</p>
+                        ) : null}
+                      </div>
+                      <span className="record-status">{application.status}</span>
+                    </article>
+                  ))}
+                </div>
+              ) : (
+                <p className="empty-record-note">No application records yet.</p>
+              )}
+            </section>
 
-          <section className="private-data-card">
-            <div className="section-heading">
-              <div>
-                <h3>Applications</h3>
-                <p>Add a dummy record to test local saving, unlock, and backup restoration.</p>
-              </div>
-              <span className="record-count">{workspace.applications.length} record(s)</span>
-            </div>
-            <form className="vault-form" onSubmit={handleAddApplication}>
-              <label htmlFor="application-studio">Studio</label>
-              <input
-                autoComplete="off"
-                id="application-studio"
-                maxLength={180}
-                onChange={(event) => setStudioName(event.target.value)}
-                required
-                value={studioName}
-              />
-              <label htmlFor="application-role">Role title</label>
-              <input
-                autoComplete="off"
-                id="application-role"
-                maxLength={180}
-                onChange={(event) => setRoleTitle(event.target.value)}
-                required
-                value={roleTitle}
-              />
-              <label htmlFor="application-url">Official application URL (optional)</label>
-              <input
-                autoComplete="url"
-                id="application-url"
-                maxLength={2000}
-                onChange={(event) => setApplicationUrl(event.target.value)}
-                placeholder="https://…"
-                type="url"
-                value={applicationUrl}
-              />
-              <button
-                className="button button-primary"
-                disabled={busy || !studioName.trim() || !roleTitle.trim()}
-                type="submit"
-              >
-                Encrypt and add application
-              </button>
-            </form>
-            {workspace.applications.length ? (
-              <div className="private-record-list" aria-label="Saved applications">
-                {workspace.applications.map((application) => (
-                  <article className="private-record-row" key={application.id}>
-                    <div>
-                      <h4>{application.studioName}</h4>
-                      <p>{application.roleTitle}</p>
-                      {application.applicationUrl ? (
-                        <p className="private-record-url">{application.applicationUrl}</p>
-                      ) : null}
-                    </div>
-                    <span className="record-status">{application.status}</span>
-                  </article>
-                ))}
-              </div>
-            ) : (
-              <p className="empty-record-note">No application records yet.</p>
-            )}
-          </section>
-
-          <section className="private-data-card">
-            <h3>Encrypted backup and recovery</h3>
-            <p>
-              Export before changing browsers or devices. Importing a backup replaces the current local workspace after
-              confirmation.
-            </p>
-            <div className="vault-actions vault-actions-wrap">
-              <button
-                className="button button-primary"
-                disabled={busy}
-                onClick={() => void handleExport()}
-                type="button"
-              >
-                Download encrypted backup
-              </button>
-              <button className="button button-secondary" disabled={busy} onClick={handleLock} type="button">
-                Lock workspace
-              </button>
-              <button
-                className="button button-danger"
-                disabled={busy}
-                onClick={() => void handleDelete()}
-                type="button"
-              >
-                Delete local vault
-              </button>
-            </div>
-            <div className="vault-form import-form">
-              <label htmlFor="backup-passphrase">Backup passphrase</label>
-              <input
-                autoComplete="off"
-                id="backup-passphrase"
-                onChange={(event) => setBackupPassphrase(event.target.value)}
-                type="password"
-                value={backupPassphrase}
-              />
-              <label htmlFor="backup-file">Encrypted backup file (maximum 5 MiB)</label>
-              <input
-                accept="application/json,.json"
-                id="backup-file"
-                onChange={(event) => void handleImport(event)}
-                type="file"
-              />
-              <p className="muted-note">
-                The imported backup's passphrase becomes the local vault passphrase. The file is validated and decrypted
-                before replacing the current vault.
+            <section className="private-data-card">
+              <h3>Encrypted backup and recovery</h3>
+              <p>
+                Export before changing browsers or devices. Importing a backup replaces the current local workspace
+                after confirmation.
               </p>
-            </div>
-          </section>
-        </>
+              <div className="vault-actions vault-actions-wrap">
+                <button
+                  className="button button-primary"
+                  disabled={busy}
+                  onClick={() => void handleExport()}
+                  type="button"
+                >
+                  Download encrypted backup
+                </button>
+                <button className="button button-secondary" disabled={busy} onClick={handleLock} type="button">
+                  Lock workspace
+                </button>
+                <button
+                  className="button button-danger"
+                  disabled={busy}
+                  onClick={() => void handleDelete()}
+                  type="button"
+                >
+                  Delete local vault
+                </button>
+              </div>
+              <div className="vault-form import-form">
+                <label htmlFor="backup-passphrase">Backup passphrase</label>
+                <input
+                  autoComplete="off"
+                  id="backup-passphrase"
+                  onChange={(event) => setBackupPassphrase(event.target.value)}
+                  type="password"
+                  value={backupPassphrase}
+                />
+                <label htmlFor="backup-file">Encrypted backup file (maximum 5 MiB)</label>
+                <input
+                  accept="application/json,.json"
+                  id="backup-file"
+                  onChange={(event) => void handleImport(event)}
+                  type="file"
+                />
+                <p className="muted-note">
+                  The imported backup's passphrase becomes the local vault passphrase. The file is validated and
+                  decrypted before replacing the current vault.
+                </p>
+              </div>
+            </section>
+          </>
         ) : dirty ? (
           <section className="private-data-card">
             <h3>Save or discard your Settings changes first</h3>
-            <p>Outreach uses only the saved candidate profile. There are unsaved edits in Settings, so this workspace is paused until you save them or lock and discard them.</p>
-            <button className="button button-primary" type="button" onClick={() => onNavigate("settings")}>Return to Settings</button>
+            <p>
+              Outreach uses only the saved candidate profile. There are unsaved edits in Settings, so this workspace is
+              paused until you save them or lock and discard them.
+            </p>
+            <button className="button button-primary" type="button" onClick={() => onNavigate("settings")}>
+              Return to Settings
+            </button>
           </section>
         ) : activePageId === "outreach" ? (
           <OutreachWorkspace workspace={workspace} onSaveWorkspace={persistWorkspace} />
@@ -602,14 +610,14 @@ export default function PrivateDataSettings({
       ) : null}
 
       {activePageId === "settings" ? (
-      <section className="private-data-card private-data-caveats">
-        <h3>Before using real personal data</h3>
-        <p>
-          This browser-local encryption is not protection against compromised browser software, malicious extensions, or
-          malicious site code while unlocked. Data is per browser/device; clearing browser storage can remove it. A lost
-          passphrase cannot be recovered. Keep original resumes outside the app. No data is synced to a server.
-        </p>
-      </section>
+        <section className="private-data-card private-data-caveats">
+          <h3>Before using real personal data</h3>
+          <p>
+            This browser-local encryption is not protection against compromised browser software, malicious extensions,
+            or malicious site code while unlocked. Data is per browser/device; clearing browser storage can remove it. A
+            lost passphrase cannot be recovered. Keep original resumes outside the app. No data is synced to a server.
+          </p>
+        </section>
       ) : null}
     </div>
   );
