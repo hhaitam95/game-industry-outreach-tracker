@@ -948,10 +948,7 @@ async function main() {
     encryptedBackupPath = await waitForFile(downloadDir);
     const backup = readFileSync(encryptedBackupPath, "utf8");
     validateEncryptedEnvelope(backup);
-    for (const marker of [
-      "BROWSER_TEST_PROFILE_CANARY",
-      "BROWSER_TEST_STUDIO_CANARY",
-    ]) {
+    for (const marker of ["BROWSER_TEST_PROFILE_CANARY", "BROWSER_TEST_STUDIO_CANARY"]) {
       if (backup.includes(marker)) throw new Error("plaintext-found-in-backup");
     }
   });
