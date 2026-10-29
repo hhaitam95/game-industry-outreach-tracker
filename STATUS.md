@@ -1,33 +1,24 @@
 # Project Status
 
 **Last updated:** 2026-10-29  
-**Current phase:** Phase 8 public Pages release — implementation is green on the verified code head, while external hosting setup/publication remains pending.  
+**Current phase:** Phase 8 same-repository GitHub Pages release — ADR-055 supersedes the separate-repository proposal; the revised workflow and docs require exact-head validation. No site is deployed.  
 **Working branch:** `feat/phase8-pages-privacy`  
-**Current PR:** [#9 — Phase 8: gated public Pages release and privacy checks](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/9). Do not merge until PRs #7 and #8 are owner-merged and this branch has been reconciled with the updated main.  
-**Verified implementation head:** `9b37f8061d2f1813eea94c6eb5b305afabf2d912`. The next commit is documentation-only and does not change executable code.  
-**Base/main:** `d56637e921fdb2e23f67e15aa3a518d6477c6842` (unchanged; no direct changes to main).
+**Current PR:** [#9 — Phase 8: gated public Pages release and privacy checks](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/9). Do not merge until prerequisite PRs #7 and #8 are owner-merged and this branch is reconciled with updated `main`.  
+**Previously verified code:** The earlier checks covered the superseded cross-repository workflow and are historical only; they do not validate the ADR-055 change. Consult the current PR checks for the exact reviewed head.  
+**Base/main:** `main` has not been changed by this implementation branch.
 
 ## Phase 8 implementation and acceptance status
 
-- **Design first:** ADR-054 was committed before implementation in [`3c7dc27f`](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/3c7dc27f1b1274543fbb0c4af5c12ee7a9b9d85e).
-- **Implementation:** manual-only Pages release workflow with default `validate-only`, explicit `publish` mode, schema-validated snapshot sync for publish mode only, a generated-artifact privacy checker, synthetic failure-path tests, CSP/local-asset checks, and a runbook. Target token checkout occurs after all dependency/build/privacy checks.
-- **Frontend CI:** passed [run 40874413179](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40874413179); the parallel push run also passed [40874405351](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40874405351).
-- **Browser acceptance:** passed [run 40874412886](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40874412886).
-- **Discovery fixtures:** passed [run 40874412749](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40874412749); the parallel push run also passed [40874405380](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40874405380).
-- **Verification scope:** frontend format, lint, typecheck, unit tests, npm audit, production build, existing repository/privacy check, new Pages artifact check and repository-path asset smoke test all passed on the verified code head above. Browser acceptance and discovery tests also passed.
-- **External setup still pending:** `hhaitam95/game-industry-outreach-tracker-site` does not exist yet. The connected GitHub tools cannot create the repository, change Pages settings, or add Actions secrets. The owner must create the public target, configure Pages for `main` root, create an expiring fine-grained target-only Contents read/write token, and add it to the source repo as `PUBLIC_PAGES_TOKEN`.
-- **Not deployed:** no publish workflow was dispatched and no public site was deployed. The workflow has no schedule, push trigger, or discovery-completion trigger. Do not select `publish` until the target repository and secret exist and PRs #7 and #8 are merged by the owner.
-- **Phase 8 exit decision:** code implementation and CI acceptance are complete; production deployment/privacy verification are not complete until the owner-controlled setup and first explicit publication pass.
+- **Design decision:** ADR-055 is recorded and supersedes ADR-054's separate output-only repository choice.
+- **Selected implementation:** The manual-only release workflow defaults to `validate-only`; only an explicit `publish` selection from `main` can upload the checked Vite `dist/` artifact and deploy it using GitHub Pages Actions. No cross-repository token or second repository is used.
+- **Privacy boundary:** The existing public-data schema, repository privacy guard, generated-artifact checker, CSP/local-asset checks, and same-repository base-path smoke test remain required. Private profile/CV/draft/application data stays browser-local.
+- **Validation status:** Exact-head Frontend CI, browser acceptance, and discovery fixtures must be rerun for the revised workflow and documentation. Do not reuse the prior cross-repository implementation's green status as acceptance for this revision.
+- **One-time external setup:** The only required GitHub setting is this repository's Settings → Pages → Source = GitHub Actions. The connected tools cannot change Pages settings or dispatch a workflow. No target repository or deployment secret is required.
+- **Not deployed:** No publish workflow has been dispatched and no site has been verified live. The workflow has no schedule, push trigger, or discovery-completion trigger.
+- **Merge order:** PRs [#7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7) and [#8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8) remain owner-controlled prerequisites. Reconcile Phase 8 with updated `main` and rerun exact-head checks before the owner merges PR #9.
+- **Exit criteria:** Pages source is configured; exact-head CI and browser acceptance pass; an explicit publish from `main` succeeds; the canonical URL/assets and public data are reviewed. Until then, implementation and deployment acceptance remain pending.
 
-**Open earlier PRs:** PR [#7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7) remains draft/unmerged; PR [#8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8) remains open/unmerged. Owner keeps merge control. After those PRs are merged, reconcile this branch with the updated `main` and re-run exact-head checks before merging PR #9.
-
-## Engineering standards for remaining work
-
-- Follow AGENTS.md and IMPLEMENTATION_PLAN.md: publish a design note and definition of done before code; keep pure domain logic separate from I/O/UI; test success and failure paths; update docs with implementation.
-- This file is the single source for volatile branch/review/run details. Other docs should point here instead of duplicating moving SHAs or run IDs.
-- Keep each delivery slice in its own branch and draft PR, stacked in order. Do not merge any PR as part of implementation.
-- Current source repository visibility is public. Never commit private candidate records, resumes, drafts, applications, contact details, credentials, or secrets.
-- Avoid using CI as a formatter/linter REPL. When format checking fails, use the formatter-diff diagnostic step added immediately after it, then make the exact formatted fixes in one commit. At most two CI cycles per unit; after that, take the simplest route and log it in DECISIONS.md.
+**Status policy:** This file is the sole source for volatile branch/review state and verification evidence. Other documents should point here rather than duplicate changing SHAs or run IDs.
 
 ## Phase 6a acceptance status
 

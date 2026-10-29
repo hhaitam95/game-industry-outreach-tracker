@@ -32,7 +32,7 @@ The binding implementation rules are in [AGENTS.md](AGENTS.md), with the policy 
 
 ### Scope
 - Document approved requirements and living-document policy.
-- Document GitHub Pages constraints, public deployment split, Actions monitoring, change detection and CV workflow.
+- Document GitHub Pages constraints, same-repository Pages artifact deployment, Actions monitoring, change detection and CV workflow.
 - Add resume guidance sources and synthesized guidelines.
 - Establish repository hygiene, AI-agent instructions, decision records, and handoff.
 - Keep source code and non-sensitive project context in the source repository; because it is public, keep all personal context out of it.
@@ -194,28 +194,28 @@ These features require the candidate profile and an active browser vault session
 
 ## Phase 8 — Public Pages deployment and privacy review
 
-**Selected architecture:** Separate output-only public repository, `hhaitam95/game-industry-outreach-tracker-site`. The source repository is already public; this phase does not change repository visibility.
+**Selected architecture:** Same-repository GitHub Pages artifact deployment, superseding ADR-054 with ADR-055. The source repository is already public; this phase does not change repository visibility.
 
 ### Scope
-- Keep source code, tests, private-data logic, and project docs in this repository; publish only Vite `dist/` output after the existing strict public opportunity schema has validated the bundled snapshot.
-- Add a manual-only publication workflow. Its default run validates/builds without publication; only an explicit publish choice can enter the cross-repository publish job.
+- Keep source code, tests, private-data logic, documentation, schemas and workflow in this repository; publish only the Vite `dist/` output after the public opportunity snapshot has passed the existing shared schema validator.
+- Add a manual-only GitHub Pages Actions workflow. Its default run validates/builds without publication; only the explicit `publish` choice can upload a Pages artifact and deploy. Publish mode is restricted to `main`.
 - During an explicitly requested publication run, validate the existing `discovery-state` snapshot via the shared schema before building. Never dispatch discovery or start a schedule from the Pages workflow.
-- Use a target-scoped `PUBLIC_PAGES_TOKEN` Actions secret, `contents: read` for the source workflow's `GITHUB_TOKEN`, and reviewed SHA-pinned actions. Never pass credentials to build-time variables or static artifacts.
-- Validate generated assets and repository subpath; retain the CSP, local assets, and absence of analytics/CDN scripts.
+- Use a read-only build job and a separate deployment job with only `pages: write` and `id-token: write`. Use reviewed SHA-pinned actions. Same-repository deployment requires no personal access token or deploy secret.
+- Validate generated assets, repository subpath and static-artifact privacy boundary; retain CSP, local assets, and the absence of analytics/CDN scripts.
 - Test public-data allowlist, artifact boundary, encrypted browser-local storage, encrypted export/import, restore, and the browser acceptance flow.
 - Document that Pages content is public and browser data is per-device, not cloud sync.
 
 ### Definition of done
-- ADR-054 and the hosting/data-flow decision are documented before implementation.
-- The manual-only workflow passes frontend CI, browser acceptance, discovery fixtures, output-boundary checks, and a repository-subpath production build on one exact commit.
-- The published repository contains only built static files plus the validated public snapshot; no candidate profile, CV text, private drafts, application history, contact notes, credentials, or tokens are present.
-- The output-only target repository exists, uses GitHub Pages from its `main` branch root, and is writeable only through the narrowly scoped secret.
-- A manually selected publication run succeeds, the site and its assets load at the expected public URL, and privacy/recovery checks pass.
-- There is no workflow schedule or trigger from discovery completion; no publication occurs in validation-only mode.
+- ADR-055 records the hosting decision, boundaries, failure modes, test plan, rollback, and acceptance criteria before the implementation change.
+- The manual-only workflow passes frontend CI, browser acceptance, discovery fixtures, output-boundary checks, and a same-repository base-path production build on the exact reviewed head.
+- Only the validated `dist/` artifact is submitted to Pages. The published artifact contains no candidate profile, CV text, private drafts, application history, contact notes, credentials, or tokens.
+- The owner configures this repository's GitHub Pages source as GitHub Actions.
+- A manually selected publication run from `main` succeeds, the site and local assets load at `https://hhaitam95.github.io/game-industry-outreach-tracker/`, and the public content is reviewed.
+- There is no workflow schedule, push trigger, or trigger from discovery completion; no artifact upload or deployment occurs in validation-only mode.
 - The last known good publication and rollback procedure are documented.
 
 ### External setup dependency
-The connected GitHub tools used for implementation do not expose repository creation, Actions-secret writes, or Pages-settings configuration. Those three target setup actions must be completed by the owner through GitHub settings before a real publication can run. Until then, report Phase 8 as implementation-ready but not deployed.
+The connected GitHub tools used for implementation do not expose GitHub Pages settings or a workflow-dispatch action. The owner must set this repository's Settings → Pages → Source to GitHub Actions before the first live publish; no repository creation or publishing secret is needed. The site must not be described as deployed until a successful publication and URL/privacy check have actually completed.
 
 ## Phase 9 — Optional improvements
 

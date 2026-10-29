@@ -103,10 +103,10 @@ Ask for clarification when a decision is consequential and cannot safely be infe
 
 - GitHub Pages serves static frontend assets only. Do not assume server-side Python, private authentication, or backend storage is available.
 - The public Pages deployment may contain only an allowlisted public dataset: sourced studio facts, public job details, official application routes and public status/change summaries.
-- This source repository is public. In Phase 8, decide explicitly whether to use it or a separate repository for Pages; do not deploy or publish without a documented privacy review and owner approval.
+- This source repository is public. ADR-055 selects same-repository GitHub Pages deployment through a Pages artifact; do not create a separate output repository or cross-repository publishing token. Publish only validated static output and allowlisted public data. The owner must configure Settings → Pages → Source = GitHub Actions before first publication.
 - Polling only monitors the known studio registry; it does not discover every studio worldwide. Keep discovery manual-dispatch-only until a separate decision approves a schedule after source coverage is reviewed.
 - Scheduled workflows run from the default branch and may be delayed. Avoid top-of-hour schedules and report the latest run/error state.
-- Use least-privilege permissions; cross-repository publishing credentials belong only in GitHub Actions secrets with narrow scope and expiry.
+- Use least-privilege permissions: the Pages build job is read-only, while only the dedicated deploy job receives `pages: write` and `id-token: write`. Cross-repository publishing credentials, if separately approved in a future design, belong only in GitHub Actions secrets with narrow scope and expiry.
 - Do not log tokens, inject them into frontend build variables, or ship them in JS, HTML, JSON, source maps, or artifacts.
 - Avoid no-op commits and workflow loops.
 - A timeout, block, parse failure, or empty error page must not mark an opportunity as closed. Keep the last known record and flag source unavailability/manual review.
