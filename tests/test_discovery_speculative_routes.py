@@ -23,11 +23,16 @@ class SpeculativeRouteContractTests(unittest.TestCase):
         cls.curated = json.loads(cls.curated_path.read_text(encoding="utf-8"))
         cls.sample = json.loads(cls.sample_path.read_text(encoding="utf-8"))
 
-    def test_shared_schema_accepts_empty_curated_data_and_synthetic_sample(self):
+    def test_shared_schema_accepts_curated_routes_and_synthetic_sample(self):
         curated = load_speculative_route_directory(self.curated_path)
         sample = load_speculative_route_directory(self.sample_path)
         self.assertEqual(curated["schemaVersion"], 1)
-        self.assertEqual(curated["routes"], [])
+        self.assertGreaterEqual(len(curated["routes"]), 10)
+        self.assertIn("Supermassive Games", {studio["name"] for studio in curated["studios"]})
+        self.assertIn("Kinetic Games", {studio["name"] for studio in curated["studios"]})
+        self.assertTrue(all(route["status"] == "verified" for route in curated["routes"]))
+        self.assertTrue(all(route["routeUrl"].startswith("https://") for route in curated["routes"]))
+        self.assertEqual(len({route["id"] for route in curated["routes"]}), len(curated["routes"]))
         self.assertEqual(len(sample["routes"]), 1)
         self.assertEqual(sample["routes"][0]["status"], "candidate")
         self.assertIn("Synthetic", sample["studios"][0]["name"])

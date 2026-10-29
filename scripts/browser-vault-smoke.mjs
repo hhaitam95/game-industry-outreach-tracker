@@ -401,7 +401,7 @@ async function main() {
   await client.send("Runtime.enable");
   await client.send("Page.setDownloadBehavior", { behavior: "allow", downloadPath: downloadDir });
   await client.send("Page.navigate", { url });
-  await client.waitForText("Your workspace");
+  await client.waitForText("Speculative applications");
   const cspDirectives = await client.evaluate(`(() => {
     const policy = document.querySelector('meta[http-equiv="Content-Security-Policy"]')?.content ?? "";
     return {
@@ -420,62 +420,43 @@ async function main() {
   }
 
   if (process.env.EXPECT_SPECULATIVE_DIRECTORY === "1") {
-    await step("Verify speculative-application directory and official-site links", async () => {
+    await step("Verify the curated speculative application list and tracking entry point", async () => {
       await client.clickButton("Speculative applications");
-      await client.waitForText("Route directory");
-      await client.waitForText("Synthetic sample data");
+      await client.waitForText("Open application page");
       const directoryState = await client.evaluate(
-        "(() => ({ search: Boolean(document.querySelector('#route-search')), statusFilter: Boolean(document.querySelector('#route-status-filter')), sort: Boolean(document.querySelector('#route-sort')), routeCards: document.querySelectorAll('[data-testid=speculative-route-card]').length, markerControlsDisabled: [...document.querySelectorAll('[data-testid=route-marker-select]')].every((control) => control.disabled), sampleNotice: document.querySelector('[data-testid=route-directory-sample-notice]')?.innerText ?? '' }))()",
+        "(() => { const routeLinks = [...document.querySelectorAll('.route-directory-links a')]; return { search: Boolean(document.querySelector('#route-search')), routeCards: document.querySelectorAll('[data-testid=speculative-route-card]').length, trackButtons: document.querySelectorAll('[data-testid=track-application-route]').length, officialLinks: routeLinks.length > 0 && routeLinks.every((link) => link.href.startsWith('https://')), showsSupermassive: document.body.innerText.includes('Supermassive Games'), sampleNotice: Boolean(document.querySelector('[data-testid=route-directory-sample-notice]')), studioCards: document.querySelectorAll('.studio-card').length }; })()",
       );
       if (
         !directoryState ||
         !directoryState.search ||
-        !directoryState.statusFilter ||
-        !directoryState.sort ||
-        directoryState.routeCards < 1 ||
-        !directoryState.markerControlsDisabled ||
-        !directoryState.sampleNotice.includes("not real studios or verified")
+        directoryState.routeCards < 10 ||
+        directoryState.trackButtons < 10 ||
+        !directoryState.officialLinks ||
+        !directoryState.showsSupermassive ||
+        directoryState.sampleNotice ||
+        directoryState.studioCards !== 0
       ) {
-        throw new Error("speculative-route-directory-trust-boundary-failed");
-      }
-      await client.waitForText("Studio research, before route verification");
-      const summary = await client.evaluate(
-        "(() => { const cards = [...document.querySelectorAll('.studio-card')]; const actions = [...document.querySelectorAll('.studio-card .studio-actions a')]; const allLinks = [...document.querySelectorAll('.studio-card a')]; const body = document.body.innerText; const legacyCopy = /Opportunity explorer|roles last seen|No roles observed|Official careers and vacancies/i.test(body); return { cardCount: cards.length, hasFourStudioNames: ['CD PROJEKT RED', 'Naughty Dog', 'Santa Monica Studio', 'Riot Games'].every((name) => body.includes(name)), officialWebsiteCount: actions.filter((link) => link.innerText.includes('Official website')).length, allLinksUseHttps: allLinks.length >= 8 && allLinks.every((link) => link.href.startsWith('https://')), legacyCopy, verifiedRouteBadges: document.querySelectorAll('.route-status').length, opportunityRows: document.querySelectorAll('[data-testid=opportunity-row]').length }; })()",
-      );
-      if (
-        !summary ||
-        summary.cardCount !== 4 ||
-        !summary.hasFourStudioNames ||
-        summary.officialWebsiteCount !== 4 ||
-        !summary.allLinksUseHttps ||
-        summary.legacyCopy ||
-        summary.verifiedRouteBadges !== 0 ||
-        summary.opportunityRows !== 0
-      ) {
-        throw new Error("speculative-directory-default-state-failed");
+        throw new Error("speculative-directory-core-workflow-failed");
       }
     });
   }
 
   if (process.env.EXPECT_SPECULATIVE_DIRECTORY === "1") {
-    await step("Verify legacy role explorer and Overview count are hidden by default", async () => {
-      const studioState = await client.evaluate(
-        "(() => ({ body: document.body.innerText, rows: document.querySelectorAll('[data-testid=opportunity-row]').length }))()",
+    await step("Verify the app exposes only the two core workflows and settings", async () => {
+      const state = await client.evaluate(
+        "(() => ({ navLabels: [...document.querySelectorAll('nav[aria-label=\\"Main navigation\\"] button')].map((button) => button.innerText.trim()), body: document.body.innerText, studioCards: document.querySelectorAll('.studio-card').length, opportunityRows: document.querySelectorAll('[data-testid=opportunity-row]').length }))()",
       );
+      const expectedNavigation = ["Speculative applications", "Applications", "Settings"];
       if (
-        !studioState ||
-        /Opportunity explorer|roles last seen|No roles observed|Official careers and vacancies/i.test(
-          studioState.body,
-        ) ||
-        studioState.rows > 0
+        !state ||
+        state.navLabels.length !== expectedNavigation.length ||
+        !expectedNavigation.every((label) => state.navLabels.includes(label)) ||
+        ["Overview", "Resume lab", "Outreach"].some((label) => state.navLabels.includes(label)) ||
+        state.studioCards !== 0 ||
+        state.opportunityRows !== 0 ||
+        /Opportunity explorer|roles last seen|No roles observed|Official careers and vacancies/i.test(state.body)
       ) {
-        throw new Error("legacy-role-explorer-visible-with-feature-disabled");
-      }
-      await client.clickButton("Overview");
-      await client.waitForText("The big picture");
-      const overviewText = await client.evaluate("document.querySelector('.page-content')?.innerText ?? ''");
-      if (/Opportunities|role links last seen|roles last seen|vacancies available/i.test(overviewText)) {
-        throw new Error("legacy-role-count-visible-with-feature-disabled");
+        throw new Error("speculative-directory-scope-failed");
       }
     });
   }

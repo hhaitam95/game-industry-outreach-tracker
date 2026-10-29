@@ -26,14 +26,18 @@ test("shared speculative-route schema accepts the explicit synthetic sample", ()
   assert.deepEqual(SPECULATIVE_ROUTE_STATUSES, ["candidate", "verified", "needs-review", "stale"]);
 });
 
-test("empty curated data selects the sample and reports its origin explicitly", () => {
+test("the curated directory contains verified official speculative-application routes", () => {
   const result = loadSpeculativeRouteDirectory(curatedDirectory, sampleDirectory);
   assert.equal(result.error, null);
-  assert.equal(result.origin, "sample");
-  assert.equal(result.directory.routes.length, 1);
-  assert.equal(SPECULATIVE_ROUTE_DIRECTORY_ORIGIN, "sample");
+  assert.equal(result.origin, "curated");
+  assert.ok(result.directory.routes.length >= 10);
+  assert.ok(result.directory.studios.some((studio) => studio.name === "Supermassive Games"));
+  assert.ok(result.directory.studios.some((studio) => studio.name === "Kinetic Games"));
+  assert.ok(result.directory.routes.every((route) => route.status === "verified"));
+  assert.ok(result.directory.routes.every((route) => route.routeUrl.startsWith("https://")));
+  assert.equal(SPECULATIVE_ROUTE_DIRECTORY_ORIGIN, "curated");
   assert.equal(SPECULATIVE_ROUTE_DIRECTORY_ERROR, null);
-  assert.equal(SPECULATIVE_ROUTE_DIRECTORY.routes[0].status, "candidate");
+  assert.ok(SPECULATIVE_ROUTE_DIRECTORY.routes.length >= 10);
 });
 
 test("a populated valid curated directory takes precedence over sample data", () => {

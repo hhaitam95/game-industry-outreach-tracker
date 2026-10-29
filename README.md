@@ -8,22 +8,26 @@ A route is not verified merely because a studio has a careers page. It must be r
 
 ## Current product direction
 
-- **Worldwide directory:** find game studios with official, evidence-backed speculative-application routes. A smaller verified set is preferable to a larger uncertain one.
-- **Evidence and freshness:** preserve the official URL, route type, evidence category, a short original paraphrase, content hash and check dates; distinguish candidates from human-verified routes, routes needing review, and routes that have become stale.
-- **Four route types:** dedicated application page, permanent speculative/open/general/unsolicited ATS posting, official email invitation (store only the page URL, never the email address), and talent-community signup shown separately.
-- **Strict exclusions:** ordinary job postings, generic careers pages, timed internship/graduate schemes, agencies and aggregator-only claims are not verified speculative routes.
-- **Manual applications:** the owner researches, adapts the resume/introduction and submits personally. The application never sends email or submits an application automatically, and never promises a response.
-- **Role explorer retained but disabled:** legacy standard-role components, data and tests remain for later reuse. One config module defines `FEATURES.roleExplorer = false`; its UI, Overview counts, and associated copy are hidden by default.
-- **Honest current UI:** the existing starter studio profiles are research context, not verified speculative-application routes. A generic careers page is not presented as proof of acceptance. The route schema, curated records and directory filters arrive in later milestones.
-- **Supporting tools:** the browser-local encrypted tracker, resume processing, draft preparation and application follow-up remain supporting workflows; private records are never committed or uploaded.
-- **Discovery automation:** GitHub Actions remains manual-dispatch-only. No schedule, live scan, or deployment runs automatically as part of these milestones.
+The tool has only two jobs:
+
+1. **Find speculative-application routes worldwide.** List official studio pages or the studio's own application-system pages that invite candidates to apply without a specific advertised vacancy. A generic careers page is not enough.
+2. **Track applications.** Open the official route, apply manually, then add it to the existing private tracker and update its status yourself.
+
+The directory currently starts with 12 official routes checked on 29 October 2026. This is a first researched batch, not a claim of complete worldwide coverage. Broadening discovery is the next priority.
+
+The page shows each studio, the route, a short explanation of why it qualifies, known eligibility restrictions and the latest check date. Search is deliberately simple. The **Add to application tracker** action pre-fills the existing tracker; it does not send an email or submit an application.
+
+Only three sections are exposed in the primary navigation: **Speculative applications**, **Applications**, and **Settings**. Resume tools, outreach drafting, advertised-role matching, and the separate starter studio catalog are deferred rather than part of the current product.
+
+> **Privacy:** Personal application records are held in the browser's encrypted local workspace. This public repository must never contain private candidate records, resumes, contact details, recruiter correspondence, credentials, or secrets. [STATUS.md](STATUS.md) is the current scope and verification record.
 
 ## Current technical baseline
 
 - React, TypeScript and Vite for a static GitHub Pages interface.
-- Deterministic Node tests, ESLint, Prettier, TypeScript checks, dependency audit, artifact/privacy gates and browser-based encrypted-vault acceptance in GitHub Actions.
-- The existing discovery pipeline will be reused for conservative official-route verification. It must respect robots.txt, rate limits and access controls; a blocked or changed source becomes `needs-review`, never silently deleted.
-- GitHub Pages publishes only a validated static artifact from this repository. The existing `scripts/check-pages-artifact.mjs` and its tests are retained for M7.
+- A validated JSON directory of official routes. Each route includes an official URL, evidence summary, current status, country restrictions where known, and check date.
+- The application tracker reuses the existing encrypted browser-local workspace. Tracking a route only pre-fills a record; the user saves it and submits externally.
+- Format, lint, typecheck, unit-test, dependency-audit, browser-acceptance and static-artifact/privacy checks run in GitHub Actions.
+- **Not implemented yet:** a truly broad automated web-discovery crawler. The current 12 routes are researched and checked directly. Next discovery work must find candidates across search engines and official sites, deduplicate them, and verify qualifying evidence before adding them to the directory. No crawler can promise literally every internet page.
 
 ## Hosting and privacy model
 

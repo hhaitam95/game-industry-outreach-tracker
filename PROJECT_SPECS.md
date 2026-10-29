@@ -6,68 +6,38 @@
 
 ## 1. Product story
 
-This project is a worldwide directory of video-game companies that explicitly accept speculative applications. A speculative application is submitted without applying to a specific advertised job, has no deadline tied to a particular vacancy, and gives an applicant a route to introduce themselves even when they do not fit current listings. The owner researches, prepares and submits each application manually.
+This is a worldwide directory of video-game studios that explicitly invite speculative, unsolicited, open, or general applications when no specific advertised vacancy fits. The user manually opens the official route, submits the application, and records progress in the application's tracker.
 
-The directory is evidence-driven, not a general job board. A verified route must be fetched from the studio’s own website or its own applicant-tracking page, remain reachable, explicitly invite applications without a specific vacancy, and show no closing date/deadline. Search results and aggregators are discovery hints only.
+The product has two responsibilities only:
 
-## 2. Primary user and success criteria
+1. Find and verify official speculative-application routes, not advertised jobs or generic studio records.
+2. Track the user's manual application progress in the existing private application tracker.
 
-The initial product is for one user who wants to approach studios worldwide through credible speculative applications.
+## 2. Inclusion rules and evidence
 
-Success means making the evidence-backed route directory useful, broad, fresh, honest about uncertainty, and straightforward to filter and track. The M4 research target is 150 verified routes across at least 15 countries; a smaller verified set with documented reasons is preferable to padding the count. A response or job offer is never promised or used as a technical acceptance criterion.
+A qualifying route is an official studio page or the studio's own applicant-tracking page that explicitly invites applications without requiring a particular advertised vacancy. Check for closing dates and relevant eligibility restrictions. A generic careers page, standard vacancy, timed internship/graduate scheme, recruitment agency listing, or aggregator-only claim does not qualify.
 
-## 3. Route definitions and lifecycle
+The visible record should answer four questions quickly: **which studio, where to apply, why the route qualifies, and when the source was last checked**. Known location or work-eligibility restrictions should be displayed rather than guessed. A route that is blocked or no longer shows evidence needs review; it should not be silently treated as available or deleted.
 
-### Qualifying route types
+The initial curated list contains 12 routes checked on 29 October 2026. This is a starting batch, not a guarantee of exhaustive worldwide coverage. Every claim of verification is bounded by the evidence and check date recorded for that route.
 
-- `dedicated-page`: official standalone page inviting speculative applications.
-- `ats-posting`: permanent official ATS posting titled/categorised as speculative, unsolicited, open, general or equivalent, with no deadline and a confirmed match between the ATS organisation and studio.
-- `email-invite`: an official page explicitly invites speculative applications by email. Commit only the page URL, never the email address.
-- `talent-community`: talent-pool signup, shown separately from direct speculative-application routes.
+## 3. Application tracking
 
-### Exclusions
+The directory's **Add to application tracker** action prefills a record in the existing encrypted browser-local application tracker with the studio name, route URL and speculative-application purpose. The user explicitly saves the record and updates status (interested, applied, interview, rejection, offer, withdrawal), notes, activity and follow-up date as appropriate.
 
-Timed internship or graduate programmes, standard job listings, generic “see our jobs” pages, recruitment agencies, and aggregator-only evidence do not qualify. An official career URL is not enough unless the page explicitly invites speculative applications.
+The directory does not maintain a second Planned/Applied status system. It does not send messages or submit applications. A prefilled or saved record is not evidence that an application was submitted.
 
-### Lifecycle states
+## 4. Product boundaries and next work
 
-- `candidate`: automatically detected, never treated as verified.
-- `verified`: human-confirmed with official evidence and dates.
-- `needs-review`: failed fetch, blocked page, or changed/missing evidence.
-- `stale`: not re-verified within 90 days.
+- **Primary navigation:** speculative applications, applications, settings.
+- **Search:** one straightforward search across the route records; keep navigation and route cards uncluttered.
+- **Evidence:** official URL, short evidence summary, status, known eligibility information and last-checked date.
+- **Privacy:** tracker records stay in the encrypted local browser workspace. Never commit private candidate records, CVs, contact details, correspondence, credentials or secrets.
+- **Deferred:** resume/profile tools, outreach drafting, advertised-job matching, generic studio catalog, route markers separate from the tracker, and complex dashboards.
+- **Next priority:** broaden discovery. Search widely across different terms and languages, follow official links to the actual route, deduplicate, check the current page and eligibility, and add only evidenced routes. Respect site policies, robots.txt, rate limits and access controls; do not bypass restrictions or claim that a crawler can find literally every internet page.
+- **No overbuilt roadmap:** ship the core route list and tracker first. Add automation or other features only when they demonstrably improve discovery coverage or application tracking.
 
-Never auto-delete a verified route. A failed fetch never proves the route closed. Two consecutive successful checks missing the phrase move a verified route to `needs-review`; check-age moves it to stale according to the state rules.
-
-### Evidence contract
-
-Store facts, not page content: official URL, route type, matched phrase category, original paraphrase (max 200 characters), content hash, and the route contract’s country, language and timestamps. Fetch every candidate page before listing it; respect robots.txt, identify the user agent, rate-limit requests, and never use logins or bypass bot protection. Missing evidence or unsafe URLs fail closed.
-
-The M3 UI uses only the validated M2 route directory and provides deterministic search, filters, sorting, pagination and visible evidence/freshness fields. A “Planned” or “Applied” route marker is a private manual label in the encrypted v3 workspace, not proof of submission. v1 and v2 vaults migrate in memory to v3 while preserving existing records; markers survive even when a route is absent from the current public dataset. Synthetic sample data is explicitly labelled and cannot be marked.
-
-## 4. Product principles and scope
-
-1. **Worldwide by default:** do not apply a country allowlist to directory search.
-2. **Official evidence first:** every verified claim must be grounded in a directly fetched official route.
-3. **Explicit uncertainty:** candidate, verified, needs-review and stale mean different things and must be visible.
-4. **Manual submission:** no automatic email or application submission; never guarantee a response.
-5. **Privacy by design:** do not commit personal profile data, CVs, application history, contact notes, recruiter email addresses, credentials or secrets.
-6. **Conservative discovery:** aggregators are hints only; failed pages never cause deletion; no scraping of social networks or unlicensed studio lists.
-7. **Legacy roles disabled:** the previous standard-role explorer remains in source code for compatibility, with `FEATURES.roleExplorer = false` by default. It is not the product’s directory or success metric.
-8. **Incremental delivery:** M0–M8 are the current milestone order; each milestone has one PR, a prior design note, documented acceptance criteria and exact-head CI evidence.
-
-### Current and planned milestones
-
-- **M0:** land/reconcile existing work; refocus ADR; keep Pages artifact/privacy checks.
-- **M1:** default-off legacy role explorer and consistent product language.
-- **M2:** one versioned SpeculativeRoute schema, matching JS/Python validators, curated JSON data and safe sample fallback.
-- **M3:** directory filters, visible evidence/freshness states, pagination and encrypted-vault Applied/Planned marker with schema v3 migration.
-- **M4:** bounded batches of direct-official-source route research, up to 30 entries per PR, with rejects and independent 10% re-checks.
-- **M5:** manual route health checks and documented public ATS adapters, writing state only to `discovery-state`.
-- **M6:** bounded candidate discovery and licensed public studio-universe sources, with conversion/freshness metrics.
-- **M7:** reuse the same-repository Pages artifact workflow and privacy checker; deploy manually only.
-- **M8:** adapt outreach and resume tools for speculative applications and close out evidence, privacy, feature-flag and CI checks.
-
-## 5. Supporting-workflow requirements (secondary scope for M8)
+## 5. Deferred supporting-workflow requirements (not in current scope)
 
 The profile should be editable and should separate private context from information approved for outward-facing messages. These tools support a verified route directory; they do not change the route qualification rules above.
 

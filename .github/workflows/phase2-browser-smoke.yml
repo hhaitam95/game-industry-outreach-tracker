@@ -32,10 +32,9 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
-      - name: Run complete local-to-AI feedback suite
+      - name: Run route directory and private-tracker acceptance
         env:
           EXPECT_SPECULATIVE_DIRECTORY: "1"
-          EXPECT_RESUME_LAB: "1"
         run: npm run feedback-report
 
       - name: Add sanitized Markdown report to the run summary
