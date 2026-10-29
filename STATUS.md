@@ -1,13 +1,16 @@
 # Project Status
 
 **Last updated:** 2026-10-29  
-**Current phase:** Phase 9 launch acceptance and Phase 4 source-coverage follow-up. PR #14 is merged; live source verification remains outstanding. The website is published, while owner acceptance of real-browser workflows and the private-data boundary is still pending.  
-**Latest source-adapter change:** [PR #14](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/14) was squash-merged into `main` as [`1a277b9`](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/1a277b92f32fced0185bf041342ae1a73cf744f6).  
-**Verified main baseline for this closeout:** `1a277b92f32fced0185bf041342ae1a73cf744f6` (the `main` head after PR #14, before this status-only follow-up).  
-**Completed PRs:** [#7 Phase 6c](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7), [#8 Phase 7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8), [#9 Phase 8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/9), [#10 Phase 9 feedback framework](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/10), [#13 profile-aware role review](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/13), and [#14 source-adapter remediation](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/14) are merged.  
-**Source-adapter design:** [ADR-058 — Remediation of official studio career-source adapters](DECISIONS.md#adr-058--remediation-of-official-studio-career-source-adapters).  
-**Launch acceptance:** [Issue #11](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/11) stays open until the live URL/assets, privacy boundary, and core user workflows are accepted.  
-**Feedback entry point:** [Open public issue forms](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/new/choose).
+**Current product direction:** A worldwide directory of official routes that explicitly accept speculative applications with no specific vacancy or deadline. Standard-role discovery code remains in the repository but will be disabled by default in M1.  
+**Current milestone:** M0 — align repository history and record the refocus decision.  
+**Verified repository state:** PRs [#7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7), [#8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8), and [#9](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/9) are already merged into `main`; no PRs are currently open. The requested M0 merge prerequisites for #7 and #8 are already satisfied. PR #9 is merged and therefore cannot be closed as superseded; retain its same-repository Pages implementation for M7 and reuse `scripts/check-pages-artifact.mjs` and its tests.  
+**CI evidence:** Frontend CI, discovery fixture tests, and Phase 2 browser acceptance each succeeded on the exact PR heads for #7 (`9035576545433ead2d38a4c7891a276ed0f13110`), #8 (`9493d91ee2bea624329413bbe8973177e8dc02c8`), and #9 (`669c9c8b94543f5ec4948cd682ed8751d4ca71af`). These are pre-refocus implementation checks, not checks for the new M0 commit. The current main commit `7444b800e7b1de95a3a03d99baa9852586af2295` has no separate workflow run returned by the connected GitHub view.  
+**M0 working branch:** `docs/m0-speculative-application-refocus-20261029`. The PR and its exact-head checks will be recorded after opening and running CI.  
+**Next action:** Review and merge the M0 refocus PR when its required checks pass; then begin M1. The owner merges; no merge is performed by this change.
+
+## Historical pre-refocus implementation and rollout evidence
+
+The remaining sections retain facts and verification evidence from the previous product direction. They are historical context, not the current product goal. New implementation must follow ADR-059 and milestones M0–M8.
 
 - **Source-verification boundary:** No live discovery scan has been run since the PR #14 source-route change. Naughty Dog's updated URL and CD PROJEKT RED extraction still need a separately authorized manual live check. Discovery remains manual-only; no schedule or Pages publication was triggered by PR #14.
 
