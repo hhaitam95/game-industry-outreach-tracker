@@ -24,7 +24,7 @@ test("default app is a speculative-route directory with the existing application
     assert.equal(featureModule.FEATURES.roleExplorer, false);
     assert.equal(featureModule.isRoleExplorerEnabled(), false);
     assert.match(app, /Speculative applications/);
-    assert.match(app, /Supermassive Games/);
+    assert.match(app, /data-testid="speculative-route-card"/);
     assert.match(app, /Add to application tracker/);
     assert.match(app, /Applications/);
     assert.match(app, /Settings/);

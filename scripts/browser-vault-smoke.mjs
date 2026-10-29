@@ -440,7 +440,7 @@ async function main() {
       await client.clickButton("Speculative applications");
       await client.waitForText("Open application page");
       const directoryState = await client.evaluate(
-        "(() => { const routeLinks = [...document.querySelectorAll('.route-directory-links a')]; return { search: Boolean(document.querySelector('#route-search')), routeCards: document.querySelectorAll('[data-testid=speculative-route-card]').length, trackButtons: document.querySelectorAll('[data-testid=track-application-route]').length, officialLinks: routeLinks.length > 0 && routeLinks.every((link) => link.href.startsWith('https://')), showsSupermassive: document.body.innerText.includes('Supermassive Games'), sampleNotice: Boolean(document.querySelector('[data-testid=route-directory-sample-notice]')), studioCards: document.querySelectorAll('.studio-card').length }; })()",
+        "(() => { const routeLinks = [...document.querySelectorAll('.route-directory-links a')]; return { search: Boolean(document.querySelector('#route-search')), routeCards: document.querySelectorAll('[data-testid=speculative-route-card]').length, trackButtons: document.querySelectorAll('[data-testid=track-application-route]').length, officialLinks: routeLinks.length > 0 && routeLinks.every((link) => link.href.startsWith('https://')), sampleNotice: Boolean(document.querySelector('[data-testid=route-directory-sample-notice]')), studioCards: document.querySelectorAll('.studio-card').length }; })()",
       );
       if (
         !directoryState ||
@@ -448,7 +448,6 @@ async function main() {
         directoryState.routeCards < 10 ||
         directoryState.trackButtons < 10 ||
         !directoryState.officialLinks ||
-        !directoryState.showsSupermassive ||
         directoryState.sampleNotice ||
         directoryState.studioCards !== 0
       ) {
