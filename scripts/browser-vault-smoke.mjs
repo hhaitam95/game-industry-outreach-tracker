@@ -533,10 +533,7 @@ async function main() {
     });
 
     await step("Extract synthetic PDF resume", async () => {
-      const pdfBase64 = readFileSync(
-        path.join(root, "tests/fixtures/resumes/synthetic-resume.pdf.b64"),
-        "utf8",
-      ).trim();
+      const pdfBase64 = readFileSync(path.join(root, "tests/fixtures/resumes/synthetic-resume.pdf.b64"), "utf8").trim();
       await chooseSyntheticResume({
         name: "synthetic-resume.pdf",
         type: "application/pdf",
@@ -547,10 +544,10 @@ async function main() {
 
     await step("Verify Phase 6c editor and export controls render", async () => {
       await client.waitFor(
-        `document.querySelector('[data-testid="resume-editor"]') &&
+        `Boolean(document.querySelector('[data-testid="resume-editor"]') &&
           document.querySelector('[data-testid="resume-export-docx"]') &&
           document.querySelector('[data-testid="resume-export-pdf"]') &&
-          document.querySelector('[data-testid="resume-diff"]')`,
+          document.querySelector('[data-testid="resume-diff"]'))`,
         "resume-structured-editor-rendered",
       );
     });
@@ -851,7 +848,10 @@ try {
     ["condition-not-met-application after unlock", "application record did not appear after unlock"],
     ["condition-not-met-profile after unlock", "profile record did not appear after unlock"],
     ["condition-not-met-lock confirmation", "lock confirmation did not appear"],
-    ["condition-not-met-resume-structured-editor-rendered", "structured editor/export controls did not appear after PDF extraction"],
+    [
+      "condition-not-met-resume-structured-editor-rendered",
+      "structured editor/export controls did not appear after PDF extraction",
+    ],
     ["condition-not-met-resume-handoff-disclosure-opened", "manual handoff disclosure did not open"],
     ["condition-not-met-incorrect passphrase rejection", "incorrect passphrase was not rejected in the UI"],
     ["condition-not-met-backup restoration", "backup restoration did not complete"],
