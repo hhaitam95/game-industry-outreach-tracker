@@ -1,13 +1,25 @@
 # Project Status
 
 **Last updated:** 2026-10-29  
-**Current phase:** Part 1 is green; Phase 6 parser/registry hygiene and CSP are implemented and verified on exact code head `b3b196da`. Frontend CI, browser acceptance (retry attempt 2), and discovery fixtures passed. Phase 6c remains gated on the owner merging PR #4 with a regular merge, retargeting PR #6 to `main`, and then merging PR #6.
-**Working branch:** feat/phase6b-resume-analysis (fast-forwarded into the PR #6 branch after each cohesive commit)  
-**Base/main:** 07d8e15cec544e56a09fbcab44202dc7051753c6 (unchanged; no direct changes to main).
+**Current phase:** Phase 7 implementation and verification are in progress on an isolated feature branch. Phase 5 and Phase 6a/6b are merged into `main`; Phase 6c remains in draft PR #7 and is not a dependency of this branch.  
+**Working branch:** `feat/phase7-outreach-tracker`  
+**Design:** ADR-050 in DECISIONS.md.  
+**Base/main:** `d56637e921fdb2e23f67e15aa3a518d6477c6842` (no changes to `main`).  
+**Review state:** Phase 7 draft PR not opened yet. No code changes have been merged. Current work includes workspace schema v2 migration, pure outreach draft/check logic, Outreach and Applications pages, synthetic regression tests, and browser acceptance coverage.
 
-**Merge plan:** The owner merges PR #4 with a regular merge commit, not squash, to preserve the Phase 6 ancestry. After PR #4 merges, retarget PR #6 to `main`. Keep both PRs unmerged by the implementation agent.
+## Current verification
 
-## Engineering standards for remaining work
+- Code checks have not yet been reported green for this branch. A draft pull request will be opened to invoke normal Frontend CI, browser acceptance and discovery fixtures after implementation self-review.
+- No workflows were manually dispatched or rerun. No workflow trigger/permission change, dependency change, Pages publish, live discovery, or personal data was introduced.
+- No automatic mail/application submission or remote transfer exists. The applied status requires explicit user confirmation, all personal records remain encrypted in the existing vault.
+
+## Engineering standards
+
+- Follow AGENTS.md and IMPLEMENTATION_PLAN.md: design before code, keep pure domain logic separate from I/O/UI, test success and failure paths, and update docs with implementation.
+- STATUS.md is the single source of volatile branch/review/run details.
+- Keep each phase in its own feature branch and draft PR. Do not merge any PR as part of implementation.
+- Current source repository visibility is public. Never commit private candidate records, resumes, drafts, applications, contact details, credentials, or secrets.
+- Do not use CI as a formatter/linter REPL. Inspect exact formatter diffs, fix all failures coherently, and allow at most two CI cycles per unit.
 
 - Follow AGENTS.md and IMPLEMENTATION_PLAN.md: publish a design note and definition of done before code; keep pure domain logic separate from I/O/UI; test success and failure paths; update docs with implementation.
 - This file is the single source for volatile branch/review/run details. Other docs should point here instead of duplicating moving SHAs or run IDs.
