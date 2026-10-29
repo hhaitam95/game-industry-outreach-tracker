@@ -4,6 +4,15 @@
 
 **Repository visibility:** Public. Never commit private candidate records, CVs, application history, contact details, credentials, or secrets.
 
+## Phase 7 implementation
+
+- Working branch: `feat/phase7-outreach-tracker`; design/acceptance: ADR-050 in DECISIONS.md and Phase 7 in IMPLEMENTATION_PLAN.md.
+- Outreach provides deterministic editable templates from user motivation, approved saved profile facts, and sourced studio context; pre-send checks are heuristic prompts, not fact checks.
+- Every saved edit creates a new private draft revision with profile timestamp, CV label (metadata only), guidance version and source context.
+- Applications tracks interested leads, manually confirmed submission, statuses, responses, interviews, outcomes, activity history and follow-up dates.
+- Personal data remains in the encrypted browser-local vault. There is no auto-send/submit, AI API, backend or localStorage persistence. Legacy v1 vault data is validated and migrated in memory to schema v2 on unlock; next save exports the new validated schema.
+- Phase 7 remains on a feature branch. See STATUS.md for exact-head CI evidence and review state.
+
 ## Phase 5a implementation
 
 - `src/data/sample-public-opportunities.json` contains synthetic Riot-style roles, the exact 16-field public record shape, `last-seen` statuses, a conspicuously synthetic timestamp, and placeholder posting URLs.
