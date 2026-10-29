@@ -148,7 +148,7 @@ These features require the candidate profile and an active browser vault session
 
 ## Phase 6 — Resume guidance and browser-side document workflow
 
-**Implementation status:** Phase 6a is the first scoped slice; the full phase remains in progress. Current verification and branch state are maintained in [STATUS.md](STATUS.md).
+**Implementation status:** Phase 6a/6b are merged into `main`; Phase 6c implementation and review-hardening are implemented and verified for owner review. Phase 6 is ready for the owner's review of draft PR #7; current check evidence and remaining limitations are maintained in [STATUS.md](STATUS.md).
 
 ### Delivery slices
 - **Phase 6a:** build-time bundled guidance; local DOCX/PDF/TXT intake and text extraction; safe failure/warning states; strict file/page/text limits; no text persistence or network upload.
@@ -180,7 +180,7 @@ These features require the candidate profile and an active browser vault session
 
 ### Phase 6c — Editable resume structure, provenance and local export
 
-Design: ADR-045 in DECISIONS.md. The design and definition of done are committed before implementation.
+Design: ADR-045 in DECISIONS.md; review hardening and regression coverage: ADR-049. The design and definition of done are committed before implementation.
 
 #### Scope
 - Convert extracted text to bounded editable blocks using recognized section headings only; preserve unrecognized text in Other and do not infer job boundaries or rewrite claims.
