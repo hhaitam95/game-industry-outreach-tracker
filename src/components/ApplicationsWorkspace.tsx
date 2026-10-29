@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { APPLICATION_STATUSES, type } from "../lib/private-data/schema.mjs";
+import { APPLICATION_STATUSES } from "../lib/private-data/schema.mjs";
 import { STUDIO_PROFILES } from "../lib/studios/catalog.mjs";
 import { validateWorkspaceData } from "../lib/private-data/schema.mjs";
 
