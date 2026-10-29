@@ -3,6 +3,7 @@ import type { RoleLeadPrefillData, RoleReviewProfile } from "./workspace.types";
 import { STUDIO_CATALOG_DATA, STUDIO_PROFILES, searchStudioProfiles } from "../lib/studios/catalog.mjs";
 import OpportunityExplorer from "./OpportunityExplorer";
 import { OPPORTUNITY_SNAPSHOT } from "../lib/opportunities/snapshot.mjs";
+import { FEATURES, isRoleExplorerEnabled } from "../config/features.mjs";
 
 const creditLabels: Record<string, string> = {
   developer: "Developer",
@@ -17,23 +18,26 @@ export default function StudioCatalog({
   profile = null,
   onTrackAsLead = () => undefined,
   onOpenSettings = () => undefined,
+  features = FEATURES,
 }: {
   profile?: RoleReviewProfile | null;
   onTrackAsLead?: (lead: RoleLeadPrefillData) => void;
   onOpenSettings?: () => void;
+  features?: typeof FEATURES;
 }) {
+  const roleExplorerEnabled = isRoleExplorerEnabled(features);
   const [query, setQuery] = useState("");
   const studios = useMemo(() => searchStudioProfiles(query), [query]);
 
   return (
     <section className="catalog-page" aria-labelledby="studio-catalog-title">
       <div className="catalog-intro">
-        <span className="eyebrow">STUDIO RESEARCH</span>
-        <h2 id="studio-catalog-title">A small, sourced starting list</h2>
+        <span className="eyebrow">SPECULATIVE APPLICATION RESEARCH</span>
+        <h2 id="studio-catalog-title">Studio research, before route verification</h2>
         <p>
-          Four hand-curated studios with official websites, career entry points, known titles, locations, and source
-          evidence. Role links below come from a bundled snapshot and do not prove that a role is open. This is a studio
-          registry, not a live list of vacancies.
+          These starter profiles provide context about selected studios; they are not verified speculative-application
+          routes. A studio is listed as accepting speculative applications only after its official page explicitly
+          invites applications without a specific advertised job or deadline.
         </p>
       </div>
 
@@ -45,7 +49,7 @@ export default function StudioCatalog({
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Name, location, owner, or game"
+            placeholder="Name, location, or studio"
             autoComplete="off"
           />
         </label>
@@ -65,8 +69,9 @@ export default function StudioCatalog({
       ) : (
         <div className="catalog-grid">
           {studios.map((studio) => {
-            const opportunityCount =
-              OPPORTUNITY_SNAPSHOT?.opportunities.filter((role) => role.studioId === studio.id).length ?? null;
+            const opportunityCount = roleExplorerEnabled
+              ? (OPPORTUNITY_SNAPSHOT?.opportunities.filter((role) => role.studioId === studio.id).length ?? null)
+              : null;
             const verifiedCareersRoute = studio.routes.find((route) => route.status === "verified");
             return (
               <article className="studio-card" key={studio.id}>
@@ -137,54 +142,60 @@ export default function StudioCatalog({
                   <a href={studio.officialWebsiteUrl} target="_blank" rel="noopener noreferrer">
                     Official website <span aria-hidden="true">↗</span>
                   </a>
-                  {studio.routes.map((route) => (
-                    <a key={route.id} href={route.url} target="_blank" rel="noopener noreferrer">
-                      {route.label} <span aria-hidden="true">↗</span>
-                      <span
-                        className={route.status === "verified" ? "route-status route-status-verified" : "route-status"}
-                      >
-                        {route.status === "verified" ? "Verified" : route.status}
-                      </span>
-                    </a>
-                  ))}
+                  {roleExplorerEnabled
+                    ? studio.routes.map((route) => (
+                        <a key={route.id} href={route.url} target="_blank" rel="noopener noreferrer">
+                          {route.label} <span aria-hidden="true">↗</span>
+                          <span
+                            className={
+                              route.status === "verified" ? "route-status route-status-verified" : "route-status"
+                            }
+                          >
+                            {route.status === "verified" ? "Verified" : route.status}
+                          </span>
+                        </a>
+                      ))
+                    : null}
                 </div>
 
-                <div className="studio-opportunity-coverage" aria-label={studio.name + " opportunity coverage"}>
-                  {opportunityCount === null ? (
-                    <>
-                      <p>
-                        <strong>Manual check needed.</strong> The opportunity snapshot is unavailable; check the
-                        official careers page directly.
-                      </p>
-                      {verifiedCareersRoute ? (
-                        <a href={verifiedCareersRoute.url} target="_blank" rel="noopener noreferrer">
-                          {verifiedCareersRoute.label}
-                        </a>
-                      ) : null}
-                    </>
-                  ) : opportunityCount > 0 ? (
-                    <p>Link monitoring: {opportunityCount} roles last seen (partial; closure cannot be detected)</p>
-                  ) : (
-                    <>
-                      <p>
-                        <strong>Manual check needed.</strong> No roles observed from this source. Check the careers page
-                        directly.
-                      </p>
-                      {verifiedCareersRoute ? (
-                        <a href={verifiedCareersRoute.url} target="_blank" rel="noopener noreferrer">
-                          {verifiedCareersRoute.label}
-                        </a>
-                      ) : null}
-                    </>
-                  )}
-                </div>
+                {roleExplorerEnabled ? (
+                  <div className="studio-opportunity-coverage" aria-label={studio.name + " opportunity coverage"}>
+                    {opportunityCount === null ? (
+                      <>
+                        <p>
+                          <strong>Manual check needed.</strong> The opportunity snapshot is unavailable; check the
+                          official careers page directly.
+                        </p>
+                        {verifiedCareersRoute ? (
+                          <a href={verifiedCareersRoute.url} target="_blank" rel="noopener noreferrer">
+                            {verifiedCareersRoute.label}
+                          </a>
+                        ) : null}
+                      </>
+                    ) : opportunityCount > 0 ? (
+                      <p>Link monitoring: {opportunityCount} roles last seen (partial; closure cannot be detected)</p>
+                    ) : (
+                      <>
+                        <p>
+                          <strong>Manual check needed.</strong> No roles observed from this source. Check the careers page
+                          directly.
+                        </p>
+                        {verifiedCareersRoute ? (
+                          <a href={verifiedCareersRoute.url} target="_blank" rel="noopener noreferrer">
+                            {verifiedCareersRoute.label}
+                          </a>
+                        ) : null}
+                      </>
+                    )}
+                  </div>
+                ) : null}
 
                 <details className="studio-sources">
                   <summary>Evidence and sources ({studio.sourceIds.length})</summary>
                   <ul>
                     {studio.sourceIds.map((sourceId) => {
                       const source = STUDIO_CATALOG_DATA.sources.find((item) => item.id === sourceId);
-                      if (!source) return null;
+                      if (!source || (!roleExplorerEnabled && source.sourceType === "official-careers")) return null;
                       return (
                         <li key={source.id}>
                           <a href={source.url} target="_blank" rel="noopener noreferrer">
@@ -205,10 +216,13 @@ export default function StudioCatalog({
       )}
 
       <p className="catalog-boundary-note">
-        The studio catalogue is manually maintained. The explorer uses a bundled snapshot and never fetches career sites
-        or role data at runtime. Snapshot status and last-seen dates do not prove that a role is open.
+        {roleExplorerEnabled
+          ? "The legacy explorer uses a bundled snapshot and never fetches career sites or role data at runtime."
+          : "The studio list is research context only. A generic careers page is not evidence of speculative-application acceptance; only directly checked official routes will be marked verified."}
       </p>
-      <OpportunityExplorer profile={profile} onTrackAsLead={onTrackAsLead} onOpenSettings={onOpenSettings} />
+      {roleExplorerEnabled ? (
+        <OpportunityExplorer profile={profile} onTrackAsLead={onTrackAsLead} onOpenSettings={onOpenSettings} />
+      ) : null}
     </section>
   );
 }

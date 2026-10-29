@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import type { PrivateWorkspaceSummary, RoleLeadPrefill, RoleLeadPrefillData } from "./components/workspace.types";
 import type { validateWorkspaceData } from "./lib/private-data/schema.mjs";
 import { getNavItem, NAV_ITEMS } from "./lib/navigation.mjs";
+import { FEATURES, isRoleExplorerEnabled } from "./config/features.mjs";
 import PrivateDataSettings from "./components/PrivateDataSettings";
 import StudioCatalog from "./components/StudioCatalog";
 import ResumeLab from "./components/ResumeLab";
@@ -73,12 +74,14 @@ function StatCard({
   );
 }
 
-function OverviewPage({
+export function OverviewPage({
   onNavigate,
   workspaceSummary,
+  roleExplorerEnabled = isRoleExplorerEnabled(),
 }: {
   onNavigate: (pageId: string) => void;
   workspaceSummary: PrivateWorkspaceSummary | null;
+  roleExplorerEnabled?: boolean;
 }) {
   return (
     <div className="page-stack">
@@ -87,11 +90,12 @@ function OverviewPage({
           <span className="eyebrow">YOUR NEXT CHAPTER</span>
           <h2>Make the next move with intention.</h2>
           <p>
-            Research game studios, connect your existing technical experience to relevant teams, and prepare thoughtful
-            professional outreach — all in one workspace.
+            Build a worldwide, evidence-backed directory of video-game studios that explicitly accept speculative
+            applications. Review the official source, prepare a thoughtful introduction, and track your next steps
+            privately.
           </p>
           <button className="button button-primary" onClick={() => onNavigate("studios")}>
-            Explore studios
+            Explore speculative applications
             <Icon name="arrow" size={16} />
           </button>
         </div>
@@ -119,16 +123,18 @@ function OverviewPage({
             icon="studios"
             value={String(STUDIO_PROFILES.length)}
           />
-          <StatCard
-            label="Opportunities"
-            detail={
-              OPPORTUNITY_SNAPSHOT
-                ? `${OPPORTUNITY_SNAPSHOT.opportunities.length} role links last seen in the snapshot; not proof a role is open${IS_SYNTHETIC_SNAPSHOT ? " · sample data, not a real scan" : ""}`
-                : "Snapshot validation failed; open Studios & roles for the error state"
-            }
-            icon="search"
-            value={OPPORTUNITY_SNAPSHOT ? String(OPPORTUNITY_SNAPSHOT.opportunities.length) : "—"}
-          />
+          {roleExplorerEnabled ? (
+            <StatCard
+              label="Opportunities"
+              detail={
+                OPPORTUNITY_SNAPSHOT
+                  ? `${OPPORTUNITY_SNAPSHOT.opportunities.length} role links last seen in the snapshot; not proof a role is open${IS_SYNTHETIC_SNAPSHOT ? " · sample data, not a real scan" : ""}`
+                  : "Snapshot validation failed; open Studios & roles for the error state"
+              }
+              icon="search"
+              value={OPPORTUNITY_SNAPSHOT ? String(OPPORTUNITY_SNAPSHOT.opportunities.length) : "—"}
+            />
+          ) : null}
           <StatCard
             label="Outreach drafts"
             detail={
@@ -162,7 +168,7 @@ function OverviewPage({
             <span className="roadmap-number">01</span>
             <div>
               <h3>Discover studios</h3>
-              <p>Build a sourced list of studios and official career routes.</p>
+              <p>Find official routes that explicitly welcome speculative applications; generic careers pages do not qualify.</p>
             </div>
             <span className="roadmap-phase">Research</span>
           </div>
@@ -170,23 +176,24 @@ function OverviewPage({
             <span className="roadmap-number">02</span>
             <div>
               <h3>Tailor your resume</h3>
-              <p>Review relevant experience against a role without inventing claims.</p>
+              <p>Prepare a factual resume tailored to the studio and discipline you want to approach.</p>
             </div>
             <span className="roadmap-phase">Review</span>
           </div>
           <div className="roadmap-item">
             <span className="roadmap-number">03</span>
             <div>
-              <h3>Prepare outreach</h3>
-              <p>Create a clear, personal draft and track the outcome yourself.</p>
+              <h3>Prepare your application</h3>
+              <p>Create a clear, personal introduction and track the outcome yourself.</p>
             </div>
             <span className="roadmap-phase">Reach out</span>
           </div>
         </div>
       </section>
       <p className="privacy-footnote">
-        Role links come from a limited, build-time snapshot and are not proof a role remains open; career sites are not
-        fetched at runtime. Private candidate records are encrypted in this browser and are never synced to a server.
+        A route is marked verified only after its official page is checked for an explicit speculative-application
+        invitation with no specific advertised job or deadline. Private candidate records are encrypted in this browser
+        and are never synced to a server.
       </p>
     </div>
   );
@@ -215,7 +222,8 @@ function PlaceholderPage({ pageId, onNavigate }: { pageId: string; onNavigate: (
   );
 }
 
-export default function App() {
+export default function App({ features = FEATURES }: { features?: typeof FEATURES } = {}) {
+  const roleExplorerEnabled = isRoleExplorerEnabled(features);
   const [activePageId, setActivePageId] = useState("overview");
   const [resumeProfile, setResumeProfile] = useState<WorkspaceProfile | null>(null);
   const [workspaceSummary, setWorkspaceSummary] = useState<PrivateWorkspaceSummary | null>(null);
@@ -297,12 +305,17 @@ export default function App() {
             />
           </div>
           {isOverview ? (
-            <OverviewPage onNavigate={setActivePageId} workspaceSummary={workspaceSummary} />
+            <OverviewPage
+              onNavigate={setActivePageId}
+              workspaceSummary={workspaceSummary}
+              roleExplorerEnabled={roleExplorerEnabled}
+            />
           ) : activeItem.id === "studios" ? (
             <StudioCatalog
               profile={resumeProfile}
               onTrackAsLead={handleTrackAsLead}
               onOpenSettings={() => setActivePageId("settings")}
+              features={features}
             />
           ) : activeItem.id === "resume" ? (
             <ResumeLab profile={resumeProfile} />

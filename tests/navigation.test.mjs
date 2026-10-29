@@ -11,7 +11,7 @@ test("navigation identifiers are unique and include the six workspace sections",
 });
 
 test("getNavItem returns the requested navigation item", () => {
-  assert.equal(getNavItem("studios").label, "Studios & roles");
+  assert.equal(getNavItem("studios").label, "Speculative applications");
   assert.equal(getNavItem("resume").description.includes("resume"), true);
 });
 

@@ -1,5 +1,7 @@
 # M1 — feature flag and product reframing
 
-- Design first: [ADR-060](../docs/decisions/ADR-060-m1-role-explorer-flag-and-reframing.md) defines the disabled-by-default legacy role explorer, the official speculative-route directory wording, UI safety boundary, tests, and definition of done.
-- The current public UI must not imply that generic career pages or advertised roles qualify as speculative applications.
-- Preserve standard-role code and tests for later reuse; this milestone changes presentation and defaults, not the old opportunity schema or private vault.
+- Added the single immutable feature config with `FEATURES.roleExplorer = false`; retained standard-role components, logic, data and tests.
+- Hid the old role/opportunity explorer, Overview opportunity count, generic careers-route links and careers-source detail links in the default UI. A test-only injected config exercises the enabled state.
+- Renamed the directory navigation item to “Speculative applications” and updated the Overview copy to describe official evidence and manual applications.
+- Reframed README, product specifications, architecture, implementation plan and handoff around the M0–M8 route-directory roadmap.
+- Added tests for both flag states and the default UI boundary. Discovery and Pages workflows remain unchanged and manual-only.

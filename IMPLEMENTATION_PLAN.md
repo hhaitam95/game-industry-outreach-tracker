@@ -1,32 +1,32 @@
 # Implementation Plan
 
-**Status:** Revised roadmap following GitHub Pages, scheduled discovery, and browser-first resume decisions  
+**Status:** Current roadmap is M0–M8 for the worldwide speculative-application directory; earlier phase notes below describe retained pre-refocus implementation.  
 **Last updated:** 2026-10-29
 
-## Delivery principles
+## Current roadmap — M0 through M8
 
-- Build a complete, useful path in incremental steps.
-- The repository is currently public; keep all private candidate/application records, CV content, contact details, credentials, and secrets out of every branch and artifact. Revisit repository/deployment privacy only in Phase 8.
-- Use GitHub Pages only for public static frontend assets and sanitized public studio/opportunity data.
-- Keep all personal CV, profile, draft and application data out of public repositories.
-- The initial release must not require a paid AI API.
-- Do not enable a scheduled workflow before its runner and source registry exist.
-- Test parsing, state changes, public-data sanitization and browser-only privacy behavior before real use.
-- Ask explicitly before commits and report diffs/tests.
+- **M0 — Land existing work and record refocus.** Existing PRs #7, #8 and #9 are already merged; the M0 refocus ADR is reviewed separately. Retain the Pages workflow and artifact/privacy checker.
+- **M1 — Feature flag and reframing.** Set `FEATURES.roleExplorer = false`, hide legacy role counts/explorer copy, rename the navigation to “Speculative applications”, and align public copy/docs.
+- **M2 — Domain contract.** Add a versioned `SpeculativeRoute` JSON Schema consumed by JS and Python validators, fail-closed URL/evidence validation, minimal studio entities, curated JSON loading and synthetic sample data.
+- **M3 — Directory UI and private tracking.** Search/filter/sort/paginate routes, expose evidence/date/status, and add an encrypted-vault Applied/Planned marker with a clean v2-to-v3 migration.
+- **M4 — Seed research.** Add no more than 30 routes per PR. Fetch each official page, document rejected/non-verifiable candidates and independently re-fetch 10% of each research batch.
+- **M5 — Verification automation.** Add a route-health check and only documented public ATS adapters. Keep dispatch manual; preserve last-known records and output health data to `discovery-state`.
+- **M6 — Candidate discovery at scale.** Run bounded discovery over known studios and licensed public studio lists; candidates remain unverified until direct human-level official-page evidence is recorded.
+- **M7 — Publishing.** Reuse same-repository Pages Actions and the artifact/privacy checker. Validate first, deploy only from `main` after owner approval, and do not enable a schedule before explicit approval.
+- **M8 — Integration and closeout.** Add speculative-application draft templates and discipline-based Resume Lab mode; verify every claimed route, privacy boundaries, role flag and green CI.
 
-## Standing engineering standards and phase gates
+## Delivery and engineering standards
 
-The binding implementation rules are in [AGENTS.md](AGENTS.md), with the policy recorded in [DECISIONS.md](DECISIONS.md). They apply to every remaining phase and every cohesive unit of work:
+- Create a short milestone design note and definition of done before implementation; record deviations after.
+- Keep domain logic, I/O adapters, validation and UI separate. Use one versioned contract per boundary and tests in each language that consumes it.
+- Use synthetic/offline fixtures for ordinary tests, including negative and failure-preservation paths.
+- Run configured formatting, lint, TypeScript, tests, audit, production build, privacy/artifact and browser checks on the exact PR head. Do not push formatter-diagnostic commits; fix all reported formatting issues before committing.
+- Keep PRs scoped to one milestone. Push to that milestone branch; the owner merges. No schedule, publication, visibility, force-push, history rewrite, branch deletion, new dependency, secret, or workflow-permission change without explicit approval.
+- Keep `STATUS.md` as the single volatile status and evidence source; keep design records in `docs/decisions/` and changelog fragments in `changelog.d/`.
 
-1. **Before work:** Publish a short numbered design note in the decision log (goal, boundaries, contracts, failure modes, test plan, rollback) and a clear definition of done before code.
-2. **Design and architecture:** Keep pure domain logic independent of I/O and UI; separate schema/validation, domain logic, adapters and components. Prefer typed, single-responsibility modules around 300 lines.
-3. **One data contract:** Use one versioned schema file for each boundary; every consumer reads it and each consuming language has contract tests. Strictly validate and fail closed with explicit public-field allowlists.
-4. **Derive, do not duplicate:** Derive flags, labels, counts and coverage from provenance/data. Do not duplicate validation, introduce manual origin flags, or present parsed clues as source facts.
-5. **Evidence-led tests:** Cover success, invalid input and failure-preservation paths with deterministic tests, including reviewed public-data golden cases and synthetic fixtures. Test complex UI logic at component level.
-6. **Quality gates:** Read and follow configured style rules before editing. Every configured formatter, linter, type checker and test runner must run in CI or be removed. Never push diagnostic commits; inspect full logs, fix failures together, and allow at most two CI cycles per unit before documenting the simplest safe fallback.
-7. **Review and docs:** Avoid unrelated formatting/refactors, keep PRs cohesive and squash-merge, self-review the complete diff, and update behaviour docs in the same commit. STATUS.md alone tracks volatile state and verification evidence.
-8. **Privacy and recovery:** Do not commit secrets/personal data. Make operations idempotent and failures visible; preserve the last known state under uncertainty.
-9. **Closeout:** After work, document deviations and reasons. Report actual checks/results and limitations; a phase is done only when relevant CI is green for the final commit, new logic is tested, docs are current, and the diff contains no secrets or personal data.
+## Retained pre-refocus implementation notes
+
+The Phase 0–9 sections below document code already delivered for the earlier standard-role discovery direction. They are not the current milestone order. Preserve compatible components and tests where ADR-059 directs it; do not treat the old opportunity model as the directory’s qualifying route data.
 
 ## Phase 0 — Requirements and architecture documentation
 
