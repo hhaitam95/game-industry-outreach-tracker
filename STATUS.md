@@ -1,26 +1,30 @@
 # Project Status
 
 **Last updated:** 2026-10-29  
-**Current phase:** Phase 8 same-repository GitHub Pages release — PR #7 and PR #8 are merged; the reconciled Phase 8 implementation has passed its required CI checks. The site is not deployed.  
-**Working branch:** `feat/phase8-pages-privacy`  
-**Current PR:** [#9 — Phase 8: same-repository Pages release and privacy checks](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/9).  
-**Phase 6c:** [PR #7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7) was squash-merged in `0c70b9e`. Its original exact-head frontend, browser acceptance, and discovery fixture checks passed.  
-**Phase 7:** [PR #8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8) was squash-merged in `32294b7` after reconciliation commit `9493d91`; its frontend, browser acceptance, and discovery fixture checks passed on that reconciled branch head.  
-**Phase 8 base:** `32294b7de99838fcb3f476feddea94ac42c82361`. Phase 8 implementation commit `840b51d` includes this merged base and passed all required checks.  
-**Pages setting:** The owner confirmed the repository's Pages source is configured for GitHub Actions.
+**Current phase:** Phase 8 is merged. Phase 9 launch feedback/stabilization is in progress; GitHub Pages is configured for Actions, but the publish workflow has not yet run and the website is not live.  
+**Working branch:** `feat/phase9-feedback-stabilization`  
+**Phase 6c:** [PR #7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7) merged as `0c70b9e`.  
+**Phase 7:** [PR #8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8) merged as `32294b7`.  
+**Phase 8:** [PR #9](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/9) merged as `3678fc9`. The workflow deploys only the validated `dist/` artifact from the original repository.  
+**Post-merge CI:** Frontend CI passed [run 40885652511](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40885652511), browser acceptance passed [run 40885652175](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40885652175), and discovery fixtures passed [run 40885652219](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40885652219) on main commit `3678fc9`.  
+**Phase 9 design:** ADR-056 and the Phase 9 plan have been committed before implementation. Feedback forms, feedback guide, README entry point, and current-state handoff updates are being added on this branch.
 
-## Phase 8 implementation and acceptance status
+## Phase 8 deployment status
 
-- **Design decision:** ADR-055 supersedes ADR-054; source, tests, documentation, public-data contract and publication workflow remain in the original repository.
-- **Selected deployment:** Manual `workflow_dispatch` only. `validate-only` is the default. Explicit `publish` is allowed from `main` only, uploads only the validated `dist/` artifact, and uses separate read-only build and least-privilege deployment jobs. No cross-repository token or second repository is used.
-- **Privacy boundary:** Existing public snapshot schema validation, repository privacy check, generated-artifact checker, CSP/local-asset checks and repository-subpath smoke test remain required. Private profile/CV/draft/application data remains browser-local and is never a build input.
-- **Reconciled-head verification:** Frontend CI passed on `840b51d` — [run 40885062992](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40885062992); browser acceptance passed — [run 40885063015](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40885063015); discovery fixtures passed — [run 40885063116](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40885063116). These runs cover the Phase 8 branch reconciled with the merged Phase 6c and Phase 7 changes. This status-only follow-up does not change executable code or workflow configuration.
-- **Deployment not yet verified:** The Pages workflow has not been manually dispatched; no public URL/assets or live site have been verified. Run `validate-only` first and then explicitly publish from `main` once merged and reviewed. No schedule, push trigger, or discovery-completion publication exists.
-- **Remaining external actions:** The Pages source setting is configured according to the owner. The connected GitHub tools cannot dispatch a workflow, so the first validation/publication must be started from Actions in GitHub if no dispatch action becomes available.
-- **Merge order:** PR #7 and PR #8 are merged. PR #9 passed all required checks on reconciled implementation commit `840b51d`; check its latest status-only follow-up before the authorized final merge.
-- **Exit criteria:** Required CI passes; the Pages workflow is manually validated and published; the canonical URL/assets and public data are reviewed; then move to Phase 9 launch acceptance, feedback and stabilization.
+- **Pages source:** owner confirmed Settings → Pages → Source = GitHub Actions.
+- **Workflow:** `.github/workflows/publish-pages.yml` uses `workflow_dispatch` only. `validate-only` is the default; explicit `publish` is restricted to `main`. Build permissions are read-only, and only the separate deploy job receives `pages: write` and `id-token: write`.
+- **Not yet deployed:** neither mode has been manually dispatched since PR #9 merged. The public URL, asset routing, and published data have not been verified live.
+- **Tool limitation:** the connected GitHub operations can read runs and edit repository content/PRs, but do not expose a workflow-dispatch action. The initial release run must therefore be started in GitHub Actions: choose `Public Pages release`, run `validate-only` on `main`, inspect its success, then deliberately run `publish`.
+- **Privacy boundary:** only the generated `dist/` artifact is uploaded; profile, CV, draft and application records remain browser-local. The artifact check is a guardrail rather than a guarantee; review the public output before declaring it accepted.
 
-**Status policy:** This file is the sole source for volatile branch/review state and verification evidence. Other documents should point here rather than duplicate changing SHAs or run IDs.
+## Phase 9 launch acceptance and feedback
+
+- ADR-056 makes launch acceptance, user feedback, small repair cycles, and a stable `v1.0.0` release the final phase.
+- GitHub Issue Forms and a feedback guide are being added on the current branch. The issue tracker is public; feedback must not contain private user data.
+- A release tag is not created until the site is published, core browser flows are tested, privacy and CI checks pass, known limitations are documented, and launch-blocking issues are resolved.
+- After go-live, classify issues as launch blockers, defects/regressions, usability polish, or later-version ideas. For every fix batch: PR, checks, manual publication, and owner retest. Keep out-of-scope ideas for a future version.
+
+**Status policy:** STATUS.md is the sole source for volatile branch/review state, exact check evidence, publication state, and next action.
 
 ## Phase 6a acceptance status
 

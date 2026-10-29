@@ -55,6 +55,9 @@ See [Local Development and Feedback Workflow](docs/LOCAL_DEVELOPMENT.md) for the
 - [Automated discovery plan](docs/operations/automated-discovery.md) — discovery design and conservative change-detection requirements.
 - [Phase 4 runner guide](docs/operations/phase4-discovery-runner.md) — initial runner usage, fixtures, safety rules, and remaining acceptance gates.
 - [Public opportunity data contract](docs/public-data-contract.md) — exact snapshot fields, sample fallback, sync procedure, discovery-state ownership and manual-dispatch limits.
+- [Feedback and stability process](docs/operations/feedback-and-stability.md) — how to report public-site bugs and enhancement ideas, run feedback cycles, and decide when the stable release is ready.
+
+**Test feedback:** Use [GitHub Issue Forms](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/new/choose). Issues are public; do not include resumes, CV text, personal profile/application details, recruiter correspondence, vault exports, credentials, or screenshots containing private information.
 
 ## Repository hygiene
 
