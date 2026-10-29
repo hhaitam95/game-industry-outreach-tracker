@@ -1,0 +1,159 @@
+name: Public Pages release
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Validate the public build, or explicitly publish it to the output-only Pages repository."
+        required: true
+        type: choice
+        options:
+          - validate-only
+          - publish
+        default: validate-only
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-pages-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Validate or publish the static public site
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+    steps:
+      - name: Check out source repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Require an explicitly configured target token before publishing
+        if: inputs.mode == 'publish'
+        env:
+          PUBLIC_PAGES_TOKEN: ${{ secrets.PUBLIC_PAGES_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [[ -z "$PUBLIC_PAGES_TOKEN" ]]; then
+            echo "Publish mode requires the PUBLIC_PAGES_TOKEN repository secret; no files were published." >&2
+            exit 1
+          fi
+
+      - name: Check out output-only Pages repository
+        if: inputs.mode == 'publish'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: hhaitam95/game-industry-outreach-tracker-site
+          ref: main
+          path: public-site
+          token: ${{ secrets.PUBLIC_PAGES_TOKEN }}
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Check locked dependency registry URLs
+        run: npm run check:lockfile-registry
+
+      - name: Check formatting
+        run: npm run format:check
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Run unit and component tests
+        run: npm test
+
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
+
+      - name: Sync the approved public snapshot only for an explicit publication
+        if: inputs.mode == 'publish'
+        run: npm run data:sync
+
+      - name: Build the static site for the selected public repository path
+        run: npm run build
+        env:
+          VITE_BASE_PATH: /game-industry-outreach-tracker-site/
+
+      - name: Check tracked paths and built output for privacy leaks
+        run: npm run check:privacy
+
+      - name: Check generated Pages artifact boundary
+        run: npm run check:pages-artifact
+
+      - name: Smoke-test target base path and local assets
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          base_path="/game-industry-outreach-tracker-site/"
+          preview_log="$(mktemp)"
+          npm run preview -- --host 127.0.0.1 --port 4173 --strictPort >"$preview_log" 2>&1 &
+          preview_pid=$!
+
+          cleanup() {
+            kill "$preview_pid" 2>/dev/null || true
+            wait "$preview_pid" 2>/dev/null || true
+            rm -f "$preview_log"
+          }
+          trap cleanup EXIT
+
+          preview_url="http://127.0.0.1:4173${base_path}"
+          ready=false
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent --show-error "$preview_url" --output /tmp/pages-index.html 2>/dev/null; then
+              ready=true
+              break
+            fi
+            sleep 1
+          done
+
+          if [[ "$ready" != "true" ]]; then
+            cat "$preview_log"
+            echo "Vite preview did not serve the target repository path." >&2
+            exit 1
+          fi
+
+          grep -q '<div id="root"></div>' /tmp/pages-index.html
+          js_asset="$(grep -oE 'src="/game-industry-outreach-tracker-site/assets/[^"]+\.js"' /tmp/pages-index.html | head -n 1 | cut -d '"' -f 2 || true)"
+          css_asset="$(grep -oE 'href="/game-industry-outreach-tracker-site/assets/[^"]+\.css"' /tmp/pages-index.html | head -n 1 | cut -d '"' -f 2 || true)"
+          if [[ -z "$js_asset" || -z "$css_asset" ]]; then
+            echo "Expected local JavaScript and CSS assets below the target repository path." >&2
+            exit 1
+          fi
+          curl --fail --silent --show-error "http://127.0.0.1:4173${js_asset}" --output /tmp/pages-app.js
+          curl --fail --silent --show-error "http://127.0.0.1:4173${css_asset}" --output /tmp/pages-app.css
+          test -s /tmp/pages-app.js
+          test -s /tmp/pages-app.css
+          echo "The static site and its assets load under the target GitHub Pages path."
+
+      - name: Publish the validated build to the output-only repository
+        if: inputs.mode == 'publish'
+        shell: bash
+        run: |
+          set -euo pipefail
+          rsync -a --delete --exclude='/.git/' dist/ public-site/
+          git -C public-site add --all
+          if git -C public-site diff --cached --quiet; then
+            echo "The public output is unchanged; no deployment commit was created."
+            exit 0
+          fi
+          git -C public-site config user.name "github-actions[bot]"
+          git -C public-site config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git -C public-site commit -m "Publish static site from ${GITHUB_SHA}"
+          git -C public-site push origin HEAD:main

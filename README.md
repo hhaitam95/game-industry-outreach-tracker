@@ -30,7 +30,7 @@ A personal, evidence-driven workspace for discovering video game studios and opp
 
 ## Hosting and privacy model
 
-GitHub Pages is a public static host, not a private server-side application. This repository is public. Any future Pages host, deployment target, or publishing workflow is deferred to Phase 8 and requires a separate privacy review and owner approval. No deployment or publication is approved in the current phase.
+GitHub Pages is a public static host, not a private server-side application. This source repository is public. Phase 8 selects a separate output-only public repository, hhaitam95/game-industry-outreach-tracker-site (canonical repository name: hhaitam95/game-industry-outreach-tracker-site without spaces). The source repository does not change visibility. Only validated build output can be published; private profile facts, CV contents, drafts, application history, contact notes, credentials, and secrets are forbidden from published files. Publication is manual-only and is not configured until the target repository, Pages settings, and narrow deployment secret are provisioned. Browser vault data remains local to the user's browser and is not cross-device cloud sync.
 
 Private candidate profile data, resume content, personal drafts, and application history must never be committed or published. Profile and tracker records use encrypted browser-local records with user-controlled encrypted export/import. Original CVs and extracted resume text are not stored, and this is not automatic cloud sync. A private backend would require a future decision.
 
