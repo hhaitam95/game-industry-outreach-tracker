@@ -270,7 +270,7 @@ function saveReport() {
   const lines = [
     "# Browser Acceptance Report",
     "",
-    "- Scope: synthetic-data browser test for the encrypted local vault, studio catalogue, opportunity explorer, Resume Lab editor/export flow, and role-card-to-Applications handoff.",
+    "- Scope: synthetic-data browser test for the encrypted local vault, default speculative-application UI, Resume Lab editor/export flow, and retained role-handoff compatibility fixture.",
     "- Runtime: " + safeVersion("node", ["--version"]),
     "- Browser: " + (chromePath ? safeVersion(chromePath, ["--version"]) : "unavailable"),
     "- Result: **" + (failure ? "FAIL" : "PASS") + "**",
@@ -335,6 +335,7 @@ async function main() {
   });
   await step("Start the production preview", () => waitForHttp(url, preview));
 
+  currentStep = "Start headless Chrome";
   chromeProcess = spawn(
     chromePath,
     [
@@ -344,7 +345,8 @@ async function main() {
       "--disable-dev-shm-usage",
       "--no-first-run",
       "--no-default-browser-check",
-      "--remote-debugging-port=0",
+      "--remote-debugging-address=127.0.0.1",
+      "--remote-debugging-port=9222",
       "--remote-allow-origins=*",
       "--user-data-dir=" + profileDir,
       "--download-default-directory=" + downloadDir,
@@ -353,14 +355,14 @@ async function main() {
     { stdio: "ignore" },
   );
 
-  let debugPort = null;
-  const activePortFile = path.join(profileDir, "DevToolsActivePort");
+  const debugPort = 9222;
+  let debugReady = false;
   for (let attempt = 0; attempt < 80; attempt += 1) {
     if (chromeProcess.exitCode !== null) throw new Error("browser-exited");
     try {
-      const port = Number(readFileSync(activePortFile, "utf8").split(/\r?\n/)[0]);
-      if (Number.isInteger(port) && port > 0) {
-        debugPort = port;
+      const response = await fetch("http://127.0.0.1:" + debugPort + "/json/version");
+      if (response.ok) {
+        debugReady = true;
         break;
       }
     } catch {
@@ -368,8 +370,9 @@ async function main() {
     }
     await delay(150);
   }
-  if (!debugPort) throw new Error("browser-debug-port-unavailable");
+  if (!debugReady) throw new Error("browser-debug-port-unavailable");
 
+  currentStep = "Connect to headless Chrome";
   const targetResponse = await fetch("http://127.0.0.1:" + debugPort + "/json/new?about:blank", { method: "PUT" });
   if (!targetResponse.ok) throw new Error("browser-target-unavailable");
   const target = await targetResponse.json();
@@ -416,56 +419,45 @@ async function main() {
     throw new Error("content-security-policy-missing-required-directives");
   }
 
-  if (process.env.EXPECT_STUDIO_CATALOG === "1") {
-    await step("Verify Phase 3 studio catalogue UI and source links", async () => {
-      await client.clickButton("Studios & roles");
-      await client.waitForText("A small, sourced starting list");
+  if (process.env.EXPECT_SPECULATIVE_DIRECTORY === "1") {
+    await step("Verify speculative-application directory and official-site links", async () => {
+      await client.clickButton("Speculative applications");
+      await client.waitForText("Studio research, before route verification");
       const summary = await client.evaluate(
-        "(() => { const cards = [...document.querySelectorAll('.studio-card')]; const routeLinks = [...document.querySelectorAll('.studio-card .studio-actions a')]; const evidenceLinks = [...document.querySelectorAll('.studio-sources a')]; return { cardCount: cards.length, hasFourStudioNames: ['CD PROJEKT RED', 'Naughty Dog', 'Santa Monica Studio', 'Riot Games'].every((name) => document.body.innerText.includes(name)), hasCareerRoutes: routeLinks.length >= 8, sourceLinksUseHttps: evidenceLinks.length >= 8 && evidenceLinks.every((link) => link.href.startsWith('https://')), noVacancyClaim: document.body.innerText.includes('not a live list of vacancies') }; })()",
+        "(() => { const cards = [...document.querySelectorAll('.studio-card')]; const actions = [...document.querySelectorAll('.studio-card .studio-actions a')]; const allLinks = [...document.querySelectorAll('.studio-card a')]; const body = document.body.innerText; const legacyCopy = /Opportunity explorer|roles last seen|No roles observed|Official careers and vacancies/i.test(body); return { cardCount: cards.length, hasFourStudioNames: ['CD PROJEKT RED', 'Naughty Dog', 'Santa Monica Studio', 'Riot Games'].every((name) => body.includes(name)), officialWebsiteCount: actions.filter((link) => link.innerText.includes('Official website')).length, allLinksUseHttps: allLinks.length >= 8 && allLinks.every((link) => link.href.startsWith('https://')), legacyCopy, verifiedRouteBadges: document.querySelectorAll('.route-status').length, opportunityRows: document.querySelectorAll('[data-testid=opportunity-row]').length }; })()",
       );
       if (
         !summary ||
         summary.cardCount !== 4 ||
         !summary.hasFourStudioNames ||
-        !summary.hasCareerRoutes ||
-        !summary.sourceLinksUseHttps ||
-        !summary.noVacancyClaim
+        summary.officialWebsiteCount !== 4 ||
+        !summary.allLinksUseHttps ||
+        summary.legacyCopy ||
+        summary.verifiedRouteBadges !== 0 ||
+        summary.opportunityRows !== 0
       ) {
-        throw new Error("studio-catalogue-acceptance-failed");
+        throw new Error("speculative-directory-default-state-failed");
       }
     });
   }
 
-  if (process.env.EXPECT_STUDIO_CATALOG === "1") {
-    await step("Verify Phase 5a opportunity explorer and filtering", async () => {
-      await client.waitForText("Opportunity explorer");
-      const before = await client.evaluate(
-        "(() => { const count = document.querySelector('[data-testid=opportunity-results-count]'); const rows = [...document.querySelectorAll('[data-testid=opportunity-row]')]; const date = document.querySelector('[data-testid=snapshot-generated-at]'); const body = document.body.innerText.toLowerCase(); const caveat = document.querySelector('.opportunity-boundary-note')?.innerText.toLowerCase() ?? ''; const claimsText = body.replace(caveat, ''); const prohibited = ['currently available', 'currently open', 'open roles', 'open positions', 'no vacancies', 'no openings', 'all roles are open', 'vacancies available']; return { rowCount: rows.length, total: Number(count?.dataset.total ?? -1), hasSnapshotDate: Boolean(date?.innerText.trim()), hasStandingNote: caveat.includes('does not prove that a role is open'), claimsAvailability: prohibited.some((phrase) => claimsText.includes(phrase)) }; })()",
+  if (process.env.EXPECT_SPECULATIVE_DIRECTORY === "1") {
+    await step("Verify legacy role explorer and Overview count are hidden by default", async () => {
+      const studioState = await client.evaluate(
+        "(() => ({ body: document.body.innerText, rows: document.querySelectorAll('[data-testid=opportunity-row]').length }))()",
       );
       if (
-        !before ||
-        before.rowCount < 2 ||
-        before.total < 2 ||
-        !before.hasSnapshotDate ||
-        !before.hasStandingNote ||
-        before.claimsAvailability
+        !studioState ||
+        /Opportunity explorer|roles last seen|No roles observed|Official careers and vacancies/i.test(studioState.body) ||
+        studioState.rows > 0
       ) {
-        throw new Error("opportunity-explorer-initial-state-failed");
+        throw new Error("legacy-role-explorer-visible-with-feature-disabled");
       }
-      const clicked = await client.evaluate(
-        "(() => { const button = document.querySelector('[data-testid=family-filter-qa-test]'); if (!button || button.disabled) return false; button.click(); return true; })()",
-      );
-      if (!clicked) throw new Error("opportunity-family-filter-not-found");
-      await client.waitFor(
-        "document.querySelectorAll('[data-testid=opportunity-row]').length > 0 && document.querySelectorAll('[data-testid=opportunity-row]').length < " +
-          before.rowCount,
-        "opportunity-filter-reduces-results",
-      );
-      const after = await client.evaluate(
-        "(() => ({ rows: document.querySelectorAll('[data-testid=opportunity-row]').length, count: Number(document.querySelector('[data-testid=opportunity-results-count]')?.dataset.total ?? -1) }))()",
-      );
-      if (!after || after.rows >= before.rowCount || after.rows !== after.count) {
-        throw new Error("opportunity-filter-did-not-reduce-results");
+      await client.clickButton("Overview");
+      await client.waitForText("The big picture");
+      const overviewText = await client.evaluate("document.querySelector('.page-content')?.innerText ?? ''");
+      if (/Opportunities|role links last seen|roles last seen|vacancies available/i.test(overviewText)) {
+        throw new Error("legacy-role-count-visible-with-feature-disabled");
       }
     });
   }
