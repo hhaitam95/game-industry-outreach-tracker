@@ -72,7 +72,7 @@ export default function ApplicationsWorkspace({ workspace, onSaveWorkspace }: Pr
       return;
     }
     const now = nowIso();
-    const application = {
+    const application: ApplicationRecord = {
       id: crypto.randomUUID(),
       studioName: name,
       roleTitle: roleTitle.trim(),
