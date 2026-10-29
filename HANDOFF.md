@@ -11,7 +11,7 @@
 - Every saved edit creates a new private draft revision with profile timestamp, CV label (metadata only), guidance version and source context.
 - Applications tracks interested leads, manually confirmed submission, statuses, responses, interviews, outcomes, activity history and follow-up dates.
 - Personal data remains in the encrypted browser-local vault. There is no auto-send/submit, AI API, backend or localStorage persistence. Legacy v1 vault data is validated and migrated in memory to schema v2 on unlock; next save exports the new validated schema.
-- Phase 7 implementation is complete and verified on its feature head. [PR #8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8) remains open as a draft and unmerged for owner review; STATUS.md records exact-head evidence and the current verification boundary.
+- Phase 7 is merged via [PR #8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8). Outreach drafts/application tracking remain browser-local; submission requires explicit confirmation. STATUS.md records the current main checks and publication state.
 
 ## Phase 8 — Same-repository GitHub Pages release
 
@@ -29,6 +29,8 @@
 - Use the GitHub Issue Forms linked from README for one bug or enhancement per issue. Reports are public; never include personal CV/profile/application material, vault exports, correspondence, credentials, or unredacted screenshots.
 - Triage reported items into launch blockers, defects/regressions, usability polish, and later-version ideas. Deliver small reviewed changes, run CI/privacy/browser checks, manually publish, then have the owner retest the deployed scenario.
 - Do not tag `v1.0.0` until the public URL/assets and core user flows are accepted, all required CI is green, no launch blockers remain, and limitations are documented. Ideas outside the stable scope remain backlog items for a future version.
+- The central [Phase 9 launch acceptance tracker](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/11) records the publish/manual-test checklist and stabilization cycles. The feedback forms are available from [Issues → New issue](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/new/choose).
+- The website remains not verified live until the owner manually runs the Pages release workflow and the public URL/assets/privacy boundary have been checked.
 - Read [STATUS.md](STATUS.md) for the current branch/checks and deployment state.
 
 ## Phase 5a implementation

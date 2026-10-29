@@ -1,31 +1,37 @@
 # Project Status
 
 **Last updated:** 2026-10-29  
-**Current phase:** Phase 9 launch acceptance and feedback framework is implemented in PR #10; live Pages validation/publication and owner testing remain pending. The site is not yet verified live.  
-**Working branch:** `feat/phase9-feedback-stabilization`  
-**Current PR:** [#10 — Phase 9: feedback forms and launch stabilization gate](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/10).  
-**Phase 6c:** [PR #7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7) merged as `0c70b9e`.  
-**Phase 7:** [PR #8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8) merged as `32294b7`.  
-**Phase 8:** [PR #9](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/9) merged as `3678fc9`; post-merge CI passed on main.  
-**Phase 9 design:** ADR-056 and the revised definition of done were committed before implementation.  
-**Phase 9 implementation head:** `2e117b3366208bcc75bbe4a30c131dcc31f7500f`. The current follow-up changes only status/verification documentation.
+**Current phase:** Phase 9 launch acceptance and feedback/stabilization. Phases 6c, 7, and 8 are merged; the Phase 9 feedback forms and guide are also merged. Required CI passed on current main. The remaining gate is the first manual Pages validation/publication and owner testing of the live site.  
+**Current branch:** `main`  
+**Current main:** `8099e0a3f8cf7f8cc86793eb4d6dbcd19a781f1a`.  
+**Completed PRs:** [#7 Phase 6c](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7), [#8 Phase 7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8), [#9 Phase 8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/9), and [#10 Phase 9 feedback framework](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/10) are all merged. No pull requests are currently open.  
+**Phase 9 tracker:** [Issue #11 — Launch acceptance and stabilization](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/11).  
+**Feedback entry point:** [Open the public issue forms](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/new/choose).
+
+## Main verification
+
+The following required workflows passed on main commit `8099e0a3f8cf7f8cc86793eb4d6dbcd19a781f1a`:
+
+- **Frontend CI:** [run 40886995230](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40886995230)
+- **Browser acceptance:** [run 40886995179](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40886995179)
+- **Discovery fixture tests:** [run 40886995277](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40886995277)
 
 ## Phase 8 — Publication status
 
 - **Pages source:** The owner confirmed Settings → Pages → Source = GitHub Actions.
 - **Release workflow:** `.github/workflows/publish-pages.yml` is manual-only. `validate-only` is the default; explicit `publish` is restricted to `main`. The build job is read-only and only the deployment job receives `pages: write` and `id-token: write`.
-- **Still not deployed:** neither mode has been manually dispatched since PR #9 merged. The public URL, local asset routing, public snapshot provenance, and live privacy boundary have not yet been verified.
-- **Manual blocker:** The connected GitHub tools do not expose a workflow-dispatch action. The release must be started in GitHub Actions: choose `Public Pages release`, select `main` and `validate-only`; review the green result, then explicitly run `publish`. Do not report go-live until the publication succeeds and the public site is checked.
-- **Post-merge main CI:** Frontend CI [40885652511](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40885652511), browser acceptance [40885652175](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40885652175), and discovery fixtures [40885652219](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40885652219) all passed on main commit `3678fc9`.
+- **Not yet deployed:** Neither mode has been manually dispatched since PR #9 merged. The public URL, local asset routing, public snapshot provenance, and live privacy boundary have not yet been verified.
+- **Manual blocker:** The connected GitHub tools do not expose a workflow-dispatch action. Start the release from GitHub Actions: choose `Public Pages release`, select `main` and `validate-only`, review the completed run, then explicitly run `publish`. Do not report go-live until publication succeeds and the public site is checked.
+- **Privacy boundary:** Only the validated `dist/` artifact is uploaded. Profile, CV, draft, and application records remain browser-local and are not build inputs. Artifact scanning is a guardrail, not a guarantee; review public content before acceptance.
 
 ## Phase 9 — Feedback and stabilization
 
-- **Delivered in the PR:** ADR-056, public bug and product-feedback issue forms, explicit warnings against posting private user information, a feedback/stability runbook, README entry point, and updated handoff/changelog.
-- **Exact-head checks:** Frontend CI passed [40886523098](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40886523098), browser acceptance passed [40886523052](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40886523052), and discovery fixtures passed [40886523012](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40886523012) on implementation commit `2e117b3`. This status-only follow-up does not change executable code or the issue forms.
-- **Public feedback route:** [Open feedback forms](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/new/choose). All issues are public. Do not include CVs, private profile/application data, correspondence, vault exports, credentials, or unredacted screenshots.
-- **Stability gate:** Do not tag `v1.0.0` until the public site is manually published and tested, the privacy boundary and required CI pass, no launch blockers remain, and known limitations are documented. Later ideas stay in the issue backlog for a future version.
+- **Delivered:** ADR-056, public bug and product-feedback issue forms, warnings against posting private user information, the feedback/stability guide, README entry point, and the central acceptance tracker issue are merged.
+- **Public feedback route:** [Open feedback forms](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/new/choose). All issues are public. Never include CVs, private profile/application data, recruiter correspondence, vault exports, credentials, or unredacted screenshots.
+- **Feedback cycles:** Triage issues into launch blockers, defects/regressions, usability polish, or later-version ideas. Work small batches through reviewed PRs, required CI, manual publishing, and owner retesting. Close reports only when deployed behavior is confirmed or explicitly deferred.
+- **Stable release gate:** Do not tag `v1.0.0` until the live URL/assets and core workflows are accepted, privacy checks and CI pass, no launch-blocking issues remain, and known limitations are documented. Future ideas stay in the issue backlog for a later version.
 
-**Status policy:** STATUS.md is the single source for current branch/review state, exact checks, publication state, and next action. Other documents refer here instead of duplicating volatile run details.
+**Status policy:** This file is the single source for current branch/review state, exact check evidence, publication state, and next action. Other documents should refer here rather than duplicate changing SHAs/run IDs.
 
 ## Phase 6a acceptance status
 
