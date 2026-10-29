@@ -2163,3 +2163,149 @@ button:focus-visible {
     break-inside: avoid;
   }
 }
+
+
+.role-review-entry {
+  margin-top: 15px;
+}
+
+.role-review-toggle {
+  min-height: 36px;
+  font-size: 12px;
+}
+
+.role-review-panel {
+  margin-top: 14px;
+  padding: 19px;
+  border: 1px solid #dfe7dc;
+  border-radius: 13px;
+  background: #f8faf7;
+}
+
+.role-review-panel h4 {
+  margin: 0 0 8px;
+  color: #303b31;
+  font-size: 13px;
+}
+
+.role-review-panel p,
+.role-review-panel li,
+.role-review-panel small {
+  color: #707b71;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.role-review-panel ul {
+  display: grid;
+  gap: 5px;
+  margin: 9px 0 0;
+  padding-left: 19px;
+}
+
+.role-review-panel li span {
+  color: #91998e;
+}
+
+.role-review-privacy,
+.role-review-evidence-note {
+  margin: 0 0 12px;
+}
+
+.role-review-privacy {
+  padding: 10px 12px;
+  border-left: 3px solid #8aa68c;
+  background: #eef4eb;
+}
+
+.role-review-description {
+  display: grid;
+  gap: 7px;
+  margin: 16px 0;
+  color: #465348;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.role-review-description textarea {
+  width: 100%;
+  min-height: 110px;
+  padding: 12px;
+  border: 1px solid #dce4da;
+  border-radius: 9px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 400;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.role-review-description small {
+  font-weight: 400;
+}
+
+.role-review-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.role-review-grid > section,
+.role-review-unknowns {
+  padding: 15px;
+  border: 1px solid #e3e9e0;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.role-review-grid > section > p {
+  margin: 0;
+}
+
+.role-review-grid > section > ul + p {
+  margin-top: 8px;
+}
+
+.role-review-muted {
+  color: #879186 !important;
+}
+
+.role-review-unknowns {
+  margin-top: 13px;
+}
+
+.role-review-caveat {
+  margin: 13px 0;
+}
+
+.role-review-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.role-review-actions .button {
+  min-height: 37px;
+  font-size: 12px;
+}
+
+.role-review-actions p {
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .role-review-panel {
+    padding: 13px;
+  }
+
+  .role-review-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .role-review-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

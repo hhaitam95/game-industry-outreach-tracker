@@ -98,6 +98,16 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Decision:** Before committing changes, explain the files and behavior affected, summarize tests/results and limitations, and ask for explicit approval. Prefer a feature branch for material work; do not commit directly to main without explicit permission.
 - **Consequences:** Remote APIs that auto-create commits require a separate approval gate; never claim they support uncommitted staging if they do not.
 
+## ADR-057 — Profile-aware role review and explicit lead handoff
+
+- **Date:** 2026-10-29
+- **Status:** Accepted design for the first stable release; implementation proposed for review on `feat/profile-aware-role-review-20261029`.
+- **Context:** The public role explorer has only listing metadata and the candidate profile exists only in the encrypted browser-local vault. Users need an actionable next step without claims unsupported by the available data.
+- **Decision:** Offer opt-in literal phrase comparison between a selected role title, optional user-pasted public role description, and the profile projection available only while the local vault is unlocked. Explain matches, terms absent from profile text, evidence used, and unknowns. Do not calculate a fit score or infer skill absence, current vacancy availability, work authorization, sponsorship, or hiring eligibility. Pasted role text is bounded, kept in component memory only, cleared on close/profile lock, and never uploaded or persisted.
+- **Lead handoff:** Prefill the existing Applications form with the selected role's title, studio, and official URL. The user explicitly saves the lead; handoff never marks an application as submitted or sends anything.
+- **Overview:** Show private workspace totals only while the encrypted vault is unlocked. When locked, hide the counts instead of inferring them or displaying zeros. Use task labels instead of stale phase labels in the user-facing navigation.
+- **Consequences:** This is a transparent heuristic aid, not an employment recommendation. Discovery remains limited to configured public career sources and requires separate coverage remediation.
+
 ## Open decisions
 
 - Which private remote host (if any) meets privacy, persistence, backup and cost requirements?

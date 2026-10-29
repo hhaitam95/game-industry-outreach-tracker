@@ -1,38 +1,30 @@
 # Project Status
 
 **Last updated:** 2026-10-29  
-**Current phase:** Phase 9 launch acceptance and feedback/stabilization. Phases 6c, 7, and 8 are merged; the Phase 9 feedback forms and guide are also merged. Required CI passed on the verified functional head; the only subsequent commit is this documentation reconciliation. The remaining gate is the first manual Pages validation/publication and owner testing of the live site.  
-**Current branch:** `main`  
-**Verified functional head:** `8099e0a3f8cf7f8cc86793eb4d6dbcd19a781f1a` — Frontend CI, browser acceptance, and discovery fixtures all passed. The current status/handoff update changes documentation only.  
-**Completed PRs:** [#7 Phase 6c](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7), [#8 Phase 7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8), [#9 Phase 8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/9), and [#10 Phase 9 feedback framework](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/10) are all merged. No pull requests are currently open.  
-**Phase 9 tracker:** [Issue #11 — Launch acceptance and stabilization](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/11).  
-**Feedback entry point:** [Open the public issue forms](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/new/choose).
+**Current phase:** Phase 9 launch acceptance and product refinement. Profile-aware role review and lead handoff are proposed on `feat/profile-aware-role-review-20261029`; this implementation is not merged. The site is published, but real-browser acceptance and source-coverage remediation remain outstanding.  
+**Current refinement branch:** `feat/profile-aware-role-review-20261029`. Exact review and check status should be taken from the pull request; the previously successful main checks are not evidence for this new implementation.  
+**Verified main head:** `5462fbf28a81459b93f1b68b6b5c292a042c1ca2`.  
+**Completed PRs:** [#7 Phase 6c](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7), [#8 Phase 7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8), [#9 Phase 8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/9), and [#10 Phase 9 feedback framework](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/10) are merged.  
+**Refinement design:** [Issue #12 — profile-aware role review and lead handoff](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/12).  
+**Launch acceptance:** [Issue #11](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/11) stays open until the live URL/assets, privacy boundary, and core user workflows are accepted.  
+**Feedback entry point:** [Open public issue forms](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/new/choose).
 
-## Main verification
+## Latest verified automation and deployment
 
-The following required workflows passed on main commit `8099e0a3f8cf7f8cc86793eb4d6dbcd19a781f1a`:
+- **Live discovery:** [run 40914150887](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40914150887) succeeded on `main` on 2026-10-29. It persisted `discovery-state/public/public-opportunities.json`, generated at `2026-10-29T16:42:13Z`, with 189 records.
+- **Source coverage:** all 189 records are `last-seen`. Riot Games produced 185 links but listing evidence was incomplete; CD PROJEKT RED and Naughty Dog were `needs-review` with no matching links; Santa Monica Studio needs a reviewed adapter. This is not global discovery or proof of current vacancies.
+- **Pages validation:** [run 40914281662](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40914281662) passed formatting, lint, typecheck, tests, audit, build, privacy/artifact checks, and repository-base asset smoke test.
+- **Pages publication:** [run 40914488893](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40914488893) succeeded, including data sync, artifact upload, and deployment. The site is published at [the Pages URL](https://hhaitam95.github.io/game-industry-outreach-tracker/); real-browser route/assets/privacy and workflow acceptance are still pending.
+- **Main CI after the documentation reconciliation:** Frontend CI [40888137794](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40888137794), discovery fixtures [40888137759](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40888137759), and Phase 2 Browser Acceptance [40888137742](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40888137742) passed.
+- **Refinement CI:** exact-head checks for `feat/profile-aware-role-review-20261029` must be reviewed on its own pull request. Do not infer that new code is tested or deployed from the main-branch runs above.
 
-- **Frontend CI:** [run 40886995230](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40886995230)
-- **Browser acceptance:** [run 40886995179](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40886995179)
-- **Discovery fixture tests:** [run 40886995277](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40886995277)
+## Phase 9 — Stable release gate
 
-## Phase 8 — Publication status
+- Public feedback forms, privacy warnings, the stabilization runbook, and the central launch tracker are merged.
+- Do not tag `v1.0.0` until the live URL/assets, private-data boundary, core workflows, and known limitations are owner-accepted; all required checks must pass on the final reviewed implementation.
+- Discovery and Pages publication remain manual-only. Do not infer current availability from `last-seen` records.
 
-- **Pages source:** The owner confirmed Settings → Pages → Source = GitHub Actions.
-- **Release workflow:** `.github/workflows/publish-pages.yml` is manual-only. `validate-only` is the default; explicit `publish` is restricted to `main`. The build job is read-only and only the deployment job receives `pages: write` and `id-token: write`.
-- **Not yet deployed:** Neither mode has been manually dispatched since PR #9 merged. The public URL, local asset routing, public snapshot provenance, and live privacy boundary have not yet been verified.
-- **Snapshot prerequisite verified:** the `discovery-state` branch currently contains `state/discovery/monitor-state.json` but does not yet contain `public/public-opportunities.json`. The `publish` path calls `npm run data:sync` and should fail closed until that snapshot is generated by a successful `Studio discovery pipeline` run in `live` mode on `main`. The default `fixture` mode is synthetic and does not persist the public snapshot. Review the live scan summary and source errors before publishing.
-- **Manual blocker:** The connected GitHub tools do not expose a workflow-dispatch action. Start the release from GitHub Actions: choose `Public Pages release`, select `main` and `validate-only`, review the completed run, then explicitly run `publish`. Do not report go-live until publication succeeds and the public site is checked.
-- **Privacy boundary:** Only the validated `dist/` artifact is uploaded. Profile, CV, draft, and application records remain browser-local and are not build inputs. Artifact scanning is a guardrail, not a guarantee; review public content before acceptance.
-
-## Phase 9 — Feedback and stabilization
-
-- **Delivered:** ADR-056, public bug and product-feedback issue forms, warnings against posting private user information, the feedback/stability guide, README entry point, and the central acceptance tracker issue are merged.
-- **Public feedback route:** [Open feedback forms](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/new/choose). All issues are public. Never include CVs, private profile/application data, recruiter correspondence, vault exports, credentials, or unredacted screenshots.
-- **Feedback cycles:** Triage issues into launch blockers, defects/regressions, usability polish, or later-version ideas. Work small batches through reviewed PRs, required CI, manual publishing, and owner retesting. Close reports only when deployed behavior is confirmed or explicitly deferred.
-- **Stable release gate:** Do not tag `v1.0.0` until the live URL/assets and core workflows are accepted, privacy checks and CI pass, no launch-blocking issues remain, and known limitations are documented. Future ideas stay in the issue backlog for a later version.
-
-**Status policy:** This file is the single source for current branch/review state, exact check evidence, publication state, and next action. Other documents should refer here rather than duplicate changing SHAs/run IDs.
+**Status policy:** This file is the single source of current branch/review state, verification evidence, publication state, and next action. The historical Phase 6 notes below are retained for context and do not override the current status above.
 
 ## Phase 6a acceptance status
 

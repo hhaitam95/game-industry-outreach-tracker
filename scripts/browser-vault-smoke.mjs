@@ -16,6 +16,7 @@ import { setTimeout as delay } from "node:timers/promises";
 const root = process.cwd();
 const reportPath = path.join(root, "test-results", "browser-acceptance-report.md");
 const basePath = "/game-industry-outreach-tracker/";
+const roleHandoffUrl = "http://127.0.0.1:4174/tests/role-handoff-browser.html";
 const url = "http://127.0.0.1:4173" + basePath;
 const timeoutMs = 20_000;
 const results = [];
@@ -23,6 +24,7 @@ let currentStep = "Browser setup";
 let failure = null;
 let failureReason = "none";
 let preview;
+let fixtureServer;
 let chromePath = null;
 let chromeProcess;
 let socket;
@@ -219,6 +221,9 @@ class DevTools {
       "Vault locked.": "lock confirmation",
       "Unable to unlock this backup.": "incorrect passphrase rejection",
       "Backup restored.": "backup restoration",
+      "Role handoff test fixture": "role handoff test page",
+      "Role details are prefilled only.": "lead prefill notice",
+      "Added an interested lead. The record does not indicate a submission.": "saved lead notice",
     };
     await this.waitFor(
       `document.body?.innerText.includes(${JSON.stringify(text)}) ?? false`,
@@ -265,7 +270,7 @@ function saveReport() {
   const lines = [
     "# Browser Acceptance Report",
     "",
-    "- Scope: synthetic-data browser test for the encrypted local vault, studio catalogue, opportunity explorer, and Resume Lab editor/export flow.",
+    "- Scope: synthetic-data browser test for the encrypted local vault, studio catalogue, opportunity explorer, Resume Lab editor/export flow, and role-card-to-Applications handoff.",
     "- Runtime: " + safeVersion("node", ["--version"]),
     "- Browser: " + (chromePath ? safeVersion(chromePath, ["--version"]) : "unavailable"),
     "- Result: **" + (failure ? "FAIL" : "PASS") + "**",
@@ -985,6 +990,71 @@ async function main() {
     await client.clickButton("Unlock vault");
     await client.waitForText("BROWSER_TEST_STUDIO_CANARY");
   });
+  await step("Start isolated role-handoff test fixture", async () => {
+    fixtureServer = spawn("npm", ["run", "dev", "--", "--host", "127.0.0.1", "--port", "4174", "--strictPort"], {
+      cwd: root,
+      env: { ...process.env, VITE_BASE_PATH: "/" },
+      stdio: "ignore",
+    });
+    await waitForHttp(roleHandoffUrl, fixtureServer);
+  });
+
+  await step("Verify role-card handoff requires explicit lead save", async () => {
+    await client.send("Page.navigate", { url: roleHandoffUrl });
+    await client.waitForText("Role handoff test fixture");
+    await client.clickButton("Review role against your profile");
+    await client.clickButton("Track as a lead in Applications");
+    await client.waitForText("Role details are prefilled only.");
+
+    const prefilled = await client.evaluate(`(() => {
+      const labels = [...document.querySelectorAll(".phase7-form-grid label")];
+      const field = (prefix, selector) =>
+        labels.find((label) => label.innerText.trim().startsWith(prefix))?.querySelector(selector)?.value ?? "";
+      return {
+        studioId: document.querySelector(".phase7-form-grid select")?.value ?? "",
+        roleTitle: field("Role / purpose", "input"),
+        applicationUrl: field("Official role/application URL", "input"),
+        notes: field("Private notes", "textarea"),
+        savedCount: Number(document.querySelector('[data-testid="role-handoff-saved-count"]')?.innerText ?? "-1"),
+        saveCount: Number(document.querySelector('[data-testid="role-handoff-save-count"]')?.innerText ?? "-1"),
+        outboundAttempts: window.__roleHandoffOutboundAttempts?.length ?? -1
+      };
+    })()`);
+    if (
+      !prefilled ||
+      prefilled.studioId !== "cd-projekt-red" ||
+      prefilled.roleTitle !== "Test-only Developer Support Specialist" ||
+      prefilled.applicationUrl !== "https://careers.example.test/developer-support" ||
+      !prefilled.notes.includes("Verify current availability") ||
+      prefilled.savedCount !== 0 ||
+      prefilled.saveCount !== 0 ||
+      prefilled.outboundAttempts !== 0
+    ) {
+      throw new Error("role-handoff-prefill-or-auto-save-failed");
+    }
+
+    await client.clickButton("Save interested lead");
+    await client.waitForText("Added an interested lead. The record does not indicate a submission.");
+    const saved = await client.evaluate(`(() => ({
+      savedCount: Number(document.querySelector('[data-testid="role-handoff-saved-count"]')?.innerText ?? "-1"),
+      saveCount: Number(document.querySelector('[data-testid="role-handoff-save-count"]')?.innerText ?? "-1"),
+      status: document.querySelector('[data-testid="role-handoff-saved-status"]')?.innerText ?? "",
+      submittedEvents: Number(document.querySelector('[data-testid="role-handoff-submitted-event-count"]')?.innerText ?? "-1"),
+      outboundAttempts: window.__roleHandoffOutboundAttempts?.length ?? -1,
+      visibleRecords: document.querySelectorAll('[data-testid="application-record"]').length
+    }))()`);
+    if (
+      !saved ||
+      saved.savedCount !== 1 ||
+      saved.saveCount !== 1 ||
+      saved.status !== "interested" ||
+      saved.submittedEvents !== 0 ||
+      saved.outboundAttempts !== 0 ||
+      saved.visibleRecords !== 1
+    ) {
+      throw new Error("role-handoff-save-or-submission-boundary-failed");
+    }
+  });
 }
 
 try {
@@ -1036,6 +1106,8 @@ try {
     "resume-local-only-boundary-failed",
     "resume-failure-did-not-preserve-previous-extraction",
     "resume-reset-did-not-clear-text",
+    "role-handoff-prefill-or-auto-save-failed",
+    "role-handoff-save-or-submission-boundary-failed",
     "resume-navigation-not-found",
   ]);
   const safeWaitReasons = new Map([
@@ -1053,6 +1125,9 @@ try {
     ["condition-not-met-resume-section-change-label-rendered", "section-change label did not appear in the diff"],
     ["condition-not-met-resume-ai-paste-failure-preserved", "failed AI-paste content was not preserved"],
     ["condition-not-met-resume-ai-paste-test-cleanup", "synthetic AI-paste test input could not be cleared"],
+    ["condition-not-met-role handoff test page", "role handoff test fixture did not load"],
+    ["condition-not-met-lead prefill notice", "role lead prefill notice did not appear"],
+    ["condition-not-met-saved lead notice", "saved lead confirmation did not appear"],
     ["condition-not-met-incorrect passphrase rejection", "incorrect passphrase was not rejected in the UI"],
     ["condition-not-met-backup restoration", "backup restoration did not complete"],
     [
@@ -1075,7 +1150,7 @@ try {
   } catch {
     /* Ignore transient startup or cleanup errors. */
   }
-  for (const processRef of [chromeProcess, preview]) {
+  for (const processRef of [chromeProcess, preview, fixtureServer]) {
     try {
       if (processRef && typeof processRef.kill === "function") processRef.kill("SIGTERM");
     } catch {

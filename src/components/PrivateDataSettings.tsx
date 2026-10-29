@@ -6,6 +6,7 @@ import {
 } from "../lib/private-data/crypto-vault.mjs";
 import { createIndexedDbVaultStore } from "../lib/private-data/indexed-db.mjs";
 import { validateWorkspaceData } from "../lib/private-data/schema.mjs";
+import type { PrivateWorkspaceSummary, RoleLeadPrefill } from "./workspace.types";
 import OutreachWorkspace from "./OutreachWorkspace";
 import ApplicationsWorkspace from "./ApplicationsWorkspace";
 import "./phase7.css";
@@ -30,16 +31,40 @@ function downloadBackup(contents: string) {
 
 export default function PrivateDataSettings({
   onProfileChange,
+  onWorkspaceSummaryChange = () => undefined,
   activePageId,
   onNavigate,
+  initialLead = null,
+  onLeadPrefillConsumed = () => undefined,
 }: {
   onProfileChange: (profile: WorkspaceProfile | null) => void;
+  onWorkspaceSummaryChange?: (summary: PrivateWorkspaceSummary | null) => void;
   activePageId: string;
   onNavigate: (pageId: string) => void;
+  initialLead?: RoleLeadPrefill | null;
+  onLeadPrefillConsumed?: () => void;
 }) {
   const storeRef = useRef<ReturnType<typeof createIndexedDbVaultStore> | null>(null);
   if (!storeRef.current) storeRef.current = createIndexedDbVaultStore();
   const store = storeRef.current;
+
+  function reportWorkspaceSummary(current: PrivateWorkspace | null) {
+    if (!current) {
+      onWorkspaceSummaryChange(null);
+      return;
+    }
+    const today = new Date().toISOString().slice(0, 10);
+    const activeApplications = current.applications.filter(
+      (application) => !["rejected", "withdrawn"].includes(application.status),
+    );
+    onWorkspaceSummaryChange({
+      draftCount: current.drafts.length,
+      applicationCount: current.applications.length,
+      dueFollowUpCount: activeApplications.filter(
+        (application) => application.nextFollowUpAt && application.nextFollowUpAt <= today,
+      ).length,
+    });
+  }
 
   const [storageReady, setStorageReady] = useState<boolean | null>(null);
   const [vaultExists, setVaultExists] = useState(false);
@@ -121,6 +146,7 @@ export default function PrivateDataSettings({
       await store.save(await session.encrypt(updated));
       setWorkspace(updated);
       onProfileChange(updated.profile);
+      reportWorkspaceSummary(updated);
       setDirty(false);
       setVaultExists(true);
       setNotice(successMessage);
@@ -146,6 +172,7 @@ export default function PrivateDataSettings({
         setSession(opened.session);
         setWorkspace(opened.data);
         onProfileChange(opened.data.profile);
+        reportWorkspaceSummary(opened.data);
         setDirty(false);
         setNotice("Vault unlocked. Private records are held in this page's memory until you lock it or close the tab.");
       } else {
@@ -154,6 +181,7 @@ export default function PrivateDataSettings({
         setSession(created.session);
         setWorkspace(created.data);
         onProfileChange(created.data.profile);
+        reportWorkspaceSummary(created.data);
         setVaultExists(true);
         setDirty(false);
         setNotice("Encrypted local vault created. Download an encrypted backup before adding important records.");
@@ -261,6 +289,7 @@ export default function PrivateDataSettings({
       setSession(restored.session);
       setWorkspace(validated);
       onProfileChange(validated.profile);
+      reportWorkspaceSummary(validated);
       setBackupPassphrase("");
       setDirty(false);
       setVaultExists(true);
@@ -278,6 +307,7 @@ export default function PrivateDataSettings({
     setSession(null);
     setWorkspace(null);
     onProfileChange(null);
+    reportWorkspaceSummary(null);
     setDirty(false);
     setPassphrase("");
     setBackupPassphrase("");
@@ -300,6 +330,7 @@ export default function PrivateDataSettings({
       setSession(null);
       setWorkspace(null);
       onProfileChange(null);
+      reportWorkspaceSummary(null);
       setVaultExists(false);
       setDirty(false);
       setPassphrase("");
@@ -320,7 +351,7 @@ export default function PrivateDataSettings({
         <section className="private-data-intro">
           <div className="section-heading">
             <div>
-              <span className="eyebrow">PHASE 2 · PRIVATE DATA FOUNDATION</span>
+              <span className="eyebrow">PRIVATE DATA FOUNDATION</span>
               <h2>Private workspace storage</h2>
             </div>
             <span className={unlocked ? "vault-state vault-state-open" : "vault-state"}>
@@ -345,7 +376,7 @@ export default function PrivateDataSettings({
         <section className="private-data-intro phase7-vault-context">
           <div className="section-heading">
             <div>
-              <span className="eyebrow">PRIVATE WORKSPACE · PHASE 7</span>
+              <span className="eyebrow">PRIVATE WORKSPACE</span>
               <h2>{activePageId === "outreach" ? "Outreach" : "Applications"}</h2>
             </div>
             <span className={unlocked ? "vault-state vault-state-open" : "vault-state"}>
@@ -605,7 +636,12 @@ export default function PrivateDataSettings({
         ) : activePageId === "outreach" ? (
           <OutreachWorkspace workspace={workspace} onSaveWorkspace={persistWorkspace} />
         ) : (
-          <ApplicationsWorkspace workspace={workspace} onSaveWorkspace={persistWorkspace} />
+          <ApplicationsWorkspace
+            workspace={workspace}
+            onSaveWorkspace={persistWorkspace}
+            initialLead={initialLead}
+            onLeadPrefillConsumed={onLeadPrefillConsumed}
+          />
         )
       ) : null}
 
