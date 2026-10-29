@@ -502,3 +502,15 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Test plan:** Re-run the normal automatic Frontend CI, browser acceptance, and discovery fixtures on the exact head. Browser acceptance must pass the Phase 7 flow and existing vault/export regression checks.
 - **Definition of done:** All three normal checks pass on the exact commit; update STATUS.md and the ADR-052 outcome with evidence.
 - **Rollback:** Revert the one-line predicate and safe diagnostic label if the browser harness cannot reliably observe the controlled field.
+
+
+## ADR-053 — Scope post-reload browser assertions to the Phase 7 synthetic application
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation
+- **Context:** Browser acceptance on head `b3e0302` passed the full initial Phase 7 draft/version/lead/submission/activity/follow-up path and failed inside the existing unlock-after-reload checkpoint. The test fixture also creates a separate synthetic Settings application, so selecting the first activity panel/status control after reload is ambiguous when cards are sorted by updated time.
+- **Decision:** In the post-reload acceptance check, find the application card identified by the synthetic studio name `CD PROJEKT RED`, open its own activity details, and verify its own applied status and saved response event. Do not rely on the first matching selector in the page.
+- **Boundaries:** Browser test only. No production UI/data changes, no workflow/dependency changes, and synthetic fixture content only.
+- **Test plan:** Run the normal automatic Frontend CI, browser acceptance, and discovery fixtures on the new exact head; verify the reloaded/encrypted-backup path checks the intended Phase 7 record.
+- **Definition of done:** All three checks pass and STATUS.md records exact-head evidence. Do not manually rerun workflows.
+- **Rollback:** Revert the targeted browser assertion while retaining this decision and document the remaining acceptance limitation if record identity cannot be verified safely.
