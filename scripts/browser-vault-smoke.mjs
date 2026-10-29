@@ -593,12 +593,15 @@ async function main() {
     await client.evaluate(
       "(() => { if (window.__phase7OutboundAttempts) return true; window.__phase7OutboundAttempts = []; const nativeFetch = window.fetch.bind(window); window.fetch = (...args) => { const request = args[0]; const method = (args[1]?.method ?? request?.method ?? 'GET').toUpperCase(); if (!['GET', 'HEAD', 'OPTIONS'].includes(method)) window.__phase7OutboundAttempts.push('fetch'); return nativeFetch(...args); }; const nativeOpen = XMLHttpRequest.prototype.open; XMLHttpRequest.prototype.open = function(method, ...args) { this.__phase7Method = String(method).toUpperCase(); return nativeOpen.call(this, method, ...args); }; const nativeSend = XMLHttpRequest.prototype.send; XMLHttpRequest.prototype.send = function(...args) { if (this.__phase7Method && !['GET', 'HEAD', 'OPTIONS'].includes(this.__phase7Method)) window.__phase7OutboundAttempts.push('xhr'); return nativeSend.apply(this, args); }; return true; })()",
     );
+    currentStep = "Phase 7 navigation to Outreach";
     const outreachClicked = await client.evaluate(
       "(() => { const item = [...document.querySelectorAll('.nav-link')].find((element) => element.innerText.trim() === 'Outreach'); if (!item) return false; item.click(); return true; })()",
     );
     if (!outreachClicked) throw new Error("phase7-outreach-navigation-not-found");
+    currentStep = "Phase 7 Outreach initial render";
     await client.waitForText("Write a thoughtful introduction, not a mass message.");
 
+    currentStep = "Phase 7 studio selection";
     const studioSelected = await client.evaluate(
       "(() => { const label = [...document.querySelectorAll('.phase7-form-grid label')].find((item) => item.innerText.trim().startsWith('Studio')); const select = label?.querySelector('select'); const setter = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, 'value')?.set; if (!select || !setter) return false; setter.call(select, 'cd-projekt-red'); select.dispatchEvent(new Event('change', { bubbles: true })); return true; })()",
     );
@@ -607,42 +610,61 @@ async function main() {
       '[data-testid="outreach-motivation"]',
       "I admire the team's mix of game development and technical problem solving.",
     );
+    currentStep = "Phase 7 generate editable template";
     await client.clickButton("Generate editable template");
+    currentStep = "Phase 7 generated message appears";
     await client.waitForText("What draws me to your team is:");
+    currentStep = "Phase 7 save first draft version";
     await client.clickButton("Save draft version");
+    currentStep = "Phase 7 first draft save confirmation";
     await client.waitForText("Draft version 1 encrypted and saved locally.");
+    currentStep = "Phase 7 save second reviewed version";
     await client.clickButton("Mark reviewed & save version");
+    currentStep = "Phase 7 second draft save confirmation";
     await client.waitForText("Draft version 2 encrypted and saved locally.");
+    currentStep = "Phase 7 create lead from saved draft";
     await client.clickButton("Create interested lead from saved version");
+    currentStep = "Phase 7 lead save confirmation";
     await client.waitForText("Lead saved locally as interested.");
 
+    currentStep = "Phase 7 navigation to Applications";
     const applicationsClicked = await client.evaluate(
       "(() => { const item = [...document.querySelectorAll('.nav-link')].find((element) => element.innerText.trim() === 'Applications'); if (!item) return false; item.click(); return true; })()",
     );
     if (!applicationsClicked) throw new Error("phase7-applications-navigation-not-found");
+    currentStep = "Phase 7 Applications initial render";
     await client.waitForText("Track what actually happened.");
+    currentStep = "Phase 7 lead record visible";
     await client.waitForText("CD PROJEKT RED");
 
+    currentStep = "Phase 7 manual applied status confirmation";
     const appliedSelected = await client.evaluate(
       "(() => { const select = document.querySelector('[data-testid=application-status]'); const setter = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, 'value')?.set; if (!select || !setter) return false; setter.call(select, 'applied'); select.dispatchEvent(new Event('change', { bubbles: true })); return true; })()",
     );
     if (!appliedSelected) throw new Error("phase7-application-status-not-found");
+    currentStep = "Phase 7 submitted status confirmation visible";
     await client.waitForText("Manual submission confirmation recorded.");
 
+    currentStep = "Phase 7 select response activity";
     const responseSelected = await client.evaluate(
       "(() => { const select = document.querySelector('[data-testid=application-activity-type]'); const setter = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, 'value')?.set; if (!select || !setter) return false; setter.call(select, 'response'); select.dispatchEvent(new Event('change', { bubbles: true })); const details = document.querySelector('.phase7-activity'); if (details) details.open = true; return Boolean(select); })()",
     );
     if (!responseSelected) throw new Error("phase7-activity-type-not-found");
     await client.fill('[data-testid="application-activity-note"]', "Synthetic recruiter response recorded.");
+    currentStep = "Phase 7 save response activity";
     await client.clickButton("Add activity");
+    currentStep = "Phase 7 response activity visible";
     await client.waitForText("Synthetic recruiter response recorded.");
 
+    currentStep = "Phase 7 set follow-up date";
     const followUpSet = await client.evaluate(
       "(() => { const input = document.querySelector('[data-testid=application-follow-up-date]'); const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')?.set; if (!input || !setter) return false; setter.call(input, '2026-11-02'); input.dispatchEvent(new Event('input', { bubbles: true })); input.dispatchEvent(new Event('change', { bubbles: true })); return true; })()",
     );
     if (!followUpSet) throw new Error("phase7-follow-up-date-not-found");
+    currentStep = "Phase 7 follow-up save confirmation";
     await client.waitForText("Follow-up date saved locally.");
 
+    currentStep = "Phase 7 no-outbound and applied-state assertion";
     const outcome = await client.evaluate(
       "(() => ({ status: document.querySelector('[data-testid=application-status]')?.value ?? '', outboundAttempts: window.__phase7OutboundAttempts?.length ?? -1 }))()",
     );
@@ -650,21 +672,26 @@ async function main() {
       throw new Error("phase7-application-state-or-privacy-check-failed");
     }
 
+    currentStep = "Phase 7 return to Outreach";
     const backToOutreach = await client.evaluate(
       "(() => { const item = [...document.querySelectorAll('.nav-link')].find((element) => element.innerText.trim() === 'Outreach'); if (!item) return false; item.click(); return true; })()",
     );
     if (!backToOutreach) throw new Error("phase7-outreach-return-not-found");
+    currentStep = "Phase 7 version history visible";
     await client.waitForText("Version 2");
+    currentStep = "Phase 7 persisted draft version count";
     const storedVersions = await client.evaluate(
       "document.querySelectorAll('[data-testid=outreach-draft-row]').length",
     );
     if (storedVersions < 2) throw new Error("phase7-draft-version-history-incomplete");
     const noOutbound = await client.evaluate("window.__phase7OutboundAttempts?.length ?? -1");
     if (noOutbound !== 0) throw new Error("phase7-outbound-privacy-boundary-failed");
+    currentStep = "Phase 7 return to Settings";
     const settingsClicked = await client.evaluate(
       "(() => { const item = [...document.querySelectorAll('.nav-link')].find((element) => element.innerText.trim() === 'Settings'); if (!item) return false; item.click(); return true; })()",
     );
     if (!settingsClicked) throw new Error("settings-navigation-not-found");
+    currentStep = "Phase 7 Settings return render";
     await client.waitForText("Private workspace storage");
   });
 
