@@ -21,13 +21,13 @@ GitHub Pages serves static HTML, CSS and JavaScript. It does not run Python or s
 - https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages
 - https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site
 
-The current source/specification repository is private and contains project context. Do not switch it to public by default. The proposed zero-cost arrangement is:
-1. Keep this source repository private.
-2. Create a separate public deployment repository containing built static assets and sanitized public studio/opportunity JSON.
-3. Run the discovery/build pipeline in the private source repository; maintain durable check history on a dedicated discovery-state branch; publish an allowlisted static artifact/data set to the public deployment repository only when public data materially changes.
-4. Keep all candidate-specific data in browser-local encrypted storage/export, not in repository data or the static website's files.
+The source/specification repository `hhaitam95/game-industry-outreach-tracker` is currently public; Phase 8 does not change its visibility. Do not assume source privacy, and never place private candidate records, resumes, drafts, application history, credentials, or secrets in this repository.
 
-A second repository and a narrowly scoped deployment token add complexity. This is a deliberate privacy compromise. If the user later agrees to make source code public after a privacy/history review, a single public repository may be simpler, but it must never contain private candidate data.
+ADR-055 selects same-repository GitHub Pages deployment for Phase 8. The source repository `hhaitam95/game-industry-outreach-tracker` is already public and remains the canonical location for source, tests, documentation, data contracts and workflow configuration. The manual workflow uploads only the validated Vite `dist/` directory as a Pages artifact; it does not copy the repository tree into the published website.
+
+The publication workflow is manual-only and defaults to validation without publishing. An explicit `publish` choice may upload/deploy only from `main`; no push trigger, schedule, live-discovery dispatch, or discovery-completion publication is introduced. Configure this repository's Pages source as GitHub Actions before the first deployment. No separate repository or long-lived cross-repository token is required. The design change does not claim a live deployment.
+
+Keep all candidate-specific data in browser-local encrypted storage/export, not in repository data or the static website's files.
 
 GitHub Pages is a public website, not a private dashboard. Browser-local data is not automatic cloud sync. If genuine private multi-device storage becomes a requirement, use a separate authenticated backend and persistent storage; Pages can remain the frontend.
 
@@ -47,7 +47,7 @@ GitHub Pages is a public website, not a private dashboard. Browser-local data is
 - YAML/JSON for the curated source registry and generated public data contract.
 
 ### Persistence
-- Public studio/opportunity data: normalized source data in the private repository; sanitized published JSON in the public deployment repository.
+- Public studio/opportunity data: normalized monitoring state on `discovery-state`; only the schema-validated public projection is bundled into the static build and published as part of the Pages artifact.
 - Private candidate profile, CV-derived fields, draft text, and application interactions: browser-local encrypted records and encrypted user-controlled export/import. Do not persist raw uploaded CV files by default.
 - No server-side database in the first release. A future authenticated backend would require a separate decision.
 
@@ -56,11 +56,11 @@ The previous Streamlit/SQLite proposal is superseded for the user-facing hosted 
 ## 4. Deployment and data flow
 
 ### Public data pipeline
-Curated registry on main → scheduled Action → source adapters → normalized observations → change detection → durable private state on discovery-state branch → validated public data contract → build static assets → publish sanitized files to Pages repository only when its public projection changes.
+Curated registry on main → owner-triggered discovery Action → source adapters → normalized observations → change detection → durable monitoring state on `discovery-state` → validated public data contract → explicitly selected static build → upload only the checked `dist/` artifact → GitHub Pages deployment through the same repository's Actions workflow.
 
 The source repo may retain operational state and richer research notes. The public deployment output must be created using an explicit allowlist, not by copying the whole source repository. Only public company facts, approved official career-route facts, public vacancy metadata, source URLs, verification state, and public change events may be published. Personal application state, private profile data, uploaded resume text, draft messages, private notes, and named personal contact notes must not be included.
 
-If cross-repository publication is used, store the deployment token as a GitHub Actions secret with the minimum permissions required for the target repository. It must never be placed in source, JSON, HTML, JavaScript, build artifacts or logs.
+The same-repository Pages workflow uses a read-only build job and a separate deploy job with `pages: write` and `id-token: write`; it does not require a personal access token or an Actions secret. If cross-repository publication is explicitly approved in a future decision, its credential must be narrowly scoped and never placed in frontend code, artifacts, or logs.
 
 ### Private browser flow
 User-selected file → browser memory → local text extraction → deterministic analysis and review → structured editable resume proposal → browser-generated DOCX/PDF download. Private profile/tracker records are stored locally using an encrypted client-side format and can be exported/imported by the user. The app should not transmit a CV or private data unless the user deliberately copies selected content into a separate external service.
@@ -82,7 +82,7 @@ Treat daily polling as best-effort rather than real-time monitoring. Keep manual
 
 ### Minimal permissions and safety
 - Use least-privilege workflow permissions. Grant contents: write only to a job that must update data in its own repository.
-- For a different public site repo, use a separate narrowly scoped deploy credential in Actions secrets; a default GITHUB_TOKEN should not be assumed to write to another repository.
+- For the selected same-repository Pages deployment, use GitHub's Pages artifact/OIDC workflow and avoid cross-repository credentials. If another deployment repository is approved in the future, use a narrowly scoped secret rather than assuming the source repository's `GITHUB_TOKEN` can write there.
 - Pin third-party actions to reviewed full commit SHAs where practical.
 - Never expose secrets to build artifacts or logs.
 - Set timeouts, bounded retries, per-domain request delays, concurrency controls, and safe failure handling.
@@ -216,8 +216,7 @@ Security controls:
 
 ## 15. Open decisions
 
-- Name/create the public Pages deployment repository and choose its publication flow.
-- Confirm whether two-repository publication overhead is acceptable or whether a different hosting plan is chosen.
+- Configure this repository's Settings → Pages → Source as GitHub Actions before the first publish. The connected GitHub tools used for implementation do not expose this Pages-settings write, so the owner must complete this one-time setting.
 - Choose document libraries after testing sample DOCX/PDF formats and licensing.
 - Define exact public JSON schema and initial studio registry.
 - Review the implemented IndexedDB/AES-GCM vault and encrypted-backup recovery UX after browser testing.

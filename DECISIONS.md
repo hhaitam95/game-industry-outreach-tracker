@@ -578,3 +578,32 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Test plan:** Run the normal automatic Frontend CI, browser acceptance, and discovery fixtures on the new exact head; verify the reloaded/encrypted-backup path checks the intended Phase 7 record.
 - **Definition of done:** All three checks pass and STATUS.md records exact-head evidence. Do not manually rerun workflows.
 - **Rollback:** Revert the targeted browser assertion while retaining this decision and document the remaining acceptance limitation if record identity cannot be verified safely.
+
+## ADR-054 — Phase 8 public Pages output and privacy gate
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation; target provisioning and first publication remain pending.
+- **Goal:** Publish the browser application without exposing private candidate records or source-repository history as Pages content.
+- **Decision:** Use `hhaitam95/game-industry-outreach-tracker-site` as a separate output-only public Pages repository. It receives only generated `dist/` static assets built from this source repository and a public opportunity snapshot validated against `schemas/public-opportunity-snapshot.schema.json`.
+- **Trigger boundary:** The publication workflow is `workflow_dispatch` only. The default mode is validation/build-only; publication requires an explicit `publish` choice. No push, schedule, live discovery dispatch, or discovery-completion trigger is added.
+- **Data boundary:** Publication mode validates the existing `discovery-state` snapshot using the existing shared validator before bundling it. Read/parse/schema failures fail closed. Private profile/CV/draft/application records, user uploads, contact notes, tokens, and credentials are never inputs to the build.
+- **Permissions:** Use source `GITHUB_TOKEN` with `contents: read`. A fine-grained `PUBLIC_PAGES_TOKEN` may write only to the target repository's contents; never expose it to frontend code, build environment, artifacts, command output, or logs. Pin workflow actions to reviewed commit SHAs.
+- **Tests:** Existing frontend CI, browser acceptance, discovery fixtures, strict public snapshot validation, public artifact boundary checks, repository-subpath smoke test, and encrypted local-vault/export/restore checks must pass on the exact reviewed commit.
+- **Definition of done:** Target repository and Pages source are configured; publish workflow passes exact-head checks; a manually confirmed publish deploys static files to the target root; public URL/assets and privacy boundary are verified; recovery and rollback are documented. Until target provisioning and a successful run, Phase 8 is not declared deployed/complete.
+- **Failure behavior:** Missing target, token, or Pages setup must stop before publication. Invalid snapshot or failed validation must preserve the previous published site and create no release commit.
+- **Rollback:** Revert the last publication commit in the target repository or restore the previous known-good static artifact; remove/rotate the target-scoped secret if compromised. Never rewrite history or delete a target branch.
+- **Supersedes:** This decision resolves the hosting-source question left open by ADR-013 and ADR-018; it does not authorize scheduled discovery or any visibility change.
+
+## ADR-055 — Same-repository GitHub Pages Actions deployment
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation; supersedes ADR-054.
+- **Goal:** Publish only the validated static website while keeping source code, CI, documentation, and deployment configuration in the original repository.
+- **Decision:** Use this already-public repository as the Pages source. Upload the checked `dist/` folder as a Pages artifact and deploy it with GitHub's official Pages Actions; use the project URL path `/game-industry-outreach-tracker/`. Do not create a second repository or cross-repository publishing token.
+- **Trigger and permission boundary:** Keep release workflow `workflow_dispatch` only with `validate-only` as the default and explicit `publish` as opt-in. Permit publication only from `main`. The build job has `contents: read`; the dedicated deploy job alone receives `pages: write` and `id-token: write`.
+- **Data contract:** Publish only generated static output and the schema-validated public opportunity snapshot. Private profile, CV, outreach draft and application records remain browser-local and are never inputs to the build.
+- **Failure behavior:** Snapshot, build, privacy, artifact, or asset-path failure must stop the run before Pages deployment. Validation-only never uploads a Pages artifact or deploys. A failed deployment must not be reported as successful.
+- **Tests:** Run formatting, lint, type checks, unit/component tests, dependency audit, lockfile checks, production build, repository/public-artifact privacy gates, base-path smoke test, browser acceptance, and discovery fixtures on the exact reviewed head.
+- **Rollback:** Revert a bad source/workflow change and manually publish the last known-good revision from `main`; do not force-push or rewrite history. The prior successfully deployed site remains until a later deployment succeeds.
+- **Definition of done:** Exact-head checks pass; the owner configures this repository's Pages source as GitHub Actions; a manually selected publish run deploys from `main`; the canonical URL and local assets are verified and public content is reviewed. Before that first publish, Phase 8 is implemented but not deployed.
+- **Why this supersedes ADR-054:** The source repository is already public, so a second public repository does not make the source private. The same-repository artifact deployment removes the extra repository and long-lived cross-repository credential without publishing the repository's full tree as website content.

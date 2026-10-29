@@ -31,7 +31,7 @@ A personal, evidence-driven workspace for discovering video game studios and opp
 
 ## Hosting and privacy model
 
-GitHub Pages is a public static host, not a private server-side application. This repository is public. Any future Pages host, deployment target, or publishing workflow is deferred to Phase 8 and requires a separate privacy review and owner approval. No deployment or publication is approved in the current phase.
+GitHub Pages is a public static host, not a private server-side application. The existing source repository is already public and remains the single repository for source, tests, documentation, and the website deployment workflow. Phase 8 uploads only the validated Vite `dist/` artifact to GitHub Pages using this repository's Actions workflow; it does not publish the rest of the repository tree as website content. Publication is manual-only: `validate-only` is the default and `publish` is an explicit choice restricted to `main`. No separate output repository or personal access token is needed. Private profile facts, CV contents, drafts, application history, contact notes, credentials, and secrets are forbidden from the public artifact. The owner must set Settings → Pages → Source to GitHub Actions before the first deployment. Browser vault data remains local to the user's browser and is not cross-device cloud sync.
 
 Private candidate profile data, resume content, personal drafts, and application history must never be committed or published. Profile and tracker records use encrypted browser-local records with user-controlled encrypted export/import. Original CVs and extracted resume text are not stored, and this is not automatic cloud sync. A private backend would require a future decision.
 

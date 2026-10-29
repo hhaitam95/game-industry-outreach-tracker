@@ -1,0 +1,154 @@
+name: Public Pages release
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Validate the public build, or explicitly publish it to GitHub Pages."
+        required: true
+        type: choice
+        options:
+          - validate-only
+          - publish
+        default: validate-only
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-pages-release
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Validate or build the static public site
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+    steps:
+      - name: Check out source repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Require the default branch for publication
+        if: inputs.mode == 'publish'
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$GITHUB_REF" != "refs/heads/main" ]]; then
+            echo "Publish mode can run only from main. No Pages artifact was uploaded or deployed." >&2
+            exit 1
+          fi
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Check locked dependency registry URLs
+        run: npm run check:lockfile-registry
+
+      - name: Check formatting
+        run: npm run format:check
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Run unit and component tests
+        run: npm test
+
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
+
+      - name: Sync the approved public snapshot only for an explicit publication
+        if: inputs.mode == 'publish'
+        run: npm run data:sync
+
+      - name: Build the static site for the same-repository Pages path
+        run: npm run build
+        env:
+          VITE_BASE_PATH: /game-industry-outreach-tracker/
+
+      - name: Check tracked paths and built output for privacy leaks
+        run: npm run check:privacy
+
+      - name: Check generated Pages artifact boundary
+        run: npm run check:pages-artifact
+
+      - name: Smoke-test same-repository Pages base path and local assets
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          base_path="/game-industry-outreach-tracker/"
+          preview_log="$(mktemp)"
+          npm run preview -- --host 127.0.0.1 --port 4173 --strictPort >"$preview_log" 2>&1 &
+          preview_pid=$!
+
+          cleanup() {
+            kill "$preview_pid" 2>/dev/null || true
+            wait "$preview_pid" 2>/dev/null || true
+            rm -f "$preview_log"
+          }
+          trap cleanup EXIT
+
+          preview_url="http://127.0.0.1:4173${base_path}"
+          ready=false
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent --show-error "$preview_url" --output /tmp/pages-index.html 2>/dev/null; then
+              ready=true
+              break
+            fi
+            sleep 1
+          done
+
+          if [[ "$ready" != "true" ]]; then
+            cat "$preview_log"
+            echo "Vite preview did not serve the target repository path." >&2
+            exit 1
+          fi
+
+          grep -q '<div id="root"></div>' /tmp/pages-index.html
+          js_asset="$(grep -oE 'src="/game-industry-outreach-tracker/assets/[^"]+\.js"' /tmp/pages-index.html | head -n 1 | cut -d '"' -f 2 || true)"
+          css_asset="$(grep -oE 'href="/game-industry-outreach-tracker/assets/[^"]+\.css"' /tmp/pages-index.html | head -n 1 | cut -d '"' -f 2 || true)"
+          if [[ -z "$js_asset" || -z "$css_asset" ]]; then
+            echo "Expected local JavaScript and CSS assets below the same-repository Pages path." >&2
+            exit 1
+          fi
+          curl --fail --silent --show-error "http://127.0.0.1:4173${js_asset}" --output /tmp/pages-app.js
+          curl --fail --silent --show-error "http://127.0.0.1:4173${css_asset}" --output /tmp/pages-app.css
+          test -s /tmp/pages-app.js
+          test -s /tmp/pages-app.css
+          echo "The static site and its assets load under the same-repository GitHub Pages path."
+
+      - name: Upload validated static output for GitHub Pages
+        if: inputs.mode == 'publish'
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
+        with:
+          path: dist
+
+  deploy:
+    name: Deploy the validated Pages artifact
+    if: inputs.mode == 'publish'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

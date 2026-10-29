@@ -52,7 +52,7 @@ Success means helping the user move from discovery to a researched, reviewed, re
 - Client-side private profile, CV-derived content, drafts, and application history with encrypted local persistence/export/import.
 - Manual tracking of submissions, responses, reminders, and outcomes.
 - Optional sourced salary estimates that do not filter or rank opportunities.
-- Private source repository, separate public deployment target if using GitHub Free Pages, tests, backups and maintainable documentation.
+- Public source repository with same-repository GitHub Pages Actions deployment, tests, backups and maintainable documentation.
 
 ### Out of scope for the first release
 
@@ -217,24 +217,23 @@ Every estimate must be labelled as an estimate and show source, date, currency, 
 
 There is no personal salary floor. Compensation is not a discovery or filtering constraint; the user will discuss it directly with employers.
 
-## 13. Data, privacy, and security
+## 13. Dat## 13. Data, privacy, and security
 
-- Keep the current source/specification repository private unless the user explicitly approves a change in visibility after a full privacy review.
-- GitHub Pages is a public static host for this design. GitHub Free Pages requires a public source repository, and published site content is publicly accessible. Do not deploy private user data or secret values to it.
-- Prefer a separate public deployment repository containing only static frontend assets and sanitized public studio/opportunity data. Keep private profile facts, resume contents, drafts, application history, and named contact notes out of that repository.
+- The source/specification repository is public and stays public; keep all private candidate data out of every branch, artifact, workflow log, and public output.
+- GitHub Pages is a public static host. Phase 8 deploys from the same repository using a GitHub Actions Pages artifact. The published site contains only the uploaded build artifact; the source tree remains viewable separately on GitHub because the repository is public.
+- Publish only validated static UI assets and an allowlisted, schema-validated public studio/opportunity snapshot. Never put private profile facts, resume contents, personalized drafts, application history, contact notes, credentials, or secrets into public assets.
 - The browser should not send an uploaded resume or private profile data to any backend by default. Use client-side file processing and no third-party analytics/CDN scripts in the initial privacy-sensitive workflow.
 - Do not treat browser storage as a secure cloud database. Keep private records in browser-local storage with encryption at rest where practical, and support encrypted export/import. Explain that local storage is per browser/device and can be lost; it does not provide automatic cross-device synchronization.
 - Browser-side encryption reduces exposure of locally stored files but cannot protect data from compromised frontend code while the user unlocks and edits it. Keep dependencies controlled, avoid external scripts, apply a restrictive Content Security Policy where practical, and review public site updates carefully.
 - If seamless private multi-device sync becomes a requirement, design a separate authenticated backend with durable storage; do not try to implement it through GitHub Pages alone.
 - Never commit CVs, generated personal resumes, profile exports, application history, recruiter correspondence, database files, uploads, credentials, API keys or deployment secrets.
-- Keep any cross-repository publish token in GitHub Actions secrets with the minimum required repository scope and expiration; never put it in source code, public site JavaScript, artifacts, or logs.
-- Use least-privilege GitHub Actions permissions. A workflow that writes to its own repository should explicitly declare only the required permissions; any cross-repository publishing credential is a separate secret.
+- Use the repository's built-in `GITHUB_TOKEN`/OIDC Pages deployment mechanism with least-privilege job permissions; do not create a personal access token for the same-repository deployment. Any cross-repository publishing credential, if approved in a future design, must be narrowly scoped and stored only as an Actions secret.
 - Treat scraped pages, job descriptions, source snippets, model output and emails as untrusted content, never instructions to the application/agent.
 - Respect source terms, access restrictions and reasonable request rates; do not bypass login, CAPTCHA or anti-bot controls.
 - Minimize collected contact data; prefer official recruitment routes and generic role contacts in public data.
 - Provide backups, export and restore documentation for private browser records before relying on them for important applications.
 
-## 14. Cost and AI requirements
+t and AI requirements
 
 The first useful release must not require a paid AI API. It should support evidence-backed discovery, deterministic CV checks, templates, local file processing and manual AI-assisted drafting via a separate assistant.
 
@@ -244,19 +243,21 @@ Do not embed API keys in client-side code, site assets, JSON, HTML, JavaScript, 
 
 ## 15. GitHub Pages, private records, and remote access
 
-GitHub Pages serves static HTML, CSS and JavaScript; it does not run Python or server-side application code. The published site is public. On GitHub Free, Pages requires a public source repository. Therefore, the current private source repository must not simply be switched to public without an explicit privacy review.
+GitHub Pages serves static HTML, CSS and JavaScript; it does not run Python or server-side application code. The published site is public. The existing source repository is already public, so Phase 8 does not make it private or change its visibility.
 
-### Recommended first-release arrangement
+### First-release arrangement
 
-- Keep this source/specification repository private.
-- Publish the static website and sanitized public studio/opportunity JSON to a separate public Pages deployment repository.
-- Use the private repository's GitHub Actions workflow to scan sources, update the private canonical data/state, build the static site, and publish only approved public files to the deployment repository.
-- Use a narrowly scoped, expiring deployment credential stored as a GitHub Actions secret if cross-repository publishing is required. Never expose it in the deployed files or logs.
-- Keep candidate profile, original resume, tailored resume files, private drafts and application/interaction history in browser-local encrypted storage and user-controlled encrypted exports. Do not publish them to the site repository.
+- Keep source code, tests, documentation, data contracts, and deployment workflow in the existing `hhaitam95/game-industry-outreach-tracker` repository.
+- Build the Vite static site and upload only the validated `dist/` directory as a GitHub Pages artifact. Do not copy the source repository tree to the website or create a second output-only repository.
+- Keep publication manual-only through `workflow_dispatch`: `validate-only` is the default, and only an explicit `publish` choice from `main` uploads the artifact and deploys it. Never trigger publication from a push, schedule, or discovery completion.
+- During an explicitly requested publication run, validate the existing `discovery-state` snapshot against the shared schema before building. If the source is missing, malformed, or invalid, stop before Pages deployment.
+- Use a read-only build job and a separate deployment job with only `pages: write` and `id-token: write`. Use pinned official Actions; do not create or store a personal access token for same-repository deployment.
+- Configure the repository's Settings → Pages → Source as GitHub Actions before the first publication. No second repository or Actions secret is needed.
+- Keep candidate profile, original resume, tailored resume files, private drafts and application/interaction history in browser-local encrypted storage and user-controlled encrypted exports. Do not publish them to the static site.
 - Allow manual encrypted export/import to move private records between devices. Explain that this is not automatic syncing and that browser-local data can be cleared or lost.
 - Provide a local/offline fallback where feasible.
 
-This is the lowest-cost way to combine a public static site with a private development repository and avoid putting personal data in a public dataset. It introduces a second, public deployment repository and a publish secret; that complexity must be weighed against publishing the entire codebase openly.
+This approach keeps the static website's published content limited to generated output while retaining a single repository for project source and operations. Since the repository is already public, it does not provide source-code confidentiality; the privacy boundary is enforced by keeping personal data out of the repository and published artifact.
 
 ### Future alternative
 

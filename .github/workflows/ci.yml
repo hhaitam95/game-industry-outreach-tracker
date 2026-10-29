@@ -74,6 +74,10 @@ jobs:
         if: steps.install.outcome == 'success' && steps.build.outcome == 'success'
         run: npm run check:privacy
 
+      - name: Check public Pages artifact boundary
+        if: steps.install.outcome == 'success' && steps.build.outcome == 'success'
+        run: npm run check:pages-artifact
+
       - name: Smoke-test preview and repository-subpath assets
         if: steps.install.outcome == 'success' && steps.build.outcome == 'success'
         shell: bash
