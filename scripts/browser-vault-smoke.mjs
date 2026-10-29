@@ -747,6 +747,8 @@ async function main() {
     if (profileName !== "BROWSER_TEST_PROFILE_CANARY") throw new Error("restored-profile-mismatch");
     const phase7ApplicationsClicked = await client.evaluate("(() => { const item = [...document.querySelectorAll('.nav-link')].find((element) => element.innerText.trim() === 'Applications'); if (!item) return false; item.click(); return true; })()");
     if (!phase7ApplicationsClicked) throw new Error("phase7-applications-navigation-not-found");
+    await client.waitForText("Track what actually happened.");
+    await client.evaluate("(() => { const details = document.querySelector('.phase7-activity'); if (details) details.open = true; return true; })()");
     await client.waitForText("Synthetic recruiter response recorded.");
     const restoredStatus = await client.evaluate("document.querySelector('[data-testid=application-status]')?.value ?? ''");
     if (restoredStatus !== "applied") throw new Error("phase7-application-state-not-restored");
@@ -780,6 +782,9 @@ async function main() {
       "Synthetic QA Profile",
       "Browser QA Role",
       "Synthetic test content only.",
+      "Synthetic recruiter response recorded.",
+      "I admire the team's mix of game development and technical problem solving.",
+      "Hello CD PROJEKT RED team",
       "https://example.com/careers",
     ]) {
       if (serialized.includes(marker)) throw new Error("plaintext-found-in-indexeddb");
