@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import type { RoleLeadPrefillData, RoleReviewProfile } from "./workspace.types";
 import {
   IS_SYNTHETIC_SNAPSHOT,
   OPPORTUNITY_SNAPSHOT,
@@ -9,7 +10,15 @@ import { getSnapshotFreshness } from "../lib/opportunities/freshness.mjs";
 import OpportunityFilters from "./OpportunityFilters";
 import OpportunityRoleCard, { displayDate } from "./OpportunityRoleCard";
 
-export default function OpportunityExplorer() {
+export default function OpportunityExplorer({
+  profile = null,
+  onTrackAsLead = () => undefined,
+  onOpenSettings = () => undefined,
+}: {
+  profile?: RoleReviewProfile | null;
+  onTrackAsLead?: (lead: RoleLeadPrefillData) => void;
+  onOpenSettings?: () => void;
+}) {
   const [query, setQuery] = useState("");
   const [studioId, setStudioId] = useState("");
   const [family, setFamily] = useState("");
@@ -65,7 +74,7 @@ export default function OpportunityExplorer() {
     >
       <div className="opportunity-explorer-intro">
         <div>
-          <span className="eyebrow">PHASE 5A · BUNDLED ROLE SNAPSHOT</span>
+          <span className="eyebrow">OPPORTUNITY EXPLORER</span>
           <h2 id="opportunity-explorer-title">Opportunity explorer</h2>
           <p>
             Browse public role links from a reviewed snapshot. Career sites and role data are not fetched at runtime.
@@ -101,6 +110,7 @@ export default function OpportunityExplorer() {
         <>
           <p className="opportunity-boundary-note">
             Last-seen means a link was observed by a scan; it does not prove that a role is open or currently available.
+            Coverage is limited to configured career sources and may be incomplete; this is not a global vacancy feed.
             Seniority, location, contract and relocation clues are parsed from listing text, not structured source
             fields. Work authorization and hiring eligibility are never inferred.
           </p>
@@ -150,7 +160,14 @@ export default function OpportunityExplorer() {
           ) : (
             <div className="opportunity-results-list" data-testid="opportunity-results-list">
               {results.roles.slice(0, visibleLimit).map((role) => (
-                <OpportunityRoleCard key={role.id} role={role} synthetic={IS_SYNTHETIC_SNAPSHOT} />
+                <OpportunityRoleCard
+                  key={role.id}
+                  role={role}
+                  synthetic={IS_SYNTHETIC_SNAPSHOT}
+                  profile={profile}
+                  onTrackAsLead={onTrackAsLead}
+                  onOpenSettings={onOpenSettings}
+                />
               ))}
             </div>
           )}

@@ -17,6 +17,8 @@ test("OpportunityExplorer component renders the public-data trust boundary", asy
     assert.match(markup, /Opportunity explorer/);
     assert.match(markup, /Sample data - not a real scan/);
     assert.match(markup, /Last-seen means a link was observed by a scan/);
+    assert.match(markup, /Coverage is limited to configured career sources and may be incomplete/);
+    assert.match(markup, /Review role against your profile/);
     assert.match(markup, /Target families only/);
     assert.match(markup, /Open placeholder URL/);
     assert.equal((markup.match(/data-testid="opportunity-row"/g) ?? []).length, 15);

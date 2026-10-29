@@ -1,4 +1,5 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
+import type { RoleLeadPrefill } from "./workspace.types";
 import { APPLICATION_STATUSES } from "../lib/private-data/schema.mjs";
 import { STUDIO_PROFILES } from "../lib/studios/catalog.mjs";
 import { validateWorkspaceData } from "../lib/private-data/schema.mjs";
@@ -11,6 +12,8 @@ type ApplicationStatus = "interested" | "applied" | "interview" | "rejected" | "
 type Props = {
   workspace: Workspace;
   onSaveWorkspace: (next: Workspace, message: string) => Promise<boolean>;
+  initialLead?: RoleLeadPrefill | null;
+  onLeadPrefillConsumed?: () => void;
 };
 
 const STATUS_LABELS: Record<ApplicationStatus, string> = {
@@ -38,7 +41,12 @@ function todayIso() {
   return new Date().toISOString().slice(0, 10);
 }
 
-export default function ApplicationsWorkspace({ workspace, onSaveWorkspace }: Props) {
+export default function ApplicationsWorkspace({
+  workspace,
+  onSaveWorkspace,
+  initialLead = null,
+  onLeadPrefillConsumed = () => undefined,
+}: Props) {
   const [studioId, setStudioId] = useState("");
   const [otherStudio, setOtherStudio] = useState("");
   const [roleTitle, setRoleTitle] = useState("");
@@ -58,6 +66,21 @@ export default function ApplicationsWorkspace({ workspace, onSaveWorkspace }: Pr
   const byStatus = (status: ApplicationStatus) => applications.filter((app) => app.status === status).length;
   const filtered = filterStatus === "all" ? applications : applications.filter((app) => app.status === filterStatus);
   const selectedStudio = STUDIO_PROFILES.find((studio) => studio.id === studioId) ?? null;
+
+  useEffect(() => {
+    if (!initialLead) return;
+    setStudioId(initialLead.studioId);
+    setOtherStudio(initialLead.studioId ? "" : initialLead.studioName);
+    setRoleTitle(initialLead.roleTitle);
+    setApplicationUrl(initialLead.applicationUrl);
+    setNotes(
+      "Started from a role snapshot. Verify current availability and official application instructions before acting.",
+    );
+    setOutreachDraftId("");
+    setNotice("Role details are prefilled only. Save the lead to track it; no application has been submitted.");
+    setLocalError("");
+    onLeadPrefillConsumed();
+  }, [initialLead, onLeadPrefillConsumed]);
 
   async function addApplication(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -201,7 +224,7 @@ export default function ApplicationsWorkspace({ workspace, onSaveWorkspace }: Pr
   return (
     <div className="phase7-page page-stack" data-testid="applications-workspace">
       <section className="phase7-intro">
-        <span className="eyebrow">PHASE 7 · APPLICATION TRACKER</span>
+        <span className="eyebrow">APPLICATION TRACKER</span>
         <h2>Track what actually happened.</h2>
         <p>
           Leads, submissions, replies, interviews, follow-ups and outcomes are private encrypted records. Status is

@@ -248,7 +248,7 @@ export default function OutreachWorkspace({ workspace, onSaveWorkspace }: Props)
   return (
     <div className="phase7-page page-stack" data-testid="outreach-workspace">
       <section className="phase7-intro">
-        <span className="eyebrow">PHASE 7 · OUTREACH DRAFTING</span>
+        <span className="eyebrow">OUTREACH DRAFTING</span>
         <h2>Write a thoughtful introduction, not a mass message.</h2>
         <p>
           Drafts and revision history are saved only inside the encrypted local vault. Templates use the selected

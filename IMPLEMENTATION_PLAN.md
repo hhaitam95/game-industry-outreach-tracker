@@ -137,14 +137,23 @@ The binding implementation rules are in [AGENTS.md](AGENTS.md), with the policy 
 - Component-level render tests verify the explorer's sample-data and uncertainty labels; browser acceptance verifies explorer rendering, a reducing filter, visible snapshot date, sample fallback wording and no unsupported open/available claims.
 - The user can research a public role link without implying completeness or current availability; no runtime role-source requests occur.
 
-## Phase 5b — Fit, skill-gap explanations and manual leads (deferred)
+## Phase 5b — Profile-aware role review and lead handoff
 
-### Deferred scope
-- Explain fit and skill gaps using the candidate profile and the role.
-- Create and manage manual leads linked to candidate context.
+**Implementation status:** Proposed for review on `feat/profile-aware-role-review-20261029`; exact-head CI and owner acceptance are not yet verified. See [STATUS.md](STATUS.md) for current release and verification state.
 
-### Reason for deferral
-These features require the candidate profile and an active browser vault session. They are intentionally excluded from Phase 5a; do not implement profile-dependent ranking or a leads workflow in the public data layer.
+### Delivered in the proposed change
+- Opt-in literal text comparison between a selected public role and the unlocked browser-local candidate profile.
+- Display literal target-role/skill matches, description terms not mentioned in the profile, evidence used, and questions to verify. Absence is not presented as proof of a skill gap; there is no numeric fit score or eligibility inference.
+- Optional pasted role descriptions are bounded to 150,000 characters and held only in component memory. The panel clears them on close or when the profile becomes unavailable; text is not uploaded or persisted.
+- Explicit handoff into the existing Applications form, prefilled with the role, studio and official URL. The user must save the lead; the handoff does not submit or silently persist anything.
+- Role browsing remains available when the vault is locked, with a clear path to Settings.
+- Overview tracker metrics are driven by unlocked-vault state instead of static placeholder text; stale user-facing phase labels are removed.
+
+### Boundaries and limitations
+- The role list is a limited configured-source snapshot, not global discovery or proof of current availability. Verify the official posting.
+- Text comparison is explanatory, not a fit score, fact check, or eligibility decision.
+- No resume text persistence, new dependency, backend, paid API, public schema change, or automatic outbound action is introduced.
+- Source-adapter coverage and live-site acceptance remain separate follow-up work.
 
 ## Phase 6 — Resume guidance and browser-side document workflow
 

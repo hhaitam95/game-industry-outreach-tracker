@@ -111,7 +111,7 @@ export default function ResumeLab({ profile = null }: { profile?: ResumeProfile 
     <div className="resume-lab page-stack" data-testid="resume-lab">
       <section className="resume-lab-intro">
         <div>
-          <span className="eyebrow">PHASE 6A · BROWSER-LOCAL DOCUMENT INTAKE</span>
+          <span className="eyebrow">BROWSER-LOCAL DOCUMENT INTAKE</span>
           <h2>Review a resume without uploading it</h2>
           <p>
             This workspace extracts DOCX, text-based PDF and UTF-8 TXT files, offers transparent baseline checks, and

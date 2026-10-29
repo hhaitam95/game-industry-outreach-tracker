@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import type { RoleLeadPrefillData, RoleReviewProfile } from "./workspace.types";
 import { STUDIO_CATALOG_DATA, STUDIO_PROFILES, searchStudioProfiles } from "../lib/studios/catalog.mjs";
 import OpportunityExplorer from "./OpportunityExplorer";
 import { OPPORTUNITY_SNAPSHOT } from "../lib/opportunities/snapshot.mjs";
@@ -12,14 +13,22 @@ const creditLabels: Record<string, string> = {
   other: "Other credit",
 };
 
-export default function StudioCatalog() {
+export default function StudioCatalog({
+  profile = null,
+  onTrackAsLead = () => undefined,
+  onOpenSettings = () => undefined,
+}: {
+  profile?: RoleReviewProfile | null;
+  onTrackAsLead?: (lead: RoleLeadPrefillData) => void;
+  onOpenSettings?: () => void;
+}) {
   const [query, setQuery] = useState("");
   const studios = useMemo(() => searchStudioProfiles(query), [query]);
 
   return (
     <section className="catalog-page" aria-labelledby="studio-catalog-title">
       <div className="catalog-intro">
-        <span className="eyebrow">PHASE 5A · STUDIO RESEARCH</span>
+        <span className="eyebrow">STUDIO RESEARCH</span>
         <h2 id="studio-catalog-title">A small, sourced starting list</h2>
         <p>
           Four hand-curated studios with official websites, career entry points, known titles, locations, and source
@@ -199,7 +208,7 @@ export default function StudioCatalog() {
         The studio catalogue is manually maintained. The explorer uses a bundled snapshot and never fetches career sites
         or role data at runtime. Snapshot status and last-seen dates do not prove that a role is open.
       </p>
-      <OpportunityExplorer />
+      <OpportunityExplorer profile={profile} onTrackAsLead={onTrackAsLead} onOpenSettings={onOpenSettings} />
     </section>
   );
 }

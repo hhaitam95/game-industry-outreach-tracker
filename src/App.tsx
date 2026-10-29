@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import type { PrivateWorkspaceSummary, RoleLeadPrefill, RoleLeadPrefillData } from "./components/workspace.types";
 import type { validateWorkspaceData } from "./lib/private-data/schema.mjs";
 import { getNavItem, NAV_ITEMS } from "./lib/navigation.mjs";
 import PrivateDataSettings from "./components/PrivateDataSettings";
@@ -10,11 +11,11 @@ import { IS_SYNTHETIC_SNAPSHOT, OPPORTUNITY_SNAPSHOT } from "./lib/opportunities
 type WorkspaceProfile = ReturnType<typeof validateWorkspaceData>["profile"];
 
 const pageRoadmap: Record<string, string> = {
-  studios: "Phase 5a",
-  resume: "Phase 6",
-  outreach: "Phase 7",
-  applications: "Phase 7",
-  settings: "Phase 2",
+  studios: "Studio research",
+  resume: "Resume review",
+  outreach: "Drafting",
+  applications: "Follow-up tracking",
+  settings: "Workspace settings",
 };
 
 const iconPaths: Record<string, string> = {
@@ -72,7 +73,13 @@ function StatCard({
   );
 }
 
-function OverviewPage({ onNavigate }: { onNavigate: (pageId: string) => void }) {
+function OverviewPage({
+  onNavigate,
+  workspaceSummary,
+}: {
+  onNavigate: (pageId: string) => void;
+  workspaceSummary: PrivateWorkspaceSummary | null;
+}) {
   return (
     <div className="page-stack">
       <section className="welcome-card">
@@ -101,7 +108,9 @@ function OverviewPage({ onNavigate }: { onNavigate: (pageId: string) => void }) 
             <span className="eyebrow">YOUR WORKSPACE</span>
             <h2 id="activity-title">The big picture</h2>
           </div>
-          <span className="muted-note">No records yet</span>
+          <span className="muted-note">
+            {workspaceSummary ? "Live totals · unlocked vault" : "Private totals hidden"}
+          </span>
         </div>
         <div className="stats-grid">
           <StatCard
@@ -120,8 +129,22 @@ function OverviewPage({ onNavigate }: { onNavigate: (pageId: string) => void }) 
             icon="search"
             value={OPPORTUNITY_SNAPSHOT ? String(OPPORTUNITY_SNAPSHOT.opportunities.length) : "—"}
           />
-          <StatCard label="Outreach drafts" detail="Prepared for your review" icon="outreach" />
-          <StatCard label="Applications" detail="Tracked submissions" icon="applications" />
+          <StatCard
+            label="Outreach drafts"
+            detail={workspaceSummary ? "Saved versions in your unlocked vault" : "Unlock Settings to view private totals"}
+            icon="outreach"
+            value={workspaceSummary ? String(workspaceSummary.draftCount) : "—"}
+          />
+          <StatCard
+            label="Applications"
+            detail={
+              workspaceSummary
+                ? workspaceSummary.dueFollowUpCount + " follow-up(s) due"
+                : "Unlock Settings to view private totals"
+            }
+            icon="applications"
+            value={workspaceSummary ? String(workspaceSummary.applicationCount) : "—"}
+          />
         </div>
       </section>
 
@@ -139,7 +162,7 @@ function OverviewPage({ onNavigate }: { onNavigate: (pageId: string) => void }) 
               <h3>Discover studios</h3>
               <p>Build a sourced list of studios and official career routes.</p>
             </div>
-            <span className="roadmap-phase">Phases 3–5</span>
+            <span className="roadmap-phase">Research</span>
           </div>
           <div className="roadmap-item">
             <span className="roadmap-number">02</span>
@@ -147,7 +170,7 @@ function OverviewPage({ onNavigate }: { onNavigate: (pageId: string) => void }) 
               <h3>Tailor your resume</h3>
               <p>Review relevant experience against a role without inventing claims.</p>
             </div>
-            <span className="roadmap-phase">Phase 6</span>
+            <span className="roadmap-phase">Review</span>
           </div>
           <div className="roadmap-item">
             <span className="roadmap-number">03</span>
@@ -155,14 +178,13 @@ function OverviewPage({ onNavigate }: { onNavigate: (pageId: string) => void }) 
               <h3>Prepare outreach</h3>
               <p>Create a clear, personal draft and track the outcome yourself.</p>
             </div>
-            <span className="roadmap-phase">Phase 7</span>
+            <span className="roadmap-phase">Reach out</span>
           </div>
         </div>
       </section>
       <p className="privacy-footnote">
-        Role links come from a bundled snapshot and are not proof a role remains open; career sites are not fetched at
-        runtime. Private candidate records created in Settings remain encrypted in this browser and are not synced to a
-        server.
+        Role links come from a limited, build-time snapshot and are not proof a role remains open; career sites are not
+        fetched at runtime. Private candidate records are encrypted in this browser and are never synced to a server.
       </p>
     </div>
   );
@@ -194,6 +216,13 @@ function PlaceholderPage({ pageId, onNavigate }: { pageId: string; onNavigate: (
 export default function App() {
   const [activePageId, setActivePageId] = useState("overview");
   const [resumeProfile, setResumeProfile] = useState<WorkspaceProfile | null>(null);
+  const [workspaceSummary, setWorkspaceSummary] = useState<PrivateWorkspaceSummary | null>(null);
+  const [pendingLead, setPendingLead] = useState<RoleLeadPrefill | null>(null);
+  const consumePendingLead = useCallback(() => setPendingLead(null), []);
+  const handleTrackAsLead = useCallback((lead: RoleLeadPrefillData) => {
+    setPendingLead({ ...lead, requestId: crypto.randomUUID() });
+    setActivePageId("applications");
+  }, []);
   const activeItem = getNavItem(activePageId);
   const isOverview = activeItem.id === "overview";
 
@@ -231,7 +260,7 @@ export default function App() {
         <div className="sidebar-bottom">
           <div className="sidebar-status">
             <span className="status-dot" />
-            <span>Phase 7 outreach workflow</span>
+            <span>Local-first workspace</span>
           </div>
           <p>Built around evidence, privacy, and human control.</p>
         </div>
@@ -248,7 +277,7 @@ export default function App() {
           </div>
           <span className="phase-badge">
             <span className="phase-badge-dot" />
-            Phase 7 · Outreach & Applications
+            Private data stays in this browser
           </span>
         </header>
         <div className="page-content">
@@ -260,12 +289,19 @@ export default function App() {
               activePageId={activeItem.id}
               onNavigate={setActivePageId}
               onProfileChange={setResumeProfile}
+              onWorkspaceSummaryChange={setWorkspaceSummary}
+              initialLead={pendingLead}
+              onLeadPrefillConsumed={consumePendingLead}
             />
           </div>
           {isOverview ? (
-            <OverviewPage onNavigate={setActivePageId} />
+            <OverviewPage onNavigate={setActivePageId} workspaceSummary={workspaceSummary} />
           ) : activeItem.id === "studios" ? (
-            <StudioCatalog />
+            <StudioCatalog
+              profile={resumeProfile}
+              onTrackAsLead={handleTrackAsLead}
+              onOpenSettings={() => setActivePageId("settings")}
+            />
           ) : activeItem.id === "resume" ? (
             <ResumeLab profile={resumeProfile} />
           ) : ["settings", "outreach", "applications"].includes(activeItem.id) ? null : (

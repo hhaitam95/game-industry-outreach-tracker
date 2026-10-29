@@ -4,6 +4,12 @@
 
 **Repository visibility:** Public. Never commit private candidate records, CVs, application history, contact details, credentials, or secrets.
 
+## Current rollout and refinement
+
+- The public website was successfully published from `main` on 2026-10-29. Validation [run #40914281662](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40914281662) and deployment [run #40914488893](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40914488893) succeeded. Real-browser navigation/refresh, end-to-end workflows, and privacy acceptance still need owner testing.
+- Live discovery [run #40914150887](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40914150887) persisted 189 observed links. All records are `last-seen`; Riot produced 185 links with incomplete listing evidence, CD PROJEKT RED and Naughty Dog need source review, and Santa Monica Studio needs a reviewed adapter. This is not comprehensive discovery.
+- The proposed profile-aware role-review design is ADR-057 in DECISIONS.md and [Issue #12](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/12). Proposed implementation is on `feat/profile-aware-role-review-20261029`; verify its pull-request checks separately from the already-green main checks.
+
 ## Phase 7 implementation
 
 - Working branch: `feat/phase7-outreach-tracker`; design/acceptance: ADR-050 in DECISIONS.md and Phase 7 in IMPLEMENTATION_PLAN.md.
@@ -20,8 +26,8 @@
 - The build job has `contents: read`. Only the separate deploy job receives `pages: write` and `id-token: write`. No second repository, personal access token, or deployment secret is required.
 - `scripts/check-pages-artifact.mjs` rejects known private file types/paths, recognized credential patterns, missing local JS/CSS assets, missing CSP, symbolic links and external/unsafe HTML script/link references. Synthetic tests cover success and failure cases. These checks are guardrails, not a replacement for reviewing public content.
 - **Pages setting:** the owner confirmed this repository's Settings → Pages source is configured as GitHub Actions. The connected GitHub integration does not expose workflow dispatch, so run the workflow manually in Actions.
-- **Snapshot prerequisite:** `discovery-state` currently has monitoring state but no `public/public-opportunities.json`. First run `Studio discovery pipeline` from `main` with mode `live` (not the default `fixture` mode), review its summary/source errors, and confirm the public snapshot is persisted on `discovery-state`. The Pages publish workflow runs `npm run data:sync` and should fail closed while this file is missing.
-- Then run `Public Pages release` in `validate-only` mode and review the checks; only after successful validation explicitly run `publish` from `main`. No site is live until publication succeeds and the public URL/privacy boundary are reviewed.
+- **Snapshot:** `discovery-state/public/public-opportunities.json` exists and passed the publish workflow's shared snapshot validator.
+- **Latest release:** validation [#40914281662](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40914281662) and deployment [#40914488893](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40914488893) both succeeded. Live routing/assets/privacy and core workflow acceptance remain open until the owner tests them in a real browser.
 - Discovery remains manual-only; do not enable schedules or push triggers. Use only the reviewed live-source scan on `main` to generate the validated public snapshot; never publish private application data or change repository visibility.
 - Read [STATUS.md](STATUS.md) for current PR, checks, review order and next action.
 
@@ -32,7 +38,7 @@
 - Triage reported items into launch blockers, defects/regressions, usability polish, and later-version ideas. Deliver small reviewed changes, run CI/privacy/browser checks, manually publish, then have the owner retest the deployed scenario.
 - Do not tag `v1.0.0` until the public URL/assets and core user flows are accepted, all required CI is green, no launch blockers remain, and limitations are documented. Ideas outside the stable scope remain backlog items for a future version.
 - The central [Phase 9 launch acceptance tracker](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/11) records the publish/manual-test checklist and stabilization cycles. The feedback forms are available from [Issues → New issue](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/new/choose).
-- The website remains not verified live until the owner manually runs the Pages release workflow and the public URL/assets/privacy boundary have been checked.
+- The website has been published, but its live routing/assets/privacy and core user workflows still require real-browser acceptance.
 - Read [STATUS.md](STATUS.md) for the current branch/checks and deployment state.
 
 ## Phase 5a implementation
@@ -62,7 +68,7 @@
 ## Review boundary
 
 - Consult [STATUS.md](STATUS.md) for current verification evidence.
-- Keep live discovery and publication owner-controlled; they remain manual actions.
+- Keep live discovery and publication owner-controlled; they remain manual actions. The successful October 29 scan and publication do not imply full source coverage or acceptance of every user workflow.
 - Discovery remains manual-dispatch-only. No schedule, publication, Pages deployment, or repository visibility change is approved.
 
 ## Engineering workflow
