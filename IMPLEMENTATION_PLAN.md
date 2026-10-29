@@ -1,7 +1,7 @@
 # Implementation Plan
 
 **Status:** Revised roadmap following GitHub Pages, scheduled discovery, and browser-first resume decisions  
-**Last updated:** 2026-10-28
+**Last updated:** 2026-10-29
 
 ## Delivery principles
 
@@ -178,6 +178,25 @@ These features require the candidate profile and an active browser vault session
 - Suggested changes are explainable and do not invent experience.
 - Resume standards are traceable to dated source references.
 
+### Phase 6c — Editable resume structure, provenance and local export
+
+Design: ADR-045 in DECISIONS.md. The design and definition of done are committed before implementation.
+
+#### Scope
+- Convert extracted text to bounded editable blocks using recognized section headings only; preserve unrecognized text in Other and do not infer job boundaries or rewrite claims.
+- Provide add/edit/remove/reorder controls for block content and section, plus a before/after diff against the imported baseline.
+- Label each block as imported, typed, or AI-pasted; highlight modified blocks and terms absent from the original resume and approved profile projection for human review.
+- Generate an ATS-safe single-column DOCX locally without adding a dependency; test ZIP/XML and round-trip with Mammoth.
+- Render a dedicated print sheet with print CSS and open the browser print dialog for user-initiated PDF saving.
+- Offer a separate manual AI disclosure/copy step with editable redaction of email, phone-like and URL patterns; pasted text remains explicitly AI-pasted.
+- Keep model, edits, analysis, role description and export state in memory. No vault migration, local storage, API, server, network upload, OCR, fit score, or automatic sending.
+
+#### Definition of done
+- Pure model tests cover valid/invalid shapes, bounds, stable IDs, recognized-heading splits, Other fallback, diff, provenance and unsupported-term flags.
+- DOCX exports contain safely escaped Unicode text and required Office Open XML parts; malformed input fails safely; output round-trips through the current text extractor/Mammoth.
+- Component tests cover editing, clearing, source labels, diff, print-sheet output, disclosure and redaction controls; browser acceptance validates the export/review path.
+- No source CV, extracted text or generated block content appears in repository fixtures, logs, URLs, workspace schema or network traffic. Only synthetic test text is used.
+- Format, lint, typecheck, unit/component tests, audit, build, privacy check, repository-subpath preview, browser acceptance and discovery fixtures pass on the exact final head. Any limitation/deviation is recorded here and in STATUS.md.
 ## Phase 7 — Outreach drafting and application tracker
 
 ### Scope
