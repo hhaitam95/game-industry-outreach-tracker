@@ -2,7 +2,7 @@
 
 **Status:** Approved baseline with static-hosting and browser-resume decisions; living document  
 **Review version:** 0.3  
-**Last updated:** 2026-10-29
+**Last updated:** 2026-10-24
 
 ## 1. Product story
 
@@ -41,8 +41,6 @@ Never auto-delete a verified route. A failed fetch never proves the route closed
 ### Evidence contract
 
 Store facts, not page content: official URL, route type, matched phrase category, original paraphrase (max 200 characters), content hash, and the route contract’s country, language and timestamps. Fetch every candidate page before listing it; respect robots.txt, identify the user agent, rate-limit requests, and never use logins or bypass bot protection. Missing evidence or unsafe URLs fail closed.
-
-The versioned v1 directory envelope and route fields are defined in `schemas/speculative-route-directory.schema.json` and checked by `src/lib/speculative-routes/validation.mjs` and `scripts/discovery/speculative_routes.py`. The curated route directory starts empty until qualifying routes are researched; an explicitly synthetic sample is identified separately, and malformed curated data fails closed.
 
 ## 4. Product principles and scope
 
