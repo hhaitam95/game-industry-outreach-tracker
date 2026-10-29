@@ -1,45 +1,27 @@
 # Changelog
 
-Meaningful changes are recorded here. This file starts with the initial documentation/scaffolding baseline; entries should describe committed changes and must not claim work is complete before it is verified.
+Meaningful changes are recorded here. Current branch/review state and verification evidence are maintained only in [STATUS.md](STATUS.md).
 
 ## Unreleased
 
-- Accepted Phase 4 for manual-only monitoring with source coverage limits after owner-directed live run [40569785573](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40569785573) on `main` commit `d052b51`. Riot yielded 183 links with incomplete-listing evidence; CD PROJEKT RED and Naughty Dog are flagged `needs-review`, and Santa Monica Studio remains `adapter-required`. The projection contains 185 Riot records, all `last-seen`; only the sanitized artifact was uploaded. Schedules, publishing, and deployment remain disabled. Frontend CI still has the independent Prettier blocker in `src/lib/studios/catalog.mjs`.
-- Added the first Phase 4 discovery-pipeline increment on the candidate feature branch: a curated four-studio registry, standard-library Python runner, fixture-backed parsing/change-detection tests, conservative three-complete-scan absence logic, an allowlisted public projection, and guarded manual workflows. Local fixture suite: 29 tests passed. Daily schedule and public publishing remain disabled pending full CI and reviewed live-scan acceptance.
+- Split discovery tests into parser, state-transition, and public-boundary/workflow modules with a shared offline helper module; removed unused pytest configuration because CI enforces unittest discovery.
+- Split the opportunity explorer into orchestration, filter-controls and role-card components; added component-level render coverage for the sample-data banner and evidence/availability disclaimers.
+- Adopted standing engineering standards for future phases: design notes and definitions of done before code, single-source versioned contracts, inward-pointing architecture, deterministic failure-path tests, enforced CI gates, cohesive reviewed changes, same-commit documentation, automation, and evidence-based closeout reporting. The rules are maintained in AGENTS.md and IMPLEMENTATION_PLAN.md and apply from the current Phase 5 work onward.
+- Phase 5a adds a synthetic sample fallback, shared JavaScript snapshot validation, a validated local sync command, a static opportunity explorer with source/freshness labels, and validated persistence of generated public projections on the dedicated discovery-state branch. The app does not fetch career sources at runtime; discovery remains manual-only, with scheduling, publishing and deployment deferred.
 
-- Closed out Phase 3 on `feat/phase3-manual-studio-catalog`: fixed Prettier formatting in the catalogue component/data module, removed temporary formatter diagnostics, and verified passing standard CI plus combined browser acceptance for code commit `843d6c38954ed381f3cc30ba53f25c991ecfdf47` (runs [40340001102](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340001102) and [40340000974](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40340000974)). `main` was not changed.
-- Added the Phase 3 manual studio registry foundation: strict schemas for studios, sites, ownership, games, distinct studio credits, opportunities, application routes, source evidence, and change events; seeded four source-linked studios; and integrated a searchable catalogue UI. The public catalogue is separate from private application data and contains no live vacancy claims.
-- Added catalogue validation/search tests and extended headless-browser acceptance to verify the catalogue UI on the Phase 3 branch.
+## 2026-10-27
 
-- Hardened the Phase 2 browser smoke test to verify exact encrypted-envelope metadata and binary lengths, and to test that an incorrect passphrase is rejected by the Settings UI without exposing private records.
+- Accepted Phase 4 for manual-only, best-effort monitoring with explicit source-coverage limitations. Link-only records remain last-seen, failed/incomplete sources never imply closure, and scheduling/publication/deployment remain disabled.
+- Added the Phase 4 discovery pipeline: official-source registry, conservative change detection, deterministic fixtures, and an allowlisted public projection.
+- Closed Phase 3 with sourced studio records, distinct ownership/game-credit relationships, verified career routes, and schema validation.
 
-- Added a dependency-free Chrome/Chromium browser acceptance test for Phase 2 vault creation, persistence, lock/unlock, encrypted backup export, restore, and plaintext-canary checks. GitHub Actions stores a sanitized Markdown report artifact; the local feedback report now includes privacy-boundary and browser checks.
+## 2026-10-25
 
-- Upgraded ESLint to supported v10.13.0, aligned `@eslint/js` to v10.0.1, and set the ESLint-10-compatible `typescript-eslint` range; isolated upgrade validation and standard CI on the feature-branch commit passed.
+- Added the encrypted browser-local private-data foundation with validated records, encrypted backup export/import, and browser acceptance coverage. Raw CV content is not persisted.
+- Strengthened privacy-boundary checks and the feedback-report flow; configured frontend quality gates cover formatting, lint, type checks, tests, dependency audit, production build, and browser smoke checks.
 
-- Follow-up hardens feedback reports by omitting branch names and filenames and replacing free-form diagnostic excerpts with fixed, non-sensitive categories.
-- CI checks now continue independently after dependency installation, so a formatting failure cannot hide lint, type, test, build, or production-dependency audit results.
-- Aligned Prettier settings with the existing double-quote style and documented that CSS syntax is checked by the production build rather than Prettier.
-- Pinned install-script approval to the locked esbuild 0.25.2 package and refreshed the dependency lockfile within declared semver ranges. The candidate's full npm audit returned zero vulnerabilities, and standard CI on the ESLint-upgrade commit passed.
+## Initial project foundation
 
-
-- Added the Phase 1 React/TypeScript/Vite static workspace shell with responsive section navigation and honest feature placeholders.
-- Added a locked Node toolchain, formatting/lint/type/test/build scripts, and GitHub Actions CI for branch pushes and pull requests.
-- Added the optional `npm run feedback-report` script and exact macOS/VS Code instructions for local troubleshooting; report output omits raw logs and file contents.
-- Added a GitHub Actions preview smoke test that serves the shell and generated JavaScript/CSS assets under `/game-industry-outreach-tracker/`; the new check passed in closeout-candidate validation and is included in standard CI for the feature-branch closeout commit. No visual browser review or public deployment has been performed.
-
-- Revised architecture direction to GitHub Pages static hosting plus browser-local private data, with a separate public deployment target planned.
-- Specified daily/manual GitHub Actions monitoring, conservative change detection, and public-data allowlisting.
-- Added browser-first resume analysis and DOCX/PDF generation design, optional manual ChatGPT handoff, and source-linked resume guidance.
-- Studio-discovery automation, resume-processing code, and deployment are not implemented; the Phase 1 frontend shell is implemented as noted above.
-
-- Approved baseline requirements and implementation direction documented.
-- Added architecture proposal for evidence-backed discovery, role matching, human-reviewed outreach, application tracking, optional salary estimates, and private remote access.
-- Added AI-agent operating rules and repository safety/approval requirements.
-- Application code and automated tests have not yet been implemented.
-
-## 2026-10-25 — Phase 2 private-data foundation
-
-- Added strict versioned schemas for private profile, resume metadata, outreach drafts, and application records; raw CV content is not persisted.
-- Added a passphrase-derived AES-256-GCM vault, encrypted IndexedDB persistence, encrypted backup export/import, lock/delete actions, and a Settings workflow.
-- Added cryptographic/schema tests and a post-build privacy-boundary check in frontend CI. Standard cloud CI passed in run 40144691400; the documented dummy-data browser smoke test remains pending.
+- Added the React/TypeScript/Vite static workspace, section navigation, responsive styling, repository-subpath build configuration, and GitHub Actions validation.
+- Added a privacy-conscious local feedback report and documented macOS/VS Code setup.
+- Documented the static-hosting privacy model, evidence-backed studio research, discovery workflow, browser-first resume processing, source-linked resume guidance, outreach drafting, and application tracking.

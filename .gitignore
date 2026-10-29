@@ -39,6 +39,9 @@ secrets.toml
 *.pem
 *.key
 
+# Generated synced public role snapshot (source of truth lives on discovery-state)
+src/data/public-opportunities.json
+
 # Private application data
 data/
 private/

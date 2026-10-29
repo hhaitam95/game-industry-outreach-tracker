@@ -1,11 +1,1 @@
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-addopts = "-ra"
-pythonpath = ["src"]
-
-[tool.ruff]
-line-length = 100
-target-version = "py311"
-
-[tool.ruff.lint]
-select = ["E", "F", "I", "UP", "B"]
+# No Python tooling configuration is maintained here. CI runs unittest discovery directly.

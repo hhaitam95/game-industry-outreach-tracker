@@ -225,3 +225,77 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Context:** The Phase 4 pipeline passed its fixture suite and a single owner-directed live run on merged `main` commit `d052b51` ([run #40569785573](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40569785573)). The run produced useful Riot Games role links, but the careers listing did not prove completeness. CD PROJEKT RED and Naughty Dog returned no matching configured role links, and Santa Monica Studio still requires a permitted adapter.
 - **Decision:** Accept Phase 4 for manual-only best-effort monitoring. Keep link-only roles at `last-seen`; never close roles due to an incomplete or failed source; retain exact public-field allowlisting; and keep schedules, publication, and deployment disabled. Treat unsuccessful/unparseable sources as `needs-review`, not empty listings. Phase 5 consumes a reviewed, allowlisted projection bundled at build time and does not fetch career sources at runtime.
 - **Consequences:** The current scan is not a comprehensive four-studio result and does not prove that any projected role is currently open. Source-specific adapter review remains needed. The public projection exists as a short-lived Actions artifact only; the separate deployment/publication decision remains deferred to Phase 8.
+
+
+## ADR-027 — Split Phase 5 into research UI and profile-dependent matching
+
+- **Date:** 2026-10-27
+- **Status:** Accepted
+- **Context:** Public role links and source freshness can be researched without a candidate profile, but fit scores, skill-gap explanations and a durable manual-lead workflow need user-owned profile context and an active browser vault session. Titles sometimes contain location or contract/seniority clues, but these are not structured source data and cannot establish hiring eligibility.
+- **Decision:** Deliver Phase 5a as a static, build-time explorer over the strict public snapshot with filters, freshness indicators, precise keyword family classification and clearly labelled title parsing. Preserve the raw title and mark derived location, seniority, contract and relocation as `parsed from listing text`. Never infer work authorization or hiring eligibility. Defer fit scoring, skill-gap explanations and the manual leads workflow to Phase 5b after the candidate profile exists and the browser vault session is available.
+- **Consequences:** Phase 5a must explain uncertainty and not claim that a last-seen role is open. Derived clues can support search only; they are not source-provided facts. Phase 5b requires a separate scope review around candidate-profile/vault access and must not expose private profile data in the public snapshot.
+
+
+## ADR-028 — Store generated public opportunity data on discovery-state
+
+- **Date:** 2026-10-27
+- **Status:** Accepted
+- **Context:** The public opportunity projection is generated from owner-triggered discovery runs. Committing the generated snapshot to `main` would mix generated observations with reviewed application source and force generated data into ordinary code review. The frontend is static and must not fetch role data from career websites at runtime.
+- **Decision:** Keep `src/data/public-opportunities.json` as a gitignored local build input. The tracked `src/data/sample-public-opportunities.json` is the deterministic fallback for tests and for builds without a synced projection. The `data:sync` command fetches the validated projection from `discovery-state/public/public-opportunities.json` (or accepts a local file/HTTPS URL), validates before writing, and does not commit it. The manual discovery workflow writes the validated generated projection to `public/public-opportunities.json` on `discovery-state`, alongside operational monitoring state. Keep the discovery workflow on `workflow_dispatch` only; do not add a schedule.
+- **Consequences:** `main` tracks code and the explicit sample only, not generated role observations. The UI says “Sample data - not a real scan” when the synced file is absent. Fresh data becomes available to a local build after the owner runs `npm run data:sync`; the app itself performs no remote data fetch. Future scheduling requires separate approval.
+
+
+## ADR-029 — Standing engineering standards for remaining phases
+
+- **Date:** 2026-10-27
+- **Status:** Accepted
+- **Goal:** Make implementation quality predictable across every remaining phase, starting with the in-flight Phase 5a review.
+- **Boundaries:** Apply the standards to engineering process and implementation; do not implicitly expand product scope, merge PRs, run live discovery, enable schedules, publish, deploy, or alter permissions.
+- **Contracts and architecture:** One versioned schema per boundary, shared by consumers and tested in every consuming language; pure domain logic, then I/O adapters, then UI.
+- **Failure handling:** Strict validation fails closed; operations are idempotent; failed or uncertain input preserves the last known good state and raises a visible review signal.
+- **Test plan:** Deterministic success/negative/failure tests, public-data golden fixtures, synthetic fixtures, component tests for meaningful UI logic, and CI checks tied to the final commit.
+- **Delivery:** Design note and definition of done before each phase/unit; cohesive PRs, self-reviewed diff, same-commit behaviour docs, and a single STATUS.md source for volatile verification state.
+- **CI rule:** Read configuration before editing; do not use CI as a formatter/linter REPL. Fix all logged failures in one planned change and allow at most two CI cycles per unit.
+- **Rollback:** Revert the cohesive change while preserving existing source data, discovery state, branches, and open review decisions.
+- **Closeout:** Record deviations and reasons; report verified evidence and limitations without claiming unobserved success.
+
+
+## ADR-030 — Shared JSON Schema for public opportunity snapshots
+
+- **Date:** 2026-10-27
+- **Status:** Accepted
+- **Goal:** Eliminate duplicated public opportunity field/status definitions across the frontend/sync CLI and discovery runner.
+- **Boundaries:** Standardize validation of the versioned public snapshot envelope and records; do not change the product field allowlist, source collection behavior, or job-status semantics.
+- **Data contract:** `schemas/public-opportunity-snapshot.schema.json` is authoritative for the root, exact 16-field record shape, types, status enum, dates, timestamps, HTTPS URL patterns, and unique record IDs.
+- **Consumers:** JavaScript and Python load the same schema. Their small validators implement only the schema vocabulary used by this contract; they do not declare a second copy of the field/status rules.
+- **Failure modes:** Invalid shape, unsupported status, unsafe URL, duplicate ID, invalid type, or malformed date/time fails closed; sync and persistence preserve last-known-good output on failure.
+- **Test plan:** Both languages validate the same historical public-data golden fixture and reject the same invalid-status fixture, with additional type/date/URL and failure-path cases.
+- **Rollback:** Revert the schema and its consumers/tests/docs together; do not modify or erase discovery-state.
+- **Closeout:** Keep fixtures offline; document that historical public links are schema evidence only, not current availability.
+
+
+## ADR-031 — Keep the opportunity explorer modular and component-tested
+
+- **Date:** 2026-10-27
+- **Status:** Accepted
+- **Goal:** Keep the explorer comprehensible and verify its rendered user-facing trust boundary below the existing browser workflow.
+- **Boundaries:** Preserve filtering, sorting, pagination, labels and snapshot-loading behavior; no product feature or data contract changes.
+- **Architecture:** The explorer owns state and orchestration; filter controls and opportunity cards are focused components; parsing/classification/filtering remain pure domain modules.
+- **Failure modes:** Invalid snapshots still fail closed; sample data remains visibly synthetic; parsed clues remain labelled and never imply current availability.
+- **Test plan:** Add a component-render test using Vite SSR and React DOM; retain offline unit tests and browser acceptance for interactive filtering.
+- **Rollback:** Revert the component extraction and test, preserving schema and discovery state.
+- **Closeout:** Review file sizes and report deviations in STATUS.md; acceptance depends on current CI for the final head.
+
+
+## ADR-034 — Separate discovery tests by responsibility and remove unused test configuration
+
+- **Date:** 2026-10-27
+- **Status:** Accepted
+- **Goal:** Keep the discovery test suite navigable and enforceable without changing its assertions or production behavior.
+- **Boundaries:** Test code organization and obsolete Python tool configuration only; no discovery source, data contract, workflow permissions, or operational state changes.
+- **Structure:** Shared helpers live in `tests/discovery_test_support.py`; parsing/adapters, state transitions, and boundary/workflow tests are separate unittest modules.
+- **Runner:** CI continues to use `python -m unittest discover -s tests -p 'test_*.py'`; pytest settings were removed because pytest is not run in CI.
+- **Failure modes:** Test discovery must include every moved class exactly once, and fixtures remain offline.
+- **Test plan:** Existing discovery tests are moved without changing method bodies; the discovery workflow and frontend/browser checks gate the refactor.
+- **Rollback:** Revert the test-module moves and configuration cleanup; no production code or discovery-state is changed.
+- **Closeout:** New test/support modules must remain below the approximate 300-line limit; record any deviation in STATUS.md.

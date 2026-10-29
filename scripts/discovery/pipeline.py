@@ -27,7 +27,6 @@ from .fetch import (
 )
 from .projection import (
     PUBLIC_FIELDS,
-    _PRIVATE_KEY_PARTS,
     public_projection,
     validate_public_projection,
     write_json,

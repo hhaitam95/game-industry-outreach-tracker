@@ -7,13 +7,14 @@
     "dev": "vite",
     "build": "npm run typecheck && vite build",
     "preview": "vite preview",
-    "format": "prettier --write \"src/**/*.{ts,tsx,mjs}\" \"tests/**/*.mjs\" \"scripts/**/*.mjs\" \"vite.config.ts\" \"eslint.config.js\" \"index.html\" \"package.json\" \"package-lock.json\" \"tsconfig.json\" \".prettierrc.json\" \".vscode/**/*.json\"",
-    "format:check": "prettier --check \"src/**/*.{ts,tsx,mjs}\" \"tests/**/*.mjs\" \"scripts/**/*.mjs\" \"vite.config.ts\" \"eslint.config.js\" \"index.html\" \"package.json\" \"package-lock.json\" \"tsconfig.json\" \".prettierrc.json\" \".vscode/**/*.json\"",
+    "format": "prettier --write \"src/**/*.{ts,tsx,mjs}\" \"src/**/*.json\" \"schemas/**/*.json\" \"tests/fixtures/**/*.json\" \"tests/**/*.mjs\" \"scripts/**/*.mjs\" \"vite.config.ts\" \"eslint.config.js\" \"index.html\" \"package.json\" \"package-lock.json\" \"tsconfig.json\" \".prettierrc.json\" \".vscode/**/*.json\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,mjs}\" \"src/**/*.json\" \"schemas/**/*.json\" \"tests/fixtures/**/*.json\" \"tests/**/*.mjs\" \"scripts/**/*.mjs\" \"vite.config.ts\" \"eslint.config.js\" \"index.html\" \"package.json\" \"package-lock.json\" \"tsconfig.json\" \".prettierrc.json\" \".vscode/**/*.json\"",
     "lint": "eslint --max-warnings=0 --ext .js,.mjs,.ts,.tsx src scripts tests vite.config.ts eslint.config.js",
     "typecheck": "tsc --noEmit",
     "test": "node --test tests/*.test.mjs",
     "feedback-report": "node scripts/feedback-report.mjs",
-    "check:privacy": "node scripts/check-public-data-boundary.mjs"
+    "check:privacy": "node scripts/check-public-data-boundary.mjs",
+    "data:sync": "node scripts/sync-public-snapshot.mjs"
   },
   "dependencies": {
     "react": "^18.2.0",

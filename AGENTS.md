@@ -20,6 +20,19 @@ Before a substantial implementation, explain:
 
 Ask for clarification when a decision is consequential and cannot safely be inferred. Do not ask repeatedly for details already stated in the repository.
 
+### Standing engineering standards for every phase
+
+- **Design first:** Before each phase and each cohesive unit of work, publish a short, uniquely numbered decision note (about 10 lines) with goal, boundaries, data contracts, failure modes, test plan, and rollback. Publish the phase design note and definition of done before code; after implementation, record deviations and why. Accepted decision records are superseded, not edited.
+- **Layering:** Dependencies point inward: pure domain logic, then I/O adapters, then UI. Domain logic imports no network, storage, or UI APIs. Keep schema/validation, pure logic, I/O, and UI in separate single-responsibility files, aiming for about 300 lines per file.
+- **Contracts first:** Each cross-language/process/network data contract has one versioned schema file. Every consumer reads that schema, with a contract test in each language that consumes it. Validate strictly and fail closed; explicitly allowlist public fields. Use explicit transition tables for status values.
+- **Derive state:** Derive origin, flags, labels, counts, and coverage from data and source provenance. Do not add manual switches such as isSampleData. Explain classifications with the matched evidence; mark parsed/derived values as derived and never imply they were source-provided.
+- **Tests:** New logic includes positive, negative, and failure-path tests. Use deterministic fixtures and public-data golden cases alongside synthetic cases; unit tests must not touch the network. UI components with meaningful logic need component-level tests, not only end-to-end tests.
+- **Format and CI:** Read formatter/linter configuration before editing (including .prettierrc.json). Write in the configured style; do not push diagnostic commits to discover formatting output. Every configured linter, type checker, formatter, and test runner must run in CI or its configuration must be removed. After a failure, inspect the complete log and fix all failures in one cohesive change; at most two CI cycles per unit, then take the simplest route and document the limitation.
+- **Change hygiene:** Never reformat/refactor untouched files. Keep pure formatting/refactors in separate commits before features. Use small conventional commits and one pull request per cohesive unit, squash-merged. Self-review the full diff; remove dead code, stray files, unrelated churn, and secrets/personal data. Update behaviour documentation in the same commit.
+- **State and reporting:** STATUS.md is the sole source of current branch/review state, test counts, commit SHAs, workflow/run IDs, and verification status. Elsewhere, link to STATUS.md or omit those volatile details. Report what was actually run, its result, and what was not verified; never call checks green without a result for the exact commit.
+- **Reliability and automation:** Treat external input as untrusted, escape output, use allowlists, pin dependencies, and use least privilege. Operations are idempotent and failures visible. On uncertainty, preserve the last known state and flag review; do not destroy or close it. Generate artifacts through automation rather than asking the owner for files or manual steps. Ask the owner only for decisions, approvals, and credentials that must be handled outside chat.
+- **Communication:** Keep completion reports under 15 lines and end with “Next action:”.
+
 ## 3. Change boundaries and commits
 
 - Do not make broad rewrites when a small change will meet the requirement.
@@ -82,7 +95,7 @@ Ask for clarification when a decision is consequential and cannot safely be infe
 - Record material architecture/product decisions in DECISIONS.md.
 - Update IMPLEMENTATION_PLAN.md when milestones or priorities change.
 - Update CHANGELOG.md for meaningful changes.
-- Update HANDOFF.md after a milestone with current branch/commit reference, implemented scope, tests run, known issues, and the next task.
+- Keep STATUS.md as the sole source of current branch/review state and verification evidence. HANDOFF.md summarizes stable context and points to STATUS.md rather than duplicating SHAs, run IDs, test counts, or branch state.
 - A new chat must inspect the repository and tests rather than blindly trusting a prior conversation or handoff note.
 
 
@@ -90,8 +103,8 @@ Ask for clarification when a decision is consequential and cannot safely be infe
 
 - GitHub Pages serves static frontend assets only. Do not assume server-side Python, private authentication, or backend storage is available.
 - The public Pages deployment may contain only an allowlisted public dataset: sourced studio facts, public job details, official application routes and public status/change summaries.
-- Keep the source repository private. If GitHub Free Pages is used, use a separate public deployment repository and publish a reviewed/static artifact only.
-- Scheduled polling monitors the known studio registry; it does not discover every studio worldwide. The workflow should have both schedule and manual dispatch.
+- This source repository is public. In Phase 8, decide explicitly whether to use it or a separate repository for Pages; do not deploy or publish without a documented privacy review and owner approval.
+- Polling only monitors the known studio registry; it does not discover every studio worldwide. Keep discovery manual-dispatch-only until a separate decision approves a schedule after source coverage is reviewed.
 - Scheduled workflows run from the default branch and may be delayed. Avoid top-of-hour schedules and report the latest run/error state.
 - Use least-privilege permissions; cross-repository publishing credentials belong only in GitHub Actions secrets with narrow scope and expiry.
 - Do not log tokens, inject them into frontend build variables, or ship them in JS, HTML, JSON, source maps, or artifacts.
