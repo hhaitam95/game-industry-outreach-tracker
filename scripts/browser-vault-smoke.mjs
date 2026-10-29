@@ -589,6 +589,60 @@ async function main() {
     await client.waitForText("Profile encrypted and saved to this browser.");
   });
 
+  await step("Verify versioned outreach and manual application lifecycle", async () => {
+    await client.evaluate("(() => { if (window.__phase7OutboundAttempts) return true; window.__phase7OutboundAttempts = []; const nativeFetch = window.fetch.bind(window); window.fetch = (...args) => { const request = args[0]; const method = (args[1]?.method ?? request?.method ?? 'GET').toUpperCase(); if (!['GET', 'HEAD', 'OPTIONS'].includes(method)) window.__phase7OutboundAttempts.push('fetch'); return nativeFetch(...args); }; const nativeOpen = XMLHttpRequest.prototype.open; XMLHttpRequest.prototype.open = function(method, ...args) { this.__phase7Method = String(method).toUpperCase(); return nativeOpen.call(this, method, ...args); }; const nativeSend = XMLHttpRequest.prototype.send; XMLHttpRequest.prototype.send = function(...args) { if (this.__phase7Method && !['GET', 'HEAD', 'OPTIONS'].includes(this.__phase7Method)) window.__phase7OutboundAttempts.push('xhr'); return nativeSend.apply(this, args); }; return true; })()");
+    const outreachClicked = await client.evaluate("(() => { const item = [...document.querySelectorAll('.nav-link')].find((element) => element.innerText.trim() === 'Outreach'); if (!item) return false; item.click(); return true; })()");
+    if (!outreachClicked) throw new Error("phase7-outreach-navigation-not-found");
+    await client.waitForText("Write a thoughtful introduction, not a mass message.");
+
+    const studioSelected = await client.evaluate("(() => { const label = [...document.querySelectorAll('.phase7-form-grid label')].find((item) => item.innerText.trim().startsWith('Studio')); const select = label?.querySelector('select'); const setter = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, 'value')?.set; if (!select || !setter) return false; setter.call(select, 'cd-projekt-red'); select.dispatchEvent(new Event('change', { bubbles: true })); return true; })()");
+    if (!studioSelected) throw new Error("phase7-studio-select-not-found");
+    await client.fill('[data-testid="outreach-motivation"]', "I admire the team's mix of game development and technical problem solving.");
+    await client.clickButton("Generate editable template");
+    await client.waitForText("What draws me to your team is:");
+    await client.clickButton("Save draft version");
+    await client.waitForText("Draft version 1 encrypted and saved locally.");
+    await client.clickButton("Mark reviewed & save version");
+    await client.waitForText("Draft version 2 encrypted and saved locally.");
+    await client.clickButton("Create interested lead from saved version");
+    await client.waitForText("Lead saved locally as interested.");
+
+    const applicationsClicked = await client.evaluate("(() => { const item = [...document.querySelectorAll('.nav-link')].find((element) => element.innerText.trim() === 'Applications'); if (!item) return false; item.click(); return true; })()");
+    if (!applicationsClicked) throw new Error("phase7-applications-navigation-not-found");
+    await client.waitForText("Track what actually happened.");
+    await client.waitForText("CD PROJEKT RED");
+
+    const appliedSelected = await client.evaluate("(() => { const select = document.querySelector('[data-testid=application-status]'); const setter = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, 'value')?.set; if (!select || !setter) return false; setter.call(select, 'applied'); select.dispatchEvent(new Event('change', { bubbles: true })); return true; })()");
+    if (!appliedSelected) throw new Error("phase7-application-status-not-found");
+    await client.waitForText("Manual submission confirmation recorded.");
+
+    const responseSelected = await client.evaluate("(() => { const select = document.querySelector('[data-testid=application-activity-type]'); const setter = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, 'value')?.set; if (!select || !setter) return false; setter.call(select, 'response'); select.dispatchEvent(new Event('change', { bubbles: true })); const details = document.querySelector('.phase7-activity'); if (details) details.open = true; return Boolean(select); })()");
+    if (!responseSelected) throw new Error("phase7-activity-type-not-found");
+    await client.fill('[data-testid="application-activity-note"]', "Synthetic recruiter response recorded.");
+    await client.clickButton("Add activity");
+    await client.waitForText("Synthetic recruiter response recorded.");
+
+    const followUpSet = await client.evaluate("(() => { const input = document.querySelector('[data-testid=application-follow-up-date]'); const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')?.set; if (!input || !setter) return false; setter.call(input, '2026-11-02'); input.dispatchEvent(new Event('input', { bubbles: true })); input.dispatchEvent(new Event('change', { bubbles: true })); return true; })()");
+    if (!followUpSet) throw new Error("phase7-follow-up-date-not-found");
+    await client.waitForText("Follow-up date saved locally.");
+
+    const outcome = await client.evaluate("(() => ({ status: document.querySelector('[data-testid=application-status]')?.value ?? '', outboundAttempts: window.__phase7OutboundAttempts?.length ?? -1 }))()");
+    if (!outcome || outcome.status !== "applied" || outcome.outboundAttempts !== 0) {
+      throw new Error("phase7-application-state-or-privacy-check-failed");
+    }
+
+    const backToOutreach = await client.evaluate("(() => { const item = [...document.querySelectorAll('.nav-link')].find((element) => element.innerText.trim() === 'Outreach'); if (!item) return false; item.click(); return true; })()");
+    if (!backToOutreach) throw new Error("phase7-outreach-return-not-found");
+    await client.waitForText("Version 2");
+    const storedVersions = await client.evaluate("document.querySelectorAll('[data-testid=outreach-draft-row]').length");
+    if (storedVersions < 2) throw new Error("phase7-draft-version-history-incomplete");
+    const noOutbound = await client.evaluate("window.__phase7OutboundAttempts?.length ?? -1");
+    if (noOutbound !== 0) throw new Error("phase7-outbound-privacy-boundary-failed");
+    const settingsClicked = await client.evaluate("(() => { const item = [...document.querySelectorAll('.nav-link')].find((element) => element.innerText.trim() === 'Settings'); if (!item) return false; item.click(); return true; })()");
+    if (!settingsClicked) throw new Error("settings-navigation-not-found");
+    await client.waitForText("Private workspace storage");
+  });
+
   await step("Verify baseline checks and private profile comparison stay in memory", async () => {
     const resumeClicked = await client.evaluate(`(() => {
       const item = [...document.querySelectorAll(".nav-link")].find((element) => element.innerText.trim().toLowerCase().includes("resume lab"));
@@ -691,6 +745,14 @@ async function main() {
     await client.waitForText("BROWSER_TEST_STUDIO_CANARY");
     const profileName = await client.evaluate("document.querySelector('#profile-display-name')?.value ?? ''");
     if (profileName !== "BROWSER_TEST_PROFILE_CANARY") throw new Error("restored-profile-mismatch");
+    const phase7ApplicationsClicked = await client.evaluate("(() => { const item = [...document.querySelectorAll('.nav-link')].find((element) => element.innerText.trim() === 'Applications'); if (!item) return false; item.click(); return true; })()");
+    if (!phase7ApplicationsClicked) throw new Error("phase7-applications-navigation-not-found");
+    await client.waitForText("Synthetic recruiter response recorded.");
+    const restoredStatus = await client.evaluate("document.querySelector('[data-testid=application-status]')?.value ?? ''");
+    if (restoredStatus !== "applied") throw new Error("phase7-application-state-not-restored");
+    const phase7SettingsClicked = await client.evaluate("(() => { const item = [...document.querySelectorAll('.nav-link')].find((element) => element.innerText.trim() === 'Settings'); if (!item) return false; item.click(); return true; })()");
+    if (!phase7SettingsClicked) throw new Error("settings-navigation-not-found");
+    await client.waitForText("Encrypted backup and recovery");
   });
 
   let encryptedBackupPath;
@@ -798,6 +860,17 @@ try {
     "backup-input-not-found",
     "restored-profile-mismatch",
     "private-record-visible-while-locked",
+    "phase7-outreach-navigation-not-found",
+    "phase7-studio-select-not-found",
+    "phase7-applications-navigation-not-found",
+    "phase7-application-status-not-found",
+    "phase7-activity-type-not-found",
+    "phase7-follow-up-date-not-found",
+    "phase7-application-state-or-privacy-check-failed",
+    "phase7-application-state-not-restored",
+    "phase7-draft-version-history-incomplete",
+    "phase7-outbound-privacy-boundary-failed",
+    "phase7-outreach-return-not-found",
     "settings-navigation-not-found",
   ]);
   const safeWaitReasons = new Map([
