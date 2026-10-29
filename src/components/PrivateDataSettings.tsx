@@ -186,7 +186,7 @@ export default function PrivateDataSettings({
           id: crypto.randomUUID(),
           studioName: studioName.trim(),
           roleTitle: roleTitle.trim(),
-          status: "interested",
+          status: "interested" as const,
           applicationUrl: applicationUrl.trim(),
           notes: "",
           createdAt: now,
@@ -198,7 +198,7 @@ export default function PrivateDataSettings({
           history: [
             {
               id: crypto.randomUUID(),
-              type: "note",
+              type: "note" as const,
               occurredAt: now,
               note: "Lead created manually in Settings. No submission is implied.",
             },
