@@ -1,14 +1,15 @@
 # Project Status
 
 **Last updated:** 2026-10-29  
-**Current phase:** Phase 6c implementation is complete and verified for owner review. Phase 5 and Phase 6a/6b are merged into `main`; Phase 6c remains isolated on its feature branch pending the owner's review/merge decision.  
-**Working branch:** `feat/phase6c-resume-export`  
-**Verified implementation/test head:** `9c60dccc6991dcd9ca38a820a9aecef13ce2a8b3`. This closeout commit changes documentation only.  
-**Design:** ADR-049 in DECISIONS.md.  
-**Base/main:** `d56637e921fdb2e23f67e15aa3a518d6477c6842`; no direct changes to `main`.  
-**Review state:** [PR #7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7) remains open as a draft and unmerged. The owner retains the readiness and merge decision.
+**Current phase:** Phase 7 outreach drafting and application tracking is being merged after Phase 6c resume editing/export; Phase 8 publication remains the final release gate before Phase 9 stabilization and feedback cycles.  
+**Working branch:** `main` (current delivery state)  
+**Phase 6c:** [PR #7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7) has been squash-merged after its exact-head checks passed.  
+**Phase 7:** [PR #8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8) is being reconciled with the Phase 6c squash commit; original feature checks passed, and exact-head checks must run after reconciliation.  
 
 ## Current verification
+
+- **Phase 7 original feature head:** Frontend CI passed [40871039135](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40871039135), browser acceptance passed [40871039106](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40871039106), and discovery fixtures passed [40871039110](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40871039110). These checks predate reconciliation with the Phase 6c squash commit; re-run on the reconciled head before merging Phase 7.
+
 
 - **Frontend CI:** passed — [run 40864491781](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864491781) and [run 40864482921](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864482921), including formatting, lint, typecheck, unit tests, dependency audit, build, privacy checks and repository-subpath smoke.
 - **Discovery fixture tests:** passed — [run 40864491922](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864491922) and [run 40864482908](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864482908).
@@ -20,6 +21,8 @@
 ## Engineering standards
 
 Follow [AGENTS.md](AGENTS.md) and [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md): design before code, focused modules, failure-path tests, exact-head verification, no CI-as-a-REPL, and at most two CI cycles per cohesive unit. Keep this file as the single source for volatile branch/review/check state; other documents link here.
+
+Follow [AGENTS.md](AGENTS.md) and [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md): record design before code, keep contracts and layers focused, test positive/negative/failure paths, inspect full diffs, avoid CI-as-a-REPL, and use no more than two CI cycles per cohesive implementation unit. Keep this file as the single source for volatile branch/review/check state; other documents link here.
 
 ## Phase 6a acceptance status
 
@@ -35,7 +38,7 @@ Follow [AGENTS.md](AGENTS.md) and [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.m
 - **Design and definition of done:** ADR-038 in DECISIONS.md.
 - The role snapshot contains titles and metadata, not full job requirements. In the absence of user-pasted role text, matching is limited to the selected title. Synthetic sample roles and last-seen status must not be presented as confirmed vacancies.
 - Resume text, pasted role description, private profile projection and analysis remain in browser memory. Do not persist them, log them, upload them, or add them to the public snapshot.
-- Phase 6c remains outstanding: editable structured resume proposal/diff, download generation and optional manual AI handoff are not included in Phase 6b.
+- Phase 6c is now merged: editable structured resume blocks with provenance/diff, local DOCX export, browser-print PDF, and selective/redacted manual AI handoff are implemented. This older Phase 6b section is retained as historical scope context.
 - No live discovery dispatch, schedule enablement, publishing, Pages deployment, repo visibility/permissions change, or merge is performed.
 
 ## Phase 6b implementation status

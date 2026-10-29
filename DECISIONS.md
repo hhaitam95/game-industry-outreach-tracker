@@ -505,8 +505,7 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Decision:** Wrap DOM-presence wait predicates in `Boolean(...)`, and audit the wait expressions added for Phase 6c so they return scalar booleans rather than DOM nodes. Preserve every assertion and privacy check.
 - **Verification:** The implementation code was verified on [head 5752946](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/57529467913053b8f48902c7e283fd6b8fabe951). [Frontend CI](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40855486074), [browser acceptance](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40855486084), and [discovery fixtures](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40855486192) passed on the exact head. Push-triggered Frontend CI and discovery fixtures also passed ([40855478878](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40855478878), [40855478906](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40855478906)).
 - **Browser evidence:** The accepted artifact reports 22/22 synthetic-data checkpoints passed, including TXT/DOCX/PDF extraction, structured editor/export controls, handoff disclosure, local-only boundary, failed-extraction preservation, clearing, and the existing encrypted-vault lock/unlock/backup paths.
-- **Privacy and review:** Fixtures contain synthetic data only; no real CV/profile data is committed. PR #7 remains open and unmerged; the owner retains readiness and merge decisions.
-
+- **Privacy and review:** Fixtures contain synthetic data only; no real CV/profile data is committed. PR #7 was subsequently squash-merged after its exact-head checks passed; see STATUS.md for the current verified state.
 
 ## ADR-049 — Phase 6c review hardening: preserve failed edits and bound parser fallback
 
@@ -521,7 +520,6 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Definition of done:** Formatting, lint, typecheck, unit/component tests, audit, production build, privacy checks, subpath browser acceptance, and discovery fixtures pass on the final exact branch head; STATUS.md and HANDOFF.md reflect the actual commit/check evidence.
 - **Rollback:** Revert the review-hardening implementation and tests as one unit, preserving this decision record and documenting the reason.
 
-
 ### ADR-049 implementation outcome
 
 - **Implementation/test head:** [9c07e20](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/9c07e205f5423842c7b379476e20712eee617725).
@@ -531,3 +529,52 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Discovery fixtures:** passed [run 40864202592](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864202592).
 - **Browser acceptance:** passed [run 40864202680](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864202680), 24/24 synthetic-data checkpoints.
 - No manual workflow dispatch or rerun, workflow/permission change, dependency change, main-branch change, or personal data was introduced.
+
+## ADR-050 — Phase 7 outreach drafting, private version history, and application tracking
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation
+- **Goal:** Replace the Outreach and Applications placeholders with a complete browser-local workflow: editable, reviewable outreach drafts, deterministic pre-send checks, saved draft revisions linked to studio/role/profile/CV/guidance context, and manually confirmed application lifecycle/activity tracking.
+- **Boundaries:** Work on `feat/phase7-outreach-tracker` based on `main`; no merge, no Phase 6c dependency, no live discovery, external send/submit, paid AI API, backend, new dependency, publication, schedule, workflow/permission change, or private-data commit.
+- **Data contract:** Version the encrypted private-workspace schema from v1 to v2 with strict field allowlists and an explicit v1 migration. Store draft versions as separate immutable records with series/version/parent IDs, approved profile timestamp, user-supplied CV label (metadata only), guidance version, studio/role/purpose, editable body and review state. Extend application records with explicit public studio/opportunity/draft references, follow-up date and bounded activity events.
+- **Privacy:** All personal drafts, provenance, activity notes, and application history remain in the existing encrypted IndexedDB vault. Decrypted data is memory-only while unlocked. No raw CV, extracted text, or candidate records enter localStorage, network requests, logs, public snapshot or repository files.
+- **Drafting/review:** Use user-provided motivation and approved profile facts in editable deterministic templates. Show source links and uncertainty for selected public records. Rule-based checks flag missing personalization/role context, generic wording, tone and contact patterns; they must never claim to fact-check prose or block user judgment.
+- **Human control:** The application does not send messages or submit applications. Draft export/copy is user-initiated after visible review. A status transition to `applied` requires explicit confirmation that the user submitted it; responses, follow-ups, interviews and outcomes are manually recorded events.
+- **Failure modes:** Strict validation rejects unsupported shapes/oversized records; migration preserves all valid v1 data and fails closed on invalid data; save failure keeps the in-memory edit and reports failure without claiming it was encrypted. No status is inferred from a draft or from a last-seen role.
+- **Test plan:** Cover schema v1→v2 migration, invalid shapes/bounds, immutable version lineage, deterministic check results, app lifecycle and event validation, save failure and vault lock/unlock/backup regression. Browser acceptance must exercise the end-to-end draft/version/manual application workflow with synthetic records and verify no outbound transmission.
+- **Definition of done:** Formatting, lint, typecheck, unit tests, audit, build, privacy boundary, repository-subpath smoke, browser acceptance and discovery fixtures pass on the exact final feature head; STATUS.md/HANDOFF.md/CHANGELOG.md/IMPLEMENTATION_PLAN.md reflect evidence and limitations.
+- **Rollback:** Revert the Phase 7 implementation and schema migration as one feature unit; retain this ADR and document why the feature was rolled back.
+
+## ADR-051 — Phase 7 typed-contract and component-fixture verification follow-up
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation
+- **Context:** The initial Phase 7 implementation unit reached its two planned CI cycles. On the second exact-head check, feature behavior had been implemented, but TypeScript exposed widened string literals in new application/migration records and one server-rendered test asserted a career-route label before selecting a studio. Two files added since the first formatter output also need the configured formatting applied.
+- **Goal:** Close only these observed validation issues without changing product scope or privacy behavior.
+- **Boundaries:** Fix literal typing for schema-v2 migrations and newly created application/activity records; correct the UI fixture expectation to assert what the default render actually displays; apply configured Prettier to the newly touched files. No new feature, dependency, workflow change, external request, or main merge.
+- **Failure behavior:** Keep schema validation strict. Use typed allowed literals rather than broad casts that could admit unsupported status/purpose values.
+- **Test plan:** Re-run Frontend CI, browser acceptance and discovery fixtures on the final branch head. Confirm the browser workflow gets past the production build before interpreting any UI checkpoint outcome.
+- **Definition of done:** All three automatic checks pass for this isolated fix unit and the exact tested head is recorded in STATUS.md.
+- **Rollback:** Revert this narrow typing/fixture correction and preserve ADR-051 if the changes cause a broader compatibility issue.
+
+## ADR-052 — Read generated outreach text from the controlled draft field in browser acceptance
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation
+- **Context:** The second Phase 7 browser verification pass reported a named failure at “Phase 7 generated message appears.” Source inspection confirmed the generated template is correctly assigned to the controlled `outreach-draft-body` textarea; the smoke test then looked for that phrase in `document.body.innerText`, which does not include a textarea's current value.
+- **Decision:** Change only the browser acceptance predicate to check the textarea's `value` for the expected generated phrase, using the existing by-value boolean DevTools wait pattern. Add a fixed safe-reason mapping for that checkpoint.
+- **Boundaries:** No product behavior, privacy boundary, workflow, dependency, or application data change. Synthetic fixture only; no outbound request or real CV.
+- **Test plan:** Re-run the normal automatic Frontend CI, browser acceptance, and discovery fixtures on the exact head. Browser acceptance must pass the Phase 7 flow and existing vault/export regression checks.
+- **Definition of done:** All three normal checks pass on the exact commit; update STATUS.md and the ADR-052 outcome with evidence.
+- **Rollback:** Revert the one-line predicate and safe diagnostic label if the browser harness cannot reliably observe the controlled field.
+
+## ADR-053 — Scope post-reload browser assertions to the Phase 7 synthetic application
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation
+- **Context:** Browser acceptance on head `b3e0302` passed the full initial Phase 7 draft/version/lead/submission/activity/follow-up path and failed inside the existing unlock-after-reload checkpoint. The test fixture also creates a separate synthetic Settings application, so selecting the first activity panel/status control after reload is ambiguous when cards are sorted by updated time.
+- **Decision:** In the post-reload acceptance check, find the application card identified by the synthetic studio name `CD PROJEKT RED`, open its own activity details, and verify its own applied status and saved response event. Do not rely on the first matching selector in the page.
+- **Boundaries:** Browser test only. No production UI/data changes, no workflow/dependency changes, and synthetic fixture content only.
+- **Test plan:** Run the normal automatic Frontend CI, browser acceptance, and discovery fixtures on the new exact head; verify the reloaded/encrypted-backup path checks the intended Phase 7 record.
+- **Definition of done:** All three checks pass and STATUS.md records exact-head evidence. Do not manually rerun workflows.
+- **Rollback:** Revert the targeted browser assertion while retaining this decision and document the remaining acceptance limitation if record identity cannot be verified safely.

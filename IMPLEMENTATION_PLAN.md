@@ -199,17 +199,24 @@ Design: ADR-045 in DECISIONS.md; review hardening and regression coverage: ADR-0
 - Format, lint, typecheck, unit/component tests, audit, build, privacy check, repository-subpath preview, browser acceptance and discovery fixtures pass on the exact final head. Any limitation/deviation is recorded here and in STATUS.md.
 ## Phase 7 — Outreach drafting and application tracker
 
-### Scope
-- Build studio-specific drafts from approved profile facts and sourced studio/role data.
-- Add pre-send checks for personalization, relevance, factual grounding, generic wording, tone and privacy.
-- Save draft versions locally and link them to selected profile/CV/guidance versions.
-- Track manual submission confirmations, responses, follow-ups, interviews and outcomes.
-- Build dashboard views and basic outcome metrics.
+**Implementation status:** Initial implementation is on `feat/phase7-outreach-tracker`. It is not merged. Design and contracts are in ADR-050; current exact-head checks and PR state are maintained in [STATUS.md](STATUS.md).
 
-### Exit criteria
-- The complete discovery-to-outcome workflow works.
-- The tool never sends an email or marks a draft submitted without user confirmation.
-- Personal drafts and application history stay out of public data/repository.
+### Delivered scope
+
+- A v2 encrypted-workspace schema with strict exact-field validation and an explicit v1 migration that preserves profile, resume metadata, legacy draft text, legacy applications, and notes.
+- Editable studio-specific outreach drafts built from sourced studio context, approved saved profile fields, and the user's own stated motivation. Templates do not invent roles, skills, achievements, or game credits.
+- Heuristic pre-send review for personalization, role context, motivation, literal profile-phrase matches, generic wording, tone, and common contact/link patterns. Results are prompts for human review, not factual verification or a readiness score.
+- Private immutable draft revisions with series/version/parent IDs, saved studio/role/source URL, profile timestamp, user-supplied CV label (metadata only), bundled guidance version, and user-selected review state.
+- An application pipeline with manually confirmed submission status, status/activity history, responses, interviews, outcomes, and next follow-up date. Leads created from drafts do not imply that a message was sent or an application submitted.
+- No outbound send/submit function, AI API, new dependency, backend, localStorage, raw CV persistence, or publication behavior. All personal records remain in the existing encrypted browser-local vault.
+
+### Definition of done
+
+- Schema tests cover v1-to-v2 migration, preserving legacy data, strict shapes, status/date/activity bounds, and draft lineage.
+- Unit/component tests cover deterministic templates, heuristic checks, sourced context, review controls, activity history, and follow-up controls.
+- Browser acceptance covers two saved versions, lead creation, manual confirmation of submission, response logging, follow-up scheduling, no outbound mutation requests, reload persistence, and encrypted backup compatibility.
+- Formatting, lint, typecheck, unit/component tests, audit, static build, privacy boundary, repository-subpath smoke, browser acceptance, and discovery fixtures pass on the exact final branch head.
+- Documentation records the exact tested commit, actual CI outcomes, remaining limitations, and reconciliation of PR #8 against the Phase 6c squash merge. See STATUS.md for current verification and review state.
 
 ## Phase 8 — Public Pages deployment and privacy review
 

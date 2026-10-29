@@ -5,6 +5,7 @@ Meaningful changes are recorded here. Current branch/review state and verificati
 ## Unreleased
 
 - Hardened Phase 6c resume editing: failed AI-paste additions retain user input, section moves are explicit in the before/after diff, and excessive recognized headings fall back to one text-preserving Other block. Added synthetic unit/component and browser regression coverage.
+- Phase 7 adds a v2 encrypted-workspace model with strict v1 migration, reviewable outreach draft revisions, heuristic pre-send checks, and private application status/activity/follow-up tracking. No automatic sending/submission, paid AI API, backend, or personal data in repository files.
 - Bounded DOCX/PDF resume parsing to 30 seconds, moved Mammoth into a terminable worker, disabled PDF.js XFA, and kept parser timeouts on the existing safe error category. The pinned pdfjs-dist 6.4.299 no longer supports `isEvalSupported` as a document initialization option, so no ineffective property is passed.
 - Replaced the lone non-canonical dependency tarball URL with `registry.npmjs.org` without changing its integrity hash; added offline registry-origin tests and an enforced Frontend CI check. Applied the exact formatter-diff correction to the new test file in the follow-up.
 - Updated the Phase 6 browser smoke flow to navigate to Settings before adding and checking the synthetic application record; no application behavior changed.
