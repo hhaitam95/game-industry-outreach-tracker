@@ -1,7 +1,7 @@
 # Project Status
 
 **Last updated:** 2026-10-29  
-**Current phase:** Phase 6 Part 2 hygiene. ResumeLab component split is committed; frontend CI and discovery fixtures are green on `146a9293`, but the browser job's report indicates `browser-debug-port-unavailable` during browser startup (before app interaction). No third CI cycle will be spent on the refactor; this environmental verification limitation is recorded below. CSP design/definition of done is ADR-044; implementation has not started.
+**Current phase:** CSP meta policy and browser assertion implemented under ADR-044; exact-head CI cycle 1 is pending. The ADR-043 browser startup failure (`browser-debug-port-unavailable`) is logged and no third CI cycle will be spent on that split.
 **Working branch:** feat/phase6b-resume-analysis (fast-forwarded into the PR #6 branch after each cohesive commit)  
 **Base/main:** 07d8e15cec544e56a09fbcab44202dc7051753c6 (unchanged; no direct changes to main).
 
@@ -117,3 +117,10 @@ Validate parser hardening on the current commit. The unit uses a bounded parser 
 
 - ADR-044 defines the static CSP and browser check before code. No CSP code has been changed yet.
 - **Next check:** add the meta policy to `index.html` and verify its required directives in the browser smoke after the application is reached. Keep the explicit two-cycle deferral rule; browser startup failures must be distinguished from CSP/application failures.
+
+
+## Phase 6 CSP hygiene — implementation
+
+- This commit adds the CSP meta policy to `index.html`; `scripts/browser-vault-smoke.mjs` asserts every required directive after the application renders.
+- **Policy compatibility:** `style-src 'self' 'unsafe-inline'` is retained for React inline-style compatibility; no inline scripts are allowed. Same-origin app assets and workers are allowed, with `blob:` explicitly available to workers. External connections, object/embed content, base URLs, and form submissions are restricted by the listed directives.
+- **Verification:** exact-head Frontend CI, privacy check, production preview/browser acceptance, and discovery fixtures are pending. The CSP item gets at most two CI cycles per ADR-044.

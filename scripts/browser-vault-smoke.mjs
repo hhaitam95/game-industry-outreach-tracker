@@ -394,6 +394,22 @@ async function main() {
   await client.send("Page.setDownloadBehavior", { behavior: "allow", downloadPath: downloadDir });
   await client.send("Page.navigate", { url });
   await client.waitForText("Your workspace");
+  const cspDirectives = await client.evaluate(`(() => {
+    const policy = document.querySelector('meta[http-equiv="Content-Security-Policy"]')?.content ?? "";
+    return {
+      defaultSrc: policy.includes("default-src 'self'"),
+      scriptSrc: policy.includes("script-src 'self'"),
+      workerSrc: policy.includes("worker-src 'self' blob:"),
+      connectSrc: policy.includes("connect-src 'self'"),
+      objectSrc: policy.includes("object-src 'none'"),
+      baseUri: policy.includes("base-uri 'none'"),
+      formAction: policy.includes("form-action 'none'"),
+      styleSrc: policy.includes("style-src 'self' 'unsafe-inline'")
+    };
+  })()`);
+  if (!cspDirectives || Object.values(cspDirectives).some((present) => !present)) {
+    throw new Error("content-security-policy-missing-required-directives");
+  }
 
   if (process.env.EXPECT_STUDIO_CATALOG === "1") {
     await step("Verify Phase 3 studio catalogue UI and source links", async () => {
