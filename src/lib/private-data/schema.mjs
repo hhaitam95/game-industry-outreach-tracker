@@ -63,6 +63,19 @@ const APPLICATION_KEYS = [
 ];
 const WORKSPACE_KEYS = ["schemaVersion", "updatedAt", "profile", "resumes", "drafts", "applications"];
 
+/** @typedef {"interested" | "applied" | "interview" | "rejected" | "offered" | "withdrawn"} ApplicationStatus */
+/** @typedef {"role-application" | "speculative-introduction" | "networking"} DraftPurpose */
+/** @typedef {"draft" | "reviewed" | "ready-for-user"} DraftReviewStatus */
+/** @typedef {"note" | "response" | "follow-up" | "interview" | "outcome" | "status-change" | "submitted"} ApplicationActivityType */
+/** @typedef {{id: string, displayName: string, headline: string, professionalSummary: string, targetRoles: string[], skills: string[], updatedAt: string}} ProfileData */
+/** @typedef {{id: string, label: string, kind: "pdf" | "docx" | "txt" | "unknown", processedAt: string}} ResumeMetadata */
+/** @typedef {{id: string, title: string, body: string, updatedAt: string}} LegacyDraftData */
+/** @typedef {{id: string, seriesId: string, versionNumber: number, previousVersionId: string | null, title: string, body: string, updatedAt: string, studioId: string, studioName: string, roleTitle: string, opportunityId: string, sourceUrl: string, purpose: DraftPurpose, profileUpdatedAt: string | null, resumeLabel: string, guidanceVersion: string, reviewStatus: DraftReviewStatus}} OutreachDraft */
+/** @typedef {{id: string, studioName: string, roleTitle: string, status: ApplicationStatus, applicationUrl: string, notes: string, createdAt: string, updatedAt: string}} LegacyApplicationData */
+/** @typedef {{id: string, type: ApplicationActivityType, occurredAt: string, note: string}} ApplicationActivity */
+/** @typedef {{id: string, studioName: string, roleTitle: string, status: ApplicationStatus, applicationUrl: string, notes: string, createdAt: string, updatedAt: string, studioId: string, opportunityId: string, outreachDraftId: string, nextFollowUpAt: string | null, history: ApplicationActivity[]}} ApplicationData */
+/** @typedef {{schemaVersion: 2, updatedAt: string, profile: ProfileData, resumes: ResumeMetadata[], drafts: OutreachDraft[], applications: ApplicationData[]}} WorkspaceData */
+
 /** @param {unknown} value @returns {value is Record<string, unknown>} */
 function isPlainRecord(value) {
   if (value === null || typeof value !== "object" || Array.isArray(value)) return false;
@@ -155,7 +168,7 @@ function safeApplicationUrl(value) {
   return normalizedUrl;
 }
 
-/** @param {unknown} value */
+/** @param {unknown} value @returns {ProfileData} */
 function validateProfile(value) {
   assertExactKeys(value, PROFILE_KEYS, "Profile");
   return {
@@ -169,7 +182,7 @@ function validateProfile(value) {
   };
 }
 
-/** @param {unknown} value */
+/** @param {unknown} value @returns {ResumeMetadata} */
 function validateResumeMetadata(value) {
   assertExactKeys(value, RESUME_KEYS, "Resume metadata");
   if (typeof value.kind !== "string" || !["pdf", "docx", "txt", "unknown"].includes(value.kind)) {
@@ -179,12 +192,12 @@ function validateResumeMetadata(value) {
     id: identifier(value.id, "Resume metadata ID"),
     // This is a user-provided display label, not the original path or file contents.
     label: boundedString(value.label, "Resume label", 120, { allowEmpty: false }),
-    kind: value.kind,
+    kind: /** @type {"pdf" | "docx" | "txt" | "unknown"} */ (value.kind),
     processedAt: timestamp(value.processedAt, "Resume processedAt"),
   };
 }
 
-/** @param {unknown} value */
+/** @param {unknown} value @returns {LegacyDraftData} */
 function validateLegacyDraft(value) {
   assertExactKeys(value, LEGACY_DRAFT_KEYS, "Outreach draft");
   return {
@@ -195,10 +208,10 @@ function validateLegacyDraft(value) {
   };
 }
 
-/** @param {unknown} value */
+/** @param {unknown} value @returns {OutreachDraft} */
 function validateDraft(value) {
   assertExactKeys(value, DRAFT_KEYS, "Outreach draft");
-  if (!Number.isSafeInteger(value.versionNumber) || value.versionNumber < 1) {
+  if (typeof value.versionNumber !== "number" || !Number.isSafeInteger(value.versionNumber) || value.versionNumber < 1) {
     throw new Error("Draft version number must be a positive integer.");
   }
   if (typeof value.purpose !== "string" || !DRAFT_PURPOSES.includes(value.purpose)) {
@@ -210,7 +223,7 @@ function validateDraft(value) {
   return {
     id: identifier(value.id, "Draft ID"),
     seriesId: identifier(value.seriesId, "Draft series ID"),
-    versionNumber: value.versionNumber,
+    versionNumber: /** @type {number} */ (value.versionNumber),
     previousVersionId: optionalIdentifier(value.previousVersionId, "Previous draft ID"),
     title: boundedString(value.title, "Draft title", 180, { allowEmpty: false }),
     body: boundedString(value.body, "Draft body", 20_000),
@@ -220,15 +233,15 @@ function validateDraft(value) {
     roleTitle: boundedString(value.roleTitle, "Draft role title", 180),
     opportunityId: boundedString(value.opportunityId, "Draft opportunity ID", 100),
     sourceUrl: safeApplicationUrl(value.sourceUrl),
-    purpose: value.purpose,
+    purpose: /** @type {DraftPurpose} */ (value.purpose),
     profileUpdatedAt: optionalTimestamp(value.profileUpdatedAt, "Draft profile timestamp"),
     resumeLabel: boundedString(value.resumeLabel, "Resume label", 120),
     guidanceVersion: boundedString(value.guidanceVersion, "Guidance version", 120, { allowEmpty: false }),
-    reviewStatus: value.reviewStatus,
+    reviewStatus: /** @type {DraftReviewStatus} */ (value.reviewStatus),
   };
 }
 
-/** @param {unknown} value */
+/** @param {unknown} value @returns {LegacyApplicationData} */
 function validateLegacyApplication(value) {
   assertExactKeys(value, LEGACY_APPLICATION_KEYS, "Application");
   if (typeof value.status !== "string" || !APPLICATION_STATUSES.includes(value.status)) {
@@ -238,7 +251,7 @@ function validateLegacyApplication(value) {
     id: identifier(value.id, "Application ID"),
     studioName: boundedString(value.studioName, "Studio name", 180, { allowEmpty: false }),
     roleTitle: boundedString(value.roleTitle, "Role title", 180, { allowEmpty: false }),
-    status: value.status,
+    status: /** @type {ApplicationStatus} */ (value.status),
     applicationUrl: safeApplicationUrl(value.applicationUrl),
     notes: boundedString(value.notes, "Application notes", 4_000),
     createdAt: timestamp(value.createdAt, "Application createdAt"),
@@ -246,7 +259,7 @@ function validateLegacyApplication(value) {
   };
 }
 
-/** @param {unknown} value */
+/** @param {unknown} value @returns {ApplicationActivity} */
 function validateActivity(value) {
   assertExactKeys(value, ["id", "type", "occurredAt", "note"], "Application activity");
   if (typeof value.type !== "string" || !APPLICATION_ACTIVITY_TYPES.includes(value.type)) {
@@ -254,13 +267,13 @@ function validateActivity(value) {
   }
   return {
     id: identifier(value.id, "Activity ID"),
-    type: value.type,
+    type: /** @type {ApplicationActivityType} */ (value.type),
     occurredAt: timestamp(value.occurredAt, "Activity timestamp"),
     note: boundedString(value.note, "Activity note", 2_000, { allowEmpty: false }),
   };
 }
 
-/** @param {unknown} value */
+/** @param {unknown} value @returns {ApplicationData} */
 function validateApplication(value) {
   assertExactKeys(value, APPLICATION_KEYS, "Application");
   if (typeof value.status !== "string" || !APPLICATION_STATUSES.includes(value.status)) {
@@ -273,7 +286,7 @@ function validateApplication(value) {
     id: identifier(value.id, "Application ID"),
     studioName: boundedString(value.studioName, "Studio name", 180, { allowEmpty: false }),
     roleTitle: boundedString(value.roleTitle, "Role title", 180, { allowEmpty: false }),
-    status: value.status,
+    status: /** @type {ApplicationStatus} */ (value.status),
     applicationUrl: safeApplicationUrl(value.applicationUrl),
     notes: boundedString(value.notes, "Application notes", 4_000),
     createdAt: timestamp(value.createdAt, "Application createdAt"),
@@ -286,7 +299,7 @@ function validateApplication(value) {
   };
 }
 
-/** @param {unknown} input */
+/** @param {unknown} input @returns {WorkspaceData} */
 function migrateV1Workspace(input) {
   assertExactKeys(input, WORKSPACE_KEYS, "Private workspace");
   if (input.schemaVersion !== 1) throw new Error("This private workspace uses an unsupported data version.");
@@ -334,7 +347,7 @@ function migrateV1Workspace(input) {
 }
 
 /** Create a blank local workspace. It contains no real profile or application data. */
-/** @param {string} [now] */
+/** @param {string} [now] @returns {WorkspaceData} */
 export function createEmptyWorkspace(now = new Date().toISOString()) {
   const safeNow = timestamp(now, "Workspace timestamp");
   return {
@@ -359,6 +372,7 @@ export function createEmptyWorkspace(now = new Date().toISOString()) {
  * Validate and copy a workspace payload. Version 1 vault data is validated and migrated
  * in memory to version 2; the caller's next explicit save writes the migrated shape encrypted.
  * @param {unknown} input
+ * @returns {WorkspaceData}
  */
 export function validateWorkspaceData(input) {
   if (!isPlainRecord(input)) throw new Error("Private workspace must be an object.");
