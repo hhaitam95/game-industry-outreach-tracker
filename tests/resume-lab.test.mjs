@@ -69,8 +69,8 @@ test("ResumeEditorPanel exposes structured editing, review, local export, and ex
 
     const oversizedStructure = Array.from(
       { length: 41 },
-      (_, index) => "Skills\\nSynthetic section " + (index + 1),
-    ).join("\\n");
+      (_, index) => "Skills\nSynthetic section " + (index + 1),
+    ).join("\n");
     const fallbackMarkup = renderToStaticMarkup(
       React.createElement(module.ResumeEditorPanel, {
         sourceText: oversizedStructure,
