@@ -140,12 +140,12 @@ export function analyzeRoleAgainstProfile({ roleTitle, roleDescription = "", pro
   };
   const hasProfile = Boolean(
     profile &&
-      [
-        candidateProfile.headline,
-        candidateProfile.professionalSummary,
-        ...(candidateProfile.targetRoles ?? []),
-        ...(candidateProfile.skills ?? []),
-      ].some((value) => typeof value === "string" && value.trim()),
+    [
+      candidateProfile.headline,
+      candidateProfile.professionalSummary,
+      ...(candidateProfile.targetRoles ?? []),
+      ...(candidateProfile.skills ?? []),
+    ].some((value) => typeof value === "string" && value.trim()),
   );
   const profileText = hasProfile
     ? [
