@@ -1,16 +1,42 @@
 # Project Status
 
-**Last updated:** 2026-10-27  
-**Current phase:** Phase 5a sample fallback, validated sync CLI, explorer and discovery-state persistence flow implemented; PR #4 is open and unmerged.  
-**Working branch:** `feat/phase5-studio-research`  
-**Base/main:** `07d8e15cec544e56a09fbcab44202dc7051753c6` (PR #3 merged). No changes to `main`.
+**Last updated:** 2026-10-29  
+**Current phase:** Part 1 is green; Phase 6 parser/registry hygiene and CSP are implemented and verified on exact code head `b3b196da`. Frontend CI, browser acceptance (retry attempt 2), and discovery fixtures passed. Phase 6c remains gated on the owner merging PR #4 with a regular merge, retargeting PR #6 to `main`, and then merging PR #6.
+**Working branch:** feat/phase6b-resume-analysis (fast-forwarded into the PR #6 branch after each cohesive commit)  
+**Base/main:** 07d8e15cec544e56a09fbcab44202dc7051753c6 (unchanged; no direct changes to main).
+
+**Merge plan:** The owner merges PR #4 with a regular merge commit, not squash, to preserve the Phase 6 ancestry. After PR #4 merges, retarget PR #6 to `main`. Keep both PRs unmerged by the implementation agent.
 
 ## Engineering standards for remaining work
 
-- Follow the standing rules in [AGENTS.md](AGENTS.md) and [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md): design note plus definition of done before each phase/unit; record deviations after implementation.
-- This file is the single source for current branch/review state and volatile verification details. Elsewhere, avoid repeating branch state, SHAs, run IDs, or test counts.
-- For the current phase review, use the [latest PR check status](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/4/checks). Historical run records below describe the commits named in those entries, not later heads.
-- **Standards audit:** The JavaScript loader/sync CLI and Python discovery projection consume one versioned public-opportunity JSON Schema. Shared valid/invalid golden fixtures run in both languages. The explorer is split into orchestration, filter controls, and role-card components with SSR/component and browser-interaction coverage. Discovery tests are split into parser, state-transition, and boundary/workflow modules below the ~300-line target; unused pytest/Ruff configuration was removed because CI runs unittest discovery. Current check evidence is in the [PR checks view](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/4/checks).
+- Follow AGENTS.md and IMPLEMENTATION_PLAN.md: publish a design note and definition of done before code; keep pure domain logic separate from I/O/UI; test success and failure paths; update docs with implementation.
+- This file is the single source for volatile branch/review/run details. Other docs should point here instead of duplicating moving SHAs or run IDs.
+- Keep each delivery slice in its own branch and draft PR, stacked in order. Do not merge any PR as part of implementation.
+- Current source repository visibility is public. Never commit private candidate records, resumes, drafts, applications, contact details, credentials, or secrets.
+- Avoid using CI as a formatter/linter REPL. When format checking fails, use the formatter-diff diagnostic step added immediately after it, then make the exact formatted fixes in one commit. At most two CI cycles per unit; after that, take the simplest route and log it in DECISIONS.md.
+
+## Phase 6a acceptance status
+
+- **Scope delivered in code:** bundled guidance and local-only DOCX/PDF/TXT text extraction; safe warnings; 10 MiB input, 100-page PDF and 150,000-character output limits; synthetic parser fixtures.
+- **Acceptance result:** The requested Part 1 corrections are present on exact head `d4ef4c82fde4b80ffd1cb26792719602c0d25afd`. Frontend CI passed [PR run 40845263877](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40845263877), browser acceptance passed [PR run 40845264018](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40845264018), and discovery fixtures passed [PR run 40845263896](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40845263896). The 6b push runs also passed: [Frontend CI 40845253383](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40845253383) and [discovery fixtures 40845253412](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40845253412).
+- **Part 1 details checked:** the browser-clear evaluator uses a template literal; stop words remain one space-delimited string; the parser import is one line; specified JSX attributes are formatted one per line; privacy copy and both assertion wraps match the requested shape; CI prints an exact Prettier diff on format-check failure.
+- **Prior repair diagnostics:** `a8c74f96` fixed the uninvoked analysis-state evaluator; `154bc097` fixed Settings navigation in the browser smoke. The failures were test-harness issues, not product runtime defects; the subsequent exact-head runs linked above pass.
+- **Acceptance decision:** Phase 6a+6b Part 1 meets its current CI gate on `154bc097`. Do not label Phase 6 complete overall; Part 2 hygiene and Phase 6c are still outstanding.
+- **Links:** [Phase 6a+6b draft PR #6](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/6); current PR-head checks: [Frontend CI](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40842791525), [browser acceptance](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40842791518), [discovery fixtures](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40842791533).
+
+## Phase 6b implementation boundary
+
+- **Design and definition of done:** ADR-038 in DECISIONS.md.
+- The role snapshot contains titles and metadata, not full job requirements. In the absence of user-pasted role text, matching is limited to the selected title. Synthetic sample roles and last-seen status must not be presented as confirmed vacancies.
+- Resume text, pasted role description, private profile projection and analysis remain in browser memory. Do not persist them, log them, upload them, or add them to the public snapshot.
+- Phase 6c remains outstanding: editable structured resume proposal/diff, download generation and optional manual AI handoff are not included in Phase 6b.
+- No live discovery dispatch, schedule enablement, publishing, Pages deployment, repo visibility/permissions change, or merge is performed.
+
+## Phase 6b implementation status
+
+- **Scope implemented:** deterministic baseline counts; common section-heading detection; count-only email/phone/URL indicators; exact profile-skill mentions; target-role phrase comparison; representative terms from selected role title and optional manually pasted role text.
+- **Privacy:** Resume text, role description, analysis result, and the current profile projection stay in browser memory. No raw resume excerpts or contact values are displayed in analysis findings; no AI API, backend, external fetch, or vault schema change is introduced.
+- **Known limitation:** No Phase 6a+6b Part 1 CI blocker remains on exact head `154bc097`. Phase 6b’s product boundaries remain unchanged: browser-memory-only analysis, no upload/API, no persistence of resume text.
 
 ## Phase 5a closeout — verification evidence
 
@@ -32,9 +58,29 @@
 - [x] README, handoff, changelog, implementation plan, public-data contract and ADR-028 document sample fallback, data flow and dispatch-only boundary.
 - [x] One PR opened: [#4](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/4). Frontend CI, discovery fixtures and PR-triggered browser acceptance passed on commit `de7160b0`; do not open another PR or merge.
 
-## Safety boundary
+## Phase 5a safety boundary
 
-No runtime fetch of career pages/role data. `last-seen` is not proof a role is open; no hiring eligibility/work authorization is inferred. Discovery remains `workflow_dispatch` only with no schedule. No workflow dispatch/live scan, publication, Pages deployment, visibility/permissions/secrets change, new dependency, force-push, history rewrite, or branch deletion is approved. Fit/skill-gap explanations and manual leads are deferred to Phase 5b until a candidate profile and active vault session exist.
+No runtime fetch of career pages/role data. `last-seen` is not proof a role is open; no hiring eligibility/work authorization is inferred. Discovery remains `workflow_dispatch` only with no schedule. No live workflow dispatch, publication, Pages deployment, visibility/permissions/secrets change, force-push, history rewrite, or branch deletion is authorized.
+
+## Phase 6a safety boundary
+
+The user-selected original and extracted text remain in the active Resume Lab component state only. No CV upload, raw-text vault persistence, logging, OCR, AI API, generated document, merge, discovery-state change, schedule, publication, or deployment is included. The dependencies are for local text extraction only. Phase 6a+6b Part 1 CI acceptance is green; full Phase 6 completion still depends on the remaining Part 2 hygiene and owner-controlled review/merge sequence.
+
+## Phase 6 Part 2 hygiene evidence
+
+- **Lockfile registry unit:** final commit `906ca938` is green on frontend CI, browser acceptance and discovery fixtures; 194 resolved URLs use the canonical npm registry and the existing integrity hash is unchanged.
+- **Parser hardening, first CI cycle:** 75 tests passed, lint passed, `npm audit` found 0 vulnerabilities, and discovery fixtures passed [6b run 40844685096](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40844685096). Frontend CI failed only format/typecheck: Prettier requested one line wrap in the new timeout test, the DOCX worker callback needed a result type, and pdfjs-dist 6.4.299 does not define `isEvalSupported` on `DocumentInitParameters` ([6b run 40844685031](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40844685031), [6a run 40844690854](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40844690854), [PR CI run 40844699873](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40844699873)). Browser acceptance on that head also failed at the CI gate [run 40844699974](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40844699974).
+- **Cycle-2 outcome:** Parser hardening is green on exact head `d4ef4c82fde4b80ffd1cb26792719602c0d25afd`: Frontend CI and discovery fixtures passed on the 6b push ([40845253383](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40845253383), [40845253412](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40845253412)); PR #6 Frontend CI, browser acceptance and discovery fixtures passed ([40845263877](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40845263877), [40845264018](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40845264018), [40845263896](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40845263896)). The final implementation keeps `enableXfa: false`, a 30-second bound and `loadingTask.destroy()` in `finally`; `isEvalSupported` is omitted because PDF.js 6.4.299 does not support that initialization option.
+
+## Phase 6a+6b Part 1 CI evidence
+
+- Lockfile hygiene commit `8f24c9ea`: registry-origin check passed and 7 new allowlist tests passed; all 74 unit tests, lint, typecheck, dependency audit and build passed. The first Frontend CI cycle failed only `format:check` on wrapping in `tests/lockfile-registry.test.mjs`; CI logged the exact correction ([6b run 40843400195](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40843400195), [6a run 40843404954](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40843404954)). Discovery fixtures passed on both branches ([40843400252](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40843400252), [40843405035](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40843405035)).
+
+- Final exact-head commit `154bc097`: Frontend CI passed on 6a [40842783624](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40842783624), 6b [40842778716](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40842778716), and PR #6 [40842791525](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40842791525). Discovery tests passed on 6a [40842783616](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40842783616), 6b [40842778973](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40842778973), and PR #6 [40842791533](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40842791533); browser acceptance passed [40842791518](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40842791518).
+- Final registry hygiene commit `906ca938`: Frontend CI passed on push [40843687346](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40843687346) and PR [40843700007](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40843700007); browser acceptance passed [40843700114](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40843700114); discovery fixtures passed on push [40843687130](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40843687130) and PR [40843700068](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40843700068). The enforced registry check passed, all 74 unit tests passed, and the 194 resolved URLs now use the canonical registry.
+- Repair commit `d8b1cb34b1bbcdf5e5c71b64320721ecd6e4bb80`: Frontend CI push [run 40786353689](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40786353689) and PR [run 40786376220](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40786376220) found Prettier differences in `src/components/ResumeLab.tsx`, `src/lib/resume/analysis.mjs`, and `scripts/browser-vault-smoke.mjs`. The formatter-diagnostic step succeeded and logged the exact diff. Lint, typecheck, all 67 unit tests, dependency audit, and production build passed; privacy-boundary and preview checks were skipped because formatting failed. Discovery fixture tests passed on push [run 40786353516](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40786353516) and PR [run 40786376222](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40786376222).
+- Follow-up commit `21e42e2be207a78f6f0c686c74b05c0adb12b18b`: Frontend CI push [run 40786545465](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40786545465) and PR [run 40786552535](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40786552535) found only the analysis-section opening-tag indentation in `ResumeLab.tsx`. The formatter-diagnostic step logged the exact correction. Discovery fixtures passed on push [run 40786545557](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40786545557) and PR [run 40786552517](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40786552517). Lint, typecheck, unit tests and dependency audit passed; production build and downstream checks were still running when this note was prepared.
+- Repair commit `a8c74f96`: Frontend CI passed on the 6a/6b push runs [40842339640](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40842339640) and [40842333544](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40842333544), PR Frontend CI [40842348231](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40842348231), and all six branch/PR discovery checks. Browser acceptance passed analysis/private-profile checking but failed “Add synthetic application” because the page remained on Resume Lab [run 40842348276](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40842348276). The navigation correction is pending exact-head verification.
 
 ## CI per implementation commit
 
@@ -49,4 +95,40 @@ No runtime fetch of career pages/role data. `last-seen` is not proof a role is o
 
 ## Next action
 
-Phase 5a is implemented, tested, and ready for owner review in [PR #4](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/4). The PR remains open and unmerged. Decide whether to merge; after an approved merge, run the discovery workflow manually once and review source coverage/last-seen records before using `npm run data:sync`. Do not enable schedules, publishing, or Pages deployment without their separately documented approval. Phase 5b (fit/skill-gap explanations and manual leads) remains deferred until its candidate-profile/vault design note and definition of done are reviewed.
+Validate parser hardening on the current commit. The unit uses a bounded parser wait, safe existing error categories, a killable DOCX worker, and PDF.js cleanup. Follow with the behavior-preserving ResumeLab split and CSP review, at most two CI cycles per unit. Do not create Phase 6c until the owner merges PR #6; keep PR #4/#6 unmerged here.
+
+
+## Phase 6 Part 2 — behavior-preserving ResumeLab split
+
+- **Design:** ADR-043 was committed before code. The split preserves rendered copy, ordering, selectors/test IDs, accessibility attributes, CSS classes, event semantics and component-owned in-memory state behavior.
+- **Implementation:** Analysis presentation moved to `src/components/ResumeAnalysisPanel.tsx`, guidance presentation to `src/components/ResumeGuidancePanel.tsx`, and inferred prop types to `src/components/resume-lab.types.ts`. `ResumeLab.tsx` retains local file extraction, state and state-transition handlers.
+- **CI cycle 1:** discovery fixtures passed [push 40848747501](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40848747501) and [PR 40848758681](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40848758681). Lint, typecheck, unit tests, audit, and build passed; format check failed only on the two extracted TSX files. The browser gate failed because Frontend CI was not green. Exact formatter output was applied to just those two files; CI cycle 2 is final.
+
+
+## Phase 6 Part 2 — behavior-preserving ResumeLab split: final-cycle outcome
+
+- **Implementation commit:** [38437f70](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/38437f700338b0b428c37c84ff937dc6372b7cbb); exact formatter correction [146a9293](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/146a9293d48ebac75ba8922760a3e38971a9c8f4).
+- **CI cycle 1:** discovery fixtures passed [push 40848747501](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40848747501) and [PR 40848758681](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40848758681). Frontend CI failed only formatting in the two newly extracted TSX components. Lint, typecheck, unit tests, audit, and build passed. The CI formatter diagnostic provided the exact two-file correction, applied without reformatting other files.
+- **CI cycle 2:** frontend CI passed [6b push 40849072335](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849072335) and [PR 40849087740](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849087740); discovery fixtures passed [6b push 40849072461](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849072461) and [PR 40849087783](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849087783). In the browser job [40849087731](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849087731), the report failed at startup with `browser-debug-port-unavailable`, before app interaction; the report recorded only the build and preview steps as passed. The browser job on the isolated refactor head did not verify behavior because Chrome failed to publish its debugging-port file before app interaction. The later full browser acceptance run on exact head `b3b196da` (which contains the same refactored components plus the CSP change) passed on retry attempt 2, so the current code state is browser-verified. No third refactor-specific code cycle was run.
+- **Code state:** `ResumeLab.tsx` 253 lines; `ResumeAnalysisPanel.tsx` 259 lines after the exact formatter diff; `ResumeGuidancePanel.tsx` 32 lines; shared inferred types in `resume-lab.types.ts`. No browser-visible behavior change is intended, but the unverified browser gate remains an explicit limitation.
+
+
+## Phase 6 CSP hygiene — pre-implementation design
+
+- ADR-044 defines the static CSP and browser check before code. No CSP code has been changed yet.
+- **Next check:** add the meta policy to `index.html` and verify its required directives in the browser smoke after the application is reached. Keep the explicit two-cycle deferral rule; browser startup failures must be distinguished from CSP/application failures.
+
+
+## Phase 6 CSP hygiene — implementation
+
+- This commit adds the CSP meta policy to `index.html`; `scripts/browser-vault-smoke.mjs` asserts every required directive after the application renders.
+- **Policy compatibility:** `style-src 'self' 'unsafe-inline'` is retained for React inline-style compatibility; no inline scripts are allowed. Same-origin app assets and workers are allowed, with `blob:` explicitly available to workers. External connections, object/embed content, base URLs, and form submissions are restricted by the listed directives.
+- **Verification:** exact-head Frontend CI, privacy check, production preview/browser acceptance, and discovery fixtures are pending. The CSP item gets at most two CI cycles per ADR-044.
+
+
+### ADR-044 implementation outcome
+
+- **Code commit:** [b3b196da](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/b3b196da6a2aeb03511efefea3a517fe4ade518d).
+- **Push CI:** Frontend CI passed [40849588956](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849588956) and [40849594611](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849594611); discovery fixtures passed [40849588962](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849588962) and [40849594640](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849594640).
+- **PR CI:** Frontend CI passed [40849604007](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849604007), discovery fixtures passed [40849604001](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849604001), and browser acceptance passed on run [40849603965, attempt 2](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849603965). The first browser attempt failed before app interaction with `browser-debug-port-unavailable`; no code changed before the successful retry.
+- The browser assertion checked every policy directive after the page rendered; the existing full browser suite then passed. No CSP rollback or Phase 8 deferral is needed.

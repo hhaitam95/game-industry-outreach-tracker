@@ -1,9 +1,13 @@
 import { useState } from "react";
+import type { validateWorkspaceData } from "./lib/private-data/schema.mjs";
 import { getNavItem, NAV_ITEMS } from "./lib/navigation.mjs";
 import PrivateDataSettings from "./components/PrivateDataSettings";
 import StudioCatalog from "./components/StudioCatalog";
+import ResumeLab from "./components/ResumeLab";
 import { STUDIO_PROFILES } from "./lib/studios/catalog.mjs";
 import { IS_SYNTHETIC_SNAPSHOT, OPPORTUNITY_SNAPSHOT } from "./lib/opportunities/snapshot.mjs";
+
+type WorkspaceProfile = ReturnType<typeof validateWorkspaceData>["profile"];
 
 const pageRoadmap: Record<string, string> = {
   studios: "Phase 5a",
@@ -189,6 +193,7 @@ function PlaceholderPage({ pageId, onNavigate }: { pageId: string; onNavigate: (
 
 export default function App() {
   const [activePageId, setActivePageId] = useState("overview");
+  const [resumeProfile, setResumeProfile] = useState<WorkspaceProfile | null>(null);
   const activeItem = getNavItem(activePageId);
   const isOverview = activeItem.id === "overview";
 
@@ -226,7 +231,7 @@ export default function App() {
         <div className="sidebar-bottom">
           <div className="sidebar-status">
             <span className="status-dot" />
-            <span>Phase 5a studio research</span>
+            <span>Phase 6 resume workspace</span>
           </div>
           <p>Built around evidence, privacy, and human control.</p>
         </div>
@@ -243,17 +248,20 @@ export default function App() {
           </div>
           <span className="phase-badge">
             <span className="phase-badge-dot" />
-            Phase 5a · Studio research
+            Phase 6b · Resume Review
           </span>
         </header>
         <div className="page-content">
+          <div hidden={activeItem.id !== "settings"} data-testid="private-data-settings-host">
+            <PrivateDataSettings onProfileChange={setResumeProfile} />
+          </div>
           {isOverview ? (
             <OverviewPage onNavigate={setActivePageId} />
           ) : activeItem.id === "studios" ? (
             <StudioCatalog />
-          ) : activeItem.id === "settings" ? (
-            <PrivateDataSettings />
-          ) : (
+          ) : activeItem.id === "resume" ? (
+            <ResumeLab profile={resumeProfile} />
+          ) : activeItem.id === "settings" ? null : (
             <PlaceholderPage pageId={activePageId} onNavigate={setActivePageId} />
           )}
         </div>

@@ -33,9 +33,19 @@ jobs:
         id: install
         run: npm ci
 
+      - name: Check locked dependency registry URLs
+        if: always() && steps.install.outcome == 'success'
+        run: npm run check:lockfile-registry
+
       - name: Check formatting
         if: always() && steps.install.outcome == 'success'
         run: npm run format:check
+
+      - name: Show exact formatter diff on failure
+        if: failure()
+        run: |
+          npx prettier --write "src/**/*.{ts,tsx,mjs}" "src/**/*.json" "schemas/**/*.json" "tests/fixtures/**/*.json" "tests/**/*.mjs" "scripts/**/*.mjs" "vite.config.ts" "eslint.config.js" "index.html" "package.json" "package-lock.json" "tsconfig.json" ".prettierrc.json" ".vscode/**/*.json"
+          git --no-pager diff
 
       - name: Lint
         if: always() && steps.install.outcome == 'success'

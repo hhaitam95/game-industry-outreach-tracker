@@ -1,7 +1,7 @@
 # Implementation Plan
 
 **Status:** Revised roadmap following GitHub Pages, scheduled discovery, and browser-first resume decisions  
-**Last updated:** 2026-10-25
+**Last updated:** 2026-10-28
 
 ## Delivery principles
 
@@ -148,6 +148,13 @@ These features require the candidate profile and an active browser vault session
 
 ## Phase 6 — Resume guidance and browser-side document workflow
 
+**Implementation status:** Phase 6a is the first scoped slice; the full phase remains in progress. Current verification and branch state are maintained in [STATUS.md](STATUS.md).
+
+### Delivery slices
+- **Phase 6a:** build-time bundled guidance; local DOCX/PDF/TXT intake and text extraction; safe failure/warning states; strict file/page/text limits; no text persistence or network upload.
+- **Phase 6b:** deterministic baseline checks and role/profile comparison with evidence-aware findings. Use literal mention detection only; missing text is not evidence that a skill is absent, and never calculate a fit score.
+- **Phase 6c:** editable structured content and before/after diff, local DOCX/PDF generation, and optional manual ChatGPT handoff after a separate disclosure/redaction step. Do not persist generated resume content by default.
+
 ### Scope
 - Maintain docs/resume-guidelines/ as versioned, source-linked rules.
 - Bundle the applicable guidance into the static app at build time; do not rely on private files fetched from public pages.
@@ -159,7 +166,13 @@ These features require the candidate profile and an active browser vault session
 - Keep original files unchanged and do not upload them to GitHub.
 - Add optional manual ChatGPT prompt/copy/paste flow with disclosure warning and redaction choices.
 
-### Exit criteria
+### Phase 6b exit criteria
+- Baseline analysis reports only reproducible counts, section detections and count-only contact/link indicators.
+- Profile skill and target-role comparisons use the active vault profile projection; lock/delete clears the projection from app state.
+- Opportunity comparisons clearly distinguish synthetic sample records and last-seen statuses; no live-page fetch or fit score is introduced.
+- Role descriptions and analysis remain in component memory and are cleared when the Resume Lab is left or reset.
+
+### Full Phase 6 exit criteria
 - Supported sample CV files can be processed locally and export valid DOCX/PDF.
 - No file upload/network transfer occurs by default.
 - Suggested changes are explainable and do not invent experience.
@@ -222,3 +235,12 @@ These features require the candidate profile and an active browser vault session
 ## Next phase entry gate
 
 Phase 5b remains deferred until Phase 5a has been accepted. Before starting any new phase or cohesive unit, publish its design note and definition of done before code, then record deviations after implementation. Current branch/review state, verification evidence and next action are maintained only in [STATUS.md](STATUS.md).
+
+
+### Phase 6a exit criteria
+- Resume Lab exposes accessible local-file selection for DOCX, text-based PDF and UTF-8 TXT with a strict 10 MiB input cap, 100-page PDF cap, and 150,000-character extracted-text cap.
+- Mammoth raw-text extraction and PDF.js text-layer extraction run from locally bundled packages; PDF.js's worker is a Vite asset. DOCX-derived HTML is never rendered.
+- Parser failures produce fixed safe messages; scanned/image-only PDFs and empty documents warn instead of reporting successful extraction.
+- Extracted text stays in component memory only. It is not written to the private workspace schema, IndexedDB, logs, reports, URLs, or repository fixtures as candidate data. Reset and navigation clear it.
+- Unit, component-render, privacy-boundary, formatting, lint, typecheck, production-build, and browser acceptance checks pass on the tested commit.
+- Phase 6b and Phase 6c remain outstanding after this slice.

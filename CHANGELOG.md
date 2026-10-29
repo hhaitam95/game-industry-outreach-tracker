@@ -4,6 +4,13 @@ Meaningful changes are recorded here. Current branch/review state and verificati
 
 ## Unreleased
 
+- Bounded DOCX/PDF resume parsing to 30 seconds, moved Mammoth into a terminable worker, disabled PDF.js XFA, and kept parser timeouts on the existing safe error category. The pinned pdfjs-dist 6.4.299 no longer supports `isEvalSupported` as a document initialization option, so no ineffective property is passed.
+- Replaced the lone non-canonical dependency tarball URL with `registry.npmjs.org` without changing its integrity hash; added offline registry-origin tests and an enforced Frontend CI check. Applied the exact formatter-diff correction to the new test file in the follow-up.
+- Updated the Phase 6 browser smoke flow to navigate to Settings before adding and checking the synthetic application record; no application behavior changed.
+- Fixed the Phase 6 browser smoke harness so the baseline-analysis privacy/result check invokes and reads its assertion result; product behavior and persistence boundaries are unchanged.
+- Phase 6b adds deterministic, browser-memory-only resume baseline counts and explicit text-term comparisons against the unlocked profile and selected/manual role text. It does not calculate a fit score, infer eligibility, persist analysis, or invoke an AI API.
+- Phase 6a adds a browser-local Resume Lab for DOCX/PDF/TXT extraction, safe parser warnings and bounded input/output, plus build-time bundled source-linked resume guidance. Raw documents/text are not persisted or uploaded; OCR, analysis, editing, export and AI handoff are not included in this slice.
+- The Phase 6a CI repair tightens JSDoc/type contracts, keeps control-character filtering lint-clean, uses PDF.js loading-task cleanup, and corrects the initial-render test to match the visible scanned-PDF notice.
 - Split discovery tests into parser, state-transition, and public-boundary/workflow modules with a shared offline helper module; removed unused pytest configuration because CI enforces unittest discovery.
 - Split the opportunity explorer into orchestration, filter-controls and role-card components; added component-level render coverage for the sample-data banner and evidence/availability disclaimers.
 - Adopted standing engineering standards for future phases: design notes and definitions of done before code, single-source versioned contracts, inward-pointing architecture, deterministic failure-path tests, enforced CI gates, cohesive reviewed changes, same-commit documentation, automation, and evidence-based closeout reporting. The rules are maintained in AGENTS.md and IMPLEMENTATION_PLAN.md and apply from the current Phase 5 work onward.

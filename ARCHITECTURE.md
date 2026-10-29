@@ -175,6 +175,10 @@ Initial sources:
 
 No source gives a universal resume law. Apply clean technical resume defaults, while following each employer's instructions and accounting for role and market. A creative/VFX version may prioritize portfolio work differently from a technical-support or build-engineering version.
 
+### Phase 6a extraction boundary
+
+The Resume Lab reads user-selected DOCX, text-based PDF, or UTF-8 TXT files in browser memory. It enforces a 10 MiB input limit, 100-page PDF limit, and 150,000-character output limit. It displays plain extracted text, safe parser warnings, and an explicit scanned-PDF/OCR limitation. It never renders DOCX-derived HTML, logs document contents, writes extracted text into the encrypted workspace schema, or sends it to a backend. Resume-guidance Markdown is bundled at build time through Vite raw imports. Role/profile comparisons, deterministic findings, structured editable content, document export, and manual AI handoff remain later Phase 6 slices.
+
 ## 12. Optional AI use
 
 Do not integrate direct AI API calls into the first static deployment. The app can generate a prompt/context pack based on the selected opportunity and the bundled resume-guidance version. The user chooses which profile/resume details to copy to ChatGPT Free, reviews the privacy warning, and pastes the result back if useful.

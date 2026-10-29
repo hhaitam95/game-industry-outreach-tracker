@@ -227,6 +227,32 @@ class DevTools {
   }
 }
 
+async function chooseSyntheticResume({ name, type, base64, text }) {
+  const bytesExpression = base64
+    ? `Uint8Array.from(atob(${JSON.stringify(base64)}), (character) => character.charCodeAt(0))`
+    : `new TextEncoder().encode(${JSON.stringify(text ?? "")})`;
+  const selected = await client.evaluate(`(() => {
+    const input = document.querySelector('[data-testid="resume-file-input"]');
+    if (!input || input.disabled) return false;
+    const bytes = ${bytesExpression};
+    const transfer = new DataTransfer();
+    transfer.items.add(new File([bytes], ${JSON.stringify(name)}, { type: ${JSON.stringify(type)} }));
+    input.files = transfer.files;
+    input.dispatchEvent(new Event("change", { bubbles: true }));
+    return true;
+  })()`);
+  if (!selected) throw new Error("resume-file-input-not-found");
+}
+
+async function waitForResumeText(kind, expected) {
+  await client.waitFor(
+    `document.querySelector('[data-testid="resume-result-kind"]')?.dataset.kind === ${JSON.stringify(kind)} &&
+      document.querySelector('[data-testid="resume-status"]')?.dataset.status === "ready" &&
+      document.querySelector('[data-testid="resume-extracted-text"]')?.value.includes(${JSON.stringify(expected)})`,
+    "resume-" + kind + "-text-extracted",
+  );
+}
+
 async function step(name, action) {
   currentStep = name;
   await action();
@@ -368,6 +394,22 @@ async function main() {
   await client.send("Page.setDownloadBehavior", { behavior: "allow", downloadPath: downloadDir });
   await client.send("Page.navigate", { url });
   await client.waitForText("Your workspace");
+  const cspDirectives = await client.evaluate(`(() => {
+    const policy = document.querySelector('meta[http-equiv="Content-Security-Policy"]')?.content ?? "";
+    return {
+      defaultSrc: policy.includes("default-src 'self'"),
+      scriptSrc: policy.includes("script-src 'self'"),
+      workerSrc: policy.includes("worker-src 'self' blob:"),
+      connectSrc: policy.includes("connect-src 'self'"),
+      objectSrc: policy.includes("object-src 'none'"),
+      baseUri: policy.includes("base-uri 'none'"),
+      formAction: policy.includes("form-action 'none'"),
+      styleSrc: policy.includes("style-src 'self' 'unsafe-inline'")
+    };
+  })()`);
+  if (!cspDirectives || Object.values(cspDirectives).some((present) => !present)) {
+    throw new Error("content-security-policy-missing-required-directives");
+  }
 
   if (process.env.EXPECT_STUDIO_CATALOG === "1") {
     await step("Verify Phase 3 studio catalogue UI and source links", async () => {
@@ -423,6 +465,103 @@ async function main() {
     });
   }
 
+  if (process.env.EXPECT_RESUME_LAB === "1") {
+    await step("Verify Phase 6a local TXT, DOCX, and PDF extraction plus bundled guidance", async () => {
+      await client.clickButton("Resume lab");
+      await client.waitForText("Review a resume without uploading it");
+      const initial = await client.evaluate(`(() => ({
+        input: Boolean(document.querySelector('[data-testid="resume-file-input"]')),
+        guidance: Boolean(document.querySelector('[data-testid="resume-guidance-sources"]')),
+        privacyNote: document.querySelector('[data-testid="resume-privacy-note"]')?.innerText.toLowerCase() ?? ""
+      }))()`);
+      if (!initial?.input || !initial.guidance || !initial.privacyNote.includes("not uploaded")) {
+        throw new Error("resume-lab-initial-state-failed");
+      }
+
+      await client.evaluate(`(() => {
+        window.__resumeOutboundAttempts = [];
+        const nativeFetch = window.fetch.bind(window);
+        window.fetch = (...args) => {
+          const request = args[0];
+          const method = (args[1]?.method ?? request?.method ?? "GET").toUpperCase();
+          if (!["GET", "HEAD", "OPTIONS"].includes(method)) window.__resumeOutboundAttempts.push("fetch");
+          return nativeFetch(...args);
+        };
+        const nativeOpen = XMLHttpRequest.prototype.open;
+        XMLHttpRequest.prototype.open = function(method, ...args) {
+          this.__resumeMethod = String(method).toUpperCase();
+          return nativeOpen.call(this, method, ...args);
+        };
+        const nativeSend = XMLHttpRequest.prototype.send;
+        XMLHttpRequest.prototype.send = function(...args) {
+          if (this.__resumeMethod && !["GET", "HEAD", "OPTIONS"].includes(this.__resumeMethod)) {
+            window.__resumeOutboundAttempts.push("xhr");
+          }
+          return nativeSend.apply(this, args);
+        };
+        if (navigator.sendBeacon) {
+          const nativeBeacon = navigator.sendBeacon.bind(navigator);
+          navigator.sendBeacon = (...args) => {
+            window.__resumeOutboundAttempts.push("beacon");
+            return nativeBeacon(...args);
+          };
+        }
+        return true;
+      })()`);
+
+      await chooseSyntheticResume({
+        name: "synthetic-resume.txt",
+        type: "text/plain",
+        text: "Synthetic Resume Fixture\nExperience: Technical support and diagnostics.\nSkills: TypeScript, Python, REST APIs.",
+      });
+      await waitForResumeText("txt", "Skills: TypeScript, Python");
+
+      const docxBase64 = readFileSync(
+        path.join(root, "tests/fixtures/resumes/synthetic-resume.docx.b64"),
+        "utf8",
+      ).trim();
+      await chooseSyntheticResume({
+        name: "synthetic-resume.docx",
+        type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        base64: docxBase64,
+      });
+      await waitForResumeText("docx", "Skills: TypeScript, Python");
+
+      const pdfBase64 = readFileSync(path.join(root, "tests/fixtures/resumes/synthetic-resume.pdf.b64"), "utf8").trim();
+      await chooseSyntheticResume({
+        name: "synthetic-resume.pdf",
+        type: "application/pdf",
+        base64: pdfBase64,
+      });
+      await waitForResumeText("pdf", "Skills: TypeScript, Python");
+
+      const noUpload = await client.evaluate(`(() => ({
+        attempts: window.__resumeOutboundAttempts?.length ?? -1,
+        extracted: document.querySelector('[data-testid="resume-extracted-text"]')?.value ?? ""
+      }))()`);
+      if (!noUpload || noUpload.attempts !== 0 || !noUpload.extracted.includes("Synthetic Resume Fixture")) {
+        throw new Error("resume-local-only-boundary-failed");
+      }
+
+      await chooseSyntheticResume({
+        name: "unsupported-resume.doc",
+        type: "application/msword",
+        text: "Not a supported format",
+      });
+      await client.waitForText("Choose a DOCX, text-based PDF, or UTF-8 text file.");
+      const previousExtractionKept = await client.evaluate(
+        "document.querySelector('[data-testid=\"resume-result-kind\"]')?.dataset.kind === 'pdf' && document.querySelector('[data-testid=\"resume-extracted-text\"]')?.value.includes('Synthetic Resume Fixture')",
+      );
+      if (!previousExtractionKept) throw new Error("resume-failure-did-not-preserve-previous-extraction");
+
+      await client.clickButton("Clear extracted text");
+      const cleared = await client.evaluate(
+        "!document.querySelector('[data-testid=\"resume-extracted-text\"]') && !document.querySelector('[data-testid=\"resume-extraction\"]')",
+      );
+      if (!cleared) throw new Error("resume-reset-did-not-clear-text");
+    });
+  }
+
   const settingsClicked = await client.evaluate(`(() => {
     const item = [...document.querySelectorAll(".nav-link")].find((element) => element.innerText.trim().includes("Settings"));
     if (!item) return false;
@@ -444,11 +583,71 @@ async function main() {
     await client.fill("#profile-display-name", "BROWSER_TEST_PROFILE_CANARY");
     await client.fill("#profile-headline", "Synthetic QA Profile");
     await client.fill("#profile-summary", "Synthetic test content only.");
+    await client.fill("#profile-target-roles", "Developer Support Specialist\nTechnical Artist");
+    await client.fill("#profile-skills", "TypeScript\nPython\nREST APIs\nKibana");
     await client.clickButton("Encrypt and save profile");
     await client.waitForText("Profile encrypted and saved to this browser.");
   });
 
+  await step("Verify baseline checks and private profile comparison stay in memory", async () => {
+    const resumeClicked = await client.evaluate(`(() => {
+      const item = [...document.querySelectorAll(".nav-link")].find((element) => element.innerText.trim().toLowerCase().includes("resume lab"));
+      if (!item) return false;
+      item.click();
+      return true;
+    })()`);
+    if (!resumeClicked) throw new Error("resume-navigation-not-found");
+    await client.waitForText("Review a resume without uploading it");
+    await chooseSyntheticResume({
+      name: "synthetic-analysis-resume.txt",
+      type: "text/plain",
+      text: "Synthetic Analysis Resume\nProfessional Summary\nPython and REST APIs.\nExperience\nTypeScript diagnostics and support.",
+    });
+    await waitForResumeText("txt", "TypeScript diagnostics");
+    await client.fill(
+      '[data-testid="resume-analysis-role-description"]',
+      "Responsibilities: Python, REST APIs, Jira, Kubernetes, CI/CD. Experience with technical support.",
+    );
+    await client.clickButton("Run baseline review");
+    await client.waitForText("Baseline counts");
+    await client.waitForText("Exact text mention found");
+    await client.waitForText("No exact text mention detected");
+    const analysisState = await client.evaluate(`(() => {
+      const results = document.querySelector('[data-testid="resume-analysis-results"]');
+      return {
+        profileAvailable: Boolean(document.querySelector('[data-testid="resume-analysis-profile-status"]')?.innerText.includes("Using the current in-memory profile")),
+        skillMention: Boolean(results?.innerText.includes("Python")),
+        noFitScore: !results?.innerText.toLowerCase().includes("fit score:"),
+        rawResumeExcluded: !results?.innerText.includes("Synthetic Analysis Resume") && !results?.innerText.includes("TypeScript diagnostics"),
+        outboundAttempts: window.__resumeOutboundAttempts?.length ?? -1
+      };
+    })()`);
+    if (
+      !analysisState?.profileAvailable ||
+      !analysisState.skillMention ||
+      !analysisState.noFitScore ||
+      !analysisState.rawResumeExcluded ||
+      analysisState.outboundAttempts !== 0
+    ) {
+      throw new Error("resume-analysis-privacy-or-result-check-failed");
+    }
+    await client.clickButton("Clear extracted text");
+    await client.waitForText("Selected file, extracted text, role description and analysis cleared from this screen.");
+    const clearedAnalysis = await client.evaluate(
+      `!document.querySelector('[data-testid="resume-analysis-results"]') && document.querySelector('[data-testid="resume-analysis-role-description"]')?.value === ''`,
+    );
+    if (!clearedAnalysis) throw new Error("resume-analysis-clear-did-not-reset-private-inputs");
+  });
+
   await step("Add synthetic application", async () => {
+    const settingsClicked = await client.evaluate(`(() => {
+      const item = [...document.querySelectorAll(".nav-link")].find((element) => element.innerText.trim().includes("Settings"));
+      if (!item) return false;
+      item.click();
+      return true;
+    })()`);
+    if (!settingsClicked) throw new Error("settings-navigation-not-found");
+    await client.waitForText("Private workspace storage");
     await client.fill("#application-studio", "BROWSER_TEST_STUDIO_CANARY");
     await client.fill("#application-role", "Browser QA Role");
     await client.fill("#application-url", "https://example.com/careers");

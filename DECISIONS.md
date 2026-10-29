@@ -299,3 +299,165 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Test plan:** Existing discovery tests are moved without changing method bodies; the discovery workflow and frontend/browser checks gate the refactor.
 - **Rollback:** Revert the test-module moves and configuration cleanup; no production code or discovery-state is changed.
 - **Closeout:** New test/support modules must remain below the approximate 300-line limit; record any deviation in STATUS.md.
+
+
+## ADR-037 — Phase 6a browser-local resume intake and extraction
+
+- **Date:** 2026-10-28
+- **Status:** Implementation delivered; acceptance pending exact-head CI. This does not approve the remainder of Phase 6.
+- **Goal:** Replace the Resume Lab placeholder with local document intake and text extraction, and expose repository-managed resume guidance in the bundled app.
+- **Boundaries:** DOCX raw text, text-based PDF text layers, and UTF-8 TXT only. No OCR, fit analysis, role comparison, editing, file generation, AI API, or automatic external handoff in this slice.
+- **Contracts:** One pure extraction module owns accepted file kinds, extension/MIME checks, a 10 MiB input cap, 100-page PDF cap, 150,000-character output cap, normalized text, safe error codes, and warning categories.
+- **Dependencies:** Pin Mammoth 1.13.0 for raw DOCX text and pdfjs-dist 6.4.299 for PDF text. Bundle both packages and the PDF worker locally; never render DOCX-derived HTML.
+- **Privacy:** Original files and extracted text stay in the Resume Lab component state only. Do not write them to the private workspace schema, IndexedDB, logs, reports, URLs, or repository as user data.
+- **Failure modes:** Unsupported/damaged/encrypted files fail with safe messages; scanned PDFs without selectable text yield an explicit OCR limitation; failures preserve the previous successful extraction.
+- **Test plan:** Pure unit tests, component-render test, synthetic DOCX/PDF/TXT browser acceptance, privacy-boundary checks, and all frontend/discovery CI.
+- **Rollback:** Revert the Phase 6a component/service/dependency/docs/test set together; preserve Phase 5a and discovery-state.
+- **Definition of done:** Phase 6a exit criteria in IMPLEMENTATION_PLAN.md pass on the exact tested commit. Phase 6b/6c remain separately gated.
+
+## ADR-038 — Phase 6b deterministic resume checks and evidence-aware comparison
+
+- **Date:** 2026-10-28
+- **Status:** Approved for implementation
+- **Goal:** Add a transparent, deterministic baseline review and comparison against the candidate's saved profile and one selected public role or manually supplied role requirements.
+- **Boundaries:** Use only browser-local extracted resume text, the active encrypted-vault profile, the selected opportunity's public fields, and role text the user chooses to paste. Do not add AI APIs, network fetches, scoring/ranking, eligibility inference, automatic applications, or persistence of resume text/analysis/role descriptions.
+- **Data contract:** Put pure analysis in src/lib/resume/analysis.mjs. Inputs are explicit value objects; outputs are bounded finding codes, labels, evidence terms, and counts. Never put raw resume lines, names, email addresses, phone numbers, or pasted role descriptions into diagnostic logs or durable records.
+- **Role limits:** The public opportunity snapshot has role titles and metadata, not complete job requirements. When there is no user-pasted description, compare only against the selected role title and label that limitation. A synthetic snapshot must remain visibly synthetic; last-seen is not proof of current availability. The user-pasted description remains in component memory only.
+- **Profile access:** While the encrypted vault is unlocked, make the projected profile available to Resume Lab in app memory. Keep the workspace schema unchanged. Explicit lock/delete clears the shared profile projection; page reload/close clears all app memory. Unsaved profile edits may be used only as visibly in-memory context and are not written unless the user saves them.
+- **Comparison semantics:** Exact normalized phrase/token presence only. “Not found” means no matching text was detected, not that the candidate lacks the skill. Never infer missing competence, authorization, sponsorship, salary, or role eligibility. Do not show fit percentages or a single match score.
+- **Baseline checks:** Provide word/character/line counts, bounded section-heading detection, link/contact-pattern counts without echoing matched values, and explicit informational/review labels. These checks guide human review; they do not declare a resume valid or invalid.
+- **Failure modes:** Empty input, unavailable/locked profile, invalid role selection, excessively long input, and an empty or malformed pasted description must yield deterministic, safe UI states. Analysis must preserve the successful extraction; no raw diagnostics or excerpts are logged or persisted.
+- **Test plan:** Pure unit tests for normal/empty/long input, case/Unicode normalization, token boundaries, matches and non-matches, limitations, and no unsupported conclusions; component-render tests for privacy/source caveats and review language; browser acceptance with synthetic profile/resume/role inputs; all exact-head frontend, privacy, browser, and discovery CI.
+- **Definition of done:** The Resume Lab presents understandable baseline findings and explicit profile/role evidence; the current snapshot's synthetic/last-seen caveats remain visible; the user can clear the extracted text and role text; no resume content or report is persisted, logged, uploaded, or placed in public files; all acceptance checks pass on the final Phase 6b commit.
+- **Rollback:** Revert the Phase 6b analysis module, UI/context integration, tests, and docs together; do not alter the encrypted workspace schema, existing vault data, public snapshot, or discovery-state.
+
+
+## Implementation note — Phase 6 CI repair (2026-10-29)
+
+- After two exact-head CI repair passes, the formatter-diagnostic step isolated the remaining format failure to the JSX opening-tag indentation in `src/components/ResumeLab.tsx`.
+- Apply the exact logged Prettier diff directly. The diagnostic step is observability only; it does not commit formatter output or modify the checked-out branch.
+- Treat the automatically triggered checks after this exact correction as the final acceptance gate for Part 1, not as another exploratory formatting iteration. If a non-formatting blocker remains, stop guessing and record the simplest safe disposition here before changing more code.
+
+## ADR-039 — Phase 6 browser acceptance evaluates resume-analysis state
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation
+- **Goal:** Make the browser smoke test read the result of the baseline-analysis assertion rather than a function object.
+- **Finding:** The prior PR browser run failed in the baseline/private-profile comparison step; source inspection found an uninvoked arrow-function expression.
+- **Boundary:** Change the browser test harness and verification notes only; no production UI, vault schema, or stored data changes.
+- **Privacy contract:** Use synthetic resume, profile and role text only; do not print or persist browser values, passphrases, raw logs, or page content.
+- **Failure mode:** Missing assertion results or failed privacy checks still fail the smoke test; do not weaken assertions.
+- **Test plan:** Exact-head Frontend CI, browser acceptance, and discovery fixture workflows. The browser path must complete all steps with no observed outbound requests.
+- **Definition of done:** All three workflows pass on the current PR head; Phase 6a+6b is not accepted until then.
+- **Rollback:** Revert the single browser-test repair and associated evidence notes; preserve the product code and prior phase branches.
+
+## ADR-040 — Browser acceptance navigates to the application view
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation
+- **Goal:** Make the browser acceptance test verify the newly created application in the UI that actually displays the application list.
+- **Finding:** After the new Resume Lab step, the test remained on Resume Lab; the Settings component stayed mounted but hidden, so its form could be filled without its saved application being visible in the document.
+- **Boundary:** Test harness only; preserve application storage and encryption behavior.
+- **Privacy contract:** The application record remains synthetic and local to the browser vault; no real candidate or application data is used.
+- **Failure mode:** Fail if Settings navigation or the expected visible confirmation is missing; do not skip the application assertion.
+- **Test plan:** Current PR browser acceptance plus frontend CI and discovery fixture checks on the same commit.
+- **Definition of done:** All browser acceptance steps pass and the application record is visible after navigation to Settings.
+- **Rollback:** Revert only the smoke-harness navigation and this note if evidence disproves the finding.
+
+## ADR-041 — Lockfile tarballs must use the canonical npm registry
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation
+- **Goal:** Prevent registry-mirror URLs from entering the public dependency lockfile.
+- **Boundary:** Preserve package versions and integrity hashes; change the one mirror URL and add a standard-library validator, tests, and CI check.
+- **Contract:** A resolved tarball must use HTTPS with the exact origin `https://registry.npmjs.org`; reject malformed URLs, credentials, HTTP and lookalike hosts.
+- **Failure mode:** The check exits nonzero and reports only the lockfile package path and a fixed reason, never the full URL.
+- **Test plan:** Deterministic offline tests for allowed URLs, mirror/lookalike hosts, HTTP, credentials, malformed values and malformed lockfile shape; execute in Frontend CI.
+- **Definition of done:** All 194 current resolved URLs validate against the canonical origin, unchanged integrity hashes, test suite and CI step pass.
+- **Rollback:** Revert the registry validator/test/CI/package changes and URL substitution as one commit; retain the previous lockfile integrity hashes.
+
+### ADR-041 implementation note — first CI cycle
+
+- Registry validation, the registry check script, and all seven new allowlist tests passed; all 74 unit tests, lint, type check, audit, and build also passed.
+- `format:check` failed only because Prettier compacted three nested assertion calls in `tests/lockfile-registry.test.mjs`; CI printed the exact formatting-only diff.
+- The test file was adjusted to match that diff. This is the second and final CI cycle for this unit; no dependencies, workflow triggers, or permissions were changed.
+
+
+### ADR-041 outcome
+
+- **Verified commit:** 906ca9388a3665e51b0fef1a7ad4870b4a2f9365.
+- The registry validator, seven dedicated tests, full unit suite, format/lint/typecheck/audit/build, browser acceptance, and discovery fixtures passed on the final PR head. The one formatter-only failure was corrected using the diagnostic diff on CI cycle 2.
+- All 194 resolved package URLs use https://registry.npmjs.org; the replaced package integrity hash is unchanged.
+
+## ADR-042 — Bound resume parsing and terminate timed-out workers
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation
+- **Goal:** Bound DOCX and PDF parsing to 30 seconds while retaining the current safe error vocabulary.
+- **DOCX design:** Run Mammoth in a dedicated module worker; terminate the worker on completion, failure, or timeout. Transfer only the selected file bytes; return extracted text and an allowlisted warning flag, never raw diagnostics.
+- **PDF design:** Set PDF.js isEvalSupported to false and enableXfa to false; bound the document-load and text-extraction operation; call loadingTask.destroy() from finally for success, parser error, page/output limits, and timeout.
+- **Error contract:** Map timeout and unknown parser failures to existing parser-failed; preserve existing too-many-pages and output-too-large. No new public error category or raw library message.
+- **Test plan:** Deterministically stall injected DOCX and PDF parser promises with a short test-only timeout and assert the existing safe category/message; browser acceptance continues to extract synthetic DOCX and PDF samples.
+- **Privacy boundary:** In-memory only; no OCR, storage, network API, or real resume data.
+- **Definition of done:** Unit, formatter, lint, typecheck, build, browser acceptance and discovery fixtures pass on the same PR head.
+- **Known limit:** The test seam can shorten but never extend the production timeout. DOCX termination relies on the dedicated worker so a parser that does not yield cannot block the UI past its deadline.
+- **Rollback:** Revert the timeout module, worker, parser wiring/tests and documentation as one unit.
+
+
+### ADR-042 implementation note — first CI cycle
+
+- The first parser-hardening CI cycle reported 75 passing unit tests, passing lint, and 0 high-severity audit findings; Frontend CI failed on one Prettier wrap and two type-check issues.
+- The DOCX worker callback now has an explicit result type; the timeout test uses the exact Prettier line wrapping.
+- The pinned dependency is pdfjs-dist 6.4.299. Its v6.4.299 `src/display/api.js` no longer defines or consumes `isEvalSupported` as a document initialization option. The option is omitted rather than added through a cast that would imply a security setting with no supported effect. `enableXfa: false` is retained, PDF loading-task cleanup remains in `finally`, and the timeout/error mapping is unchanged.
+- This is the second and final CI cycle for this unit. If further problems appear, stop after the exact formatter/type corrections and document any deferral instead of starting a third cycle.
+
+
+## ADR-043 — Behavior-preserving ResumeLab component split
+
+- **Date:** 2026-10-29
+- **Status:** Implemented; exact-head CI results are tracked in `STATUS.md`.
+- **Context:** `src/components/ResumeLab.tsx` combines local file intake, deterministic role/resume comparison, and the bundled guidance display in one 484-line component.
+- **Decision:** Extract the deterministic analysis presentation into `ResumeAnalysisPanel.tsx` and the guidance presentation into `ResumeGuidancePanel.tsx`. Keep file extraction, state ownership, and state transitions in `ResumeLab.tsx`; add a small shared type module only if needed to keep props typed without runtime coupling.
+- **No-behavior-change contract:** Preserve user-visible copy, render order, IDs, data-testid values, CSS classes, accessibility attributes, parsing and analysis calls, event semantics, clear behavior, and the in-memory privacy boundary. This is a JSX/component-boundary refactor only.
+- **Out of scope:** No feature changes, new hooks, data-model changes, dependency changes, workflow changes, style changes, or edits to unrelated files.
+- **Definition of done:** Each component stays around 300 lines or fewer; all existing unit/component tests, format check, lint, typecheck, audit, build, privacy-boundary check, repository-subpath preview, discovery fixtures, and browser acceptance pass on the same exact PR head. Use existing CI formatter diagnostics rather than speculative formatting commits; allow at most two CI cycles for this unit.
+- **Rollback:** Revert the component extraction and its status entry as one implementation commit.
+
+
+### ADR-042 outcome
+
+- **Verified exact head:** d4ef4c82fde4b80ffd1cb26792719602c0d25afd.
+- Frontend CI, browser acceptance, and discovery fixtures passed on the PR head; the two corresponding branch-push CI jobs also passed. See the exact run links in `STATUS.md`.
+- The second and final CI cycle resolved the formatter/type issues. No third cycle or unsupported `isEvalSupported` compatibility cast was added.
+
+
+### ADR-043 implementation note
+
+- Extracted analysis rendering to `ResumeAnalysisPanel.tsx` and guidance rendering to `ResumeGuidancePanel.tsx`; `ResumeLab.tsx` retains state, file intake, and state-transition handlers. Shared inferred types are in `resume-lab.types.ts`.
+- No intended changes to visible copy, DOM identifiers, styles, interaction semantics, or data/privacy behavior. Exact-head CI verification is pending and will be recorded in `STATUS.md`.
+
+
+### ADR-043 formatter diagnostic — first CI cycle
+
+- The component split passed lint, typecheck, all unit tests, dependency audit, and production build on the first implementation commit. Frontend CI failed only `format:check` because the two extracted TSX files had excess JSX indentation and their opening tags differed from Prettier's configured layout.
+- Applied the exact two-file diff printed by the CI diagnostic step; no unrelated files changed. Discovery fixtures passed. The second CI cycle is the final verification attempt for this refactor.
+
+
+## ADR-044 — Static Content-Security-Policy meta policy
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation
+- **Context:** This project is a static browser application, so the HTML entry point can apply an explicit CSP without introducing a server or hosting configuration change.
+- **Policy:** Add a CSP meta tag to `index.html` with `default-src 'self'; script-src 'self'; worker-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; style-src 'self' 'unsafe-inline'`. Inline styles remain allowed for React/browser compatibility; no inline script allowance is added.
+- **Verification:** Extend the existing browser acceptance smoke test to assert the required directives after the app loads. Existing local DOCX/PDF extraction and the production preview exercise same-origin scripts/assets and the allowed worker sources.
+- **Definition of done:** Frontend formatting, lint, typecheck, unit tests, audit, build, privacy check, repository-subpath preview, browser acceptance and discovery fixtures pass on an exact head; the CSP meta content has all listed directives; no workflow triggers/permissions, dependency, runtime API, or network behavior change.
+- **Failure policy:** At most two CI cycles. If policy compatibility cannot be verified after two attempts, remove the CSP meta tag and record the deferral to Phase 8 rather than relaxing the policy speculatively.
+- **Rollback:** Remove the meta tag and its browser assertion as one small commit; retain this decision and document the Phase 8 deferral.
+
+
+### ADR-044 implementation outcome
+
+- **Code commit:** [b3b196da](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/b3b196da6a2aeb03511efefea3a517fe4ade518d).
+- **Push CI:** Frontend CI passed [40849588956](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849588956) and [40849594611](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849594611); discovery fixtures passed [40849588962](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849588962) and [40849594640](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849594640).
+- **PR CI:** Frontend CI passed [40849604007](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849604007), discovery fixtures passed [40849604001](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849604001), and browser acceptance passed on run [40849603965, attempt 2](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849603965). The first browser attempt failed before app interaction with `browser-debug-port-unavailable`; no code changed before the successful retry.
+- The browser assertion checked every policy directive after the page rendered; the existing full browser suite then passed. No CSP rollback or Phase 8 deferral is needed.
