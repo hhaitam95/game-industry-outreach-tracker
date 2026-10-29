@@ -410,3 +410,22 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - The DOCX worker callback now has an explicit result type; the timeout test uses the exact Prettier line wrapping.
 - The pinned dependency is pdfjs-dist 6.4.299. Its v6.4.299 `src/display/api.js` no longer defines or consumes `isEvalSupported` as a document initialization option. The option is omitted rather than added through a cast that would imply a security setting with no supported effect. `enableXfa: false` is retained, PDF loading-task cleanup remains in `finally`, and the timeout/error mapping is unchanged.
 - This is the second and final CI cycle for this unit. If further problems appear, stop after the exact formatter/type corrections and document any deferral instead of starting a third cycle.
+
+
+## ADR-043 — Behavior-preserving ResumeLab component split
+
+- **Date:** 2026-10-29
+- **Status:** Accepted for implementation
+- **Context:** `src/components/ResumeLab.tsx` combines local file intake, deterministic role/resume comparison, and the bundled guidance display in one 484-line component.
+- **Decision:** Extract the deterministic analysis presentation into `ResumeAnalysisPanel.tsx` and the guidance presentation into `ResumeGuidancePanel.tsx`. Keep file extraction, state ownership, and state transitions in `ResumeLab.tsx`; add a small shared type module only if needed to keep props typed without runtime coupling.
+- **No-behavior-change contract:** Preserve user-visible copy, render order, IDs, data-testid values, CSS classes, accessibility attributes, parsing and analysis calls, event semantics, clear behavior, and the in-memory privacy boundary. This is a JSX/component-boundary refactor only.
+- **Out of scope:** No feature changes, new hooks, data-model changes, dependency changes, workflow changes, style changes, or edits to unrelated files.
+- **Definition of done:** Each component stays around 300 lines or fewer; all existing unit/component tests, format check, lint, typecheck, audit, build, privacy-boundary check, repository-subpath preview, discovery fixtures, and browser acceptance pass on the same exact PR head. Use existing CI formatter diagnostics rather than speculative formatting commits; allow at most two CI cycles for this unit.
+- **Rollback:** Revert the component extraction and its status entry as one implementation commit.
+
+
+### ADR-042 outcome
+
+- **Verified exact head:** d4ef4c82fde4b80ffd1cb26792719602c0d25afd.
+- Frontend CI, browser acceptance, and discovery fixtures passed on the PR head; the two corresponding branch-push CI jobs also passed. See the exact run links in `STATUS.md`.
+- The second and final CI cycle resolved the formatter/type issues. No third cycle or unsupported `isEvalSupported` compatibility cast was added.
