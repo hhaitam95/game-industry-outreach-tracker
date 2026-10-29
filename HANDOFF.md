@@ -26,7 +26,7 @@
 - Resume Lab provides local-only DOCX, text-based PDF and UTF-8 TXT extraction with visible warnings and conservative file/page/text limits.
 - Resume-guidance Markdown is bundled at build time; it is not fetched at runtime.
 - Extracted text is read-only and held in component state only. It is not saved to the encrypted workspace, logged, or uploaded. Scanned PDFs require a text-based copy because OCR is not enabled.
-- Phase 6c is underway on feat/phase6c-resume-export; see ADR-045 in DECISIONS.md and the phase scope/definition of done in IMPLEMENTATION_PLAN.md. Current branch, merge state and verification evidence are maintained in STATUS.md.
+- Phase 6c's editor, provenance/diff, local DOCX export, browser print/Save as PDF and explicit manual AI handoff are verified on implementation head 5752946. Frontend CI, browser acceptance (22/22 checkpoints) and discovery fixtures pass. See ADR-045 through ADR-048 in DECISIONS.md; the PR remains owner-controlled and unmerged. STATUS.md is the source of truth for review state.
 
 ## Review boundary
 
