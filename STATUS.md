@@ -3,7 +3,7 @@
 **Last updated:** 2026-10-29  
 **Current phase:** Phase 8 public Pages release — implementation is green on the verified code head, while external hosting setup/publication remains pending.  
 **Working branch:** `feat/phase8-pages-privacy`  
-**Current PR:** [#9 — Phase 8: gated public Pages release and privacy checks](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/9) (draft until status/handoff refresh is verified).  
+**Current PR:** [#9 — Phase 8: gated public Pages release and privacy checks](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/9). Do not merge until PRs #7 and #8 are owner-merged and this branch has been reconciled with the updated main.  
 **Verified implementation head:** `9b37f8061d2f1813eea94c6eb5b305afabf2d912`. The next commit is documentation-only and does not change executable code.  
 **Base/main:** `d56637e921fdb2e23f67e15aa3a518d6477c6842` (unchanged; no direct changes to main).
 
