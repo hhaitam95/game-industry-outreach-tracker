@@ -337,3 +337,16 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - After two exact-head CI repair passes, the formatter-diagnostic step isolated the remaining format failure to the JSX opening-tag indentation in `src/components/ResumeLab.tsx`.
 - Apply the exact logged Prettier diff directly. The diagnostic step is observability only; it does not commit formatter output or modify the checked-out branch.
 - Treat the automatically triggered checks after this exact correction as the final acceptance gate for Part 1, not as another exploratory formatting iteration. If a non-formatting blocker remains, stop guessing and record the simplest safe disposition here before changing more code.
+
+## ADR-039 — Phase 6 browser acceptance evaluates resume-analysis state
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation
+- **Goal:** Make the browser smoke test read the result of the baseline-analysis assertion rather than a function object.
+- **Finding:** The prior PR browser run failed in the baseline/private-profile comparison step; source inspection found an uninvoked arrow-function expression.
+- **Boundary:** Change the browser test harness and verification notes only; no production UI, vault schema, or stored data changes.
+- **Privacy contract:** Use synthetic resume, profile and role text only; do not print or persist browser values, passphrases, raw logs, or page content.
+- **Failure mode:** Missing assertion results or failed privacy checks still fail the smoke test; do not weaken assertions.
+- **Test plan:** Exact-head Frontend CI, browser acceptance, and discovery fixture workflows. The browser path must complete all steps with no observed outbound requests.
+- **Definition of done:** All three workflows pass on the current PR head; Phase 6a+6b is not accepted until then.
+- **Rollback:** Revert the single browser-test repair and associated evidence notes; preserve the product code and prior phase branches.

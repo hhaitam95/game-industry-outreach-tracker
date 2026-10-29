@@ -4,6 +4,7 @@ Meaningful changes are recorded here. Current branch/review state and verificati
 
 ## Unreleased
 
+- Fixed the Phase 6 browser smoke harness so the baseline-analysis privacy/result check invokes and reads its assertion result; product behavior and persistence boundaries are unchanged.
 - Phase 6b adds deterministic, browser-memory-only resume baseline counts and explicit text-term comparisons against the unlocked profile and selected/manual role text. It does not calculate a fit score, infer eligibility, persist analysis, or invoke an AI API.
 - Phase 6a adds a browser-local Resume Lab for DOCX/PDF/TXT extraction, safe parser warnings and bounded input/output, plus build-time bundled source-linked resume guidance. Raw documents/text are not persisted or uploaded; OCR, analysis, editing, export and AI handoff are not included in this slice.
 - The Phase 6a CI repair tightens JSDoc/type contracts, keeps control-character filtering lint-clean, uses PDF.js loading-task cleanup, and corrects the initial-render test to match the visible scanned-PDF notice.

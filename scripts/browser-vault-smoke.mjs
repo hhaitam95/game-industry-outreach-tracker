@@ -596,7 +596,7 @@ async function main() {
     await client.waitForText("Baseline counts");
     await client.waitForText("Exact text mention found");
     await client.waitForText("No exact text mention detected");
-    const analysisState = await client.evaluate(`() => {
+    const analysisState = await client.evaluate(`(() => {
       const results = document.querySelector('[data-testid="resume-analysis-results"]');
       return {
         profileAvailable: Boolean(document.querySelector('[data-testid="resume-analysis-profile-status"]')?.innerText.includes("Using the current in-memory profile")),
@@ -605,7 +605,7 @@ async function main() {
         rawResumeExcluded: !results?.innerText.includes("Synthetic Analysis Resume") && !results?.innerText.includes("TypeScript diagnostics"),
         outboundAttempts: window.__resumeOutboundAttempts?.length ?? -1
       };
-    }`);
+    })()`);
     if (
       !analysisState?.profileAvailable ||
       !analysisState.skillMention ||
