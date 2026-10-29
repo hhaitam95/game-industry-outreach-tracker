@@ -477,3 +477,17 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Failure behavior:** Missing target, token, or Pages setup must stop before publication. Invalid snapshot or failed validation must preserve the previous published site and create no release commit.
 - **Rollback:** Revert the last publication commit in the target repository or restore the previous known-good static artifact; remove/rotate the target-scoped secret if compromised. Never rewrite history or delete a target branch.
 - **Supersedes:** This decision resolves the hosting-source question left open by ADR-013 and ADR-018; it does not authorize scheduled discovery or any visibility change.
+
+## ADR-055 — Same-repository GitHub Pages Actions deployment
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation; supersedes ADR-054.
+- **Goal:** Publish only the validated static website while keeping source code, CI, documentation, and deployment configuration in the original repository.
+- **Decision:** Use this already-public repository as the Pages source. Upload the checked `dist/` folder as a Pages artifact and deploy it with GitHub's official Pages Actions; use the project URL path `/game-industry-outreach-tracker/`. Do not create a second repository or cross-repository publishing token.
+- **Trigger and permission boundary:** Keep release workflow `workflow_dispatch` only with `validate-only` as the default and explicit `publish` as opt-in. Permit publication only from `main`. The build job has `contents: read`; the dedicated deploy job alone receives `pages: write` and `id-token: write`.
+- **Data contract:** Publish only generated static output and the schema-validated public opportunity snapshot. Private profile, CV, outreach draft and application records remain browser-local and are never inputs to the build.
+- **Failure behavior:** Snapshot, build, privacy, artifact, or asset-path failure must stop the run before Pages deployment. Validation-only never uploads a Pages artifact or deploys. A failed deployment must not be reported as successful.
+- **Tests:** Run formatting, lint, type checks, unit/component tests, dependency audit, lockfile checks, production build, repository/public-artifact privacy gates, base-path smoke test, browser acceptance, and discovery fixtures on the exact reviewed head.
+- **Rollback:** Revert a bad source/workflow change and manually publish the last known-good revision from `main`; do not force-push or rewrite history. The prior successfully deployed site remains until a later deployment succeeds.
+- **Definition of done:** Exact-head checks pass; the owner configures this repository's Pages source as GitHub Actions; a manually selected publish run deploys from `main`; the canonical URL and local assets are verified and public content is reviewed. Before that first publish, Phase 8 is implemented but not deployed.
+- **Why this supersedes ADR-054:** The source repository is already public, so a second public repository does not make the source private. The same-repository artifact deployment removes the extra repository and long-lived cross-repository credential without publishing the repository's full tree as website content.
