@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "registry_reviewed_on": "2026-10-26",
+  "registry_reviewed_on": "2026-10-29",
   "description": "Curated official career sources. Monitoring this list is not global studio discovery; no vacancy is assumed from a career page alone.",
   "sources": [
     {
@@ -20,7 +20,7 @@
       "id": "naughty-dog-careers",
       "studio_id": "naughty-dog",
       "studio_name": "Naughty Dog",
-      "url": "https://www.naughtydog.com/careers",
+      "url": "https://www.naughtydog.com/openings",
       "source_type": "official-careers",
       "adapter": "official-job-links",
       "enabled": true,
