@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { existsSync, lstatSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
+import { pathToFileURL } from "node:url";
 
 const forbiddenExtensions = /\.(?:pdf|docx?|sqlite3?|db|pem|key|map)$/i;
 const forbiddenPathSegment = /^(?:private|personal-data|resume-uploads|uploads|exports|backups?)$/i;
@@ -128,10 +128,14 @@ if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === imp
   const findings = inspectPagesArtifact(root);
   if (findings.length > 0) {
     process.stderr.write(
-      "Public Pages artifact check failed: " + findings.join(", ") + ". No file paths or matched content were printed.\n",
+      "Public Pages artifact check failed: " +
+        findings.join(", ") +
+        ". No file paths or matched content were printed.\n",
     );
     process.exitCode = 1;
   } else {
-    process.stdout.write("Public Pages artifact check passed: static entry point, local assets, CSP, and file/content boundaries validated.\n");
+    process.stdout.write(
+      "Public Pages artifact check passed: static entry point, local assets, CSP, and file/content boundaries validated.\n",
+    );
   }
 }
