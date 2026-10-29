@@ -441,3 +441,15 @@ This is a living decision record. Accepted decisions may be amended or supersede
 
 - The component split passed lint, typecheck, all unit tests, dependency audit, and production build on the first implementation commit. Frontend CI failed only `format:check` because the two extracted TSX files had excess JSX indentation and their opening tags differed from Prettier's configured layout.
 - Applied the exact two-file diff printed by the CI diagnostic step; no unrelated files changed. Discovery fixtures passed. The second CI cycle is the final verification attempt for this refactor.
+
+
+## ADR-044 — Static Content-Security-Policy meta policy
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation
+- **Context:** This project is a static browser application, so the HTML entry point can apply an explicit CSP without introducing a server or hosting configuration change.
+- **Policy:** Add a CSP meta tag to `index.html` with `default-src 'self'; script-src 'self'; worker-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; style-src 'self' 'unsafe-inline'`. Inline styles remain allowed for React/browser compatibility; no inline script allowance is added.
+- **Verification:** Extend the existing browser acceptance smoke test to assert the required directives after the app loads. Existing local DOCX/PDF extraction and the production preview exercise same-origin scripts/assets and the allowed worker sources.
+- **Definition of done:** Frontend formatting, lint, typecheck, unit tests, audit, build, privacy check, repository-subpath preview, browser acceptance and discovery fixtures pass on an exact head; the CSP meta content has all listed directives; no workflow triggers/permissions, dependency, runtime API, or network behavior change.
+- **Failure policy:** At most two CI cycles. If policy compatibility cannot be verified after two attempts, remove the CSP meta tag and record the deferral to Phase 8 rather than relaxing the policy speculatively.
+- **Rollback:** Remove the meta tag and its browser assertion as one small commit; retain this decision and document the Phase 8 deferral.

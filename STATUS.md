@@ -1,7 +1,7 @@
 # Project Status
 
 **Last updated:** 2026-10-29  
-**Current phase:** ResumeLab split is corrected to the exact formatter diff from CI cycle 1; cycle 2 is the final verification attempt for ADR-043. No behavior or type/test failures occurred in cycle 1.
+**Current phase:** Phase 6 Part 2 hygiene. ResumeLab component split is committed; frontend CI and discovery fixtures are green on `146a9293`, but the browser job's report indicates `browser-debug-port-unavailable` during browser startup (before app interaction). No third CI cycle will be spent on the refactor; this environmental verification limitation is recorded below. CSP design/definition of done is ADR-044; implementation has not started.
 **Working branch:** feat/phase6b-resume-analysis (fast-forwarded into the PR #6 branch after each cohesive commit)  
 **Base/main:** 07d8e15cec544e56a09fbcab44202dc7051753c6 (unchanged; no direct changes to main).
 
@@ -103,3 +103,17 @@ Validate parser hardening on the current commit. The unit uses a bounded parser 
 - **Design:** ADR-043 was committed before code. The split preserves rendered copy, ordering, selectors/test IDs, accessibility attributes, CSS classes, event semantics and component-owned in-memory state behavior.
 - **Implementation:** Analysis presentation moved to `src/components/ResumeAnalysisPanel.tsx`, guidance presentation to `src/components/ResumeGuidancePanel.tsx`, and inferred prop types to `src/components/resume-lab.types.ts`. `ResumeLab.tsx` retains local file extraction, state and state-transition handlers.
 - **CI cycle 1:** discovery fixtures passed [push 40848747501](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40848747501) and [PR 40848758681](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40848758681). Lint, typecheck, unit tests, audit, and build passed; format check failed only on the two extracted TSX files. The browser gate failed because Frontend CI was not green. Exact formatter output was applied to just those two files; CI cycle 2 is final.
+
+
+## Phase 6 Part 2 — behavior-preserving ResumeLab split: final-cycle outcome
+
+- **Implementation commit:** [38437f70](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/38437f700338b0b428c37c84ff937dc6372b7cbb); exact formatter correction [146a9293](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/146a9293d48ebac75ba8922760a3e38971a9c8f4).
+- **CI cycle 1:** discovery fixtures passed [push 40848747501](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40848747501) and [PR 40848758681](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40848758681). Frontend CI failed only formatting in the two newly extracted TSX components. Lint, typecheck, unit tests, audit, and build passed. The CI formatter diagnostic provided the exact two-file correction, applied without reformatting other files.
+- **CI cycle 2:** frontend CI passed [6b push 40849072335](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849072335) and [PR 40849087740](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849087740); discovery fixtures passed [6b push 40849072461](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849072461) and [PR 40849087783](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849087783). In the browser job [40849087731](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849087731), the report failed at startup with `browser-debug-port-unavailable`, before app interaction; the report recorded only the build and preview steps as passed. Thus browser acceptance on the refactored exact head is **not verified**. Per the two-cycle rule, no third cycle will be run for ADR-043; do not treat the browser job as green.
+- **Code state:** `ResumeLab.tsx` 253 lines; `ResumeAnalysisPanel.tsx` 259 lines after the exact formatter diff; `ResumeGuidancePanel.tsx` 32 lines; shared inferred types in `resume-lab.types.ts`. No browser-visible behavior change is intended, but the unverified browser gate remains an explicit limitation.
+
+
+## Phase 6 CSP hygiene — pre-implementation design
+
+- ADR-044 defines the static CSP and browser check before code. No CSP code has been changed yet.
+- **Next check:** add the meta policy to `index.html` and verify its required directives in the browser smoke after the application is reached. Keep the explicit two-cycle deferral rule; browser startup failures must be distinguished from CSP/application failures.
