@@ -490,3 +490,15 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Test plan:** Re-run Frontend CI, browser acceptance and discovery fixtures on the final branch head. Confirm the browser workflow gets past the production build before interpreting any UI checkpoint outcome.
 - **Definition of done:** All three automatic checks pass for this isolated fix unit and the exact tested head is recorded in STATUS.md.
 - **Rollback:** Revert this narrow typing/fixture correction and preserve ADR-051 if the changes cause a broader compatibility issue.
+
+
+## ADR-052 — Read generated outreach text from the controlled draft field in browser acceptance
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation
+- **Context:** The second Phase 7 browser verification pass reported a named failure at “Phase 7 generated message appears.” Source inspection confirmed the generated template is correctly assigned to the controlled `outreach-draft-body` textarea; the smoke test then looked for that phrase in `document.body.innerText`, which does not include a textarea's current value.
+- **Decision:** Change only the browser acceptance predicate to check the textarea's `value` for the expected generated phrase, using the existing by-value boolean DevTools wait pattern. Add a fixed safe-reason mapping for that checkpoint.
+- **Boundaries:** No product behavior, privacy boundary, workflow, dependency, or application data change. Synthetic fixture only; no outbound request or real CV.
+- **Test plan:** Re-run the normal automatic Frontend CI, browser acceptance, and discovery fixtures on the exact head. Browser acceptance must pass the Phase 7 flow and existing vault/export regression checks.
+- **Definition of done:** All three normal checks pass on the exact commit; update STATUS.md and the ADR-052 outcome with evidence.
+- **Rollback:** Revert the one-line predicate and safe diagnostic label if the browser harness cannot reliably observe the controlled field.
