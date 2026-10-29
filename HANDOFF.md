@@ -11,7 +11,7 @@
 - Every saved edit creates a new private draft revision with profile timestamp, CV label (metadata only), guidance version and source context.
 - Applications tracks interested leads, manually confirmed submission, statuses, responses, interviews, outcomes, activity history and follow-up dates.
 - Personal data remains in the encrypted browser-local vault. There is no auto-send/submit, AI API, backend or localStorage persistence. Legacy v1 vault data is validated and migrated in memory to schema v2 on unlock; next save exports the new validated schema.
-- Phase 7 remains on a feature branch. See STATUS.md for exact-head CI evidence and review state.
+- Phase 7 implementation is complete and verified on its feature head. [PR #8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8) remains open as a draft and unmerged for owner review; STATUS.md records exact-head evidence and the current verification boundary.
 
 ## Phase 5a implementation
 
