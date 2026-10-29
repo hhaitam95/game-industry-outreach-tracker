@@ -350,3 +350,16 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Test plan:** Exact-head Frontend CI, browser acceptance, and discovery fixture workflows. The browser path must complete all steps with no observed outbound requests.
 - **Definition of done:** All three workflows pass on the current PR head; Phase 6a+6b is not accepted until then.
 - **Rollback:** Revert the single browser-test repair and associated evidence notes; preserve the product code and prior phase branches.
+
+## ADR-040 — Browser acceptance navigates to the application view
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation
+- **Goal:** Make the browser acceptance test verify the newly created application in the UI that actually displays the application list.
+- **Finding:** After the new Resume Lab step, the test remained on Resume Lab; the Settings component stayed mounted but hidden, so its form could be filled without its saved application being visible in the document.
+- **Boundary:** Test harness only; preserve application storage and encryption behavior.
+- **Privacy contract:** The application record remains synthetic and local to the browser vault; no real candidate or application data is used.
+- **Failure mode:** Fail if Settings navigation or the expected visible confirmation is missing; do not skip the application assertion.
+- **Test plan:** Current PR browser acceptance plus frontend CI and discovery fixture checks on the same commit.
+- **Definition of done:** All browser acceptance steps pass and the application record is visible after navigation to Settings.
+- **Rollback:** Revert only the smoke-harness navigation and this note if evidence disproves the finding.

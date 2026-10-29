@@ -624,6 +624,14 @@ async function main() {
   });
 
   await step("Add synthetic application", async () => {
+    const settingsClicked = await client.evaluate(`(() => {
+      const item = [...document.querySelectorAll(".nav-link")].find((element) => element.innerText.trim().includes("Settings"));
+      if (!item) return false;
+      item.click();
+      return true;
+    })()`);
+    if (!settingsClicked) throw new Error("settings-navigation-not-found");
+    await client.waitForText("Private workspace storage");
     await client.fill("#application-studio", "BROWSER_TEST_STUDIO_CANARY");
     await client.fill("#application-role", "Browser QA Role");
     await client.fill("#application-url", "https://example.com/careers");
