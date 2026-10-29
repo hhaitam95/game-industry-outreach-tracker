@@ -489,3 +489,13 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Known open check:** The browser acceptance failure on the second head is not sufficiently diagnosed by the safe report. No browser-code change is guessed at to silence it.
 - **Definition of done remains outstanding:** All formatter, unit/component, privacy/build and browser/discovery checks must pass on one exact Phase 6c head. Current implementation changes are not verified by CI because the two-cycle cap was reached.
 - **Rollback:** Keep PR #7 draft and unmerged; revert the feature unit if the owner chooses not to continue after the verification limitation is reviewed.
+
+
+## ADR-047 — Isolate Phase 6c browser acceptance checkpoints
+
+- **Date:** 2026-10-29
+- **Status:** Approved for implementation
+- **Context:** The PR browser job reports a failure inside one broad Resume Lab extraction step. Its safe artifact identifies a DevTools protocol-command failure but cannot distinguish TXT/DOCX/PDF extraction, structured editor rendering, handoff disclosure, or local-only boundary checks.
+- **Decision:** Split that browser test into named, synthetic-data checkpoints. Extend the fixed safe-reason allowlist only for fixed test assertion names and expected UI states. Do not expose exception text, source, page content, filenames derived from user files, or raw browser logs. Do not loosen or remove any acceptance assertions.
+- **Verification:** The commit naturally triggers repository-configured checks. This is a separate diagnostic unit authorized after ADR-046 and is limited to at most two CI cycles; no workflow dispatch or manual rerun.
+- **Acceptance:** The report must identify the precise failing checkpoint; all existing checks and the Phase 6c browser interactions must pass before the PR is marked ready. If browser acceptance still fails after two cycles, document the specific unresolved category and stop.

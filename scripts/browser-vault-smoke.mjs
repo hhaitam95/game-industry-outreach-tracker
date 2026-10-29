@@ -466,7 +466,7 @@ async function main() {
   }
 
   if (process.env.EXPECT_RESUME_LAB === "1") {
-    await step("Verify Phase 6a local TXT, DOCX, and PDF extraction plus bundled guidance", async () => {
+    await step("Verify Resume Lab initial state and outbound monitoring", async () => {
       await client.clickButton("Resume lab");
       await client.waitForText("Review a resume without uploading it");
       const initial = await client.evaluate(`(() => ({
@@ -508,14 +508,18 @@ async function main() {
         }
         return true;
       })()`);
+    });
 
+    await step("Extract synthetic TXT resume", async () => {
       await chooseSyntheticResume({
         name: "synthetic-resume.txt",
         type: "text/plain",
-        text: "Synthetic Resume Fixture\nExperience: Technical support and diagnostics.\nSkills: TypeScript, Python, REST APIs.",
+        text: "Synthetic Resume Fixture\\nExperience: Technical support and diagnostics.\\nSkills: TypeScript, Python, REST APIs.",
       });
       await waitForResumeText("txt", "Skills: TypeScript, Python");
+    });
 
+    await step("Extract synthetic DOCX resume", async () => {
       const docxBase64 = readFileSync(
         path.join(root, "tests/fixtures/resumes/synthetic-resume.docx.b64"),
         "utf8",
@@ -526,14 +530,22 @@ async function main() {
         base64: docxBase64,
       });
       await waitForResumeText("docx", "Skills: TypeScript, Python");
+    });
 
-      const pdfBase64 = readFileSync(path.join(root, "tests/fixtures/resumes/synthetic-resume.pdf.b64"), "utf8").trim();
+    await step("Extract synthetic PDF resume", async () => {
+      const pdfBase64 = readFileSync(
+        path.join(root, "tests/fixtures/resumes/synthetic-resume.pdf.b64"),
+        "utf8",
+      ).trim();
       await chooseSyntheticResume({
         name: "synthetic-resume.pdf",
         type: "application/pdf",
         base64: pdfBase64,
       });
       await waitForResumeText("pdf", "Skills: TypeScript, Python");
+    });
+
+    await step("Verify Phase 6c editor and export controls render", async () => {
       await client.waitFor(
         `document.querySelector('[data-testid="resume-editor"]') &&
           document.querySelector('[data-testid="resume-export-docx"]') &&
@@ -541,6 +553,9 @@ async function main() {
           document.querySelector('[data-testid="resume-diff"]')`,
         "resume-structured-editor-rendered",
       );
+    });
+
+    await step("Verify manual AI handoff disclosure defaults", async () => {
       await client.clickButton("Review manual AI handoff");
       await client.waitFor(
         `document.querySelector('[data-testid="resume-handoff-panel"]')`,
@@ -554,7 +569,9 @@ async function main() {
       if (!editorReady || editorReady.blocks < 1 || editorReady.copyDisabled !== true || editorReady.preview !== "") {
         throw new Error("resume-export-ui-incomplete");
       }
+    });
 
+    await step("Verify local-only boundary, failed extraction preservation, and clearing", async () => {
       const noUpload = await client.evaluate(`(() => ({
         attempts: window.__resumeOutboundAttempts?.length ?? -1,
         extracted: document.querySelector('[data-testid="resume-extracted-text"]')?.value ?? ""
@@ -570,13 +587,13 @@ async function main() {
       });
       await client.waitForText("Choose a DOCX, text-based PDF, or UTF-8 text file.");
       const previousExtractionKept = await client.evaluate(
-        "document.querySelector('[data-testid=\"resume-result-kind\"]')?.dataset.kind === 'pdf' && document.querySelector('[data-testid=\"resume-extracted-text\"]')?.value.includes('Synthetic Resume Fixture')",
+        "document.querySelector('[data-testid=\\\"resume-result-kind\\\"]')?.dataset.kind === 'pdf' && document.querySelector('[data-testid=\\\"resume-extracted-text\\\"]')?.value.includes('Synthetic Resume Fixture')",
       );
       if (!previousExtractionKept) throw new Error("resume-failure-did-not-preserve-previous-extraction");
 
       await client.clickButton("Clear extracted text");
       const cleared = await client.evaluate(
-        "!document.querySelector('[data-testid=\"resume-extracted-text\"]') && !document.querySelector('[data-testid=\"resume-extraction\"]')",
+        "!document.querySelector('[data-testid=\\\"resume-extracted-text\\\"]') && !document.querySelector('[data-testid=\\\"resume-extraction\\\"]')",
       );
       if (!cleared) throw new Error("resume-reset-did-not-clear-text");
     });
@@ -819,6 +836,13 @@ try {
     "restored-profile-mismatch",
     "private-record-visible-while-locked",
     "settings-navigation-not-found",
+    "resume-lab-initial-state-failed",
+    "resume-file-input-not-found",
+    "resume-export-ui-incomplete",
+    "resume-local-only-boundary-failed",
+    "resume-failure-did-not-preserve-previous-extraction",
+    "resume-reset-did-not-clear-text",
+    "resume-navigation-not-found",
   ]);
   const safeWaitReasons = new Map([
     ["condition-not-met-workspace after reload", "workspace after reload did not appear"],
@@ -827,6 +851,8 @@ try {
     ["condition-not-met-application after unlock", "application record did not appear after unlock"],
     ["condition-not-met-profile after unlock", "profile record did not appear after unlock"],
     ["condition-not-met-lock confirmation", "lock confirmation did not appear"],
+    ["condition-not-met-resume-structured-editor-rendered", "structured editor/export controls did not appear after PDF extraction"],
+    ["condition-not-met-resume-handoff-disclosure-opened", "manual handoff disclosure did not open"],
     ["condition-not-met-incorrect passphrase rejection", "incorrect passphrase was not rejected in the UI"],
     ["condition-not-met-backup restoration", "backup restoration did not complete"],
   ]);
