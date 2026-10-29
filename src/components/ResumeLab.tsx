@@ -10,6 +10,7 @@ import { OPPORTUNITY_SNAPSHOT } from "../lib/opportunities/snapshot.mjs";
 import type { ResumeAnalysis, ResumeProfile, Extraction } from "./resume-lab.types";
 import { ResumeAnalysisPanel } from "./ResumeAnalysisPanel";
 import { ResumeGuidancePanel } from "./ResumeGuidancePanel";
+import { ResumeEditorPanel } from "./ResumeEditorPanel";
 
 export default function ResumeLab({ profile = null }: { profile?: ResumeProfile | null }) {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -113,9 +114,9 @@ export default function ResumeLab({ profile = null }: { profile?: ResumeProfile 
           <span className="eyebrow">PHASE 6A · BROWSER-LOCAL DOCUMENT INTAKE</span>
           <h2>Review a resume without uploading it</h2>
           <p>
-            This workspace extracts text from DOCX, text-based PDF, and UTF-8 TXT files, then offers deterministic
-            checks and explicit text-term comparisons. It does not score fit, infer eligibility, rewrite the original,
-            or export a new document in this slice.
+            This workspace extracts DOCX, text-based PDF and UTF-8 TXT files, offers transparent baseline checks, and lets you
+            create an editable structured draft with local DOCX export or browser Print / Save as PDF. It does not score
+            fit, infer eligibility, contact an AI service, or claim to preserve the original layout.
           </p>
         </div>
         <span className="resume-guidance-version" data-testid="resume-guidance-version">
@@ -243,9 +244,10 @@ export default function ResumeLab({ profile = null }: { profile?: ResumeProfile 
       />
 
       <ResumeGuidancePanel />
+      {extraction?.text ? <ResumeEditorPanel sourceText={extraction.text} profile={profile} /> : null}
       <p className="privacy-footnote">
-        The next slice will add editable structured content and a review diff, then local DOCX/PDF downloads. Optional
-        ChatGPT handoff remains manual, explicit, and subject to disclosure/redaction safeguards.
+        All structured changes remain in this tab until you choose an export. Manual AI handoff is optional, selective,
+        redacted by default for common contact patterns, and never sent by this app.
       </p>
     </div>
   );

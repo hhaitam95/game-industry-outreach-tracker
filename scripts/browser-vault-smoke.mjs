@@ -265,7 +265,7 @@ function saveReport() {
   const lines = [
     "# Browser Acceptance Report",
     "",
-    "- Scope: synthetic-data browser test for the encrypted local vault, studio catalogue and Phase 5a opportunity explorer when enabled.",
+    "- Scope: synthetic-data browser test for the encrypted local vault, studio catalogue, opportunity explorer and local Resume Lab editor/export flow.",
     "- Runtime: " + safeVersion("node", ["--version"]),
     "- Browser: " + (chromePath ? safeVersion(chromePath, ["--version"]) : "unavailable"),
     "- Result: **" + (failure ? "FAIL" : "PASS") + "**",
@@ -534,6 +534,26 @@ async function main() {
         base64: pdfBase64,
       });
       await waitForResumeText("pdf", "Skills: TypeScript, Python");
+      await client.waitFor(
+        'document.querySelector(\'[data-testid="resume-editor"]\') && ' +
+          'document.querySelector(\'[data-testid="resume-export-docx"]\') && ' +
+          'document.querySelector(\'[data-testid="resume-export-pdf"]\') && ' +
+          'document.querySelector(\'[data-testid="resume-diff"]\')',
+        "resume-structured-editor-rendered",
+      );
+      await client.clickButton("Review manual AI handoff");
+      await client.waitFor(
+        'document.querySelector(\'[data-testid="resume-handoff-panel"]\')',
+        "resume-handoff-disclosure-opened",
+      );
+      const editorReady = await client.evaluate("(() => ({ " +
+        "blocks: document.querySelectorAll('[data-testid=\"resume-editor-block\"]').length, " +
+        "copyDisabled: document.querySelector('[data-testid=\"resume-handoff-copy\"]')?.disabled ?? false, " +
+        "preview: document.querySelector('[data-testid=\"resume-handoff-preview\"]')?.value ?? \"\" " +
+      "}))()");
+      if (!editorReady || editorReady.blocks < 1 || editorReady.copyDisabled !== true || editorReady.preview !== "") {
+        throw new Error("resume-export-ui-incomplete");
+      }
 
       const noUpload = await client.evaluate(`(() => ({
         attempts: window.__resumeOutboundAttempts?.length ?? -1,

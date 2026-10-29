@@ -14,7 +14,7 @@ A personal, evidence-driven workspace for discovering video game studios and opp
 - ESLint, Prettier, TypeScript checks, Node's built-in test runner, an automated Chrome/Chromium vault smoke test, and privacy-conscious Markdown feedback reports.
 - GitHub Actions validates formatting, lint, types, unit tests, dependency audit, privacy boundaries, the production build, and browser-level vault create/save/reload/lock/export/restore behavior.
 - Settings supports a passphrase-protected local vault, profile fields, basic application records, encrypted backup export/import, locking, and local deletion.
-- Phase 6a adds browser-local DOCX/PDF/TXT text extraction and a build-time bundled resume-guidance library. Original files and extracted text stay in the active page memory and are not saved or uploaded. Role analysis, editing and document export remain pending. There is no server-side runtime, remote sync, raw CV storage, or automatic outbound communication.
+- Phase 6 adds browser-local DOCX/PDF/TXT extraction, deterministic review, editable structured blocks with provenance and before/after diff, locally generated DOCX, browser print/Save as PDF, and an optional explicitly disclosed/redacted manual AI handoff. Original files and edits stay in page memory unless the user requests an export; no resume text is uploaded or stored in the vault by this workflow. There is no server-side runtime, remote sync, raw CV storage, or automatic outbound communication.
 
 ## Product goals
 

@@ -4,7 +4,8 @@ export const RESUME_MODEL_VERSION = 1;
 export const MAX_RESUME_BLOCKS = 40;
 export const MAX_RESUME_TEXT_CHARS = 150_000;
 
-const VALID_SECTIONS = new Set([...RESUME_SECTION_GROUPS.map((section) => section.label), "Other"]);
+export const RESUME_SECTIONS = Object.freeze([...RESUME_SECTION_GROUPS.map((section) => section.label), "Other"]);
+const VALID_SECTIONS = new Set(RESUME_SECTIONS);
 const VALID_ORIGINS = new Set(["imported", "typed", "ai-paste"]);
 const SECTION_ALIASES = new Map(
   RESUME_SECTION_GROUPS.flatMap((section) => section.aliases.map((alias) => [normalizeHeading(alias), section.label])),
@@ -268,11 +269,13 @@ export function addResumeBlock(input, section = "Other", origin = "typed", conte
   if (document.blocks.reduce((sum, block) => sum + block.content.length, 0) + content.length > MAX_RESUME_TEXT_CHARS) {
     throw new Error("Resume document exceeds the supported text limit.");
   }
-  let id = "block-" + document.nextId;
+  let candidateId = document.nextId;
+  let id = "block-" + candidateId;
   while (document.blocks.some((block) => block.id === id) || document.baseline.some((block) => block.id === id)) {
-    id = "block-" + (document.nextId + 1);
+    candidateId += 1;
+    id = "block-" + candidateId;
   }
-  const nextId = Number(id.slice("block-".length)) + 1;
+  const nextId = candidateId + 1;
   const block = {
     id,
     section: /** @type {ResumeSection} */ (section),
