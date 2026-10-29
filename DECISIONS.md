@@ -435,3 +435,9 @@ This is a living decision record. Accepted decisions may be amended or supersede
 
 - Extracted analysis rendering to `ResumeAnalysisPanel.tsx` and guidance rendering to `ResumeGuidancePanel.tsx`; `ResumeLab.tsx` retains state, file intake, and state-transition handlers. Shared inferred types are in `resume-lab.types.ts`.
 - No intended changes to visible copy, DOM identifiers, styles, interaction semantics, or data/privacy behavior. Exact-head CI verification is pending and will be recorded in `STATUS.md`.
+
+
+### ADR-043 formatter diagnostic — first CI cycle
+
+- The component split passed lint, typecheck, all unit tests, dependency audit, and production build on the first implementation commit. Frontend CI failed only `format:check` because the two extracted TSX files had excess JSX indentation and their opening tags differed from Prettier's configured layout.
+- Applied the exact two-file diff printed by the CI diagnostic step; no unrelated files changed. Discovery fixtures passed. The second CI cycle is the final verification attempt for this refactor.

@@ -1,7 +1,7 @@
 # Project Status
 
 **Last updated:** 2026-10-29  
-**Current phase:** Behavior-preserving ResumeLab split implemented under ADR-043; exact-head CI verification is pending. Part 1 and parser/registry hygiene were green on the preceding exact head. Phase 6c remains gated on the owner merging PR #6.
+**Current phase:** ResumeLab split is corrected to the exact formatter diff from CI cycle 1; cycle 2 is the final verification attempt for ADR-043. No behavior or type/test failures occurred in cycle 1.
 **Working branch:** feat/phase6b-resume-analysis (fast-forwarded into the PR #6 branch after each cohesive commit)  
 **Base/main:** 07d8e15cec544e56a09fbcab44202dc7051753c6 (unchanged; no direct changes to main).
 
@@ -102,4 +102,4 @@ Validate parser hardening on the current commit. The unit uses a bounded parser 
 
 - **Design:** ADR-043 was committed before code. The split preserves rendered copy, ordering, selectors/test IDs, accessibility attributes, CSS classes, event semantics and component-owned in-memory state behavior.
 - **Implementation:** Analysis presentation moved to `src/components/ResumeAnalysisPanel.tsx`, guidance presentation to `src/components/ResumeGuidancePanel.tsx`, and inferred prop types to `src/components/resume-lab.types.ts`. `ResumeLab.tsx` retains local file extraction, state and state-transition handlers.
-- **Verification at implementation commit:** CI is triggered for this exact head. Record exact run IDs and outcomes here after completion; do not use formatting-only commits to discover Prettier output.
+- **CI cycle 1:** discovery fixtures passed [push 40848747501](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40848747501) and [PR 40848758681](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40848758681). Lint, typecheck, unit tests, audit, and build passed; format check failed only on the two extracted TSX files. The browser gate failed because Frontend CI was not green. Exact formatter output was applied to just those two files; CI cycle 2 is final.
