@@ -9,7 +9,7 @@ import {
   PBKDF2_ITERATIONS,
   VAULT_FORMAT,
 } from "../src/lib/private-data/crypto-vault.mjs";
-import { createEmptyWorkspace, validateWorkspaceData } from "../src/lib/private-data/schema.mjs";
+import { createEmptyWorkspace, validateWorkspaceData, WORKSPACE_SCHEMA_VERSION } from "../src/lib/private-data/schema.mjs";
 import { createIndexedDbVaultStore } from "../src/lib/private-data/indexed-db.mjs";
 
 const passphrase = "correct horse battery staple";
@@ -73,9 +73,22 @@ function maximumWorkspace() {
   }));
   workspace.drafts = Array.from({ length: 500 }, (_, index) => ({
     id: "draft-" + index,
+    seriesId: "series-" + index,
+    versionNumber: 1,
+    previousVersionId: null,
     title: "T".repeat(180),
     body: "B".repeat(20_000),
     updatedAt: timestamp,
+    studioId: "",
+    studioName: "S".repeat(180),
+    roleTitle: "R".repeat(180),
+    opportunityId: "",
+    sourceUrl: "",
+    purpose: "speculative-introduction",
+    profileUpdatedAt: timestamp,
+    resumeLabel: "L".repeat(120),
+    guidanceVersion: "G".repeat(120),
+    reviewStatus: "draft",
   }));
   const urlPrefix = "https://example.com/";
   const applicationUrl = urlPrefix + "x".repeat(2_000 - urlPrefix.length);
@@ -88,6 +101,11 @@ function maximumWorkspace() {
     notes: "N".repeat(4_000),
     createdAt: timestamp,
     updatedAt: timestamp,
+    studioId: "",
+    opportunityId: "",
+    outreachDraftId: "",
+    nextFollowUpAt: null,
+    history: [],
   }));
   return workspace;
 }
@@ -107,12 +125,35 @@ function sampleWorkspace() {
     notes: "PRIVATE_NOTE_CANARY_8348",
     createdAt: timestamp,
     updatedAt: timestamp,
+    studioId: "",
+    opportunityId: "",
+    outreachDraftId: "",
+    nextFollowUpAt: null,
+    history: [{
+      id: "activity-test-1",
+      type: "note",
+      occurredAt: timestamp,
+      note: "PRIVATE_NOTE_CANARY_8348",
+    }],
   });
   workspace.drafts.push({
     id: "draft-test-1",
+    seriesId: "draft-test-1",
+    versionNumber: 1,
+    previousVersionId: null,
     title: "Sample draft",
     body: "PRIVATE_DRAFT_CANARY_8348",
     updatedAt: timestamp,
+    studioId: "",
+    studioName: "",
+    roleTitle: "",
+    opportunityId: "",
+    sourceUrl: "",
+    purpose: "speculative-introduction",
+    profileUpdatedAt: timestamp,
+    resumeLabel: "",
+    guidanceVersion: "test-guidance-v1",
+    reviewStatus: "draft",
   });
   workspace.resumes.push({
     id: "resume-meta-1",
@@ -124,7 +165,7 @@ function sampleWorkspace() {
 }
 
 test("empty workspace and known schema fields validate", () => {
-  assert.equal(createEmptyWorkspace(timestamp).schemaVersion, 1);
+  assert.equal(createEmptyWorkspace(timestamp).schemaVersion, WORKSPACE_SCHEMA_VERSION);
   assert.deepEqual(validateWorkspaceData(sampleWorkspace()), sampleWorkspace());
 });
 
@@ -148,6 +189,11 @@ test("application URLs reject script schemes and embedded credentials", () => {
     notes: "",
     createdAt: timestamp,
     updatedAt: timestamp,
+    studioId: "",
+    opportunityId: "",
+    outreachDraftId: "",
+    nextFollowUpAt: null,
+    history: [],
   });
   assert.throws(() => validateWorkspaceData(workspace), /HTTPS or HTTP/i);
 });
@@ -176,7 +222,7 @@ test("vault uses AES-GCM-256 and the fixed PBKDF2-SHA-256 work factor", async ()
   assert.equal(envelope.cipher, "AES-GCM-256");
   assert.equal(envelope.kdf, "PBKDF2-SHA-256");
   assert.equal(envelope.iterations, PBKDF2_ITERATIONS);
-  assert.equal((await openEncryptedSession(created.envelope, passphrase, webcrypto)).data.schemaVersion, 1);
+  assert.equal((await openEncryptedSession(created.envelope, passphrase, webcrypto)).data.schemaVersion, WORKSPACE_SCHEMA_VERSION);
 });
 
 test("encrypted backup restores profile, metadata, draft, and application records", async () => {
