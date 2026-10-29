@@ -1,19 +1,19 @@
 # Architecture
 
-**Status:** Approved direction for static hosting and browser-side private workflows; implementation details remain provisional  
-**Last updated:** 2026-10-24
+**Status:** Current direction is the official speculative-application route directory; the legacy standard-role explorer remains disabled by default.  
+**Last updated:** 2026-10-29
 
-## 1. Architectural goals
+## 1. Current product architecture
 
-- Deliver a low-cost, global studio discovery and outreach-preparation workflow.
-- Use GitHub Actions for periodic source monitoring and data generation.
-- Use GitHub Pages for a static public interface and public studio/opportunity data only.
-- Keep candidate CVs, profile details, tailored resumes, drafts, and application history out of public repositories and static assets.
-- Support resume processing in the browser without uploading user files to a server by default.
-- Avoid paid AI APIs in the initial release through deterministic checks and optional manual ChatGPT handoff.
-- Keep data sources, analysis rules, document generation, and deployment replaceable.
-- Preserve evidence and uncertainty for external facts.
-- Keep requirements living and architecture recoverable through repository documentation.
+- **Core domain:** a studio may have zero or more speculative routes; a general careers page is not a speculative route. Route status is candidate, verified, needs-review or stale, and a verified record is never automatically deleted.
+- **Evidence boundary:** the research adapter fetches each official studio/owned ATS page directly. Store a concise original paraphrase, phrase category, content hash and timestamps, never copied page content or email addresses. Blocked pages or unavailable content become needs-review.
+- **Public data:** curated versioned JSON plus a shared versioned JSON Schema. Both JavaScript and Python validators consume the same contract and fail closed on missing evidence or unsafe URLs.
+- **Directory UI:** the static client filters official routes by country, discipline, route type, work model, state and verification age, while showing evidence/date freshness and honest limitations. A visible sample/live origin must be derived from the data loader, not a manually set flag.
+- **Feature boundary:** `src/config/features.mjs` is the only frontend feature-config module and sets `FEATURES.roleExplorer = false`. The retained standard-role explorer and Overview count are not rendered by default.
+- **Private application tracking:** application status and route IDs live in the existing encrypted browser-local vault. Storage writes are allowed only while unlocked; legacy workspace schema versions migrate explicitly.
+- **Discovery automation:** the existing runner is reused through a conservative official-route checker and documented public ATS endpoints. All workflow dispatch stays manual; health outputs go to `discovery-state`, not `main`.
+- **Publishing:** reuse same-repository GitHub Pages and `scripts/check-pages-artifact.mjs`. Publish only the validated static artifact, from `main`, after explicit owner approval; no schedule is enabled by this milestone.
+- **No outbound automation:** no auto-send/submit, no remote sync or backend, no paid AI requirement, no personal profile data or email addresses in committed public records.
 
 ## 2. Hosting decision and constraints
 

@@ -6,32 +6,34 @@ export const NAV_ITEMS = [
     id: "overview",
     label: "Overview",
     icon: "overview",
-    description: "A starting point for your game-industry search.",
+    description: "A starting point for researching official speculative-application routes worldwide.",
   },
   {
     id: "studios",
-    label: "Studios & roles",
+    label: "Speculative applications",
     icon: "studios",
     description:
-      "Browse sourced studio profiles and a build-time role snapshot with freshness and unknowns clearly marked.",
+      "Research studios and official application routes. A generic careers page alone does not prove speculative applications are accepted.",
   },
   {
     id: "resume",
     label: "Resume lab",
     icon: "resume",
-    description: "Review and tailor your resume for a specific opportunity.",
+    description: "Review your resume for a speculative application while keeping every claim factual.",
   },
   {
     id: "outreach",
     label: "Outreach",
     icon: "outreach",
-    description: "Create sourced, editable outreach drafts and review them before you copy or send anything yourself.",
+    description:
+      "Prepare a tailored speculative-application introduction and review it before you copy or send it yourself.",
   },
   {
     id: "applications",
     label: "Applications",
     icon: "applications",
-    description: "Privately track manually confirmed submissions, replies, interviews, follow-ups and outcomes.",
+    description:
+      "Privately track planned or submitted speculative applications, replies, interviews, follow-ups and outcomes.",
   },
   {
     id: "settings",

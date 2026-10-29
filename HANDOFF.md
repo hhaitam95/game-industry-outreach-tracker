@@ -4,13 +4,15 @@
 
 **Repository visibility:** Public. Never commit private candidate records, CVs, application history, contact details, credentials, or secrets.
 
-## Current rollout and refinement
+## Current product direction
 
-- The public website was successfully published from `main` on 2026-10-29. Validation [run #40914281662](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40914281662) and deployment [run #40914488893](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40914488893) succeeded. Real-browser navigation/refresh, end-to-end workflows, and privacy acceptance still need owner testing.
-- Live discovery [run #40914150887](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40914150887) persisted 189 observed links. All records are `last-seen`; Riot produced 185 links with incomplete listing evidence, CD PROJEKT RED and Naughty Dog need source review, and Santa Monica Studio needs a reviewed adapter. This is not comprehensive discovery.
-- The proposed profile-aware role-review design is ADR-057 in DECISIONS.md and [Issue #12](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/12). Proposed implementation is on `feat/profile-aware-role-review-20261029`; verify its pull-request checks separately from the already-green main checks.
+The product is now a worldwide directory of official speculative-application routes, explicitly invited on a studio-owned page or its own ATS page with no specific vacancy or deadline. Aggregators are research hints only; each proposed route must be fetched and checked directly. Candidate, verified, needs-review and stale states are distinct, and verified records are never auto-deleted. No personal data or recruiter email addresses may be committed.
 
-## Phase 7 implementation
+The current roadmap is M0–M8 in [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md), with the product definition in [ADR-059](docs/decisions/ADR-059-speculative-application-directory.md). M1 sets `FEATURES.roleExplorer = false`, hides standard-role UI by default, and reframes the interface and project docs. Existing studio, role-explorer, resume, outreach and tracker code remains as compatibility/supporting code while the route schema and verified seed research are built in M2–M4.
+
+Current milestone, branch/PR state, exact checks and next action are in [STATUS.md](STATUS.md). The historical implementation notes below describe retained code from the previous direction; they do not override the M0–M8 roadmap.
+
+## Retained legacy implementation notes — Phase 7
 
 - Working branch: `feat/phase7-outreach-tracker`; design/acceptance: ADR-050 in DECISIONS.md and Phase 7 in IMPLEMENTATION_PLAN.md.
 - Outreach provides deterministic editable templates from user motivation, approved saved profile facts, and sourced studio context; pre-send checks are heuristic prompts, not fact checks.
@@ -19,7 +21,7 @@
 - Personal data remains in the encrypted browser-local vault. There is no auto-send/submit, AI API, backend or localStorage persistence. Legacy v1 vault data is validated and migrated in memory to schema v2 on unlock; next save exports the new validated schema.
 - Phase 7 is merged via [PR #8](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/8). Outreach drafts/application tracking remain browser-local; submission requires explicit confirmation. STATUS.md records the current main checks and publication state.
 
-## Phase 8 — Same-repository GitHub Pages release
+## Retained legacy implementation notes — Phase 8
 
 - ADR-055 supersedes ADR-054 and selects the original `hhaitam95/game-industry-outreach-tracker` repository for source, tests, docs, and Pages deployment workflow.
 - `.github/workflows/publish-pages.yml` is `workflow_dispatch` only. `validate-only` is the default and uses synthetic sample data; it does not upload an artifact or deploy. The explicit `publish` mode is allowed only from `main`, validates the existing public snapshot, checks the build/privacy boundary, uploads only `dist/`, then calls the official Pages deployment action.
@@ -31,7 +33,7 @@
 - Discovery remains manual-only; do not enable schedules or push triggers. Use only the reviewed live-source scan on `main` to generate the validated public snapshot; never publish private application data or change repository visibility.
 - Read [STATUS.md](STATUS.md) for current PR, checks, review order and next action.
 
-## Phase 9 — Launch feedback and stabilization
+## Retained legacy implementation notes — Phase 9
 
 - ADR-056 defines the launch acceptance gate, public feedback loop, rollback path, and stable release rules.
 - Use the GitHub Issue Forms linked from README for one bug or enhancement per issue. Reports are public; never include personal CV/profile/application material, vault exports, correspondence, credentials, or unredacted screenshots.
