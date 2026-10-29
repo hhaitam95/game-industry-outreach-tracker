@@ -9,7 +9,11 @@ import {
   PBKDF2_ITERATIONS,
   VAULT_FORMAT,
 } from "../src/lib/private-data/crypto-vault.mjs";
-import { createEmptyWorkspace, validateWorkspaceData, WORKSPACE_SCHEMA_VERSION } from "../src/lib/private-data/schema.mjs";
+import {
+  createEmptyWorkspace,
+  validateWorkspaceData,
+  WORKSPACE_SCHEMA_VERSION,
+} from "../src/lib/private-data/schema.mjs";
 import { createIndexedDbVaultStore } from "../src/lib/private-data/indexed-db.mjs";
 
 const passphrase = "correct horse battery staple";
@@ -129,12 +133,14 @@ function sampleWorkspace() {
     opportunityId: "",
     outreachDraftId: "",
     nextFollowUpAt: null,
-    history: [{
-      id: "activity-test-1",
-      type: "note",
-      occurredAt: timestamp,
-      note: "PRIVATE_NOTE_CANARY_8348",
-    }],
+    history: [
+      {
+        id: "activity-test-1",
+        type: "note",
+        occurredAt: timestamp,
+        note: "PRIVATE_NOTE_CANARY_8348",
+      },
+    ],
   });
   workspace.drafts.push({
     id: "draft-test-1",
@@ -222,7 +228,10 @@ test("vault uses AES-GCM-256 and the fixed PBKDF2-SHA-256 work factor", async ()
   assert.equal(envelope.cipher, "AES-GCM-256");
   assert.equal(envelope.kdf, "PBKDF2-SHA-256");
   assert.equal(envelope.iterations, PBKDF2_ITERATIONS);
-  assert.equal((await openEncryptedSession(created.envelope, passphrase, webcrypto)).data.schemaVersion, WORKSPACE_SCHEMA_VERSION);
+  assert.equal(
+    (await openEncryptedSession(created.envelope, passphrase, webcrypto)).data.schemaVersion,
+    WORKSPACE_SCHEMA_VERSION,
+  );
 });
 
 test("encrypted backup restores profile, metadata, draft, and application records", async () => {
