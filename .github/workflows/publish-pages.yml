@@ -43,17 +43,6 @@ jobs:
             exit 1
           fi
 
-      - name: Check out output-only Pages repository
-        if: inputs.mode == 'publish'
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          repository: hhaitam95/game-industry-outreach-tracker-site
-          ref: main
-          path: public-site
-          token: ${{ secrets.PUBLIC_PAGES_TOKEN }}
-          persist-credentials: true
-          fetch-depth: 0
-
       - name: Set up Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
@@ -141,6 +130,17 @@ jobs:
           test -s /tmp/pages-app.js
           test -s /tmp/pages-app.css
           echo "The static site and its assets load under the target GitHub Pages path."
+
+      - name: Check out output-only Pages repository
+        if: inputs.mode == 'publish'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: hhaitam95/game-industry-outreach-tracker-site
+          ref: main
+          path: public-site
+          token: ${{ secrets.PUBLIC_PAGES_TOKEN }}
+          persist-credentials: true
+          fetch-depth: 0
 
       - name: Publish the validated build to the output-only repository
         if: inputs.mode == 'publish'
