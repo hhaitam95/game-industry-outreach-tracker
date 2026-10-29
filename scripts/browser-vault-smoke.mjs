@@ -805,12 +805,13 @@ async function main() {
     );
     if (!phase7ApplicationsClicked) throw new Error("phase7-applications-navigation-not-found");
     await client.waitForText("Track what actually happened.");
-    await client.evaluate(
-      "(() => { const details = document.querySelector('.phase7-activity'); if (details) details.open = true; return true; })()",
+    const targetRecordReady = await client.evaluate(
+      "(() => { const record = [...document.querySelectorAll('[data-testid=application-record]')].find((item) => item.innerText.includes('CD PROJEKT RED')); if (!record) return false; const details = record.querySelector('.phase7-activity'); if (!details) return false; details.open = true; return Boolean(record.querySelector('[data-testid=application-status]')); })()",
     );
+    if (!targetRecordReady) throw new Error("phase7-restored-record-not-found");
     await client.waitForText("Synthetic recruiter response recorded.");
     const restoredStatus = await client.evaluate(
-      "document.querySelector('[data-testid=application-status]')?.value ?? ''",
+      "(() => { const record = [...document.querySelectorAll('[data-testid=application-record]')].find((item) => item.innerText.includes('CD PROJEKT RED')); return record?.querySelector('[data-testid=application-status]')?.value ?? ''; })()",
     );
     if (restoredStatus !== "applied") throw new Error("phase7-application-state-not-restored");
     const phase7SettingsClicked = await client.evaluate(
@@ -936,6 +937,7 @@ try {
     "phase7-follow-up-date-not-found",
     "phase7-application-state-or-privacy-check-failed",
     "phase7-application-state-not-restored",
+    "phase7-restored-record-not-found",
     "phase7-draft-version-history-incomplete",
     "phase7-outbound-privacy-boundary-failed",
     "phase7-outreach-return-not-found",
