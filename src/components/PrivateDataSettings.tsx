@@ -31,9 +31,11 @@ function downloadBackup(contents: string) {
 export default function PrivateDataSettings({
   onProfileChange,
   activePageId,
+  onNavigate,
 }: {
   onProfileChange: (profile: WorkspaceProfile | null) => void;
   activePageId: string;
+  onNavigate: (pageId: string) => void;
 }) {
   const storeRef = useRef<ReturnType<typeof createIndexedDbVaultStore> | null>(null);
   if (!storeRef.current) storeRef.current = createIndexedDbVaultStore();
@@ -574,6 +576,12 @@ export default function PrivateDataSettings({
             </div>
           </section>
         </>
+        ) : dirty ? (
+          <section className="private-data-card">
+            <h3>Save or discard your Settings changes first</h3>
+            <p>Outreach uses only the saved candidate profile. There are unsaved edits in Settings, so this workspace is paused until you save them or lock and discard them.</p>
+            <button className="button button-primary" type="button" onClick={() => onNavigate("settings")}>Return to Settings</button>
+          </section>
         ) : activePageId === "outreach" ? (
           <OutreachWorkspace workspace={workspace} onSaveWorkspace={persistWorkspace} />
         ) : (
