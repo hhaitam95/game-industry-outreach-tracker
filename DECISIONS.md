@@ -453,3 +453,11 @@ This is a living decision record. Accepted decisions may be amended or supersede
 - **Definition of done:** Frontend formatting, lint, typecheck, unit tests, audit, build, privacy check, repository-subpath preview, browser acceptance and discovery fixtures pass on an exact head; the CSP meta content has all listed directives; no workflow triggers/permissions, dependency, runtime API, or network behavior change.
 - **Failure policy:** At most two CI cycles. If policy compatibility cannot be verified after two attempts, remove the CSP meta tag and record the deferral to Phase 8 rather than relaxing the policy speculatively.
 - **Rollback:** Remove the meta tag and its browser assertion as one small commit; retain this decision and document the Phase 8 deferral.
+
+
+### ADR-044 implementation outcome
+
+- **Code commit:** [b3b196da](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/b3b196da6a2aeb03511efefea3a517fe4ade518d).
+- **Push CI:** Frontend CI passed [40849588956](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849588956) and [40849594611](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849594611); discovery fixtures passed [40849588962](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849588962) and [40849594640](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849594640).
+- **PR CI:** Frontend CI passed [40849604007](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849604007), discovery fixtures passed [40849604001](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849604001), and browser acceptance passed on run [40849603965, attempt 2](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40849603965). The first browser attempt failed before app interaction with `browser-debug-port-unavailable`; no code changed before the successful retry.
+- The browser assertion checked every policy directive after the page rendered; the existing full browser suite then passed. No CSP rollback or Phase 8 deferral is needed.
