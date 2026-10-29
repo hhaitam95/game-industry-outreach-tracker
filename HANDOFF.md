@@ -26,11 +26,11 @@
 - Resume Lab provides local-only DOCX, text-based PDF and UTF-8 TXT extraction with visible warnings and conservative file/page/text limits.
 - Resume-guidance Markdown is bundled at build time; it is not fetched at runtime.
 - Extracted text is read-only and held in component state only. It is not saved to the encrypted workspace, logged, or uploaded. Scanned PDFs require a text-based copy because OCR is not enabled.
-- Phase 6c includes structured editing, provenance, before/after review, local DOCX and browser-print PDF export, and selective manual AI handoff. ADR-049 also fixes failed-paste data loss, makes section changes explicit in the diff, and preserves text when too many headings prevent safe structuring. Frontend CI, discovery fixtures, and browser acceptance (24/24 synthetic checkpoints) passed on implementation/test head 9c07e20. See STATUS.md for verification links; PR #7 remains draft and unmerged pending owner review.
+- Phase 6c provides structured resume editing with imported baselines and provenance, add/remove/reorder, before/after review, local DOCX export, browser-print PDF, and selective/redacted manual AI handoff. ADR-049 also fixes failed-paste data loss, makes section changes explicit in the diff, and preserves text when too many headings prevent safe structuring. Frontend CI, discovery fixtures, and browser acceptance passed on verified implementation/test head `9c60dccc`. See STATUS.md and the [current PR #7 checks](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7/checks); PR #7 remains draft and unmerged pending owner review.
 
 ## Review boundary
 
-- Consult [STATUS.md](STATUS.md) and the current [Phase 5a pull-request checks](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/4/checks) for current verification evidence.
+- Consult [STATUS.md](STATUS.md) and the current [Phase 6c pull-request checks](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7/checks) for current verification evidence.
 - Keep any future merge decision and any live discovery run owner-controlled.
 - Discovery remains manual-dispatch-only. No schedule, publication, Pages deployment, or repository visibility change is approved.
 

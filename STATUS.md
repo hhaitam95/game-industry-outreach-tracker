@@ -1,22 +1,26 @@
 # Project Status
 
 **Last updated:** 2026-10-29  
-**Current phase:** Phase 6 implementation is complete and verified for owner review. Phase 5 and Phase 6a/6b are merged into `main`; Phase 6c remains isolated on its feature branch.  
+**Current phase:** Phase 6c implementation is complete and verified for owner review. Phase 5 and Phase 6a/6b are merged into `main`; Phase 6c remains isolated on its feature branch pending the owner's review/merge decision.  
 **Working branch:** `feat/phase6c-resume-export`  
-**Verified implementation/test head:** [9c07e20](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/9c07e205f5423842c7b379476e20712eee617725). Subsequent closeout changes are documentation-only; no direct commits to `main`.
+**Verified implementation/test head:** `9c60dccc6991dcd9ca38a820a9aecef13ce2a8b3`. This closeout commit changes documentation only.  
+**Design:** ADR-049 in DECISIONS.md.  
+**Base/main:** `d56637e921fdb2e23f67e15aa3a518d6477c6842`; no direct changes to `main`.  
+**Review state:** [PR #7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7) remains open as a draft and unmerged. The owner retains the readiness and merge decision.
 
-**Review state:** [PR #7](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7) remains draft and unmerged. Owner retains the readiness and merge decision.  
-**Phase 6c review findings:** Resolved failed AI-paste clearing, added explicit before/after section labels, and made excessive recognized headings fall back to one text-preserving `Other` block. Unit/component and interactive browser regression tests were added.
-**Exact-head verification:** [Frontend CI 40864202641](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864202641) passed, including formatting, lint, typecheck, unit tests, audit, build, privacy checks and repository-subpath smoke. [Discovery fixtures 40864202592](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864202592) passed. [Browser acceptance 40864202680](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864202680) passed 24/24 synthetic-data checkpoints, including the two new review regressions.
-**Privacy and scope:** No real CV/profile/application data or secrets were added. No manual workflow dispatch/rerun, workflow permission/trigger change, dependency change, merge, or main-branch change was performed. The public repository/local-only data boundary remains unchanged.
+## Current verification
 
-## Engineering standards for remaining work
+- **Frontend CI:** passed — [run 40864491781](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864491781) and [run 40864482921](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864482921), including formatting, lint, typecheck, unit tests, dependency audit, build, privacy checks and repository-subpath smoke.
+- **Discovery fixture tests:** passed — [run 40864491922](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864491922) and [run 40864482908](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864482908).
+- **Browser acceptance:** passed — [run 40864491787](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/40864491787), covering the existing vault regression flow and synthetic Phase 6c edit/export/redaction regressions.
+- The feature provides structured resume editing with imported baselines and provenance, edit/add/remove/reorder, before/after review, term-only review prompts, local DOCX generation, browser-print PDF, and optional selective/redacted manual AI handoff. Resume content remains in page memory and is not persisted or uploaded.
+- This documentation-only closeout does not change application behavior. Check the [current PR #7 checks](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/7/checks) for validation triggered by this documentation commit.
+- No real CV/profile/application data or secrets were added. No manual workflow dispatch/rerun, workflow trigger/permission change, dependency change, merge, main-branch change, publication, or deployment was performed.
 
-- Follow AGENTS.md and IMPLEMENTATION_PLAN.md: design before code, keep pure domain logic separate from I/O/UI, test success and failure paths, and update docs with implementation.
-- This file is the single source for volatile branch/review/run details, test status, commit SHAs, workflow URLs, and next action.
-- Keep this delivery slice cohesive and separate. Do not merge its PR as part of implementation.
-- Current source repository visibility is public. Never commit private candidate records, resumes, drafts, applications, contact details, credentials, or secrets.
-- Do not use CI as a formatter/linter REPL. Use configured formatting; if a check fails, inspect the complete log and apply the exact formatter diff. At most two CI cycles per unit, then document the simplest safe deferral in DECISIONS.md.
+## Engineering standards
+
+Follow [AGENTS.md](AGENTS.md) and [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md): design before code, focused modules, failure-path tests, exact-head verification, no CI-as-a-REPL, and at most two CI cycles per cohesive unit. Keep this file as the single source for volatile branch/review/check state; other documents link here.
+
 ## Phase 6a acceptance status
 
 - **Scope delivered in code:** bundled guidance and local-only DOCX/PDF/TXT text extraction; safe warnings; 10 MiB input, 100-page PDF and 150,000-character output limits; synthetic parser fixtures.
