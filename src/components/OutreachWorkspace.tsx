@@ -44,7 +44,11 @@ export default function OutreachWorkspace({ workspace, onSaveWorkspace }: Props)
   const [localError, setLocalError] = useState("");
   const studio = STUDIO_PROFILES.find((item) => item.id === studioId) ?? null;
   const careerRoute = studio?.routes.find((item) => item.status === "verified") ?? studio?.routes[0] ?? null;
-  const availableOpportunities = !IS_SYNTHETIC_SNAPSHOT ? (OPPORTUNITY_SNAPSHOT?.opportunities ?? []) : [];
+  const availableOpportunities = !IS_SYNTHETIC_SNAPSHOT
+    ? (OPPORTUNITY_SNAPSHOT?.opportunities ?? []).filter((item) =>
+        STUDIO_PROFILES.some((catalogStudio) => catalogStudio.id === item.studioId),
+      )
+    : [];
   const activeSavedDraft = workspace.drafts.find((item) => item.id === editingDraftId) ?? null;
 
   const review = useMemo(() => {
