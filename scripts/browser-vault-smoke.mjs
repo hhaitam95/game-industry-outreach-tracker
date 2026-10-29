@@ -568,6 +568,58 @@ async function main() {
       }
     });
 
+    await step("Verify section changes are explicit in the before/after diff", async () => {
+      const changed = await client.evaluate(`(() => {
+        const select = document.querySelector('select[aria-label="Section for block 1"]');
+        if (!select) return false;
+        const setter = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, "value")?.set;
+        if (!setter) return false;
+        setter.call(select, "Summary");
+        select.dispatchEvent(new Event("change", { bubbles: true }));
+        const diff = document.querySelector('[data-testid="resume-diff"]');
+        if (diff) diff.open = true;
+        return true;
+      })()`);
+      if (!changed) throw new Error("resume-section-select-not-found");
+      await client.waitFor(
+        `Boolean(document.querySelector('[data-testid="resume-diff-section-change"]')?.innerText.includes("Other → Summary"))`,
+        "resume-section-change-label-rendered",
+      );
+    });
+
+    await step("Verify failed AI paste preserves input for correction", async () => {
+      const submitted = await client.evaluate(`(() => {
+        const field = document.querySelector('[data-testid="resume-ai-paste"]');
+        const button = document.querySelector('[data-testid="resume-ai-paste-add"]');
+        const setter = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, "value")?.set;
+        if (!field || !button || !setter) return false;
+        setter.call(field, "x".repeat(150001));
+        field.dispatchEvent(new Event("input", { bubbles: true }));
+        field.dispatchEvent(new Event("change", { bubbles: true }));
+        button.click();
+        return true;
+      })()`);
+      if (!submitted) throw new Error("resume-ai-paste-controls-not-found");
+      await client.waitFor(
+        `Boolean(document.querySelector('[data-testid="resume-ai-paste"]')?.value.length === 150001 &&
+          document.querySelector('[data-testid="resume-editor-error"]')?.innerText.includes("previous version was kept"))`,
+        "resume-ai-paste-failure-preserved",
+      );
+      await client.evaluate(`(() => {
+        const field = document.querySelector('[data-testid="resume-ai-paste"]');
+        const setter = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, "value")?.set;
+        if (!field || !setter) return false;
+        setter.call(field, "");
+        field.dispatchEvent(new Event("input", { bubbles: true }));
+        field.dispatchEvent(new Event("change", { bubbles: true }));
+        return true;
+      })()`);
+      await client.waitFor(
+        `Boolean(document.querySelector('[data-testid="resume-ai-paste"]')?.value.length === 0)`,
+        "resume-ai-paste-test-cleanup",
+      );
+    });
+
     await step("Verify local-only boundary, failed extraction preservation, and clearing", async () => {
       const noUpload = await client.evaluate(`(() => ({
         attempts: window.__resumeOutboundAttempts?.length ?? -1,
@@ -836,6 +888,8 @@ try {
     "resume-lab-initial-state-failed",
     "resume-file-input-not-found",
     "resume-export-ui-incomplete",
+    "resume-section-select-not-found",
+    "resume-ai-paste-controls-not-found",
     "resume-local-only-boundary-failed",
     "resume-failure-did-not-preserve-previous-extraction",
     "resume-reset-did-not-clear-text",
@@ -853,6 +907,9 @@ try {
       "structured editor/export controls did not appear after PDF extraction",
     ],
     ["condition-not-met-resume-handoff-disclosure-opened", "manual handoff disclosure did not open"],
+    ["condition-not-met-resume-section-change-label-rendered", "section-change label did not appear in the diff"],
+    ["condition-not-met-resume-ai-paste-failure-preserved", "failed AI-paste content was not preserved"],
+    ["condition-not-met-resume-ai-paste-test-cleanup", "synthetic AI-paste test input could not be cleared"],
     ["condition-not-met-incorrect passphrase rejection", "incorrect passphrase was not rejected in the UI"],
     ["condition-not-met-backup restoration", "backup restoration did not complete"],
   ]);
