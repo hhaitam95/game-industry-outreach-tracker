@@ -29,14 +29,16 @@ function formatDate(value: string | null) {
   }).format(parsed);
 }
 
-function eligibilityLabel(route: Directory["routes"][number]) {
+function eligibilityLabel(route: { countryScope: string; countryCodes: string[] }) {
   if (route.countryScope === "worldwide") return "Worldwide";
   if (route.countryScope === "unknown") return "Check the application page";
-  if (route.countryCodes.length === 28 && route.countryCodes.includes("GB")) return "United Kingdom + EU";
+  if (route.countryCodes.length === 28 && route.countryCodes.includes("GB")) {
+    return "United Kingdom + EU";
+  }
   if (route.countryCodes.length <= 3) {
     return route.countryCodes.map((code) => COUNTRY_NAMES[code] ?? code).join(", ");
   }
-  return route.countryCodes.slice(0, 3).join(", ") + " +" + (route.countryCodes.length - 3) + " more";
+  return `${route.countryCodes.slice(0, 3).join(", ")} +${route.countryCodes.length - 3} more`;
 }
 
 function statusLabel(status: string) {
@@ -78,15 +80,21 @@ export default function SpeculativeRouteDirectory({
         <span className="eyebrow">WORLDWIDE · OFFICIAL SOURCES</span>
         <h2 id="route-directory-title">Speculative applications</h2>
         <p>
-          Game studios that invite applications beyond their advertised vacancies. Open the official route to check
-          the current instructions, then add it to your application tracker when you are ready.
+          Game studios that invite applications beyond their advertised vacancies. Open the official route
+          to check the current instructions, then add it to your application tracker when you are ready.
         </p>
       </div>
 
       {isSynthetic ? (
-        <div className="route-directory-notice" role="note" data-testid="route-directory-sample-notice">
+        <div
+          className="route-directory-notice"
+          role="note"
+          data-testid="route-directory-sample-notice"
+        >
           <strong>Sample data only</strong>
-          <p>These illustrative records are not real opportunities. They cannot be added to your application tracker.</p>
+          <p>
+            These illustrative records are not real opportunities. They cannot be added to your application tracker.
+          </p>
         </div>
       ) : null}
 
@@ -124,7 +132,11 @@ export default function SpeculativeRouteDirectory({
                 const studio = directory.studios.find((item) => item.id === route.studioId);
                 const blockedBySample = isSynthetic;
                 return (
-                  <article className="route-directory-card" data-testid="speculative-route-card" key={route.id}>
+                  <article
+                    className="route-directory-card"
+                    data-testid="speculative-route-card"
+                    key={route.id}
+                  >
                     <div className="route-directory-card-heading">
                       <div>
                         <h3>{route.studioName}</h3>
@@ -134,7 +146,9 @@ export default function SpeculativeRouteDirectory({
                             : "Studio location not recorded"}
                         </p>
                       </div>
-                      <span className={"route-directory-status route-directory-status-" + route.status}>
+                      <span
+                        className={"route-directory-status route-directory-status-" + route.status}
+                      >
                         {statusLabel(route.status)}
                       </span>
                     </div>

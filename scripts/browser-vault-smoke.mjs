@@ -444,7 +444,7 @@ async function main() {
   if (process.env.EXPECT_SPECULATIVE_DIRECTORY === "1") {
     await step("Verify the app exposes only the two core workflows and settings", async () => {
       const state = await client.evaluate(
-        "(() => ({ navLabels: [...document.querySelectorAll('nav[aria-label=\\"Main navigation\\"] button')].map((button) => button.innerText.trim()), body: document.body.innerText, studioCards: document.querySelectorAll('.studio-card').length, opportunityRows: document.querySelectorAll('[data-testid=opportunity-row]').length }))()",
+        "(() => ({ navLabels: [...document.querySelectorAll('nav.main-navigation button')].map((button) => button.innerText.trim()), body: document.body.innerText, studioCards: document.querySelectorAll('.studio-card').length, opportunityRows: document.querySelectorAll('[data-testid=opportunity-row]').length }))()",
       );
       const expectedNavigation = ["Speculative applications", "Applications", "Settings"];
       if (

@@ -72,7 +72,7 @@ export default function App() {
                 onClick={() => setActivePageId(item.id)}
                 type="button"
               >
-                <Icon name={item.icon} />
+                <Icon name={item.id} />
                 <span>{item.label}</span>
                 {active ? <span className="nav-active-dot" /> : null}
               </button>
@@ -117,7 +117,9 @@ export default function App() {
               onLeadPrefillConsumed={consumePendingLead}
             />
           </div>
-          {activeItem.id === "studios" ? <SpeculativeRouteDirectory onTrackRoute={handleTrackRoute} /> : null}
+          {activeItem.id === "studios" ? (
+            <SpeculativeRouteDirectory onTrackRoute={handleTrackRoute} />
+          ) : null}
         </div>
 
         <footer className="app-footer">
