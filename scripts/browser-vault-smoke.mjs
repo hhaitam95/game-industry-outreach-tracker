@@ -613,7 +613,10 @@ async function main() {
     currentStep = "Phase 7 generate editable template";
     await client.clickButton("Generate editable template");
     currentStep = "Phase 7 generated message appears";
-    await client.waitForText("What draws me to your team is:");
+    await client.waitFor(
+      `Boolean(document.querySelector('[data-testid="outreach-draft-body"]')?.value.includes("What draws me to your team is:"))`,
+      "phase7-generated-message-in-textarea",
+    );
     currentStep = "Phase 7 save first draft version";
     await client.clickButton("Save draft version");
     currentStep = "Phase 7 first draft save confirmation";
@@ -947,6 +950,7 @@ try {
     ["condition-not-met-lock confirmation", "lock confirmation did not appear"],
     ["condition-not-met-incorrect passphrase rejection", "incorrect passphrase was not rejected in the UI"],
     ["condition-not-met-backup restoration", "backup restoration did not complete"],
+    ["condition-not-met-phase7-generated-message-in-textarea", "generated message did not appear in the editable draft field"],
   ]);
   failureReason = safeReasons.has(message)
     ? message
