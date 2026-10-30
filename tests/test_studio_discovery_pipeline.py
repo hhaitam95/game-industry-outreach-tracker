@@ -195,6 +195,23 @@ class DiscoveryParsingTests(unittest.TestCase):
         self.assertIsNotNone(discovery.exclusion_match("A studio making pornographic adult games."))
         self.assertIsNone(discovery.exclusion_match("We build fantasy adventure games with tavern scenes."))
 
+    def test_staffing_platform_screen_requires_multiple_independent_indicators(self):
+        self.assertIsNotNone(
+            discovery.staffing_platform_match(
+                "Staffing support for studios. Freelancers and consultants can join our network."
+            )
+        )
+        self.assertIsNone(
+            discovery.staffing_platform_match(
+                "Our game studio sometimes hires freelancers and consultants for production."
+            )
+        )
+        self.assertIsNone(
+            discovery.staffing_platform_match(
+                "We are a staffing agency supporting game studios."
+            )
+        )
+
     def test_spaqrl_query_uses_qid_cursor_and_separate_candidate_feeds(self):
         cursor = "Q500"
         developer_query = discovery.sparql_query("class", cursor, 120)
@@ -377,6 +394,38 @@ class CandidateVerificationTests(unittest.TestCase):
         self.assertEqual(
             result["reason"],
             "explicit_route_text_without_a_detectable_submission_method",
+        )
+
+    def test_staffing_marketplace_candidate_is_held_for_manual_review(self):
+        pages = {
+            "https://example-studio.example/": discovery.FetchResult(
+                True,
+                "https://example-studio.example/",
+                200,
+                """
+                <title>Game Boost</title>
+                <p>Staffing support for game studios.</p>
+                <p>Freelancers and consultants can register for upcoming gigs.</p>
+                <a href="/jobs">Jobs</a>
+                """,
+            ),
+            "https://example-studio.example/jobs": discovery.FetchResult(
+                True,
+                "https://example-studio.example/jobs",
+                200,
+                "<p>Find upcoming gigs and contract gigs with studios.</p>",
+            ),
+        }
+        result = discovery.verify_candidate_pages(
+            self.candidate(),
+            lambda url, allowed: pages.get(
+                url, discovery.FetchResult(False, url, 404, "", "not-found")
+            ),
+        )
+        self.assertEqual(result["status"], "needs_review")
+        self.assertEqual(
+            result["reason"],
+            "likely_staffing_or_talent_platform_not_a_game_studio",
         )
 
     def test_relevant_vice_content_is_excluded(self):
