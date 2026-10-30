@@ -892,17 +892,22 @@ def route_page_check(studio: dict[str, Any], page_fetcher: Callable[[str, bool],
     if not urls:
         return "unknown"
     results: list[FetchResult] = []
+    positive_pages = 0
     for url in urls:
         result = page_fetcher(url, not same_site(studio["websiteUrl"], url))
         results.append(result)
         if result.ok:
             page = parse_page(result.url, result.body)
-            if positive_route_match(page.text) and not negative_route_match(page.text):
-                return "active"
             if negative_route_match(page.text):
                 return "negative"
+            if positive_route_match(page.text):
+                positive_pages += 1
     if results and all(result.status_code in {404, 410} for result in results):
         return "gone"
+    # A live evidence page does not make a missing submission URL healthy. Keep the
+    # record active while uncertain, but do not reset its closure counters either.
+    if positive_pages and all(result.ok for result in results):
+        return "active"
     return "unknown"
 
 
