@@ -3432,5 +3432,162 @@
       "https://job-boards.greenhouse.io/tactilegames/jobs/4319957101"
     ],
     "applicationLocation": "Copenhagen, Denmark · open-application eligibility not stated"
+  },
+  "Glowmade": {
+    "description": "Independent UK game studio founded by Lionhead alumni, creating original and imaginative games.",
+    "headquarters": {
+      "city": "Guildford",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent · privately held",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Action",
+      "Adventure"
+    ],
+    "popularGames": [
+      {
+        "title": "Rogue Planet",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.glowmade.com/about-us",
+      "https://www.glowmade.com/careers",
+      "https://glowmade.jobs.personio.com/job/2805976"
+    ],
+    "applicationLocation": "Guildford hybrid or remote within the UK · UK right to work required"
+  },
+  "Hugecalf Studios": {
+    "description": "Small UK remote game studio behind Stuck Together, Turbo Golf Racing and When Ski Lifts Go Wrong.",
+    "headquarters": {
+      "city": null,
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ · city not publicly stated"
+    },
+    "otherLocations": [
+      "Fully remote team within the United Kingdom"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent · privately held",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small team · exact count not disclosed",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Console",
+      "Multiplayer",
+      "Sports",
+      "Racing"
+    ],
+    "popularGames": [
+      {
+        "title": "Turbo Golf Racing",
+        "appId": null
+      },
+      {
+        "title": "When Ski Lifts Go Wrong",
+        "appId": null
+      },
+      {
+        "title": "Stuck Together",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://hugecalf.com/careers",
+      "https://jobs.hugecalf.com/speculative-application?src=hugecalf.com"
+    ],
+    "applicationLocation": "Fully remote · UK only"
+  },
+  "Havoc Games": {
+    "description": "Independent Indian game studio building WEX, a competitive multiplayer game.",
+    "headquarters": {
+      "city": null,
+      "country": "India",
+      "countryCode": "IN",
+      "label": "HQ · city not publicly stated"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Mobile",
+      "Competitive multiplayer",
+      "Action"
+    ],
+    "popularGames": [
+      {
+        "title": "WEX",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://havocgames.co/",
+      "https://havocgames.co/careers"
+    ],
+    "applicationLocation": "India · general-application location and remote eligibility not stated"
+  },
+  "Sports Interactive": {
+    "description": "London-based SEGA game studio behind the Football Manager series.",
+    "headquarters": {
+      "city": "Stratford, London",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Subsidiary"
+    ],
+    "ownership": "Wholly owned subsidiary of SEGA Europe",
+    "parentCompany": "SEGA Europe",
+    "industryScale": "AAA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Sports simulation",
+      "Football management"
+    ],
+    "popularGames": [
+      {
+        "title": "Football Manager series",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.sigames.com/",
+      "https://sega.wd3.myworkdayjobs.com/SEGA_Careers/job/Greater-London-E15-2GW/Senior-Graphics-Engineer--Speculative-Application-_JR100190"
+    ],
+    "applicationLocation": "East London · hybrid 2–3 days in studio; remote by exception"
   }
 }
