@@ -142,29 +142,40 @@
     "applicationLocation": "Malta / Kyiv studio network · general applicant eligibility not stated"
   },
   "A4VR": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Düsseldorf-listed XR and virtual-reality production agency creating immersive experiences for business, brands and live communication. Its services span real-time production, game design, motion capture, 360° film and livestream production, 3D/CG and AR/VR/MR development.",
     "headquarters": {
-      "city": "Dusseldorf, Nordrhein-Westfalen",
+      "city": "Düsseldorf, Nordrhein-Westfalen",
       "country": "Germany",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "DE",
+      "label": "Listed location · GameDevMap; HQ not independently confirmed"
     },
     "otherLocations": [],
     "companyType": [
-      "Extended Reality (XR)"
+      "XR production agency",
+      "Virtual reality",
+      "Immersive media"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Not disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Not disclosed",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
+    "focus": [
+      "VR",
+      "AR",
+      "MR",
+      "Real-time production",
+      "Motion capture",
+      "3D/CG",
+      "Game design"
+    ],
     "popularGames": [],
     "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=101&state=&type=",
-      "https://a4vr.com/"
+      "https://www.a4vr.com/about-en",
+      "https://www.a4vr.com/jobs"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "applicationLocation": "Not stated · previous jobs URL currently serves a domain-reserved page",
+    "reachHighlights": "A4VR describes an in-house Living Lab combining real-time, game-design, motion-capture, 360° production and 3D/CG capabilities."
   },
   "AARISE": {
     "description": "Independent French AA developer founded by the original team behind Empire of the Ants, now creating focused premium games across multiple genres.",
@@ -206,54 +217,107 @@
     "reachHighlights": "Founded by the original team behind Empire of the Ants; self-describes its positioning as premium AA."
   },
   "Abbey Games": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Independent Dutch game studio focused on deep, mechanically rich management and strategy games, based in Utrecht.",
     "headquarters": {
       "city": "Utrecht",
       "country": "Netherlands",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "NL",
+      "label": "HQ · official jobs page"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Independent"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Independent",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=101&state=&type=",
-      "https://abbeygames.com/"
+    "focus": [
+      "PC",
+      "Strategy",
+      "Management",
+      "2D"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "Reus",
+        "appId": null
+      },
+      {
+        "title": "Renowned Explorers: International Society",
+        "appId": null
+      },
+      {
+        "title": "Godhood",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://abbeygames.com/about/",
+      "https://abbeygames.com/jobs/"
+    ],
+    "applicationLocation": "Utrecht, Netherlands · hiring eligibility not separately stated",
+    "reachHighlights": "Official jobs page invites open applications by email with a portfolio or relevant résumé and a motivation letter."
   },
   "About Fun": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Prague-based mobile game developer founded in 2011, focused on accessible mobile and casual multiplayer experiences.",
     "headquarters": {
-      "city": "Prague, Bohemia",
+      "city": "Prague",
       "country": "Czechia",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "CZ",
+      "label": "HQ · official About page"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Mobile games"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Founder-led / privately held · ownership details not disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=101&state=&type=",
-      "https://about-fun.com/"
+    "focus": [
+      "Mobile",
+      "Free-to-play",
+      "Multiplayer",
+      "Casual"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "WarFriends",
+        "appId": null
+      },
+      {
+        "title": "Zombie Horde",
+        "appId": null
+      },
+      {
+        "title": "LETZ Match!",
+        "appId": null
+      },
+      {
+        "title": "Mega Dead Pixel",
+        "appId": null
+      },
+      {
+        "title": "Cut and Hack",
+        "appId": null
+      },
+      {
+        "title": "Tiny Miners",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.about-fun.com/about-us",
+      "https://www.about-fun.com/games",
+      "https://www.about-fun.com/jobs-open-application"
+    ],
+    "applicationLocation": "Prague, Czechia · remote eligibility not stated",
+    "reachHighlights": "The studio's About page reports eight released games, two projects in development and approximately 19.9 million cumulative downloads (company-reported page figures)."
   },
   "Abyssal Interactive": {
     "description": "Small French developer creating persistent multiplayer worlds and simulation/strategy experiences in-house.",
@@ -399,29 +463,44 @@
     "applicationLocation": "Remote across Europe · CET overlap"
   },
   "Agate": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Indonesian game-development company providing full-cycle game development, game art, porting and gamification services. Agate says it has created more than 50 titles across mobile, PC and console platforms.",
     "headquarters": {
       "city": "Bandung, West Java",
       "country": "Indonesia",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "ID",
+      "label": "Listed location · GameDevMap; HQ not independently confirmed"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Co-development",
+      "Game art",
+      "Porting",
+      "Gamification"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Not disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "AA / large independent service studio · editorial indication",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
+    "focus": [
+      "Mobile",
+      "PC",
+      "Console",
+      "Game development",
+      "Game art",
+      "Porting",
+      "Gamification"
+    ],
     "popularGames": [],
     "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=201&state=&type=",
-      "https://agate.id/"
+      "https://agate.id/about-us/",
+      "https://agate.id/career/",
+      "https://agate.id/job/open-application-lead-3d-artist/",
+      "https://agate.id/contract/open-application/"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "applicationLocation": "Indonesia · official career page describes a hybrid work system",
+    "reachHighlights": "Agate reports 50+ titles, 10M+ downloads, 200K+ daily active users and 100K+ PC/console sales across its game business (company-reported figures)."
   },
   "AlterEyes": {
     "description": "Belgian XR and game studio creating VR and AR games, immersive entertainment and interactive learning and business experiences.",
@@ -494,54 +573,97 @@
     "applicationLocation": "In-house or remote options described · eligible remote countries not stated"
   },
   "Another Axiom": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Virtual-reality game studio and developer of Gorilla Tag, a social VR experience with more than six million lifetime users reported on the company's careers page. The studio also lists Orion Drift, Monke Mayhem and Contagion.",
     "headquarters": {
-      "city": "Casas Adobes, Arizona",
+      "city": null,
       "country": "United States",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "US",
+      "label": "HQ city not confirmed by official sources"
     },
     "otherLocations": [],
     "companyType": [
-      "Extended Reality (XR)"
+      "Developer",
+      "Virtual reality",
+      "Social VR"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Not disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "AA · editorial indication",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=401&state=&type=",
-      "https://anotheraxiom.com/"
+    "focus": [
+      "VR",
+      "Social VR",
+      "Multiplayer",
+      "Live games"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "Gorilla Tag",
+        "appId": null
+      },
+      {
+        "title": "Orion Drift",
+        "appId": null
+      },
+      {
+        "title": "Monke Mayhem",
+        "appId": null
+      },
+      {
+        "title": "Contagion",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.anotheraxiom.com/job-positions/general-application",
+      "https://www.anotheraxiom.com/careers"
+    ],
+    "applicationLocation": "Fully remote · applicant-country eligibility not stated",
+    "reachHighlights": "The official application page says general applications are kept on file and describes the role as fully remote."
   },
   "Apog Labs": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Independent game studio in Malmö, Sweden, developing ATMOSFAR, a science-fiction exploration adventure set among floating islands. Its previous release was the airport-management game Airport CEO.",
     "headquarters": {
-      "city": "Malmo, Scania",
+      "city": "Malmö",
       "country": "Sweden",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "SE",
+      "label": "Studio location · official website"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Independent"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Independent · ownership details not disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=501&state=&type=",
-      "https://www.apoglabs.com/"
+    "focus": [
+      "PC",
+      "Simulation",
+      "Management",
+      "Exploration",
+      "Adventure"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "ATMOSFAR",
+        "appId": null,
+        "stage": "In development"
+      },
+      {
+        "title": "Airport CEO",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.apoglabs.com/",
+      "https://www.apoglabs.com/join"
+    ],
+    "applicationLocation": "Malmö, Sweden · applicant-country eligibility not stated",
+    "reachHighlights": "The studio identifies Malmö as its base and describes ATMOSFAR as its current project."
   },
   "Artefacts Studio": {
     "description": "Independent French developer and co-development partner creating and marketing PC and console games, with long-running art, technical and design subcontracting capabilities.",
@@ -590,29 +712,43 @@
     "reachHighlights": "Founded 2003 · studio reports 80 experienced collaborators · credits include Agatha Christie, Naheulbeuk and Disciples."
   },
   "Ashborne Games (THQ Nordic)": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Brno-based game-development studio and member of the THQ Nordic family, known for historical strategy and simulation projects.",
     "headquarters": {
-      "city": "Brno, Moravia",
+      "city": "Brno",
       "country": "Czechia",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "CZ",
+      "label": "Studio location · official open-application page"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Strategy",
+      "Historical games"
     ],
-    "ownership": "Not yet researched",
-    "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "ownership": "Part of the THQ Nordic family",
+    "parentCompany": "THQ Nordic",
+    "industryScale": "AA · editorial indication",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=601&state=&type=",
-      "https://ashbornegames.com/"
+    "focus": [
+      "PC",
+      "Strategy",
+      "Historical",
+      "Simulation"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "Last Train Home",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://ashbornegames.com/careers/open-application",
+      "https://ashbornegames.com/about/",
+      "https://ashbornegames.com/games"
+    ],
+    "applicationLocation": "Brno, Czechia · home-office allowance mentioned; applicant eligibility not stated",
+    "reachHighlights": "Its official open-application page accepts a CV, portfolio and cover letter by email and identifies modern offices in central Brno."
   },
   "Aska Studios": {
     "description": "Reykjavík game studio with a remote-first working environment, currently developing a cooperative deckbuilder-shooter.",
@@ -699,54 +835,83 @@
     "applicationLocation": "Bordeaux · on-site"
   },
   "AstroBeam": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Austin-based independent game studio developing original interactive and virtual-reality experiences, including the titles Robo Detective and Stellar Cafe.",
     "headquarters": {
       "city": "Austin, Texas",
       "country": "United States",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "US",
+      "label": "Based in Austin · official application page"
     },
     "otherLocations": [],
     "companyType": [
-      "Extended Reality (XR)"
+      "Developer",
+      "Independent",
+      "Virtual reality"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Not disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=601&state=&type=",
-      "https://www.astrobeam.com/"
+    "focus": [
+      "PC",
+      "VR",
+      "Unity",
+      "Interactive games"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "Robo Detective",
+        "appId": null
+      },
+      {
+        "title": "Stellar Cafe",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.astrobeam.com/",
+      "https://www.astrobeam.com/jobs/blog-post-title-four-2x696-35n6y"
+    ],
+    "applicationLocation": "Remote within the United States only · studio based in Austin, Texas",
+    "reachHighlights": "The official General Application page explicitly limits remote work to the United States."
   },
   "Atvis": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Swedish engineering and digital-experience consultancy whose work includes virtual-reality and serious-games-style interactive solutions. The company reports offices in Gothenburg and Stockholm; its public projects also include VR visualisation for property sales.",
     "headquarters": {
-      "city": "Gothenburg, Vastra Gotaland",
+      "city": null,
       "country": "Sweden",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "SE",
+      "label": "HQ not stated · offices reported in Gothenburg and Stockholm"
     },
-    "otherLocations": [],
-    "companyType": [
-      "Serious Games"
+    "otherLocations": [
+      "Gothenburg",
+      "Stockholm"
     ],
-    "ownership": "Not yet researched",
+    "companyType": [
+      "Serious games",
+      "XR consultancy",
+      "Software and engineering services"
+    ],
+    "ownership": "Not disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Not disclosed",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
+    "focus": [
+      "VR",
+      "XR",
+      "Interactive visualisation",
+      "Serious games",
+      "Software engineering"
+    ],
     "popularGames": [],
     "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=701&state=&type=",
+      "https://atvis.com/index.php/jobba-hos-oss/",
       "https://atvis.com/"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "applicationLocation": "Sweden · open application route does not state remote eligibility",
+    "reachHighlights": "Included as a serious-games/immersive-technology provider rather than a conventional entertainment-game developer."
   },
   "Awe Interactive": {
     "description": "Independent remote game studio creating premium PC and console experiences.",
@@ -787,104 +952,178 @@
     "applicationLocation": "Location not specified · HQ shown"
   },
   "AxesInMotion (gamigo Group)": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Seville-based free-to-play mobile game developer and publisher, founded in 2014 and part of the Media and Games Invest (MGI) group since 2022.",
     "headquarters": {
-      "city": "Seville",
+      "city": "Mairena del Aljarafe, Seville",
       "country": "Spain",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "ES",
+      "label": "Studio address · official Work With Us page"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Publisher",
+      "Mobile games"
     ],
-    "ownership": "Not yet researched",
-    "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
+    "ownership": "Part of Media and Games Invest (MGI) group",
+    "parentCompany": "Media and Games Invest (MGI)",
+    "industryScale": "AA · editorial indication",
+    "teamSize": "30+ people (company-reported on About page; page figures are historical)",
+    "teamSizeAsOf": "Company About page; historical figure",
+    "focus": [
+      "Mobile",
+      "Free-to-play",
+      "Racing",
+      "Simulation"
+    ],
+    "popularGames": [
+      {
+        "title": "Extreme Car Driving Simulator",
+        "appId": null
+      },
+      {
+        "title": "Extreme Motorcycle Simulator",
+        "appId": null
+      },
+      {
+        "title": "Extreme Car Driving Stunts",
+        "appId": null
+      },
+      {
+        "title": "Highway Moto Rush",
+        "appId": null
+      },
+      {
+        "title": "Car Stunt Races: Mega Ramps",
+        "appId": null
+      },
+      {
+        "title": "Extreme SUV Driving Simulator",
+        "appId": null
+      }
+    ],
     "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=701&state=&type=",
+      "https://axesinmotion.com/about/",
+      "https://axesinmotion.com/work-with-us/",
       "https://axesinmotion.com/"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "applicationLocation": "Seville, Spain · work model not stated on the speculative route",
+    "reachHighlights": "The studio's About page reports 800M+ downloads and more than 30 employees in its historical company figures."
   },
   "Axolot Games": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Stockholm-based game developer and publisher focused on survival sandbox games. The studio says it develops and publishes its own games and builds its engine and tools in-house.",
     "headquarters": {
       "city": "Stockholm",
       "country": "Sweden",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "SE",
+      "label": "Application location · official careers page"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer and Publisher"
+      "Developer",
+      "Publisher",
+      "Survival sandbox"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Not disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Indie / AA · editorial indication",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=701&state=&type=",
-      "https://axolotgames.com/"
+    "focus": [
+      "PC",
+      "Console",
+      "Survival sandbox",
+      "Multiplayer"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "Scrap Mechanic",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.axolotgames.com/",
+      "https://www.axolotgames.com/careers"
+    ],
+    "applicationLocation": "Stockholm, Sweden · remote eligibility not stated",
+    "reachHighlights": "The official careers page lists both an Open Application and a separate Open Internship Application in Stockholm."
   },
   "Ayelet Studio": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Small independent narrative-first game studio based in Chennai, India, developing Son of Thanjai, a cinematic action-adventure inspired by 11th-century South India.",
     "headquarters": {
-      "city": "Chennai, Tamil Nadu",
+      "city": "Chennai",
       "country": "India",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "IN",
+      "label": "Studio location · official website"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Independent"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Independent",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=701&state=&type=",
-      "https://ayelet.studio/"
+    "industryScale": "Indie",
+    "teamSize": "Small independent team · exact count not disclosed",
+    "teamSizeAsOf": "Official team page",
+    "focus": [
+      "PC",
+      "Console",
+      "Action-adventure",
+      "Narrative"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "Son of Thanjai",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://ayelet.studio/",
+      "https://ayelet.studio/team",
+      "https://ayelet.studio/jobs"
+    ],
+    "applicationLocation": "Chennai, India · remote eligibility not stated",
+    "reachHighlights": "The official website says Son of Thanjai is in development for PS5, Xbox and PC; the studio team page describes a small independent team."
   },
   "Baby Robot Games": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Spanish indie game-development studio behind Ereban: Shadow Legacy, a stealth-action adventure. The studio welcomes open applications by email even when the desired position is not listed.",
     "headquarters": {
-      "city": "Barcelona, Catalonia",
+      "city": "Barcelona",
       "country": "Spain",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "ES",
+      "label": "Listed location · GameDevMap; city not independently confirmed on current careers page"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Independent"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Independent · ownership details not disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=701&state=&type=",
-      "https://www.ereban.com/"
+    "focus": [
+      "PC",
+      "Console",
+      "Stealth",
+      "Action-adventure"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "Ereban: Shadow Legacy",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.ereban.com/contact/",
+      "https://www.ereban.com/",
+      "https://www.gamedevmap.com/"
+    ],
+    "applicationLocation": "Not stated · contact the studio about role location and eligibility",
+    "reachHighlights": "The official Ereban contact page explicitly welcomes open applications and provides join@babyrobotgames.com for CV submissions."
   },
   "Bananagun": {
     "description": "Small senior mobile-game team building hyper-casual and hybrid-casual Unity games for iOS and Android.",
@@ -926,29 +1165,37 @@
     ]
   },
   "Bandit Island Games": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Independent Stockholm-based video-game studio founded by industry veterans from Disney, Nickelodeon and King. It develops original games and partners with entertainment companies on collaborative projects.",
     "headquarters": {
       "city": "Stockholm",
       "country": "Sweden",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "SE",
+      "label": "HQ · official About page"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Independent"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Independent",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
+    "industryScale": "Indie",
+    "teamSize": "Small team · exact count not disclosed",
+    "teamSizeAsOf": "Official Careers page",
+    "focus": [
+      "PC",
+      "Console",
+      "Co-op",
+      "Party games",
+      "Family games"
+    ],
     "popularGames": [],
     "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=801&state=&type=",
-      "https://www.bandit-island.com/"
+      "https://www.bandit-island.com/about",
+      "https://www.bandit-island.com/careers"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "applicationLocation": "Stockholm, Sweden · eligibility and remote arrangements not stated",
+    "reachHighlights": "The official Careers page lists an Open Application in Stockholm and describes the team as small."
   },
   "Barnstorm Games": {
     "description": "Small UK developer and publisher specializing in family-friendly quiz, trivia, word and branded games for mobile, console, desktop and smart TV.",
@@ -1003,29 +1250,44 @@
     ]
   },
   "BeamNG": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Independent German development studio creating the BeamNG soft-body physics engine, known to players through BeamNG.drive and also used for professional simulation applications via BeamNG.tech.",
     "headquarters": {
       "city": "Bremen",
       "country": "Germany",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "DE",
+      "label": "HQ · official company page"
     },
-    "otherLocations": [],
+    "otherLocations": [
+      "Remote-first team with employees in multiple countries"
+    ],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Simulation technology"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Independent",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=901&state=&type=",
-      "https://www.beamng.gmbh/"
+    "industryScale": "AA · editorial indication",
+    "teamSize": "70+ people (company-reported on official website)",
+    "teamSizeAsOf": "Official company page; undated",
+    "focus": [
+      "PC",
+      "Vehicle simulation",
+      "Physics engine",
+      "Simulation technology"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "BeamNG.drive",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://beamng.gmbh/",
+      "https://www.beamng.gmbh/team/",
+      "https://www.beamng.com/game/press/"
+    ],
+    "applicationLocation": "Remote-first · HQ in Bremen, Germany; verify work-authorisation requirements for each role",
+    "reachHighlights": "BeamNG says it has a team of 70+ and has been remote-first since 2018."
   },
   "Beenox": {
     "description": "Activision development studio with a long track record in co-development, ports and major franchise production.",
@@ -1076,54 +1338,49 @@
     "reachHighlights": "Long-running Activision studio with franchise work across Crash Bandicoot, Tony Hawk's Pro Skater and Call of Duty."
   },
   "BetaDwarf": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Copenhagen-based game studio focused on co-op games and experiences intended to build social connection. It released FORCED and has reached millions of players with Minion Masters.",
     "headquarters": {
-      "city": "Copenhagen, Oresund",
+      "city": "Copenhagen",
       "country": "Denmark",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "DK",
+      "label": "Office address · official Careers page"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Independent"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Privately held / investor-backed; shareholders and investors named by company",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Indie / AA · editorial indication",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
+    "focus": [
+      "PC",
+      "Co-op",
+      "Strategy",
+      "Multiplayer"
+    ],
+    "popularGames": [
+      {
+        "title": "FORCED",
+        "appId": null
+      },
+      {
+        "title": "Minion Masters",
+        "appId": null
+      },
+      {
+        "title": "Forced Showdown",
+        "appId": null
+      }
+    ],
     "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=901&state=&type=",
-      "https://betadwarf.com/"
+      "https://betadwarf.com/",
+      "https://betadwarf.com/career"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
-  },
-  "Binary Impacts": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
-    "headquarters": {
-      "city": "Niederelbert, Rhineland-Palatinate",
-      "country": "Germany",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer"
-    ],
-    "ownership": "Not yet researched",
-    "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1001&state=&type=",
-      "https://www.binaryimpact.de/"
-    ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "applicationLocation": "Copenhagen, Denmark · unsolicited application route is for internships only",
+    "reachHighlights": "The official Careers page says unsolicited applications are accepted for internships; internships are unpaid and at least three months."
   },
   "Blackbird Interactive": {
     "description": "Independent Vancouver game-development studio working on original worlds and partner-owned game franchises.",
@@ -1200,29 +1457,54 @@
     ]
   },
   "Bongfish": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Privately owned game-development studio headquartered in Graz, Austria, combining game production with advanced technology and co-development services.",
     "headquarters": {
-      "city": "Graz, Steiermark",
+      "city": "Graz",
       "country": "Austria",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "AT",
+      "label": "HQ · official Our Story page"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Co-development"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Privately owned",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1201&state=&type=",
-      "https://bongfish.com/"
+    "industryScale": "AA / AAA co-development · editorial indication",
+    "teamSize": "60 team members (company-reported)",
+    "teamSizeAsOf": "Official Our Story page; undated",
+    "focus": [
+      "PC",
+      "Console",
+      "Co-development",
+      "AI",
+      "Gameplay",
+      "Simulation"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "Star Stable Horses",
+        "appId": null,
+        "stage": "Co-development / live support"
+      },
+      {
+        "title": "Generation Zero",
+        "appId": null,
+        "stage": "Co-development contribution"
+      },
+      {
+        "title": "Waffenträger event / World of Tanks",
+        "appId": null,
+        "stage": "Co-development contribution"
+      }
+    ],
+    "profileSources": [
+      "https://www.bongfish.com/our-story/",
+      "https://www.bongfish.com/jobs/"
+    ],
+    "applicationLocation": "Graz, Austria · relocation and visa-application support offered",
+    "reachHighlights": "Bongfish reports 13 released titles and 60 team members; its Careers page says it offers relocation and visa-application support."
   },
   "Bossa Studios": {
     "description": "London-based independent game developer and publisher creating original games for PC, console, mobile and VR, alongside co-development and multiplayer technology.",
@@ -1270,31 +1552,6 @@
       "https://www.bossagames.com/careers.html"
     ],
     "reachHighlights": "Surgeon Simulator: 5M+ copies sold · I Am Bread: 3M+ copies sold · BAFTA-winning studio."
-  },
-  "Box Dragon (Coffee Stain)": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
-    "headquarters": {
-      "city": "Gothenburg, Vastra Gotaland",
-      "country": "Sweden",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer"
-    ],
-    "ownership": "Not yet researched",
-    "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1201&state=&type=",
-      "https://boxdragon.se/"
-    ],
-    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "Brave At Night": {
     "description": "Independent game developer behind narrative kingdom-management RPGs and publisher of selected indie titles.",
@@ -5072,5 +5329,76 @@
     ],
     "applicationLocation": "Near Vienna preferred · full-time remote work limited to Austria",
     "reachHighlights": "Developing an original top-down multiplayer action game. The studio states that it avoids gambling mechanics, dark patterns and pay-to-win monetisation."
+  },
+  "Binary Impact GmbH": {
+    "description": "Owner-managed German software and engineering company that also develops games and immersive experiences. Binary Impact developed and published the award-winning game Beam in 2019 alongside software projects for industrial and commercial clients.",
+    "headquarters": {
+      "city": "Niederelbert, Rhineland-Palatinate",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Software development",
+      "Game developer",
+      "XR / interactive projects"
+    ],
+    "ownership": "Owner-managed; privately held",
+    "parentCompany": null,
+    "industryScale": "Small company",
+    "teamSize": "Small team; the official About page gives differing employee totals in separate sections",
+    "teamSizeAsOf": "Official About page; current exact count unclear",
+    "focus": [
+      "Software engineering",
+      "Games",
+      "Interactive audio",
+      "XR",
+      "Simulation"
+    ],
+    "popularGames": [
+      {
+        "title": "Beam",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.binaryimpact.de/en/about-us/",
+      "https://www.binaryimpact.de/jobs/"
+    ],
+    "applicationLocation": "Remote within Germany",
+    "reachHighlights": "The Jobs page accepts unsolicited applications by email and explicitly allows remote work from anywhere in Germany."
+  },
+  "Box Dragon": {
+    "description": "Small Gothenburg-based PC game-development studio building its debut title. The company describes its work as immersive PC games and says it is backed by Coffee Stain.",
+    "headquarters": {
+      "city": "Gothenburg",
+      "country": "Sweden",
+      "countryCode": "SE",
+      "label": "Studio address · official About page"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "PC games"
+    ],
+    "ownership": "Coffee Stain-backed",
+    "parentCompany": "Coffee Stain",
+    "industryScale": "Indie",
+    "teamSize": "Small team · exact count not disclosed",
+    "teamSizeAsOf": "Official About page",
+    "focus": [
+      "PC",
+      "Narrative",
+      "Immersive games"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.boxdragon.se/about",
+      "https://www.boxdragon.se/",
+      "https://www.boxdragon.se/jobs"
+    ],
+    "applicationLocation": "Gothenburg, Sweden · applicant eligibility and remote policy not stated",
+    "reachHighlights": "Box Dragon identifies itself as a PC game-development studio in Gothenburg and says it is backed by Coffee Stain."
   }
 }
