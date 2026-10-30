@@ -385,9 +385,20 @@ def merge_from_git(
             incoming_rows,
         )
 
-    incoming_rows, registry_exclusions = exclude_records_by_domains(
+    # Apply the persistent registry to both sides of the merge. Filtering only
+    # incoming rows would leave a manually excluded record already present in the
+    # latest main snapshot untouched.
+    base_rows, base_registry_exclusions = exclude_records_by_domains(
+        base_rows,
+        persistent_domains,
+    )
+    incoming_rows, incoming_registry_exclusions = exclude_records_by_domains(
         incoming_rows,
         persistent_domains,
+    )
+    registry_exclusions = sorted(
+        set(base_registry_exclusions + incoming_registry_exclusions),
+        key=str.casefold,
     )
 
     if candidate_state:
