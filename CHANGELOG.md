@@ -1,45 +1,9 @@
 # Changelog
 
-Meaningful changes are recorded here. Current branch/review state and verification evidence are maintained only in [STATUS.md](STATUS.md).
+## 2026-10-30
 
-## Unreleased
-
-- PR #20 merged the first M4 research batch, expanding the directory from 12 to 40 curated official routes and repairing LIQUIDBULLET’s saved careers URL. CI, discovery fixtures and browser-vault acceptance passed on the reviewed head.
-- A second bounded research batch adds 10 directly checked speculative/open-application routes, taking the proposed directory to 50. Eligibility, location, work-model and compensation caveats are included; this is a data-only update with no new crawler, workflow, dependency, schedule or publication.
-
-- ADR-058 source remediation points Naughty Dog discovery at its official /openings page, strengthens synthetic CD PROJEKT RED/Naughty Dog fixtures, and adds offline source-coverage regression tests. CD PROJEKT RED remains under review until a separately authorized live check verifies listing extraction; Riot remains incomplete and Santa Monica remains manual-review.
-
-- PR #13 delivers profile-aware role review with literal evidence and explicit uncertainty, temporary pasted-description comparison, manual lead prefill, live encrypted-vault Overview counts, and clearer task-focused labels.
-- Phase 9 adds public issue forms and a post-launch feedback/stabilization process. Stable `v1.0.0` remains gated on manual Pages publication, real-browser acceptance, a clean privacy boundary, and no unresolved launch blockers.
-
-- Hardened Phase 6c resume editing: failed AI-paste additions retain user input, section moves are explicit in the before/after diff, and excessive recognized headings fall back to one text-preserving Other block. Added synthetic unit/component and browser regression coverage.
-- Phase 7 adds a v2 encrypted-workspace model with strict v1 migration, reviewable outreach draft revisions, heuristic pre-send checks, and private application status/activity/follow-up tracking. No automatic sending/submission, paid AI API, backend, or personal data in repository files.
-- Phase 8 supersedes the separate-repository proposal with same-repository GitHub Pages deployment through an Actions artifact. The manual workflow defaults to validation-only, requires an explicit publish selection on main, uses separate least-privilege build/deploy jobs, and enforces a static-artifact privacy gate. A live site is not deployed until the owner selects GitHub Actions as the repository's Pages source and a publish run succeeds.
-- Bounded DOCX/PDF resume parsing to 30 seconds, moved Mammoth into a terminable worker, disabled PDF.js XFA, and kept parser timeouts on the existing safe error category. The pinned pdfjs-dist 6.4.299 no longer supports `isEvalSupported` as a document initialization option, so no ineffective property is passed.
-- Replaced the lone non-canonical dependency tarball URL with `registry.npmjs.org` without changing its integrity hash; added offline registry-origin tests and an enforced Frontend CI check. Applied the exact formatter-diff correction to the new test file in the follow-up.
-- Updated the Phase 6 browser smoke flow to navigate to Settings before adding and checking the synthetic application record; no application behavior changed.
-- Fixed the Phase 6 browser smoke harness so the baseline-analysis privacy/result check invokes and reads its assertion result; product behavior and persistence boundaries are unchanged.
-- Phase 6b adds deterministic, browser-memory-only resume baseline counts and explicit text-term comparisons against the unlocked profile and selected/manual role text. It does not calculate a fit score, infer eligibility, persist analysis, or invoke an AI API.
-- Phase 6a adds a browser-local Resume Lab for DOCX/PDF/TXT extraction, safe parser warnings and bounded input/output, plus build-time bundled source-linked resume guidance. Raw documents/text are not persisted or uploaded; OCR, analysis, editing, export and AI handoff are not included in this slice.
-- The Phase 6a CI repair tightens JSDoc/type contracts, keeps control-character filtering lint-clean, uses PDF.js loading-task cleanup, and corrects the initial-render test to match the visible scanned-PDF notice.
-- Split discovery tests into parser, state-transition, and public-boundary/workflow modules with a shared offline helper module; removed unused pytest configuration because CI enforces unittest discovery.
-- Split the opportunity explorer into orchestration, filter-controls and role-card components; added component-level render coverage for the sample-data banner and evidence/availability disclaimers.
-- Adopted standing engineering standards for future phases: design notes and definitions of done before code, single-source versioned contracts, inward-pointing architecture, deterministic failure-path tests, enforced CI gates, cohesive reviewed changes, same-commit documentation, automation, and evidence-based closeout reporting. The rules are maintained in AGENTS.md and IMPLEMENTATION_PLAN.md and apply from the current Phase 5 work onward.
-- Phase 5a adds a synthetic sample fallback, shared JavaScript snapshot validation, a validated local sync command, a static opportunity explorer with source/freshness labels, and validated persistence of generated public projections on the dedicated discovery-state branch. The app does not fetch career sources at runtime; discovery remains manual-only, with scheduling, publishing and deployment deferred.
-
-## 2026-10-27
-
-- Accepted Phase 4 for manual-only, best-effort monitoring with explicit source-coverage limitations. Link-only records remain last-seen, failed/incomplete sources never imply closure, and scheduling/publication/deployment remain disabled.
-- Added the Phase 4 discovery pipeline: official-source registry, conservative change detection, deterministic fixtures, and an allowlisted public projection.
-- Closed Phase 3 with sourced studio records, distinct ownership/game-credit relationships, verified career routes, and schema validation.
-
-## 2026-10-25
-
-- Added the encrypted browser-local private-data foundation with validated records, encrypted backup export/import, and browser acceptance coverage. Raw CV content is not persisted.
-- Strengthened privacy-boundary checks and the feedback-report flow; configured frontend quality gates cover formatting, lint, type checks, tests, dependency audit, production build, and browser smoke checks.
-
-## Initial project foundation
-
-- Added the React/TypeScript/Vite static workspace, section navigation, responsive styling, repository-subpath build configuration, and GitHub Actions validation.
-- Added a privacy-conscious local feedback report and documented macOS/VS Code setup.
-- Documented the static-hosting privacy model, evidence-backed studio research, discovery workflow, browser-first resume processing, source-linked resume guidance, outreach drafting, and application tracking.
+- Reset the product to a small studio directory and private application tracker.
+- Flattened the public directory to studios with official speculative/open-application routes only.
+- Simplified the directory, application tracker and navigation.
+- Removed legacy advertised-job discovery workflows from the active workflow set.
+- Kept route rechecking and new-route discovery as future optional automation.
