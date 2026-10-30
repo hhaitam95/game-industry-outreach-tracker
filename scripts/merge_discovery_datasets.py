@@ -80,7 +80,7 @@ def load_manual_exclusion_domains(root: Path) -> tuple[set[str], list[str]]:
             or normalized != raw_domain.casefold().strip(".")
             or not name
             or not reason
-            or not re.fullmatch(r"\\d{4}-\\d{2}-\\d{2}", reviewed_at)
+            or not re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", reviewed_at)
         ):
             raise ValueError("Manual studio-exclusion entry is incomplete or has an invalid domain.")
         domains.add(normalized)
