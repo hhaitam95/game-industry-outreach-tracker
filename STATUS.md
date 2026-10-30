@@ -9,7 +9,7 @@
 - Tracker entries remain in browser localStorage only; no personal application data is committed.
 - Current research branch contains **163 studio records and 163 matching profiles**.
 - **160 routes are active** and **3 are paused** because current evidence does not establish a usable speculative submission path.
-- Records span **31 identified countries**; 11 records use the explicit value "Not stated" rather than an inferred country.
+- Records span **30 identified countries**; 11 records use the explicit value "Not stated" rather than an inferred country.
 - Every active/paused record retains official studio, application and evidence URLs plus a verification date.
 - Removed Capcom Pictures (film-production subsidiary, not a game studio) and Game Boost Sweden (staffing/talent marketplace, not a game studio).
 - Corrected Funny Games to Funny Tales, identified its operator as Digital Tales LLC (DBA Funny Tales), and corrected its location to Miami, Florida.
