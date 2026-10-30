@@ -1,6 +1,6 @@
 # StudioScout status
 
-**Date:** 2026-10-30 19:38 UTC  
+**Date:** 2026-10-30 19:47 UTC  
 **Product scope:** Simple two-page studio directory and personal application tracker.
 
 ## Website
@@ -45,7 +45,10 @@
 - Removed duplicate legacy definitions that overrode thread-safe per-host request pacing and the robots-policy cache; PR #31 added a same-host serialization regression test.
 - PR #35 adds deterministic merging of discovery output with concurrent manual changes and retry-safe public publishing.
 - PR #38 moved discovery to a versioned concurrency group; merged after the successful full backfill run.
-- Latest data PR #45 passed CI: Python discovery tests, frontend/data tests, studio-directory validation, route-review checks and the production build.
+- PR #45 passed CI and added Couch Heroes and Stranded Beast while correcting Kuuasema's application method and location constraints.
+- PR #46 enriched the 19 initial GameDevMap discoveries with official company descriptions, games, locations and route details. It corrected Agate's broken route and recorded its discipline-specific application pools; set AstroBeam's US-only remote eligibility; clarified Axolot's Stockholm application and BetaDwarf's internship-only route; paused A4VR while its jobs URL serves a reserved-domain placeholder; and corrected the names Binary Impact GmbH and Box Dragon.
+- The profile pass distinguishes serious-games/XR consultancies from conventional game studios and preserves unknown HQ, ownership, team size and applicant eligibility rather than guessing.
+- PR #46 CI passed: 44 Python discovery tests, 14 frontend/data tests, 136 complete profile records, route-review checks and the production build.
 - Same-host requests remain serialized, while checks across different studio domains can run concurrently.
 
 ## Next
