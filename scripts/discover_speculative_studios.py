@@ -583,7 +583,10 @@ def verify_candidate_pages(
     if external_ats:
         methods.append("ats")
     if not methods:
-        methods.append("website_form")
+        return {
+            "status": "needs_review",
+            "reason": "explicit_route_text_without_a_detectable_submission_method",
+        }
     matched_text = " ".join(match.group(0).split())[:180]
     return {
         "status": "verified",
