@@ -2020,9 +2020,9 @@
     "name": "Futurats",
     "country": "Italy",
     "websiteUrl": "https://futurats.com/",
-    "applicationUrl": "https://futurats.com/contact-us/",
-    "evidenceUrl": "https://futurats.com/contact-us/",
-    "notes": "The official Contact page explicitly invites open applications by email. The application instruction is separate from the general contact form; FutuRats is based in Turin, Italy and does not state remote or international applicant eligibility.",
+    "applicationUrl": "https://futurats.com/work-with-us/",
+    "evidenceUrl": "https://futurats.com/work-with-us/",
+    "notes": "The official Work With Us page states there are no open positions but explicitly invites spontaneous applications by email. It also lists current Turin hybrid vacancies and an EU-time-zone remote freelance designer role; the spontaneous route does not define separate applicant-country eligibility.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "open",
@@ -2031,7 +2031,7 @@
       ],
       "workModel": "not_stated",
       "eligibleLocations": [
-        "Turin, Italy · remote and cross-border eligibility not stated"
+        "Turin, Italy; specific open roles state hybrid in Turin; a separate freelance role is fully remote within the EU time zone"
       ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
