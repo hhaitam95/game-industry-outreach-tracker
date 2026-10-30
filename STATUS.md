@@ -7,11 +7,12 @@
 
 - The site remains limited to the studio directory and My applications.
 - Tracker entries remain in browser localStorage only; no personal application data is committed.
-- Current research branch contains **163 studio records and 163 matching profiles**.
-- **160 routes are active** and **3 are paused** because current evidence does not establish a usable speculative submission path.
+- Current research branch contains **160 unique studio records and 160 matching profiles**.
+- **157 routes are active** and **3 are paused** because current evidence does not establish a usable speculative submission path.
 - Records span **30 identified countries**; 11 records use the explicit value "Not stated" rather than an inferred country.
 - Every active/paused record retains official studio, application and evidence URLs plus a verification date.
 - Removed Capcom Pictures (film-production subsidiary, not a game studio) and Game Boost Sweden (staffing/talent marketplace, not a game studio).
+- Consolidated duplicate official-domain records for SumiGames, Ocellus and Studios DRAMA, retaining the most recent official application details.
 - Corrected Funny Games to Funny Tales, identified its operator as Digital Tales LLC (DBA Funny Tales), and corrected its location to Miami, Florida.
 - Corrected Greensky Games' location to Montréal, Canada; "remote" is no longer used as a country.
 - Corrected route destinations and constraints for Fool's Theory, Game Tailors and several other recently discovered studios.
