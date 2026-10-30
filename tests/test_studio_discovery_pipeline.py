@@ -126,16 +126,30 @@ class DiscoveryParsingTests(unittest.TestCase):
         self.assertIsNotNone(discovery.exclusion_match("A studio making pornographic adult games."))
         self.assertIsNone(discovery.exclusion_match("We build fantasy adventure games with tavern scenes."))
 
-    def test_spaqrl_query_uses_cursor_and_separate_candidate_feeds(self):
-        cursor = "https://www.wikidata.org/entity/Q500"
+    def test_spaqrl_query_uses_qid_cursor_and_separate_candidate_feeds(self):
+        cursor = "Q500"
         developer_query = discovery.sparql_query("class", cursor, 120)
         credit_query = discovery.sparql_query("developer_credit", cursor, 120)
         self.assertIn("wd:Q210167", developer_query)
         self.assertIn("wdt:P856", developer_query)
-        self.assertIn(cursor, developer_query)
+        self.assertIn('STRAFTER(STR(?company), "/entity/") > "Q500"', developer_query)
+        self.assertNotIn("https://www.wikidata.org/entity/Q500", developer_query)
         self.assertIn("wdt:P178", credit_query)
         self.assertIn("wd:Q7889", credit_query)
         self.assertIn("LIMIT 120", credit_query)
+
+    def test_wikidata_entity_uri_is_normalized_to_qid_and_https_source(self):
+        self.assertEqual(
+            discovery.normalize_wikidata_entity_uri("http://www.wikidata.org/entity/Q123"),
+            ("Q123", "https://www.wikidata.org/entity/Q123"),
+        )
+        self.assertEqual(
+            discovery.normalize_wikidata_entity_uri("https://www.wikidata.org/entity/Q456"),
+            ("Q456", "https://www.wikidata.org/entity/Q456"),
+        )
+        self.assertIsNone(
+            discovery.normalize_wikidata_entity_uri("https://example.org/entity/Q789")
+        )
 
 
 class CandidateVerificationTests(unittest.TestCase):
