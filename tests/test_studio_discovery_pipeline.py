@@ -548,6 +548,47 @@ class DatasetUpdateTests(unittest.TestCase):
         self.assertEqual(studio["name"], "Example Game Studio")
         self.assertIn("two consecutive", studio["notes"])
 
+    def test_future_retry_does_not_block_completion_of_a_discovery_cycle(self):
+        state = discovery.empty_state()
+        discovery.add_candidates(state, [{
+            "qid": "Q123",
+            "entity_url": "https://www.wikidata.org/entity/Q123",
+            "name": "Example Game Studio",
+            "website": "https://example-studio.example/",
+            "country": "Canada",
+            "hq_city": "Montreal",
+            "country_code": "CA",
+        }])
+        candidate = state["candidates"]["Q123"]
+        candidate["status"] = "retry"
+        candidate["next_check_at"] = "2099-01-01"
+        for feed in discovery.FEEDS:
+            state["feed_done"][feed["id"]] = True
+
+        self.assertTrue(discovery.finish_cycle_if_complete(state))
+        self.assertEqual(state["cycle"], 2)
+        self.assertEqual(candidate["status"], "retry")
+
+    def test_due_retry_keeps_its_current_discovery_cycle_open(self):
+        state = discovery.empty_state()
+        discovery.add_candidates(state, [{
+            "qid": "Q123",
+            "entity_url": "https://www.wikidata.org/entity/Q123",
+            "name": "Example Game Studio",
+            "website": "https://example-studio.example/",
+            "country": "Canada",
+            "hq_city": "Montreal",
+            "country_code": "CA",
+        }])
+        candidate = state["candidates"]["Q123"]
+        candidate["status"] = "retry"
+        candidate["next_check_at"] = discovery.iso_date()
+        for feed in discovery.FEEDS:
+            state["feed_done"][feed["id"]] = True
+
+        self.assertFalse(discovery.finish_cycle_if_complete(state))
+        self.assertEqual(state["cycle"], 1)
+
     def test_three_complete_empty_cycles_mark_initial_discovery_saturated(self):
         state = discovery.empty_state()
         for _ in range(3):
