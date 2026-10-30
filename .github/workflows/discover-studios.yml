@@ -124,7 +124,9 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/data/speculative-route-directory.json src/data/studio-profiles.json
+          # These source datasets live under a directory name matched by the
+          # broad local-data ignore rule; force-add only the two public, reviewed files.
+          git add -f -- src/data/speculative-route-directory.json src/data/studio-profiles.json
           if git diff --cached --quiet; then
             echo "data_changed=false" >> "$GITHUB_OUTPUT"
             echo "No public directory changes to publish."
