@@ -1,10 +1,13 @@
-# How it works
+# Architecture
 
-- React and Vite serve a small static website on GitHub Pages.
-- `src/data/speculative-route-directory.json` is the public list of qualifying studios.
-- A studio is added only after its own website or studio-controlled application system explicitly invites speculative/open/general applications.
-- The website searches the JSON list and links directly to the official application page.
-- Personal application records use the existing encrypted browser-local vault. They are never sent to a server or stored in the public JSON.
-- There is no backend or scheduled scanner.
+- React and Vite serve a static website on GitHub Pages.
+- `src/data/speculative-route-directory.json` contains the studios with verified official speculative/open application routes.
+- `src/data/studio-profiles.json` contains enriched studio descriptions, headquarters, branches, ownership, type, selected games, indicative scale, team size, application geography and sources.
+- `StudioDirectory` renders the dark searchable/filterable table and expandable company profiles.
+- Studio marks are loaded from website favicons with initials as a fallback. Game artwork is loaded from Steam CDN for titles with verified Steam app IDs; other titles show a neutral placeholder.
+- `App.tsx` stores the small application tracker in browser `localStorage`. The records are not sent to any backend and are not encrypted.
+- There is no backend, login, remote sync, crawler or scheduled scanner.
 
-A future checker can revisit saved URLs and flag changes. A failed or blocked page must be marked for review, not assumed closed.
+HQ and application geography are separate fields. HQ is only a fallback reference when the route does not state a hiring location. Do not claim an HQ location is where the job is based.
+
+External profile facts should carry official or otherwise reliable source links. Employee counts and company size ranges need a date/reference period. Missing data remains visibly unknown.
