@@ -20,8 +20,8 @@ const statusLabels:Record<TrackerStatus,string>={
   archived:"Not moving forward"
 };
 
-export default function ApplicationTracker({applications,onChangeStatus,onRemove,onOpenDirectory}:{applications:TrackedApplication[];onChangeStatus:(id:string,status:TrackerStatus)=>void;onRemove:(id:string)=>void;onOpenDirectory:()=>void}){
-  const [activeTab,setActiveTab]=useState("applied");
+export default function ApplicationTracker({initialTab="saved",applications,onChangeStatus,onRemove,onOpenDirectory}:{initialTab?:string;applications:TrackedApplication[];onChangeStatus:(id:string,status:TrackerStatus)=>void;onRemove:(id:string)=>void;onOpenDirectory:()=>void}){
+  const [activeTab,setActiveTab]=useState(initialTab);
   const [query,setQuery]=useState("");
   const active=tabs.find(t=>t.id===activeTab)||tabs[0];
   const counts=useMemo(()=>Object.fromEntries(tabs.map(t=>[t.id,applications.filter(a=>t.statuses.includes(a.status)).length])),[applications]);
