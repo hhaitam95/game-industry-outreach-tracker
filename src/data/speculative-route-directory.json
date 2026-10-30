@@ -873,20 +873,20 @@
     "websiteUrl": "https://fundaygames.dk/",
     "applicationUrl": "https://joinus.fundaygames.dk/jobs/7277761-unsolicited-application",
     "evidenceUrl": "https://joinus.fundaygames.dk/jobs/7277761-unsolicited-application",
-    "notes": "Official listing invites unsolicited CVs when no role matches. Listed as hybrid in Aarhus, Denmark; broader applicant-country eligibility is not stated.",
-    "checkedAt": "2026-10-29",
+    "notes": "Official Teamtailor Unsolicited Application invites CVs and a brief introduction when no current position matches. The application is listed as hybrid in Aarhus; broader applicant-country eligibility is not stated.",
+    "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "unsolicited",
       "submissionMethods": [
-        "website_form"
+        "ats"
       ],
       "workModel": "hybrid",
       "eligibleLocations": [],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-27"
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
@@ -979,6 +979,30 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "studio_controlled_ats",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "GOALS",
+    "country": "Sweden",
+    "websiteUrl": "https://studio.playgoals.com/",
+    "applicationUrl": "https://tt.playgoals.com/connect",
+    "evidenceUrl": "https://studio.playgoals.com/open-positions",
+    "notes": "Official Open positions page links an 'Open Application All/Optional Remote - Stockholm / Hybrid / Remote' route to GOALS' Teamtailor talent-connection form. The form lets applicants specify departments and role interests and opt in to future opportunities. Exact applicant-country eligibility is not stated.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Stockholm / hybrid / optional remote · applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-28"
     }
   },
@@ -1128,6 +1152,30 @@
     }
   },
   {
+    "name": "Ingame Studios",
+    "country": "Czech Republic",
+    "websiteUrl": "https://www.ingamestudios.com/",
+    "applicationUrl": "https://www.ingamestudios.com/",
+    "evidenceUrl": "https://www.ingamestudios.com/",
+    "notes": "Official Jobs section explicitly invites open applications and asks candidates to email jobs@ingamestudios.com. The studio says some roles require on-site presence while others may be remote depending on team needs. HQ is Brno; applicant-country eligibility is not stated.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Brno office · remote only where team needs allow"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Katal Games",
     "country": "Spain",
     "websiteUrl": "https://katal.games/",
@@ -1195,6 +1243,30 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-27"
+    }
+  },
+  {
+    "name": "Kolibri Games",
+    "country": "Germany",
+    "websiteUrl": "https://www.kolibrigames.com/",
+    "applicationUrl": "https://jobs.lever.co/kolibrigames/d2ff05ad-e219-4dd9-985a-825d72bcf671/apply",
+    "evidenceUrl": "https://www.kolibrigames.com/career/position/d2ff05ad-e219-4dd9-985a-825d72bcf671/",
+    "notes": "Official Open/Speculative Application is a full-time Berlin role for candidates who do not see a suitable posting; applicants are asked to describe their proposed role and first 90 days in English. Hybrid working and relocation support are stated. Applicant-country eligibility is not stated.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "Full-time Berlin, Germany · hybrid; relocation support stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
@@ -1526,17 +1598,15 @@
     "websiteUrl": "https://paintbucket.de/en",
     "applicationUrl": "https://paintbucket.de/en/jobs",
     "evidenceUrl": "https://paintbucket.de/en/jobs",
-    "notes": "Official Jobs page lists an Unsolicited Application and says to apply even when no current job offer fits. Full-time; studio is based in Berlin.",
+    "notes": "Official Jobs page lists a full-time Unsolicited Application and explicitly welcomes candidates when no current job offer fits. Applicants are asked to send their application by email to jobs@paintbucket.de.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "unsolicited",
       "submissionMethods": [
-        "website_form"
+        "email"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [
-        "Berlin · full-time"
-      ],
+      "eligibleLocations": [],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
@@ -1692,12 +1762,12 @@
     "websiteUrl": "https://rawpowergames.com/",
     "applicationUrl": "https://careers.rawpowergames.com/jobs/5969751-unsolicited-application",
     "evidenceUrl": "https://careers.rawpowergames.com/jobs/5969751-unsolicited-application",
-    "notes": "Official ATS listing titled Unsolicited Application; remote work is limited to time zones roughly 1–2 hours from Copenhagen.",
-    "checkedAt": "2026-10-29",
+    "notes": "Official Teamtailor listing is titled Unsolicited Application and welcomes candidates even when no current opening matches. Remote work is supported only within approximately ±1–2 hours of Copenhagen; Copenhagen/hybrid work is also listed.",
+    "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "unsolicited",
       "submissionMethods": [
-        "website_form"
+        "ats"
       ],
       "workModel": "mixed",
       "eligibleLocations": [
@@ -1706,8 +1776,8 @@
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-27"
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
@@ -1938,6 +2008,35 @@
       "workModel": "not_stated",
       "eligibleLocations": [],
       "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Studios DRAMA",
+    "country": "France",
+    "websiteUrl": "https://studiosdrama.com/",
+    "applicationUrl": "https://studiosdrama.com/unsolicited-application/",
+    "evidenceUrl": "https://studiosdrama.com/unsolicited-application/",
+    "notes": "Official Unsolicited Application form accepts applicants across art, programming, design and other disciplines. It requires a motivation statement explaining interest in UNRECORD and asks about Unreal Engine expertise and employment options. Regular on-site presence in Rennes is expected, with role-dependent flexibility.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "on_site",
+      "eligibleLocations": [
+        "Rennes, France · regular on-site presence expected; role-dependent flexibility"
+      ],
+      "disciplineScope": [
+        "Art",
+        "Programming",
+        "Design",
+        "Other"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
@@ -2219,6 +2318,28 @@
       "eligibleLocations": [
         "Remote · North America and United Kingdom; work authorization required in US or UK"
       ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Vertigo Games",
+    "country": "Netherlands",
+    "websiteUrl": "https://www.vertigo-games.com/",
+    "applicationUrl": "https://www.vertigo-games.com/jobs/",
+    "evidenceUrl": "https://www.vertigo-games.com/jobs/",
+    "notes": "Official Jobs page explicitly welcomes open applications and asks applicants to send a motivation letter, resume and/or portfolio to jobs@vertigo-games.com. HQ is Rotterdam; remote or applicant-country eligibility is not stated.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
