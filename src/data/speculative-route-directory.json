@@ -2245,6 +2245,30 @@
     }
   },
   {
+    "name": "Stranded Beast",
+    "country": "Austria",
+    "websiteUrl": "https://www.strandedbeast.com/",
+    "applicationUrl": "https://www.strandedbeast.com/job-initiative-application",
+    "evidenceUrl": "https://www.strandedbeast.com/job-initiative-application",
+    "notes": "Official Initiative Application page invites game developers, artists and people seeking internships who do not see a matching role, and asks them to email a CV, availability and portfolio links. Applicants located near the studio are encouraged; EU work authorization or an Austrian work visa is required for full-time roles, and fully remote full-time work is limited to Austria.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Near Vienna preferred; full-time remote work limited to Austria"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Studios DRAMA",
     "country": "France",
     "websiteUrl": "https://studiosdrama.com/",
