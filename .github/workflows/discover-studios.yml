@@ -136,24 +136,48 @@ jobs:
         env:
           VITE_BASE_PATH: /game-industry-outreach-tracker/
 
-      - name: Commit verified public dataset updates
+      - name: Merge discovery output with the latest published dataset
         id: commit
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # These source datasets live under a directory name matched by the
-          # broad local-data ignore rule; force-add only the two public, reviewed files.
-          git add -f -- src/data/speculative-route-directory.json src/data/studio-profiles.json
-          if git diff --cached --quiet; then
-            echo "data_changed=false" >> "$GITHUB_OUTPUT"
-            echo "No public directory changes to publish."
-          else
+
+          # Manual PRs may update main while a long discovery batch is running.
+          # Rebase the data merge onto the latest main snapshot before publishing.
+          max_attempts=3
+          for attempt in $(seq 1 "$max_attempts"); do
+            git fetch origin main
+            git reset --mixed origin/main
+            python3 scripts/merge_discovery_datasets.py --base-ref origin/main
+
+            # These public datasets match the broad local-data ignore rule.
+            git add -f -- src/data/speculative-route-directory.json src/data/studio-profiles.json
+            if git diff --cached --quiet; then
+              echo "data_changed=false" >> "$GITHUB_OUTPUT"
+              echo "No public directory changes to publish."
+              break
+            fi
+
             git commit -m "data: update verified speculative studio routes"
-            git push origin HEAD:main
-            echo "data_changed=true" >> "$GITHUB_OUTPUT"
-          fi
+            if git push origin HEAD:main; then
+              echo "data_changed=true" >> "$GITHUB_OUTPUT"
+              break
+            fi
+
+            if [ "$attempt" -eq "$max_attempts" ]; then
+              echo "Could not publish discovery output after $max_attempts attempts."
+              exit 1
+            fi
+            echo "main advanced during publication; retrying the merge on the new main snapshot."
+          done
+
+      - name: Rebuild static directory after merging latest main
+        if: steps.commit.outputs.data_changed == 'true'
+        run: npm run build
+        env:
+          VITE_BASE_PATH: /game-industry-outreach-tracker/
 
       - name: Upload Pages artifact when the public dataset changed
         if: steps.commit.outputs.data_changed == 'true'
