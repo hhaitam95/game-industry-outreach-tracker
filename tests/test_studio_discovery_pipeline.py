@@ -217,6 +217,27 @@ class CandidateVerificationTests(unittest.TestCase):
         )
         self.assertEqual(result["status"], "no_route")
 
+    def test_route_text_without_submission_method_is_held_for_review(self):
+        pages = {
+            "https://example-studio.example/": discovery.FetchResult(
+                True, "https://example-studio.example/", 200,
+                '<a href="/careers">Careers</a>',
+            ),
+            "https://example-studio.example/careers": discovery.FetchResult(
+                True, "https://example-studio.example/careers", 200,
+                "<p>We welcome speculative applications from game developers.</p>",
+            ),
+        }
+        result = discovery.verify_candidate_pages(
+            self.candidate(),
+            lambda url, allowed: pages.get(url, discovery.FetchResult(False, url, 404, "", "not-found")),
+        )
+        self.assertEqual(result["status"], "needs_review")
+        self.assertEqual(
+            result["reason"],
+            "explicit_route_text_without_a_detectable_submission_method",
+        )
+
     def test_relevant_vice_content_is_excluded(self):
         pages = {
             "https://example-studio.example/": discovery.FetchResult(
