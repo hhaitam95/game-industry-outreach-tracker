@@ -518,12 +518,12 @@ def verify_candidate_pages(
     matches: list[tuple[Page, re.Match[str]]] = []
     negatives: list[tuple[Page, re.Match[str]]] = []
     for page in pages:
-        match = positive_route_match(page.text)
-        if match:
-            matches.append((page, match))
         negative = negative_route_match(page.text)
+        match = positive_route_match(page.text)
         if negative:
             negatives.append((page, negative))
+        elif match:
+            matches.append((page, match))
     if negatives:
         if matches:
             return {"status": "needs_review", "reason": "conflicting_positive_and_negative_route_evidence"}
