@@ -163,7 +163,8 @@
       "https://beenox.com/",
       "https://investor.activision.com/news-releases/news-release-details/activision-establishes-development-foothold-quebec-acquisition"
     ],
-    "applicationLocation": "Location not specified · HQ shown"
+    "applicationLocation": "Location not specified · HQ shown",
+    "reachHighlights": "Long-running Activision studio with franchise work across Crash Bandicoot, Tony Hawk's Pro Skater and Call of Duty."
   },
   "CI Games": {
     "description": "Publicly traded Polish video-game developer and publisher, operating multiple development studios and publishing labels.",
@@ -209,7 +210,8 @@
       "https://cigames.com/en/about-us/",
       "https://cigames.com/en/investor-relations/"
     ],
-    "applicationLocation": "Worldwide · fully remote"
+    "applicationLocation": "Worldwide · fully remote",
+    "reachHighlights": "150+ professionals reported across its company group."
   },
   "Cyanide Studio": {
     "description": "Established developer working across sports, strategy, RPG and narrative games, with teams in France and Canada.",
@@ -498,7 +500,8 @@
       "https://www.lostboysinteractive.com/",
       "https://www.lostboysinteractive.com/news"
     ],
-    "applicationLocation": "Remote-first · US and Canada"
+    "applicationLocation": "Remote-first · US and Canada",
+    "reachHighlights": "AAA co-development credits include Diablo IV and Tiny Tina's Wonderlands."
   },
   "Obsidian Entertainment": {
     "description": "California RPG developer known for narrative-heavy role-playing games and large-scale worlds.",
@@ -545,7 +548,8 @@
     "profileSources": [
       "https://www.obsidian.net/",
       "https://www.latimes.com/business/story/2026-07-09/microsofts-xbox-to-shift-obsidian-studio-to-new-fallout-video-game"
-    ]
+    ],
+    "reachHighlights": "Major RPG portfolio includes Fallout: New Vegas, Pillars of Eternity, The Outer Worlds and Avowed."
   },
   "Redly Games": {
     "description": "Small remote-first game studio founded by former Supercell game lead Thea Chow, focused on thoughtful, design-led experiences.",
@@ -689,7 +693,8 @@
       "https://www.supermassivegames.com/about",
       "https://www.reveliolabs.com/companies/supermassive-games/employees"
     ],
-    "applicationLocation": "Guildford · see role-specific conditions"
+    "applicationLocation": "Guildford · see role-specific conditions",
+    "reachHighlights": "BAFTA-winning studio; known for Until Dawn, The Quarry, The Dark Pictures Anthology and Little Nightmares III."
   },
   "Unknown Worlds": {
     "description": "Independent-origin studio now within Krafton, known for immersive underwater exploration and survival games.",
@@ -874,7 +879,8 @@
     "profileSources": [
       "https://www.aarise.games/about/",
       "https://www.aarise.games/press-kit/"
-    ]
+    ],
+    "reachHighlights": "Founded by the original team behind Empire of the Ants; self-describes its positioning as premium AA."
   },
   "Artefacts Studio": {
     "description": "Independent French developer and co-development partner creating and marketing PC and console games, with long-running art, technical and design subcontracting capabilities.",
@@ -919,7 +925,8 @@
     "applicationLocation": "Location not specified · use HQ as reference",
     "profileSources": [
       "https://www.artefacts-studio.fr/en/about-us"
-    ]
+    ],
+    "reachHighlights": "Founded 2003 · studio reports 80 experienced collaborators · credits include Agatha Christie, Naheulbeuk and Disciples."
   },
   "Chimera Entertainment": {
     "description": "Independent Munich game developer with a broad portfolio spanning strategy, RPG and mobile titles; offers hybrid and remote work across Europe.",
@@ -960,7 +967,8 @@
     "applicationLocation": "Hybrid / remote · Europe",
     "profileSources": [
       "https://chimera-entertainment.com/"
-    ]
+    ],
+    "reachHighlights": "25+ released games · around 80 team members across Europe (studio-reported)."
   },
   "Bossa Studios": {
     "description": "London-based independent game developer and publisher creating original games for PC, console, mobile and VR, alongside co-development and multiplayer technology.",
@@ -1006,7 +1014,8 @@
     "profileSources": [
       "https://www.bossagames.com/about.html",
       "https://www.bossagames.com/careers.html"
-    ]
+    ],
+    "reachHighlights": "Surgeon Simulator: 5M+ copies sold · I Am Bread: 3M+ copies sold · BAFTA-winning studio."
   },
   "Outplay Entertainment": {
     "description": "Independent Dundee studio developing original and partner games across mobile, PC, Roblox, HTML5 and console, with full-cycle and co-development services.",
@@ -1053,7 +1062,8 @@
     "profileSources": [
       "https://outplay.com/about-us/",
       "https://outplay.com/"
-    ]
+    ],
+    "reachHighlights": "250M+ global downloads · BAFTA-nominated · games and production across five platform categories (studio-reported)."
   },
   "Third Kind Games": {
     "description": "Full-service AAA co-development and full-development studio delivering art, design, engineering and production for major publishers and franchises.",
@@ -1107,7 +1117,8 @@
     "applicationLocation": "Location not specified · use HQ as reference",
     "profileSources": [
       "https://thirdkindgames.com/about/"
-    ]
+    ],
+    "reachHighlights": "AAA co-development credits include Fable, Forza Horizon, Sea of Thieves and Hearthstone; part of Virtuos."
   },
   "Stormind Games": {
     "description": "Independent Italian developer and co-development partner known for atmospheric horror, action-adventure and narrative-driven games.",
@@ -1158,7 +1169,8 @@
     "applicationLocation": "Location not specified · use HQ as reference",
     "profileSources": [
       "https://stormindgames.com/company/"
-    ]
+    ],
+    "reachHighlights": "100+ internal resources plus external collaborators (studio-reported); credits include A Quiet Place and Mafia: The Old Country."
   },
   "Futureplay Games": {
     "description": "Helsinki casual-game studio within Plarium, creating mobile games for global audiences.",
@@ -1198,7 +1210,8 @@
     "applicationLocation": "Remote · global stated",
     "profileSources": [
       "https://company.plarium.com/en/studio/finland-helsinki/"
-    ]
+    ],
+    "reachHighlights": "60+ professionals · six titles in the studio portfolio (Plarium studio page)."
   },
   "Sencorp Games": {
     "description": "Independent Izmir game and technology studio building original mobile and PC games.",
@@ -1283,7 +1296,8 @@
     "applicationLocation": "Berlin · full-time",
     "profileSources": [
       "https://paintbucket.de/en"
-    ]
+    ],
+    "reachHighlights": "Known for historically themed narrative games Through the Darkest of Times and The Darkest Files."
   },
   "Ember Crows": {
     "description": "Independent London-based game studio developing ambitious narrative role-playing games, including a Slavic cyberpunk RPG.",
@@ -1374,7 +1388,8 @@
     "profileSources": [
       "https://frimastudio.com/en/careers/",
       "https://frimastudio.com/"
-    ]
+    ],
+    "reachHighlights": "Multi-platform co-development and full-production partner with work across Triangle Strategy, Fortnite and licensed/partner projects."
   },
   "Reply Game Studios": {
     "description": "Milan-based game developer within the Reply technology group, focused on original PC and console action experiences.",
