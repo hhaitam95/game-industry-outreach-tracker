@@ -628,7 +628,7 @@ def infer_work_model(text: str) -> str:
 
 
 def normalize_wikidata_entity_uri(uri: str) -> tuple[str, str] | None:
-    match = re.fullmatch(r"https?://www\\.wikidata\\.org/entity/(Q[1-9]\\d*)", uri.strip())
+    match = re.fullmatch(r"https?://www\.wikidata\.org/entity/(Q[1-9]\d*)", uri.strip())
     if not match:
         return None
     qid = match.group(1)
