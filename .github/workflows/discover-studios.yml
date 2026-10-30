@@ -68,6 +68,30 @@ jobs:
             MODE="${{ inputs.mode }}"
           elif [ ! -f "$STATE_FILE" ]; then
             MODE="bulk"
+          else
+            # Keep using the larger batch while the initial GameDevMap catalogue
+            # is still downloading or any candidates remain due for verification.
+            MODE="$(python3 - "$STATE_FILE" <<'PY'
+          import datetime as dt
+          import json
+          import sys
+
+          with open(sys.argv[1], encoding="utf-8") as handle:
+              state = json.load(handle)
+          today = dt.date.today().isoformat()
+          candidates = state.get("candidates", {}).values()
+          pending = any(
+              item.get("status") == "queued"
+              or (
+                  item.get("status") == "retry"
+                  and (not item.get("next_check_at") or item["next_check_at"] <= today)
+              )
+              for item in candidates
+          )
+          map_complete = state.get("feed_done", {}).get("gamedevmap", False)
+          print("hourly" if map_complete and not pending else "bulk")
+          PY
+          )"
           fi
 
           if [ "$MODE" = "bulk" ]; then
