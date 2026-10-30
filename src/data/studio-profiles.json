@@ -2959,8 +2959,7 @@
       "Kyiv, Ukraine"
     ],
     "companyType": [
-      "Developer",
-      "First-party studio"
+      "Developer"
     ],
     "ownership": "Privately held · ownership details not confirmed in this record",
     "parentCompany": null,
@@ -3161,7 +3160,11 @@
       "countryCode": "GB",
       "label": "HQ"
     },
-    "otherLocations": [],
+    "otherLocations": [
+      "London, United Kingdom",
+      "Edinburgh, Scotland, United Kingdom",
+      "Liverpool, United Kingdom"
+    ],
     "companyType": [
       "Developer",
       "Co-development",
@@ -3360,10 +3363,10 @@
   "Ambertail Games": {
     "description": "Independent small game studio developing Amber Isle and other colourful, character-led experiences.",
     "headquarters": {
-      "city": null,
+      "city": "Belfast",
       "country": "United Kingdom",
       "countryCode": "GB",
-      "label": "HQ · city not publicly stated"
+      "label": "HQ"
     },
     "otherLocations": [],
     "companyType": [
