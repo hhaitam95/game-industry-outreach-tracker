@@ -1276,8 +1276,8 @@
     "ownership": "Independent",
     "parentCompany": null,
     "industryScale": "Indie / AA",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
+    "teamSize": "Around 20 people (studio-reported)",
+    "teamSizeAsOf": "2026-10",
     "focus": [
       "PC",
       "Narrative",
@@ -1296,7 +1296,8 @@
     ],
     "applicationLocation": "Berlin · full-time",
     "profileSources": [
-      "https://paintbucket.de/en"
+      "https://paintbucket.de/en",
+      "https://paintbucket.de/en/jobs"
     ],
     "reachHighlights": "Known for historically themed narrative games Through the Darkest of Times and The Darkest Files."
   },
@@ -3922,5 +3923,207 @@
     ],
     "applicationLocation": "Not stated",
     "reachHighlights": "Builds the Janus Engine in-house and develops two original game universes, Puppies vs. Kittens and RiftBleed (studio-reported)."
+  },
+  "Vertigo Games": {
+    "description": "Multi-platform game publisher and developer based in Rotterdam, known for virtual-reality titles and third-party publishing.",
+    "headquarters": {
+      "city": "Rotterdam",
+      "country": "Netherlands",
+      "countryCode": "NL",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher"
+    ],
+    "ownership": "Part of PLAION Group",
+    "parentCompany": "PLAION Group",
+    "industryScale": "Not disclosed",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "VR",
+      "PC",
+      "Console",
+      "Publishing"
+    ],
+    "popularGames": [
+      {
+        "title": "The 7th Guest Remake",
+        "appId": null
+      },
+      {
+        "title": "Thief VR: Legacy of Shadow",
+        "appId": null
+      },
+      {
+        "title": "Metro Awakening",
+        "appId": null
+      },
+      {
+        "title": "Arizona Sunshine VR 2",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.vertigo-games.com/about/",
+      "https://www.vertigo-games.com/jobs/"
+    ],
+    "applicationLocation": "Rotterdam · hiring/remote eligibility not stated",
+    "reachHighlights": "Multi-platform developer and publisher; part of PLAION Group."
+  },
+  "GOALS": {
+    "description": "Stockholm-based game studio developing a competitive football game and inviting applicants to connect for future opportunities across its disciplines.",
+    "headquarters": {
+      "city": "Stockholm",
+      "country": "Sweden",
+      "countryCode": "SE",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Not disclosed",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Sports",
+      "Football",
+      "Competitive multiplayer"
+    ],
+    "popularGames": [
+      {
+        "title": "GOALS",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://studio.playgoals.com/",
+      "https://studio.playgoals.com/open-positions",
+      "https://playgoals.com/en/eula"
+    ],
+    "applicationLocation": "Stockholm / hybrid / optional remote · applicant-country eligibility not stated",
+    "reachHighlights": "Official Open Application route connects candidates to all departments and future opportunities."
+  },
+  "Kolibri Games": {
+    "description": "Berlin-based mobile game studio known for idle and simulation games, including Idle Miner Tycoon; acquired by Ubisoft in 2020.",
+    "headquarters": {
+      "city": "Berlin",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Mobile"
+    ],
+    "ownership": "Part of Ubisoft",
+    "parentCompany": "Ubisoft",
+    "industryScale": "AA · Mobile",
+    "teamSize": "More than 140 Kolibris (studio-reported)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "Mobile",
+      "Idle",
+      "Simulation",
+      "Casual"
+    ],
+    "popularGames": [
+      {
+        "title": "Idle Miner Tycoon",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.kolibrigames.com/story/",
+      "https://www.kolibrigames.com/career/position/d2ff05ad-e219-4dd9-985a-825d72bcf671/",
+      "https://jobs.lever.co/kolibrigames/d2ff05ad-e219-4dd9-985a-825d72bcf671/apply"
+    ],
+    "applicationLocation": "Berlin · full-time, hybrid; relocation support stated",
+    "reachHighlights": "Founded 2016; more than 140 Kolibris; part of Ubisoft since 2020 (studio-reported)."
+  },
+  "Ingame Studios": {
+    "description": "Brno-based game developer with a 40+ person team and two decades of experience across Czech and international game productions; builds on Unreal Engine.",
+    "headquarters": {
+      "city": "Brno",
+      "country": "Czech Republic",
+      "countryCode": "CZ",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "AA",
+    "teamSize": "40+ team members (studio-reported)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Console",
+      "Unreal Engine",
+      "Action",
+      "Shooter"
+    ],
+    "popularGames": [
+      {
+        "title": "Crime Boss: Rockay City",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.ingamestudios.com/"
+    ],
+    "applicationLocation": "Brno · some roles may be remote depending on team needs",
+    "reachHighlights": "Team members have worked on titles including Vietcong, Hidden & Dangerous 2, Mafia, Arma, Kingdom Come: Deliverance and Vigor (studio-reported)."
+  },
+  "Studios DRAMA": {
+    "description": "Independent Rennes game studio founded in 2020, developing UNRECORD, a narrative open-world tactical first-person shooter built with Unreal Engine 5.",
+    "headquarters": {
+      "city": "Rennes",
+      "country": "France",
+      "countryCode": "FR",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "AA ambition (studio-stated)",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Unreal Engine 5",
+      "Tactical FPS",
+      "Open world",
+      "Narrative"
+    ],
+    "popularGames": [
+      {
+        "title": "UNRECORD",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://studiosdrama.com/",
+      "https://studiosdrama.com/career/",
+      "https://studiosdrama.com/unsolicited-application/"
+    ],
+    "applicationLocation": "Rennes · regular on-site presence expected; role-dependent flexibility",
+    "reachHighlights": "Focused independent studio building UNRECORD with gameplay-first development and small specialized teams."
   }
 }
