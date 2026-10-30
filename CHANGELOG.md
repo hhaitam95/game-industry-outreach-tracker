@@ -4,7 +4,8 @@ Meaningful changes are recorded here. Current branch/review state and verificati
 
 ## Unreleased
 
-- M4 research branch expands the official speculative/open-application directory from 12 to 40 route records with 28 additional entries across North America, Europe, Australia and the Middle East; repairs LIQUIDBULLET’s saved route URL to its live official careers page. Eligibility/work-model and unusual compensation/adult-content caveats are included in summaries. CI and review remain pending; no crawler, schedule, submission automation, or publication was added.
+- PR #20 merged the first M4 research batch, expanding the directory from 12 to 40 curated official routes and repairing LIQUIDBULLET’s saved careers URL. CI, discovery fixtures and browser-vault acceptance passed on the reviewed head.
+- A second bounded research batch adds 10 directly checked speculative/open-application routes, taking the proposed directory to 50. Eligibility, location, work-model and compensation caveats are included; this is a data-only update with no new crawler, workflow, dependency, schedule or publication.
 
 - ADR-058 source remediation points Naughty Dog discovery at its official /openings page, strengthens synthetic CD PROJEKT RED/Naughty Dog fixtures, and adds offline source-coverage regression tests. CD PROJEKT RED remains under review until a separately authorized live check verifies listing extraction; Riot remains incomplete and Santa Monica remains manual-review.
 

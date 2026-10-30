@@ -19,7 +19,7 @@ A qualifying route is an official studio page or the studio's own applicant-trac
 
 The visible record should answer four questions quickly: **which studio, where to apply, why the route qualifies, and when the source was last checked**. Known location or work-eligibility restrictions should be displayed rather than guessed. A route that is blocked or no longer shows evidence needs review; it should not be silently treated as available or deleted.
 
-The initial curated list contains 12 routes checked on 29 October 2026. This is a starting batch, not a guarantee of exhaustive worldwide coverage. Every claim of verification is bounded by the evidence and check date recorded for that route.
+The main directory contains 40 curated routes, with a second 10-route research batch proposed on the current branch. This is not a guarantee of exhaustive worldwide coverage. Every verification claim is bounded by the official evidence and check date recorded for that route.
 
 ## 3. Application tracking
 

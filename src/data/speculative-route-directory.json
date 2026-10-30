@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-29T22:00:00.000Z",
+  "generatedAt": "2026-10-30T08:15:00.000Z",
   "studios": [
     {
       "id": "supermassive-games",
@@ -241,6 +241,66 @@
       "name": "HypeHype",
       "officialWebsiteUrl": "https://hypehype.com/",
       "homeCountryCode": "FI"
+    },
+    {
+      "id": "dionic-software",
+      "name": "Dionic Software",
+      "officialWebsiteUrl": "https://dionicsoftware.com/",
+      "homeCountryCode": "DE"
+    },
+    {
+      "id": "kuuasema",
+      "name": "Kuuasema",
+      "officialWebsiteUrl": "https://www.kuuasema.com/",
+      "homeCountryCode": "FI"
+    },
+    {
+      "id": "plummy-games",
+      "name": "Plummy Games",
+      "officialWebsiteUrl": "https://plummygames.teamtailor.com/",
+      "homeCountryCode": "EE"
+    },
+    {
+      "id": "craftigames",
+      "name": "CraftiGames",
+      "officialWebsiteUrl": "https://www.craftigames.net/",
+      "homeCountryCode": null
+    },
+    {
+      "id": "redly-games",
+      "name": "Redly Games",
+      "officialWebsiteUrl": "https://jobs.ashbyhq.com/redlygames",
+      "homeCountryCode": null
+    },
+    {
+      "id": "aethra-studios",
+      "name": "Aethra Studios",
+      "officialWebsiteUrl": "https://www.aethrastudios.com/",
+      "homeCountryCode": null
+    },
+    {
+      "id": "uplift-games",
+      "name": "Uplift Games",
+      "officialWebsiteUrl": "https://www.uplift.games/",
+      "homeCountryCode": "US"
+    },
+    {
+      "id": "vestgames",
+      "name": "VestGames",
+      "officialWebsiteUrl": "https://vestgames.com/",
+      "homeCountryCode": "DE"
+    },
+    {
+      "id": "stormind-games",
+      "name": "Stormind Games",
+      "officialWebsiteUrl": "https://stormindgames.com/",
+      "homeCountryCode": "IT"
+    },
+    {
+      "id": "rustling-leaves-games",
+      "name": "Rustling Leaves Games",
+      "officialWebsiteUrl": "https://www.rustlingleavesgames.com/",
+      "homeCountryCode": null
     }
   ],
   "routes": [
@@ -1098,6 +1158,219 @@
       "firstSeenAt": "2026-10-29T22:00:00.000Z",
       "lastCheckedAt": "2026-10-29T22:00:00.000Z",
       "lastVerifiedAt": "2026-10-29T22:00:00.000Z"
+    },
+    {
+      "id": "dionic-software-speculative-application",
+      "studioId": "dionic-software",
+      "routeUrl": "https://dionicsoftware.com/jobs.html",
+      "evidenceUrl": "https://dionicsoftware.com/jobs.html",
+      "routeType": "dedicated-page",
+      "status": "verified",
+      "countryScope": "unknown",
+      "countryCodes": [],
+      "language": "en",
+      "disciplineTags": [],
+      "workModel": "remote",
+      "matchedPhraseCategory": "unsolicited-application",
+      "evidenceSummary": "Official jobs page invites speculative approaches when no role fits. Employment is Germany-only; freelancers can usually work from European time zones.",
+      "contentHash": "21915367c4de208cbea6ccc2659eba6787f1990e0e0d6a07c4ec83cb2f613592",
+      "firstSeenAt": "2026-10-30T08:15:00.000Z",
+      "lastCheckedAt": "2026-10-30T08:15:00.000Z",
+      "lastVerifiedAt": "2026-10-30T08:15:00.000Z"
+    },
+    {
+      "id": "kuuasema-open-application",
+      "studioId": "kuuasema",
+      "routeUrl": "https://www.kuuasema.com/jobs/open-application/",
+      "evidenceUrl": "https://www.kuuasema.com/jobs/open-application/",
+      "routeType": "email-invite",
+      "status": "verified",
+      "countryScope": "unknown",
+      "countryCodes": [],
+      "language": "en",
+      "disciplineTags": [],
+      "workModel": "hybrid",
+      "matchedPhraseCategory": "general-application-invitation",
+      "evidenceSummary": "Official Open Application for Helsinki hybrid roles. Accepts EU/EEA/Swiss citizens or people already authorised to work in Finland; no visa sponsorship.",
+      "contentHash": "99680c44ea1cafc8cb72788eae1bf489ca97e7634f29f1474cb2e31ce5501447",
+      "firstSeenAt": "2026-10-30T08:15:00.000Z",
+      "lastCheckedAt": "2026-10-30T08:15:00.000Z",
+      "lastVerifiedAt": "2026-10-30T08:15:00.000Z"
+    },
+    {
+      "id": "plummy-games-open-application",
+      "studioId": "plummy-games",
+      "routeUrl": "https://plummygames.teamtailor.com/jobs/6670751-open-application/applications/new",
+      "evidenceUrl": "https://plummygames.teamtailor.com/jobs/6670751-open-application/applications/new",
+      "routeType": "ats-posting",
+      "status": "verified",
+      "countryScope": "worldwide",
+      "countryCodes": [],
+      "language": "en",
+      "disciplineTags": [],
+      "workModel": "remote",
+      "matchedPhraseCategory": "general-application-invitation",
+      "evidenceSummary": "Official Teamtailor Open Application; fully remote from Tallinn. Applicants outside Moldova or Estonia must be willing to use a B2B contract.",
+      "contentHash": "22874dd482c4c01b5a88b92afb8d01889fd1472fdfc36b5fd427116b4d4f7a0d",
+      "firstSeenAt": "2026-10-30T08:15:00.000Z",
+      "lastCheckedAt": "2026-10-30T08:15:00.000Z",
+      "lastVerifiedAt": "2026-10-30T08:15:00.000Z"
+    },
+    {
+      "id": "craftigames-open-application",
+      "studioId": "craftigames",
+      "routeUrl": "https://www.craftigames.net/careers",
+      "evidenceUrl": "https://www.craftigames.net/careers",
+      "routeType": "dedicated-page",
+      "status": "verified",
+      "countryScope": "unknown",
+      "countryCodes": [],
+      "language": "en",
+      "disciplineTags": [
+        "engineering",
+        "design",
+        "quality-assurance"
+      ],
+      "workModel": "remote",
+      "matchedPhraseCategory": "general-application-invitation",
+      "evidenceSummary": "Official careers page invites open applications beyond listed roles. Small, fully remote Minecraft studio; typical roles specify a GMT ±6-hour window.",
+      "contentHash": "17368b8d81721f23f624c1b6614dd4a60c432a2cdabde864ce9be972c1bf642e",
+      "firstSeenAt": "2026-10-30T08:15:00.000Z",
+      "lastCheckedAt": "2026-10-30T08:15:00.000Z",
+      "lastVerifiedAt": "2026-10-30T08:15:00.000Z"
+    },
+    {
+      "id": "redly-games-general-interest-open-application",
+      "studioId": "redly-games",
+      "routeUrl": "https://jobs.ashbyhq.com/redlygames/3c2a1d1e-5e80-4b4e-895d-f43d0efe4d3b",
+      "evidenceUrl": "https://jobs.ashbyhq.com/redlygames/3c2a1d1e-5e80-4b4e-895d-f43d0efe4d3b",
+      "routeType": "ats-posting",
+      "status": "verified",
+      "countryScope": "worldwide",
+      "countryCodes": [],
+      "language": "en",
+      "disciplineTags": [
+        "art",
+        "engineering",
+        "design",
+        "production"
+      ],
+      "workModel": "remote",
+      "matchedPhraseCategory": "general-application-invitation",
+      "evidenceSummary": "Official Ashby General Interest application welcomes candidates without a matching role. Global remote; EU and Canada preferred, others considered by role.",
+      "contentHash": "4b6d761358585eb081d9f8e2133b719e8b6dee23777ac97d07521582d203b063",
+      "firstSeenAt": "2026-10-30T08:15:00.000Z",
+      "lastCheckedAt": "2026-10-30T08:15:00.000Z",
+      "lastVerifiedAt": "2026-10-30T08:15:00.000Z"
+    },
+    {
+      "id": "aethra-studios-open-application",
+      "studioId": "aethra-studios",
+      "routeUrl": "https://www.aethrastudios.com/careers/",
+      "evidenceUrl": "https://www.aethrastudios.com/careers/",
+      "routeType": "email-invite",
+      "status": "verified",
+      "countryScope": "unknown",
+      "countryCodes": [],
+      "language": "en",
+      "disciplineTags": [],
+      "workModel": "remote",
+      "matchedPhraseCategory": "general-application-invitation",
+      "evidenceSummary": "Official careers page invites open applications with a portfolio or work samples. Remote across Europe with CET overlap; specific roles are also listed.",
+      "contentHash": "56d85fc4657ec8d51e052420d2ed3576e758082769d718c544bcead42b7fb63a",
+      "firstSeenAt": "2026-10-30T08:15:00.000Z",
+      "lastCheckedAt": "2026-10-30T08:15:00.000Z",
+      "lastVerifiedAt": "2026-10-30T08:15:00.000Z"
+    },
+    {
+      "id": "uplift-games-general-application",
+      "studioId": "uplift-games",
+      "routeUrl": "https://www.uplift.games/careers/general-application",
+      "evidenceUrl": "https://www.uplift.games/careers/general-application",
+      "routeType": "ats-posting",
+      "status": "verified",
+      "countryScope": "country-limited",
+      "countryCodes": [
+        "US",
+        "GB"
+      ],
+      "language": "en",
+      "disciplineTags": [],
+      "workModel": "remote",
+      "matchedPhraseCategory": "general-application-invitation",
+      "evidenceSummary": "Official General Application for future opportunities. Remote-first, but applicants must live in and have permission to work in the US or UK.",
+      "contentHash": "3f746bef6245ffc7d8a161c7a01ed0f91f85ee38519b424a765e5e400d2ad514",
+      "firstSeenAt": "2026-10-30T08:15:00.000Z",
+      "lastCheckedAt": "2026-10-30T08:15:00.000Z",
+      "lastVerifiedAt": "2026-10-30T08:15:00.000Z"
+    },
+    {
+      "id": "vestgames-unsolicited-application",
+      "studioId": "vestgames",
+      "routeUrl": "https://vestgames.com/jobs/unsolicited-application/",
+      "evidenceUrl": "https://vestgames.com/jobs/unsolicited-application/",
+      "routeType": "dedicated-page",
+      "status": "verified",
+      "countryScope": "unknown",
+      "countryCodes": [],
+      "language": "en",
+      "disciplineTags": [
+        "engineering"
+      ],
+      "workModel": "remote",
+      "matchedPhraseCategory": "unsolicited-application",
+      "evidenceSummary": "Official Unsolicited Application accepts candidates when no role is open. On-site, hybrid or remote; English required, German for full-time roles.",
+      "contentHash": "a45a1386cd8a555b1b0fcc05cf47ccac6e778c8d3f9cca221ecf9783974a3d22",
+      "firstSeenAt": "2026-10-30T08:15:00.000Z",
+      "lastCheckedAt": "2026-10-30T08:15:00.000Z",
+      "lastVerifiedAt": "2026-10-30T08:15:00.000Z"
+    },
+    {
+      "id": "stormind-games-spontaneous-application",
+      "studioId": "stormind-games",
+      "routeUrl": "https://stormindgames.com/careers/",
+      "evidenceUrl": "https://stormindgames.com/careers/",
+      "routeType": "dedicated-page",
+      "status": "verified",
+      "countryScope": "unknown",
+      "countryCodes": [],
+      "language": "en",
+      "disciplineTags": [],
+      "workModel": "not-stated",
+      "matchedPhraseCategory": "unsolicited-application",
+      "evidenceSummary": "Official careers page offers a spontaneous-application form when no listed role fits; candidates can attach a CV and portfolio. Work model is not stated.",
+      "contentHash": "c14e3cacf1a44e8c0925140f3ecbd3a7df224d472799f1465bd862607e6735f9",
+      "firstSeenAt": "2026-10-30T08:15:00.000Z",
+      "lastCheckedAt": "2026-10-30T08:15:00.000Z",
+      "lastVerifiedAt": "2026-10-30T08:15:00.000Z"
+    },
+    {
+      "id": "rustling-leaves-games-general-application",
+      "studioId": "rustling-leaves-games",
+      "routeUrl": "https://www.rustlingleavesgames.com/join-us/general-application/",
+      "evidenceUrl": "https://www.rustlingleavesgames.com/join-us/general-application/",
+      "routeType": "dedicated-page",
+      "status": "verified",
+      "countryScope": "unknown",
+      "countryCodes": [],
+      "language": "en",
+      "disciplineTags": [
+        "design",
+        "narrative",
+        "art",
+        "animation",
+        "engineering",
+        "audio",
+        "production",
+        "quality-assurance"
+      ],
+      "workModel": "not-stated",
+      "matchedPhraseCategory": "general-application-invitation",
+      "evidenceSummary": "Official General Application invites future-role applications across disciplines. Important caveat: the studio states its work is rev-share-based.",
+      "contentHash": "fe171744c299dd4c800d61c1ce290c351c1f0483b38ed25ce8692f75faa7ceef",
+      "firstSeenAt": "2026-10-30T08:15:00.000Z",
+      "lastCheckedAt": "2026-10-30T08:15:00.000Z",
+      "lastVerifiedAt": "2026-10-30T08:15:00.000Z"
     }
   ]
 }

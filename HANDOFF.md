@@ -10,7 +10,7 @@ The product is now a worldwide directory of official speculative-application rou
 
 The current roadmap is M0–M8 in [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md), with the product definition in [ADR-059](docs/decisions/ADR-059-speculative-application-directory.md). M1 sets `FEATURES.roleExplorer = false`, hides standard-role UI by default, and reframes the interface and project docs. Existing studio, role-explorer, resume, outreach and tracker code remains as compatibility/supporting code while the route schema and verified seed research are built in M2–M4.
 
-Current milestone, branch/PR state, exact checks and next action are in [STATUS.md](STATUS.md). The historical implementation notes below describe retained code from the previous direction; they do not override the M0–M8 roadmap.
+The main directory contains 40 routes; the current second research batch adds 10 more on its feature branch. Current milestone, branch/PR state, exact checks and next action are in [STATUS.md](STATUS.md). The historical implementation notes below describe retained code from the previous direction; they do not override the current product scope.
 
 ## Retained legacy implementation notes — Phase 7
 

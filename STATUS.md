@@ -1,14 +1,11 @@
 # Project Status
 
-**Last updated:** 2026-10-29  
-**Current product scope:** (1) discover official worldwide speculative-application routes; (2) track manually submitted applications. Resume/profile editing, outreach drafting, advertised-role matching, and generic studio research are deferred.  
-**Current branch / review:** M3 PR #19 was squash-merged as [`e207b38`](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/e207b386a250adb0e47127b95fd087703e726365). M4's worldwide route research is proposed on `feat/m4-worldwide-route-research-20261029`; validation is pending on that PR's final head.  
-**Current useful state:** The M4 research branch proposes 40 curated official routes: the original 12 plus 28 new routes across North America, Europe, Australia and the Middle East, including material eligibility/work-model/pay caveats. This broadens coverage; it is not a comprehensive worldwide census. “Add to application tracker” prefills the existing encrypted private tracker; the user still saves and submits manually. M4 tests are pending.  
-**M0 completion:** [PR #16](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/16) was squash-merged as [`f210279`](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/f2102797970752bd75b29d98a40e21868e625084). Exact-head and post-merge frontend CI, discovery fixtures and browser acceptance passed.  
-**M1 completion:** [PR #17](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/17) was squash-merged as [`e2bedb6`](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/e2bedb667ee1d3e7c7f29d492135dd1ebdbd9725). Reconciled exact-head and post-merge frontend CI, discovery fixture tests and browser acceptance passed.  
-**M2 completion:** [PR #18](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/18) was squash-merged as [`713a4cf`](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/713a4cfa6abb20ae2360f18396ac9bdb9ccee005). Exact-head and post-merge Frontend CI, discovery fixture tests and browser acceptance passed.  
-**M3 scope correction:** ADR-062 described the first, more elaborate UI plan. The current implementation deliberately drops the duplicate Planned/Applied route-marker UI and the starter studio catalog. The existing application tracker is the single place to record progress. The encrypted-vault schema retains backward-compatible fields, but the route directory does not use them.  
-**Next step:** Validate the M4 research batch on its exact PR head, merge only when required checks pass, then continue adding evidenced official routes. No schedule or publication is enabled by this work.
+**Last updated:** 2026-10-30  
+**Product scope:** a simple worldwide directory of official speculative-application routes plus the existing private tracker for applications submitted manually. No job-board aggregation, outreach automation, backend, or extra workflow features.  
+**Main branch:** M3 PR #19 and the first M4 expansion PR #20 are merged. Main contains 40 curated official routes.  
+**Current branch:** `feat/m4-worldwide-routes-batch-2-20261029` — second M4 research batch. It adds 10 directly reviewed routes, taking the proposed total to 50.  
+**Current changes:** data and short supporting documentation only. No UI changes, new dependencies, crawler, schedule, automatic contact/submission, or Pages publication.  
+**Next step:** validate the data and existing app with the normal CI/browser checks, then review and merge the focused PR if everything passes. See the current PR/checks once opened.
 
 ## Historical pre-refocus implementation and rollout evidence
 
