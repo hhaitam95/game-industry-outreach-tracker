@@ -3,21 +3,23 @@
     "name": "10 Chambers",
     "country": "Sweden",
     "websiteUrl": "https://10chambers.com/",
-    "applicationUrl": "https://10chambers.com/",
-    "evidenceUrl": "https://10chambers.com/",
-    "notes": "Official studio-controlled page explicitly invites spontaneous applications. Evidence: spontaneous application. Hiring geography is not inferred from headquarters.",
+    "applicationUrl": "https://careers.10chambers.com/connect",
+    "evidenceUrl": "https://careers.10chambers.com/",
+    "notes": "Official careers site invites applicants to connect with the studio for future job opportunities; its main site describes this as a spontaneous application when no positions are open. The Teamtailor Connect form collects interest areas and contact details. The studio is Stockholm-based, works four days a week in the office with one flexible remote day, and offers relocation assistance including work permits and short-term housing support.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [
-        "website_form"
+        "ats"
       ],
-      "workModel": "not_stated",
-      "eligibleLocations": [],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "Stockholm, Sweden · four office days and one flexible remote day; relocation and work-permit support offered"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
-      "sourceType": "official_company_site",
+      "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-28"
     }
   },
@@ -27,17 +29,22 @@
     "websiteUrl": "https://1000orks.com/",
     "applicationUrl": "https://1000orks.com/",
     "evidenceUrl": "https://1000orks.com/",
-    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: Initiativbewerbungen. Hiring geography is not inferred from headquarters.",
+    "notes": "Official site currently says the studio is not hiring for posted roles, but still invites Initiativbewerbungen. Applicants are asked to email a CV and cover letter, plus a portfolio where relevant, to social@1000orks.com. The site says its current expansion requirement is German citizens only. The team particularly welcomes C++ enthusiasts and programmers. The studio is headquartered in Osnabrück; the legal imprint lists an address in Kirchwalsede.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
-      "routeType": "general",
+      "routeType": "unsolicited",
       "submissionMethods": [
-        "email",
-        "website_form"
+        "email"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
-      "disciplineScope": [],
+      "eligibleLocations": [
+        "German citizens only (current company-stated hiring stipulation)"
+      ],
+      "disciplineScope": [
+        "C++",
+        "Programming",
+        "Game development"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
@@ -48,9 +55,9 @@
     "name": "10tons",
     "country": "Finland",
     "websiteUrl": "https://10tons.com/",
-    "applicationUrl": "https://10tons.com/careers",
-    "evidenceUrl": "https://10tons.com/careers",
-    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "applicationUrl": "https://10tons.com/careers/",
+    "evidenceUrl": "https://10tons.com/careers/",
+    "notes": "Official Careers page says 10tons is not actively recruiting but accepts open applications by email to jobs@10tons.com. Applications are archived and may be searched when suitable positions open; the studio does not respond to open applications individually. The route does not state applicant-country or remote-work eligibility.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "open",
@@ -58,7 +65,9 @@
         "email"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
+      "eligibleLocations": [
+        "Tampere, Finland · applicant-country eligibility not stated"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
@@ -72,7 +81,7 @@
     "websiteUrl": "https://1939games.com/",
     "applicationUrl": "https://1939games.com/career/",
     "evidenceUrl": "https://1939games.com/career/",
-    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: OPEN APPLICATION. Hiring geography is not inferred from headquarters.",
+    "notes": "Official Careers page explicitly invites open applications. Applications must be in English and include a portfolio; submissions go to jobs@1939games.com. The company operates across Reykjavík and Helsinki; a current mobile-first project role is advertised for either city. The open-application page does not specify remote eligibility or applicant-country restrictions.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "open",
@@ -80,7 +89,9 @@
         "email"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
+      "eligibleLocations": [
+        "Reykjavík, Iceland and Helsinki, Finland are the company's stated studio locations; open-application role location is not separately specified"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
@@ -1451,20 +1462,30 @@
   },
   {
     "name": "Ghost Ship Games",
-    "country": "Not stated",
-    "websiteUrl": "https://www.ghostship.dk/",
-    "applicationUrl": "https://www.teamtailor.com/?utm_campaign=poweredby&utm_content=jobs.ghostship.dk&utm_medium=referral&utm_source=career-site",
+    "country": "Denmark",
+    "websiteUrl": "https://ghostship.dk/",
+    "applicationUrl": "https://jobs.ghostship.dk/connect",
     "evidenceUrl": "https://jobs.ghostship.dk/",
-    "notes": "Official studio-controlled page explicitly invites unsolicited applications. Evidence: unsolicited application. Hiring geography is not inferred from headquarters.",
+    "notes": "The official Ghost Ship FAQ directs unsolicited applicants to its Teamtailor Connect page and explicitly warns that applications submitted through the general Contact form are not reviewed. Connect lets candidates select departments/interests and share their email for future opportunities. Regular positions are on-site only: applicants must live in Copenhagen or within commuting distance; the studio provides limited work-from-home days but no relocation support. Internships are separately limited to at least six months and are unpaid.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "unsolicited",
       "submissionMethods": [
         "ats"
       ],
-      "workModel": "remote",
-      "eligibleLocations": [],
-      "disciplineScope": [],
+      "workModel": "on_site",
+      "eligibleLocations": [
+        "Copenhagen, Denmark or within commuting distance; no relocation support"
+      ],
+      "disciplineScope": [
+        "Administration",
+        "Art",
+        "Game design",
+        "Internship",
+        "Programming",
+        "Publishing and marketing",
+        "QA"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
@@ -1817,20 +1838,29 @@
   },
   {
     "name": "KORION",
-    "country": "Not stated",
+    "country": "Germany",
     "websiteUrl": "https://www.korion.de/",
-    "applicationUrl": "https://korion.de/en/careers/",
+    "applicationUrl": "https://korion.de/karriere/",
     "evidenceUrl": "https://korion.de/karriere/",
-    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: Initiativbewerbungen. Hiring geography is not inferred from headquarters.",
+    "notes": "Official Careers page accepts digital applications by email to career@korion.de, including a short cover note, CV and relevant work samples. It says it is not currently considering unsolicited applications for Data Analyst, Cloud Engineer, System Administrator or Purchasing roles. The company is based in Ludwigsburg and says up to 100% remote work may be possible depending on the role; this is not a blanket remote guarantee for all open applications.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
         "email"
       ],
-      "workModel": "not_stated",
-      "eligibleLocations": [],
-      "disciplineScope": [],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Ludwigsburg, Germany · up to 100% remote may be possible depending on role; applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Game art",
+        "Programming",
+        "Porting",
+        "Publishing",
+        "Interactive media"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
@@ -2003,20 +2033,21 @@
   },
   {
     "name": "Nomad Games",
-    "country": "Not stated",
+    "country": "United Kingdom",
     "websiteUrl": "https://nomadgames.co.uk/",
     "applicationUrl": "https://nomadgames.co.uk/careers",
     "evidenceUrl": "https://nomadgames.co.uk/careers",
-    "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: speculative application. Hiring geography is not inferred from headquarters.",
+    "notes": "Official Careers page invites speculative applications from exceptional game developers who are passionate about board games; send a CV and cover letter to jobs@nomadgames.co.uk. The studio has operated a policy allowing staff to work fully remotely since 2020, although successful applicants may be asked to visit its Lymm office for a few days. Applicant-country/work-authorisation eligibility is not stated.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
-        "email",
-        "website_form"
+        "email"
       ],
-      "workModel": "not_stated",
-      "eligibleLocations": [],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote working is available to staff; occasional initial visits to Lymm, Warrington may be requested. Applicant-country eligibility not stated."
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
@@ -2314,52 +2345,6 @@
     }
   },
   {
-    "name": "Q104636206",
-    "country": "Not stated",
-    "websiteUrl": "https://www.serenityforge.com/",
-    "applicationUrl": "https://www.serenityforge.com/careers",
-    "evidenceUrl": "https://www.serenityforge.com/careers",
-    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-30",
-    "applicationResearch": {
-      "routeType": "open",
-      "submissionMethods": [
-        "email",
-        "website_form"
-      ],
-      "workModel": "not_stated",
-      "eligibleLocations": [],
-      "disciplineScope": [],
-      "relatedApplicationUrls": [],
-      "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
-    }
-  },
-  {
-    "name": "Q105687032",
-    "country": "Not stated",
-    "websiteUrl": "https://www.velanstudios.com/",
-    "applicationUrl": "https://velanstudios.workable.com/jobs/3417239",
-    "evidenceUrl": "https://www.velanstudios.com/careers",
-    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-30",
-    "applicationResearch": {
-      "routeType": "general",
-      "submissionMethods": [
-        "ats",
-        "email"
-      ],
-      "workModel": "hybrid",
-      "eligibleLocations": [],
-      "disciplineScope": [],
-      "relatedApplicationUrls": [],
-      "routeStatus": "active",
-      "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-28"
-    }
-  },
-  {
     "name": "Rad Games",
     "country": "Not stated",
     "websiteUrl": "https://radgames.ai/",
@@ -2580,6 +2565,35 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-27"
+    }
+  },
+  {
+    "name": "Serenity Forge",
+    "country": "United States",
+    "websiteUrl": "https://www.serenityforge.com/",
+    "applicationUrl": "https://serenityforge.com/careers",
+    "evidenceUrl": "https://serenityforge.com/careers",
+    "notes": "Official Careers page accepts open applications for unlisted jobs by email to jobs@serenityforge.com. Applicants should include a résumé, optional cover letter and relevant supplementary materials or links. The page does not specify the applicant-country eligibility or work model for open applications.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Boulder, Colorado, USA · applicant-country eligibility and remote policy for open applications not stated"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Publishing",
+        "Co-development",
+        "Creative and technical roles"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
@@ -3118,6 +3132,30 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Velan Studios",
+    "country": "United States",
+    "websiteUrl": "https://www.velanstudios.com/",
+    "applicationUrl": "https://apply.workable.com/velanstudios/jobs/3417239",
+    "evidenceUrl": "https://www.velanstudios.com/careers",
+    "notes": "Official Careers page explicitly encourages applicants whose experience does not align perfectly with a listed vacancy to submit a General Application. The route is handled through Velan's Workable application form. The studio operates from Troy, New York and Toronto, Ontario; roles are hybrid, with a stated option of three days in the studio. Applicant-country eligibility should be confirmed for each role; US positions participate in E-Verify.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "Troy, New York, USA and Toronto, Ontario, Canada · hybrid option is three days in studio"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-28"
     }
   },
