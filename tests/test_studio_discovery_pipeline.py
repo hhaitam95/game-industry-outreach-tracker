@@ -272,6 +272,31 @@ class DatasetUpdateTests(unittest.TestCase):
             self.assertEqual(profiles["Example Game Studio"]["headquarters"]["country"], "Canada")
             self.assertTrue(state_path.exists())
 
+    def test_candidate_queue_stops_before_starting_a_check_after_deadline(self):
+        state = discovery.empty_state()
+        discovery.add_candidates(state, [{
+            "qid": "Q123",
+            "entity_url": "https://www.wikidata.org/entity/Q123",
+            "name": "Example Game Studio",
+            "website": "https://example-studio.example/",
+            "country": "Canada",
+            "hq_city": "Montreal",
+            "country_code": "CA",
+        }])
+        studios = []
+        profiles = {}
+        checked, published = discovery.process_candidate_queue(
+            state,
+            studios,
+            profiles,
+            10,
+            lambda url, allowed: self.fail("The page fetcher must not run after the deadline."),
+            deadline=0,
+        )
+        self.assertEqual((checked, published), (0, 0))
+        self.assertEqual(state["candidates"]["Q123"]["attempts"], 0)
+        self.assertEqual(state["candidates"]["Q123"]["status"], "queued")
+
     def test_existing_studio_name_or_domain_is_deduplicated(self):
         state = discovery.empty_state()
         discovery.add_candidates(state, [{
