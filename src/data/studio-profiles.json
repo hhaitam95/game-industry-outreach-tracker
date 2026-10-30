@@ -3981,6 +3981,134 @@
     ],
     "applicationLocation": "India · general-application location and remote eligibility not stated"
   },
+  "Hazelight": {
+    "description": "Swedish independent game studio founded in 2014 and based in Stockholm. Hazelight develops story-driven cooperative action-adventure games, including A Way Out, It Takes Two and Split Fiction. Its official career site lists approximately 80 co-workers.",
+    "headquarters": {
+      "city": "Stockholm",
+      "country": "Sweden",
+      "countryCode": "SE",
+      "label": "Studio address · official FAQ and career site"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "AA · editorial indication",
+    "teamSize": "80 co-workers (official career site)",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "PlayStation",
+      "Xbox",
+      "Nintendo Switch",
+      "Cooperative games",
+      "Action-adventure",
+      "Narrative"
+    ],
+    "popularGames": [
+      {
+        "title": "Brothers: A Tale of Two Sons",
+        "appId": null
+      },
+      {
+        "title": "A Way Out",
+        "appId": null
+      },
+      {
+        "title": "It Takes Two",
+        "appId": null
+      },
+      {
+        "title": "Split Fiction",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://hazelight.se/faq",
+      "https://hazelight.se/careers",
+      "https://careers.hazelight.se/"
+    ],
+    "applicationLocation": "Stockholm, Sweden · open applications via Teamtailor Connect; hybrid work; applicant-country eligibility not stated",
+    "reachHighlights": "The official career site describes a hybrid setup, a flat creative structure, and 80 co-workers; the FAQ allows open applications when no current role matches an applicant's expertise."
+  },
+  "Headless Chicken Games": {
+    "description": "Costa Rica-based game-development and co-development studio providing game design, programming, art production, porting and project execution. Its portfolio includes co-development, porting and art contributions to internationally released console and PC games.",
+    "headquarters": {
+      "city": "San Pedro de Montes de Oca, San José",
+      "country": "Costa Rica",
+      "countryCode": "CR",
+      "label": "Studio address · official website"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Porting",
+      "Art production"
+    ],
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie / co-development services · editorial indication",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Game development",
+      "Co-development",
+      "Porting",
+      "Game design",
+      "Programming",
+      "2D art",
+      "3D art",
+      "Animation",
+      "Rigging"
+    ],
+    "popularGames": [
+      {
+        "title": "G.I. Joe: Operation Blackout",
+        "appId": null,
+        "stage": "Co-development"
+      },
+      {
+        "title": "Quar: Infernal Machines",
+        "appId": null,
+        "stage": "Porting / engineering"
+      },
+      {
+        "title": "Cobra Kai: The Karate Kid Saga Continues",
+        "appId": null,
+        "stage": "Art production"
+      },
+      {
+        "title": "Cobra Kai 2: Dojos Rising",
+        "appId": null,
+        "stage": "Porting / engineering"
+      },
+      {
+        "title": "CrisTales",
+        "appId": null,
+        "stage": "Co-development"
+      },
+      {
+        "title": "Nickelodeon All-Star Brawl",
+        "appId": null,
+        "stage": "Co-development"
+      },
+      {
+        "title": "Bramble: The Mountain King",
+        "appId": null,
+        "stage": "Porting / engineering"
+      }
+    ],
+    "profileSources": [
+      "https://www.headlesschickengames.com/",
+      "https://www.headlesschickengames.com/presskit/"
+    ],
+    "applicationLocation": "San José, Costa Rica · the official site invites applicants to email the jobs address; remote and cross-border eligibility not stated",
+    "reachHighlights": "The official site lists game-design, programming, art-production and project-execution services and displays a portfolio spanning co-development, porting and art-production credits."
+  },
   "Hindsight Studios": {
     "description": "German game-development studio with an official speculative-application route; public portfolio and company structure require further verification.",
     "headquarters": {
