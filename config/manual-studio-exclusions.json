@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "excluded_domains": [
+    {
+      "domain": "capcomusa.com",
+      "name": "Capcom Pictures",
+      "reason": "Official Capcom group information identifies Capcom Pictures as a motion-picture planning and production-management subsidiary, not a game-development studio. The prior CAPCOM U.S.A. Jobvite route was not evidence of hiring for Capcom Pictures.",
+      "reviewed_at": "2026-10-30"
+    },
+    {
+      "domain": "gameboost.se",
+      "name": "Game Boost Sweden",
+      "reason": "The official service is a staffing and talent marketplace connecting game studios with freelancers and consultants for gigs and contracts; it is not itself a game studio.",
+      "reviewed_at": "2026-10-30"
+    }
+  ]
+}
