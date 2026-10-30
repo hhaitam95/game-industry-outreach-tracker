@@ -216,7 +216,7 @@
     "applicationUrl": "https://www.aweinteractive.com/careers",
     "evidenceUrl": "https://www.aweinteractive.com/careers",
     "notes": "Official careers page has a Speculative Application section and invites candidates to contact careers@aweinteractive.com. Work location and eligibility are unstated.",
-    "checkedAt": "2026-10-29",
+    "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
@@ -228,7 +228,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-27"
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
@@ -328,7 +328,7 @@
     "applicationUrl": "https://www.blowfishstudios.com/open-application",
     "evidenceUrl": "https://www.blowfishstudios.com/open-application",
     "notes": "Official Open Application asks applicants without a matching role to email a resume. Preferred locations are Brisbane, Sydney, Melbourne and/or remote.",
-    "checkedAt": "2026-10-29",
+    "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -342,7 +342,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-27"
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
@@ -352,7 +352,7 @@
     "applicationUrl": "https://www.bossagames.com/careers.html",
     "evidenceUrl": "https://www.bossagames.com/careers.html",
     "notes": "Official careers page invites speculative resumes, says the studio is 100% remote, and shows a speculative application open to all departments any time. Official route describes eligibility as worldwide.",
-    "checkedAt": "2026-10-29",
+    "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
@@ -366,7 +366,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-27"
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
@@ -1504,6 +1504,29 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Q105687032",
+    "country": "Not stated",
+    "websiteUrl": "https://www.velanstudios.com/",
+    "applicationUrl": "https://velanstudios.workable.com/jobs/3417239",
+    "evidenceUrl": "https://www.velanstudios.com/careers",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats",
+        "email"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-28"
     }
   },
