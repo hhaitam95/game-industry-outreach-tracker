@@ -41,7 +41,8 @@ export default function ApplicationTracker({initialTab="saved",applications,onCh
     {visible.length?<div className="application-cards">{visible.map(item=><article className="application-card" key={item.id}>
       <StudioLogo name={item.studioName} websiteUrl={item.websiteUrl} size="lg"/>
       <div className="application-card-main"><div className="application-card-title"><h3>{item.studioName}</h3><span className={"application-status status-"+item.status}>{statusLabels[item.status]}</span></div>
-        <p>{item.country==="Not stated"?"🌍 Location not disclosed":item.country} {item.hqLabel?"· "+item.hqLabel:""}</p>
+        <p>{item.country==="Not stated"||item.country==="Not publicly stated"?"🌍 Location not disclosed":item.country} {item.hqLabel?"· "+item.hqLabel:""}</p>
+        {item.applicationLocation?<p className="application-geography">Hiring scope: {item.applicationLocation}</p>:null}
         <div className="application-meta"><span>Added {new Date(item.createdAt).toLocaleDateString()}</span>{item.appliedAt?<span>Applied {new Date(item.appliedAt).toLocaleDateString()}</span>:null}</div>
         <div className="application-card-actions">{item.applicationUrl?<a href={item.applicationUrl} target="_blank" rel="noopener noreferrer">Application page ↗</a>:null}<a href={item.websiteUrl} target="_blank" rel="noopener noreferrer">Studio website ↗</a></div>
       </div>
