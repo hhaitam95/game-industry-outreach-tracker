@@ -6075,49 +6075,6 @@
     "applicationLocation": "Dubai, UAE / United Kingdom · remote-friendly; applicant-country eligibility not stated",
     "reachHighlights": "Portfolio mixes conventional game development, XR and Web3/blockchain services; the official Careers page accepts open applications by email."
   },
-  "SumiGamesStudio": {
-    "description": "Game development and publishing company working across mobile, PC, multiplayer, AR/VR/XR and Web3 experiences.",
-    "headquarters": {
-      "city": "Dubai",
-      "country": "United Arab Emirates",
-      "countryCode": "AE",
-      "label": "Primary base · multi-location"
-    },
-    "otherLocations": [
-      "United Kingdom",
-      "Dubai, United Arab Emirates"
-    ],
-    "companyType": [
-      "Developer",
-      "Publisher",
-      "Services",
-      "Co-development",
-      "Technology services"
-    ],
-    "ownership": "Private company · ownership not publicly detailed",
-    "parentCompany": null,
-    "industryScale": "Indie / AA",
-    "teamSize": "Small senior team · exact count not disclosed",
-    "teamSizeAsOf": "2026",
-    "focus": [
-      "Mobile",
-      "PC",
-      "AR/VR/XR",
-      "Multiplayer",
-      "Web3",
-      "Unity",
-      "Unreal Engine",
-      "Godot"
-    ],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.sumigamesstudio.com/company",
-      "https://www.sumigamesstudio.com/",
-      "https://www.sumigamesstudio.com/careers"
-    ],
-    "applicationLocation": "Dubai, UAE / United Kingdom · remote-friendly; applicant-country eligibility not stated",
-    "reachHighlights": "Portfolio mixes conventional game development, XR and Web3/blockchain services; the official Careers page accepts open applications by email."
-  },
   "Supermassive Games": {
     "description": "BAFTA-winning British developer specializing in cinematic, narrative-led horror and interactive drama.",
     "headquarters": {
@@ -6507,10 +6464,10 @@
   "Uplift Games": {
     "description": "Remote-first Roblox developer behind Adopt Me!, building large-scale social and family-friendly virtual worlds.",
     "headquarters": {
-      "city": null,
+      "city": "Not publicly stated",
       "country": "Not publicly stated",
       "countryCode": "",
-      "label": "Remote-first · no single HQ stated"
+      "label": "Headquarters not publicly disclosed on reviewed official pages"
     },
     "otherLocations": [
       "North America",
@@ -6538,7 +6495,7 @@
         "appId": null
       }
     ],
-    "applicationLocation": "Remote · North America and United Kingdom; work authorization required in US or UK",
+    "applicationLocation": "Remote-first · applicants must live in and have permission to work in the United States or United Kingdom",
     "reachHighlights": "Adopt Me! is reported by Uplift as having 40B+ plays and 425M+ players; Uplift reports a 60+ person team.",
     "profileSources": [
       "https://www.uplift.games/about",
