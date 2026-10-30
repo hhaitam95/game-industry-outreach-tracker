@@ -952,6 +952,116 @@
     }
   },
   {
+    "name": "Byterockers’ Games",
+    "country": "Germany",
+    "websiteUrl": "https://byterockers.games/",
+    "applicationUrl": "https://www.byterockers.games/jobs",
+    "evidenceUrl": "https://www.byterockers.games/jobs",
+    "notes": "Official studio-controlled page explicitly invites unsolicited applications. Evidence: unsolicited application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Campfire Cabal (THQ Nordic)",
+    "country": "Denmark",
+    "websiteUrl": "https://campfirecabal.com/",
+    "applicationUrl": "https://campfirecabal.com/jobs/",
+    "evidenceUrl": "https://campfirecabal.com/jobs/",
+    "notes": "Official studio-controlled page explicitly invites unsolicited applications. Evidence: unsolicited applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Capcom Pictures",
+    "country": "United States",
+    "websiteUrl": "https://capcomusa.com/",
+    "applicationUrl": "https://app.jobvite.com/",
+    "evidenceUrl": "https://jobs.jobvite.com/capcomusa",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Carbonated",
+    "country": "United States",
+    "websiteUrl": "https://www.carbonated.com/",
+    "applicationUrl": "https://www.carbonated.com/jobs",
+    "evidenceUrl": "https://www.carbonated.com/job-listings",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: general application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Chief Rebel",
+    "country": "Sweden",
+    "websiteUrl": "https://chiefrebel.com/",
+    "applicationUrl": "https://www.teamtailor.com/?utm_campaign=poweredby&utm_content=jobs.chiefrebel.com&utm_medium=referral&utm_source=career-site",
+    "evidenceUrl": "https://jobs.chiefrebel.com/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Chimera Entertainment",
     "country": "Germany",
     "websiteUrl": "https://www.chimera-entertainment.de/",
@@ -968,6 +1078,28 @@
       "eligibleLocations": [
         "Hybrid / remote · Europe"
       ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Chimpworks",
+    "country": "Netherlands",
+    "websiteUrl": "https://www.chimpworksgames.com/",
+    "applicationUrl": "https://www.chimpworksgames.com/contact-us/",
+    "evidenceUrl": "https://www.chimpworksgames.com/contact-us/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
@@ -1049,6 +1181,50 @@
         "Elgin, Scotland, United Kingdom",
         "Vancouver, Canada"
       ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Codename Red",
+    "country": "Netherlands",
+    "websiteUrl": "https://www.codenamered.nl/",
+    "applicationUrl": "https://www.codenamered.nl/",
+    "evidenceUrl": "https://www.codenamered.nl/",
+    "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: speculative application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Cold Symmetry",
+    "country": "United States",
+    "websiteUrl": "https://coldsymmetry.com/",
+    "applicationUrl": "https://www.coldsymmetry.com/jobs",
+    "evidenceUrl": "https://www.coldsymmetry.com/jobs",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
@@ -1146,6 +1322,28 @@
     }
   },
   {
+    "name": "Cutting Corner Games",
+    "country": "Sweden",
+    "websiteUrl": "https://cuttingcornergames.com/",
+    "applicationUrl": "https://cuttingcornergames.com/careers/",
+    "evidenceUrl": "https://cuttingcornergames.com/careers/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Cyanide Studio",
     "country": "France",
     "websiteUrl": "https://cyanide-studio.com/",
@@ -1184,6 +1382,28 @@
       "eligibleLocations": [
         "Remote / Kyiv roles advertised; general-applicant eligibility not fully specified"
       ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Cyborn",
+    "country": "Belgium",
+    "websiteUrl": "https://cyborn.be/",
+    "applicationUrl": "https://www.cyborn.be/job",
+    "evidenceUrl": "https://www.cyborn.be/job",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
@@ -1280,6 +1500,94 @@
       "eligibleLocations": [
         "Montréal-specific application"
       ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Double Eleven (Pneuma Games Group)",
+    "country": "Malaysia",
+    "websiteUrl": "https://www.double11.com/",
+    "applicationUrl": "https://apply.workable.com/j/38C4D1F485",
+    "evidenceUrl": "https://double11.com/vacancies/",
+    "notes": "Official studio-controlled page explicitly invites discipline specific applications. Evidence: Expression of Interest. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "discipline_specific",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "EB Studio",
+    "country": "Sweden",
+    "websiteUrl": "https://www.ernstborg.studio/",
+    "applicationUrl": "https://www.ernstborg.studio/career",
+    "evidenceUrl": "https://www.ernstborg.studio/career",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Eidos Montreal",
+    "country": "Canada",
+    "websiteUrl": "https://www.eidosmontreal.com/",
+    "applicationUrl": "https://www.eidosmontreal.com/careers/",
+    "evidenceUrl": "https://www.eidosmontreal.com/contact/",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: general applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Electric Square (Keywords)",
+    "country": "England",
+    "websiteUrl": "https://electricsquare.com/",
+    "applicationUrl": "https://electricsquare.com/come-join-us/open-positions/",
+    "evidenceUrl": "https://electricsquare.com/come-join-us/",
+    "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: Speculative applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
@@ -2865,24 +3173,34 @@
   },
   {
     "name": "SumiGamesStudio",
-    "country": "United Arab Emirates",
+    "country": "Not stated",
     "websiteUrl": "https://www.sumigamesstudio.com/",
     "applicationUrl": "https://www.sumigamesstudio.com/careers",
     "evidenceUrl": "https://www.sumigamesstudio.com/careers",
-    "notes": "Official careers page hires ahead of need and welcomes introductions by email when no opening fits. Remote-friendly game, XR and partner projects; eligibility is unstated.",
-    "checkedAt": "2026-10-29",
+    "notes": "Official Careers page invites open applications by email to careers@sumigames.com with a portfolio/showreel, GitHub or CV. It describes the company as a small, senior, remote-friendly game-development studio operating in Dubai, UAE and the United Kingdom. Its project mix includes conventional mobile/PC/multiplayer/XR games and Web3/blockchain work; no applicant-country eligibility or single HQ is stated.",
+    "checkedAt": "2026-10-30",
     "applicationResearch": {
-      "routeType": "general",
+      "routeType": "open",
       "submissionMethods": [
         "email"
       ],
       "workModel": "remote",
-      "eligibleLocations": [],
-      "disciplineScope": [],
+      "eligibleLocations": [
+        "Dubai, UAE / United Kingdom · remote-friendly; applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Unity",
+        "Unreal Engine",
+        "Godot",
+        "XR",
+        "Game Art",
+        "QA",
+        "Production"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-27"
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
