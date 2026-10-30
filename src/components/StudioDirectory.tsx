@@ -19,6 +19,7 @@ type Profile={
   focus:string[];
   popularGames:{title:string;appId:number|null;stage?:string}[];
   profileSources:string[];
+  applicationLocation?:string;
 };
 const profiles=profilesJson as Record<string,Profile>;
 const countryCodes:Record<string,string>={
@@ -89,7 +90,7 @@ export default function StudioDirectory({applications,onSave,onMarkApplied}:{app
           const type=p?.companyType?.slice(0,2).join(" · ")||"Classification pending";
           return <Fragment key={studio.name}><tr className={active?"studio-row is-expanded":"studio-row"}>
             <td><button className="studio-expand" type="button" onClick={()=>setExpanded(active?null:studio.name)} aria-expanded={active}><span className="expand-chevron">{active?"⌄":"›"}</span><StudioLogo name={studio.name} websiteUrl={studio.websiteUrl}/><span className="studio-name-cell"><strong>{studio.name}</strong><small>{type}</small></span></button></td>
-            <td><span className="location-cell"><span className="country-flag">{location.emoji}</span><span><strong>{location.label}</strong><small>{location.tag}</small></span></span></td>
+            <td><span className="location-cell"><span className="country-flag">{location.emoji}</span><span><strong>{location.label}</strong><small>{p?.applicationLocation||location.tag}</small></span></span></td>
             <td><div className="game-chips">{games.length?games.slice(0,2).map(g=><span className="game-chip" key={g.title}>{g.title}</span>):<span className="muted">{(p?.description||studio.notes).slice(0,72)}…</span>}</div></td>
             <td><span className={`scale-tag ${(p?.industryScale||"").toLowerCase().replace(/[^a-z]+/g,"-")}`}>{p?.industryScale||"Unclassified"}</span></td>
             <td><span className="ownership-cell">{p?.parentCompany||p?.ownership||"Not yet researched"}</span></td>
@@ -107,6 +108,7 @@ export default function StudioDirectory({applications,onSave,onMarkApplied}:{app
               </div>
               <div className="detail-facts">
                 <div className="fact"><span>Headquarters</span><strong>{location.emoji} {location.label}</strong><small>{location.tag}</small></div>
+                <div className="fact"><span>Application location</span><strong>{p?.applicationLocation||"Not specified · HQ shown as reference"}</strong></div>
                 <div className="fact"><span>Other branches</span><strong>{p?.otherLocations?.length?p.otherLocations.join(" · "):"Not publicly confirmed"}</strong></div>
                 <div className="fact"><span>Ownership</span><strong>{p?.ownership||"Not yet researched"}</strong>{p?.parentCompany?<small>Parent: {p.parentCompany}</small>:null}</div>
                 <div className="fact"><span>Industry scale</span><strong>{p?.industryScale||"Not yet assessed"}</strong><small>Indicative portfolio / production profile, not an official rating</small></div>
