@@ -186,12 +186,12 @@
     "websiteUrl": "https://www.aethrastudios.com/",
     "applicationUrl": "https://www.aethrastudios.com/careers/",
     "evidenceUrl": "https://www.aethrastudios.com/careers/",
-    "notes": "Official careers page invites open applications with a portfolio or work samples. Remote across Europe with CET overlap; specific roles are also listed.",
+    "notes": "Official Careers page explicitly invites open applications by email to jobs@aethrastudios.com, with a portfolio and the type of work the applicant wants to do. Current listed roles are remote across Europe with CET overlap.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
-        "website_form"
+        "email"
       ],
       "workModel": "remote",
       "eligibleLocations": [
@@ -1222,6 +1222,38 @@
     }
   },
   {
+    "name": "Kiagu Studios",
+    "country": "South Korea",
+    "websiteUrl": "https://www.kiagu.com/",
+    "applicationUrl": "https://www.kiagu.com/careers",
+    "evidenceUrl": "https://www.kiagu.com/careers",
+    "notes": "Official Careers page explicitly welcomes unsolicited applications at contact@kiagu.com and provides an application form for CVs and work samples. Studio is remote-first and headquartered in Seoul; applicant-country eligibility is not explicitly stated.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote-first · applicant-country eligibility not explicitly stated"
+      ],
+      "disciplineScope": [
+        "Writing",
+        "Art",
+        "Design",
+        "Production",
+        "Animation",
+        "Engineering"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Kinetic Games",
     "country": "United Kingdom",
     "websiteUrl": "https://kineticgames.co.uk/",
@@ -1501,6 +1533,30 @@
     }
   },
   {
+    "name": "Ocellus",
+    "country": "France",
+    "websiteUrl": "https://ocellus-studio.com/",
+    "applicationUrl": "https://ocellus-studio.com/careers",
+    "evidenceUrl": "https://ocellus-studio.com/careers",
+    "notes": "Official Careers page invites spontaneous applications when no listed position fits and asks candidates to send a CV/resume. The official Contact page lists contact@ocellus-games.com for Ocellus Games and contact@ocellus-services.com for Ocellus Services. Studio is located in Lyon; specific role/work location eligibility is not stated.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Lyon, France · role-specific arrangements not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Ocellus Studio",
     "country": "France",
     "websiteUrl": "https://www.ocellus-studio.com/",
@@ -1550,22 +1606,22 @@
     "name": "Old Skull Games",
     "country": "France",
     "websiteUrl": "https://www.oldskullgames.com/",
-    "applicationUrl": "https://www.oldskullgames.com/careers/",
+    "applicationUrl": "https://jobs.smartrecruiters.com/oneclick-ui/company/OldSkullGames1/job/1683277082?dcr_ci=OldSkullGames1&lang=fr&sid=",
     "evidenceUrl": "https://www.oldskullgames.com/careers/",
-    "notes": "Official careers page says it is always meeting good people and links a Spontaneous Application for candidates whose role is not listed.",
-    "checkedAt": "2026-10-29",
+    "notes": "Official careers page invites spontaneous applications and links directly to an employer-managed SmartRecruiters application. Applicants are asked to send a portfolio and a few words about what they would like to make next.",
+    "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [
-        "website_form"
+        "ats"
       ],
       "workModel": "not_stated",
       "eligibleLocations": [],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-27"
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
@@ -1757,6 +1813,37 @@
     }
   },
   {
+    "name": "Raven Illusion",
+    "country": "Not stated",
+    "websiteUrl": "https://www.ravenillusion.studio/",
+    "applicationUrl": "https://www.ravenillusion.studio/contact",
+    "evidenceUrl": "https://www.ravenillusion.studio/careers",
+    "notes": "Official Careers page invites developers, artists, creatives and storytellers to send a short introduction and portfolio/reel to the studio they want to join, and says local and international talent are welcome. The official Contact page provides a careers-capable form and emails for Atlanta and Doha studios. Official pages list studios in Lagos, Atlanta and Doha but conflict on which is headquarters, so HQ is left unresolved.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form",
+        "email"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Lagos, Nigeria / Atlanta, United States / Doha, Qatar; international and remote arrangements depend on role"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Art",
+        "Animation",
+        "Writing",
+        "Narrative"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Raw Power Games",
     "country": "Denmark",
     "websiteUrl": "https://rawpowergames.com/",
@@ -1810,8 +1897,8 @@
     "websiteUrl": "https://www.reply.com/reply-game-studios/en/career",
     "applicationUrl": "https://www.reply.com/reply-game-studios/en/career",
     "evidenceUrl": "https://www.reply.com/reply-game-studios/en/career",
-    "notes": "Official page invites spontaneous applications by email. Requires fluent English and Italian and availability to work on site in Milan, Italy. Work model: onsite.",
-    "checkedAt": "2026-10-29",
+    "notes": "Official Careers page accepts spontaneous applications by email to jobs.rgs@reply.it. Applicants must specify the desired position, attach a portfolio or relevant samples, be fluent in Italian and English, and be available to work on-site in Milan.",
+    "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [
@@ -1819,13 +1906,13 @@
       ],
       "workModel": "on_site",
       "eligibleLocations": [
-        "Milan · on-site; Italian and English required"
+        "Milan, Italy · on-site; fluent Italian and English required"
       ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-27"
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
