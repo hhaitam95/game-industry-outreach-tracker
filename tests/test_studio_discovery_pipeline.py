@@ -654,9 +654,9 @@ class GameDevMapDiscoveryTests(unittest.TestCase):
         body = """
         <table>
           <tr><th>Company</th><th>Social</th><th>Type</th><th>City</th><th>State</th><th>Country</th></tr>
-          <tr><td><a href="https://example-studio.test/">Example Studio</a></td><td></td><td>Developer</td><td>Montreal</td><td>Quebec</td><td>Canada</td></tr>
-          <tr><td><a href="https://example-studio.test/">Example Studio</a></td><td></td><td>Developer</td><td>Toronto</td><td>Ontario</td><td>Canada</td></tr>
-          <tr><td><a href="https://investments.test/">Game Fund</a></td><td></td><td>Investment</td><td>London</td><td>England</td><td>United Kingdom</td></tr>
+          <tr><td><a href="https://example-studio.com/">Example Studio</a></td><td></td><td>Developer</td><td>Montreal</td><td>Quebec</td><td>Canada</td></tr>
+          <tr><td><a href="https://example-studio.com/">Example Studio</a></td><td></td><td>Developer</td><td>Toronto</td><td>Ontario</td><td>Canada</td></tr>
+          <tr><td><a href="https://investments.com/">Game Fund</a></td><td></td><td>Investment</td><td>London</td><td>England</td><td>United Kingdom</td></tr>
           <tr><td>Missing Website</td><td></td><td>Developer</td><td>Paris</td><td>Ile-de-France</td><td>France</td></tr>
         </table>
         """
@@ -669,7 +669,7 @@ class GameDevMapDiscoveryTests(unittest.TestCase):
         self.assertTrue(rows[0]["qid"].startswith("GDM:"))
         self.assertEqual(rows[0]["source_id"], "gamedevmap")
         self.assertEqual(rows[0]["name"], "Example Studio")
-        self.assertEqual(rows[0]["website"], "https://example-studio.test/")
+        self.assertEqual(rows[0]["website"], "https://example-studio.com/")
         self.assertEqual(rows[0]["country"], "Canada")
         self.assertEqual(rows[0]["hq_city"], "Montreal, Quebec")
         self.assertEqual(rows[0]["company_type"], "Developer")
@@ -680,7 +680,7 @@ class GameDevMapDiscoveryTests(unittest.TestCase):
             "qid": "Q100",
             "entity_url": "https://www.wikidata.org/entity/Q100",
             "name": "Example Studio",
-            "website": "https://example-studio.test/",
+            "website": "https://example-studio.com/",
             "country": "Canada",
             "hq_city": "Montreal",
             "country_code": "CA",
@@ -690,7 +690,7 @@ class GameDevMapDiscoveryTests(unittest.TestCase):
             "qid": "GDM:abc",
             "entity_url": "https://www.gamedevmap.com/index.php?start=1",
             "name": "Example Studio",
-            "website": "https://example-studio.test/contact",
+            "website": "https://example-studio.com/contact",
             "country": "Canada",
             "hq_city": "Toronto",
             "country_code": "",
@@ -729,8 +729,8 @@ class GameDevMapDiscoveryTests(unittest.TestCase):
             def first_page(kind, cursor, limit):
                 calls.append((kind, cursor, limit))
                 return [
-                    row("GDM:a", "Alpha Studio", "https://alpha-studio.test/"),
-                    row("GDM:b", "Beta Studio", "https://beta-studio.test/"),
+                    row("GDM:a", "Alpha Studio", "https://alpha-studio.com/"),
+                    row("GDM:b", "Beta Studio", "https://beta-studio.com/"),
                 ]
 
             discovery.run_pipeline(
@@ -751,7 +751,7 @@ class GameDevMapDiscoveryTests(unittest.TestCase):
 
             def second_page(kind, cursor, limit):
                 calls.append((kind, cursor, limit))
-                return [row("GDM:c", "Gamma Studio", "https://gamma-studio.test/")]
+                return [row("GDM:c", "Gamma Studio", "https://gamma-studio.com/")]
 
             discovery.run_pipeline(
                 mode="bulk",
