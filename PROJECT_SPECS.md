@@ -11,6 +11,10 @@ Only studios that pass the official-page check are included. Each entry contains
 
 A generic careers page, standard vacancy, aggregator claim or public studio-directory entry alone does not qualify.
 
+## Content suitability
+
+Studios whose games or ordinary work involve pornography, adult-only games, erotic or sexually explicit content must be excluded, even when they otherwise have a qualifying open-application route. Also exclude routes that ask applicants to confirm comfort with that content. If a studio's content suitability is unclear, leave it out pending manual review. This is a sexual-content suitability rule, not a blanket exclusion of mature-rated games generally.
+
 ## Private application tracker
 
 The user saves studios they plan to contact, then updates each status manually. Tracker records stay encrypted in the browser and are not committed to GitHub.
