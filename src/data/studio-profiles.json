@@ -5400,5 +5400,57 @@
     ],
     "applicationLocation": "Gothenburg, Sweden · applicant eligibility and remote policy not stated",
     "reachHighlights": "Box Dragon identifies itself as a PC game-development studio in Gothenburg and says it is backed by Coffee Stain."
+  },
+  "StickyStoneStudio": {
+    "description": "German game developer and publisher creating original PC and console games while also providing game/app development, XR, gamification and 3D visualization services.",
+    "headquarters": {
+      "city": "Gundelfingen",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Co-development",
+      "XR services"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "PlayStation",
+      "Xbox",
+      "Nintendo Switch",
+      "VR",
+      "AR",
+      "XR",
+      "Unity",
+      "Roguelite",
+      "Puzzle adventure"
+    ],
+    "popularGames": [
+      {
+        "title": "M.O.O.D.S.",
+        "appId": null,
+        "stage": "Released in Early Access"
+      },
+      {
+        "title": "Memorrha",
+        "appId": null,
+        "stage": "Released"
+      }
+    ],
+    "profileSources": [
+      "https://www.stickystonestudio.de/",
+      "https://www.stickystonestudio.de/jobs/",
+      "https://www.stickystonestudio.de/imprint/"
+    ],
+    "applicationLocation": "Gundelfingen near Freiburg, Germany · remote/applicant-country eligibility not stated",
+    "reachHighlights": "Official studio describes M.O.O.D.S. as a 3D action roguelite and Memorrha as a first-person puzzle adventure; it also develops games and interactive applications for major consoles, PC and XR."
   }
 }
