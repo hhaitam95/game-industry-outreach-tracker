@@ -24,9 +24,19 @@ type Profile={
 };
 const profiles=profilesJson as Record<string,Profile>;
 const countryCodes:Record<string,string>={
-  "Australia":"AU","Bulgaria":"BG","Canada":"CA","Czech Republic":"CZ","Denmark":"DK","Estonia":"EE","Finland":"FI","France":"FR","Germany":"DE","Hungary":"HU","Iceland":"IS","Italy":"IT","Poland":"PL","Portugal":"PT","Saudi Arabia":"SA","Thailand":"TH","Türkiye":"TR","Turkey":"TR","United Kingdom":"GB","United States":"US","United Arab Emirates":"AE","Netherlands":"NL","Spain":"ES"
+  "Australia":"AU","Bulgaria":"BG","Canada":"CA","Czech Republic":"CZ","Denmark":"DK","Estonia":"EE","Finland":"FI","France":"FR","Germany":"DE","Hungary":"HU","Iceland":"IS","Italy":"IT","Moldova":"MD","Poland":"PL","Portugal":"PT","Saudi Arabia":"SA","Thailand":"TH","Türkiye":"TR","Turkey":"TR","United Kingdom":"GB","United States":"US","United Arab Emirates":"AE","Netherlands":"NL","Spain":"ES"
 };
 function flag(code?:string){return code&&code.length===2?String.fromCodePoint(...code.toUpperCase().split("").map(c=>127397+c.charCodeAt(0))):"🌍";}
+function scaleCategory(value?:string){
+  const normalized=(value||"").toLowerCase();
+  const hasAAA=normalized.includes("aaa");
+  const hasAA=/(^|[^a-z])aa([^a-z]|$)/.test(normalized);
+  const hasIndie=normalized.includes("indie");
+  if(normalized.includes("ambition")||(!hasAAA&&!hasAA&&!hasIndie)||((hasAAA?1:0)+(hasAA?1:0)+(hasIndie?1:0)>1))return "Mixed / Unclassified";
+  if(hasAAA)return "AAA";
+  if(hasAA)return "AA";
+  return "Indie";
+}
 function hqFor(studio:Studio,profile?:Profile){
   const hq=profile?.headquarters;
   if(hq)return {emoji:flag(hq.countryCode),label:[hq.city,hq.country].filter(Boolean).join(", ")||hq.country,tag:hq.label||"HQ"};
@@ -67,15 +77,15 @@ export default function StudioDirectory({applications,onSave,onMarkApplied}:{app
       const p=profiles[studio.name];
       const fields=[studio.name,studio.country,studio.notes,p?.description,p?.headquarters?.city,p?.headquarters?.country,p?.applicationLocation,p?.otherLocations.join(" "),p?.ownership,p?.parentCompany,p?.companyType.join(" "),p?.focus.join(" "),p?.teamSize,p?.reachHighlights,p?.popularGames.map(g=>g.title).join(" ")].filter(Boolean).join(" ").toLowerCase();
       const matches= !term||fields.includes(term);
-      const sizeMatch=scale==="All sizes"||p?.industryScale===scale;
+      const sizeMatch=scale==="All sizes"||scaleCategory(p?.industryScale)===scale;
       const kindMatch=kind==="All types"||p?.companyType.includes(kind);
       const studioCountry=p?.headquarters?.country||studio.country;
       const countryMatch=country==="All countries"||studioCountry===country;
       return matches&&sizeMatch&&kindMatch&&countryMatch;
     }).sort((a,b)=>sort==="name"?a.name.localeCompare(b.name):((profiles[b.name]?.popularGames.length||0)-(profiles[a.name]?.popularGames.length||0)));
   },[query,scale,kind,country,sort]);
-  const types=["All types","Developer","Publisher","Co-development","Mobile","Services"];
-  const scales=["All sizes","AAA","AA","AA / AAA","Indie","Indie / AA","AAA co-development","AA · Mobile"];
+  const types=["All types","Developer","Publisher","Co-development","Mobile","Services","Independent","Subsidiary","First-party studio"];
+  const scales=["All sizes","AAA","AA","Indie","Mixed / Unclassified"];
   const statusMap=new Map(applications.map(a=>[a.studioName,a.status]));
   return <section className="directory-page">
     <div className="directory-hero">
@@ -88,7 +98,7 @@ export default function StudioDirectory({applications,onSave,onMarkApplied}:{app
       <select aria-label="Filter by country" value={country} onChange={e=>setCountry(e.target.value)}><option>All countries</option>{countries.map(x=><option key={x}>{x}</option>)}</select>
       <select aria-label="Filter by studio type" value={kind} onChange={e=>setKind(e.target.value)}>{types.map(x=><option key={x}>{x}</option>)}</select>
       <select aria-label="Filter by industry scale" value={scale} onChange={e=>setScale(e.target.value)}>{scales.map(x=><option key={x}>{x}</option>)}</select>
-      <select aria-label="Sort studios" value={sort} onChange={e=>setSort(e.target.value)}><option value="name">A–Z</option><option value="games">Most known titles</option></select>
+      <select aria-label="Sort studios" value={sort} onChange={e=>setSort(e.target.value)}><option value="name">A–Z</option><option value="games">Most listed games</option></select>
       <span className="result-count">{filtered.length} studios</span>
     </div>
     <div className="directory-note"><span>✦</span> HQ is shown when a speculative route does not name a hiring location. Remote eligibility and branch offices are shown in each profile.</div>
