@@ -985,7 +985,7 @@ def maintain_existing_routes(
         if check["negative_count"] >= 2 or check["gone_count"] >= 2:
             research = studio["applicationResearch"]
             if research.get("routeStatus") != "closed":
-                evidence = "two consecutive official-site checks rejected speculative applications" if check["negative_count"] >= 2 else "both official application/evidence URLs returned 404/410 on two consecutive checks"
+                evidence = "two consecutive official-site checks rejected speculative applications" if check["negative_count"] >= 2 else "all configured official application/evidence URLs returned 404/410 on two consecutive checks"
                 studio["notes"] = str(studio.get("notes", "")).rstrip() + " Automated route review: marked closed after " + evidence + "."
                 research["routeStatus"] = "closed"
                 studio["checkedAt"] = today
