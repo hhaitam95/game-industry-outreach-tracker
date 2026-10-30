@@ -899,17 +899,22 @@ def route_page_check(studio: dict[str, Any], page_fetcher: Callable[[str, bool],
         return "unknown"
     results: list[FetchResult] = []
     positive_pages = 0
+    negative_pages = 0
     for url in urls:
         result = page_fetcher(url, not same_site(studio["websiteUrl"], url))
         results.append(result)
         if result.ok:
             page = parse_page(result.url, result.body)
             if negative_route_match(page.text):
-                return "negative"
-            if positive_route_match(page.text):
+                negative_pages += 1
+            elif positive_route_match(page.text):
                 positive_pages += 1
     if results and all(result.status_code in {404, 410} for result in results):
         return "gone"
+    if positive_pages and negative_pages:
+        return "unknown"
+    if negative_pages:
+        return "negative"
     # A live evidence page does not make a missing submission URL healthy. Keep the
     # record active while uncertain, but do not reset its closure counters either.
     if positive_pages and all(result.ok for result in results):
@@ -932,7 +937,6 @@ def maintain_existing_routes(
         return 0
     start = int(state.get("route_check_index", 0)) % len(active)
     selected = [active[(start + index) % len(active)] for index in range(min(batch_size, len(active)))]
-    state["route_check_index"] = (start + len(selected)) % len(active)
     today = iso_date()
     checked = 0
     for studio in selected:
@@ -974,6 +978,7 @@ def maintain_existing_routes(
                 research["routeStatus"] = "closed"
                 studio["checkedAt"] = today
                 research["nextReviewAt"] = today
+    state["route_check_index"] = (start + checked) % len(active)
     return checked
 
 
