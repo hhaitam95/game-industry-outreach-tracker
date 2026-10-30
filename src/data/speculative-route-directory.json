@@ -9,6 +9,15 @@
     "checkedAt": "2026-10-29"
   },
   {
+    "name": "AARISE",
+    "country": "France",
+    "websiteUrl": "https://www.aarise.games/",
+    "applicationUrl": "https://www.aarise.games/jobs/",
+    "evidenceUrl": "https://www.aarise.games/jobs/",
+    "notes": "Official Jobs page invites spontaneous applications and provides a form; asks for a CV and portfolio/showreel. Studio is in La Rochelle; listed roles are on-site or hybrid.",
+    "checkedAt": "2026-10-30"
+  },
+  {
     "name": "Abyssal Interactive",
     "country": "France",
     "websiteUrl": "https://www.abyssal-interactive.com/en/",
@@ -36,6 +45,15 @@
     "checkedAt": "2026-10-30"
   },
   {
+    "name": "Artefacts Studio",
+    "country": "France",
+    "websiteUrl": "https://www.artefacts-studio.fr/",
+    "applicationUrl": "https://www.artefacts-studio.fr/career",
+    "evidenceUrl": "https://www.artefacts-studio.fr/career",
+    "notes": "Official careers page explicitly invites spontaneous applications and provides an application route. Studio address is in Villeurbanne, France.",
+    "checkedAt": "2026-10-30"
+  },
+  {
     "name": "Aska Studios",
     "country": "Iceland",
     "websiteUrl": "https://askastudios.is/",
@@ -43,6 +61,15 @@
     "evidenceUrl": "https://askastudios.is/",
     "notes": "Official site invites CV and portfolio emails for developers, artists, designers and other contributors. Reykjavík-based studio describes a remote-first work environment.",
     "checkedAt": "2026-10-29"
+  },
+  {
+    "name": "Asobo Studio",
+    "country": "France",
+    "websiteUrl": "https://www.asobostudio.com/",
+    "applicationUrl": "https://jobs.eu.lever.co/asobostudio/b4b5157c-8b6d-441f-a3ed-5bd26034813f",
+    "evidenceUrl": "https://www.asobostudio.com/fr/carriere",
+    "notes": "Official Lever Speculative Application accepts candidates whose skills do not match a listed role. Full-time, on-site in Bordeaux; portfolio encouraged.",
+    "checkedAt": "2026-10-30"
   },
   {
     "name": "Awe Interactive",
@@ -70,6 +97,24 @@
     "evidenceUrl": "https://www.bananagun.fun/",
     "notes": "Official website includes an Open Application alongside role listings and invites candidates to apply by email.",
     "checkedAt": "2026-10-29"
+  },
+  {
+    "name": "Barnstorm Games",
+    "country": "United Kingdom",
+    "websiteUrl": "https://www.barnstormgames.com/",
+    "applicationUrl": "https://www.barnstormgames.com/speculative-application/",
+    "evidenceUrl": "https://www.barnstormgames.com/speculative-application/",
+    "notes": "Dedicated Speculative Application page invites applications from candidates who do not see the right role advertised. Company registered in England and Wales.",
+    "checkedAt": "2026-10-30"
+  },
+  {
+    "name": "Beenox",
+    "country": "Canada",
+    "websiteUrl": "https://beenox.com/",
+    "applicationUrl": "https://beenox.com/carrieres",
+    "evidenceUrl": "https://beenox.com/carrieres",
+    "notes": "Official careers FAQ explicitly confirms spontaneous applications and invites CVs. Full-time roles only; studio locations include Québec City and Montréal.",
+    "checkedAt": "2026-10-30"
   },
   {
     "name": "Blowfish Studios",
@@ -126,12 +171,30 @@
     "checkedAt": "2026-10-30"
   },
   {
+    "name": "Cyanide Studio",
+    "country": "France",
+    "websiteUrl": "https://cyanide-studio.com/",
+    "applicationUrl": "https://cyanide-studio.com/fr/nous-rejoindre/",
+    "evidenceUrl": "https://cyanide-studio.com/fr/nous-rejoindre/",
+    "notes": "Official careers page invites spontaneous applications when no listed role fits. The page's Apply button leads to an external application form; French-language route.",
+    "checkedAt": "2026-10-30"
+  },
+  {
     "name": "Dionic Software",
     "country": "Germany",
     "websiteUrl": "https://dionicsoftware.com/",
     "applicationUrl": "https://dionicsoftware.com/jobs.html",
     "evidenceUrl": "https://dionicsoftware.com/jobs.html",
     "notes": "Official jobs page invites speculative approaches when no role fits. Employment is Germany-only; freelancers can usually work from European time zones. Work model: remote.",
+    "checkedAt": "2026-10-30"
+  },
+  {
+    "name": "DON'T NOD (Montreal)",
+    "country": "Canada",
+    "websiteUrl": "https://dont-nod.com/en/",
+    "applicationUrl": "https://jobs.smartrecruiters.com/DONTNOD/744000056999494-spontaneous-application",
+    "evidenceUrl": "https://jobs.smartrecruiters.com/DONTNOD/744000056999494-spontaneous-application",
+    "notes": "Official SmartRecruiters Spontaneous Application for DON'T NOD Montreal. Invites applications when the career site has no matching role; Montreal-specific.",
     "checkedAt": "2026-10-30"
   },
   {
@@ -261,6 +324,15 @@
     "checkedAt": "2026-10-30"
   },
   {
+    "name": "Lighthouse Games",
+    "country": "United Kingdom",
+    "websiteUrl": "https://lighthousegames.com/",
+    "applicationUrl": "https://lighthousegames.com/careers/3C151DE079/",
+    "evidenceUrl": "https://lighthousegames.com/careers/3C151DE079/",
+    "notes": "Dedicated Speculative Application invites candidates who do not see a matching role. Full-time, on-site in Royal Leamington Spa; studio says it is looking for top talent.",
+    "checkedAt": "2026-10-30"
+  },
+  {
     "name": "LIQUIDBULLET Studios",
     "country": "Not stated",
     "websiteUrl": "https://www.liquidbulletstudios.com/",
@@ -306,6 +378,15 @@
     "checkedAt": "2026-10-29"
   },
   {
+    "name": "Octocube Games",
+    "country": "Denmark",
+    "websiteUrl": "https://octocubegames.com/",
+    "applicationUrl": "https://octocubegames.com/contact/",
+    "evidenceUrl": "https://octocubegames.com/careers/",
+    "notes": "Official Careers page invites Unsolicited Applications. The studio contact form includes an 'Unsolicited Application' topic. Based in Roskilde, Denmark.",
+    "checkedAt": "2026-10-30"
+  },
+  {
     "name": "Old Skull Games",
     "country": "France",
     "websiteUrl": "https://www.oldskullgames.com/",
@@ -322,6 +403,15 @@
     "evidenceUrl": "https://outplay.com/careers/speculative-applications/",
     "notes": "Official ATS route for speculative applications when no specific role fits. Listed as flexi-hybrid with remote options in the UK/EU. Eligible locations: Austria, Belgium, Bulgaria, Croatia, Cyprus, Czechia, Denmark, Estonia, Finland, France, Germany, Greece, Hungary, Ireland, Italy, Latvia, Lithuania, Luxembourg, Malta, Netherlands, Poland, Portugal, Romania, Slovakia, Slovenia, Spain, Sweden, United Kingdom.",
     "checkedAt": "2026-10-29"
+  },
+  {
+    "name": "Paintbucket Games",
+    "country": "Germany",
+    "websiteUrl": "https://paintbucket.de/en",
+    "applicationUrl": "https://paintbucket.de/en/jobs",
+    "evidenceUrl": "https://paintbucket.de/en/jobs",
+    "notes": "Official Jobs page lists an Unsolicited Application and says to apply even when no current job offer fits. Full-time; studio is based in Berlin.",
+    "checkedAt": "2026-10-30"
   },
   {
     "name": "Plummy Games",
