@@ -126,16 +126,30 @@ class DiscoveryParsingTests(unittest.TestCase):
         self.assertIsNotNone(discovery.exclusion_match("A studio making pornographic adult games."))
         self.assertIsNone(discovery.exclusion_match("We build fantasy adventure games with tavern scenes."))
 
-    def test_spaqrl_query_uses_cursor_and_separate_candidate_feeds(self):
-        cursor = "https://www.wikidata.org/entity/Q500"
+    def test_spaqrl_query_uses_qid_cursor_and_separate_candidate_feeds(self):
+        cursor = "Q500"
         developer_query = discovery.sparql_query("class", cursor, 120)
         credit_query = discovery.sparql_query("developer_credit", cursor, 120)
         self.assertIn("wd:Q210167", developer_query)
         self.assertIn("wdt:P856", developer_query)
-        self.assertIn(cursor, developer_query)
+        self.assertIn('STRAFTER(STR(?company), "/entity/") > "Q500"', developer_query)
+        self.assertNotIn("https://www.wikidata.org/entity/Q500", developer_query)
         self.assertIn("wdt:P178", credit_query)
         self.assertIn("wd:Q7889", credit_query)
         self.assertIn("LIMIT 120", credit_query)
+
+    def test_wikidata_entity_uri_is_normalized_to_qid_and_https_source(self):
+        self.assertEqual(
+            discovery.normalize_wikidata_entity_uri("http://www.wikidata.org/entity/Q123"),
+            ("Q123", "https://www.wikidata.org/entity/Q123"),
+        )
+        self.assertEqual(
+            discovery.normalize_wikidata_entity_uri("https://www.wikidata.org/entity/Q456"),
+            ("Q456", "https://www.wikidata.org/entity/Q456"),
+        )
+        self.assertIsNone(
+            discovery.normalize_wikidata_entity_uri("https://example.org/entity/Q789")
+        )
 
 
 class CandidateVerificationTests(unittest.TestCase):
@@ -196,6 +210,52 @@ class CandidateVerificationTests(unittest.TestCase):
         self.assertEqual(result["evidence_url"], "https://example-studio.example/careers")
         self.assertIn("ats", result["submission_methods"])
         self.assertEqual(result["source_type"], "employer_managed_career_platform")
+
+    def test_production_fetcher_uses_the_verifier_two_argument_interface(self):
+        bodies = {
+            "https://example-studio.example/": '<a href="/careers">Careers</a>',
+            "https://example-studio.example/careers": (
+                "<p>We welcome speculative applications from game developers.</p>"
+                "<form action='/submit'></form>"
+            ),
+        }
+
+        class FakeResponse:
+            status = 200
+
+            def __init__(self, url, body):
+                self.url = url
+                self.body = body.encode("utf-8")
+                self.headers = {"Content-Type": "text/html; charset=utf-8"}
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc_value, traceback):
+                return False
+
+            def geturl(self):
+                return self.url
+
+            def read(self, limit):
+                return self.body[:limit]
+
+        class FakeOpener:
+            def open(self, request, timeout):
+                url = request.full_url
+                return FakeResponse(url, bodies[url])
+
+        with (
+            patch.object(discovery, "validate_public_host", return_value=True),
+            patch.object(discovery, "robots_allowed", return_value=True),
+            patch.object(discovery, "wait_for_host"),
+            patch.object(discovery.urllib.request, "build_opener", return_value=FakeOpener()),
+        ):
+            result = discovery.verify_candidate_pages(self.candidate(), discovery.fetch_url)
+
+        self.assertEqual(result["status"], "verified")
+        self.assertEqual(result["route_type"], "speculative")
+        self.assertEqual(result["submission_methods"], ["website_form"])
 
     def test_explicit_rejection_means_no_route_even_if_page_has_careers_links(self):
         pages = {
@@ -487,6 +547,47 @@ class DatasetUpdateTests(unittest.TestCase):
         self.assertEqual(studio["applicationResearch"]["routeStatus"], "closed")
         self.assertEqual(studio["name"], "Example Game Studio")
         self.assertIn("two consecutive", studio["notes"])
+
+    def test_future_retry_does_not_block_completion_of_a_discovery_cycle(self):
+        state = discovery.empty_state()
+        discovery.add_candidates(state, [{
+            "qid": "Q123",
+            "entity_url": "https://www.wikidata.org/entity/Q123",
+            "name": "Example Game Studio",
+            "website": "https://example-studio.example/",
+            "country": "Canada",
+            "hq_city": "Montreal",
+            "country_code": "CA",
+        }])
+        candidate = state["candidates"]["Q123"]
+        candidate["status"] = "retry"
+        candidate["next_check_at"] = "2099-01-01"
+        for feed in discovery.FEEDS:
+            state["feed_done"][feed["id"]] = True
+
+        self.assertTrue(discovery.finish_cycle_if_complete(state))
+        self.assertEqual(state["cycle"], 2)
+        self.assertEqual(candidate["status"], "retry")
+
+    def test_due_retry_keeps_its_current_discovery_cycle_open(self):
+        state = discovery.empty_state()
+        discovery.add_candidates(state, [{
+            "qid": "Q123",
+            "entity_url": "https://www.wikidata.org/entity/Q123",
+            "name": "Example Game Studio",
+            "website": "https://example-studio.example/",
+            "country": "Canada",
+            "hq_city": "Montreal",
+            "country_code": "CA",
+        }])
+        candidate = state["candidates"]["Q123"]
+        candidate["status"] = "retry"
+        candidate["next_check_at"] = discovery.iso_date()
+        for feed in discovery.FEEDS:
+            state["feed_done"][feed["id"]] = True
+
+        self.assertFalse(discovery.finish_cycle_if_complete(state))
+        self.assertEqual(state["cycle"], 1)
 
     def test_three_complete_empty_cycles_mark_initial_discovery_saturated(self):
         state = discovery.empty_state()
