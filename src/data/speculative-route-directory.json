@@ -276,7 +276,7 @@
     "websiteUrl": "https://agate.id/",
     "applicationUrl": "https://agate.id/job/open-application-lead-3d-artist/",
     "evidenceUrl": "https://agate.id/job/open-application-lead-3d-artist/",
-    "notes": "Official Lead 3D Artist Open Application page states that applicants join Agate's Open Application Pool for future role needs and are prioritised for review before a vacancy is publicly posted. This is a role-specific open-application pool, not an unrestricted general application. Agate also lists separate open-application pools for 3D Artist, Technical Artist and 2D Artist; the selected route is the currently verified Lead 3D Artist page. The page describes a hybrid work system.",
+    "notes": "Official Open Application pages place candidates into Agate's future-role pool. These are discipline-specific listings for Lead 3D Artist, Technical Artist, 3D Artist and 2D Artist rather than an unrestricted general application. The primary route is the Lead 3D Artist pool; the additional official discipline-specific routes are linked as related application URLs. The pages describe a hybrid work system.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "discipline_specific",
@@ -288,9 +288,16 @@
         "Indonesia · hybrid model stated; applicant eligibility not otherwise specified"
       ],
       "disciplineScope": [
-        "Lead 3D Artist"
+        "Lead 3D Artist",
+        "Technical Artist",
+        "3D Artist",
+        "2D Artist"
       ],
-      "relatedApplicationUrls": [],
+      "relatedApplicationUrls": [
+        "https://agate.id/job/open-application-open-application-technical-artist/",
+        "https://agate.id/job/open-application-3d-artist/",
+        "https://agate.id/job/open-application-2d-artist/"
+      ],
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
@@ -491,8 +498,7 @@
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
-        "email",
-        "website_form"
+        "email"
       ],
       "workModel": "remote",
       "eligibleLocations": [
@@ -760,18 +766,19 @@
     "name": "BetaDwarf",
     "country": "Denmark",
     "websiteUrl": "https://betadwarf.com/",
-    "applicationUrl": "https://betadwarf.com/career",
+    "applicationUrl": "https://betadwarfaps.bamboohr.com/careers/34",
     "evidenceUrl": "https://betadwarf.com/career",
-    "notes": "Official Careers page accepts unsolicited applications only under its Unsolicited Internships section. Applicants should email a CV, cover letter and portfolio link. The studio states that internships are unpaid and must last at least three months; the listed office is in Copenhagen. This is not a general unsolicited route for permanent roles.",
+    "notes": "Official Careers page accepts unsolicited applications only under its Unsolicited Internships section, linking to this BambooHR listing. The page asks applicants for a CV, cover letter and portfolio link. BetaDwarf states that internships are unpaid and must last at least three months. This is not a general unsolicited route for permanent roles.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "discipline_specific",
       "submissionMethods": [
+        "ats",
         "email"
       ],
-      "workModel": "on_site",
+      "workModel": "not_stated",
       "eligibleLocations": [
-        "Copenhagen, Denmark"
+        "Copenhagen, Denmark · office listed; internship work location not separately specified"
       ],
       "disciplineScope": [
         "Internships only"
