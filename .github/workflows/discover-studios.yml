@@ -150,7 +150,7 @@ jobs:
           for attempt in $(seq 1 "$max_attempts"); do
             git fetch origin main
             git reset --mixed origin/main
-            python3 scripts/merge_discovery_datasets.py --base-ref origin/main
+            python3 scripts/merge_discovery_datasets.py --base-ref origin/main --initial-ref "$GITHUB_SHA"
 
             # These public datasets match the broad local-data ignore rule.
             git add -f -- src/data/speculative-route-directory.json src/data/studio-profiles.json
