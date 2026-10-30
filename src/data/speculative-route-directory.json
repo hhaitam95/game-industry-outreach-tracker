@@ -113,6 +113,28 @@
     }
   },
   {
+    "name": "A4VR",
+    "country": "Germany",
+    "websiteUrl": "https://a4vr.com/",
+    "applicationUrl": "https://www.a4vr.com/jobs",
+    "evidenceUrl": "https://www.a4vr.com/jobs",
+    "notes": "Official studio-controlled page explicitly invites spontaneous applications. Evidence: INITIATIVBEWERBUNG. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "AARISE",
     "country": "France",
     "websiteUrl": "https://www.aarise.games/",
@@ -126,6 +148,50 @@
         "website_form"
       ],
       "workModel": "mixed",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Abbey Games",
+    "country": "Netherlands",
+    "websiteUrl": "https://abbeygames.com/",
+    "applicationUrl": "https://abbeygames.com/jobs/",
+    "evidenceUrl": "https://abbeygames.com/jobs/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "About Fun",
+    "country": "Czechia",
+    "websiteUrl": "https://about-fun.com/",
+    "applicationUrl": "https://www.about-fun.com/jobs-open-application",
+    "evidenceUrl": "https://www.about-fun.com/jobs",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
       "eligibleLocations": [],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
@@ -205,6 +271,29 @@
     }
   },
   {
+    "name": "Agate",
+    "country": "Indonesia",
+    "websiteUrl": "https://agate.id/",
+    "applicationUrl": "https://agate.id/?page_id=14741",
+    "evidenceUrl": "https://agate.id/contact-agate/gamedevelopment/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "AlterEyes",
     "country": "Belgium",
     "websiteUrl": "https://altereyes.com/",
@@ -251,6 +340,50 @@
     }
   },
   {
+    "name": "Another Axiom",
+    "country": "United States",
+    "websiteUrl": "https://anotheraxiom.com/",
+    "applicationUrl": "https://www.anotheraxiom.com/careers",
+    "evidenceUrl": "https://www.anotheraxiom.com/careers",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Apog Labs",
+    "country": "Sweden",
+    "websiteUrl": "https://www.apoglabs.com/",
+    "applicationUrl": "https://career.apoglabs.com/",
+    "evidenceUrl": "https://www.apoglabs.com/join",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Artefacts Studio",
     "country": "France",
     "websiteUrl": "https://www.artefacts-studio.fr/",
@@ -262,6 +395,28 @@
       "routeType": "spontaneous",
       "submissionMethods": [
         "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Ashborne Games (THQ Nordic)",
+    "country": "Czechia",
+    "websiteUrl": "https://ashbornegames.com/",
+    "applicationUrl": "https://ashbornegames.com/careers",
+    "evidenceUrl": "https://ashbornegames.com/careers",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
       ],
       "workModel": "not_stated",
       "eligibleLocations": [],
@@ -321,6 +476,51 @@
     }
   },
   {
+    "name": "AstroBeam",
+    "country": "United States",
+    "websiteUrl": "https://www.astrobeam.com/",
+    "applicationUrl": "https://www.astrobeam.com/jobs/blog-post-title-four-2x696-35n6y",
+    "evidenceUrl": "https://www.astrobeam.com/jobs",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Atvis",
+    "country": "Sweden",
+    "websiteUrl": "https://atvis.com/",
+    "applicationUrl": "https://atvis.com/index.php/jobba-hos-oss/",
+    "evidenceUrl": "https://atvis.com/index.php/jobba-hos-oss/",
+    "notes": "Official studio-controlled page explicitly invites spontaneous applications. Evidence: Spontanansökan. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Awe Interactive",
     "country": "United Kingdom",
     "websiteUrl": "https://www.aweinteractive.com/",
@@ -330,6 +530,97 @@
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "speculative",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "AxesInMotion (gamigo Group)",
+    "country": "Spain",
+    "websiteUrl": "https://axesinmotion.com/",
+    "applicationUrl": "https://apply.workable.com/axesinmotion/j/C4A86990C1/",
+    "evidenceUrl": "https://axesinmotion.com/work-with-us/",
+    "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: Speculative Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "ats",
+        "email",
+        "website_form"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Axolot Games",
+    "country": "Sweden",
+    "websiteUrl": "https://axolotgames.com/",
+    "applicationUrl": "https://axolotgamesab.teamtailor.com/jobs/3583177-open-application",
+    "evidenceUrl": "https://www.axolotgames.com/careers",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Ayelet Studio",
+    "country": "India",
+    "websiteUrl": "https://ayelet.studio/",
+    "applicationUrl": "https://ayelet.studio/jobs",
+    "evidenceUrl": "https://ayelet.studio/jobs",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Baby Robot Games",
+    "country": "Spain",
+    "websiteUrl": "https://www.ereban.com/",
+    "applicationUrl": "https://www.ereban.com/careers/open-position",
+    "evidenceUrl": "https://www.ereban.com/contact/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
       "submissionMethods": [
         "email"
       ],
@@ -365,6 +656,28 @@
     }
   },
   {
+    "name": "Bandit Island Games",
+    "country": "Sweden",
+    "websiteUrl": "https://www.bandit-island.com/",
+    "applicationUrl": "https://www.bandit-island.com/careers",
+    "evidenceUrl": "https://www.bandit-island.com/careers",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: OPEN APPLICATION. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Barnstorm Games",
     "country": "United Kingdom",
     "websiteUrl": "https://www.barnstormgames.com/",
@@ -387,6 +700,28 @@
     }
   },
   {
+    "name": "BeamNG",
+    "country": "Germany",
+    "websiteUrl": "https://www.beamng.gmbh/",
+    "applicationUrl": "https://apply.workable.com/beamng/",
+    "evidenceUrl": "https://www.beamng.gmbh/career/",
+    "notes": "Official studio-controlled page explicitly invites unsolicited applications. Evidence: Unsolicited applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Beenox",
     "country": "Canada",
     "websiteUrl": "https://beenox.com/",
@@ -398,6 +733,51 @@
       "routeType": "spontaneous",
       "submissionMethods": [
         "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "BetaDwarf",
+    "country": "Denmark",
+    "websiteUrl": "https://betadwarf.com/",
+    "applicationUrl": "https://betadwarfaps.bamboohr.com/jobs/view.php?id=34",
+    "evidenceUrl": "https://betadwarf.com/career",
+    "notes": "Official studio-controlled page explicitly invites unsolicited applications. Evidence: unsolicited application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "ats",
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Binary Impacts",
+    "country": "Germany",
+    "websiteUrl": "https://www.binaryimpact.de/",
+    "applicationUrl": "https://www.binaryimpact.de/jobs/",
+    "evidenceUrl": "https://www.binaryimpact.de/jobs/",
+    "notes": "Official studio-controlled page explicitly invites spontaneous applications. Evidence: Initiativbewerbung. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email"
       ],
       "workModel": "not_stated",
       "eligibleLocations": [],
@@ -457,6 +837,28 @@
     }
   },
   {
+    "name": "Bongfish",
+    "country": "Austria",
+    "websiteUrl": "https://bongfish.com/",
+    "applicationUrl": "https://www.bongfish.com/jobs/",
+    "evidenceUrl": "https://www.bongfish.com/jobs/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Bossa Studios",
     "country": "United Kingdom",
     "websiteUrl": "https://www.bossagames.com/",
@@ -473,6 +875,28 @@
       "eligibleLocations": [
         "Remote-first · application eligibility to confirm"
       ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Box Dragon (Coffee Stain)",
+    "country": "Sweden",
+    "websiteUrl": "https://boxdragon.se/",
+    "applicationUrl": "https://www.boxdragon.se/jobs",
+    "evidenceUrl": "https://www.boxdragon.se/jobs",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: general applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
