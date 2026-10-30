@@ -3815,4 +3815,78 @@
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
   }
+,
+  "AlterEyes": {
+    "description": "Belgian XR and game studio creating VR and AR games, immersive entertainment and interactive learning and business experiences.",
+    "headquarters": {
+      "city": "Hasselt",
+      "country": "Belgium",
+      "countryCode": "BE",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "XR venture studio"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Not disclosed",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "VR",
+      "AR",
+      "Mixed Reality",
+      "PC",
+      "Mobile",
+      "XR"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://altereyes.com/about-us/",
+      "https://altereyes.com/jobs/"
+    ],
+    "applicationLocation": "Not stated · HQ shown as reference",
+    "reachHighlights": "Award-winning game studio within the XR ecosystem; develops immersive games and learning, marketing and business experiences."
+  },
+  "The Knights of U": {
+    "description": "Polish external game-development studio delivering Unity and Unreal co-development, porting, optimization, technical art, UX/UI and remastering, alongside original desktop and console projects.",
+    "headquarters": {
+      "city": "Wrocław",
+      "country": "Poland",
+      "countryCode": "PL",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Porting"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Not classified",
+    "teamSize": "65+ experts onboard (studio-reported)",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "PC",
+      "Console",
+      "Unity",
+      "Unreal Engine",
+      "Co-development",
+      "Porting",
+      "Technical Art",
+      "Optimization",
+      "Remastering"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://theknightsofu.com/",
+      "https://theknightsofu.com/career/",
+      "https://theknightsofu.com/about-us/"
+    ],
+    "applicationLocation": "Wrocław office · office, hybrid or fully remote options stated; applicant geography not stated",
+    "reachHighlights": "65+ experts onboard, 120+ completed projects and 100+ satisfied clients (studio-reported). Formerly The Knights of Unity."
+  }
 }
