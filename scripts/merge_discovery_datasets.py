@@ -56,6 +56,42 @@ def is_placeholder(value: object) -> bool:
     return False
 
 
+def exclude_records_removed_from_latest_main(
+    initial_rows: list[dict],
+    latest_main_rows: list[dict],
+    incoming_rows: list[dict],
+) -> tuple[list[dict], list[str]]:
+    """Do not resurrect a studio that main removed while discovery was running.
+
+    A rename keeps the same official domain and is therefore not considered a
+    deletion. A domain present in the run's initial checkout but absent from the
+    latest main snapshot is treated as an intentional removal.
+    """
+    initial_domains = {
+        domain_key(str(record.get("websiteUrl", "")))
+        for record in initial_rows
+        if domain_key(str(record.get("websiteUrl", "")))
+    }
+    latest_domains = {
+        domain_key(str(record.get("websiteUrl", "")))
+        for record in latest_main_rows
+        if domain_key(str(record.get("websiteUrl", "")))
+    }
+    removed_domains = initial_domains - latest_domains
+    if not removed_domains:
+        return copy.deepcopy(incoming_rows), []
+
+    kept: list[dict] = []
+    skipped: list[str] = []
+    for record in incoming_rows:
+        domain = domain_key(str(record.get("websiteUrl", "")))
+        if domain in removed_domains:
+            skipped.append(str(record.get("name", "")).strip())
+            continue
+        kept.append(record)
+    return kept, sorted(set(name for name in skipped if name), key=str.casefold)
+
+
 def merge_profiles(base: dict, incoming: dict) -> dict:
     """Fill gaps and union sourced arrays without replacing researched main data."""
     merged = copy.deepcopy(base)
@@ -207,7 +243,11 @@ def git_show(ref: str, path: str) -> str:
     return result.stdout
 
 
-def merge_from_git(root: Path, base_ref: str) -> dict[str, object]:
+def merge_from_git(
+    root: Path,
+    base_ref: str,
+    initial_ref: str | None = None,
+) -> dict[str, object]:
     directory_path = root / DIRECTORY_PATH
     profiles_path = root / PROFILES_PATH
     base_rows = json.loads(git_show(base_ref, DIRECTORY_PATH))
@@ -215,9 +255,19 @@ def merge_from_git(root: Path, base_ref: str) -> dict[str, object]:
     incoming_rows = json.loads(directory_path.read_text(encoding="utf-8"))
     incoming_profiles = json.loads(profiles_path.read_text(encoding="utf-8"))
 
+    concurrently_removed: list[str] = []
+    if initial_ref:
+        initial_rows = json.loads(git_show(initial_ref, DIRECTORY_PATH))
+        incoming_rows, concurrently_removed = exclude_records_removed_from_latest_main(
+            initial_rows,
+            base_rows,
+            incoming_rows,
+        )
+
     merged_rows, merged_profiles, summary = merge_datasets(
         base_rows, incoming_rows, base_profiles, incoming_profiles
     )
+    summary["concurrent_main_removals_respected"] = concurrently_removed
     directory_path.write_text(
         json.dumps(merged_rows, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
@@ -231,10 +281,14 @@ def merge_from_git(root: Path, base_ref: str) -> dict[str, object]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--base-ref", required=True, help="Fetched Git ref, e.g. origin/main")
+    parser.add_argument("--base-ref", required=True, help="Fetched latest Git ref, e.g. origin/main")
+    parser.add_argument(
+        "--initial-ref",
+        help="Run-start commit ref used to detect records intentionally removed from main while discovery ran.",
+    )
     parser.add_argument("--root", type=Path, default=ROOT)
     args = parser.parse_args()
-    summary = merge_from_git(args.root, args.base_ref)
+    summary = merge_from_git(args.root, args.base_ref, args.initial_ref)
     print("Merged discovery dataset with latest main:", json.dumps(summary, sort_keys=True))
     return 0
 
