@@ -305,13 +305,11 @@ def canonical_url(value: str) -> str | None:
         # urllib; otherwise one malformed image/link can abort an entire discovery run.
         path = urllib.parse.quote(
             parsed.path or "/",
-            safe="/:@!        path = parsed.path or "/"
-        return urllib.parse.urlunsplit((scheme, netloc, path, parsed.query, ""))'()*+,;=-._~%",
+            safe="/:@!$&'()*+,;=-._~%",
         )
         query = urllib.parse.quote(
             parsed.query,
-            safe="/?:@!        path = parsed.path or "/"
-        return urllib.parse.urlunsplit((scheme, netloc, path, parsed.query, ""))'()*+,;=-._~%[]",
+            safe="/?:@!$&'()*+,;=-._~%[]",
         )
         return urllib.parse.urlunsplit((scheme, netloc, path, query, ""))
     except (ValueError, AttributeError):
