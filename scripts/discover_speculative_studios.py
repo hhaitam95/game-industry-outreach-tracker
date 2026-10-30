@@ -830,9 +830,14 @@ def fetch_wikidata_batch(feed_kind: str, cursor: str, limit: int) -> list[dict[s
     return rows
 
 
-def parse_gamedevmap_page(body: str, page_url: str, start: int) -> list[dict[str, str]]:
+def parse_gamedevmap_page_with_count(
+    body: str,
+    page_url: str,
+    start: int,
+) -> tuple[list[dict[str, str]], int]:
     parser = GameDevMapParser()
     parser.feed(body)
+    raw_row_count = len(parser.rows)
     rows: list[dict[str, str]] = []
     for cells in parser.rows:
         # Public results table: Company, social link, Type, City, State/Province, Country.
@@ -869,12 +874,17 @@ def parse_gamedevmap_page(body: str, page_url: str, start: int) -> list[dict[str
             "country": country,
             "hq_city": hq_city,
             "country_code": "",
-            "company_type": company_type or "Not stated",
+            "company_type": company_type,
         })
+    return rows, raw_row_count
+
+
+def parse_gamedevmap_page(body: str, page_url: str, start: int) -> list[dict[str, str]]:
+    rows, _raw_row_count = parse_gamedevmap_page_with_count(body, page_url, start)
     return rows
 
 
-def fetch_gamedevmap_batch(cursor: str, limit: int) -> list[dict[str, str]]:
+def fetch_gamedevmap_page(cursor: str, limit: int) -> tuple[list[dict[str, str]], int]:
     try:
         start = max(1, int(cursor or "1"))
     except ValueError as exc:
@@ -894,8 +904,12 @@ def fetch_gamedevmap_batch(cursor: str, limit: int) -> list[dict[str, str]]:
     result = fetch_url(page_url, timeout=REQUEST_TIMEOUT_SECONDS, max_bytes=MAX_RESPONSE_BYTES)
     if not result.ok:
         raise RuntimeError("GameDevMap fetch failed safely: " + (result.error or "unavailable"))
-    return parse_gamedevmap_page(result.body, result.url, start)
+    return parse_gamedevmap_page_with_count(result.body, result.url, start)
 
+
+def fetch_gamedevmap_batch(cursor: str, limit: int) -> list[dict[str, str]]:
+    rows, _raw_row_count = fetch_gamedevmap_page(cursor, limit)
+    return rows
 
 def fetch_source_batch(feed_kind: str, cursor: str, limit: int) -> list[dict[str, str]]:
     if feed_kind == "gamedevmap":
@@ -1348,11 +1362,17 @@ def run_pipeline(
             if state["feed_done"].get(feed_id, False) or time.monotonic() + 30 >= deadline:
                 break
             cursor = state["feed_cursors"].get(feed_id, "1") or "1"
-            rows = source_fetcher(feed["kind"], cursor, batch_size)
+            if source_fetcher is fetch_source_batch:
+                rows, source_row_count = fetch_gamedevmap_page(cursor, batch_size)
+            else:
+                # Injected source fetchers return parsed rows; production reads the
+                # raw table row count separately because category filtering is lossy.
+                rows = source_fetcher(feed["kind"], cursor, batch_size)
+                source_row_count = len(rows)
             source_pages += 1
             source_candidates += add_candidates(state, rows)
             state["feed_cursors"][feed_id] = str(int(cursor) + batch_size)
-            if len(rows) < batch_size:
+            if source_row_count < batch_size:
                 state["feed_done"][feed_id] = True
                 break
     else:

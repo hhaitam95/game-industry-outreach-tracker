@@ -871,5 +871,66 @@ class GameDevMapDiscoveryTests(unittest.TestCase):
         self.assertEqual(profile["headquarters"]["label"], "Listed location · GameDevMap")
 
 
+    def test_parser_reports_raw_rows_separately_from_filtered_studio_candidates(self):
+        body = """
+        <table>
+          <tr><th>Company</th><th>Social</th><th>Type</th><th>City</th><th>State</th><th>Country</th></tr>
+          <tr><td><a href="https://developer.example/">Developer</a></td><td></td><td>Developer</td><td>Montreal</td><td>Quebec</td><td>Canada</td></tr>
+          <tr><td><a href="https://fund.example/">Fund</a></td><td></td><td>Investment</td><td>London</td><td>England</td><td>United Kingdom</td></tr>
+          <tr><td><a href="https://publisher.example/">Publisher</a></td><td></td><td>Publisher</td><td>Paris</td><td></td><td>France</td></tr>
+        </table>
+        """
+        candidates, raw_row_count = discovery.parse_gamedevmap_page_with_count(
+            body,
+            "https://www.gamedevmap.com/index.php?start=1&count=3",
+            1,
+        )
+        self.assertEqual(len(candidates), 2)
+        self.assertEqual(raw_row_count, 4)
+
+    def test_bulk_mode_does_not_finish_page_when_filtering_reduces_candidate_rows(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "src/data").mkdir(parents=True)
+            (root / "src/data/speculative-route-directory.json").write_text("[]", encoding="utf-8")
+            (root / "src/data/studio-profiles.json").write_text("{}", encoding="utf-8")
+            state_path = root / "state/state.json"
+            state_path.parent.mkdir(parents=True)
+            state_path.write_text(__import__("json").dumps(discovery.empty_state()), encoding="utf-8")
+            candidate = {
+                "qid": "GDM:developer",
+                "entity_url": "https://www.gamedevmap.com/index.php?start=1",
+                "source_id": "gamedevmap",
+                "name": "Developer Studio",
+                "website": "https://developer-studio.example/",
+                "country": "Canada",
+                "hq_city": "Montreal",
+                "country_code": "",
+                "company_type": "Developer",
+            }
+            # The raw page had two result rows, but only one survived category filtering.
+            # The source still has another page and must not be marked complete.
+            with patch.object(
+                discovery,
+                "fetch_gamedevmap_page",
+                return_value=([candidate], 2),
+            ) as fetch_page:
+                discovery.run_pipeline(
+                    mode="bulk",
+                    batch_size=2,
+                    max_source_pages=1,
+                    max_candidate_checks=0,
+                    route_check_count=0,
+                    max_run_seconds=60,
+                    root=root,
+                    state_path=state_path,
+                )
+            fetch_page.assert_called_once_with("1", 2)
+            saved = discovery.load_state(state_path)
+            self.assertEqual(saved["feed_cursors"]["gamedevmap"], "3")
+            self.assertFalse(saved["feed_done"]["gamedevmap"])
+            self.assertEqual(len(saved["candidates"]), 1)
+
+
 if __name__ == "__main__":
     unittest.main()
