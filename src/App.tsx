@@ -37,6 +37,7 @@ export default function App(){
     const timestamp=new Date().toISOString();
     setApplications(previous=>{
       const existing=previous.find(item=>item.studioName===studio.name);
+      if(existing&&status==="saved")return previous;
       const next:TrackedApplication={
         id:existing?.id||studio.name.toLowerCase().replace(/[^a-z0-9]+/g,"-"),
         studioName:studio.name,
