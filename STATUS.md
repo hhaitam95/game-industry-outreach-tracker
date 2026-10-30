@@ -19,8 +19,9 @@
 - The separate `discovery-state` branch stores private candidate/source progress; candidate data is not exposed in the public directory.
 - Last confirmed persisted snapshot: **403 candidates** at 2026-10-30 18:33:52 UTC. Statuses: 269 no route, 111 retry, 9 published by discovery, 6 duplicates, 5 needs review and 3 excluded.
 - At that snapshot, the GameDevMap offset was 101; two Wikidata feeds were still incomplete.
-- The next discovery job has processed a later GameDevMap page in its runner log (pool size 496; 93 source rows checked; GameDevMap reported complete), but its state push was rejected because the state branch changed after checkout. That batch has not yet been confirmed as persisted.
-- A scheduled recovery run is in progress, with the failed run replay queued behind it. The workflow's repository-wide concurrency group serializes discovery runs so they do not work on the same state snapshot simultaneously.
+- The live GameDevMap page at offset 101 explicitly reports results 101–200 of 10,500. The initial worldwide backfill is therefore far from exhausted at offset 101.
+- A discovery runner processed one further batch but its state push was rejected after the discovery-state branch changed during the run. Treat that batch as unpersisted; the last confirmed saved cursor remains 101. Do not treat a runner-reported completion flag as final until the saved cursor reaches the end of the source pagination.
+- A scheduled recovery run is still in progress. Discovery runs share a repository-wide concurrency group, so the queued retry must wait for the scheduled run rather than competing for the same state branch.
 - Candidate directories are leads only. Publication remains strict: only explicit speculative/open application routes verified on official studio-controlled pages are included. Timeouts, blocks and ambiguous evidence do not close routes.
 
 ## Scraper correctness
