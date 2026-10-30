@@ -34,6 +34,11 @@ function hqFor(studio:Studio,profile?:Profile){
   return {emoji:"🌍",label:"Not publicly stated",tag:"HQ unknown"};
 }
 function gameArtUrl(appId:number){return `https://cdn.cloudflare.steamstatic.com/steam/apps/${appId}/header.jpg`;}
+function trackerLocation(studio:Studio,profile?:Profile){
+  const hq=profile?.headquarters;
+  const hqLabel=hq?.city?`${hq.city} · HQ`:hq?.label||"HQ not disclosed";
+  return {country:hq?.country||studio.country,hqLabel,applicationLocation:profile?.applicationLocation||"Not specified · HQ shown as reference"};
+}
 
 function GameCard({game}:{game:Profile["popularGames"][number]}){
   const [failed,setFailed]=useState(false);
@@ -43,7 +48,7 @@ function GameCard({game}:{game:Profile["popularGames"][number]}){
   </div>;
 }
 
-export default function StudioDirectory({applications,onSave,onMarkApplied}:{applications:TrackedApplication[];onSave:(studio:Studio)=>void;onMarkApplied:(studio:Studio)=>void}){
+export default function StudioDirectory({applications,onSave,onMarkApplied}:{applications:TrackedApplication[];onSave:(studio:Studio,location:{country:string;hqLabel:string;applicationLocation:string})=>void;onMarkApplied:(studio:Studio,location:{country:string;hqLabel:string;applicationLocation:string})=>void}){
   const [query,setQuery]=useState("");
   const [scale,setScale]=useState("All sizes");
   const [kind,setKind]=useState("All types");
@@ -96,7 +101,7 @@ export default function StudioDirectory({applications,onSave,onMarkApplied}:{app
             <td><span className={`scale-tag ${(p?.industryScale||"").toLowerCase().replace(/[^a-z]+/g,"-")}`}>{p?.industryScale||"Unclassified"}</span></td>
             <td><span className="ownership-cell">{p?.parentCompany||p?.ownership||"Not yet researched"}</span></td>
             <td><span className="team-cell">{p?.teamSize||"Not disclosed"}</span></td>
-            <td><div className="route-cell"><a href={studio.applicationUrl} target="_blank" rel="noopener noreferrer" className="route-link">Open route ↗</a><button type="button" className={tracked?"save-studio is-saved":"save-studio"} onClick={()=>onSave(studio)} disabled={Boolean(tracked)}>{tracked? "✓ In tracker":"＋ Save"}</button></div></td>
+            <td><div className="route-cell"><a href={studio.applicationUrl} target="_blank" rel="noopener noreferrer" className="route-link">Open route ↗</a><button type="button" className={tracked?"save-studio is-saved":"save-studio"} onClick={()=>onSave(studio,trackerLocation(studio,p))} disabled={Boolean(tracked)}>{tracked? "✓ In tracker":"＋ Save"}</button></div></td>
           </tr>
           {active?<tr className="detail-row" key={studio.name+"-details"}><td colSpan={7}>
             <div className="studio-detail">
@@ -117,7 +122,7 @@ export default function StudioDirectory({applications,onSave,onMarkApplied}:{app
                 {p?.reachHighlights?<div className="fact fact-wide"><span>Reach & recognition</span><strong>{p.reachHighlights}</strong></div>:null}
                 <div className="fact"><span>Company role</span><strong>{type}</strong></div>
                 <div className="detail-links"><a href={studio.websiteUrl} target="_blank" rel="noopener noreferrer">Official website ↗</a><a href={studio.evidenceUrl} target="_blank" rel="noopener noreferrer">Application evidence ↗</a>{p?.profileSources?.map((u,i)=><a key={u} href={u} target="_blank" rel="noopener noreferrer">{i===0?"Studio profile": "Additional source"} ↗</a>)}</div>
-                <div className="detail-actions"><a className="primary-action" href={studio.applicationUrl} target="_blank" rel="noopener noreferrer">Visit application page ↗</a><button className="secondary-action" type="button" onClick={()=>onSave(studio)} disabled={Boolean(tracked)}>{tracked?"Already in tracker":"Save studio"}</button><button className="applied-action" type="button" onClick={()=>onMarkApplied(studio)} disabled={tracked==="applied"}>{tracked==="applied"?"✓ Already marked Applied":"✓ Confirm application sent"}</button></div>
+                <div className="detail-actions"><a className="primary-action" href={studio.applicationUrl} target="_blank" rel="noopener noreferrer">Visit application page ↗</a><button className="secondary-action" type="button" onClick={()=>onSave(studio)} disabled={Boolean(tracked)}>{tracked?"Already in tracker":"Save studio"}</button><button className="applied-action" type="button" onClick={()=>onMarkApplied(studio,trackerLocation(studio,p))} disabled={tracked==="applied"}>{tracked==="applied"?"✓ Already marked Applied":"✓ Confirm application sent"}</button></div>
                 {tracked?<p className="tracked-hint">Already in your tracker · {tracked.replace("_"," ")}</p>:null}
               </div>
             </div>
