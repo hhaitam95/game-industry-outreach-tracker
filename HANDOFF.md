@@ -1,14 +1,15 @@
 # Handoff
 
-StudioScout is a small personal static app: a visual global studio directory plus a lightweight local application tracker.
+StudioScout is a small personal static app: a worldwide studio directory of verified speculative application routes plus a lightweight local application tracker.
 
-- Public studios live in `src/data/speculative-route-directory.json`.
-- Enriched company details and sources live in `src/data/studio-profiles.json`.
-- The active UI is the dark expandable directory and the Saved / In Progress / Applied / Interview / Offer / Archived tracker.
-- Application entries are stored in browser localStorage only. No login, backend, encryption, remote sync, email or auto-application exists.
-- The public directory includes every currently verified speculative route; the profile dataset is still being enriched. Mark unknowns honestly.
-- Show HQ as a fallback only when the application route doesn't state hiring location. Show remote eligibility separately when confirmed.
+- Public verified routes: src/data/speculative-route-directory.json.
+- Studio details: src/data/studio-profiles.json.
+- Active UI: StudioDirectory and ApplicationTracker.
+- Personal application records stay in browser localStorage only.
+- Candidate/source progress lives on the separate discovery-state branch.
 
-Exclude studios materially focused on pornography/erotica/sexually explicit entertainment, gambling/betting/casinos (including simulated/social-casino games), recreational drugs/cannabis, alcohol, tobacco/nicotine/vaping and related vice industries. Apply this to the studio's business/portfolio and to the actual project or role. Exclude routes that ask applicants to confirm comfort with such content. Leave unclear cases out pending manual review; incidental fictional references in mainstream games are not enough to exclude a studio.
+The active discovery script is scripts/discover_speculative_studios.py. It collects studio leads from public directories and structured sources, deduplicates them, then verifies any speculative application route against the studio's own website or a directly linked employer-controlled application platform. Candidate directories and generic careers pages are never treated as proof of acceptance.
 
-Do not add job-board features, resume tools, outreach automation, AI scoring, crawler schedules or complex workflows.
+Keep the product to two pages. Do not reintroduce the old job-posting monitor, resume tools, outreach drafting, analytics, accounts, remote tracker sync or automatic applications.
+
+Exclude studios materially focused on pornography/erotica/sexually explicit entertainment, gambling/betting/casinos (including simulated/social-casino games), recreational drugs/cannabis, alcohol, tobacco/nicotine/vaping and related vice industries. Leave uncertain cases out pending manual review. Mark unknown hiring locations and remote eligibility honestly.

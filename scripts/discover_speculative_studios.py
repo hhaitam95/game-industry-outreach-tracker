@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+from concurrent.futures import ThreadPoolExecutor
 import hashlib
 import html
 from html.parser import HTMLParser
@@ -18,6 +19,7 @@ import re
 import socket
 import sys
 import time
+from threading import Lock
 import urllib.error
 import urllib.parse
 import urllib.robotparser
@@ -41,6 +43,7 @@ REQUEST_TIMEOUT_SECONDS = 18
 WDQS_TIMEOUT_SECONDS = 55
 MAX_RESPONSE_BYTES = 2_500_000
 PER_HOST_DELAY_SECONDS = 1.2
+MAX_CONCURRENT_SITE_CHECKS = 8
 REVIEW_DAYS = 90
 MAX_SITE_PAGES = 7
 ROUTE_CHECK_STATUSES = {"active", "paused"}
@@ -61,7 +64,25 @@ FEEDS = (
         "label": "Wikidata: video-game company entities",
         "kind": "company_class",
     },
+    {
+        "id": "gamedevmap",
+        "label": "GameDevMap: public worldwide studio directory",
+        "kind": "gamedevmap",
+    },
 )
+
+GAMEDEVMAP_URL = "https://www.gamedevmap.com/index.php"
+GAMEDEVMAP_TYPES = {
+    "developer",
+    "developer and publisher",
+    "publisher",
+    "mobile",
+    "microstudio",
+    "online",
+    "serious games",
+    "extended reality (xr)",
+    "social",
+}
 
 ATS_HOSTS = (
     "greenhouse.io",
@@ -185,6 +206,8 @@ MULTI_TENANT_SUFFIXES = {
 ROBOTS_CACHE: dict[str, urllib.robotparser.RobotFileParser] = {}
 PUBLIC_HOST_CACHE: dict[str, bool] = {}
 LAST_REQUEST_BY_HOST: dict[str, float] = {}
+HOST_LOCKS: dict[str, Any] = {}
+FETCH_STATE_LOCK = Lock()
 
 
 @dataclass
@@ -203,6 +226,45 @@ class Page:
     text: str
     links: list[tuple[str, str]]
     has_form: bool
+
+
+class GameDevMapParser(HTMLParser):
+    """Read the public, paginated GameDevMap results table, not its disallowed raw data files."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.rows: list[list[dict[str, str]]] = []
+        self.current_row: list[dict[str, str]] | None = None
+        self.current_cell: dict[str, Any] | None = None
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        values = dict(attrs)
+        if tag == "tr":
+            self.current_row = []
+        elif tag in {"td", "th"} and self.current_row is not None:
+            self.current_cell = {"parts": [], "href": ""}
+        elif tag == "a" and self.current_cell is not None and values.get("href"):
+            if not self.current_cell["href"]:
+                self.current_cell["href"] = str(values["href"])
+
+    def handle_data(self, data: str) -> None:
+        if self.current_cell is not None:
+            clean = " ".join(data.split())
+            if clean:
+                self.current_cell["parts"].append(clean)
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag in {"td", "th"} and self.current_cell is not None and self.current_row is not None:
+            self.current_row.append({
+                "text": " ".join(self.current_cell["parts"]).strip(),
+                "href": str(self.current_cell["href"]),
+            })
+            self.current_cell = None
+        elif tag == "tr" and self.current_row is not None:
+            if self.current_row:
+                self.rows.append(self.current_row)
+            self.current_row = None
+            self.current_cell = None
 
 
 class PageParser(HTMLParser):
@@ -351,8 +413,9 @@ def validate_public_host(host: str) -> bool:
     host = host.lower().strip(".")
     if not host or host == "localhost" or host.endswith((".local", ".internal", ".invalid", ".test")):
         return False
-    if host in PUBLIC_HOST_CACHE:
-        return PUBLIC_HOST_CACHE[host]
+    with FETCH_STATE_LOCK:
+        if host in PUBLIC_HOST_CACHE:
+            return PUBLIC_HOST_CACHE[host]
     try:
         address = ipaddress.ip_address(host)
         allowed = address.is_global
@@ -364,9 +427,51 @@ def validate_public_host(host: str) -> bool:
             )
         except (OSError, ValueError):
             allowed = False
-    PUBLIC_HOST_CACHE[host] = allowed
-    return allowed
+    with FETCH_STATE_LOCK:
+        PUBLIC_HOST_CACHE.setdefault(host, allowed)
+        return PUBLIC_HOST_CACHE[host]
 
+
+def wait_for_host(host: str) -> None:
+    # Different studio hosts can be checked concurrently. Each individual host
+    # gets a lock so concurrent workers still respect its request-spacing limit.
+    with FETCH_STATE_LOCK:
+        host_lock = HOST_LOCKS.setdefault(host, Lock())
+    with host_lock:
+        previous = LAST_REQUEST_BY_HOST.get(host, 0.0)
+        delay = PER_HOST_DELAY_SECONDS - (time.monotonic() - previous)
+        if delay > 0:
+            time.sleep(delay)
+        LAST_REQUEST_BY_HOST[host] = time.monotonic()
+
+
+def robots_allowed(url: str) -> bool:
+    parsed = urllib.parse.urlsplit(url)
+    host = parsed.hostname or ""
+    cache_key = host.lower()
+    with FETCH_STATE_LOCK:
+        parser = ROBOTS_CACHE.get(cache_key)
+    if parser is None:
+        robots_url = urllib.parse.urlunsplit(("https", host, "/robots.txt", "", ""))
+        candidate_parser = urllib.robotparser.RobotFileParser()
+        candidate_parser.set_url(robots_url)
+        result = fetch_url(
+            robots_url,
+            check_robots=False,
+            timeout=10,
+            max_bytes=250_000,
+            allow_plain_text=True,
+        )
+        if result.ok:
+            candidate_parser.parse(result.body.splitlines())
+        elif result.status_code == 404:
+            candidate_parser.parse([])
+        else:
+            # A robots policy that cannot be retrieved is treated conservatively.
+            candidate_parser.parse(["User-agent: *", "Disallow: /"])
+        with FETCH_STATE_LOCK:
+            parser = ROBOTS_CACHE.setdefault(cache_key, candidate_parser)
+    return parser.can_fetch(USER_AGENT, url)
 
 class SafeRedirectHandler(urllib.request.HTTPRedirectHandler):
     def __init__(self, initial_url: str, allowed_external: bool = False) -> None:
@@ -650,7 +755,10 @@ def sparql_query(feed_kind: str, cursor: str, limit: int) -> str:
     if feed_kind == "class":
         source_pattern = "?company wdt:P31 wd:Q210167."
     elif feed_kind == "developer_credit":
-        source_pattern = "?game wdt:P31 wd:Q7889; wdt:P178 ?company."
+        source_pattern = (
+            "?game wdt:P31 wd:Q7889; wdt:P178 ?company. "
+            "FILTER NOT EXISTS { ?company wdt:P31/wdt:P279* wd:Q5. }"
+        )
     elif feed_kind == "company_class":
         source_pattern = "?company wdt:P31 wd:Q112042224."
     else:
@@ -722,11 +830,87 @@ def fetch_wikidata_batch(feed_kind: str, cursor: str, limit: int) -> list[dict[s
     return rows
 
 
+def parse_gamedevmap_page(body: str, page_url: str, start: int) -> list[dict[str, str]]:
+    parser = GameDevMapParser()
+    parser.feed(body)
+    rows: list[dict[str, str]] = []
+    for cells in parser.rows:
+        # Public results table: Company, social link, Type, City, State/Province, Country.
+        if len(cells) < 6:
+            continue
+        name = cells[0]["text"]
+        website_href = cells[0]["href"]
+        company_type = cells[2]["text"]
+        type_key = " ".join(company_type.casefold().split())
+        if not name or not website_href or not type_key:
+            continue
+        if type_key not in GAMEDEVMAP_TYPES:
+            continue
+        website = canonical_url(urllib.parse.urljoin(page_url, website_href))
+        if not website or (urllib.parse.urlsplit(website).hostname or "").endswith("gamedevmap.com"):
+            continue
+        city = cells[3]["text"]
+        region = cells[4]["text"]
+        country = cells[5]["text"] or "Not stated"
+        hq_city = city
+        if region and region.casefold() != city.casefold():
+            hq_city = f"{city}, {region}" if city else region
+        stable_key = hashlib.sha256(
+            f"{name_key(name)}|{domain_key(website)}".encode("utf-8")
+        ).hexdigest()[:20]
+        rows.append({
+            "qid": "GDM:" + stable_key,
+            "entity_url": page_url,
+            "source_id": "gamedevmap",
+            "source_name": "GameDevMap",
+            "source_start": str(start),
+            "name": name,
+            "website": website,
+            "country": country,
+            "hq_city": hq_city,
+            "country_code": "",
+            "company_type": company_type or "Not stated",
+        })
+    return rows
+
+
+def fetch_gamedevmap_batch(cursor: str, limit: int) -> list[dict[str, str]]:
+    try:
+        start = max(1, int(cursor or "1"))
+    except ValueError as exc:
+        raise RuntimeError("GameDevMap cursor is invalid.") from exc
+    page_size = min(max(1, int(limit)), 100)
+    params = {
+        "city": "",
+        "count": str(page_size),
+        "country": "",
+        "location": "",
+        "query": "",
+        "start": str(start),
+        "state": "",
+        "type": "",
+    }
+    page_url = GAMEDEVMAP_URL + "?" + urllib.parse.urlencode(params)
+    result = fetch_url(page_url, timeout=REQUEST_TIMEOUT_SECONDS, max_bytes=MAX_RESPONSE_BYTES)
+    if not result.ok:
+        raise RuntimeError("GameDevMap fetch failed safely: " + (result.error or "unavailable"))
+    return parse_gamedevmap_page(result.body, result.url, start)
+
+
+def fetch_source_batch(feed_kind: str, cursor: str, limit: int) -> list[dict[str, str]]:
+    if feed_kind == "gamedevmap":
+        return fetch_gamedevmap_batch(cursor, limit)
+    return fetch_wikidata_batch(feed_kind, cursor, limit)
+
+
 def empty_state() -> dict[str, Any]:
     return {
         "schema_version": 1,
         "updated_at": utc_now().isoformat(),
-        "feed_cursors": {feed["id"]: "" for feed in FEEDS},
+        "feed_cursors": {
+            feed["id"]: ("1" if feed["kind"] == "gamedevmap" else "")
+            for feed in FEEDS
+        },
         "feed_done": {feed["id"]: False for feed in FEEDS},
         "feed_index": 0,
         "cycle": 1,
@@ -748,6 +932,11 @@ def load_state(path: Path = STATE_PATH) -> dict[str, Any]:
     for field in ("feed_cursors", "feed_done", "candidates", "route_checks", "stats"):
         if not isinstance(state.get(field), dict):
             raise ValueError("Discovery state field is invalid: " + field)
+    # Backfill new source fields when reading state written by an earlier pipeline version.
+    for feed in FEEDS:
+        default_cursor = "1" if feed["kind"] == "gamedevmap" else ""
+        state["feed_cursors"].setdefault(feed["id"], default_cursor)
+        state["feed_done"].setdefault(feed["id"], False)
     return state
 
 
@@ -766,12 +955,22 @@ def existing_indexes(studios: list[dict[str, Any]]) -> tuple[set[str], set[str]]
 
 def add_candidates(state: dict[str, Any], rows: list[dict[str, str]]) -> int:
     added = 0
+    known_domains = {
+        domain_key(str(candidate.get("website", "")))
+        for candidate in state["candidates"].values()
+        if canonical_url(str(candidate.get("website", "")))
+    }
     for row in rows:
         qid = row["qid"]
         if qid in state["candidates"]:
             continue
         website = canonical_url(row["website"])
         if not website:
+            continue
+        domain = domain_key(website)
+        # Official domains are the reliable deduplication key. Same-name candidates
+        # on different domains are retained for verification instead of silently dropped.
+        if domain in known_domains:
             continue
         state["candidates"][qid] = {
             **row,
@@ -784,10 +983,10 @@ def add_candidates(state: dict[str, Any], rows: list[dict[str, str]]) -> int:
             "cycle": state["cycle"],
             "reason": None,
         }
+        known_domains.add(domain)
         state["stats"]["candidates_seen"] += 1
         added += 1
     return added
-
 
 def ingest_source_pages(state: dict[str, Any], max_pages: int, batch_size: int) -> tuple[int, int]:
     pages_processed = 0
@@ -801,14 +1000,14 @@ def ingest_source_pages(state: dict[str, Any], max_pages: int, batch_size: int) 
         if state["feed_done"].get(feed["id"], False):
             # Look for the next source that is not exhausted in this cycle.
             feed = available[0]
-        rows = fetch_wikidata_batch(
-            feed["kind"],
-            state["feed_cursors"].get(feed["id"], ""),
-            batch_size,
-        )
+        cursor = state["feed_cursors"].get(feed["id"], "1" if feed["kind"] == "gamedevmap" else "")
+        rows = fetch_source_batch(feed["kind"], cursor, batch_size)
         pages_processed += 1
         if rows:
-            state["feed_cursors"][feed["id"]] = max(row["qid"] for row in rows)
+            if feed["kind"] == "gamedevmap":
+                state["feed_cursors"][feed["id"]] = str(int(cursor or "1") + batch_size)
+            else:
+                state["feed_cursors"][feed["id"]] = max(row["qid"] for row in rows)
             candidates_added += add_candidates(state, rows)
         if len(rows) < batch_size:
             state["feed_done"][feed["id"]] = True
@@ -821,13 +1020,19 @@ def profile_for(candidate: dict[str, Any]) -> dict[str, Any]:
     country_code = candidate.get("country_code") or ""
     entity_url = candidate["entity_url"]
     website = candidate["website"]
+    if candidate.get("source_id") == "gamedevmap":
+        location_label = "Listed location · GameDevMap"
+    else:
+        location_label = "HQ · Wikidata" if city else (
+            "Country · Wikidata" if country != "Not disclosed" else "Not disclosed"
+        )
     return {
         "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
         "headquarters": {
             "city": city,
             "country": country,
             "countryCode": country_code,
-            "label": "HQ · Wikidata" if city else ("Country · Wikidata" if country != "Not disclosed" else "Not disclosed"),
+            "label": location_label,
         },
         "otherLocations": [],
         "companyType": [candidate.get("company_type") or "Developer"],
@@ -839,9 +1044,8 @@ def profile_for(candidate: dict[str, Any]) -> dict[str, Any]:
         "focus": [],
         "popularGames": [],
         "profileSources": [entity_url, website],
-        "applicationLocation": "Not specified · HQ shown as reference",
+        "applicationLocation": "Not specified · confirm on the official application route",
     }
-
 
 def studio_record_for(candidate: dict[str, Any], route: dict[str, Any]) -> dict[str, Any]:
     today = iso_date()
@@ -891,26 +1095,31 @@ def process_candidate_queue(
     pending.sort(key=lambda candidate: candidate.get("discovered_at") or "")
     checked = 0
     published = 0
-    for candidate in pending[:limit]:
-        worst_case_candidate_seconds = (
-            MAX_SITE_PAGES * (REQUEST_TIMEOUT_SECONDS + PER_HOST_DELAY_SECONDS) + 30
-        )
-        if deadline is not None and time.monotonic() + worst_case_candidate_seconds >= deadline:
-            break
-        checked += 1
-        candidate["attempts"] = int(candidate.get("attempts", 0)) + 1
-        candidate["checked_at"] = utc_now().isoformat()
-        name = candidate["name"]
-        normalized_name = name_key(name)
-        domain = domain_key(candidate["website"])
-        if normalized_name in names or domain in domains:
-            candidate["status"] = "duplicate"
-            candidate["reason"] = "name_or_official_domain_already_in_directory"
-            continue
-        result = verify_candidate_pages(candidate, page_fetcher)
+    worst_case_candidate_seconds = (
+        MAX_SITE_PAGES * (REQUEST_TIMEOUT_SECONDS + PER_HOST_DELAY_SECONDS) + 30
+    )
+
+    def apply_result(candidate: dict[str, Any], result: dict[str, Any]) -> None:
+        nonlocal published
         candidate["status"] = result["status"]
         candidate["reason"] = result.get("reason")
         if result["status"] == "verified":
+            name = candidate["name"]
+            normalized_name = name_key(name)
+            domain = domain_key(candidate["website"])
+            if domain in domains:
+                candidate["status"] = "duplicate"
+                candidate["reason"] = "official_domain_already_in_directory"
+                return
+            if normalized_name in names:
+                # A same-name, different-domain result may be a distinct studio.
+                # Preserve its evidence for review rather than silently discarding it.
+                candidate["status"] = "needs_review"
+                candidate["reason"] = "verified_route_name_matches_existing_studio_but_domain_differs"
+                candidate["route"] = result
+                candidate["next_check_at"] = plus_days(iso_date(), 30)
+                state["stats"]["needs_review"] += 1
+                return
             studio = studio_record_for(candidate, result)
             studios.append(studio)
             profiles[name] = profile_for(candidate)
@@ -934,8 +1143,45 @@ def process_candidate_queue(
         else:
             candidate["next_check_at"] = plus_days(iso_date(), 30)
             state["stats"]["needs_review"] += 1
-    return checked, published
 
+    # Verify different studio websites concurrently. fetch_url still serializes
+    # requests per host, respects robots.txt, and enforces public-host validation.
+    with ThreadPoolExecutor(max_workers=MAX_CONCURRENT_SITE_CHECKS) as executor:
+        pending_index = 0
+        while pending_index < len(pending) and checked < limit:
+            if deadline is not None and time.monotonic() + worst_case_candidate_seconds >= deadline:
+                break
+            batch: list[dict[str, Any]] = []
+            while (
+                pending_index < len(pending)
+                and checked < limit
+                and len(batch) < MAX_CONCURRENT_SITE_CHECKS
+            ):
+                candidate = pending[pending_index]
+                pending_index += 1
+                checked += 1
+                candidate["attempts"] = int(candidate.get("attempts", 0)) + 1
+                candidate["checked_at"] = utc_now().isoformat()
+                domain = domain_key(candidate["website"])
+                if domain in domains:
+                    candidate["status"] = "duplicate"
+                    candidate["reason"] = "official_domain_already_in_directory"
+                    continue
+                batch.append(candidate)
+            if not batch:
+                continue
+            futures = [
+                executor.submit(verify_candidate_pages, candidate, page_fetcher)
+                for candidate in batch
+            ]
+            # Apply in source order so duplicate/name-collision decisions stay deterministic.
+            for candidate, future in zip(batch, futures):
+                try:
+                    result = future.result()
+                except Exception as exc:
+                    result = {"status": "retry", "reason": "verification_error_" + type(exc).__name__}
+                apply_result(candidate, result)
+    return checked, published
 
 def route_page_check(studio: dict[str, Any], page_fetcher: Callable[[str, bool], FetchResult]) -> str:
     urls = []
@@ -1053,8 +1299,14 @@ def finish_cycle_if_complete(state: dict[str, Any]) -> bool:
         state["empty_cycles"] = 0
     state["cycle"] = int(state.get("cycle", 1)) + 1
     state["cycle_additions"] = 0
-    state["feed_cursors"] = {feed["id"]: "" for feed in FEEDS}
-    state["feed_done"] = {feed["id"]: False for feed in FEEDS}
+    # Wikidata feeds are refreshed on each pass. GameDevMap is a one-time bulk
+    # catalogue backfill; retain its terminal offset so hourly maintenance never
+    # starts downloading the same 10k rows again.
+    for feed in FEEDS:
+        if feed["kind"] == "gamedevmap":
+            continue
+        state["feed_cursors"][feed["id"]] = ""
+        state["feed_done"][feed["id"]] = False
     if state["empty_cycles"] >= 3:
         state["saturated"] = True
     return True
@@ -1071,7 +1323,7 @@ def run_pipeline(
     root: Path = ROOT,
     state_path: Path | None = None,
     page_fetcher: Callable[[str, bool], FetchResult] = fetch_url,
-    source_fetcher: Callable[[str, str, int], list[dict[str, str]]] = fetch_wikidata_batch,
+    source_fetcher: Callable[[str, str, int], list[dict[str, str]]] = fetch_source_batch,
 ) -> dict[str, Any]:
     studios_path = root / "src/data/speculative-route-directory.json"
     profiles_path = root / "src/data/studio-profiles.json"
@@ -1079,7 +1331,7 @@ def run_pipeline(
     studios = read_json(studios_path, [])
     profiles = read_json(profiles_path, {})
     state = load_state(state_path) if state_path.exists() else empty_state()
-    if mode == "bootstrap":
+    if mode in {"bootstrap", "bulk"}:
         state["bootstrap_started"] = True
     if not isinstance(studios, list) or not isinstance(profiles, dict):
         raise ValueError("Public studio datasets have an invalid shape.")
@@ -1087,28 +1339,49 @@ def run_pipeline(
     deadline = time.monotonic() + max_run_seconds
     source_pages = 0
     source_candidates = 0
-    # Use an injectable source fetcher in tests. Production requests are spaced out to
-    # stay well below WDQS's documented per-client processing budget.
-    for _ in range(max_source_pages):
-        available = [feed for feed in FEEDS if not state["feed_done"].get(feed["id"], False)]
-        if not available:
-            break
-        feed = FEEDS[state["feed_index"] % len(FEEDS)]
-        if state["feed_done"].get(feed["id"], False):
-            feed = available[0]
-        cursor = state["feed_cursors"].get(feed["id"], "")
-        rows = source_fetcher(feed["kind"], cursor, batch_size)
-        source_pages += 1
-        if rows:
-            state["feed_cursors"][feed["id"]] = max(row["qid"] for row in rows)
+    # Bulk mode backfills GameDevMap's public 100-row query interface from its
+    # saved offset. fetch_url enforces robots.txt and per-host request spacing.
+    if mode == "bulk":
+        feed = next(item for item in FEEDS if item["kind"] == "gamedevmap")
+        feed_id = feed["id"]
+        for _ in range(max_source_pages):
+            if state["feed_done"].get(feed_id, False) or time.monotonic() + 30 >= deadline:
+                break
+            cursor = state["feed_cursors"].get(feed_id, "1") or "1"
+            rows = source_fetcher(feed["kind"], cursor, batch_size)
+            source_pages += 1
             source_candidates += add_candidates(state, rows)
-        if len(rows) < batch_size:
-            state["feed_done"][feed["id"]] = True
-        state["feed_index"] = (FEEDS.index(feed) + 1) % len(FEEDS)
-        if source_pages < max_source_pages and time.monotonic() + 65 < deadline:
-            time.sleep(65)
-        elif source_pages < max_source_pages:
-            break
+            state["feed_cursors"][feed_id] = str(int(cursor) + batch_size)
+            if len(rows) < batch_size:
+                state["feed_done"][feed_id] = True
+                break
+    else:
+        # Wikidata requests are deliberately spaced apart; GameDevMap uses fetch_url's
+        # separate per-host pacing and therefore needs no extra 65-second sleep.
+        for _ in range(max_source_pages):
+            available = [feed for feed in FEEDS if not state["feed_done"].get(feed["id"], False)]
+            if not available:
+                break
+            feed = FEEDS[state["feed_index"] % len(FEEDS)]
+            if state["feed_done"].get(feed["id"], False):
+                feed = available[0]
+            cursor = state["feed_cursors"].get(feed["id"], "1" if feed["kind"] == "gamedevmap" else "")
+            rows = source_fetcher(feed["kind"], cursor, batch_size)
+            source_pages += 1
+            if rows:
+                if feed["kind"] == "gamedevmap":
+                    state["feed_cursors"][feed["id"]] = str(int(cursor or "1") + batch_size)
+                else:
+                    state["feed_cursors"][feed["id"]] = max(row["qid"] for row in rows)
+                source_candidates += add_candidates(state, rows)
+            if len(rows) < batch_size:
+                state["feed_done"][feed["id"]] = True
+            state["feed_index"] = (FEEDS.index(feed) + 1) % len(FEEDS)
+            if feed["kind"] != "gamedevmap" and source_pages < max_source_pages:
+                if time.monotonic() + 65 < deadline:
+                    time.sleep(65)
+                else:
+                    break
 
     checked, published = process_candidate_queue(
         state, studios, profiles, max_candidate_checks, page_fetcher, deadline
@@ -1136,6 +1409,9 @@ def run_pipeline(
         "saturated": state["saturated"],
         "studio_count": len(studios),
         "candidate_queue": sum(1 for item in state["candidates"].values() if item.get("status") in {"queued", "retry"}),
+        "candidate_pool_size": len(state["candidates"]),
+        "gamedevmap_complete": state["feed_done"].get("gamedevmap", False),
+        "gamedevmap_next_start": state["feed_cursors"].get("gamedevmap", "1"),
         "stats": state["stats"],
     }
     write_json_atomic(studios_path, studios)
@@ -1146,7 +1422,7 @@ def run_pipeline(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--mode", choices=("bootstrap", "hourly"), default="hourly")
+    parser.add_argument("--mode", choices=("bulk", "bootstrap", "hourly"), default="hourly")
     parser.add_argument("--batch-size", type=int, default=150)
     parser.add_argument("--max-source-pages", type=int, default=None)
     parser.add_argument("--max-candidate-checks", type=int, default=None)
@@ -1160,12 +1436,15 @@ def main() -> int:
     args = parse_args()
     if not 1 <= args.batch_size <= 250:
         raise ValueError("--batch-size must be between 1 and 250.")
-    if args.mode == "bootstrap":
-        pages = args.max_source_pages if args.max_source_pages is not None else 6
-        checks = args.max_candidate_checks if args.max_candidate_checks is not None else 80
+    if args.mode == "bulk":
+        pages = args.max_source_pages if args.max_source_pages is not None else 110
+        checks = args.max_candidate_checks if args.max_candidate_checks is not None else 250
+    elif args.mode == "bootstrap":
+        pages = args.max_source_pages if args.max_source_pages is not None else 4
+        checks = args.max_candidate_checks if args.max_candidate_checks is not None else 150
     else:
         pages = args.max_source_pages if args.max_source_pages is not None else 1
-        checks = args.max_candidate_checks if args.max_candidate_checks is not None else 20
+        checks = args.max_candidate_checks if args.max_candidate_checks is not None else 150
     if pages < 0 or checks < 0 or args.route_check_count < 0:
         raise ValueError("Batch limits cannot be negative.")
     if not 60 <= args.max_run_seconds <= 1500:

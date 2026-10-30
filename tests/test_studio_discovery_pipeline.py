@@ -1,5 +1,7 @@
 import sys
 import tempfile
+import threading
+import time
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -647,6 +649,226 @@ class DatasetUpdateTests(unittest.TestCase):
             self.assertTrue(discovery.finish_cycle_if_complete(state))
         self.assertTrue(state["saturated"])
         self.assertEqual(state["empty_cycles"], 3)
+
+
+class GameDevMapDiscoveryTests(unittest.TestCase):
+    def test_parser_reads_studio_rows_and_ignores_non_studio_categories(self):
+        body = """
+        <table>
+          <tr><th>Company</th><th>Social</th><th>Type</th><th>City</th><th>State</th><th>Country</th></tr>
+          <tr><td><a href="https://example-studio.com/">Example Studio</a></td><td></td><td>Developer</td><td>Montreal</td><td>Quebec</td><td>Canada</td></tr>
+          <tr><td><a href="https://example-studio.com/">Example Studio</a></td><td></td><td>Developer</td><td>Toronto</td><td>Ontario</td><td>Canada</td></tr>
+          <tr><td><a href="https://investments.com/">Game Fund</a></td><td></td><td>Investment</td><td>London</td><td>England</td><td>United Kingdom</td></tr>
+          <tr><td>Missing Website</td><td></td><td>Developer</td><td>Paris</td><td>Ile-de-France</td><td>France</td></tr>
+        </table>
+        """
+        rows = discovery.parse_gamedevmap_page(
+            body,
+            "https://www.gamedevmap.com/index.php?start=1&count=100",
+            1,
+        )
+        self.assertEqual(len(rows), 2)
+        self.assertTrue(rows[0]["qid"].startswith("GDM:"))
+        self.assertEqual(rows[0]["source_id"], "gamedevmap")
+        self.assertEqual(rows[0]["name"], "Example Studio")
+        self.assertEqual(rows[0]["website"], "https://example-studio.com/")
+        self.assertEqual(rows[0]["country"], "Canada")
+        self.assertEqual(rows[0]["hq_city"], "Montreal, Quebec")
+        self.assertEqual(rows[0]["company_type"], "Developer")
+
+    def test_candidate_pool_deduplicates_same_studio_across_sources_and_offices(self):
+        state = discovery.empty_state()
+        wikidata_row = {
+            "qid": "Q100",
+            "entity_url": "https://www.wikidata.org/entity/Q100",
+            "name": "Example Studio",
+            "website": "https://example-studio.com/",
+            "country": "Canada",
+            "hq_city": "Montreal",
+            "country_code": "CA",
+            "company_type": "Developer",
+        }
+        map_row = {
+            "qid": "GDM:abc",
+            "entity_url": "https://www.gamedevmap.com/index.php?start=1",
+            "name": "Example Studio",
+            "website": "https://example-studio.com/contact",
+            "country": "Canada",
+            "hq_city": "Toronto",
+            "country_code": "",
+            "company_type": "Developer",
+            "source_id": "gamedevmap",
+        }
+        self.assertEqual(discovery.add_candidates(state, [wikidata_row]), 1)
+        self.assertEqual(discovery.add_candidates(state, [map_row]), 0)
+        self.assertEqual(len(state["candidates"]), 1)
+
+    def test_bulk_mode_saves_and_resumes_game_dev_map_offset(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "src/data").mkdir(parents=True)
+            (root / "src/data/speculative-route-directory.json").write_text("[]", encoding="utf-8")
+            (root / "src/data/studio-profiles.json").write_text("{}", encoding="utf-8")
+            state_path = root / "state/state.json"
+            state = discovery.empty_state()
+            state_path.parent.mkdir(parents=True)
+            state_path.write_text(__import__("json").dumps(state), encoding="utf-8")
+
+            def row(qid, name, website):
+                return {
+                    "qid": qid,
+                    "entity_url": "https://www.gamedevmap.com/index.php?start=1",
+                    "source_id": "gamedevmap",
+                    "name": name,
+                    "website": website,
+                    "country": "Canada",
+                    "hq_city": "Montreal",
+                    "country_code": "",
+                    "company_type": "Developer",
+                }
+
+            calls = []
+            def first_page(kind, cursor, limit):
+                calls.append((kind, cursor, limit))
+                return [
+                    row("GDM:a", "Alpha Studio", "https://alpha-studio.com/"),
+                    row("GDM:b", "Beta Studio", "https://beta-studio.com/"),
+                ]
+
+            discovery.run_pipeline(
+                mode="bulk",
+                batch_size=2,
+                max_source_pages=1,
+                max_candidate_checks=0,
+                route_check_count=0,
+                max_run_seconds=60,
+                root=root,
+                state_path=state_path,
+                source_fetcher=first_page,
+            )
+            saved = discovery.load_state(state_path)
+            self.assertEqual(calls, [("gamedevmap", "1", 2)])
+            self.assertEqual(saved["feed_cursors"]["gamedevmap"], "3")
+            self.assertFalse(saved["feed_done"]["gamedevmap"])
+
+            def second_page(kind, cursor, limit):
+                calls.append((kind, cursor, limit))
+                return [row("GDM:c", "Gamma Studio", "https://gamma-studio.com/")]
+
+            discovery.run_pipeline(
+                mode="bulk",
+                batch_size=2,
+                max_source_pages=1,
+                max_candidate_checks=0,
+                route_check_count=0,
+                max_run_seconds=60,
+                root=root,
+                state_path=state_path,
+                source_fetcher=second_page,
+            )
+            saved = discovery.load_state(state_path)
+            self.assertEqual(calls[-1], ("gamedevmap", "3", 2))
+            self.assertEqual(saved["feed_cursors"]["gamedevmap"], "5")
+            self.assertTrue(saved["feed_done"]["gamedevmap"])
+            self.assertEqual(len(saved["candidates"]), 3)
+
+    def test_completed_wikidata_cycle_does_not_reset_game_dev_map_catalogue_cursor(self):
+        state = discovery.empty_state()
+        state["feed_cursors"]["gamedevmap"] = "10501"
+        state["feed_done"]["gamedevmap"] = True
+        for feed in discovery.FEEDS:
+            if feed["kind"] != "gamedevmap":
+                state["feed_done"][feed["id"]] = True
+
+        self.assertTrue(discovery.finish_cycle_if_complete(state))
+        self.assertEqual(state["feed_cursors"]["gamedevmap"], "10501")
+        self.assertTrue(state["feed_done"]["gamedevmap"])
+        self.assertEqual(state["feed_cursors"]["wikidata_video_game_developers"], "")
+        self.assertFalse(state["feed_done"]["wikidata_video_game_developers"])
+
+
+    def test_candidate_verification_runs_concurrently_across_distinct_studio_domains(self):
+        state = discovery.empty_state()
+        rows = [
+            {
+                "qid": f"Q{index}",
+                "entity_url": f"https://www.wikidata.org/entity/Q{index}",
+                "name": f"Example Studio {index}",
+                "website": f"https://studio-{index}.example/",
+                "country": "Canada",
+                "hq_city": "Montreal",
+                "country_code": "CA",
+            }
+            for index in range(1, 7)
+        ]
+        self.assertEqual(discovery.add_candidates(state, rows), 6)
+        active = 0
+        max_active = 0
+        guard = threading.Lock()
+
+        def parallel_fetch(url, _allowed_external):
+            nonlocal active, max_active
+            with guard:
+                active += 1
+                max_active = max(max_active, active)
+            time.sleep(0.03)
+            with guard:
+                active -= 1
+            body = (
+                "<html><body><p>We welcome speculative applications.</p>"
+                "<form action='/apply'></form></body></html>"
+            )
+            return discovery.FetchResult(True, url, 200, body)
+
+        checked, published = discovery.process_candidate_queue(
+            state,
+            [],
+            {},
+            limit=6,
+            page_fetcher=parallel_fetch,
+        )
+        self.assertEqual(checked, 6)
+        self.assertEqual(published, 6)
+        self.assertGreater(max_active, 1)
+        self.assertLessEqual(max_active, discovery.MAX_CONCURRENT_SITE_CHECKS)
+
+    def test_same_name_different_domains_are_retained_for_verification(self):
+        state = discovery.empty_state()
+        rows = [
+            {
+                "qid": "Q101",
+                "entity_url": "https://www.wikidata.org/entity/Q101",
+                "name": "The Game Studio",
+                "website": "https://the-game-studio.example/",
+                "country": "Canada",
+                "hq_city": "Montreal",
+                "country_code": "CA",
+            },
+            {
+                "qid": "Q102",
+                "entity_url": "https://www.wikidata.org/entity/Q102",
+                "name": "The Game Studio",
+                "website": "https://thegamestudio.example/",
+                "country": "France",
+                "hq_city": "Paris",
+                "country_code": "FR",
+            },
+        ]
+        self.assertEqual(discovery.add_candidates(state, rows), 2)
+        self.assertEqual(len(state["candidates"]), 2)
+
+    def test_gamedevmap_location_is_not_mislabelled_as_headquarters(self):
+        profile = discovery.profile_for({
+            "name": "Example Studio",
+            "website": "https://example-studio.com/",
+            "entity_url": "https://www.gamedevmap.com/index.php?start=1",
+            "source_id": "gamedevmap",
+            "country": "Canada",
+            "hq_city": "Montreal, Quebec",
+            "country_code": "",
+            "company_type": "Developer",
+        })
+        self.assertEqual(profile["headquarters"]["label"], "Listed location · GameDevMap")
 
 
 if __name__ == "__main__":

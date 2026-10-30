@@ -9,6 +9,7 @@ type Profile = {
   headquarters?: {
     city: string | null;
     country: string;
+    label?: string;
   } | null;
   companyType?: string[];
 };
@@ -159,7 +160,7 @@ export default function StudioDirectory({
           <thead>
             <tr>
               <th scope="col">Studio</th>
-              <th scope="col">HQ country</th>
+              <th scope="col">Studio location</th>
               <th scope="col">Studio type</th>
               <th scope="col">Work model</th>
               <th scope="col">Application route</th>
@@ -171,6 +172,7 @@ export default function StudioDirectory({
             {filtered.map((studio) => {
               const profile = profiles[studio.name];
               const studioCountry = profile?.headquarters?.country || studio.country || "Not stated";
+              const studioLocation = [profile?.headquarters?.city, studioCountry].filter(Boolean).join(", ");
               const types = profile?.companyType?.slice(0, 2).join(" · ") || "Not stated";
               const routeType = studio.applicationResearch?.routeType || "general";
               const workType = studio.applicationResearch?.workModel || "not_stated";
@@ -179,7 +181,7 @@ export default function StudioDirectory({
               return (
                 <tr key={studio.name}>
                   <td className="studio-name">{studio.name}</td>
-                  <td>{studioCountry}</td>
+                  <td>{studioLocation}</td>
                   <td>{types}</td>
                   <td>
                     <span className="plain-tag">{workModelLabels[workType] || "Not stated"}</span>
@@ -201,7 +203,9 @@ export default function StudioDirectory({
                       onClick={() =>
                         onSave(studio, {
                           country: studioCountry,
-                          hqLabel: profile?.headquarters?.city ? profile.headquarters.city + " · HQ" : "HQ",
+                          hqLabel: profile?.headquarters?.city
+                            ? profile.headquarters.city + " · " + (profile.headquarters.label || "Location")
+                            : profile?.headquarters?.label || "Country listed",
                           applicationLocation: "See official application route",
                         })
                       }
