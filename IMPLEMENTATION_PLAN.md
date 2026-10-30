@@ -2,12 +2,16 @@
 
 ## Now
 
-Research studios worldwide. Use public directories as candidate sources, then check the official studio site or its own application system. Add only studios with a real speculative/open/general application route. Keep the public JSON list clean.
+The first StudioScout directory and tracker implementation is in place:
 
-The website should stay a search box, a simple studio list, official application links and the private application tracker.
+- Keep all verified studios with qualifying official speculative/open/general application routes in the directory.
+- Continue expanding the directory with newly researched studios, but publish only routes verified on the studio's own site or application system.
+- Review the studio favicon marks and Steam game-cover thumbnails; where high-quality official logo/wordmark assets are available, prefer those and retain a clear fallback when they are not.
+- Continue checking profile facts, particularly ownership, studio-only headcounts, locations and game credits. Keep unknowns labelled rather than estimated without evidence.
+- Complete browser acceptance on the deployed Pages URL after PR approval/merge.
 
 ## Later
 
-When useful, add a small automation to recheck saved application pages and find newly published speculative/open-application routes. Flag changes for review; never silently remove studios.
+Only consider small, manually reviewed maintenance for stale application links. Do not add scheduled crawling, automatic applications, job-board discovery, account systems or remote storage.
 
-No broader platform or extra workflow is needed.
+No broader platform or workflow is needed.

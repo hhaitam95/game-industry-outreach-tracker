@@ -1,35 +1,108 @@
-import {useCallback,useState} from "react";
-import type {RoleLeadPrefill,RoleLeadPrefillData} from "./components/workspace.types";
-import PrivateDataSettings from "./components/PrivateDataSettings";
-import SpeculativeRouteDirectory from "./components/SpeculativeRouteDirectory";
-import {getNavItem,NAV_ITEMS} from "./lib/navigation.mjs";
-const icons:Record<string,string>={
- studios:"M3 21h18 M5 21V7l7-4 7 4v14 M9 21v-6h6v6 M9 9h.01 M15 9h.01",
- applications:"M8 3h8 M9 3v4h6V3 M5 5h14v16H5z M8 13l2 2 5-5",
- settings:"M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z M19 12a7 7 0 0 0-.2-1.6l1.5-1.1-1.5-2.6-1.8.6a7 7 0 0 0-2.8-1.6L14 3.8h-3l-.3 1.9a7 7 0 0 0-2.8 1.6l-1.8-.6-1.5 2.6 1.5 1.1a7 7 0 0 0 0 3.2l-1.5 1.1 1.5 2.6 1.8-.6a7 7 0 0 0 2.8 1.6l.3 1.9h3l.3-1.9a7 7 0 0 0 2.8-1.6l1.8.6-1.5-2.6-1.5-1.1A7 7 0 0 0 19 12z"
-};
-function Icon({name}:{name:string}){return <svg aria-hidden="true" className="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d={icons[name]}/></svg>;}
+import {useEffect,useMemo,useState} from "react";
+import type {TrackedApplication,TrackerStatus} from "./components/studio.types";
+import StudioDirectory from "./components/StudioDirectory";
+import ApplicationTracker from "./components/ApplicationTracker";
+
+const STORAGE_KEY="studio-outreach-tracker-v1";
+const nav=[{id:"studios",label:"Studio directory",icon:"▦"},{id:"applications",label:"My applications",icon:"▤"}] as const;
+
+function readApplications():TrackedApplication[]{
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(!raw)return [];
+    const parsed=JSON.parse(raw);
+    if(!Array.isArray(parsed))return [];
+    return parsed.filter((item):item is TrackedApplication=>item&&typeof item.id==="string"&&typeof item.studioName==="string"&&typeof item.status==="string");
+  }catch{return [];}
+}
+
 export default function App(){
- const [activePageId,setActivePageId]=useState("studios");
- const [pendingLead,setPendingLead]=useState<RoleLeadPrefill|null>(null);
- const consumePendingLead=useCallback(()=>setPendingLead(null),[]);
- const handleTrackRoute=useCallback((lead:RoleLeadPrefillData)=>{setPendingLead({...lead,requestId:crypto.randomUUID()});setActivePageId("applications");},[]);
- const activeItem=getNavItem(activePageId);
- return <div className="app-shell">
-  <aside className="sidebar">
-   <div className="brand"><div className="brand-mark"><span>✦</span></div><div><span className="brand-name">Studio Outreach</span><span className="brand-caption">SPECULATIVE APPLICATIONS</span></div></div>
-   <nav aria-label="Main navigation" className="main-navigation"><span className="nav-section-label">WORKSPACE</span>
-    {NAV_ITEMS.map(item=>{const active=activeItem.id===item.id;return <button aria-current={active?"page":undefined} className={active?"nav-link nav-link-active":"nav-link"} key={item.id} onClick={()=>setActivePageId(item.id)} type="button"><Icon name={item.id}/><span>{item.label}</span>{active?<span className="nav-active-dot"/>:null}</button>;})}
-   </nav>
-   <div className="sidebar-bottom"><div className="sidebar-status"><span className="status-dot"/><span>Private tracker</span></div><p>Find a studio, apply personally, and track your progress.</p></div>
-  </aside>
-  <main className="main-area">
-   <header className="topbar"><div><p className="breadcrumb">Studio Outreach <span>/</span> {activeItem.label}</p><h1>{activeItem.label}</h1><p className="page-description">{activeItem.description}</p></div></header>
-   <div className="page-content">
-    {activePageId==="studios"?<SpeculativeRouteDirectory onTrackRoute={handleTrackRoute}/>:null}
-    <div hidden={activePageId==="studios"}><PrivateDataSettings activePageId={activePageId} initialLead={pendingLead} onLeadPrefillConsumed={consumePendingLead}/></div>
-   </div>
-   <footer className="app-footer"><span>Studio Outreach</span><span>Official application routes · Manual applications · Private tracking</span></footer>
-  </main>
- </div>;
+  const [page,setPage]=useState<"studios"|"applications">("studios");
+  const [trackerInitialTab,setTrackerInitialTab]=useState("saved");
+  const [applications,setApplications]=useState<TrackedApplication[]>([]);
+  const [loaded,setLoaded]=useState(false);
+
+  useEffect(()=>{setApplications(readApplications());setLoaded(true);},[]);
+  useEffect(()=>{
+    if(!loaded)return;
+    try{localStorage.setItem(STORAGE_KEY,JSON.stringify(applications));}
+    catch{window.alert("The browser could not save your tracker. Check available site storage.");}
+  },[applications,loaded]);
+
+  const counts=useMemo(()=>({
+    saved:applications.filter(a=>a.status==="saved").length,
+    active:applications.filter(a=>["in_progress","applied","interview","offer"].includes(a.status)).length
+  }),[applications]);
+
+  function trackStudio(studio:{name:string;websiteUrl:string;applicationUrl:string;country:string},status:TrackerStatus,location?:{country:string;hqLabel:string;applicationLocation:string}){
+    const timestamp=new Date().toISOString();
+    setApplications(previous=>{
+      const existing=previous.find(item=>item.studioName===studio.name);
+      if(existing&&status==="saved")return previous;
+      const next:TrackedApplication={
+        id:existing?.id||studio.name.toLowerCase().replace(/[^a-z0-9]+/g,"-"),
+        studioName:studio.name,
+        websiteUrl:studio.websiteUrl,
+        applicationUrl:studio.applicationUrl,
+        country:location?.country||studio.country,
+        hqLabel:location?.hqLabel||"HQ",
+        applicationLocation:location?.applicationLocation||"Not specified · HQ shown as reference",
+        status,
+        createdAt:existing?.createdAt||timestamp,
+        updatedAt:timestamp,
+        appliedAt:status==="applied"?(existing?.appliedAt||timestamp):existing?.appliedAt||null,
+        note:existing?.note||""
+      };
+      return [next,...previous.filter(item=>item.studioName!==studio.name)];
+    });
+  }
+
+  function markApplied(studio:{name:string;websiteUrl:string;applicationUrl:string;country:string},geo:{country:string;hqLabel:string;applicationLocation:string}){
+    const confirmed=window.confirm("Confirm that you have submitted an application to "+studio.name+"? This will add it to My Applications as Applied.");
+    if(!confirmed)return;
+    trackStudio(studio,"applied",geo);
+    setTrackerInitialTab("applied");
+    setPage("applications");
+  }
+
+  function changeStatus(id:string,status:TrackerStatus){
+    const current=applications.find(item=>item.id===id);
+    if(!current)return;
+    if(status==="applied"&&current.status!=="applied"&&!window.confirm("Confirm that you have submitted an application to "+current.studioName+"?"))return;
+    setApplications(previous=>previous.map(item=>item.id!==id?item:{
+      ...item,status,updatedAt:new Date().toISOString(),
+      appliedAt:status==="applied"?(item.appliedAt||new Date().toISOString()):item.appliedAt
+    }));
+  }
+
+  function removeApplication(id:string){
+    const item=applications.find(a=>a.id===id);
+    if(!item||!window.confirm("Remove "+item.studioName+" from My Applications?"))return;
+    setApplications(previous=>previous.filter(a=>a.id!==id));
+  }
+
+  return <div className="app-shell">
+    <aside className="sidebar">
+      <a className="brand" href="#studios" onClick={e=>{e.preventDefault();setPage("studios");}}>
+        <span className="brand-mark">✦</span><span><strong>STUDIO<span>SCOUT</span></strong><small>GAME INDUSTRY DIRECTORY</small></span>
+      </a>
+      <div className="sidebar-section-label">WORKSPACE</div>
+      <nav className="main-navigation" aria-label="Main navigation">
+        {nav.map(item=><button key={item.id} className={page===item.id?"nav-link active":"nav-link"} type="button" onClick={()=>{if(item.id==="applications")setTrackerInitialTab("saved");setPage(item.id);}}><span className="nav-icon">{item.icon}</span><span>{item.label}</span>{item.id==="applications"?<b>{applications.length}</b>:null}</button>)}
+      </nav>
+      <div className="sidebar-spacer"/>
+      <div className="sidebar-mini-card"><span className="mini-card-icon">◈</span><strong>{applications.length} tracked studios</strong><p>{counts.saved} saved · {counts.active} active</p><button type="button" onClick={()=>setPage("applications")}>View tracker →</button></div>
+      <div className="sidebar-footer"><span className="online-dot"/> Personal workspace <span>·</span> Local only</div>
+    </aside>
+    <main className="main-area">
+      <header className="topbar">
+        <div className="breadcrumb">STUDIOSCOUT <span>/</span> {page==="studios"?"DISCOVER":"MY APPLICATIONS"}</div>
+        <div className="topbar-right"><span className="topbar-tag">PERSONAL RESEARCH</span><span className="avatar">H</span></div>
+      </header>
+      <div className="page-content">
+        {page==="studios"?<StudioDirectory applications={applications} onSave={(studio,location)=>trackStudio(studio,"saved",location)} onMarkApplied={markApplied}/>:<ApplicationTracker initialTab={trackerInitialTab} applications={applications} onChangeStatus={changeStatus} onRemove={removeApplication} onOpenDirectory={()=>setPage("studios")}/>}
+      </div>
+      <footer className="app-footer"><span>STUDIOSCOUT</span><span>Studio profiles · Official application routes · Manual tracking</span><span>© 2026</span></footer>
+    </main>
+  </div>;
 }

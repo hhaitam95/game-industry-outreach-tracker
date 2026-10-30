@@ -1,14 +1,5 @@
 [
   {
-    "name": "3Sigma Studios",
-    "country": "Hungary",
-    "websiteUrl": "https://www.3sigma-games.com/",
-    "applicationUrl": "https://www.3sigma-games.com/public/hiring",
-    "evidenceUrl": "https://www.3sigma-games.com/public/hiring",
-    "notes": "Budapest-based adult FMV studio has a General Application for game dev, design and DevOps. Form explicitly asks applicants to confirm comfort with adult content.",
-    "checkedAt": "2026-10-29"
-  },
-  {
     "name": "AARISE",
     "country": "France",
     "websiteUrl": "https://www.aarise.games/",
@@ -37,7 +28,7 @@
   },
   {
     "name": "Aethra Studios",
-    "country": "Not stated",
+    "country": "Netherlands",
     "websiteUrl": "https://www.aethrastudios.com/",
     "applicationUrl": "https://www.aethrastudios.com/careers/",
     "evidenceUrl": "https://www.aethrastudios.com/careers/",
@@ -73,7 +64,7 @@
   },
   {
     "name": "Awe Interactive",
-    "country": "Not stated",
+    "country": "United Kingdom",
     "websiteUrl": "https://www.aweinteractive.com/",
     "applicationUrl": "https://www.aweinteractive.com/careers",
     "evidenceUrl": "https://www.aweinteractive.com/careers",
@@ -81,22 +72,13 @@
     "checkedAt": "2026-10-29"
   },
   {
-    "name": "Ballistic Moon",
-    "country": "United Kingdom",
-    "websiteUrl": "https://ballisticmoon.com/",
-    "applicationUrl": "https://ballisticmoon.com/careers/",
-    "evidenceUrl": "https://ballisticmoon.com/careers/",
-    "notes": "Official careers page has a Speculative Application section and invites people without a matching role to contact the studio. Work model: remote.",
-    "checkedAt": "2026-10-29"
-  },
-  {
     "name": "Bananagun",
     "country": "Not stated",
-    "websiteUrl": "https://www.bananagun.fun/",
-    "applicationUrl": "https://www.bananagun.fun/",
-    "evidenceUrl": "https://www.bananagun.fun/",
-    "notes": "Official website includes an Open Application alongside role listings and invites candidates to apply by email.",
-    "checkedAt": "2026-10-29"
+    "websiteUrl": "https://bananagun.games/",
+    "applicationUrl": "https://bananagun.games/",
+    "evidenceUrl": "https://bananagun.games/",
+    "notes": "Official site describes a small, senior mobile game team building hyper- and hybrid-casual Unity games for iOS and Android; current careers section invites open applications. HQ is not publicly stated.",
+    "checkedAt": "2026-10-30"
   },
   {
     "name": "Barnstorm Games",
@@ -163,7 +145,7 @@
   },
   {
     "name": "CraftiGames",
-    "country": "Not stated",
+    "country": "United Arab Emirates",
     "websiteUrl": "https://www.craftigames.net/",
     "applicationUrl": "https://www.craftigames.net/careers",
     "evidenceUrl": "https://www.craftigames.net/careers",
@@ -208,7 +190,7 @@
   },
   {
     "name": "Fawkes Games",
-    "country": "Not stated",
+    "country": "Bulgaria",
     "websiteUrl": "https://fawkesgames.com/",
     "applicationUrl": "https://fawkesgames.com/en/careers/",
     "evidenceUrl": "https://fawkesgames.com/en/careers/",
@@ -271,7 +253,7 @@
   },
   {
     "name": "Hypemasters",
-    "country": "Not stated",
+    "country": "United Arab Emirates",
     "websiteUrl": "https://hypemasters.com/",
     "applicationUrl": "https://hypemasters.careers-page.com/open-application",
     "evidenceUrl": "https://hypemasters.careers-page.com/open-application",
@@ -280,7 +262,7 @@
   },
   {
     "name": "Katal Games",
-    "country": "Not stated",
+    "country": "Spain",
     "websiteUrl": "https://katal.games/",
     "applicationUrl": "https://katal.games/careers/",
     "evidenceUrl": "https://katal.games/careers/",
@@ -415,11 +397,11 @@
   },
   {
     "name": "Plummy Games",
-    "country": "Estonia",
+    "country": "Moldova",
     "websiteUrl": "https://plummygames.teamtailor.com/",
     "applicationUrl": "https://plummygames.teamtailor.com/jobs/6670751-open-application/applications/new",
     "evidenceUrl": "https://plummygames.teamtailor.com/jobs/6670751-open-application/applications/new",
-    "notes": "Official Teamtailor Open Application; fully remote from Tallinn. Applicants outside Moldova or Estonia must be willing to use a B2B contract. Official route describes eligibility as worldwide.",
+    "notes": "Official company page identifies Chișinău, Moldova as its home base (about 25 teammates in the office) and lists Tallinn, Estonia among remote-work locations. Open application; fully remote options, with B2B conditions for some countries.",
     "checkedAt": "2026-10-30"
   },
   {
@@ -433,7 +415,7 @@
   },
   {
     "name": "Redly Games",
-    "country": "Not stated",
+    "country": "Finland",
     "websiteUrl": "https://jobs.ashbyhq.com/redlygames",
     "applicationUrl": "https://jobs.ashbyhq.com/redlygames/3c2a1d1e-5e80-4b4e-895d-f43d0efe4d3b",
     "evidenceUrl": "https://jobs.ashbyhq.com/redlygames/3c2a1d1e-5e80-4b4e-895d-f43d0efe4d3b",
@@ -451,7 +433,7 @@
   },
   {
     "name": "Rustling Leaves Games",
-    "country": "Not stated",
+    "country": "United States",
     "websiteUrl": "https://www.rustlingleavesgames.com/",
     "applicationUrl": "https://www.rustlingleavesgames.com/join-us/general-application/",
     "evidenceUrl": "https://www.rustlingleavesgames.com/join-us/general-application/",
@@ -523,7 +505,7 @@
   },
   {
     "name": "SumiGamesStudio",
-    "country": "Not stated",
+    "country": "United Arab Emirates",
     "websiteUrl": "https://www.sumigamesstudio.com/",
     "applicationUrl": "https://www.sumigamesstudio.com/careers",
     "evidenceUrl": "https://www.sumigamesstudio.com/careers",
@@ -586,7 +568,7 @@
   },
   {
     "name": "Vyrex Interactive",
-    "country": "Not stated",
+    "country": "United States",
     "websiteUrl": "https://vyrexinteractive.com/",
     "applicationUrl": "https://vyrexinteractive.com/careers",
     "evidenceUrl": "https://vyrexinteractive.com/careers",

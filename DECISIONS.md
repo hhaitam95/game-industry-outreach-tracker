@@ -1,12 +1,29 @@
-# Product decision
+# Product decisions
 
-On 30 October 2026 the owner reset the project scope.
+**Date:** 30 October 2026
 
-The tool is a small personal app:
-1. Gather game-studio candidates from public sources.
-2. Check each candidate's official site for a real speculative/open/unsolicited/general application route.
-3. Publish only the studios that pass.
-4. Let the user open the route and apply manually.
-5. Track the application privately in the browser.
+StudioScout is a personal game-industry research tool with two core functions:
 
-Future automation is limited to rechecking saved routes and finding new official routes. No automatic outreach or applications.
+1. A dark, searchable and expandable directory of studios with verified official speculative/open/unsolicited/general application routes.
+2. A lightweight application tracker stored in the user's browser using localStorage.
+
+## Directory rules
+
+- Show HQ as a labelled reference when an application route does not state a hiring location. Never imply that HQ is the job location.
+- Show confirmed remote eligibility or application geography separately.
+- Include sourced company type, parent/subsidiary relationship, selected games, indicative industry scale and headcount details where available.
+- Label AAA/AA/Indie as editorial guidance, not an official rating.
+- Exclude studios materially focused on pornography/erotica/sexually explicit entertainment, gambling/casinos/betting (including simulated casino games), recreational drugs/cannabis, alcohol, tobacco/nicotine/vaping and related vice industries. Leave unclear cases out pending manual review.
+- Never invent locations, ownership, employee numbers or game credits.
+
+## Tracker rules
+
+- Statuses: Saved, In Progress, Applied, Interview, Offer and Archived (Not moving forward).
+- Saving a studio adds it to Saved.
+- A separate user confirmation records an actually submitted application and moves it to Applied.
+- Records stay in browser localStorage. No login, backend, encryption, remote sync, email sending or automatic application submission is required for this single-user tool.
+- Browser data can be cleared and does not sync across devices.
+
+## Out of scope
+
+No general job board, resume editor, outreach generator, AI scoring, automatic crawling, scheduled scans, public user accounts, multi-user access, analytics dashboard or email integration.
