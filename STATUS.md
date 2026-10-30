@@ -1,14 +1,26 @@
-# Current status
+# StudioScout status
 
 **Date:** 2026-10-30  
-**Scope:** dark worldwide game-studio directory + simple local application tracker.  
-**Active work:** PR #22 — adult/vice-sector exclusion and StudioScout redesign.  
-**Directory:** 65 studios with qualifying official speculative/open/general application routes.  
-**Studio profiles:** 65 profile records; facts vary by public evidence and unknowns remain explicitly labelled.  
-**Tracker:** Saved, In Progress, Applied, Interview, Offer and Archived (displayed as “Not moving forward”), stored in browser localStorage only.  
-**UI:** dark expandable table with studio marks, country flags, selected game artwork, company type, ownership, selected games, indicative scale, team-size notes, HQ/branch information and direct application links.  
-**Location rule:** HQ is shown as a labelled reference when the application route does not state a hiring location. Confirmed remote regions or role locations are shown separately. Five records have no publicly stated HQ and remain marked as unknown.  
-**Recent data cleanup:** 3Sigma Studios excluded under the adult/vice policy; Ballistic Moon removed because the UK company is in liquidation; Bananagun's official site link and Plummy Games' Chișinău home base were corrected.  
-**Not included:** login, backend, encrypted vault, remote sync, email, automatic applications, job board, resume tools or automated discovery.  
-**Directory filters:** AAA, AA, Indie and Mixed / Unclassified; country/type filters include researched values. Moldova flag mapping corrected.
-**Next:** complete browser acceptance on the deployed Pages site after PR approval/merge; continue verifying profile accuracy and external artwork availability.
+**Current goal:** Make the studio directory and application tracker straightforward, functional and reliable before adding visual polish.
+
+## Website
+
+- Two pages: Studio directory and My applications.
+- Directory data: 89 researched studio records in `src/data/speculative-route-directory.json`; all currently carry an active application-route status.
+- Studio details are pared back to the fields needed to find and assess a speculative route.
+- Tracker stages: Saved, In Progress, Applied, Interview, Offer and Archived.
+- Tracker storage: browser localStorage only; no personal application data is stored in the repository.
+- Current UI implementation branch: `feat/studioscout-functional-mvp`.
+
+## Automation
+
+- A separate older discovery prototype scans advertised job postings and is not suitable for the studio-speculative-route use case.
+- The studio-route discovery engine and hourly GitHub Actions workflow are still to be implemented on the default branch.
+- Automation must verify official speculative/open application routes and must never treat temporary failures as closure.
+
+## Next
+
+1. Run CI and browser acceptance for the simplified two-page UI.
+2. Fix any build/test failures.
+3. Implement resumable, batched discovery of studios that accept speculative applications.
+4. Enable hourly maintenance only after a successful initial discovery run and validation.
