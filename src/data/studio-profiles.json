@@ -1,145 +1,847 @@
 {
-  "10 Chambers": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+  "Aethra Studios": {
+    "description": "Independent remote-first studio focused on atmospheric, narrative-driven games.",
     "headquarters": {
-      "city": "Stockholm",
-      "country": "Sweden",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "city": "The Hague",
+      "country": "Netherlands",
+      "countryCode": "NL",
+      "label": "HQ"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Independent"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Independent · self-published",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
+    "industryScale": "Indie",
+    "teamSize": "Small team · exact count not disclosed",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Horror",
+      "Narrative"
+    ],
+    "popularGames": [
+      {
+        "title": "Clocked Out",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
     "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1&state=&type=",
-      "https://10chambers.com/"
+      "https://www.aethrastudios.com/studio/",
+      "https://www.aethrastudios.com/press/"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "applicationLocation": "Remote across Europe · CET overlap"
   },
-  "1000 Orks": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+  "Awe Interactive": {
+    "description": "Independent remote game studio creating premium PC and console experiences.",
     "headquarters": {
-      "city": "Osnabruck, Saxony",
-      "country": "Germany",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer"
-    ],
-    "ownership": "Not yet researched",
-    "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1&state=&type=",
-      "https://1000orks.com/"
-    ],
-    "applicationLocation": "Not specified · confirm on the official application route"
-  },
-  "10tons": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
-    "headquarters": {
-      "city": "Tampere, Pirkanmaa",
-      "country": "Finland",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer"
-    ],
-    "ownership": "Not yet researched",
-    "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1&state=&type=",
-      "https://10tons.com/"
-    ],
-    "applicationLocation": "Not specified · confirm on the official application route"
-  },
-  "1939 Games": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
-    "headquarters": {
-      "city": "Reykjavik",
-      "country": "Iceland",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Mobile"
-    ],
-    "ownership": "Not yet researched",
-    "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1&state=&type=",
-      "https://1939games.com/"
-    ],
-    "applicationLocation": "Not specified · confirm on the official application route"
-  },
-  "4A Games": {
-    "description": "International game developer known for the Metro series, with studio operations in Malta and Kyiv.",
-    "headquarters": {
-      "city": null,
-      "country": "Malta",
-      "countryCode": "MT",
-      "label": "Corporate HQ · city not stated"
+      "city": "Bedfordshire",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
     },
     "otherLocations": [
-      "Kyiv, Ukraine"
+      "Remote team distributed internationally"
     ],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Independent"
     ],
-    "ownership": "Privately held · ownership details not confirmed in this record",
+    "ownership": "Independent",
     "parentCompany": null,
-    "industryScale": "AAA",
+    "industryScale": "Indie / AA",
     "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
     "focus": [
       "PC",
       "Console",
-      "Shooter",
-      "Narrative",
-      "Action"
+      "Action",
+      "Rhythm"
     ],
     "popularGames": [
       {
-        "title": "Metro Exodus",
-        "appId": 412020
-      },
-      {
-        "title": "Metro: Last Light Redux",
-        "appId": 287390
+        "title": "BPM: Bullets Per Minute",
+        "appId": 1286350
       }
     ],
     "profileSources": [
-      "https://www.4a-games.com.mt/",
-      "https://www.4a-games.com.mt/careers"
+      "https://www.aweinteractive.com/about",
+      "https://www.aweinteractive.com/press"
     ],
-    "applicationLocation": "Malta / Kyiv studio network · general applicant eligibility not stated"
+    "applicationLocation": "Location not specified · HQ shown"
+  },
+  "Asobo Studio": {
+    "description": "Large Bordeaux-based developer known for technically ambitious PC and console productions, simulation and narrative adventures.",
+    "headquarters": {
+      "city": "Bordeaux",
+      "country": "France",
+      "countryCode": "FR",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Co-development"
+    ],
+    "ownership": "Independent studio; no parent company publicly confirmed",
+    "parentCompany": null,
+    "industryScale": "AAA",
+    "teamSize": "201–500 employees (LinkedIn company range)",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "PC",
+      "Console",
+      "Simulation",
+      "Adventure",
+      "Technology"
+    ],
+    "popularGames": [
+      {
+        "title": "Microsoft Flight Simulator",
+        "appId": 1250410
+      },
+      {
+        "title": "A Plague Tale: Requiem",
+        "appId": 1182900
+      },
+      {
+        "title": "A Plague Tale: Innocence",
+        "appId": 752590
+      }
+    ],
+    "profileSources": [
+      "https://www.asobostudio.com/about-us",
+      "https://www.linkedin.com/company/asobo-studio/"
+    ],
+    "applicationLocation": "Bordeaux · on-site"
+  },
+  "Beenox": {
+    "description": "Activision development studio with a long track record in co-development, ports and major franchise production.",
+    "headquarters": {
+      "city": "Québec City",
+      "country": "Canada",
+      "countryCode": "CA",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Montréal, Canada"
+    ],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Porting"
+    ],
+    "ownership": "Subsidiary of Activision · part of Microsoft Gaming",
+    "parentCompany": "Activision / Microsoft Gaming",
+    "industryScale": "AAA",
+    "teamSize": "Not reliably disclosed as a current studio-only figure",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Co-development",
+      "Porting"
+    ],
+    "popularGames": [
+      {
+        "title": "Crash Bandicoot N. Sane Trilogy",
+        "appId": 731490
+      },
+      {
+        "title": "Tony Hawk's Pro Skater 1 + 2",
+        "appId": 2395210
+      },
+      {
+        "title": "Call of Duty: Modern Warfare III",
+        "appId": 2519060
+      }
+    ],
+    "profileSources": [
+      "https://beenox.com/",
+      "https://investor.activision.com/news-releases/news-release-details/activision-establishes-development-foothold-quebec-acquisition"
+    ],
+    "applicationLocation": "Location not specified · HQ shown",
+    "reachHighlights": "Long-running Activision studio with franchise work across Crash Bandicoot, Tony Hawk's Pro Skater and Call of Duty."
+  },
+  "CI Games": {
+    "description": "Publicly traded Polish video-game developer and publisher, operating multiple development studios and publishing labels.",
+    "headquarters": {
+      "city": "Warsaw",
+      "country": "Poland",
+      "countryCode": "PL",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Barcelona, Spain",
+      "Bucharest, Romania",
+      "United States"
+    ],
+    "companyType": [
+      "Developer",
+      "Publisher"
+    ],
+    "ownership": "Public company · listed on the Warsaw Stock Exchange",
+    "parentCompany": null,
+    "industryScale": "AA",
+    "teamSize": "150+ industry professionals (company-reported)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Console",
+      "Action",
+      "Shooter",
+      "RPG",
+      "Publishing"
+    ],
+    "popularGames": [
+      {
+        "title": "Lords of the Fallen",
+        "appId": 1501750
+      },
+      {
+        "title": "Sniper Ghost Warrior Contracts 2",
+        "appId": 1338770
+      }
+    ],
+    "profileSources": [
+      "https://cigames.com/en/about-us/",
+      "https://cigames.com/en/investor-relations/"
+    ],
+    "applicationLocation": "Worldwide · fully remote",
+    "reachHighlights": "150+ professionals reported across its company group."
+  },
+  "Cyanide Studio": {
+    "description": "Established developer working across sports, strategy, RPG and narrative games, with teams in France and Canada.",
+    "headquarters": {
+      "city": "Paris",
+      "country": "France",
+      "countryCode": "FR",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Bordeaux, France",
+      "Montréal, Canada"
+    ],
+    "companyType": [
+      "Developer",
+      "Co-development"
+    ],
+    "ownership": "Nacon subsidiary",
+    "parentCompany": "Nacon · Bigben Group",
+    "industryScale": "AA",
+    "teamSize": "190 at 31 Mar 2026 (127 France + 63 Canada; before later group restructuring)",
+    "teamSizeAsOf": "2026-03-31",
+    "focus": [
+      "PC",
+      "Console",
+      "RPG",
+      "Strategy",
+      "Sports"
+    ],
+    "popularGames": [
+      {
+        "title": "Styx: Shards of Darkness",
+        "appId": 527100
+      },
+      {
+        "title": "Blood Bowl 3",
+        "appId": 1016950
+      },
+      {
+        "title": "Werewolf: The Apocalypse – Earthblood",
+        "appId": 679110
+      }
+    ],
+    "profileSources": [
+      "https://cyanide-studio.com/",
+      "https://corporate.nacongaming.com/wp-content/uploads/2026/10/Document-URD-NACON-31.03.2026.html"
+    ],
+    "applicationLocation": "Location not specified · HQ shown"
+  },
+  "DON'T NOD (Montreal)": {
+    "description": "Montréal subsidiary of French developer and publisher DON'T NOD, established as the group's first international studio.",
+    "headquarters": {
+      "city": "Montréal",
+      "country": "Canada",
+      "countryCode": "CA",
+      "label": "Application studio"
+    },
+    "otherLocations": [
+      "Paris, France · parent company headquarters"
+    ],
+    "companyType": [
+      "Developer",
+      "Subsidiary"
+    ],
+    "ownership": "Subsidiary of DON'T NOD Entertainment",
+    "parentCompany": "DON'T NOD Entertainment",
+    "industryScale": "AA",
+    "teamSize": "40+ talents (studio-reported)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Console",
+      "Narrative",
+      "Adventure"
+    ],
+    "popularGames": [
+      {
+        "title": "Lost Records: Bloom & Rage",
+        "appId": 1902960
+      }
+    ],
+    "profileSources": [
+      "https://dont-nod.com/en/dont-nod-montreal-en/",
+      "https://dont-nod.com/en/about-us/",
+      "https://www.dontnod-bourse.com/en/company"
+    ],
+    "applicationLocation": "Montréal-specific application"
+  },
+  "Fawkes Games": {
+    "description": "Game operator and publisher running a portfolio of established online multiplayer and strategy titles.",
+    "headquarters": {
+      "city": "Plovdiv",
+      "country": "Bulgaria",
+      "countryCode": "BG",
+      "label": "Registered HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Publisher",
+      "Live operations"
+    ],
+    "ownership": "Privately held · company ownership not publicly detailed",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Online multiplayer",
+      "Live operations"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://fawkesgames.com/terms",
+      "https://fawkesgames.com/privacy"
+    ],
+    "applicationLocation": "Remote · worldwide stated"
+  },
+  "Hypemasters": {
+    "description": "International strategy-game developer with its main development office in Abu Dhabi and a distributed international team.",
+    "headquarters": {
+      "city": "Abu Dhabi",
+      "country": "United Arab Emirates",
+      "countryCode": "AE",
+      "label": "Main development office"
+    },
+    "otherLocations": [
+      "Dover, Delaware, United States · corporate address",
+      "London, United Kingdom",
+      "Lisbon, Portugal"
+    ],
+    "companyType": [
+      "Developer",
+      "Mobile",
+      "PC"
+    ],
+    "ownership": "Privately held · investors include Gem Capital and others",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "11–50 employees (LinkedIn company range)",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "Mobile",
+      "PC",
+      "Strategy",
+      "Free-to-play"
+    ],
+    "popularGames": [
+      {
+        "title": "World War Armies",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.hypemasters.com/",
+      "https://www.linkedin.com/company/hypemasters",
+      "https://store.steampowered.com/developer/hypemasters_inc"
+    ],
+    "applicationLocation": "Location not specified · HQ shown"
+  },
+  "Katal Games": {
+    "description": "Game and software studio building original games, live interactive formats and real-time technology for partner projects.",
+    "headquarters": {
+      "city": null,
+      "country": "Spain",
+      "countryCode": "ES",
+      "label": "HQ · city not published"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Services",
+      "Live interactive formats"
+    ],
+    "ownership": "Independent · private",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "PC",
+      "Live interactive",
+      "Real-time software"
+    ],
+    "popularGames": [
+      {
+        "title": "Arena",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://katal.games/",
+      "https://katal.games/studio/",
+      "https://katal.games/press/"
+    ]
+  },
+  "Kylotonn": {
+    "description": "French developer specializing in racing games and large licensed productions.",
+    "headquarters": {
+      "city": "Paris",
+      "country": "France",
+      "countryCode": "FR",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Lyon, France"
+    ],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Nacon subsidiary",
+    "parentCompany": "Nacon · Bigben Group",
+    "industryScale": "AA",
+    "teamSize": "127 at 31 Mar 2026 (group-reported; before later restructuring)",
+    "teamSizeAsOf": "2026-03-31",
+    "focus": [
+      "PC",
+      "Console",
+      "Racing",
+      "Simulation"
+    ],
+    "popularGames": [
+      {
+        "title": "Test Drive Unlimited Solar Crown",
+        "appId": 1249970
+      },
+      {
+        "title": "WRC Generations",
+        "appId": 1953520
+      }
+    ],
+    "profileSources": [
+      "https://kylotonn.com/en/",
+      "https://corporate.nacongaming.com/wp-content/uploads/2026/10/Document-URD-NACON-31.03.2026.html"
+    ]
+  },
+  "Lost Boys Interactive": {
+    "description": "Veteran-led development and co-development studio providing full-production support across engineering, art, design and production.",
+    "headquarters": {
+      "city": "Madison, Wisconsin",
+      "country": "United States",
+      "countryCode": "US",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Austin, Texas, United States",
+      "Remote-first"
+    ],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Support studio"
+    ],
+    "ownership": "Independent, founder-led ownership restored in December 2025",
+    "parentCompany": null,
+    "industryScale": "AAA co-development",
+    "teamSize": "Not publicly disclosed after return to independence",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Co-development",
+      "Engineering",
+      "Art"
+    ],
+    "popularGames": [
+      {
+        "title": "WWE 2K26",
+        "appId": null,
+        "stage": "Co-development contribution"
+      },
+      {
+        "title": "Tiny Tina's Wonderlands",
+        "appId": 1286680,
+        "stage": "Co-development contribution"
+      },
+      {
+        "title": "Diablo IV",
+        "appId": 2344520,
+        "stage": "Co-development contribution"
+      }
+    ],
+    "profileSources": [
+      "https://www.lostboysinteractive.com/",
+      "https://www.lostboysinteractive.com/news"
+    ],
+    "applicationLocation": "Remote-first · US and Canada",
+    "reachHighlights": "AAA co-development credits include Diablo IV and Tiny Tina's Wonderlands."
+  },
+  "Obsidian Entertainment": {
+    "description": "California RPG developer known for narrative-heavy role-playing games and large-scale worlds.",
+    "headquarters": {
+      "city": "Irvine, California",
+      "country": "United States",
+      "countryCode": "US",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "First-party studio"
+    ],
+    "ownership": "Xbox Game Studios subsidiary · Microsoft",
+    "parentCompany": "Microsoft Gaming · Xbox Game Studios",
+    "industryScale": "AAA",
+    "teamSize": "Not publicly confirmed after 2026 restructuring",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Xbox",
+      "RPG",
+      "Narrative"
+    ],
+    "popularGames": [
+      {
+        "title": "Avowed",
+        "appId": 2457220
+      },
+      {
+        "title": "The Outer Worlds",
+        "appId": 578650
+      },
+      {
+        "title": "The Outer Worlds 2",
+        "appId": 2882670
+      },
+      {
+        "title": "Pillars of Eternity",
+        "appId": 291650
+      }
+    ],
+    "profileSources": [
+      "https://www.obsidian.net/",
+      "https://www.latimes.com/business/story/2026-07-09/microsofts-xbox-to-shift-obsidian-studio-to-new-fallout-video-game"
+    ],
+    "reachHighlights": "Major RPG portfolio includes Fallout: New Vegas, Pillars of Eternity, The Outer Worlds and Avowed."
+  },
+  "Redly Games": {
+    "description": "Small remote-first game studio founded by former Supercell game lead Thea Chow, focused on thoughtful, design-led experiences.",
+    "headquarters": {
+      "city": "Helsinki",
+      "country": "Finland",
+      "countryCode": "FI",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Remote-first"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent startup"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small team · exact count not disclosed",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "Mobile",
+      "Narrative",
+      "Casual"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.redlygames.com/"
+    ],
+    "applicationLocation": "Global remote · EU and Canada preferred"
+  },
+  "Rustling Leaves Games": {
+    "description": "Volunteer-built indie studio developing its first game, with a revenue-share compensation model.",
+    "headquarters": {
+      "city": "Clayton, North Carolina",
+      "country": "United States",
+      "countryCode": "US",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "11–50 listed on LinkedIn; volunteer team",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "PC",
+      "Indie",
+      "Narrative"
+    ],
+    "popularGames": [
+      {
+        "title": "Project Vertex",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://www.rustlingleavesgames.com/",
+      "https://www.linkedin.com/company/rustling-leaves-games"
+    ]
+  },
+  "SOFTGAMES": {
+    "description": "Berlin-based casual-game developer and publisher specializing in instant, HTML5, social and mobile games.",
+    "headquarters": {
+      "city": "Berlin",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Toronto, Canada"
+    ],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Mobile"
+    ],
+    "ownership": "Privately held · ownership not confirmed",
+    "parentCompany": null,
+    "industryScale": "AA · Mobile",
+    "teamSize": "51–200 employees (LinkedIn company range)",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "Mobile",
+      "HTML5",
+      "Instant games",
+      "Casual",
+      "Social"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.softgames.com/",
+      "https://www.linkedin.com/company/softgames-mobile-entertainment-services/"
+    ]
+  },
+  "Supermassive Games": {
+    "description": "BAFTA-winning British developer specializing in cinematic, narrative-led horror and interactive drama.",
+    "headquarters": {
+      "city": "Guildford",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Owned by Nordisk Games · part of the Egmont Group",
+    "parentCompany": "Nordisk Games / Egmont Group",
+    "industryScale": "AA / AAA",
+    "teamSize": "About 188 estimated employees worldwide (March 2026; third-party estimate)",
+    "teamSizeAsOf": "2026-03",
+    "focus": [
+      "PC",
+      "PlayStation",
+      "Xbox",
+      "Horror",
+      "Narrative"
+    ],
+    "popularGames": [
+      {
+        "title": "Until Dawn",
+        "appId": 2172010
+      },
+      {
+        "title": "The Quarry",
+        "appId": 1577120
+      },
+      {
+        "title": "Little Nightmares III",
+        "appId": 1392860
+      }
+    ],
+    "profileSources": [
+      "https://www.supermassivegames.com/about",
+      "https://www.reveliolabs.com/companies/supermassive-games/employees"
+    ],
+    "applicationLocation": "Guildford · see role-specific conditions",
+    "reachHighlights": "BAFTA-winning studio; known for Until Dawn, The Quarry, The Dark Pictures Anthology and Little Nightmares III."
+  },
+  "Unknown Worlds": {
+    "description": "Independent-origin studio now within Krafton, known for immersive underwater exploration and survival games.",
+    "headquarters": {
+      "city": "San Francisco, California",
+      "country": "United States",
+      "countryCode": "US",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "First-party studio"
+    ],
+    "ownership": "Krafton subsidiary",
+    "parentCompany": "Krafton",
+    "industryScale": "AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Survival",
+      "Exploration"
+    ],
+    "popularGames": [
+      {
+        "title": "Subnautica",
+        "appId": 264710
+      },
+      {
+        "title": "Subnautica: Below Zero",
+        "appId": 848450
+      }
+    ],
+    "profileSources": [
+      "https://unknownworlds.com/",
+      "https://www.krafton.com/en/"
+    ],
+    "applicationLocation": "Location not specified · HQ shown"
+  },
+  "CraftiGames": {
+    "description": "Game studio operating large multiplayer Minecraft networks and related online experiences.",
+    "headquarters": {
+      "city": "Dubai",
+      "country": "United Arab Emirates",
+      "countryCode": "AE",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Netherlands · legal entity referenced in company terms"
+    ],
+    "companyType": [
+      "Developer",
+      "Live operations"
+    ],
+    "ownership": "Privately held",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Minecraft",
+      "Online multiplayer",
+      "Live operations"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.craftigames.net/contact",
+      "https://craftigames.net/terms"
+    ],
+    "applicationLocation": "Remote · GMT ±6 hours typically"
+  },
+  "SumiGamesStudio": {
+    "description": "Game development and publishing company working across mobile, PC, multiplayer, AR/VR/XR and Web3 experiences.",
+    "headquarters": {
+      "city": "Dubai",
+      "country": "United Arab Emirates",
+      "countryCode": "AE",
+      "label": "Primary base · multi-location"
+    },
+    "otherLocations": [
+      "United Kingdom"
+    ],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Services"
+    ],
+    "ownership": "Private company · ownership not publicly detailed",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "PC",
+      "AR/VR/XR",
+      "Multiplayer",
+      "Web3"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.sumigamesstudio.com/company",
+      "https://www.sumigamesstudio.com/"
+    ]
+  },
+  "Vyrex Interactive": {
+    "description": "Independent US-based studio building systems-driven space and survival games and its own C# engine.",
+    "headquarters": {
+      "city": null,
+      "country": "United States",
+      "countryCode": "US",
+      "label": "HQ · city not published"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed · founded 2026",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "PC",
+      "Linux",
+      "Space",
+      "Survival"
+    ],
+    "popularGames": [
+      {
+        "title": "Galactic Prospectors",
+        "appId": 3561380,
+        "stage": "Early Access"
+      },
+      {
+        "title": "Starbreaker",
+        "appId": 492980,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://vyrexinteractive.com/press",
+      "https://vyrexinteractive.com/studio.php"
+    ]
   },
   "AARISE": {
     "description": "Independent French AA developer founded by the original team behind Empire of the Ants, now creating focused premium games across multiple genres.",
@@ -179,6 +881,908 @@
       "https://www.aarise.games/press-kit/"
     ],
     "reachHighlights": "Founded by the original team behind Empire of the Ants; self-describes its positioning as premium AA."
+  },
+  "Artefacts Studio": {
+    "description": "Independent French developer and co-development partner creating and marketing PC and console games, with long-running art, technical and design subcontracting capabilities.",
+    "headquarters": {
+      "city": "Villeurbanne (Lyon area)",
+      "country": "France",
+      "countryCode": "FR",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Services"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "AA",
+    "teamSize": "80 collaborators (studio-reported)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Console",
+      "Co-development",
+      "Art",
+      "Design"
+    ],
+    "popularGames": [
+      {
+        "title": "Naheulbeuk's Dungeon: Amulet of Chaos",
+        "appId": 970830
+      },
+      {
+        "title": "Crown Wars: The Black Prince",
+        "appId": 1658920
+      },
+      {
+        "title": "Disciples: Domination",
+        "appId": 2383200
+      }
+    ],
+    "applicationLocation": "Location not specified · use HQ as reference",
+    "profileSources": [
+      "https://www.artefacts-studio.fr/en/about-us"
+    ],
+    "reachHighlights": "Founded 2003 · studio reports 80 experienced collaborators · credits include Agatha Christie, Naheulbeuk and Disciples."
+  },
+  "Chimera Entertainment": {
+    "description": "Independent Munich game developer with a broad portfolio spanning strategy, RPG and mobile titles; offers hybrid and remote work across Europe.",
+    "headquarters": {
+      "city": "Munich",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Distributed team members across Europe"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "Around 80 team members (studio-reported)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Mobile",
+      "Strategy",
+      "RPG"
+    ],
+    "popularGames": [
+      {
+        "title": "Songs of Silence",
+        "appId": 2195410
+      },
+      {
+        "title": "Shadow and Bone: Enter the Fold",
+        "appId": null
+      }
+    ],
+    "applicationLocation": "Hybrid / remote · Europe",
+    "profileSources": [
+      "https://chimera-entertainment.com/"
+    ],
+    "reachHighlights": "25+ released games · around 80 team members across Europe (studio-reported)."
+  },
+  "Bossa Studios": {
+    "description": "London-based independent game developer and publisher creating original games for PC, console, mobile and VR, alongside co-development and multiplayer technology.",
+    "headquarters": {
+      "city": "London",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Co-development"
+    ],
+    "ownership": "Independent studio · no parent company disclosed",
+    "parentCompany": null,
+    "industryScale": "AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Mobile",
+      "VR",
+      "Multiplayer"
+    ],
+    "popularGames": [
+      {
+        "title": "Surgeon Simulator",
+        "appId": 233720
+      },
+      {
+        "title": "I Am Bread",
+        "appId": 327890
+      },
+      {
+        "title": "Lost Skies",
+        "appId": 1931180
+      }
+    ],
+    "applicationLocation": "Remote-first · application eligibility to confirm",
+    "profileSources": [
+      "https://www.bossagames.com/about.html",
+      "https://www.bossagames.com/careers.html"
+    ],
+    "reachHighlights": "Surgeon Simulator: 5M+ copies sold · I Am Bread: 3M+ copies sold · BAFTA-winning studio."
+  },
+  "Outplay Entertainment": {
+    "description": "Independent Dundee studio developing original and partner games across mobile, PC, Roblox, HTML5 and console, with full-cycle and co-development services.",
+    "headquarters": {
+      "city": "Dundee, Scotland",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Co-development"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "AA · Mobile / multi-platform",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "PC",
+      "Roblox",
+      "HTML5",
+      "Console",
+      "Casual"
+    ],
+    "popularGames": [
+      {
+        "title": "The Incentive Program",
+        "appId": null
+      },
+      {
+        "title": "The Creeps",
+        "appId": null
+      },
+      {
+        "title": "Monopoly Match",
+        "appId": null
+      }
+    ],
+    "applicationLocation": "UK / EU remote options",
+    "profileSources": [
+      "https://outplay.com/about-us/",
+      "https://outplay.com/"
+    ],
+    "reachHighlights": "250M+ global downloads · BAFTA-nominated · games and production across five platform categories (studio-reported)."
+  },
+  "Third Kind Games": {
+    "description": "Full-service AAA co-development and full-development studio delivering art, design, engineering and production for major publishers and franchises.",
+    "headquarters": {
+      "city": "Leamington Spa",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Poland",
+      "Spain"
+    ],
+    "companyType": [
+      "Developer",
+      "Co-development"
+    ],
+    "ownership": "Part of Virtuos",
+    "parentCompany": "Virtuos",
+    "industryScale": "AAA co-development",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "AAA co-development",
+      "Full development"
+    ],
+    "popularGames": [
+      {
+        "title": "Fable",
+        "appId": null,
+        "stage": "Co-development credit"
+      },
+      {
+        "title": "Forza Horizon",
+        "appId": null,
+        "stage": "Co-development credit"
+      },
+      {
+        "title": "Sea of Thieves",
+        "appId": null,
+        "stage": "Co-development credit"
+      },
+      {
+        "title": "Hearthstone",
+        "appId": null,
+        "stage": "Co-development credit"
+      }
+    ],
+    "applicationLocation": "Location not specified · use HQ as reference",
+    "profileSources": [
+      "https://thirdkindgames.com/about/"
+    ],
+    "reachHighlights": "AAA co-development credits include Fable, Forza Horizon, Sea of Thieves and Hearthstone; part of Virtuos."
+  },
+  "Stormind Games": {
+    "description": "Independent Italian developer and co-development partner known for atmospheric horror, action-adventure and narrative-driven games.",
+    "headquarters": {
+      "city": "Catania",
+      "country": "Italy",
+      "countryCode": "IT",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "AA",
+    "teamSize": "100+ internal resources plus external collaborators (studio-reported)",
+    "teamSizeAsOf": "2025",
+    "focus": [
+      "PC",
+      "PlayStation",
+      "Xbox",
+      "Horror",
+      "Action-adventure",
+      "Co-development"
+    ],
+    "popularGames": [
+      {
+        "title": "Remothered: Tormented Fathers",
+        "appId": 633360
+      },
+      {
+        "title": "Batora: Lost Haven",
+        "appId": 1506440
+      },
+      {
+        "title": "A Quiet Place: The Road Ahead",
+        "appId": 2233120
+      },
+      {
+        "title": "Mafia: The Old Country",
+        "appId": 3058630,
+        "stage": "Co-development contribution"
+      }
+    ],
+    "applicationLocation": "Location not specified · use HQ as reference",
+    "profileSources": [
+      "https://stormindgames.com/company/"
+    ],
+    "reachHighlights": "100+ internal resources plus external collaborators (studio-reported); credits include A Quiet Place and Mafia: The Old Country."
+  },
+  "Futureplay Games": {
+    "description": "Helsinki casual-game studio within Plarium, creating mobile games for global audiences.",
+    "headquarters": {
+      "city": "Helsinki",
+      "country": "Finland",
+      "countryCode": "FI",
+      "label": "Studio HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Mobile",
+      "Subsidiary"
+    ],
+    "ownership": "Part of Plarium",
+    "parentCompany": "Plarium · Aristocrat Leisure",
+    "industryScale": "AA · Mobile",
+    "teamSize": "60+ professionals (studio-reported)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "Mobile",
+      "Casual",
+      "Merge",
+      "Idle"
+    ],
+    "popularGames": [
+      {
+        "title": "Idle Farming Empire",
+        "appId": null
+      },
+      {
+        "title": "Merge Gardens",
+        "appId": null
+      }
+    ],
+    "applicationLocation": "Remote · global stated",
+    "profileSources": [
+      "https://company.plarium.com/en/studio/finland-helsinki/"
+    ],
+    "reachHighlights": "60+ professionals · six titles in the studio portfolio (Plarium studio page)."
+  },
+  "Sencorp Games": {
+    "description": "Independent Izmir game and technology studio building original mobile and PC games.",
+    "headquarters": {
+      "city": "Izmir",
+      "country": "Türkiye",
+      "countryCode": "TR",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "PC",
+      "Casual",
+      "Action"
+    ],
+    "popularGames": [
+      {
+        "title": "Pawstorm",
+        "appId": null,
+        "stage": "Available on Android"
+      },
+      {
+        "title": "Jellyclash",
+        "appId": null,
+        "stage": "Coming soon"
+      },
+      {
+        "title": "Kick Blast",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "applicationLocation": "Location not specified · use HQ as reference",
+    "profileSources": [
+      "https://sencorpgames.com/"
+    ]
+  },
+  "Paintbucket Games": {
+    "description": "Berlin independent studio making historically grounded, politically thoughtful narrative games.",
+    "headquarters": {
+      "city": "Berlin",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Narrative",
+      "Strategy",
+      "History"
+    ],
+    "popularGames": [
+      {
+        "title": "Through the Darkest of Times",
+        "appId": 1003090
+      },
+      {
+        "title": "The Darkest Files",
+        "appId": 2056630
+      }
+    ],
+    "applicationLocation": "Berlin · full-time",
+    "profileSources": [
+      "https://paintbucket.de/en"
+    ],
+    "reachHighlights": "Known for historically themed narrative games Through the Darkest of Times and The Darkest Files."
+  },
+  "Ember Crows": {
+    "description": "Independent London-based game studio developing ambitious narrative role-playing games, including a Slavic cyberpunk RPG.",
+    "headquarters": {
+      "city": "London",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Remote-friendly team"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "11–50 employees (LinkedIn company range)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "RPG",
+      "Narrative",
+      "Cyberpunk"
+    ],
+    "popularGames": [
+      {
+        "title": "Project Veles",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "applicationLocation": "Remote-friendly · confirm role eligibility",
+    "profileSources": [
+      "https://www.embercrows.com/",
+      "https://www.embercrows.com/careers/spontaneous-application",
+      "https://www.linkedin.com/company/ember-crows"
+    ]
+  },
+  "Frima Studio": {
+    "description": "Québec-based full-service game developer and co-development partner working across original IP, licensed games and major publisher projects.",
+    "headquarters": {
+      "city": "Québec City",
+      "country": "Canada",
+      "countryCode": "CA",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Montréal, Canada"
+    ],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Services"
+    ],
+    "ownership": "Privately held · parent not confirmed",
+    "parentCompany": null,
+    "industryScale": "AA / AAA co-development",
+    "teamSize": "Large multi-discipline team · exact current count not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Mobile",
+      "Co-development",
+      "Full production"
+    ],
+    "popularGames": [
+      {
+        "title": "Disciples: Liberation",
+        "appId": null,
+        "stage": "Development contribution"
+      },
+      {
+        "title": "Triangle Strategy",
+        "appId": 1850510,
+        "stage": "Development contribution"
+      },
+      {
+        "title": "Temple Run: Legends",
+        "appId": 2682580,
+        "stage": "Development contribution"
+      }
+    ],
+    "applicationLocation": "Québec / Montréal · see role-specific conditions",
+    "profileSources": [
+      "https://frimastudio.com/en/careers/",
+      "https://frimastudio.com/"
+    ],
+    "reachHighlights": "Multi-platform co-development and full-production partner with work across Triangle Strategy, Fortnite and licensed/partner projects."
+  },
+  "Reply Game Studios": {
+    "description": "Milan-based game developer within the Reply technology group, focused on original PC and console action experiences.",
+    "headquarters": {
+      "city": "Milan",
+      "country": "Italy",
+      "countryCode": "IT",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Subsidiary"
+    ],
+    "ownership": "Part of Reply Group",
+    "parentCompany": "Reply S.p.A.",
+    "industryScale": "AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Action",
+      "Adventure"
+    ],
+    "popularGames": [
+      {
+        "title": "Soulstice",
+        "appId": 1602080
+      },
+      {
+        "title": "Theseus",
+        "appId": 577280
+      }
+    ],
+    "applicationLocation": "Milan · on-site; Italian and English required",
+    "profileSources": [
+      "https://www.reply.com/reply-game-studios/en/career",
+      "https://www.reply.com/reply-game-studios/en"
+    ]
+  },
+  "Old Skull Games": {
+    "description": "Independent Lyon game studio creating original IP and working with partners across PC, console and mobile.",
+    "headquarters": {
+      "city": "Lyon",
+      "country": "France",
+      "countryCode": "FR",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "Around 60 creators (studio-reported)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Console",
+      "Mobile",
+      "Original IP",
+      "Co-development"
+    ],
+    "popularGames": [],
+    "applicationLocation": "Location not specified · use HQ as reference",
+    "profileSources": [
+      "https://www.oldskullgames.com/",
+      "https://www.oldskullgames.com/careers/"
+    ]
+  },
+  "G7 Studio": {
+    "description": "Saudi independent game studio developing original PC and mobile intellectual property.",
+    "headquarters": {
+      "city": null,
+      "country": "Saudi Arabia",
+      "countryCode": "SA",
+      "label": "HQ · city not stated"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Mobile",
+      "Original IP"
+    ],
+    "popularGames": [
+      {
+        "title": "Edge of the World",
+        "appId": null,
+        "stage": "Project"
+      },
+      {
+        "title": "The Last Signal",
+        "appId": null,
+        "stage": "Project"
+      },
+      {
+        "title": "Remnant Bloom",
+        "appId": null,
+        "stage": "Project"
+      },
+      {
+        "title": "Fix It Studio",
+        "appId": null,
+        "stage": "Project"
+      }
+    ],
+    "applicationLocation": "Location not specified · use HQ as reference",
+    "profileSources": [
+      "https://g7works.com/en/careers/",
+      "https://g7works.com/"
+    ]
+  },
+  "Keen Software House": {
+    "description": "Privately owned Czech game developer and technology company known for engineering-driven sandbox and simulation games and its VRAGE engine.",
+    "headquarters": {
+      "city": null,
+      "country": "Czech Republic",
+      "countryCode": "CZ",
+      "label": "HQ · city not verified"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Technology",
+      "Independent"
+    ],
+    "ownership": "Privately owned · independent",
+    "parentCompany": null,
+    "industryScale": "AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Xbox",
+      "Simulation",
+      "Sandbox",
+      "Game technology"
+    ],
+    "popularGames": [
+      {
+        "title": "Space Engineers",
+        "appId": 244850
+      },
+      {
+        "title": "Medieval Engineers",
+        "appId": 333950
+      }
+    ],
+    "applicationLocation": "Remote considered · CET overlap; experienced candidates preferred",
+    "profileSources": [
+      "https://www.keenswh.com/",
+      "https://www.keenswh.com/job/spontaneous-applications/"
+    ]
+  },
+  "Kinetic Games": {
+    "description": "Independent British developer best known for the co-operative paranormal investigation game Phasmophobia.",
+    "headquarters": {
+      "city": null,
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ · city not verified"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "Small studio · exact count not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Horror",
+      "Co-operative multiplayer"
+    ],
+    "popularGames": [
+      {
+        "title": "Phasmophobia",
+        "appId": 739630
+      }
+    ],
+    "applicationLocation": "Southampton hybrid · UK right-to-work required",
+    "profileSources": [
+      "https://kineticgames.co.uk/",
+      "https://kineticgames.co.uk/careers"
+    ]
+  },
+  "Kuuasema": {
+    "description": "Helsinki-based game development partner with a long track record of full-cycle mobile, casual and cross-platform projects.",
+    "headquarters": {
+      "city": "Helsinki",
+      "country": "Finland",
+      "countryCode": "FI",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Services"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "AA co-development",
+    "teamSize": "Not publicly disclosed · 130+ project deliveries is not headcount",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "Casual",
+      "Co-development",
+      "Full-cycle development"
+    ],
+    "popularGames": [],
+    "applicationLocation": "Helsinki hybrid · no visa sponsorship",
+    "profileSources": [
+      "https://www.kuuasema.com/",
+      "https://www.kuuasema.com/jobs/open-application/"
+    ]
+  },
+  "Sanuk Games": {
+    "description": "Small Thailand-based developer and porting partner with a catalogue of more than 70 games across PC and console platforms.",
+    "headquarters": {
+      "city": null,
+      "country": "Thailand",
+      "countryCode": "TH",
+      "label": "HQ · city not stated"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Porting",
+      "Services"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small studio · exact count not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Arcade",
+      "Casual",
+      "Porting"
+    ],
+    "popularGames": [],
+    "applicationLocation": "Work-from-home roles · confirm country eligibility",
+    "profileSources": [
+      "https://www.sanukgames.com/careers",
+      "https://www.sanukgames.com/"
+    ]
+  },
+  "HypeHype": {
+    "description": "Helsinki-based game-creation technology company developing a platform for creating, sharing and playing mobile-first games.",
+    "headquarters": {
+      "city": "Helsinki",
+      "country": "Finland",
+      "countryCode": "FI",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Technology platform"
+    ],
+    "ownership": "Privately held · ownership not confirmed",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "User-generated games",
+      "Game creation platform"
+    ],
+    "popularGames": [],
+    "applicationLocation": "Helsinki · on-site noted on route",
+    "profileSources": [
+      "https://hypehype.com/jobs",
+      "https://hypehype.com/"
+    ]
+  },
+  "Squeeze Studio": {
+    "description": "Québec-based 3D animation and digital production studio working on animation, cinematics and creative content for games and entertainment.",
+    "headquarters": {
+      "city": "Québec City",
+      "country": "Canada",
+      "countryCode": "CA",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Montréal, Canada"
+    ],
+    "companyType": [
+      "Co-development",
+      "Animation",
+      "Services"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "AA / AAA services",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "3D animation",
+      "Cinematics",
+      "Game art",
+      "Co-development"
+    ],
+    "popularGames": [],
+    "applicationLocation": "Québec / Montréal · on-site, remote or hybrid options",
+    "profileSources": [
+      "https://squeezestudio.com/",
+      "https://squeezestudio.recruitee.com/l/en/o/candidatures-spontanees?lang=en"
+    ]
+  },
+  "Lighthouse Games": {
+    "description": "Leamington Spa game developer founded by experienced AAA leaders, building premium games for PC and consoles.",
+    "headquarters": {
+      "city": "Royal Leamington Spa",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "AAA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Premium",
+      "AAA"
+    ],
+    "popularGames": [],
+    "applicationLocation": "Royal Leamington Spa · on-site",
+    "profileSources": [
+      "https://lighthousegames.com/",
+      "https://lighthousegames.com/careers/3C151DE079/"
+    ]
+  },
+  "Blowfish Studios": {
+    "description": "Sydney game developer and publisher working on original IP and partner titles across PC, console and mobile.",
+    "headquarters": {
+      "city": "Sydney",
+      "country": "Australia",
+      "countryCode": "AU",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher"
+    ],
+    "ownership": "Ownership requires confirmation · check current corporate records",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Mobile",
+      "Publishing"
+    ],
+    "popularGames": [],
+    "applicationLocation": "Preferred locations include Brisbane, Sydney, Melbourne and/or remote",
+    "profileSources": [
+      "https://www.blowfishstudios.com/",
+      "https://www.blowfishstudios.com/open-application"
+    ]
   },
   "Abyssal Interactive": {
     "description": "Small French developer creating persistent multiplayer worlds and simulation/strategy experiences in-house.",
@@ -287,158 +1891,6 @@
       "https://adeninteractive.com/"
     ]
   },
-  "Aethra Studios": {
-    "description": "Independent remote-first studio focused on atmospheric, narrative-driven games.",
-    "headquarters": {
-      "city": "The Hague",
-      "country": "Netherlands",
-      "countryCode": "NL",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent · self-published",
-    "parentCompany": null,
-    "industryScale": "Indie",
-    "teamSize": "Small team · exact count not disclosed",
-    "teamSizeAsOf": "2026-10-30",
-    "focus": [
-      "PC",
-      "Horror",
-      "Narrative"
-    ],
-    "popularGames": [
-      {
-        "title": "Clocked Out",
-        "appId": null,
-        "stage": "In development"
-      }
-    ],
-    "profileSources": [
-      "https://www.aethrastudios.com/studio/",
-      "https://www.aethrastudios.com/press/"
-    ],
-    "applicationLocation": "Remote across Europe · CET overlap"
-  },
-  "AlterEyes": {
-    "description": "Belgian XR and game studio creating VR and AR games, immersive entertainment and interactive learning and business experiences.",
-    "headquarters": {
-      "city": "Hasselt",
-      "country": "Belgium",
-      "countryCode": "BE",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "XR venture studio"
-    ],
-    "ownership": "Not disclosed",
-    "parentCompany": null,
-    "industryScale": "Not disclosed",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "VR",
-      "AR",
-      "Mixed Reality",
-      "PC",
-      "Mobile",
-      "XR"
-    ],
-    "popularGames": [],
-    "profileSources": [
-      "https://altereyes.com/about-us/",
-      "https://altereyes.com/jobs/"
-    ],
-    "applicationLocation": "Not stated · HQ shown as reference",
-    "reachHighlights": "Award-winning game studio within the XR ecosystem; develops immersive games and learning, marketing and business experiences."
-  },
-  "Ambertail Games": {
-    "description": "Independent small game studio developing Amber Isle and other colourful, character-led experiences.",
-    "headquarters": {
-      "city": "Belfast",
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "Indie",
-    "teamSize": "Small team · exact count not disclosed",
-    "teamSizeAsOf": "2026-10-30",
-    "focus": [
-      "PC",
-      "Simulation",
-      "Adventure",
-      "Indie"
-    ],
-    "popularGames": [
-      {
-        "title": "Amber Isle",
-        "appId": null
-      }
-    ],
-    "profileSources": [
-      "https://www.ambertailgames.com/",
-      "https://www.ambertailgames.com/jobs"
-    ],
-    "applicationLocation": "In-house or remote options described · eligible remote countries not stated"
-  },
-  "Artefacts Studio": {
-    "description": "Independent French developer and co-development partner creating and marketing PC and console games, with long-running art, technical and design subcontracting capabilities.",
-    "headquarters": {
-      "city": "Villeurbanne (Lyon area)",
-      "country": "France",
-      "countryCode": "FR",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Co-development",
-      "Services"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "AA",
-    "teamSize": "80 collaborators (studio-reported)",
-    "teamSizeAsOf": "2026",
-    "focus": [
-      "PC",
-      "Console",
-      "Co-development",
-      "Art",
-      "Design"
-    ],
-    "popularGames": [
-      {
-        "title": "Naheulbeuk's Dungeon: Amulet of Chaos",
-        "appId": 970830
-      },
-      {
-        "title": "Crown Wars: The Black Prince",
-        "appId": 1658920
-      },
-      {
-        "title": "Disciples: Domination",
-        "appId": 2383200
-      }
-    ],
-    "applicationLocation": "Location not specified · use HQ as reference",
-    "profileSources": [
-      "https://www.artefacts-studio.fr/en/about-us"
-    ],
-    "reachHighlights": "Founded 2003 · studio reports 80 experienced collaborators · credits include Agatha Christie, Naheulbeuk and Disciples."
-  },
   "Aska Studios": {
     "description": "Reykjavík game studio with a remote-first working environment, currently developing a cooperative deckbuilder-shooter.",
     "headquarters": {
@@ -477,89 +1929,6 @@
     "profileSources": [
       "https://askastudios.is/"
     ]
-  },
-  "Asobo Studio": {
-    "description": "Large Bordeaux-based developer known for technically ambitious PC and console productions, simulation and narrative adventures.",
-    "headquarters": {
-      "city": "Bordeaux",
-      "country": "France",
-      "countryCode": "FR",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Co-development"
-    ],
-    "ownership": "Independent studio; no parent company publicly confirmed",
-    "parentCompany": null,
-    "industryScale": "AAA",
-    "teamSize": "201–500 employees (LinkedIn company range)",
-    "teamSizeAsOf": "2026-10",
-    "focus": [
-      "PC",
-      "Console",
-      "Simulation",
-      "Adventure",
-      "Technology"
-    ],
-    "popularGames": [
-      {
-        "title": "Microsoft Flight Simulator",
-        "appId": 1250410
-      },
-      {
-        "title": "A Plague Tale: Requiem",
-        "appId": 1182900
-      },
-      {
-        "title": "A Plague Tale: Innocence",
-        "appId": 752590
-      }
-    ],
-    "profileSources": [
-      "https://www.asobostudio.com/about-us",
-      "https://www.linkedin.com/company/asobo-studio/"
-    ],
-    "applicationLocation": "Bordeaux · on-site"
-  },
-  "Awe Interactive": {
-    "description": "Independent remote game studio creating premium PC and console experiences.",
-    "headquarters": {
-      "city": "Bedfordshire",
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "label": "HQ"
-    },
-    "otherLocations": [
-      "Remote team distributed internationally"
-    ],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "Indie / AA",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Console",
-      "Action",
-      "Rhythm"
-    ],
-    "popularGames": [
-      {
-        "title": "BPM: Bullets Per Minute",
-        "appId": 1286350
-      }
-    ],
-    "profileSources": [
-      "https://www.aweinteractive.com/about",
-      "https://www.aweinteractive.com/press"
-    ],
-    "applicationLocation": "Location not specified · HQ shown"
   },
   "Bananagun": {
     "description": "Small senior mobile-game team building hyper-casual and hybrid-casual Unity games for iOS and Android.",
@@ -652,175 +2021,6 @@
       "https://apps.apple.com/gb/developer/barnstorm-games/id385706699"
     ]
   },
-  "Beenox": {
-    "description": "Activision development studio with a long track record in co-development, ports and major franchise production.",
-    "headquarters": {
-      "city": "Québec City",
-      "country": "Canada",
-      "countryCode": "CA",
-      "label": "HQ"
-    },
-    "otherLocations": [
-      "Montréal, Canada"
-    ],
-    "companyType": [
-      "Developer",
-      "Co-development",
-      "Porting"
-    ],
-    "ownership": "Subsidiary of Activision · part of Microsoft Gaming",
-    "parentCompany": "Activision / Microsoft Gaming",
-    "industryScale": "AAA",
-    "teamSize": "Not reliably disclosed as a current studio-only figure",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Console",
-      "Co-development",
-      "Porting"
-    ],
-    "popularGames": [
-      {
-        "title": "Crash Bandicoot N. Sane Trilogy",
-        "appId": 731490
-      },
-      {
-        "title": "Tony Hawk's Pro Skater 1 + 2",
-        "appId": 2395210
-      },
-      {
-        "title": "Call of Duty: Modern Warfare III",
-        "appId": 2519060
-      }
-    ],
-    "profileSources": [
-      "https://beenox.com/",
-      "https://investor.activision.com/news-releases/news-release-details/activision-establishes-development-foothold-quebec-acquisition"
-    ],
-    "applicationLocation": "Location not specified · HQ shown",
-    "reachHighlights": "Long-running Activision studio with franchise work across Crash Bandicoot, Tony Hawk's Pro Skater and Call of Duty."
-  },
-  "Blackbird Interactive": {
-    "description": "Independent Vancouver game-development studio working on original worlds and partner-owned game franchises.",
-    "headquarters": {
-      "city": "Vancouver, British Columbia",
-      "country": "Canada",
-      "countryCode": "CA",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Co-development",
-      "Independent"
-    ],
-    "ownership": "Independent · privately held",
-    "parentCompany": null,
-    "industryScale": "AA / AAA co-development",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Console",
-      "Co-development",
-      "Game design",
-      "Art",
-      "Engineering"
-    ],
-    "popularGames": [
-      {
-        "title": "Hardspace: Shipbreaker",
-        "appId": 1161580
-      },
-      {
-        "title": "Homeworld 3",
-        "appId": null
-      }
-    ],
-    "profileSources": [
-      "https://blackbirdinteractive.com/",
-      "https://jobs.lever.co/blackbirdinteractive/498bb3c2-b23f-4aed-8fdd-ee80649e381d"
-    ],
-    "applicationLocation": "Canada only · must reside in Canada and already be legally eligible to work there"
-  },
-  "Blowfish Studios": {
-    "description": "Sydney game developer and publisher working on original IP and partner titles across PC, console and mobile.",
-    "headquarters": {
-      "city": "Sydney",
-      "country": "Australia",
-      "countryCode": "AU",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Publisher"
-    ],
-    "ownership": "Ownership requires confirmation · check current corporate records",
-    "parentCompany": null,
-    "industryScale": "Indie / AA",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Console",
-      "Mobile",
-      "Publishing"
-    ],
-    "popularGames": [],
-    "applicationLocation": "Preferred locations include Brisbane, Sydney, Melbourne and/or remote",
-    "profileSources": [
-      "https://www.blowfishstudios.com/",
-      "https://www.blowfishstudios.com/open-application"
-    ]
-  },
-  "Bossa Studios": {
-    "description": "London-based independent game developer and publisher creating original games for PC, console, mobile and VR, alongside co-development and multiplayer technology.",
-    "headquarters": {
-      "city": "London",
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Publisher",
-      "Co-development"
-    ],
-    "ownership": "Independent studio · no parent company disclosed",
-    "parentCompany": null,
-    "industryScale": "AA",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Console",
-      "Mobile",
-      "VR",
-      "Multiplayer"
-    ],
-    "popularGames": [
-      {
-        "title": "Surgeon Simulator",
-        "appId": 233720
-      },
-      {
-        "title": "I Am Bread",
-        "appId": 327890
-      },
-      {
-        "title": "Lost Skies",
-        "appId": 1931180
-      }
-    ],
-    "applicationLocation": "Remote-first · application eligibility to confirm",
-    "profileSources": [
-      "https://www.bossagames.com/about.html",
-      "https://www.bossagames.com/careers.html"
-    ],
-    "reachHighlights": "Surgeon Simulator: 5M+ copies sold · I Am Bread: 3M+ copies sold · BAFTA-winning studio."
-  },
   "Brave At Night": {
     "description": "Independent game developer behind narrative kingdom-management RPGs and publisher of selected indie titles.",
     "headquarters": {
@@ -868,317 +2068,6 @@
       "https://www.braveatnight.co.uk/speculative"
     ]
   },
-  "Chimera Entertainment": {
-    "description": "Independent Munich game developer with a broad portfolio spanning strategy, RPG and mobile titles; offers hybrid and remote work across Europe.",
-    "headquarters": {
-      "city": "Munich",
-      "country": "Germany",
-      "countryCode": "DE",
-      "label": "HQ"
-    },
-    "otherLocations": [
-      "Distributed team members across Europe"
-    ],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "Indie / AA",
-    "teamSize": "Around 80 team members (studio-reported)",
-    "teamSizeAsOf": "2026",
-    "focus": [
-      "PC",
-      "Mobile",
-      "Strategy",
-      "RPG"
-    ],
-    "popularGames": [
-      {
-        "title": "Songs of Silence",
-        "appId": 2195410
-      },
-      {
-        "title": "Shadow and Bone: Enter the Fold",
-        "appId": null
-      }
-    ],
-    "applicationLocation": "Hybrid / remote · Europe",
-    "profileSources": [
-      "https://chimera-entertainment.com/"
-    ],
-    "reachHighlights": "25+ released games · around 80 team members across Europe (studio-reported)."
-  },
-  "CI Games": {
-    "description": "Publicly traded Polish video-game developer and publisher, operating multiple development studios and publishing labels.",
-    "headquarters": {
-      "city": "Warsaw",
-      "country": "Poland",
-      "countryCode": "PL",
-      "label": "HQ"
-    },
-    "otherLocations": [
-      "Barcelona, Spain",
-      "Bucharest, Romania",
-      "United States"
-    ],
-    "companyType": [
-      "Developer",
-      "Publisher"
-    ],
-    "ownership": "Public company · listed on the Warsaw Stock Exchange",
-    "parentCompany": null,
-    "industryScale": "AA",
-    "teamSize": "150+ industry professionals (company-reported)",
-    "teamSizeAsOf": "2026",
-    "focus": [
-      "PC",
-      "Console",
-      "Action",
-      "Shooter",
-      "RPG",
-      "Publishing"
-    ],
-    "popularGames": [
-      {
-        "title": "Lords of the Fallen",
-        "appId": 1501750
-      },
-      {
-        "title": "Sniper Ghost Warrior Contracts 2",
-        "appId": 1338770
-      }
-    ],
-    "profileSources": [
-      "https://cigames.com/en/about-us/",
-      "https://cigames.com/en/investor-relations/"
-    ],
-    "applicationLocation": "Worldwide · fully remote",
-    "reachHighlights": "150+ professionals reported across its company group."
-  },
-  "Climax Studios": {
-    "description": "Established UK game development and co-development studio delivering original games and partner projects across platforms.",
-    "headquarters": {
-      "city": "Portsmouth",
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "label": "HQ"
-    },
-    "otherLocations": [
-      "London, United Kingdom",
-      "Edinburgh, Scotland, United Kingdom",
-      "Liverpool, United Kingdom"
-    ],
-    "companyType": [
-      "Developer",
-      "Co-development",
-      "Services"
-    ],
-    "ownership": "Part of Keywords Studios",
-    "parentCompany": "Keywords Studios",
-    "industryScale": "AA / AAA services",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Console",
-      "Art",
-      "Animation",
-      "Game design",
-      "Programming",
-      "Co-development"
-    ],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.climaxstudios.com/",
-      "https://www.climaxstudios.com/join-our-team/jobs/Rw-speculative-application-art-animation/"
-    ],
-    "applicationLocation": "Portsmouth, United Kingdom"
-  },
-  "Code Wizards Group": {
-    "description": "Game-industry technology and professional-services group providing backend, multiplayer infrastructure and operational support to game developers and publishers.",
-    "headquarters": {
-      "city": "Reading",
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "label": "HQ"
-    },
-    "otherLocations": [
-      "Elgin, Scotland, United Kingdom",
-      "Vancouver, Canada"
-    ],
-    "companyType": [
-      "Services",
-      "Game technology",
-      "Co-development"
-    ],
-    "ownership": "Independent · privately held",
-    "parentCompany": null,
-    "industryScale": "AA / AAA services",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "Backend infrastructure",
-      "Multiplayer",
-      "Online services",
-      "Game operations"
-    ],
-    "popularGames": [],
-    "profileSources": [
-      "https://codewizards.io/",
-      "https://careers.codewizards.io/jobs/5884840-speculative-application"
-    ],
-    "applicationLocation": "Hybrid · Reading, Elgin or Vancouver"
-  },
-  "CraftiGames": {
-    "description": "Game studio operating large multiplayer Minecraft networks and related online experiences.",
-    "headquarters": {
-      "city": "Dubai",
-      "country": "United Arab Emirates",
-      "countryCode": "AE",
-      "label": "HQ"
-    },
-    "otherLocations": [
-      "Netherlands · legal entity referenced in company terms"
-    ],
-    "companyType": [
-      "Developer",
-      "Live operations"
-    ],
-    "ownership": "Privately held",
-    "parentCompany": null,
-    "industryScale": "Indie",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "Minecraft",
-      "Online multiplayer",
-      "Live operations"
-    ],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.craftigames.net/contact",
-      "https://craftigames.net/terms"
-    ],
-    "applicationLocation": "Remote · GMT ±6 hours typically"
-  },
-  "Cyanide Studio": {
-    "description": "Established developer working across sports, strategy, RPG and narrative games, with teams in France and Canada.",
-    "headquarters": {
-      "city": "Paris",
-      "country": "France",
-      "countryCode": "FR",
-      "label": "HQ"
-    },
-    "otherLocations": [
-      "Bordeaux, France",
-      "Montréal, Canada"
-    ],
-    "companyType": [
-      "Developer",
-      "Co-development"
-    ],
-    "ownership": "Nacon subsidiary",
-    "parentCompany": "Nacon · Bigben Group",
-    "industryScale": "AA",
-    "teamSize": "190 at 31 Mar 2026 (127 France + 63 Canada; before later group restructuring)",
-    "teamSizeAsOf": "2026-03-31",
-    "focus": [
-      "PC",
-      "Console",
-      "RPG",
-      "Strategy",
-      "Sports"
-    ],
-    "popularGames": [
-      {
-        "title": "Styx: Shards of Darkness",
-        "appId": 527100
-      },
-      {
-        "title": "Blood Bowl 3",
-        "appId": 1016950
-      },
-      {
-        "title": "Werewolf: The Apocalypse – Earthblood",
-        "appId": 679110
-      }
-    ],
-    "profileSources": [
-      "https://cyanide-studio.com/",
-      "https://corporate.nacongaming.com/wp-content/uploads/2026/10/Document-URD-NACON-31.03.2026.html"
-    ],
-    "applicationLocation": "Location not specified · HQ shown"
-  },
-  "Cybernation Team": {
-    "description": "Independent Ukrainian game studio developing an Unreal Engine 5 tactical multiplayer game.",
-    "headquarters": {
-      "city": null,
-      "country": "Ukraine",
-      "countryCode": "UA",
-      "label": "HQ · city not publicly confirmed"
-    },
-    "otherLocations": [
-      "Remote team / Kyiv roles"
-    ],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "Indie",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Unreal Engine 5",
-      "Multiplayer",
-      "Tactical",
-      "Action"
-    ],
-    "popularGames": [],
-    "profileSources": [
-      "https://cybernation.team/",
-      "https://cybernation.team/careers"
-    ],
-    "applicationLocation": "Remote / Kyiv roles are advertised · general-applicant eligibility should be confirmed"
-  },
-  "Dark Cloud Games": {
-    "description": "Independent game-development team recruiting across programming, game services, art, animation, visual effects and design.",
-    "headquarters": {
-      "city": "Lisbon",
-      "country": "Portugal",
-      "countryCode": "PT",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent · private",
-    "parentCompany": null,
-    "industryScale": "Indie",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Game services",
-      "Programming",
-      "Art",
-      "Animation",
-      "Visual effects"
-    ],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.darkcloud.games/",
-      "https://www.darkcloud.games/careers/",
-      "https://www.darkcloud.games/ui-ux-designer/"
-    ],
-    "applicationLocation": "Lisbon, Portugal · speculative route does not state remote eligibility"
-  },
   "Dionic Software": {
     "description": "Small independent German developer making building, colony, automation and simulation games.",
     "headquarters": {
@@ -1224,228 +2113,6 @@
     "profileSources": [
       "https://dionicsoftware.com/"
     ]
-  },
-  "Dogfish Games": {
-    "description": "Small independent Vancouver studio developing its first atmospheric, story-driven game.",
-    "headquarters": {
-      "city": "Vancouver",
-      "country": "Canada",
-      "countryCode": "CA",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "Indie",
-    "teamSize": "Small team · exact count not disclosed",
-    "teamSizeAsOf": "2026-10-30",
-    "focus": [
-      "PC",
-      "Narrative",
-      "Atmospheric",
-      "Adventure"
-    ],
-    "popularGames": [],
-    "profileSources": [
-      "https://dogfishgames.com/",
-      "https://dogfishgames.com/jobs/"
-    ],
-    "applicationLocation": "Remote · based in or willing to work within Canadian time zones"
-  },
-  "DON'T NOD (Montreal)": {
-    "description": "Montréal subsidiary of French developer and publisher DON'T NOD, established as the group's first international studio.",
-    "headquarters": {
-      "city": "Montréal",
-      "country": "Canada",
-      "countryCode": "CA",
-      "label": "Application studio"
-    },
-    "otherLocations": [
-      "Paris, France · parent company headquarters"
-    ],
-    "companyType": [
-      "Developer",
-      "Subsidiary"
-    ],
-    "ownership": "Subsidiary of DON'T NOD Entertainment",
-    "parentCompany": "DON'T NOD Entertainment",
-    "industryScale": "AA",
-    "teamSize": "40+ talents (studio-reported)",
-    "teamSizeAsOf": "2026",
-    "focus": [
-      "PC",
-      "Console",
-      "Narrative",
-      "Adventure"
-    ],
-    "popularGames": [
-      {
-        "title": "Lost Records: Bloom & Rage",
-        "appId": 1902960
-      }
-    ],
-    "profileSources": [
-      "https://dont-nod.com/en/dont-nod-montreal-en/",
-      "https://dont-nod.com/en/about-us/",
-      "https://www.dontnod-bourse.com/en/company"
-    ],
-    "applicationLocation": "Montréal-specific application"
-  },
-  "Ember Crows": {
-    "description": "Independent London-based game studio developing ambitious narrative role-playing games, including a Slavic cyberpunk RPG.",
-    "headquarters": {
-      "city": "London",
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "label": "HQ"
-    },
-    "otherLocations": [
-      "Remote-friendly team"
-    ],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "Indie / AA",
-    "teamSize": "11–50 employees (LinkedIn company range)",
-    "teamSizeAsOf": "2026",
-    "focus": [
-      "PC",
-      "RPG",
-      "Narrative",
-      "Cyberpunk"
-    ],
-    "popularGames": [
-      {
-        "title": "Project Veles",
-        "appId": null,
-        "stage": "In development"
-      }
-    ],
-    "applicationLocation": "Remote-friendly · confirm role eligibility",
-    "profileSources": [
-      "https://www.embercrows.com/",
-      "https://www.embercrows.com/careers/spontaneous-application",
-      "https://www.linkedin.com/company/ember-crows"
-    ]
-  },
-  "Fawkes Games": {
-    "description": "Game operator and publisher running a portfolio of established online multiplayer and strategy titles.",
-    "headquarters": {
-      "city": "Plovdiv",
-      "country": "Bulgaria",
-      "countryCode": "BG",
-      "label": "Registered HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Publisher",
-      "Live operations"
-    ],
-    "ownership": "Privately held · company ownership not publicly detailed",
-    "parentCompany": null,
-    "industryScale": "Indie / AA",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Online multiplayer",
-      "Live operations"
-    ],
-    "popularGames": [],
-    "profileSources": [
-      "https://fawkesgames.com/terms",
-      "https://fawkesgames.com/privacy"
-    ],
-    "applicationLocation": "Remote · worldwide stated"
-  },
-  "Frima Studio": {
-    "description": "Québec-based full-service game developer and co-development partner working across original IP, licensed games and major publisher projects.",
-    "headquarters": {
-      "city": "Québec City",
-      "country": "Canada",
-      "countryCode": "CA",
-      "label": "HQ"
-    },
-    "otherLocations": [
-      "Montréal, Canada"
-    ],
-    "companyType": [
-      "Developer",
-      "Co-development",
-      "Services"
-    ],
-    "ownership": "Privately held · parent not confirmed",
-    "parentCompany": null,
-    "industryScale": "AA / AAA co-development",
-    "teamSize": "Large multi-discipline team · exact current count not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Console",
-      "Mobile",
-      "Co-development",
-      "Full production"
-    ],
-    "popularGames": [
-      {
-        "title": "Disciples: Liberation",
-        "appId": null,
-        "stage": "Development contribution"
-      },
-      {
-        "title": "Triangle Strategy",
-        "appId": 1850510,
-        "stage": "Development contribution"
-      },
-      {
-        "title": "Temple Run: Legends",
-        "appId": 2682580,
-        "stage": "Development contribution"
-      }
-    ],
-    "applicationLocation": "Québec / Montréal · see role-specific conditions",
-    "profileSources": [
-      "https://frimastudio.com/en/careers/",
-      "https://frimastudio.com/"
-    ],
-    "reachHighlights": "Multi-platform co-development and full-production partner with work across Triangle Strategy, Fortnite and licensed/partner projects."
-  },
-  "Funatic Games": {
-    "description": "Early-stage independent game studio focused on physics-driven, replayable games and gameplay-first design.",
-    "headquarters": {
-      "city": null,
-      "country": "Not publicly stated",
-      "countryCode": "",
-      "label": "HQ not publicly stated"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "Indie",
-    "teamSize": "Small early-stage team · exact count not disclosed",
-    "teamSizeAsOf": "2026-10-30",
-    "focus": [
-      "PC",
-      "Physics-driven gameplay",
-      "Indie"
-    ],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.funatic.games/",
-      "https://www.funatic.games/careers"
-    ],
-    "applicationLocation": "Not specified · applicant-country eligibility not stated"
   },
   "Funday Games": {
     "description": "Independent Aarhus developer and publisher specializing in spin-off games based on established indie IPs and original projects.",
@@ -1495,197 +2162,6 @@
       "https://joinus.fundaygames.dk/jobs/7277761-unsolicited-application"
     ]
   },
-  "Futureplay Games": {
-    "description": "Helsinki casual-game studio within Plarium, creating mobile games for global audiences.",
-    "headquarters": {
-      "city": "Helsinki",
-      "country": "Finland",
-      "countryCode": "FI",
-      "label": "Studio HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Mobile",
-      "Subsidiary"
-    ],
-    "ownership": "Part of Plarium",
-    "parentCompany": "Plarium · Aristocrat Leisure",
-    "industryScale": "AA · Mobile",
-    "teamSize": "60+ professionals (studio-reported)",
-    "teamSizeAsOf": "2026",
-    "focus": [
-      "Mobile",
-      "Casual",
-      "Merge",
-      "Idle"
-    ],
-    "popularGames": [
-      {
-        "title": "Idle Farming Empire",
-        "appId": null
-      },
-      {
-        "title": "Merge Gardens",
-        "appId": null
-      }
-    ],
-    "applicationLocation": "Remote · global stated",
-    "profileSources": [
-      "https://company.plarium.com/en/studio/finland-helsinki/"
-    ],
-    "reachHighlights": "60+ professionals · six titles in the studio portfolio (Plarium studio page)."
-  },
-  "G7 Studio": {
-    "description": "Saudi independent game studio developing original PC and mobile intellectual property.",
-    "headquarters": {
-      "city": null,
-      "country": "Saudi Arabia",
-      "countryCode": "SA",
-      "label": "HQ · city not stated"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "Indie / AA",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Mobile",
-      "Original IP"
-    ],
-    "popularGames": [
-      {
-        "title": "Edge of the World",
-        "appId": null,
-        "stage": "Project"
-      },
-      {
-        "title": "The Last Signal",
-        "appId": null,
-        "stage": "Project"
-      },
-      {
-        "title": "Remnant Bloom",
-        "appId": null,
-        "stage": "Project"
-      },
-      {
-        "title": "Fix It Studio",
-        "appId": null,
-        "stage": "Project"
-      }
-    ],
-    "applicationLocation": "Location not specified · use HQ as reference",
-    "profileSources": [
-      "https://g7works.com/en/careers/",
-      "https://g7works.com/"
-    ]
-  },
-  "Ghost Ship Games": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
-    "headquarters": {
-      "city": null,
-      "country": "Not stated",
-      "countryCode": "DK",
-      "label": "Country · Wikidata"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer"
-    ],
-    "ownership": "Not yet researched",
-    "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.wikidata.org/entity/Q105080681",
-      "https://www.ghostship.dk/"
-    ],
-    "applicationLocation": "Not specified · HQ shown as reference"
-  },
-  "Glowmade": {
-    "description": "Independent UK game studio founded by Lionhead alumni, creating original and imaginative games.",
-    "headquarters": {
-      "city": "Guildford",
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent · privately held",
-    "parentCompany": null,
-    "industryScale": "Indie / AA",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Console",
-      "Action",
-      "Adventure"
-    ],
-    "popularGames": [
-      {
-        "title": "Rogue Fortune",
-        "appId": null
-      }
-    ],
-    "profileSources": [
-      "https://www.glowmade.com/about-us",
-      "https://www.glowmade.com/careers",
-      "https://glowmade.jobs.personio.com/job/2805976"
-    ],
-    "applicationLocation": "Guildford hybrid or remote within the UK · UK right to work required"
-  },
-  "Havoc Games": {
-    "description": "Independent Indian game studio building WEX, a competitive multiplayer game.",
-    "headquarters": {
-      "city": null,
-      "country": "India",
-      "countryCode": "IN",
-      "label": "HQ · city not publicly stated"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "Indie",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Mobile",
-      "Competitive multiplayer",
-      "Action"
-    ],
-    "popularGames": [
-      {
-        "title": "WEX",
-        "appId": null,
-        "stage": "In development"
-      }
-    ],
-    "profileSources": [
-      "https://havocgames.co/",
-      "https://havocgames.co/careers"
-    ],
-    "applicationLocation": "India · general-application location and remote eligibility not stated"
-  },
   "Hindsight Studios": {
     "description": "German game-development studio with an official speculative-application route; public portfolio and company structure require further verification.",
     "headquarters": {
@@ -1711,401 +2187,6 @@
     "reachHighlights": "Profile intentionally limited: public company and portfolio information needs a deeper review.",
     "profileSources": [
       "https://www.hindsight-studios.de/career.html"
-    ]
-  },
-  "Hugecalf Studios": {
-    "description": "Small UK remote game studio behind Stuck Together, Turbo Golf Racing and When Ski Lifts Go Wrong.",
-    "headquarters": {
-      "city": null,
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "label": "HQ · city not publicly stated"
-    },
-    "otherLocations": [
-      "Fully remote team within the United Kingdom"
-    ],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent · privately held",
-    "parentCompany": null,
-    "industryScale": "Indie",
-    "teamSize": "Small team · exact count not disclosed",
-    "teamSizeAsOf": "2026-10-30",
-    "focus": [
-      "PC",
-      "Console",
-      "Multiplayer",
-      "Sports",
-      "Racing"
-    ],
-    "popularGames": [
-      {
-        "title": "Turbo Golf Racing",
-        "appId": null
-      },
-      {
-        "title": "When Ski Lifts Go Wrong",
-        "appId": null
-      },
-      {
-        "title": "Stuck Together",
-        "appId": null
-      }
-    ],
-    "profileSources": [
-      "https://hugecalf.com/careers",
-      "https://jobs.hugecalf.com/speculative-application?src=hugecalf.com"
-    ],
-    "applicationLocation": "Fully remote · UK only"
-  },
-  "HundredStar Games": {
-    "description": "Independent East London game developer founded by the former creative leadership behind the Batman: Arkham series.",
-    "headquarters": {
-      "city": "Hackney Wick, London",
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent · privately held",
-    "parentCompany": null,
-    "industryScale": "AA",
-    "teamSize": "Growing studio · stated target up to 100 people",
-    "teamSizeAsOf": "2026-10-30",
-    "focus": [
-      "PC",
-      "Console",
-      "Action",
-      "Art",
-      "Production"
-    ],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.hundredstar.games/",
-      "https://www.hundredstar.games/careers/role?id=speculative-application-art-86"
-    ],
-    "applicationLocation": "London hybrid · in studio Tuesday–Thursday; remote work Monday/Friday within the UK"
-  },
-  "HypeHype": {
-    "description": "Helsinki-based game-creation technology company developing a platform for creating, sharing and playing mobile-first games.",
-    "headquarters": {
-      "city": "Helsinki",
-      "country": "Finland",
-      "countryCode": "FI",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Technology platform"
-    ],
-    "ownership": "Privately held · ownership not confirmed",
-    "parentCompany": null,
-    "industryScale": "Indie / AA",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "Mobile",
-      "User-generated games",
-      "Game creation platform"
-    ],
-    "popularGames": [],
-    "applicationLocation": "Helsinki · on-site noted on route",
-    "profileSources": [
-      "https://hypehype.com/jobs",
-      "https://hypehype.com/"
-    ]
-  },
-  "Hypemasters": {
-    "description": "International strategy-game developer with its main development office in Abu Dhabi and a distributed international team.",
-    "headquarters": {
-      "city": "Abu Dhabi",
-      "country": "United Arab Emirates",
-      "countryCode": "AE",
-      "label": "Main development office"
-    },
-    "otherLocations": [
-      "Dover, Delaware, United States · corporate address",
-      "London, United Kingdom",
-      "Lisbon, Portugal"
-    ],
-    "companyType": [
-      "Developer",
-      "Mobile",
-      "PC"
-    ],
-    "ownership": "Privately held · investors include Gem Capital and others",
-    "parentCompany": null,
-    "industryScale": "Indie / AA",
-    "teamSize": "11–50 employees (LinkedIn company range)",
-    "teamSizeAsOf": "2026-10",
-    "focus": [
-      "Mobile",
-      "PC",
-      "Strategy",
-      "Free-to-play"
-    ],
-    "popularGames": [
-      {
-        "title": "World War Armies",
-        "appId": null
-      }
-    ],
-    "profileSources": [
-      "https://www.hypemasters.com/",
-      "https://www.linkedin.com/company/hypemasters",
-      "https://store.steampowered.com/developer/hypemasters_inc"
-    ],
-    "applicationLocation": "Location not specified · HQ shown"
-  },
-  "Katal Games": {
-    "description": "Game and software studio building original games, live interactive formats and real-time technology for partner projects.",
-    "headquarters": {
-      "city": null,
-      "country": "Spain",
-      "countryCode": "ES",
-      "label": "HQ · city not published"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Services",
-      "Live interactive formats"
-    ],
-    "ownership": "Independent · private",
-    "parentCompany": null,
-    "industryScale": "Indie",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "Mobile",
-      "PC",
-      "Live interactive",
-      "Real-time software"
-    ],
-    "popularGames": [
-      {
-        "title": "Arena",
-        "appId": null,
-        "stage": "In development"
-      }
-    ],
-    "profileSources": [
-      "https://katal.games/",
-      "https://katal.games/studio/",
-      "https://katal.games/press/"
-    ]
-  },
-  "Keen Software House": {
-    "description": "Privately owned Czech game developer and technology company known for engineering-driven sandbox and simulation games and its VRAGE engine.",
-    "headquarters": {
-      "city": null,
-      "country": "Czech Republic",
-      "countryCode": "CZ",
-      "label": "HQ · city not verified"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Technology",
-      "Independent"
-    ],
-    "ownership": "Privately owned · independent",
-    "parentCompany": null,
-    "industryScale": "AA",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Xbox",
-      "Simulation",
-      "Sandbox",
-      "Game technology"
-    ],
-    "popularGames": [
-      {
-        "title": "Space Engineers",
-        "appId": 244850
-      },
-      {
-        "title": "Medieval Engineers",
-        "appId": 333950
-      }
-    ],
-    "applicationLocation": "Remote considered · CET overlap; experienced candidates preferred",
-    "profileSources": [
-      "https://www.keenswh.com/",
-      "https://www.keenswh.com/job/spontaneous-applications/"
-    ]
-  },
-  "Kinetic Games": {
-    "description": "Independent British developer best known for the co-operative paranormal investigation game Phasmophobia.",
-    "headquarters": {
-      "city": null,
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "label": "HQ · city not verified"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "Indie / AA",
-    "teamSize": "Small studio · exact count not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Console",
-      "Horror",
-      "Co-operative multiplayer"
-    ],
-    "popularGames": [
-      {
-        "title": "Phasmophobia",
-        "appId": 739630
-      }
-    ],
-    "applicationLocation": "Southampton hybrid · UK right-to-work required",
-    "profileSources": [
-      "https://kineticgames.co.uk/",
-      "https://kineticgames.co.uk/careers"
-    ]
-  },
-  "KORION": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
-    "headquarters": {
-      "city": null,
-      "country": "Not stated",
-      "countryCode": "DE",
-      "label": "Country · Wikidata"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer"
-    ],
-    "ownership": "Not yet researched",
-    "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.wikidata.org/entity/Q101069308",
-      "https://www.korion.de/"
-    ],
-    "applicationLocation": "Not specified · HQ shown as reference"
-  },
-  "Kuuasema": {
-    "description": "Helsinki-based game development partner with a long track record of full-cycle mobile, casual and cross-platform projects.",
-    "headquarters": {
-      "city": "Helsinki",
-      "country": "Finland",
-      "countryCode": "FI",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Co-development",
-      "Services"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "AA co-development",
-    "teamSize": "Not publicly disclosed · 130+ project deliveries is not headcount",
-    "teamSizeAsOf": null,
-    "focus": [
-      "Mobile",
-      "Casual",
-      "Co-development",
-      "Full-cycle development"
-    ],
-    "popularGames": [],
-    "applicationLocation": "Helsinki hybrid · no visa sponsorship",
-    "profileSources": [
-      "https://www.kuuasema.com/",
-      "https://www.kuuasema.com/jobs/open-application/"
-    ]
-  },
-  "Kylotonn": {
-    "description": "French developer specializing in racing games and large licensed productions.",
-    "headquarters": {
-      "city": "Paris",
-      "country": "France",
-      "countryCode": "FR",
-      "label": "HQ"
-    },
-    "otherLocations": [
-      "Lyon, France"
-    ],
-    "companyType": [
-      "Developer"
-    ],
-    "ownership": "Nacon subsidiary",
-    "parentCompany": "Nacon · Bigben Group",
-    "industryScale": "AA",
-    "teamSize": "127 at 31 Mar 2026 (group-reported; before later restructuring)",
-    "teamSizeAsOf": "2026-03-31",
-    "focus": [
-      "PC",
-      "Console",
-      "Racing",
-      "Simulation"
-    ],
-    "popularGames": [
-      {
-        "title": "Test Drive Unlimited Solar Crown",
-        "appId": 1249970
-      },
-      {
-        "title": "WRC Generations",
-        "appId": 1953520
-      }
-    ],
-    "profileSources": [
-      "https://kylotonn.com/en/",
-      "https://corporate.nacongaming.com/wp-content/uploads/2026/10/Document-URD-NACON-31.03.2026.html"
-    ]
-  },
-  "Lighthouse Games": {
-    "description": "Leamington Spa game developer founded by experienced AAA leaders, building premium games for PC and consoles.",
-    "headquarters": {
-      "city": "Royal Leamington Spa",
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "AAA",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Console",
-      "Premium",
-      "AAA"
-    ],
-    "popularGames": [],
-    "applicationLocation": "Royal Leamington Spa · on-site",
-    "profileSources": [
-      "https://lighthousegames.com/",
-      "https://lighthousegames.com/careers/3C151DE079/"
     ]
   },
   "LIQUIDBULLET Studios": {
@@ -2147,59 +2228,6 @@
       "https://www.liquidbulletstudios.com/careers"
     ]
   },
-  "Lost Boys Interactive": {
-    "description": "Veteran-led development and co-development studio providing full-production support across engineering, art, design and production.",
-    "headquarters": {
-      "city": "Madison, Wisconsin",
-      "country": "United States",
-      "countryCode": "US",
-      "label": "HQ"
-    },
-    "otherLocations": [
-      "Austin, Texas, United States",
-      "Remote-first"
-    ],
-    "companyType": [
-      "Developer",
-      "Co-development",
-      "Support studio"
-    ],
-    "ownership": "Independent, founder-led ownership restored in December 2025",
-    "parentCompany": null,
-    "industryScale": "AAA co-development",
-    "teamSize": "Not publicly disclosed after return to independence",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Console",
-      "Co-development",
-      "Engineering",
-      "Art"
-    ],
-    "popularGames": [
-      {
-        "title": "WWE 2K26",
-        "appId": null,
-        "stage": "Co-development contribution"
-      },
-      {
-        "title": "Tiny Tina's Wonderlands",
-        "appId": 1286680,
-        "stage": "Co-development contribution"
-      },
-      {
-        "title": "Diablo IV",
-        "appId": 2344520,
-        "stage": "Co-development contribution"
-      }
-    ],
-    "profileSources": [
-      "https://www.lostboysinteractive.com/",
-      "https://www.lostboysinteractive.com/news"
-    ],
-    "applicationLocation": "Remote-first · US and Canada",
-    "reachHighlights": "AAA co-development credits include Diablo IV and Tiny Tina's Wonderlands."
-  },
   "Lunacy Studios": {
     "description": "Fully remote, globally distributed indie studio creating narrative-rich games centered on culture, emotion and identity.",
     "headquarters": {
@@ -2238,120 +2266,6 @@
       "https://lunacystudios.com/about-us/",
       "https://lunacystudios.com/"
     ]
-  },
-  "Next Level Games": {
-    "description": "Vancouver-based first-party game studio developing games for Nintendo platforms.",
-    "headquarters": {
-      "city": "Vancouver, British Columbia",
-      "country": "Canada",
-      "countryCode": "CA",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "First-party studio",
-      "Subsidiary"
-    ],
-    "ownership": "Wholly owned subsidiary of Nintendo",
-    "parentCompany": "Nintendo",
-    "industryScale": "AAA",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "Nintendo",
-      "Console",
-      "Action",
-      "Adventure"
-    ],
-    "popularGames": [
-      {
-        "title": "Luigi’s Mansion 3",
-        "appId": null
-      },
-      {
-        "title": "Mario Strikers: Battle League",
-        "appId": null
-      }
-    ],
-    "profileSources": [
-      "https://nextlevelgames.com/",
-      "https://nextlevelgames.applytojob.com/apply/YyYQvToJW1/General-Application"
-    ],
-    "applicationLocation": "Vancouver, Canada · general-route remote eligibility not stated"
-  },
-  "Nomad Games": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
-    "headquarters": {
-      "city": null,
-      "country": "Not stated",
-      "countryCode": "GB",
-      "label": "Country · Wikidata"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer"
-    ],
-    "ownership": "Not yet researched",
-    "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.wikidata.org/entity/Q96612282",
-      "https://nomadgames.co.uk/"
-    ],
-    "applicationLocation": "Not specified · confirm on the official application route"
-  },
-  "Obsidian Entertainment": {
-    "description": "California RPG developer known for narrative-heavy role-playing games and large-scale worlds.",
-    "headquarters": {
-      "city": "Irvine, California",
-      "country": "United States",
-      "countryCode": "US",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "First-party studio"
-    ],
-    "ownership": "Xbox Game Studios subsidiary · Microsoft",
-    "parentCompany": "Microsoft Gaming · Xbox Game Studios",
-    "industryScale": "AAA",
-    "teamSize": "Not publicly confirmed after 2026 restructuring",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Xbox",
-      "RPG",
-      "Narrative"
-    ],
-    "popularGames": [
-      {
-        "title": "Avowed",
-        "appId": 2457220
-      },
-      {
-        "title": "The Outer Worlds",
-        "appId": 578650
-      },
-      {
-        "title": "The Outer Worlds 2",
-        "appId": 2882670
-      },
-      {
-        "title": "Pillars of Eternity",
-        "appId": 291650
-      }
-    ],
-    "profileSources": [
-      "https://www.obsidian.net/",
-      "https://www.latimes.com/business/story/2026-07-09/microsofts-xbox-to-shift-obsidian-studio-to-new-fallout-video-game"
-    ],
-    "reachHighlights": "Major RPG portfolio includes Fallout: New Vegas, Pillars of Eternity, The Outer Worlds and Avowed."
   },
   "Ocellus Studio": {
     "description": "Lyon-based game group combining original game development with large-scale stylized art, animation and game-development services for major publishers.",
@@ -2444,203 +2358,6 @@
       "https://octocubegames.com/contact/"
     ]
   },
-  "Old Skull Games": {
-    "description": "Independent Lyon game studio creating original IP and working with partners across PC, console and mobile.",
-    "headquarters": {
-      "city": "Lyon",
-      "country": "France",
-      "countryCode": "FR",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Co-development",
-      "Independent"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "Indie / AA",
-    "teamSize": "Around 60 creators (studio-reported)",
-    "teamSizeAsOf": "2026",
-    "focus": [
-      "PC",
-      "Console",
-      "Mobile",
-      "Original IP",
-      "Co-development"
-    ],
-    "popularGames": [],
-    "applicationLocation": "Location not specified · use HQ as reference",
-    "profileSources": [
-      "https://www.oldskullgames.com/",
-      "https://www.oldskullgames.com/careers/"
-    ]
-  },
-  "Outplay Entertainment": {
-    "description": "Independent Dundee studio developing original and partner games across mobile, PC, Roblox, HTML5 and console, with full-cycle and co-development services.",
-    "headquarters": {
-      "city": "Dundee, Scotland",
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Publisher",
-      "Co-development"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "AA · Mobile / multi-platform",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "Mobile",
-      "PC",
-      "Roblox",
-      "HTML5",
-      "Console",
-      "Casual"
-    ],
-    "popularGames": [
-      {
-        "title": "The Incentive Program",
-        "appId": null
-      },
-      {
-        "title": "The Creeps",
-        "appId": null
-      },
-      {
-        "title": "Monopoly Match",
-        "appId": null
-      }
-    ],
-    "applicationLocation": "UK / EU remote options",
-    "profileSources": [
-      "https://outplay.com/about-us/",
-      "https://outplay.com/"
-    ],
-    "reachHighlights": "250M+ global downloads · BAFTA-nominated · games and production across five platform categories (studio-reported)."
-  },
-  "Paintbucket Games": {
-    "description": "Berlin independent studio making historically grounded, politically thoughtful narrative games.",
-    "headquarters": {
-      "city": "Berlin",
-      "country": "Germany",
-      "countryCode": "DE",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "Indie / AA",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Narrative",
-      "Strategy",
-      "History"
-    ],
-    "popularGames": [
-      {
-        "title": "Through the Darkest of Times",
-        "appId": 1003090
-      },
-      {
-        "title": "The Darkest Files",
-        "appId": 2056630
-      }
-    ],
-    "applicationLocation": "Berlin · full-time",
-    "profileSources": [
-      "https://paintbucket.de/en"
-    ],
-    "reachHighlights": "Known for historically themed narrative games Through the Darkest of Times and The Darkest Files."
-  },
-  "Playdead": {
-    "description": "Independent Copenhagen game developer known for atmospheric, highly crafted puzzle-platform adventures.",
-    "headquarters": {
-      "city": "Copenhagen",
-      "country": "Denmark",
-      "countryCode": "DK",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent · privately held",
-    "parentCompany": null,
-    "industryScale": "AA",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Console",
-      "Adventure",
-      "Puzzle",
-      "Narrative"
-    ],
-    "popularGames": [
-      {
-        "title": "LIMBO",
-        "appId": 48000
-      },
-      {
-        "title": "INSIDE",
-        "appId": 304430
-      }
-    ],
-    "profileSources": [
-      "https://playdead.com/",
-      "https://playdead.breezy.hr/p/fbda7a56839001-speculative-applications"
-    ],
-    "applicationLocation": "Copenhagen, Denmark · on-site"
-  },
-  "Playsport Games": {
-    "description": "Independent UK game developer focused on management and simulation games.",
-    "headquarters": {
-      "city": "Guildford",
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "Indie",
-    "teamSize": "Small team · exact count not disclosed",
-    "teamSizeAsOf": "2026-10-30",
-    "focus": [
-      "PC",
-      "Simulation",
-      "Management"
-    ],
-    "popularGames": [
-      {
-        "title": "Motorsport Manager",
-        "appId": 415200
-      }
-    ],
-    "profileSources": [
-      "https://www.playsportgames.com/",
-      "https://www.playsportgames.com/careers/"
-    ],
-    "applicationLocation": "Guildford, United Kingdom · speculative route does not state remote eligibility"
-  },
   "Plummy Games": {
     "description": "Moldova-founded remote-first mobile developer creating casual merge games, with its home base in Chișinău and remote team locations including Tallinn.",
     "headquarters": {
@@ -2682,56 +2399,6 @@
       "https://plummygames.teamtailor.com/pages/about-us",
       "https://plummygames.teamtailor.com/"
     ]
-  },
-  "Q104636206": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
-    "headquarters": {
-      "city": null,
-      "country": "Not stated",
-      "countryCode": "US",
-      "label": "Country · Wikidata"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer"
-    ],
-    "ownership": "Not yet researched",
-    "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.wikidata.org/entity/Q104636206",
-      "https://www.serenityforge.com/"
-    ],
-    "applicationLocation": "Not specified · HQ shown as reference"
-  },
-  "Q105687032": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
-    "headquarters": {
-      "city": null,
-      "country": "Not stated",
-      "countryCode": "US",
-      "label": "Country · Wikidata"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer"
-    ],
-    "ownership": "Not yet researched",
-    "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.wikidata.org/entity/Q105687032",
-      "https://www.velanstudios.com/"
-    ],
-    "applicationLocation": "Not specified · HQ shown as reference"
   },
   "Raw Power Games": {
     "description": "Fully funded Copenhagen developer building a large-scale open-world medieval sandbox game with a senior team drawn from major AAA productions.",
@@ -2776,225 +2443,6 @@
       "https://www.linkedin.com/company/raw-power-games"
     ]
   },
-  "Redly Games": {
-    "description": "Small remote-first game studio founded by former Supercell game lead Thea Chow, focused on thoughtful, design-led experiences.",
-    "headquarters": {
-      "city": "Helsinki",
-      "country": "Finland",
-      "countryCode": "FI",
-      "label": "HQ"
-    },
-    "otherLocations": [
-      "Remote-first"
-    ],
-    "companyType": [
-      "Developer",
-      "Independent startup"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "Indie",
-    "teamSize": "Small team · exact count not disclosed",
-    "teamSizeAsOf": "2026-10",
-    "focus": [
-      "Mobile",
-      "Narrative",
-      "Casual"
-    ],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.redlygames.com/"
-    ],
-    "applicationLocation": "Global remote · EU and Canada preferred"
-  },
-  "Reply Game Studios": {
-    "description": "Milan-based game developer within the Reply technology group, focused on original PC and console action experiences.",
-    "headquarters": {
-      "city": "Milan",
-      "country": "Italy",
-      "countryCode": "IT",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Subsidiary"
-    ],
-    "ownership": "Part of Reply Group",
-    "parentCompany": "Reply S.p.A.",
-    "industryScale": "AA",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Console",
-      "Action",
-      "Adventure"
-    ],
-    "popularGames": [
-      {
-        "title": "Soulstice",
-        "appId": 1602080
-      },
-      {
-        "title": "Theseus",
-        "appId": 577280
-      }
-    ],
-    "applicationLocation": "Milan · on-site; Italian and English required",
-    "profileSources": [
-      "https://www.reply.com/reply-game-studios/en/career",
-      "https://www.reply.com/reply-game-studios/en"
-    ]
-  },
-  "Rustling Leaves Games": {
-    "description": "Volunteer-built indie studio developing its first game, with a revenue-share compensation model.",
-    "headquarters": {
-      "city": "Clayton, North Carolina",
-      "country": "United States",
-      "countryCode": "US",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "Indie",
-    "teamSize": "11–50 listed on LinkedIn; volunteer team",
-    "teamSizeAsOf": "2026-10",
-    "focus": [
-      "PC",
-      "Indie",
-      "Narrative"
-    ],
-    "popularGames": [
-      {
-        "title": "Project Vertex",
-        "appId": null,
-        "stage": "In development"
-      }
-    ],
-    "profileSources": [
-      "https://www.rustlingleavesgames.com/",
-      "https://www.linkedin.com/company/rustling-leaves-games"
-    ]
-  },
-  "Sanuk Games": {
-    "description": "Small Thailand-based developer and porting partner with a catalogue of more than 70 games across PC and console platforms.",
-    "headquarters": {
-      "city": null,
-      "country": "Thailand",
-      "countryCode": "TH",
-      "label": "HQ · city not stated"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Porting",
-      "Services"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "Indie",
-    "teamSize": "Small studio · exact count not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Console",
-      "Arcade",
-      "Casual",
-      "Porting"
-    ],
-    "popularGames": [],
-    "applicationLocation": "Work-from-home roles · confirm country eligibility",
-    "profileSources": [
-      "https://www.sanukgames.com/careers",
-      "https://www.sanukgames.com/"
-    ]
-  },
-  "Sencorp Games": {
-    "description": "Independent Izmir game and technology studio building original mobile and PC games.",
-    "headquarters": {
-      "city": "Izmir",
-      "country": "Türkiye",
-      "countryCode": "TR",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "Indie",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "Mobile",
-      "PC",
-      "Casual",
-      "Action"
-    ],
-    "popularGames": [
-      {
-        "title": "Pawstorm",
-        "appId": null,
-        "stage": "Available on Android"
-      },
-      {
-        "title": "Jellyclash",
-        "appId": null,
-        "stage": "Coming soon"
-      },
-      {
-        "title": "Kick Blast",
-        "appId": null,
-        "stage": "In development"
-      }
-    ],
-    "applicationLocation": "Location not specified · use HQ as reference",
-    "profileSources": [
-      "https://sencorpgames.com/"
-    ]
-  },
-  "SOFTGAMES": {
-    "description": "Berlin-based casual-game developer and publisher specializing in instant, HTML5, social and mobile games.",
-    "headquarters": {
-      "city": "Berlin",
-      "country": "Germany",
-      "countryCode": "DE",
-      "label": "HQ"
-    },
-    "otherLocations": [
-      "Toronto, Canada"
-    ],
-    "companyType": [
-      "Developer",
-      "Publisher",
-      "Mobile"
-    ],
-    "ownership": "Privately held · ownership not confirmed",
-    "parentCompany": null,
-    "industryScale": "AA · Mobile",
-    "teamSize": "51–200 employees (LinkedIn company range)",
-    "teamSizeAsOf": "2026-10",
-    "focus": [
-      "Mobile",
-      "HTML5",
-      "Instant games",
-      "Casual",
-      "Social"
-    ],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.softgames.com/",
-      "https://www.linkedin.com/company/softgames-mobile-entertainment-services/"
-    ]
-  },
   "Speedway Games": {
     "description": "Global remote game studio focused on building and operating large-scale Roblox experiences; accepts general applications for experienced contributors.",
     "headquarters": {
@@ -3028,128 +2476,6 @@
       "https://speedway-games.com/careers/45073",
       "https://speedway-games.com/"
     ]
-  },
-  "Sports Interactive": {
-    "description": "London-based SEGA game studio behind the Football Manager series.",
-    "headquarters": {
-      "city": "Stratford, London",
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Subsidiary"
-    ],
-    "ownership": "Wholly owned subsidiary of SEGA Europe",
-    "parentCompany": "SEGA Europe",
-    "industryScale": "AAA",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Console",
-      "Sports simulation",
-      "Football management"
-    ],
-    "popularGames": [
-      {
-        "title": "Football Manager series",
-        "appId": null
-      }
-    ],
-    "profileSources": [
-      "https://www.sigames.com/",
-      "https://sega.wd3.myworkdayjobs.com/SEGA_Careers/job/Greater-London-E15-2GW/Senior-Graphics-Engineer--Speculative-Application-_JR100190"
-    ],
-    "applicationLocation": "East London · hybrid 2–3 days in studio; remote by exception"
-  },
-  "Squeeze Studio": {
-    "description": "Québec-based 3D animation and digital production studio working on animation, cinematics and creative content for games and entertainment.",
-    "headquarters": {
-      "city": "Québec City",
-      "country": "Canada",
-      "countryCode": "CA",
-      "label": "HQ"
-    },
-    "otherLocations": [
-      "Montréal, Canada"
-    ],
-    "companyType": [
-      "Co-development",
-      "Animation",
-      "Services"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "AA / AAA services",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "3D animation",
-      "Cinematics",
-      "Game art",
-      "Co-development"
-    ],
-    "popularGames": [],
-    "applicationLocation": "Québec / Montréal · on-site, remote or hybrid options",
-    "profileSources": [
-      "https://squeezestudio.com/",
-      "https://squeezestudio.recruitee.com/l/en/o/candidatures-spontanees?lang=en"
-    ]
-  },
-  "Stormind Games": {
-    "description": "Independent Italian developer and co-development partner known for atmospheric horror, action-adventure and narrative-driven games.",
-    "headquarters": {
-      "city": "Catania",
-      "country": "Italy",
-      "countryCode": "IT",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Co-development",
-      "Independent"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "AA",
-    "teamSize": "100+ internal resources plus external collaborators (studio-reported)",
-    "teamSizeAsOf": "2025",
-    "focus": [
-      "PC",
-      "PlayStation",
-      "Xbox",
-      "Horror",
-      "Action-adventure",
-      "Co-development"
-    ],
-    "popularGames": [
-      {
-        "title": "Remothered: Tormented Fathers",
-        "appId": 633360
-      },
-      {
-        "title": "Batora: Lost Haven",
-        "appId": 1506440
-      },
-      {
-        "title": "A Quiet Place: The Road Ahead",
-        "appId": 2233120
-      },
-      {
-        "title": "Mafia: The Old Country",
-        "appId": 3058630,
-        "stage": "Co-development contribution"
-      }
-    ],
-    "applicationLocation": "Location not specified · use HQ as reference",
-    "profileSources": [
-      "https://stormindgames.com/company/"
-    ],
-    "reachHighlights": "100+ internal resources plus external collaborators (studio-reported); credits include A Quiet Place and Mafia: The Old Country."
   },
   "Studios DRAMA / UNRECORD": {
     "description": "Independent Rennes studio making UNRECORD, a gameplay-first tactical FPS built around high-fidelity realism and systemic design.",
@@ -3189,158 +2515,6 @@
       "https://studiosdrama.com/career/",
       "https://studiosdrama.com/unsolicited-application/"
     ]
-  },
-  "SumiGamesStudio": {
-    "description": "Game development and publishing company working across mobile, PC, multiplayer, AR/VR/XR and Web3 experiences.",
-    "headquarters": {
-      "city": "Dubai",
-      "country": "United Arab Emirates",
-      "countryCode": "AE",
-      "label": "Primary base · multi-location"
-    },
-    "otherLocations": [
-      "United Kingdom"
-    ],
-    "companyType": [
-      "Developer",
-      "Publisher",
-      "Services"
-    ],
-    "ownership": "Private company · ownership not publicly detailed",
-    "parentCompany": null,
-    "industryScale": "Indie / AA",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "Mobile",
-      "PC",
-      "AR/VR/XR",
-      "Multiplayer",
-      "Web3"
-    ],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.sumigamesstudio.com/company",
-      "https://www.sumigamesstudio.com/"
-    ]
-  },
-  "Supermassive Games": {
-    "description": "BAFTA-winning British developer specializing in cinematic, narrative-led horror and interactive drama.",
-    "headquarters": {
-      "city": "Guildford",
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer"
-    ],
-    "ownership": "Owned by Nordisk Games · part of the Egmont Group",
-    "parentCompany": "Nordisk Games / Egmont Group",
-    "industryScale": "AA / AAA",
-    "teamSize": "About 188 estimated employees worldwide (March 2026; third-party estimate)",
-    "teamSizeAsOf": "2026-03",
-    "focus": [
-      "PC",
-      "PlayStation",
-      "Xbox",
-      "Horror",
-      "Narrative"
-    ],
-    "popularGames": [
-      {
-        "title": "Until Dawn",
-        "appId": 2172010
-      },
-      {
-        "title": "The Quarry",
-        "appId": 1577120
-      },
-      {
-        "title": "Little Nightmares III",
-        "appId": 1392860
-      }
-    ],
-    "profileSources": [
-      "https://www.supermassivegames.com/about",
-      "https://www.reveliolabs.com/companies/supermassive-games/employees"
-    ],
-    "applicationLocation": "Guildford · see role-specific conditions",
-    "reachHighlights": "BAFTA-winning studio; known for Until Dawn, The Quarry, The Dark Pictures Anthology and Little Nightmares III."
-  },
-  "Tactile Games": {
-    "description": "Large Copenhagen mobile game studio creating casual and puzzle games, including Lily's Garden.",
-    "headquarters": {
-      "city": "Copenhagen",
-      "country": "Denmark",
-      "countryCode": "DK",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Publisher",
-      "Mobile"
-    ],
-    "ownership": "Independent · privately held",
-    "parentCompany": null,
-    "industryScale": "AA · Mobile",
-    "teamSize": "350+ people (studio-reported)",
-    "teamSizeAsOf": "2026-10-30",
-    "focus": [
-      "Mobile",
-      "Casual",
-      "Puzzle",
-      "Free-to-play"
-    ],
-    "popularGames": [
-      {
-        "title": "Lily's Garden",
-        "appId": null
-      }
-    ],
-    "profileSources": [
-      "https://tactilegames.com/",
-      "https://job-boards.greenhouse.io/tactilegames/jobs/4319957101"
-    ],
-    "applicationLocation": "Copenhagen, Denmark · open-application eligibility not stated"
-  },
-  "Techtive Games GmbH": {
-    "description": "Germany-based independent video-game developer building Ardem, an open-world survival game.",
-    "headquarters": {
-      "city": null,
-      "country": "Germany",
-      "countryCode": "DE",
-      "label": "HQ · city not publicly stated"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "Indie / AA",
-    "teamSize": "11–50 employees (company profile range)",
-    "teamSizeAsOf": "2026-10-30",
-    "focus": [
-      "PC",
-      "Survival",
-      "Open world"
-    ],
-    "popularGames": [
-      {
-        "title": "Ardem",
-        "appId": null,
-        "stage": "In development"
-      }
-    ],
-    "profileSources": [
-      "https://techtive.games/",
-      "https://join.com/companies/techtivegames"
-    ],
-    "applicationLocation": "Remote work and relocation are advertised; applicant-country eligibility not specified"
   },
   "The Indie Stone": {
     "description": "Independent distributed studio behind Project Zomboid, a long-running open-world zombie survival sandbox.",
@@ -3386,228 +2560,6 @@
       "https://projectzomboid.com/blog/about-us/",
       "https://theindiestone.com/"
     ]
-  },
-  "The Knights of U": {
-    "description": "Polish external game-development studio delivering Unity and Unreal co-development, porting, optimization, technical art, UX/UI and remastering, alongside original desktop and console projects.",
-    "headquarters": {
-      "city": "Wrocław",
-      "country": "Poland",
-      "countryCode": "PL",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Co-development",
-      "Porting"
-    ],
-    "ownership": "Not disclosed",
-    "parentCompany": null,
-    "industryScale": "Not classified",
-    "teamSize": "65+ experts onboard (studio-reported)",
-    "teamSizeAsOf": "2026-10",
-    "focus": [
-      "PC",
-      "Console",
-      "Unity",
-      "Unreal Engine",
-      "Co-development",
-      "Porting",
-      "Technical Art",
-      "Optimization",
-      "Remastering"
-    ],
-    "popularGames": [],
-    "profileSources": [
-      "https://theknightsofu.com/",
-      "https://theknightsofu.com/career/",
-      "https://theknightsofu.com/about-us/"
-    ],
-    "applicationLocation": "Wrocław office · office, hybrid or fully remote options stated; applicant geography not stated",
-    "reachHighlights": "65+ experts onboard, 120+ completed projects and 100+ satisfied clients (studio-reported). Formerly The Knights of Unity."
-  },
-  "Third Kind Games": {
-    "description": "Full-service AAA co-development and full-development studio delivering art, design, engineering and production for major publishers and franchises.",
-    "headquarters": {
-      "city": "Leamington Spa",
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "label": "HQ"
-    },
-    "otherLocations": [
-      "Poland",
-      "Spain"
-    ],
-    "companyType": [
-      "Developer",
-      "Co-development"
-    ],
-    "ownership": "Part of Virtuos",
-    "parentCompany": "Virtuos",
-    "industryScale": "AAA co-development",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Console",
-      "AAA co-development",
-      "Full development"
-    ],
-    "popularGames": [
-      {
-        "title": "Fable",
-        "appId": null,
-        "stage": "Co-development credit"
-      },
-      {
-        "title": "Forza Horizon",
-        "appId": null,
-        "stage": "Co-development credit"
-      },
-      {
-        "title": "Sea of Thieves",
-        "appId": null,
-        "stage": "Co-development credit"
-      },
-      {
-        "title": "Hearthstone",
-        "appId": null,
-        "stage": "Co-development credit"
-      }
-    ],
-    "applicationLocation": "Location not specified · use HQ as reference",
-    "profileSources": [
-      "https://thirdkindgames.com/about/"
-    ],
-    "reachHighlights": "AAA co-development credits include Fable, Forza Horizon, Sea of Thieves and Hearthstone; part of Virtuos."
-  },
-  "THQ Nordic GmbH": {
-    "description": "Vienna-headquartered video-game publisher and developer with a global portfolio of owned labels and subsidiary studios.",
-    "headquarters": {
-      "city": "Vienna",
-      "country": "Austria",
-      "countryCode": "AT",
-      "label": "HQ"
-    },
-    "otherLocations": [
-      "Multiple subsidiary studios worldwide · each has its own recruitment route"
-    ],
-    "companyType": [
-      "Publisher",
-      "Developer",
-      "Parent company"
-    ],
-    "ownership": "Subsidiary of Embracer Group",
-    "parentCompany": "Embracer Group",
-    "industryScale": "AAA",
-    "teamSize": "501–1,000 employees (company profile range)",
-    "teamSizeAsOf": "2026-10-30",
-    "focus": [
-      "PC",
-      "Console",
-      "Publishing",
-      "Game development"
-    ],
-    "popularGames": [
-      {
-        "title": "Darksiders",
-        "appId": null
-      },
-      {
-        "title": "Destroy All Humans!",
-        "appId": null
-      },
-      {
-        "title": "Wreckfest",
-        "appId": null
-      }
-    ],
-    "profileSources": [
-      "https://thqnordic.com/",
-      "https://thqnordic.com/company/careers",
-      "https://join.com/companies/thqnordiccom"
-    ],
-    "applicationLocation": "THQ Nordic GmbH · Vienna headquarters only; subsidiary studios recruit independently"
-  },
-  "Twin Harbour Interactive": {
-    "description": "Game developer and operator behind the Supremacy strategy-game franchise, with teams in Germany and Malta.",
-    "headquarters": {
-      "city": "San Ġiljan",
-      "country": "Malta",
-      "countryCode": "MT",
-      "label": "Registered company location"
-    },
-    "otherLocations": [
-      "Hamburg, Germany"
-    ],
-    "companyType": [
-      "Developer",
-      "Publisher",
-      "Live operations"
-    ],
-    "ownership": "Operated jointly by Stillfront Supremacy Ltd and Stillfront Supremacy GmbH",
-    "parentCompany": "Stillfront Group",
-    "industryScale": "AA",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Mobile",
-      "Strategy",
-      "Live operations"
-    ],
-    "popularGames": [
-      {
-        "title": "Supremacy: World War 3",
-        "appId": null
-      }
-    ],
-    "profileSources": [
-      "https://twinharbourinteractive.com/",
-      "https://www.playsupremacy.com/en/careers",
-      "https://twinharbour.teamtailor.com/jobs/6958619-unsolicited-application-twin-harbour-interactive/applications/new"
-    ],
-    "applicationLocation": "Hybrid · Hamburg, Germany or San Ġiljan, Malta · work authorisation for one location required"
-  },
-  "Unknown Worlds": {
-    "description": "Independent-origin studio now within Krafton, known for immersive underwater exploration and survival games.",
-    "headquarters": {
-      "city": "San Francisco, California",
-      "country": "United States",
-      "countryCode": "US",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "First-party studio"
-    ],
-    "ownership": "Krafton subsidiary",
-    "parentCompany": "Krafton",
-    "industryScale": "AA",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Console",
-      "Survival",
-      "Exploration"
-    ],
-    "popularGames": [
-      {
-        "title": "Subnautica",
-        "appId": 264710
-      },
-      {
-        "title": "Subnautica: Below Zero",
-        "appId": 848450
-      }
-    ],
-    "profileSources": [
-      "https://unknownworlds.com/",
-      "https://www.krafton.com/en/"
-    ],
-    "applicationLocation": "Location not specified · HQ shown"
   },
   "Uplift Games": {
     "description": "Remote-first Roblox developer behind Adopt Me!, building large-scale social and family-friendly virtual worlds.",
@@ -3692,114 +2644,6 @@
       "https://vestgames.com/"
     ]
   },
-  "Virtual Programming": {
-    "description": "Specialist game technology studio focused on PC game porting, graphics, performance optimisation and platform integration.",
-    "headquarters": {
-      "city": null,
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "label": "HQ · city not publicly stated"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Services",
-      "Co-development"
-    ],
-    "ownership": "Independent · privately held",
-    "parentCompany": null,
-    "industryScale": "AA / Specialist services",
-    "teamSize": "Small specialist team · exact count not disclosed",
-    "teamSizeAsOf": "2026-10-30",
-    "focus": [
-      "PC",
-      "Console",
-      "Porting",
-      "Graphics",
-      "Low-level engineering",
-      "Optimisation"
-    ],
-    "popularGames": [],
-    "profileSources": [
-      "https://vpltd.com/",
-      "https://vpltd.com/careers"
-    ],
-    "applicationLocation": "United Kingdom · specific location and remote eligibility not stated"
-  },
-  "Vyrex Interactive": {
-    "description": "Independent US-based studio building systems-driven space and survival games and its own C# engine.",
-    "headquarters": {
-      "city": null,
-      "country": "United States",
-      "countryCode": "US",
-      "label": "HQ · city not published"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "Indie",
-    "teamSize": "Not publicly disclosed · founded 2026",
-    "teamSizeAsOf": "2026-10",
-    "focus": [
-      "PC",
-      "Linux",
-      "Space",
-      "Survival"
-    ],
-    "popularGames": [
-      {
-        "title": "Galactic Prospectors",
-        "appId": 3561380,
-        "stage": "Early Access"
-      },
-      {
-        "title": "Starbreaker",
-        "appId": 492980,
-        "stage": "In development"
-      }
-    ],
-    "profileSources": [
-      "https://vyrexinteractive.com/press",
-      "https://vyrexinteractive.com/studio.php"
-    ]
-  },
-  "Wushu Studios": {
-    "description": "UK game development and co-development studio working with publishers and developers on original and partner projects.",
-    "headquarters": {
-      "city": null,
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "label": "HQ · city not confirmed in this record"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Co-development",
-      "Services"
-    ],
-    "ownership": "Independent · privately held",
-    "parentCompany": null,
-    "industryScale": "AA / AAA co-development",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Console",
-      "Co-development",
-      "Game development",
-      "Production"
-    ],
-    "popularGames": [],
-    "profileSources": [
-      "https://wushustudios.com/",
-      "https://wushustudios.com/careers/"
-    ],
-    "applicationLocation": "Location and remote eligibility not stated on the speculative route"
-  },
   "Yabu Games": {
     "description": "Istanbul-based independent mobile studio creating puzzle, casual, action, arcade and racing games.",
     "headquarters": {
@@ -3856,6 +2700,221 @@
       "https://yabugames.io/careers/"
     ]
   },
+  "Playdead": {
+    "description": "Independent Copenhagen game developer known for atmospheric, highly crafted puzzle-platform adventures.",
+    "headquarters": {
+      "city": "Copenhagen",
+      "country": "Denmark",
+      "countryCode": "DK",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent · privately held",
+    "parentCompany": null,
+    "industryScale": "AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Adventure",
+      "Puzzle",
+      "Narrative"
+    ],
+    "popularGames": [
+      {
+        "title": "LIMBO",
+        "appId": 48000
+      },
+      {
+        "title": "INSIDE",
+        "appId": 304430
+      }
+    ],
+    "profileSources": [
+      "https://playdead.com/",
+      "https://playdead.breezy.hr/p/fbda7a56839001-speculative-applications"
+    ],
+    "applicationLocation": "Copenhagen, Denmark · on-site"
+  },
+  "Playsport Games": {
+    "description": "Independent UK game developer focused on management and simulation games.",
+    "headquarters": {
+      "city": "Guildford",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small team · exact count not disclosed",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Simulation",
+      "Management"
+    ],
+    "popularGames": [
+      {
+        "title": "Motorsport Manager",
+        "appId": 415200
+      }
+    ],
+    "profileSources": [
+      "https://www.playsportgames.com/",
+      "https://www.playsportgames.com/careers/"
+    ],
+    "applicationLocation": "Guildford, United Kingdom · speculative route does not state remote eligibility"
+  },
+  "Dark Cloud Games": {
+    "description": "Independent game-development team recruiting across programming, game services, art, animation, visual effects and design.",
+    "headquarters": {
+      "city": "Lisbon",
+      "country": "Portugal",
+      "countryCode": "PT",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent · private",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Game services",
+      "Programming",
+      "Art",
+      "Animation",
+      "Visual effects"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.darkcloud.games/",
+      "https://www.darkcloud.games/careers/",
+      "https://www.darkcloud.games/ui-ux-designer/"
+    ],
+    "applicationLocation": "Lisbon, Portugal · speculative route does not state remote eligibility"
+  },
+  "Virtual Programming": {
+    "description": "Specialist game technology studio focused on PC game porting, graphics, performance optimisation and platform integration.",
+    "headquarters": {
+      "city": null,
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ · city not publicly stated"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Services",
+      "Co-development"
+    ],
+    "ownership": "Independent · privately held",
+    "parentCompany": null,
+    "industryScale": "AA / Specialist services",
+    "teamSize": "Small specialist team · exact count not disclosed",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Console",
+      "Porting",
+      "Graphics",
+      "Low-level engineering",
+      "Optimisation"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://vpltd.com/",
+      "https://vpltd.com/careers"
+    ],
+    "applicationLocation": "United Kingdom · specific location and remote eligibility not stated"
+  },
+  "Code Wizards Group": {
+    "description": "Game-industry technology and professional-services group providing backend, multiplayer infrastructure and operational support to game developers and publishers.",
+    "headquarters": {
+      "city": "Reading",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Elgin, Scotland, United Kingdom",
+      "Vancouver, Canada"
+    ],
+    "companyType": [
+      "Services",
+      "Game technology",
+      "Co-development"
+    ],
+    "ownership": "Independent · privately held",
+    "parentCompany": null,
+    "industryScale": "AA / AAA services",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Backend infrastructure",
+      "Multiplayer",
+      "Online services",
+      "Game operations"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://codewizards.io/",
+      "https://careers.codewizards.io/jobs/5884840-speculative-application"
+    ],
+    "applicationLocation": "Hybrid · Reading, Elgin or Vancouver"
+  },
+  "Techtive Games GmbH": {
+    "description": "Germany-based independent video-game developer building Ardem, an open-world survival game.",
+    "headquarters": {
+      "city": null,
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "HQ · city not publicly stated"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "11–50 employees (company profile range)",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Survival",
+      "Open world"
+    ],
+    "popularGames": [
+      {
+        "title": "Ardem",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://techtive.games/",
+      "https://join.com/companies/techtivegames"
+    ],
+    "applicationLocation": "Remote work and relocation are advertised; applicant-country eligibility not specified"
+  },
   "Zygle Games": {
     "description": "London-based mobile game developer and publisher creating strategy, RPG and simulation experiences.",
     "headquarters": {
@@ -3887,5 +2946,947 @@
       "https://zygle-games.com/careers"
     ],
     "applicationLocation": "Hybrid London or remote · remote-country eligibility not stated"
+  },
+  "4A Games": {
+    "description": "International game developer known for the Metro series, with studio operations in Malta and Kyiv.",
+    "headquarters": {
+      "city": null,
+      "country": "Malta",
+      "countryCode": "MT",
+      "label": "Corporate HQ · city not stated"
+    },
+    "otherLocations": [
+      "Kyiv, Ukraine"
+    ],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Privately held · ownership details not confirmed in this record",
+    "parentCompany": null,
+    "industryScale": "AAA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Shooter",
+      "Narrative",
+      "Action"
+    ],
+    "popularGames": [
+      {
+        "title": "Metro Exodus",
+        "appId": 412020
+      },
+      {
+        "title": "Metro: Last Light Redux",
+        "appId": 287390
+      }
+    ],
+    "profileSources": [
+      "https://www.4a-games.com.mt/",
+      "https://www.4a-games.com.mt/careers"
+    ],
+    "applicationLocation": "Malta / Kyiv studio network · general applicant eligibility not stated"
+  },
+  "THQ Nordic GmbH": {
+    "description": "Vienna-headquartered video-game publisher and developer with a global portfolio of owned labels and subsidiary studios.",
+    "headquarters": {
+      "city": "Vienna",
+      "country": "Austria",
+      "countryCode": "AT",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Multiple subsidiary studios worldwide · each has its own recruitment route"
+    ],
+    "companyType": [
+      "Publisher",
+      "Developer",
+      "Parent company"
+    ],
+    "ownership": "Subsidiary of Embracer Group",
+    "parentCompany": "Embracer Group",
+    "industryScale": "AAA",
+    "teamSize": "501–1,000 employees (company profile range)",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Console",
+      "Publishing",
+      "Game development"
+    ],
+    "popularGames": [
+      {
+        "title": "Darksiders",
+        "appId": null
+      },
+      {
+        "title": "Destroy All Humans!",
+        "appId": null
+      },
+      {
+        "title": "Wreckfest",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://thqnordic.com/",
+      "https://thqnordic.com/company/careers",
+      "https://join.com/companies/thqnordiccom"
+    ],
+    "applicationLocation": "THQ Nordic GmbH · Vienna headquarters only; subsidiary studios recruit independently"
+  },
+  "Blackbird Interactive": {
+    "description": "Independent Vancouver game-development studio working on original worlds and partner-owned game franchises.",
+    "headquarters": {
+      "city": "Vancouver, British Columbia",
+      "country": "Canada",
+      "countryCode": "CA",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Independent"
+    ],
+    "ownership": "Independent · privately held",
+    "parentCompany": null,
+    "industryScale": "AA / AAA co-development",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Co-development",
+      "Game design",
+      "Art",
+      "Engineering"
+    ],
+    "popularGames": [
+      {
+        "title": "Hardspace: Shipbreaker",
+        "appId": 1161580
+      },
+      {
+        "title": "Homeworld 3",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://blackbirdinteractive.com/",
+      "https://jobs.lever.co/blackbirdinteractive/498bb3c2-b23f-4aed-8fdd-ee80649e381d"
+    ],
+    "applicationLocation": "Canada only · must reside in Canada and already be legally eligible to work there"
+  },
+  "Next Level Games": {
+    "description": "Vancouver-based first-party game studio developing games for Nintendo platforms.",
+    "headquarters": {
+      "city": "Vancouver, British Columbia",
+      "country": "Canada",
+      "countryCode": "CA",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "First-party studio",
+      "Subsidiary"
+    ],
+    "ownership": "Wholly owned subsidiary of Nintendo",
+    "parentCompany": "Nintendo",
+    "industryScale": "AAA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Nintendo",
+      "Console",
+      "Action",
+      "Adventure"
+    ],
+    "popularGames": [
+      {
+        "title": "Luigi’s Mansion 3",
+        "appId": null
+      },
+      {
+        "title": "Mario Strikers: Battle League",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://nextlevelgames.com/",
+      "https://nextlevelgames.applytojob.com/apply/YyYQvToJW1/General-Application"
+    ],
+    "applicationLocation": "Vancouver, Canada · general-route remote eligibility not stated"
+  },
+  "Dogfish Games": {
+    "description": "Small independent Vancouver studio developing its first atmospheric, story-driven game.",
+    "headquarters": {
+      "city": "Vancouver",
+      "country": "Canada",
+      "countryCode": "CA",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small team · exact count not disclosed",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Narrative",
+      "Atmospheric",
+      "Adventure"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://dogfishgames.com/",
+      "https://dogfishgames.com/jobs/"
+    ],
+    "applicationLocation": "Remote · based in or willing to work within Canadian time zones"
+  },
+  "Climax Studios": {
+    "description": "Established UK game development and co-development studio delivering original games and partner projects across platforms.",
+    "headquarters": {
+      "city": "Portsmouth",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "London, United Kingdom",
+      "Edinburgh, Scotland, United Kingdom",
+      "Liverpool, United Kingdom"
+    ],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Services"
+    ],
+    "ownership": "Part of Keywords Studios",
+    "parentCompany": "Keywords Studios",
+    "industryScale": "AA / AAA services",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Art",
+      "Animation",
+      "Game design",
+      "Programming",
+      "Co-development"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.climaxstudios.com/",
+      "https://www.climaxstudios.com/join-our-team/jobs/Rw-speculative-application-art-animation/"
+    ],
+    "applicationLocation": "Portsmouth, United Kingdom"
+  },
+  "Twin Harbour Interactive": {
+    "description": "Game developer and operator behind the Supremacy strategy-game franchise, with teams in Germany and Malta.",
+    "headquarters": {
+      "city": "San Ġiljan",
+      "country": "Malta",
+      "countryCode": "MT",
+      "label": "Registered company location"
+    },
+    "otherLocations": [
+      "Hamburg, Germany"
+    ],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Live operations"
+    ],
+    "ownership": "Operated jointly by Stillfront Supremacy Ltd and Stillfront Supremacy GmbH",
+    "parentCompany": "Stillfront Group",
+    "industryScale": "AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Mobile",
+      "Strategy",
+      "Live operations"
+    ],
+    "popularGames": [
+      {
+        "title": "Supremacy: World War 3",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://twinharbourinteractive.com/",
+      "https://www.playsupremacy.com/en/careers",
+      "https://twinharbour.teamtailor.com/jobs/6958619-unsolicited-application-twin-harbour-interactive/applications/new"
+    ],
+    "applicationLocation": "Hybrid · Hamburg, Germany or San Ġiljan, Malta · work authorisation for one location required"
+  },
+  "HundredStar Games": {
+    "description": "Independent East London game developer founded by the former creative leadership behind the Batman: Arkham series.",
+    "headquarters": {
+      "city": "Hackney Wick, London",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent · privately held",
+    "parentCompany": null,
+    "industryScale": "AA",
+    "teamSize": "Growing studio · stated target up to 100 people",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Console",
+      "Action",
+      "Art",
+      "Production"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.hundredstar.games/",
+      "https://www.hundredstar.games/careers/role?id=speculative-application-art-86"
+    ],
+    "applicationLocation": "London hybrid · in studio Tuesday–Thursday; remote work Monday/Friday within the UK"
+  },
+  "Funatic Games": {
+    "description": "Early-stage independent game studio focused on physics-driven, replayable games and gameplay-first design.",
+    "headquarters": {
+      "city": null,
+      "country": "Not publicly stated",
+      "countryCode": "",
+      "label": "HQ not publicly stated"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small early-stage team · exact count not disclosed",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Physics-driven gameplay",
+      "Indie"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.funatic.games/",
+      "https://www.funatic.games/careers"
+    ],
+    "applicationLocation": "Not specified · applicant-country eligibility not stated"
+  },
+  "Cybernation Team": {
+    "description": "Independent Ukrainian game studio developing an Unreal Engine 5 tactical multiplayer game.",
+    "headquarters": {
+      "city": null,
+      "country": "Ukraine",
+      "countryCode": "UA",
+      "label": "HQ · city not publicly confirmed"
+    },
+    "otherLocations": [
+      "Remote team / Kyiv roles"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Unreal Engine 5",
+      "Multiplayer",
+      "Tactical",
+      "Action"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://cybernation.team/",
+      "https://cybernation.team/careers"
+    ],
+    "applicationLocation": "Remote / Kyiv roles are advertised · general-applicant eligibility should be confirmed"
+  },
+  "Wushu Studios": {
+    "description": "UK game development and co-development studio working with publishers and developers on original and partner projects.",
+    "headquarters": {
+      "city": null,
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ · city not confirmed in this record"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Services"
+    ],
+    "ownership": "Independent · privately held",
+    "parentCompany": null,
+    "industryScale": "AA / AAA co-development",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Co-development",
+      "Game development",
+      "Production"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://wushustudios.com/",
+      "https://wushustudios.com/careers/"
+    ],
+    "applicationLocation": "Location and remote eligibility not stated on the speculative route"
+  },
+  "Ambertail Games": {
+    "description": "Independent small game studio developing Amber Isle and other colourful, character-led experiences.",
+    "headquarters": {
+      "city": "Belfast",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small team · exact count not disclosed",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Simulation",
+      "Adventure",
+      "Indie"
+    ],
+    "popularGames": [
+      {
+        "title": "Amber Isle",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.ambertailgames.com/",
+      "https://www.ambertailgames.com/jobs"
+    ],
+    "applicationLocation": "In-house or remote options described · eligible remote countries not stated"
+  },
+  "Tactile Games": {
+    "description": "Large Copenhagen mobile game studio creating casual and puzzle games, including Lily's Garden.",
+    "headquarters": {
+      "city": "Copenhagen",
+      "country": "Denmark",
+      "countryCode": "DK",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Mobile"
+    ],
+    "ownership": "Independent · privately held",
+    "parentCompany": null,
+    "industryScale": "AA · Mobile",
+    "teamSize": "350+ people (studio-reported)",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "Mobile",
+      "Casual",
+      "Puzzle",
+      "Free-to-play"
+    ],
+    "popularGames": [
+      {
+        "title": "Lily's Garden",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://tactilegames.com/",
+      "https://job-boards.greenhouse.io/tactilegames/jobs/4319957101"
+    ],
+    "applicationLocation": "Copenhagen, Denmark · open-application eligibility not stated"
+  },
+  "Glowmade": {
+    "description": "Independent UK game studio founded by Lionhead alumni, creating original and imaginative games.",
+    "headquarters": {
+      "city": "Guildford",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent · privately held",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Action",
+      "Adventure"
+    ],
+    "popularGames": [
+      {
+        "title": "Rogue Fortune",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.glowmade.com/about-us",
+      "https://www.glowmade.com/careers",
+      "https://glowmade.jobs.personio.com/job/2805976"
+    ],
+    "applicationLocation": "Guildford hybrid or remote within the UK · UK right to work required"
+  },
+  "Hugecalf Studios": {
+    "description": "Small UK remote game studio behind Stuck Together, Turbo Golf Racing and When Ski Lifts Go Wrong.",
+    "headquarters": {
+      "city": null,
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ · city not publicly stated"
+    },
+    "otherLocations": [
+      "Fully remote team within the United Kingdom"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent · privately held",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small team · exact count not disclosed",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Console",
+      "Multiplayer",
+      "Sports",
+      "Racing"
+    ],
+    "popularGames": [
+      {
+        "title": "Turbo Golf Racing",
+        "appId": null
+      },
+      {
+        "title": "When Ski Lifts Go Wrong",
+        "appId": null
+      },
+      {
+        "title": "Stuck Together",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://hugecalf.com/careers",
+      "https://jobs.hugecalf.com/speculative-application?src=hugecalf.com"
+    ],
+    "applicationLocation": "Fully remote · UK only"
+  },
+  "Havoc Games": {
+    "description": "Independent Indian game studio building WEX, a competitive multiplayer game.",
+    "headquarters": {
+      "city": null,
+      "country": "India",
+      "countryCode": "IN",
+      "label": "HQ · city not publicly stated"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Mobile",
+      "Competitive multiplayer",
+      "Action"
+    ],
+    "popularGames": [
+      {
+        "title": "WEX",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://havocgames.co/",
+      "https://havocgames.co/careers"
+    ],
+    "applicationLocation": "India · general-application location and remote eligibility not stated"
+  },
+  "Sports Interactive": {
+    "description": "London-based SEGA game studio behind the Football Manager series.",
+    "headquarters": {
+      "city": "Stratford, London",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Subsidiary"
+    ],
+    "ownership": "Wholly owned subsidiary of SEGA Europe",
+    "parentCompany": "SEGA Europe",
+    "industryScale": "AAA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Sports simulation",
+      "Football management"
+    ],
+    "popularGames": [
+      {
+        "title": "Football Manager series",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.sigames.com/",
+      "https://sega.wd3.myworkdayjobs.com/SEGA_Careers/job/Greater-London-E15-2GW/Senior-Graphics-Engineer--Speculative-Application-_JR100190"
+    ],
+    "applicationLocation": "East London · hybrid 2–3 days in studio; remote by exception"
+  },
+  "Q104636206": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": null,
+      "country": "Not stated",
+      "countryCode": "US",
+      "label": "Country · Wikidata"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.wikidata.org/entity/Q104636206",
+      "https://www.serenityforge.com/"
+    ],
+    "applicationLocation": "Not specified · HQ shown as reference"
+  },
+  "KORION": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": null,
+      "country": "Not stated",
+      "countryCode": "DE",
+      "label": "Country · Wikidata"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.wikidata.org/entity/Q101069308",
+      "https://www.korion.de/"
+    ],
+    "applicationLocation": "Not specified · HQ shown as reference"
+  },
+  "Ghost Ship Games": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": null,
+      "country": "Not stated",
+      "countryCode": "DK",
+      "label": "Country · Wikidata"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.wikidata.org/entity/Q105080681",
+      "https://www.ghostship.dk/"
+    ],
+    "applicationLocation": "Not specified · HQ shown as reference"
+  },
+  "Q105687032": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": null,
+      "country": "Not stated",
+      "countryCode": "US",
+      "label": "Country · Wikidata"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.wikidata.org/entity/Q105687032",
+      "https://www.velanstudios.com/"
+    ],
+    "applicationLocation": "Not specified · HQ shown as reference"
+  },
+  "Nomad Games": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": null,
+      "country": "Not stated",
+      "countryCode": "GB",
+      "label": "Country · Wikidata"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.wikidata.org/entity/Q96612282",
+      "https://nomadgames.co.uk/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "10 Chambers": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Stockholm",
+      "country": "Sweden",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1&state=&type=",
+      "https://10chambers.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "1000 Orks": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Osnabruck, Saxony",
+      "country": "Germany",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1&state=&type=",
+      "https://1000orks.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "10tons": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Tampere, Pirkanmaa",
+      "country": "Finland",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1&state=&type=",
+      "https://10tons.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "1939 Games": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Reykjavik",
+      "country": "Iceland",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Mobile"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1&state=&type=",
+      "https://1939games.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  }
+,
+  "AlterEyes": {
+    "description": "Belgian XR and game studio creating VR and AR games, immersive entertainment and interactive learning and business experiences.",
+    "headquarters": {
+      "city": "Hasselt",
+      "country": "Belgium",
+      "countryCode": "BE",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "XR venture studio"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Not disclosed",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "VR",
+      "AR",
+      "Mixed Reality",
+      "PC",
+      "Mobile",
+      "XR"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://altereyes.com/about-us/",
+      "https://altereyes.com/jobs/"
+    ],
+    "applicationLocation": "Not stated · HQ shown as reference",
+    "reachHighlights": "Award-winning game studio within the XR ecosystem; develops immersive games and learning, marketing and business experiences."
+  },
+  "The Knights of U": {
+    "description": "Polish external game-development studio delivering Unity and Unreal co-development, porting, optimization, technical art, UX/UI and remastering, alongside original desktop and console projects.",
+    "headquarters": {
+      "city": "Wrocław",
+      "country": "Poland",
+      "countryCode": "PL",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Porting"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Not classified",
+    "teamSize": "65+ experts onboard (studio-reported)",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "PC",
+      "Console",
+      "Unity",
+      "Unreal Engine",
+      "Co-development",
+      "Porting",
+      "Technical Art",
+      "Optimization",
+      "Remastering"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://theknightsofu.com/",
+      "https://theknightsofu.com/career/",
+      "https://theknightsofu.com/about-us/"
+    ],
+    "applicationLocation": "Wrocław office · office, hybrid or fully remote options stated; applicant geography not stated",
+    "reachHighlights": "65+ experts onboard, 120+ completed projects and 100+ satisfied clients (studio-reported). Formerly The Knights of Unity."
   }
 }
