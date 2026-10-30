@@ -300,8 +300,18 @@ def canonical_url(value: str) -> str | None:
             pass
         scheme = "https"
         netloc = host
-        path = parsed.path or "/"
-        return urllib.parse.urlunsplit((scheme, netloc, path, parsed.query, ""))
+        # HTML attributes and CMS-generated links often contain literal spaces or
+        # Unicode characters. Percent-encode URL components before passing them to
+        # urllib; otherwise one malformed image/link can abort an entire discovery run.
+        path = urllib.parse.quote(
+            parsed.path or "/",
+            safe="/:@!$&'()*+,;=-._~%",
+        )
+        query = urllib.parse.quote(
+            parsed.query,
+            safe="/?:@!$&'()*+,;=-._~%[]",
+        )
+        return urllib.parse.urlunsplit((scheme, netloc, path, query, ""))
     except (ValueError, AttributeError):
         return None
 
