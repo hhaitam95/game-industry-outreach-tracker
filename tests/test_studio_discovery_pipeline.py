@@ -21,6 +21,10 @@ class DiscoveryParsingTests(unittest.TestCase):
     def test_base_domain_handles_common_compound_suffix(self):
         self.assertEqual(discovery.base_domain("jobs.studio.co.uk"), "studio.co.uk")
         self.assertEqual(discovery.base_domain("careers.studio.com"), "studio.com")
+        self.assertEqual(discovery.base_domain("www.team.itch.io"), "team.itch.io")
+        self.assertTrue(discovery.same_site("https://www.team.itch.io", "https://team.itch.io/careers"))
+        self.assertFalse(discovery.same_site("https://team.itch.io", "https://another-team.itch.io"))
+        self.assertEqual(discovery.base_domain("www.team.github.io"), "team.github.io")
         self.assertTrue(discovery.same_site("https://www.studio.co.uk", "https://jobs.studio.co.uk"))
 
     def test_page_parser_extracts_visible_text_links_and_forms(self):
