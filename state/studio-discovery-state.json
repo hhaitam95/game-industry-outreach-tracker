@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-30T18:10:16.331973+00:00",
+  "updated_at": "2026-10-30T18:33:52.230Z",
   "feed_cursors": {
     "wikidata_video_game_developers": "Q106171121",
     "wikidata_game_developer_credits": "Q99297811",
@@ -11,7 +11,7 @@
     "wikidata_video_game_developers": false,
     "wikidata_game_developer_credits": false,
     "wikidata_video_game_companies": true,
-    "gamedevmap": true
+    "gamedevmap": false
   },
   "feed_index": 2,
   "cycle": 1,
