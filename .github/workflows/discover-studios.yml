@@ -1,6 +1,13 @@
 name: Studio speculative-route discovery
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/discover-studios.yml"
+      - "scripts/discover_speculative_studios.py"
+      - "src/data/speculative-route-directory.json"
+      - "src/data/studio-profiles.json"
   schedule:
     - cron: "17 * * * *"
   workflow_dispatch:
