@@ -11,7 +11,19 @@ A small personal tool for finding game studios that accept speculative applicati
 
 A generic careers page, an advertised vacancy or an aggregator claim is not enough. Studios without a qualifying route are simply left out.
 
-Studios whose games or ordinary work involve pornography, adult-only games, erotic or sexually explicit content must be excluded, even when they otherwise have a qualifying open-application route. Also exclude routes that ask applicants to confirm comfort with that content. If a studio's content suitability is unclear, leave it out pending manual review. This is a sexual-content suitability rule, not a blanket exclusion of mature-rated games generally.
+## Content suitability
+
+Exclude studios whose game portfolio, core business, or the actual work being recruited for is materially focused on adult, vice-oriented, or age-restricted sectors, including:
+
+- Pornography, erotica, adult-only sexual games, sexually explicit entertainment, or sexual services.
+- Gambling, betting, casinos, sportsbooks, lotteries, poker/slots or other wagering products, including simulated/social-casino games.
+- Recreational drugs, cannabis, marijuana or products primarily promoting or commercializing drug use.
+- Alcohol, tobacco, nicotine, vaping or similar age-restricted products.
+- Closely related adult-entertainment or vice industries.
+
+This applies even when the studio has a legitimate speculative-application route. Exclude a studio if these sectors are a meaningful part of its portfolio/business, or if the specific project or role is for one of them. Also exclude application processes that ask applicants to confirm comfort with such content. When the studio's portfolio, business model or project content is unclear, do not publish it until a manual review resolves the uncertainty.
+
+Do not treat a mainstream studio as disqualified solely because a general-audience game contains incidental fictional references to alcohol, drugs, gambling or mature themes. The exclusion is for studios, products, projects or roles materially centered on these sectors—not passing depiction in an otherwise mainstream game.
 
 ## Website
 
