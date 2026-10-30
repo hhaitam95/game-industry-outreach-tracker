@@ -53,8 +53,8 @@
     "ownership": "Independent",
     "parentCompany": null,
     "industryScale": "Indie / AA",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
+    "teamSize": "Over 120 across the UK (studio-reported)",
+    "teamSizeAsOf": "2026-10",
     "focus": [
       "PC",
       "Console",
@@ -1116,7 +1116,8 @@
     ],
     "applicationLocation": "Location not specified · use HQ as reference",
     "profileSources": [
-      "https://thirdkindgames.com/about/"
+      "https://thirdkindgames.com/about/",
+      "https://thirdkindgames.com/careers/speculative-application/"
     ],
     "reachHighlights": "AAA co-development credits include Fable, Forza Horizon, Sea of Thieves and Hearthstone; part of Virtuos."
   },

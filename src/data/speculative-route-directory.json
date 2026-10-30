@@ -2112,13 +2112,14 @@
     "name": "Third Kind Games",
     "country": "United Kingdom",
     "websiteUrl": "https://thirdkindgames.com/",
-    "applicationUrl": "https://thirdkindgames.com/careers/speculative-application/",
+    "applicationUrl": "https://thirdkindgames.careers.hibob.com/jobs/dad51ee2-0b6e-4638-8b3e-7082d462202c/apply",
     "evidenceUrl": "https://thirdkindgames.com/careers/speculative-application/",
-    "notes": "Official careers page asks applicants to send their CV and details as a speculative application when no current role fits.",
-    "checkedAt": "2026-10-29",
+    "notes": "Official Speculative Application page invites CVs and details when no current role fits, and its Apply Now link opens the employer-managed HiBob application form. The page also provides the recruitment email hello@thirdkindgames.com. Location/remote eligibility is not stated.",
+    "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
+        "ats",
         "email"
       ],
       "workModel": "not_stated",
@@ -2126,8 +2127,8 @@
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-27"
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
