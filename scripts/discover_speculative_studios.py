@@ -140,6 +140,7 @@ DOMAIN_SUFFIXES = {
 }
 
 ROBOTS_CACHE: dict[str, urllib.robotparser.RobotFileParser] = {}
+PUBLIC_HOST_CACHE: dict[str, bool] = {}
 LAST_REQUEST_BY_HOST: dict[str, float] = {}
 
 
@@ -293,24 +294,21 @@ def validate_public_host(host: str) -> bool:
     host = host.lower().strip(".")
     if not host or host == "localhost" or host.endswith((".local", ".internal", ".invalid", ".test")):
         return False
+    if host in PUBLIC_HOST_CACHE:
+        return PUBLIC_HOST_CACHE[host]
     try:
         address = ipaddress.ip_address(host)
-        return address.is_global
+        allowed = address.is_global
     except ValueError:
-        pass
-    try:
-        addresses = socket.getaddrinfo(host, 443, type=socket.SOCK_STREAM)
-    except OSError:
-        return False
-    if not addresses:
-        return False
-    for entry in addresses:
         try:
-            if not ipaddress.ip_address(entry[4][0]).is_global:
-                return False
-        except ValueError:
-            return False
-    return True
+            addresses = socket.getaddrinfo(host, 443, type=socket.SOCK_STREAM)
+            allowed = bool(addresses) and all(
+                ipaddress.ip_address(entry[4][0]).is_global for entry in addresses
+            )
+        except (OSError, ValueError):
+            allowed = False
+    PUBLIC_HOST_CACHE[host] = allowed
+    return allowed
 
 
 class SafeRedirectHandler(urllib.request.HTTPRedirectHandler):
@@ -323,8 +321,10 @@ class SafeRedirectHandler(urllib.request.HTTPRedirectHandler):
         target = canonical_url(urllib.parse.urljoin(req.full_url, newurl))
         if not target:
             raise urllib.error.HTTPError(req.full_url, code, "Unsafe redirect rejected", headers, fp)
+        target_host = urllib.parse.urlsplit(target).hostname or ""
+        if not validate_public_host(target_host):
+            raise urllib.error.HTTPError(req.full_url, code, "Non-public redirect target rejected", headers, fp)
         if not same_site(self.initial_url, target):
-            target_host = urllib.parse.urlsplit(target).hostname or ""
             if not (self.allowed_external and is_ats_host(target_host)):
                 raise urllib.error.HTTPError(req.full_url, code, "Cross-site redirect rejected", headers, fp)
         return super().redirect_request(req, fp, code, msg, headers, target)
@@ -801,7 +801,7 @@ def process_candidate_queue(
     names, domains = existing_indexes(studios)
     pending = [
         candidate for candidate in state["candidates"].values()
-        if candidate.get("status") in {"queued", "retry"}
+        if candidate.get("status") in {"queued", "retry", "no_route", "needs_review"}
         and (not candidate.get("next_check_at") or candidate["next_check_at"] <= iso_date())
     ]
     pending.sort(key=lambda candidate: candidate.get("discovered_at") or "")
@@ -950,12 +950,13 @@ def run_pipeline(
     max_candidate_checks: int,
     route_check_count: int,
     root: Path = ROOT,
+    state_path: Path | None = None,
     page_fetcher: Callable[[str, bool], FetchResult] = fetch_url,
     source_fetcher: Callable[[str, str, int], list[dict[str, str]]] = fetch_wikidata_batch,
 ) -> dict[str, Any]:
     studios_path = root / "src/data/speculative-route-directory.json"
     profiles_path = root / "src/data/studio-profiles.json"
-    state_path = root / "state/studio-discovery-state.json"
+    state_path = state_path or (root / "state/studio-discovery-state.json")
     studios = read_json(studios_path, [])
     profiles = read_json(profiles_path, {})
     state = load_state(state_path) if state_path.exists() else empty_state()
@@ -1023,6 +1024,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-source-pages", type=int, default=None)
     parser.add_argument("--max-candidate-checks", type=int, default=None)
     parser.add_argument("--route-check-count", type=int, default=8)
+    parser.add_argument("--state-file", type=Path, default=None, help="Optional durable state file outside the public website branch.")
     return parser.parse_args()
 
 
@@ -1044,6 +1046,7 @@ def main() -> int:
         max_source_pages=pages,
         max_candidate_checks=checks,
         route_check_count=args.route_check_count,
+        state_path=args.state_file,
     )
     print("StudioScout speculative-route discovery")
     for key, value in result.items():
