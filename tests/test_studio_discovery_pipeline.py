@@ -86,10 +86,18 @@ class DiscoveryParsingTests(unittest.TestCase):
             "Our open application form is available here.",
             "Submit a general application even if there is no suitable role.",
             "We would love to hear from you even if you do not see a matching position.",
+            "Candidatura espontánea",
+            "Open sollicitatie",
+            "Avoin hakemus",
+            "Uopfordret ansøgning",
+            "Åpen søknad",
         ]
         for text in cases:
             with self.subTest(text=text):
                 self.assertIsNotNone(discovery.positive_route_match(text))
+        for phrase in ["Candidatura espontánea", "Open sollicitatie", "Avoin hakemus", "Uopfordret ansøgning", "Åpen søknad"]:
+            with self.subTest(route_type=phrase):
+                self.assertEqual(discovery.route_type_for(phrase), "spontaneous")
 
     def test_negative_route_language_overrides_positive_ambiguity(self):
         text = (
