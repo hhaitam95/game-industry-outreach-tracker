@@ -4773,49 +4773,12 @@
     "reachHighlights": "Major RPG portfolio includes Fallout: New Vegas, Pillars of Eternity, The Outer Worlds and Avowed."
   },
   "Ocellus": {
-    "description": "Lyon-based game development and art-production studio providing stylized game art and animation services while building its own games teams and projects.",
+    "description": "Lyon-based game group combining original game development with stylized art, animation and game-development services through Ocellus Games and Ocellus Services. Its current careers page lists Ocellus Games positions in Lyon and an Ocellus Services realtime VFX role in Lyon / Remote.",
     "headquarters": {
       "city": "Lyon",
       "country": "France",
       "countryCode": "FR",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Art production",
-      "Animation services"
-    ],
-    "ownership": "Not disclosed",
-    "parentCompany": null,
-    "industryScale": "Not disclosed",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "Game development",
-      "Art production",
-      "Animation",
-      "Stylized games",
-      "PC",
-      "Console",
-      "Mobile"
-    ],
-    "popularGames": [],
-    "profileSources": [
-      "https://ocellus-studio.com/careers",
-      "https://ocellus-studio.com/contact",
-      "https://ocellus-studio.com/games"
-    ],
-    "applicationLocation": "Lyon, France · role-specific arrangements not stated",
-    "reachHighlights": "Ocellus Games is building an independent game-development team alongside Ocellus Services' art-production work."
-  },
-  "Ocellus Studio": {
-    "description": "Lyon-based game group combining original game development with large-scale stylized art, animation and game-development services for major publishers.",
-    "headquarters": {
-      "city": "Lyon",
-      "country": "France",
-      "countryCode": "FR",
-      "label": "HQ"
+      "label": "Studio location · official Careers page"
     },
     "otherLocations": [
       "Ocellus North · Northern France"
@@ -4826,28 +4789,33 @@
       "Art services",
       "Animation"
     ],
-    "ownership": "Privately held · Ocellus Group",
-    "parentCompany": "Ocellus Group",
-    "industryScale": "AA / AAA services",
-    "teamSize": "2–10 at Ocellus Games; 51–200 at Ocellus Services (LinkedIn ranges)",
-    "teamSizeAsOf": "2026",
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "AA / AAA co-development and art services · editorial indication",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
     "focus": [
+      "Game development",
       "Game art",
       "Animation",
       "Cinematics",
+      "Realtime VFX",
+      "Co-development",
       "Live operations",
-      "Co-development"
+      "PC",
+      "Console",
+      "Mobile"
     ],
     "popularGames": [
       {
         "title": "Clash Royale",
         "appId": null,
-        "stage": "Art/live-operations services"
+        "stage": "Art / live-operations services"
       },
       {
         "title": "Fortnite",
         "appId": null,
-        "stage": "Art and creative services"
+        "stage": "Art / creative services"
       },
       {
         "title": "Smurfs: Dreams",
@@ -4860,12 +4828,12 @@
         "stage": "Original studio project"
       }
     ],
-    "applicationLocation": "Lyon / Ocellus North · some roles may allow remote from Lyon",
-    "reachHighlights": "Ocellus Services reports work across 56 games, 3B+ downloads and 245M daily active users on partner live games; these are cumulative partner-work reach figures, not studio-owned players.",
+    "applicationLocation": "Lyon, France · one Ocellus Services role is listed Lyon / Remote; Ocellus Games roles are Lyon-based; the spontaneous route does not state separate applicant-country eligibility",
+    "reachHighlights": "The official Careers page separates Ocellus Services and Ocellus Games roles, with roles listed in Lyon and one Lyon / Remote realtime VFX opening. It also explicitly invites spontaneous applications.",
     "profileSources": [
       "https://ocellus-studio.com/about",
       "https://ocellus-studio.com/services",
-      "https://www.linkedin.com/company/ocellus-games/"
+      "https://ocellus-studio.com/careers"
     ]
   },
   "Octocube Games": {
@@ -5995,45 +5963,6 @@
     ],
     "applicationLocation": "Rennes · regular on-site presence expected; role-dependent flexibility",
     "reachHighlights": "Focused independent studio building UNRECORD with gameplay-first development and small specialized teams."
-  },
-  "Studios DRAMA / UNRECORD": {
-    "description": "Independent Rennes studio making UNRECORD, a gameplay-first tactical FPS built around high-fidelity realism and systemic design.",
-    "headquarters": {
-      "city": "Rennes",
-      "country": "France",
-      "countryCode": "FR",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "AA",
-    "teamSize": "Small specialized team · exact count not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "FPS",
-      "Unreal Engine 5",
-      "Tactical",
-      "Realism"
-    ],
-    "popularGames": [
-      {
-        "title": "UNRECORD",
-        "appId": null,
-        "stage": "In development"
-      }
-    ],
-    "applicationLocation": "Rennes · regular on-site presence expected; role-dependent flexibility",
-    "reachHighlights": "Studio describes UNRECORD as an AA-ambition project.",
-    "profileSources": [
-      "https://studiosdrama.com/career/",
-      "https://studiosdrama.com/unsolicited-application/"
-    ]
   },
   "SumiGames Studio": {
     "description": "Small, senior game-development and co-development studio working on mobile, PC, multiplayer, XR and Web3 projects for itself and partner teams.",
