@@ -5452,5 +5452,44 @@
     ],
     "applicationLocation": "Gundelfingen near Freiburg, Germany · remote/applicant-country eligibility not stated",
     "reachHighlights": "Official studio describes M.O.O.D.S. as a 3D action roguelite and Memorrha as a first-person puzzle adventure; it also develops games and interactive applications for major consoles, PC and XR."
+  },
+  "Cyberborz Interactive": {
+    "description": "Independent game-development studio founded in 2025, building large-scale multiplayer games with a focus on real-time destruction, squad cooperation and narrative.",
+    "headquarters": {
+      "city": null,
+      "country": "Not stated",
+      "countryCode": "",
+      "label": "HQ not disclosed"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small international team · exact count not disclosed",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Unreal Engine 5",
+      "Multiplayer",
+      "First-person shooter",
+      "Destruction physics",
+      "Squad-based gameplay"
+    ],
+    "popularGames": [
+      {
+        "title": "Battlecontact",
+        "appId": null,
+        "stage": "In development · closed alpha"
+      }
+    ],
+    "profileSources": [
+      "https://cyberborz.com/"
+    ],
+    "applicationLocation": "Europe-focused remote-friendly roles · precise HQ and applicant-country eligibility not stated",
+    "reachHighlights": "Official site reports more than 5,000 players joined Battlecontact's second closed alpha in April 2026; its hiring page invites spontaneous applications by email."
   }
 }
