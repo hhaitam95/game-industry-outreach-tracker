@@ -1013,6 +1013,28 @@
     }
   },
   {
+    "name": "Capcom Pictures",
+    "country": "United States",
+    "websiteUrl": "https://capcomusa.com/",
+    "applicationUrl": "https://app.jobvite.com/",
+    "evidenceUrl": "https://jobs.jobvite.com/capcomusa",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Carbonated",
     "country": "United States",
     "websiteUrl": "https://www.carbonated.com/",
@@ -1663,6 +1685,73 @@
     }
   },
   {
+    "name": "Embers",
+    "country": "France",
+    "websiteUrl": "https://embers.games/",
+    "applicationUrl": "https://embers.games/",
+    "evidenceUrl": "https://embers.games/",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Fakefish",
+    "country": "Finland",
+    "websiteUrl": "https://www.fakefishgames.com/",
+    "applicationUrl": "https://www.fakefishgames.com/jobs/open-application",
+    "evidenceUrl": "https://www.fakefishgames.com/jobs",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Fast Travel Games",
+    "country": "Sweden",
+    "websiteUrl": "https://www.fasttravelgames.com/",
+    "applicationUrl": "https://www.fasttravelgames.com/career",
+    "evidenceUrl": "https://www.fasttravelgames.com/career",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Fawkes Games",
     "country": "Bulgaria",
     "websiteUrl": "https://fawkesgames.com/",
@@ -1687,6 +1776,72 @@
     }
   },
   {
+    "name": "Flow Studio",
+    "country": "Australia",
+    "websiteUrl": "https://flowgamestudio.com/",
+    "applicationUrl": "https://www.flowgamestudio.com/opportunities",
+    "evidenceUrl": "https://www.flowgamestudio.com/opportunities",
+    "notes": "Official studio-controlled page explicitly invites discipline specific applications. Evidence: Expression of Interest. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "discipline_specific",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Fool’s Theory",
+    "country": "Poland",
+    "websiteUrl": "https://foolstheory.com/",
+    "applicationUrl": "https://www.teamtailor.com/?utm_campaign=poweredby&utm_content=careers.foolstheory.com&utm_medium=referral&utm_source=career-site",
+    "evidenceUrl": "https://careers.foolstheory.com/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open Applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Formation Games",
+    "country": "England",
+    "websiteUrl": "https://formation.games/",
+    "applicationUrl": "https://formation.games/careers",
+    "evidenceUrl": "https://formation.games/careers",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Frima Studio",
     "country": "Canada",
     "websiteUrl": "https://frimastudio.com/",
@@ -1708,6 +1863,28 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-27"
+    }
+  },
+  {
+    "name": "Full Fat Productions",
+    "country": "England",
+    "websiteUrl": "https://www.full-fat.com/",
+    "applicationUrl": "https://www.full-fat.com/jobs/",
+    "evidenceUrl": "https://www.full-fat.com/jobs/",
+    "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: speculative application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
@@ -1755,6 +1932,50 @@
     }
   },
   {
+    "name": "Funny Games",
+    "country": "Italy",
+    "websiteUrl": "https://funnytales.us/",
+    "applicationUrl": "https://funnytales.us/contact-us/",
+    "evidenceUrl": "https://funnytales.us/contact-us/",
+    "notes": "Official studio-controlled page explicitly invites spontaneous applications. Evidence: Spontaneous application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Futurats",
+    "country": "Italy",
+    "websiteUrl": "https://futurats.com/",
+    "applicationUrl": "https://futurats.com/contact-us/",
+    "evidenceUrl": "https://futurats.com/contact-us/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Futureplay Games",
     "country": "Finland",
     "websiteUrl": "https://www.futureplaygames.com/",
@@ -1798,6 +2019,73 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-27"
+    }
+  },
+  {
+    "name": "Game Boost Sweden",
+    "country": "Sweden",
+    "websiteUrl": "https://www.gameboost.se/",
+    "applicationUrl": "https://www.teamtailor.com/?utm_campaign=poweredby&utm_content=www.gameboost.se&utm_medium=referral&utm_source=career-site",
+    "evidenceUrl": "https://www.gameboost.se/jobs",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "ats",
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Game Tailors",
+    "country": "Netherlands",
+    "websiteUrl": "https://www.gametailors.com/",
+    "applicationUrl": "https://www.gametailors.com/over-ons/vacatures",
+    "evidenceUrl": "https://www.gametailors.com/over-ons/vacatures",
+    "notes": "Official studio-controlled page explicitly invites spontaneous applications. Evidence: Open sollicitatie. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "GauravGo Games Technologies",
+    "country": "India",
+    "websiteUrl": "https://gauravgo.com/",
+    "applicationUrl": "https://www.gauravgo.com/careers",
+    "evidenceUrl": "https://www.gauravgo.com/careers",
+    "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: speculative application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
@@ -1878,6 +2166,50 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Gold Town Games",
+    "country": "Sweden",
+    "websiteUrl": "https://goldtowngames.com/en/",
+    "applicationUrl": "https://goldtowngames.com/en/job-opportunities/",
+    "evidenceUrl": "https://goldtowngames.com/en/job-opportunities/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Greensky Games",
+    "country": "Remote",
+    "websiteUrl": "https://www.greensky.games/",
+    "applicationUrl": "https://www.greensky.games/work",
+    "evidenceUrl": "https://www.greensky.games/work",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
     }
   },

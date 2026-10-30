@@ -160,7 +160,8 @@
     ],
     "companyType": [
       "Developer",
-      "Independent"
+      "Independent",
+      "Mobile"
     ],
     "ownership": "Privately held · ownership details not disclosed",
     "parentCompany": null,
@@ -1816,7 +1817,8 @@
     "companyType": [
       "Developer",
       "Publisher",
-      "Independent"
+      "Independent",
+      "Developer and Publisher"
     ],
     "ownership": "Independent · ownership details not disclosed",
     "parentCompany": null,
@@ -1853,10 +1855,91 @@
       "https://www.byterockers.games/kontakt",
       "https://www.byterockers.games/praktikum-byterockersgames",
       "https://www.byterockers.games/games",
-      "https://store.steampowered.com/publisher/ByteRockersGames/"
+      "https://store.steampowered.com/publisher/ByteRockersGames/",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1301&state=&type=",
+      "https://byterockers.games/"
     ],
     "applicationLocation": "Berlin, Germany · the explicit speculative route is for internships; 18+ requirement applies to interns",
     "reachHighlights": "ByteRockers' says it was founded in 2008 and has been led by CEO Maik Reichelt since 2023; it describes itself as an indie developer and publisher."
+  },
+  "Campfire Cabal": {
+    "description": "Copenhagen-based game-development studio wholly owned by THQ Nordic, focused on narrative-led, turn-based historical role-playing games for PC. Established in 2022 by veterans of the Expeditions series; after a difficult 2023 restructuring period, THQ Nordic confirmed in May 2025 that the studio survived and had returned to full production. Its current Expeditions: Samurai has reached Early Access.",
+    "headquarters": {
+      "city": "Copenhagen",
+      "country": "Denmark",
+      "countryCode": "DK",
+      "label": "Studio address · official website"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Role-playing games"
+    ],
+    "ownership": "Wholly owned by THQ Nordic",
+    "parentCompany": "THQ Nordic",
+    "industryScale": "Indie / AA · editorial indication",
+    "teamSize": "Compact development team; current exact headcount not disclosed",
+    "teamSizeAsOf": "2025-05",
+    "focus": [
+      "PC",
+      "Turn-based RPG",
+      "Historical",
+      "Narrative"
+    ],
+    "popularGames": [
+      {
+        "title": "Expeditions: Conquistador",
+        "appId": null
+      },
+      {
+        "title": "Expeditions: Viking",
+        "appId": null
+      },
+      {
+        "title": "Expeditions: Rome",
+        "appId": null
+      },
+      {
+        "title": "Expeditions: Samurai",
+        "appId": null,
+        "stage": "Early Access"
+      }
+    ],
+    "profileSources": [
+      "https://campfirecabal.com/",
+      "https://campfirecabal.com/jobs/",
+      "https://campfirecabal.com/frequently-asked-questions/",
+      "https://campfirecabal.com/still-alive/",
+      "https://thqnordic.com/news/we-didn-t-stop-the-fire-developer-campfire-cabal-still-alive-kicking",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1401&state=&type="
+    ],
+    "applicationLocation": "Copenhagen, Denmark · current unsolicited route does not specify applicant-country or remote eligibility",
+    "reachHighlights": "The 2023 closure announcement was superseded by the studio's May 2025 confirmation that a compact team had survived and resumed full production; the official homepage now promotes Expeditions: Samurai Early Access."
+  },
+  "Capcom Pictures": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Culver City, California",
+      "country": "United States",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1401&state=&type=",
+      "https://capcomusa.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "Carbonated": {
     "description": "Mobile game-development company founded in 2015 by industry veterans from Zynga, Electronic Arts and Blizzard. Carbonated describes its focus as hardcore player-versus-environment-versus-player games on phones, using AI to shape moment-to-moment gameplay. It has also developed Carbyne, a proprietary live-operations platform.",
@@ -1869,7 +1952,8 @@
     "otherLocations": [],
     "companyType": [
       "Developer",
-      "Mobile games"
+      "Mobile games",
+      "Mobile"
     ],
     "ownership": "Privately held · ownership details not disclosed",
     "parentCompany": null,
@@ -1886,7 +1970,8 @@
     "profileSources": [
       "https://www.carbonated.com/",
       "https://www.carbonated.com/job-listings",
-      "https://www.carbonated.com/jobs"
+      "https://www.carbonated.com/jobs",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1401&state=&type="
     ],
     "applicationLocation": "Applicant location and remote-work eligibility not stated",
     "reachHighlights": "The official site describes Carbonated's Carbyne platform as an in-house live-operations tool designed to modify game experiences through web-based tools."
@@ -1902,11 +1987,12 @@
     "otherLocations": [],
     "companyType": [
       "Developer",
-      "Game studio"
+      "Game studio",
+      "Online"
     ],
     "ownership": "Not publicly disclosed",
     "parentCompany": null,
-    "industryScale": "Not publicly disclosed",
+    "industryScale": "Mixed / Unclassified",
     "teamSize": "The studio has described a team of approximately 30–40 co-workers (company-reported); current exact count not confirmed",
     "teamSizeAsOf": "2026",
     "focus": [
@@ -1918,7 +2004,9 @@
     "profileSources": [
       "https://chiefrebel.com/about/",
       "https://jobs.chiefrebel.com/",
-      "https://jobs.chiefrebel.com/connect"
+      "https://jobs.chiefrebel.com/connect",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1501&state=&type=",
+      "https://chiefrebel.com/"
     ],
     "applicationLocation": "Stockholm, Sweden · applicant-country and remote eligibility not stated",
     "reachHighlights": "The studio's About page identifies its office as Sthlm 01 in central Stockholm; its Teamtailor Connect form lists roles including VFX Artist, Technical Artist, Animator, Game Designer and multiple programming disciplines."
@@ -1977,7 +2065,8 @@
     "companyType": [
       "Developer",
       "Mobile games",
-      "Publisher"
+      "Publisher",
+      "Mobile"
     ],
     "ownership": "Independent · ownership details not disclosed",
     "parentCompany": null,
@@ -2019,7 +2108,9 @@
     "profileSources": [
       "https://www.chimpworksgames.com/our-story/",
       "https://www.chimpworksgames.com/games/",
-      "https://www.chimpworksgames.com/contact-us"
+      "https://www.chimpworksgames.com/contact-us",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1501&state=&type=",
+      "https://www.chimpworksgames.com/"
     ],
     "applicationLocation": "Eindhoven, Netherlands · remote eligibility not stated",
     "reachHighlights": "The company reports 23 employees, 19 released games and more than 350 million total downloads across its portfolio."
@@ -2181,7 +2272,8 @@
     "profileSources": [
       "https://www.codenamered.nl/",
       "https://www.codenamered.nl/#join-us",
-      "https://www.dutchgamesassociation.nl/"
+      "https://www.dutchgamesassociation.nl/",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1701&state=&type="
     ],
     "applicationLocation": "The Hague, Netherlands · applicant-country and remote eligibility not stated",
     "reachHighlights": "The company reports a seed funding stage, three titles in development in the Arcflame universe and a closed-alpha debut title."
@@ -2220,7 +2312,9 @@
     ],
     "profileSources": [
       "https://www.coldsymmetry.com/jobs",
-      "https://www.coldsymmetry.com/"
+      "https://www.coldsymmetry.com/",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1701&state=&type=",
+      "https://coldsymmetry.com/"
     ],
     "applicationLocation": "Fully remote · the studio says candidates anywhere in the world may be considered",
     "reachHighlights": "The studio's official Jobs page explicitly states that all positions are fully remote and that international applicants may be considered."
@@ -2387,7 +2481,8 @@
     ],
     "profileSources": [
       "https://cuttingcornergames.com/",
-      "https://cuttingcornergames.com/careers/"
+      "https://cuttingcornergames.com/careers/",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1901&state=&type="
     ],
     "applicationLocation": "Linköping, Sweden · no confirmed speculative application or remote policy",
     "reachHighlights": "The official site describes Pistonica as its upcoming factory-automation game and frames the Careers link as a general contact invitation rather than an explicit hiring route."
@@ -2516,7 +2611,8 @@
       "https://cyborn.be/",
       "https://www.cyborn.be/job",
       "https://www.cyborn.be/game/hubris",
-      "https://www.cyborn.be/game/wall-town-wonders"
+      "https://www.cyborn.be/game/wall-town-wonders",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1901&state=&type="
     ],
     "applicationLocation": "Antwerp, Belgium · official Jobs page does not state remote or international eligibility",
     "reachHighlights": "Cyborn develops games and immersive experiences and operates an in-house motion-capture facility in Antwerp."
@@ -2671,6 +2767,78 @@
     ],
     "applicationLocation": "Montréal-specific application"
   },
+  "Double Eleven": {
+    "description": "Independent full-service game-development studio founded in 2009, with locations in the United Kingdom and Kuala Lumpur, Malaysia. Double Eleven works on original games, co-development, ports, live-service content and publishing.",
+    "headquarters": {
+      "city": "Middlesbrough",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "UK studio location · official company pages"
+    },
+    "otherLocations": [
+      "Kuala Lumpur, Malaysia"
+    ],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Co-development",
+      "Porting",
+      "Live operations",
+      "Developer and Publisher"
+    ],
+    "ownership": "Independent · company describes itself as an independent studio",
+    "parentCompany": null,
+    "industryScale": "AA / AAA co-development · editorial indication",
+    "teamSize": "Not publicly disclosed on the current pages reviewed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Mobile",
+      "Co-development",
+      "Porting",
+      "Live service",
+      "Publishing"
+    ],
+    "popularGames": [
+      {
+        "title": "Red Dead Redemption",
+        "appId": null,
+        "stage": "Development contribution"
+      },
+      {
+        "title": "Fallout 76",
+        "appId": null,
+        "stage": "Development contribution"
+      },
+      {
+        "title": "Minecraft Dungeons",
+        "appId": null,
+        "stage": "Development contribution"
+      },
+      {
+        "title": "Rust Console Edition",
+        "appId": null
+      },
+      {
+        "title": "RimWorld Console Edition",
+        "appId": null
+      },
+      {
+        "title": "Songbringer",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://double11.com/development/",
+      "https://double11.com/games/",
+      "https://double11.com/vacancies/",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=2301&state=&type=",
+      "https://www.double11.com/"
+    ],
+    "applicationLocation": "UK and Kuala Lumpur, Malaysia · use the corresponding location-specific Expression of Interest form",
+    "reachHighlights": "The company describes itself as an independent studio with more than 15 years of experience and a portfolio spanning co-development, live-service support, publishing and console editions."
+  },
   "EB Studio": {
     "description": "Malmö-based game-development and creative-technology studio building its first original game, Delve, alongside work in virtual production and interactive experiences. EB Studio describes itself as a small collaborative team working on large-production-quality projects.",
     "headquarters": {
@@ -2687,7 +2855,7 @@
     ],
     "ownership": "Not publicly disclosed",
     "parentCompany": null,
-    "industryScale": "Not publicly disclosed",
+    "industryScale": "Mixed / Unclassified",
     "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
     "focus": [
@@ -2708,7 +2876,8 @@
     "profileSources": [
       "https://www.ernstborg.studio/",
       "https://www.ernstborg.studio/career",
-      "https://www.ernstborg.studio/contact"
+      "https://www.ernstborg.studio/contact",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=2501&state=&type="
     ],
     "applicationLocation": "Malmö, Sweden · relocation help may be available; remote eligibility not stated",
     "reachHighlights": "The studio's Careers page invites open applications by email and describes its work as combining large-production experience with a small-team environment."
@@ -2724,7 +2893,8 @@
     "otherLocations": [],
     "companyType": [
       "Developer",
-      "AAA development"
+      "AAA development",
+      "Developer and Publisher"
     ],
     "ownership": "Part of Embracer Group",
     "parentCompany": "Embracer Group",
@@ -2768,10 +2938,50 @@
     "profileSources": [
       "https://www.eidosmontreal.com/",
       "https://www.eidosmontreal.com/careers/",
-      "https://www.eidosmontreal.com/news/tips-for-your-application/"
+      "https://www.eidosmontreal.com/news/tips-for-your-application/",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=2501&state=&type="
     ],
     "applicationLocation": "Montréal, Canada · work-from-home options are role-specific; spontaneous application channel needs confirmation",
     "reachHighlights": "The official application advice article explicitly discusses spontaneous applications, but the current Careers page exposes only individual vacancies; the directory route is paused until a general submission path is published."
+  },
+  "Electric Square": {
+    "description": "Game-development and co-development studio with bases in the United Kingdom and Malta. Electric Square works across game development and production, and is part of Keywords Studios.",
+    "headquarters": {
+      "city": "Brighton",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "UK office address · official Come Join Us page"
+    },
+    "otherLocations": [
+      "Malta"
+    ],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Game production"
+    ],
+    "ownership": "Part of Keywords Studios",
+    "parentCompany": "Keywords Studios",
+    "industryScale": "AA / AAA co-development · editorial indication",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Co-development",
+      "Game production",
+      "Multi-platform development"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://electricsquare.com/come-join-us/",
+      "https://electricsquare.com/come-join-us/open-positions/",
+      "https://www.keywordsstudios.com/",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=2501&state=&type=",
+      "https://electricsquare.com/"
+    ],
+    "applicationLocation": "UK and Malta bases; flexible work-from-home policy says candidates worldwide may be considered",
+    "reachHighlights": "The official careers page explicitly invites speculative applications and states that its flexible work-from-home policy allows it to consider great candidates from anywhere in the world."
   },
   "Ember Crows": {
     "description": "Independent London-based game studio developing ambitious narrative role-playing games, including a Slavic cyberpunk RPG.",
@@ -2813,6 +3023,81 @@
       "https://www.linkedin.com/company/ember-crows"
     ]
   },
+  "Embers": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Strasbourg, Grand Est",
+      "country": "France",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=2601&state=&type=",
+      "https://embers.games/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Fakefish": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Turku",
+      "country": "Finland",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=2801&state=&type=",
+      "https://www.fakefishgames.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Fast Travel Games": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Stockholm",
+      "country": "Sweden",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer and Publisher"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=2901&state=&type=",
+      "https://www.fasttravelgames.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
   "Fawkes Games": {
     "description": "Game operator and publisher running a portfolio of established online multiplayer and strategy titles.",
     "headquarters": {
@@ -2842,6 +3127,81 @@
       "https://fawkesgames.com/privacy"
     ],
     "applicationLocation": "Remote · worldwide stated"
+  },
+  "Flow Studio": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Brisbane, Queensland",
+      "country": "Australia",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3001&state=&type=",
+      "https://flowgamestudio.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Fool’s Theory": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Bielsko-Biala, Silesia",
+      "country": "Poland",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3101&state=&type=",
+      "https://foolstheory.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Formation Games": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "London",
+      "country": "England",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3101&state=&type=",
+      "https://formation.games/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "Frima Studio": {
     "description": "Québec-based full-service game developer and co-development partner working across original IP, licensed games and major publisher projects.",
@@ -2894,6 +3254,31 @@
       "https://frimastudio.com/"
     ],
     "reachHighlights": "Multi-platform co-development and full-production partner with work across Triangle Strategy, Fortnite and licensed/partner projects."
+  },
+  "Full Fat Productions": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Coventry, West Midlands",
+      "country": "England",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3201&state=&type=",
+      "https://www.full-fat.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "Funatic Games": {
     "description": "Early-stage independent game studio focused on physics-driven, replayable games and gameplay-first design.",
@@ -2972,6 +3357,56 @@
       "https://www.fundaygames.dk/about",
       "https://joinus.fundaygames.dk/jobs/7277761-unsolicited-application"
     ]
+  },
+  "Funny Games": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Imola, Emilia-Romagna",
+      "country": "Italy",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3201&state=&type=",
+      "https://funnytales.us/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Futurats": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Turin, Piedmont",
+      "country": "Italy",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3301&state=&type=",
+      "https://futurats.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "Futureplay Games": {
     "description": "Helsinki casual-game studio within Plarium, creating mobile games for global audiences.",
@@ -3064,6 +3499,81 @@
       "https://g7works.com/en/careers/",
       "https://g7works.com/"
     ]
+  },
+  "Game Boost Sweden": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Umea, Norrland",
+      "country": "Sweden",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3301&state=&type=",
+      "https://www.gameboost.se/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Game Tailors": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Delft, Zuid-Holland",
+      "country": "Netherlands",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Serious Games"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3401&state=&type=",
+      "https://www.gametailors.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "GauravGo Games Technologies": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Puri, Odisha",
+      "country": "India",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3601&state=&type=",
+      "https://gauravgo.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "Ghost Ship Games": {
     "description": "Copenhagen-based Danish game studio founded in 2016 by six veteran developers. Creator of Deep Rock Galactic and developer of the upcoming Deep Rock Galactic: Rogue Core.",
@@ -3187,6 +3697,56 @@
     ],
     "applicationLocation": "Stockholm / hybrid / optional remote · applicant-country eligibility not stated",
     "reachHighlights": "Official Open Application route connects candidates to all departments and future opportunities."
+  },
+  "Gold Town Games": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Skelleftea, Vasterbotten",
+      "country": "Sweden",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Mobile"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3701&state=&type=",
+      "https://goldtowngames.com/en/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Greensky Games": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Remote",
+      "country": "Remote",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Extended Reality (XR)"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3801&state=&type=",
+      "https://www.greensky.games/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "Havoc Games": {
     "description": "Independent Indian game studio building WEX, a competitive multiplayer game.",
@@ -4897,6 +5457,62 @@
       "https://sencorpgames.com/"
     ]
   },
+  "Serenity Forge": {
+    "description": "Boulder, Colorado-based video game development and publishing company working on original IP, co-development, publishing and physical-game merchandising. It also partners with US-based and international developers, publishers, vendors and clients.",
+    "headquarters": {
+      "city": "Boulder, Colorado",
+      "country": "United States",
+      "countryCode": "US",
+      "label": "HQ · official About page"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Co-development",
+      "Merchandising"
+    ],
+    "ownership": "Serenity Forge LLC · privately held",
+    "parentCompany": null,
+    "industryScale": "Indie / AA · editorial indication",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Publishing",
+      "Original IP",
+      "Co-development",
+      "Physical editions"
+    ],
+    "popularGames": [
+      {
+        "title": "Faraday Blues",
+        "appId": null
+      },
+      {
+        "title": "Vivarium",
+        "appId": null
+      },
+      {
+        "title": "Fractured Blooms",
+        "appId": null
+      },
+      {
+        "title": "Springs, Eternal",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.wikidata.org/entity/Q104636206",
+      "https://www.serenityforge.com/",
+      "https://serenityforge.com/about",
+      "https://serenityforge.com/careers",
+      "https://serenityforge.com/"
+    ],
+    "applicationLocation": "Boulder, Colorado, USA · applicant-country eligibility for open applications not stated",
+    "reachHighlights": "The company operates both dedicated development and publishing teams and explicitly accepts open applications for unlisted roles."
+  },
   "SOFTGAMES": {
     "description": "Berlin-based casual-game developer and publisher specializing in instant, HTML5, social and mobile games.",
     "headquarters": {
@@ -5801,6 +6417,71 @@
       "https://upliftgames.zendesk.com/hc/en-us/articles/39204397059604-Adopt-Me-FAQ"
     ]
   },
+  "Velan Studios": {
+    "description": "Independent game studio founded in Troy, New York in 2016 by brothers Karthik and Guha Bala. Velan builds original games and proprietary technology, with a second studio office in Toronto, Canada.",
+    "headquarters": {
+      "city": "Troy, New York",
+      "country": "United States",
+      "countryCode": "US",
+      "label": "Founded and original studio location · official About page"
+    },
+    "otherLocations": [
+      "Toronto, Ontario, Canada"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "AA · editorial indication",
+    "teamSize": "100+ team members across Troy and Toronto (company-reported)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Console",
+      "AR",
+      "VR",
+      "Mixed reality",
+      "Action",
+      "Sports"
+    ],
+    "popularGames": [
+      {
+        "title": "Star Fox",
+        "appId": null
+      },
+      {
+        "title": "Midnight Murder Club",
+        "appId": null
+      },
+      {
+        "title": "Bounce Arcade",
+        "appId": null
+      },
+      {
+        "title": "Hot Wheels Rift Rally",
+        "appId": null
+      },
+      {
+        "title": "Knockout City",
+        "appId": null
+      },
+      {
+        "title": "Mario Kart Live: Home Circuit",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.wikidata.org/entity/Q105687032",
+      "https://www.velanstudios.com/",
+      "https://www.velanstudios.com/about",
+      "https://www.velanstudios.com/careers",
+      "https://www.velanstudios.com/games"
+    ],
+    "applicationLocation": "Hybrid · Troy, New York, USA and Toronto, Ontario, Canada · three days in studio option",
+    "reachHighlights": "Velan reports more than 100 team members across its two offices and has shipped games with Nintendo, PlayStation and other partners."
+  },
   "Vertigo Games": {
     "description": "Multi-platform game publisher and developer based in Rotterdam, known for virtual-reality titles and third-party publishing.",
     "headquarters": {
@@ -6086,285 +6767,5 @@
       "https://zygle-games.com/careers"
     ],
     "applicationLocation": "Hybrid London or remote · remote-country eligibility not stated"
-  },
-  "Serenity Forge": {
-    "description": "Boulder, Colorado-based video game development and publishing company working on original IP, co-development, publishing and physical-game merchandising. It also partners with US-based and international developers, publishers, vendors and clients.",
-    "headquarters": {
-      "city": "Boulder, Colorado",
-      "country": "United States",
-      "countryCode": "US",
-      "label": "HQ · official About page"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Publisher",
-      "Co-development",
-      "Merchandising"
-    ],
-    "ownership": "Serenity Forge LLC · privately held",
-    "parentCompany": null,
-    "industryScale": "Indie / AA · editorial indication",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Console",
-      "Publishing",
-      "Original IP",
-      "Co-development",
-      "Physical editions"
-    ],
-    "popularGames": [
-      {
-        "title": "Faraday Blues",
-        "appId": null
-      },
-      {
-        "title": "Vivarium",
-        "appId": null
-      },
-      {
-        "title": "Fractured Blooms",
-        "appId": null
-      },
-      {
-        "title": "Springs, Eternal",
-        "appId": null
-      }
-    ],
-    "profileSources": [
-      "https://www.wikidata.org/entity/Q104636206",
-      "https://www.serenityforge.com/",
-      "https://serenityforge.com/about",
-      "https://serenityforge.com/careers",
-      "https://serenityforge.com/"
-    ],
-    "applicationLocation": "Boulder, Colorado, USA · applicant-country eligibility for open applications not stated",
-    "reachHighlights": "The company operates both dedicated development and publishing teams and explicitly accepts open applications for unlisted roles."
-  },
-  "Velan Studios": {
-    "description": "Independent game studio founded in Troy, New York in 2016 by brothers Karthik and Guha Bala. Velan builds original games and proprietary technology, with a second studio office in Toronto, Canada.",
-    "headquarters": {
-      "city": "Troy, New York",
-      "country": "United States",
-      "countryCode": "US",
-      "label": "Founded and original studio location · official About page"
-    },
-    "otherLocations": [
-      "Toronto, Ontario, Canada"
-    ],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "AA · editorial indication",
-    "teamSize": "100+ team members across Troy and Toronto (company-reported)",
-    "teamSizeAsOf": "2026",
-    "focus": [
-      "PC",
-      "Console",
-      "AR",
-      "VR",
-      "Mixed reality",
-      "Action",
-      "Sports"
-    ],
-    "popularGames": [
-      {
-        "title": "Star Fox",
-        "appId": null
-      },
-      {
-        "title": "Midnight Murder Club",
-        "appId": null
-      },
-      {
-        "title": "Bounce Arcade",
-        "appId": null
-      },
-      {
-        "title": "Hot Wheels Rift Rally",
-        "appId": null
-      },
-      {
-        "title": "Knockout City",
-        "appId": null
-      },
-      {
-        "title": "Mario Kart Live: Home Circuit",
-        "appId": null
-      }
-    ],
-    "profileSources": [
-      "https://www.wikidata.org/entity/Q105687032",
-      "https://www.velanstudios.com/",
-      "https://www.velanstudios.com/about",
-      "https://www.velanstudios.com/careers",
-      "https://www.velanstudios.com/games"
-    ],
-    "applicationLocation": "Hybrid · Troy, New York, USA and Toronto, Ontario, Canada · three days in studio option",
-    "reachHighlights": "Velan reports more than 100 team members across its two offices and has shipped games with Nintendo, PlayStation and other partners."
-  },
-  "Campfire Cabal": {
-    "description": "Copenhagen-based game-development studio wholly owned by THQ Nordic, focused on narrative-led, turn-based historical role-playing games for PC. Established in 2022 by veterans of the Expeditions series; after a difficult 2023 restructuring period, THQ Nordic confirmed in May 2025 that the studio survived and had returned to full production. Its current Expeditions: Samurai has reached Early Access.",
-    "headquarters": {
-      "city": "Copenhagen",
-      "country": "Denmark",
-      "countryCode": "DK",
-      "label": "Studio address · official website"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Role-playing games"
-    ],
-    "ownership": "Wholly owned by THQ Nordic",
-    "parentCompany": "THQ Nordic",
-    "industryScale": "Indie / AA · editorial indication",
-    "teamSize": "Compact development team; current exact headcount not disclosed",
-    "teamSizeAsOf": "2025-05",
-    "focus": [
-      "PC",
-      "Turn-based RPG",
-      "Historical",
-      "Narrative"
-    ],
-    "popularGames": [
-      {
-        "title": "Expeditions: Conquistador",
-        "appId": null
-      },
-      {
-        "title": "Expeditions: Viking",
-        "appId": null
-      },
-      {
-        "title": "Expeditions: Rome",
-        "appId": null
-      },
-      {
-        "title": "Expeditions: Samurai",
-        "appId": null,
-        "stage": "Early Access"
-      }
-    ],
-    "profileSources": [
-      "https://campfirecabal.com/",
-      "https://campfirecabal.com/jobs/",
-      "https://campfirecabal.com/frequently-asked-questions/",
-      "https://campfirecabal.com/still-alive/",
-      "https://thqnordic.com/news/we-didn-t-stop-the-fire-developer-campfire-cabal-still-alive-kicking"
-    ],
-    "applicationLocation": "Copenhagen, Denmark · current unsolicited route does not specify applicant-country or remote eligibility",
-    "reachHighlights": "The 2023 closure announcement was superseded by the studio's May 2025 confirmation that a compact team had survived and resumed full production; the official homepage now promotes Expeditions: Samurai Early Access."
-  },
-  "Double Eleven": {
-    "description": "Independent full-service game-development studio founded in 2009, with locations in the United Kingdom and Kuala Lumpur, Malaysia. Double Eleven works on original games, co-development, ports, live-service content and publishing.",
-    "headquarters": {
-      "city": "Middlesbrough",
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "label": "UK studio location · official company pages"
-    },
-    "otherLocations": [
-      "Kuala Lumpur, Malaysia"
-    ],
-    "companyType": [
-      "Developer",
-      "Publisher",
-      "Co-development",
-      "Porting",
-      "Live operations"
-    ],
-    "ownership": "Independent · company describes itself as an independent studio",
-    "parentCompany": null,
-    "industryScale": "AA / AAA co-development · editorial indication",
-    "teamSize": "Not publicly disclosed on the current pages reviewed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Console",
-      "Mobile",
-      "Co-development",
-      "Porting",
-      "Live service",
-      "Publishing"
-    ],
-    "popularGames": [
-      {
-        "title": "Red Dead Redemption",
-        "appId": null,
-        "stage": "Development contribution"
-      },
-      {
-        "title": "Fallout 76",
-        "appId": null,
-        "stage": "Development contribution"
-      },
-      {
-        "title": "Minecraft Dungeons",
-        "appId": null,
-        "stage": "Development contribution"
-      },
-      {
-        "title": "Rust Console Edition",
-        "appId": null
-      },
-      {
-        "title": "RimWorld Console Edition",
-        "appId": null
-      },
-      {
-        "title": "Songbringer",
-        "appId": null
-      }
-    ],
-    "profileSources": [
-      "https://double11.com/development/",
-      "https://double11.com/games/",
-      "https://double11.com/vacancies/"
-    ],
-    "applicationLocation": "UK and Kuala Lumpur, Malaysia · use the corresponding location-specific Expression of Interest form",
-    "reachHighlights": "The company describes itself as an independent studio with more than 15 years of experience and a portfolio spanning co-development, live-service support, publishing and console editions."
-  },
-  "Electric Square": {
-    "description": "Game-development and co-development studio with bases in the United Kingdom and Malta. Electric Square works across game development and production, and is part of Keywords Studios.",
-    "headquarters": {
-      "city": "Brighton",
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "label": "UK office address · official Come Join Us page"
-    },
-    "otherLocations": [
-      "Malta"
-    ],
-    "companyType": [
-      "Developer",
-      "Co-development",
-      "Game production"
-    ],
-    "ownership": "Part of Keywords Studios",
-    "parentCompany": "Keywords Studios",
-    "industryScale": "AA / AAA co-development · editorial indication",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Console",
-      "Co-development",
-      "Game production",
-      "Multi-platform development"
-    ],
-    "popularGames": [],
-    "profileSources": [
-      "https://electricsquare.com/come-join-us/",
-      "https://electricsquare.com/come-join-us/open-positions/",
-      "https://www.keywordsstudios.com/"
-    ],
-    "applicationLocation": "UK and Malta bases; flexible work-from-home policy says candidates worldwide may be considered",
-    "reachHighlights": "The official careers page explicitly invites speculative applications and states that its flexible work-from-home policy allows it to consider great candidates from anywhere in the world."
   }
 }
