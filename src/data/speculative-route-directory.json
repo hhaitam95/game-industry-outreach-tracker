@@ -608,6 +608,37 @@
     }
   },
   {
+    "name": "Couch Heroes",
+    "country": "Not stated",
+    "websiteUrl": "https://couch-heroes.com/",
+    "applicationUrl": "https://couch-heroes.com/careers/120029215",
+    "evidenceUrl": "https://couch-heroes.com/careers/",
+    "notes": "Official Careers page links an Open Application form for applicants who do not see a suitable listed role; the form collects role, portfolio, CV and cover letter and says unsolicited applications are kept on file for future roles. Couch Heroes describes itself as remote-first with a team across Europe, the USA and the Middle East. One page says founded in Greece and another describes it as based in the UK, so HQ/country is left unresolved.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote-first; team across Europe, USA and Middle East; applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Animation",
+        "UI/UX",
+        "Narrative",
+        "Gameplay engineering",
+        "DevOps",
+        "Game development"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "CraftiGames",
     "country": "United Arab Emirates",
     "websiteUrl": "https://www.craftigames.net/",
@@ -1363,16 +1394,16 @@
     "websiteUrl": "https://www.kuuasema.com/",
     "applicationUrl": "https://www.kuuasema.com/jobs/open-application/",
     "evidenceUrl": "https://www.kuuasema.com/jobs/open-application/",
-    "notes": "Official Open Application for Helsinki hybrid roles. Accepts EU/EEA/Swiss citizens or people already authorised to work in Finland; no visa sponsorship.",
+    "notes": "Official Open Application page invites applicants whose preferred role is not listed. Send a CV and work samples to jobs@kuuasema.com with subject 'Open Application'. Roles are Helsinki hybrid (three days in office); applicants must be EU/EEA/Swiss citizens or already hold a Finnish residence permit with work rights. No visa sponsorship; limited senior-role flexibility may occasionally be considered.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
-        "website_form"
+        "email"
       ],
       "workModel": "hybrid",
       "eligibleLocations": [
-        "Helsinki hybrid · no visa sponsorship"
+        "Helsinki, Finland · hybrid, three office days; EU/EEA/Swiss citizens or applicants already authorised to work in Finland; no visa sponsorship"
       ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
