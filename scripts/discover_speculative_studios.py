@@ -174,6 +174,13 @@ DOMAIN_SUFFIXES = {
     "co.jp", "co.kr", "com.br", "com.mx", "com.tr", "co.in", "co.za",
     "com.sg", "com.hk", "com.tw", "com.cn", "com.ar", "com.pl",
 }
+MULTI_TENANT_SUFFIXES = {
+    "github.io", "itch.io", "wixsite.com", "weebly.com", "webflow.io",
+    "wordpress.com", "blogspot.com", "tumblr.com", "netlify.app",
+    "vercel.app", "pages.dev", "herokuapp.com", "firebaseapp.com",
+    "squarespace.com", "cargo.site", "framer.website", "notion.site",
+    "godaddysites.com", "myportfolio.com",
+}
 
 ROBOTS_CACHE: dict[str, urllib.robotparser.RobotFileParser] = {}
 PUBLIC_HOST_CACHE: dict[str, bool] = {}
@@ -305,6 +312,10 @@ def base_domain(host: str) -> str:
         return host.lower().strip(".")
     suffix = ".".join(labels[-2:])
     compound = ".".join(labels[-3:])
+    if suffix in MULTI_TENANT_SUFFIXES and len(labels) >= 3:
+        # Preserve the tenant label so unrelated studio pages on shared hosting
+        # are not incorrectly deduplicated into one company.
+        return compound
     if suffix in DOMAIN_SUFFIXES and len(labels) >= 3:
         return compound
     return suffix
