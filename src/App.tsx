@@ -66,6 +66,9 @@ export default function App(){
   }
 
   function changeStatus(id:string,status:TrackerStatus){
+    const current=applications.find(item=>item.id===id);
+    if(!current)return;
+    if(status==="applied"&&current.status!=="applied"&&!window.confirm("Confirm that you have submitted an application to "+current.studioName+"?"))return;
     setApplications(previous=>previous.map(item=>item.id!==id?item:{
       ...item,status,updatedAt:new Date().toISOString(),
       appliedAt:status==="applied"?(item.appliedAt||new Date().toISOString()):item.appliedAt
