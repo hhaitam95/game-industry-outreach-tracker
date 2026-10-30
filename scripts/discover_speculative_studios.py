@@ -576,7 +576,7 @@ def verify_candidate_pages(
     application_host = urllib.parse.urlsplit(application_url).hostname or ""
     external_ats = not same_site(website, application_url) and is_ats_host(application_host)
     methods: list[str] = []
-    if evidence_page.has_form or application_url == evidence_page.url:
+    if evidence_page.has_form:
         methods.append("website_form")
     if any(href.lower().startswith("mailto:") for href, _ in evidence_page.links):
         methods.append("email")
