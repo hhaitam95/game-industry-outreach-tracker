@@ -1916,6 +1916,31 @@
     "applicationLocation": "Copenhagen, Denmark · current unsolicited route does not specify applicant-country or remote eligibility",
     "reachHighlights": "The 2023 closure announcement was superseded by the studio's May 2025 confirmation that a compact team had survived and resumed full production; the official homepage now promotes Expeditions: Samurai Early Access."
   },
+  "Capcom Pictures": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Culver City, California",
+      "country": "United States",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1401&state=&type=",
+      "https://capcomusa.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
   "Carbonated": {
     "description": "Mobile game-development company founded in 2015 by industry veterans from Zynga, Electronic Arts and Blizzard. Carbonated describes its focus as hardcore player-versus-environment-versus-player games on phones, using AI to shape moment-to-moment gameplay. It has also developed Carbyne, a proprietary live-operations platform.",
     "headquarters": {
@@ -3024,7 +3049,8 @@
     ],
     "popularGames": [],
     "profileSources": [
-      "https://embers.games/"
+      "https://embers.games/",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=2601&state=&type="
     ],
     "applicationLocation": "Strasbourg, France · speculative applicant geography and remote eligibility not stated",
     "reachHighlights": "The official site lists its Strasbourg address and invites general applications through its contact channel."
@@ -3063,7 +3089,8 @@
     "profileSources": [
       "https://www.fakefishgames.com/",
       "https://www.fakefishgames.com/jobs",
-      "https://www.fakefishgames.com/jobs/open-application"
+      "https://www.fakefishgames.com/jobs/open-application",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=2801&state=&type="
     ],
     "applicationLocation": "Turku, Finland · the open-application page invites applicants from beyond Turku; role-specific eligibility should be confirmed",
     "reachHighlights": "The studio's about page describes its founding in 2014 and its base in Turku; the official Jobs page provides a dedicated open-application route."
@@ -3080,7 +3107,8 @@
     "companyType": [
       "Developer",
       "Publisher",
-      "Virtual reality"
+      "Virtual reality",
+      "Developer and Publisher"
     ],
     "ownership": "Not publicly disclosed",
     "parentCompany": null,
@@ -3119,7 +3147,8 @@
     ],
     "profileSources": [
       "https://www.fasttravelgames.com/",
-      "https://www.fasttravelgames.com/career"
+      "https://www.fasttravelgames.com/career",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=2901&state=&type="
     ],
     "applicationLocation": "Stockholm, Sweden · the open-application page does not state remote or cross-border eligibility",
     "reachHighlights": "The studio's official careers page invites open applications by email; its portfolio is focused on VR games."
@@ -3187,7 +3216,8 @@
     ],
     "profileSources": [
       "https://flowgamestudio.com/",
-      "https://www.flowgamestudio.com/opportunities"
+      "https://www.flowgamestudio.com/opportunities",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3001&state=&type="
     ],
     "applicationLocation": "Brisbane, Australia · the Expression of Interest page does not state remote or international applicant eligibility",
     "reachHighlights": "The official site identifies Flow Studio as an independent game developer in Brisbane; its opportunities page accepts Expressions of Interest by email."
@@ -3235,7 +3265,8 @@
     "profileSources": [
       "https://foolstheory.com/",
       "https://careers.foolstheory.com/",
-      "https://careers.foolstheory.com/connect"
+      "https://careers.foolstheory.com/connect",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3101&state=&type="
     ],
     "applicationLocation": "Remote within the stated time-zone range of approximately ±2 hours from GMT+1; confirm role-specific country and work-authorisation requirements",
     "reachHighlights": "The official careers site has an Open Applications/Connect form with discipline choices and future-opportunity notifications; the studio describes remote work within a GMT+1 time-zone window."
@@ -3274,7 +3305,8 @@
     ],
     "profileSources": [
       "https://formation.games/",
-      "https://formation.games/careers"
+      "https://formation.games/careers",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3101&state=&type="
     ],
     "applicationLocation": "United Kingdom · the general application page provides an email channel; remote or international eligibility is not stated",
     "reachHighlights": "The official careers page invites general applications by email; the studio's current project is the mobile football-management game CLUB."
@@ -3359,7 +3391,8 @@
     "popularGames": [],
     "profileSources": [
       "https://www.full-fat.com/",
-      "https://www.full-fat.com/jobs/"
+      "https://www.full-fat.com/jobs/",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3201&state=&type="
     ],
     "applicationLocation": "Warwick, United Kingdom · speculative applications are invited by email; remote and cross-border eligibility are not stated",
     "reachHighlights": "The official jobs page states there are no current vacancies and invites speculative applications by email."
@@ -3457,7 +3490,7 @@
     ],
     "ownership": "Not publicly disclosed",
     "parentCompany": null,
-    "industryScale": "Not publicly disclosed",
+    "industryScale": "Mixed / Unclassified",
     "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
     "focus": [
@@ -3467,7 +3500,8 @@
     "popularGames": [],
     "profileSources": [
       "https://funnytales.us/",
-      "https://funnytales.us/contact-us/"
+      "https://funnytales.us/contact-us/",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3201&state=&type="
     ],
     "applicationLocation": "Miami, Florida, USA · the spontaneous-application form does not state remote or cross-border eligibility",
     "reachHighlights": "The official Contact page identifies the operator as Digital Tales LLC (DBA Funny Tales), lists its Miami office and offers a spontaneous-application option."
@@ -3507,7 +3541,8 @@
     "profileSources": [
       "https://futurats.com/",
       "https://futurats.com/work-with-us/",
-      "https://futurats.com/games/"
+      "https://futurats.com/games/",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3301&state=&type="
     ],
     "applicationLocation": "Turin, Italy · current listed positions are hybrid; separate freelance role is fully remote within the EU time zone; speculative-route applicant geography is not otherwise stated",
     "reachHighlights": "The official Contact page explicitly directs open applicants to email rather than use the general contact form."
@@ -3604,6 +3639,31 @@
       "https://g7works.com/"
     ]
   },
+  "Game Boost Sweden": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Umea, Norrland",
+      "country": "Sweden",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3301&state=&type=",
+      "https://www.gameboost.se/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
   "Game Tailors": {
     "description": "Delft-based Dutch studio specialising in serious games and interactive experiences. The studio's open-application page specifically describes internship opportunities in marketing, development, art and UX research.",
     "headquarters": {
@@ -3616,7 +3676,8 @@
     "companyType": [
       "Developer",
       "Serious games",
-      "Interactive experiences"
+      "Interactive experiences",
+      "Serious Games"
     ],
     "ownership": "Not publicly disclosed",
     "parentCompany": null,
@@ -3633,7 +3694,8 @@
     "popularGames": [],
     "profileSources": [
       "https://www.gametailors.com/",
-      "https://www.gametailors.com/over-ons/vacatures/open-sollicitatie"
+      "https://www.gametailors.com/over-ons/vacatures/open-sollicitatie",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3401&state=&type="
     ],
     "applicationLocation": "Delft, Netherlands · the open-application page focuses on internships; office presence is preferred and fully remote eligibility is not stated",
     "reachHighlights": "The official Open Sollicitatie page invites applicants for internship opportunities in marketing, development, art and UX research; the studio indicates a preference for office attendance."
@@ -3657,7 +3719,7 @@
     ],
     "ownership": "Not publicly disclosed",
     "parentCompany": null,
-    "industryScale": "Not publicly disclosed",
+    "industryScale": "Mixed / Unclassified",
     "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
     "focus": [
@@ -3676,7 +3738,8 @@
     ],
     "profileSources": [
       "https://gauravgo.com/",
-      "https://www.gauravgo.com/careers"
+      "https://www.gauravgo.com/careers",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3601&state=&type="
     ],
     "applicationLocation": "Bhubaneswar and Puri, Odisha, India · the speculative application page does not state remote or international applicant eligibility",
     "reachHighlights": "The official site lists a corporate office in Bhubaneswar and a registered office in Puri; the Careers page invites speculative applications and links to its application form."
@@ -3816,7 +3879,8 @@
     "companyType": [
       "Developer",
       "Mobile games",
-      "Sports games"
+      "Sports games",
+      "Mobile"
     ],
     "ownership": "Not publicly disclosed",
     "parentCompany": null,
@@ -3839,7 +3903,8 @@
     "profileSources": [
       "https://goldtowngames.com/en/",
       "https://goldtowngames.com/en/about/",
-      "https://goldtowngames.com/en/job-opportunities/"
+      "https://goldtowngames.com/en/job-opportunities/",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3701&state=&type="
     ],
     "applicationLocation": "Skellefteå, Sweden · the open-application email does not state remote or international applicant eligibility",
     "reachHighlights": "The official About page identifies the Skellefteå base and sports-management focus; the Careers page invites open applications by email."
@@ -3856,11 +3921,12 @@
     "companyType": [
       "Developer",
       "Extended reality (XR)",
-      "Virtual reality"
+      "Virtual reality",
+      "Extended Reality (XR)"
     ],
     "ownership": "Not publicly disclosed",
     "parentCompany": null,
-    "industryScale": "Not publicly disclosed",
+    "industryScale": "Mixed / Unclassified",
     "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
     "focus": [
@@ -3872,7 +3938,8 @@
     "popularGames": [],
     "profileSources": [
       "https://www.greensky.games/",
-      "https://www.greensky.games/work"
+      "https://www.greensky.games/work",
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3801&state=&type="
     ],
     "applicationLocation": "Remote-first · the official page does not specify applicant-country, work-authorisation or role-specific eligibility",
     "reachHighlights": "The official Work page describes the studio as remote-first and based in Montréal and includes an Open Application route."
@@ -4787,13 +4854,15 @@
       "Developer",
       "Co-development",
       "Art services",
-      "Animation"
+      "Animation",
+      "Art production",
+      "Animation services"
     ],
-    "ownership": "Not publicly disclosed",
-    "parentCompany": null,
+    "ownership": "Privately held · Ocellus Group",
+    "parentCompany": "Ocellus Group",
     "industryScale": "AA / AAA co-development and art services · editorial indication",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
+    "teamSize": "2–10 at Ocellus Games; 51–200 at Ocellus Services (LinkedIn ranges)",
+    "teamSizeAsOf": "2026",
     "focus": [
       "Game development",
       "Game art",
@@ -4804,7 +4873,9 @@
       "Live operations",
       "PC",
       "Console",
-      "Mobile"
+      "Mobile",
+      "Art production",
+      "Stylized games"
     ],
     "popularGames": [
       {
@@ -4826,6 +4897,16 @@
         "title": "Everdale",
         "appId": null,
         "stage": "Original studio project"
+      },
+      {
+        "title": "Clash Royale",
+        "appId": null,
+        "stage": "Art/live-operations services"
+      },
+      {
+        "title": "Fortnite",
+        "appId": null,
+        "stage": "Art and creative services"
       }
     ],
     "applicationLocation": "Lyon, France · one Ocellus Services role is listed Lyon / Remote; Ocellus Games roles are Lyon-based; the spontaneous route does not state separate applicant-country eligibility",
@@ -4833,7 +4914,10 @@
     "profileSources": [
       "https://ocellus-studio.com/about",
       "https://ocellus-studio.com/services",
-      "https://ocellus-studio.com/careers"
+      "https://ocellus-studio.com/careers",
+      "https://ocellus-studio.com/contact",
+      "https://ocellus-studio.com/games",
+      "https://www.linkedin.com/company/ocellus-games/"
     ]
   },
   "Octocube Games": {
@@ -5940,14 +6024,17 @@
     "ownership": "Independent",
     "parentCompany": null,
     "industryScale": "AA ambition (studio-stated)",
-    "teamSize": "Not publicly disclosed",
+    "teamSize": "Small specialized team · exact count not disclosed",
     "teamSizeAsOf": null,
     "focus": [
       "PC",
       "Unreal Engine 5",
       "Tactical FPS",
       "Open world",
-      "Narrative"
+      "Narrative",
+      "FPS",
+      "Tactical",
+      "Realism"
     ],
     "popularGames": [
       {
@@ -5979,11 +6066,13 @@
     "companyType": [
       "Developer",
       "Co-development",
-      "Technology services"
+      "Technology services",
+      "Publisher",
+      "Services"
     ],
-    "ownership": "Not disclosed",
+    "ownership": "Private company · ownership not publicly detailed",
     "parentCompany": null,
-    "industryScale": "Not disclosed",
+    "industryScale": "Indie / AA",
     "teamSize": "Small senior team · exact count not disclosed",
     "teamSizeAsOf": "2026",
     "focus": [
@@ -5999,7 +6088,8 @@
     "popularGames": [],
     "profileSources": [
       "https://www.sumigamesstudio.com/careers",
-      "https://www.sumigamesstudio.com/"
+      "https://www.sumigamesstudio.com/",
+      "https://www.sumigamesstudio.com/company"
     ],
     "applicationLocation": "Dubai, UAE / United Kingdom · remote-friendly; applicant-country eligibility not stated",
     "reachHighlights": "Portfolio mixes conventional game development, XR and Web3/blockchain services; the official Careers page accepts open applications by email."

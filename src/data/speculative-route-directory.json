@@ -1013,6 +1013,28 @@
     }
   },
   {
+    "name": "Capcom Pictures",
+    "country": "United States",
+    "websiteUrl": "https://capcomusa.com/",
+    "applicationUrl": "https://app.jobvite.com/",
+    "evidenceUrl": "https://jobs.jobvite.com/capcomusa",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Carbonated",
     "country": "United States",
     "websiteUrl": "https://www.carbonated.com/",
@@ -2090,6 +2112,29 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-27"
+    }
+  },
+  {
+    "name": "Game Boost Sweden",
+    "country": "Sweden",
+    "websiteUrl": "https://www.gameboost.se/",
+    "applicationUrl": "https://www.teamtailor.com/?utm_campaign=poweredby&utm_content=www.gameboost.se&utm_medium=referral&utm_source=career-site",
+    "evidenceUrl": "https://www.gameboost.se/jobs",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "ats",
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
