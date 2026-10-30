@@ -1665,6 +1665,28 @@
     }
   },
   {
+    "name": "Rad Games",
+    "country": "Not stated",
+    "websiteUrl": "https://radgames.ai/",
+    "applicationUrl": "https://radgames.ai/careers",
+    "evidenceUrl": "https://radgames.ai/careers",
+    "notes": "Official Careers page explicitly invites candidates who do not see a suitable role to send a note and their best work as an open application to careers@radgames.ai. The route does not state hiring location or remote-country eligibility.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Raw Power Games",
     "country": "Denmark",
     "websiteUrl": "https://rawpowergames.com/",
