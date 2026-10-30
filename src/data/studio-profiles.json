@@ -4008,6 +4008,31 @@
       "https://www.hindsight-studios.de/career.html"
     ]
   },
+  "Honeyfrost": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Paris, Ile-de-France",
+      "country": "France",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=4101&state=&type=",
+      "https://honeyfrost.net/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
   "Hugecalf Studios": {
     "description": "Small UK remote game studio behind Stuck Together, Turbo Golf Racing and When Ski Lifts Go Wrong.",
     "headquarters": {
@@ -4087,6 +4112,31 @@
     ],
     "applicationLocation": "London hybrid · in studio Tuesday–Thursday; remote work Monday/Friday within the UK"
   },
+  "HVNT Entertainment": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Stockholm",
+      "country": "Sweden",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Extended Reality (XR)"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=4201&state=&type=",
+      "https://www.hvnt.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
   "HypeHype": {
     "description": "Helsinki-based game-creation technology company developing a platform for creating, sharing and playing mobile-first games.",
     "headquarters": {
@@ -4159,6 +4209,56 @@
     ],
     "applicationLocation": "Location not specified · HQ shown"
   },
+  "Hyperkani": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Tampere, Pirkanmaa",
+      "country": "Finland",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Mobile"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=4201&state=&type=",
+      "https://www.hyperkani.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Implicit Conversions": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Middletown, Delaware",
+      "country": "United States",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=4401&state=&type=",
+      "https://www.implicitconversions.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
   "Ingame Studios": {
     "description": "Brno-based game developer with a 40+ person team and two decades of experience across Czech and international game productions; builds on Unreal Engine.",
     "headquarters": {
@@ -4194,6 +4294,106 @@
     ],
     "applicationLocation": "Brno · some roles may be remote depending on team needs",
     "reachHighlights": "Team members have worked on titles including Vietcong, Hidden & Dangerous 2, Mafia, Arma, Kingdom Come: Deliverance and Vigor (studio-reported)."
+  },
+  "InnoGames": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Hamburg, Metropolregion Hamburg",
+      "country": "Germany",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer and Publisher"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=4501&state=&type=",
+      "https://www.innogames.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Insanity Crew": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "New Delhi, Delhi",
+      "country": "India",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=4501&state=&type=",
+      "https://insanitycrew.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Invictus": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Debrecen, Hajdu-Bihar",
+      "country": "Hungary",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=4501&state=&type=",
+      "https://www.invictus.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Ironroot Games": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "San Diego, California",
+      "country": "United States",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=4601&state=&type=",
+      "https://ironrootgames.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "Katal Games": {
     "description": "Game and software studio building original games, live interactive formats and real-time technology for partner projects.",
@@ -4275,6 +4475,31 @@
       "https://www.keenswh.com/job/spontaneous-applications/"
     ]
   },
+  "Kerberos Productions": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Vancouver, British Columbia",
+      "country": "Canada",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=4801&state=&type=",
+      "https://www.kerberos-productions.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
   "Kiagu Studios": {
     "description": "Seoul-based entertainment IP studio developing original properties across webnovels, webtoons, animation and games, including the dark-fantasy action RPG Astral Sync.",
     "headquarters": {
@@ -4352,6 +4577,31 @@
       "https://kineticgames.co.uk/",
       "https://kineticgames.co.uk/careers"
     ]
+  },
+  "Kitfox Games": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Montreal, Quebec",
+      "country": "Canada",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=4901&state=&type=",
+      "https://www.kitfoxgames.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "Kolibri Games": {
     "description": "Berlin-based mobile game studio known for idle and simulation games, including Idle Miner Tycoon; acquired by Ubisoft in 2020.",
@@ -4457,6 +4707,31 @@
     "applicationLocation": "Ludwigsburg, Germany · up to 100% remote possible depending on position",
     "reachHighlights": "KORION traces its origins to a 2003 Fraunhofer Society spin-off and says it established its main Ludwigsburg base in 2007."
   },
+  "Krillbite Studios": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Hamar, Hedmark",
+      "country": "Norway",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=5001&state=&type=",
+      "https://krillbite.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
   "Kuuasema": {
     "description": "Helsinki-based game development partner with a long track record of full-cycle mobile, casual and cross-platform projects.",
     "headquarters": {
@@ -4529,6 +4804,81 @@
       "https://corporate.nacongaming.com/wp-content/uploads/2026/10/Document-URD-NACON-31.03.2026.html"
     ]
   },
+  "Larian Studios": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Barcelona, Catalonia",
+      "country": "Spain",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=5101&state=&type=",
+      "https://www.larian.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "LBC Studio": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Vancouver, British Columbia",
+      "country": "Canada",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Mobile"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=5101&state=&type=",
+      "https://www.lbcstudios.ca/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Lightheart Entertainment": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Helsinki, Uusimaa",
+      "country": "Finland",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Mobile"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=5201&state=&type=",
+      "https://www.lightheart.games/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
   "Lighthouse Games": {
     "description": "Leamington Spa game developer founded by experienced AAA leaders, building premium games for PC and consoles.",
     "headquarters": {
@@ -4559,6 +4909,56 @@
       "https://lighthousegames.com/",
       "https://lighthousegames.com/careers/3C151DE079/"
     ]
+  },
+  "Limbic Entertainment": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Langen, Hesse",
+      "country": "Germany",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=5201&state=&type=",
+      "https://www.limbic-entertainment.de/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Lion Castle Entertainment": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Assen, Drenthe",
+      "country": "Netherlands",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Publisher"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=5201&state=&type=",
+      "https://www.lion-castle.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "LIQUIDBULLET Studios": {
     "description": "Very small independent studio building its debut Unreal Engine 5 survival game.",
@@ -4651,6 +5051,31 @@
     ],
     "applicationLocation": "Remote-first · US and Canada",
     "reachHighlights": "AAA co-development credits include Diablo IV and Tiny Tina's Wonderlands."
+  },
+  "Lost Native Games": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Remote",
+      "country": "Remote",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=5301&state=&type=",
+      "https://www.lostnative.co/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "Lunacy Studios": {
     "description": "Fully remote, globally distributed indie studio creating narrative-rich games centered on culture, emotion and identity.",

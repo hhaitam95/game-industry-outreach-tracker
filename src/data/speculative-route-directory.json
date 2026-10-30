@@ -2398,6 +2398,28 @@
     }
   },
   {
+    "name": "Honeyfrost",
+    "country": "France",
+    "websiteUrl": "https://honeyfrost.net/",
+    "applicationUrl": "https://honeyfrost.net/work",
+    "evidenceUrl": "https://honeyfrost.net/work",
+    "notes": "Official studio-controlled page explicitly invites spontaneous applications. Evidence: Spontaneous application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Hugecalf Studios",
     "country": "United Kingdom",
     "websiteUrl": "https://hugecalf.com/",
@@ -2451,6 +2473,28 @@
     }
   },
   {
+    "name": "HVNT Entertainment",
+    "country": "Sweden",
+    "websiteUrl": "https://www.hvnt.com/",
+    "applicationUrl": "https://hvnt.com/careers",
+    "evidenceUrl": "https://hvnt.com/careers",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "HypeHype",
     "country": "Finland",
     "websiteUrl": "https://hypehype.com/",
@@ -2497,6 +2541,50 @@
     }
   },
   {
+    "name": "Hyperkani",
+    "country": "Finland",
+    "websiteUrl": "https://www.hyperkani.com/",
+    "applicationUrl": "https://hyperkani.com/",
+    "evidenceUrl": "https://hyperkani.com/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Implicit Conversions",
+    "country": "United States",
+    "websiteUrl": "https://www.implicitconversions.com/",
+    "applicationUrl": "https://www.implicitconversions.com/careers",
+    "evidenceUrl": "https://www.implicitconversions.com/careers",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Ingame Studios",
     "country": "Czechia",
     "websiteUrl": "https://www.ingamestudios.com/",
@@ -2513,6 +2601,94 @@
       "eligibleLocations": [
         "Brno office · remote only where team needs allow"
       ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "InnoGames",
+    "country": "Germany",
+    "websiteUrl": "https://www.innogames.com/",
+    "applicationUrl": "https://www.innogames.com/career/career-starters/index.html",
+    "evidenceUrl": "https://www.innogames.com/career/faq/index.html",
+    "notes": "Official studio-controlled page explicitly invites unsolicited applications. Evidence: unsolicited application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Insanity Crew",
+    "country": "India",
+    "websiteUrl": "https://insanitycrew.com/",
+    "applicationUrl": "https://www.insanitycrew.com/contact-us",
+    "evidenceUrl": "https://www.insanitycrew.com/contact-us",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: submit your resume for consideration in future positions. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Invictus",
+    "country": "Hungary",
+    "websiteUrl": "https://www.invictus.com/",
+    "applicationUrl": "https://www.invictus.com/menu/contact/menu/Careers/",
+    "evidenceUrl": "https://www.invictus.com/menu/contact/",
+    "notes": "Official studio-controlled page explicitly invites discipline specific applications. Evidence: expression of interest. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "discipline_specific",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Ironroot Games",
+    "country": "United States",
+    "websiteUrl": "https://ironrootgames.com/",
+    "applicationUrl": "https://ironrootgames.com/",
+    "evidenceUrl": "https://ironrootgames.com/",
+    "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: speculative applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
@@ -2559,6 +2735,28 @@
       "eligibleLocations": [
         "Remote considered · CET overlap; experienced candidates preferred"
       ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Kerberos Productions",
+    "country": "Canada",
+    "websiteUrl": "https://www.kerberos-productions.com/",
+    "applicationUrl": "https://www.kerberos-productions.com/",
+    "evidenceUrl": "https://www.kerberos-productions.com/",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
@@ -2623,6 +2821,29 @@
     }
   },
   {
+    "name": "Kitfox Games",
+    "country": "Canada",
+    "websiteUrl": "https://www.kitfoxgames.com/",
+    "applicationUrl": "https://www.kitfoxgames.com/en/contact",
+    "evidenceUrl": "https://www.kitfoxgames.com/en/contact",
+    "notes": "Official studio-controlled page explicitly invites unsolicited applications. Evidence: unsolicited applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Kolibri Games",
     "country": "Germany",
     "websiteUrl": "https://www.kolibrigames.com/",
@@ -2678,6 +2899,28 @@
     }
   },
   {
+    "name": "Krillbite Studios",
+    "country": "Norway",
+    "websiteUrl": "https://krillbite.com/",
+    "applicationUrl": "https://www.krillbite.com/jobs",
+    "evidenceUrl": "https://www.krillbite.com/jobs",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Kuuasema",
     "country": "Finland",
     "websiteUrl": "https://www.kuuasema.com/",
@@ -2724,6 +2967,72 @@
     }
   },
   {
+    "name": "Larian Studios",
+    "country": "Spain",
+    "websiteUrl": "https://www.larian.com/",
+    "applicationUrl": "https://larian.com/",
+    "evidenceUrl": "https://larian.com/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "LBC Studio",
+    "country": "Canada",
+    "websiteUrl": "https://www.lbcstudios.ca/",
+    "applicationUrl": "https://lbcstudios.ca/?page_id=2637",
+    "evidenceUrl": "https://lbcstudios.ca/careers/",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Lightheart Entertainment",
+    "country": "Finland",
+    "websiteUrl": "https://www.lightheart.games/",
+    "applicationUrl": "https://www.teamtailor.com/?utm_campaign=poweredby&utm_content=careers.lightheart.games&utm_medium=referral&utm_source=career-site",
+    "evidenceUrl": "https://careers.lightheart.games/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Lighthouse Games",
     "country": "United Kingdom",
     "websiteUrl": "https://lighthousegames.com/",
@@ -2740,6 +3049,51 @@
       "eligibleLocations": [
         "Royal Leamington Spa · on-site"
       ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Limbic Entertainment",
+    "country": "Germany",
+    "websiteUrl": "https://www.limbic-entertainment.de/",
+    "applicationUrl": "https://www.limbic-entertainment.de/careers/",
+    "evidenceUrl": "https://www.limbic-entertainment.de/careers/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Lion Castle Entertainment",
+    "country": "Netherlands",
+    "websiteUrl": "https://www.lion-castle.com/",
+    "applicationUrl": "https://www.lion-castle.com/career/",
+    "evidenceUrl": "https://www.lion-castle.com/contact/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
@@ -2788,6 +3142,28 @@
       "eligibleLocations": [
         "Remote-first · US and Canada"
       ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Lost Native Games",
+    "country": "Remote",
+    "websiteUrl": "https://www.lostnative.co/",
+    "applicationUrl": "https://www.lostnative.co/careers",
+    "evidenceUrl": "https://www.lostnative.co/careers",
+    "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: SPECULATIVE APPLICATION. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
