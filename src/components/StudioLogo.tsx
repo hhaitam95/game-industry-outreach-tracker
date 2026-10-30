@@ -17,6 +17,5 @@ export default function StudioLogo({name,websiteUrl,size="md"}:{name:string;webs
   const source=sources[sourceIndex];
   return <span className={`studio-logo studio-logo-${size}`} role="img" aria-label={name+" logo"} title={name}>
     {source?<img src={source} alt="" loading="lazy" decoding="async" referrerPolicy="no-referrer" onError={()=>setSourceIndex(current=>current+1)}/>:<span>{initials}</span>}
-    {!source?<span>{initials}</span>:null}
   </span>;
 }
