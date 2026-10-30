@@ -72,22 +72,13 @@
     "checkedAt": "2026-10-29"
   },
   {
-    "name": "Ballistic Moon",
-    "country": "United Kingdom",
-    "websiteUrl": "https://ballisticmoon.com/",
-    "applicationUrl": "https://ballisticmoon.com/careers/",
-    "evidenceUrl": "https://ballisticmoon.com/careers/",
-    "notes": "Official careers page has a Speculative Application section and invites people without a matching role to contact the studio. Work model: remote.",
-    "checkedAt": "2026-10-29"
-  },
-  {
     "name": "Bananagun",
     "country": "Not stated",
-    "websiteUrl": "https://www.bananagun.fun/",
-    "applicationUrl": "https://www.bananagun.fun/",
-    "evidenceUrl": "https://www.bananagun.fun/",
-    "notes": "Official website includes an Open Application alongside role listings and invites candidates to apply by email.",
-    "checkedAt": "2026-10-29"
+    "websiteUrl": "https://bananagun.games/",
+    "applicationUrl": "https://bananagun.games/",
+    "evidenceUrl": "https://bananagun.games/",
+    "notes": "Official site describes a small, senior mobile game team building hyper- and hybrid-casual Unity games for iOS and Android; current careers section invites open applications. HQ is not publicly stated.",
+    "checkedAt": "2026-10-30"
   },
   {
     "name": "Barnstorm Games",
@@ -406,11 +397,11 @@
   },
   {
     "name": "Plummy Games",
-    "country": "Estonia",
+    "country": "Moldova",
     "websiteUrl": "https://plummygames.teamtailor.com/",
     "applicationUrl": "https://plummygames.teamtailor.com/jobs/6670751-open-application/applications/new",
     "evidenceUrl": "https://plummygames.teamtailor.com/jobs/6670751-open-application/applications/new",
-    "notes": "Official Teamtailor Open Application; fully remote from Tallinn. Applicants outside Moldova or Estonia must be willing to use a B2B contract. Official route describes eligibility as worldwide.",
+    "notes": "Official company page identifies Chișinău, Moldova as its home base (about 25 teammates in the office) and lists Tallinn, Estonia among remote-work locations. Open application; fully remote options, with B2B conditions for some countries.",
     "checkedAt": "2026-10-30"
   },
   {
