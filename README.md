@@ -11,6 +11,8 @@ A small personal tool for finding game studios that accept speculative applicati
 
 A generic careers page, an advertised vacancy or an aggregator claim is not enough. Studios without a qualifying route are simply left out.
 
+Studios whose games or ordinary work involve pornography, adult-only games, erotic or sexually explicit content must be excluded, even when they otherwise have a qualifying open-application route. Also exclude routes that ask applicants to confirm comfort with that content. If a studio's content suitability is unclear, leave it out pending manual review. This is a sexual-content suitability rule, not a blanket exclusion of mature-rated games generally.
+
 ## Website
 
 The site shows only studios that passed the official-page check. Each entry includes the studio, country, application link, short conditions note and date checked. Search by studio, country or discipline.
