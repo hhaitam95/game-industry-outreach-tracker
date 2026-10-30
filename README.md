@@ -1,84 +1,54 @@
 # StudioScout
 
-StudioScout is a lightweight directory of game studios that explicitly accept speculative/open applications, paired with a personal application tracker.
+StudioScout is a small worldwide directory of game studios that explicitly accept speculative applications, paired with a personal application tracker.
 
-The first release intentionally has only two pages and a simple internal-tool style interface.
+The website intentionally has only two pages: the studio directory and My applications. Tracker data stays in this browser's local storage.
 
-## The two pages
+## Studio directory
 
-### Studio directory
+Search studios by name, country and studio type; filter by country and work model; open the official studio website or application route; and save studios to the tracker.
 
-- Search studios by name, country and studio type.
-- Filter by country and work model.
-- Sort by studio name or country.
-- See basic studio details and the type of application route.
-- Open the official studio website or application route.
-- Save a studio to the personal tracker.
+A studio appears in the public directory only when its own website or a studio-controlled hiring platform explicitly invites speculative, unsolicited, spontaneous, open or general applications. A normal careers page or an advertised vacancy is not enough. Headquarters do not establish hiring location or remote eligibility.
 
-The directory contains only studios with a route verified on the studio's own website or a studio-controlled application platform. Headquarters are shown as a reference; they do not establish job location or remote eligibility.
+## Discovery
 
-### My applications
+The automated discovery pipeline collects a large candidate pool, then visits official studio websites to verify application routes.
 
-Save a studio from the directory and it appears in the tracker. Track it through:
+Current candidate sources:
 
-- Saved
-- In Progress
-- Applied
-- Interview
-- Offer
-- Archived
+- GameDevMap public worldwide directory. It reports 10,500 results and exposes a paginated public results table with studio/company website links and locations. It includes multiple offices and some non-studio organisations, so records are filtered and deduplicated before website checks.
+- Wikidata feeds for video-game developers, organisations credited as game developers, and video-game companies.
 
-Status changes and removals are stored in this browser's local storage. The tracker is not connected to a server, account or remote sync. Personal application records are never committed to the repository.
+GameDevMap is accessed through its public paginated results interface (100 rows per page). The scraper does not download its raw data files. It respects robots.txt and the existing per-host request delay. Source directories are leads only; no source's claim is treated as proof of speculative hiring.
 
-## Automated studio discovery
+For each candidate, StudioScout:
 
-GitHub Actions runs the discovery and maintenance pipeline hourly.
+1. Deduplicates by normalized studio name and official website domain.
+2. Fetches the official HTTPS site and relevant careers, jobs, application or contact links.
+3. Checks official pages and directly linked employer-controlled ATS platforms for explicit speculative-application wording.
+4. Gives explicit rejection language priority and keeps conflicting or ambiguous evidence out of the public directory.
+5. Excludes the project-defined adult/vice sectors and leaves uncertain cases for review.
+6. Publishes only verified routes, with evidence and application URLs. Unknown studio facts remain unknown rather than guessed.
 
-Candidate sources currently include three Wikidata feeds:
+The detailed candidate pool and progress are stored on the separate discovery-state branch. It is not exposed in the public directory.
 
-1. Organizations classified as video-game developers.
-2. Organizations credited as developers of video games.
-3. Organizations classified as video-game companies.
+## Bulk discovery and hourly maintenance
 
-These feeds are candidate lists only. They are not proof that a company accepts applications.
+The scheduled workflow automatically uses bulk mode while the GameDevMap backfill or candidate verification queue remains unfinished. Bulk runs are resumable: the source offset, Wikidata cursors and candidate statuses are saved after each successful run. When the initial queue is processed, the workflow returns to hourly maintenance.
 
-For each new candidate, StudioScout:
+You can also open Actions → Studio speculative-route discovery → Run workflow → bulk to resume the initial backfill manually, or select hourly to run a smaller maintenance batch.
 
-1. Deduplicates the studio by name and official website domain.
-2. Fetches its HTTPS official website, respecting robots.txt and conservative per-host request spacing.
-3. Follows relevant careers/jobs/contact links on the official site, plus hiring platforms linked from that site.
-4. Looks for explicit speculative, unsolicited, spontaneous, open or general application language.
-5. Checks for explicit rejection language and content categories excluded by the project policy.
-6. Adds the studio only when a suitable route is verified on an official or employer-controlled page.
-7. Creates a minimal profile with unknown facts left explicitly unresearched.
+The bulk run is bounded by a 25-minute discovery budget. If it reaches that limit, it saves its progress and continues on a later run. It does not weaken route verification to increase the number of published records.
 
-Candidate discovery uses the public Wikidata Query Service. No third-party search API key is required. Wikidata is incomplete and is used as a source of leads, not as an authoritative directory. The pipeline uses a descriptive User-Agent, bounded queries and a pause between multi-page bootstrap queries to respect the public service's published limits.
+## Route maintenance and safety
 
-### Bootstrap and hourly runs
+A timeout, blocked request, robots denial, HTTP 403/429, parsing problem or ambiguous page never closes a route. Explicit official-site rejection or both evidence/application URLs missing (404/410) must be confirmed on two consecutive checks before a route is marked closed. Closed records are retained for history and disappear from the active directory.
 
-The scheduled workflow performs a one-time larger bootstrap batch when discovery state does not yet exist. Subsequent scheduled runs process a rotating source page, verify a bounded candidate batch and recheck a small group of existing application routes.
+## Personal application tracker
 
-Use **Actions → Studio speculative-route discovery → Run workflow → bootstrap** to request a larger manual batch. The bootstrap is resumable.
+Save studios and track them through Saved, In Progress, Applied, Interview, Offer and Archived. Status changes and removals are stored in this browser only. There is no login, server sync or automatic application submission.
 
-When all configured source feeds have completed three consecutive full passes without adding a newly verified studio, the state marks the first discovery pass as saturated. Hourly maintenance continues after saturation, looking for newly added candidates and rechecking existing routes.
-
-Progress and cursors are stored separately on the `discovery-state` branch, not in the public website's personal tracker data.
-
-### Route closure safety
-
-A timeout, blocked request, robots denial, HTTP 403/429, parsing problem or ambiguous page never closes a route.
-
-A route is marked closed only after two consecutive checks find either explicit official-site rejection language or both the official evidence and application URLs missing (404/410). Closed records are retained in the dataset for history and disappear from the active directory view.
-
-## Studio inclusion rules
-
-Public studio directories, Wikidata and other industry sources are candidate sources only. Every application route must be checked against the studio's own website or a studio-controlled application system.
-
-Exclude studios materially focused on pornography, erotica, explicit sexual entertainment, gambling/betting/casinos (including simulated/social casino), recreational drugs/cannabis, alcohol, tobacco/nicotine/vaping or related adult/vice sectors. Ambiguous content cases are not auto-published.
-
-Generic careers pages, advertised roles and aggregator claims alone do not qualify. An ordinary application to a specific advertised vacancy is not a speculative application.
-
-## Run locally
+## Development checks
 
 Use Node.js 24 and Python 3.10 or newer:
 
@@ -96,12 +66,12 @@ npm run check:studio-directory
 npm run build
 ```
 
-## Source data
+## Key files
 
-- `src/data/speculative-route-directory.json`: public directory of verified application routes.
-- `src/data/studio-profiles.json`: basic studio profile fields for the directory.
-- `scripts/discover_speculative_studios.py`: candidate discovery, official-site verification and route maintenance.
-- `.github/workflows/discover-studios.yml`: hourly and manual discovery workflow.
-- `discovery-state/state/studio-discovery-state.json`: resumable discovery cursors and verification state on the separate state branch.
+- src/data/speculative-route-directory.json: verified public opportunity directory.
+- src/data/studio-profiles.json: basic researched studio fields.
+- scripts/discover_speculative_studios.py: candidate collection, official-site verification and route maintenance.
+- .github/workflows/discover-studios.yml: resumable bulk discovery and hourly maintenance.
+- discovery-state/state/studio-discovery-state.json: candidate and cursor state on the separate branch.
 
-Do not put personal application records, secrets or private candidate data in the public source datasets.
+Never put personal application records, secrets or private candidate notes in the public source datasets.
