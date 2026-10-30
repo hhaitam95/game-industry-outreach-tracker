@@ -1013,28 +1013,6 @@
     }
   },
   {
-    "name": "Capcom Pictures",
-    "country": "United States",
-    "websiteUrl": "https://capcomusa.com/",
-    "applicationUrl": "https://app.jobvite.com/",
-    "evidenceUrl": "https://jobs.jobvite.com/capcomusa",
-    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-30",
-    "applicationResearch": {
-      "routeType": "general",
-      "submissionMethods": [
-        "ats"
-      ],
-      "workModel": "not_stated",
-      "eligibleLocations": [],
-      "disciplineScope": [],
-      "relatedApplicationUrls": [],
-      "routeStatus": "active",
-      "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-28"
-    }
-  },
-  {
     "name": "Carbonated",
     "country": "United States",
     "websiteUrl": "https://www.carbonated.com/",
@@ -2115,29 +2093,6 @@
     }
   },
   {
-    "name": "Game Boost Sweden",
-    "country": "Sweden",
-    "websiteUrl": "https://www.gameboost.se/",
-    "applicationUrl": "https://www.teamtailor.com/?utm_campaign=poweredby&utm_content=www.gameboost.se&utm_medium=referral&utm_source=career-site",
-    "evidenceUrl": "https://www.gameboost.se/jobs",
-    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open application. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-30",
-    "applicationResearch": {
-      "routeType": "open",
-      "submissionMethods": [
-        "ats",
-        "website_form"
-      ],
-      "workModel": "remote",
-      "eligibleLocations": [],
-      "disciplineScope": [],
-      "relatedApplicationUrls": [],
-      "routeStatus": "active",
-      "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-28"
-    }
-  },
-  {
     "name": "Game Tailors",
     "country": "Netherlands",
     "websiteUrl": "https://www.gametailors.com/",
@@ -3172,6 +3127,72 @@
     }
   },
   {
+    "name": "Lucid Games",
+    "country": "England",
+    "websiteUrl": "https://www.lucidgames.co.uk/",
+    "applicationUrl": "https://www.lucidgames.co.uk/careers/",
+    "evidenceUrl": "https://www.lucidgames.co.uk/careers/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open Applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Lucid Labs",
+    "country": "India",
+    "websiteUrl": "https://www.lucidlabs.in/",
+    "applicationUrl": "https://lucidlabs.in/careers",
+    "evidenceUrl": "https://lucidlabs.in/careers",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Ludia",
+    "country": "Canada",
+    "websiteUrl": "https://www.ludia.com/",
+    "applicationUrl": "https://ludia.bamboohr.com/careers/29?source=aWQ9MTA%3D",
+    "evidenceUrl": "https://www.ludia.com/open-positions",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Lunacy Studios",
     "country": "Not stated",
     "websiteUrl": "https://lunacystudios.com/",
@@ -3191,6 +3212,210 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-27"
+    }
+  },
+  {
+    "name": "Melcher Studios",
+    "country": "Canada",
+    "websiteUrl": "https://www.melcher.ca/",
+    "applicationUrl": "https://www.melcher.ca/careers.html",
+    "evidenceUrl": "https://www.melcher.ca/careers.html",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "metricminds (THQ Nordic)",
+    "country": "Germany",
+    "websiteUrl": "https://metricminds.com/",
+    "applicationUrl": "https://metricmindsgmbh.bamboohr.com/careers",
+    "evidenceUrl": "https://metricminds.com/jobs/",
+    "notes": "Official studio-controlled page explicitly invites unsolicited applications. Evidence: unsolicited application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "ats",
+        "email",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Mighty Coconut",
+    "country": "United States",
+    "websiteUrl": "https://www.mightycoconut.com/",
+    "applicationUrl": "https://www.mightycoconut.com/jobs",
+    "evidenceUrl": "https://www.mightycoconut.com/jobs",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: general applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Milky Tea Studios (Aonic)",
+    "country": "England",
+    "websiteUrl": "https://www.milkytea.com/",
+    "applicationUrl": "https://www.milkytea.com/",
+    "evidenceUrl": "https://www.milkytea.com/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: OPEN APPLICATION. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Mindstorm Studios",
+    "country": "Pakistan",
+    "websiteUrl": "https://www.mindstormstudios.com/",
+    "applicationUrl": "https://mindstormstudios.com/",
+    "evidenceUrl": "https://mindstormstudios.com/",
+    "notes": "Official studio-controlled page explicitly invites discipline specific applications. Evidence: Expression of Interest. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "discipline_specific",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Modern Wolf",
+    "country": "England",
+    "websiteUrl": "https://www.modernwolf.net/",
+    "applicationUrl": "https://modernwolf.net/join-the-pack",
+    "evidenceUrl": "https://modernwolf.net/join-the-pack",
+    "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: Speculative Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "MVRX games",
+    "country": "Sweden",
+    "websiteUrl": "https://www.mvrx-games.com/",
+    "applicationUrl": "https://www.mvrx-games.com/",
+    "evidenceUrl": "https://www.mvrx-games.com/",
+    "notes": "Official studio-controlled page explicitly invites discipline specific applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "discipline_specific",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Myrkur",
+    "country": "Iceland",
+    "websiteUrl": "https://www.myrkur.is/",
+    "applicationUrl": "https://myrkur.is/careers",
+    "evidenceUrl": "https://myrkur.is/careers/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Ndemic Creations",
+    "country": "England",
+    "websiteUrl": "https://www.ndemiccreations.com/",
+    "applicationUrl": "https://www.ndemiccreations.com/en/19-careers",
+    "evidenceUrl": "https://www.ndemiccreations.com/en/19-careers",
+    "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: Speculative Applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
@@ -3234,6 +3459,28 @@
       "eligibleLocations": [
         "Remote working is available to staff; occasional initial visits to Lymm, Warrington may be requested. Applicant-country eligibility not stated."
       ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Nordeus (Take-Two Interactive Software)",
+    "country": "Serbia",
+    "websiteUrl": "https://nordeus.com/",
+    "applicationUrl": "https://nordeus.com/careers",
+    "evidenceUrl": "https://nordeus.com/contact/",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: general applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
@@ -3340,6 +3587,29 @@
     }
   },
   {
+    "name": "Odenity Interactive",
+    "country": "Sweden",
+    "websiteUrl": "https://odenity.se/",
+    "applicationUrl": "https://odenity.se/",
+    "evidenceUrl": "https://odenity.se/",
+    "notes": "Official studio-controlled page explicitly invites spontaneous applications. Evidence: spontaneous application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Old Skull Games",
     "country": "France",
     "websiteUrl": "https://www.oldskullgames.com/",
@@ -3358,6 +3628,28 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Optillusion Games",
+    "country": "United States",
+    "websiteUrl": "https://optillusion.games/",
+    "applicationUrl": "https://www.optillusion.games/job",
+    "evidenceUrl": "https://www.optillusion.games/job/",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
     }
   },

@@ -1916,31 +1916,6 @@
     "applicationLocation": "Copenhagen, Denmark · current unsolicited route does not specify applicant-country or remote eligibility",
     "reachHighlights": "The 2023 closure announcement was superseded by the studio's May 2025 confirmation that a compact team had survived and resumed full production; the official homepage now promotes Expeditions: Samurai Early Access."
   },
-  "Capcom Pictures": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
-    "headquarters": {
-      "city": "Culver City, California",
-      "country": "United States",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer"
-    ],
-    "ownership": "Not yet researched",
-    "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1401&state=&type=",
-      "https://capcomusa.com/"
-    ],
-    "applicationLocation": "Not specified · confirm on the official application route"
-  },
   "Carbonated": {
     "description": "Mobile game-development company founded in 2015 by industry veterans from Zynga, Electronic Arts and Blizzard. Carbonated describes its focus as hardcore player-versus-environment-versus-player games on phones, using AI to shape moment-to-moment gameplay. It has also developed Carbyne, a proprietary live-operations platform.",
     "headquarters": {
@@ -3639,31 +3614,6 @@
       "https://g7works.com/"
     ]
   },
-  "Game Boost Sweden": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
-    "headquarters": {
-      "city": "Umea, Norrland",
-      "country": "Sweden",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer"
-    ],
-    "ownership": "Not yet researched",
-    "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3301&state=&type=",
-      "https://www.gameboost.se/"
-    ],
-    "applicationLocation": "Not specified · confirm on the official application route"
-  },
   "Game Tailors": {
     "description": "Delft-based Dutch studio specialising in serious games and interactive experiences. The studio's open-application page specifically describes internship opportunities in marketing, development, art and UX research.",
     "headquarters": {
@@ -5077,6 +5027,81 @@
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
   },
+  "Lucid Games": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Liverpool, Merseyside",
+      "country": "England",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=5301&state=&type=",
+      "https://www.lucidgames.co.uk/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Lucid Labs": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "New Delhi, Delhi",
+      "country": "India",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Mobile"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=5301&state=&type=",
+      "https://www.lucidlabs.in/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Ludia": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Montreal, Quebec",
+      "country": "Canada",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Mobile"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=5301&state=&type=",
+      "https://www.ludia.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
   "Lunacy Studios": {
     "description": "Fully remote, globally distributed indie studio creating narrative-rich games centered on culture, emotion and identity.",
     "headquarters": {
@@ -5115,6 +5140,231 @@
       "https://lunacystudios.com/about-us/",
       "https://lunacystudios.com/"
     ]
+  },
+  "Melcher Studios": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Calgary, Alberta",
+      "country": "Canada",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=5701&state=&type=",
+      "https://www.melcher.ca/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "metricminds (THQ Nordic)": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Frankfurt am Main, Hesse",
+      "country": "Germany",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Extended Reality (XR)"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=5701&state=&type=",
+      "https://metricminds.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Mighty Coconut": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Austin, Texas",
+      "country": "United States",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=5801&state=&type=",
+      "https://www.mightycoconut.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Milky Tea Studios (Aonic)": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Liverpool, Merseyside",
+      "country": "England",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=5801&state=&type=",
+      "https://www.milkytea.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Mindstorm Studios": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Lahore, Punjab",
+      "country": "Pakistan",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=5801&state=&type=",
+      "https://www.mindstormstudios.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Modern Wolf": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "London",
+      "country": "England",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Publisher"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=5901&state=&type=",
+      "https://www.modernwolf.net/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "MVRX games": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Umea, Norrland",
+      "country": "Sweden",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=6101&state=&type=",
+      "https://www.mvrx-games.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Myrkur": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Reykjavík, Reykjavik",
+      "country": "Iceland",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=6101&state=&type=",
+      "https://www.myrkur.is/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Ndemic Creations": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Bristol, Avon",
+      "country": "England",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=6201&state=&type=",
+      "https://www.ndemiccreations.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "Next Level Games": {
     "description": "Vancouver-based first-party game studio developing games for Nintendo platforms.",
@@ -5215,6 +5465,31 @@
     ],
     "applicationLocation": "Remote working is available to staff; Lymm office is available for in-person work and occasional onboarding visits",
     "reachHighlights": "The official Careers page says remote work has been available for staff who prefer it since early 2020."
+  },
+  "Nordeus (Take-Two Interactive Software)": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Belgrade",
+      "country": "Serbia",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Mobile"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=6401&state=&type=",
+      "https://nordeus.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "Obsidian Entertainment": {
     "description": "California RPG developer known for narrative-heavy role-playing games and large-scale worlds.",
@@ -5419,6 +5694,31 @@
     "applicationLocation": "Remote · applicants must reside in Flanders, Belgium",
     "reachHighlights": "Headquartered in Ghent. The official open-application route is remote but explicitly limited to applicants living in Flanders."
   },
+  "Odenity Interactive": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Vanersborg, Vastra Gotaland",
+      "country": "Sweden",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Extended Reality (XR)"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=6501&state=&type=",
+      "https://odenity.se/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
   "Old Skull Games": {
     "description": "Independent Lyon game studio creating original IP and working with partners across PC, console and mobile.",
     "headquarters": {
@@ -5451,6 +5751,31 @@
       "https://www.oldskullgames.com/",
       "https://www.oldskullgames.com/careers/"
     ]
+  },
+  "Optillusion Games": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Irvine, California",
+      "country": "United States",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=6601&state=&type=",
+      "https://optillusion.games/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "Outplay Entertainment": {
     "description": "Independent Dundee studio developing original and partner games across mobile, PC, Roblox, HTML5 and console, with full-cycle and co-development services.",
