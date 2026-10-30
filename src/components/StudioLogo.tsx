@@ -16,6 +16,6 @@ export default function StudioLogo({name,websiteUrl,size="md"}:{name:string;webs
   const initials=name.split(/\s+/).filter(Boolean).slice(0,2).map(part=>part[0]).join("").toUpperCase();
   const source=sources[sourceIndex];
   return <span className={`studio-logo studio-logo-${size}`} role="img" aria-label={name+" logo"} title={name}>
-    {source?<img src={source} alt="" loading="lazy" decoding="async" referrerPolicy="no-referrer" onError={()=>setSourceIndex(current=>current+1)}/>:<span>{initials}</span>}
+    {source?<img src={source} alt="" loading="lazy" decoding="async" referrerPolicy="no-referrer" onError={() => setSourceIndex(sourceIndex === 0 ? 1 : 2)}/>:<span>{initials}</span>}
   </span>;
 }
