@@ -1013,28 +1013,6 @@
     }
   },
   {
-    "name": "Capcom Pictures",
-    "country": "United States",
-    "websiteUrl": "https://capcomusa.com/",
-    "applicationUrl": "https://app.jobvite.com/",
-    "evidenceUrl": "https://jobs.jobvite.com/capcomusa",
-    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-30",
-    "applicationResearch": {
-      "routeType": "general",
-      "submissionMethods": [
-        "ats"
-      ],
-      "workModel": "not_stated",
-      "eligibleLocations": [],
-      "disciplineScope": [],
-      "relatedApplicationUrls": [],
-      "routeStatus": "active",
-      "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-28"
-    }
-  },
-  {
     "name": "Carbonated",
     "country": "United States",
     "websiteUrl": "https://www.carbonated.com/",
@@ -1690,22 +1668,29 @@
     "websiteUrl": "https://embers.games/",
     "applicationUrl": "https://embers.games/",
     "evidenceUrl": "https://embers.games/",
-    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
+    "notes": "The official site identifies Embers as a game studio in Strasbourg and invites general applications through its contact channel. The page lists the Strasbourg address; remote and international applicant eligibility are not stated.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
-        "email",
-        "website_form"
+        "email"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
+      "eligibleLocations": [
+        "Strasbourg, France · remote and cross-border eligibility not stated"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
-    }
+    },
+    "submissionMethods": [
+      "email"
+    ],
+    "eligibleLocations": [
+      "Strasbourg, France · remote and cross-border eligibility not stated"
+    ]
   },
   {
     "name": "Fakefish",
@@ -1713,7 +1698,7 @@
     "websiteUrl": "https://www.fakefishgames.com/",
     "applicationUrl": "https://www.fakefishgames.com/jobs/open-application",
     "evidenceUrl": "https://www.fakefishgames.com/jobs",
-    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "notes": "The official Jobs page provides a dedicated open-application route and invites prospective team members to email their application. FakeFish is based in Turku; the page does not set a general international remote policy.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "open",
@@ -1721,13 +1706,21 @@
         "email"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
+      "eligibleLocations": [
+        "Turku, Finland · cross-border and remote eligibility not stated"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
-    }
+    },
+    "submissionMethods": [
+      "email"
+    ],
+    "eligibleLocations": [
+      "Turku, Finland · cross-border and remote eligibility not stated"
+    ]
   },
   {
     "name": "Fast Travel Games",
@@ -1735,7 +1728,7 @@
     "websiteUrl": "https://www.fasttravelgames.com/",
     "applicationUrl": "https://www.fasttravelgames.com/career",
     "evidenceUrl": "https://www.fasttravelgames.com/career",
-    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "notes": "The official Careers page invites open applications by email to career@fasttravelgames.com. Fast Travel Games is a Stockholm-based VR developer and publisher; the open route does not state remote or cross-border eligibility.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "open",
@@ -1743,13 +1736,21 @@
         "email"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
+      "eligibleLocations": [
+        "Stockholm, Sweden · remote and cross-border eligibility not stated"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
-    }
+    },
+    "submissionMethods": [
+      "email"
+    ],
+    "eligibleLocations": [
+      "Stockholm, Sweden · remote and cross-border eligibility not stated"
+    ]
   },
   {
     "name": "Fawkes Games",
@@ -1781,7 +1782,7 @@
     "websiteUrl": "https://flowgamestudio.com/",
     "applicationUrl": "https://www.flowgamestudio.com/opportunities",
     "evidenceUrl": "https://www.flowgamestudio.com/opportunities",
-    "notes": "Official studio-controlled page explicitly invites discipline specific applications. Evidence: Expression of Interest. Hiring geography is not inferred from headquarters.",
+    "notes": "The official Opportunities page invites Expressions of Interest and provides an email submission route. Flow Studio is based in Brisbane, Australia; remote and international eligibility are not stated.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "discipline_specific",
@@ -1789,21 +1790,34 @@
         "email"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
-      "disciplineScope": [],
+      "eligibleLocations": [
+        "Brisbane, Queensland, Australia · remote and cross-border eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Game development"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
-    }
+    },
+    "submissionMethods": [
+      "email"
+    ],
+    "eligibleLocations": [
+      "Brisbane, Queensland, Australia · remote and cross-border eligibility not stated"
+    ],
+    "disciplineScope": [
+      "Game development"
+    ]
   },
   {
     "name": "Fool’s Theory",
     "country": "Poland",
     "websiteUrl": "https://foolstheory.com/",
-    "applicationUrl": "https://www.teamtailor.com/?utm_campaign=poweredby&utm_content=careers.foolstheory.com&utm_medium=referral&utm_source=career-site",
+    "applicationUrl": "https://careers.foolstheory.com/connect",
     "evidenceUrl": "https://careers.foolstheory.com/",
-    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open Applications. Hiring geography is not inferred from headquarters.",
+    "notes": "The official Teamtailor Careers site provides an Open Applications/Connect form with discipline selections and future-opportunity notifications. The studio is based in Bielsko-Biała and says remote work is available within approximately two hours of GMT+1; confirm any role-specific country and work-authorisation constraints.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "open",
@@ -1811,21 +1825,49 @@
         "ats"
       ],
       "workModel": "remote",
-      "eligibleLocations": [],
-      "disciplineScope": [],
+      "eligibleLocations": [
+        "Remote within approximately ±2 hours of GMT+1; Bielsko-Biała, Poland"
+      ],
+      "disciplineScope": [
+        "Art",
+        "Animation",
+        "Design",
+        "Programming",
+        "Game design",
+        "Production",
+        "Quality assurance",
+        "Other studio disciplines"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-28"
-    }
+    },
+    "submissionMethods": [
+      "ats"
+    ],
+    "eligibleLocations": [
+      "Remote within approximately ±2 hours of GMT+1; Bielsko-Biała, Poland"
+    ],
+    "disciplineScope": [
+      "Art",
+      "Animation",
+      "Design",
+      "Programming",
+      "Game design",
+      "Production",
+      "Quality assurance",
+      "Other studio disciplines"
+    ],
+    "workModel": "remote"
   },
   {
     "name": "Formation Games",
-    "country": "England",
+    "country": "United Kingdom",
     "websiteUrl": "https://formation.games/",
     "applicationUrl": "https://formation.games/careers",
     "evidenceUrl": "https://formation.games/careers",
-    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
+    "notes": "The official Careers page invites general applications and provides a CV/portfolio/cover-letter email route. The studio is identified as a UK-based independent sports-game developer; the page does not state remote or cross-border applicant eligibility.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "general",
@@ -1833,13 +1875,21 @@
         "email"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
+      "eligibleLocations": [
+        "United Kingdom · remote and cross-border eligibility not stated"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
-    }
+    },
+    "submissionMethods": [
+      "email"
+    ],
+    "eligibleLocations": [
+      "United Kingdom · remote and cross-border eligibility not stated"
+    ]
   },
   {
     "name": "Frima Studio",
@@ -1867,11 +1917,11 @@
   },
   {
     "name": "Full Fat Productions",
-    "country": "England",
+    "country": "United Kingdom",
     "websiteUrl": "https://www.full-fat.com/",
     "applicationUrl": "https://www.full-fat.com/jobs/",
     "evidenceUrl": "https://www.full-fat.com/jobs/",
-    "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: speculative application. Hiring geography is not inferred from headquarters.",
+    "notes": "The official Jobs page states there are no current vacancies and explicitly invites speculative applications by email. The page identifies Warwick as the studio location; remote and international applicant eligibility are not stated.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "speculative",
@@ -1879,13 +1929,21 @@
         "email"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
+      "eligibleLocations": [
+        "Warwick, United Kingdom · remote and cross-border eligibility not stated"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
-    }
+    },
+    "submissionMethods": [
+      "email"
+    ],
+    "eligibleLocations": [
+      "Warwick, United Kingdom · remote and cross-border eligibility not stated"
+    ]
   },
   {
     "name": "Funatic Games",
@@ -1932,12 +1990,12 @@
     }
   },
   {
-    "name": "Funny Games",
-    "country": "Italy",
+    "name": "Funny Tales",
+    "country": "United States",
     "websiteUrl": "https://funnytales.us/",
     "applicationUrl": "https://funnytales.us/contact-us/",
     "evidenceUrl": "https://funnytales.us/contact-us/",
-    "notes": "Official studio-controlled page explicitly invites spontaneous applications. Evidence: Spontaneous application. Hiring geography is not inferred from headquarters.",
+    "notes": "The official Contact page identifies the operator as Digital Tales LLC (DBA Funny Tales), lists a Miami, Florida office and includes a spontaneous-application option in its form. Applicant location and remote eligibility are not stated.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "spontaneous",
@@ -1945,13 +2003,18 @@
         "website_form"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
+      "eligibleLocations": [
+        "Miami, Florida, USA · applicant-country and remote eligibility not stated"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
-    }
+    },
+    "eligibleLocations": [
+      "Miami, Florida, USA · applicant-country and remote eligibility not stated"
+    ]
   },
   {
     "name": "Futurats",
@@ -1959,21 +2022,29 @@
     "websiteUrl": "https://futurats.com/",
     "applicationUrl": "https://futurats.com/contact-us/",
     "evidenceUrl": "https://futurats.com/contact-us/",
-    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "notes": "The official Contact page explicitly invites open applications by email. The application instruction is separate from the general contact form; FutuRats is based in Turin, Italy and does not state remote or international applicant eligibility.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
-        "website_form"
+        "email"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
+      "eligibleLocations": [
+        "Turin, Italy · remote and cross-border eligibility not stated"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
-    }
+    },
+    "submissionMethods": [
+      "email"
+    ],
+    "eligibleLocations": [
+      "Turin, Italy · remote and cross-border eligibility not stated"
+    ]
   },
   {
     "name": "Futureplay Games",
@@ -2022,49 +2093,49 @@
     }
   },
   {
-    "name": "Game Boost Sweden",
-    "country": "Sweden",
-    "websiteUrl": "https://www.gameboost.se/",
-    "applicationUrl": "https://www.teamtailor.com/?utm_campaign=poweredby&utm_content=www.gameboost.se&utm_medium=referral&utm_source=career-site",
-    "evidenceUrl": "https://www.gameboost.se/jobs",
-    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open application. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-30",
-    "applicationResearch": {
-      "routeType": "open",
-      "submissionMethods": [
-        "ats",
-        "website_form"
-      ],
-      "workModel": "remote",
-      "eligibleLocations": [],
-      "disciplineScope": [],
-      "relatedApplicationUrls": [],
-      "routeStatus": "active",
-      "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-28"
-    }
-  },
-  {
     "name": "Game Tailors",
     "country": "Netherlands",
     "websiteUrl": "https://www.gametailors.com/",
-    "applicationUrl": "https://www.gametailors.com/over-ons/vacatures",
-    "evidenceUrl": "https://www.gametailors.com/over-ons/vacatures",
-    "notes": "Official studio-controlled page explicitly invites spontaneous applications. Evidence: Open sollicitatie. Hiring geography is not inferred from headquarters.",
+    "applicationUrl": "https://www.gametailors.com/over-ons/vacatures/open-sollicitatie",
+    "evidenceUrl": "https://www.gametailors.com/over-ons/vacatures/open-sollicitatie",
+    "notes": "The official Open Sollicitatie page describes internship opportunities and invites applications for marketing, development, art and UX research. Game Tailors is based in Delft and indicates office attendance is preferred; it does not state fully remote or international internship eligibility.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
-      "routeType": "spontaneous",
+      "routeType": "discipline_specific",
       "submissionMethods": [
         "email"
       ],
-      "workModel": "not_stated",
-      "eligibleLocations": [],
-      "disciplineScope": [],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "Delft, Netherlands · internship route; office attendance preferred"
+      ],
+      "disciplineScope": [
+        "Internships",
+        "Marketing",
+        "Game development",
+        "Art",
+        "UX research"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
-    }
+    },
+    "routeType": "discipline_specific",
+    "submissionMethods": [
+      "email"
+    ],
+    "eligibleLocations": [
+      "Delft, Netherlands · internship route; office attendance preferred"
+    ],
+    "disciplineScope": [
+      "Internships",
+      "Marketing",
+      "Game development",
+      "Art",
+      "UX research"
+    ],
+    "workModel": "hybrid"
   },
   {
     "name": "GauravGo Games Technologies",
@@ -2072,21 +2143,29 @@
     "websiteUrl": "https://gauravgo.com/",
     "applicationUrl": "https://www.gauravgo.com/careers",
     "evidenceUrl": "https://www.gauravgo.com/careers",
-    "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: speculative application. Hiring geography is not inferred from headquarters.",
+    "notes": "The official Careers page explicitly invites speculative applications when no suitable role is listed and links to an application form. The company lists a corporate office in Bhubaneswar and a registered office in Puri, Odisha; remote and international eligibility are not stated.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
-        "email"
+        "website_form"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
+      "eligibleLocations": [
+        "Bhubaneswar and Puri, Odisha, India · remote and cross-border eligibility not stated"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
-    }
+    },
+    "submissionMethods": [
+      "website_form"
+    ],
+    "eligibleLocations": [
+      "Bhubaneswar and Puri, Odisha, India · remote and cross-border eligibility not stated"
+    ]
   },
   {
     "name": "Ghost Ship Games",
@@ -2175,7 +2254,7 @@
     "websiteUrl": "https://goldtowngames.com/en/",
     "applicationUrl": "https://goldtowngames.com/en/job-opportunities/",
     "evidenceUrl": "https://goldtowngames.com/en/job-opportunities/",
-    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "notes": "The official Job Opportunities page invites open applications by email. Gold Town Games is based in Skellefteå and develops mobile sports-management games; its open route does not state remote or international applicant eligibility.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "open",
@@ -2183,13 +2262,21 @@
         "email"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
+      "eligibleLocations": [
+        "Skellefteå, Sweden · remote and cross-border eligibility not stated"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
-    }
+    },
+    "submissionMethods": [
+      "email"
+    ],
+    "eligibleLocations": [
+      "Skellefteå, Sweden · remote and cross-border eligibility not stated"
+    ]
   },
   {
     "name": "Greensky Games",
@@ -2197,7 +2284,7 @@
     "websiteUrl": "https://www.greensky.games/",
     "applicationUrl": "https://www.greensky.games/work",
     "evidenceUrl": "https://www.greensky.games/work",
-    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open Application. Hiring geography is not inferred from headquarters.",
+    "notes": "The official Work page describes Greensky Games as a remote-first studio based in Montréal and explicitly invites open applications. Applicant-country and work-authorisation eligibility are not specified.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "open",
@@ -2205,13 +2292,19 @@
         "website_form"
       ],
       "workModel": "remote",
-      "eligibleLocations": [],
+      "eligibleLocations": [
+        "Remote-first; studio base Montréal, Québec, Canada; applicant-country eligibility not stated"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
-    }
+    },
+    "eligibleLocations": [
+      "Remote-first; studio base Montréal, Québec, Canada; applicant-country eligibility not stated"
+    ],
+    "workModel": "remote"
   },
   {
     "name": "Havoc Games",
@@ -2360,7 +2453,7 @@
   },
   {
     "name": "Ingame Studios",
-    "country": "Czech Republic",
+    "country": "Czechia",
     "websiteUrl": "https://www.ingamestudios.com/",
     "applicationUrl": "https://www.ingamestudios.com/",
     "evidenceUrl": "https://www.ingamestudios.com/",
@@ -2406,7 +2499,7 @@
   },
   {
     "name": "Keen Software House",
-    "country": "Czech Republic",
+    "country": "Czechia",
     "websiteUrl": "https://www.keenswh.com/",
     "applicationUrl": "https://www.keenswh.com/job/spontaneous-applications/",
     "evidenceUrl": "https://www.keenswh.com/job/spontaneous-applications/",
