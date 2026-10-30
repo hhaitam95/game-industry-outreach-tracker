@@ -205,6 +205,28 @@
     }
   },
   {
+    "name": "AlterEyes",
+    "country": "Belgium",
+    "websiteUrl": "https://altereyes.com/",
+    "applicationUrl": "https://altereyes.com/jobs/",
+    "evidenceUrl": "https://altereyes.com/jobs/",
+    "notes": "Official Jobs page explicitly invites open applications and provides a general application form. A separate listed Senior Unity Developer role is on-site in Hasselt; the open-application route itself does not state applicant geography or remote eligibility.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Ambertail Games",
     "country": "United Kingdom",
     "websiteUrl": "https://www.ambertailgames.com/",
@@ -2039,6 +2061,28 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "The Knights of U",
+    "country": "Poland",
+    "websiteUrl": "https://theknightsofu.com/",
+    "applicationUrl": "https://theknightsofunity.elevato.net/pl/nie-znalazles-interesujacego-cie-stanowiska%2Cja%2C58",
+    "evidenceUrl": "https://theknightsofu.com/career/",
+    "notes": "Official career page invites CVs from talented applicants who have not found an ideal listed position and links to a dedicated recruitment-platform form. Office, hybrid and fully remote work are described, but applicant-country eligibility is not stated. Formerly The Knights of Unity.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-28"
     }
   },
