@@ -4387,5 +4387,96 @@
     ],
     "applicationLocation": "Dubai, UAE / United Kingdom · remote-friendly; applicant-country eligibility not stated",
     "reachHighlights": "Portfolio mixes conventional game development, XR and Web3/blockchain services; the official Careers page accepts open applications by email."
+  },
+  "Crystal Dynamics": {
+    "description": "American video-game developer known for the Tomb Raider and Legacy of Kain franchises, with more than three decades of game-development history.",
+    "headquarters": {
+      "city": "San Carlos",
+      "country": "United States",
+      "countryCode": "US",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Bellevue, Washington",
+      "Austin, Texas"
+    ],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "AAA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "PlayStation",
+      "Xbox",
+      "Action-adventure",
+      "Narrative"
+    ],
+    "popularGames": [
+      {
+        "title": "Tomb Raider",
+        "appId": null
+      },
+      {
+        "title": "Rise of the Tomb Raider",
+        "appId": null
+      },
+      {
+        "title": "Shadow of the Tomb Raider",
+        "appId": null
+      },
+      {
+        "title": "Marvel's Avengers",
+        "appId": null
+      },
+      {
+        "title": "Legacy of Kain",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.crystaldynamics.com/",
+      "https://www.crystaldynamics.com/careers/",
+      "https://www.crystaldynamics.com/careers/job-scams-phishing-attempts/"
+    ],
+    "applicationLocation": "Remote/Flexible · location and role dependent; on-site options in San Carlos, Bellevue and Austin",
+    "reachHighlights": "Thirty-plus years of game development; current official career listing includes a General Application for future roles."
+  },
+  "PlayQ": {
+    "description": "Santa Monica-based global entertainment and technology company developing mobile games and original game IP.",
+    "headquarters": {
+      "city": "Santa Monica",
+      "country": "United States",
+      "countryCode": "US",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Mobile"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Not disclosed",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "Casual",
+      "Puzzle",
+      "Narrative",
+      "Game development tools"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.playq.com/careers",
+      "https://www.playq.com/contact",
+      "https://job-boards.greenhouse.io/playq/jobs/3055199"
+    ],
+    "applicationLocation": "Santa Monica, California · general application form asks about US work authorization and visa sponsorship; remote eligibility not stated",
+    "reachHighlights": "PlayQ reports more than 60 million game downloads across its portfolio (company-reported)."
   }
 }

@@ -632,6 +632,40 @@
     }
   },
   {
+    "name": "Crystal Dynamics",
+    "country": "United States",
+    "websiteUrl": "https://www.crystaldynamics.com/",
+    "applicationUrl": "https://job-boards.greenhouse.io/crystaldynamics/jobs/4352498005",
+    "evidenceUrl": "https://www.crystaldynamics.com/careers/",
+    "notes": "Official Careers page links to a Greenhouse General Application for future roles. The current posting is marked Remote/Flexible; the studio says remote opportunities depend on location and also offers hybrid on-site/off-site work. Headquarters is San Carlos, California.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Remote/Flexible · role and location dependent; San Carlos, California HQ"
+      ],
+      "disciplineScope": [
+        "Art",
+        "Animation",
+        "Audio",
+        "Design",
+        "Engineering",
+        "Production",
+        "UI/UX",
+        "QA",
+        "Operations"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Cyanide Studio",
     "country": "France",
     "websiteUrl": "https://cyanide-studio.com/",
@@ -1693,6 +1727,37 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "PlayQ",
+    "country": "United States",
+    "websiteUrl": "https://www.playq.com/",
+    "applicationUrl": "https://job-boards.greenhouse.io/playq/jobs/3055199",
+    "evidenceUrl": "https://www.playq.com/careers",
+    "notes": "Official Careers page explicitly invites applicants who do not see a suitable opening to submit a resume for future matching and links directly to its Greenhouse General Application. The form lists Santa Monica, California and asks applicants about US work authorization and current/future visa sponsorship; remote eligibility for speculative applicants is not stated.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Santa Monica, California · form asks about US work authorization and visa sponsorship; remote eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Art",
+        "Motion Graphics",
+        "Design",
+        "Production",
+        "Engineering"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-28"
     }
   },
