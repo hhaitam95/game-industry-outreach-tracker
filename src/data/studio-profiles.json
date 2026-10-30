@@ -4478,5 +4478,44 @@
     ],
     "applicationLocation": "Santa Monica, California · general application form asks about US work authorization and visa sponsorship; remote eligibility not stated",
     "reachHighlights": "PlayQ reports more than 60 million game downloads across its portfolio (company-reported)."
+  },
+  "Couch Heroes": {
+    "description": "Remote-first game studio developing an Unreal Engine-powered MMO experience and a cross-game social platform that connects player identities, progression, quests and rewards.",
+    "headquarters": {
+      "city": null,
+      "country": "Not stated",
+      "countryCode": "",
+      "label": "HQ unresolved · official pages differ on base"
+    },
+    "otherLocations": [
+      "Team members across Europe",
+      "United States",
+      "Middle East"
+    ],
+    "companyType": [
+      "Developer",
+      "Online multiplayer",
+      "Platform"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Not disclosed",
+    "teamSize": "15+ nationalities represented (studio-reported; not team-size count)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Unreal Engine",
+      "MMO",
+      "Online multiplayer",
+      "Social platform",
+      "Cross-game progression"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://couch-heroes.com/careers",
+      "https://couch-heroes.com/careers/120029215"
+    ],
+    "applicationLocation": "Remote-first; team across Europe, USA and Middle East · applicant-country eligibility not stated",
+    "reachHighlights": "Building an MMO universe and developer platform; careers page says its team represents 15+ nationalities."
   }
 }
