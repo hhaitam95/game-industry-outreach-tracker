@@ -7,6 +7,7 @@ export type TrackedApplication={
   applicationUrl:string;
   country:string;
   hqLabel:string;
+  applicationLocation?:string;
   status:TrackerStatus;
   createdAt:string;
   updatedAt:string;
