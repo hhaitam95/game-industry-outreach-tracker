@@ -16,9 +16,9 @@ on:
         description: "Bootstrap performs a larger first backfill; hourly runs one rotating discovery batch."
         type: choice
         options:
-          - bootstrap
+          - bulk
           - hourly
-        default: bootstrap
+        default: bulk
         required: true
 
 permissions:
@@ -34,7 +34,7 @@ jobs:
   discover-and-publish:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -66,32 +66,27 @@ jobs:
 
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             MODE="${{ inputs.mode }}"
-          elif [ -f "$STATE_FILE" ]; then
-            BOOTSTRAP_STARTED="$(python3 -c "import json; from pathlib import Path; p=Path('$STATE_FILE'); print(str(json.loads(p.read_text()).get('bootstrap_started', False)).lower())")"
-            if [ "$BOOTSTRAP_STARTED" != "true" ]; then
-              MODE="bootstrap"
-            fi
-          else
-            MODE="bootstrap"
+          elif [ ! -f "$STATE_FILE" ]; then
+            MODE="bulk"
           fi
 
-          if [ "$MODE" = "bootstrap" ]; then
+          if [ "$MODE" = "bulk" ]; then
             python3 scripts/discover_speculative_studios.py \
-              --mode bootstrap \
+              --mode bulk \
               --batch-size 100 \
-              --max-source-pages 4 \
-              --max-candidate-checks 150 \
+              --max-source-pages 110 \
+              --max-candidate-checks 250 \
               --route-check-count 8 \
-              --max-run-seconds 1200 \
+              --max-run-seconds 1500 \
               --state-file "$STATE_FILE"
           else
             python3 scripts/discover_speculative_studios.py \
               --mode hourly \
               --batch-size 100 \
               --max-source-pages 1 \
-              --max-candidate-checks 100 \
+              --max-candidate-checks 150 \
               --route-check-count 8 \
-              --max-run-seconds 1200 \
+              --max-run-seconds 1500 \
               --state-file "$STATE_FILE"
           fi
           echo "mode=$MODE" >> "$GITHUB_OUTPUT"
