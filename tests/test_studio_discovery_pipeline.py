@@ -113,7 +113,7 @@ class CandidateVerificationTests(unittest.TestCase):
             "qid": "Q123",
             "entity_url": "https://www.wikidata.org/entity/Q123",
             "name": "Example Game Studio",
-            "website": "https://example-studio.test/",
+            "website": "https://example-studio.example/",
             "country": "Canada",
             "hq_city": "Montreal",
             "country_code": "CA",
@@ -121,9 +121,9 @@ class CandidateVerificationTests(unittest.TestCase):
 
     def test_candidate_is_verified_only_from_official_positive_evidence(self):
         pages = {
-            "https://example-studio.test/": discovery.FetchResult(
+            "https://example-studio.example/": discovery.FetchResult(
                 True,
-                "https://example-studio.test/",
+                "https://example-studio.example/",
                 200,
                 """
                 <title>Example Studio</title>
@@ -131,9 +131,9 @@ class CandidateVerificationTests(unittest.TestCase):
                 <a href="https://boards.greenhouse.io/example-studio">Apply</a>
                 """,
             ),
-            "https://example-studio.test/careers": discovery.FetchResult(
+            "https://example-studio.example/careers": discovery.FetchResult(
                 True,
-                "https://example-studio.test/careers",
+                "https://example-studio.example/careers",
                 200,
                 """
                 <title>Careers</title>
@@ -159,18 +159,18 @@ class CandidateVerificationTests(unittest.TestCase):
         self.assertEqual(result["status"], "verified")
         self.assertEqual(result["route_type"], "speculative")
         self.assertEqual(result["application_url"], "https://boards.greenhouse.io/example-studio")
-        self.assertEqual(result["evidence_url"], "https://example-studio.test/careers")
+        self.assertEqual(result["evidence_url"], "https://example-studio.example/careers")
         self.assertIn("ats", result["submission_methods"])
         self.assertEqual(result["source_type"], "employer_managed_career_platform")
 
     def test_explicit_rejection_means_no_route_even_if_page_has_careers_links(self):
         pages = {
-            "https://example-studio.test/": discovery.FetchResult(
-                True, "https://example-studio.test/", 200,
+            "https://example-studio.example/": discovery.FetchResult(
+                True, "https://example-studio.example/", 200,
                 '<a href="/careers">Careers</a>',
             ),
-            "https://example-studio.test/careers": discovery.FetchResult(
-                True, "https://example-studio.test/careers", 200,
+            "https://example-studio.example/careers": discovery.FetchResult(
+                True, "https://example-studio.example/careers", 200,
                 "<p>We are not currently accepting speculative applications.</p>",
             ),
         }
@@ -184,8 +184,8 @@ class CandidateVerificationTests(unittest.TestCase):
 
     def test_ambiguous_page_is_not_published(self):
         pages = {
-            "https://example-studio.test/": discovery.FetchResult(
-                True, "https://example-studio.test/", 200,
+            "https://example-studio.example/": discovery.FetchResult(
+                True, "https://example-studio.example/", 200,
                 "<h1>Careers</h1><p>View our open positions and apply online.</p>",
             ),
         }
@@ -194,8 +194,8 @@ class CandidateVerificationTests(unittest.TestCase):
 
     def test_relevant_vice_content_is_excluded(self):
         pages = {
-            "https://example-studio.test/": discovery.FetchResult(
-                True, "https://example-studio.test/", 200,
+            "https://example-studio.example/": discovery.FetchResult(
+                True, "https://example-studio.example/", 200,
                 "<p>We are a social casino game studio.</p><a href='/careers'>Careers</a>",
             ),
         }
@@ -227,18 +227,18 @@ class DatasetUpdateTests(unittest.TestCase):
                 "qid": "Q123",
                 "entity_url": "https://www.wikidata.org/entity/Q123",
                 "name": "Example Game Studio",
-                "website": "https://example-studio.test/",
+                "website": "https://example-studio.example/",
                 "country": "Canada",
                 "hq_city": "Montreal",
                 "country_code": "CA",
             }])
             pages = {
-                "https://example-studio.test/": discovery.FetchResult(
-                    True, "https://example-studio.test/", 200,
+                "https://example-studio.example/": discovery.FetchResult(
+                    True, "https://example-studio.example/", 200,
                     '<a href="/careers">Careers</a>',
                 ),
-                "https://example-studio.test/careers": discovery.FetchResult(
-                    True, "https://example-studio.test/careers", 200,
+                "https://example-studio.example/careers": discovery.FetchResult(
+                    True, "https://example-studio.example/careers", 200,
                     "<p>We welcome speculative applications.</p><form></form>",
                 ),
             }
@@ -271,14 +271,14 @@ class DatasetUpdateTests(unittest.TestCase):
             "qid": "Q123",
             "entity_url": "https://www.wikidata.org/entity/Q123",
             "name": "Example Game Studio",
-            "website": "https://www.example-studio.test/",
+            "website": "https://www.example-studio.example/",
             "country": "Canada",
             "hq_city": "",
             "country_code": "CA",
         }])
         studios = [{
             "name": "Example Game Studio",
-            "websiteUrl": "https://example-studio.test/",
+            "websiteUrl": "https://example-studio.example/",
         }]
         profiles = {}
         checked, published = discovery.process_candidate_queue(
@@ -292,9 +292,9 @@ class DatasetUpdateTests(unittest.TestCase):
     def test_transient_route_checks_never_close_a_studio(self):
         studio = {
             "name": "Example Game Studio",
-            "websiteUrl": "https://example-studio.test/",
-            "applicationUrl": "https://example-studio.test/apply",
-            "evidenceUrl": "https://example-studio.test/careers",
+            "websiteUrl": "https://example-studio.example/",
+            "applicationUrl": "https://example-studio.example/apply",
+            "evidenceUrl": "https://example-studio.example/careers",
             "notes": "Verified route.",
             "checkedAt": "2026-10-30",
             "applicationResearch": {
@@ -311,9 +311,9 @@ class DatasetUpdateTests(unittest.TestCase):
     def test_two_consecutive_confirmed_missing_checks_close_route_but_preserve_record(self):
         studio = {
             "name": "Example Game Studio",
-            "websiteUrl": "https://example-studio.test/",
-            "applicationUrl": "https://example-studio.test/apply",
-            "evidenceUrl": "https://example-studio.test/careers",
+            "websiteUrl": "https://example-studio.example/",
+            "applicationUrl": "https://example-studio.example/apply",
+            "evidenceUrl": "https://example-studio.example/careers",
             "notes": "Verified route.",
             "checkedAt": "2026-10-30",
             "applicationResearch": {
