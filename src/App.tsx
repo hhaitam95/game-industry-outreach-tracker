@@ -57,10 +57,10 @@ export default function App(){
     });
   }
 
-  function markApplied(studio:{name:string;websiteUrl:string;applicationUrl:string;country:string}){
+  function markApplied(studio:{name:string;websiteUrl:string;applicationUrl:string;country:string},geo:{country:string;hqLabel:string;applicationLocation:string}){
     const confirmed=window.confirm("Confirm that you have submitted an application to "+studio.name+"? This will add it to My Applications as Applied.");
     if(!confirmed)return;
-    trackStudio(studio,"applied",location);
+    trackStudio(studio,"applied",geo);
     setTrackerInitialTab("applied");
     setPage("applications");
   }
