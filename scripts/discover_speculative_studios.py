@@ -118,7 +118,11 @@ POSITIVE_ROUTE_PATTERNS = (
     re.compile(r"\bcandidature\s+libre\b", re.I),
     re.compile(r"\binitiativbewerbung(?:en)?\b", re.I),
     re.compile(r"\bspontanbewerbung(?:en)?\b", re.I),
-    re.compile(r"\bcandidatura\s+espont[aâ]nea\b", re.I),
+    re.compile(r"\bcandidatura\s+espont[aáâ]nea\b", re.I),
+    re.compile(r"\bopen\s+sollicitatie(?:s)?\b", re.I),
+    re.compile(r"\bavoin\s+hakemus\b", re.I),
+    re.compile(r"\buopfordret\s+ans[oø]gning(?:er)?\b", re.I),
+    re.compile(r"\b[aå]pen\s+s[oø]knad(?:er)?\b", re.I),
     re.compile(r"\bcandidatura\s+spontanea\b", re.I),
     re.compile(r"\bspontane\s+sollicitatie\b", re.I),
     re.compile(r"\bspontanansök(?:an|ningar)\b", re.I),
@@ -161,7 +165,7 @@ POSITIVE_ROUTE_TYPE = (
     ("discipline_specific", re.compile(r"\b(?:expression of interest|talent pool)\b", re.I)),
     ("open", re.compile(r"\bopen applications?\b", re.I)),
     ("general", re.compile(r"\bgeneral applications?\b", re.I)),
-    ("spontaneous", re.compile(r"\b(?:candidature\s+spontan[ée]e?s?|initiativbewerbung|spontanbewerbung|candidatura\s+espont[aâ]nea|spontane\s+sollicitatie|spontanansök(?:an|ningar)|spontanansøgning|spontan\s+jelentkez[eé]s|spontaniczna\s+aplikacja)\b", re.I)),
+    ("spontaneous", re.compile(r"\b(?:candidature\s+spontan[ée]e?s?|initiativbewerbung|spontanbewerbung|candidatura\s+espont[aáâ]nea|spontane\s+sollicitatie|open\s+sollicitatie|avoin\s+hakemus|uopfordret\s+ans[oø]gning|[aå]pen\s+s[oø]knad|spontanansök(?:an|ningar)|spontanansøgning|spontan\s+jelentkez[eé]s|spontaniczna\s+aplikacja)\b", re.I)),
 )
 
 COUNTRY_CODE_RE = re.compile(r"^[A-Z]{2}$")
