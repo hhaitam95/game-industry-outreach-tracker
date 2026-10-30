@@ -98,6 +98,59 @@ class DiscoveryParsingTests(unittest.TestCase):
             )
         discovery.ROBOTS_CACHE.clear()
 
+    def test_same_host_requests_are_serialized_by_per_host_lock(self):
+        host = "serialization-test.example"
+        discovery.LAST_REQUEST_BY_HOST.pop(host, None)
+        discovery.HOST_LOCKS.pop(host, None)
+        first_sleep = threading.Event()
+        second_sleep = threading.Event()
+        release_first = threading.Event()
+        sleep_count = 0
+        sleep_count_lock = threading.Lock()
+
+        def controlled_sleep(_delay):
+            nonlocal sleep_count
+            with sleep_count_lock:
+                sleep_count += 1
+                current_call = sleep_count
+            if current_call == 1:
+                first_sleep.set()
+                release_first.wait(timeout=2)
+            elif current_call == 2:
+                second_sleep.set()
+
+        def request_host():
+            discovery.wait_for_host(host)
+
+        first = threading.Thread(target=request_host, daemon=True)
+        second = threading.Thread(target=request_host, daemon=True)
+        try:
+            with (
+                patch.object(discovery, "PER_HOST_DELAY_SECONDS", 1.2),
+                patch.object(discovery.time, "monotonic", return_value=0.0),
+                patch.object(discovery.time, "sleep", side_effect=controlled_sleep),
+            ):
+                first.start()
+                self.assertTrue(first_sleep.wait(timeout=1))
+                second.start()
+                self.assertFalse(
+                    second_sleep.wait(timeout=0.05),
+                    "a second request for the same host entered the delay concurrently",
+                )
+                release_first.set()
+                first.join(timeout=1)
+                second.join(timeout=1)
+            self.assertFalse(first.is_alive())
+            self.assertFalse(second.is_alive())
+            self.assertTrue(second_sleep.is_set())
+            self.assertEqual(sleep_count, 2)
+        finally:
+            release_first.set()
+            first.join(timeout=2)
+            second.join(timeout=2)
+            discovery.LAST_REQUEST_BY_HOST.pop(host, None)
+            discovery.HOST_LOCKS.pop(host, None)
+
     def test_positive_route_language_is_detected(self):
         cases = [
             "We welcome speculative applications from talented developers.",
