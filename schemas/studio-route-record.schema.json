@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://studioscout.local/schemas/studio-route-record.schema.json",
+  "title": "StudioScout application route record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "country",
+    "websiteUrl",
+    "applicationUrl",
+    "evidenceUrl",
+    "notes",
+    "checkedAt",
+    "applicationResearch"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "country": {
+      "type": "string",
+      "minLength": 1
+    },
+    "websiteUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://"
+    },
+    "applicationUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://"
+    },
+    "evidenceUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://"
+    },
+    "notes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "checkedAt": {
+      "type": "string",
+      "format": "date"
+    },
+    "applicationResearch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "routeType",
+        "submissionMethods",
+        "workModel",
+        "eligibleLocations",
+        "disciplineScope",
+        "relatedApplicationUrls",
+        "routeStatus",
+        "sourceType",
+        "nextReviewAt"
+      ],
+      "properties": {
+        "routeType": {
+          "enum": [
+            "speculative",
+            "unsolicited",
+            "spontaneous",
+            "open",
+            "general",
+            "discipline_specific"
+          ]
+        },
+        "submissionMethods": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "ats",
+              "email",
+              "website_form",
+              "contact_form"
+            ]
+          }
+        },
+        "workModel": {
+          "enum": [
+            "remote",
+            "hybrid",
+            "on_site",
+            "mixed",
+            "not_stated"
+          ]
+        },
+        "eligibleLocations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "disciplineScope": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "relatedApplicationUrls": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://"
+          }
+        },
+        "routeStatus": {
+          "enum": [
+            "active",
+            "paused",
+            "closed"
+          ]
+        },
+        "sourceType": {
+          "enum": [
+            "official_company_site",
+            "studio_controlled_ats",
+            "employer_managed_career_platform"
+          ]
+        },
+        "nextReviewAt": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    }
+  }
+}

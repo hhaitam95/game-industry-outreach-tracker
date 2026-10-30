@@ -1,12 +1,49 @@
 [
   {
+    "name": "4A Games",
+    "country": "Malta",
+    "websiteUrl": "https://www.4a-games.com.mt/",
+    "applicationUrl": "https://www.4a-games.com.mt/other-cv",
+    "evidenceUrl": "https://www.4a-games.com.mt/careers",
+    "notes": "Official careers page explicitly links an “Unsolicited Application” route for applicants who do not see a suitable position. Studio operates in Malta and Kyiv; the general route does not state remote or applicant-country eligibility.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Malta / Kyiv studio network · remote eligibility not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "AARISE",
     "country": "France",
     "websiteUrl": "https://www.aarise.games/",
     "applicationUrl": "https://www.aarise.games/jobs/",
     "evidenceUrl": "https://www.aarise.games/jobs/",
     "notes": "Official Jobs page invites spontaneous applications and provides a form; asks for a CV and portfolio/showreel. Studio is in La Rochelle; listed roles are on-site or hybrid.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Abyssal Interactive",
@@ -15,7 +52,20 @@
     "applicationUrl": "https://www.abyssal-interactive.com/en/careers",
     "evidenceUrl": "https://www.abyssal-interactive.com/en/careers",
     "notes": "Official careers page invites spontaneous applications if no listed role fits. Current freelance roles are remote; speculative applicant eligibility is not stated.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Aden Interactive",
@@ -24,7 +74,22 @@
     "applicationUrl": "https://adeninteractive.com/careers/",
     "evidenceUrl": "https://adeninteractive.com/careers/",
     "notes": "Official careers page invites spontaneous applications for roles in Portugal or remote, including full-time, part-time, contract and freelance.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Portugal or remote · see role conditions"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Aethra Studios",
@@ -33,7 +98,46 @@
     "applicationUrl": "https://www.aethrastudios.com/careers/",
     "evidenceUrl": "https://www.aethrastudios.com/careers/",
     "notes": "Official careers page invites open applications with a portfolio or work samples. Remote across Europe with CET overlap; specific roles are also listed.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote across Europe · CET overlap"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Ambertail Games",
+    "country": "United Kingdom",
+    "websiteUrl": "https://www.ambertailgames.com/",
+    "applicationUrl": "https://www.ambertailgames.com/jobs",
+    "evidenceUrl": "https://www.ambertailgames.com/jobs",
+    "notes": "Official Jobs page has a dedicated Speculative Applications section and invites applicants to submit for future opportunities. The studio says it supports in-house or remote working, but remote-country eligibility is not stated.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "In-house or remote; remote-country eligibility not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Artefacts Studio",
@@ -42,7 +146,20 @@
     "applicationUrl": "https://www.artefacts-studio.fr/career",
     "evidenceUrl": "https://www.artefacts-studio.fr/career",
     "notes": "Official careers page explicitly invites spontaneous applications and provides an application route. Studio address is in Villeurbanne, France.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Aska Studios",
@@ -51,7 +168,22 @@
     "applicationUrl": "https://askastudios.is/",
     "evidenceUrl": "https://askastudios.is/",
     "notes": "Official site invites CV and portfolio emails for developers, artists, designers and other contributors. Reykjavík-based studio describes a remote-first work environment.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote-first · confirm country eligibility"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Asobo Studio",
@@ -60,7 +192,22 @@
     "applicationUrl": "https://jobs.eu.lever.co/asobostudio/b4b5157c-8b6d-441f-a3ed-5bd26034813f",
     "evidenceUrl": "https://www.asobostudio.com/fr/carriere",
     "notes": "Official Lever Speculative Application accepts candidates whose skills do not match a listed role. Full-time, on-site in Bordeaux; portfolio encouraged.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "on_site",
+      "eligibleLocations": [
+        "Bordeaux · on-site"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Awe Interactive",
@@ -69,7 +216,20 @@
     "applicationUrl": "https://www.aweinteractive.com/careers",
     "evidenceUrl": "https://www.aweinteractive.com/careers",
     "notes": "Official careers page has a Speculative Application section and invites candidates to contact careers@aweinteractive.com. Work location and eligibility are unstated.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Bananagun",
@@ -78,7 +238,20 @@
     "applicationUrl": "https://bananagun.games/",
     "evidenceUrl": "https://bananagun.games/",
     "notes": "Official site describes a small, senior mobile game team building hyper- and hybrid-casual Unity games for iOS and Android; current careers section invites open applications. HQ is not publicly stated.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Barnstorm Games",
@@ -87,7 +260,20 @@
     "applicationUrl": "https://www.barnstormgames.com/speculative-application/",
     "evidenceUrl": "https://www.barnstormgames.com/speculative-application/",
     "notes": "Dedicated Speculative Application page invites applications from candidates who do not see the right role advertised. Company registered in England and Wales.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Beenox",
@@ -96,7 +282,44 @@
     "applicationUrl": "https://beenox.com/carrieres",
     "evidenceUrl": "https://beenox.com/carrieres",
     "notes": "Official careers FAQ explicitly confirms spontaneous applications and invites CVs. Full-time roles only; studio locations include Québec City and Montréal.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Blackbird Interactive",
+    "country": "Canada",
+    "websiteUrl": "https://blackbirdinteractive.com/",
+    "applicationUrl": "https://jobs.lever.co/blackbirdinteractive/498bb3c2-b23f-4aed-8fdd-ee80649e381d",
+    "evidenceUrl": "https://jobs.lever.co/blackbirdinteractive/498bb3c2-b23f-4aed-8fdd-ee80649e381d",
+    "notes": "Official Lever General Application invites candidates who do not fit current openings. Current eligibility is restricted to applicants legally eligible to work in Canada and residing in Canada; studio describes flexible, remote-first arrangements.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "Canada only; applicants must reside in Canada and be legally eligible to work there"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Blowfish Studios",
@@ -105,7 +328,22 @@
     "applicationUrl": "https://www.blowfishstudios.com/open-application",
     "evidenceUrl": "https://www.blowfishstudios.com/open-application",
     "notes": "Official Open Application asks applicants without a matching role to email a resume. Preferred locations are Brisbane, Sydney, Melbourne and/or remote.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Preferred locations include Brisbane, Sydney, Melbourne and/or remote"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Bossa Studios",
@@ -114,7 +352,22 @@
     "applicationUrl": "https://www.bossagames.com/careers.html",
     "evidenceUrl": "https://www.bossagames.com/careers.html",
     "notes": "Official careers page invites speculative resumes, says the studio is 100% remote, and shows a speculative application open to all departments any time. Official route describes eligibility as worldwide.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote-first · application eligibility to confirm"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Brave At Night",
@@ -123,7 +376,20 @@
     "applicationUrl": "https://www.braveatnight.co.uk/speculative",
     "evidenceUrl": "https://www.braveatnight.co.uk/speculative",
     "notes": "Official page is titled Speculative Application and asks applicants to send a CV and portfolio if possible.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Chimera Entertainment",
@@ -132,7 +398,22 @@
     "applicationUrl": "https://chimera-entertainment.jobs.personio.com/job/150955?language=en",
     "evidenceUrl": "https://chimera-entertainment.jobs.personio.com/job/150955?language=en",
     "notes": "Official Personio posting is titled speculative application; it says applicants who did not find a fitting role can apply anyway. Munich office. Work model: onsite.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Hybrid / remote · Europe"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "CI Games",
@@ -141,7 +422,79 @@
     "applicationUrl": "https://cigames.teamtailor.com/jobs/7918450-open-application",
     "evidenceUrl": "https://cigames.teamtailor.com/jobs/7918450-open-application",
     "notes": "Official Open Application welcomes candidates even if no exact role is listed. Marked Worldwide and Fully Remote; considers current or future project needs.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Worldwide · fully remote"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
+  },
+  {
+    "name": "Climax Studios",
+    "country": "United Kingdom",
+    "websiteUrl": "https://www.climaxstudios.com/",
+    "applicationUrl": "https://www.climaxstudios.com/join-our-team/jobs/Rw-speculative-application-art-animation/",
+    "evidenceUrl": "https://www.climaxstudios.com/join-our-team/jobs/Rw-speculative-application-art-animation/",
+    "notes": "Official careers site lists multiple active discipline-specific speculative applications: Art & Animation, Game & Level Design, and Games Programming. The selected route is Art & Animation; separate related routes are recorded for the other disciplines. Portsmouth, UK.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "discipline_specific",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Portsmouth, United Kingdom"
+      ],
+      "disciplineScope": [
+        "Art & Animation",
+        "Game & Level Design",
+        "Games Programming"
+      ],
+      "relatedApplicationUrls": [
+        "https://www.climaxstudios.com/join-our-team/jobs/Rh-speculative-application-game-level-design/",
+        "https://www.climaxstudios.com/join-our-team/jobs/R6-speculative-application-games-programming/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Code Wizards Group",
+    "country": "United Kingdom",
+    "websiteUrl": "https://codewizards.io/",
+    "applicationUrl": "https://careers.codewizards.io/jobs/5884840-speculative-application",
+    "evidenceUrl": "https://careers.codewizards.io/jobs/5884840-speculative-application",
+    "notes": "Official Code Wizards careers platform has a dedicated Speculative Application and invites CVs for future roles. Game-industry professional-services group specialising in backend and multiplayer infrastructure. Listed locations are Reading (UK), Elgin (UK) and Vancouver (Canada); hybrid.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "Reading, United Kingdom",
+        "Elgin, Scotland, United Kingdom",
+        "Vancouver, Canada"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "CraftiGames",
@@ -150,7 +503,22 @@
     "applicationUrl": "https://www.craftigames.net/careers",
     "evidenceUrl": "https://www.craftigames.net/careers",
     "notes": "Official careers page invites open applications beyond listed roles. Small, fully remote Minecraft studio; typical roles specify a GMT ±6-hour window.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote · GMT ±6 hours typically"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Cyanide Studio",
@@ -159,7 +527,68 @@
     "applicationUrl": "https://cyanide-studio.com/fr/nous-rejoindre/",
     "evidenceUrl": "https://cyanide-studio.com/fr/nous-rejoindre/",
     "notes": "Official careers page invites spontaneous applications when no listed role fits. The page's Apply button leads to an external application form; French-language route.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Cybernation Team",
+    "country": "Ukraine",
+    "websiteUrl": "https://cybernation.team/",
+    "applicationUrl": "https://cybernation.team/careers",
+    "evidenceUrl": "https://cybernation.team/careers",
+    "notes": "Official site identifies Cybernation as an independent Ukrainian game studio and provides a General Application for candidates who can strengthen the team. Current role examples are listed as remote / Kyiv; the general-application page does not fully specify applicant-country restrictions.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Remote / Kyiv roles advertised; general-applicant eligibility not fully specified"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Dark Cloud Games",
+    "country": "Portugal",
+    "websiteUrl": "https://www.darkcloud.games/",
+    "applicationUrl": "https://www.darkcloud.games/careers/",
+    "evidenceUrl": "https://www.darkcloud.games/careers/",
+    "notes": "Official careers page has a Speculative Applications section and invites CVs and cover letters by email when current roles do not fit. Applicants are asked to put their name and “Speculative Application” in the subject line.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Lisbon, Portugal · remote eligibility not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Dionic Software",
@@ -168,7 +597,46 @@
     "applicationUrl": "https://dionicsoftware.com/jobs.html",
     "evidenceUrl": "https://dionicsoftware.com/jobs.html",
     "notes": "Official jobs page invites speculative approaches when no role fits. Employment is Germany-only; freelancers can usually work from European time zones. Work model: remote.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Germany for employees · European time zones considered for freelancers"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Dogfish Games",
+    "country": "Canada",
+    "websiteUrl": "https://dogfishgames.com/",
+    "applicationUrl": "https://dogfishgames.com/jobs/",
+    "evidenceUrl": "https://dogfishgames.com/jobs/",
+    "notes": "Official jobs page invites General Applications across all teams despite having no current openings. Full-time and remote; applicants must be based in or willing to work within Canadian time zones.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Based in or willing to work within Canadian time zones"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "DON'T NOD (Montreal)",
@@ -177,7 +645,22 @@
     "applicationUrl": "https://jobs.smartrecruiters.com/DONTNOD/744000056999494-spontaneous-application",
     "evidenceUrl": "https://jobs.smartrecruiters.com/DONTNOD/744000056999494-spontaneous-application",
     "notes": "Official SmartRecruiters Spontaneous Application for DON'T NOD Montreal. Invites applications when the career site has no matching role; Montreal-specific.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Montréal-specific application"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Ember Crows",
@@ -186,7 +669,22 @@
     "applicationUrl": "https://www.embercrows.com/careers/spontaneous-application",
     "evidenceUrl": "https://www.embercrows.com/careers/spontaneous-application",
     "notes": "Official Spontaneous Application accepts worldwide applicants. Caveat: project-based freelance with points-based profit share, no guaranteed upfront salary or fee.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote-friendly · confirm role eligibility"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Fawkes Games",
@@ -195,7 +693,22 @@
     "applicationUrl": "https://fawkesgames.com/en/careers/",
     "evidenceUrl": "https://fawkesgames.com/en/careers/",
     "notes": "Official careers page invites spontaneous applications and says remote work can be done from anywhere. Some freelance roles prefer Europe-friendly time zones. Official route describes eligibility as worldwide.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote · worldwide stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Frima Studio",
@@ -204,7 +717,44 @@
     "applicationUrl": "https://frimastudio.com/en/careers/",
     "evidenceUrl": "https://frimastudio.com/en/careers/",
     "notes": "Official Québec careers page lists a Spontaneous Application and invites interested candidates to send an English CV and cover letter.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Québec / Montréal · see role-specific conditions"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
+  },
+  {
+    "name": "Funatic Games",
+    "country": "Not stated",
+    "websiteUrl": "https://www.funatic.games/",
+    "applicationUrl": "https://www.funatic.games/careers",
+    "evidenceUrl": "https://www.funatic.games/careers",
+    "notes": "Official careers page offers a General Application for artists, programmers, game designers, producers and other future collaborators. The studio describes itself as an early-stage independent game developer; headquarters and applicant-country eligibility are not publicly stated.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Funday Games",
@@ -213,7 +763,20 @@
     "applicationUrl": "https://joinus.fundaygames.dk/jobs/7277761-unsolicited-application",
     "evidenceUrl": "https://joinus.fundaygames.dk/jobs/7277761-unsolicited-application",
     "notes": "Official listing invites unsolicited CVs when no role matches. Listed as hybrid in Aarhus, Denmark; broader applicant-country eligibility is not stated.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Futureplay Games",
@@ -222,7 +785,22 @@
     "applicationUrl": "https://www.futureplaygames.com/careers/career",
     "evidenceUrl": "https://www.futureplaygames.com/careers/career",
     "notes": "Official Open Application covers general disciplines and explicitly lists Remote: Global for people passionate about the game industry.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote · global stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "G7 Studio",
@@ -231,7 +809,69 @@
     "applicationUrl": "https://g7works.com/en/careers/",
     "evidenceUrl": "https://g7works.com/en/careers/",
     "notes": "Saudi-based G7 Studio has a General Application for game development and future opportunities; roles and working arrangements can be discussed if there's a fit.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
+  },
+  {
+    "name": "Glowmade",
+    "country": "United Kingdom",
+    "websiteUrl": "https://www.glowmade.com/",
+    "applicationUrl": "https://glowmade.jobs.personio.com/job/2805976",
+    "evidenceUrl": "https://www.glowmade.com/careers",
+    "notes": "Official Personio Speculative Application invites talent across art, code, design, production, audio, QA and operations. Hybrid from Guildford or remote within the UK; applicants must have UK right to work.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Guildford, United Kingdom · hybrid",
+        "Remote within the United Kingdom · UK right to work required"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "studio_controlled_ats",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Havoc Games",
+    "country": "India",
+    "websiteUrl": "https://havocgames.co/",
+    "applicationUrl": "https://havocgames.co/careers",
+    "evidenceUrl": "https://havocgames.co/careers",
+    "notes": "Official careers page says candidates whose profile does not match a listed role can send a general application through its application form. Independent game studio from India building WEX; CV and portfolio are required.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "India · applicant location and remote eligibility not specified"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Hindsight Studios",
@@ -240,7 +880,73 @@
     "applicationUrl": "https://www.hindsight-studios.de/career.html",
     "evidenceUrl": "https://www.hindsight-studios.de/career.html",
     "notes": "Invites speculative applications when no listed position fits, with a speculative-application option on its official careers form. Location and country eligibility should be confirmed directly.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Hugecalf Studios",
+    "country": "United Kingdom",
+    "websiteUrl": "https://hugecalf.com/",
+    "applicationUrl": "https://jobs.hugecalf.com/speculative-application?src=hugecalf.com",
+    "evidenceUrl": "https://hugecalf.com/careers",
+    "notes": "Official careers page links a dedicated Speculative Application form for candidates even when no vacancy matches. Fully remote, but applicants must work from within the UK.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote within the United Kingdom"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "HundredStar Games",
+    "country": "United Kingdom",
+    "websiteUrl": "https://www.hundredstar.games/",
+    "applicationUrl": "https://www.hundredstar.games/careers/role?id=speculative-application-art-86",
+    "evidenceUrl": "https://www.hundredstar.games/careers/role?id=speculative-application-art-86",
+    "notes": "Official careers site has speculative applications for Art and Production. The selected route is Art; the studio describes a hybrid London model with in-studio Tuesday–Thursday and work-from-home Monday/Friday within the UK. Other discipline route is recorded separately.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "discipline_specific",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "United Kingdom · London studio attendance Tuesday–Thursday"
+      ],
+      "disciplineScope": [
+        "Art (Character, Environment, Lighting, VFX, Concept, UI)",
+        "Production"
+      ],
+      "relatedApplicationUrls": [
+        "https://www.hundredstar.games/careers/role?id=speculative-application-production-89"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "HypeHype",
@@ -249,7 +955,22 @@
     "applicationUrl": "https://hypehype.com/jobs",
     "evidenceUrl": "https://hypehype.com/jobs",
     "notes": "Official jobs page lists an Open Application for people interested in AI-native games and game creation; studio is in Helsinki and eligibility is unstated. Work model: onsite.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "on_site",
+      "eligibleLocations": [
+        "Helsinki · on-site noted on route"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Hypemasters",
@@ -258,7 +979,20 @@
     "applicationUrl": "https://hypemasters.careers-page.com/open-application",
     "evidenceUrl": "https://hypemasters.careers-page.com/open-application",
     "notes": "Branded open-application page welcomes a resume even when no suitable listed position fits. Applicant-country eligibility and work arrangements are not specified.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Katal Games",
@@ -267,7 +1001,20 @@
     "applicationUrl": "https://katal.games/careers/",
     "evidenceUrl": "https://katal.games/careers/",
     "notes": "Official careers page says there are no open roles but welcomes open applications by email with a CV or portfolio and a note about the candidate's interests.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Keen Software House",
@@ -276,7 +1023,22 @@
     "applicationUrl": "https://www.keenswh.com/job/spontaneous-applications/",
     "evidenceUrl": "https://www.keenswh.com/job/spontaneous-applications/",
     "notes": "Official spontaneous-application route for candidates who do not fit a listed opening. Remote applications are considered with CET overlap; the studio is looking for experienced, senior people rather than juniors.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote considered · CET overlap; experienced candidates preferred"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Kinetic Games",
@@ -285,7 +1047,22 @@
     "applicationUrl": "https://ats.rippling.com/pt-PT/kinetic-games-careers/jobs/b665dfab-9e85-445d-b5a7-765d34b9dc43",
     "evidenceUrl": "https://ats.rippling.com/pt-PT/kinetic-games-careers/jobs/b665dfab-9e85-445d-b5a7-765d34b9dc43",
     "notes": "Official ATS route welcomes speculative applications across disciplines. Hybrid in Southampton; applicants must already have UK right to work and sponsorship is unavailable. Eligible locations: United Kingdom.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "Southampton hybrid · UK right-to-work required"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Kuuasema",
@@ -294,7 +1071,22 @@
     "applicationUrl": "https://www.kuuasema.com/jobs/open-application/",
     "evidenceUrl": "https://www.kuuasema.com/jobs/open-application/",
     "notes": "Official Open Application for Helsinki hybrid roles. Accepts EU/EEA/Swiss citizens or people already authorised to work in Finland; no visa sponsorship.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "Helsinki hybrid · no visa sponsorship"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Kylotonn",
@@ -303,7 +1095,20 @@
     "applicationUrl": "https://kylotonn.com/en/join-us/",
     "evidenceUrl": "https://kylotonn.com/en/careers/",
     "notes": "Official careers page explicitly links to an unsolicited application. Use the studio's application form; location and eligibility conditions are not stated on the route.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Lighthouse Games",
@@ -312,7 +1117,22 @@
     "applicationUrl": "https://lighthousegames.com/careers/3C151DE079/",
     "evidenceUrl": "https://lighthousegames.com/careers/3C151DE079/",
     "notes": "Dedicated Speculative Application invites candidates who do not see a matching role. Full-time, on-site in Royal Leamington Spa; studio says it is looking for top talent.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "on_site",
+      "eligibleLocations": [
+        "Royal Leamington Spa · on-site"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "LIQUIDBULLET Studios",
@@ -321,7 +1141,22 @@
     "applicationUrl": "https://www.liquidbulletstudios.com/careers",
     "evidenceUrl": "https://www.liquidbulletstudios.com/careers",
     "notes": "Official page says 'Apply anyway', is open to all departments, fully remote and reviewed all year; it describes its speculative application process. Official route describes eligibility as worldwide.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Fully remote · worldwide stated on application page"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Lost Boys Interactive",
@@ -330,7 +1165,22 @@
     "applicationUrl": "https://lostboysinteractive.applytojob.com/",
     "evidenceUrl": "https://lostboysinteractive.applytojob.com/",
     "notes": "Studio-owned careers portal lists a General Application. The studio describes itself as remote-first across the United States and Canada; confirm eligibility for the specific role or application.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote-first · US and Canada"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Lunacy Studios",
@@ -339,7 +1189,44 @@
     "applicationUrl": "https://lunacystudios.com/careers/",
     "evidenceUrl": "https://lunacystudios.com/careers/",
     "notes": "Official careers page describes a fully remote, globally distributed indie studio and invites General Applications when no role fits. Country eligibility is unstated.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
+  },
+  {
+    "name": "Next Level Games",
+    "country": "Canada",
+    "websiteUrl": "https://nextlevelgames.com/",
+    "applicationUrl": "https://nextlevelgames.applytojob.com/apply/YyYQvToJW1/General-Application",
+    "evidenceUrl": "https://nextlevelgames.applytojob.com/apply/YyYQvToJW1/General-Application",
+    "notes": "Official studio career portal has a General Application and explicitly invites exceptional game developers even when no opening is posted. The application page identifies the studio as a wholly owned Nintendo subsidiary and lists Vancouver, Canada.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Vancouver, Canada · remote eligibility not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Obsidian Entertainment",
@@ -348,7 +1235,20 @@
     "applicationUrl": "https://obsidian.applytojob.com/apply/21Ud1IGKcj/General-Application",
     "evidenceUrl": "https://obsidian.applytojob.com/apply/21Ud1IGKcj/General-Application",
     "notes": "Official General Application accepts candidates who do not find a matching opening, across art, design, animation, production, programming and other disciplines. Remote work is mentioned; country eligibility is not stated.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Ocellus Studio",
@@ -357,7 +1257,22 @@
     "applicationUrl": "https://www.ocellus-studio.com/careers",
     "evidenceUrl": "https://www.ocellus-studio.com/careers",
     "notes": "Official careers page invites CVs if no open position fits. Most work is Lyon-based; some roles allow remote from Lyon. Unsolicited eligibility is not stated.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Lyon / Ocellus North · some roles may allow remote from Lyon"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Octocube Games",
@@ -366,7 +1281,20 @@
     "applicationUrl": "https://octocubegames.com/contact/",
     "evidenceUrl": "https://octocubegames.com/careers/",
     "notes": "Official Careers page invites Unsolicited Applications. The studio contact form includes an 'Unsolicited Application' topic. Based in Roskilde, Denmark.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "contact_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Old Skull Games",
@@ -375,7 +1303,20 @@
     "applicationUrl": "https://www.oldskullgames.com/careers/",
     "evidenceUrl": "https://www.oldskullgames.com/careers/",
     "notes": "Official careers page says it is always meeting good people and links a Spontaneous Application for candidates whose role is not listed.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Outplay Entertainment",
@@ -384,7 +1325,22 @@
     "applicationUrl": "https://outplayentertainment.applytojob.com/apply/CS3Wh2/Speculative-Applications",
     "evidenceUrl": "https://outplay.com/careers/speculative-applications/",
     "notes": "Official ATS route for speculative applications when no specific role fits. Listed as flexi-hybrid with remote options in the UK/EU. Eligible locations: Austria, Belgium, Bulgaria, Croatia, Cyprus, Czechia, Denmark, Estonia, Finland, France, Germany, Greece, Hungary, Ireland, Italy, Latvia, Lithuania, Luxembourg, Malta, Netherlands, Poland, Portugal, Romania, Slovakia, Slovenia, Spain, Sweden, United Kingdom.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "UK / EU remote options"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Paintbucket Games",
@@ -393,7 +1349,72 @@
     "applicationUrl": "https://paintbucket.de/en/jobs",
     "evidenceUrl": "https://paintbucket.de/en/jobs",
     "notes": "Official Jobs page lists an Unsolicited Application and says to apply even when no current job offer fits. Full-time; studio is based in Berlin.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Berlin · full-time"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Playdead",
+    "country": "Denmark",
+    "websiteUrl": "https://playdead.com/",
+    "applicationUrl": "https://playdead.breezy.hr/p/fbda7a56839001-speculative-applications",
+    "evidenceUrl": "https://playdead.breezy.hr/p/fbda7a56839001-speculative-applications",
+    "notes": "Official Breezy page lists a Speculative Applications route for experienced candidates. Full-time, Copenhagen office; the posting requests relevant professional experience and a portfolio. It is not advertised as remote.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "on_site",
+      "eligibleLocations": [
+        "Copenhagen, Denmark"
+      ],
+      "disciplineScope": [
+        "Experienced game-development candidates"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Playsport Games",
+    "country": "United Kingdom",
+    "websiteUrl": "https://www.playsportgames.com/",
+    "applicationUrl": "https://www.playsportgames.com/careers/",
+    "evidenceUrl": "https://www.playsportgames.com/careers/",
+    "notes": "Official careers page explicitly welcomes speculative applications when no advertised role fits. Applicants are asked to email a CV and covering letter. Studio describes itself as a small team in Guildford.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Guildford, United Kingdom · remote eligibility not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Plummy Games",
@@ -402,7 +1423,22 @@
     "applicationUrl": "https://plummygames.teamtailor.com/jobs/6670751-open-application/applications/new",
     "evidenceUrl": "https://plummygames.teamtailor.com/jobs/6670751-open-application/applications/new",
     "notes": "Official company page identifies Chișinău, Moldova as its home base (about 25 teammates in the office) and lists Tallinn, Estonia among remote-work locations. Open application; fully remote options, with B2B conditions for some countries.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote / Tallinn · B2B terms may apply depending on country"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Raw Power Games",
@@ -411,7 +1447,22 @@
     "applicationUrl": "https://careers.rawpowergames.com/jobs/5969751-unsolicited-application",
     "evidenceUrl": "https://careers.rawpowergames.com/jobs/5969751-unsolicited-application",
     "notes": "Official ATS listing titled Unsolicited Application; remote work is limited to time zones roughly 1–2 hours from Copenhagen.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Copenhagen / hybrid / remote within CET ±1–2 hours"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Redly Games",
@@ -420,7 +1471,22 @@
     "applicationUrl": "https://jobs.ashbyhq.com/redlygames/3c2a1d1e-5e80-4b4e-895d-f43d0efe4d3b",
     "evidenceUrl": "https://jobs.ashbyhq.com/redlygames/3c2a1d1e-5e80-4b4e-895d-f43d0efe4d3b",
     "notes": "Official Ashby General Interest application welcomes candidates without a matching role. Global remote; EU and Canada preferred, others considered by role.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Global remote · EU and Canada preferred"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Reply Game Studios",
@@ -429,7 +1495,22 @@
     "applicationUrl": "https://www.reply.com/reply-game-studios/en/career",
     "evidenceUrl": "https://www.reply.com/reply-game-studios/en/career",
     "notes": "Official page invites spontaneous applications by email. Requires fluent English and Italian and availability to work on site in Milan, Italy. Work model: onsite.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "on_site",
+      "eligibleLocations": [
+        "Milan · on-site; Italian and English required"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Rustling Leaves Games",
@@ -438,7 +1519,20 @@
     "applicationUrl": "https://www.rustlingleavesgames.com/join-us/general-application/",
     "evidenceUrl": "https://www.rustlingleavesgames.com/join-us/general-application/",
     "notes": "Official General Application invites future-role applications across disciplines. Important caveat: the studio states its work is rev-share-based.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Sanuk Games",
@@ -447,7 +1541,22 @@
     "applicationUrl": "https://www.sanukgames.com/careers",
     "evidenceUrl": "https://www.sanukgames.com/careers",
     "notes": "The official careers page says CVs are considered even when no position is listed. Work-from-home roles; follow the page instructions and include a portfolio where relevant.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Work-from-home roles · confirm country eligibility"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Sencorp Games",
@@ -456,7 +1565,20 @@
     "applicationUrl": "https://sencorpgames.com/careers/",
     "evidenceUrl": "https://sencorpgames.com/careers/",
     "notes": "Official careers page lists Open application alongside role listings; the studio describes its work model as remote-friendly.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "SOFTGAMES",
@@ -465,7 +1587,20 @@
     "applicationUrl": "https://jobs.softgames.de/o/unsolicited-application",
     "evidenceUrl": "https://jobs.softgames.de/o/unsolicited-application",
     "notes": "Official Unsolicited Application welcomes candidates without a matching role. Remote-first company asks for an English CV and cover letter; country eligibility is not specified.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Speedway Games",
@@ -474,7 +1609,48 @@
     "applicationUrl": "https://speedway-games.com/careers/45073",
     "evidenceUrl": "https://speedway-games.com/careers/45073",
     "notes": "Official General Application is for experienced contributors whose skills do not match a listed role. Applications are reviewed on an ongoing basis; location is Global.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Global · location stated on general application"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
+  },
+  {
+    "name": "Sports Interactive",
+    "country": "United Kingdom",
+    "websiteUrl": "https://www.sigames.com/",
+    "applicationUrl": "https://sega.wd3.myworkdayjobs.com/SEGA_Careers/job/Greater-London-E15-2GW/Senior-Graphics-Engineer--Speculative-Application-_JR100190",
+    "evidenceUrl": "https://sega.wd3.myworkdayjobs.com/SEGA_Careers/job/Greater-London-E15-2GW/Senior-Graphics-Engineer--Speculative-Application-_JR100190",
+    "notes": "Current SEGA Workday posting is a speculative application specifically for a Senior Graphics Engineer at Sports Interactive, the Football Manager studio. Hybrid in East London, normally 2–3 days in studio; remote by exception. This is not a general all-disciplines speculative route.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "discipline_specific",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "Greater London, United Kingdom · hybrid 2–3 days in studio; remote by exception"
+      ],
+      "disciplineScope": [
+        "Senior Graphics Engineering"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "studio_controlled_ats",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Squeeze Studio",
@@ -483,7 +1659,22 @@
     "applicationUrl": "https://squeezestudio.recruitee.com/l/en/o/candidatures-spontanees?lang=en",
     "evidenceUrl": "https://squeezestudio.recruitee.com/l/en/o/candidatures-spontanees?lang=en",
     "notes": "Official Recruitee listing welcomes applications when no listed specialty matches; options include on-site, remote or hybrid around Montréal and Québec, Canada.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Québec / Montréal · on-site, remote or hybrid options"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Stormind Games",
@@ -492,7 +1683,20 @@
     "applicationUrl": "https://stormindgames.com/careers/",
     "evidenceUrl": "https://stormindgames.com/careers/",
     "notes": "Official careers page offers a spontaneous-application form when no listed role fits; candidates can attach a CV and portfolio. Work model is not stated.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Studios DRAMA / UNRECORD",
@@ -501,7 +1705,22 @@
     "applicationUrl": "https://studiosdrama.com/unsolicited-application/",
     "evidenceUrl": "https://studiosdrama.com/unsolicited-application/",
     "notes": "Official unsolicited form covers art, programming, design, production, audio, QA and more; applicants explain why they want to work on UNRECORD.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "on_site",
+      "eligibleLocations": [
+        "Rennes · regular on-site presence expected; role-dependent flexibility"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "SumiGamesStudio",
@@ -510,7 +1729,20 @@
     "applicationUrl": "https://www.sumigamesstudio.com/careers",
     "evidenceUrl": "https://www.sumigamesstudio.com/careers",
     "notes": "Official careers page hires ahead of need and welcomes introductions by email when no opening fits. Remote-friendly game, XR and partner projects; eligibility is unstated.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Supermassive Games",
@@ -519,7 +1751,70 @@
     "applicationUrl": "https://www.supermassivegames.com/careers/speculative-application",
     "evidenceUrl": "https://www.supermassivegames.com/careers/speculative-application",
     "notes": "Official page titled Speculative Application invites applicants whose experience fits even when no listed role does. Guildford, UK.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Guildford · see role-specific conditions"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
+  },
+  {
+    "name": "Tactile Games",
+    "country": "Denmark",
+    "websiteUrl": "https://tactilegames.com/",
+    "applicationUrl": "https://job-boards.greenhouse.io/tactilegames/jobs/4319957101",
+    "evidenceUrl": "https://job-boards.greenhouse.io/tactilegames/jobs/4319957101",
+    "notes": "Official Greenhouse Open Applications posting invites applicants who did not find a matching opportunity to share their background and career ambitions for future consideration. Copenhagen studio; applicant-country eligibility and work model are not specified in the open application.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Copenhagen, Denmark · applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Techtive Games GmbH",
+    "country": "Germany",
+    "websiteUrl": "https://techtive.games/",
+    "applicationUrl": "https://join.com/companies/techtivegames/spontaneous-application",
+    "evidenceUrl": "https://join.com/companies/techtivegames/spontaneous-application",
+    "notes": "Studio-controlled JOIN company profile offers a Spontaneous Application and invites CVs and cover letters for future opportunities when no suitable role is listed. Germany-based developer creating Ardem; profile lists remote work and relocation support.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote work advertised; eligible countries not specified"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "The Indie Stone",
@@ -528,7 +1823,22 @@
     "applicationUrl": "https://theindiestone-demo-demo.teamtailor.com/jobs/6696114-speculative-application",
     "evidenceUrl": "https://projectzomboid.com/blog/jobs/",
     "notes": "Accepts speculative applications across programming, design, writing, art and other game-development disciplines. Fully remote worldwide; good written English required.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Fully remote · worldwide contributors"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Third Kind Games",
@@ -537,7 +1847,69 @@
     "applicationUrl": "https://thirdkindgames.com/careers/speculative-application/",
     "evidenceUrl": "https://thirdkindgames.com/careers/speculative-application/",
     "notes": "Official careers page asks applicants to send their CV and details as a speculative application when no current role fits.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
+  },
+  {
+    "name": "THQ Nordic GmbH",
+    "country": "Austria",
+    "websiteUrl": "https://thqnordic.com/",
+    "applicationUrl": "https://join.com/companies/thqnordiccom/spontaneous-application",
+    "evidenceUrl": "https://thqnordic.com/company/careers",
+    "notes": "Company-managed JOIN page offers a Spontaneous Application for future roles at THQ Nordic GmbH. This route is for the Vienna headquarters; THQ Nordic states that its subsidiary development studios manage their own recruitment separately.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Vienna, Austria · THQ Nordic GmbH headquarters only"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Twin Harbour Interactive",
+    "country": "Malta",
+    "websiteUrl": "https://twinharbourinteractive.com/",
+    "applicationUrl": "https://twinharbour.teamtailor.com/jobs/6958619-unsolicited-application-twin-harbour-interactive/applications/new",
+    "evidenceUrl": "https://twinharbour.teamtailor.com/jobs/6958619-unsolicited-application-twin-harbour-interactive/applications/new",
+    "notes": "Official Teamtailor Unsolicited Application supports future opportunities and asks candidates to select Hamburg (Germany) or San Ġiljan (Malta), provide current residence and confirm work-permit status for Germany or Malta. Hybrid; this is not a worldwide-remote route.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "Hamburg, Germany",
+        "San Ġiljan, Malta"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "studio_controlled_ats",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Unknown Worlds",
@@ -546,7 +1918,20 @@
     "applicationUrl": "https://job-boards.greenhouse.io/unknownworlds/jobs/7535230002",
     "evidenceUrl": "https://job-boards.greenhouse.io/unknownworlds/jobs/7535230002",
     "notes": "Official Greenhouse General Application accepts candidates for future opportunities. Team is globally distributed; eligible hiring countries are not listed. Work model: remote.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
   },
   {
     "name": "Uplift Games",
@@ -555,7 +1940,22 @@
     "applicationUrl": "https://www.uplift.games/careers/general-application",
     "evidenceUrl": "https://www.uplift.games/careers/general-application",
     "notes": "Official General Application for future opportunities. Remote-first, but applicants must live in and have permission to work in the US or UK. Eligible locations: United States, United Kingdom.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote · North America and United Kingdom; work authorization required in US or UK"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "VestGames",
@@ -564,7 +1964,49 @@
     "applicationUrl": "https://vestgames.com/jobs/unsolicited-application/",
     "evidenceUrl": "https://vestgames.com/jobs/unsolicited-application/",
     "notes": "Official Unsolicited Application accepts candidates when no role is open. On-site, hybrid or remote; English required, German for full-time roles.",
-    "checkedAt": "2026-10-30"
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Hybrid / remote · full-time roles require German; English required"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Virtual Programming",
+    "country": "United Kingdom",
+    "websiteUrl": "https://vpltd.com/",
+    "applicationUrl": "https://vpltd.com/careers",
+    "evidenceUrl": "https://vpltd.com/careers",
+    "notes": "Official careers page explicitly invites speculative applications from strong C++ or graphics engineers when no roles are open. The company requests a CV and a short note; this is a discipline-specific opportunity rather than a general all-departments route.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "United Kingdom · remote eligibility not stated"
+      ],
+      "disciplineScope": [
+        "C++ engineering",
+        "Graphics engineering"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Vyrex Interactive",
@@ -573,7 +2015,42 @@
     "applicationUrl": "https://vyrexinteractive.com/careers",
     "evidenceUrl": "https://vyrexinteractive.com/careers",
     "notes": "Official careers page says there are no open roles right now but accepts speculative applications from people who believe they fit.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
+  },
+  {
+    "name": "Wushu Studios",
+    "country": "United Kingdom",
+    "websiteUrl": "https://wushustudios.com/",
+    "applicationUrl": "https://wushustudios.com/careers/",
+    "evidenceUrl": "https://wushustudios.com/careers/",
+    "notes": "Official careers page explicitly welcomes speculative applications even when no vacancy matches and invites applicants to send a CV and portfolio where applicable to the studio's recruitment email.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   },
   {
     "name": "Yabu Games",
@@ -582,6 +2059,46 @@
     "applicationUrl": "https://yabugames.io/careers/",
     "evidenceUrl": "https://yabugames.io/careers/",
     "notes": "Official careers page invites applications beyond listed roles; applicants choose Open application in the form. Studio office is in Istanbul. Work model: hybrid.",
-    "checkedAt": "2026-10-29"
+    "checkedAt": "2026-10-29",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "Istanbul · hybrid"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-27"
+    }
+  },
+  {
+    "name": "Zygle Games",
+    "country": "United Kingdom",
+    "websiteUrl": "https://zygle-games.com/",
+    "applicationUrl": "https://zygle-games.com/careers",
+    "evidenceUrl": "https://zygle-games.com/careers",
+    "notes": "Official careers page explicitly welcomes candidates even when no role matches and provides a “Send Speculative Application” route. London-based mobile game publisher describes hybrid London and fully remote options; remote-country eligibility is not stated.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "London, United Kingdom",
+        "Remote · eligible countries not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
   }
 ]

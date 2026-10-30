@@ -61,6 +61,48 @@ if (Array.isArray(studios) && profiles && typeof profiles === "object" && !Array
       errors.push(row + ".checkedAt must use YYYY-MM-DD.");
     }
 
+    const research = studio.applicationResearch;
+    if (!research || typeof research !== "object" || Array.isArray(research)) {
+      errors.push(row + ".applicationResearch must be present.");
+    } else {
+      const enums = {
+        routeType: ["speculative", "unsolicited", "spontaneous", "open", "general", "discipline_specific"],
+        workModel: ["remote", "hybrid", "on_site", "mixed", "not_stated"],
+        routeStatus: ["active", "paused", "closed"],
+        sourceType: ["official_company_site", "studio_controlled_ats", "employer_managed_career_platform"]
+      };
+      for (const [field, allowed] of Object.entries(enums)) {
+        if (!allowed.includes(research[field])) errors.push(row + ".applicationResearch." + field + " must be one of: " + allowed.join(", ") + ".");
+      }
+      for (const field of ["submissionMethods", "eligibleLocations", "disciplineScope", "relatedApplicationUrls"]) {
+        if (!Array.isArray(research[field])) {
+          errors.push(row + ".applicationResearch." + field + " must be an array.");
+        } else {
+          for (const [itemIndex, value] of research[field].entries()) {
+            requiredText(value, row + ".applicationResearch." + field + "[" + itemIndex + "]");
+          }
+        }
+      }
+      if (Array.isArray(research.submissionMethods)) {
+        for (const method of research.submissionMethods) {
+          if (!["ats", "email", "website_form", "contact_form"].includes(method)) {
+            errors.push(row + ".applicationResearch.submissionMethods contains unsupported method: " + method + ".");
+          }
+        }
+      }
+      if (typeof research.nextReviewAt !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(research.nextReviewAt)) {
+        errors.push(row + ".applicationResearch.nextReviewAt must use YYYY-MM-DD.");
+      } else if (typeof studio.checkedAt === "string" && research.nextReviewAt < studio.checkedAt) {
+        errors.push(row + ".applicationResearch.nextReviewAt cannot be earlier than checkedAt.");
+      }
+      if (Array.isArray(research.relatedApplicationUrls)) {
+        for (const [urlIndex, url] of research.relatedApplicationUrls.entries()) {
+          try { httpsUrl(url, row + ".applicationResearch.relatedApplicationUrls[" + urlIndex + "]"); }
+          catch (error) { errors.push(error.message); }
+        }
+      }
+    }
+
     const key = typeof studio.name === "string" ? studio.name.toLowerCase() : "";
     if (key && names.has(key)) errors.push("Duplicate studio name: " + studio.name + ".");
     if (key) names.add(key);

@@ -2699,5 +2699,895 @@
       "https://yabugames.io/about/",
       "https://yabugames.io/careers/"
     ]
+  },
+  "Playdead": {
+    "description": "Independent Copenhagen game developer known for atmospheric, highly crafted puzzle-platform adventures.",
+    "headquarters": {
+      "city": "Copenhagen",
+      "country": "Denmark",
+      "countryCode": "DK",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent · privately held",
+    "parentCompany": null,
+    "industryScale": "AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Adventure",
+      "Puzzle",
+      "Narrative"
+    ],
+    "popularGames": [
+      {
+        "title": "LIMBO",
+        "appId": 48000
+      },
+      {
+        "title": "INSIDE",
+        "appId": 304430
+      }
+    ],
+    "profileSources": [
+      "https://playdead.com/",
+      "https://playdead.breezy.hr/p/fbda7a56839001-speculative-applications"
+    ],
+    "applicationLocation": "Copenhagen, Denmark · on-site"
+  },
+  "Playsport Games": {
+    "description": "Independent UK game developer focused on management and simulation games.",
+    "headquarters": {
+      "city": "Guildford",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small team · exact count not disclosed",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Simulation",
+      "Management"
+    ],
+    "popularGames": [
+      {
+        "title": "Motorsport Manager",
+        "appId": 415200
+      }
+    ],
+    "profileSources": [
+      "https://www.playsportgames.com/",
+      "https://www.playsportgames.com/careers/"
+    ],
+    "applicationLocation": "Guildford, United Kingdom · speculative route does not state remote eligibility"
+  },
+  "Dark Cloud Games": {
+    "description": "Independent game-development team recruiting across programming, game services, art, animation, visual effects and design.",
+    "headquarters": {
+      "city": "Lisbon",
+      "country": "Portugal",
+      "countryCode": "PT",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent · private",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Game services",
+      "Programming",
+      "Art",
+      "Animation",
+      "Visual effects"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.darkcloud.games/",
+      "https://www.darkcloud.games/careers/",
+      "https://www.darkcloud.games/ui-ux-designer/"
+    ],
+    "applicationLocation": "Lisbon, Portugal · speculative route does not state remote eligibility"
+  },
+  "Virtual Programming": {
+    "description": "Specialist game technology studio focused on PC game porting, graphics, performance optimisation and platform integration.",
+    "headquarters": {
+      "city": null,
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ · city not publicly stated"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Services",
+      "Co-development"
+    ],
+    "ownership": "Independent · privately held",
+    "parentCompany": null,
+    "industryScale": "AA / Specialist services",
+    "teamSize": "Small specialist team · exact count not disclosed",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Console",
+      "Porting",
+      "Graphics",
+      "Low-level engineering",
+      "Optimisation"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://vpltd.com/",
+      "https://vpltd.com/careers"
+    ],
+    "applicationLocation": "United Kingdom · specific location and remote eligibility not stated"
+  },
+  "Code Wizards Group": {
+    "description": "Game-industry technology and professional-services group providing backend, multiplayer infrastructure and operational support to game developers and publishers.",
+    "headquarters": {
+      "city": "Reading",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Elgin, Scotland, United Kingdom",
+      "Vancouver, Canada"
+    ],
+    "companyType": [
+      "Services",
+      "Game technology",
+      "Co-development"
+    ],
+    "ownership": "Independent · privately held",
+    "parentCompany": null,
+    "industryScale": "AA / AAA services",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Backend infrastructure",
+      "Multiplayer",
+      "Online services",
+      "Game operations"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://codewizards.io/",
+      "https://careers.codewizards.io/jobs/5884840-speculative-application"
+    ],
+    "applicationLocation": "Hybrid · Reading, Elgin or Vancouver"
+  },
+  "Techtive Games GmbH": {
+    "description": "Germany-based independent video-game developer building Ardem, an open-world survival game.",
+    "headquarters": {
+      "city": null,
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "HQ · city not publicly stated"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "11–50 employees (company profile range)",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Survival",
+      "Open world"
+    ],
+    "popularGames": [
+      {
+        "title": "Ardem",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://techtive.games/",
+      "https://join.com/companies/techtivegames"
+    ],
+    "applicationLocation": "Remote work and relocation are advertised; applicant-country eligibility not specified"
+  },
+  "Zygle Games": {
+    "description": "London-based mobile game developer and publisher creating strategy, RPG and simulation experiences.",
+    "headquarters": {
+      "city": "London",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Mobile"
+    ],
+    "ownership": "Independent · privately held",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "Strategy",
+      "RPG",
+      "Simulation"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://zygle-games.com/",
+      "https://zygle-games.com/careers"
+    ],
+    "applicationLocation": "Hybrid London or remote · remote-country eligibility not stated"
+  },
+  "4A Games": {
+    "description": "International game developer known for the Metro series, with studio operations in Malta and Kyiv.",
+    "headquarters": {
+      "city": null,
+      "country": "Malta",
+      "countryCode": "MT",
+      "label": "Corporate HQ · city not stated"
+    },
+    "otherLocations": [
+      "Kyiv, Ukraine"
+    ],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Privately held · ownership details not confirmed in this record",
+    "parentCompany": null,
+    "industryScale": "AAA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Shooter",
+      "Narrative",
+      "Action"
+    ],
+    "popularGames": [
+      {
+        "title": "Metro Exodus",
+        "appId": 412020
+      },
+      {
+        "title": "Metro: Last Light Redux",
+        "appId": 287390
+      }
+    ],
+    "profileSources": [
+      "https://www.4a-games.com.mt/",
+      "https://www.4a-games.com.mt/careers"
+    ],
+    "applicationLocation": "Malta / Kyiv studio network · general applicant eligibility not stated"
+  },
+  "THQ Nordic GmbH": {
+    "description": "Vienna-headquartered video-game publisher and developer with a global portfolio of owned labels and subsidiary studios.",
+    "headquarters": {
+      "city": "Vienna",
+      "country": "Austria",
+      "countryCode": "AT",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Multiple subsidiary studios worldwide · each has its own recruitment route"
+    ],
+    "companyType": [
+      "Publisher",
+      "Developer",
+      "Parent company"
+    ],
+    "ownership": "Subsidiary of Embracer Group",
+    "parentCompany": "Embracer Group",
+    "industryScale": "AAA",
+    "teamSize": "501–1,000 employees (company profile range)",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Console",
+      "Publishing",
+      "Game development"
+    ],
+    "popularGames": [
+      {
+        "title": "Darksiders",
+        "appId": null
+      },
+      {
+        "title": "Destroy All Humans!",
+        "appId": null
+      },
+      {
+        "title": "Wreckfest",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://thqnordic.com/",
+      "https://thqnordic.com/company/careers",
+      "https://join.com/companies/thqnordiccom"
+    ],
+    "applicationLocation": "THQ Nordic GmbH · Vienna headquarters only; subsidiary studios recruit independently"
+  },
+  "Blackbird Interactive": {
+    "description": "Independent Vancouver game-development studio working on original worlds and partner-owned game franchises.",
+    "headquarters": {
+      "city": "Vancouver, British Columbia",
+      "country": "Canada",
+      "countryCode": "CA",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Independent"
+    ],
+    "ownership": "Independent · privately held",
+    "parentCompany": null,
+    "industryScale": "AA / AAA co-development",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Co-development",
+      "Game design",
+      "Art",
+      "Engineering"
+    ],
+    "popularGames": [
+      {
+        "title": "Hardspace: Shipbreaker",
+        "appId": 1161580
+      },
+      {
+        "title": "Homeworld 3",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://blackbirdinteractive.com/",
+      "https://jobs.lever.co/blackbirdinteractive/498bb3c2-b23f-4aed-8fdd-ee80649e381d"
+    ],
+    "applicationLocation": "Canada only · must reside in Canada and already be legally eligible to work there"
+  },
+  "Next Level Games": {
+    "description": "Vancouver-based first-party game studio developing games for Nintendo platforms.",
+    "headquarters": {
+      "city": "Vancouver, British Columbia",
+      "country": "Canada",
+      "countryCode": "CA",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "First-party studio",
+      "Subsidiary"
+    ],
+    "ownership": "Wholly owned subsidiary of Nintendo",
+    "parentCompany": "Nintendo",
+    "industryScale": "AAA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Nintendo",
+      "Console",
+      "Action",
+      "Adventure"
+    ],
+    "popularGames": [
+      {
+        "title": "Luigi’s Mansion 3",
+        "appId": null
+      },
+      {
+        "title": "Mario Strikers: Battle League",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://nextlevelgames.com/",
+      "https://nextlevelgames.applytojob.com/apply/YyYQvToJW1/General-Application"
+    ],
+    "applicationLocation": "Vancouver, Canada · general-route remote eligibility not stated"
+  },
+  "Dogfish Games": {
+    "description": "Small independent Vancouver studio developing its first atmospheric, story-driven game.",
+    "headquarters": {
+      "city": "Vancouver",
+      "country": "Canada",
+      "countryCode": "CA",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small team · exact count not disclosed",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Narrative",
+      "Atmospheric",
+      "Adventure"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://dogfishgames.com/",
+      "https://dogfishgames.com/jobs/"
+    ],
+    "applicationLocation": "Remote · based in or willing to work within Canadian time zones"
+  },
+  "Climax Studios": {
+    "description": "Established UK game development and co-development studio delivering original games and partner projects across platforms.",
+    "headquarters": {
+      "city": "Portsmouth",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "London, United Kingdom",
+      "Edinburgh, Scotland, United Kingdom",
+      "Liverpool, United Kingdom"
+    ],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Services"
+    ],
+    "ownership": "Part of Keywords Studios",
+    "parentCompany": "Keywords Studios",
+    "industryScale": "AA / AAA services",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Art",
+      "Animation",
+      "Game design",
+      "Programming",
+      "Co-development"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.climaxstudios.com/",
+      "https://www.climaxstudios.com/join-our-team/jobs/Rw-speculative-application-art-animation/"
+    ],
+    "applicationLocation": "Portsmouth, United Kingdom"
+  },
+  "Twin Harbour Interactive": {
+    "description": "Game developer and operator behind the Supremacy strategy-game franchise, with teams in Germany and Malta.",
+    "headquarters": {
+      "city": "San Ġiljan",
+      "country": "Malta",
+      "countryCode": "MT",
+      "label": "Registered company location"
+    },
+    "otherLocations": [
+      "Hamburg, Germany"
+    ],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Live operations"
+    ],
+    "ownership": "Operated jointly by Stillfront Supremacy Ltd and Stillfront Supremacy GmbH",
+    "parentCompany": "Stillfront Group",
+    "industryScale": "AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Mobile",
+      "Strategy",
+      "Live operations"
+    ],
+    "popularGames": [
+      {
+        "title": "Supremacy: World War 3",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://twinharbourinteractive.com/",
+      "https://www.playsupremacy.com/en/careers",
+      "https://twinharbour.teamtailor.com/jobs/6958619-unsolicited-application-twin-harbour-interactive/applications/new"
+    ],
+    "applicationLocation": "Hybrid · Hamburg, Germany or San Ġiljan, Malta · work authorisation for one location required"
+  },
+  "HundredStar Games": {
+    "description": "Independent East London game developer founded by the former creative leadership behind the Batman: Arkham series.",
+    "headquarters": {
+      "city": "Hackney Wick, London",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent · privately held",
+    "parentCompany": null,
+    "industryScale": "AA",
+    "teamSize": "Growing studio · stated target up to 100 people",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Console",
+      "Action",
+      "Art",
+      "Production"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.hundredstar.games/",
+      "https://www.hundredstar.games/careers/role?id=speculative-application-art-86"
+    ],
+    "applicationLocation": "London hybrid · in studio Tuesday–Thursday; remote work Monday/Friday within the UK"
+  },
+  "Funatic Games": {
+    "description": "Early-stage independent game studio focused on physics-driven, replayable games and gameplay-first design.",
+    "headquarters": {
+      "city": null,
+      "country": "Not publicly stated",
+      "countryCode": "",
+      "label": "HQ not publicly stated"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small early-stage team · exact count not disclosed",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Physics-driven gameplay",
+      "Indie"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.funatic.games/",
+      "https://www.funatic.games/careers"
+    ],
+    "applicationLocation": "Not specified · applicant-country eligibility not stated"
+  },
+  "Cybernation Team": {
+    "description": "Independent Ukrainian game studio developing an Unreal Engine 5 tactical multiplayer game.",
+    "headquarters": {
+      "city": null,
+      "country": "Ukraine",
+      "countryCode": "UA",
+      "label": "HQ · city not publicly confirmed"
+    },
+    "otherLocations": [
+      "Remote team / Kyiv roles"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Unreal Engine 5",
+      "Multiplayer",
+      "Tactical",
+      "Action"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://cybernation.team/",
+      "https://cybernation.team/careers"
+    ],
+    "applicationLocation": "Remote / Kyiv roles are advertised · general-applicant eligibility should be confirmed"
+  },
+  "Wushu Studios": {
+    "description": "UK game development and co-development studio working with publishers and developers on original and partner projects.",
+    "headquarters": {
+      "city": null,
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ · city not confirmed in this record"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Services"
+    ],
+    "ownership": "Independent · privately held",
+    "parentCompany": null,
+    "industryScale": "AA / AAA co-development",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Co-development",
+      "Game development",
+      "Production"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://wushustudios.com/",
+      "https://wushustudios.com/careers/"
+    ],
+    "applicationLocation": "Location and remote eligibility not stated on the speculative route"
+  },
+  "Ambertail Games": {
+    "description": "Independent small game studio developing Amber Isle and other colourful, character-led experiences.",
+    "headquarters": {
+      "city": "Belfast",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small team · exact count not disclosed",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Simulation",
+      "Adventure",
+      "Indie"
+    ],
+    "popularGames": [
+      {
+        "title": "Amber Isle",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.ambertailgames.com/",
+      "https://www.ambertailgames.com/jobs"
+    ],
+    "applicationLocation": "In-house or remote options described · eligible remote countries not stated"
+  },
+  "Tactile Games": {
+    "description": "Large Copenhagen mobile game studio creating casual and puzzle games, including Lily's Garden.",
+    "headquarters": {
+      "city": "Copenhagen",
+      "country": "Denmark",
+      "countryCode": "DK",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Mobile"
+    ],
+    "ownership": "Independent · privately held",
+    "parentCompany": null,
+    "industryScale": "AA · Mobile",
+    "teamSize": "350+ people (studio-reported)",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "Mobile",
+      "Casual",
+      "Puzzle",
+      "Free-to-play"
+    ],
+    "popularGames": [
+      {
+        "title": "Lily's Garden",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://tactilegames.com/",
+      "https://job-boards.greenhouse.io/tactilegames/jobs/4319957101"
+    ],
+    "applicationLocation": "Copenhagen, Denmark · open-application eligibility not stated"
+  },
+  "Glowmade": {
+    "description": "Independent UK game studio founded by Lionhead alumni, creating original and imaginative games.",
+    "headquarters": {
+      "city": "Guildford",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent · privately held",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Action",
+      "Adventure"
+    ],
+    "popularGames": [
+      {
+        "title": "Rogue Fortune",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.glowmade.com/about-us",
+      "https://www.glowmade.com/careers",
+      "https://glowmade.jobs.personio.com/job/2805976"
+    ],
+    "applicationLocation": "Guildford hybrid or remote within the UK · UK right to work required"
+  },
+  "Hugecalf Studios": {
+    "description": "Small UK remote game studio behind Stuck Together, Turbo Golf Racing and When Ski Lifts Go Wrong.",
+    "headquarters": {
+      "city": null,
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ · city not publicly stated"
+    },
+    "otherLocations": [
+      "Fully remote team within the United Kingdom"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent · privately held",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small team · exact count not disclosed",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Console",
+      "Multiplayer",
+      "Sports",
+      "Racing"
+    ],
+    "popularGames": [
+      {
+        "title": "Turbo Golf Racing",
+        "appId": null
+      },
+      {
+        "title": "When Ski Lifts Go Wrong",
+        "appId": null
+      },
+      {
+        "title": "Stuck Together",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://hugecalf.com/careers",
+      "https://jobs.hugecalf.com/speculative-application?src=hugecalf.com"
+    ],
+    "applicationLocation": "Fully remote · UK only"
+  },
+  "Havoc Games": {
+    "description": "Independent Indian game studio building WEX, a competitive multiplayer game.",
+    "headquarters": {
+      "city": null,
+      "country": "India",
+      "countryCode": "IN",
+      "label": "HQ · city not publicly stated"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Mobile",
+      "Competitive multiplayer",
+      "Action"
+    ],
+    "popularGames": [
+      {
+        "title": "WEX",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://havocgames.co/",
+      "https://havocgames.co/careers"
+    ],
+    "applicationLocation": "India · general-application location and remote eligibility not stated"
+  },
+  "Sports Interactive": {
+    "description": "London-based SEGA game studio behind the Football Manager series.",
+    "headquarters": {
+      "city": "Stratford, London",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Subsidiary"
+    ],
+    "ownership": "Wholly owned subsidiary of SEGA Europe",
+    "parentCompany": "SEGA Europe",
+    "industryScale": "AAA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Sports simulation",
+      "Football management"
+    ],
+    "popularGames": [
+      {
+        "title": "Football Manager series",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.sigames.com/",
+      "https://sega.wd3.myworkdayjobs.com/SEGA_Careers/job/Greater-London-E15-2GW/Senior-Graphics-Engineer--Speculative-Application-_JR100190"
+    ],
+    "applicationLocation": "East London · hybrid 2–3 days in studio; remote by exception"
   }
 }

@@ -45,3 +45,18 @@ Use Node.js 24 and npm:
 npm ci
 npm run dev
 ```
+
+
+## Application-route research data
+
+The directory is backed by a version-controlled JSON dataset in `src/data/speculative-route-directory.json`, paired with studio profiles in `src/data/studio-profiles.json`. This is the source data used to build the static website; it is not a hosted server-side database.
+
+Each route record now also has an `applicationResearch` object to support future discovery and maintenance:
+
+- `routeType`: speculative, unsolicited, spontaneous, open, general or discipline-specific.
+- `submissionMethods`: ATS, email, website form or contact form.
+- `workModel` and `eligibleLocations`: kept separate from studio headquarters.
+- `disciplineScope` and `relatedApplicationUrls`: for routes limited to a team or discipline, or where a studio publishes multiple route links.
+- `routeStatus`, `sourceType`, and `nextReviewAt`: to support route health checks and re-verification.
+
+`checkedAt` is the last verification date. The default review interval is 90 days. Run `npm run routes:review` to see routes due for re-checking; pass `--as-of=YYYY-MM-DD` to inspect the dataset as of another date. Run `npm run check:studio-directory` to validate required profile, source and research fields.
