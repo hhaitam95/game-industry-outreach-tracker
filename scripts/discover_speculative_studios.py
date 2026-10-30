@@ -1212,8 +1212,14 @@ def finish_cycle_if_complete(state: dict[str, Any]) -> bool:
         state["empty_cycles"] = 0
     state["cycle"] = int(state.get("cycle", 1)) + 1
     state["cycle_additions"] = 0
-    state["feed_cursors"] = {feed["id"]: "" for feed in FEEDS}
-    state["feed_done"] = {feed["id"]: False for feed in FEEDS}
+    # Wikidata feeds are refreshed on each pass. GameDevMap is a one-time bulk
+    # catalogue backfill; retain its terminal offset so hourly maintenance never
+    # starts downloading the same 10k rows again.
+    for feed in FEEDS:
+        if feed["kind"] == "gamedevmap":
+            continue
+        state["feed_cursors"][feed["id"]] = ""
+        state["feed_done"][feed["id"]] = False
     if state["empty_cycles"] >= 3:
         state["saturated"] = True
     return True
@@ -1284,10 +1290,11 @@ def run_pipeline(
             if len(rows) < batch_size:
                 state["feed_done"][feed["id"]] = True
             state["feed_index"] = (FEEDS.index(feed) + 1) % len(FEEDS)
-            if feed["kind"] != "gamedevmap" and source_pages < max_source_pages and time.monotonic() + 65 < deadline:
-                time.sleep(65)
-        elif source_pages < max_source_pages:
-            break
+            if feed["kind"] != "gamedevmap" and source_pages < max_source_pages:
+                if time.monotonic() + 65 < deadline:
+                    time.sleep(65)
+                else:
+                    break
 
     checked, published = process_candidate_queue(
         state, studios, profiles, max_candidate_checks, page_fetcher, deadline
