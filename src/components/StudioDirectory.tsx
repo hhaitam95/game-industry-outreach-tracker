@@ -1,8 +1,8 @@
-import {useMemo,useState} from "react";
+import {Fragment,useMemo,useState} from "react";
 import studios from "../data/speculative-route-directory.json" with {type:"json"};
 import profilesJson from "../data/studio-profiles.json" with {type:"json"};
 import StudioLogo from "./StudioLogo";
-import type {TrackedApplication,TrackerStatus} from "./studio.types";
+import type {TrackedApplication} from "./studio.types";
 import "./directory.css";
 
 type Studio=typeof studios[number];
@@ -25,7 +25,6 @@ const countryCodes:Record<string,string>={
   "Australia":"AU","Bulgaria":"BG","Canada":"CA","Czech Republic":"CZ","Denmark":"DK","Estonia":"EE","Finland":"FI","France":"FR","Germany":"DE","Hungary":"HU","Iceland":"IS","Italy":"IT","Poland":"PL","Portugal":"PT","Saudi Arabia":"SA","Thailand":"TH","Türkiye":"TR","Turkey":"TR","United Kingdom":"GB","United States":"US","United Arab Emirates":"AE","Netherlands":"NL","Spain":"ES"
 };
 function flag(code?:string){return code&&code.length===2?String.fromCodePoint(...code.toUpperCase().split("").map(c=>127397+c.charCodeAt(0))):"🌍";}
-function countryCodeFor(studio:Studio,profile?:Profile){return profile?.headquarters?.countryCode||countryCodes[profile?.headquarters?.country||studio.country]||"";}
 function hqFor(studio:Studio,profile?:Profile){
   const hq=profile?.headquarters;
   if(hq)return {emoji:flag(hq.countryCode),label:[hq.city,hq.country].filter(Boolean).join(", ")||hq.country,tag:hq.label||"HQ"};
@@ -63,7 +62,6 @@ export default function StudioDirectory({applications,onSave,onMarkApplied}:{app
   const types=["All types","Developer","Publisher","Co-development","Mobile","Services"];
   const scales=["All sizes","AAA","AA","AA / AAA","Indie","Indie / AA","AAA co-development","AA · Mobile"];
   const statusMap=new Map(applications.map(a=>[a.studioName,a.status]));
-  const trackedCount=applications.length;
   return <section className="directory-page">
     <div className="directory-hero">
       <div className="hero-copy"><span className="eyebrow">THE GAME INDUSTRY INDEX</span><h2>Find your next studio.</h2><p>Explore teams, worlds, ownership and career routes across the game industry.</p></div>
@@ -89,7 +87,7 @@ export default function StudioDirectory({applications,onSave,onMarkApplied}:{app
           const tracked=statusMap.get(studio.name);
           const games=p?.popularGames||[];
           const type=p?.companyType?.slice(0,2).join(" · ")||"Studio";
-          return <><tr className={active?"studio-row is-expanded":"studio-row"} key={studio.name}>
+          return <Fragment key={studio.name}><tr className={active?"studio-row is-expanded":"studio-row"}>
             <td><button className="studio-expand" type="button" onClick={()=>setExpanded(active?null:studio.name)} aria-expanded={active}><span className="expand-chevron">{active?"⌄":"›"}</span><StudioLogo name={studio.name} websiteUrl={studio.websiteUrl}/><span className="studio-name-cell"><strong>{studio.name}</strong><small>{type}</small></span></button></td>
             <td><span className="location-cell"><span className="country-flag">{location.emoji}</span><span><strong>{location.label}</strong><small>{location.tag}</small></span></span></td>
             <td><div className="game-chips">{games.length?games.slice(0,2).map(g=><span className="game-chip" key={g.title}>{g.title}</span>):<span className="muted">Profile pending</span>}</div></td>
@@ -119,7 +117,7 @@ export default function StudioDirectory({applications,onSave,onMarkApplied}:{app
                 {tracked?<p className="tracked-hint">Already in your tracker · {tracked.replace("_"," ")}</p>:null}
               </div>
             </div>
-          </td></tr>:null}</>;
+          </td></tr>:null}</Fragment>;
         })}
         {filtered.length===0?<tr><td colSpan={7} className="empty-table">No studios match those filters. Try a broader search.</td></tr>:null}
         </tbody>
