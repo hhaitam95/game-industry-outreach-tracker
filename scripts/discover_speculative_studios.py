@@ -179,6 +179,15 @@ EXCLUSION_PATTERNS = (
     re.compile(r"\b(?:alcohol|liquor)\s+(?:game|gaming|entertainment)\s+(?:studio|company|business)\b", re.I),
 )
 
+# Studio directories sometimes include talent marketplaces or outsourcing
+# staffing firms. Require at least two independent marketplace indicators so a
+# normal studio mentioning freelancers is not incorrectly rejected.
+STAFFING_PLATFORM_INDICATORS = (
+    re.compile(r"\b(?:staffing agency|staffing support|staffing solutions|recruitment agency|talent marketplace|freelancer marketplace)\b", re.I),
+    re.compile(r"\b(?:freelancers? and consultants|freelancer network|available freelancers|find (?:a |the )?freelancers?|connect (?:studios|companies) with freelancers)\b", re.I),
+    re.compile(r"\b(?:upcoming gigs|contract gigs|freelance gigs|gig marketplace|short[- ]term contracts)\b", re.I),
+)
+
 POSITIVE_ROUTE_TYPE = (
     ("unsolicited", re.compile(r"\bunsolicited\b", re.I)),
     ("spontaneous", re.compile(r"\bspontaneous\b", re.I)),
@@ -602,6 +611,12 @@ def exclusion_match(text: str) -> re.Match[str] | None:
     return None
 
 
+def staffing_platform_match(text: str) -> re.Match[str] | None:
+    matches = [pattern.search(text) for pattern in STAFFING_PLATFORM_INDICATORS]
+    found = [match for match in matches if match]
+    return found[0] if len(found) >= 2 else None
+
+
 def route_type_for(text: str) -> str:
     for route_type, pattern in POSITIVE_ROUTE_TYPE:
         if pattern.search(text):
@@ -652,6 +667,12 @@ def verify_candidate_pages(
     excluded = exclusion_match(all_text)
     if excluded:
         return {"status": "excluded", "reason": "portfolio_or_company_content_exclusion"}
+    staffing = staffing_platform_match(all_text)
+    if staffing:
+        return {
+            "status": "needs_review",
+            "reason": "likely_staffing_or_talent_platform_not_a_game_studio",
+        }
     matches: list[tuple[Page, re.Match[str]]] = []
     negatives: list[tuple[Page, re.Match[str]]] = []
     for page in pages:
