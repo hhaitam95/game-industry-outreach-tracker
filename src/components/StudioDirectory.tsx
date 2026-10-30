@@ -86,21 +86,21 @@ export default function StudioDirectory({applications,onSave,onMarkApplied}:{app
           const active=expanded===studio.name;
           const tracked=statusMap.get(studio.name);
           const games=p?.popularGames||[];
-          const type=p?.companyType?.slice(0,2).join(" · ")||"Studio";
+          const type=p?.companyType?.slice(0,2).join(" · ")||"Classification pending";
           return <Fragment key={studio.name}><tr className={active?"studio-row is-expanded":"studio-row"}>
             <td><button className="studio-expand" type="button" onClick={()=>setExpanded(active?null:studio.name)} aria-expanded={active}><span className="expand-chevron">{active?"⌄":"›"}</span><StudioLogo name={studio.name} websiteUrl={studio.websiteUrl}/><span className="studio-name-cell"><strong>{studio.name}</strong><small>{type}</small></span></button></td>
             <td><span className="location-cell"><span className="country-flag">{location.emoji}</span><span><strong>{location.label}</strong><small>{location.tag}</small></span></span></td>
-            <td><div className="game-chips">{games.length?games.slice(0,2).map(g=><span className="game-chip" key={g.title}>{g.title}</span>):<span className="muted">Profile pending</span>}</div></td>
+            <td><div className="game-chips">{games.length?games.slice(0,2).map(g=><span className="game-chip" key={g.title}>{g.title}</span>):<span className="muted">{(p?.description||studio.notes).slice(0,72)}…</span>}</div></td>
             <td><span className={`scale-tag ${(p?.industryScale||"").toLowerCase().replace(/[^a-z]+/g,"-")}`}>{p?.industryScale||"Unclassified"}</span></td>
-            <td><span className="ownership-cell">{p?.parentCompany||"Independent / unknown"}</span></td>
+            <td><span className="ownership-cell">{p?.parentCompany||p?.ownership||"Not yet researched"}</span></td>
             <td><span className="team-cell">{p?.teamSize||"Not disclosed"}</span></td>
-            <td><div className="route-cell"><a href={studio.applicationUrl} target="_blank" rel="noopener noreferrer" className="route-link">Open route ↗</a><button type="button" className={tracked?"save-studio is-saved":"save-studio"} onClick={()=>onSave(studio)}>{tracked? "✓ Saved":"＋ Save"}</button></div></td>
+            <td><div className="route-cell"><a href={studio.applicationUrl} target="_blank" rel="noopener noreferrer" className="route-link">Open route ↗</a><button type="button" className={tracked?"save-studio is-saved":"save-studio"} onClick={()=>onSave(studio)} disabled={Boolean(tracked)}>{tracked? "✓ In tracker":"＋ Save"}</button></div></td>
           </tr>
           {active?<tr className="detail-row" key={studio.name+"-details"}><td colSpan={7}>
             <div className="studio-detail">
               <div className="detail-main">
                 <div className="detail-heading"><StudioLogo name={studio.name} websiteUrl={studio.websiteUrl} size="lg"/><div><span className="eyebrow">STUDIO PROFILE</span><h3>{studio.name}</h3><p>{p?.description||studio.notes}</p></div></div>
-                <div className="tag-list">{(p?.companyType||["Developer · type to verify"]).map(t=><span className="profile-tag" key={t}>{t}</span>)}{(p?.focus||[]).map(t=><span className="profile-tag subtle" key={t}>{t}</span>)}</div>
+                <div className="tag-list">{(p?.companyType||["Company role to verify"]).map(t=><span className="profile-tag" key={t}>{t}</span>)}{(p?.focus||[]).map(t=><span className="profile-tag subtle" key={t}>{t}</span>)}</div>
                 <h4>Selected work</h4>
                 {games.length?<div className="game-grid">{games.map(g=><GameCard game={g} key={g.title}/>)}</div>:<p className="detail-muted">Notable titles are being researched. Check the studio's official website for its portfolio.</p>}
                 <p className="route-conditions"><strong>Application notes:</strong> {studio.notes}</p>
@@ -108,7 +108,7 @@ export default function StudioDirectory({applications,onSave,onMarkApplied}:{app
               <div className="detail-facts">
                 <div className="fact"><span>Headquarters</span><strong>{location.emoji} {location.label}</strong><small>{location.tag}</small></div>
                 <div className="fact"><span>Other branches</span><strong>{p?.otherLocations?.length?p.otherLocations.join(" · "):"Not publicly confirmed"}</strong></div>
-                <div className="fact"><span>Ownership</span><strong>{p?.ownership||"Not publicly confirmed"}</strong>{p?.parentCompany?<small>Parent: {p.parentCompany}</small>:null}</div>
+                <div className="fact"><span>Ownership</span><strong>{p?.ownership||"Not yet researched"}</strong>{p?.parentCompany?<small>Parent: {p.parentCompany}</small>:null}</div>
                 <div className="fact"><span>Industry scale</span><strong>{p?.industryScale||"Not yet assessed"}</strong><small>Indicative portfolio / production profile, not an official rating</small></div>
                 <div className="fact"><span>Team size</span><strong>{p?.teamSize||"Not publicly disclosed"}</strong>{p?.teamSizeAsOf?<small>Reference period: {p.teamSizeAsOf}</small>:null}</div>
                 <div className="fact"><span>Company role</span><strong>{type}</strong></div>
