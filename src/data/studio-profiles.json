@@ -3689,5 +3689,130 @@
       "https://www.velanstudios.com/"
     ],
     "applicationLocation": "Not specified · HQ shown as reference"
+  },
+  "Nomad Games": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": null,
+      "country": "Not stated",
+      "countryCode": "GB",
+      "label": "Country · Wikidata"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.wikidata.org/entity/Q96612282",
+      "https://nomadgames.co.uk/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "10 Chambers": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Stockholm",
+      "country": "Sweden",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1&state=&type=",
+      "https://10chambers.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "1000 Orks": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Osnabruck, Saxony",
+      "country": "Germany",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1&state=&type=",
+      "https://1000orks.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "10tons": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Tampere, Pirkanmaa",
+      "country": "Finland",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1&state=&type=",
+      "https://10tons.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "1939 Games": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Reykjavik",
+      "country": "Iceland",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Mobile"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1&state=&type=",
+      "https://1939games.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   }
 }

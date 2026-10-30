@@ -1,5 +1,94 @@
 [
   {
+    "name": "10 Chambers",
+    "country": "Sweden",
+    "websiteUrl": "https://10chambers.com/",
+    "applicationUrl": "https://10chambers.com/",
+    "evidenceUrl": "https://10chambers.com/",
+    "notes": "Official studio-controlled page explicitly invites spontaneous applications. Evidence: spontaneous application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "1000 Orks",
+    "country": "Germany",
+    "websiteUrl": "https://1000orks.com/",
+    "applicationUrl": "https://1000orks.com/",
+    "evidenceUrl": "https://1000orks.com/",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: Initiativbewerbungen. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "10tons",
+    "country": "Finland",
+    "websiteUrl": "https://10tons.com/",
+    "applicationUrl": "https://10tons.com/careers",
+    "evidenceUrl": "https://10tons.com/careers",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "1939 Games",
+    "country": "Iceland",
+    "websiteUrl": "https://1939games.com/",
+    "applicationUrl": "https://1939games.com/career/",
+    "evidenceUrl": "https://1939games.com/career/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: OPEN APPLICATION. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "4A Games",
     "country": "Malta",
     "websiteUrl": "https://www.4a-games.com.mt/",
@@ -376,7 +465,7 @@
     "applicationUrl": "https://www.braveatnight.co.uk/speculative",
     "evidenceUrl": "https://www.braveatnight.co.uk/speculative",
     "notes": "Official page is titled Speculative Application and asks applicants to send a CV and portfolio if possible.",
-    "checkedAt": "2026-10-29",
+    "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
@@ -388,7 +477,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-27"
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
@@ -398,7 +487,7 @@
     "applicationUrl": "https://chimera-entertainment.jobs.personio.com/job/150955?language=en",
     "evidenceUrl": "https://chimera-entertainment.jobs.personio.com/job/150955?language=en",
     "notes": "Official Personio posting is titled speculative application; it says applicants who did not find a fitting role can apply anyway. Munich office. Work model: onsite.",
-    "checkedAt": "2026-10-29",
+    "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
@@ -412,7 +501,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-27"
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
@@ -422,7 +511,7 @@
     "applicationUrl": "https://cigames.teamtailor.com/jobs/7918450-open-application",
     "evidenceUrl": "https://cigames.teamtailor.com/jobs/7918450-open-application",
     "notes": "Official Open Application welcomes candidates even if no exact role is listed. Marked Worldwide and Fully Remote; considers current or future project needs.",
-    "checkedAt": "2026-10-29",
+    "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -436,7 +525,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-27"
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
@@ -1265,6 +1354,29 @@
       "eligibleLocations": [
         "Vancouver, Canada · remote eligibility not stated"
       ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Nomad Games",
+    "country": "Not stated",
+    "websiteUrl": "https://nomadgames.co.uk/",
+    "applicationUrl": "https://nomadgames.co.uk/careers",
+    "evidenceUrl": "https://nomadgames.co.uk/careers",
+    "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: speculative application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
