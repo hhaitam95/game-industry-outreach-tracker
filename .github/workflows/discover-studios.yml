@@ -85,6 +85,7 @@ jobs:
               --route-check-count 8 \
               --state-file "$STATE_FILE"
           fi
+          echo "mode=$MODE" >> "$GITHUB_OUTPUT"
 
       - name: Run offline discovery pipeline tests
         run: python3 -m unittest discover -s tests -p 'test_studio_discovery*.py' -v
@@ -124,6 +125,17 @@ jobs:
             echo "data_changed=true" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Upload Pages artifact when the public dataset changed
+        if: steps.commit.outputs.data_changed == 'true'
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
+        with:
+          path: dist
+
+      - name: Deploy updated directory
+        id: deployment
+        if: steps.commit.outputs.data_changed == 'true'
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+
       - name: Persist discovery cursors and verification state
         shell: bash
         run: |
@@ -138,23 +150,12 @@ jobs:
             git -C .discovery-state push origin HEAD:discovery-state
           fi
 
-      - name: Upload Pages artifact when the public dataset changed
-        if: steps.commit.outputs.data_changed == 'true'
-        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
-        with:
-          path: dist
-
-      - name: Deploy updated directory
-        id: deployment
-        if: steps.commit.outputs.data_changed == 'true'
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
-
       - name: Add sanitized workflow summary
         if: always()
         run: |
           {
             echo "## StudioScout discovery run"
-            echo "- Mode: ${{ steps.discovery.outcome || 'not started' }}"
+            echo "- Mode: ${{ steps.discovery.outputs.mode || 'not started' }}"
             echo "- Public changes: ${{ steps.commit.outputs.data_changed || 'not committed' }}"
             echo "- Candidate and route details remain in the discovery-state branch."
             echo "- Unavailable, blocked, robots-disallowed or ambiguous pages do not close routes."
