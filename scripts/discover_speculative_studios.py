@@ -377,7 +377,13 @@ def robots_allowed(url: str) -> bool:
         robots_url = urllib.parse.urlunsplit(("https", host, "/robots.txt", "", ""))
         parser = urllib.robotparser.RobotFileParser()
         parser.set_url(robots_url)
-        result = fetch_url(robots_url, check_robots=False, timeout=10, max_bytes=250_000)
+        result = fetch_url(
+            robots_url,
+            check_robots=False,
+            timeout=10,
+            max_bytes=250_000,
+            allow_plain_text=True,
+        )
         if result.ok:
             parser.parse(result.body.splitlines())
         elif result.status_code == 404:
@@ -396,6 +402,7 @@ def fetch_url(
     allowed_external: bool = False,
     timeout: int = REQUEST_TIMEOUT_SECONDS,
     max_bytes: int = MAX_RESPONSE_BYTES,
+    allow_plain_text: bool = False,
 ) -> FetchResult:
     safe_url = canonical_url(url)
     if not safe_url:
@@ -422,8 +429,10 @@ def fetch_url(
             if not 200 <= status < 300:
                 return FetchResult(False, final_url, status, "", "http-status")
             content_type = response.headers.get("Content-Type", "text/html").lower()
-            if not any(kind in content_type for kind in ("html", "xhtml")):
-                return FetchResult(False, final_url, status, "", "not-html")
+            is_html = any(kind in content_type for kind in ("html", "xhtml"))
+            is_plain_text = "text/plain" in content_type or content_type.startswith("text/plain;")
+            if not is_html and not (allow_plain_text and is_plain_text):
+                return FetchResult(False, final_url, status, "", "unexpected-content-type")
             body_bytes = response.read(max_bytes + 1)
             if len(body_bytes) > max_bytes:
                 return FetchResult(False, final_url, status, "", "response-too-large")
