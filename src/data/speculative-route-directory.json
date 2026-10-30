@@ -2703,6 +2703,36 @@
     }
   },
   {
+    "name": "StickyStoneStudio",
+    "country": "Germany",
+    "websiteUrl": "https://www.stickystonestudio.de/",
+    "applicationUrl": "https://www.stickystonestudio.de/jobs/",
+    "evidenceUrl": "https://www.stickystonestudio.de/jobs/",
+    "notes": "Official Jobs & Internships page explicitly invites unsolicited applications in 3D/2D design, programming, game design and QA. Applicants are asked to email a short description of themselves and work samples; applications in German are welcome. HQ is Gundelfingen near Freiburg; the route does not state remote or applicant-country eligibility.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Gundelfingen near Freiburg, Germany · hiring/remote eligibility not stated"
+      ],
+      "disciplineScope": [
+        "3D Design",
+        "2D Design",
+        "Programming",
+        "Game Design",
+        "QA"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Stormind Games",
     "country": "Italy",
     "websiteUrl": "https://stormindgames.com/",
