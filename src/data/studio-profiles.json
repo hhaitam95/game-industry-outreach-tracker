@@ -1783,5 +1783,921 @@
       "https://www.blowfishstudios.com/",
       "https://www.blowfishstudios.com/open-application"
     ]
+  },
+  "Abyssal Interactive": {
+    "description": "Small French developer creating persistent multiplayer worlds and simulation/strategy experiences in-house.",
+    "headquarters": {
+      "city": null,
+      "country": "France",
+      "countryCode": "FR",
+      "label": "HQ · city not stated"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent · small team",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small in-house team · exact count not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Mac",
+      "iOS",
+      "Multiplayer",
+      "Simulation",
+      "Strategy"
+    ],
+    "popularGames": [
+      {
+        "title": "Train Station Tycoon",
+        "appId": null,
+        "stage": "Released October 2026"
+      },
+      {
+        "title": "Wood'N'Destroy",
+        "appId": null
+      },
+      {
+        "title": "Stereopoly",
+        "appId": null
+      },
+      {
+        "title": "Citiizen",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "applicationLocation": "Freelance roles remote · speculative eligibility not specified",
+    "reachHighlights": "Four games listed in the current official portfolio.",
+    "profileSources": [
+      "https://www.abyssal-interactive.com/studio?lang=en",
+      "https://www.abyssal-interactive.com/games",
+      "https://www.abyssal-interactive.com/en/careers"
+    ]
+  },
+  "Aden Interactive": {
+    "description": "Portugal-based developer creating original IP, co-development games and interactive digital experiences across desktop, mobile, VR and AR.",
+    "headquarters": {
+      "city": "Caldas da Rainha",
+      "country": "Portugal",
+      "countryCode": "PT",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Remote collaborators worldwide"
+    ],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Interactive services"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small core team · exact current count not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Mobile",
+      "VR",
+      "AR",
+      "Original IP",
+      "Co-development"
+    ],
+    "popularGames": [
+      {
+        "title": "Gladihaters",
+        "appId": null
+      },
+      {
+        "title": "Timepunk",
+        "appId": null,
+        "stage": "Beta"
+      },
+      {
+        "title": "AM I AI",
+        "appId": null,
+        "stage": "Alpha"
+      }
+    ],
+    "applicationLocation": "Portugal or remote · see role conditions",
+    "reachHighlights": "Founded in 2021; studio press kit lists Gladihaters and Timepunk among its original projects.",
+    "profileSources": [
+      "https://adeninteractive.com/studio/",
+      "https://adeninteractive.com/press/index.php",
+      "https://adeninteractive.com/"
+    ]
+  },
+  "Aska Studios": {
+    "description": "Reykjavík game studio with a remote-first working environment, currently developing a cooperative deckbuilder-shooter.",
+    "headquarters": {
+      "city": "Reykjavík",
+      "country": "Iceland",
+      "countryCode": "IS",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Remote-first team"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent · ownership not further disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Co-op",
+      "Shooter",
+      "Deckbuilder",
+      "Roguelite"
+    ],
+    "popularGames": [
+      {
+        "title": "Gang of Frogs",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "applicationLocation": "Remote-first · confirm country eligibility",
+    "profileSources": [
+      "https://askastudios.is/"
+    ]
+  },
+  "Bananagun": {
+    "description": "Small senior mobile-game team building hyper-casual and hybrid-casual Unity games for iOS and Android.",
+    "headquarters": {
+      "city": null,
+      "country": "Not publicly stated",
+      "countryCode": "",
+      "label": "HQ not disclosed"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Mobile",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small, senior team · exact count not disclosed",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "iOS",
+      "Android",
+      "Unity",
+      "Hyper-casual",
+      "Hybrid-casual"
+    ],
+    "popularGames": [
+      {
+        "title": "Skyline Tycoon",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "applicationLocation": "Hybrid roles listed · location eligibility not specified",
+    "reachHighlights": "Founded 2026; the studio's first mobile game is in development.",
+    "profileSources": [
+      "https://bananagun.games/"
+    ]
+  },
+  "Barnstorm Games": {
+    "description": "Small UK developer and publisher specializing in family-friendly quiz, trivia, word and branded games for mobile, console, desktop and smart TV.",
+    "headquarters": {
+      "city": "London",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ · LinkedIn listing"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher"
+    ],
+    "ownership": "Privately held",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "2–10 employees (LinkedIn company range)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "Mobile",
+      "Console",
+      "Desktop",
+      "Smart TV",
+      "Quiz",
+      "Family"
+    ],
+    "popularGames": [
+      {
+        "title": "The 1% Club World Challenge",
+        "appId": null
+      },
+      {
+        "title": "The Chase: World Tour",
+        "appId": null
+      },
+      {
+        "title": "The Wheel: Premium Edition",
+        "appId": null
+      },
+      {
+        "title": "Tenable",
+        "appId": null
+      }
+    ],
+    "applicationLocation": "Location not specified · use HQ as reference",
+    "reachHighlights": "Long-running licensed game work with TV brands including The Chase, The 1% Club and Mensa.",
+    "profileSources": [
+      "https://www.barnstormgames.com/",
+      "https://uk.linkedin.com/company/barnstorm-games",
+      "https://apps.apple.com/gb/developer/barnstorm-games/id385706699"
+    ]
+  },
+  "Brave At Night": {
+    "description": "Independent game developer behind narrative kingdom-management RPGs and publisher of selected indie titles.",
+    "headquarters": {
+      "city": null,
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ · city not verified"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Narrative",
+      "RPG",
+      "Simulation"
+    ],
+    "popularGames": [
+      {
+        "title": "Yes, Your Grace",
+        "appId": 1115690
+      },
+      {
+        "title": "Yes, Your Grace: Snowfall",
+        "appId": null,
+        "stage": "Released 2025"
+      },
+      {
+        "title": "Mind Scanners",
+        "appId": 1389550,
+        "stage": "Published title"
+      }
+    ],
+    "applicationLocation": "Location not specified · use HQ as reference",
+    "profileSources": [
+      "https://store.steampowered.com/developer/braveatnight/",
+      "https://www.braveatnight.co.uk/speculative"
+    ]
+  },
+  "Dionic Software": {
+    "description": "Small independent German developer making building, colony, automation and simulation games.",
+    "headquarters": {
+      "city": null,
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "HQ · city not verified"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "4 developers (studio-published figure)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Simulation",
+      "Building",
+      "Automation",
+      "Strategy"
+    ],
+    "popularGames": [
+      {
+        "title": "Founders' Fortune",
+        "appId": 1104330
+      },
+      {
+        "title": "InfraSpace",
+        "appId": 1511460
+      },
+      {
+        "title": "HavenCraft",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "applicationLocation": "Germany for employees · European time zones considered for freelancers",
+    "reachHighlights": "Official website reports 638K players and 7.3M hours played across its games.",
+    "profileSources": [
+      "https://dionicsoftware.com/"
+    ]
+  },
+  "Funday Games": {
+    "description": "Independent Aarhus developer and publisher specializing in spin-off games based on established indie IPs and original projects.",
+    "headquarters": {
+      "city": "Aarhus",
+      "country": "Denmark",
+      "countryCode": "DK",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "AA",
+    "teamSize": "50+ talents (studio-reported)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Console",
+      "Mobile",
+      "Action",
+      "Survivor-like",
+      "Publishing"
+    ],
+    "popularGames": [
+      {
+        "title": "Deep Rock Galactic: Survivor",
+        "appId": 2321470
+      },
+      {
+        "title": "Wild Indigo Ranch",
+        "appId": null
+      },
+      {
+        "title": "The Margot Collapse",
+        "appId": null,
+        "stage": "Announced 2026"
+      }
+    ],
+    "applicationLocation": "Aarhus hybrid · broader eligibility not specified",
+    "reachHighlights": "Deep Rock Galactic: Survivor has surpassed 2M players since its 2024 launch (studio-reported).",
+    "profileSources": [
+      "https://www.fundaygames.dk/about",
+      "https://joinus.fundaygames.dk/jobs/7277761-unsolicited-application"
+    ]
+  },
+  "Hindsight Studios": {
+    "description": "German game-development studio with an official speculative-application route; public portfolio and company structure require further verification.",
+    "headquarters": {
+      "city": null,
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "HQ · city not verified"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer · details to verify"
+    ],
+    "ownership": "Not publicly confirmed",
+    "parentCompany": null,
+    "industryScale": "Not yet assessed",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Game development · portfolio details pending"
+    ],
+    "popularGames": [],
+    "applicationLocation": "Location not specified · use HQ country as reference",
+    "reachHighlights": "Profile intentionally limited: public company and portfolio information needs a deeper review.",
+    "profileSources": [
+      "https://www.hindsight-studios.de/career.html"
+    ]
+  },
+  "LIQUIDBULLET Studios": {
+    "description": "Very small independent studio building its debut Unreal Engine 5 survival game.",
+    "headquarters": {
+      "city": null,
+      "country": "Not publicly stated",
+      "countryCode": "",
+      "label": "HQ not disclosed"
+    },
+    "otherLocations": [
+      "Fully remote · worldwide eligibility stated"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Very small team · exact count not disclosed",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Unreal Engine 5",
+      "Survival",
+      "Action"
+    ],
+    "popularGames": [
+      {
+        "title": "DECAYED",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "applicationLocation": "Fully remote · worldwide stated on application page",
+    "profileSources": [
+      "https://www.liquidbulletstudios.com/",
+      "https://www.liquidbulletstudios.com/careers"
+    ]
+  },
+  "Lunacy Studios": {
+    "description": "Fully remote, globally distributed indie studio creating narrative-rich games centered on culture, emotion and identity.",
+    "headquarters": {
+      "city": null,
+      "country": "Not publicly stated",
+      "countryCode": "",
+      "label": "Remote-first · HQ not stated"
+    },
+    "otherLocations": [
+      "Globally distributed team"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Narrative",
+      "Adventure",
+      "3D"
+    ],
+    "popularGames": [
+      {
+        "title": "The House of Hikmah",
+        "appId": null,
+        "stage": "Demo available"
+      }
+    ],
+    "applicationLocation": "Fully remote · global team; eligibility not stated",
+    "profileSources": [
+      "https://lunacystudios.com/about-us/",
+      "https://lunacystudios.com/"
+    ]
+  },
+  "Ocellus Studio": {
+    "description": "Lyon-based game group combining original game development with large-scale stylized art, animation and game-development services for major publishers.",
+    "headquarters": {
+      "city": "Lyon",
+      "country": "France",
+      "countryCode": "FR",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Ocellus North · Northern France"
+    ],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Art services",
+      "Animation"
+    ],
+    "ownership": "Privately held · Ocellus Group",
+    "parentCompany": "Ocellus Group",
+    "industryScale": "AA / AAA services",
+    "teamSize": "2–10 at Ocellus Games; 51–200 at Ocellus Services (LinkedIn ranges)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "Game art",
+      "Animation",
+      "Cinematics",
+      "Live operations",
+      "Co-development"
+    ],
+    "popularGames": [
+      {
+        "title": "Clash Royale",
+        "appId": null,
+        "stage": "Art/live-operations services"
+      },
+      {
+        "title": "Fortnite",
+        "appId": null,
+        "stage": "Art and creative services"
+      },
+      {
+        "title": "Smurfs: Dreams",
+        "appId": null,
+        "stage": "Game development"
+      },
+      {
+        "title": "Everdale",
+        "appId": null,
+        "stage": "Original studio project"
+      }
+    ],
+    "applicationLocation": "Lyon / Ocellus North · some roles may allow remote from Lyon",
+    "reachHighlights": "Ocellus Services reports work across 56 games, 3B+ downloads and 245M daily active users on partner live games; these are cumulative partner-work reach figures, not studio-owned players.",
+    "profileSources": [
+      "https://ocellus-studio.com/about",
+      "https://ocellus-studio.com/services",
+      "https://www.linkedin.com/company/ocellus-games/"
+    ]
+  },
+  "Octocube Games": {
+    "description": "Independent Roskilde mobile-game studio focused on thoughtful idle games and progression-led experiences.",
+    "headquarters": {
+      "city": "Roskilde",
+      "country": "Denmark",
+      "countryCode": "DK",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Mobile",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "Idle games",
+      "Progression",
+      "Casual"
+    ],
+    "popularGames": [],
+    "applicationLocation": "Roskilde · unsolicited application route; eligibility not specified",
+    "profileSources": [
+      "https://octocubegames.com/about/",
+      "https://octocubegames.com/contact/"
+    ]
+  },
+  "Plummy Games": {
+    "description": "Moldova-founded remote-first mobile developer creating casual merge games, with its home base in Chișinău and remote team locations including Tallinn.",
+    "headquarters": {
+      "city": "Chișinău",
+      "country": "Moldova",
+      "countryCode": "MD",
+      "label": "HQ / home base"
+    },
+    "otherLocations": [
+      "Tallinn, Estonia",
+      "Remote team internationally"
+    ],
+    "companyType": [
+      "Developer",
+      "Mobile",
+      "Independent startup"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "AA · Mobile",
+    "teamSize": "80 employees (company-reported)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "Mobile",
+      "Casual",
+      "Merge-3",
+      "Free-to-play"
+    ],
+    "popularGames": [
+      {
+        "title": "Star Merge",
+        "appId": null,
+        "stage": "Flagship mobile game"
+      }
+    ],
+    "applicationLocation": "Remote / Tallinn · B2B terms may apply depending on country",
+    "reachHighlights": "The company reports 80 coworkers and describes Star Merge as a Top 3 title in the Merge-3 genre.",
+    "profileSources": [
+      "https://plummygames.teamtailor.com/pages/about-us",
+      "https://plummygames.teamtailor.com/"
+    ]
+  },
+  "Raw Power Games": {
+    "description": "Fully funded Copenhagen developer building a large-scale open-world medieval sandbox game with a senior team drawn from major AAA productions.",
+    "headquarters": {
+      "city": "Copenhagen",
+      "country": "Denmark",
+      "countryCode": "DK",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Remote team within roughly 1–2 hours of Copenhagen time"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Privately held · fully funded",
+    "parentCompany": null,
+    "industryScale": "AAA ambition",
+    "teamSize": "51–200 employees (LinkedIn range); company says 100+ senior developers",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Console",
+      "Open-world",
+      "Sandbox",
+      "Medieval"
+    ],
+    "popularGames": [
+      {
+        "title": "Chronicles: Medieval",
+        "appId": null,
+        "stage": "Debut game · 2026 Early Access plan"
+      }
+    ],
+    "applicationLocation": "Copenhagen / hybrid / remote within CET ±1–2 hours",
+    "reachHighlights": "Founded 2022; team credits include The Witcher 3, Red Dead Redemption 2, Cyberpunk 2077, GTA, Hogwarts Legacy and Total War.",
+    "profileSources": [
+      "https://www.rawpowergames.com/about",
+      "https://careers.rawpowergames.com/",
+      "https://www.chronicles.net/faq",
+      "https://www.linkedin.com/company/raw-power-games"
+    ]
+  },
+  "Speedway Games": {
+    "description": "Global remote game studio focused on building and operating large-scale Roblox experiences; accepts general applications for experienced contributors.",
+    "headquarters": {
+      "city": null,
+      "country": "Not publicly stated",
+      "countryCode": "",
+      "label": "Global · HQ not stated"
+    },
+    "otherLocations": [
+      "Remote · global location stated"
+    ],
+    "companyType": [
+      "Developer",
+      "Live operations"
+    ],
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie / AA · platform-native",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Roblox",
+      "Online multiplayer",
+      "Live operations",
+      "UGC"
+    ],
+    "popularGames": [],
+    "applicationLocation": "Global · location stated on general application",
+    "reachHighlights": "Studio careers material describes Roblox games reaching tens of millions of players per month.",
+    "profileSources": [
+      "https://speedway-games.com/careers/45073",
+      "https://speedway-games.com/"
+    ]
+  },
+  "Studios DRAMA / UNRECORD": {
+    "description": "Independent Rennes studio making UNRECORD, a gameplay-first tactical FPS built around high-fidelity realism and systemic design.",
+    "headquarters": {
+      "city": "Rennes",
+      "country": "France",
+      "countryCode": "FR",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "AA",
+    "teamSize": "Small specialized team · exact count not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "FPS",
+      "Unreal Engine 5",
+      "Tactical",
+      "Realism"
+    ],
+    "popularGames": [
+      {
+        "title": "UNRECORD",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "applicationLocation": "Rennes · regular on-site presence expected; role-dependent flexibility",
+    "reachHighlights": "Studio describes UNRECORD as an AA-ambition project.",
+    "profileSources": [
+      "https://studiosdrama.com/career/",
+      "https://studiosdrama.com/unsolicited-application/"
+    ]
+  },
+  "The Indie Stone": {
+    "description": "Independent distributed studio behind Project Zomboid, a long-running open-world zombie survival sandbox.",
+    "headquarters": {
+      "city": null,
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "UK roots · distributed studio; formal HQ not stated"
+    },
+    "otherLocations": [
+      "Canada",
+      "United States",
+      "France",
+      "Germany",
+      "Australia",
+      "Other countries"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "Originally four core founders; current contributors distributed globally",
+    "teamSizeAsOf": "Studio history page",
+    "focus": [
+      "PC",
+      "Survival",
+      "Sandbox",
+      "Simulation",
+      "Modding"
+    ],
+    "popularGames": [
+      {
+        "title": "Project Zomboid",
+        "appId": 108600
+      }
+    ],
+    "applicationLocation": "Fully remote · worldwide contributors",
+    "reachHighlights": "Project Zomboid is a long-running sandbox title with a global community and extensive mod ecosystem.",
+    "profileSources": [
+      "https://projectzomboid.com/blog/about-us/",
+      "https://theindiestone.com/"
+    ]
+  },
+  "Uplift Games": {
+    "description": "Remote-first Roblox developer behind Adopt Me!, building large-scale social and family-friendly virtual worlds.",
+    "headquarters": {
+      "city": null,
+      "country": "Not publicly stated",
+      "countryCode": "",
+      "label": "Remote-first · no single HQ stated"
+    },
+    "otherLocations": [
+      "North America",
+      "United Kingdom"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent",
+      "Roblox"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "AA / AAA-scale live game",
+    "teamSize": "60+ team members (studio-reported)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "Roblox",
+      "Live operations",
+      "Social",
+      "Family-friendly"
+    ],
+    "popularGames": [
+      {
+        "title": "Adopt Me!",
+        "appId": null
+      }
+    ],
+    "applicationLocation": "Remote · North America and United Kingdom; work authorization required in US or UK",
+    "reachHighlights": "Adopt Me! is reported by Uplift as having 40B+ plays and 425M+ players; Uplift reports a 60+ person team.",
+    "profileSources": [
+      "https://www.uplift.games/about",
+      "https://www.uplift.games/careers",
+      "https://upliftgames.zendesk.com/hc/en-us/articles/39204397059604-Adopt-Me-FAQ"
+    ]
+  },
+  "VestGames": {
+    "description": "Small German indie studio building multiplayer social-deduction games and providing 2D/3D art services.",
+    "headquarters": {
+      "city": "Datteln",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Contributors across Europe"
+    ],
+    "companyType": [
+      "Developer",
+      "Services",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "8 people (studio-reported)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Multiplayer",
+      "Social deduction",
+      "Unreal Engine",
+      "Art services"
+    ],
+    "popularGames": [
+      {
+        "title": "Eville",
+        "appId": 1220170
+      }
+    ],
+    "applicationLocation": "Hybrid / remote · full-time roles require German; English required",
+    "reachHighlights": "Founded in 2020; small team working across Germany and Europe.",
+    "profileSources": [
+      "https://vestgames.com/about/",
+      "https://vestgames.com/"
+    ]
+  },
+  "Yabu Games": {
+    "description": "Istanbul-based independent mobile studio creating puzzle, casual, action, arcade and racing games.",
+    "headquarters": {
+      "city": "Istanbul",
+      "country": "Türkiye",
+      "countryCode": "TR",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Mobile",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "iOS",
+      "Android",
+      "Puzzle",
+      "Casual",
+      "Action",
+      "Arcade",
+      "Racing"
+    ],
+    "popularGames": [
+      {
+        "title": "Crash Road",
+        "appId": null
+      },
+      {
+        "title": "Hijack the Aisle!",
+        "appId": null
+      },
+      {
+        "title": "Sand Pop!",
+        "appId": null
+      },
+      {
+        "title": "Rescue Sort",
+        "appId": null
+      },
+      {
+        "title": "Orbit People Sort",
+        "appId": null
+      }
+    ],
+    "applicationLocation": "Istanbul · hybrid",
+    "profileSources": [
+      "https://yabugames.io/about/",
+      "https://yabugames.io/careers/"
+    ]
   }
 }
