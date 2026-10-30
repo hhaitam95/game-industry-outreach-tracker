@@ -3889,4 +3889,37 @@
     "applicationLocation": "Wrocław office · office, hybrid or fully remote options stated; applicant geography not stated",
     "reachHighlights": "65+ experts onboard, 120+ completed projects and 100+ satisfied clients (studio-reported). Formerly The Knights of Unity."
   }
+,
+  "Rad Games": {
+    "description": "Game studio division of IDFire Technologies Inc., developing its own game universes alongside the in-house Janus game engine.",
+    "headquarters": {
+      "city": null,
+      "country": "Not publicly stated",
+      "countryCode": "",
+      "label": "HQ not disclosed"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Game engine developer"
+    ],
+    "ownership": "Studio division of IDFire Technologies Inc.",
+    "parentCompany": "IDFire Technologies Inc.",
+    "industryScale": "Not disclosed",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Game development",
+      "Game engine development",
+      "Action",
+      "Strategy"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://radgames.ai/about",
+      "https://radgames.ai/careers"
+    ],
+    "applicationLocation": "Not stated",
+    "reachHighlights": "Builds the Janus Engine in-house and develops two original game universes, Puppies vs. Kittens and RiftBleed (studio-reported)."
+  }
 }
