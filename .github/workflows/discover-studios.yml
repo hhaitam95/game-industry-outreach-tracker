@@ -1,0 +1,171 @@
+name: Studio speculative-route discovery
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/discover-studios.yml"
+      - "scripts/discover_speculative_studios.py"
+      - "src/data/speculative-route-directory.json"
+      - "src/data/studio-profiles.json"
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Bootstrap performs a larger first backfill; hourly runs one rotating discovery batch."
+        type: choice
+        options:
+          - bootstrap
+          - hourly
+        default: bootstrap
+        required: true
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: studio-discovery-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  discover-and-publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out the public website repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+
+      - name: Check out the separate discovery-state branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: discovery-state
+          path: .discovery-state
+          persist-credentials: true
+
+      - name: Check Python runtime
+        run: |
+          python3 --version
+          python3 -c "import sys; assert sys.version_info >= (3, 10), 'Python 3.10 or newer is required'"
+
+      - name: Run a resumable discovery batch
+        id: discovery
+        shell: bash
+        run: |
+          set -euo pipefail
+          STATE_FILE=".discovery-state/state/studio-discovery-state.json"
+          MODE="hourly"
+
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            MODE="${{ inputs.mode }}"
+          elif [ -f "$STATE_FILE" ]; then
+            BOOTSTRAP_STARTED="$(python3 -c "import json; from pathlib import Path; p=Path('$STATE_FILE'); print(str(json.loads(p.read_text()).get('bootstrap_started', False)).lower())")"
+            if [ "$BOOTSTRAP_STARTED" != "true" ]; then
+              MODE="bootstrap"
+            fi
+          else
+            MODE="bootstrap"
+          fi
+
+          if [ "$MODE" = "bootstrap" ]; then
+            python3 scripts/discover_speculative_studios.py \
+              --mode bootstrap \
+              --batch-size 100 \
+              --max-source-pages 4 \
+              --max-candidate-checks 150 \
+              --route-check-count 8 \
+              --max-run-seconds 1200 \
+              --state-file "$STATE_FILE"
+          else
+            python3 scripts/discover_speculative_studios.py \
+              --mode hourly \
+              --batch-size 100 \
+              --max-source-pages 1 \
+              --max-candidate-checks 100 \
+              --route-check-count 8 \
+              --max-run-seconds 1200 \
+              --state-file "$STATE_FILE"
+          fi
+          echo "mode=$MODE" >> "$GITHUB_OUTPUT"
+
+      - name: Run offline discovery pipeline tests
+        run: python3 -m unittest discover -s tests -p 'test_studio_discovery*.py' -v
+
+      - name: Install frontend dependencies
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Run frontend and data tests
+        run: |
+          npm ci
+          npm test
+          npm run check:studio-directory
+          npm run routes:review
+
+      - name: Build the updated static directory
+        run: npm run build
+        env:
+          VITE_BASE_PATH: /game-industry-outreach-tracker/
+
+      - name: Commit verified public dataset updates
+        id: commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/speculative-route-directory.json src/data/studio-profiles.json
+          if git diff --cached --quiet; then
+            echo "data_changed=false" >> "$GITHUB_OUTPUT"
+            echo "No public directory changes to publish."
+          else
+            git commit -m "data: update verified speculative studio routes"
+            git push origin HEAD:main
+            echo "data_changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Upload Pages artifact when the public dataset changed
+        if: steps.commit.outputs.data_changed == 'true'
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
+        with:
+          path: dist
+
+      - name: Deploy updated directory
+        id: deployment
+        if: steps.commit.outputs.data_changed == 'true'
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+
+      - name: Persist discovery cursors and verification state
+        shell: bash
+        run: |
+          set -euo pipefail
+          git -C .discovery-state config user.name "github-actions[bot]"
+          git -C .discovery-state config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git -C .discovery-state add state/studio-discovery-state.json
+          if git -C .discovery-state diff --cached --quiet; then
+            echo "No discovery-state changes to persist."
+          else
+            git -C .discovery-state commit -m "chore: advance speculative studio discovery state"
+            git -C .discovery-state push origin HEAD:discovery-state
+          fi
+
+      - name: Add sanitized workflow summary
+        if: always()
+        run: |
+          {
+            echo "## StudioScout discovery run"
+            echo "- Mode: ${{ steps.discovery.outputs.mode || 'not started' }}"
+            echo "- Public changes: ${{ steps.commit.outputs.data_changed || 'not committed' }}"
+            echo "- Candidate and route details remain in the discovery-state branch."
+            echo "- Unavailable, blocked, robots-disallowed or ambiguous pages do not close routes."
+          } >> "$GITHUB_STEP_SUMMARY"

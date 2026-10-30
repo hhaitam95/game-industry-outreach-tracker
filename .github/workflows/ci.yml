@@ -17,6 +17,7 @@ jobs:
         with:
           node-version: "24"
           cache: npm
+      - run: python3 -m unittest discover -s tests -p 'test_studio_discovery*.py' -v
       - run: npm ci
       - run: npm test
       - run: npm run check:studio-directory
