@@ -34,7 +34,7 @@ export default function App(){
     active:applications.filter(a=>["in_progress","applied","interview","offer"].includes(a.status)).length
   }),[applications]);
 
-  function trackStudio(studio:{name:string;websiteUrl:string;applicationUrl:string;country:string},status:TrackerStatus){
+  function trackStudio(studio:{name:string;websiteUrl:string;applicationUrl:string;country:string},status:TrackerStatus,location?:{country:string;hqLabel:string;applicationLocation:string}){
     const timestamp=new Date().toISOString();
     setApplications(previous=>{
       const existing=previous.find(item=>item.studioName===studio.name);
@@ -44,8 +44,9 @@ export default function App(){
         studioName:studio.name,
         websiteUrl:studio.websiteUrl,
         applicationUrl:studio.applicationUrl,
-        country:studio.country,
-        hqLabel:"HQ",
+        country:location?.country||studio.country,
+        hqLabel:location?.hqLabel||"HQ",
+        applicationLocation:location?.applicationLocation||"Not specified · HQ shown as reference",
         status,
         createdAt:existing?.createdAt||timestamp,
         updatedAt:timestamp,
@@ -59,7 +60,7 @@ export default function App(){
   function markApplied(studio:{name:string;websiteUrl:string;applicationUrl:string;country:string}){
     const confirmed=window.confirm("Confirm that you have submitted an application to "+studio.name+"? This will add it to My Applications as Applied.");
     if(!confirmed)return;
-    trackStudio(studio,"applied");
+    trackStudio(studio,"applied",location);
     setTrackerInitialTab("applied");
     setPage("applications");
   }
@@ -96,7 +97,7 @@ export default function App(){
         <div className="topbar-right"><span className="topbar-tag">PERSONAL RESEARCH</span><span className="avatar">H</span></div>
       </header>
       <div className="page-content">
-        {page==="studios"?<StudioDirectory applications={applications} onSave={studio=>trackStudio(studio,"saved")} onMarkApplied={markApplied}/>:<ApplicationTracker initialTab={trackerInitialTab} applications={applications} onChangeStatus={changeStatus} onRemove={removeApplication} onOpenDirectory={()=>setPage("studios")}/>}
+        {page==="studios"?<StudioDirectory applications={applications} onSave={(studio,location)=>trackStudio(studio,"saved",location)} onMarkApplied={markApplied}/>:<ApplicationTracker initialTab={trackerInitialTab} applications={applications} onChangeStatus={changeStatus} onRemove={removeApplication} onOpenDirectory={()=>setPage("studios")}/>}
       </div>
       <footer className="app-footer"><span>STUDIOSCOUT</span><span>Studio profiles · Official application routes · Manual tracking</span><span>© 2026</span></footer>
     </main>
