@@ -6,6 +6,8 @@ on:
     paths:
       - ".github/workflows/discover-studios.yml"
       - "scripts/discover_speculative_studios.py"
+      - "scripts/merge_discovery_datasets.py"
+      - "config/manual-studio-exclusions.json"
       - "src/data/speculative-route-directory.json"
       - "src/data/studio-profiles.json"
   schedule:
@@ -27,7 +29,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: studio-discovery-v3-${{ github.repository }}
+  group: studio-discovery-v4-${{ github.repository }}
   cancel-in-progress: false
 
 jobs:
