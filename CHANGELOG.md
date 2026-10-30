@@ -7,3 +7,4 @@
 - Simplified the directory, application tracker and navigation.
 - Removed legacy advertised-job discovery workflows from the active workflow set.
 - Kept route rechecking and new-route discovery as future optional automation.
+- Excluded studios focused on adult-only or sexually explicit content from the public directory.
