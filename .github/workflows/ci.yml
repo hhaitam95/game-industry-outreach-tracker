@@ -18,6 +18,7 @@ jobs:
           node-version: "24"
           cache: npm
       - run: npm ci
+      - run: npm run check:studio-directory
       - run: npm run build
         env:
           VITE_BASE_PATH: /game-industry-outreach-tracker/
