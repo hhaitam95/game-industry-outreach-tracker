@@ -5,7 +5,7 @@ The live workflow is .github/workflows/discover-studios.yml; the active script i
 ## What it does
 
 1. Collect studio candidates from GameDevMap's public paginated results interface and three Wikidata feeds.
-2. Deduplicate candidates by normalized name and official website domain.
+2. Deduplicate candidates by official website domain. Same-name candidates with different domains are retained for separate verification.
 3. Check official websites and relevant careers/application links for explicit speculative-application invitations.
 4. Publish only verified, active routes. Keep ambiguous, blocked and unverified candidates in discovery state.
 

@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+from concurrent.futures import ThreadPoolExecutor
 import hashlib
 import html
 from html.parser import HTMLParser
@@ -18,6 +19,7 @@ import re
 import socket
 import sys
 import time
+from threading import Lock
 import urllib.error
 import urllib.parse
 import urllib.robotparser
@@ -41,6 +43,7 @@ REQUEST_TIMEOUT_SECONDS = 18
 WDQS_TIMEOUT_SECONDS = 55
 MAX_RESPONSE_BYTES = 2_500_000
 PER_HOST_DELAY_SECONDS = 1.2
+MAX_CONCURRENT_SITE_CHECKS = 8
 REVIEW_DAYS = 90
 MAX_SITE_PAGES = 7
 ROUTE_CHECK_STATUSES = {"active", "paused"}
@@ -203,6 +206,8 @@ MULTI_TENANT_SUFFIXES = {
 ROBOTS_CACHE: dict[str, urllib.robotparser.RobotFileParser] = {}
 PUBLIC_HOST_CACHE: dict[str, bool] = {}
 LAST_REQUEST_BY_HOST: dict[str, float] = {}
+HOST_LOCKS: dict[str, Any] = {}
+FETCH_STATE_LOCK = Lock()
 
 
 @dataclass
@@ -408,8 +413,9 @@ def validate_public_host(host: str) -> bool:
     host = host.lower().strip(".")
     if not host or host == "localhost" or host.endswith((".local", ".internal", ".invalid", ".test")):
         return False
-    if host in PUBLIC_HOST_CACHE:
-        return PUBLIC_HOST_CACHE[host]
+    with FETCH_STATE_LOCK:
+        if host in PUBLIC_HOST_CACHE:
+            return PUBLIC_HOST_CACHE[host]
     try:
         address = ipaddress.ip_address(host)
         allowed = address.is_global
@@ -421,9 +427,51 @@ def validate_public_host(host: str) -> bool:
             )
         except (OSError, ValueError):
             allowed = False
-    PUBLIC_HOST_CACHE[host] = allowed
-    return allowed
+    with FETCH_STATE_LOCK:
+        PUBLIC_HOST_CACHE.setdefault(host, allowed)
+        return PUBLIC_HOST_CACHE[host]
 
+
+def wait_for_host(host: str) -> None:
+    # Different studio hosts can be checked concurrently. Each individual host
+    # gets a lock so concurrent workers still respect its request-spacing limit.
+    with FETCH_STATE_LOCK:
+        host_lock = HOST_LOCKS.setdefault(host, Lock())
+    with host_lock:
+        previous = LAST_REQUEST_BY_HOST.get(host, 0.0)
+        delay = PER_HOST_DELAY_SECONDS - (time.monotonic() - previous)
+        if delay > 0:
+            time.sleep(delay)
+        LAST_REQUEST_BY_HOST[host] = time.monotonic()
+
+
+def robots_allowed(url: str) -> bool:
+    parsed = urllib.parse.urlsplit(url)
+    host = parsed.hostname or ""
+    cache_key = host.lower()
+    with FETCH_STATE_LOCK:
+        parser = ROBOTS_CACHE.get(cache_key)
+    if parser is None:
+        robots_url = urllib.parse.urlunsplit(("https", host, "/robots.txt", "", ""))
+        candidate_parser = urllib.robotparser.RobotFileParser()
+        candidate_parser.set_url(robots_url)
+        result = fetch_url(
+            robots_url,
+            check_robots=False,
+            timeout=10,
+            max_bytes=250_000,
+            allow_plain_text=True,
+        )
+        if result.ok:
+            candidate_parser.parse(result.body.splitlines())
+        elif result.status_code == 404:
+            candidate_parser.parse([])
+        else:
+            # A robots policy that cannot be retrieved is treated conservatively.
+            candidate_parser.parse(["User-agent: *", "Disallow: /"])
+        with FETCH_STATE_LOCK:
+            parser = ROBOTS_CACHE.setdefault(cache_key, candidate_parser)
+    return parser.can_fetch(USER_AGENT, url)
 
 class SafeRedirectHandler(urllib.request.HTTPRedirectHandler):
     def __init__(self, initial_url: str, allowed_external: bool = False) -> None:
@@ -794,9 +842,9 @@ def parse_gamedevmap_page(body: str, page_url: str, start: int) -> list[dict[str
         website_href = cells[0]["href"]
         company_type = cells[2]["text"]
         type_key = " ".join(company_type.casefold().split())
-        if not name or not website_href:
+        if not name or not website_href or not type_key:
             continue
-        if type_key and type_key not in GAMEDEVMAP_TYPES:
+        if type_key not in GAMEDEVMAP_TYPES:
             continue
         website = canonical_url(urllib.parse.urljoin(page_url, website_href))
         if not website or (urllib.parse.urlsplit(website).hostname or "").endswith("gamedevmap.com"):
@@ -907,11 +955,6 @@ def existing_indexes(studios: list[dict[str, Any]]) -> tuple[set[str], set[str]]
 
 def add_candidates(state: dict[str, Any], rows: list[dict[str, str]]) -> int:
     added = 0
-    known_names = {
-        name_key(str(candidate.get("name", "")))
-        for candidate in state["candidates"].values()
-        if candidate.get("name")
-    }
     known_domains = {
         domain_key(str(candidate.get("website", "")))
         for candidate in state["candidates"].values()
@@ -924,10 +967,10 @@ def add_candidates(state: dict[str, Any], rows: list[dict[str, str]]) -> int:
         website = canonical_url(row["website"])
         if not website:
             continue
-        normalized_name = name_key(str(row.get("name", "")))
         domain = domain_key(website)
-        # Deduplicate across source feeds before spending time crawling the same studio.
-        if (normalized_name and normalized_name in known_names) or domain in known_domains:
+        # Official domains are the reliable deduplication key. Same-name candidates
+        # on different domains are retained for verification instead of silently dropped.
+        if domain in known_domains:
             continue
         state["candidates"][qid] = {
             **row,
@@ -940,13 +983,10 @@ def add_candidates(state: dict[str, Any], rows: list[dict[str, str]]) -> int:
             "cycle": state["cycle"],
             "reason": None,
         }
-        if normalized_name:
-            known_names.add(normalized_name)
         known_domains.add(domain)
         state["stats"]["candidates_seen"] += 1
         added += 1
     return added
-
 
 def ingest_source_pages(state: dict[str, Any], max_pages: int, batch_size: int) -> tuple[int, int]:
     pages_processed = 0
@@ -980,13 +1020,19 @@ def profile_for(candidate: dict[str, Any]) -> dict[str, Any]:
     country_code = candidate.get("country_code") or ""
     entity_url = candidate["entity_url"]
     website = candidate["website"]
+    if candidate.get("source_id") == "gamedevmap":
+        location_label = "Listed location · GameDevMap"
+    else:
+        location_label = "HQ · Wikidata" if city else (
+            "Country · Wikidata" if country != "Not disclosed" else "Not disclosed"
+        )
     return {
         "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
         "headquarters": {
             "city": city,
             "country": country,
             "countryCode": country_code,
-            "label": "HQ · Wikidata" if city else ("Country · Wikidata" if country != "Not disclosed" else "Not disclosed"),
+            "label": location_label,
         },
         "otherLocations": [],
         "companyType": [candidate.get("company_type") or "Developer"],
@@ -998,9 +1044,8 @@ def profile_for(candidate: dict[str, Any]) -> dict[str, Any]:
         "focus": [],
         "popularGames": [],
         "profileSources": [entity_url, website],
-        "applicationLocation": "Not specified · HQ shown as reference",
+        "applicationLocation": "Not specified · confirm on the official application route",
     }
-
 
 def studio_record_for(candidate: dict[str, Any], route: dict[str, Any]) -> dict[str, Any]:
     today = iso_date()
@@ -1050,26 +1095,31 @@ def process_candidate_queue(
     pending.sort(key=lambda candidate: candidate.get("discovered_at") or "")
     checked = 0
     published = 0
-    for candidate in pending[:limit]:
-        worst_case_candidate_seconds = (
-            MAX_SITE_PAGES * (REQUEST_TIMEOUT_SECONDS + PER_HOST_DELAY_SECONDS) + 30
-        )
-        if deadline is not None and time.monotonic() + worst_case_candidate_seconds >= deadline:
-            break
-        checked += 1
-        candidate["attempts"] = int(candidate.get("attempts", 0)) + 1
-        candidate["checked_at"] = utc_now().isoformat()
-        name = candidate["name"]
-        normalized_name = name_key(name)
-        domain = domain_key(candidate["website"])
-        if normalized_name in names or domain in domains:
-            candidate["status"] = "duplicate"
-            candidate["reason"] = "name_or_official_domain_already_in_directory"
-            continue
-        result = verify_candidate_pages(candidate, page_fetcher)
+    worst_case_candidate_seconds = (
+        MAX_SITE_PAGES * (REQUEST_TIMEOUT_SECONDS + PER_HOST_DELAY_SECONDS) + 30
+    )
+
+    def apply_result(candidate: dict[str, Any], result: dict[str, Any]) -> None:
+        nonlocal published
         candidate["status"] = result["status"]
         candidate["reason"] = result.get("reason")
         if result["status"] == "verified":
+            name = candidate["name"]
+            normalized_name = name_key(name)
+            domain = domain_key(candidate["website"])
+            if domain in domains:
+                candidate["status"] = "duplicate"
+                candidate["reason"] = "official_domain_already_in_directory"
+                return
+            if normalized_name in names:
+                # A same-name, different-domain result may be a distinct studio.
+                # Preserve its evidence for review rather than silently discarding it.
+                candidate["status"] = "needs_review"
+                candidate["reason"] = "verified_route_name_matches_existing_studio_but_domain_differs"
+                candidate["route"] = result
+                candidate["next_check_at"] = plus_days(iso_date(), 30)
+                state["stats"]["needs_review"] += 1
+                return
             studio = studio_record_for(candidate, result)
             studios.append(studio)
             profiles[name] = profile_for(candidate)
@@ -1093,8 +1143,45 @@ def process_candidate_queue(
         else:
             candidate["next_check_at"] = plus_days(iso_date(), 30)
             state["stats"]["needs_review"] += 1
-    return checked, published
 
+    # Verify different studio websites concurrently. fetch_url still serializes
+    # requests per host, respects robots.txt, and enforces public-host validation.
+    with ThreadPoolExecutor(max_workers=MAX_CONCURRENT_SITE_CHECKS) as executor:
+        pending_index = 0
+        while pending_index < len(pending) and checked < limit:
+            if deadline is not None and time.monotonic() + worst_case_candidate_seconds >= deadline:
+                break
+            batch: list[dict[str, Any]] = []
+            while (
+                pending_index < len(pending)
+                and checked < limit
+                and len(batch) < MAX_CONCURRENT_SITE_CHECKS
+            ):
+                candidate = pending[pending_index]
+                pending_index += 1
+                checked += 1
+                candidate["attempts"] = int(candidate.get("attempts", 0)) + 1
+                candidate["checked_at"] = utc_now().isoformat()
+                domain = domain_key(candidate["website"])
+                if domain in domains:
+                    candidate["status"] = "duplicate"
+                    candidate["reason"] = "official_domain_already_in_directory"
+                    continue
+                batch.append(candidate)
+            if not batch:
+                continue
+            futures = [
+                executor.submit(verify_candidate_pages, candidate, page_fetcher)
+                for candidate in batch
+            ]
+            # Apply in source order so duplicate/name-collision decisions stay deterministic.
+            for candidate, future in zip(batch, futures):
+                try:
+                    result = future.result()
+                except Exception as exc:
+                    result = {"status": "retry", "reason": "verification_error_" + type(exc).__name__}
+                apply_result(candidate, result)
+    return checked, published
 
 def route_page_check(studio: dict[str, Any], page_fetcher: Callable[[str, bool], FetchResult]) -> str:
     urls = []

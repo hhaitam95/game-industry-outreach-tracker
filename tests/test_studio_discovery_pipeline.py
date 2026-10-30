@@ -1,5 +1,7 @@
 import sys
 import tempfile
+import threading
+import time
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -783,6 +785,90 @@ class GameDevMapDiscoveryTests(unittest.TestCase):
         self.assertTrue(state["feed_done"]["gamedevmap"])
         self.assertEqual(state["feed_cursors"]["wikidata_video_game_developers"], "")
         self.assertFalse(state["feed_done"]["wikidata_video_game_developers"])
+
+
+    def test_candidate_verification_runs_concurrently_across_distinct_studio_domains(self):
+        state = discovery.empty_state()
+        rows = [
+            {
+                "qid": f"Q{index}",
+                "entity_url": f"https://www.wikidata.org/entity/Q{index}",
+                "name": f"Example Studio {index}",
+                "website": f"https://studio-{index}.example/",
+                "country": "Canada",
+                "hq_city": "Montreal",
+                "country_code": "CA",
+            }
+            for index in range(1, 7)
+        ]
+        self.assertEqual(discovery.add_candidates(state, rows), 6)
+        active = 0
+        max_active = 0
+        guard = threading.Lock()
+
+        def parallel_fetch(url, _allowed_external):
+            nonlocal active, max_active
+            with guard:
+                active += 1
+                max_active = max(max_active, active)
+            time.sleep(0.03)
+            with guard:
+                active -= 1
+            body = (
+                "<html><body><p>We welcome speculative applications.</p>"
+                "<form action='/apply'></form></body></html>"
+            )
+            return discovery.FetchResult(True, url, 200, body)
+
+        checked, published = discovery.process_candidate_queue(
+            state,
+            [],
+            {},
+            limit=6,
+            page_fetcher=parallel_fetch,
+        )
+        self.assertEqual(checked, 6)
+        self.assertEqual(published, 6)
+        self.assertGreater(max_active, 1)
+        self.assertLessEqual(max_active, discovery.MAX_CONCURRENT_SITE_CHECKS)
+
+    def test_same_name_different_domains_are_retained_for_verification(self):
+        state = discovery.empty_state()
+        rows = [
+            {
+                "qid": "Q101",
+                "entity_url": "https://www.wikidata.org/entity/Q101",
+                "name": "The Game Studio",
+                "website": "https://the-game-studio.example/",
+                "country": "Canada",
+                "hq_city": "Montreal",
+                "country_code": "CA",
+            },
+            {
+                "qid": "Q102",
+                "entity_url": "https://www.wikidata.org/entity/Q102",
+                "name": "The Game Studio",
+                "website": "https://thegamestudio.example/",
+                "country": "France",
+                "hq_city": "Paris",
+                "country_code": "FR",
+            },
+        ]
+        self.assertEqual(discovery.add_candidates(state, rows), 2)
+        self.assertEqual(len(state["candidates"]), 2)
+
+    def test_gamedevmap_location_is_not_mislabelled_as_headquarters(self):
+        profile = discovery.profile_for({
+            "name": "Example Studio",
+            "website": "https://example-studio.com/",
+            "entity_url": "https://www.gamedevmap.com/index.php?start=1",
+            "source_id": "gamedevmap",
+            "country": "Canada",
+            "hq_city": "Montreal, Quebec",
+            "country_code": "",
+            "company_type": "Developer",
+        })
+        self.assertEqual(profile["headquarters"]["label"], "Listed location · GameDevMap")
 
 
 if __name__ == "__main__":

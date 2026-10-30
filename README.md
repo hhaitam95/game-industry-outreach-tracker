@@ -16,19 +16,19 @@ The automated discovery pipeline collects a large candidate pool, then visits of
 
 Current candidate sources:
 
-- GameDevMap public worldwide directory. It reports 10,500 results and exposes a paginated public results table with studio/company website links and locations. It includes multiple offices and some non-studio organisations, so records are filtered and deduplicated before website checks.
+- GameDevMap public worldwide directory. It exposes about 10,500 paginated result rows with studio/company website links and listed locations. Rows can represent multiple offices or non-studio organisations, so category filtering and official-domain deduplication happen before website checks.
 - Wikidata feeds for video-game developers, organisations credited as game developers, and video-game companies.
 
-GameDevMap is accessed through its public paginated results interface (100 rows per page). The scraper does not download its raw data files. It respects robots.txt and the existing per-host request delay. Source directories are leads only; no source's claim is treated as proof of speculative hiring.
+GameDevMap is accessed through its public paginated results interface (100 rows per page). The scraper does not download its raw data files. It respects robots.txt and the per-host request delay. Website verification checks up to eight different studio domains concurrently; requests to the same host remain paced. Source directories are leads only; no source's claim is treated as proof of speculative hiring.
 
 For each candidate, StudioScout:
 
-1. Deduplicates by normalized studio name and official website domain.
+1. Deduplicates by official website domain. Same-name candidates on different domains are retained for separate verification rather than silently merged.
 2. Fetches the official HTTPS site and relevant careers, jobs, application or contact links.
 3. Checks official pages and directly linked employer-controlled ATS platforms for explicit speculative-application wording.
 4. Gives explicit rejection language priority and keeps conflicting or ambiguous evidence out of the public directory.
 5. Excludes the project-defined adult/vice sectors and leaves uncertain cases for review.
-6. Publishes only verified routes, with evidence and application URLs. Unknown studio facts remain unknown rather than guessed.
+6. Publishes only verified routes, with evidence and application URLs. Unknown studio facts remain unknown rather than guessed. GameDevMap locations are labelled as listed locations, not assumed headquarters.
 
 The detailed candidate pool and progress are stored on the separate discovery-state branch. It is not exposed in the public directory.
 
