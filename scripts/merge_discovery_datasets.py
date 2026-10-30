@@ -56,6 +56,24 @@ def is_placeholder(value: object) -> bool:
     return False
 
 
+def removed_domains_from_latest_main(
+    initial_rows: list[dict],
+    latest_main_rows: list[dict],
+) -> set[str]:
+    """Return official domains present at run start but absent from latest main."""
+    initial_domains = {
+        domain_key(str(record.get("websiteUrl", "")))
+        for record in initial_rows
+        if domain_key(str(record.get("websiteUrl", "")))
+    }
+    latest_domains = {
+        domain_key(str(record.get("websiteUrl", "")))
+        for record in latest_main_rows
+        if domain_key(str(record.get("websiteUrl", "")))
+    }
+    return initial_domains - latest_domains
+
+
 def exclude_records_removed_from_latest_main(
     initial_rows: list[dict],
     latest_main_rows: list[dict],
@@ -67,17 +85,7 @@ def exclude_records_removed_from_latest_main(
     deletion. A domain present in the run's initial checkout but absent from the
     latest main snapshot is treated as an intentional removal.
     """
-    initial_domains = {
-        domain_key(str(record.get("websiteUrl", "")))
-        for record in initial_rows
-        if domain_key(str(record.get("websiteUrl", "")))
-    }
-    latest_domains = {
-        domain_key(str(record.get("websiteUrl", "")))
-        for record in latest_main_rows
-        if domain_key(str(record.get("websiteUrl", "")))
-    }
-    removed_domains = initial_domains - latest_domains
+    removed_domains = removed_domains_from_latest_main(initial_rows, latest_main_rows)
     if not removed_domains:
         return copy.deepcopy(incoming_rows), []
 
@@ -90,6 +98,52 @@ def exclude_records_removed_from_latest_main(
             continue
         kept.append(record)
     return kept, sorted(set(name for name in skipped if name), key=str.casefold)
+
+
+def exclude_removed_candidates_from_discovery_state(
+    state_path: Path,
+    removed_domains: set[str],
+) -> list[str]:
+    """Mark candidates for manually removed studios as excluded in the same checkpoint."""
+    if not removed_domains or not state_path.exists():
+        return []
+
+    state = json.loads(state_path.read_text(encoding="utf-8"))
+    if not isinstance(state, dict) or not isinstance(state.get("candidates"), dict):
+        raise ValueError("Discovery state is invalid; refusing to overwrite it.")
+
+    stats = state.get("stats")
+    if not isinstance(stats, dict):
+        raise ValueError("Discovery state stats are invalid; refusing to overwrite them.")
+
+    excluded_names: list[str] = []
+    newly_excluded = 0
+    for candidate in state["candidates"].values():
+        if not isinstance(candidate, dict):
+            continue
+        candidate_domain = domain_key(str(candidate.get("website", "")))
+        if candidate_domain not in removed_domains:
+            continue
+        name = str(candidate.get("name", "")).strip()
+        if candidate.get("status") != "excluded":
+            newly_excluded += 1
+        candidate["status"] = "excluded"
+        candidate["reason"] = "manually_removed_from_public_directory"
+        candidate["next_check_at"] = None
+        if name:
+            excluded_names.append(name)
+
+    if newly_excluded:
+        stats["excluded"] = int(stats.get("excluded", 0)) + newly_excluded
+        state_path.parent.mkdir(parents=True, exist_ok=True)
+        temporary = state_path.with_suffix(state_path.suffix + ".tmp")
+        temporary.write_text(
+            json.dumps(state, ensure_ascii=False, indent=2) + "\\n",
+            encoding="utf-8",
+        )
+        temporary.replace(state_path)
+
+    return sorted(set(excluded_names), key=str.casefold)
 
 
 def merge_profiles(base: dict, incoming: dict) -> dict:
@@ -247,6 +301,7 @@ def merge_from_git(
     root: Path,
     base_ref: str,
     initial_ref: str | None = None,
+    candidate_state: Path | None = None,
 ) -> dict[str, object]:
     directory_path = root / DIRECTORY_PATH
     profiles_path = root / PROFILES_PATH
@@ -256,18 +311,27 @@ def merge_from_git(
     incoming_profiles = json.loads(profiles_path.read_text(encoding="utf-8"))
 
     concurrently_removed: list[str] = []
+    manually_excluded_candidates: list[str] = []
     if initial_ref:
         initial_rows = json.loads(git_show(initial_ref, DIRECTORY_PATH))
+        removed_domains = removed_domains_from_latest_main(initial_rows, base_rows)
         incoming_rows, concurrently_removed = exclude_records_removed_from_latest_main(
             initial_rows,
             base_rows,
             incoming_rows,
         )
+        if candidate_state:
+            state_path = candidate_state if candidate_state.is_absolute() else root / candidate_state
+            manually_excluded_candidates = exclude_removed_candidates_from_discovery_state(
+                state_path,
+                removed_domains,
+            )
 
     merged_rows, merged_profiles, summary = merge_datasets(
         base_rows, incoming_rows, base_profiles, incoming_profiles
     )
     summary["concurrent_main_removals_respected"] = concurrently_removed
+    summary["discovery_candidates_excluded_for_manual_removals"] = manually_excluded_candidates
     directory_path.write_text(
         json.dumps(merged_rows, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
@@ -286,9 +350,14 @@ def main() -> int:
         "--initial-ref",
         help="Run-start commit ref used to detect records intentionally removed from main while discovery ran.",
     )
+    parser.add_argument(
+        "--candidate-state",
+        type=Path,
+        help="Discovery-state JSON path to update when a studio was manually removed from the public directory.",
+    )
     parser.add_argument("--root", type=Path, default=ROOT)
     args = parser.parse_args()
-    summary = merge_from_git(args.root, args.base_ref, args.initial_ref)
+    summary = merge_from_git(args.root, args.base_ref, args.initial_ref, args.candidate_state)
     print("Merged discovery dataset with latest main:", json.dumps(summary, sort_keys=True))
     return 0
 
