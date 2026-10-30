@@ -57,7 +57,7 @@ function MiniGameChip({game}:{game:Profile["popularGames"][number]}){
   const [sourceIndex,setSourceIndex]=useState(0);
   const sources=game.appId?gameArtUrls(game.appId):[];
   const source=sources[sourceIndex];
-  return <span className="game-chip">{source?<img src={source} alt="" loading="lazy" decoding="async" onError={()=>setSourceIndex(current=>current+1)}/>:null}<span>{game.title}</span></span>;
+  return <span className="game-chip">{source?<img src={source} alt="" loading="lazy" decoding="async" onError={() => setSourceIndex(sourceIndex === 0 ? 1 : 2)}/>:null}<span>{game.title}</span></span>;
 }
 
 function GameCard({game}:{game:Profile["popularGames"][number]}){
@@ -65,7 +65,7 @@ function GameCard({game}:{game:Profile["popularGames"][number]}){
   const sources=game.appId?gameArtUrls(game.appId):[];
   const source=sources[sourceIndex];
   return <div className="game-card">
-    {source?<img src={source} alt="" loading="lazy" decoding="async" onError={()=>setSourceIndex(current=>current+1)}/>:<div className="game-art-placeholder">ARTWORK</div>}
+    {source?<img src={source} alt="" loading="lazy" decoding="async" onError={() => setSourceIndex(sourceIndex === 0 ? 1 : 2)}/>:<div className="game-art-placeholder">ARTWORK</div>}
     <div><strong>{game.title}</strong>{game.stage?<small>{game.stage}</small>:null}</div>
   </div>;
 }
