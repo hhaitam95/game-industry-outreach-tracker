@@ -4125,5 +4125,147 @@
     ],
     "applicationLocation": "Rennes · regular on-site presence expected; role-dependent flexibility",
     "reachHighlights": "Focused independent studio building UNRECORD with gameplay-first development and small specialized teams."
+  },
+  "Kiagu Studios": {
+    "description": "Seoul-based entertainment IP studio developing original properties across webnovels, webtoons, animation and games, including the dark-fantasy action RPG Astral Sync.",
+    "headquarters": {
+      "city": "Seoul",
+      "country": "South Korea",
+      "countryCode": "KR",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Entertainment IP studio",
+      "Transmedia"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Not disclosed",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Mobile",
+      "Unreal Engine 5",
+      "Action RPG",
+      "Dark fantasy",
+      "Transmedia"
+    ],
+    "popularGames": [
+      {
+        "title": "Astral Sync",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://www.kiagu.com/",
+      "https://www.kiagu.com/careers"
+    ],
+    "applicationLocation": "Remote-first · applicant-country eligibility not explicitly stated",
+    "reachHighlights": "Builds original IP across webnovels, webtoons, animation and games; Astral Sync is an Unreal Engine 5 action RPG."
+  },
+  "Ocellus": {
+    "description": "Lyon-based game development and art-production studio providing stylized game art and animation services while building its own games teams and projects.",
+    "headquarters": {
+      "city": "Lyon",
+      "country": "France",
+      "countryCode": "FR",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Art production",
+      "Animation services"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Not disclosed",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Game development",
+      "Art production",
+      "Animation",
+      "Stylized games",
+      "PC",
+      "Console",
+      "Mobile"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://ocellus-studio.com/careers",
+      "https://ocellus-studio.com/contact",
+      "https://ocellus-studio.com/games"
+    ],
+    "applicationLocation": "Lyon, France · role-specific arrangements not stated",
+    "reachHighlights": "Ocellus Games is building an independent game-development team alongside Ocellus Services' art-production work."
+  },
+  "Raven Illusion": {
+    "description": "Global video-game publishing and development company with studios in Lagos, Atlanta and Doha, creating culturally grounded games and interactive experiences.",
+    "headquarters": {
+      "city": null,
+      "country": "Not stated",
+      "countryCode": "",
+      "label": "HQ unresolved · official pages conflict"
+    },
+    "otherLocations": [
+      "Lagos, Nigeria",
+      "Atlanta, United States",
+      "Doha, Qatar"
+    ],
+    "companyType": [
+      "Developer",
+      "Publisher"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Not disclosed",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Mobile",
+      "Narrative",
+      "Adventure",
+      "Publishing",
+      "Culturally grounded games"
+    ],
+    "popularGames": [
+      {
+        "title": "Unbroken",
+        "appId": null
+      },
+      {
+        "title": "Adventurers",
+        "appId": null
+      },
+      {
+        "title": "Wazobia",
+        "appId": null,
+        "stage": "In development"
+      },
+      {
+        "title": "Beyond",
+        "appId": null,
+        "stage": "In development"
+      },
+      {
+        "title": "Qvatars",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://www.ravenillusion.studio/about",
+      "https://www.ravenillusion.studio/careers",
+      "https://www.ravenillusion.studio/contact"
+    ],
+    "applicationLocation": "Lagos / Atlanta / Doha · local and international candidates; remote or contract arrangements depend on role",
+    "reachHighlights": "Official pages list studios in Nigeria, the United States and Qatar. HQ is not inferred because different official pages identify different bases."
   }
 }
