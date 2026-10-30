@@ -118,7 +118,7 @@
     "websiteUrl": "https://a4vr.com/",
     "applicationUrl": "https://www.a4vr.com/jobs",
     "evidenceUrl": "https://www.a4vr.com/jobs",
-    "notes": "Official studio-controlled page explicitly invites spontaneous applications. Evidence: INITIATIVBEWERBUNG. Hiring geography is not inferred from headquarters.",
+    "notes": "A4VR's official About page still describes its VR production studio and in-house game-design unit, but the previously recorded /jobs application URL currently serves a domain-reserved placeholder. The spontaneous-application invitation therefore cannot be reconfirmed; route paused pending direct confirmation from the company.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "spontaneous",
@@ -129,9 +129,9 @@
       "eligibleLocations": [],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
-      "routeStatus": "active",
+      "routeStatus": "paused",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2026-11-29"
     }
   },
   {
@@ -274,19 +274,22 @@
     "name": "Agate",
     "country": "Indonesia",
     "websiteUrl": "https://agate.id/",
-    "applicationUrl": "https://agate.id/?page_id=14741",
-    "evidenceUrl": "https://agate.id/contact-agate/gamedevelopment/",
-    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open Application. Hiring geography is not inferred from headquarters.",
+    "applicationUrl": "https://agate.id/job/open-application-lead-3d-artist/",
+    "evidenceUrl": "https://agate.id/job/open-application-lead-3d-artist/",
+    "notes": "Official Lead 3D Artist Open Application page states that applicants join Agate's Open Application Pool for future role needs and are prioritised for review before a vacancy is publicly posted. This is a role-specific open-application pool, not an unrestricted general application. Agate also lists separate open-application pools for 3D Artist, Technical Artist and 2D Artist; the selected route is the currently verified Lead 3D Artist page. The page describes a hybrid work system.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
-      "routeType": "open",
+      "routeType": "discipline_specific",
       "submissionMethods": [
-        "email",
         "website_form"
       ],
-      "workModel": "not_stated",
-      "eligibleLocations": [],
-      "disciplineScope": [],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "Indonesia · hybrid model stated; applicant eligibility not otherwise specified"
+      ],
+      "disciplineScope": [
+        "Lead 3D Artist"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
@@ -343,17 +346,19 @@
     "name": "Another Axiom",
     "country": "United States",
     "websiteUrl": "https://anotheraxiom.com/",
-    "applicationUrl": "https://www.anotheraxiom.com/careers",
-    "evidenceUrl": "https://www.anotheraxiom.com/careers",
-    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
+    "applicationUrl": "https://www.anotheraxiom.com/job-positions/general-application",
+    "evidenceUrl": "https://www.anotheraxiom.com/job-positions/general-application",
+    "notes": "Official General Application page says applications are kept on file and reviewed when a matching role opens. Submission is by email to jobs@anotheraxiom.com. The position is described as fully remote; the official page does not specify eligible countries.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
         "email"
       ],
-      "workModel": "not_stated",
-      "eligibleLocations": [],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Fully remote · applicant-country eligibility not stated"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
@@ -481,7 +486,7 @@
     "websiteUrl": "https://www.astrobeam.com/",
     "applicationUrl": "https://www.astrobeam.com/jobs/blog-post-title-four-2x696-35n6y",
     "evidenceUrl": "https://www.astrobeam.com/jobs",
-    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
+    "notes": "Official General Application page invites multi-disciplinary game-development applicants and explicitly states that AstroBeam is based in Austin, Texas and remote work is limited to the United States. Applications are submitted by email to jobs@astrobeam.com.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "general",
@@ -489,8 +494,10 @@
         "email",
         "website_form"
       ],
-      "workModel": "not_stated",
-      "eligibleLocations": [],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote within the United States"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
@@ -548,7 +555,7 @@
     "websiteUrl": "https://axesinmotion.com/",
     "applicationUrl": "https://apply.workable.com/axesinmotion/j/C4A86990C1/",
     "evidenceUrl": "https://axesinmotion.com/work-with-us/",
-    "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: Speculative Application. Hiring geography is not inferred from headquarters.",
+    "notes": "Official Work With Us page lists a Speculative Application and gives the studio's Seville-area address and jobs@axesinmotion.com contact. Its About page describes a free-to-play mobile-game developer; work model and applicant-country eligibility are not explicitly stated on the speculative route.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "speculative",
@@ -557,8 +564,10 @@
         "email",
         "website_form"
       ],
-      "workModel": "hybrid",
-      "eligibleLocations": [],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Seville, Spain · role-specific applicant eligibility not stated"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
@@ -572,7 +581,7 @@
     "websiteUrl": "https://axolotgames.com/",
     "applicationUrl": "https://axolotgamesab.teamtailor.com/jobs/3583177-open-application",
     "evidenceUrl": "https://www.axolotgames.com/careers",
-    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open Application. Hiring geography is not inferred from headquarters.",
+    "notes": "Official careers page lists an Open Application in Stockholm for applicants whose desired role is not currently listed. It also lists a separate Open Internship Application. The open-application route does not state remote eligibility.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "open",
@@ -580,7 +589,9 @@
         "ats"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
+      "eligibleLocations": [
+        "Stockholm, Sweden"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
@@ -705,7 +716,7 @@
     "websiteUrl": "https://www.beamng.gmbh/",
     "applicationUrl": "https://apply.workable.com/beamng/",
     "evidenceUrl": "https://www.beamng.gmbh/career/",
-    "notes": "Official studio-controlled page explicitly invites unsolicited applications. Evidence: Unsolicited applications. Hiring geography is not inferred from headquarters.",
+    "notes": "Official BeamNG careers page invites unsolicited applications. The company describes itself as remote-first, with HQ in Bremen and employees working around the globe; it does not state an unrestricted worldwide work-authorisation policy.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "unsolicited",
@@ -713,7 +724,9 @@
         "ats"
       ],
       "workModel": "remote",
-      "eligibleLocations": [],
+      "eligibleLocations": [
+        "Remote-first; employees work from multiple countries; applicant-country eligibility should be confirmed for each role"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
@@ -747,19 +760,22 @@
     "name": "BetaDwarf",
     "country": "Denmark",
     "websiteUrl": "https://betadwarf.com/",
-    "applicationUrl": "https://betadwarfaps.bamboohr.com/jobs/view.php?id=34",
+    "applicationUrl": "https://betadwarf.com/career",
     "evidenceUrl": "https://betadwarf.com/career",
-    "notes": "Official studio-controlled page explicitly invites unsolicited applications. Evidence: unsolicited application. Hiring geography is not inferred from headquarters.",
+    "notes": "Official Careers page accepts unsolicited applications only under its Unsolicited Internships section. Applicants should email a CV, cover letter and portfolio link. The studio states that internships are unpaid and must last at least three months; the listed office is in Copenhagen. This is not a general unsolicited route for permanent roles.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
-      "routeType": "unsolicited",
+      "routeType": "discipline_specific",
       "submissionMethods": [
-        "ats",
         "email"
       ],
-      "workModel": "not_stated",
-      "eligibleLocations": [],
-      "disciplineScope": [],
+      "workModel": "on_site",
+      "eligibleLocations": [
+        "Copenhagen, Denmark"
+      ],
+      "disciplineScope": [
+        "Internships only"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
@@ -767,20 +783,22 @@
     }
   },
   {
-    "name": "Binary Impacts",
+    "name": "Binary Impact GmbH",
     "country": "Germany",
     "websiteUrl": "https://www.binaryimpact.de/",
     "applicationUrl": "https://www.binaryimpact.de/jobs/",
     "evidenceUrl": "https://www.binaryimpact.de/jobs/",
-    "notes": "Official studio-controlled page explicitly invites spontaneous applications. Evidence: Initiativbewerbung. Hiring geography is not inferred from headquarters.",
+    "notes": "Binary Impact's official Jobs page invites unsolicited applications by email to jobs@binaryimpact.de. It says remote work is possible from anywhere in Germany and asks applicants to include a cover letter. The legal/company name is Binary Impact GmbH.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [
         "email"
       ],
-      "workModel": "not_stated",
-      "eligibleLocations": [],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote within Germany"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
@@ -883,7 +901,7 @@
     }
   },
   {
-    "name": "Box Dragon (Coffee Stain)",
+    "name": "Box Dragon",
     "country": "Sweden",
     "websiteUrl": "https://boxdragon.se/",
     "applicationUrl": "https://www.boxdragon.se/jobs",
