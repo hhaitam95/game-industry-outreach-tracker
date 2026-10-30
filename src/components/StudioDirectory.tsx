@@ -24,7 +24,7 @@ type Profile={
 };
 const profiles=profilesJson as Record<string,Profile>;
 const countryCodes:Record<string,string>={
-  "Australia":"AU","Austria":"AT","Bulgaria":"BG","Canada":"CA","Czech Republic":"CZ","Denmark":"DK","Estonia":"EE","Finland":"FI","France":"FR","Germany":"DE","Hungary":"HU","Iceland":"IS","Italy":"IT","Moldova":"MD","Malta":"MT","Poland":"PL","Portugal":"PT","Saudi Arabia":"SA","Thailand":"TH","Türkiye":"TR","Turkey":"TR","United Kingdom":"GB","United States":"US","Ukraine":"UA","United Arab Emirates":"AE","Netherlands":"NL","Spain":"ES"
+  "Australia":"AU","Austria":"AT","Bulgaria":"BG","Canada":"CA","Czech Republic":"CZ","Denmark":"DK","Estonia":"EE","Finland":"FI","France":"FR","Germany":"DE","Hungary":"HU","Iceland":"IS","India":"IN","Italy":"IT","Moldova":"MD","Malta":"MT","Poland":"PL","Portugal":"PT","Saudi Arabia":"SA","Thailand":"TH","Türkiye":"TR","Turkey":"TR","United Kingdom":"GB","United States":"US","Ukraine":"UA","United Arab Emirates":"AE","Netherlands":"NL","Spain":"ES"
 };
 function flag(code?:string){return code&&code.length===2?String.fromCodePoint(...code.toUpperCase().split("").map(c=>127397+c.charCodeAt(0))):"🌍";}
 function scaleCategory(value?:string){
