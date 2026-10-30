@@ -189,7 +189,10 @@ class CandidateVerificationTests(unittest.TestCase):
                 "<h1>Careers</h1><p>View our open positions and apply online.</p>",
             ),
         }
-        result = discovery.verify_candidate_pages(self.candidate(), lambda url, allowed: pages[url])
+        result = discovery.verify_candidate_pages(
+            self.candidate(),
+            lambda url, allowed: pages.get(url, discovery.FetchResult(False, url, 404, "", "not-found")),
+        )
         self.assertEqual(result["status"], "no_route")
 
     def test_relevant_vice_content_is_excluded(self):
@@ -232,6 +235,7 @@ class DatasetUpdateTests(unittest.TestCase):
                 "hq_city": "Montreal",
                 "country_code": "CA",
             }])
+            discovery.write_json_atomic(state_path, state)
             pages = {
                 "https://example-studio.example/": discovery.FetchResult(
                     True, "https://example-studio.example/", 200,
