@@ -42,7 +42,7 @@ WDQS_TIMEOUT_SECONDS = 55
 MAX_RESPONSE_BYTES = 2_500_000
 PER_HOST_DELAY_SECONDS = 1.2
 REVIEW_DAYS = 90
-MAX_SITE_PAGES = 9
+MAX_SITE_PAGES = 7
 ROUTE_CHECK_STATUSES = {"active", "paused"}
 
 FEEDS = (
@@ -832,6 +832,7 @@ def process_candidate_queue(
     profiles: dict[str, Any],
     limit: int,
     page_fetcher: Callable[[str, bool], FetchResult] = fetch_url,
+    deadline: float | None = None,
 ) -> tuple[int, int]:
     names, domains = existing_indexes(studios)
     pending = [
@@ -843,6 +844,11 @@ def process_candidate_queue(
     checked = 0
     published = 0
     for candidate in pending[:limit]:
+        worst_case_candidate_seconds = (
+            MAX_SITE_PAGES * (REQUEST_TIMEOUT_SECONDS + PER_HOST_DELAY_SECONDS) + 30
+        )
+        if deadline is not None and time.monotonic() + worst_case_candidate_seconds >= deadline:
+            break
         checked += 1
         candidate["attempts"] = int(candidate.get("attempts", 0)) + 1
         candidate["checked_at"] = utc_now().isoformat()
@@ -916,6 +922,7 @@ def maintain_existing_routes(
     studios: list[dict[str, Any]],
     batch_size: int,
     page_fetcher: Callable[[str, bool], FetchResult] = fetch_url,
+    deadline: float | None = None,
 ) -> int:
     active = [
         studio for studio in studios
@@ -927,9 +934,20 @@ def maintain_existing_routes(
     selected = [active[(start + index) % len(active)] for index in range(min(batch_size, len(active)))]
     state["route_check_index"] = (start + len(selected)) % len(active)
     today = iso_date()
+    checked = 0
     for studio in selected:
+        urls = {
+            url for key in ("evidenceUrl", "applicationUrl")
+            if (url := canonical_url(str(studio.get(key, ""))))
+        }
+        worst_case_route_seconds = (
+            len(urls) * (REQUEST_TIMEOUT_SECONDS + PER_HOST_DELAY_SECONDS) + 10
+        )
+        if deadline is not None and time.monotonic() + worst_case_route_seconds >= deadline:
+            break
         name = studio["name"]
         result = route_page_check(studio, page_fetcher)
+        checked += 1
         check = state["route_checks"].setdefault(name, {"negative_count": 0, "gone_count": 0, "last_result": None})
         check["last_checked_at"] = utc_now().isoformat()
         check["last_result"] = result
@@ -956,7 +974,7 @@ def maintain_existing_routes(
                 research["routeStatus"] = "closed"
                 studio["checkedAt"] = today
                 research["nextReviewAt"] = today
-    return len(selected)
+    return checked
 
 
 def finish_cycle_if_complete(state: dict[str, Any]) -> bool:
@@ -989,6 +1007,7 @@ def run_pipeline(
     max_source_pages: int,
     max_candidate_checks: int,
     route_check_count: int,
+    max_run_seconds: int = 1200,
     root: Path = ROOT,
     state_path: Path | None = None,
     page_fetcher: Callable[[str, bool], FetchResult] = fetch_url,
@@ -1005,6 +1024,7 @@ def run_pipeline(
     if not isinstance(studios, list) or not isinstance(profiles, dict):
         raise ValueError("Public studio datasets have an invalid shape.")
 
+    deadline = time.monotonic() + max_run_seconds
     source_pages = 0
     source_candidates = 0
     # Use an injectable source fetcher in tests. Production requests are spaced out to
@@ -1025,13 +1045,17 @@ def run_pipeline(
         if len(rows) < batch_size:
             state["feed_done"][feed["id"]] = True
         state["feed_index"] = (FEEDS.index(feed) + 1) % len(FEEDS)
-        if source_pages < max_source_pages:
+        if source_pages < max_source_pages and time.monotonic() + 65 < deadline:
             time.sleep(65)
+        elif source_pages < max_source_pages:
+            break
 
     checked, published = process_candidate_queue(
-        state, studios, profiles, max_candidate_checks, page_fetcher
+        state, studios, profiles, max_candidate_checks, page_fetcher, deadline
     )
-    routes_checked = maintain_existing_routes(state, studios, route_check_count, page_fetcher)
+    routes_checked = maintain_existing_routes(
+        state, studios, route_check_count, page_fetcher, deadline
+    )
     cycle_completed = finish_cycle_if_complete(state)
     state["updated_at"] = utc_now().isoformat()
 
@@ -1045,6 +1069,7 @@ def run_pipeline(
         "candidate_checks": checked,
         "verified_added": published,
         "routes_checked": routes_checked,
+        "time_budget_exhausted": time.monotonic() >= deadline,
         "cycle_completed": cycle_completed,
         "cycle": state["cycle"],
         "empty_cycles": state["empty_cycles"],
@@ -1066,6 +1091,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-source-pages", type=int, default=None)
     parser.add_argument("--max-candidate-checks", type=int, default=None)
     parser.add_argument("--route-check-count", type=int, default=8)
+    parser.add_argument("--max-run-seconds", type=int, default=1200, help="Stop starting new website checks when the bounded runtime budget is exhausted.")
     parser.add_argument("--state-file", type=Path, default=None, help="Optional durable state file outside the public website branch.")
     return parser.parse_args()
 
@@ -1082,12 +1108,15 @@ def main() -> int:
         checks = args.max_candidate_checks if args.max_candidate_checks is not None else 20
     if pages < 0 or checks < 0 or args.route_check_count < 0:
         raise ValueError("Batch limits cannot be negative.")
+    if not 60 <= args.max_run_seconds <= 1500:
+        raise ValueError("--max-run-seconds must be between 60 and 1500.")
     result = run_pipeline(
         mode=args.mode,
         batch_size=args.batch_size,
         max_source_pages=pages,
         max_candidate_checks=checks,
         route_check_count=args.route_check_count,
+        max_run_seconds=args.max_run_seconds,
         state_path=args.state_file,
     )
     print("StudioScout speculative-route discovery")
