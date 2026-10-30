@@ -43,7 +43,10 @@ function hqFor(studio:Studio,profile?:Profile){
   if(studio.country!=="Not stated")return {emoji:flag(countryCodes[studio.country]),label:studio.country,tag:"HQ · city unconfirmed"};
   return {emoji:"🌍",label:"Not publicly stated",tag:"HQ unknown"};
 }
-function gameArtUrl(appId:number){return `https://cdn.cloudflare.steamstatic.com/steam/apps/${appId}/header.jpg`;}
+function gameArtUrls(appId:number){return [
+  `https://cdn.cloudflare.steamstatic.com/steam/apps/${appId}/header.jpg`,
+  `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${appId}/header.jpg`
+];}
 function trackerLocation(studio:Studio,profile?:Profile){
   const hq=profile?.headquarters;
   const hqLabel=hq?.city?`${hq.city} · HQ`:hq?.label||"HQ not disclosed";
@@ -51,14 +54,18 @@ function trackerLocation(studio:Studio,profile?:Profile){
 }
 
 function MiniGameChip({game}:{game:Profile["popularGames"][number]}){
-  const [failed,setFailed]=useState(false);
-  return <span className="game-chip">{game.appId&&!failed?<img src={gameArtUrl(game.appId)} alt="" loading="lazy" onError={()=>setFailed(true)}/>:null}<span>{game.title}</span></span>;
+  const [sourceIndex,setSourceIndex]=useState(0);
+  const sources=game.appId?gameArtUrls(game.appId):[];
+  const source=sources[sourceIndex];
+  return <span className="game-chip">{source?<img src={source} alt="" loading="lazy" decoding="async" onError={()=>setSourceIndex(current=>current+1}/>:null}<span>{game.title}</span></span>;
 }
 
 function GameCard({game}:{game:Profile["popularGames"][number]}){
-  const [failed,setFailed]=useState(false);
+  const [sourceIndex,setSourceIndex]=useState(0);
+  const sources=game.appId?gameArtUrls(game.appId):[];
+  const source=sources[sourceIndex];
   return <div className="game-card">
-    {game.appId&&!failed?<img src={gameArtUrl(game.appId)} alt="" loading="lazy" onError={()=>setFailed(true)}/>:<div className="game-art-placeholder">GAME</div>}
+    {source?<img src={source} alt="" loading="lazy" decoding="async" onError={()=>setSourceIndex(current=>current+1}/>:<div className="game-art-placeholder">ARTWORK</div>}
     <div><strong>{game.title}</strong>{game.stage?<small>{game.stage}</small>:null}</div>
   </div>;
 }
