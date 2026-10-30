@@ -770,6 +770,20 @@ class GameDevMapDiscoveryTests(unittest.TestCase):
             self.assertTrue(saved["feed_done"]["gamedevmap"])
             self.assertEqual(len(saved["candidates"]), 3)
 
+    def test_completed_wikidata_cycle_does_not_reset_game_dev_map_catalogue_cursor(self):
+        state = discovery.empty_state()
+        state["feed_cursors"]["gamedevmap"] = "10501"
+        state["feed_done"]["gamedevmap"] = True
+        for feed in discovery.FEEDS:
+            if feed["kind"] != "gamedevmap":
+                state["feed_done"][feed["id"]] = True
+
+        self.assertTrue(discovery.finish_cycle_if_complete(state))
+        self.assertEqual(state["feed_cursors"]["gamedevmap"], "10501")
+        self.assertTrue(state["feed_done"]["gamedevmap"])
+        self.assertEqual(state["feed_cursors"]["wikidata_video_game_developers"], "")
+        self.assertFalse(state["feed_done"]["wikidata_video_game_developers"])
+
 
 if __name__ == "__main__":
     unittest.main()
