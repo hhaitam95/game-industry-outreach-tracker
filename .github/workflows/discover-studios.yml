@@ -75,6 +75,7 @@ jobs:
               --max-source-pages 4 \
               --max-candidate-checks 150 \
               --route-check-count 8 \
+              --max-run-seconds 1200 \
               --state-file "$STATE_FILE"
           else
             python3 scripts/discover_speculative_studios.py \
@@ -83,6 +84,7 @@ jobs:
               --max-source-pages 1 \
               --max-candidate-checks 100 \
               --route-check-count 8 \
+              --max-run-seconds 1200 \
               --state-file "$STATE_FILE"
           fi
           echo "mode=$MODE" >> "$GITHUB_OUTPUT"
