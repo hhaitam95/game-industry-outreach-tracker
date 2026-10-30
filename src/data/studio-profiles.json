@@ -1,103 +1,192 @@
 {
   "10 Chambers": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Stockholm-based independent game developer focused on cooperative first-person shooters. Founded in 2015 by Ulf Andersson, the designer behind PAYDAY and PAYDAY 2; released GTFO and is developing Den of Wolves.",
     "headquarters": {
       "city": "Stockholm",
       "country": "Sweden",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "SE",
+      "label": "HQ · official About page"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Independent"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Independent · ownership details not disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
+    "industryScale": "AA · editorial indication",
     "teamSize": "Not disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1&state=&type=",
-      "https://10chambers.com/"
+    "focus": [
+      "PC",
+      "Co-op",
+      "FPS",
+      "Horror",
+      "Action"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "GTFO",
+        "appId": null
+      },
+      {
+        "title": "Den of Wolves",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://10chambers.com/about-us/",
+      "https://careers.10chambers.com/",
+      "https://careers.10chambers.com/connect"
+    ],
+    "applicationLocation": "Stockholm, Sweden · four days in office, one flexible remote day",
+    "reachHighlights": "The official career site states that it can assist relocating employees and their families with Swedish work permits and initial housing."
   },
   "1000 Orks": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Small German independent game developer founded in 2019, focused on high-quality games, advanced technology and cinematic pixel art. Its current project is PROXIES, a cooperative dungeon crawler; its previous release WARCANA is no longer in active development.",
     "headquarters": {
-      "city": "Osnabruck, Saxony",
+      "city": "Osnabrück",
       "country": "Germany",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "DE",
+      "label": "HQ · official About page"
     },
-    "otherLocations": [],
-    "companyType": [
-      "Developer"
+    "otherLocations": [
+      "Registered imprint address: Kirchwalsede, Germany"
     ],
-    "ownership": "Not yet researched",
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "1000 Orks UG (haftungsbeschränkt) · privately held",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
+    "industryScale": "Indie",
+    "teamSize": "Small core team · exact count not disclosed",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Co-op",
+      "Dungeon crawler",
+      "RTS",
+      "Strategy",
+      "Pixel art",
+      "C++"
+    ],
+    "popularGames": [
+      {
+        "title": "PROXIES",
+        "appId": null,
+        "stage": "In development"
+      },
+      {
+        "title": "WARCANA",
+        "appId": null,
+        "stage": "No longer in active development"
+      }
+    ],
     "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1&state=&type=",
       "https://1000orks.com/"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "applicationLocation": "Germany · current company statement limits expansion applications to German citizens",
+    "reachHighlights": "The studio says PROXIES is publicly funded and highlights its proprietary HORDE technology for rendering very large numbers of on-screen units."
   },
   "10tons": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Independent game-development studio founded in Tampere in 2003. Its portfolio spans action RPGs, twin-stick shooters and survival games, with more than 30 released games across PC, consoles and mobile platforms.",
     "headquarters": {
-      "city": "Tampere, Pirkanmaa",
+      "city": "Tampere",
       "country": "Finland",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "FI",
+      "label": "HQ · official About page"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Independent"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Independent",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Indie / AA · editorial indication",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1&state=&type=",
-      "https://10tons.com/"
+    "focus": [
+      "PC",
+      "PlayStation",
+      "Xbox",
+      "Nintendo Switch",
+      "Mobile",
+      "Action",
+      "Survival"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "DYSMANTLE",
+        "appId": null
+      },
+      {
+        "title": "Tesla vs Lovecraft",
+        "appId": null
+      },
+      {
+        "title": "Neon Chrome",
+        "appId": null
+      },
+      {
+        "title": "Undead Horde",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://10tons.com/about",
+      "https://10tons.com/careers/"
+    ],
+    "applicationLocation": "Tampere, Finland · open-application eligibility and remote policy not stated",
+    "reachHighlights": "The studio reports 20+ years in business, 30+ games released and support for 8+ platforms."
   },
   "1939 Games": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Icelandic game studio founded by brothers Ívar and Guðmundur Kristjánsson, veterans of CCP Games. The company develops KARDS, a digital collectible card game set in World War II, and has a mobile-first game in development.",
     "headquarters": {
-      "city": "Reykjavik",
+      "city": "Reykjavík",
       "country": "Iceland",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "IS",
+      "label": "Studio office · official About page"
     },
-    "otherLocations": [],
+    "otherLocations": [
+      "Helsinki, Finland · official career page lists the mobile-first role in either Reykjavík or Helsinki"
+    ],
     "companyType": [
-      "Mobile"
+      "Developer",
+      "Independent"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Privately held · ownership details not disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Indie / AA · editorial indication",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1&state=&type=",
-      "https://1939games.com/"
+    "focus": [
+      "PC",
+      "Mobile",
+      "Collectible card game",
+      "Strategy",
+      "World War II"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "KARDS",
+        "appId": null
+      },
+      {
+        "title": "Untitled mobile-first game",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://1939games.com/about/",
+      "https://1939games.com/career/",
+      "https://1939games.com/career/ui-designer-mobile-first-game/"
+    ],
+    "applicationLocation": "Reykjavík, Iceland and Helsinki, Finland · no remote policy stated for open applications",
+    "reachHighlights": "The founders describe their combined games-industry experience as more than 35 years and created KARDS from a shared interest in collectible card games and WWII history."
   },
   "4A Games": {
     "description": "International game developer known for the Metro series, with studio operations in Malta and Kyiv.",
@@ -2377,29 +2466,49 @@
     ]
   },
   "Ghost Ship Games": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Copenhagen-based Danish game studio founded in 2016 by six veteran developers. Creator of Deep Rock Galactic and developer of the upcoming Deep Rock Galactic: Rogue Core.",
     "headquarters": {
-      "city": null,
-      "country": "Not stated",
+      "city": "Copenhagen",
+      "country": "Denmark",
       "countryCode": "DK",
-      "label": "Country · Wikidata"
+      "label": "HQ · official studio site"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Independent"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Not disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.wikidata.org/entity/Q105080681",
-      "https://www.ghostship.dk/"
+    "industryScale": "AA · editorial indication",
+    "teamSize": "Around 60 people (company-reported)",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Co-op",
+      "FPS",
+      "Action",
+      "Roguelite"
     ],
-    "applicationLocation": "Not specified · HQ shown as reference"
+    "popularGames": [
+      {
+        "title": "Deep Rock Galactic",
+        "appId": null
+      },
+      {
+        "title": "Deep Rock Galactic: Rogue Core",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://ghostship.dk/",
+      "https://jobs.ghostship.dk/",
+      "https://jobs.ghostship.dk/connect",
+      "https://ghostship.dk/read-before-contacting-us/"
+    ],
+    "applicationLocation": "Copenhagen, Denmark · on-site regular positions; commuting-distance applicants only",
+    "reachHighlights": "The official career site describes an in-office collaborative culture, optional limited work-from-home days and no relocation support."
   },
   "Glowmade": {
     "description": "Independent UK game studio founded by Lionhead alumni, creating original and imaginative games.",
@@ -2925,29 +3034,68 @@
     "reachHighlights": "Founded 2016; more than 140 Kolibris; part of Ubisoft since 2020 (studio-reported)."
   },
   "KORION": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "KORION Interactive is a Ludwigsburg-based game and interactive-technology studio that grew from a Fraunhofer Society spin-off. It develops original games, ports and publishes titles, and creates serious simulations and interactive software.",
     "headquarters": {
-      "city": null,
-      "country": "Not stated",
+      "city": "Ludwigsburg",
+      "country": "Germany",
       "countryCode": "DE",
-      "label": "Country · Wikidata"
+      "label": "HQ · official company history"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Porting",
+      "Publisher",
+      "Simulation",
+      "Serious games"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "KORION Interactive GmbH · privately held",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Small / mid-size studio · exact scale not disclosed",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.wikidata.org/entity/Q101069308",
-      "https://www.korion.de/"
+    "focus": [
+      "PC",
+      "Console",
+      "Board and casual games",
+      "Simulation",
+      "Serious games",
+      "Porting",
+      "Unity"
     ],
-    "applicationLocation": "Not specified · HQ shown as reference"
+    "popularGames": [
+      {
+        "title": "Sugardew Island",
+        "appId": null
+      },
+      {
+        "title": "Moorhuhn Kart 4",
+        "appId": null
+      },
+      {
+        "title": "Yatzi 2",
+        "appId": null
+      },
+      {
+        "title": "Ludo XXL 2",
+        "appId": null
+      },
+      {
+        "title": "Tow Game",
+        "appId": null
+      },
+      {
+        "title": "Whoowasit?",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://korion.de/en/company/",
+      "https://korion.de/en/games/",
+      "https://korion.de/karriere/"
+    ],
+    "applicationLocation": "Ludwigsburg, Germany · up to 100% remote possible depending on position",
+    "reachHighlights": "KORION traces its origins to a 2003 Fraunhofer Society spin-off and says it established its main Ludwigsburg base in 2007."
   },
   "Kuuasema": {
     "description": "Helsinki-based game development partner with a long track record of full-cycle mobile, casual and cross-platform projects.",
@@ -3225,29 +3373,61 @@
     "applicationLocation": "Vancouver, Canada · general-route remote eligibility not stated"
   },
   "Nomad Games": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Small independent game studio based in Lymm, England. Nomad Games specialises in digital adaptations of physical board games and also provides co-development, engineering, art, porting and game-development services across PC, console and mobile.",
     "headquarters": {
-      "city": null,
-      "country": "Not stated",
+      "city": "Lymm, Warrington",
+      "country": "United Kingdom",
       "countryCode": "GB",
-      "label": "Country · Wikidata"
+      "label": "Studio base · official About page"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Publisher",
+      "Co-development",
+      "Porting"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Independent · ownership details not disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Indie",
+    "teamSize": "Small studio · exact count not disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.wikidata.org/entity/Q96612282",
-      "https://nomadgames.co.uk/"
+    "focus": [
+      "PC",
+      "Console",
+      "Mobile",
+      "Board-game adaptations",
+      "Simulation",
+      "Porting",
+      "C++",
+      "Unity",
+      "Unreal"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "Talisman",
+        "appId": null
+      },
+      {
+        "title": "Fury of Dracula",
+        "appId": null
+      },
+      {
+        "title": "Fighting Fantasy Legends",
+        "appId": null
+      },
+      {
+        "title": "Talisman: Origins",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://nomadgames.co.uk/about-us",
+      "https://nomadgames.co.uk/careers",
+      "https://nomadgames.co.uk/blog/fury-of-dracula-digital-adaptation-announced"
+    ],
+    "applicationLocation": "Remote working is available to staff; Lymm office is available for in-person work and occasional onboarding visits",
+    "reachHighlights": "The official Careers page says remote work has been available for staff who prefer it since early 2020."
   },
   "Obsidian Entertainment": {
     "description": "California RPG developer known for narrative-heavy role-playing games and large-scale worlds.",
@@ -3740,56 +3920,6 @@
       "https://plummygames.teamtailor.com/pages/about-us",
       "https://plummygames.teamtailor.com/"
     ]
-  },
-  "Q104636206": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
-    "headquarters": {
-      "city": null,
-      "country": "Not stated",
-      "countryCode": "US",
-      "label": "Country · Wikidata"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer"
-    ],
-    "ownership": "Not yet researched",
-    "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.wikidata.org/entity/Q104636206",
-      "https://www.serenityforge.com/"
-    ],
-    "applicationLocation": "Not specified · HQ shown as reference"
-  },
-  "Q105687032": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
-    "headquarters": {
-      "city": null,
-      "country": "Not stated",
-      "countryCode": "US",
-      "label": "Country · Wikidata"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer"
-    ],
-    "ownership": "Not yet researched",
-    "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.wikidata.org/entity/Q105687032",
-      "https://www.velanstudios.com/"
-    ],
-    "applicationLocation": "Not specified · HQ shown as reference"
   },
   "Rad Games": {
     "description": "Game studio division of IDFire Technologies Inc., developing its own game universes alongside the in-house Janus game engine.",
@@ -5452,5 +5582,123 @@
     ],
     "applicationLocation": "Gundelfingen near Freiburg, Germany · remote/applicant-country eligibility not stated",
     "reachHighlights": "Official studio describes M.O.O.D.S. as a 3D action roguelite and Memorrha as a first-person puzzle adventure; it also develops games and interactive applications for major consoles, PC and XR."
+  },
+  "Serenity Forge": {
+    "description": "Boulder, Colorado-based video game development and publishing company working on original IP, co-development, publishing and physical-game merchandising. It also partners with US-based and international developers, publishers, vendors and clients.",
+    "headquarters": {
+      "city": "Boulder, Colorado",
+      "country": "United States",
+      "countryCode": "US",
+      "label": "HQ · official About page"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Co-development",
+      "Merchandising"
+    ],
+    "ownership": "Serenity Forge LLC · privately held",
+    "parentCompany": null,
+    "industryScale": "Indie / AA · editorial indication",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Publishing",
+      "Original IP",
+      "Co-development",
+      "Physical editions"
+    ],
+    "popularGames": [
+      {
+        "title": "Faraday Blues",
+        "appId": null
+      },
+      {
+        "title": "Vivarium",
+        "appId": null
+      },
+      {
+        "title": "Fractured Blooms",
+        "appId": null
+      },
+      {
+        "title": "Springs, Eternal",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://serenityforge.com/about",
+      "https://serenityforge.com/careers",
+      "https://serenityforge.com/"
+    ],
+    "applicationLocation": "Boulder, Colorado, USA · applicant-country eligibility for open applications not stated",
+    "reachHighlights": "The company operates both dedicated development and publishing teams and explicitly accepts open applications for unlisted roles."
+  },
+  "Velan Studios": {
+    "description": "Independent game studio founded in Troy, New York in 2016 by brothers Karthik and Guha Bala. Velan builds original games and proprietary technology, with a second studio office in Toronto, Canada.",
+    "headquarters": {
+      "city": "Troy, New York",
+      "country": "United States",
+      "countryCode": "US",
+      "label": "Founded and original studio location · official About page"
+    },
+    "otherLocations": [
+      "Toronto, Ontario, Canada"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "AA · editorial indication",
+    "teamSize": "100+ team members across Troy and Toronto (company-reported)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Console",
+      "AR",
+      "VR",
+      "Mixed reality",
+      "Action",
+      "Sports"
+    ],
+    "popularGames": [
+      {
+        "title": "Star Fox",
+        "appId": null
+      },
+      {
+        "title": "Midnight Murder Club",
+        "appId": null
+      },
+      {
+        "title": "Bounce Arcade",
+        "appId": null
+      },
+      {
+        "title": "Hot Wheels Rift Rally",
+        "appId": null
+      },
+      {
+        "title": "Knockout City",
+        "appId": null
+      },
+      {
+        "title": "Mario Kart Live: Home Circuit",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.velanstudios.com/about",
+      "https://www.velanstudios.com/careers",
+      "https://www.velanstudios.com/games",
+      "https://www.velanstudios.com/"
+    ],
+    "applicationLocation": "Hybrid · Troy, New York, USA and Toronto, Ontario, Canada · three days in studio option",
+    "reachHighlights": "Velan reports more than 100 team members across its two offices and has shipped games with Nintendo, PlayStation and other partners."
   }
 }
