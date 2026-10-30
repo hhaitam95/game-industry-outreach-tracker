@@ -4518,5 +4518,44 @@
     ],
     "applicationLocation": "Remote · applicants must reside in Flanders, Belgium",
     "reachHighlights": "Headquartered in Ghent. The official open-application route is remote but explicitly limited to applicants living in Flanders."
+  },
+  "Stranded Beast": {
+    "description": "Independent Vienna-based game studio founded by business and industry veterans, developing its original multiplayer action game Postmortem.",
+    "headquarters": {
+      "city": "Vienna",
+      "country": "Austria",
+      "countryCode": "AT",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small team · exact count not disclosed",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Multiplayer",
+      "Action",
+      "Godot"
+    ],
+    "popularGames": [
+      {
+        "title": "Postmortem",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://www.strandedbeast.com/",
+      "https://www.strandedbeast.com/job-initiative-application",
+      "https://www.strandedbeast.com/job-3d-technical-artist"
+    ],
+    "applicationLocation": "Near Vienna preferred · full-time remote work limited to Austria",
+    "reachHighlights": "Developing an original top-down multiplayer action game. The studio states that it avoids gambling mechanics, dark patterns and pay-to-win monetisation."
   }
 }
