@@ -2718,7 +2718,7 @@
       "Full-cycle development"
     ],
     "popularGames": [],
-    "applicationLocation": "Helsinki hybrid · no visa sponsorship",
+    "applicationLocation": "Helsinki, Finland · hybrid, three office days; EU/EEA/Swiss citizens or applicants already authorised to work in Finland; no visa sponsorship",
     "profileSources": [
       "https://www.kuuasema.com/",
       "https://www.kuuasema.com/jobs/open-application/"
@@ -4993,5 +4993,84 @@
       "https://zygle-games.com/careers"
     ],
     "applicationLocation": "Hybrid London or remote · remote-country eligibility not stated"
+  },
+  "Couch Heroes": {
+    "description": "Remote-first game studio developing an Unreal Engine-powered MMO experience and a cross-game social platform that connects player identities, progression, quests and rewards.",
+    "headquarters": {
+      "city": null,
+      "country": "Not stated",
+      "countryCode": "",
+      "label": "HQ unresolved · official pages differ on base"
+    },
+    "otherLocations": [
+      "Team members across Europe",
+      "United States",
+      "Middle East"
+    ],
+    "companyType": [
+      "Developer",
+      "Online multiplayer",
+      "Platform"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Not disclosed",
+    "teamSize": "15+ nationalities represented (studio-reported; not team-size count)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Unreal Engine",
+      "MMO",
+      "Online multiplayer",
+      "Social platform",
+      "Cross-game progression"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://couch-heroes.com/careers",
+      "https://couch-heroes.com/careers/120029215",
+      "https://couch-heroes.com/about"
+    ],
+    "applicationLocation": "Remote-first; team across Europe, USA and Middle East · applicant-country eligibility not stated",
+    "reachHighlights": "Building an MMO universe and developer platform; careers page says its team represents 15+ nationalities."
+  },
+  "Stranded Beast": {
+    "description": "Independent Vienna-based game studio founded by business and industry veterans, developing its original multiplayer action game Postmortem.",
+    "headquarters": {
+      "city": "Vienna",
+      "country": "Austria",
+      "countryCode": "AT",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small team · exact count not disclosed",
+    "teamSizeAsOf": "2026-10-30",
+    "focus": [
+      "PC",
+      "Multiplayer",
+      "Action",
+      "Godot"
+    ],
+    "popularGames": [
+      {
+        "title": "Postmortem",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://www.strandedbeast.com/",
+      "https://www.strandedbeast.com/job-initiative-application",
+      "https://www.strandedbeast.com/job-3d-technical-artist"
+    ],
+    "applicationLocation": "Near Vienna preferred · full-time remote work limited to Austria",
+    "reachHighlights": "Developing an original top-down multiplayer action game. The studio states that it avoids gambling mechanics, dark patterns and pay-to-win monetisation."
   }
 }
