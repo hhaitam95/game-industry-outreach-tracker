@@ -823,5 +823,413 @@
       "https://vyrexinteractive.com/press",
       "https://vyrexinteractive.com/studio.php"
     ]
+  },
+  "AARISE": {
+    "description": "Independent French AA developer founded by the original team behind Empire of the Ants, now creating focused premium games across multiple genres.",
+    "headquarters": {
+      "city": "La Rochelle",
+      "country": "France",
+      "countryCode": "FR",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Premium",
+      "Strategy",
+      "Adventure"
+    ],
+    "popularGames": [
+      {
+        "title": "Empire of the Ants",
+        "appId": 2287330,
+        "stage": "Previous team project"
+      }
+    ],
+    "applicationLocation": "Location not specified · use HQ as reference",
+    "profileSources": [
+      "https://www.aarise.games/about/",
+      "https://www.aarise.games/press-kit/"
+    ]
+  },
+  "Artefacts Studio": {
+    "description": "Independent French developer and co-development partner creating and marketing PC and console games, with long-running art, technical and design subcontracting capabilities.",
+    "headquarters": {
+      "city": "Villeurbanne (Lyon area)",
+      "country": "France",
+      "countryCode": "FR",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Services"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "AA",
+    "teamSize": "80 collaborators (studio-reported)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Console",
+      "Co-development",
+      "Art",
+      "Design"
+    ],
+    "popularGames": [
+      {
+        "title": "Naheulbeuk's Dungeon: Amulet of Chaos",
+        "appId": 970830
+      },
+      {
+        "title": "Crown Wars: The Black Prince",
+        "appId": 1658920
+      },
+      {
+        "title": "Disciples: Domination",
+        "appId": 2383200
+      }
+    ],
+    "applicationLocation": "Location not specified · use HQ as reference",
+    "profileSources": [
+      "https://www.artefacts-studio.fr/en/about-us"
+    ]
+  },
+  "Chimera Entertainment": {
+    "description": "Independent Munich game developer with a broad portfolio spanning strategy, RPG and mobile titles; offers hybrid and remote work across Europe.",
+    "headquarters": {
+      "city": "Munich",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Distributed team members across Europe"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "Around 80 team members (studio-reported)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Mobile",
+      "Strategy",
+      "RPG"
+    ],
+    "popularGames": [
+      {
+        "title": "Songs of Silence",
+        "appId": 2195410
+      },
+      {
+        "title": "Shadow and Bone: Enter the Fold",
+        "appId": null
+      }
+    ],
+    "applicationLocation": "Hybrid / remote · Europe",
+    "profileSources": [
+      "https://chimera-entertainment.com/"
+    ]
+  },
+  "Bossa Studios": {
+    "description": "London-based independent game developer and publisher creating original games for PC, console, mobile and VR, alongside co-development and multiplayer technology.",
+    "headquarters": {
+      "city": "London",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Co-development"
+    ],
+    "ownership": "Independent studio · no parent company disclosed",
+    "parentCompany": null,
+    "industryScale": "AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Mobile",
+      "VR",
+      "Multiplayer"
+    ],
+    "popularGames": [
+      {
+        "title": "Surgeon Simulator",
+        "appId": 233720
+      },
+      {
+        "title": "I Am Bread",
+        "appId": 327890
+      },
+      {
+        "title": "Lost Skies",
+        "appId": 1931180
+      }
+    ],
+    "applicationLocation": "Remote-first · application eligibility to confirm",
+    "profileSources": [
+      "https://www.bossagames.com/about.html",
+      "https://www.bossagames.com/careers.html"
+    ]
+  },
+  "Outplay Entertainment": {
+    "description": "Independent Dundee studio developing original and partner games across mobile, PC, Roblox, HTML5 and console, with full-cycle and co-development services.",
+    "headquarters": {
+      "city": "Dundee, Scotland",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Co-development"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "AA · Mobile / multi-platform",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "PC",
+      "Roblox",
+      "HTML5",
+      "Console",
+      "Casual"
+    ],
+    "popularGames": [
+      {
+        "title": "The Incentive Program",
+        "appId": null
+      },
+      {
+        "title": "The Creeps",
+        "appId": null
+      },
+      {
+        "title": "Monopoly Match",
+        "appId": null
+      }
+    ],
+    "applicationLocation": "UK / EU remote options · see route",
+    "profileSources": [
+      "https://outplay.com/about-us/",
+      "https://outplay.com/"
+    ]
+  },
+  "Third Kind Games": {
+    "description": "Full-service AAA co-development and full-development studio delivering art, design, engineering and production for major publishers and franchises.",
+    "headquarters": {
+      "city": "Leamington Spa",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Poland",
+      "Spain"
+    ],
+    "companyType": [
+      "Developer",
+      "Co-development"
+    ],
+    "ownership": "Part of Virtuos",
+    "parentCompany": "Virtuos",
+    "industryScale": "AAA co-development",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "AAA co-development",
+      "Full development"
+    ],
+    "popularGames": [
+      {
+        "title": "Fable",
+        "appId": null,
+        "stage": "Co-development credit"
+      },
+      {
+        "title": "Forza Horizon",
+        "appId": null,
+        "stage": "Co-development credit"
+      },
+      {
+        "title": "Sea of Thieves",
+        "appId": null,
+        "stage": "Co-development credit"
+      },
+      {
+        "title": "Hearthstone",
+        "appId": null,
+        "stage": "Co-development credit"
+      }
+    ],
+    "applicationLocation": "Location not specified · use HQ as reference",
+    "profileSources": [
+      "https://thirdkindgames.com/about/"
+    ]
+  },
+  "Stormind Games": {
+    "description": "Independent Italian developer and co-development partner known for atmospheric horror, action-adventure and narrative-driven games.",
+    "headquarters": {
+      "city": "Catania",
+      "country": "Italy",
+      "countryCode": "IT",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "AA",
+    "teamSize": "100+ internal resources plus external collaborators (studio-reported)",
+    "teamSizeAsOf": "2025",
+    "focus": [
+      "PC",
+      "PlayStation",
+      "Xbox",
+      "Horror",
+      "Action-adventure",
+      "Co-development"
+    ],
+    "popularGames": [
+      {
+        "title": "Remothered: Tormented Fathers",
+        "appId": 633360
+      },
+      {
+        "title": "Batora: Lost Haven",
+        "appId": 1506440
+      },
+      {
+        "title": "A Quiet Place: The Road Ahead",
+        "appId": 2233120
+      },
+      {
+        "title": "Mafia: The Old Country",
+        "appId": 3058630,
+        "stage": "Co-development contribution"
+      }
+    ],
+    "applicationLocation": "Location not specified · use HQ as reference",
+    "profileSources": [
+      "https://stormindgames.com/company/"
+    ]
+  },
+  "Futureplay Games": {
+    "description": "Helsinki casual-game studio within Plarium, creating mobile games for global audiences.",
+    "headquarters": {
+      "city": "Helsinki",
+      "country": "Finland",
+      "countryCode": "FI",
+      "label": "Studio HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Mobile",
+      "Subsidiary"
+    ],
+    "ownership": "Part of Plarium",
+    "parentCompany": "Plarium · Aristocrat Leisure",
+    "industryScale": "AA · Mobile",
+    "teamSize": "60+ professionals (studio-reported)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "Mobile",
+      "Casual",
+      "Merge",
+      "Idle"
+    ],
+    "popularGames": [
+      {
+        "title": "Idle Farming Empire",
+        "appId": null
+      },
+      {
+        "title": "Merge Gardens",
+        "appId": null
+      }
+    ],
+    "applicationLocation": "Remote · global listed on open application",
+    "profileSources": [
+      "https://company.plarium.com/en/studio/finland-helsinki/"
+    ]
+  },
+  "Sencorp Games": {
+    "description": "Independent Izmir game and technology studio building original mobile and PC games.",
+    "headquarters": {
+      "city": "Izmir",
+      "country": "Türkiye",
+      "countryCode": "TR",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "PC",
+      "Casual",
+      "Action"
+    ],
+    "popularGames": [
+      {
+        "title": "Pawstorm",
+        "appId": null,
+        "stage": "Available on Android"
+      },
+      {
+        "title": "Jellyclash",
+        "appId": null,
+        "stage": "Coming soon"
+      },
+      {
+        "title": "Kick Blast",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "applicationLocation": "Location not specified · use HQ as reference",
+    "profileSources": [
+      "https://sencorpgames.com/"
+    ]
   }
 }
