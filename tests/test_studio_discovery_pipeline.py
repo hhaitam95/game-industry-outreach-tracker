@@ -18,6 +18,20 @@ class DiscoveryParsingTests(unittest.TestCase):
         self.assertIsNone(discovery.canonical_url("https://127.0.0.1/careers"))
         self.assertIsNone(discovery.canonical_url("javascript:alert(1)"))
 
+    def test_canonical_url_percent_encodes_spaces_and_unicode_in_path_and_query(self):
+        self.assertEqual(
+            discovery.canonical_url("https://studio.example/images/clients/croteam logo.png"),
+            "https://studio.example/images/clients/croteam%20logo.png",
+        )
+        self.assertEqual(
+            discovery.canonical_url("https://studio.example/search?q=game studio"),
+            "https://studio.example/search?q=game%20studio",
+        )
+        self.assertEqual(
+            discovery.canonical_url("https://studio.example/café"),
+            "https://studio.example/caf%C3%A9",
+        )
+
     def test_base_domain_handles_common_compound_suffix(self):
         self.assertEqual(discovery.base_domain("jobs.studio.co.uk"), "studio.co.uk")
         self.assertEqual(discovery.base_domain("careers.studio.com"), "studio.com")
