@@ -52,31 +52,35 @@ export default function StudioDirectory({applications,onSave,onMarkApplied}:{app
   const [query,setQuery]=useState("");
   const [scale,setScale]=useState("All sizes");
   const [kind,setKind]=useState("All types");
+  const [country,setCountry]=useState("All countries");
   const [expanded,setExpanded]=useState<string|null>(null);
   const [sort,setSort]=useState("name");
-  const countries=useMemo(()=>new Set(studios.map(s=>profiles[s.name]?.headquarters?.country||s.country).filter(c=>c!=="Not stated")),[]);
+  const countries=useMemo(()=>Array.from(new Set(studios.map(s=>profiles[s.name]?.headquarters?.country||s.country).filter(c=>c&&c!=="Not stated"&&c!=="Not publicly stated"))).sort((a,b)=>a.localeCompare(b)),[]);
   const filtered=useMemo(()=>{
     const term=query.trim().toLowerCase();
     return studios.filter((studio:Studio)=>{
       const p=profiles[studio.name];
-      const fields=[studio.name,studio.country,studio.notes,p?.description,p?.ownership,p?.parentCompany,p?.companyType.join(" "),p?.focus.join(" "),p?.popularGames.map(g=>g.title).join(" ")].filter(Boolean).join(" ").toLowerCase();
+      const fields=[studio.name,studio.country,studio.notes,p?.description,p?.headquarters?.city,p?.headquarters?.country,p?.applicationLocation,p?.otherLocations.join(" "),p?.ownership,p?.parentCompany,p?.companyType.join(" "),p?.focus.join(" "),p?.teamSize,p?.reachHighlights,p?.popularGames.map(g=>g.title).join(" ")].filter(Boolean).join(" ").toLowerCase();
       const matches= !term||fields.includes(term);
       const sizeMatch=scale==="All sizes"||p?.industryScale===scale;
       const kindMatch=kind==="All types"||p?.companyType.includes(kind);
-      return matches&&sizeMatch&&kindMatch;
+      const studioCountry=p?.headquarters?.country||studio.country;
+      const countryMatch=country==="All countries"||studioCountry===country;
+      return matches&&sizeMatch&&kindMatch&&countryMatch;
     }).sort((a,b)=>sort==="name"?a.name.localeCompare(b.name):((profiles[b.name]?.popularGames.length||0)-(profiles[a.name]?.popularGames.length||0)));
-  },[query,scale,kind,sort]);
+  },[query,scale,kind,country,sort]);
   const types=["All types","Developer","Publisher","Co-development","Mobile","Services"];
   const scales=["All sizes","AAA","AA","AA / AAA","Indie","Indie / AA","AAA co-development","AA · Mobile"];
   const statusMap=new Map(applications.map(a=>[a.studioName,a.status]));
   return <section className="directory-page">
     <div className="directory-hero">
       <div className="hero-copy"><span className="eyebrow">THE GAME INDUSTRY INDEX</span><h2>Find your next studio.</h2><p>Explore teams, worlds, ownership and career routes across the game industry.</p></div>
-      <div className="hero-stat"><strong>{studios.length}</strong><span>verified speculative routes</span><small>{countries.size} represented countries</small></div>
+      <div className="hero-stat"><strong>{studios.length}</strong><span>verified speculative routes</span><small>{countries.length} represented countries</small></div>
       <div className="hero-orbit orbit-one"/><div className="hero-orbit orbit-two"/>
     </div>
     <div className="directory-toolbar">
       <label className="search-box"><span>⌕</span><input type="search" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search studios, games, publishers, countries…"/></label>
+      <select aria-label="Filter by country" value={country} onChange={e=>setCountry(e.target.value)}><option>All countries</option>{countries.map(x=><option key={x}>{x}</option>)}</select>
       <select aria-label="Filter by studio type" value={kind} onChange={e=>setKind(e.target.value)}>{types.map(x=><option key={x}>{x}</option>)}</select>
       <select aria-label="Filter by industry scale" value={scale} onChange={e=>setScale(e.target.value)}>{scales.map(x=><option key={x}>{x}</option>)}</select>
       <select aria-label="Sort studios" value={sort} onChange={e=>setSort(e.target.value)}><option value="name">A–Z</option><option value="games">Most known titles</option></select>
