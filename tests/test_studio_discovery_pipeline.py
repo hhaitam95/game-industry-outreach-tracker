@@ -349,6 +349,42 @@ class DatasetUpdateTests(unittest.TestCase):
     def setUp(self):
         discovery.LAST_REQUEST_BY_HOST.clear()
 
+    def test_run_pipeline_persists_qid_cursor_not_entity_url(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "src/data").mkdir(parents=True)
+            (root / "src/data/speculative-route-directory.json").write_text("[]", encoding="utf-8")
+            (root / "src/data/studio-profiles.json").write_text("{}", encoding="utf-8")
+            state_path = root / "state/discovery.json"
+
+            row = {
+                "qid": "Q123",
+                "entity_url": "https://www.wikidata.org/entity/Q123",
+                "name": "Example Game Studio",
+                "website": "https://example-studio.example/",
+                "country": "Canada",
+                "hq_city": "Montreal",
+                "country_code": "CA",
+                "company_type": "Developer",
+            }
+            result = discovery.run_pipeline(
+                mode="hourly",
+                batch_size=1,
+                max_source_pages=1,
+                max_candidate_checks=0,
+                route_check_count=0,
+                root=root,
+                state_path=state_path,
+                page_fetcher=lambda url, allowed: self.fail("No candidate checks expected."),
+                source_fetcher=lambda kind, cursor, limit: [row],
+            )
+
+            saved = discovery.read_json(state_path, {})
+            first_feed_id = discovery.FEEDS[0]["id"]
+            self.assertEqual(result["source_pages"], 1)
+            self.assertEqual(saved["feed_cursors"][first_feed_id], "Q123")
+            self.assertNotIn("https://www.wikidata.org/entity/", saved["feed_cursors"][first_feed_id])
+
     def test_verified_candidate_adds_directory_and_minimal_profile_once(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

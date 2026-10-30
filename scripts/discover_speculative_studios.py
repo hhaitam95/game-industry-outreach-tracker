@@ -1100,7 +1100,7 @@ def run_pipeline(
         rows = source_fetcher(feed["kind"], cursor, batch_size)
         source_pages += 1
         if rows:
-            state["feed_cursors"][feed["id"]] = max(row["entity_url"] for row in rows)
+            state["feed_cursors"][feed["id"]] = max(row["qid"] for row in rows)
             source_candidates += add_candidates(state, rows)
         if len(rows) < batch_size:
             state["feed_done"][feed["id"]] = True
