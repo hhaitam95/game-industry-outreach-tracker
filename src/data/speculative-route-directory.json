@@ -1916,6 +1916,36 @@
     }
   },
   {
+    "name": "Russet Studio",
+    "country": "Not stated",
+    "websiteUrl": "https://russetstudio.com/",
+    "applicationUrl": "https://russetstudio.com/careers",
+    "evidenceUrl": "https://russetstudio.com/careers",
+    "notes": "Official Careers page offers a General Application form for people who do not see a suitable role. It requests a CV, optional portfolio/link and a short introduction; the page currently lists seven remote roles including Senior Unity Developer, Environment Artist, Technical Artist and Gameplay Designer. The studio says its work is remote-friendly and work-from-anywhere; HQ/applicant-country eligibility is not stated.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote · exact applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Art",
+        "Technology",
+        "Audio",
+        "Operations"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Rustling Leaves Games",
     "country": "United States",
     "websiteUrl": "https://www.rustlingleavesgames.com/",
@@ -2080,6 +2110,30 @@
     }
   },
   {
+    "name": "StarPolar",
+    "country": "Malaysia",
+    "websiteUrl": "https://www.starpolar.games/",
+    "applicationUrl": "https://www.starpolar.games/careers/general-application/",
+    "evidenceUrl": "https://www.starpolar.games/careers/",
+    "notes": "Official Careers page invites general applications by email to info@starpolar.games, asking for a CV, work samples and a short introduction. Studio HQ is in Greater Kuala Lumpur. The general route is marked Remote; applicant-country eligibility is not stated.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote · applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Stormind Games",
     "country": "Italy",
     "websiteUrl": "https://stormindgames.com/",
@@ -2152,6 +2206,38 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-27"
+    }
+  },
+  {
+    "name": "SumiGames Studio",
+    "country": "Not stated",
+    "websiteUrl": "https://www.sumigamesstudio.com/",
+    "applicationUrl": "https://www.sumigamesstudio.com/careers",
+    "evidenceUrl": "https://www.sumigamesstudio.com/careers",
+    "notes": "Official Careers page invites open applications by email to careers@sumigames.com with a portfolio/showreel, GitHub or CV. It describes the company as a small, senior, remote-friendly game-development studio operating in Dubai, UAE and the United Kingdom. Its project mix includes conventional mobile/PC/multiplayer/XR games and Web3/blockchain work; no applicant-country eligibility or single HQ is stated.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Dubai, UAE / United Kingdom · remote-friendly; applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Unity",
+        "Unreal Engine",
+        "Godot",
+        "XR",
+        "Game Art",
+        "QA",
+        "Production"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
