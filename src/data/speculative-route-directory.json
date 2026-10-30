@@ -1759,7 +1759,7 @@
     "applicationUrl": "https://fawkesgames.com/en/careers/",
     "evidenceUrl": "https://fawkesgames.com/en/careers/",
     "notes": "Official careers page invites spontaneous applications and says remote work can be done from anywhere. Some freelance roles prefer Europe-friendly time zones. Official route describes eligibility as worldwide.",
-    "checkedAt": "2026-10-29",
+    "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [
@@ -1773,7 +1773,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-27"
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
@@ -3723,6 +3723,29 @@
     }
   },
   {
+    "name": "Other Ocean Interactive",
+    "country": "Canada",
+    "websiteUrl": "https://otherocean.com/",
+    "applicationUrl": "https://otherocean.com/",
+    "evidenceUrl": "https://otherocean.com/",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: GENERAL APPLICATION. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Outplay Entertainment",
     "country": "United Kingdom",
     "websiteUrl": "https://outplay.com/",
@@ -3756,6 +3779,50 @@
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "unsolicited",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Paranoid Interactive",
+    "country": "Poland",
+    "websiteUrl": "https://paranoidinteractive.net/",
+    "applicationUrl": "https://paranoidinteractive.net/career/",
+    "evidenceUrl": "https://paranoidinteractive.net/career/",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: general application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Piktiv",
+    "country": "Sweden",
+    "websiteUrl": "https://piktiv.com/",
+    "applicationUrl": "https://piktiv.com/careers",
+    "evidenceUrl": "https://piktiv.com/careers",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
       "submissionMethods": [
         "email"
       ],
@@ -3826,6 +3893,28 @@
     }
   },
   {
+    "name": "Playrion",
+    "country": "France",
+    "websiteUrl": "https://www.playrion.com/",
+    "applicationUrl": "https://www.playrion.com/recruitment/",
+    "evidenceUrl": "https://www.playrion.com/recruitment/",
+    "notes": "Official studio-controlled page explicitly invites unsolicited applications. Evidence: unsolicited applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Playsport Games",
     "country": "United Kingdom",
     "websiteUrl": "https://www.playsportgames.com/",
@@ -3842,6 +3931,29 @@
       "eligibleLocations": [
         "Guildford, United Kingdom · remote eligibility not stated"
       ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Playtouch",
+    "country": "Mauritius",
+    "websiteUrl": "https://playtouch.net/",
+    "applicationUrl": "https://playtouch.net/career",
+    "evidenceUrl": "https://playtouch.net/career",
+    "notes": "Official studio-controlled page explicitly invites spontaneous applications. Evidence: Spontaneous applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
@@ -3874,6 +3986,119 @@
     }
   },
   {
+    "name": "Pneuma Games Group",
+    "country": "England",
+    "websiteUrl": "https://pneumagroup.co.uk/games/",
+    "applicationUrl": "https://www.teamtailor.com/?utm_campaign=poweredby&utm_content=careers.pneumagroup.co.uk&utm_medium=referral&utm_source=career-site",
+    "evidenceUrl": "https://careers.pneumagroup.co.uk/",
+    "notes": "Official studio-controlled page explicitly invites discipline specific applications. Evidence: Expression of Interest. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "discipline_specific",
+      "submissionMethods": [
+        "ats",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Pontoco",
+    "country": "United States",
+    "websiteUrl": "https://pontoco.com/",
+    "applicationUrl": "https://pontoco.com/jobs",
+    "evidenceUrl": "https://pontoco.com/jobs",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: general application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Preloaded",
+    "country": "England",
+    "websiteUrl": "https://www.preloaded.com/",
+    "applicationUrl": "https://preloaded.com/the-studio/",
+    "evidenceUrl": "https://preloaded.com/the-studio/",
+    "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: Speculative Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Psyon Games",
+    "country": "Finland",
+    "websiteUrl": "https://psyongames.com/",
+    "applicationUrl": "https://psyongames.com/careers/",
+    "evidenceUrl": "https://psyongames.com/careers/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Purple Lamp (THQ Nordic)",
+    "country": "Austria",
+    "websiteUrl": "https://purplelamp.com/",
+    "applicationUrl": "https://www.purplelamp.com/career",
+    "evidenceUrl": "https://www.purplelamp.com/contact/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Rad Games",
     "country": "Not stated",
     "websiteUrl": "https://radgames.ai/",
@@ -3885,6 +4110,50 @@
       "routeType": "open",
       "submissionMethods": [
         "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Ratloop Games Canada",
+    "country": "Canada",
+    "websiteUrl": "https://www.ratloopgamescanada.com/",
+    "applicationUrl": "https://ratloopgamescanada.com/careers",
+    "evidenceUrl": "https://ratloopgamescanada.com/careers",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "RattleAxe Games",
+    "country": "Canada",
+    "websiteUrl": "https://rattleaxegames.ca/main",
+    "applicationUrl": "https://rattleaxegames.ca/jobs",
+    "evidenceUrl": "https://rattleaxegames.ca/jobs",
+    "notes": "Official studio-controlled page explicitly invites discipline specific applications. Evidence: Expression of Interest. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "discipline_specific",
+      "submissionMethods": [
+        "website_form"
       ],
       "workModel": "not_stated",
       "eligibleLocations": [],
@@ -3951,6 +4220,29 @@
     }
   },
   {
+    "name": "Red Thread Games",
+    "country": "Norway",
+    "websiteUrl": "https://redthreadgames.com/",
+    "applicationUrl": "https://www.redthreadgames.com/jobs",
+    "evidenceUrl": "https://www.redthreadgames.com/jobs",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Redly Games",
     "country": "Finland",
     "websiteUrl": "https://jobs.ashbyhq.com/redlygames",
@@ -3975,6 +4267,28 @@
     }
   },
   {
+    "name": "Render Cube",
+    "country": "Poland",
+    "websiteUrl": "https://rendercube.pl/",
+    "applicationUrl": "https://rendercube.pl/join-us/",
+    "evidenceUrl": "https://rendercube.pl/join-us/",
+    "notes": "Official studio-controlled page explicitly invites spontaneous applications. Evidence: spontaneous application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Reply Game Studios",
     "country": "Italy",
     "websiteUrl": "https://www.reply.com/reply-game-studios/en/career",
@@ -3991,6 +4305,72 @@
       "eligibleLocations": [
         "Milan, Italy · on-site; fluent Italian and English required"
       ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Rice Games",
+    "country": "United States",
+    "websiteUrl": "https://ricegames.net/",
+    "applicationUrl": "https://ricegames.net/careers",
+    "evidenceUrl": "https://ricegames.net/careers/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Rightsized Games",
+    "country": "Sweden",
+    "websiteUrl": "https://www.rightsizedgames.com/",
+    "applicationUrl": "https://www.rightsizedgames.com/",
+    "evidenceUrl": "https://www.rightsizedgames.com/",
+    "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: speculative application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Rogue Factor",
+    "country": "Canada",
+    "websiteUrl": "https://rogue-factor.com/",
+    "applicationUrl": "https://rogue-factor.com/careers/",
+    "evidenceUrl": "https://rogue-factor.com/careers/",
+    "notes": "Official studio-controlled page explicitly invites spontaneous applications. Evidence: candidature spontanée. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
