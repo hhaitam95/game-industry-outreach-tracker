@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "Bootstrap performs a larger first backfill; hourly runs one rotating discovery batch."
+        description: "Bulk backfills the global studio catalogue; hourly keeps looking for new studios and verifies routes."
         type: choice
         options:
           - bulk
@@ -75,7 +75,7 @@ jobs:
               --mode bulk \
               --batch-size 100 \
               --max-source-pages 110 \
-              --max-candidate-checks 250 \
+              --max-candidate-checks 1000 \
               --route-check-count 8 \
               --max-run-seconds 1500 \
               --state-file "$STATE_FILE"
