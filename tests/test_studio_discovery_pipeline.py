@@ -59,7 +59,7 @@ class DiscoveryParsingTests(unittest.TestCase):
 
     def test_plain_text_robots_policy_is_parsed_and_respected(self):
         discovery.ROBOTS_CACHE.clear()
-        robots_body = "User-agent: *\\nDisallow: /private\\nAllow: /careers"
+        robots_body = "User-agent: *" + chr(10) + "Disallow: /private" + chr(10) + "Allow: /careers"
         result = discovery.FetchResult(
             True,
             "https://example-studio.example/robots.txt",
