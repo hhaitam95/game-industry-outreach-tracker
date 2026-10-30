@@ -1245,5 +1245,528 @@
     "profileSources": [
       "https://sencorpgames.com/"
     ]
+  },
+  "Paintbucket Games": {
+    "description": "Berlin independent studio making historically grounded, politically thoughtful narrative games.",
+    "headquarters": {
+      "city": "Berlin",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Narrative",
+      "Strategy",
+      "History"
+    ],
+    "popularGames": [
+      {
+        "title": "Through the Darkest of Times",
+        "appId": 1003090
+      },
+      {
+        "title": "The Darkest Files",
+        "appId": 2056630
+      }
+    ],
+    "applicationLocation": "Berlin · full-time",
+    "profileSources": [
+      "https://paintbucket.de/en"
+    ]
+  },
+  "Ember Crows": {
+    "description": "Independent London-based game studio developing ambitious narrative role-playing games, including a Slavic cyberpunk RPG.",
+    "headquarters": {
+      "city": "London",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Remote-friendly team"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "11–50 employees (LinkedIn company range)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "RPG",
+      "Narrative",
+      "Cyberpunk"
+    ],
+    "popularGames": [
+      {
+        "title": "Project Veles",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "applicationLocation": "Remote-friendly · confirm role eligibility",
+    "profileSources": [
+      "https://www.embercrows.com/",
+      "https://www.embercrows.com/careers/spontaneous-application",
+      "https://www.linkedin.com/company/ember-crows"
+    ]
+  },
+  "Frima Studio": {
+    "description": "Québec-based full-service game developer and co-development partner working across original IP, licensed games and major publisher projects.",
+    "headquarters": {
+      "city": "Québec City",
+      "country": "Canada",
+      "countryCode": "CA",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Montréal, Canada"
+    ],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Services"
+    ],
+    "ownership": "Privately held · parent not confirmed",
+    "parentCompany": null,
+    "industryScale": "AA / AAA co-development",
+    "teamSize": "Large multi-discipline team · exact current count not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Mobile",
+      "Co-development",
+      "Full production"
+    ],
+    "popularGames": [
+      {
+        "title": "Disciples: Liberation",
+        "appId": null,
+        "stage": "Development contribution"
+      },
+      {
+        "title": "Triangle Strategy",
+        "appId": 1850510,
+        "stage": "Development contribution"
+      },
+      {
+        "title": "Temple Run: Legends",
+        "appId": 2682580,
+        "stage": "Development contribution"
+      }
+    ],
+    "applicationLocation": "Québec / Montréal · see role-specific conditions",
+    "profileSources": [
+      "https://frimastudio.com/en/careers/",
+      "https://frimastudio.com/"
+    ]
+  },
+  "Reply Game Studios": {
+    "description": "Milan-based game developer within the Reply technology group, focused on original PC and console action experiences.",
+    "headquarters": {
+      "city": "Milan",
+      "country": "Italy",
+      "countryCode": "IT",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Subsidiary"
+    ],
+    "ownership": "Part of Reply Group",
+    "parentCompany": "Reply S.p.A.",
+    "industryScale": "AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Action",
+      "Adventure"
+    ],
+    "popularGames": [
+      {
+        "title": "Soulstice",
+        "appId": 1602080
+      },
+      {
+        "title": "Theseus",
+        "appId": 577280
+      }
+    ],
+    "applicationLocation": "Milan · on-site; Italian and English required",
+    "profileSources": [
+      "https://www.reply.com/reply-game-studios/en/career",
+      "https://www.reply.com/reply-game-studios/en"
+    ]
+  },
+  "Old Skull Games": {
+    "description": "Independent Lyon game studio creating original IP and working with partners across PC, console and mobile.",
+    "headquarters": {
+      "city": "Lyon",
+      "country": "France",
+      "countryCode": "FR",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "Around 60 creators (studio-reported)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Console",
+      "Mobile",
+      "Original IP",
+      "Co-development"
+    ],
+    "popularGames": [],
+    "applicationLocation": "Location not specified · use HQ as reference",
+    "profileSources": [
+      "https://www.oldskullgames.com/",
+      "https://www.oldskullgames.com/careers/"
+    ]
+  },
+  "G7 Studio": {
+    "description": "Saudi independent game studio developing original PC and mobile intellectual property.",
+    "headquarters": {
+      "city": null,
+      "country": "Saudi Arabia",
+      "countryCode": "SA",
+      "label": "HQ · city not stated"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Mobile",
+      "Original IP"
+    ],
+    "popularGames": [
+      {
+        "title": "Edge of the World",
+        "appId": null,
+        "stage": "Project"
+      },
+      {
+        "title": "The Last Signal",
+        "appId": null,
+        "stage": "Project"
+      },
+      {
+        "title": "Remnant Bloom",
+        "appId": null,
+        "stage": "Project"
+      },
+      {
+        "title": "Fix It Studio",
+        "appId": null,
+        "stage": "Project"
+      }
+    ],
+    "applicationLocation": "Location not specified · use HQ as reference",
+    "profileSources": [
+      "https://g7works.com/en/careers/",
+      "https://g7works.com/"
+    ]
+  },
+  "Keen Software House": {
+    "description": "Privately owned Czech game developer and technology company known for engineering-driven sandbox and simulation games and its VRAGE engine.",
+    "headquarters": {
+      "city": null,
+      "country": "Czech Republic",
+      "countryCode": "CZ",
+      "label": "HQ · city not verified"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Technology",
+      "Independent"
+    ],
+    "ownership": "Privately owned · independent",
+    "parentCompany": null,
+    "industryScale": "AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Xbox",
+      "Simulation",
+      "Sandbox",
+      "Game technology"
+    ],
+    "popularGames": [
+      {
+        "title": "Space Engineers",
+        "appId": 244850
+      },
+      {
+        "title": "Medieval Engineers",
+        "appId": 333950
+      }
+    ],
+    "applicationLocation": "Remote considered · CET overlap; experienced candidates preferred",
+    "profileSources": [
+      "https://www.keenswh.com/",
+      "https://www.keenswh.com/job/spontaneous-applications/"
+    ]
+  },
+  "Kinetic Games": {
+    "description": "Independent British developer best known for the co-operative paranormal investigation game Phasmophobia.",
+    "headquarters": {
+      "city": null,
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ · city not verified"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "Small studio · exact count not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Horror",
+      "Co-operative multiplayer"
+    ],
+    "popularGames": [
+      {
+        "title": "Phasmophobia",
+        "appId": 739630
+      }
+    ],
+    "applicationLocation": "Southampton hybrid · UK right-to-work required",
+    "profileSources": [
+      "https://kineticgames.co.uk/",
+      "https://kineticgames.co.uk/careers"
+    ]
+  },
+  "Kuuasema": {
+    "description": "Helsinki-based game development partner with a long track record of full-cycle mobile, casual and cross-platform projects.",
+    "headquarters": {
+      "city": "Helsinki",
+      "country": "Finland",
+      "countryCode": "FI",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Services"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "AA co-development",
+    "teamSize": "Not publicly disclosed · 130+ project deliveries is not headcount",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "Casual",
+      "Co-development",
+      "Full-cycle development"
+    ],
+    "popularGames": [],
+    "applicationLocation": "Helsinki hybrid · no visa sponsorship",
+    "profileSources": [
+      "https://www.kuuasema.com/",
+      "https://www.kuuasema.com/jobs/open-application/"
+    ]
+  },
+  "Sanuk Games": {
+    "description": "Small Thailand-based developer and porting partner with a catalogue of more than 70 games across PC and console platforms.",
+    "headquarters": {
+      "city": null,
+      "country": "Thailand",
+      "countryCode": "TH",
+      "label": "HQ · city not stated"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Porting",
+      "Services"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small studio · exact count not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Arcade",
+      "Casual",
+      "Porting"
+    ],
+    "popularGames": [],
+    "applicationLocation": "Work-from-home roles · confirm country eligibility",
+    "profileSources": [
+      "https://www.sanukgames.com/careers",
+      "https://www.sanukgames.com/"
+    ]
+  },
+  "HypeHype": {
+    "description": "Helsinki-based game-creation technology company developing a platform for creating, sharing and playing mobile-first games.",
+    "headquarters": {
+      "city": "Helsinki",
+      "country": "Finland",
+      "countryCode": "FI",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Technology platform"
+    ],
+    "ownership": "Privately held · ownership not confirmed",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "User-generated games",
+      "Game creation platform"
+    ],
+    "popularGames": [],
+    "applicationLocation": "Helsinki · on-site noted on route",
+    "profileSources": [
+      "https://hypehype.com/jobs",
+      "https://hypehype.com/"
+    ]
+  },
+  "Squeeze Studio": {
+    "description": "Québec-based 3D animation and digital production studio working on animation, cinematics and creative content for games and entertainment.",
+    "headquarters": {
+      "city": "Québec City",
+      "country": "Canada",
+      "countryCode": "CA",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Montréal, Canada"
+    ],
+    "companyType": [
+      "Co-development",
+      "Animation",
+      "Services"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "AA / AAA services",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "3D animation",
+      "Cinematics",
+      "Game art",
+      "Co-development"
+    ],
+    "popularGames": [],
+    "applicationLocation": "Québec / Montréal · on-site, remote or hybrid options",
+    "profileSources": [
+      "https://squeezestudio.com/",
+      "https://squeezestudio.recruitee.com/l/en/o/candidatures-spontanees?lang=en"
+    ]
+  },
+  "Lighthouse Games": {
+    "description": "Leamington Spa game developer founded by experienced AAA leaders, building premium games for PC and consoles.",
+    "headquarters": {
+      "city": "Royal Leamington Spa",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "AAA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Premium",
+      "AAA"
+    ],
+    "popularGames": [],
+    "applicationLocation": "Royal Leamington Spa · on-site",
+    "profileSources": [
+      "https://lighthousegames.com/",
+      "https://lighthousegames.com/careers/3C151DE079/"
+    ]
+  },
+  "Blowfish Studios": {
+    "description": "Sydney game developer and publisher working on original IP and partner titles across PC, console and mobile.",
+    "headquarters": {
+      "city": "Sydney",
+      "country": "Australia",
+      "countryCode": "AU",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher"
+    ],
+    "ownership": "Ownership requires confirmation · check current corporate records",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Mobile",
+      "Publishing"
+    ],
+    "popularGames": [],
+    "applicationLocation": "Preferred locations include Brisbane, Sydney, Melbourne and/or remote",
+    "profileSources": [
+      "https://www.blowfishstudios.com/",
+      "https://www.blowfishstudios.com/open-application"
+    ]
   }
 }
