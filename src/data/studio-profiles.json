@@ -4515,5 +4515,47 @@
     ],
     "applicationLocation": "Near Vienna preferred · full-time remote work limited to Austria",
     "reachHighlights": "Developing an original top-down multiplayer action game. The studio states that it avoids gambling mechanics, dark patterns and pay-to-win monetisation."
+  },
+  "Oddshot Games": {
+    "description": "Belgian indie game development and publishing studio focused on community-driven multiplayer sports games.",
+    "headquarters": {
+      "city": "Ghent",
+      "country": "Belgium",
+      "countryCode": "BE",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Multiplayer",
+      "Sports"
+    ],
+    "popularGames": [
+      {
+        "title": "Slapshot: Rebound",
+        "appId": null
+      },
+      {
+        "title": "Strikers Club",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://oddshot.gg/our-studio/",
+      "https://oddshot.gg/contact/",
+      "https://oddshot.gg/jobs/open-application/",
+      "https://oddshot.gg/our-games/"
+    ],
+    "applicationLocation": "Remote · applicants must reside in Flanders, Belgium",
+    "reachHighlights": "Headquartered in Ghent. The official open-application route is remote but explicitly limited to applicants living in Flanders."
   }
 }
