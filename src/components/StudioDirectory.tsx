@@ -40,6 +40,11 @@ function trackerLocation(studio:Studio,profile?:Profile){
   return {country:hq?.country||studio.country,hqLabel,applicationLocation:profile?.applicationLocation||"Not specified · HQ shown as reference"};
 }
 
+function MiniGameChip({game}:{game:Profile["popularGames"][number]}){
+  const [failed,setFailed]=useState(false);
+  return <span className="game-chip">{game.appId&&!failed?<img src={gameArtUrl(game.appId)} alt="" loading="lazy" onError={()=>setFailed(true)}/>:null}<span>{game.title}</span></span>;
+}
+
 function GameCard({game}:{game:Profile["popularGames"][number]}){
   const [failed,setFailed]=useState(false);
   return <div className="game-card">
@@ -101,7 +106,7 @@ export default function StudioDirectory({applications,onSave,onMarkApplied}:{app
           return <Fragment key={studio.name}><tr className={active?"studio-row is-expanded":"studio-row"}>
             <td><button className="studio-expand" type="button" onClick={()=>setExpanded(active?null:studio.name)} aria-expanded={active}><span className="expand-chevron">{active?"⌄":"›"}</span><StudioLogo name={studio.name} websiteUrl={studio.websiteUrl}/><span className="studio-name-cell"><strong>{studio.name}</strong><small>{type}</small></span></button></td>
             <td><span className="location-cell"><span className="country-flag">{location.emoji}</span><span><strong>{location.label}</strong><small>{p?.applicationLocation||location.tag}</small></span></span></td>
-            <td><div className="game-chips">{games.length?games.slice(0,2).map(g=><span className="game-chip" key={g.title}>{g.title}</span>):<span className="muted">{(p?.description||studio.notes).slice(0,72)}…</span>}</div></td>
+            <td><div className="game-chips">{games.length?games.slice(0,2).map(g=><MiniGameChip game={g} key={g.title}/>):<span className="muted">{(p?.description||studio.notes).slice(0,72)}…</span>}</div></td>
             <td><span className={`scale-tag ${(p?.industryScale||"").toLowerCase().replace(/[^a-z]+/g,"-")}`}>{p?.industryScale||"Unclassified"}</span></td>
             <td><span className="ownership-cell">{p?.parentCompany||p?.ownership||"Not yet researched"}</span></td>
             <td><span className="team-cell">{p?.teamSize||"Not disclosed"}</span></td>
