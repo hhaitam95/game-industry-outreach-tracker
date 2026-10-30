@@ -56,6 +56,11 @@ FEEDS = (
         "label": "Wikidata: organizations credited as video-game developers",
         "kind": "developer_credit",
     },
+    {
+        "id": "wikidata_video_game_companies",
+        "label": "Wikidata: video-game company entities",
+        "kind": "company_class",
+    },
 )
 
 ATS_HOSTS = (
@@ -78,8 +83,11 @@ ATS_HOSTS = (
 )
 
 CAREER_LINK_HINT = re.compile(
-    r"(career|job|vacanc|opportunit|join|work[-_ ]?with[-_ ]?us|"
-    r"apply|application|recruit|talent|contact|people|team)",
+    r"(career|karriere|stellenangebot|bewerbung|job|vacanc|opportunit|join|"
+    r"work[-_ ]?with[-_ ]?us|apply|application|recruit|talent|contact|people|"
+    r"team|emploi|carri[eè]re|recrut|postuler|nous rejoindre|vacature|werken bij|"
+    r"contacto|empleo|trabaja con|candidatura|lavoro|lavora con noi|offerte di lavoro|"
+    r"karri[aä]r|lediga jobb|spontanans[oö]k|ty[oö]paikka|arbet)",
     re.I,
 )
 
@@ -104,6 +112,23 @@ POSITIVE_ROUTE_PATTERNS = (
         re.I | re.S,
     ),
     re.compile(r"\bexpression\s+of\s+interest\b", re.I),
+    re.compile(r"\bcandidature\s+spontan[ée]e?s?\b", re.I),
+    re.compile(r"\bcandidature\s+libre\b", re.I),
+    re.compile(r"\binitiativbewerbung(?:en)?\b", re.I),
+    re.compile(r"\bspontanbewerbung(?:en)?\b", re.I),
+    re.compile(r"\bcandidatura\s+espont[aâ]nea\b", re.I),
+    re.compile(r"\bcandidatura\s+spontanea\b", re.I),
+    re.compile(r"\bspontane\s+sollicitatie\b", re.I),
+    re.compile(r"\bspontanansök(?:an|ningar)\b", re.I),
+    re.compile(r"\bspontanansøgning\b", re.I),
+    re.compile(r"\bspontan\s+jelentkez[eé]s\b", re.I),
+    re.compile(r"\bspontaniczna\s+aplikacja\b", re.I),
+    re.compile(
+        r"\bwe\s+(?:would\s+)?love\s+to\s+hear\s+from\s+you\s+even\s+if\s+"
+        r"(?:you\s+)?(?:do\s+not|don't)\s+see\s+(?:a\s+)?"
+        r"(?:suitable|matching|relevant)\s+(?:role|job|position|vacanc(?:y|ies))\b",
+        re.I,
+    ),
 )
 
 NEGATIVE_ROUTE_PATTERNS = (
@@ -113,6 +138,10 @@ NEGATIVE_ROUTE_PATTERNS = (
     re.compile(r"\bno\s+(?:speculative|unsolicited|spontaneous)\s+applications?\b", re.I),
     re.compile(r"\bunsolicited\s+applications?\s+(?:will\s+not|won't)\s+be\s+(?:considered|reviewed|accepted)\b", re.I),
     re.compile(r"\bonly\s+(?:consider|accept|review)\s+applications?\s+for\s+(?:advertised|posted|listed|open)\s+(?:roles|jobs|positions|vacancies)\b", re.I),
+    re.compile(r"\b(?:aucune|pas de)\s+candidatures?\s+spontan[ée]e?s?\b", re.I),
+    re.compile(r"\bne\s+(?:nous\s+)?(?:acceptons|traitons)\s+pas\s+les?\s+candidatures?\s+spontan[ée]e?s?\b", re.I),
+    re.compile(r"\bkeine\s+(?:Initiativbewerbungen|Spontanbewerbungen)\b", re.I),
+    re.compile(r"\bno\s+aceptamos\s+candidaturas?\s+espont[aâ]neas?\b", re.I),
 )
 
 EXCLUSION_PATTERNS = (
@@ -130,6 +159,7 @@ POSITIVE_ROUTE_TYPE = (
     ("discipline_specific", re.compile(r"\b(?:expression of interest|talent pool)\b", re.I)),
     ("open", re.compile(r"\bopen applications?\b", re.I)),
     ("general", re.compile(r"\bgeneral applications?\b", re.I)),
+    ("spontaneous", re.compile(r"\b(?:candidature\s+spontan[ée]e?s?|initiativbewerbung|spontanbewerbung|candidatura\s+espont[aâ]nea|spontane\s+sollicitatie|spontanansök(?:an|ningar)|spontanansøgning|spontan\s+jelentkez[eé]s|spontaniczna\s+aplikacja)\b", re.I)),
 )
 
 COUNTRY_CODE_RE = re.compile(r"^[A-Z]{2}$")
@@ -574,6 +604,8 @@ def sparql_query(feed_kind: str, cursor: str, limit: int) -> str:
         source_pattern = "?company wdt:P31 wd:Q210167."
     elif feed_kind == "developer_credit":
         source_pattern = "?game wdt:P31 wd:Q7889; wdt:P178 ?company."
+    elif feed_kind == "company_class":
+        source_pattern = "?company wdt:P31 wd:Q112042224."
     else:
         raise ValueError("Unknown Wikidata feed kind: " + feed_kind)
     return f"""
@@ -636,6 +668,7 @@ def fetch_wikidata_batch(feed_kind: str, cursor: str, limit: int) -> list[dict[s
             "country": value("countryLabel") or "Not stated",
             "hq_city": value("hqLabel"),
             "country_code": value("countryCode").upper(),
+            "company_type": "Game industry company" if feed_kind == "company_class" else "Developer",
         })
     return rows
 
@@ -747,7 +780,7 @@ def profile_for(candidate: dict[str, Any]) -> dict[str, Any]:
             "label": "HQ · Wikidata" if city else ("Country · Wikidata" if country != "Not disclosed" else "Not disclosed"),
         },
         "otherLocations": [],
-        "companyType": ["Developer"],
+        "companyType": [candidate.get("company_type") or "Developer"],
         "ownership": "Not yet researched",
         "parentCompany": None,
         "industryScale": "Mixed / Unclassified",
