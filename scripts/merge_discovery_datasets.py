@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import copy
+import datetime as dt
 import json
 import subprocess
 import sys
@@ -135,10 +136,11 @@ def exclude_removed_candidates_from_discovery_state(
 
     if newly_excluded:
         stats["excluded"] = int(stats.get("excluded", 0)) + newly_excluded
+        state["updated_at"] = dt.datetime.now(dt.timezone.utc).isoformat()
         state_path.parent.mkdir(parents=True, exist_ok=True)
         temporary = state_path.with_suffix(state_path.suffix + ".tmp")
         temporary.write_text(
-            json.dumps(state, ensure_ascii=False, indent=2) + "\\n",
+            json.dumps(state, ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",
         )
         temporary.replace(state_path)
