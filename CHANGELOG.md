@@ -10,6 +10,6 @@
 - Excluded studios materially focused on adult, gambling, drug, alcohol, tobacco/nicotine and related vice-oriented sectors; unclear cases require manual review.
 
 - Replaced the light route-card list with a dark expandable global studio directory.
-- Added 44 sourced studio profiles with company classification, ownership, locations, selected games, scale and headcount notes.
+- Added 65 sourced studio profiles with company classification, ownership, locations, selected games, scale and headcount notes.
 - Added separate HQ and application-location presentation; HQ is only a fallback reference.
 - Replaced the encrypted vault application flow with a simple browser-local application tracker and status board.
