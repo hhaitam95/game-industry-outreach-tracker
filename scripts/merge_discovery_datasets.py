@@ -11,6 +11,7 @@ import argparse
 import copy
 import datetime as dt
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -19,6 +20,7 @@ from urllib.parse import urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 DIRECTORY_PATH = "src/data/speculative-route-directory.json"
 PROFILES_PATH = "src/data/studio-profiles.json"
+MANUAL_EXCLUSIONS_PATH = "config/manual-studio-exclusions.json"
 PROFILE_ARRAY_FIELDS = ("companyType", "otherLocations", "focus", "popularGames", "profileSources")
 PLACEHOLDER_TEXT = {
     "",
@@ -45,6 +47,62 @@ def domain_key(value: str) -> str:
     if host.startswith("www."):
         host = host[4:]
     return host
+
+
+def load_manual_exclusion_domains(root: Path) -> tuple[set[str], list[str]]:
+    """Load persistent, human-reviewed studio exclusions.
+
+    The registry contains only official website domains. Each entry must include
+    a name, reason and review date so that exclusions are explicit and auditable.
+    """
+    path = root / MANUAL_EXCLUSIONS_PATH
+    if not path.exists():
+        return set(), []
+
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict) or payload.get("schema_version") != 1:
+        raise ValueError("Manual studio-exclusion registry has an unsupported schema.")
+    entries = payload.get("excluded_domains")
+    if not isinstance(entries, list):
+        raise ValueError("Manual studio-exclusion registry must contain an excluded_domains array.")
+
+    domains: set[str] = set()
+    names: list[str] = []
+    for entry in entries:
+        if not isinstance(entry, dict):
+            raise ValueError("Manual studio-exclusion entries must be objects.")
+        raw_domain = str(entry.get("domain", "")).strip()
+        name = str(entry.get("name", "")).strip()
+        reason = str(entry.get("reason", "")).strip()
+        reviewed_at = str(entry.get("reviewed_at", "")).strip()
+        normalized = domain_key("https://" + raw_domain) if raw_domain else ""
+        if (
+            not normalized
+            or normalized != raw_domain.casefold().strip(".")
+            or not name
+            or not reason
+            or not re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", reviewed_at)
+        ):
+            raise ValueError("Manual studio-exclusion entry is incomplete or has an invalid domain.")
+        domains.add(normalized)
+        names.append(name)
+    return domains, sorted(set(names), key=str.casefold)
+
+
+def exclude_records_by_domains(
+    incoming_rows: list[dict],
+    excluded_domains: set[str],
+) -> tuple[list[dict], list[str]]:
+    """Remove records whose official website domain is in the reviewed exclusion registry."""
+    kept: list[dict] = []
+    excluded_names: list[str] = []
+    for record in incoming_rows:
+        domain = domain_key(str(record.get("websiteUrl", "")))
+        if domain and domain in excluded_domains:
+            excluded_names.append(str(record.get("name", "")).strip())
+        else:
+            kept.append(record)
+    return kept, sorted(set(name for name in excluded_names if name), key=str.casefold)
 
 
 def is_placeholder(value: object) -> bool:
@@ -314,25 +372,37 @@ def merge_from_git(
 
     concurrently_removed: list[str] = []
     manually_excluded_candidates: list[str] = []
+    persistent_domains, persistent_names = load_manual_exclusion_domains(root)
+    excluded_domains = set(persistent_domains)
+
     if initial_ref:
         initial_rows = json.loads(git_show(initial_ref, DIRECTORY_PATH))
         removed_domains = removed_domains_from_latest_main(initial_rows, base_rows)
+        excluded_domains.update(removed_domains)
         incoming_rows, concurrently_removed = exclude_records_removed_from_latest_main(
             initial_rows,
             base_rows,
             incoming_rows,
         )
-        if candidate_state:
-            state_path = candidate_state if candidate_state.is_absolute() else root / candidate_state
-            manually_excluded_candidates = exclude_removed_candidates_from_discovery_state(
-                state_path,
-                removed_domains,
-            )
+
+    incoming_rows, registry_exclusions = exclude_records_by_domains(
+        incoming_rows,
+        persistent_domains,
+    )
+
+    if candidate_state:
+        state_path = candidate_state if candidate_state.is_absolute() else root / candidate_state
+        manually_excluded_candidates = exclude_removed_candidates_from_discovery_state(
+            state_path,
+            excluded_domains,
+        )
 
     merged_rows, merged_profiles, summary = merge_datasets(
         base_rows, incoming_rows, base_profiles, incoming_profiles
     )
     summary["concurrent_main_removals_respected"] = concurrently_removed
+    summary["persistent_manual_exclusions"] = registry_exclusions
+    summary["manual_exclusion_registry_entries"] = persistent_names
     summary["discovery_candidates_excluded_for_manual_removals"] = manually_excluded_candidates
     directory_path.write_text(
         json.dumps(merged_rows, ensure_ascii=False, indent=2) + "\n",
