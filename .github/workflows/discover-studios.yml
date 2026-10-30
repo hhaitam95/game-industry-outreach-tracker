@@ -20,7 +20,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: studio-discovery-\${{ github.repository }}
+  group: studio-discovery-${{ github.repository }}
   cancel-in-progress: false
 
 jobs:
@@ -30,7 +30,7 @@ jobs:
     timeout-minutes: 30
     environment:
       name: github-pages
-      url: \${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Check out the public website repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -57,8 +57,8 @@ jobs:
           STATE_FILE=".discovery-state/state/studio-discovery-state.json"
           MODE="hourly"
 
-          if [ "\${{ github.event_name }}" = "workflow_dispatch" ]; then
-            MODE="\${{ inputs.mode }}"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            MODE="${{ inputs.mode }}"
           elif [ -f "$STATE_FILE" ]; then
             SATURATED="$(python3 -c "import json; from pathlib import Path; p=Path('$STATE_FILE'); print(str(json.loads(p.read_text()).get('saturated', False)).lower())")"
             if [ "$SATURATED" != "true" ]; then
@@ -154,8 +154,8 @@ jobs:
         run: |
           {
             echo "## StudioScout discovery run"
-            echo "- Mode: \${{ steps.discovery.outcome || 'not started' }}"
-            echo "- Public changes: \${{ steps.commit.outputs.data_changed || 'not committed' }}"
+            echo "- Mode: ${{ steps.discovery.outcome || 'not started' }}"
+            echo "- Public changes: ${{ steps.commit.outputs.data_changed || 'not committed' }}"
             echo "- Candidate and route details remain in the discovery-state branch."
             echo "- Unavailable, blocked, robots-disallowed or ambiguous pages do not close routes."
           } >> "$GITHUB_STEP_SUMMARY"
