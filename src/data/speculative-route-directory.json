@@ -1898,7 +1898,7 @@
     "applicationUrl": "https://frimastudio.com/en/careers/",
     "evidenceUrl": "https://frimastudio.com/en/careers/",
     "notes": "Official Québec careers page lists a Spontaneous Application and invites interested candidates to send an English CV and cover letter.",
-    "checkedAt": "2026-10-29",
+    "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [
@@ -1912,7 +1912,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-27"
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
@@ -4431,6 +4431,28 @@
     }
   },
   {
+    "name": "Sans Strings Studio",
+    "country": "United States",
+    "websiteUrl": "https://sansstrings.studio/",
+    "applicationUrl": "https://sansstrings.studio/careers/",
+    "evidenceUrl": "https://sansstrings.studio/careers/",
+    "notes": "Official studio-controlled page explicitly invites discipline specific applications. Evidence: Expression of Interest. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "discipline_specific",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Sanuk Games",
     "country": "Thailand",
     "websiteUrl": "https://www.sanukgames.com/",
@@ -4506,6 +4528,118 @@
     }
   },
   {
+    "name": "Silent Games",
+    "country": "England",
+    "websiteUrl": "https://www.silentgames-studio.com/",
+    "applicationUrl": "https://careers.smartrecruiters.com/SilentGames",
+    "evidenceUrl": "https://careers.smartrecruiters.com/SilentGames",
+    "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: speculative application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "ats",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Silkroad Studios",
+    "country": "Denmark",
+    "websiteUrl": "https://silkroadstudios.net/",
+    "applicationUrl": "https://silkroadstudios.net/jobs/",
+    "evidenceUrl": "https://silkroadstudios.net/jobs/",
+    "notes": "Official studio-controlled page explicitly invites unsolicited applications. Evidence: unsolicited applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Simply Sweet Games",
+    "country": "Canada",
+    "websiteUrl": "https://simplysweetgames.ca/",
+    "applicationUrl": "https://simplysweetgames.ca/careers.html",
+    "evidenceUrl": "https://simplysweetgames.ca/careers.html",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Sinn Studio",
+    "country": "Canada",
+    "websiteUrl": "https://sinnstudio.com/",
+    "applicationUrl": "https://www.sinnstudio.com/careers",
+    "evidenceUrl": "https://www.sinnstudio.com/careers",
+    "notes": "Official studio-controlled page explicitly invites spontaneous applications. Evidence: spontaneous application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Snowcastle Games",
+    "country": "Norway",
+    "websiteUrl": "https://www.snowcastlegames.com/",
+    "applicationUrl": "https://www.snowcastlegames.com/jobsmain",
+    "evidenceUrl": "https://www.snowcastlegames.com/jobsmain",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "SOFTGAMES",
     "country": "Germany",
     "websiteUrl": "https://www.softgames.de/",
@@ -4525,6 +4659,28 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-27"
+    }
+  },
+  {
+    "name": "Solid Clouds",
+    "country": "Iceland",
+    "websiteUrl": "https://www.solidclouds.com/",
+    "applicationUrl": "https://www.solidclouds.com/job/general-application",
+    "evidenceUrl": "https://www.solidclouds.com/jobs",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
@@ -4578,6 +4734,29 @@
     }
   },
   {
+    "name": "Springlab",
+    "country": "Netherlands",
+    "websiteUrl": "https://www.springlab.nl/",
+    "applicationUrl": "https://www.springlab.nl/werken-bij/",
+    "evidenceUrl": "https://www.springlab.nl/werken-bij/",
+    "notes": "Official studio-controlled page explicitly invites spontaneous applications. Evidence: open sollicitatie. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Squeeze Studio",
     "country": "Canada",
     "websiteUrl": "https://squeezestudio.com/",
@@ -4599,6 +4778,72 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-27"
+    }
+  },
+  {
+    "name": "Squido Studio",
+    "country": "Canada",
+    "websiteUrl": "https://www.squidostudio.com/",
+    "applicationUrl": "https://www.squidostudio.com/jobs",
+    "evidenceUrl": "https://www.squidostudio.com/jobs",
+    "notes": "Official studio-controlled page explicitly invites spontaneous applications. Evidence: spontaneous applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Starberry Games",
+    "country": "Germany",
+    "websiteUrl": "https://starberry.games/",
+    "applicationUrl": "https://www.starberry.games/careers",
+    "evidenceUrl": "https://www.starberry.games/careers",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Stardust",
+    "country": "Switzerland",
+    "websiteUrl": "https://stardust.ch/",
+    "applicationUrl": "https://www.stardust.ch/careers/",
+    "evidenceUrl": "https://www.stardust.ch/careers/",
+    "notes": "Official studio-controlled page explicitly invites unsolicited applications. Evidence: unsolicited applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
@@ -4656,6 +4901,29 @@
     }
   },
   {
+    "name": "Stitch Media",
+    "country": "Canada",
+    "websiteUrl": "https://www.stitch.media/",
+    "applicationUrl": "https://www.stitch.media/careers",
+    "evidenceUrl": "https://www.stitch.media/careers",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: general application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Stormind Games",
     "country": "Italy",
     "websiteUrl": "https://stormindgames.com/",
@@ -4702,6 +4970,50 @@
     }
   },
   {
+    "name": "Studio 316",
+    "country": "England",
+    "websiteUrl": "https://studio316.co.uk/",
+    "applicationUrl": "https://studio316.co.uk/jobs/",
+    "evidenceUrl": "https://studio316.co.uk/jobs/",
+    "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: speculative applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Studio 555",
+    "country": "Finland",
+    "websiteUrl": "https://studio555.io/",
+    "applicationUrl": "https://studio555.io/",
+    "evidenceUrl": "https://studio555.io/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Studios DRAMA",
     "country": "France",
     "websiteUrl": "https://studiosdrama.com/",
@@ -4730,6 +5042,28 @@
         "Business / publishing",
         "Other"
       ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Stunlock Studios",
+    "country": "Sweden",
+    "websiteUrl": "https://www.stunlockstudios.com/",
+    "applicationUrl": "https://stunlockstudios.com/careers/",
+    "evidenceUrl": "https://stunlockstudios.com/careers/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
@@ -4769,6 +5103,28 @@
     }
   },
   {
+    "name": "Super Evil Megacorp",
+    "country": "United States",
+    "websiteUrl": "https://www.superevilmegacorp.com/",
+    "applicationUrl": "https://superevilmegacorp.com/careers/",
+    "evidenceUrl": "https://superevilmegacorp.com/careers/",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: GENERAL APPLICATION. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Supermassive Games",
     "country": "United Kingdom",
     "websiteUrl": "https://www.supermassivegames.com/",
@@ -4790,6 +5146,74 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-27"
+    }
+  },
+  {
+    "name": "Surgical Science",
+    "country": "Sweden",
+    "websiteUrl": "https://surgicalscience.com/",
+    "applicationUrl": "https://surgicalscience.bamboohr.com/careers/73",
+    "evidenceUrl": "https://surgicalscience.com/contact/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "ats",
+        "email",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Sweaty Chair",
+    "country": "Australia",
+    "websiteUrl": "https://www.sweatychair.com/",
+    "applicationUrl": "https://www.sweatychair.com/careers",
+    "evidenceUrl": "https://www.sweatychair.com/careers",
+    "notes": "Official studio-controlled page explicitly invites discipline specific applications. Evidence: Expression of interest. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "discipline_specific",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "SYBO",
+    "country": "Denmark",
+    "websiteUrl": "https://www.sybogames.com/",
+    "applicationUrl": "https://sybo.teamtailor.com/connect",
+    "evidenceUrl": "https://sybogames.com/careers/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
@@ -4837,6 +5261,29 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Tension Technology",
+    "country": "Sweden",
+    "websiteUrl": "https://www.tension.se/",
+    "applicationUrl": "https://www.tension.se/career",
+    "evidenceUrl": "https://www.tension.se/career",
+    "notes": "Official studio-controlled page explicitly invites spontaneous applications. Evidence: Spontaneous application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
     }
   },

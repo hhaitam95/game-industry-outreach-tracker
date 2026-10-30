@@ -6862,6 +6862,31 @@
       "https://www.linkedin.com/company/rustling-leaves-games"
     ]
   },
+  "Sans Strings Studio": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "San Francisco, California",
+      "country": "United States",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=7901&state=&type=",
+      "https://sansstrings.studio/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
   "Sanuk Games": {
     "description": "Small Thailand-based developer and porting partner with a catalogue of more than 70 games across PC and console platforms.",
     "headquarters": {
@@ -6997,6 +7022,131 @@
     "applicationLocation": "Boulder, Colorado, USA · applicant-country eligibility for open applications not stated",
     "reachHighlights": "The company operates both dedicated development and publishing teams and explicitly accepts open applications for unlisted roles."
   },
+  "Silent Games": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Newcastle-Upon-Tyne, Tyne and Wear",
+      "country": "England",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=8101&state=&type=",
+      "https://www.silentgames-studio.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Silkroad Studios": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Copenhagen, Oresund",
+      "country": "Denmark",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=8201&state=&type=",
+      "https://silkroadstudios.net/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Simply Sweet Games": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Osoyoos, British Columbia",
+      "country": "Canada",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=8201&state=&type=",
+      "https://simplysweetgames.ca/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Sinn Studio": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Toronto, Ontario",
+      "country": "Canada",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Extended Reality (XR)"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=8201&state=&type=",
+      "https://sinnstudio.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Snowcastle Games": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Oslo",
+      "country": "Norway",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=8301&state=&type=",
+      "https://www.snowcastlegames.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
   "SOFTGAMES": {
     "description": "Berlin-based casual-game developer and publisher specializing in instant, HTML5, social and mobile games.",
     "headquarters": {
@@ -7030,6 +7180,31 @@
       "https://www.softgames.com/",
       "https://www.linkedin.com/company/softgames-mobile-entertainment-services/"
     ]
+  },
+  "Solid Clouds": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Seltjarnarnes, Reykjavik",
+      "country": "Iceland",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Online"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=8401&state=&type=",
+      "https://www.solidclouds.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "Speedway Games": {
     "description": "Global remote game studio focused on building and operating large-scale Roblox experiences; accepts general applications for experienced contributors.",
@@ -7101,6 +7276,31 @@
     ],
     "applicationLocation": "East London · hybrid 2–3 days in studio; remote by exception"
   },
+  "Springlab": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Utrecht",
+      "country": "Netherlands",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Serious Games"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=8501&state=&type=",
+      "https://www.springlab.nl/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
   "Squeeze Studio": {
     "description": "Québec-based 3D animation and digital production studio working on animation, cinematics and creative content for games and entertainment.",
     "headquarters": {
@@ -7134,6 +7334,81 @@
       "https://squeezestudio.com/",
       "https://squeezestudio.recruitee.com/l/en/o/candidatures-spontanees?lang=en"
     ]
+  },
+  "Squido Studio": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Montreal, Quebec",
+      "country": "Canada",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Extended Reality (XR)"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=8601&state=&type=",
+      "https://www.squidostudio.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Starberry Games": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Berlin",
+      "country": "Germany",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Mobile"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=8601&state=&type=",
+      "https://starberry.games/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Stardust": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Zürich",
+      "country": "Switzerland",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=8601&state=&type=",
+      "https://stardust.ch/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "StarPolar": {
     "description": "Founder-owned independent game studio based in Greater Kuala Lumpur, founded in 2026 by Ryan Thornton and Troy Mason. The studio is developing an original science-fiction tactical game and works with a small, senior team.",
@@ -7219,6 +7494,31 @@
     ],
     "applicationLocation": "Gundelfingen near Freiburg, Germany · remote/applicant-country eligibility not stated",
     "reachHighlights": "Official studio describes M.O.O.D.S. as a 3D action roguelite and Memorrha as a first-person puzzle adventure; it also develops games and interactive applications for major consoles, PC and XR."
+  },
+  "Stitch Media": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Toronto, Ontario",
+      "country": "Canada",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=8701&state=&type=",
+      "https://www.stitch.media/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "Stormind Games": {
     "description": "Independent Italian developer and co-development partner known for atmospheric horror, action-adventure and narrative-driven games.",
@@ -7311,6 +7611,56 @@
     "applicationLocation": "Near Vienna preferred · full-time remote work limited to Austria",
     "reachHighlights": "Developing an original top-down multiplayer action game. The studio states that it avoids gambling mechanics, dark patterns and pay-to-win monetisation."
   },
+  "Studio 316": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Redruth, Cornwall",
+      "country": "England",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=8701&state=&type=",
+      "https://studio316.co.uk/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Studio 555": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Helsinki, Uusimaa",
+      "country": "Finland",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=8701&state=&type=",
+      "https://studio555.io/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
   "Studios DRAMA": {
     "description": "Independent Rennes game studio founded in 2020, developing UNRECORD, a narrative open-world tactical first-person shooter built with Unreal Engine 5.",
     "headquarters": {
@@ -7354,6 +7704,31 @@
     "applicationLocation": "Rennes · regular on-site presence expected; role-dependent flexibility",
     "reachHighlights": "Focused independent studio building UNRECORD with gameplay-first development and small specialized teams."
   },
+  "Stunlock Studios": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Skoevde, Vastra Gotaland",
+      "country": "Sweden",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=8801&state=&type=",
+      "https://www.stunlockstudios.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
   "SumiGames Studio": {
     "description": "Small, senior game-development and co-development studio working on mobile, PC, multiplayer, XR and Web3 projects for itself and partner teams.",
     "headquarters": {
@@ -7396,6 +7771,31 @@
     ],
     "applicationLocation": "Dubai, UAE / United Kingdom · remote-friendly; applicant-country eligibility not stated",
     "reachHighlights": "Portfolio mixes conventional game development, XR and Web3/blockchain services; the official Careers page accepts open applications by email."
+  },
+  "Super Evil Megacorp": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "San Mateo, California",
+      "country": "United States",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Mobile"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=8901&state=&type=",
+      "https://www.superevilmegacorp.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "Supermassive Games": {
     "description": "BAFTA-winning British developer specializing in cinematic, narrative-led horror and interactive drama.",
@@ -7441,6 +7841,81 @@
     ],
     "applicationLocation": "Guildford · see role-specific conditions",
     "reachHighlights": "BAFTA-winning studio; known for Until Dawn, The Quarry, The Dark Pictures Anthology and Little Nightmares III."
+  },
+  "Surgical Science": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Gothenburg, Vastra Gotaland",
+      "country": "Sweden",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Serious Games"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=8901&state=&type=",
+      "https://surgicalscience.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Sweaty Chair": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Parramatta, New South Wales",
+      "country": "Australia",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Mobile"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=8901&state=&type=",
+      "https://www.sweatychair.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "SYBO": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Copenhagen, Oresund",
+      "country": "Denmark",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Mobile"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=9001&state=&type=",
+      "https://www.sybogames.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "Tactile Games": {
     "description": "Large Copenhagen mobile game studio creating casual and puzzle games, including Lily's Garden.",
@@ -7514,6 +7989,31 @@
       "https://join.com/companies/techtivegames"
     ],
     "applicationLocation": "Remote work and relocation are advertised; applicant-country eligibility not specified"
+  },
+  "Tension Technology": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Falun, Dalarna",
+      "country": "Sweden",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=9201&state=&type=",
+      "https://www.tension.se/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "The Indie Stone": {
     "description": "Independent distributed studio behind Project Zomboid, a long-running open-world zombie survival sandbox.",
