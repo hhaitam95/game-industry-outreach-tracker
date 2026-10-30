@@ -825,6 +825,55 @@
     }
   },
   {
+    "name": "Glowmade",
+    "country": "United Kingdom",
+    "websiteUrl": "https://www.glowmade.com/",
+    "applicationUrl": "https://glowmade.jobs.personio.com/job/2805976",
+    "evidenceUrl": "https://www.glowmade.com/careers",
+    "notes": "Official Personio Speculative Application invites talent across art, code, design, production, audio, QA and operations. Hybrid from Guildford or remote within the UK; applicants must have UK right to work.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Guildford, United Kingdom · hybrid",
+        "Remote within the United Kingdom · UK right to work required"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "studio_controlled_ats",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Havoc Games",
+    "country": "India",
+    "websiteUrl": "https://havocgames.co/",
+    "applicationUrl": "https://havocgames.co/careers",
+    "evidenceUrl": "https://havocgames.co/careers",
+    "notes": "Official careers page says candidates whose profile does not match a listed role can send a general application through its application form. Independent game studio from India building WEX; CV and portfolio are required.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "India · applicant location and remote eligibility not specified"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Hindsight Studios",
     "country": "Germany",
     "websiteUrl": "https://www.hindsight-studios.de/",
@@ -839,6 +888,30 @@
       ],
       "workModel": "not_stated",
       "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Hugecalf Studios",
+    "country": "United Kingdom",
+    "websiteUrl": "https://hugecalf.com/",
+    "applicationUrl": "https://jobs.hugecalf.com/speculative-application?src=hugecalf.com",
+    "evidenceUrl": "https://hugecalf.com/careers",
+    "notes": "Official careers page links a dedicated Speculative Application form for candidates even when no vacancy matches. Fully remote, but applicants must work from within the UK.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote within the United Kingdom"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
@@ -1551,6 +1624,32 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-27"
+    }
+  },
+  {
+    "name": "Sports Interactive",
+    "country": "United Kingdom",
+    "websiteUrl": "https://www.sigames.com/",
+    "applicationUrl": "https://sega.wd3.myworkdayjobs.com/SEGA_Careers/job/Greater-London-E15-2GW/Senior-Graphics-Engineer--Speculative-Application-_JR100190",
+    "evidenceUrl": "https://sega.wd3.myworkdayjobs.com/SEGA_Careers/job/Greater-London-E15-2GW/Senior-Graphics-Engineer--Speculative-Application-_JR100190",
+    "notes": "Current SEGA Workday posting is a speculative application specifically for a Senior Graphics Engineer at Sports Interactive, the Football Manager studio. Hybrid in East London, normally 2–3 days in studio; remote by exception. This is not a general all-disciplines speculative route.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "discipline_specific",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "Greater London, United Kingdom · hybrid 2–3 days in studio; remote by exception"
+      ],
+      "disciplineScope": [
+        "Senior Graphics Engineering"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "studio_controlled_ats",
+      "nextReviewAt": "2027-01-28"
     }
   },
   {
