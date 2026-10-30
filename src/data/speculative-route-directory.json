@@ -2376,6 +2376,75 @@
     }
   },
   {
+    "name": "Hazelight",
+    "country": "Sweden",
+    "websiteUrl": "https://hazelight.se/",
+    "applicationUrl": "https://careers.hazelight.se/connect",
+    "evidenceUrl": "https://hazelight.se/faq",
+    "notes": "The official FAQ explicitly permits open applications when Hazelight is not currently hiring for an applicant's expertise and directs applicants to its official career site. The Teamtailor Connect page lets applicants select disciplines and consent to future job-opportunity updates or direct contact. The career site lists hybrid work; applicant-country eligibility is not stated.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "Stockholm, Sweden · hybrid work; applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Animation",
+        "Audio",
+        "Character Art",
+        "Code",
+        "Concept Art",
+        "Creative",
+        "Design",
+        "Environment Art",
+        "Operations",
+        "Production",
+        "Tech Art",
+        "VFX"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Headless Chicken Games",
+    "country": "Costa Rica",
+    "websiteUrl": "https://www.headlesschickengames.com/",
+    "applicationUrl": "https://www.headlesschickengames.com/",
+    "evidenceUrl": "https://www.headlesschickengames.com/",
+    "notes": "The official homepage identifies Headless Chicken Games as a game-development studio in Costa Rica and explicitly invites people interested in working there to contact its jobs email address (jobs@headlesschickengames.com). The site does not state remote or international applicant eligibility.",
+    "checkedAt": "2026-10-30",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "San Pedro de Montes de Oca, San José, Costa Rica · remote and cross-border applicant eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Programming",
+        "Game design",
+        "Art production",
+        "Animation",
+        "Porting",
+        "Co-development"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
     "name": "Hindsight Studios",
     "country": "Germany",
     "websiteUrl": "https://www.hindsight-studios.de/",
