@@ -4267,5 +4267,125 @@
     ],
     "applicationLocation": "Lagos / Atlanta / Doha · local and international candidates; remote or contract arrangements depend on role",
     "reachHighlights": "Official pages list studios in Nigeria, the United States and Qatar. HQ is not inferred because different official pages identify different bases."
+  },
+  "StarPolar": {
+    "description": "Founder-owned independent game studio based in Greater Kuala Lumpur, founded in 2026 by Ryan Thornton and Troy Mason. The studio is developing an original science-fiction tactical game and works with a small, senior team.",
+    "headquarters": {
+      "city": "Greater Kuala Lumpur",
+      "country": "Malaysia",
+      "countryCode": "MY",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Founder-owned",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small senior team · exact count not disclosed",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Unreal Engine",
+      "Science fiction",
+      "Tactical"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.starpolar.games/studio/",
+      "https://www.starpolar.games/careers/",
+      "https://www.starpolar.games/careers/general-application/"
+    ],
+    "applicationLocation": "Greater Kuala Lumpur · general application marked Remote; applicant-country eligibility not stated",
+    "reachHighlights": "Founded in 2026 by two co-founders; original science-fiction tactical game remains unannounced."
+  },
+  "Russet Studio": {
+    "description": "Independent creative studio building video games alongside original music, media and tools. Its current projects include Namara, a dark-fantasy action RPG, and Astro Assault, a 2D space shooter.",
+    "headquarters": {
+      "city": null,
+      "country": "Not publicly stated",
+      "countryCode": "",
+      "label": "HQ not stated"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent",
+      "Creative studio"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small team · exact count not disclosed",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Action RPG",
+      "2D shooter",
+      "Unreal Engine",
+      "Game development"
+    ],
+    "popularGames": [
+      {
+        "title": "Namara: The Fallen World",
+        "appId": null,
+        "stage": "In development"
+      },
+      {
+        "title": "Astro Assault",
+        "appId": null,
+        "stage": "Early development"
+      }
+    ],
+    "profileSources": [
+      "https://russetstudio.com/",
+      "https://russetstudio.com/articles/welcome-to-russet-studio",
+      "https://russetstudio.com/careers",
+      "https://russetstudio.com/articles/russet-studio-is-hiring"
+    ],
+    "applicationLocation": "Remote · exact applicant-country eligibility not stated",
+    "reachHighlights": "The careers page currently lists seven roles across game development, art, audio, community and operations and also accepts general applications."
+  },
+  "SumiGames Studio": {
+    "description": "Small, senior game-development and co-development studio working on mobile, PC, multiplayer, XR and Web3 projects for itself and partner teams.",
+    "headquarters": {
+      "city": null,
+      "country": "Not publicly stated",
+      "countryCode": "",
+      "label": "HQ not stated"
+    },
+    "otherLocations": [
+      "Dubai, United Arab Emirates",
+      "United Kingdom"
+    ],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Technology services"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Not disclosed",
+    "teamSize": "Small senior team · exact count not disclosed",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "Mobile",
+      "PC",
+      "Multiplayer",
+      "Unity",
+      "Unreal Engine",
+      "Godot",
+      "AR/VR/XR",
+      "Web3"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.sumigamesstudio.com/careers",
+      "https://www.sumigamesstudio.com/"
+    ],
+    "applicationLocation": "Dubai, UAE / United Kingdom · remote-friendly; applicant-country eligibility not stated",
+    "reachHighlights": "Portfolio mixes conventional game development, XR and Web3/blockchain services; the official Careers page accepts open applications by email."
   }
 }
