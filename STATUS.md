@@ -1,59 +1,53 @@
 # StudioScout status
 
-**Date:** 2026-10-30 19:47 UTC  
-**Product scope:** Simple two-page studio directory and personal application tracker.
+**Date:** 2026-10-30 20:20 UTC  
+**Product scope:** Two-page worldwide studio directory and personal browser-local application tracker.
 
-## Website
+## Website and public data
 
-- Studio directory and personal application tracker are implemented.
-- Personal tracker data remains in browser localStorage; it is not committed or synced.
-- Public directory contains **136 studio records across 31 identified countries**. 15 records use the explicit country value "Not stated" rather than an inferred location.
-- All 136 records have an official studio URL, application URL, evidence URL and verification date; production directory validation is run on every data update.
-- Latest data additions:
-  - Oddshot Games (Ghent, Belgium): verified official open-application route; remote application restricted to applicants living in Flanders.
-  - Couch Heroes: verified unsolicited-application form; remote-first team; conflicting official location descriptions are recorded as unresolved rather than guessing its HQ.
-  - Stranded Beast (Vienna, Austria): verified initiative application by email; full-time remote work limited to Austria, with relevant work-authorization requirements recorded.
-  - Kuuasema: corrected the open application submission method to email, and recorded Helsinki hybrid attendance and Finland work-right requirements.
-- Crystal Dynamics and PlayQ were also added in PR #40; a worldwide expansion added 19 more officially verified routes.
-- No UI redesign or additional product features are planned before discovery and data quality are stable.
+- The site remains limited to the studio directory and My applications.
+- Tracker entries remain in browser localStorage only; no personal application data is committed.
+- Current research branch contains **163 studio records and 163 matching profiles**.
+- **160 routes are active** and **3 are paused** because current evidence does not establish a usable speculative submission path.
+- Records span **31 identified countries**; 11 records use the explicit value "Not stated" rather than an inferred country.
+- Every active/paused record retains official studio, application and evidence URLs plus a verification date.
+- Removed Capcom Pictures (film-production subsidiary, not a game studio) and Game Boost Sweden (staffing/talent marketplace, not a game studio).
+- Corrected Funny Games to Funny Tales, identified its operator as Digital Tales LLC (DBA Funny Tales), and corrected its location to Miami, Florida.
+- Corrected Greensky Games' location to Montréal, Canada; "remote" is no longer used as a country.
+- Corrected route destinations and constraints for Fool's Theory, Game Tailors and several other recently discovered studios.
+- Enriched 13 previously placeholder profiles with studio descriptions, sourced locations, portfolio focus, selected games and application constraints. Unknown company details remain explicitly unknown.
+- Normalized England to United Kingdom and Czech Republic to Czechia in country fields.
 
-## Discovery automation
+## Discovery pipeline
 
-- The automated discovery and hourly maintenance workflow is merged and enabled.
-- Candidate sources are GameDevMap plus three Wikidata feeds (video-game developers, organisations credited as game developers, and video-game companies).
-- The separate `discovery-state` branch stores candidates and source progress; candidate data is not exposed in the public directory.
-- The first complete GameDevMap backfill has now finished and its state is saved:
-  - 105 pages processed at 100 rows/page (10,500 source rows).
-  - 7,939 candidate rows collected from GameDevMap.
-  - Combined candidate pool: **8,342**.
-  - Saved GameDevMap cursor: **10,601**; GameDevMap is marked complete.
-- The successful discovery run **41113219915** checked 1,000 candidates, found 19 additional official application routes, merged the verified output into the latest public dataset, deployed the website and persisted its progress to `discovery-state`.
-- Persisted candidate status snapshot at 2026-10-30 19:32:16 UTC:
-  - 28 published/verified by discovery.
-  - 1,108 with no official speculative route.
-  - 8 excluded by the studio/content suitability screen.
-  - 13 held for manual review.
-  - 16 duplicate candidates.
-  - 6,939 queued and 230 retry candidates (7,169 remaining).
-- Two Wikidata feeds remain incomplete; the initial GameDevMap source completion does not mean global candidate discovery is finished.
-- The new concurrency group from PR #38 is merged as `studio-discovery-v2`, preventing a stale runner in the previous group from blocking subsequent batches.
-- New queue processing has started in run **41116464331**. A further run was queued after the latest public-data update. Each run remains bounded and resumable.
-- Candidate directories are leads only. Publication remains strict: only explicit speculative/open/unsolicited/spontaneous/general routes verified on official studio-controlled pages are included. Timeouts, blocks and ambiguous evidence do not close routes.
+- GameDevMap's initial 10,500-row paginated backfill is complete and saved at cursor 10,601.
+- The combined saved candidate pool contains **8,342 candidates** from GameDevMap and Wikidata.
+- Last confirmed state snapshot on `discovery-state` is 2026-10-30 19:51 UTC:
+  - 5,939 queued
+  - 372 retry
+  - 1,931 no official speculative route
+  - 40 published by discovery
+  - 24 needs review
+  - 23 duplicates
+  - 13 excluded by the suitability screen
+- Two Wikidata feeds remain incomplete; GameDevMap completion is not the end of global discovery.
+- A discovery run had completed its candidate-processing, validation and public-data steps but stalled during GitHub Pages deployment, before persisting its candidate-state checkpoint. The public dataset merge was successful; the last confirmed discovery-state cursor remains the 19:51 snapshot.
+- Main now persists discovery state before the Pages deployment step and uses the versioned `studio-discovery-v3` concurrency group.
+- The current research branch additionally prevents a long-running discovery job from restoring a studio removed from the latest main snapshot. It preserves legitimate renames when the official domain stays the same.
+- Staffing/talent marketplaces are now held for manual review when multiple independent marketplace indicators are found; a single mention of freelancers is not enough.
 
-## Scraper correctness and validation
+## Scraper and data-quality validation
 
-- Removed duplicate legacy definitions that overrode thread-safe per-host request pacing and the robots-policy cache; PR #31 added a same-host serialization regression test.
-- PR #35 adds deterministic merging of discovery output with concurrent manual changes and retry-safe public publishing.
-- PR #38 moved discovery to a versioned concurrency group; merged after the successful full backfill run.
-- PR #45 passed CI and added Couch Heroes and Stranded Beast while correcting Kuuasema's application method and location constraints.
-- PR #46 enriched the 19 initial GameDevMap discoveries with official company descriptions, games, locations and route details. It corrected Agate's broken route and recorded its discipline-specific application pools; set AstroBeam's US-only remote eligibility; clarified Axolot's Stockholm application and BetaDwarf's internship-only route; paused A4VR while its jobs URL serves a reserved-domain placeholder; and corrected the names Binary Impact GmbH and Box Dragon.
-- The profile pass distinguishes serious-games/XR consultancies from conventional game studios and preserves unknown HQ, ownership, team size and applicant eligibility rather than guessing.
-- PR #46 CI passed: 44 Python discovery tests, 14 frontend/data tests, 136 complete profile records, route-review checks and the production build.
-- Same-host requests remain serialized, while checks across different studio domains can run concurrently.
+- Per-host request pacing remains thread-safe; checks can run concurrently across distinct studio domains while preserving same-host delays.
+- Route verification requires explicit positive application evidence on an official studio-controlled page or linked employer-controlled ATS.
+- Robots denials, blocks, timeouts and ambiguous pages are not treated as route closures.
+- Public data is checked for secure official links, matching profile records and duplicate identities before publication.
+- This branch adds tests for concurrent manual deletions, studio renames, and staffing-platform false positives.
 
 ## Next
 
-1. Continue processing the 7,169 remaining queued/retry candidates in resumable batches.
-2. Finish the two incomplete Wikidata feeds and then process their candidate pools.
-3. Review new route matches and identity/suitability conflicts before publication; do not trade evidence quality for volume.
-4. Keep the hourly route maintenance after the initial candidate backlog is processed.
+1. Merge the current data-quality and stale-merge protection changes after CI passes.
+2. Resume the 5,939 queued candidates and retry eligible candidates from the saved discovery state.
+3. Complete the two remaining Wikidata feeds and verify new route candidates on official studio-controlled pages.
+4. Continue enriching profiles and route restrictions without relaxing the evidence threshold.
+5. Keep the directory and tracker stable; avoid unrelated feature work.
