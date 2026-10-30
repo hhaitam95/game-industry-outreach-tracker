@@ -61,7 +61,25 @@ FEEDS = (
         "label": "Wikidata: video-game company entities",
         "kind": "company_class",
     },
+    {
+        "id": "gamedevmap",
+        "label": "GameDevMap: public worldwide studio directory",
+        "kind": "gamedevmap",
+    },
 )
+
+GAMEDEVMAP_URL = "https://www.gamedevmap.com/index.php"
+GAMEDEVMAP_TYPES = {
+    "developer",
+    "developer and publisher",
+    "publisher",
+    "mobile",
+    "microstudio",
+    "online",
+    "serious games",
+    "extended reality (xr)",
+    "social",
+}
 
 ATS_HOSTS = (
     "greenhouse.io",
@@ -203,6 +221,45 @@ class Page:
     text: str
     links: list[tuple[str, str]]
     has_form: bool
+
+
+class GameDevMapParser(HTMLParser):
+    """Read the public, paginated GameDevMap results table, not its disallowed raw data files."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.rows: list[list[dict[str, str]]] = []
+        self.current_row: list[dict[str, str]] | None = None
+        self.current_cell: dict[str, Any] | None = None
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        values = dict(attrs)
+        if tag == "tr":
+            self.current_row = []
+        elif tag in {"td", "th"} and self.current_row is not None:
+            self.current_cell = {"parts": [], "href": ""}
+        elif tag == "a" and self.current_cell is not None and values.get("href"):
+            if not self.current_cell["href"]:
+                self.current_cell["href"] = str(values["href"])
+
+    def handle_data(self, data: str) -> None:
+        if self.current_cell is not None:
+            clean = " ".join(data.split())
+            if clean:
+                self.current_cell["parts"].append(clean)
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag in {"td", "th"} and self.current_cell is not None and self.current_row is not None:
+            self.current_row.append({
+                "text": " ".join(self.current_cell["parts"]).strip(),
+                "href": str(self.current_cell["href"]),
+            })
+            self.current_cell = None
+        elif tag == "tr" and self.current_row is not None:
+            if self.current_row:
+                self.rows.append(self.current_row)
+            self.current_row = None
+            self.current_cell = None
 
 
 class PageParser(HTMLParser):
@@ -650,7 +707,10 @@ def sparql_query(feed_kind: str, cursor: str, limit: int) -> str:
     if feed_kind == "class":
         source_pattern = "?company wdt:P31 wd:Q210167."
     elif feed_kind == "developer_credit":
-        source_pattern = "?game wdt:P31 wd:Q7889; wdt:P178 ?company."
+        source_pattern = (
+            "?game wdt:P31 wd:Q7889; wdt:P178 ?company. "
+            "FILTER NOT EXISTS { ?company wdt:P31/wdt:P279* wd:Q5. }"
+        )
     elif feed_kind == "company_class":
         source_pattern = "?company wdt:P31 wd:Q112042224."
     else:
@@ -722,11 +782,87 @@ def fetch_wikidata_batch(feed_kind: str, cursor: str, limit: int) -> list[dict[s
     return rows
 
 
+def parse_gamedevmap_page(body: str, page_url: str, start: int) -> list[dict[str, str]]:
+    parser = GameDevMapParser()
+    parser.feed(body)
+    rows: list[dict[str, str]] = []
+    for cells in parser.rows:
+        # Public results table: Company, social link, Type, City, State/Province, Country.
+        if len(cells) < 6:
+            continue
+        name = cells[0]["text"]
+        website_href = cells[0]["href"]
+        company_type = cells[2]["text"]
+        type_key = " ".join(company_type.casefold().split())
+        if not name or not website_href:
+            continue
+        if type_key and type_key not in GAMEDEVMAP_TYPES:
+            continue
+        website = canonical_url(urllib.parse.urljoin(page_url, website_href))
+        if not website or (urllib.parse.urlsplit(website).hostname or "").endswith("gamedevmap.com"):
+            continue
+        city = cells[3]["text"]
+        region = cells[4]["text"]
+        country = cells[5]["text"] or "Not stated"
+        hq_city = city
+        if region and region.casefold() != city.casefold():
+            hq_city = f"{city}, {region}" if city else region
+        stable_key = hashlib.sha256(
+            f"{name_key(name)}|{domain_key(website)}".encode("utf-8")
+        ).hexdigest()[:20]
+        rows.append({
+            "qid": "GDM:" + stable_key,
+            "entity_url": page_url,
+            "source_id": "gamedevmap",
+            "source_name": "GameDevMap",
+            "source_start": str(start),
+            "name": name,
+            "website": website,
+            "country": country,
+            "hq_city": hq_city,
+            "country_code": "",
+            "company_type": company_type or "Not stated",
+        })
+    return rows
+
+
+def fetch_gamedevmap_batch(cursor: str, limit: int) -> list[dict[str, str]]:
+    try:
+        start = max(1, int(cursor or "1"))
+    except ValueError as exc:
+        raise RuntimeError("GameDevMap cursor is invalid.") from exc
+    page_size = min(max(1, int(limit)), 100)
+    params = {
+        "city": "",
+        "count": str(page_size),
+        "country": "",
+        "location": "",
+        "query": "",
+        "start": str(start),
+        "state": "",
+        "type": "",
+    }
+    page_url = GAMEDEVMAP_URL + "?" + urllib.parse.urlencode(params)
+    result = fetch_url(page_url, timeout=REQUEST_TIMEOUT_SECONDS, max_bytes=MAX_RESPONSE_BYTES)
+    if not result.ok:
+        raise RuntimeError("GameDevMap fetch failed safely: " + (result.error or "unavailable"))
+    return parse_gamedevmap_page(result.body, result.url, start)
+
+
+def fetch_source_batch(feed_kind: str, cursor: str, limit: int) -> list[dict[str, str]]:
+    if feed_kind == "gamedevmap":
+        return fetch_gamedevmap_batch(cursor, limit)
+    return fetch_wikidata_batch(feed_kind, cursor, limit)
+
+
 def empty_state() -> dict[str, Any]:
     return {
         "schema_version": 1,
         "updated_at": utc_now().isoformat(),
-        "feed_cursors": {feed["id"]: "" for feed in FEEDS},
+        "feed_cursors": {
+            feed["id"]: ("1" if feed["kind"] == "gamedevmap" else "")
+            for feed in FEEDS
+        },
         "feed_done": {feed["id"]: False for feed in FEEDS},
         "feed_index": 0,
         "cycle": 1,
@@ -748,6 +884,11 @@ def load_state(path: Path = STATE_PATH) -> dict[str, Any]:
     for field in ("feed_cursors", "feed_done", "candidates", "route_checks", "stats"):
         if not isinstance(state.get(field), dict):
             raise ValueError("Discovery state field is invalid: " + field)
+    # Backfill new source fields when reading state written by an earlier pipeline version.
+    for feed in FEEDS:
+        default_cursor = "1" if feed["kind"] == "gamedevmap" else ""
+        state["feed_cursors"].setdefault(feed["id"], default_cursor)
+        state["feed_done"].setdefault(feed["id"], False)
     return state
 
 
@@ -766,12 +907,27 @@ def existing_indexes(studios: list[dict[str, Any]]) -> tuple[set[str], set[str]]
 
 def add_candidates(state: dict[str, Any], rows: list[dict[str, str]]) -> int:
     added = 0
+    known_names = {
+        name_key(str(candidate.get("name", "")))
+        for candidate in state["candidates"].values()
+        if candidate.get("name")
+    }
+    known_domains = {
+        domain_key(str(candidate.get("website", "")))
+        for candidate in state["candidates"].values()
+        if canonical_url(str(candidate.get("website", "")))
+    }
     for row in rows:
         qid = row["qid"]
         if qid in state["candidates"]:
             continue
         website = canonical_url(row["website"])
         if not website:
+            continue
+        normalized_name = name_key(str(row.get("name", "")))
+        domain = domain_key(website)
+        # Deduplicate across source feeds before spending time crawling the same studio.
+        if (normalized_name and normalized_name in known_names) or domain in known_domains:
             continue
         state["candidates"][qid] = {
             **row,
@@ -784,6 +940,9 @@ def add_candidates(state: dict[str, Any], rows: list[dict[str, str]]) -> int:
             "cycle": state["cycle"],
             "reason": None,
         }
+        if normalized_name:
+            known_names.add(normalized_name)
+        known_domains.add(domain)
         state["stats"]["candidates_seen"] += 1
         added += 1
     return added
@@ -801,14 +960,14 @@ def ingest_source_pages(state: dict[str, Any], max_pages: int, batch_size: int) 
         if state["feed_done"].get(feed["id"], False):
             # Look for the next source that is not exhausted in this cycle.
             feed = available[0]
-        rows = fetch_wikidata_batch(
-            feed["kind"],
-            state["feed_cursors"].get(feed["id"], ""),
-            batch_size,
-        )
+        cursor = state["feed_cursors"].get(feed["id"], "1" if feed["kind"] == "gamedevmap" else "")
+        rows = fetch_source_batch(feed["kind"], cursor, batch_size)
         pages_processed += 1
         if rows:
-            state["feed_cursors"][feed["id"]] = max(row["qid"] for row in rows)
+            if feed["kind"] == "gamedevmap":
+                state["feed_cursors"][feed["id"]] = str(int(cursor or "1") + batch_size)
+            else:
+                state["feed_cursors"][feed["id"]] = max(row["qid"] for row in rows)
             candidates_added += add_candidates(state, rows)
         if len(rows) < batch_size:
             state["feed_done"][feed["id"]] = True
@@ -1071,7 +1230,7 @@ def run_pipeline(
     root: Path = ROOT,
     state_path: Path | None = None,
     page_fetcher: Callable[[str, bool], FetchResult] = fetch_url,
-    source_fetcher: Callable[[str, str, int], list[dict[str, str]]] = fetch_wikidata_batch,
+    source_fetcher: Callable[[str, str, int], list[dict[str, str]]] = fetch_source_batch,
 ) -> dict[str, Any]:
     studios_path = root / "src/data/speculative-route-directory.json"
     profiles_path = root / "src/data/studio-profiles.json"
@@ -1079,7 +1238,7 @@ def run_pipeline(
     studios = read_json(studios_path, [])
     profiles = read_json(profiles_path, {})
     state = load_state(state_path) if state_path.exists() else empty_state()
-    if mode == "bootstrap":
+    if mode in {"bootstrap", "bulk"}:
         state["bootstrap_started"] = True
     if not isinstance(studios, list) or not isinstance(profiles, dict):
         raise ValueError("Public studio datasets have an invalid shape.")
@@ -1087,26 +1246,46 @@ def run_pipeline(
     deadline = time.monotonic() + max_run_seconds
     source_pages = 0
     source_candidates = 0
-    # Use an injectable source fetcher in tests. Production requests are spaced out to
-    # stay well below WDQS's documented per-client processing budget.
-    for _ in range(max_source_pages):
-        available = [feed for feed in FEEDS if not state["feed_done"].get(feed["id"], False)]
-        if not available:
-            break
-        feed = FEEDS[state["feed_index"] % len(FEEDS)]
-        if state["feed_done"].get(feed["id"], False):
-            feed = available[0]
-        cursor = state["feed_cursors"].get(feed["id"], "")
-        rows = source_fetcher(feed["kind"], cursor, batch_size)
-        source_pages += 1
-        if rows:
-            state["feed_cursors"][feed["id"]] = max(row["qid"] for row in rows)
+    # Bulk mode backfills GameDevMap's public 100-row query interface from its
+    # saved offset. fetch_url enforces robots.txt and per-host request spacing.
+    if mode == "bulk":
+        feed = next(item for item in FEEDS if item["kind"] == "gamedevmap")
+        feed_id = feed["id"]
+        for _ in range(max_source_pages):
+            if state["feed_done"].get(feed_id, False) or time.monotonic() + 30 >= deadline:
+                break
+            cursor = state["feed_cursors"].get(feed_id, "1") or "1"
+            rows = source_fetcher(feed["kind"], cursor, batch_size)
+            source_pages += 1
             source_candidates += add_candidates(state, rows)
-        if len(rows) < batch_size:
-            state["feed_done"][feed["id"]] = True
-        state["feed_index"] = (FEEDS.index(feed) + 1) % len(FEEDS)
-        if source_pages < max_source_pages and time.monotonic() + 65 < deadline:
-            time.sleep(65)
+            state["feed_cursors"][feed_id] = str(int(cursor) + batch_size)
+            if len(rows) < batch_size:
+                state["feed_done"][feed_id] = True
+                break
+    else:
+        # Wikidata requests are deliberately spaced apart; GameDevMap uses fetch_url's
+        # separate per-host pacing and therefore needs no extra 65-second sleep.
+        for _ in range(max_source_pages):
+            available = [feed for feed in FEEDS if not state["feed_done"].get(feed["id"], False)]
+            if not available:
+                break
+            feed = FEEDS[state["feed_index"] % len(FEEDS)]
+            if state["feed_done"].get(feed["id"], False):
+                feed = available[0]
+            cursor = state["feed_cursors"].get(feed["id"], "1" if feed["kind"] == "gamedevmap" else "")
+            rows = source_fetcher(feed["kind"], cursor, batch_size)
+            source_pages += 1
+            if rows:
+                if feed["kind"] == "gamedevmap":
+                    state["feed_cursors"][feed["id"]] = str(int(cursor or "1") + batch_size)
+                else:
+                    state["feed_cursors"][feed["id"]] = max(row["qid"] for row in rows)
+                source_candidates += add_candidates(state, rows)
+            if len(rows) < batch_size:
+                state["feed_done"][feed["id"]] = True
+            state["feed_index"] = (FEEDS.index(feed) + 1) % len(FEEDS)
+            if feed["kind"] != "gamedevmap" and source_pages < max_source_pages and time.monotonic() + 65 < deadline:
+                time.sleep(65)
         elif source_pages < max_source_pages:
             break
 
@@ -1136,6 +1315,9 @@ def run_pipeline(
         "saturated": state["saturated"],
         "studio_count": len(studios),
         "candidate_queue": sum(1 for item in state["candidates"].values() if item.get("status") in {"queued", "retry"}),
+        "candidate_pool_size": len(state["candidates"]),
+        "gamedevmap_complete": state["feed_done"].get("gamedevmap", False),
+        "gamedevmap_next_start": state["feed_cursors"].get("gamedevmap", "1"),
         "stats": state["stats"],
     }
     write_json_atomic(studios_path, studios)
@@ -1146,7 +1328,7 @@ def run_pipeline(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--mode", choices=("bootstrap", "hourly"), default="hourly")
+    parser.add_argument("--mode", choices=("bulk", "bootstrap", "hourly"), default="hourly")
     parser.add_argument("--batch-size", type=int, default=150)
     parser.add_argument("--max-source-pages", type=int, default=None)
     parser.add_argument("--max-candidate-checks", type=int, default=None)
@@ -1160,12 +1342,15 @@ def main() -> int:
     args = parse_args()
     if not 1 <= args.batch_size <= 250:
         raise ValueError("--batch-size must be between 1 and 250.")
-    if args.mode == "bootstrap":
-        pages = args.max_source_pages if args.max_source_pages is not None else 6
-        checks = args.max_candidate_checks if args.max_candidate_checks is not None else 80
+    if args.mode == "bulk":
+        pages = args.max_source_pages if args.max_source_pages is not None else 110
+        checks = args.max_candidate_checks if args.max_candidate_checks is not None else 250
+    elif args.mode == "bootstrap":
+        pages = args.max_source_pages if args.max_source_pages is not None else 4
+        checks = args.max_candidate_checks if args.max_candidate_checks is not None else 150
     else:
         pages = args.max_source_pages if args.max_source_pages is not None else 1
-        checks = args.max_candidate_checks if args.max_candidate_checks is not None else 20
+        checks = args.max_candidate_checks if args.max_candidate_checks is not None else 150
     if pages < 0 or checks < 0 or args.route_check_count < 0:
         raise ValueError("Batch limits cannot be negative.")
     if not 60 <= args.max_run_seconds <= 1500:
