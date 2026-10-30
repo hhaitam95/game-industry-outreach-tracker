@@ -126,10 +126,7 @@ class ConcurrentDirectoryRemovalTests(unittest.TestCase):
                     "applicationUrl": "https://valid-studio.example/careers",
                     "evidenceUrl": "https://valid-studio.example/careers",
                     "checkedAt": "2026-10-30",
-                }
-            ]
-            base_profiles = {"Valid Studio": {"description": "Existing studio"}}
-            incoming_rows = base_rows + [
+                },
                 {
                     "name": "Capcom Pictures",
                     "websiteUrl": "https://capcomusa.com/",
@@ -145,11 +142,15 @@ class ConcurrentDirectoryRemovalTests(unittest.TestCase):
                     "checkedAt": "2026-10-30",
                 },
             ]
-            incoming_profiles = {
+            base_profiles = {
                 "Valid Studio": {"description": "Existing studio"},
                 "Capcom Pictures": {"description": "Film production"},
                 "Game Boost Sweden": {"description": "Staffing marketplace"},
             }
+            # Both the latest main base and the in-flight run contain the two
+            # manually excluded records. The persistent registry must remove them.
+            incoming_rows = list(base_rows)
+            incoming_profiles = dict(base_profiles)
             directory_path = root / "src/data/speculative-route-directory.json"
             profiles_path = root / "src/data/studio-profiles.json"
             directory_path.write_text(json.dumps(incoming_rows), encoding="utf-8")
