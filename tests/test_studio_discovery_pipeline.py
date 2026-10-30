@@ -2,6 +2,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 import discover_speculative_studios as discovery
@@ -55,6 +56,27 @@ class DiscoveryParsingTests(unittest.TestCase):
             "https://studio.example/careers",
             "https://boards.greenhouse.io/studio",
         ])
+
+    def test_plain_text_robots_policy_is_parsed_and_respected(self):
+        discovery.ROBOTS_CACHE.clear()
+        robots_body = "User-agent: *\\nDisallow: /private\\nAllow: /careers"
+        result = discovery.FetchResult(
+            True,
+            "https://example-studio.example/robots.txt",
+            200,
+            robots_body,
+        )
+        with patch.object(discovery, "fetch_url", return_value=result) as fetch:
+            self.assertTrue(discovery.robots_allowed("https://example-studio.example/careers"))
+            self.assertFalse(discovery.robots_allowed("https://example-studio.example/private"))
+            fetch.assert_called_once_with(
+                "https://example-studio.example/robots.txt",
+                check_robots=False,
+                timeout=10,
+                max_bytes=250_000,
+                allow_plain_text=True,
+            )
+        discovery.ROBOTS_CACHE.clear()
 
     def test_positive_route_language_is_detected(self):
         cases = [
