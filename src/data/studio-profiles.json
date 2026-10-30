@@ -3816,8 +3816,7 @@
       "https://1939games.com/"
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
-  }
-,
+  },
   "AlterEyes": {
     "description": "Belgian XR and game studio creating VR and AR games, immersive entertainment and interactive learning and business experiences.",
     "headquarters": {
@@ -3890,8 +3889,7 @@
     ],
     "applicationLocation": "Wrocław office · office, hybrid or fully remote options stated; applicant geography not stated",
     "reachHighlights": "65+ experts onboard, 120+ completed projects and 100+ satisfied clients (studio-reported). Formerly The Knights of Unity."
-  }
-,
+  },
   "Rad Games": {
     "description": "Game studio division of IDFire Technologies Inc., developing its own game universes alongside the in-house Janus game engine.",
     "headquarters": {
@@ -4478,5 +4476,47 @@
     ],
     "applicationLocation": "Santa Monica, California · general application form asks about US work authorization and visa sponsorship; remote eligibility not stated",
     "reachHighlights": "PlayQ reports more than 60 million game downloads across its portfolio (company-reported)."
+  },
+  "Oddshot Games": {
+    "description": "Belgian indie game development and publishing studio focused on community-driven multiplayer sports games.",
+    "headquarters": {
+      "city": "Ghent",
+      "country": "Belgium",
+      "countryCode": "BE",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Multiplayer",
+      "Sports"
+    ],
+    "popularGames": [
+      {
+        "title": "Slapshot: Rebound",
+        "appId": null
+      },
+      {
+        "title": "Strikers Club",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://oddshot.gg/our-studio/",
+      "https://oddshot.gg/contact/",
+      "https://oddshot.gg/jobs/open-application/",
+      "https://oddshot.gg/our-games/"
+    ],
+    "applicationLocation": "Remote · applicants must reside in Flanders, Belgium",
+    "reachHighlights": "Headquartered in Ghent. The official open-application route is remote but explicitly limited to applicants living in Flanders."
   }
 }
