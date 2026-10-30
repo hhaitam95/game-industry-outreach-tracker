@@ -211,6 +211,52 @@ class CandidateVerificationTests(unittest.TestCase):
         self.assertIn("ats", result["submission_methods"])
         self.assertEqual(result["source_type"], "employer_managed_career_platform")
 
+    def test_production_fetcher_uses_the_verifier_two_argument_interface(self):
+        bodies = {
+            "https://example-studio.example/": '<a href="/careers">Careers</a>',
+            "https://example-studio.example/careers": (
+                "<p>We welcome speculative applications from game developers.</p>"
+                "<form action='/submit'></form>"
+            ),
+        }
+
+        class FakeResponse:
+            status = 200
+
+            def __init__(self, url, body):
+                self.url = url
+                self.body = body.encode("utf-8")
+                self.headers = {"Content-Type": "text/html; charset=utf-8"}
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc_value, traceback):
+                return False
+
+            def geturl(self):
+                return self.url
+
+            def read(self, limit):
+                return self.body[:limit]
+
+        class FakeOpener:
+            def open(self, request, timeout):
+                url = request.full_url
+                return FakeResponse(url, bodies[url])
+
+        with (
+            patch.object(discovery, "validate_public_host", return_value=True),
+            patch.object(discovery, "robots_allowed", return_value=True),
+            patch.object(discovery, "wait_for_host"),
+            patch.object(discovery.urllib.request, "build_opener", return_value=FakeOpener()),
+        ):
+            result = discovery.verify_candidate_pages(self.candidate(), discovery.fetch_url)
+
+        self.assertEqual(result["status"], "verified")
+        self.assertEqual(result["route_type"], "speculative")
+        self.assertEqual(result["submission_methods"], ["website_form"])
+
     def test_explicit_rejection_means_no_route_even_if_page_has_careers_links(self):
         pages = {
             "https://example-studio.example/": discovery.FetchResult(
