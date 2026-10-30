@@ -7,10 +7,11 @@
 
 - Studio directory and personal application tracker are implemented.
 - Personal tracker data remains in browser localStorage; it is not committed or synced.
-- Public directory contains **100 verified studio records**.
-- The 100 records cover **27 identified countries**; 10 records use the explicit country value "Not stated" rather than an inferred location.
+- Public directory contains **101 verified studio records**.
+- The 101 records cover **27 identified countries**; 11 records use the explicit country value "Not stated" rather than an inferred location.
 - Each public record has an official studio URL, application URL, evidence URL and verification date. The production directory validation passed.
 - Two additional records were manually confirmed against official career pages and merged: AlterEyes (Belgium) and The Knights of U (Poland; formerly The Knights of Unity).
+- A third additional official open-application route was confirmed and merged: Rad Games (country and HQ not stated; applications by email to its official careers address).
 - No UI redesign or additional product features are planned before global discovery is complete.
 
 ## Discovery automation
