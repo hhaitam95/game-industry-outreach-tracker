@@ -7,9 +7,10 @@
 
 - Studio directory and personal application tracker are implemented.
 - Personal tracker data remains in browser localStorage; it is not committed or synced.
-- Public directory contains **98 verified studio records**.
-- The 98 records cover **26 identified countries**; 10 records use the explicit country value "Not stated" rather than an inferred location.
+- Public directory contains **100 verified studio records**.
+- The 100 records cover **27 identified countries**; 10 records use the explicit country value "Not stated" rather than an inferred location.
 - Each public record has an official studio URL, application URL, evidence URL and verification date. The production directory validation passed.
+- Two additional records were manually confirmed against official career pages and merged: AlterEyes (Belgium) and The Knights of U (Poland; formerly The Knights of Unity).
 - No UI redesign or additional product features are planned before global discovery is complete.
 
 ## Discovery automation
@@ -21,7 +22,7 @@
 - At that snapshot, the GameDevMap offset was 101; two Wikidata feeds were still incomplete.
 - The live GameDevMap page at offset 101 explicitly reports results 101–200 of 10,500. The initial worldwide backfill is therefore far from exhausted at offset 101.
 - A discovery runner processed one further batch but its state push was rejected after the discovery-state branch changed during the run. Treat that batch as unpersisted; the last confirmed saved cursor remains 101. Do not treat a runner-reported completion flag as final until the saved cursor reaches the end of the source pagination.
-- A scheduled recovery run is still in progress. Discovery runs share a repository-wide concurrency group, so the queued retry must wait for the scheduled run rather than competing for the same state branch.
+- The scheduled bulk discovery run (run 41108416333) remains marked in progress, but the saved discovery-state branch has not advanced beyond its 18:33:52 UTC snapshot. The next push-triggered run is queued behind it by the repository-wide concurrency group. Do not count unsaved run output as persisted progress.
 - Candidate directories are leads only. Publication remains strict: only explicit speculative/open application routes verified on official studio-controlled pages are included. Timeouts, blocks and ambiguous evidence do not close routes.
 
 ## Scraper correctness
