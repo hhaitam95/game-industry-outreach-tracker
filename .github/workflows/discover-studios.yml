@@ -60,8 +60,8 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             MODE="${{ inputs.mode }}"
           elif [ -f "$STATE_FILE" ]; then
-            SATURATED="$(python3 -c "import json; from pathlib import Path; p=Path('$STATE_FILE'); print(str(json.loads(p.read_text()).get('saturated', False)).lower())")"
-            if [ "$SATURATED" != "true" ]; then
+            BOOTSTRAP_STARTED="$(python3 -c "import json; from pathlib import Path; p=Path('$STATE_FILE'); print(str(json.loads(p.read_text()).get('bootstrap_started', False)).lower())")"
+            if [ "$BOOTSTRAP_STARTED" != "true" ]; then
               MODE="bootstrap"
             fi
           else
