@@ -2848,7 +2848,7 @@
     "websiteUrl": "https://ocellus-studio.com/",
     "applicationUrl": "https://ocellus-studio.com/careers",
     "evidenceUrl": "https://ocellus-studio.com/careers",
-    "notes": "Official Careers page invites spontaneous applications when no listed position fits and asks candidates to send a CV/resume. The official Contact page lists contact@ocellus-games.com for Ocellus Games and contact@ocellus-services.com for Ocellus Services. Studio is located in Lyon; specific role/work location eligibility is not stated.",
+    "notes": "The official Careers page lists distinct Ocellus Services and Ocellus Games roles and explicitly invites spontaneous applications when no listed position fits, asking applicants to send a CV/resume. Current roles include a Lyon / Remote realtime VFX position at Ocellus Services and Lyon-based Ocellus Games positions; the spontaneous route does not state separate applicant-country eligibility.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "spontaneous",
@@ -2857,37 +2857,19 @@
       ],
       "workModel": "not_stated",
       "eligibleLocations": [
-        "Lyon, France · role-specific arrangements not stated"
+        "Lyon, France · one Ocellus Services role is listed Lyon / Remote; Ocellus Games positions are Lyon-based"
       ],
-      "disciplineScope": [],
+      "disciplineScope": [
+        "Game development",
+        "Game design",
+        "Art",
+        "Realtime VFX",
+        "Programming"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
-    }
-  },
-  {
-    "name": "Ocellus Studio",
-    "country": "France",
-    "websiteUrl": "https://www.ocellus-studio.com/",
-    "applicationUrl": "https://www.ocellus-studio.com/careers",
-    "evidenceUrl": "https://www.ocellus-studio.com/careers",
-    "notes": "Official careers page invites CVs if no open position fits. Most work is Lyon-based; some roles allow remote from Lyon. Unsolicited eligibility is not stated.",
-    "checkedAt": "2026-10-29",
-    "applicationResearch": {
-      "routeType": "unsolicited",
-      "submissionMethods": [
-        "website_form"
-      ],
-      "workModel": "remote",
-      "eligibleLocations": [
-        "Lyon / Ocellus North · some roles may allow remote from Lyon"
-      ],
-      "disciplineScope": [],
-      "relatedApplicationUrls": [],
-      "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-27"
     }
   },
   {
@@ -3563,7 +3545,7 @@
     "websiteUrl": "https://studiosdrama.com/",
     "applicationUrl": "https://studiosdrama.com/unsolicited-application/",
     "evidenceUrl": "https://studiosdrama.com/unsolicited-application/",
-    "notes": "Official Unsolicited Application form accepts applicants across art, programming, design and other disciplines. It requires a motivation statement explaining interest in UNRECORD and asks about Unreal Engine expertise and employment options. Regular on-site presence in Rennes is expected, with role-dependent flexibility.",
+    "notes": "Official Unsolicited Application form accepts applicants across art, programming, design, production, audio, QA, marketing, community management, business/publishing and other disciplines. It requires a concise motivation statement explaining the applicant's interest in UNRECORD and asks about Unreal Engine expertise and employment options. Regular on-site presence in Rennes is expected, with role-dependent flexibility.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "unsolicited",
@@ -3578,36 +3560,18 @@
         "Art",
         "Programming",
         "Design",
+        "Production",
+        "Audio",
+        "QA",
+        "Marketing",
+        "Community management",
+        "Business / publishing",
         "Other"
       ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
-    }
-  },
-  {
-    "name": "Studios DRAMA / UNRECORD",
-    "country": "France",
-    "websiteUrl": "https://studiosdrama.com/",
-    "applicationUrl": "https://studiosdrama.com/unsolicited-application/",
-    "evidenceUrl": "https://studiosdrama.com/unsolicited-application/",
-    "notes": "Official unsolicited form covers art, programming, design, production, audio, QA and more; applicants explain why they want to work on UNRECORD.",
-    "checkedAt": "2026-10-29",
-    "applicationResearch": {
-      "routeType": "unsolicited",
-      "submissionMethods": [
-        "website_form"
-      ],
-      "workModel": "on_site",
-      "eligibleLocations": [
-        "Rennes · regular on-site presence expected; role-dependent flexibility"
-      ],
-      "disciplineScope": [],
-      "relatedApplicationUrls": [],
-      "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-27"
     }
   },
   {
