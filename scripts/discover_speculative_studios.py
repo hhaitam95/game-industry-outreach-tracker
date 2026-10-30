@@ -87,7 +87,8 @@ CAREER_LINK_HINT = re.compile(
     r"work[-_ ]?with[-_ ]?us|apply|application|recruit|talent|contact|people|"
     r"team|emploi|carri[eè]re|recrut|postuler|nous rejoindre|vacature|werken bij|"
     r"contacto|empleo|trabaja con|candidatura|lavoro|lavora con noi|offerte di lavoro|"
-    r"karri[aä]r|lediga jobb|spontanans[oö]k|ty[oö]paikka|arbet)",
+    r"karri[aä]r|lediga jobb|spontanans[oö]k|ty[oö]paikka|arbet|sollicitat|"
+    r"stillinger|s[oø]knad|hakemus|ty[oö]paikk|vacantes)",
     re.I,
 )
 
