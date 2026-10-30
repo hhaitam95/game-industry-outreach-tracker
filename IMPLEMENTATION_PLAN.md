@@ -1,17 +1,29 @@
-# Next steps
+# StudioScout MVP plan
 
-## Now
+## Immediate website scope
 
-The first StudioScout directory and tracker implementation is in place:
+The first usable release has two pages:
 
-- Keep all verified studios with qualifying official speculative/open/general application routes in the directory.
-- Continue expanding the directory with newly researched studios, but publish only routes verified on the studio's own site or application system.
-- Review the studio favicon marks and Steam game-cover thumbnails; where high-quality official logo/wordmark assets are available, prefer those and retain a clear fallback when they are not.
-- Continue checking profile facts, particularly ownership, studio-only headcounts, locations and game credits. Keep unknowns labelled rather than estimated without evidence.
-- Complete browser acceptance on the deployed Pages URL after PR approval/merge.
+1. **Studio directory** — a compact table of studios with verified official speculative/open application routes. Support search, country and work-model filters, sorting, official website/application links, and a Save action.
+2. **Application tracker** — a simple LinkedIn-style tracker with Saved, In Progress, Applied, Interview, Offer and Archived statuses. Saving a studio from the directory adds it to the tracker. Status changes and removals persist in browser localStorage.
 
-## Later
+The UI should remain a straightforward developer/internal-tool interface. Do not spend time on detailed profiles, artwork, analytics or visual polish before the core workflow works.
 
-Only consider small, manually reviewed maintenance for stale application links. Do not add scheduled crawling, automatic applications, job-board discovery, account systems or remote storage.
+## Discovery automation
 
-No broader platform or workflow is needed.
+Build an automated studio-route discovery pipeline, not an advertised-vacancy crawler.
+
+- Run an initial global discovery/backfill in bounded batches.
+- Use public studio directories and search sources to discover candidates only.
+- Verify each speculative/open application route through the studio's official website or studio-controlled application system.
+- Deduplicate candidates and records using canonical website domains and normalized studio names.
+- Save progress/cursors so long discovery runs can resume.
+- Stop the initial backfill after several complete passes produce no meaningful new verified studios across the configured sources.
+- Add an hourly GitHub Actions maintenance run to discover new studios and recheck known routes in rotating batches.
+- Update verified route details and add newly confirmed studios.
+- Mark routes inactive only with reliable closure evidence. Temporary network failures or blocked sources must preserve the previous active state.
+- Validate records and run tests/build before publishing any dataset change.
+
+## Out of scope until the MVP is stable
+
+Detailed studio profiles, game artwork, elaborate analytics, user accounts, cloud tracker sync, automated applications, resume tooling, outreach generation, notifications and advanced customization.
