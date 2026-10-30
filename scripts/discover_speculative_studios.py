@@ -627,8 +627,16 @@ def infer_work_model(text: str) -> str:
     return "not_stated"
 
 
+def normalize_wikidata_entity_uri(uri: str) -> tuple[str, str] | None:
+    match = re.fullmatch(r"https?://www\\.wikidata\\.org/entity/(Q[1-9]\\d*)", uri.strip())
+    if not match:
+        return None
+    qid = match.group(1)
+    return qid, "https://www.wikidata.org/entity/" + qid
+
+
 def sparql_query(feed_kind: str, cursor: str, limit: int) -> str:
-    safe_cursor = cursor if cursor.startswith("https://www.wikidata.org/entity/Q") else "https://www.wikidata.org/entity/Q0"
+    safe_cursor = cursor if re.fullmatch(r"Q[0-9]+", cursor) else "Q0"
     if feed_kind == "class":
         source_pattern = "?company wdt:P31 wd:Q210167."
     elif feed_kind == "developer_credit":
@@ -649,7 +657,7 @@ WHERE {{
   OPTIONAL {{ ?company wdt:P17 ?country. }}
   OPTIONAL {{ ?company wdt:P159 ?hq. }}
   OPTIONAL {{ ?country wdt:P297 ?countryCode. }}
-  FILTER(STR(?company) > "{safe_cursor}")
+  FILTER(STRAFTER(STR(?company), "/entity/") > "{safe_cursor}")
   SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en". }}
 }}
 GROUP BY ?company ?companyLabel
@@ -687,11 +695,13 @@ def fetch_wikidata_batch(feed_kind: str, cursor: str, limit: int) -> list[dict[s
         uri = value("company")
         name = value("companyLabel")
         website = value("website")
-        if not uri or not name or not website:
+        entity = normalize_wikidata_entity_uri(uri)
+        if not entity or not name or not website:
             continue
+        qid, entity_url = entity
         rows.append({
-            "qid": uri.rsplit("/", 1)[-1],
-            "entity_url": uri,
+            "qid": qid,
+            "entity_url": entity_url,
             "name": name,
             "website": website,
             "country": value("countryLabel") or "Not stated",
@@ -788,7 +798,7 @@ def ingest_source_pages(state: dict[str, Any], max_pages: int, batch_size: int) 
         )
         pages_processed += 1
         if rows:
-            state["feed_cursors"][feed["id"]] = max(row["entity_url"] for row in rows)
+            state["feed_cursors"][feed["id"]] = max(row["qid"] for row in rows)
             candidates_added += add_candidates(state, rows)
         if len(rows) < batch_size:
             state["feed_done"][feed["id"]] = True
