@@ -18,6 +18,7 @@ function readApplications():TrackedApplication[]{
 
 export default function App(){
   const [page,setPage]=useState<"studios"|"applications">("studios");
+  const [trackerInitialTab,setTrackerInitialTab]=useState("saved");
   const [applications,setApplications]=useState<TrackedApplication[]>([]);
   const [loaded,setLoaded]=useState(false);
 
@@ -59,6 +60,7 @@ export default function App(){
     const confirmed=window.confirm("Confirm that you have submitted an application to "+studio.name+"? This will add it to My Applications as Applied.");
     if(!confirmed)return;
     trackStudio(studio,"applied");
+    setTrackerInitialTab("applied");
     setPage("applications");
   }
 
@@ -82,7 +84,7 @@ export default function App(){
       </a>
       <div className="sidebar-section-label">WORKSPACE</div>
       <nav className="main-navigation" aria-label="Main navigation">
-        {nav.map(item=><button key={item.id} className={page===item.id?"nav-link active":"nav-link"} type="button" onClick={()=>setPage(item.id)}><span className="nav-icon">{item.icon}</span><span>{item.label}</span>{item.id==="applications"?<b>{applications.length}</b>:null}</button>)}
+        {nav.map(item=><button key={item.id} className={page===item.id?"nav-link active":"nav-link"} type="button" onClick={()=>{if(item.id==="applications")setTrackerInitialTab("saved");setPage(item.id);}}><span className="nav-icon">{item.icon}</span><span>{item.label}</span>{item.id==="applications"?<b>{applications.length}</b>:null}</button>)}
       </nav>
       <div className="sidebar-spacer"/>
       <div className="sidebar-mini-card"><span className="mini-card-icon">◈</span><strong>{applications.length} tracked studios</strong><p>{counts.saved} saved · {counts.active} active</p><button type="button" onClick={()=>setPage("applications")}>View tracker →</button></div>
@@ -94,7 +96,7 @@ export default function App(){
         <div className="topbar-right"><span className="topbar-tag">PERSONAL RESEARCH</span><span className="avatar">H</span></div>
       </header>
       <div className="page-content">
-        {page==="studios"?<StudioDirectory applications={applications} onSave={studio=>trackStudio(studio,"saved")} onMarkApplied={markApplied}/>:<ApplicationTracker applications={applications} onChangeStatus={changeStatus} onRemove={removeApplication} onOpenDirectory={()=>setPage("studios")}/>}
+        {page==="studios"?<StudioDirectory applications={applications} onSave={studio=>trackStudio(studio,"saved")} onMarkApplied={markApplied}/>:<ApplicationTracker initialTab={trackerInitialTab} applications={applications} onChangeStatus={changeStatus} onRemove={removeApplication} onOpenDirectory={()=>setPage("studios")}/>}
       </div>
       <footer className="app-footer"><span>STUDIOSCOUT</span><span>Studio profiles · Official application routes · Manual tracking</span><span>© 2026</span></footer>
     </main>
