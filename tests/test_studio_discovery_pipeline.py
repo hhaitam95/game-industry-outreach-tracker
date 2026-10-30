@@ -202,7 +202,10 @@ class CandidateVerificationTests(unittest.TestCase):
                 "<p>We are a social casino game studio.</p><a href='/careers'>Careers</a>",
             ),
         }
-        result = discovery.verify_candidate_pages(self.candidate(), lambda url, allowed: pages[url])
+        result = discovery.verify_candidate_pages(
+            self.candidate(),
+            lambda url, allowed: pages.get(url, discovery.FetchResult(False, url, 404, "", "not-found")),
+        )
         self.assertEqual(result["status"], "excluded")
 
     def test_temporary_homepage_failure_is_retry_not_closure(self):
