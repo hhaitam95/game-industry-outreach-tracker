@@ -1023,9 +1023,16 @@ def maintain_existing_routes(
 def finish_cycle_if_complete(state: dict[str, Any]) -> bool:
     if not all(state["feed_done"].get(feed["id"], False) for feed in FEEDS):
         return False
+    today = iso_date()
     queued = any(
         candidate.get("cycle") == state["cycle"]
-        and candidate.get("status") in {"queued", "retry"}
+        and (
+            candidate.get("status") == "queued"
+            or (
+                candidate.get("status") == "retry"
+                and (not candidate.get("next_check_at") or candidate["next_check_at"] <= today)
+            )
+        )
         for candidate in state["candidates"].values()
     )
     if queued:
