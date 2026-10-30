@@ -413,9 +413,9 @@ def robots_allowed(url: str) -> bool:
 
 def fetch_url(
     url: str,
+    allowed_external: bool = False,
     *,
     check_robots: bool = True,
-    allowed_external: bool = False,
     timeout: int = REQUEST_TIMEOUT_SECONDS,
     max_bytes: int = MAX_RESPONSE_BYTES,
     allow_plain_text: bool = False,
