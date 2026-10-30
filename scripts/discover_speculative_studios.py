@@ -684,6 +684,7 @@ def empty_state() -> dict[str, Any]:
         "cycle_additions": 0,
         "empty_cycles": 0,
         "saturated": False,
+        "bootstrap_started": False,
         "candidates": {},
         "route_checks": {},
         "route_check_index": 0,
@@ -993,6 +994,8 @@ def run_pipeline(
     studios = read_json(studios_path, [])
     profiles = read_json(profiles_path, {})
     state = load_state(state_path) if state_path.exists() else empty_state()
+    if mode == "bootstrap":
+        state["bootstrap_started"] = True
     if not isinstance(studios, list) or not isinstance(profiles, dict):
         raise ValueError("Public studio datasets have an invalid shape.")
 
