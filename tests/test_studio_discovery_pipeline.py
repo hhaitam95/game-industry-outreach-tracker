@@ -315,6 +315,53 @@ class DatasetUpdateTests(unittest.TestCase):
         discovery.maintain_existing_routes(state, [studio], 1, failure)
         self.assertEqual(studio["applicationResearch"]["routeStatus"], "active")
 
+    def test_live_evidence_page_with_missing_submission_page_is_unknown(self):
+        studio = {
+            "name": "Example Game Studio",
+            "websiteUrl": "https://example-studio.example/",
+            "applicationUrl": "https://example-studio.example/apply",
+            "evidenceUrl": "https://example-studio.example/careers",
+        }
+        pages = {
+            "https://example-studio.example/careers": discovery.FetchResult(
+                True,
+                "https://example-studio.example/careers",
+                200,
+                "<p>We welcome speculative applications.</p>",
+            ),
+            "https://example-studio.example/apply": discovery.FetchResult(
+                False,
+                "https://example-studio.example/apply",
+                404,
+                "",
+                "http-status",
+            ),
+        }
+        result = discovery.route_page_check(
+            studio,
+            lambda url, allowed: pages[url],
+        )
+        self.assertEqual(result, "unknown")
+
+        tracked = {
+            **studio,
+            "notes": "Verified route.",
+            "checkedAt": "2026-10-30",
+            "applicationResearch": {
+                "routeStatus": "active",
+                "nextReviewAt": "2027-01-28",
+            },
+        }
+        state = discovery.empty_state()
+        discovery.maintain_existing_routes(
+            state,
+            [tracked],
+            1,
+            lambda url, allowed: pages[url],
+        )
+        self.assertEqual(tracked["applicationResearch"]["routeStatus"], "active")
+        self.assertEqual(state["route_checks"]["Example Game Studio"]["last_result"], "unknown")
+
     def test_two_consecutive_confirmed_missing_checks_close_route_but_preserve_record(self):
         studio = {
             "name": "Example Game Studio",
