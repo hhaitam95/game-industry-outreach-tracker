@@ -1,6 +1,6 @@
 # ADR-064 — M4 worldwide speculative-route research batch 2
 
-- Date: 2026-10-29
+- Date: 2026-10-30
 - Status: Accepted for implementation
 - Depends on: ADR-059, the M2 route contract, M3 directory/tracker, and ADR-063.
 

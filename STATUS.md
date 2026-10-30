@@ -3,9 +3,12 @@
 **Last updated:** 2026-10-30  
 **Product scope:** a simple worldwide directory of official speculative-application routes plus the existing private tracker for applications submitted manually. No job-board aggregation, outreach automation, backend, or extra workflow features.  
 **Main branch:** M3 PR #19 and the first M4 expansion PR #20 are merged. Main contains 40 curated official routes.  
-**Current branch:** `feat/m4-worldwide-routes-batch-2-20261029` — second M4 research batch. It adds 10 directly reviewed routes, taking the proposed total to 50.  
-**Current changes:** data and short supporting documentation only. No UI changes, new dependencies, crawler, schedule, automatic contact/submission, or Pages publication.  
-**Next step:** validate the data and existing app with the normal CI/browser checks, then review and merge the focused PR if everything passes. See the current PR/checks once opened.
+**Current PR:** [#21 — second batch of worldwide speculative routes](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/21). It adds 10 directly reviewed routes, taking the proposed total to 50.  
+**Current changes:** route data and short supporting documentation only. No UI changes, new dependencies, crawler, schedule, automatic contact/submission, or Pages publication.  
+**Validation:** structural checks confirm 50 unique studios/routes and compliant evidence-summary lengths. Frontend CI, discovery fixtures and browser acceptance are pending on the latest PR head.  
+**Next step:** review the exact-head CI results, fix any failure in one small pass, then leave the merge decision with the owner.
+
+## Historical pre-refocus implementation and rollout evidence
 
 ## Historical pre-refocus implementation and rollout evidence
 
