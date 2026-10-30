@@ -4,7 +4,7 @@ import StudioDirectory from "./components/StudioDirectory";
 import ApplicationTracker from "./components/ApplicationTracker";
 
 const STORAGE_KEY="studio-outreach-tracker-v1";
-const nav=[{id:"studios",label:"Studio directory",icon:"▦"},{id:"applications",label:"My applications",icon:"▤"}];
+const nav=[{id:"studios",label:"Studio directory",icon:"▦"},{id:"applications",label:"My applications",icon:"▤"}] as const;
 
 function readApplications():TrackedApplication[]{
   try{
