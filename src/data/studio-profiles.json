@@ -1916,31 +1916,6 @@
     "applicationLocation": "Copenhagen, Denmark · current unsolicited route does not specify applicant-country or remote eligibility",
     "reachHighlights": "The 2023 closure announcement was superseded by the studio's May 2025 confirmation that a compact team had survived and resumed full production; the official homepage now promotes Expeditions: Samurai Early Access."
   },
-  "Capcom Pictures": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
-    "headquarters": {
-      "city": "Culver City, California",
-      "country": "United States",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer"
-    ],
-    "ownership": "Not yet researched",
-    "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1401&state=&type=",
-      "https://capcomusa.com/"
-    ],
-    "applicationLocation": "Not specified · confirm on the official application route"
-  },
   "Carbonated": {
     "description": "Mobile game-development company founded in 2015 by industry veterans from Zynga, Electronic Arts and Blizzard. Carbonated describes its focus as hardcore player-versus-environment-versus-player games on phones, using AI to shape moment-to-moment gameplay. It has also developed Carbyne, a proprietary live-operations platform.",
     "headquarters": {
@@ -3024,79 +2999,130 @@
     ]
   },
   "Embers": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Independent video-game studio based in Strasbourg, France. The studio develops original games and invites general applications through its official contact channel.",
     "headquarters": {
-      "city": "Strasbourg, Grand Est",
+      "city": "Strasbourg",
       "country": "France",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "FR",
+      "label": "Studio location · official website"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Independent"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Not publicly disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Indie · editorial indication",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
+    "focus": [
+      "PC",
+      "Console",
+      "Original IP",
+      "Game development"
+    ],
     "popularGames": [],
     "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=2601&state=&type=",
       "https://embers.games/"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "applicationLocation": "Strasbourg, France · speculative applicant geography and remote eligibility not stated",
+    "reachHighlights": "The official site lists its Strasbourg address and invites general applications through its contact channel."
   },
   "Fakefish": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Turku-based Finnish game studio founded in 2014. FakeFish develops games including Barotrauma and has an official open-application route for prospective team members.",
     "headquarters": {
       "city": "Turku",
       "country": "Finland",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "FI",
+      "label": "Headquarters · official company information"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Independent"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Not publicly disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Indie · editorial indication",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=2801&state=&type=",
-      "https://www.fakefishgames.com/"
+    "focus": [
+      "PC",
+      "Cooperative multiplayer",
+      "Simulation",
+      "Survival",
+      "Game development"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "Barotrauma",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.fakefishgames.com/",
+      "https://www.fakefishgames.com/jobs",
+      "https://www.fakefishgames.com/jobs/open-application"
+    ],
+    "applicationLocation": "Turku, Finland · the open-application page invites applicants from beyond Turku; role-specific eligibility should be confirmed",
+    "reachHighlights": "The studio's about page describes its founding in 2014 and its base in Turku; the official Jobs page provides a dedicated open-application route."
   },
   "Fast Travel Games": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Stockholm-based virtual-reality game developer and publisher founded by veterans of Battlefield, Mirror's Edge and Angry Birds. Its portfolio includes original VR titles and licensed experiences.",
     "headquarters": {
       "city": "Stockholm",
       "country": "Sweden",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "SE",
+      "label": "Studio location · official website"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer and Publisher"
+      "Developer",
+      "Publisher",
+      "Virtual reality"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Not publicly disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Indie / AA · editorial indication",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=2901&state=&type=",
-      "https://www.fasttravelgames.com/"
+    "focus": [
+      "VR",
+      "PC VR",
+      "Meta Quest",
+      "PlayStation VR2",
+      "Action-adventure",
+      "Horror"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "Apex Construct",
+        "appId": null
+      },
+      {
+        "title": "The Curious Tale of the Stolen Pets",
+        "appId": null
+      },
+      {
+        "title": "Wraith: The Oblivion – Afterlife",
+        "appId": null
+      },
+      {
+        "title": "Ghost Signal: A Stellaris Game",
+        "appId": null
+      },
+      {
+        "title": "Mannequin",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.fasttravelgames.com/",
+      "https://www.fasttravelgames.com/career"
+    ],
+    "applicationLocation": "Stockholm, Sweden · the open-application page does not state remote or cross-border eligibility",
+    "reachHighlights": "The studio's official careers page invites open applications by email; its portfolio is focused on VR games."
   },
   "Fawkes Games": {
     "description": "Game operator and publisher running a portfolio of established online multiplayer and strategy titles.",
@@ -3129,79 +3155,129 @@
     "applicationLocation": "Remote · worldwide stated"
   },
   "Flow Studio": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Independent game-development studio based in Brisbane, Australia. Its portfolio includes Len's Island, an open-world survival and crafting game.",
     "headquarters": {
-      "city": "Brisbane, Queensland",
+      "city": "Brisbane",
       "country": "Australia",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "AU",
+      "label": "Studio location · official website"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Independent"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Not publicly disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Indie · editorial indication",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3001&state=&type=",
-      "https://flowgamestudio.com/"
+    "focus": [
+      "PC",
+      "Survival",
+      "Crafting",
+      "Open world",
+      "Game development"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "Len's Island",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://flowgamestudio.com/",
+      "https://www.flowgamestudio.com/opportunities"
+    ],
+    "applicationLocation": "Brisbane, Australia · the Expression of Interest page does not state remote or international applicant eligibility",
+    "reachHighlights": "The official site identifies Flow Studio as an independent game developer in Brisbane; its opportunities page accepts Expressions of Interest by email."
   },
   "Fool’s Theory": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Independent game-development studio founded in 2015 and based in Bielsko-Biała, Poland. The team has worked on The Thaumaturge and Seven: The Days Long Gone and is involved in the announced The Witcher remake.",
     "headquarters": {
-      "city": "Bielsko-Biala, Silesia",
+      "city": "Bielsko-Biała",
       "country": "Poland",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "PL",
+      "label": "Studio location · official company information"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Independent"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Not publicly disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Indie / AA · editorial indication",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3101&state=&type=",
-      "https://foolstheory.com/"
+    "focus": [
+      "PC",
+      "Console",
+      "RPG",
+      "Action RPG",
+      "Narrative"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "Seven: The Days Long Gone",
+        "appId": null
+      },
+      {
+        "title": "The Thaumaturge",
+        "appId": null
+      },
+      {
+        "title": "The Witcher remake",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://foolstheory.com/",
+      "https://careers.foolstheory.com/",
+      "https://careers.foolstheory.com/connect"
+    ],
+    "applicationLocation": "Remote within the stated time-zone range of approximately ±2 hours from GMT+1; confirm role-specific country and work-authorisation requirements",
+    "reachHighlights": "The official careers site has an Open Applications/Connect form with discipline choices and future-opportunity notifications; the studio describes remote work within a GMT+1 time-zone window."
   },
   "Formation Games": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Independent sports-game studio based in the United Kingdom. Its first announced title, CLUB, is a mobile football-management game.",
     "headquarters": {
       "city": "London",
-      "country": "England",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "Listed location · GameDevMap; official site confirms studio identity but not a street address"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Independent",
+      "Mobile games",
+      "Sports games"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Not publicly disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Indie · editorial indication",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3101&state=&type=",
-      "https://formation.games/"
+    "focus": [
+      "Mobile",
+      "Football management",
+      "Sports simulation"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "CLUB",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://formation.games/",
+      "https://formation.games/careers"
+    ],
+    "applicationLocation": "United Kingdom · the general application page provides an email channel; remote or international eligibility is not stated",
+    "reachHighlights": "The official careers page invites general applications by email; the studio's current project is the mobile football-management game CLUB."
   },
   "Frima Studio": {
     "description": "Québec-based full-service game developer and co-development partner working across original IP, licensed games and major publisher projects.",
@@ -3256,29 +3332,37 @@
     "reachHighlights": "Multi-platform co-development and full-production partner with work across Triangle Strategy, Fortnite and licensed/partner projects."
   },
   "Full Fat Productions": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Independent game developer based in Warwick, United Kingdom, with a long-running focus on mobile and casual games.",
     "headquarters": {
-      "city": "Coventry, West Midlands",
-      "country": "England",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "city": "Warwick",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "Studio location · official jobs page"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Independent",
+      "Mobile games"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Not publicly disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Indie · editorial indication",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
+    "focus": [
+      "Mobile",
+      "Casual games",
+      "Arcade",
+      "Game development"
+    ],
     "popularGames": [],
     "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3201&state=&type=",
-      "https://www.full-fat.com/"
+      "https://www.full-fat.com/",
+      "https://www.full-fat.com/jobs/"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "applicationLocation": "Warwick, United Kingdom · speculative applications are invited by email; remote and cross-border eligibility are not stated",
+    "reachHighlights": "The official jobs page states there are no current vacancies and invites speculative applications by email."
   },
   "Funatic Games": {
     "description": "Early-stage independent game studio focused on physics-driven, replayable games and gameplay-first design.",
@@ -3358,55 +3442,75 @@
       "https://joinus.fundaygames.dk/jobs/7277761-unsolicited-application"
     ]
   },
-  "Funny Games": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+  "Funny Tales": {
+    "description": "Game-development studio operating as Funny Tales, the trading name of Digital Tales LLC, with an office in Miami, Florida. Its official contact form includes a spontaneous-application option.",
     "headquarters": {
-      "city": "Imola, Emilia-Romagna",
-      "country": "Italy",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "city": "Miami, Florida",
+      "country": "United States",
+      "countryCode": "US",
+      "label": "Office location · official Contact page"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Mobile games"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Not publicly disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Not publicly disclosed",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
+    "focus": [
+      "Mobile",
+      "Game development"
+    ],
     "popularGames": [],
     "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3201&state=&type=",
-      "https://funnytales.us/"
+      "https://funnytales.us/",
+      "https://funnytales.us/contact-us/"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "applicationLocation": "Miami, Florida, USA · the spontaneous-application form does not state remote or cross-border eligibility",
+    "reachHighlights": "The official Contact page identifies the operator as Digital Tales LLC (DBA Funny Tales), lists its Miami office and offers a spontaneous-application option."
   },
   "Futurats": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Independent video-game studio founded in 2023 and based in Turin, Italy. FutuRats combines original game development with co-development and outsourcing services; its portfolio includes the original IP COMPULSE.",
     "headquarters": {
-      "city": "Turin, Piedmont",
+      "city": "Turin",
       "country": "Italy",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "IT",
+      "label": "Studio location · official website"
     },
     "otherLocations": [],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Independent",
+      "Co-development"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Not publicly disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Indie · editorial indication",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3301&state=&type=",
-      "https://futurats.com/"
+    "focus": [
+      "PC",
+      "Original IP",
+      "Co-development",
+      "Outsourcing"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "COMPULSE",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://futurats.com/",
+      "https://futurats.com/work-with-us/",
+      "https://futurats.com/games/"
+    ],
+    "applicationLocation": "Turin, Italy · current listed positions are hybrid; separate freelance role is fully remote within the EU time zone; speculative-route applicant geography is not otherwise stated",
+    "reachHighlights": "The official Contact page explicitly directs open applicants to email rather than use the general contact form."
   },
   "Futureplay Games": {
     "description": "Helsinki casual-game studio within Plarium, creating mobile games for global audiences.",
@@ -3500,80 +3604,82 @@
       "https://g7works.com/"
     ]
   },
-  "Game Boost Sweden": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
-    "headquarters": {
-      "city": "Umea, Norrland",
-      "country": "Sweden",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer"
-    ],
-    "ownership": "Not yet researched",
-    "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3301&state=&type=",
-      "https://www.gameboost.se/"
-    ],
-    "applicationLocation": "Not specified · confirm on the official application route"
-  },
   "Game Tailors": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Delft-based Dutch studio specialising in serious games and interactive experiences. The studio's open-application page specifically describes internship opportunities in marketing, development, art and UX research.",
     "headquarters": {
-      "city": "Delft, Zuid-Holland",
+      "city": "Delft",
       "country": "Netherlands",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "NL",
+      "label": "Studio location · official website"
     },
     "otherLocations": [],
     "companyType": [
-      "Serious Games"
+      "Developer",
+      "Serious games",
+      "Interactive experiences"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Not publicly disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Small studio · editorial indication",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
+    "focus": [
+      "Serious games",
+      "Interactive training",
+      "Game development",
+      "UX research",
+      "Art"
+    ],
     "popularGames": [],
     "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3401&state=&type=",
-      "https://www.gametailors.com/"
+      "https://www.gametailors.com/",
+      "https://www.gametailors.com/over-ons/vacatures/open-sollicitatie"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "applicationLocation": "Delft, Netherlands · the open-application page focuses on internships; office presence is preferred and fully remote eligibility is not stated",
+    "reachHighlights": "The official Open Sollicitatie page invites applicants for internship opportunities in marketing, development, art and UX research; the studio indicates a preference for office attendance."
   },
   "GauravGo Games Technologies": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "India-based game and immersive-technology company with a registered office in Puri and a corporate office in Bhubaneswar, Odisha. Its activities span mobile games, gamification, AR/VR and enterprise experiences; its careers page explicitly invites speculative applications when no vacancy fits.",
     "headquarters": {
-      "city": "Puri, Odisha",
+      "city": "Bhubaneswar, Odisha",
       "country": "India",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "IN",
+      "label": "Corporate office · official company website"
     },
-    "otherLocations": [],
+    "otherLocations": [
+      "Puri, Odisha · registered office"
+    ],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Mobile games",
+      "AR/VR",
+      "Gamification"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Not publicly disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Not publicly disclosed",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3601&state=&type=",
-      "https://gauravgo.com/"
+    "focus": [
+      "Mobile",
+      "Hyper-casual games",
+      "AR",
+      "VR",
+      "Enterprise gamification",
+      "Mayaverse"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "SENA Mayaverse",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://gauravgo.com/",
+      "https://www.gauravgo.com/careers"
+    ],
+    "applicationLocation": "Bhubaneswar and Puri, Odisha, India · the speculative application page does not state remote or international applicant eligibility",
+    "reachHighlights": "The official site lists a corporate office in Bhubaneswar and a registered office in Puri; the Careers page invites speculative applications and links to its application form."
   },
   "Ghost Ship Games": {
     "description": "Copenhagen-based Danish game studio founded in 2016 by six veteran developers. Creator of Deep Rock Galactic and developer of the upcoming Deep Rock Galactic: Rogue Core.",
@@ -3699,54 +3805,77 @@
     "reachHighlights": "Official Open Application route connects candidates to all departments and future opportunities."
   },
   "Gold Town Games": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Swedish mobile sports-game studio based in Skellefteå. The company develops sports-management games and reports a team of approximately 25 people; its official job-opportunities page accepts open applications by email.",
     "headquarters": {
-      "city": "Skelleftea, Vasterbotten",
+      "city": "Skellefteå",
       "country": "Sweden",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "SE",
+      "label": "Studio location · official website"
     },
     "otherLocations": [],
     "companyType": [
-      "Mobile"
+      "Developer",
+      "Mobile games",
+      "Sports games"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Not publicly disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Indie / AA · editorial indication",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3701&state=&type=",
-      "https://goldtowngames.com/en/"
+    "focus": [
+      "Mobile",
+      "Sports management",
+      "Hockey",
+      "Baseball",
+      "Football"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "World Hockey Manager",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://goldtowngames.com/en/",
+      "https://goldtowngames.com/en/about/",
+      "https://goldtowngames.com/en/job-opportunities/"
+    ],
+    "applicationLocation": "Skellefteå, Sweden · the open-application email does not state remote or international applicant eligibility",
+    "reachHighlights": "The official About page identifies the Skellefteå base and sports-management focus; the Careers page invites open applications by email."
   },
   "Greensky Games": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Remote-first game-development studio based in Montréal, Canada, specialising in immersive and extended-reality experiences. Its official Work page invites open applications.",
     "headquarters": {
-      "city": "Remote",
-      "country": "Remote",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "city": "Montréal, Québec",
+      "country": "Canada",
+      "countryCode": "CA",
+      "label": "Studio base · official website"
     },
     "otherLocations": [],
     "companyType": [
-      "Extended Reality (XR)"
+      "Developer",
+      "Extended reality (XR)",
+      "Virtual reality"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Not publicly disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Not publicly disclosed",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
+    "focus": [
+      "XR",
+      "VR",
+      "Immersive experiences",
+      "Game development"
+    ],
     "popularGames": [],
     "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=3801&state=&type=",
-      "https://www.greensky.games/"
+      "https://www.greensky.games/",
+      "https://www.greensky.games/work"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "applicationLocation": "Remote-first · the official page does not specify applicant-country, work-authorisation or role-specific eligibility",
+    "reachHighlights": "The official Work page describes the studio as remote-first and based in Montréal and includes an Open Application route."
   },
   "Havoc Games": {
     "description": "Independent Indian game studio building WEX, a competitive multiplayer game.",
@@ -3967,7 +4096,7 @@
     "description": "Brno-based game developer with a 40+ person team and two decades of experience across Czech and international game productions; builds on Unreal Engine.",
     "headquarters": {
       "city": "Brno",
-      "country": "Czech Republic",
+      "country": "Czechia",
       "countryCode": "CZ",
       "label": "HQ"
     },
@@ -4041,7 +4170,7 @@
     "description": "Privately owned Czech game developer and technology company known for engineering-driven sandbox and simulation games and its VRAGE engine.",
     "headquarters": {
       "city": null,
-      "country": "Czech Republic",
+      "country": "Czechia",
       "countryCode": "CZ",
       "label": "HQ · city not verified"
     },
@@ -4644,49 +4773,12 @@
     "reachHighlights": "Major RPG portfolio includes Fallout: New Vegas, Pillars of Eternity, The Outer Worlds and Avowed."
   },
   "Ocellus": {
-    "description": "Lyon-based game development and art-production studio providing stylized game art and animation services while building its own games teams and projects.",
+    "description": "Lyon-based game group combining original game development with stylized art, animation and game-development services through Ocellus Games and Ocellus Services. Its current careers page lists Ocellus Games positions in Lyon and an Ocellus Services realtime VFX role in Lyon / Remote.",
     "headquarters": {
       "city": "Lyon",
       "country": "France",
       "countryCode": "FR",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Art production",
-      "Animation services"
-    ],
-    "ownership": "Not disclosed",
-    "parentCompany": null,
-    "industryScale": "Not disclosed",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "Game development",
-      "Art production",
-      "Animation",
-      "Stylized games",
-      "PC",
-      "Console",
-      "Mobile"
-    ],
-    "popularGames": [],
-    "profileSources": [
-      "https://ocellus-studio.com/careers",
-      "https://ocellus-studio.com/contact",
-      "https://ocellus-studio.com/games"
-    ],
-    "applicationLocation": "Lyon, France · role-specific arrangements not stated",
-    "reachHighlights": "Ocellus Games is building an independent game-development team alongside Ocellus Services' art-production work."
-  },
-  "Ocellus Studio": {
-    "description": "Lyon-based game group combining original game development with large-scale stylized art, animation and game-development services for major publishers.",
-    "headquarters": {
-      "city": "Lyon",
-      "country": "France",
-      "countryCode": "FR",
-      "label": "HQ"
+      "label": "Studio location · official Careers page"
     },
     "otherLocations": [
       "Ocellus North · Northern France"
@@ -4697,28 +4789,33 @@
       "Art services",
       "Animation"
     ],
-    "ownership": "Privately held · Ocellus Group",
-    "parentCompany": "Ocellus Group",
-    "industryScale": "AA / AAA services",
-    "teamSize": "2–10 at Ocellus Games; 51–200 at Ocellus Services (LinkedIn ranges)",
-    "teamSizeAsOf": "2026",
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "AA / AAA co-development and art services · editorial indication",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
     "focus": [
+      "Game development",
       "Game art",
       "Animation",
       "Cinematics",
+      "Realtime VFX",
+      "Co-development",
       "Live operations",
-      "Co-development"
+      "PC",
+      "Console",
+      "Mobile"
     ],
     "popularGames": [
       {
         "title": "Clash Royale",
         "appId": null,
-        "stage": "Art/live-operations services"
+        "stage": "Art / live-operations services"
       },
       {
         "title": "Fortnite",
         "appId": null,
-        "stage": "Art and creative services"
+        "stage": "Art / creative services"
       },
       {
         "title": "Smurfs: Dreams",
@@ -4731,12 +4828,12 @@
         "stage": "Original studio project"
       }
     ],
-    "applicationLocation": "Lyon / Ocellus North · some roles may allow remote from Lyon",
-    "reachHighlights": "Ocellus Services reports work across 56 games, 3B+ downloads and 245M daily active users on partner live games; these are cumulative partner-work reach figures, not studio-owned players.",
+    "applicationLocation": "Lyon, France · one Ocellus Services role is listed Lyon / Remote; Ocellus Games roles are Lyon-based; the spontaneous route does not state separate applicant-country eligibility",
+    "reachHighlights": "The official Careers page separates Ocellus Services and Ocellus Games roles, with roles listed in Lyon and one Lyon / Remote realtime VFX opening. It also explicitly invites spontaneous applications.",
     "profileSources": [
       "https://ocellus-studio.com/about",
       "https://ocellus-studio.com/services",
-      "https://www.linkedin.com/company/ocellus-games/"
+      "https://ocellus-studio.com/careers"
     ]
   },
   "Octocube Games": {
@@ -5867,45 +5964,6 @@
     "applicationLocation": "Rennes · regular on-site presence expected; role-dependent flexibility",
     "reachHighlights": "Focused independent studio building UNRECORD with gameplay-first development and small specialized teams."
   },
-  "Studios DRAMA / UNRECORD": {
-    "description": "Independent Rennes studio making UNRECORD, a gameplay-first tactical FPS built around high-fidelity realism and systemic design.",
-    "headquarters": {
-      "city": "Rennes",
-      "country": "France",
-      "countryCode": "FR",
-      "label": "HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent",
-    "parentCompany": null,
-    "industryScale": "AA",
-    "teamSize": "Small specialized team · exact count not disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "FPS",
-      "Unreal Engine 5",
-      "Tactical",
-      "Realism"
-    ],
-    "popularGames": [
-      {
-        "title": "UNRECORD",
-        "appId": null,
-        "stage": "In development"
-      }
-    ],
-    "applicationLocation": "Rennes · regular on-site presence expected; role-dependent flexibility",
-    "reachHighlights": "Studio describes UNRECORD as an AA-ambition project.",
-    "profileSources": [
-      "https://studiosdrama.com/career/",
-      "https://studiosdrama.com/unsolicited-application/"
-    ]
-  },
   "SumiGames Studio": {
     "description": "Small, senior game-development and co-development studio working on mobile, PC, multiplayer, XR and Web3 projects for itself and partner teams.",
     "headquarters": {
@@ -5942,49 +6000,6 @@
     "profileSources": [
       "https://www.sumigamesstudio.com/careers",
       "https://www.sumigamesstudio.com/"
-    ],
-    "applicationLocation": "Dubai, UAE / United Kingdom · remote-friendly; applicant-country eligibility not stated",
-    "reachHighlights": "Portfolio mixes conventional game development, XR and Web3/blockchain services; the official Careers page accepts open applications by email."
-  },
-  "SumiGamesStudio": {
-    "description": "Game development and publishing company working across mobile, PC, multiplayer, AR/VR/XR and Web3 experiences.",
-    "headquarters": {
-      "city": "Dubai",
-      "country": "United Arab Emirates",
-      "countryCode": "AE",
-      "label": "Primary base · multi-location"
-    },
-    "otherLocations": [
-      "United Kingdom",
-      "Dubai, United Arab Emirates"
-    ],
-    "companyType": [
-      "Developer",
-      "Publisher",
-      "Services",
-      "Co-development",
-      "Technology services"
-    ],
-    "ownership": "Private company · ownership not publicly detailed",
-    "parentCompany": null,
-    "industryScale": "Indie / AA",
-    "teamSize": "Small senior team · exact count not disclosed",
-    "teamSizeAsOf": "2026",
-    "focus": [
-      "Mobile",
-      "PC",
-      "AR/VR/XR",
-      "Multiplayer",
-      "Web3",
-      "Unity",
-      "Unreal Engine",
-      "Godot"
-    ],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.sumigamesstudio.com/company",
-      "https://www.sumigamesstudio.com/",
-      "https://www.sumigamesstudio.com/careers"
     ],
     "applicationLocation": "Dubai, UAE / United Kingdom · remote-friendly; applicant-country eligibility not stated",
     "reachHighlights": "Portfolio mixes conventional game development, XR and Web3/blockchain services; the official Careers page accepts open applications by email."
@@ -6378,10 +6393,10 @@
   "Uplift Games": {
     "description": "Remote-first Roblox developer behind Adopt Me!, building large-scale social and family-friendly virtual worlds.",
     "headquarters": {
-      "city": null,
+      "city": "Not publicly stated",
       "country": "Not publicly stated",
       "countryCode": "",
-      "label": "Remote-first · no single HQ stated"
+      "label": "Headquarters not publicly disclosed on reviewed official pages"
     },
     "otherLocations": [
       "North America",
@@ -6409,7 +6424,7 @@
         "appId": null
       }
     ],
-    "applicationLocation": "Remote · North America and United Kingdom; work authorization required in US or UK",
+    "applicationLocation": "Remote-first · applicants must live in and have permission to work in the United States or United Kingdom",
     "reachHighlights": "Adopt Me! is reported by Uplift as having 40B+ plays and 425M+ players; Uplift reports a 60+ person team.",
     "profileSources": [
       "https://www.uplift.games/about",
