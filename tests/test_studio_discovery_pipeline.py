@@ -340,6 +340,30 @@ class DatasetUpdateTests(unittest.TestCase):
         discovery.maintain_existing_routes(state, [studio], 1, failure)
         self.assertEqual(studio["applicationResearch"]["routeStatus"], "active")
 
+    def test_conflicting_official_route_pages_do_not_trigger_closure(self):
+        studio = {
+            "name": "Example Game Studio",
+            "websiteUrl": "https://example-studio.example/",
+            "applicationUrl": "https://example-studio.example/apply",
+            "evidenceUrl": "https://example-studio.example/careers",
+        }
+        pages = {
+            "https://example-studio.example/careers": discovery.FetchResult(
+                True,
+                "https://example-studio.example/careers",
+                200,
+                "<p>We welcome speculative applications.</p>",
+            ),
+            "https://example-studio.example/apply": discovery.FetchResult(
+                True,
+                "https://example-studio.example/apply",
+                200,
+                "<p>We are not currently accepting speculative applications.</p>",
+            ),
+        }
+        result = discovery.route_page_check(studio, lambda url, allowed: pages[url])
+        self.assertEqual(result, "unknown")
+
     def test_live_evidence_page_with_missing_submission_page_is_unknown(self):
         studio = {
             "name": "Example Game Studio",
