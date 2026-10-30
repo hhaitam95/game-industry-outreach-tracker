@@ -108,7 +108,8 @@ POSITIVE_ROUTE_PATTERNS = (
     ),
     re.compile(
         r"\b(?:send|submit)\s+(?:us\s+)?(?:your\s+)?(?:cv|résumé|resume|portfolio)\b"
-        r".{0,160}\b(?:future|opportunit|role|position|consider|application)\b",
+        r".{0,160}\b(?:future\s+(?:opportunit|roles?|positions?)|upcoming\s+(?:roles?|positions?)|"
+        r"even\s+if\s+(?:there\s+are\s+)?no\s+(?:open\s+)?(?:roles?|positions?|vacancies))\b",
         re.I | re.S,
     ),
     re.compile(r"\bexpression\s+of\s+interest\b", re.I),
