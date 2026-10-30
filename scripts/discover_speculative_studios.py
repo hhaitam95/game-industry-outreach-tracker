@@ -492,40 +492,6 @@ class SafeRedirectHandler(urllib.request.HTTPRedirectHandler):
         return super().redirect_request(req, fp, code, msg, headers, target)
 
 
-def wait_for_host(host: str) -> None:
-    previous = LAST_REQUEST_BY_HOST.get(host, 0.0)
-    delay = PER_HOST_DELAY_SECONDS - (time.monotonic() - previous)
-    if delay > 0:
-        time.sleep(delay)
-    LAST_REQUEST_BY_HOST[host] = time.monotonic()
-
-
-def robots_allowed(url: str) -> bool:
-    parsed = urllib.parse.urlsplit(url)
-    host = parsed.hostname or ""
-    cache_key = host.lower()
-    if cache_key not in ROBOTS_CACHE:
-        robots_url = urllib.parse.urlunsplit(("https", host, "/robots.txt", "", ""))
-        parser = urllib.robotparser.RobotFileParser()
-        parser.set_url(robots_url)
-        result = fetch_url(
-            robots_url,
-            check_robots=False,
-            timeout=10,
-            max_bytes=250_000,
-            allow_plain_text=True,
-        )
-        if result.ok:
-            parser.parse(result.body.splitlines())
-        elif result.status_code == 404:
-            parser.parse([])
-        else:
-            # A robots policy that cannot be retrieved is treated conservatively.
-            parser.parse(["User-agent: *", "Disallow: /"])
-        ROBOTS_CACHE[cache_key] = parser
-    return ROBOTS_CACHE[cache_key].can_fetch(USER_AGENT, url)
-
-
 def fetch_url(
     url: str,
     allowed_external: bool = False,
