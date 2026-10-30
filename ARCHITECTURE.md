@@ -2,40 +2,32 @@
 
 ## Website
 
-- React and Vite serve the static website on GitHub Pages.
-- `src/data/speculative-route-directory.json` is the public directory of studios with verified speculative/open application routes.
-- `src/data/studio-profiles.json` contains basic researched studio classification and headquarters fields. Unknown facts remain explicitly labelled.
-- `StudioDirectory` renders the compact searchable/filterable table with official links and a Save action.
-- `ApplicationTracker` renders the simple status-based tracker.
-- `App.tsx` connects both pages and stores tracker records in browser `localStorage`. Personal tracker data is not synced to a server and is never committed.
+- React and Vite publish the static site on GitHub Pages.
+- The site has two pages: a searchable/filterable studio directory and a local application tracker.
+- src/data/speculative-route-directory.json contains only studios with verified, active speculative application routes.
+- src/data/studio-profiles.json contains basic researched studio fields. Unknown facts are not guessed.
+- The tracker uses browser localStorage; personal application records are not committed or synced.
 
-## Studio discovery and route verification
+## Candidate collection and route verification
 
-- `scripts/discover_speculative_studios.py` discovers candidate organizations from Wikidata and verifies speculative application routes on official studio sites.
-- Candidate feeds are Wikidata video-game developer entities, developer credits on video games, and video-game company entities.
-- Public structured data is used to find possible studios only. The publication gate requires explicit positive application wording on the studio website or a hiring platform linked from it.
-- The verifier follows only relevant careers/jobs/contact links, respects robots.txt, uses HTTPS, blocks non-public hosts, applies per-host request spacing and limits page/response sizes.
-- English and selected European-language speculative-application phrases are recognized. Explicit rejection language and excluded industry-content signals prevent automatic publication.
-- Candidate records are deduplicated against both normalized studio names and official website domains.
-- New records receive a minimal profile. Missing ownership, scale, team size, notable games and hiring geography are not guessed.
+- scripts/discover_speculative_studios.py collects candidates from GameDevMap and three Wikidata feeds.
+- GameDevMap is read through its public paginated results interface (100 rows per page), not from its raw data files. Its rows include company name, official website, type and location. Non-studio categories and duplicate offices are filtered/deduplicated.
+- The Wikidata feeds cover game developer entities, organisations credited as game developers, and game-industry companies. The developer-credit query excludes personal entities.
+- Candidate sources are leads only. A candidate is published only when an explicit speculative/open application invitation is found on its official site or a directly linked employer-controlled ATS.
+- The verifier follows relevant career/application links, respects robots.txt, enforces HTTPS and public-host checks, applies per-host pacing, and limits page count and response size.
+- Positive and negative wording is checked together. Explicit refusal takes priority; conflicting or ambiguous pages are held back.
+- Network failures, blocks and robots denials never count as route closures. Two consecutive authoritative negative/missing checks are required before closing a route.
 
-## State and scheduled workflow
+## Resumable workflow
 
-- `.github/workflows/discover-studios.yml` runs hourly and supports manual bootstrap/hourly runs.
-- The public dataset is updated only after the discovery script, offline tests, directory validation, existing tests and production build all pass.
-- Updated static data is deployed to GitHub Pages by the same workflow because commits made with `GITHUB_TOKEN` do not trigger a second workflow run.
-- Cursors, candidate status and closure counters are stored in `state/studio-discovery-state.json` on the separate `discovery-state` branch. This avoids creating an hourly state-only commit on the public `main` branch.
-- The initial bootstrap is considered saturated after three complete configured-source passes produce no newly verified studios. Scheduled hourly discovery and route maintenance continue afterwards.
-
-## Closure safety
-
-- Network errors, timeouts, HTTP 403/429, robots restrictions, non-HTML responses and ambiguous pages do not change route status.
-- Explicit official-site rejection or both evidence/application URLs returning 404/410 must be observed in two consecutive checks before a route is marked closed.
-- Closed records remain in the data for historical integrity; the active directory UI filters them out.
+- .github/workflows/discover-studios.yml runs the resumable bulk backfill while GameDevMap pages or due candidate checks remain. It automatically returns to hourly maintenance after the initial candidate queue is processed.
+- Bulk mode reads up to 110 pages per run, checks as many candidates as possible within a 25-minute discovery budget, and persists its offset and candidate statuses. Interrupted runs resume from the saved cursor.
+- Hourly mode checks a smaller rotating source batch, processes due candidates and rechecks existing routes.
+- The public datasets are committed and deployed only after discovery tests, frontend/data tests and the production build pass.
+- Discovery state and cursors are stored on discovery-state, separate from the public dataset. Personal tracker data never enters the repository.
 
 ## Product boundaries
 
-- Two website pages only: studio directory and application tracker.
-- No login, user accounts, remote tracker sync, resume tools, outreach drafting, analytics or automatic applications.
-- Keep headquarters distinct from stated hiring location and remote eligibility.
-- Never store personal application records in the public studio dataset or discovery state.
+- Two website pages only: studio directory and personal application tracker.
+- No login, remote tracker sync, resume tools, outreach drafting, analytics or automatic applications.
+- Keep headquarters distinct from hiring location and confirmed remote eligibility.
