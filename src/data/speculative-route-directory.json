@@ -966,18 +966,22 @@
     "name": "Byterockers’ Games",
     "country": "Germany",
     "websiteUrl": "https://byterockers.games/",
-    "applicationUrl": "https://www.byterockers.games/jobs",
-    "evidenceUrl": "https://www.byterockers.games/jobs",
-    "notes": "Official studio-controlled page explicitly invites unsolicited applications. Evidence: unsolicited application. Hiring geography is not inferred from headquarters.",
+    "applicationUrl": "https://www.byterockers.games/praktikum-byterockersgames",
+    "evidenceUrl": "https://www.byterockers.games/praktikum-byterockersgames",
+    "notes": "The official internship page explicitly invites speculative applications for internships, asks applicants to email their CV and examples of games/designs they have worked on to jobs@byterockers.games, and requires interns to be at least 18 because they may encounter content unsuitable for minors. The general contact page lists the same application email, but the explicit speculative invitation is internship-specific.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
-      "routeType": "unsolicited",
+      "routeType": "discipline_specific",
       "submissionMethods": [
         "email"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
-      "disciplineScope": [],
+      "eligibleLocations": [
+        "Berlin, Germany · internship applicants must be at least 18"
+      ],
+      "disciplineScope": [
+        "Internships only"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
@@ -985,12 +989,12 @@
     }
   },
   {
-    "name": "Campfire Cabal (THQ Nordic)",
+    "name": "Campfire Cabal",
     "country": "Denmark",
     "websiteUrl": "https://campfirecabal.com/",
     "applicationUrl": "https://campfirecabal.com/jobs/",
     "evidenceUrl": "https://campfirecabal.com/jobs/",
-    "notes": "Official studio-controlled page explicitly invites unsolicited applications. Evidence: unsolicited applications. Hiring geography is not inferred from headquarters.",
+    "notes": "The official Jobs page currently says there are no open positions, but explicitly invites unsolicited applications by email to contact@campfirecabal.com and asks applicants to state the role in the subject. The studio is based in Copenhagen. Older role descriptions allowed remote work with a maximum three-hour CET/CEST time difference, but the current unsolicited route does not promise remote eligibility.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "unsolicited",
@@ -998,33 +1002,13 @@
         "email"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
+      "eligibleLocations": [
+        "Copenhagen, Denmark · current unsolicited route does not state remote eligibility"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
-    }
-  },
-  {
-    "name": "Capcom Pictures",
-    "country": "United States",
-    "websiteUrl": "https://capcomusa.com/",
-    "applicationUrl": "https://app.jobvite.com/",
-    "evidenceUrl": "https://jobs.jobvite.com/capcomusa",
-    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-30",
-    "applicationResearch": {
-      "routeType": "general",
-      "submissionMethods": [
-        "ats"
-      ],
-      "workModel": "not_stated",
-      "eligibleLocations": [],
-      "disciplineScope": [],
-      "relatedApplicationUrls": [],
-      "routeStatus": "active",
-      "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-28"
     }
   },
@@ -1032,18 +1016,25 @@
     "name": "Carbonated",
     "country": "United States",
     "websiteUrl": "https://www.carbonated.com/",
-    "applicationUrl": "https://www.carbonated.com/jobs",
+    "applicationUrl": "https://www.carbonated.com/job-listings",
     "evidenceUrl": "https://www.carbonated.com/job-listings",
-    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: general application. Hiring geography is not inferred from headquarters.",
+    "notes": "The official Job Listings page explicitly directs applicants who do not see a matching vacancy to complete a general application so the company can contact them if a suitable role becomes available. The main site describes Carbonated as a mobile PvEvP game developer using AI to drive moment-to-moment gameplay; it does not publish applicant geography or a remote-work policy.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
-        "email"
+        "website_form"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
-      "disciplineScope": [],
+      "eligibleLocations": [
+        "Applicant location and remote-work eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Narrative",
+        "Art",
+        "Marketing"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
@@ -1054,9 +1045,9 @@
     "name": "Chief Rebel",
     "country": "Sweden",
     "websiteUrl": "https://chiefrebel.com/",
-    "applicationUrl": "https://www.teamtailor.com/?utm_campaign=poweredby&utm_content=jobs.chiefrebel.com&utm_medium=referral&utm_source=career-site",
+    "applicationUrl": "https://jobs.chiefrebel.com/connect",
     "evidenceUrl": "https://jobs.chiefrebel.com/",
-    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "notes": "Official Teamtailor Careers site provides an Open Application/Connect route with department selections across art, animation, design, programming, VFX, production, QA, tools and other disciplines. Applicants can leave their email for future job opportunities. The studio is based in central Stockholm; remote eligibility is not stated on the Connect page.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "open",
@@ -1064,8 +1055,19 @@
         "ats"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
-      "disciplineScope": [],
+      "eligibleLocations": [
+        "Stockholm, Sweden · remote or cross-border eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Art",
+        "Animation",
+        "Game design",
+        "Programming",
+        "VFX",
+        "Production",
+        "QA",
+        "Tools"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
@@ -1100,9 +1102,9 @@
     "name": "Chimpworks",
     "country": "Netherlands",
     "websiteUrl": "https://www.chimpworksgames.com/",
-    "applicationUrl": "https://www.chimpworksgames.com/contact-us/",
-    "evidenceUrl": "https://www.chimpworksgames.com/contact-us/",
-    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open Application. Hiring geography is not inferred from headquarters.",
+    "applicationUrl": "https://www.chimpworksgames.com/contact-us",
+    "evidenceUrl": "https://www.chimpworksgames.com/contact-us",
+    "notes": "Official Contact Us page explicitly says applicants may contact the studio to apply for a job and provides a form with a CV upload field. ChimpWorks is based in Eindhoven and develops mobile games; its contact page does not state remote-work or applicant-country eligibility.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "open",
@@ -1110,7 +1112,9 @@
         "website_form"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
+      "eligibleLocations": [
+        "Eindhoven, Netherlands · applicant-country and remote eligibility not stated"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
@@ -1205,16 +1209,23 @@
     "websiteUrl": "https://www.codenamered.nl/",
     "applicationUrl": "https://www.codenamered.nl/",
     "evidenceUrl": "https://www.codenamered.nl/",
-    "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: speculative application. Hiring geography is not inferred from headquarters.",
+    "notes": "The official Join Us section says there are no open positions but explicitly invites speculative applications from developers, artists, designers and producers. The CTA leads to the site's contact form (name, email, company and message fields); applicants can include portfolio links in their message. The studio is based in The Hague and does not publish remote or applicant-country eligibility.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
-        "website_form"
+        "contact_form"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
-      "disciplineScope": [],
+      "eligibleLocations": [
+        "The Hague, Netherlands · applicant-country and remote eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Development",
+        "Art",
+        "Design",
+        "Production"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
@@ -1227,15 +1238,17 @@
     "websiteUrl": "https://coldsymmetry.com/",
     "applicationUrl": "https://www.coldsymmetry.com/jobs",
     "evidenceUrl": "https://www.coldsymmetry.com/jobs",
-    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "notes": "Official Jobs page explicitly invites applicants to complete an open application if no listed role fits their experience. Cold Symmetry describes itself as a distributed studio with fully remote positions and says it considers candidates from anywhere in the world. The application form is embedded on the official jobs page.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
-        "email"
+        "website_form"
       ],
       "workModel": "remote",
-      "eligibleLocations": [],
+      "eligibleLocations": [
+        "Candidates from anywhere in the world may be considered; role-specific work authorisation should be confirmed"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
@@ -1337,19 +1350,19 @@
     "country": "Sweden",
     "websiteUrl": "https://cuttingcornergames.com/",
     "applicationUrl": "https://cuttingcornergames.com/careers/",
-    "evidenceUrl": "https://cuttingcornergames.com/careers/",
-    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "evidenceUrl": "https://cuttingcornergames.com/",
+    "notes": "Paused: the official site has a Career section and invites general questions, collaboration ideas and contact by email, but it does not explicitly invite job or speculative applications. No dedicated application form or application email is published on the Careers section. Do not treat the general contact invitation as an open application route.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "open",
-      "submissionMethods": [
-        "email"
-      ],
+      "submissionMethods": [],
       "workModel": "not_stated",
-      "eligibleLocations": [],
+      "eligibleLocations": [
+        "Linköping, Sweden · application eligibility not stated"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
-      "routeStatus": "active",
+      "routeStatus": "paused",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
     }
@@ -1406,16 +1419,21 @@
     "websiteUrl": "https://cyborn.be/",
     "applicationUrl": "https://www.cyborn.be/job",
     "evidenceUrl": "https://www.cyborn.be/job",
-    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "notes": "Official Jobs page lists vacancies and invites internship applicants to submit a CV, portfolio and short introduction by email to jobs@cyborn.be. This is a verified internship/posted-role application channel, not an unrestricted speculative route for every discipline. The studio's games include Hubris and Wall Town Wonders; its application page is Antwerp-based and does not state international remote eligibility.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
-      "routeType": "open",
+      "routeType": "discipline_specific",
       "submissionMethods": [
         "email"
       ],
-      "workModel": "not_stated",
-      "eligibleLocations": [],
-      "disciplineScope": [],
+      "workModel": "on_site",
+      "eligibleLocations": [
+        "Antwerp, Belgium · remote or cross-border eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Internships",
+        "Roles listed on the official Jobs page"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
@@ -1519,22 +1537,27 @@
     }
   },
   {
-    "name": "Double Eleven (Pneuma Games Group)",
-    "country": "Malaysia",
+    "name": "Double Eleven",
+    "country": "United Kingdom",
     "websiteUrl": "https://www.double11.com/",
-    "applicationUrl": "https://apply.workable.com/j/38C4D1F485",
+    "applicationUrl": "https://apply.workable.com/double-eleven/j/99F32D8BF0",
     "evidenceUrl": "https://double11.com/vacancies/",
-    "notes": "Official studio-controlled page explicitly invites discipline specific applications. Evidence: Expression of Interest. Hiring geography is not inferred from headquarters.",
+    "notes": "Official Vacancies page lists separate Expression of Interest forms for the UK and Kuala Lumpur, both hosted on Double Eleven's Workable account. The UK form is the primary route; the Kuala Lumpur form is included as a related application URL. Double Eleven describes itself as an independent studio with offices/hiring locations in the UK and Malaysia. Applicant eligibility and work model should be confirmed on the relevant location-specific form.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
-      "routeType": "discipline_specific",
+      "routeType": "general",
       "submissionMethods": [
         "ats"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
+      "eligibleLocations": [
+        "United Kingdom (UK Expression of Interest)",
+        "Kuala Lumpur, Malaysia (separate Expression of Interest)"
+      ],
       "disciplineScope": [],
-      "relatedApplicationUrls": [],
+      "relatedApplicationUrls": [
+        "https://apply.workable.com/double-eleven/j/75808FA5F5"
+      ],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-28"
@@ -1546,16 +1569,23 @@
     "websiteUrl": "https://www.ernstborg.studio/",
     "applicationUrl": "https://www.ernstborg.studio/career",
     "evidenceUrl": "https://www.ernstborg.studio/career",
-    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "notes": "Official Careers page explicitly says applicants may submit an open application by emailing a CV and portfolio to job@ernstborg.studio. The studio is based in Malmö and says relocation help may be available for the right candidate. No remote-work or applicant-country eligibility is stated.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
         "email"
       ],
-      "workModel": "not_stated",
-      "eligibleLocations": [],
-      "disciplineScope": [],
+      "workModel": "on_site",
+      "eligibleLocations": [
+        "Malmö, Sweden · relocation assistance may be available for the right candidate"
+      ],
+      "disciplineScope": [
+        "Game art",
+        "Environment art",
+        "Material art",
+        "Game development"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
@@ -1567,38 +1597,40 @@
     "country": "Canada",
     "websiteUrl": "https://www.eidosmontreal.com/",
     "applicationUrl": "https://www.eidosmontreal.com/careers/",
-    "evidenceUrl": "https://www.eidosmontreal.com/contact/",
-    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: general applications. Hiring geography is not inferred from headquarters.",
+    "evidenceUrl": "https://www.eidosmontreal.com/news/tips-for-your-application/",
+    "notes": "Paused pending a directly usable general submission channel. Eidos-Montréal's official application advice article explicitly discusses spontaneous applications and asks candidates to prepare a CV, cover letter and portfolio, but its linked Careers page currently exposes individual job postings through Dayforce and no dedicated open/general application form. The record is retained for review; do not treat the current job list as a verified general application route.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
-      "routeType": "general",
-      "submissionMethods": [
-        "website_form"
+      "routeType": "spontaneous",
+      "submissionMethods": [],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Montréal, Canada · current job postings are Montréal-based; remote arrangements are role-specific"
       ],
-      "workModel": "not_stated",
-      "eligibleLocations": [],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
-      "routeStatus": "active",
+      "routeStatus": "paused",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
     }
   },
   {
-    "name": "Electric Square (Keywords)",
-    "country": "England",
+    "name": "Electric Square",
+    "country": "United Kingdom",
     "websiteUrl": "https://electricsquare.com/",
-    "applicationUrl": "https://electricsquare.com/come-join-us/open-positions/",
+    "applicationUrl": "https://electricsquare.com/come-join-us/",
     "evidenceUrl": "https://electricsquare.com/come-join-us/",
-    "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: Speculative applications. Hiring geography is not inferred from headquarters.",
+    "notes": "Official Come Join Us page explicitly welcomes speculative applications when no current vacancy fits and asks applicants to email a CV and cover letter to Charlotte.pook@electricsquare.com. Electric Square has bases in the UK and Malta and says its flexible work-from-home policy allows it to consider candidates from anywhere in the world. Applicant work rights and the exact arrangement remain role-specific.",
     "checkedAt": "2026-10-30",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
         "email"
       ],
-      "workModel": "not_stated",
-      "eligibleLocations": [],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Candidates from anywhere in the world may be considered under the flexible work-from-home policy; role-specific work authorisation and arrangement must be confirmed"
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
