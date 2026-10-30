@@ -32,7 +32,8 @@
     "profileSources": [
       "https://www.aethrastudios.com/studio/",
       "https://www.aethrastudios.com/press/"
-    ]
+    ],
+    "applicationLocation": "Remote across Europe · CET overlap"
   },
   "Awe Interactive": {
     "description": "Independent remote game studio creating premium PC and console experiences.",
@@ -69,7 +70,8 @@
     "profileSources": [
       "https://www.aweinteractive.com/about",
       "https://www.aweinteractive.com/press"
-    ]
+    ],
+    "applicationLocation": "Location not specified · HQ shown"
   },
   "Asobo Studio": {
     "description": "Large Bordeaux-based developer known for technically ambitious PC and console productions, simulation and narrative adventures.",
@@ -113,7 +115,8 @@
     "profileSources": [
       "https://www.asobostudio.com/about-us",
       "https://www.linkedin.com/company/asobo-studio/"
-    ]
+    ],
+    "applicationLocation": "Bordeaux · on-site"
   },
   "Beenox": {
     "description": "Activision development studio with a long track record in co-development, ports and major franchise production.",
@@ -159,7 +162,8 @@
     "profileSources": [
       "https://beenox.com/",
       "https://investor.activision.com/news-releases/news-release-details/activision-establishes-development-foothold-quebec-acquisition"
-    ]
+    ],
+    "applicationLocation": "Location not specified · HQ shown"
   },
   "CI Games": {
     "description": "Publicly traded Polish video-game developer and publisher, operating multiple development studios and publishing labels.",
@@ -204,7 +208,8 @@
     "profileSources": [
       "https://cigames.com/en/about-us/",
       "https://cigames.com/en/investor-relations/"
-    ]
+    ],
+    "applicationLocation": "Worldwide · fully remote"
   },
   "Cyanide Studio": {
     "description": "Established developer working across sports, strategy, RPG and narrative games, with teams in France and Canada.",
@@ -251,7 +256,8 @@
     "profileSources": [
       "https://cyanide-studio.com/",
       "https://corporate.nacongaming.com/wp-content/uploads/2026/10/Document-URD-NACON-31.03.2026.html"
-    ]
+    ],
+    "applicationLocation": "Location not specified · HQ shown"
   },
   "DON'T NOD (Montreal)": {
     "description": "Montréal subsidiary of French developer and publisher DON'T NOD, established as the group's first international studio.",
@@ -289,7 +295,8 @@
       "https://dont-nod.com/en/dont-nod-montreal-en/",
       "https://dont-nod.com/en/about-us/",
       "https://www.dontnod-bourse.com/en/company"
-    ]
+    ],
+    "applicationLocation": "Montréal-specific application"
   },
   "Fawkes Games": {
     "description": "Game operator and publisher running a portfolio of established online multiplayer and strategy titles.",
@@ -318,7 +325,8 @@
     "profileSources": [
       "https://fawkesgames.com/terms",
       "https://fawkesgames.com/privacy"
-    ]
+    ],
+    "applicationLocation": "Remote · worldwide stated"
   },
   "Hypemasters": {
     "description": "International strategy-game developer with its main development office in Abu Dhabi and a distributed international team.",
@@ -359,7 +367,8 @@
       "https://www.hypemasters.com/",
       "https://www.linkedin.com/company/hypemasters",
       "https://store.steampowered.com/developer/hypemasters_inc"
-    ]
+    ],
+    "applicationLocation": "Location not specified · HQ shown"
   },
   "Katal Games": {
     "description": "Game and software studio building original games, live interactive formats and real-time technology for partner projects.",
@@ -488,7 +497,8 @@
     "profileSources": [
       "https://www.lostboysinteractive.com/",
       "https://www.lostboysinteractive.com/news"
-    ]
+    ],
+    "applicationLocation": "Remote-first · US and Canada"
   },
   "Obsidian Entertainment": {
     "description": "California RPG developer known for narrative-heavy role-playing games and large-scale worlds.",
@@ -565,7 +575,8 @@
     "popularGames": [],
     "profileSources": [
       "https://www.redlygames.com/"
-    ]
+    ],
+    "applicationLocation": "Global remote · EU and Canada preferred"
   },
   "Rustling Leaves Games": {
     "description": "Volunteer-built indie studio developing its first game, with a revenue-share compensation model.",
@@ -677,7 +688,8 @@
     "profileSources": [
       "https://www.supermassivegames.com/about",
       "https://www.reveliolabs.com/companies/supermassive-games/employees"
-    ]
+    ],
+    "applicationLocation": "Guildford · see role-specific conditions"
   },
   "Unknown Worlds": {
     "description": "Independent-origin studio now within Krafton, known for immersive underwater exploration and survival games.",
@@ -716,7 +728,8 @@
     "profileSources": [
       "https://unknownworlds.com/",
       "https://www.krafton.com/en/"
-    ]
+    ],
+    "applicationLocation": "Location not specified · HQ shown"
   },
   "CraftiGames": {
     "description": "Game studio operating large multiplayer Minecraft networks and related online experiences.",
@@ -747,7 +760,8 @@
     "profileSources": [
       "https://www.craftigames.net/contact",
       "https://craftigames.net/terms"
-    ]
+    ],
+    "applicationLocation": "Remote · GMT ±6 hours typically"
   },
   "SumiGamesStudio": {
     "description": "Game development and publishing company working across mobile, PC, multiplayer, AR/VR/XR and Web3 experiences.",
@@ -1035,7 +1049,7 @@
         "appId": null
       }
     ],
-    "applicationLocation": "UK / EU remote options · see route",
+    "applicationLocation": "UK / EU remote options",
     "profileSources": [
       "https://outplay.com/about-us/",
       "https://outplay.com/"
@@ -1181,7 +1195,7 @@
         "appId": null
       }
     ],
-    "applicationLocation": "Remote · global listed on open application",
+    "applicationLocation": "Remote · global stated",
     "profileSources": [
       "https://company.plarium.com/en/studio/finland-helsinki/"
     ]
