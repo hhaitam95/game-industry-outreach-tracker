@@ -11798,5 +11798,76 @@
     ],
     "applicationLocation": "Fully remote per official website; applicant-country and contracting eligibility not stated",
     "reachHighlights": "The official site describes the studio as fully remote and RPG-focused, with leadership experience from established role-playing game productions. The careers page linked from the official homepage accepts open applications."
+  },
+  "Fawkes Games": {
+    "description": "Bulgaria-registered video-game developer, publisher and live-service operator focused on reviving, maintaining and expanding established online game worlds. The company operates a portfolio of MMORPG and browser strategy titles, performs client modernization, gameplay-system overhauls and content updates, and advertises in-house Unity engineering, game art and design roles. It should be classified as a development/live-service publisher, not an original-IP-only studio.",
+    "headquarters": {
+      "city": "Plovdiv",
+      "country": "Bulgaria",
+      "countryCode": "BG",
+      "label": "Registered office · official Terms of Service"
+    },
+    "otherLocations": [
+      "Remote-first team; current roles prefer Europe-friendly time zones"
+    ],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Live-service operator"
+    ],
+    "ownership": "Fawkes Games LTD · registered in Bulgaria; shareholder details not disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie / AA live-service operator · editorial indication",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "MMORPG",
+      "Online strategy",
+      "Live-service games",
+      "Game modernization",
+      "Game content updates",
+      "Unity",
+      "Game operations"
+    ],
+    "popularGames": [
+      {
+        "title": "Shaiya",
+        "appId": null,
+        "stage": "Operated live-service title"
+      },
+      {
+        "title": "Defiance",
+        "appId": null,
+        "stage": "Revival / modernization project"
+      },
+      {
+        "title": "Last Chaos",
+        "appId": null,
+        "stage": "Operated live-service title"
+      },
+      {
+        "title": "Desert Operations",
+        "appId": null,
+        "stage": "Operated live-service title"
+      },
+      {
+        "title": "Wargame 1942",
+        "appId": null,
+        "stage": "Operated live-service title"
+      },
+      {
+        "title": "The Last Train",
+        "appId": null,
+        "stage": "Fawkes-operated title"
+      }
+    ],
+    "profileSources": [
+      "https://fawkesgames.com/",
+      "https://fawkesgames.com/en/careers/",
+      "https://fawkesgames.com/en/terms/"
+    ],
+    "applicationLocation": "Remote worldwide per official Careers page; current freelance roles prefer Europe-friendly time zones. Registered office in Plovdiv, Bulgaria.",
+    "reachHighlights": "Founded in 2023; operates five legacy online game worlds and develops client modernization, gameplay overhauls, content updates and a unified launcher. Careers page explicitly invites spontaneous applications."
   }
 }
