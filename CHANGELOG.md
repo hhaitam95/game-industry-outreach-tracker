@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-10-31 — Worldwide expansion batch 4 (proposed)
+
+- Added Kokku (remote co-development talent pools), Side (Philippines Player Support and regional co-development / QA / animation pools), and Raini Studios (spontaneous remote application).
+- Refreshed Havoc Games to reflect current Remote (India) general application and listed disciplines.
+
+
 ## 2026-10-31 — Worldwide expansion batch 3 (merged in PR #65)
 
 - Added six more employers/teams across Iraq, the Philippines, Brazil and South Korea.
