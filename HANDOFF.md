@@ -38,8 +38,9 @@ Keep the application to the two existing pages. Do not reintroduce the old job-p
 ## Current global-discovery checkpoint
 
 - Main remains at **287 verified routes / 287 profiles** (284 active, 3 paused) until the current batch-6 PR is merged and deployed.
-- The in-progress branch `data/global-discovery-batch-6-20261031` consolidates the previously validated fifth expansion and adds 22cans, Absolutely Games and AB Games, for a proposal of **291 routes / 291 profiles** (288 active, 3 paused).
-- It also corrects submission/eligibility/compensation details for Bossa Studios, Brave At Night and Ember Crows.
+- The in-progress branch `data/global-discovery-batch-6-20261031` consolidates the previously validated fifth expansion and adds 22cans, Absolutely Games and AB Games, for a proposal of **293 routes / 293 profiles** (289 active, 4 paused).
+- It adds Favo Games, DON’T NOD Montréal's explicitly caveated candidate bank and Ubisoft Saguenay, and refreshes Bossa Studios, Brave At Night and Ember Crows.
+- Techtive Games GmbH is paused until its JOIN application route is linked or confirmed through an official employer channel. Fawkes Games is removed because the reviewed evidence establishes publisher/live-operations activity, not in-house game development.
 - Candidate source status and access restrictions are recorded in the Global Discovery Implementation Model. IGDB, GameCompanies.com, Games Jobs Index, Steam, MobyGames and the community dataset are not yet automated feeds; do not describe them as integrated.
 - PR #68 is superseded by the consolidated batch-6 proposal because of a base-branch conflict after the global-model documentation merge. Do not merge it independently.
 
