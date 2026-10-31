@@ -60,7 +60,7 @@ The detailed candidate pool and progress are stored on the separate discovery-st
 
 GitHub Actions runs the discovery workflow hourly. The current pipeline has resumable GameDevMap and Wikidata work, but the additional sources above are still evaluation leads, not integrated feeds.
 
-The existing workflow has a saturation mechanism for its current discovery cycles. The target model is **source-specific saturation**, not a global stop: adding or expanding a source must reopen its discovery; an incomplete/failed source pass must not count as exhaustion; and one source's saturation must not suppress work on others. This is an implementation requirement to audit and complete, not a claim that every future source is already covered.
+The integrated discovery pipeline uses **source-specific saturation**, not a global stop. Each active feed has its own cursor, cycle, verified-addition count and saturation state; three complete empty passes throttle only that feed. Incomplete or failed passes do not count as exhaustion, and one source's saturation does not suppress work on others. Additional candidate sources listed above remain evaluation leads until their adapters are implemented and tested.
 
 Every run adds a sanitized GitHub Actions summary with work counts, candidate-status totals, source cursors and saturation state.
 
