@@ -4648,7 +4648,7 @@
       "https://havocgames.co/",
       "https://havocgames.co/careers"
     ],
-    "applicationLocation": "India · general-application location and remote eligibility not stated"
+    "applicationLocation": "Remote within India · current listings; international eligibility not stated"
   },
   "Hazelight": {
     "description": "Swedish independent game studio founded in 2014 and based in Stockholm. Hazelight develops story-driven cooperative action-adventure games, including A Way Out, It Takes Two and Split Fiction. Its official career site lists approximately 80 co-workers.",
@@ -5503,6 +5503,49 @@
       "https://www.kitfoxgames.com/"
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Kokku": {
+    "description": "Brazil-founded game development and co-development services provider delivering end-to-end creative development for AA and AAA game projects, with teams in Latin America and Europe.",
+    "headquarters": {
+      "city": "Recife",
+      "country": "Brazil",
+      "countryCode": "BR",
+      "label": "Head office · official privacy / data-processing notice"
+    },
+    "otherLocations": [
+      "Europe · specific offices not confirmed in the reviewed profile",
+      "Other Latin American locations · specific offices not confirmed"
+    ],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "External development services"
+    ],
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "AA / AAA co-development services",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Game development",
+      "Co-development",
+      "QA",
+      "Backend engineering",
+      "Rendering",
+      "UI/UX",
+      "Production",
+      "Art and animation"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://kokkugames.com/about-us/",
+      "https://kokkugames.factorialhr.com.br/",
+      "https://kokkugames.factorialhr.com.br/apply",
+      "https://kokkugames.factorialhr.com.br/terms"
+    ],
+    "applicationLocation": "Remote talent-pool roles are listed; country eligibility and requirements vary by discipline and contract"
   },
   "Kolibri Games": {
     "description": "Berlin-based mobile game studio known for idle and simulation games, including Idle Miner Tycoon; acquired by Ubisoft in 2020.",
@@ -7645,6 +7688,54 @@
     "applicationLocation": "Not stated",
     "reachHighlights": "Builds the Janus Engine in-house and develops two original game universes, Puppies vs. Kittens and RiftBleed (studio-reported)."
   },
+  "Raini Studios": {
+    "description": "Australian game studio developing blockchain-enabled and digital-collectible games, including the card battler The Lords of Light.",
+    "headquarters": {
+      "city": null,
+      "country": "Australia",
+      "countryCode": "AU",
+      "label": "Australian studio · city not stated on reviewed official careers page"
+    },
+    "otherLocations": [
+      "Remote team; Australian Eastern time-zone overlap preferred"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Digital collectibles",
+      "Card battler",
+      "Game design",
+      "Technical art",
+      "UI/UX"
+    ],
+    "popularGames": [
+      {
+        "title": "The Lords of Light",
+        "appId": null
+      },
+      {
+        "title": "Lucha Throwdown",
+        "appId": null
+      },
+      {
+        "title": "Jon Jones Brawler",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://raini.io/",
+      "https://raini.io/careers/"
+    ],
+    "applicationLocation": "Remote · AEST/AEDT time-zone overlap preferred; broader country eligibility not stated"
+  },
   "Ratloop Games Canada": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
     "headquarters": {
@@ -8318,6 +8409,55 @@
       "https://jobs.shirogames.com/jobs/general-application/"
     ],
     "applicationLocation": "Bordeaux, France · the studio invites candidates to live in Bordeaux"
+  },
+  "Side": {
+    "description": "Global game services and co-development provider offering engineering, art, audio, quality assurance, localisation and player support to game developers and publishers.",
+    "headquarters": {
+      "city": null,
+      "country": "Not stated",
+      "countryCode": "",
+      "label": "Global services provider · single headquarters not confirmed on the reviewed careers pages"
+    },
+    "otherLocations": [
+      "London, United Kingdom",
+      "Paris, France",
+      "Braga, Portugal",
+      "São Paulo, Brazil",
+      "Other regional delivery locations"
+    ],
+    "companyType": [
+      "Co-development",
+      "Game development services",
+      "Player support",
+      "Quality assurance",
+      "Localisation"
+    ],
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "Global game services provider",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Player support",
+      "Email support",
+      "Game support",
+      "Quality assurance",
+      "Localization QA",
+      "Co-development",
+      "Programming",
+      "Art",
+      "Animation",
+      "Audio",
+      "Localization"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://side.inc/About",
+      "https://side.inc/careers",
+      "https://apply.workable.com/sideinc/",
+      "https://apply.workable.com/sideinc/j/2952D9213F/"
+    ],
+    "applicationLocation": "Regional talent pools: remote Player Support in the Philippines; remote LATAM co-development contract; APAC animation on-site contract; selected Europe LQA pools"
   },
   "Silent Games": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",

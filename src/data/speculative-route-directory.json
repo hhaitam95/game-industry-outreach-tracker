@@ -2817,18 +2817,26 @@
     "websiteUrl": "https://havocgames.co/",
     "applicationUrl": "https://havocgames.co/careers",
     "evidenceUrl": "https://havocgames.co/careers",
-    "notes": "Official careers page says candidates whose profile does not match a listed role can send a general application through its application form. Independent game studio from India building WEX; CV and portfolio are required.",
+    "notes": "The official Careers page provides a general application for candidates whose profile does not match a listed role; CV and portfolio are requested. The current careers listings include remote roles in India and accept applications across game-development and art disciplines. Remote hiring is stated for India; cross-border eligibility is not stated.",
     "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
         "website_form"
       ],
-      "workModel": "not_stated",
+      "workModel": "remote",
       "eligibleLocations": [
-        "India · applicant location and remote eligibility not specified"
+        "Remote within India · current careers listings are marked Remote (India); international work eligibility is not stated"
       ],
-      "disciplineScope": [],
+      "disciplineScope": [
+        "Any team",
+        "Game development",
+        "Programming",
+        "Game design",
+        "3D environment art",
+        "3D character / weapon art",
+        "Production"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
@@ -3429,6 +3437,45 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Kokku",
+    "country": "Brazil",
+    "websiteUrl": "https://kokkugames.com/",
+    "applicationUrl": "https://kokkugames.factorialhr.com.br/job_posting/haven-t-found-the-perfect-job-position-yet-submit-your-resume-here-240529",
+    "evidenceUrl": "https://kokkugames.factorialhr.com.br/",
+    "notes": "Official careers site has an Open Application for candidates who have not found the right role and says it stores resumes in a talent bank for future opportunities. A separate official application form has an optional consent checkbox for inclusion in the talent pool and contact about future jobs. Current remote talent-pool roles include QA, backend/game programming, rendering, UI/UX and production. Individual roles have their own country, language and experience requirements; worldwide eligibility is not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote · individual talent-pool listings are marked remote; country-specific hiring eligibility and language requirements vary by role and are not universally stated"
+      ],
+      "disciplineScope": [
+        "Quality assurance",
+        "Game testing",
+        "Backend engineering",
+        "Game programming",
+        "Rendering",
+        "UI/UX",
+        "Game design",
+        "Production",
+        "Producer"
+      ],
+      "relatedApplicationUrls": [
+        "https://kokkugames.factorialhr.com.br/apply",
+        "https://kokkugames.factorialhr.com.br/job_posting/qa-lead-talent-pool-314398",
+        "https://kokkugames.factorialhr.com.br/job_posting/producer-sr-principal-talent-pool-308225",
+        "https://kokkugames.factorialhr.com.br/job_posting/game-developer-mid-sr-backend-talent-pool-280092"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-29"
     }
   },
@@ -5003,6 +5050,34 @@
     }
   },
   {
+    "name": "Raini Studios",
+    "country": "Australia",
+    "websiteUrl": "https://raini.io/",
+    "applicationUrl": "https://raini.io/careers/",
+    "evidenceUrl": "https://raini.io/careers/",
+    "notes": "Official Careers page says Raini is not actively hiring for a specific vacancy but is always open to hearing from the right talent, and invites candidates to send a CV and application for future opportunities. Current talent interests include Technical Artist, UI/UX Designer and Game Designer; the page offers remote work and prefers Australian Eastern time-zone overlap (AEST/AEDT), while remaining flexible about other locations. The page's email address is obfuscated; the official Careers page is retained as the application destination rather than guessing the address.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote · AEST/AEDT time-zone overlap preferred; wider country eligibility is not explicitly stated"
+      ],
+      "disciplineScope": [
+        "Technical art",
+        "UI/UX design",
+        "Game design"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Ratloop Games Canada",
     "country": "Canada",
     "websiteUrl": "https://www.ratloopgamescanada.com/",
@@ -5454,6 +5529,48 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Side",
+    "country": "Not stated",
+    "websiteUrl": "https://side.inc/",
+    "applicationUrl": "https://apply.workable.com/sideinc/j/2952D9213F/",
+    "evidenceUrl": "https://side.inc/careers",
+    "notes": "Side is a global game-development services and co-development provider rather than a single game studio. Its official careers system maintains future talent pools rather than immediate vacancies in several regions and disciplines. The primary route recorded here is a remote Player Support Representative / Email Support talent pool in the Philippines, for future project-based client opportunities. Other official pools include LATAM co-development programming (remote contract, with listed cities in Brazil, Mexico, Argentina and Colombia), LATAM animation/technical animation, APAC animation/technical animation (on-site in listed cities including Manila, Bengaluru, Kuala Lumpur, Taipei and Auckland), and selected European LQA pools. Eligibility and contract terms are role-specific; this is not a worldwide-remote general application.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "discipline_specific",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Philippines · remote Player Support / Email Support future talent pool",
+        "LATAM programming and animation pools · remote contract; listed hiring cities include São Paulo, Mexico City, Guadalajara, Buenos Aires and Bogotá",
+        "APAC animation / technical animation pool · on-site contract; listed locations include Manila, Bengaluru, Kuala Lumpur, Taipei and Auckland",
+        "Selected European LQA pools · remote or location-specific by language and project"
+      ],
+      "disciplineScope": [
+        "Player support",
+        "Email support",
+        "Game support",
+        "Quality assurance",
+        "Localization QA",
+        "Programming",
+        "Co-development",
+        "Animation",
+        "Technical animation"
+      ],
+      "relatedApplicationUrls": [
+        "https://apply.workable.com/sideinc/j/FB02F8DA68/",
+        "https://apply.workable.com/sideinc/j/7A0295D084/",
+        "https://apply.workable.com/sideinc/j/7DA23A6877/",
+        "https://apply.workable.com/sideinc/j/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-29"
     }
   },
