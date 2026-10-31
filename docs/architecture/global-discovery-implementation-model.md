@@ -243,6 +243,19 @@ The following is an ordered engineering plan, not a priority ranking of employer
 
 All these decisions are evidence-led and provisional where marked for manual review; recheck employer pages before changing a held or excluded disposition.
 
+### Additional verified speculative-route findings — 2026-10-31
+
+- **Favo Games (Türkiye):** its official Careers page offers an explicit Open application option for skills not represented by current openings, accepts a CV and portfolio through its form, and states that the five-person Istanbul studio works remotely from anywhere. Country-specific employment/contract arrangements are not enumerated. Added as a legitimate mobile/puzzle game developer with an active route.
+- **DON’T NOD Montréal (France / Canada):** the official careers page lists a Montréal Spontaneous Application and links to an employer-hosted SmartRecruiters candidate-bank posting. The posting asks candidates to describe their desired work and explicitly states it does not represent a current or future recruitment need; only selected applicants are contacted. It says candidates may work anywhere in Québec. Added as a speculative candidate-bank route with these limitations prominent; do not describe it as an active vacancy.
+- **Ubisoft Saguenay (Canada):** the official studio careers page explicitly invites applicants whose desired position is not posted to email a CV and portfolio to `rhsaguenay@ubisoft.com`. The official studio site separately identifies Saguenay's contribution to NFL Primetime Fantasy and XDefiant. Added as a distinct Ubisoft development studio, without inferring remote or applicant-country eligibility.
+
+### Qualification corrections from source rechecks — 2026-10-31
+
+- **Techtive Games GmbH:** the JOIN company profile contains a spontaneous application and links to `techtive.games`, but the current official Techtive domain redirects to the ARDEM game website and does not link back to the JOIN route. The route's employer-controlled relationship cannot currently be established under the direct official-evidence standard. The directory record is paused pending direct employer confirmation; do not count it as active.
+- **Fawkes Games:** its current official About material describes a European publisher/operator of established online games, live operations and indie publishing. The reviewed official sources did not establish an in-house game-development studio. Removed from the public *studio* directory under the developer-identity gate; reconsider only if evidence of direct in-house development emerges.
+
+
+
 ## 10. Handover protocol
 
 At the start of any new work session or handover:
