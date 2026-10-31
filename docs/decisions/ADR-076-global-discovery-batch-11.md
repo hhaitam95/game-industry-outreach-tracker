@@ -1,7 +1,7 @@
 # ADR-076 — Global discovery batch 11: FakeFish, Winning Streak and ByteRockers; source verification correction
 
 - Date: 2026-10-31
-- Status: Proposed on PR #70; not merged to main
+- Status: Merged to main via PR #70; FakeFish identity consolidated by ADR-078
 - Depends on: Global Discovery Implementation Model; ADR-071 through ADR-075.
 
 ## Decision
@@ -83,11 +83,11 @@ Add three further studios after both the developer-identity gate and explicit sp
 
 ## Data / validation
 
-- Proposal dataset after this pass: **311 route records / 311 matching profiles**.
+- Historical proposal snapshot after this pass: **311 route records / 311 matching profiles** before final identity reconciliation.
 - Status: **306 active / 5 paused**.
 - Country/location labels: **51**.
-- Three new route/profile pairs: FakeFish Games, Winning Streak Games and ByteRockers' Games.
+- Three candidate route/profile pairs were prepared: FakeFish (now consolidated with the existing Fakefish record by ADR-078), Winning Streak Games and ByteRockers' Games.
 - Existing route/profile updates: Redly Games, HypeHype and Plummy Games.
 - Manual exclusion added: Xatronic Software GmbH.
 - Run Python discovery tests, frontend tests, lockfile registry, directory validator, route review, production build, privacy boundary, Pages artifact validation and browser acceptance on the exact PR head.
-- Do not merge or deploy without normal review and exact-head CI success.
+- PR #70 was subsequently merged after exact-head CI success. The duplicate FakeFish record was consolidated in ADR-078.

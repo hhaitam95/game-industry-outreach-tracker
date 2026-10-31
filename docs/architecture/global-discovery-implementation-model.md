@@ -190,6 +190,15 @@ Saturation is source-specific, not global. A source may enter a slower maintenan
 
 Keep source-level checkpoints and candidate progress resumable. Do not overwrite a newer discovery-state snapshot with a stale workflow run.
 
+### Implemented source-specific cadence (ADR-070)
+
+The runtime feed inventory is `config/discovery-sources.json`. The discovery script loads this manifest and validates each source ID, adapter kind, refresh policy and saturation settings. The private state schema is v2 and migrates schema-v1 cursors/candidates additively.
+
+The three Wikidata feeds each own their cursor, cycle, verified-addition count, complete-empty-pass count, saturation flag and last-pass outcome. Three complete empty passes throttle only that feed to one page per hourly run; unsaturated feeds retain the remaining run budget. A verified route resets only its originating feed. Due candidate work keeps that feed's pass open; future retries/manual-review candidates mark the pass incomplete and cannot increment saturation. Failed fetches do not advance cursors or count as complete passes.
+
+GameDevMap remains a one-time catalogue backfill. Its terminal numeric offset is preserved and is not restarted by recurring Wikidata maintenance. Legacy candidate records without saved Wikidata query-feed provenance remain unattributed; do not guess their origin.
+
+
 ## 8. Accuracy and quality safeguards
 
 - Candidate directories are leads, never proof.
@@ -207,14 +216,14 @@ Keep source-level checkpoints and candidate progress resumable. Do not overwrite
 
 The following is an ordered engineering plan, not a priority ranking of employers or regions.
 
-1. **Preserve the model and source registry.** Keep this document and the project handoff current. Add a machine-readable source manifest/coverage ledger so source status, terms, cursors and last-harvest dates are explicit.
-2. **Audit existing discovery behaviour.** Check current GameDevMap/Wikidata adapters, candidate states, exclusion patterns, source saturation and reporting against this model. The current script has initial adult/vice keyword patterns; these are not yet a complete company-level classification system.
+1. **Preserve the model and source registry.** Keep this document and the project handoff current. Maintain `config/discovery-sources.json` as the machine-readable inventory for integrated adapters, source coverage, access/policy notes, pagination, refresh policy and per-source saturation settings.
+2. **Continue the discovery-quality audit.** The GameDevMap/Wikidata adapter cadence, private checkpoint migration and source-specific saturation are implemented. Continue auditing candidate identity, adult/vice false positives, source failure handling and company-level classification against this model; keyword patterns are not a complete company-level classification system.
 3. **Add source adapters only after access review.** Evaluate the IGDB Company API first as a structured company/game-credit source, using Twitch credentials stored only in repository Actions secrets after the user configures them. Evaluate GameCompanies.com, Games Jobs Index, Steam and permitted regional datasets independently. Do not automate GameCompanies.com without written permission; retain Games Jobs Index as a manual lead source until its automation terms are established. Preserve provenance for every source.
 4. **Review MobyGames access separately.** Use only authorized API access, subject to its current API and content terms. Do not implement page scraping.
 5. **Strengthen entity classification and deduplication.** Distinguish original developers, developer-publishers, subsidiaries, co-development/service providers, publishers-only entities and non-studio organisations.
 6. **Strengthen exclusion review.** Use evidence-backed manual exclusions and a cautious classifier with tests that protect legitimate mainstream studios from theme/keyword false positives.
 7. **Strengthen application-route verification.** Improve multilingual patterns and evidence extraction without weakening the requirement for explicit official acceptance.
-8. **Make coverage source-specific.** Add per-source progress, exhaustion, failure and refresh reporting. Ensure new sources reopen discovery and no source's saturation stops global work.
+8. **Maintain source-specific coverage.** Per-source cursors, pass outcomes, empty-pass counters, saturation and throttle budgets are implemented. Ensure every new adapter enters the source manifest with reviewed access terms, explicit coverage and tests; a new source must start with its own unsaturated checkpoint.
 9. **Expand, validate and maintain.** Process sources in resumable batches, review ambiguous cases, deduplicate, test and publish only verified route/profile datasets.
 
 ## 11. Live research decision log — 2026-10-31
@@ -395,7 +404,7 @@ A legitimate one-person video-game developer can satisfy the studio gate. If the
 
 #### Current batch checkpoint
 
-The proposal branch contains **314 route/profile pairs**, **309 active** and **5 paused**, across **51 country/location labels**. Main remains at 287/287 until PR #70 is reviewed, merged and deployed.
+Main contains **313 unique studio/employer records / 313 matching profiles**, **308 active** and **5 paused**, across **51 country/location labels**. PR #70 and PR #71 are merged. The pre-deduplication PR #70 dataset had 314 rows because Fakefish and FakeFish Games represented the same official employer/application route; ADR-078 records the canonical FakeFish consolidation.
 
 ## 10. Handover protocol
 

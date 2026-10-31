@@ -20,8 +20,8 @@ Exclude organisations materially focused on pornography/adult sexual entertainme
 
 - The live site remains limited to Studio Directory and My applications.
 - Personal tracker entries remain in the visitor's browser localStorage. No application records or CVs are committed to the public repository.
-- Current main contains **287 studio/employer records**, **287 matching profiles**, **284 active** and **3 paused** routes across **48 country/location labels**.
-- The open PR #70 proposal branch currently contains **314 route records / 314 matching profiles**, with **309 active** and **5 paused** routes across **51 country/location labels**. These are proposed data, not yet merged into main or deployed.
+- Current main contains **313 unique studio/employer records**, **313 matching profiles**, **308 active** and **5 paused** routes across **51 country/location labels**.
+- PR #70 (global route expansion) and PR #71 (source-specific discovery saturation) are both merged into `main`. PR #70's 314 raw rows included two entries for the same FakeFish studio and identical official application route; ADR-078 consolidates them into one canonical `FakeFish` record.
 - This batch-6 branch consolidates PR #68's fifth expansion and subsequent manual global research. PR #68 is superseded; do not merge it separately.
 - The proposal includes the prior batch's additions/updates: Sudden Forest, 22cans, Absolutely Games, AB Games, Favo Games, DON’T NOD Montréal and Ubisoft Saguenay; updates to Chimera Entertainment, Supermassive Games, Bossa Studios, Brave At Night and Ember Crows; plus the earlier batch-6 work.
 - Four additional routes added in this continuation are **AnkleBreaker Studio**, **Alice in Games**, **No Roof Games** and **Skytale**. Their route and profile records are one-to-one.
@@ -33,15 +33,16 @@ Exclude organisations materially focused on pornography/adult sexual entertainme
 - The existing **Next Level Games** route was refreshed: hybrid Vancouver, at least three studio days per week, Canada work authorization and current British Columbia residence are now recorded.
 - Additional rechecks confirmed that Raw Power Games, Futureplay Games and Shiro Games are already in the directory; they were not duplicated. Studio Countdown and welevel were not added because the official videogame-developer/official-route gates were not sufficiently established.
 - Existing Redly Games and HypeHype records were refreshed to match current official pages. **Plummy Games** was moved to paused because its Teamtailor Open Application could not be linked forward from the official company site.
-- Do not count any proposed route in main until PR #70 is reviewed, merged and deployed.
+- The merged 313-record dataset is present on `main`; deployment and the first post-merge source-discovery run are tracked separately in GitHub Actions.
 
 ## Discovery pipeline checkpoint
 
 - Currently integrated candidate feeds: GameDevMap public paginated results and three Wikidata feeds (video-game developer entities, credited developer organisations and video-game company entities).
-- The latest known successful saved discovery checkpoint is [run 41191375366](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41191375366), completed on 2026-10-31 after processing seven source pages and adding 304 candidates.
+- The latest pre-migration saved checkpoint is [run 41191375366](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41191375366), completed on 2026-10-31 after processing seven source pages and adding 304 candidates. PR #71 now migrates discovery state additively from schema v1 to v2 on the next successful run.
 - At that checkpoint, the pipeline had seen **10,370 candidates**, cumulatively verified **126 routes**, recorded **56 suitability exclusions**, **7,883 no-route outcomes** and **79 manual-review cases**. These are automated candidate-pipeline counters, not the manually researched/current public directory totals.
 - Later scheduled runs [41200057779](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41200057779) and [41200817331](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41200817331) stopped safely on upstream Wikidata request timeouts. They did not advance or publish partial source checkpoints.
 - Temporary failures, blocked access, robots denials and incomplete parsing do not count as confirmed no-route evidence and do not close existing routes.
+- Per-feed saturation is now implemented via `config/discovery-sources.json`: the three Wikidata feeds own independent cursors/cycles and only a source with three complete empty passes is throttled. GameDevMap remains a one-time backfill. Failed/incomplete passes do not count as exhaustion.
 - The additional discovery indexes documented below are not yet integrated adapters; manual research does not mean automated ingestion.
 
 ## Additional candidate sources identified — not yet integrated
@@ -68,11 +69,10 @@ Exclude organisations materially focused on pornography/adult sexual entertainme
 
 ## Next engineering and research work
 
-1. Synchronize the proposal branch with current main if it diverges, rerun the full validation suite on the exact PR head, and review PR #70. Do not merge without user approval.
+1. Verify the first post-merge Pages publication and source-discovery workflow outcomes; confirm the schema v2 discovery-state migration preserves all v1 cursors and candidates.
 2. Continue global candidate discovery from additional regional and international indexes; do not prioritize by country, studio size, genre, discipline or personal career fit. Resolve DreamCentury's paid-credits/prize model and retry President Studio's official TSP application link before adding either.
-3. Add a source manifest/coverage ledger and make saturation source-specific, not global.
-4. Evaluate IGDB and other candidate sources against access terms, coverage, provenance and attribution. Keep Games Jobs Index as a manual lead source until automated access is authorized.
-5. Continue identity resolution, company-level industry exclusions and official speculative-route verification.
-6. Record every material source, route, exclusion and manual-review finding in the Global Discovery Implementation Model, ADRs, CHANGELOG and STATUS.
+3. Maintain the source manifest and evaluate additional adapters one at a time, including access terms, coverage, provenance, attribution and source-specific request limits. Keep Games Jobs Index as a manual lead source until automated access is authorized.
+4. Continue identity resolution, company-level industry exclusions and official speculative-route verification; the directory validator now rejects duplicate rows with the same official website, application route and evidence page.
+5. Record every material source, route, exclusion and manual-review finding in the Global Discovery Implementation Model, ADRs, CHANGELOG and STATUS.
 
 Manual real-site acceptance and stabilization remain separate release work; see [issue #11](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/11).

@@ -270,6 +270,33 @@
     }
   },
   {
+    "name": "Abrakam Studio",
+    "country": "Belgium",
+    "websiteUrl": "https://www.abrakam.com/",
+    "applicationUrl": "https://www.abrakam.com/contact",
+    "evidenceUrl": "https://www.abrakam.com/careers",
+    "notes": "Official Careers page links a “Spontaneous apply” route and invites candidates whose profile does not match a current opening to send a CV and portfolio. The official Contact page explicitly identifies careers@abrakam.com for spontaneous applications and includes “Job application” in its enquiry form. The company is based at an official address in Angleur, Liège; remote and applicant-country eligibility are not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email",
+        "contact_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Angleur, Liège, Belgium · official company address; remote and applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [
+        "https://www.abrakam.com/careers"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Absolutely Games",
     "country": "United Kingdom",
     "websiteUrl": "https://www.absolutelygames.net/",
@@ -337,6 +364,30 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Aesir Interactive",
+    "country": "Germany",
+    "websiteUrl": "https://aesir-interactive.com/",
+    "applicationUrl": "https://aesir-interactive.com/careers",
+    "evidenceUrl": "https://aesir-interactive.com/careers",
+    "notes": "Official Careers page explicitly invites an initiative application from candidates who do not see a suitable role, asks for a CV and portfolio, and provides jobs@aesir-interactive.com. The studio is based in Munich, Bavaria. The general initiative route does not state remote-work or applicant-country eligibility.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Munich, Bavaria, Germany · official studio location; remote and applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -429,6 +480,64 @@
     }
   },
   {
+    "name": "Ahoiii Entertainment",
+    "country": "Germany",
+    "websiteUrl": "https://www.ahoiii.com/en/",
+    "applicationUrl": "https://www.ahoiii.com/en/jobs",
+    "evidenceUrl": "https://www.ahoiii.com/en/contact",
+    "notes": "Official Contact page explicitly lists both open positions and speculative applications and directs candidates to the Jobs page. The Jobs page asks applicants to send a portfolio and a few words about themselves to jobs@ahoiii.com. The studio is based in Cologne and develops children's and family games; remote and applicant-country eligibility for speculative applications are not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Cologne, Germany · official studio location; remote and applicant-country eligibility for speculative applications not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [
+        "https://www.ahoiii.com/en/contact"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Alice in Games",
+    "country": "Germany",
+    "websiteUrl": "https://aliceingames.com/",
+    "applicationUrl": "https://aliceingames.com/career/",
+    "evidenceUrl": "https://aliceingames.com/career/",
+    "notes": "Official Career page explicitly provides an Open Application and invites artists, developers, designers and other creatives even when no specific role fits. It asks for a resume, portfolio or a short introduction by email to info@aliceingames.com. The official Contact page lists an office in Berlin, Germany. The About page describes a small independent studio and says its first story-driven game is in development, but no title, platform, release date or team size is publicly disclosed. Remote and applicant-country eligibility are not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Berlin, Germany · official Contact page lists an office; remote and applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Art",
+        "Development",
+        "Design",
+        "Storytelling"
+      ],
+      "relatedApplicationUrls": [
+        "https://aliceingames.com/about/",
+        "https://aliceingames.com/contact/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "AlterEyes",
     "country": "Belgium",
     "websiteUrl": "https://altereyes.com/",
@@ -472,6 +581,38 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "AnkleBreaker Studio",
+    "country": "France",
+    "websiteUrl": "https://anklebreaker-studio.com/",
+    "applicationUrl": "https://anklebreaker-studio.com/careers",
+    "evidenceUrl": "https://anklebreaker-studio.com/careers",
+    "notes": "Official Careers page has a “Don't see your role?” invitation: candidates with an exceptional skill not listed may send a portfolio, project or letter to hello@anklebreaker-studio.com. This is an open invitation for unlisted disciplines, separate from the eight advertised Mithrall vacancies. The studio describes itself as an independent French indie studio near Paris; it works in person by default, with remote considered for the right person and role. Current careers pages say the team has ten senior members. Profit-sharing is stated for shipped titles; do not imply a conventional bonus or guaranteed compensation terms beyond the employer's own wording.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "on_site",
+      "eligibleLocations": [
+        "Near Paris, France · in-person is the default; remote is considered for the right person and role"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Art",
+        "Programming",
+        "Design",
+        "Animation",
+        "Technical art",
+        "Other unlisted skills"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -1143,6 +1284,43 @@
     }
   },
   {
+    "name": "ByteRockers' Games",
+    "country": "Germany",
+    "websiteUrl": "https://www.byterockers.games/",
+    "applicationUrl": "https://www.byterockers.games/de/jobs",
+    "evidenceUrl": "https://www.byterockers.games/de/jobs",
+    "notes": "Official Jobs page explicitly says that candidates who do not find a suitable role, or when the company is not actively hiring, should send an Initiativbewerbung to jobs@byterockers.games. It specifically addresses people passionate about developing video games. Official About page says ByteRockers' Games creates its own games and began publishing other creative teams' projects in 2024. The legal Impressum identifies ByteRockers' Games GmbH & Co. KG at Schloßstraße 110, 12163 Berlin. Its developer credits include Insurmountable, Beat Slayer and Gelly Break Deluxe; the current homepage also features further PC/console titles. The unsolicited route does not separately state work model or applicant-country eligibility.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Berlin, Germany · official registered address; work model and applicant-country eligibility for unsolicited applicants not stated"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Programming",
+        "Game design",
+        "Art",
+        "Animation",
+        "Audio",
+        "QA",
+        "Production",
+        "Publishing"
+      ],
+      "relatedApplicationUrls": [
+        "https://www.byterockers.games/de/%C3%BCber-uns",
+        "https://www.byterockers.games/de/impressum"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Byterockers’ Games",
     "country": "Germany",
     "websiteUrl": "https://byterockers.games/",
@@ -1219,6 +1397,39 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Cenrellia Studios",
+    "country": "Not stated",
+    "websiteUrl": "https://cenrelliastudios.com/",
+    "applicationUrl": "https://cenrelliastudios.com/de/contact",
+    "evidenceUrl": "https://cenrelliastudios.com/de/careers",
+    "notes": "The official Careers page explicitly invites unsolicited pitches for art, music, commissioned development, QA and community work when there are no current job openings. It directs applicants to the company contact form and tells them to select “Careers” as the subject. The About page describes Cenrellia as an independent game studio and explicitly says it is currently a one-person business. Its Games page lists Stellar Hustler, published for Steam/PC (Linux-first), Android and iOS. This is a solo-development business accepting unsolicited collaboration/work pitches, not an employer advertising regular vacancies; compensation and engagement terms are not stated and must be agreed directly.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "contact_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Country and hiring location not stated on the reviewed official pages"
+      ],
+      "disciplineScope": [
+        "Art",
+        "Music",
+        "Commissioned game development",
+        "Quality assurance",
+        "Community work"
+      ],
+      "relatedApplicationUrls": [
+        "https://cenrelliastudios.com/de/about",
+        "https://cenrelliastudios.com/de/games"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -1394,6 +1605,39 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Cluetivity",
+    "country": "Germany",
+    "websiteUrl": "https://www.cluetivity.com/",
+    "applicationUrl": "https://cluetivity.jobs.personio.de/job/431574?language=en",
+    "evidenceUrl": "https://www.cluetivity.com/careers/",
+    "notes": "Official Careers page embeds the employer's Personio job system, where an Initiative Application is listed. The Personio page explicitly invites applicants to make contact when their desired job is not listed. Cluetivity is a Berlin-created developer of GPS-based, location-based and mobile games and an associated game-creation platform, with AR-enabled outdoor/indoor experiences. It is included as a specialised digital-game developer, not represented as a conventional PC/console studio. The Personio listing allows remote work or Berlin, but applicant-country eligibility is not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Berlin, Germany or remote · employer listing says remote or Berlin; applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Mobile game development",
+        "GPS-based games",
+        "Location-based games",
+        "Augmented reality",
+        "Game platform development"
+      ],
+      "relatedApplicationUrls": [
+        "https://www.cluetivity.com/about/",
+        "https://www.cluetivity.com/careers/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -2107,34 +2351,39 @@
     }
   },
   {
-    "name": "Fakefish",
+    "name": "FakeFish",
     "country": "Finland",
     "websiteUrl": "https://www.fakefishgames.com/",
     "applicationUrl": "https://www.fakefishgames.com/jobs/open-application",
     "evidenceUrl": "https://www.fakefishgames.com/jobs",
-    "notes": "The official Jobs page provides a dedicated open-application route and invites prospective team members to email their application. FakeFish is based in Turku; the page does not set a general international remote policy.",
-    "checkedAt": "2026-10-30",
+    "notes": "Official Careers page explicitly tells candidates not to hesitate to fill out the Open Application form if no current role fits. The dedicated application asks candidates who do not see their job listed to submit information so the studio can keep them in mind for future opportunities. FakeFish is an independent game-development studio working on Barotrauma and an undisclosed second game. Its current About page describes a flexible workplace with headquarters in Turku and a smaller Helsinki office. The Open Application page reports a team of about 25 people as of early 2023; the current homepage describes about 20 people, so the older role-page figure should not be treated as current headcount.",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
-        "email"
+        "website_form"
       ],
       "workModel": "not_stated",
       "eligibleLocations": [
-        "Turku, Finland · cross-border and remote eligibility not stated"
+        "Turku, Finland and beyond · official page says Turku & beyond and flexible work; no applicant-country eligibility or fixed remote policy stated"
       ],
-      "disciplineScope": [],
-      "relatedApplicationUrls": [],
+      "disciplineScope": [
+        "Programming",
+        "Art",
+        "Game design",
+        "Quality assurance",
+        "Production",
+        "Community management",
+        "Audio"
+      ],
+      "relatedApplicationUrls": [
+        "https://www.fakefishgames.com/about-us",
+        "https://www.fakefishgames.com/our-games"
+      ],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
-    },
-    "submissionMethods": [
-      "email"
-    ],
-    "eligibleLocations": [
-      "Turku, Finland · cross-border and remote eligibility not stated"
-    ]
+      "nextReviewAt": "2027-01-29"
+    }
   },
   {
     "name": "Fast Travel Games",
@@ -2185,6 +2434,41 @@
       ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Fawkes Games",
+    "country": "Bulgaria",
+    "websiteUrl": "https://fawkesgames.com/",
+    "applicationUrl": "https://fawkesgames.com/en/careers/",
+    "evidenceUrl": "https://fawkesgames.com/en/careers/",
+    "notes": "Official Careers page says candidates who do not see a suitable role are welcome to send a spontaneous application. The same page currently lists Unity Game Engineer, 2D Game Artist, Game Designer, Producer and 2.5D Pixel Artist positions, describing them as remote freelance roles with Europe-friendly time zones preferred. The company is a Bulgaria-registered game developer, publisher and live-service operator rather than an original-IP-only studio: its official materials describe client modernization, gameplay-system overhauls, content expansions and development/maintenance across operated online games, and it advertises in-house Unity/game-art/design roles. Its terms identify Fawkes Games LTD, registered in Plovdiv, Bulgaria. The Careers page says work can be remote worldwide, while individual roles prefer Europe-friendly time zones.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote worldwide per official Careers page; current roles are freelance and prefer Europe-friendly time zones"
+      ],
+      "disciplineScope": [
+        "Unity game engineering",
+        "2D game art",
+        "Game design",
+        "Production",
+        "Quality assurance",
+        "Live operations",
+        "Game content development"
+      ],
+      "relatedApplicationUrls": [
+        "https://fawkesgames.com/en/terms/",
+        "https://fawkesgames.com/en/"
+      ],
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-29"
@@ -3395,6 +3679,39 @@
     }
   },
   {
+    "name": "Iteration One",
+    "country": "Germany",
+    "websiteUrl": "https://www.iterationone.com/",
+    "applicationUrl": "https://join.com/companies/iterationonecom/spontaneous-application",
+    "evidenceUrl": "https://www.iterationone.com/",
+    "notes": "The official homepage links its Career section directly to the employer's JOIN recruitment page. The JOIN page includes a dedicated Spontaneous Application and explicitly says there may be no suitable job available now, but candidates' skills may match a future role; it invites applicants to upload a CV and cover letter. Iteration One is a self-funded independent gaming studio and publisher in Karlsruhe, developing free-to-play mobile idle/tycoon games. Its live title Nightclub Tycoon is described by the employer as having been played by millions. The employer profile lists 1–10 employees. Current listed positions are in Karlsruhe, but the open application itself does not state work model or applicant-country eligibility.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Karlsruhe, Germany · studio location and current listed roles; work model and applicant-country eligibility for spontaneous applicants not stated"
+      ],
+      "disciplineScope": [
+        "Mobile game development",
+        "Game design",
+        "Software engineering",
+        "User acquisition",
+        "Performance marketing",
+        "Product management"
+      ],
+      "relatedApplicationUrls": [
+        "https://join.com/companies/iterationonecom"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Kabam",
     "country": "Canada",
     "websiteUrl": "https://www.kabam.com/",
@@ -4455,6 +4772,37 @@
     }
   },
   {
+    "name": "No Roof Games",
+    "country": "Finland",
+    "websiteUrl": "https://noroofgames.com/",
+    "applicationUrl": "https://noroofgames.com/open-application/",
+    "evidenceUrl": "https://noroofgames.com/open-application/",
+    "notes": "Official homepage identifies No Roof Games as a small mobile game studio from Tampere, Finland. Its dedicated Open Application page explicitly invites applications for casual real-time multiplayer games and asks candidates to send an application letter and CV, with a game portfolio link if available, to contact@noroofgames.com. The official About page reports a three-person team with over 20 years of combined industry experience. The company's current release, Heroes & Friends GO, is also listed under the developer name on Google Play. Remote and applicant-country eligibility for the open application are not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Tampere, Finland · official studio location; remote and applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Mobile game development",
+        "Unity",
+        "Casual games",
+        "Real-time multiplayer"
+      ],
+      "relatedApplicationUrls": [
+        "https://noroofgames.com/about/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Nomad Games",
     "country": "United Kingdom",
     "websiteUrl": "https://nomadgames.co.uk/",
@@ -5076,6 +5424,41 @@
     }
   },
   {
+    "name": "Procedural Games",
+    "country": "Spain",
+    "websiteUrl": "https://proceduralgames.com/",
+    "applicationUrl": "https://careers.proceduralgames.com/en/jobs/candidatura-espontanea",
+    "evidenceUrl": "https://careers.proceduralgames.com/en/jobs/candidatura-espontanea",
+    "notes": "The official Procedural Games homepage links directly to its Careers subdomain. The employer-controlled application portal lists an “Always open” Open application and says candidates who do not see a suitable role can submit a CV to be considered when a matching role opens. It is explicitly not a firm job offer; CV retention is up to 12 months and requires applicant permission. The portal lists hybrid work at Lanzadera in Valencia, depending on the role. The official homepage describes an independent mobile-game studio founded in Valencia in 2023, with game design, Unity development, live operations, monetization and user acquisition handled in-house. It encourages international applications and remote collaboration, while the open role itself is marked hybrid/Valencia.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "Valencia, Spain · hybrid at Lanzadera; exact arrangement depends on the role. The company says it encourages international applications and remote collaboration, but the open application posting itself is listed as hybrid/Valencia"
+      ],
+      "disciplineScope": [
+        "Mobile game development",
+        "Unity programming",
+        "Game art",
+        "Game design",
+        "Marketing",
+        "Quality assurance",
+        "Live operations"
+      ],
+      "relatedApplicationUrls": [
+        "https://proceduralgames.com/",
+        "https://careers.proceduralgames.com/en"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Psyon Games",
     "country": "Finland",
     "websiteUrl": "https://psyongames.com/",
@@ -5232,6 +5615,39 @@
         "Game design"
       ],
       "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Rapidfire Games",
+    "country": "Cyprus",
+    "websiteUrl": "https://rapidfire.games/",
+    "applicationUrl": "https://rapidfire.games/",
+    "evidenceUrl": "https://rapidfire.games/",
+    "notes": "Official Careers section says there are no open positions right now but explicitly invites an open application with a portfolio or CV through the careers contact shown on the page. The studio describes itself as an independent team of 18 working remotely from around the world and developing free-to-play mobile games; its live title is Backpack Brawl. The legal documents identify the operating company in Cyprus (Geri, registration HE460989), although the terms and privacy pages vary slightly in the company-name styling. A globally distributed team does not by itself establish that applicants can be hired in every country; applicant-country and contracting eligibility are not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Registered office: Geri, Cyprus · team states that it works remotely across the world; applicant-country and contracting eligibility are not stated"
+      ],
+      "disciplineScope": [
+        "Mobile game development",
+        "Game design",
+        "Art",
+        "Programming",
+        "Production"
+      ],
+      "relatedApplicationUrls": [
+        "https://rapidfire.games/privacy-policy/",
+        "https://rapidfire.games/terms-and-conditions/"
+      ],
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-29"
@@ -5848,6 +6264,77 @@
     }
   },
   {
+    "name": "Skytale",
+    "country": "France",
+    "websiteUrl": "https://skytale.fr/en/",
+    "applicationUrl": "https://app.skytale.fr/rejoindre",
+    "evidenceUrl": "https://app.skytale.fr/rejoindre",
+    "notes": "Official application page includes a “Candidature spontanée” route and invites people to join the studio. Skytale is a French non-profit, volunteer-run video-game studio: it reports 80+ volunteers across three continents, 100% remote work, no employees and no commercial budget. The application is for volunteering, not paid employment. Its projects include The Last Artifact, a free Minecraft adventure/puzzle game, and Z'Wonder Battle, a charity tower-defense project. Candidates can apply with a CV and two or three links; preserve the volunteer-only status prominently.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Volunteer team across three continents; 100% remote; no paid employment or applicant-country restriction stated"
+      ],
+      "disciplineScope": [
+        "Administration",
+        "Project management",
+        "Game design",
+        "Game testing",
+        "Sound design",
+        "2D/3D art",
+        "Development",
+        "Communication"
+      ],
+      "relatedApplicationUrls": [
+        "https://skytale.fr/en/qui-sommes-nous"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Sleeprunner Studios",
+    "country": "Germany",
+    "websiteUrl": "https://sleeprunnerstudios.com/",
+    "applicationUrl": "https://sleeprunnerstudios.com/jobs/",
+    "evidenceUrl": "https://sleeprunnerstudios.com/jobs/",
+    "notes": "Official Jobs page explicitly invites unsolicited applications from designers, programmers, artists, marketers and other contributors when no current vacancy fits. Applications must be sent by email to hello@sleeprunnerstudios.com in PDF format, with CV, portfolio and motivation letter. The five-person indie studio is based in Bayreuth and develops core PC/console games with Unreal Engine. The employer says employees must reside in Germany or the EU; freelance collaborations are possible worldwide. Its current workplace is hybrid, and relocation support is mentioned.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Bayreuth, Germany · employee hiring limited to people residing in Germany or the EU; freelance collaboration possible worldwide; hybrid workplace"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Programming",
+        "Art",
+        "2D art",
+        "Level design",
+        "Game design",
+        "Marketing",
+        "Unreal Engine"
+      ],
+      "relatedApplicationUrls": [
+        "https://sleeprunnerstudios.com/about/",
+        "https://sleeprunnerstudios.com/press/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "SmashByte",
     "country": "Brazil",
     "websiteUrl": "https://smashbyte.com.br/",
@@ -6055,6 +6542,47 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Square Enix",
+    "country": "Japan",
+    "websiteUrl": "https://www.jp.square-enix.com/",
+    "applicationUrl": "https://hrmos.co/pages/square-enix/jobs/00001/apply?_ga=2.56325035.1257445894.1654503188-1642193798.1609815115",
+    "evidenceUrl": "https://www.jp.square-enix.com/recruit/career/careerlink/index.html",
+    "notes": "Official mid-career recruitment site explicitly invites Career Registration from people who do not want to limit themselves to one job type or whose desired role is not currently advertised. The company reviews registered profiles across departments and can introduce suitable roles, including positions not listed publicly. This is a candidate registration, not a promise of an interview or job; registration remains valid for three years. The official page says the entire Square Enix Group may be considered for matching. Current career categories include game development, production/operations, CG, sound, localization and R&D, alongside publishing, media and corporate functions. The company profile lists Tokyo (Shinjuku) headquarters plus Shibuya and Osaka offices; the career-registration page does not state work-model or overseas applicant eligibility.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Japan · SQUARE ENIX Group career registration; offices in Shinjuku, Shibuya and Osaka. The registration page does not specify work model or overseas applicant eligibility"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Production",
+        "Game operations",
+        "CG production",
+        "Sound",
+        "Localization",
+        "R&D",
+        "Publishing",
+        "Media",
+        "Marketing",
+        "IT",
+        "Quality assurance",
+        "Customer support"
+      ],
+      "relatedApplicationUrls": [
+        "https://www.jp.square-enix.com/recruit/career/",
+        "https://www.jp.square-enix.com/recruit/career/data/index.html"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -6311,6 +6839,30 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Stratosphere Games",
+    "country": "Germany",
+    "websiteUrl": "https://www.stratosphere-games.com/en/",
+    "applicationUrl": "https://stratosphere-games.jobs.personio.de/job/1318003?language=en",
+    "evidenceUrl": "https://www.stratosphere-games.com/en/jobs/initiative-application-part-time-full-time/",
+    "notes": "Official Careers page offers an “Initiative Application” and explicitly invites applications when no fitting offer exists. The directly linked employer-managed Personio listing accepts applications for future consideration and is full- or part-time/permanent in Berlin. The Careers page describes a mixture of office and remote work; applicant-country eligibility is not stated. Official pages report different team sizes (60 on the careers listing and nearly 35 on the current homepage), so the profile preserves that discrepancy.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Berlin, Germany · initiative application listed as full- or part-time permanent; employer describes a mixture of office and remote work; applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -6673,6 +7225,39 @@
     }
   },
   {
+    "name": "Tarokai",
+    "country": "Switzerland",
+    "websiteUrl": "https://www.tarokai.com/",
+    "applicationUrl": "https://www.tarokai.com/",
+    "evidenceUrl": "https://www.tarokai.com/",
+    "notes": "Official homepage explicitly invites spontaneous applications by email to careers@tarokai.com when the candidate does not see a suitable role. The site identifies Tarokai as a Swiss mobile-game studio and lists remote full-time roles in engineering, design, growth and art. Its live title is Peach Farmer, a free-to-play collectible-card game for iOS and Android linking card collection to real-world experiences. The Legal Notice identifies Tarokai SA as a Swiss société anonyme but does not disclose a registered city/address. Remote listings do not establish applicant-country or contracting eligibility.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Swiss company (Tarokai SA); current listings are full-remote, but applicant-country and contracting eligibility are not stated"
+      ],
+      "disciplineScope": [
+        "Mobile game development",
+        "Unity engineering",
+        "Game design",
+        "User acquisition",
+        "3D art",
+        "Community and live events"
+      ],
+      "relatedApplicationUrls": [
+        "https://www.tarokai.com/legal"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Techtive Games GmbH",
     "country": "Germany",
     "websiteUrl": "https://techtive.games/",
@@ -6808,6 +7393,40 @@
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Thought Pennies",
+    "country": "Not stated",
+    "websiteUrl": "https://www.thoughtpennies.com/",
+    "applicationUrl": "https://thought-pennies.careers-page.com/open-application",
+    "evidenceUrl": "https://www.thoughtpennies.com/",
+    "notes": "The official Thought Pennies website links directly to its “Join Us” page on the employer's careers-page.com subdomain. That linked page explicitly invites candidates to submit a resume even when no suitable position is listed and provides a dedicated Open application route. The studio describes itself as a fully remote, story-first RPG developer focused on emotional storytelling and technically ambitious role-playing games. The official site identifies the legal entity as Thought Pennies, Inc. but does not state a registered country or headquarters city. Remote work is stated; applicant-country and contracting eligibility are not.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Fully remote per official studio website; legal incorporation country, applicant-country and contracting eligibility are not stated"
+      ],
+      "disciplineScope": [
+        "Role-playing game development",
+        "Art",
+        "Visual effects",
+        "Programming",
+        "Game design",
+        "Narrative",
+        "Technical development"
+      ],
+      "relatedApplicationUrls": [
+        "https://thought-pennies.careers-page.com/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -7277,6 +7896,41 @@
     }
   },
   {
+    "name": "Winning Streak Games",
+    "country": "Germany",
+    "websiteUrl": "https://winningstreakgames.de/",
+    "applicationUrl": "https://winningstreakgames.de/",
+    "evidenceUrl": "https://winningstreakgames.de/",
+    "notes": "Official company homepage contains a dedicated Initiativbewerbung section explicitly inviting candidates to write even when no listed job fits. The company's Impressum publishes the recruitment contact gkoehler@winningstreak.de. Winning Streak Games is a Cologne-based developer of PC simulation games; its own site identifies WE ARE FOOTBALL 2027 and WE ARE FOOTBALL 2024 and records the company's founding in Cologne in 2018. All advertised jobs are full-time in Cologne; home office is possible only as an exception. The company has a publishing agreement with THQ Nordic but is a direct developer, not a publisher-only business.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "on_site",
+      "eligibleLocations": [
+        "Cologne, Germany · advertised positions are full-time in Cologne; home office only in exceptional cases"
+      ],
+      "disciplineScope": [
+        "PC game development",
+        "Simulation",
+        "Programming",
+        "Game design",
+        "UI",
+        "Graphics",
+        "Quality assurance",
+        "Database/game systems"
+      ],
+      "relatedApplicationUrls": [
+        "https://winningstreakgames.de/impressum.html"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Wolfjaw Studios",
     "country": "United States",
     "websiteUrl": "https://wolfjawstudios.com/",
@@ -7536,690 +8190,6 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
-    }
-  },
-  {
-    "name": "Abrakam Studio",
-    "country": "Belgium",
-    "websiteUrl": "https://www.abrakam.com/",
-    "applicationUrl": "https://www.abrakam.com/contact",
-    "evidenceUrl": "https://www.abrakam.com/careers",
-    "notes": "Official Careers page links a “Spontaneous apply” route and invites candidates whose profile does not match a current opening to send a CV and portfolio. The official Contact page explicitly identifies careers@abrakam.com for spontaneous applications and includes “Job application” in its enquiry form. The company is based at an official address in Angleur, Liège; remote and applicant-country eligibility are not stated.",
-    "checkedAt": "2026-10-31",
-    "applicationResearch": {
-      "routeType": "spontaneous",
-      "submissionMethods": [
-        "email",
-        "contact_form"
-      ],
-      "workModel": "not_stated",
-      "eligibleLocations": [
-        "Angleur, Liège, Belgium · official company address; remote and applicant-country eligibility not stated"
-      ],
-      "disciplineScope": [],
-      "relatedApplicationUrls": [
-        "https://www.abrakam.com/careers"
-      ],
-      "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
-    }
-  },
-  {
-    "name": "Aesir Interactive",
-    "country": "Germany",
-    "websiteUrl": "https://aesir-interactive.com/",
-    "applicationUrl": "https://aesir-interactive.com/careers",
-    "evidenceUrl": "https://aesir-interactive.com/careers",
-    "notes": "Official Careers page explicitly invites an initiative application from candidates who do not see a suitable role, asks for a CV and portfolio, and provides jobs@aesir-interactive.com. The studio is based in Munich, Bavaria. The general initiative route does not state remote-work or applicant-country eligibility.",
-    "checkedAt": "2026-10-31",
-    "applicationResearch": {
-      "routeType": "spontaneous",
-      "submissionMethods": [
-        "email"
-      ],
-      "workModel": "not_stated",
-      "eligibleLocations": [
-        "Munich, Bavaria, Germany · official studio location; remote and applicant-country eligibility not stated"
-      ],
-      "disciplineScope": [],
-      "relatedApplicationUrls": [],
-      "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
-    }
-  },
-  {
-    "name": "Ahoiii Entertainment",
-    "country": "Germany",
-    "websiteUrl": "https://www.ahoiii.com/en/",
-    "applicationUrl": "https://www.ahoiii.com/en/jobs",
-    "evidenceUrl": "https://www.ahoiii.com/en/contact",
-    "notes": "Official Contact page explicitly lists both open positions and speculative applications and directs candidates to the Jobs page. The Jobs page asks applicants to send a portfolio and a few words about themselves to jobs@ahoiii.com. The studio is based in Cologne and develops children's and family games; remote and applicant-country eligibility for speculative applications are not stated.",
-    "checkedAt": "2026-10-31",
-    "applicationResearch": {
-      "routeType": "speculative",
-      "submissionMethods": [
-        "email"
-      ],
-      "workModel": "not_stated",
-      "eligibleLocations": [
-        "Cologne, Germany · official studio location; remote and applicant-country eligibility for speculative applications not stated"
-      ],
-      "disciplineScope": [],
-      "relatedApplicationUrls": [
-        "https://www.ahoiii.com/en/contact"
-      ],
-      "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
-    }
-  },
-  {
-    "name": "Stratosphere Games",
-    "country": "Germany",
-    "websiteUrl": "https://www.stratosphere-games.com/en/",
-    "applicationUrl": "https://stratosphere-games.jobs.personio.de/job/1318003?language=en",
-    "evidenceUrl": "https://www.stratosphere-games.com/en/jobs/initiative-application-part-time-full-time/",
-    "notes": "Official Careers page offers an “Initiative Application” and explicitly invites applications when no fitting offer exists. The directly linked employer-managed Personio listing accepts applications for future consideration and is full- or part-time/permanent in Berlin. The Careers page describes a mixture of office and remote work; applicant-country eligibility is not stated. Official pages report different team sizes (60 on the careers listing and nearly 35 on the current homepage), so the profile preserves that discrepancy.",
-    "checkedAt": "2026-10-31",
-    "applicationResearch": {
-      "routeType": "spontaneous",
-      "submissionMethods": [
-        "ats"
-      ],
-      "workModel": "mixed",
-      "eligibleLocations": [
-        "Berlin, Germany · initiative application listed as full- or part-time permanent; employer describes a mixture of office and remote work; applicant-country eligibility not stated"
-      ],
-      "disciplineScope": [],
-      "relatedApplicationUrls": [],
-      "routeStatus": "active",
-      "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-29"
-    }
-  },
-  {
-    "name": "AnkleBreaker Studio",
-    "country": "France",
-    "websiteUrl": "https://anklebreaker-studio.com/",
-    "applicationUrl": "https://anklebreaker-studio.com/careers",
-    "evidenceUrl": "https://anklebreaker-studio.com/careers",
-    "notes": "Official Careers page has a “Don't see your role?” invitation: candidates with an exceptional skill not listed may send a portfolio, project or letter to hello@anklebreaker-studio.com. This is an open invitation for unlisted disciplines, separate from the eight advertised Mithrall vacancies. The studio describes itself as an independent French indie studio near Paris; it works in person by default, with remote considered for the right person and role. Current careers pages say the team has ten senior members. Profit-sharing is stated for shipped titles; do not imply a conventional bonus or guaranteed compensation terms beyond the employer's own wording.",
-    "checkedAt": "2026-10-31",
-    "applicationResearch": {
-      "routeType": "open",
-      "submissionMethods": [
-        "email"
-      ],
-      "workModel": "on_site",
-      "eligibleLocations": [
-        "Near Paris, France · in-person is the default; remote is considered for the right person and role"
-      ],
-      "disciplineScope": [
-        "Game development",
-        "Art",
-        "Programming",
-        "Design",
-        "Animation",
-        "Technical art",
-        "Other unlisted skills"
-      ],
-      "relatedApplicationUrls": [],
-      "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
-    }
-  },
-  {
-    "name": "Alice in Games",
-    "country": "Germany",
-    "websiteUrl": "https://aliceingames.com/",
-    "applicationUrl": "https://aliceingames.com/career/",
-    "evidenceUrl": "https://aliceingames.com/career/",
-    "notes": "Official Career page explicitly provides an Open Application and invites artists, developers, designers and other creatives even when no specific role fits. It asks for a resume, portfolio or a short introduction by email to info@aliceingames.com. The official Contact page lists an office in Berlin, Germany. The About page describes a small independent studio and says its first story-driven game is in development, but no title, platform, release date or team size is publicly disclosed. Remote and applicant-country eligibility are not stated.",
-    "checkedAt": "2026-10-31",
-    "applicationResearch": {
-      "routeType": "open",
-      "submissionMethods": [
-        "email"
-      ],
-      "workModel": "not_stated",
-      "eligibleLocations": [
-        "Berlin, Germany · official Contact page lists an office; remote and applicant-country eligibility not stated"
-      ],
-      "disciplineScope": [
-        "Art",
-        "Development",
-        "Design",
-        "Storytelling"
-      ],
-      "relatedApplicationUrls": [
-        "https://aliceingames.com/about/",
-        "https://aliceingames.com/contact/"
-      ],
-      "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
-    }
-  },
-  {
-    "name": "No Roof Games",
-    "country": "Finland",
-    "websiteUrl": "https://noroofgames.com/",
-    "applicationUrl": "https://noroofgames.com/open-application/",
-    "evidenceUrl": "https://noroofgames.com/open-application/",
-    "notes": "Official homepage identifies No Roof Games as a small mobile game studio from Tampere, Finland. Its dedicated Open Application page explicitly invites applications for casual real-time multiplayer games and asks candidates to send an application letter and CV, with a game portfolio link if available, to contact@noroofgames.com. The official About page reports a three-person team with over 20 years of combined industry experience. The company's current release, Heroes & Friends GO, is also listed under the developer name on Google Play. Remote and applicant-country eligibility for the open application are not stated.",
-    "checkedAt": "2026-10-31",
-    "applicationResearch": {
-      "routeType": "open",
-      "submissionMethods": [
-        "email"
-      ],
-      "workModel": "not_stated",
-      "eligibleLocations": [
-        "Tampere, Finland · official studio location; remote and applicant-country eligibility not stated"
-      ],
-      "disciplineScope": [
-        "Mobile game development",
-        "Unity",
-        "Casual games",
-        "Real-time multiplayer"
-      ],
-      "relatedApplicationUrls": [
-        "https://noroofgames.com/about/"
-      ],
-      "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
-    }
-  },
-  {
-    "name": "Skytale",
-    "country": "France",
-    "websiteUrl": "https://skytale.fr/en/",
-    "applicationUrl": "https://app.skytale.fr/rejoindre",
-    "evidenceUrl": "https://app.skytale.fr/rejoindre",
-    "notes": "Official application page includes a “Candidature spontanée” route and invites people to join the studio. Skytale is a French non-profit, volunteer-run video-game studio: it reports 80+ volunteers across three continents, 100% remote work, no employees and no commercial budget. The application is for volunteering, not paid employment. Its projects include The Last Artifact, a free Minecraft adventure/puzzle game, and Z'Wonder Battle, a charity tower-defense project. Candidates can apply with a CV and two or three links; preserve the volunteer-only status prominently.",
-    "checkedAt": "2026-10-31",
-    "applicationResearch": {
-      "routeType": "spontaneous",
-      "submissionMethods": [
-        "website_form"
-      ],
-      "workModel": "remote",
-      "eligibleLocations": [
-        "Volunteer team across three continents; 100% remote; no paid employment or applicant-country restriction stated"
-      ],
-      "disciplineScope": [
-        "Administration",
-        "Project management",
-        "Game design",
-        "Game testing",
-        "Sound design",
-        "2D/3D art",
-        "Development",
-        "Communication"
-      ],
-      "relatedApplicationUrls": [
-        "https://skytale.fr/en/qui-sommes-nous"
-      ],
-      "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
-    }
-  },
-  {
-    "name": "Rapidfire Games",
-    "country": "Cyprus",
-    "websiteUrl": "https://rapidfire.games/",
-    "applicationUrl": "https://rapidfire.games/",
-    "evidenceUrl": "https://rapidfire.games/",
-    "notes": "Official Careers section says there are no open positions right now but explicitly invites an open application with a portfolio or CV through the careers contact shown on the page. The studio describes itself as an independent team of 18 working remotely from around the world and developing free-to-play mobile games; its live title is Backpack Brawl. The legal documents identify the operating company in Cyprus (Geri, registration HE460989), although the terms and privacy pages vary slightly in the company-name styling. A globally distributed team does not by itself establish that applicants can be hired in every country; applicant-country and contracting eligibility are not stated.",
-    "checkedAt": "2026-10-31",
-    "applicationResearch": {
-      "routeType": "open",
-      "submissionMethods": [
-        "email"
-      ],
-      "workModel": "remote",
-      "eligibleLocations": [
-        "Registered office: Geri, Cyprus · team states that it works remotely across the world; applicant-country and contracting eligibility are not stated"
-      ],
-      "disciplineScope": [
-        "Mobile game development",
-        "Game design",
-        "Art",
-        "Programming",
-        "Production"
-      ],
-      "relatedApplicationUrls": [
-        "https://rapidfire.games/privacy-policy/",
-        "https://rapidfire.games/terms-and-conditions/"
-      ],
-      "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
-    }
-  },
-  {
-    "name": "Sleeprunner Studios",
-    "country": "Germany",
-    "websiteUrl": "https://sleeprunnerstudios.com/",
-    "applicationUrl": "https://sleeprunnerstudios.com/jobs/",
-    "evidenceUrl": "https://sleeprunnerstudios.com/jobs/",
-    "notes": "Official Jobs page explicitly invites unsolicited applications from designers, programmers, artists, marketers and other contributors when no current vacancy fits. Applications must be sent by email to hello@sleeprunnerstudios.com in PDF format, with CV, portfolio and motivation letter. The five-person indie studio is based in Bayreuth and develops core PC/console games with Unreal Engine. The employer says employees must reside in Germany or the EU; freelance collaborations are possible worldwide. Its current workplace is hybrid, and relocation support is mentioned.",
-    "checkedAt": "2026-10-31",
-    "applicationResearch": {
-      "routeType": "unsolicited",
-      "submissionMethods": [
-        "email"
-      ],
-      "workModel": "mixed",
-      "eligibleLocations": [
-        "Bayreuth, Germany · employee hiring limited to people residing in Germany or the EU; freelance collaboration possible worldwide; hybrid workplace"
-      ],
-      "disciplineScope": [
-        "Game development",
-        "Programming",
-        "Art",
-        "2D art",
-        "Level design",
-        "Game design",
-        "Marketing",
-        "Unreal Engine"
-      ],
-      "relatedApplicationUrls": [
-        "https://sleeprunnerstudios.com/about/",
-        "https://sleeprunnerstudios.com/press/"
-      ],
-      "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
-    }
-  },
-  {
-    "name": "Cluetivity",
-    "country": "Germany",
-    "websiteUrl": "https://www.cluetivity.com/",
-    "applicationUrl": "https://cluetivity.jobs.personio.de/job/431574?language=en",
-    "evidenceUrl": "https://www.cluetivity.com/careers/",
-    "notes": "Official Careers page embeds the employer's Personio job system, where an Initiative Application is listed. The Personio page explicitly invites applicants to make contact when their desired job is not listed. Cluetivity is a Berlin-created developer of GPS-based, location-based and mobile games and an associated game-creation platform, with AR-enabled outdoor/indoor experiences. It is included as a specialised digital-game developer, not represented as a conventional PC/console studio. The Personio listing allows remote work or Berlin, but applicant-country eligibility is not stated.",
-    "checkedAt": "2026-10-31",
-    "applicationResearch": {
-      "routeType": "spontaneous",
-      "submissionMethods": [
-        "ats"
-      ],
-      "workModel": "mixed",
-      "eligibleLocations": [
-        "Berlin, Germany or remote · employer listing says remote or Berlin; applicant-country eligibility not stated"
-      ],
-      "disciplineScope": [
-        "Mobile game development",
-        "GPS-based games",
-        "Location-based games",
-        "Augmented reality",
-        "Game platform development"
-      ],
-      "relatedApplicationUrls": [
-        "https://www.cluetivity.com/about/",
-        "https://www.cluetivity.com/careers/"
-      ],
-      "routeStatus": "active",
-      "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-29"
-    }
-  },
-  {
-    "name": "Tarokai",
-    "country": "Switzerland",
-    "websiteUrl": "https://www.tarokai.com/",
-    "applicationUrl": "https://www.tarokai.com/",
-    "evidenceUrl": "https://www.tarokai.com/",
-    "notes": "Official homepage explicitly invites spontaneous applications by email to careers@tarokai.com when the candidate does not see a suitable role. The site identifies Tarokai as a Swiss mobile-game studio and lists remote full-time roles in engineering, design, growth and art. Its live title is Peach Farmer, a free-to-play collectible-card game for iOS and Android linking card collection to real-world experiences. The Legal Notice identifies Tarokai SA as a Swiss société anonyme but does not disclose a registered city/address. Remote listings do not establish applicant-country or contracting eligibility.",
-    "checkedAt": "2026-10-31",
-    "applicationResearch": {
-      "routeType": "spontaneous",
-      "submissionMethods": [
-        "email"
-      ],
-      "workModel": "remote",
-      "eligibleLocations": [
-        "Swiss company (Tarokai SA); current listings are full-remote, but applicant-country and contracting eligibility are not stated"
-      ],
-      "disciplineScope": [
-        "Mobile game development",
-        "Unity engineering",
-        "Game design",
-        "User acquisition",
-        "3D art",
-        "Community and live events"
-      ],
-      "relatedApplicationUrls": [
-        "https://www.tarokai.com/legal"
-      ],
-      "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
-    }
-  },
-  {
-    "name": "Procedural Games",
-    "country": "Spain",
-    "websiteUrl": "https://proceduralgames.com/",
-    "applicationUrl": "https://careers.proceduralgames.com/en/jobs/candidatura-espontanea",
-    "evidenceUrl": "https://careers.proceduralgames.com/en/jobs/candidatura-espontanea",
-    "notes": "The official Procedural Games homepage links directly to its Careers subdomain. The employer-controlled application portal lists an “Always open” Open application and says candidates who do not see a suitable role can submit a CV to be considered when a matching role opens. It is explicitly not a firm job offer; CV retention is up to 12 months and requires applicant permission. The portal lists hybrid work at Lanzadera in Valencia, depending on the role. The official homepage describes an independent mobile-game studio founded in Valencia in 2023, with game design, Unity development, live operations, monetization and user acquisition handled in-house. It encourages international applications and remote collaboration, while the open role itself is marked hybrid/Valencia.",
-    "checkedAt": "2026-10-31",
-    "applicationResearch": {
-      "routeType": "open",
-      "submissionMethods": [
-        "ats"
-      ],
-      "workModel": "hybrid",
-      "eligibleLocations": [
-        "Valencia, Spain · hybrid at Lanzadera; exact arrangement depends on the role. The company says it encourages international applications and remote collaboration, but the open application posting itself is listed as hybrid/Valencia"
-      ],
-      "disciplineScope": [
-        "Mobile game development",
-        "Unity programming",
-        "Game art",
-        "Game design",
-        "Marketing",
-        "Quality assurance",
-        "Live operations"
-      ],
-      "relatedApplicationUrls": [
-        "https://proceduralgames.com/",
-        "https://careers.proceduralgames.com/en"
-      ],
-      "routeStatus": "active",
-      "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-29"
-    }
-  },
-  {
-    "name": "Thought Pennies",
-    "country": "Not stated",
-    "websiteUrl": "https://www.thoughtpennies.com/",
-    "applicationUrl": "https://thought-pennies.careers-page.com/open-application",
-    "evidenceUrl": "https://www.thoughtpennies.com/",
-    "notes": "The official Thought Pennies website links directly to its “Join Us” page on the employer's careers-page.com subdomain. That linked page explicitly invites candidates to submit a resume even when no suitable position is listed and provides a dedicated Open application route. The studio describes itself as a fully remote, story-first RPG developer focused on emotional storytelling and technically ambitious role-playing games. The official site identifies the legal entity as Thought Pennies, Inc. but does not state a registered country or headquarters city. Remote work is stated; applicant-country and contracting eligibility are not.",
-    "checkedAt": "2026-10-31",
-    "applicationResearch": {
-      "routeType": "open",
-      "submissionMethods": [
-        "ats"
-      ],
-      "workModel": "remote",
-      "eligibleLocations": [
-        "Fully remote per official studio website; legal incorporation country, applicant-country and contracting eligibility are not stated"
-      ],
-      "disciplineScope": [
-        "Role-playing game development",
-        "Art",
-        "Visual effects",
-        "Programming",
-        "Game design",
-        "Narrative",
-        "Technical development"
-      ],
-      "relatedApplicationUrls": [
-        "https://thought-pennies.careers-page.com/"
-      ],
-      "routeStatus": "active",
-      "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-29"
-    }
-  },
-  {
-    "name": "Fawkes Games",
-    "country": "Bulgaria",
-    "websiteUrl": "https://fawkesgames.com/",
-    "applicationUrl": "https://fawkesgames.com/en/careers/",
-    "evidenceUrl": "https://fawkesgames.com/en/careers/",
-    "notes": "Official Careers page says candidates who do not see a suitable role are welcome to send a spontaneous application. The same page currently lists Unity Game Engineer, 2D Game Artist, Game Designer, Producer and 2.5D Pixel Artist positions, describing them as remote freelance roles with Europe-friendly time zones preferred. The company is a Bulgaria-registered game developer, publisher and live-service operator rather than an original-IP-only studio: its official materials describe client modernization, gameplay-system overhauls, content expansions and development/maintenance across operated online games, and it advertises in-house Unity/game-art/design roles. Its terms identify Fawkes Games LTD, registered in Plovdiv, Bulgaria. The Careers page says work can be remote worldwide, while individual roles prefer Europe-friendly time zones.",
-    "checkedAt": "2026-10-31",
-    "applicationResearch": {
-      "routeType": "spontaneous",
-      "submissionMethods": [
-        "website_form"
-      ],
-      "workModel": "remote",
-      "eligibleLocations": [
-        "Remote worldwide per official Careers page; current roles are freelance and prefer Europe-friendly time zones"
-      ],
-      "disciplineScope": [
-        "Unity game engineering",
-        "2D game art",
-        "Game design",
-        "Production",
-        "Quality assurance",
-        "Live operations",
-        "Game content development"
-      ],
-      "relatedApplicationUrls": [
-        "https://fawkesgames.com/en/terms/",
-        "https://fawkesgames.com/en/"
-      ],
-      "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
-    }
-  },
-  {
-    "name": "FakeFish Games",
-    "country": "Finland",
-    "websiteUrl": "https://www.fakefishgames.com/",
-    "applicationUrl": "https://www.fakefishgames.com/jobs/open-application",
-    "evidenceUrl": "https://www.fakefishgames.com/jobs",
-    "notes": "Official Careers page explicitly tells candidates not to hesitate to fill out the Open Application form if no current role fits. The dedicated application asks candidates who do not see their job listed to submit information so the studio can keep them in mind for future opportunities. FakeFish is an independent game-development studio working on Barotrauma and an undisclosed second game. Its current About page describes a flexible workplace with headquarters in Turku and a smaller Helsinki office. The Open Application page reports a team of about 25 people as of early 2023; the current homepage describes about 20 people, so the older role-page figure should not be treated as current headcount.",
-    "checkedAt": "2026-10-31",
-    "applicationResearch": {
-      "routeType": "open",
-      "submissionMethods": [
-        "website_form"
-      ],
-      "workModel": "not_stated",
-      "eligibleLocations": [
-        "Turku, Finland and beyond · official page says Turku & beyond and flexible work; no applicant-country eligibility or fixed remote policy stated"
-      ],
-      "disciplineScope": [
-        "Programming",
-        "Art",
-        "Game design",
-        "Quality assurance",
-        "Production",
-        "Community management",
-        "Audio"
-      ],
-      "relatedApplicationUrls": [
-        "https://www.fakefishgames.com/about-us",
-        "https://www.fakefishgames.com/our-games"
-      ],
-      "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
-    }
-  },
-  {
-    "name": "Winning Streak Games",
-    "country": "Germany",
-    "websiteUrl": "https://winningstreakgames.de/",
-    "applicationUrl": "https://winningstreakgames.de/",
-    "evidenceUrl": "https://winningstreakgames.de/",
-    "notes": "Official company homepage contains a dedicated Initiativbewerbung section explicitly inviting candidates to write even when no listed job fits. The company's Impressum publishes the recruitment contact gkoehler@winningstreak.de. Winning Streak Games is a Cologne-based developer of PC simulation games; its own site identifies WE ARE FOOTBALL 2027 and WE ARE FOOTBALL 2024 and records the company's founding in Cologne in 2018. All advertised jobs are full-time in Cologne; home office is possible only as an exception. The company has a publishing agreement with THQ Nordic but is a direct developer, not a publisher-only business.",
-    "checkedAt": "2026-10-31",
-    "applicationResearch": {
-      "routeType": "spontaneous",
-      "submissionMethods": [
-        "email"
-      ],
-      "workModel": "on_site",
-      "eligibleLocations": [
-        "Cologne, Germany · advertised positions are full-time in Cologne; home office only in exceptional cases"
-      ],
-      "disciplineScope": [
-        "PC game development",
-        "Simulation",
-        "Programming",
-        "Game design",
-        "UI",
-        "Graphics",
-        "Quality assurance",
-        "Database/game systems"
-      ],
-      "relatedApplicationUrls": [
-        "https://winningstreakgames.de/impressum.html"
-      ],
-      "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
-    }
-  },
-  {
-    "name": "ByteRockers' Games",
-    "country": "Germany",
-    "websiteUrl": "https://www.byterockers.games/",
-    "applicationUrl": "https://www.byterockers.games/de/jobs",
-    "evidenceUrl": "https://www.byterockers.games/de/jobs",
-    "notes": "Official Jobs page explicitly says that candidates who do not find a suitable role, or when the company is not actively hiring, should send an Initiativbewerbung to jobs@byterockers.games. It specifically addresses people passionate about developing video games. Official About page says ByteRockers' Games creates its own games and began publishing other creative teams' projects in 2024. The legal Impressum identifies ByteRockers' Games GmbH & Co. KG at Schloßstraße 110, 12163 Berlin. Its developer credits include Insurmountable, Beat Slayer and Gelly Break Deluxe; the current homepage also features further PC/console titles. The unsolicited route does not separately state work model or applicant-country eligibility.",
-    "checkedAt": "2026-10-31",
-    "applicationResearch": {
-      "routeType": "unsolicited",
-      "submissionMethods": [
-        "email"
-      ],
-      "workModel": "not_stated",
-      "eligibleLocations": [
-        "Berlin, Germany · official registered address; work model and applicant-country eligibility for unsolicited applicants not stated"
-      ],
-      "disciplineScope": [
-        "Game development",
-        "Programming",
-        "Game design",
-        "Art",
-        "Animation",
-        "Audio",
-        "QA",
-        "Production",
-        "Publishing"
-      ],
-      "relatedApplicationUrls": [
-        "https://www.byterockers.games/de/%C3%BCber-uns",
-        "https://www.byterockers.games/de/impressum"
-      ],
-      "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
-    }
-  },
-  {
-    "name": "Square Enix",
-    "country": "Japan",
-    "websiteUrl": "https://www.jp.square-enix.com/",
-    "applicationUrl": "https://hrmos.co/pages/square-enix/jobs/00001/apply?_ga=2.56325035.1257445894.1654503188-1642193798.1609815115",
-    "evidenceUrl": "https://www.jp.square-enix.com/recruit/career/careerlink/index.html",
-    "notes": "Official mid-career recruitment site explicitly invites Career Registration from people who do not want to limit themselves to one job type or whose desired role is not currently advertised. The company reviews registered profiles across departments and can introduce suitable roles, including positions not listed publicly. This is a candidate registration, not a promise of an interview or job; registration remains valid for three years. The official page says the entire Square Enix Group may be considered for matching. Current career categories include game development, production/operations, CG, sound, localization and R&D, alongside publishing, media and corporate functions. The company profile lists Tokyo (Shinjuku) headquarters plus Shibuya and Osaka offices; the career-registration page does not state work-model or overseas applicant eligibility.",
-    "checkedAt": "2026-10-31",
-    "applicationResearch": {
-      "routeType": "general",
-      "submissionMethods": [
-        "ats"
-      ],
-      "workModel": "not_stated",
-      "eligibleLocations": [
-        "Japan · SQUARE ENIX Group career registration; offices in Shinjuku, Shibuya and Osaka. The registration page does not specify work model or overseas applicant eligibility"
-      ],
-      "disciplineScope": [
-        "Game development",
-        "Production",
-        "Game operations",
-        "CG production",
-        "Sound",
-        "Localization",
-        "R&D",
-        "Publishing",
-        "Media",
-        "Marketing",
-        "IT",
-        "Quality assurance",
-        "Customer support"
-      ],
-      "relatedApplicationUrls": [
-        "https://www.jp.square-enix.com/recruit/career/",
-        "https://www.jp.square-enix.com/recruit/career/data/index.html"
-      ],
-      "routeStatus": "active",
-      "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-29"
-    }
-  },
-  {
-    "name": "Iteration One",
-    "country": "Germany",
-    "websiteUrl": "https://www.iterationone.com/",
-    "applicationUrl": "https://join.com/companies/iterationonecom/spontaneous-application",
-    "evidenceUrl": "https://www.iterationone.com/",
-    "notes": "The official homepage links its Career section directly to the employer's JOIN recruitment page. The JOIN page includes a dedicated Spontaneous Application and explicitly says there may be no suitable job available now, but candidates' skills may match a future role; it invites applicants to upload a CV and cover letter. Iteration One is a self-funded independent gaming studio and publisher in Karlsruhe, developing free-to-play mobile idle/tycoon games. Its live title Nightclub Tycoon is described by the employer as having been played by millions. The employer profile lists 1–10 employees. Current listed positions are in Karlsruhe, but the open application itself does not state work model or applicant-country eligibility.",
-    "checkedAt": "2026-10-31",
-    "applicationResearch": {
-      "routeType": "spontaneous",
-      "submissionMethods": [
-        "ats"
-      ],
-      "workModel": "not_stated",
-      "eligibleLocations": [
-        "Karlsruhe, Germany · studio location and current listed roles; work model and applicant-country eligibility for spontaneous applicants not stated"
-      ],
-      "disciplineScope": [
-        "Mobile game development",
-        "Game design",
-        "Software engineering",
-        "User acquisition",
-        "Performance marketing",
-        "Product management"
-      ],
-      "relatedApplicationUrls": [
-        "https://join.com/companies/iterationonecom"
-      ],
-      "routeStatus": "active",
-      "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-29"
-    }
-  },
-  {
-    "name": "Cenrellia Studios",
-    "country": "Not stated",
-    "websiteUrl": "https://cenrelliastudios.com/",
-    "applicationUrl": "https://cenrelliastudios.com/de/contact",
-    "evidenceUrl": "https://cenrelliastudios.com/de/careers",
-    "notes": "The official Careers page explicitly invites unsolicited pitches for art, music, commissioned development, QA and community work when there are no current job openings. It directs applicants to the company contact form and tells them to select “Careers” as the subject. The About page describes Cenrellia as an independent game studio and explicitly says it is currently a one-person business. Its Games page lists Stellar Hustler, published for Steam/PC (Linux-first), Android and iOS. This is a solo-development business accepting unsolicited collaboration/work pitches, not an employer advertising regular vacancies; compensation and engagement terms are not stated and must be agreed directly.",
-    "checkedAt": "2026-10-31",
-    "applicationResearch": {
-      "routeType": "spontaneous",
-      "submissionMethods": [
-        "contact_form"
-      ],
-      "workModel": "not_stated",
-      "eligibleLocations": [
-        "Country and hiring location not stated on the reviewed official pages"
-      ],
-      "disciplineScope": [
-        "Art",
-        "Music",
-        "Commissioned game development",
-        "Quality assurance",
-        "Community work"
-      ],
-      "relatedApplicationUrls": [
-        "https://cenrelliastudios.com/de/about",
-        "https://cenrelliastudios.com/de/games"
-      ],
-      "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
     }
   }
 ]
