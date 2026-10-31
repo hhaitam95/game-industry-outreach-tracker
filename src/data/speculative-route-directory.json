@@ -2795,6 +2795,34 @@
     }
   },
   {
+    "name": "IO Interactive",
+    "country": "Denmark",
+    "websiteUrl": "https://ioi.dk/",
+    "applicationUrl": "https://apply.ioi.dk/jobs/2380320-unsolicited-applications/1a0498c3-c941-4b03-a29a-56535ccf9011",
+    "evidenceUrl": "https://ioi.dk/careers?panel=j",
+    "notes": "Official careers page links an Unsolicited Applications listing on IOI's Teamtailor platform. The listing explicitly invites unsolicited applications, accepts a resume, cover letter and optional portfolio, and keeps applications on file for future openings. It lists Copenhagen, Malmö, Barcelona and Brighton as locations and says opportunities are based in the studio network including Istanbul; the listing is marked hybrid and states that onsite work is expected.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "Copenhagen, Denmark",
+        "Malmö, Sweden",
+        "Barcelona, Spain",
+        "Brighton, United Kingdom",
+        "Istanbul, Türkiye · hybrid; onsite presence expected"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Ironroot Games",
     "country": "United States",
     "websiteUrl": "https://ironrootgames.com/",
