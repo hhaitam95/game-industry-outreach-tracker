@@ -309,6 +309,29 @@ Several newly surfaced pages were already represented in the directory and were 
 
 Location-based, GPS-based, mobile and augmented-reality game developers can qualify when the organisation materially creates digital games/gameplay and the supporting software. Cluetivity is included under this rule, with its specialised business category clearly stated. Do not automatically include events companies, escape-room operators or general software/platform vendors that do not actually develop digital games.
 
+### Additional verified and rechecked findings — 2026-10-31 (batch 9)
+
+#### New verified speculative routes prepared for publication on PR #70
+
+- **Tarokai (Switzerland):** the official homepage explicitly says candidates who do not see their role may send a spontaneous application to `careers@tarokai.com`. The Legal Notice identifies Tarokai SA, a Swiss société anonyme registered in the Swiss Commercial Register, but does not publish a city/address. Its current game Peach Farmer is a free-to-play mobile collectible-card game for iOS/Android connecting card collection to real-world experiences. Current listed roles are marked remote; applicant-country/contracting eligibility is not stated. Sources: https://www.tarokai.com/, https://www.tarokai.com/legal.
+- **Procedural Games (Spain):** its official homepage links directly to its Careers subdomain. The employer-managed Open Application is labelled “Always open”, invites candidates who do not see a matching role to submit a CV for future consideration, and states CVs are stored for up to 12 months only with applicant permission. The official homepage describes an independent Valencia mobile studio founded in 2023, with game design, Unity development, live operations, monetization and user acquisition in-house. Open application work setup is hybrid at Lanzadera in Valencia, depending on role; the studio encourages international applications and remote collaboration, but the open posting itself is Valencia/hybrid. Sources: https://proceduralgames.com/, https://careers.proceduralgames.com/en/jobs/candidatura-espontanea, https://careers.proceduralgames.com/en.
+- **Thought Pennies (country not stated):** its official homepage's “Join Us” link directly opens https://thought-pennies.careers-page.com/. That linked careers page contains an explicit Open application and invites resumes even when no suitable role is listed. This resolves the earlier missing-employer-linkage concern; the candidate is now qualified and included. The official website describes a fully remote, story-first RPG studio and identifies Thought Pennies, Inc., but gives no incorporation country, HQ city or applicant-country eligibility. Those facts remain unknown rather than being inferred. Sources: https://www.thoughtpennies.com/, https://thought-pennies.careers-page.com/, https://thought-pennies.careers-page.com/open-application.
+
+#### Existing route precision refresh — Playtouch (Mauritius / France)
+
+- The current official Careers page now clearly describes a year-round spontaneous talent pool, even while the team is complete. Applicants select one of six skill tracks (AI/automation, HTML5 game/web engineering, 2D art/motion/Creative AI, design/narrative/audio, QA/release operations, or product/AdTech/B2B) and send a CV or portfolio directly to the Grand Baie studio leads; `contact@playtouch.net` is published. The record now distinguishes the production studio in Grand Baie, Mauritius; administration in Port Louis; and French headquarters in Roquefort-les-Pins. Current advertised roles are on-site in Grand Baie; remote and applicant-country eligibility for spontaneous candidates are not stated. Sources: https://playtouch.net/career, https://playtouch.net/about.
+- Playtouch remains one record. Do not duplicate it because it appears in new search results.
+
+#### Other candidate rechecks
+
+- Kuuasema and Bananagun were already present and retained; their open-application records were not duplicated.
+- Thought Pennies' earlier manual hold is superseded by the new first-party Join Us link described above.
+- Other candidates without a verified employer-backed route or sufficient developer identity should remain unlisted until the missing evidence is found.
+
+#### Current data checkpoint
+
+The working PR #70 branch now proposes **307 route/profile pairs**, **303 active and 4 paused**, across **50 country/location labels**. Main remains at 287/287 until the replacement PR is reviewed, merged and deployed.
+
 ## 10. Handover protocol
 
 At the start of any new work session or handover:
