@@ -9000,5 +9000,98 @@
       "https://zygle-games.com/careers"
     ],
     "applicationLocation": "Hybrid London or remote · remote-country eligibility not stated"
+  },
+  "Facepunch Studios": {
+    "description": "Independent, self-published game developer based in Birmingham, known for Rust, Garry's Mod, s&box and Chippy.",
+    "headquarters": {
+      "city": "Birmingham",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "Office location · official careers page"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent",
+      "Self-published"
+    ],
+    "ownership": "Independent · self-published",
+    "parentCompany": null,
+    "industryScale": "Independent mid-sized studio",
+    "teamSize": "Over 110 people · stated on the official website",
+    "teamSizeAsOf": "2026-10-31",
+    "focus": [
+      "PC",
+      "Multiplayer",
+      "Sandbox"
+    ],
+    "popularGames": [
+      {
+        "title": "Rust",
+        "appId": null
+      },
+      {
+        "title": "Garry's Mod",
+        "appId": null
+      },
+      {
+        "title": "s&box",
+        "appId": null
+      },
+      {
+        "title": "Chippy",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://facepunch.com/",
+      "https://facepunch.com/careers"
+    ],
+    "applicationLocation": "Worldwide remote, subject to local employment laws; Birmingham office also available"
+  },
+  "Fenris Creations": {
+    "description": "Independent video-game developer headquartered in Reykjavík, known for EVE Online and its player-driven virtual worlds. The company also operates studios in London and Shanghai.",
+    "headquarters": {
+      "city": "Reykjavík",
+      "country": "Iceland",
+      "countryCode": "IS",
+      "label": "Headquarters · official careers FAQ"
+    },
+    "otherLocations": [
+      "London, United Kingdom",
+      "Shanghai, China"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independently owned · stated by the company in 2026",
+    "parentCompany": null,
+    "industryScale": "Established international game studio",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "MMO",
+      "Online games",
+      "Persistent worlds"
+    ],
+    "popularGames": [
+      {
+        "title": "EVE Online",
+        "appId": null
+      },
+      {
+        "title": "EVE Frontier",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://fenris.com/",
+      "https://fenris.com/careers",
+      "https://careers.fenris.com/en/register-your-interest/new"
+    ],
+    "applicationLocation": "Reykjavík, London or Shanghai · select preferences in the official application form; remote eligibility not stated"
   }
 }
