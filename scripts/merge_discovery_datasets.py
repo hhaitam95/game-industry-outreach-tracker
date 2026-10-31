@@ -206,6 +206,11 @@ def exclude_removed_candidates_from_discovery_state(
     return sorted(set(excluded_names), key=str.casefold)
 
 
+def added_at_timestamp() -> str:
+    """Return an ISO-8601 UTC timestamp for a newly published directory row."""
+    return dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
 def merge_profiles(base: dict, incoming: dict) -> dict:
     """Fill gaps and union sourced arrays without replacing researched main data."""
     merged = copy.deepcopy(base)
@@ -300,7 +305,10 @@ def merge_datasets(
             if not isinstance(profile, dict):
                 missing_profiles.append(name)
                 continue
-            rows.append(copy.deepcopy(incoming))
+            new_record = copy.deepcopy(incoming)
+            if not new_record.get("addedAt"):
+                new_record["addedAt"] = added_at_timestamp()
+            rows.append(new_record)
             new_index = len(rows) - 1
             by_name[name_id] = new_index
             by_domain[domain_id] = new_index
