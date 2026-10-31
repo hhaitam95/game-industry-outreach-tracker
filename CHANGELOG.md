@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-10-31 — Global discovery batch 9 (proposed on PR #70)
+
+- Added **Tarokai** (Switzerland), **Procedural Games** (Spain) and **Thought Pennies** (country not stated), each with a first-party or directly linked employer open/spontaneous application route and matching researched profile.
+- Resolved the earlier Thought Pennies manual hold after confirming its official homepage links directly to its careers-page.com Open application; retained unknown country and applicant eligibility rather than inferring them.
+- Refreshed **Playtouch** to document its six year-round spontaneous talent-pool tracks, direct Grand Baie application handling and separate Mauritius production/administration and French HQ locations.
+- Reconfirmed Kuuasema and Bananagun as existing qualifying entries; no duplicates added.
+- Proposal branch now contains **307 route/profile pairs (303 active, 4 paused; 50 country/location labels)**. Main remains at 287/287 until PR #70 is reviewed, merged and deployed.
+- Added ADR-074 and preserved the source evidence and unknowns in the Global Discovery Implementation Model, STATUS and HANDOFF.
+
 ## 2026-10-31 — Global discovery batch 8 (proposed on PR #70)
 
 - Added **Rapidfire Games** (Cyprus), **Sleeprunner Studios** (Germany) and **Cluetivity** (Germany), each with an official open, unsolicited or initiative application route and matching studio profile.
