@@ -2593,25 +2593,28 @@
     "websiteUrl": "https://www.gamefreak.co.jp/",
     "applicationUrl": "https://hrmos.co/pages/gamefreak/jobs/10-4",
     "evidenceUrl": "https://hrmos.co/pages/gamefreak/jobs/10-4",
-    "notes": "The official mid-career Career Registration system lets interested candidates register their experience even when they do not have a current target position; HR may contact registrants if a suitable role or hiring event becomes available. The official FAQ says overseas applications are accepted, but business-level Japanese (approximately JLPT N1 for development work) is required. The stated work base is Tokyo, with hybrid attendance; full remote is not offered for new-graduate hiring.",
+    "notes": "The official GAME FREAK recruiting site links to the employer's HRMOS recruitment system; the company-branded Career Registration listing invites candidates to register their career experience even when they do not currently have a target position, so HR can contact them if a suitable role or hiring event arises. The registration is for regular employees, retained for up to two years, and does not guarantee a matching opening or contact. The official FAQ confirms overseas applications are accepted; business-level Japanese is required for all positions and approximately JLPT N1 is specified for development work. The Career Registration listing itself does not state work-model or specific role location; GAME FREAK's HQ is in Tokyo.",
     "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
         "ats"
       ],
-      "workModel": "hybrid",
+      "workModel": "not_stated",
       "eligibleLocations": [
-        "Tokyo, Japan · overseas applications accepted; business-level Japanese required for all positions; hybrid office attendance"
+        "Tokyo, Japan · HQ reference; overseas applications accepted, but business-level Japanese is required for all positions and approximately JLPT N1 for development work. Work model/role location depends on the matched position"
       ],
       "disciplineScope": [
         "Game development",
+        "Programming",
+        "Technical art",
         "Art",
         "Design",
-        "Programming",
+        "Planning",
         "Production"
       ],
       "relatedApplicationUrls": [
+        "https://www.gamefreak.co.jp/recruit/",
         "https://www.gamefreak.co.jp/recruit/faq/"
       ],
       "routeStatus": "active",
@@ -6258,20 +6261,32 @@
     "websiteUrl": "https://stormindgames.com/",
     "applicationUrl": "https://stormindgames.com/careers/",
     "evidenceUrl": "https://stormindgames.com/careers/",
-    "notes": "Official careers page offers a spontaneous-application form when no listed role fits; candidates can attach a CV and portfolio. Work model is not stated.",
-    "checkedAt": "2026-10-30",
+    "notes": "Official Careers page says candidates can send a spontaneous application if no listed job matches. Its embedded form collects name, city, phone, email, website/LinkedIn, message and a CV/resume attachment. The company page describes Stormind as an independent Italian PC/console studio founded in 2016, focused on original IP and co-development for AAA IP holders, with 100+ internal resources plus external collaborators. Its HQ is in Catania/Acireale and its registered office is in Milan. The application route does not specify remote-work or applicant-country eligibility.",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [
         "website_form"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
-      "disciplineScope": [],
+      "eligibleLocations": [
+        "Catania/Acireale, Italy · official HQ; registered office in Milan. Work model and applicant-country eligibility for spontaneous applicants are not stated"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Pre-production",
+        "Production",
+        "Post-production",
+        "Game art",
+        "Design",
+        "Programming",
+        "Marketing",
+        "Co-development"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -8094,6 +8109,113 @@
       "relatedApplicationUrls": [
         "https://www.byterockers.games/de/%C3%BCber-uns",
         "https://www.byterockers.games/de/impressum"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Square Enix",
+    "country": "Japan",
+    "websiteUrl": "https://www.jp.square-enix.com/",
+    "applicationUrl": "https://hrmos.co/pages/square-enix/jobs/00001/apply?_ga=2.56325035.1257445894.1654503188-1642193798.1609815115",
+    "evidenceUrl": "https://www.jp.square-enix.com/recruit/career/careerlink/index.html",
+    "notes": "Official mid-career recruitment site explicitly invites Career Registration from people who do not want to limit themselves to one job type or whose desired role is not currently advertised. The company reviews registered profiles across departments and can introduce suitable roles, including positions not listed publicly. This is a candidate registration, not a promise of an interview or job; registration remains valid for three years. The official page says the entire Square Enix Group may be considered for matching. Current career categories include game development, production/operations, CG, sound, localization and R&D, alongside publishing, media and corporate functions. The company profile lists Tokyo (Shinjuku) headquarters plus Shibuya and Osaka offices; the career-registration page does not state work-model or overseas applicant eligibility.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Japan · SQUARE ENIX Group career registration; offices in Shinjuku, Shibuya and Osaka. The registration page does not specify work model or overseas applicant eligibility"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Production",
+        "Game operations",
+        "CG production",
+        "Sound",
+        "Localization",
+        "R&D",
+        "Publishing",
+        "Media",
+        "Marketing",
+        "IT",
+        "Quality assurance",
+        "Customer support"
+      ],
+      "relatedApplicationUrls": [
+        "https://www.jp.square-enix.com/recruit/career/",
+        "https://www.jp.square-enix.com/recruit/career/data/index.html"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Iteration One",
+    "country": "Germany",
+    "websiteUrl": "https://www.iterationone.com/",
+    "applicationUrl": "https://join.com/companies/iterationonecom/spontaneous-application",
+    "evidenceUrl": "https://www.iterationone.com/",
+    "notes": "The official homepage links its Career section directly to the employer's JOIN recruitment page. The JOIN page includes a dedicated Spontaneous Application and explicitly says there may be no suitable job available now, but candidates' skills may match a future role; it invites applicants to upload a CV and cover letter. Iteration One is a self-funded independent gaming studio and publisher in Karlsruhe, developing free-to-play mobile idle/tycoon games. Its live title Nightclub Tycoon is described by the employer as having been played by millions. The employer profile lists 1–10 employees. Current listed positions are in Karlsruhe, but the open application itself does not state work model or applicant-country eligibility.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Karlsruhe, Germany · studio location and current listed roles; work model and applicant-country eligibility for spontaneous applicants not stated"
+      ],
+      "disciplineScope": [
+        "Mobile game development",
+        "Game design",
+        "Software engineering",
+        "User acquisition",
+        "Performance marketing",
+        "Product management"
+      ],
+      "relatedApplicationUrls": [
+        "https://join.com/companies/iterationonecom"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Cenrellia Studios",
+    "country": "Not stated",
+    "websiteUrl": "https://cenrelliastudios.com/",
+    "applicationUrl": "https://cenrelliastudios.com/de/contact",
+    "evidenceUrl": "https://cenrelliastudios.com/de/careers",
+    "notes": "The official Careers page explicitly invites unsolicited pitches for art, music, commissioned development, QA and community work when there are no current job openings. It directs applicants to the company contact form and tells them to select “Careers” as the subject. The About page describes Cenrellia as an independent game studio and explicitly says it is currently a one-person business. Its Games page lists Stellar Hustler, published for Steam/PC (Linux-first), Android and iOS. This is a solo-development business accepting unsolicited collaboration/work pitches, not an employer advertising regular vacancies; compensation and engagement terms are not stated and must be agreed directly.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "contact_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Country and hiring location not stated on the reviewed official pages"
+      ],
+      "disciplineScope": [
+        "Art",
+        "Music",
+        "Commissioned game development",
+        "Quality assurance",
+        "Community work"
+      ],
+      "relatedApplicationUrls": [
+        "https://cenrelliastudios.com/de/about",
+        "https://cenrelliastudios.com/de/games"
       ],
       "routeStatus": "active",
       "sourceType": "official_company_site",
