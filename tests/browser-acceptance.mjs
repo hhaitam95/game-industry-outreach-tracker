@@ -117,7 +117,7 @@ async function main() {
     // Search and empty-state recovery.
     await page.getByLabel("Search").fill("no-studio-with-this-name-9345");
     await page.getByText("No studios match these filters.").waitFor();
-    await page.getByRole("button", { name: "Clear filters" }).click();
+    await page.getByRole("button", { name: "Reset filters" }).click();
     assert.equal(await rows.count(), initialCount, "Clearing filters should restore the directory.");
 
     await page.getByLabel("Search").fill("4A Games");
