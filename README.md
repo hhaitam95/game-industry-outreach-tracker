@@ -1,50 +1,72 @@
 # Game Industry Outreach Tracker
 
-Game Industry Outreach Tracker is a worldwide directory of game studios that explicitly accept speculative applications, paired with a personal application tracker.
+Game Industry Outreach Tracker is a worldwide directory of legitimate video-game development organisations that explicitly accept speculative applications, paired with a personal application tracker.
 
-The website intentionally has only two pages: the studio directory and My applications. Tracker data stays in this browser's local storage.
+The website intentionally has two pages: the studio directory and My applications. Tracker data stays in this browser's local storage.
+
+**Discovery rules and handover source of truth:** [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md). Read it before changing discovery sources, qualification, exclusions, application verification or coverage cadence.
 
 ## Studio directory
 
 Search studios by name, country and studio type; filter by country and work model; open the official studio website or application route; and save studios to the tracker.
 
-A studio appears in the public directory only when its own website or a studio-controlled hiring platform explicitly invites speculative, unsolicited, spontaneous, open or general applications. A normal careers page or an advertised vacancy is not enough. Headquarters do not establish hiring location or remote eligibility.
+An organisation appears in the public directory only when both conditions are met:
 
-## Discovery
+1. It is a legitimate video-game developer or performs direct game-development work.
+2. Its official website or a directly linked employer-controlled hiring platform explicitly invites speculative, unsolicited, spontaneous, open or general applications beyond a specific advertised vacancy.
 
-The automated discovery pipeline collects a large candidate pool, then visits official studio websites to verify application routes.
+A normal careers page, an advertised vacancy, a generic contact form or a third-party directory claim is not enough. Headquarters do not establish hiring location or remote eligibility.
 
-Current candidate sources:
+## Global discovery
 
-- GameDevMap public worldwide directory. It exposes about 10,500 paginated result rows with studio/company website links and listed locations. Rows can represent multiple offices or non-studio organisations, so category filtering and official-domain deduplication happen before website checks.
-- Wikidata feeds for video-game developers, organisations credited as game developers, and video-game companies.
+The goal is broad, continuing global coverage of legitimate game-development studios, from indie to AAA. Do not prioritize employers by geography, size, platform, discipline, work model or the user's current career interests. There is no arbitrary maximum number of directory entries.
 
-GameDevMap is accessed through its public paginated results interface (100 rows per page). The scraper does not download its raw data files. It respects robots.txt and the per-host request delay. Website verification checks up to eight different studio domains concurrently; requests to the same host remain paced. Source directories are leads only; no source's claim is treated as proof of speculative hiring.
+Candidate sources are leads only; every company and application route is verified independently against official evidence.
+
+### Currently integrated candidate feeds
+
+- GameDevMap public paginated worldwide directory. The existing adapter reads its public results interface; rows can represent multiple offices or non-studio organisations, so classification and deduplication are required.
+- Wikidata feeds for video-game developers, organisations credited as video-game developers, and video-game companies.
+
+### Additional candidate sources under evaluation
+
+These are not yet integrated discovery adapters. Their terms, access method, coverage and reuse conditions must be reviewed before automation.
+
+- [GameCompanies.com](https://gamecompanies.com/) — global directory of studios, publishers, hubs, organisations and service companies.
+- [Games Jobs Index studio directory](https://gamesjobsindex.com/studios.html) — supplementary studio directory and cross-check; job listings do not prove speculative applications.
+- [Steam Developer & Publisher Homepages](https://store.steampowered.com/dev/?l=english) — large paginated creator directory; includes publishers and entities beyond unique development studios.
+- [MobyGames API](https://www.mobygames.com/info/api/) — potential game-credit/company discovery source. Requires authorized API access; do not scrape MobyGames pages or bypass its current API/terms restrictions. Review [MobyGames terms](https://www.mobygames.com/info/terms/) before integration.
+- [Community Game Studios & Publishers Database](https://github.com/EddieWing/gamedev-studios-db) — secondary seed and cross-check only; review licence, provenance, coverage and exclusions before reuse.
+- Regional/national game-industry associations, government creative-industry registries, public funding recipients, cluster directories, event exhibitor lists and other official developer-credit sources.
+
+The full source notes, observed catalogue sizes, caveats, coverage policy and future roadmap are maintained in the Global Discovery Implementation Model. Source catalogue counts are dynamic and must not be interpreted as unique studio totals without validation.
+
+## Verification process
 
 For each candidate, the discovery pipeline:
 
-1. Deduplicates by official website domain. Same-name candidates on different domains are retained for separate verification rather than silently merged.
-2. Fetches the official HTTPS site and relevant careers, jobs, application or contact links.
-3. Checks official pages and directly linked employer-controlled ATS platforms for explicit speculative-application wording.
+1. Deduplicates by verified official identity/domain. Same-name candidates on different domains are retained until their identity is confirmed.
+2. Confirms that the organisation materially develops video games or performs direct game-development work.
+3. Checks official pages and directly linked employer-controlled application platforms for explicit non-vacancy application invitations.
 4. Gives explicit rejection language priority and keeps conflicting or ambiguous evidence out of the public directory.
-5. Excludes the project-defined adult/vice sectors and leaves uncertain cases for review.
-6. Publishes only verified routes, with evidence and application URLs. Unknown studio facts remain unknown rather than guessed. GameDevMap locations are labelled as listed locations, not assumed headquarters.
+5. Applies the company-level adult/vice exclusion policy; uncertain cases go to manual review. Mature themes in an individual mainstream game are not an automatic exclusion.
+6. Publishes only verified routes, with evidence and application URLs. Unknown studio facts remain unknown rather than guessed.
 
-The detailed candidate pool and progress are stored on the separate discovery-state branch. It is not exposed in the public directory.
+A timeout, blocked request, robots denial, HTTP 403/429, parsing problem or ambiguous page never proves that a route does not exist and never closes a route by itself.
 
-## Discovery cadence and background maintenance
+The detailed candidate pool and progress are stored on the separate discovery-state branch. They are not exposed in the public directory.
 
-GitHub Actions runs the discovery workflow hourly. The initial GameDevMap catalogue backfill and due candidate-verification work use resumable batches; source cursors and candidate statuses are saved to the separate discovery-state branch after a successful run.
+## Discovery cadence and known coverage gap
 
-After the GameDevMap backfill is complete and there is no queued or due-retry verification work, scheduled runs scan the unfinished Wikidata feeds. The normal exploration cadence checks up to 8 source pages per hourly run, with a 65-second gap between Wikidata requests, up to 1,000 candidate checks, 8 existing-route checks, and a 25-minute discovery runtime ceiling. The workflow itself has a 40-minute timeout.
+GitHub Actions runs the discovery workflow hourly. The current pipeline has resumable GameDevMap and Wikidata work, but the additional sources above are still evaluation leads, not integrated feeds.
 
-Once three complete Wikidata cycles finish without finding a new verified speculative route, the saved state marks discovery as saturated. Scheduled maintenance then continues to refresh the feeds at 1 source page per hour instead of 8, while retaining candidate verification and existing-route checks. Any cycle that verifies a new studio clears saturation and restores the faster 8-page cadence for the next cycle. This reduces repeated scanning pressure without stopping discovery or relaxing the evidence threshold.
+The existing workflow has a saturation mechanism for its current discovery cycles. The target model is **source-specific saturation**, not a global stop: adding or expanding a source must reopen its discovery; an incomplete/failed source pass must not count as exhaustion; and one source's saturation must not suppress work on others. This is an implementation requirement to audit and complete, not a claim that every future source is already covered.
 
-Every run adds a sanitized GitHub Actions summary with its work counts, candidate-status totals, source cursors and saturation state.
+Every run adds a sanitized GitHub Actions summary with work counts, candidate-status totals, source cursors and saturation state.
 
-## Route maintenance and safety
+## Exclusion policy
 
-A timeout, blocked request, robots denial, HTTP 403/429, parsing problem or ambiguous page never closes a route. Explicit official-site rejection or both evidence/application URLs missing (404/410) must be confirmed on two consecutive checks before a route is marked closed. Closed records are retained for history and disappear from the active directory.
+Exclude organisations materially focused on pornography/adult sexual entertainment, iGaming/gambling/casinos/betting, recreational drugs/cannabis, alcohol, tobacco/nicotine/vaping and related vice sectors. Apply exclusions to the organisation's actual business, not an isolated keyword or the themes of one legitimate mainstream game. Keep uncertain cases for manual review.
 
 ## Personal application tracker
 
@@ -70,10 +92,11 @@ npm run build
 
 ## Key files
 
-- src/data/speculative-route-directory.json: verified public opportunity directory.
-- src/data/studio-profiles.json: basic researched studio fields.
-- scripts/discover_speculative_studios.py: candidate collection, official-site verification and route maintenance.
-- .github/workflows/discover-studios.yml: resumable bulk discovery and hourly maintenance.
-- discovery-state/state/studio-discovery-state.json: candidate and cursor state on the separate branch.
+- `src/data/speculative-route-directory.json`: verified public application-route directory.
+- `src/data/studio-profiles.json`: basic researched studio fields.
+- `scripts/discover_speculative_studios.py`: candidate collection, official-site verification and route maintenance.
+- `.github/workflows/discover-studios.yml`: resumable discovery and hourly maintenance.
+- `discovery-state/state/studio-discovery-state.json`: candidate and cursor state on the separate branch.
+- `docs/architecture/global-discovery-implementation-model.md`: authoritative global discovery strategy, policies and roadmap.
 
 Never put personal application records, secrets or private candidate notes in the public source datasets.
