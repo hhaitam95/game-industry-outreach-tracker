@@ -6,6 +6,7 @@ import type { TrackedApplication } from "./studio.types";
 import DiscoveryStatus from "./DiscoveryStatus";
 import StudioMark from "./StudioMark";
 import { continentsForLocation, countryFlagFor } from "./location";
+import type { ContinentLabel } from "./location";
 import "./directory.css";
 
 type Studio = (typeof studios)[number] & { addedAt?: string };
@@ -97,7 +98,7 @@ export default function StudioDirectory({
   ) => void;
 }) {
   const [query, setQuery] = useState("");
-  const [continent, setContinent] = useState("All continents");
+  const [continent, setContinent] = useState<ContinentLabel | "All continents">("All continents");
   const [country, setCountry] = useState("All countries");
   const [workModel, setWorkModel] = useState("All work models");
   const [sortKey, setSortKey] = useState<SortKey>("name");
