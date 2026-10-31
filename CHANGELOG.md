@@ -1,19 +1,20 @@
 # Changelog
 
-## 2026-10-31 — Worldwide expansion batch 5 (proposed)
+## 2026-10-31 — Worldwide expansion batch 5 (merged in PR #68)
 
-- Added Sudden Forest's Unreal Engine 5 speculative route, with Berlin/Brandenburg-only eligibility for the current funded freelance project and a separate future-contact caveat for applicants elsewhere.
-- Refreshed Chimera Entertainment's official Personio location and multi-country remote/hybrid notes; disclosed differing headcount figures across its official pages.
-- Refreshed Supermassive Games' email-based speculative route and Guildford location wording.
-
-## 2026-10-31 — Route precision refresh (merged in PR #67)
-
-- Updated Aska Studios to its official email-based General Application.
-- Updated Obsidian and SOFTGAMES to their employer-managed application systems and discipline requirements.
-- Corrected Lost Boys Interactive's General Application to US-only remote eligibility with no visa sponsorship.
-- Clarified Rustling Leaves Games' rev-share compensation model.
+- Added Sudden Forest's official Unreal Engine 5 speculative application, preserving the Berlin/Brandenburg-only limitation for the current funded Tidewind freelance project and the separate future-contact caveat for applicants elsewhere.
+- Refined Chimera Entertainment's Personio submission method, Munich ATS listing, company-stated remote/hybrid employment countries and on-site internship requirements; retained the conflicting official headcount figures as a discrepancy.
+- Refined Supermassive Games' email-based speculative application route and Guildford location without inferring remote or cross-border eligibility.
 
 # Changelog
+
+## 2026-10-31 — Global discovery implementation model documented
+
+- Added [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md) as the authoritative source for global coverage, studio qualification, speculative-route evidence, adult/vice exclusions, source evaluation, coverage/saturation and handover rules.
+- Reaffirmed that discovery is global and non-prioritized: indie through AAA, all geographies, platforms and work models; no arbitrary directory-size cap and no personal career-targeting filter at this stage.
+- Documented additional candidate indexes for evaluation: GameCompanies.com, Games Jobs Index, Steam Developer/Publisher Homepages, the MobyGames API, a community-maintained studio dataset and regional/national sources. These are discovery leads, not integrated adapters or proof of speculative application acceptance.
+- Recorded access and accuracy caveats, including MobyGames API authorization/terms, mixed entity types in directories, manual review for uncertain exclusions and source-specific (not global) saturation as the target model.
+- Linked the model from README.md and HANDOFF.md; refreshed STATUS.md to remove outdated career-path/geography prioritization and record the current PR #68 checkpoint.
 
 ## 2026-10-31 — Route quality refresh (proposed)
 
@@ -29,7 +30,6 @@
 
 - Added Kokku (remote co-development talent pools), Side (Philippines Player Support and regional co-development / QA / animation pools), and Raini Studios (spontaneous remote application).
 - Refreshed Havoc Games to reflect current Remote (India) general application and listed disciplines.
-
 
 ## 2026-10-31 — Worldwide expansion batch 3 (merged in PR #65)
 
