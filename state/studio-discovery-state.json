@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-31T17:37:15.987849+00:00",
+  "updated_at": "2026-10-31T17:48:04.638083+00:00",
   "feed_cursors": {
-    "wikidata_video_game_developers": "",
-    "wikidata_game_developer_credits": "Q99540288",
+    "wikidata_video_game_developers": "Q110454010",
+    "wikidata_game_developer_credits": "",
     "wikidata_video_game_companies": "",
     "gamedevmap": "10601"
   },
@@ -14,7 +14,7 @@
     "gamedevmap": true
   },
   "feed_index": 1,
-  "cycle": 7,
+  "cycle": 8,
   "cycle_additions": 0,
   "empty_cycles": 1,
   "saturated": false,
@@ -213100,16 +213100,52 @@
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T17:37:13.859411+00:00"
+      "last_checked_at": "2026-10-31T17:47:47.507948+00:00"
     },
     "Ndemic Creations": {
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T17:37:15.985483+00:00"
+      "last_checked_at": "2026-10-31T17:47:49.599052+00:00"
+    },
+    "Next Level Games": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-10-31T17:47:51.228750+00:00"
+    },
+    "Nikity Games Studio": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "unknown",
+      "last_checked_at": "2026-10-31T17:47:52.710009+00:00"
+    },
+    "No Roof Games": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-10-31T17:47:54.098684+00:00"
+    },
+    "Nomad Games": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-10-31T17:47:55.631613+00:00"
+    },
+    "Nordeus (Take-Two Interactive Software)": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-10-31T17:48:03.101292+00:00"
+    },
+    "Obsidian Entertainment": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-10-31T17:48:04.636321+00:00"
     }
   },
-  "route_check_index": 184,
+  "route_check_index": 192,
   "stats": {
     "candidates_seen": 10372,
     "routes_verified": 126,
@@ -213131,24 +213167,24 @@
       "last_pass_incomplete_candidates": 0
     },
     "wikidata_game_developer_credits": {
-      "cycle": 5,
+      "cycle": 6,
       "cycle_additions": 0,
-      "empty_cycles": 3,
+      "empty_cycles": 4,
       "saturated": true,
       "complete": false,
-      "last_pass_completed_at": "2026-10-31T15:51:44.099492+00:00",
+      "last_pass_completed_at": "2026-10-31T17:48:04.636362+00:00",
       "last_pass_status": "saturated",
       "last_pass_candidates": 0,
       "last_pass_verified": 0,
       "last_pass_incomplete_candidates": 0
     },
     "wikidata_video_game_companies": {
-      "cycle": 7,
+      "cycle": 8,
       "cycle_additions": 0,
-      "empty_cycles": 5,
+      "empty_cycles": 6,
       "saturated": true,
       "complete": false,
-      "last_pass_completed_at": "2026-10-31T17:37:15.985520+00:00",
+      "last_pass_completed_at": "2026-10-31T17:48:04.636362+00:00",
       "last_pass_status": "saturated",
       "last_pass_candidates": 0,
       "last_pass_verified": 0,
