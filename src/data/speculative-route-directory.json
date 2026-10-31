@@ -7496,5 +7496,106 @@
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
     }
+  },
+  {
+    "name": "Abrakam Studio",
+    "country": "Belgium",
+    "websiteUrl": "https://www.abrakam.com/",
+    "applicationUrl": "https://www.abrakam.com/contact",
+    "evidenceUrl": "https://www.abrakam.com/careers",
+    "notes": "Official Careers page links a “Spontaneous apply” route and invites candidates whose profile does not match a current opening to send a CV and portfolio. The official Contact page explicitly identifies careers@abrakam.com for spontaneous applications and includes “Job application” in its enquiry form. The company is based at an official address in Angleur, Liège; remote and applicant-country eligibility are not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email",
+        "contact_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Angleur, Liège, Belgium · official company address; remote and applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [
+        "https://www.abrakam.com/careers"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Aesir Interactive",
+    "country": "Germany",
+    "websiteUrl": "https://aesir-interactive.com/",
+    "applicationUrl": "https://aesir-interactive.com/careers",
+    "evidenceUrl": "https://aesir-interactive.com/careers",
+    "notes": "Official Careers page explicitly invites an initiative application from candidates who do not see a suitable role, asks for a CV and portfolio, and provides jobs@aesir-interactive.com. The studio is based in Munich, Bavaria. The general initiative route does not state remote-work or applicant-country eligibility.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Munich, Bavaria, Germany · official studio location; remote and applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Ahoiii Entertainment",
+    "country": "Germany",
+    "websiteUrl": "https://www.ahoiii.com/en/",
+    "applicationUrl": "https://www.ahoiii.com/en/jobs",
+    "evidenceUrl": "https://www.ahoiii.com/en/contact",
+    "notes": "Official Contact page explicitly lists both open positions and speculative applications and directs candidates to the Jobs page. The Jobs page asks applicants to send a portfolio and a few words about themselves to jobs@ahoiii.com. The studio is based in Cologne and develops children's and family games; remote and applicant-country eligibility for speculative applications are not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Cologne, Germany · official studio location; remote and applicant-country eligibility for speculative applications not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [
+        "https://www.ahoiii.com/en/contact"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Stratosphere Games",
+    "country": "Germany",
+    "websiteUrl": "https://www.stratosphere-games.com/en/",
+    "applicationUrl": "https://stratosphere-games.jobs.personio.de/job/1318003?language=en",
+    "evidenceUrl": "https://www.stratosphere-games.com/en/jobs/initiative-application-part-time-full-time/",
+    "notes": "Official Careers page offers an “Initiative Application” and explicitly invites applications when no fitting offer exists. The directly linked employer-managed Personio listing accepts applications for future consideration and is full- or part-time/permanent in Berlin. The Careers page describes a mixture of office and remote work; applicant-country eligibility is not stated. Official pages report different team sizes (60 on the careers listing and nearly 35 on the current homepage), so the profile preserves that discrepancy.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Berlin, Germany · initiative application listed as full- or part-time permanent; employer describes a mixture of office and remote work; applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
+    }
   }
 ]
