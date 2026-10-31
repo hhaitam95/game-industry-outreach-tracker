@@ -570,7 +570,7 @@ export default function StudioDirectory({
         </table>
       </div>
       <p className="directory-note">
-        Studio flags and continent filters identify headquarters, not hiring eligibility or a guaranteed work location.
+        Flags and continent filters use the recorded headquarters or, where headquarters is not stated, the primary country or location listed in the profile. They do not indicate hiring eligibility or a guaranteed work location.
         Application routes are linked to official websites or studio-controlled systems.
       </p>
     </section>
