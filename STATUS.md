@@ -21,7 +21,7 @@ Exclude organisations materially focused on pornography/adult sexual entertainme
 - The live site remains limited to Studio Directory and My applications.
 - Personal tracker entries remain in the visitor's browser localStorage. No application records or CVs are committed to the public repository.
 - Current main contains **287 studio/employer records**, **287 matching profiles**, **284 active** and **3 paused** routes across **48 country/location labels**.
-- The open PR #70 proposal branch currently contains **311 route records / 311 matching profiles**, with **306 active** and **5 paused** routes across **51 country/location labels**. These are proposed data, not yet merged into main or deployed.
+- The open PR #70 proposal branch currently contains **314 route records / 314 matching profiles**, with **309 active** and **5 paused** routes across **51 country/location labels**. These are proposed data, not yet merged into main or deployed.
 - This batch-6 branch consolidates PR #68's fifth expansion and subsequent manual global research. PR #68 is superseded; do not merge it separately.
 - The proposal includes the prior batch's additions/updates: Sudden Forest, 22cans, Absolutely Games, AB Games, Favo Games, DON’T NOD Montréal and Ubisoft Saguenay; updates to Chimera Entertainment, Supermassive Games, Bossa Studios, Brave At Night and Ember Crows; plus the earlier batch-6 work.
 - Four additional routes added in this continuation are **AnkleBreaker Studio**, **Alice in Games**, **No Roof Games** and **Skytale**. Their route and profile records are one-to-one.
