@@ -951,8 +951,9 @@
         "stage": "In development"
       }
     ],
-    "applicationLocation": "Remote-first · confirm country eligibility",
+    "applicationLocation": "Remote-first · country-of-employment eligibility not stated",
     "profileSources": [
+      "https://askastudios.is/home-mobile/",
       "https://askastudios.is/"
     ]
   },
@@ -6057,9 +6058,10 @@
     ],
     "profileSources": [
       "https://www.lostboysinteractive.com/",
-      "https://www.lostboysinteractive.com/news"
+      "https://www.lostboysinteractive.com/news",
+      "https://lostboysinteractive.applytojob.com/apply/xkgGK23ygA/General-Application"
     ],
-    "applicationLocation": "Remote-first · US and Canada",
+    "applicationLocation": "Remote within the United States only · no visa sponsorship; applicants must reside and work in the US",
     "reachHighlights": "AAA co-development credits include Diablo IV and Tiny Tina's Wonderlands."
   },
   "Lost Native Games": {
@@ -6777,9 +6779,11 @@
     ],
     "profileSources": [
       "https://www.obsidian.net/",
-      "https://www.latimes.com/business/story/2026-07-09/microsofts-xbox-to-shift-obsidian-studio-to-new-fallout-video-game"
+      "https://www.latimes.com/business/story/2026-07-09/microsofts-xbox-to-shift-obsidian-studio-to-new-fallout-video-game",
+      "https://obsidian.applytojob.com/apply/21Ud1IGKcj/General-Application"
     ],
-    "reachHighlights": "Major RPG portfolio includes Fallout: New Vegas, Pillars of Eternity, The Outer Worlds and Avowed."
+    "reachHighlights": "Major RPG portfolio includes Fallout: New Vegas, Pillars of Eternity, The Outer Worlds and Avowed.",
+    "applicationLocation": "Remote · country eligibility not specified on the General Application"
   },
   "Ocellus": {
     "description": "Lyon-based game group combining original game development with stylized art, animation and game-development services through Ocellus Games and Ocellus Services. Its current careers page lists Ocellus Games positions in Lyon and an Ocellus Services realtime VFX role in Lyon / Remote.",
@@ -8161,7 +8165,7 @@
     "reachHighlights": "The careers page currently lists seven roles across game development, art, audio, community and operations and also accepts general applications."
   },
   "Rustling Leaves Games": {
-    "description": "Volunteer-built indie studio developing its first game, with a revenue-share compensation model.",
+    "description": "Small independent, volunteer-built game studio developing its first narrative-focused game. The studio states that its work is based on revenue sharing rather than conventional salary.",
     "headquarters": {
       "city": "Clayton, North Carolina",
       "country": "United States",
@@ -8192,8 +8196,10 @@
     ],
     "profileSources": [
       "https://www.rustlingleavesgames.com/",
-      "https://www.linkedin.com/company/rustling-leaves-games"
-    ]
+      "https://www.linkedin.com/company/rustling-leaves-games",
+      "https://www.rustlingleavesgames.com/join-us/general-application/"
+    ],
+    "applicationLocation": "Location not stated · revenue-share model; no conventional salary or guaranteed upfront pay stated"
   },
   "Sans Strings Studio": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
@@ -8626,7 +8632,7 @@
     "applicationLocation": "Not specified · confirm on the official application route"
   },
   "SOFTGAMES": {
-    "description": "Berlin-based casual-game developer and publisher specializing in instant, HTML5, social and mobile games.",
+    "description": "Berlin-founded remote-first casual-game developer and publisher specializing in instant, HTML5, social and mobile games.",
     "headquarters": {
       "city": "Berlin",
       "country": "Germany",
@@ -8644,7 +8650,7 @@
     "ownership": "Privately held · ownership not confirmed",
     "parentCompany": null,
     "industryScale": "AA · Mobile",
-    "teamSize": "51–200 employees (LinkedIn company range)",
+    "teamSize": "100+ people (company-reported on official careers material)",
     "teamSizeAsOf": "2026-10",
     "focus": [
       "Mobile",
@@ -8656,8 +8662,10 @@
     "popularGames": [],
     "profileSources": [
       "https://www.softgames.com/",
-      "https://www.linkedin.com/company/softgames-mobile-entertainment-services/"
-    ]
+      "https://jobs.softgames.de/",
+      "https://jobs.softgames.de/o/unsolicited-application"
+    ],
+    "applicationLocation": "Remote-first · the unsolicited route does not state specific country or work-authorisation eligibility"
   },
   "Solid Clouds": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",

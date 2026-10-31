@@ -486,24 +486,30 @@
     "name": "Aska Studios",
     "country": "Iceland",
     "websiteUrl": "https://askastudios.is/",
-    "applicationUrl": "https://askastudios.is/",
-    "evidenceUrl": "https://askastudios.is/",
-    "notes": "Official site invites CV and portfolio emails for developers, artists, designers and other contributors. Reykjavík-based studio describes a remote-first work environment.",
-    "checkedAt": "2026-10-30",
+    "applicationUrl": "https://askastudios.is/home-mobile/",
+    "evidenceUrl": "https://askastudios.is/home-mobile/",
+    "notes": "The official hiring page has a General Application and explicitly invites developers, artists, designers and other contributors to send a CV and portfolio/reel for future opportunities. It lists careers@askastudios.is and jobs@askastudios.is as application contacts. Aska describes its Reykjavík studio as remote-first; applicant-country eligibility is not specified.",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
-        "website_form"
+        "email"
       ],
       "workModel": "remote",
       "eligibleLocations": [
-        "Remote-first · confirm country eligibility"
+        "Remote-first · applicant-country / employment-country eligibility not stated"
       ],
-      "disciplineScope": [],
+      "disciplineScope": [
+        "Game development",
+        "Programming",
+        "Art",
+        "Design",
+        "Other studio disciplines"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -3813,24 +3819,31 @@
     "name": "Lost Boys Interactive",
     "country": "United States",
     "websiteUrl": "https://www.lostboysinteractive.com/",
-    "applicationUrl": "https://lostboysinteractive.applytojob.com/",
-    "evidenceUrl": "https://lostboysinteractive.applytojob.com/",
-    "notes": "Studio-owned careers portal lists a General Application. The studio describes itself as remote-first across the United States and Canada; confirm eligibility for the specific role or application.",
-    "checkedAt": "2026-10-30",
+    "applicationUrl": "https://lostboysinteractive.applytojob.com/apply/xkgGK23ygA/General-Application",
+    "evidenceUrl": "https://lostboysinteractive.applytojob.com/apply/xkgGK23ygA/General-Application",
+    "notes": "Official employer-managed General Application invites candidates who do not see a suitable opening to apply for future matching roles. It is full-time and remote, but the specific application says applicants must reside in and work from the United States. The studio cannot sponsor visas for this route. This supersedes older, broader assumptions about US/Canada eligibility.",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
-        "website_form"
+        "ats"
       ],
       "workModel": "remote",
       "eligibleLocations": [
-        "Remote-first · US and Canada"
+        "Remote only for people who reside and work in the United States; employer states it cannot sponsor visas"
       ],
-      "disciplineScope": [],
+      "disciplineScope": [
+        "Game development",
+        "Engineering",
+        "Art",
+        "Design",
+        "Production",
+        "Other studio disciplines"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -4366,20 +4379,29 @@
     "websiteUrl": "https://www.obsidian.net/",
     "applicationUrl": "https://obsidian.applytojob.com/apply/21Ud1IGKcj/General-Application",
     "evidenceUrl": "https://obsidian.applytojob.com/apply/21Ud1IGKcj/General-Application",
-    "notes": "Official General Application accepts candidates who do not find a matching opening, across art, design, animation, production, programming and other disciplines. Remote work is mentioned; country eligibility is not stated.",
-    "checkedAt": "2026-10-30",
+    "notes": "Official ApplyToJob General Application accepts candidates who do not see a matching opening and says the studio will contact applicants if a possible fit arises. The form lists the role as full-time and remote, and welcomes interest across design, art, production, animation, programming and administration. A cover letter is recommended; a portfolio is welcome where relevant. Applicant-country and work-authorisation eligibility are not stated.",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
-        "website_form"
+        "ats"
       ],
       "workModel": "remote",
-      "eligibleLocations": [],
-      "disciplineScope": [],
+      "eligibleLocations": [
+        "Remote · country-specific hiring eligibility and work-authorisation requirements are not stated on the General Application"
+      ],
+      "disciplineScope": [
+        "Design",
+        "Art",
+        "Production",
+        "Animation",
+        "Programming",
+        "Administration"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -5393,20 +5415,33 @@
     "websiteUrl": "https://www.rustlingleavesgames.com/",
     "applicationUrl": "https://www.rustlingleavesgames.com/join-us/general-application/",
     "evidenceUrl": "https://www.rustlingleavesgames.com/join-us/general-application/",
-    "notes": "Official General Application invites future-role applications across disciplines. Important caveat: the studio states its work is rev-share-based.",
-    "checkedAt": "2026-10-30",
+    "notes": "Official General Application accepts candidates for future opportunities across design, narrative, art, animation, programming, audio, production, QA, community and marketing. Important compensation caveat: the studio explicitly describes its work as rev-share-based, and its listed roles include rev-share positions; this should not be treated as conventional salaried employment or guaranteed upfront pay. Exact hiring geography is not stated.",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
         "website_form"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
-      "disciplineScope": [],
+      "eligibleLocations": [
+        "Not stated · applicants should confirm location and engagement terms with the studio"
+      ],
+      "disciplineScope": [
+        "Design",
+        "Narrative",
+        "Art",
+        "Animation",
+        "Programming",
+        "Audio",
+        "Production",
+        "Quality assurance",
+        "Community",
+        "Marketing"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -5724,20 +5759,30 @@
     "websiteUrl": "https://www.softgames.de/",
     "applicationUrl": "https://jobs.softgames.de/o/unsolicited-application",
     "evidenceUrl": "https://jobs.softgames.de/o/unsolicited-application",
-    "notes": "Official Unsolicited Application welcomes candidates without a matching role. Remote-first company asks for an English CV and cover letter; country eligibility is not specified.",
-    "checkedAt": "2026-10-29",
+    "notes": "Official employer-managed Unsolicited Application explicitly invites candidates even when no matching position is available. Applicants must submit an English CV and cover letter and state their discipline/area of interest (examples include Game Design, QA and Business Development); salary expectations and earliest start date are also requested. The employer describes itself as remote-first with a team from many countries. The precise legal work-eligibility and location rules for the unsolicited route are not stated, so worldwide employment eligibility is not inferred.",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "unsolicited",
       "submissionMethods": [
-        "website_form"
+        "ats"
       ],
       "workModel": "remote",
-      "eligibleLocations": [],
-      "disciplineScope": [],
+      "eligibleLocations": [
+        "Remote-first team with people from many countries; country-specific employment eligibility for the unsolicited route is not stated"
+      ],
+      "disciplineScope": [
+        "Game design",
+        "Quality assurance",
+        "Business development",
+        "Game production",
+        "Audio / sound design",
+        "Recruiting / talent sourcing",
+        "Other disciplines"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-27"
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
