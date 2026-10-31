@@ -9118,5 +9118,115 @@
       "https://careers.fenris.com/en/register-your-interest/new"
     ],
     "applicationLocation": "Reykjavík, London or Shanghai · select preferences in the official application form; remote eligibility not stated"
+  },
+  "Aether Studios": {
+    "description": "Independent game developer creating games in the Rivals of Aether universe, including competitive platform fighters, dungeon crawlers and other spin-offs.",
+    "headquarters": {
+      "city": "Seattle",
+      "country": "United States",
+      "countryCode": "US",
+      "label": "Studio base · official studio announcement"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent studio · legal ownership not stated",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Fighting",
+      "Platform fighter",
+      "Action"
+    ],
+    "popularGames": [
+      {
+        "title": "Rivals of Aether",
+        "appId": null
+      },
+      {
+        "title": "Rivals of Aether II",
+        "appId": null
+      },
+      {
+        "title": "Dungeons of Aether",
+        "appId": null
+      },
+      {
+        "title": "Creatures of Aether",
+        "appId": null
+      },
+      {
+        "title": "Lovers of Aether",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://aetherstudios.com/",
+      "https://aetherstudios.com/jobs/",
+      "https://aetherstudios.com/vacancy/general-application/",
+      "https://aetherstudios.com/news/aether-studios-announcment/"
+    ],
+    "applicationLocation": "Location preference is collected in the official jobs system; remote and international eligibility are not stated"
+  },
+  "IO Interactive": {
+    "description": "Independent video-game development and publishing company founded in 1998, best known for the HITMAN series and its proprietary Glacier technology. The studio is also developing 007 First Light and Project Fantasy.",
+    "headquarters": {
+      "city": "Copenhagen",
+      "country": "Denmark",
+      "countryCode": "DK",
+      "label": "Office address · official IOI website"
+    },
+    "otherLocations": [
+      "Malmö, Sweden",
+      "Barcelona, Spain",
+      "Brighton, United Kingdom",
+      "Istanbul, Türkiye"
+    ],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Independent"
+    ],
+    "ownership": "Independent video-game company · stated by IOI",
+    "parentCompany": null,
+    "industryScale": "AAA",
+    "teamSize": "Not publicly disclosed in this record",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Action",
+      "Stealth",
+      "Shooter",
+      "Online"
+    ],
+    "popularGames": [
+      {
+        "title": "HITMAN World of Assassination",
+        "appId": null
+      },
+      {
+        "title": "007 First Light",
+        "appId": null,
+        "stage": "In development"
+      },
+      {
+        "title": "Project Fantasy",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://ioi.dk/careers",
+      "https://apply.ioi.dk/jobs/2380320-unsolicited-applications/1a0498c3-c941-4b03-a29a-56535ccf9011",
+      "https://ioi.dk/about"
+    ],
+    "applicationLocation": "Copenhagen, Malmö, Barcelona, Brighton or Istanbul · hybrid; onsite presence expected per the unsolicited application listing"
   }
 }

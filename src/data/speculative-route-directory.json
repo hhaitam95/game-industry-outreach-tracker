@@ -258,6 +258,38 @@
     }
   },
   {
+    "name": "Aether Studios",
+    "country": "United States",
+    "websiteUrl": "https://aetherstudios.com/",
+    "applicationUrl": "https://aetherstudios.com/vacancy/general-application/",
+    "evidenceUrl": "https://aetherstudios.com/vacancy/general-application/",
+    "notes": "Official Jobs page lists a General Application and explicitly asks applicants to email jobs@aetherstudios.com with a resume, portfolio and cover letter. The form/page asks candidates to describe how they see themselves fitting into the team. The application page does not state remote or applicant-country eligibility.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Location preference is collected in the official jobs system; remote and international eligibility are not stated"
+      ],
+      "disciplineScope": [
+        "Art & Animation",
+        "Design",
+        "Effects",
+        "Human Resources",
+        "Production",
+        "Programming & Engineering",
+        "UI"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Aethra Studios",
     "country": "Netherlands",
     "websiteUrl": "https://www.aethrastudios.com/",
@@ -2760,6 +2792,34 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "IO Interactive",
+    "country": "Denmark",
+    "websiteUrl": "https://ioi.dk/",
+    "applicationUrl": "https://apply.ioi.dk/jobs/2380320-unsolicited-applications/1a0498c3-c941-4b03-a29a-56535ccf9011",
+    "evidenceUrl": "https://ioi.dk/careers?panel=j",
+    "notes": "Official careers page links an Unsolicited Applications listing on IOI's Teamtailor platform. The listing explicitly invites unsolicited applications, accepts a resume, cover letter and optional portfolio, and keeps applications on file for future openings. It lists Copenhagen, Malmö, Barcelona and Brighton as locations and says opportunities are based in the studio network including Istanbul; the listing is marked hybrid and states that onsite work is expected.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "Copenhagen, Denmark",
+        "Malmö, Sweden",
+        "Barcelona, Spain",
+        "Brighton, United Kingdom",
+        "Istanbul, Türkiye · hybrid; onsite presence expected"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
