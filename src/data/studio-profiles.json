@@ -11491,5 +11491,166 @@
     ],
     "applicationLocation": "100% remote volunteer team across three continents; this is unpaid volunteering, not employment",
     "reachHighlights": "The association reports 80+ volunteers, 10 projects and 30M+ total views across its creations. All projects are volunteer-produced and non-commercial."
+  },
+  "Rapidfire Games": {
+    "description": "Independent, globally distributed mobile-game developer with a senior team making free-to-play games for iOS and Android. Its live title is Backpack Brawl.",
+    "headquarters": {
+      "city": "Geri",
+      "country": "Cyprus",
+      "countryCode": "CY",
+      "label": "Registered office · official terms/privacy documents"
+    },
+    "otherLocations": [
+      "Distributed team working remotely across the world (company-reported)"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent",
+      "Mobile games"
+    ],
+    "ownership": "Private company; official legal documents identify Rapidfire Ltd / Rapidfire Game Ltd, registration HE460989, Cyprus; exact legal-name styling differs between documents",
+    "parentCompany": null,
+    "industryScale": "Indie · editorial indication",
+    "teamSize": "18 people (company-reported on the official homepage)",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "Mobile",
+      "iOS",
+      "Android",
+      "Free-to-play",
+      "Strategy",
+      "Auto-battler"
+    ],
+    "popularGames": [
+      {
+        "title": "Backpack Brawl",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://rapidfire.games/",
+      "https://rapidfire.games/privacy-policy/",
+      "https://rapidfire.games/terms-and-conditions/"
+    ],
+    "applicationLocation": "Remote team distributed worldwide; legal entity registered in Geri, Cyprus. The open-application page does not state applicant-country or contracting eligibility.",
+    "reachHighlights": "The studio reports 18 people working remotely around the world. Backpack Brawl is its live iOS/Android inventory auto-battler, published by Azur Games."
+  },
+  "Sleeprunner Studios": {
+    "description": "Five-person independent German game studio founded in 2020, based in Bayreuth and focused on core PC/console games built with Unreal Engine. It also offers co-development, 3D visualisation, technical consulting and plugin development.",
+    "headquarters": {
+      "city": "Bayreuth",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "Studio address · official Jobs/About pages"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent",
+      "Co-development"
+    ],
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie · editorial indication",
+    "teamSize": "Five team members (company-reported on the official Jobs page)",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "PC",
+      "Console",
+      "Unreal Engine",
+      "3D platformer",
+      "Collectathon",
+      "Roguelite",
+      "Co-development"
+    ],
+    "popularGames": [
+      {
+        "title": "Trail of Toads",
+        "appId": null,
+        "stage": "In development"
+      },
+      {
+        "title": "Downfall Hearts",
+        "appId": null,
+        "stage": "In development"
+      },
+      {
+        "title": "Windstorm: Start of a Great Friendship - Remastered",
+        "appId": null,
+        "stage": "Developed/remastered by the studio"
+      }
+    ],
+    "profileSources": [
+      "https://sleeprunnerstudios.com/",
+      "https://sleeprunnerstudios.com/about/",
+      "https://sleeprunnerstudios.com/jobs/",
+      "https://sleeprunnerstudios.com/press/"
+    ],
+    "applicationLocation": "Bayreuth, Germany · employees must reside in Germany or the EU; freelance collaborators may work worldwide; hybrid workplace",
+    "reachHighlights": "Five-person team; core PC/console game development in Unreal Engine. The studio reports projects including Trail of Toads, Downfall Hearts and the Windstorm remaster."
+  },
+  "Cluetivity": {
+    "description": "Berlin-created developer of GPS-based, location-based and mobile games, alongside a platform that enables businesses to build and customise outdoor/indoor game experiences and augmented-reality activities.",
+    "headquarters": {
+      "city": "Berlin",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "Company origin / head office · official About page"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Mobile games",
+      "Location-based games",
+      "Game platform provider"
+    ],
+    "ownership": "Life Action Games GmbH (official legal footer)",
+    "parentCompany": null,
+    "industryScale": "Not disclosed",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "GPS-based games",
+      "Location-based games",
+      "Augmented reality",
+      "Outdoor escape games",
+      "Indoor games",
+      "Gamification"
+    ],
+    "popularGames": [
+      {
+        "title": "Treasure Hunters",
+        "appId": null
+      },
+      {
+        "title": "Magic Portal",
+        "appId": null
+      },
+      {
+        "title": "Operation Mindfall",
+        "appId": null
+      },
+      {
+        "title": "Blackout",
+        "appId": null
+      },
+      {
+        "title": "Bachelor Royale",
+        "appId": null
+      },
+      {
+        "title": "Christmas Adventures",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.cluetivity.com/",
+      "https://www.cluetivity.com/about/",
+      "https://www.cluetivity.com/careers/",
+      "https://cluetivity.jobs.personio.de/job/431574?language=en"
+    ],
+    "applicationLocation": "Berlin, Germany or remote · employer-controlled Personio initiative listing allows either; applicant-country eligibility not stated",
+    "reachHighlights": "The company says it began developing GPS-based games in 2006 and now supplies location-based experiences and a mobile games platform used by partners in multiple countries."
   }
 }
