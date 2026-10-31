@@ -494,3 +494,7 @@
     grid-template-columns: 1fr;
   }
 }
+
+.studio-table th:not([aria-sort]) {
+  padding: 10px 12px;
+}
