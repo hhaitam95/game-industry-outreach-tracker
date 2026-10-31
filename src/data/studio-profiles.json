@@ -6421,6 +6421,31 @@
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
   },
+  "Q138639552": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": null,
+      "country": "Not stated",
+      "countryCode": "GB",
+      "label": "Country · Wikidata"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.wikidata.org/entity/Q138639552",
+      "https://ballisticmoon.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
   "Rad Games": {
     "description": "Game studio division of IDFire Technologies Inc., developing its own game universes alongside the in-house Janus game engine.",
     "headquarters": {

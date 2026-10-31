@@ -2661,7 +2661,7 @@
     "applicationUrl": "https://www.insanitycrew.com/contact-us",
     "evidenceUrl": "https://www.insanitycrew.com/contact-us",
     "notes": "Official studio-controlled page explicitly invites general applications. Evidence: submit your resume for consideration in future positions. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -2673,7 +2673,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -2705,7 +2705,7 @@
     "applicationUrl": "https://ironrootgames.com/",
     "evidenceUrl": "https://ironrootgames.com/",
     "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: speculative applications. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
@@ -2717,7 +2717,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -2727,7 +2727,7 @@
     "applicationUrl": "https://katal.games/careers/",
     "evidenceUrl": "https://katal.games/careers/",
     "notes": "Official careers page says there are no open roles but welcomes open applications by email with a CV or portfolio and a note about the candidate's interests.",
-    "checkedAt": "2026-10-29",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -2739,7 +2739,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-27"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -2749,7 +2749,7 @@
     "applicationUrl": "https://www.keenswh.com/job/spontaneous-applications/",
     "evidenceUrl": "https://www.keenswh.com/job/spontaneous-applications/",
     "notes": "Official spontaneous-application route for candidates who do not fit a listed opening. Remote applications are considered with CET overlap; the studio is looking for experienced, senior people rather than juniors.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [
@@ -2763,7 +2763,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -2773,7 +2773,7 @@
     "applicationUrl": "https://www.kerberos-productions.com/",
     "evidenceUrl": "https://www.kerberos-productions.com/",
     "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Applications. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -2785,7 +2785,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -2795,7 +2795,7 @@
     "applicationUrl": "https://www.kiagu.com/careers",
     "evidenceUrl": "https://www.kiagu.com/careers",
     "notes": "Official Careers page explicitly welcomes unsolicited applications at contact@kiagu.com and provides an application form for CVs and work samples. Studio is remote-first and headquartered in Seoul; applicant-country eligibility is not explicitly stated.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "unsolicited",
       "submissionMethods": [
@@ -2817,7 +2817,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -2827,7 +2827,7 @@
     "applicationUrl": "https://ats.rippling.com/pt-PT/kinetic-games-careers/jobs/b665dfab-9e85-445d-b5a7-765d34b9dc43",
     "evidenceUrl": "https://ats.rippling.com/pt-PT/kinetic-games-careers/jobs/b665dfab-9e85-445d-b5a7-765d34b9dc43",
     "notes": "Official ATS route welcomes speculative applications across disciplines. Hybrid in Southampton; applicants must already have UK right to work and sponsorship is unavailable. Eligible locations: United Kingdom.",
-    "checkedAt": "2026-10-29",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
@@ -2841,7 +2841,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-27"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -4118,6 +4118,28 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Q138639552",
+    "country": "Not stated",
+    "websiteUrl": "https://ballisticmoon.com/",
+    "applicationUrl": "https://ballisticmoon.com/careers/",
+    "evidenceUrl": "https://ballisticmoon.com/careers/",
+    "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: SPECULATIVE APPLICATION. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
