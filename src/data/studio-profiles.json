@@ -6732,6 +6732,50 @@
       "https://corporate.nacongaming.com/wp-content/uploads/2026/10/Document-URD-NACON-31.03.2026.html"
     ]
   },
+  "Laki Studios": {
+    "description": "Independent Katowice-based game studio producing artistic indie games and contributing art, cinematic and layout work to other projects. Its released game Oaken is followed by new projects including Haze and Sail.",
+    "headquarters": {
+      "city": "Katowice",
+      "country": "Poland",
+      "countryCode": "PL",
+      "label": "Studio location · official About page"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Services"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie game studio",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Indie games",
+      "Tactical",
+      "Roguelite",
+      "Game design",
+      "Unity",
+      "Unreal",
+      "Art and cinematics"
+    ],
+    "popularGames": [
+      {
+        "title": "Oaken"
+      },
+      {
+        "title": "Haze",
+        "stage": "Pre-production"
+      }
+    ],
+    "profileSources": [
+      "https://www.lakistudios.com/about",
+      "https://www.lakistudios.com/games",
+      "https://www.lakistudios.com/jobs/open-application"
+    ],
+    "applicationLocation": "Katowice, Poland · open application describes full-time flexible and fully remote work; applicant-country eligibility is not stated."
+  },
   "Larian Studios": {
     "description": "Independent game developer founded in Gent, Belgium in 1996, known for the Divinity series and Baldur's Gate 3, operating seven studios across Europe, Asia and North America.",
     "headquarters": {
@@ -7257,6 +7301,60 @@
       "https://careers.mainstaygames.com/roles/open-application"
     ],
     "applicationLocation": "Helsinki, Finland · the form asks for country of residence; applicant-country eligibility and work model are not stated."
+  },
+  "Makemake Creative Studio": {
+    "description": "Istanbul-based creative game and animation studio developing mobile games and technology products. Its public catalogue includes Mega Harvester: Lumber Factory, Plantoid and other mobile titles.",
+    "headquarters": {
+      "city": "Istanbul",
+      "country": "Türkiye",
+      "countryCode": "TR",
+      "label": "Studio location · official About page"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Animation studio"
+    ],
+    "ownership": "Private limited company (Makemake Tasarım Prodüksiyon Ltd.)",
+    "parentCompany": null,
+    "industryScale": "Game and animation studio",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "Game development",
+      "Game design",
+      "Game art",
+      "Animation",
+      "Unity",
+      "Unreal"
+    ],
+    "popularGames": [
+      {
+        "title": "Mega Harvester: Lumber Factory"
+      },
+      {
+        "title": "Plantoid"
+      },
+      {
+        "title": "Carpet Cleaning"
+      },
+      {
+        "title": "Thread Rush"
+      },
+      {
+        "title": "Feather Sort 3D"
+      },
+      {
+        "title": "Delicious Eating Simulator"
+      }
+    ],
+    "profileSources": [
+      "https://www.makemake.com.tr/",
+      "https://makemake.com.tr/about",
+      "https://makemake.com.tr/career"
+    ],
+    "applicationLocation": "Istanbul, Türkiye · work model and applicant-country eligibility are not stated."
   },
   "Melcher Studios": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
@@ -8276,6 +8374,44 @@
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
   },
+  "PixelAnt Games": {
+    "description": "Independent Wrocław-based game-development services studio providing co-development, porting, remasters/remakes and full production for publishers worldwide. It is also building its own unannounced game IP. Team members have worked on multiple recognised AA/AAA titles; those titles are client credits, not presented as owned IP.",
+    "headquarters": {
+      "city": "Wrocław",
+      "country": "Poland",
+      "countryCode": "PL",
+      "label": "Studio location · official About page"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Game-development services"
+    ],
+    "ownership": "Independent (since 2025)",
+    "parentCompany": null,
+    "industryScale": "Specialist AA/AAA co-development and full-production studio",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "PlayStation",
+      "Xbox",
+      "Nintendo Switch",
+      "Co-development",
+      "Porting",
+      "Remasters and remakes",
+      "Full production",
+      "Unreal Engine"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://pixelantgames.com/about-us/",
+      "https://pixelantgames.com/careers/",
+      "https://pixelantgames.com/careers/future-opportunities/"
+    ],
+    "applicationLocation": "Wrocław, Poland · the Future Opportunities form offers office, hybrid and fully remote preferences; remote applicant-country eligibility is not stated."
+  },
   "Playa Games": {
     "description": "Hamburg-based developer and operator of browser and mobile games, known for the MMORPG Shakes & Fidget.",
     "headquarters": {
@@ -8354,6 +8490,42 @@
       "https://playdead.breezy.hr/p/fbda7a56839001-speculative-applications"
     ],
     "applicationLocation": "Copenhagen, Denmark · on-site"
+  },
+  "Played With Fire": {
+    "description": "Independent Kraków game studio making knowledge-vania experiences and story-driven first-person action, adventure, puzzle and stealth games. Founded in 2019, the studio grew from VR-informed interaction design into a broader PC game-development focus.",
+    "headquarters": {
+      "city": "Kraków",
+      "country": "Poland",
+      "countryCode": "PL",
+      "label": "Registered office · official company details"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie game studio",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Action",
+      "Adventure",
+      "Puzzle",
+      "Stealth",
+      "Narrative",
+      "Knowledge-vania",
+      "VR"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.playedwithfire.com/about/",
+      "https://www.playedwithfire.com/careers/",
+      "https://www.playedwithfire.com/job/cv-for-the-future/"
+    ],
+    "applicationLocation": "Kraków, Poland · work model and applicant-country eligibility are not stated."
   },
   "PlayQ": {
     "description": "Santa Monica-based global entertainment and technology company developing mobile games and original game IP.",
@@ -9089,6 +9261,42 @@
       "https://www.readyatdawn.com/"
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Rebel Wolves": {
+    "description": "Warsaw-based independent video-game developer focused on role-playing games and narrative experiences. Its first announced game is The Blood of Dawnwalker.",
+    "headquarters": {
+      "city": "Warsaw",
+      "country": "Poland",
+      "countryCode": "PL",
+      "label": "Registered office · official Join Us page"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "Independent game studio",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Role-playing games",
+      "Action RPG",
+      "Narrative games",
+      "Fantasy"
+    ],
+    "popularGames": [
+      {
+        "title": "The Blood of Dawnwalker"
+      }
+    ],
+    "profileSources": [
+      "https://rebel-wolves.com/en",
+      "https://rebel-wolves.com/en/join-us"
+    ],
+    "applicationLocation": "Warsaw, Poland · the employer says candidates in other countries may be considered when the time difference is within ±4 hours of Warsaw; work model is not stated."
   },
   "Red Thread Games": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
