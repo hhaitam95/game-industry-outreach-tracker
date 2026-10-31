@@ -96,7 +96,10 @@ jobs:
           )"
           fi
 
-          SOURCE_PAGE_LIMIT=8
+          SOURCE_PAGE_LIMIT=110
+          if [ "$MODE" = "hourly" ]; then
+            SOURCE_PAGE_LIMIT=8
+          fi
           if [ "$MODE" = "hourly" ] && [ -f "$STATE_FILE" ]; then
             SATURATED="$(python3 - "$STATE_FILE" <<'PY'
           import json
