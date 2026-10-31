@@ -376,6 +376,27 @@ The proposal branch contains **308 route/profile pairs**, **304 active** and **4
 
 The proposal branch contains **311 route/profile pairs**, **306 active** and **5 paused**, across **51 country/location labels**. Main remains at 287/287 until PR #70 is reviewed, merged and deployed.
 
+### Additional verified and refreshed findings — 2026-10-31 (batch 12)
+
+#### New verified routes prepared for publication on PR #70
+
+- **SQUARE ENIX (Japan):** the official mid-career site has an explicit Career Registration system for people who do not want to select a single job type or whose target position is not currently advertised. The employer reviews profiles across divisions and may introduce matching openings, including unpublished roles. This is a group-wide talent registration, valid for three years, and does not guarantee an interview, job or contact. Current categories include Digital Entertainment/game development, production/operations, CG, sound, localization, R&D, publishing, media and corporate roles. Official company data reports 3,235 employees as of 2026-03-31, with Shinjuku HQ and Shibuya/Osaka offices; the company is wholly owned by Square Enix Holdings. Work model and overseas eligibility are not stated for the registration. Sources: https://www.jp.square-enix.com/recruit/career/careerlink/index.html, https://www.jp.square-enix.com/recruit/career/data/index.html, https://hrmos.co/pages/square-enix/jobs/00001/apply.
+- **Iteration One (Germany):** its official homepage links directly to its JOIN recruiting portal, where a dedicated Spontaneous Application explicitly invites CVs and cover letters for future roles when no suitable position is open. It is a self-funded independent Karlsruhe-based mobile game developer/publisher making free-to-play idle/tycoon games; its live game is Nightclub Tycoon. JOIN lists 1–10 employees. The spontaneous route does not state a work model or applicant-country eligibility. Sources: https://www.iterationone.com/, https://join.com/companies/iterationonecom/spontaneous-application.
+- **Cenrellia Studios (country not stated):** its own Careers page says there are no current positions but explicitly invites unsolicited Art, Music, commissioned game-development, QA and Community pitches through its first-party contact form (select “Careers”). Its Games page lists Stellar Hustler for Steam/PC (Linux-first), Android and iOS. The business is a one-person sole proprietorship. Country/HQ, compensation and engagement terms are not stated. It qualifies because it demonstrably develops a digital game and explicitly invites unsolicited work/collaboration pitches. State clearly that this is not an advertised salaried vacancy and do not imply employment. Sources: https://cenrelliastudios.com/de/careers, https://cenrelliastudios.com/de/contact, https://cenrelliastudios.com/de/about, https://cenrelliastudios.com/de/games.
+
+#### Existing route/profile precision refreshes
+
+- **Stormind Games (Italy):** rechecked the current spontaneous-application form, which accepts a CV/resume and supporting details. The official Company page states that the independent studio was founded in 2016, has 100+ internal resources plus external collaborators, and has HQ in Catania/Acireale with registered office in Milan. The refreshed profile records Remothered: Red Nun's Legacy (released 2026-10-27), upcoming remasters, A Quiet Place: The Road Ahead, Batora: Lost Haven and its co-development contribution on Mafia: The Old Country. The spontaneous route does not state work model or applicant-country eligibility. Sources: https://stormindgames.com/careers/, https://stormindgames.com/company/, https://stormindgames.com/games/.
+- **GAME FREAK (Japan):** rechecked the employer-managed HRMOS Career Registration. It invites mid-career regular-employee candidates to register their experience even when no target position is open; HR may contact them if a matching job or hiring event becomes available. The registration may be held for up to two years and is not a job vacancy or guarantee. The official FAQ accepts overseas applications but requires business-level Japanese for all roles and approximately JLPT N1 for development work. The route now uses workModel `not_stated`; Tokyo is retained as an HQ reference only, not a presumption of hybrid work. Sources: https://www.gamefreak.co.jp/recruit/, https://www.gamefreak.co.jp/recruit/faq/, https://hrmos.co/pages/gamefreak/jobs/10-4.
+
+#### Classification clarification: solo studios and non-job applications
+
+A legitimate one-person video-game developer can satisfy the studio gate. If the explicit unsolicited route is for project pitches, commissioned work or collaboration rather than a salaried vacancy, include only when the game-development identity and application invitation are both established, and describe the route as such. Do not convert “no current jobs” into a claim that paid employment is open. Record compensation/contract conditions as unknown if the employer does not state them. Cenrellia Studios is the example captured in this batch.
+
+#### Current batch checkpoint
+
+The proposal branch contains **314 route/profile pairs**, **309 active** and **5 paused**, across **51 country/location labels**. Main remains at 287/287 until PR #70 is reviewed, merged and deployed.
+
 ## 10. Handover protocol
 
 At the start of any new work session or handover:
