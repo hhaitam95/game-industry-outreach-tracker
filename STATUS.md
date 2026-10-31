@@ -7,33 +7,29 @@
 
 - The site remains limited to the studio directory and My applications.
 - Tracker entries remain in the visitor's browser localStorage; no personal application data is committed to the repository.
-- The current main-branch directory contains **266 studio records** and **266 matching profiles**, with **263 active** and **3 paused** routes across **44 country/location labels**.
-- This second worldwide research batch proposes **12 additional records** and refreshes Speedway Games' official route; its proposal snapshot has **278 records / 278 profiles**, **275 active** and **3 paused** routes across **45 country/location labels**.
-- Each route retains official studio, application and evidence URLs plus a verification date.
-- A studio appears only when an official studio-controlled page or linked employer-managed application system explicitly invites speculative, unsolicited, spontaneous, open or general applications.
-- Some entries are publishers, co-development/services studios or Minecraft content developers rather than original-IP game studios; their type is explicit in each profile. Volunteer-only and commission/freelance routes carry clear caveats.
+- Current main contains **278 studio records**, **278 matching profiles**, **275 active** and **3 paused** routes across **45 country/location labels**.
+- This third manual research batch proposes **6 additional studios** and refreshes **3 existing studio records** (Bananagun, Larian Studios and Garena). The proposal branch contains **284 routes / 284 profiles**, **281 active** and **3 paused** routes across **48 country/location labels**.
+- New records extend coverage to Iraq, the Philippines and Brazil. Existing entries for South Korea and other countries are not duplicated.
+- Every record retains official studio, application and evidence URLs plus a verification date. Explicit work-location, experience, language, country eligibility and compensation constraints are preserved.
+- Some directory entries are publishers, co-development/service studios, game-content providers or entertainment groups rather than traditional original-IP studios; their profile classification makes this visible. All non-paid or volunteer collaboration caveats are disclosed.
 
 ## Phase 1 — Global discovery
 
-- The latest completed successful scheduled discovery checkpoint is [run 41191375366](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41191375366), which completed a source cycle, processed 7 source pages and added 304 candidates to the pool.
-- The checkpoint contained **10,370 candidates seen**, **126 cumulative routes verified**, **56 suitability exclusions**, **7,883 candidates with no explicit route found** and **79 cases retained for manual review**. Retry and review queues remain distinct from confirmed negative findings.
-- A post-merge run [41200057779](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41200057779) stopped safely when a Wikidata request timed out. It did not advance or publish a partial source checkpoint; the 10,370-candidate state remains the last successful saved checkpoint.
-- The four existing source feeds remain GameDevMap and three Wikidata queries. The one-time GameDevMap catalogue backfill is complete; scheduled refresh and candidate verification continue.
-- The workflow retains the 25-minute bounded source/verification budget, up to 1,000 candidate checks, 8 concurrent distinct-domain checks, same-host pacing, and conservative route-closure rules. Temporary timeouts, rate limits, blocks or robots denials do not close routes.
+- The latest completed successful scheduled discovery checkpoint is [run 41191375366](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41191375366), completed on 2026-10-31 after processing 7 source pages and adding 304 candidates.
+- At that checkpoint, the pipeline had seen **10,370 candidates**, cumulatively verified **126 routes**, recorded **56 suitability exclusions**, **7,883 no-route outcomes** and **79 manual-review cases**. Retry and review queues are kept separate from confirmed negative outcomes.
+- The post-merge scheduled runs [41200057779](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41200057779) and [41200817331](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41200817331) stopped safely on upstream Wikidata request timeouts. They did not advance or publish partial source checkpoints; the last successful private discovery state remains intact.
+- The four existing source feeds remain GameDevMap and three Wikidata queries. The one-time GameDevMap backfill is complete. Scheduled source refresh and candidate verification remain active.
+- Timeouts, HTTP rate limits, access blocks and robots denials do not close application routes or count as no-route evidence.
 
-## Phase 2 — Data quality and verification
+## Phase 2 — Data quality
 
-- The public-data validator checks required route fields, HTTPS official/application/evidence URLs, route enums and review dates.
-- It verifies one matching profile per route, mandatory profile fields/source URLs, duplicate studio names and excluded records.
-- Main at the beginning of this batch validated **266 routes / 266 profiles**. The proposal branch contains **278 / 278**; exact-head CI must pass again before merge.
-- The 79 manual-review cases and retry queue remain separate; they are not counted as successful discoveries.
-
-## Phase 3 — Background automation
-
-- Saturation-aware maintenance and the hourly schedule remain in place. A temporary upstream timeout does not reset source cursors or mark candidates as negative.
-- The latest merge-triggered website publication and build succeeded; the failed discovery attempt did not affect the deployed 266-record main dataset.
+- The validator checks required route fields, HTTPS official/application/evidence URLs, route enums, review dates, one matching profile per route, profile source links and duplicate names.
+- Main at the start of this batch validated **278 routes / 278 profiles**. The proposal contains **284 / 284** and will be validated by exact-head CI before merge.
+- Six new records are included: D4N Games, Monstronauts, Nikity Games Studio, Tropical Games, TAKEONE and SmashByte.
+- Existing entries are refreshed rather than duplicated: Bananagun (wildcard email route), Larian Studios (multiple discipline-specific open applications, including DevOps) and Garena (Singapore, Jakarta and Vietnam talent pools).
 
 ## Next research focus
 
-- Expand beyond the current strongest UK/US/Canada/Sweden/Germany concentration, prioritising additional APAC, Africa, Latin America, Eastern Europe and remote-first studios.
-- Recheck held leads only when the official employer route becomes reachable or clearer; do not reinterpret 403/404, generic contact pages or vacancy-only listings as applications.
+- Continue broadening the directory in Latin America, Africa, South and Southeast Asia and Eastern Europe.
+- Prioritise fully remote or regionally remote talent pools and game-operations, technical support, QA, community, production, DevOps and platform-support pathways.
+- Recheck held leads only when the official employer route becomes reachable and explicit; never infer open hiring from a generic contact page, a vacancy-only listing or an HTTP error.
