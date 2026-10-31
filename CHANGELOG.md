@@ -1,12 +1,23 @@
 # Changelog
 
+## 2026-10-31 — Global discovery batch 7 (proposed on PR #70)
+
+- Added AnkleBreaker Studio (France), Alice in Games (Germany), No Roof Games (Finland) and Skytale (France), each with an official open/spontaneous application route and matching researched profile.
+- Marked Skytale clearly as a non-profit, volunteer-only studio with no employees; this is unpaid volunteering, not employment.
+- Added Chouic to the manual exclusion configuration because its company-level mobile-game catalogue includes sexual-entertainment/intimate-couple games and alcohol/party games.
+- Recorded Duhndal as manual review due to the drug-themed Drug Lord Tycoon title in a broader game portfolio; recorded Manc Games as manual review because the separate General Application microsite is not linked from the main official Careers page.
+- Reconsidered Fawkes Games: its spontaneous application and development role listings warrant review, but the official About page still describes a publisher/operator rather than establishing in-house development. AMIGO Spiele is kept out as a tabletop-only publisher/developer.
+- Confirmed multiple other rediscovered studios were already in the directory and were not duplicated.
+- The proposal branch now contains 301 route/profile pairs (297 active, 4 paused; 49 country/location labels). Main remains at 287 / 287 until PR #70 is reviewed and merged.
+- Updated the global discovery implementation model, ADR-072 and STATUS.md to preserve the evidence and handover decisions.
+
 ## 2026-10-31 — Global discovery batch 6 (proposed)
 
 - Consolidates the validated fifth expansion: adds Sudden Forest and refines Chimera Entertainment and Supermassive Games.
 - Adds 22cans, Absolutely Games and AB Games, plus Favo Games (Türkiye), DON’T NOD Montréal (France / Canada) and Ubisoft Saguenay (Canada), each with an official non-vacancy application route.
 - Corrects Bossa Studios' submission method to email; updates Brave At Night's Manchester location; clarifies Ember Crows' international eligibility and points-based freelance/profit-share caveat.
 - Pauses Techtive Games GmbH until its JOIN spontaneous route is directly linked or confirmed by an official company channel.
-- Removes Fawkes Games from the public studio directory because reviewed official material supports publisher/live-operations classification, not an in-house development studio.
+- Holds Fawkes Games pending confirmation of direct in-house development; its publisher/operator identity has not been reconciled with the current development-role listings.
 - Records source/access findings for IGDB, Games Jobs Index, GameCompanies.com, Steam, MobyGames and the community dataset.
 - Records held/manual-review decisions in ADR-071 and the Global Discovery Implementation Model. Candidate-index claims remain leads, not employer evidence.
 
@@ -16,7 +27,7 @@
 - Reaffirmed that discovery is global and non-prioritized: indie through AAA, all geographies, platforms and work models; no arbitrary directory-size cap and no personal career-targeting filter at this stage.
 - Documented additional candidate indexes for evaluation: GameCompanies.com, Games Jobs Index, Steam Developer/Publisher Homepages, the MobyGames API, a community-maintained studio dataset and regional/national sources. These are discovery leads, not integrated adapters or proof of speculative application acceptance.
 - Recorded access and accuracy caveats, including MobyGames API authorization/terms, mixed entity types in directories, manual review for uncertain exclusions and source-specific (not global) saturation as the target model.
-- Linked the model from README.md and HANDOFF.md; refreshed STATUS.md to remove outdated career-path/geography prioritization and record the current PR #68 checkpoint.
+- Linked the model from README.md and HANDOFF.md; refreshed STATUS.md to remove outdated career-path/geography prioritization and record the current discovery checkpoint.
 
 ## 2026-10-31 — Route quality refresh (proposed)
 
@@ -47,4 +58,4 @@
 
 ## Earlier changes — Worldwide expansion batch 1
 
-- Added 14 researched routes (merged in PR #63) and corresponding profiles across Australia, Denmark, Germany, India, Japan, Malaysia, Nigeria, Portugal, Türkiye, the United States and Vietnam.
+- Added 14 researched routes (merged in PR #63) and corresponding studio profiles across Australia, Denmark, Germany, India, Japan, Malaysia, Nigeria, Portugal, Türkiye, the United States and Vietnam.
