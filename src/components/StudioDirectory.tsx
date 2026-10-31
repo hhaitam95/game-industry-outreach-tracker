@@ -46,6 +46,12 @@ function locationFor(studio: Studio): string {
   const country = hq?.country || studio.country || "Not stated";
   return [hq?.city, country].filter(Boolean).join(", ");
 }
+function locationSortFor(studio: Studio): string {
+  const hq = profiles[studio.name]?.headquarters;
+  const country = hq?.country || studio.country || "Not stated";
+  const flag = countryFlagFor(country, hq?.countryCode);
+  return [flag, locationFor(studio)].filter(Boolean).join(" ");
+}
 
 export default function StudioDirectory({
   applications,
@@ -110,7 +116,7 @@ export default function StudioDirectory({
       })
       .sort((a, b) =>
         sort === "country"
-          ? locationFor(a).localeCompare(locationFor(b)) || a.name.localeCompare(b.name)
+          ? locationSortFor(a).localeCompare(locationSortFor(b)) || a.name.localeCompare(b.name)
           : a.name.localeCompare(b.name),
       );
   }, [activeStudios, country, now, query, showNewOnly, sort, workModel]);
