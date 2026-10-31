@@ -34,7 +34,7 @@ PROFILES_PATH = ROOT / "src/data/studio-profiles.json"
 STATE_PATH = ROOT / "state/studio-discovery-state.json"
 
 USER_AGENT = (
-    "StudioScoutDiscovery/1.0 "
+    "GameIndustryOutreachTracker/1.0 "
     "(https://github.com/hhaitam95/game-industry-outreach-tracker/issues; "
     "purpose: verify public game-studio speculative application pages)"
 )
@@ -1468,7 +1468,7 @@ def main() -> int:
         max_run_seconds=args.max_run_seconds,
         state_path=args.state_file,
     )
-    print("StudioScout speculative-route discovery")
+    print("Game Industry Outreach Tracker speculative-route discovery")
     for key, value in result.items():
         print(f"{key}: {json.dumps(value, ensure_ascii=False) if isinstance(value, (dict, list)) else value}")
     return 0

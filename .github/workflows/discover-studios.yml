@@ -126,7 +126,7 @@ jobs:
               --max-candidate-checks 1000 \
               --route-check-count 8 \
               --max-run-seconds 1500 \
-              --state-file "$STATE_FILE" 2>&1 | tee "$RUNNER_TEMP/studioscout-discovery.log"
+              --state-file "$STATE_FILE" 2>&1 | tee "$RUNNER_TEMP/game-industry-outreach-tracker-discovery.log"
           else
             # Continue unfinished Wikidata feeds with a bounded hourly budget.
             # Normal exploration checks up to 8 pages; saturated maintenance
@@ -139,7 +139,7 @@ jobs:
               --max-candidate-checks 1000 \
               --route-check-count 8 \
               --max-run-seconds 1500 \
-              --state-file "$STATE_FILE" 2>&1 | tee "$RUNNER_TEMP/studioscout-discovery.log"
+              --state-file "$STATE_FILE" 2>&1 | tee "$RUNNER_TEMP/game-industry-outreach-tracker-discovery.log"
           fi
           echo "mode=$MODE" >> "$GITHUB_OUTPUT"
           echo "source_page_limit=$SOURCE_PAGE_LIMIT" >> "$GITHUB_OUTPUT"
@@ -250,13 +250,13 @@ jobs:
         shell: bash
         run: |
           {
-            echo "## StudioScout discovery run"
+            echo "## Game Industry Outreach Tracker discovery run"
             echo "- Mode: ${{ steps.discovery.outputs.mode || 'not started' }}"
             echo "- Source-page cap: ${{ steps.discovery.outputs.source_page_limit || 'not set' }}"
             echo "- Public changes: ${{ steps.commit.outputs.data_changed || 'not committed' }}"
-            if [ -f "$RUNNER_TEMP/studioscout-discovery.log" ]; then
+            if [ -f "$RUNNER_TEMP/game-industry-outreach-tracker-discovery.log" ]; then
               for key in source_pages source_candidates candidate_checks verified_added routes_checked time_budget_exhausted; do
-                value="$(awk -F': ' -v key="$key" '$1 == key { print substr($0, index($0, ": ") + 2); exit }' "$RUNNER_TEMP/studioscout-discovery.log")"
+                value="$(awk -F': ' -v key="$key" '$1 == key { print substr($0, index($0, ": ") + 2); exit }' "$RUNNER_TEMP/game-industry-outreach-tracker-discovery.log")"
                 if [ -n "$value" ]; then
                   label="$(printf '%s' "$key" | tr '_' ' ')"
                   echo "- ${label^}: $value"
