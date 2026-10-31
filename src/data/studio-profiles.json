@@ -2454,6 +2454,58 @@
     "applicationLocation": "Copenhagen, Denmark · current unsolicited route does not specify applicant-country or remote eligibility",
     "reachHighlights": "The 2023 closure announcement was superseded by the studio's May 2025 confirmation that a compact team had survived and resumed full production; the official homepage now promotes Expeditions: Samurai Early Access."
   },
+  "CAPCOM": {
+    "description": "Japanese video-game developer and publisher based in Osaka, established in 1979. CAPCOM develops, manufactures and distributes home-console, PC, mobile and arcade games and operates amusement facilities. Its major game franchises include Resident Evil, Monster Hunter and Street Fighter.",
+    "headquarters": {
+      "city": "Osaka",
+      "country": "Japan",
+      "countryCode": "JP",
+      "label": "Head office · official corporate profile (as of May 19, 2026)"
+    },
+    "otherLocations": [
+      "Tokyo, Japan",
+      "Iga, Mie, Japan"
+    ],
+    "companyType": [
+      "Developer",
+      "Publisher"
+    ],
+    "ownership": "Publicly listed Japanese company (Tokyo Stock Exchange)",
+    "parentCompany": null,
+    "industryScale": "Large publicly listed game developer and publisher",
+    "teamSize": "3,976 consolidated / 3,593 non-consolidated (as of 2026-03-31)",
+    "teamSizeAsOf": "2026-03-31",
+    "focus": [
+      "PC",
+      "Console",
+      "Mobile",
+      "Arcade",
+      "Action",
+      "Fighting",
+      "Survival horror",
+      "Multiplayer"
+    ],
+    "popularGames": [
+      {
+        "title": "Resident Evil"
+      },
+      {
+        "title": "Monster Hunter"
+      },
+      {
+        "title": "Street Fighter"
+      },
+      {
+        "title": "Devil May Cry"
+      }
+    ],
+    "profileSources": [
+      "https://www.capcom.co.jp/ir/english/company/info.html",
+      "https://www.capcom.co.jp/ir/english/company/map.html",
+      "https://www.capcom.co.jp/recruit/guidelines/career/"
+    ],
+    "applicationLocation": "Japan · company headquarters in Osaka; career registration is group/department-wide, but overseas eligibility and remote work are not specified."
+  },
   "Carbonated": {
     "description": "Mobile game-development company founded in 2015 by industry veterans from Zynga, Electronic Arts and Blizzard. Carbonated describes its focus as hardcore player-versus-environment-versus-player games on phones, using AI to shape moment-to-moment gameplay. It has also developed Carbyne, a proprietary live-operations platform.",
     "headquarters": {
@@ -3402,6 +3454,66 @@
     "applicationLocation": "Antwerp, Belgium · official Jobs page does not state remote or international eligibility",
     "reachHighlights": "Cyborn develops games and immersive experiences and operates an in-house motion-capture facility in Antwerp."
   },
+  "Cygames Group": {
+    "description": "Japanese game-development group centred on Cygames, Inc., founded in Tokyo in 2011. The corporate profile covers mobile and console games plus related companies involved in game planning, development, operations, illustration, 3D game art and development support. The career-registration route is group-wide and may refer applications to affiliated entities.",
+    "headquarters": {
+      "city": "Tokyo",
+      "country": "Japan",
+      "countryCode": "JP",
+      "label": "Cygames, Inc. head office · group registration covers multiple affiliated entities"
+    },
+    "otherLocations": [
+      "Osaka, Japan",
+      "Saga, Japan",
+      "Seoul, South Korea",
+      "Taipei, Taiwan",
+      "London, United Kingdom",
+      "Los Angeles, USA",
+      "Singapore"
+    ],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Group company"
+    ],
+    "ownership": "Part of the CyberAgent corporate group; verify the specific employing entity for any matching role",
+    "parentCompany": "CyberAgent, Inc. (corporate group affiliation)",
+    "industryScale": "Major Japanese game-development group",
+    "teamSize": "Not publicly disclosed for the group-wide registration scope",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "Console",
+      "PC",
+      "Game planning",
+      "Game development",
+      "Game operations",
+      "Art and illustration",
+      "3D game art",
+      "Localization"
+    ],
+    "popularGames": [
+      {
+        "title": "Granblue Fantasy"
+      },
+      {
+        "title": "Umamusume: Pretty Derby"
+      },
+      {
+        "title": "Shadowverse"
+      },
+      {
+        "title": "Shadowverse: Worlds Beyond"
+      }
+    ],
+    "profileSources": [
+      "https://www.cygames.co.jp/en/corporate/profile/",
+      "https://www.cygames.co.jp/en/corporate/locations/",
+      "https://recruit.cygames.co.jp/career/",
+      "https://hrmos.co/pages/cygames/jobs/1984149015409414261"
+    ],
+    "applicationLocation": "Group registration in Japan; Cygames corporate information lists Tokyo, Osaka and Saga operations and selected overseas affiliates. The registration does not specify overseas applicant eligibility or remote work."
+  },
   "D4N Games": {
     "description": "Independent Erbil-based game studio creating games with locally rooted stories for global audiences, including Roblox experiences and horror, puzzle and adventure projects.",
     "headquarters": {
@@ -4276,7 +4388,7 @@
       "https://fawkesgames.com/privacy"
     ],
     "applicationLocation": "Remote worldwide per official Careers page; current freelance roles prefer Europe-friendly time zones. Registered office in Plovdiv, Bulgaria.",
-    "reachHighlights": "Founded in 2023; operates five legacy online game worlds and develops client modernization, gameplay overhauls, content updates and a unified launcher. Careers page explicitly invites spontaneous applications."
+    "reachHighlights": "The official careers page invites spontaneous applications by email and describes work-from-anywhere arrangements. As of 2026-10-31, the linked Breezy ATS lists a 12-month worldwide-remote Senior Unreal Engineer contractor role, with Eastern Europe preferred."
   },
   "Fenris Creations": {
     "description": "Independent video-game developer headquartered in Reykjavík, known for EVE Online and its player-driven virtual worlds. The company also operates studios in London and Shanghai.",
@@ -9789,6 +9901,50 @@
     "applicationLocation": "Bayreuth, Germany · employees must reside in Germany or the EU; freelance collaborators may work worldwide; hybrid workplace",
     "reachHighlights": "Five-person team; core PC/console game development in Unreal Engine. The studio reports projects including Trail of Toads, Downfall Hearts and the Windstorm remaster."
   },
+  "Small Giant Games": {
+    "description": "Helsinki-based mobile game developer creating accessible, socially engaging games with small autonomous teams. Small Giant Games is part of the Zynga and Take-Two Interactive family and reports an international team of more than 130 people.",
+    "headquarters": {
+      "city": "Helsinki",
+      "country": "Finland",
+      "countryCode": "FI",
+      "label": "Studio location · official company About page"
+    },
+    "otherLocations": [
+      "Internationally distributed team"
+    ],
+    "companyType": [
+      "Developer",
+      "Subsidiary"
+    ],
+    "ownership": "Part of the Zynga and Take-Two Interactive family (company-described)",
+    "parentCompany": "Zynga / Take-Two Interactive",
+    "industryScale": "Established mobile game studio",
+    "teamSize": "Over 130 (company-reported)",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "Puzzle",
+      "Social games",
+      "Casual",
+      "Live operations",
+      "Free-to-play"
+    ],
+    "popularGames": [
+      {
+        "title": "Empires & Puzzles"
+      },
+      {
+        "title": "Puzzle Combat"
+      }
+    ],
+    "profileSources": [
+      "https://www.smallgiantgames.com/",
+      "https://www.smallgiantgames.com/about/",
+      "https://www.smallgiantgames.com/careers/",
+      "https://job-boards.greenhouse.io/sggcareers/jobs/5669163004"
+    ],
+    "applicationLocation": "Helsinki, Finland · official careers page describes a hybrid work model; the application does not state overseas hiring eligibility."
+  },
   "SmashByte": {
     "description": "Brazilian game studio and publisher building and operating online multiplayer games, including Alaria Online, with in-house client/server engineering, cloud infrastructure and live operations.",
     "headquarters": {
@@ -10663,29 +10819,48 @@
     "reachHighlights": "Focused independent studio building UNRECORD with gameplay-first development and small specialized teams."
   },
   "Stunlock Studios": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Video-game developer based in Skövde, Sweden, creating multiplayer action games. The studio's official About page says it has been making games since 2009, while its Teamtailor employer profile currently lists 2010 as the founding year; its careers board reports a team of about 40 people.",
     "headquarters": {
-      "city": "Skoevde, Vastra Gotaland",
+      "city": "Skövde",
       "country": "Sweden",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "countryCode": "SE",
+      "label": "Studio location · official Stunlock About and Careers pages"
     },
     "otherLocations": [],
     "companyType": [
       "Developer"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Not publicly disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Independent game studio",
+    "teamSize": "About 40 (company-reported on Teamtailor)",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=8801&state=&type=",
-      "https://www.stunlockstudios.com/"
+    "focus": [
+      "PC",
+      "Action",
+      "Multiplayer",
+      "PvP",
+      "Survival",
+      "Online games"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "V Rising"
+      },
+      {
+        "title": "Battlerite"
+      },
+      {
+        "title": "Bloodline Champions"
+      }
+    ],
+    "profileSources": [
+      "https://www.stunlock.com/about",
+      "https://www.stunlock.com/games",
+      "https://www.stunlock.com/careers",
+      "https://jobs.stunlockstudios.com/jobs"
+    ],
+    "applicationLocation": "Skövde, Sweden · open-application ATS currently says Temporarily Remote; the company does not publish a worldwide applicant-eligibility statement."
   },
   "Sudden Forest": {
     "description": "Independent Berlin/Brandenburg game-development studio creating Tidewind, a 3D action-adventure prototype using Unreal Engine 5.",
