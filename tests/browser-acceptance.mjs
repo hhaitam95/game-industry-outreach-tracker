@@ -78,7 +78,7 @@ async function main() {
       });
     });
     const posterFixture = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC", "base64");
-    await page.route("https://shared.steamstatic.com/**", async route => {
+    await page.route("https://shared.akamai.steamstatic.com/**", async route => {
       await route.fulfill({ status: 200, contentType: "image/png", body: posterFixture });
     });
     await page.addInitScript(() => {

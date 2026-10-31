@@ -9,8 +9,8 @@ export type PopularGame = {
 function steamArtworkSources(appId?: number | null): string[] {
   if (!appId) return [];
   return [
-    `https://shared.steamstatic.com/store_item_assets/steam/apps/${appId}/library_600x900.jpg`,
-    `https://shared.steamstatic.com/store_item_assets/steam/apps/${appId}/library_600x900_2x.jpg`,
+    `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${appId}/library_600x900.jpg`,
+    `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${appId}/library_600x900_2x.jpg`,
     `https://cdn.cloudflare.steamstatic.com/steam/apps/${appId}/library_600x900.jpg`,
   ];
 }
