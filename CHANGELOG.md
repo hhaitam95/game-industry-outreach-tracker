@@ -3,11 +3,13 @@
 ## 2026-10-31 — Merge and data-quality reconciliation
 
 - Merged **PR #71**: added the manifest-backed discovery source inventory, source-specific saturation, independent recurring-feed checkpoints and additive v1-to-v2 private state migration.
+- Merged **PR #72**: consolidated duplicate FakeFish identities and added the exact-route duplicate guard/regression test.
 - Merged **PR #70**: consolidated global discovery batches 5–12, adding and refreshing official speculative-application routes and recording manual exclusions/held cases.
 - Reconciled the duplicate **Fakefish / FakeFish Games** rows. The official site and open-application route identify one employer, **FakeFish Oy**; the canonical directory/profile record is now **FakeFish**. Its richer current profile and route detail are retained, along with earlier profile-source provenance.
 - Added an exact application-route duplicate check to `scripts/check-studio-directory.mjs`, so rows with the same official website, application URL and evidence URL cannot silently pass directory validation.
 - Main now contains **313 unique studio records / 313 matching profiles**: **308 active**, **5 paused**, across **51 country/location labels**.
-- The merges automatically triggered main-branch Build, Pages publication and source-discovery workflows. Their final outcomes are recorded in the current STATUS checkpoint; a merge is not treated as a confirmed deployment until the publication run succeeds.
+- The corrected 313-record directory was deployed successfully by [Pages publication run 41212913830](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41212913830) from main commit `360d0a79530a1d0402deb8bba158b966fe1562e8`.
+- The first post-merge source-discovery run [41212342190](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41212342190) passed and persisted the schema-v2 private discovery-state checkpoint (commit `61bc51c0830fb62521ce182e806ca3fe282b54b9`). A follow-up run triggered by PR #72 is processing separately.
 
 ## 2026-10-31 — Global discovery batch 12 (merged in PR #70)
 
