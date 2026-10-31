@@ -1899,6 +1899,30 @@
     }
   },
   {
+    "name": "Flashbulb Games",
+    "country": "Denmark",
+    "websiteUrl": "https://www.flashbulbgames.com/",
+    "applicationUrl": "https://www.flashbulbgames.com/blank",
+    "evidenceUrl": "https://www.flashbulbgames.com/blank",
+    "notes": "The official Jobs page states there are currently no open positions and explicitly invites unsolicited applications by email to job@flashbulbgames.com. The studio's July 2026 privacy policy confirms that job applications are processed when submitted by email. Remote and cross-border applicant eligibility are not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Copenhagen, Denmark · remote and cross-border applicant eligibility not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Flow Studio",
     "country": "Australia",
     "websiteUrl": "https://flowgamestudio.com/",

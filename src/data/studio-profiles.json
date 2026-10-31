@@ -9315,5 +9315,47 @@
       "https://job-boards.greenhouse.io/bonfirestudiosinc/jobs/4423455009"
     ],
     "applicationLocation": "Irvine, California, United States · full-time hybrid; onsite collaboration expected"
+  },
+  "Flashbulb Games": {
+    "description": "Independent game studio based in Copenhagen, founded in 2016 by industry veterans. Best known for Trailmakers and Rubber Bandits, with a focus on player-driven experiences.",
+    "headquarters": {
+      "city": "Copenhagen",
+      "country": "Denmark",
+      "countryCode": "DK",
+      "label": "Studio base · official homepage"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent · company-stated",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Around 30 developers, artists and designers · company-stated",
+    "teamSizeAsOf": "2026-10-31",
+    "focus": [
+      "PC",
+      "Console",
+      "Multiplayer",
+      "Construction",
+      "Party games"
+    ],
+    "popularGames": [
+      {
+        "title": "Trailmakers",
+        "appId": null
+      },
+      {
+        "title": "Rubber Bandits",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.flashbulbgames.com/",
+      "https://www.flashbulbgames.com/blank",
+      "https://www.flashbulbgames.com/privacy-policy"
+    ],
+    "applicationLocation": "Copenhagen, Denmark · remote and cross-border applicant eligibility not stated"
   }
 }
