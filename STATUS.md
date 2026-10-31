@@ -7,8 +7,8 @@
 
 - The site remains limited to the studio directory and My applications.
 - Tracker entries remain in the visitor's browser localStorage; no personal application data is committed to the repository.
-- Current main contains **284 studio records**, **284 matching profiles**, **281 active** and **3 paused** routes across **48 country/location labels**. The fourth manual research batch proposes **3 additional employers** (Kokku, Raini Studios and Side) and refreshes Havoc Games; the proposal branch contains **287 records / 287 profiles**, **284 active** and **3 paused** routes.
-- The third manual research batch is merged in [PR #65](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/65): it added **6 studios** and refreshed **3 existing studio records** (Bananagun, Larian Studios and Garena). The fourth batch is proposed in PR #66: Kokku, Raini Studios and Side, plus an updated Havoc Games route.
+- Current main contains **287 studio records**, **287 matching profiles**, **284 active** and **3 paused** routes across **48 country/location labels**. The fourth manual research batch proposes **3 additional employers** (Kokku, Raini Studios and Side) and refreshes Havoc Games; the proposal branch contains **287 records / 287 profiles**, **284 active** and **3 paused** routes.
+- The third manual research batch is merged in [PR #65](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/65): it added **6 studios** and refreshed **3 existing studio records** (Bananagun, Larian Studios and Garena). The fourth batch is merged in [PR #66](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/66): Kokku, Raini Studios and Side, plus an updated Havoc Games route.
 - New records extend coverage to Iraq, the Philippines and Brazil. Existing entries for South Korea and other countries are not duplicated.
 - Every record retains official studio, application and evidence URLs plus a verification date. Explicit work-location, experience, language, country eligibility and compensation constraints are preserved.
 - Some directory entries are publishers, co-development/service studios, game-content providers or entertainment groups rather than traditional original-IP studios; their profile classification makes this visible. All non-paid or volunteer collaboration caveats are disclosed.
@@ -24,9 +24,10 @@
 ## Phase 2 — Data quality
 
 - The validator checks required route fields, HTTPS official/application/evidence URLs, route enums, review dates, one matching profile per route, profile source links and duplicate names.
-- Main at the start of this batch validated **278 routes / 278 profiles**. The merged dataset contains **284 / 284**; PR #65's exact-head CI passed Python discovery tests, route/profile validation, frontend tests, route review, production build, privacy boundary, Pages artifact and browser acceptance. PR #66 proposes **287 / 287** pending its own exact-head CI.
+- Main at the start of this batch validated **278 routes / 278 profiles**. The merged dataset contains **284 / 284**; PR #65's exact-head CI passed Python discovery tests, route/profile validation, frontend tests, route review, production build, privacy boundary, Pages artifact and browser acceptance. The merged dataset contains **287 / 287** and PR #66 passed its exact-head CI suite, including browser acceptance.
 - Six new records were merged: D4N Games, Monstronauts, Nikity Games Studio, Tropical Games, TAKEONE and SmashByte.
-- The next manual batch proposes Kokku (remote co-development talent pools), Side (regional player-support and co-development pools) and Raini Studios; Havoc Games' existing application details are refreshed rather than duplicated.
+- Kokku (remote co-development talent pools), Side (regional player-support and co-development pools) and Raini Studios were added in PR #66; Havoc Games' existing application details were refreshed rather than duplicated.
+- PR #67 proposes further precision updates to Aska Studios, Obsidian Entertainment, SOFTGAMES, Lost Boys Interactive and Rustling Leaves Games, without creating duplicate records.
 - Existing entries were refreshed rather than duplicated: Bananagun (wildcard email route), Larian Studios (multiple discipline-specific open applications, including DevOps) and Garena (Singapore, Jakarta and Vietnam talent pools).
 
 ## Next research focus

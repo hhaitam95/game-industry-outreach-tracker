@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-10-31 — Route quality refresh (proposed)
+
+- Updated Aska Studios to its official email-based General Application page and explicit remote-first wording.
+- Updated Obsidian Entertainment to its employer-managed ATS General Application, including discipline scope.
+- Updated SOFTGAMES' unsolicited application requirements and remote-first details.
+- Corrected Lost Boys Interactive's General Application to US-only remote eligibility and no visa sponsorship.
+- Expanded Rustling Leaves Games' discipline scope and prominently documented its rev-share compensation model.
+
+# Changelog
+
 ## 2026-10-31 — Worldwide expansion batch 4 (proposed)
 
 - Added Kokku (remote co-development talent pools), Side (Philippines Player Support and regional co-development / QA / animation pools), and Raini Studios (spontaneous remote application).
