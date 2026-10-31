@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-10-31 — Global discovery batch 12 (proposed on PR #70)
+
+- Added **SQUARE ENIX** (Japan) with the official three-year group-wide Career Registration for candidates without a current target role; the listing is not a job or guaranteed interview.
+- Added **Iteration One** (Germany) after confirming the official homepage links directly to JOIN's Spontaneous Application.
+- Added **Cenrellia Studios** (country not stated), a one-person developer whose official Careers page explicitly invites unsolicited project/collaboration pitches through its contact form. Public notes distinguish this from an advertised salaried vacancy and leave compensation unknown.
+- Refreshed **Stormind Games** using its current spontaneous-application form, studio scale/location and current credits.
+- Refreshed **GAME FREAK** using the current HRMOS Career Registration and official FAQ: overseas applicants are accepted but business-level Japanese is required; work model is not assumed.
+- Added ADR-077 and updated the authoritative model, STATUS and HANDOFF.
+- Proposal branch now contains **314 route/profile pairs (309 active, 5 paused; 51 country/location labels)**. Main remains at 287/287 until PR #70 is reviewed, merged and deployed.
+
 ## 2026-10-31 — Global discovery batch 11 (proposed on PR #70)
 
 - Added **FakeFish Games** (Finland), **Winning Streak Games** (Germany) and **ByteRockers' Games** (Germany), with official open/spontaneous application evidence and matching profiles.
