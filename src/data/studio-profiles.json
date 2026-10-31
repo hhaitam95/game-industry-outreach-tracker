@@ -4909,34 +4909,38 @@
     "applicationLocation": "Not specified · confirm on the official application route"
   },
   "HypeHype": {
-    "description": "Helsinki-based game-creation technology company developing a platform for creating, sharing and playing mobile-first games.",
+    "description": "Helsinki-based AI-native game studio and game-creation technology company developing games and tooling for the next generation of game creation. Its current careers page describes an AI-native studio building games and the underlying creation tools.",
     "headquarters": {
       "city": "Helsinki",
       "country": "Finland",
       "countryCode": "FI",
-      "label": "HQ"
+      "label": "Studio location · official Jobs page"
     },
     "otherLocations": [],
     "companyType": [
       "Developer",
-      "Technology platform"
+      "Technology platform",
+      "Independent studio"
     ],
-    "ownership": "Privately held · ownership not confirmed",
+    "ownership": "Independent company backed by Supercell and Benchmark; investor backing does not establish parent-company ownership",
     "parentCompany": null,
-    "industryScale": "Indie / AA",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
+    "industryScale": "Indie / AA · editorial indication",
+    "teamSize": "Not publicly disclosed on the current Jobs page",
+    "teamSizeAsOf": "2026-10",
     "focus": [
+      "AI-native games",
+      "Game creation tools",
       "Mobile",
       "User-generated games",
-      "Game creation platform"
+      "Game technology"
     ],
     "popularGames": [],
-    "applicationLocation": "Helsinki · on-site noted on route",
     "profileSources": [
-      "https://hypehype.com/jobs",
-      "https://hypehype.com/"
-    ]
+      "https://hypehype.com/",
+      "https://hypehype.com/jobs"
+    ],
+    "applicationLocation": "Helsinki, Finland · open-application work model and applicant-country eligibility not stated",
+    "reachHighlights": "The current Jobs page positions HypeHype as an AI-native game studio backed by Supercell and Benchmark, with a dedicated Open Application for people who want to shape games and game creation."
   },
   "Hypemasters": {
     "description": "International strategy-game developer with its main development office in Abu Dhabi and a distributed international team.",
@@ -7941,35 +7945,40 @@
     "applicationLocation": "Not specified · confirm on the official application route"
   },
   "Redly Games": {
-    "description": "Small remote-first game studio founded by former Supercell game lead Thea Chow, focused on thoughtful, design-led experiences.",
+    "description": "Small remote-first Finnish game studio led by Thea Chow, former game lead at Supercell. It is developing its first title: a mobile 3D adventure game built with Unreal Engine 5; the title has not yet been announced.",
     "headquarters": {
       "city": "Helsinki",
       "country": "Finland",
       "countryCode": "FI",
-      "label": "HQ"
+      "label": "Base · official homepage"
     },
     "otherLocations": [
-      "Remote-first"
+      "Remote-first team across Europe and North America (company-reported)"
     ],
     "companyType": [
       "Developer",
       "Independent startup"
     ],
-    "ownership": "Independent",
+    "ownership": "Redly Games Oy · Finnish company; shareholder details not publicly stated",
     "parentCompany": null,
-    "industryScale": "Indie",
-    "teamSize": "Small team · exact count not disclosed",
+    "industryScale": "Indie / early-stage startup · editorial indication",
+    "teamSize": "Small senior-leaning team · exact count not disclosed",
     "teamSizeAsOf": "2026-10",
     "focus": [
       "Mobile",
+      "3D adventure",
+      "Unreal Engine 5",
       "Narrative",
-      "Casual"
+      "Casual",
+      "Remote development"
     ],
     "popularGames": [],
     "profileSources": [
-      "https://www.redlygames.com/"
+      "https://www.redlygames.com/",
+      "https://jobs.ashbyhq.com/redlygames/3c2a1d1e-5e80-4b4e-895d-f43d0efe4d3b"
     ],
-    "applicationLocation": "Global remote · EU and Canada preferred"
+    "applicationLocation": "Remote contract · EU and Canada preferred; exceptional candidates elsewhere may be considered depending on role",
+    "reachHighlights": "The official homepage identifies a Helsinki-based remote-first startup led by former Supercell game lead Thea Chow. Its Ashby Open Application says its first mobile 3D adventure game is being developed in Unreal Engine 5."
   },
   "Render Cube": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
