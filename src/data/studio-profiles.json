@@ -8099,6 +8099,31 @@
     "applicationLocation": "Wrocław office · office, hybrid or fully remote options stated; applicant geography not stated",
     "reachHighlights": "65+ experts onboard, 120+ completed projects and 100+ satisfied clients (studio-reported). Formerly The Knights of Unity."
   },
+  "Theory Studios": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Calgary, Alberta",
+      "country": "Canada",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=9301&state=&type=",
+      "https://www.theorystudios.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
   "Third Kind Games": {
     "description": "Full-service AAA co-development and full-development studio delivering art, design, engineering and production for major publishers and franchises.",
     "headquarters": {
@@ -8202,6 +8227,106 @@
       "https://join.com/companies/thqnordiccom"
     ],
     "applicationLocation": "THQ Nordic GmbH · Vienna headquarters only; subsidiary studios recruit independently"
+  },
+  "Thunder Lotus Games": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Montreal, Quebec",
+      "country": "Canada",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=9301&state=&type=",
+      "https://thunderlotusgames.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Traega Entertainment": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Nashville, Tennessee",
+      "country": "United States",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=9501&state=&type=",
+      "https://www.traega.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Triangular Pixels": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "London",
+      "country": "England",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Extended Reality (XR)"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=9501&state=&type=",
+      "https://www.triangularpixels.net/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Tripwire Interactive": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Roswell, Georgia",
+      "country": "United States",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer and Publisher"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=9501&state=&type=",
+      "https://tripwireinteractive.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "Twin Harbour Interactive": {
     "description": "Game developer and operator behind the Supremacy strategy-game franchise, with teams in Germany and Malta.",
@@ -8480,6 +8605,56 @@
       "https://vestgames.com/"
     ]
   },
+  "videoreality": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Frankfurt am Main, Hesse",
+      "country": "Germany",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Extended Reality (XR)"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=9901&state=&type=",
+      "https://www.videoreality.de/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "VILLIAN Studios": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Amsterdam, Noord-Holland",
+      "country": "Netherlands",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=9901&state=&type=",
+      "https://villainstudios.nl/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
   "Virtual Programming": {
     "description": "Specialist game technology studio focused on PC game porting, graphics, performance optimisation and platform integration.",
     "headquarters": {
@@ -8554,6 +8729,81 @@
       "https://vyrexinteractive.com/press",
       "https://vyrexinteractive.com/studio.php"
     ]
+  },
+  "Walk The Frog Studio": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Ludwigsburg, Baden-Wurttemberg",
+      "country": "Germany",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Microstudio"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=10001&state=&type=",
+      "https://walkthefrog.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "WolfPack Game Design": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Payson, Arizona",
+      "country": "United States",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=10201&state=&type=",
+      "https://www.wolfpackgamedesign.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Wonderstorm": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "El Segundo, California",
+      "country": "United States",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=10201&state=&type=",
+      "https://www.wonderstorm.net/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "Wushu Studios": {
     "description": "UK game development and co-development studio working with publishers and developers on original and partner projects.",
@@ -8643,6 +8893,31 @@
       "https://yabugames.io/about/",
       "https://yabugames.io/careers/"
     ]
+  },
+  "Yodo1": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Hong Kong",
+      "country": "China",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Mobile"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=10301&state=&type=",
+      "https://www.yodo1.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "Zygle Games": {
     "description": "London-based mobile game developer and publisher creating strategy, RPG and simulation experiences.",
