@@ -1176,22 +1176,31 @@
     "websiteUrl": "https://www.chimera-entertainment.de/",
     "applicationUrl": "https://chimera-entertainment.jobs.personio.com/job/150955?language=en",
     "evidenceUrl": "https://chimera-entertainment.jobs.personio.com/job/150955?language=en",
-    "notes": "Official Personio posting is titled speculative application; it says applicants who did not find a fitting role can apply anyway. Munich office. Work model: onsite.",
-    "checkedAt": "2026-10-30",
+    "notes": "Official Personio speculative-application listing invites candidates to apply even when no current role fits. The ATS places the role at the Munich office and labels it full-time/permanent; the company careers page separately describes remote/hybrid work and permanent employment options in Germany, Spain, Portugal, Italy, Finland, Poland and Romania. The same application page allows mandatory internships, which must be part of the applicant's degree, last at least five months and are on-site in Munich. Confirm location and contract conditions for the role being considered.",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
-        "website_form"
+        "ats"
       ],
       "workModel": "mixed",
       "eligibleLocations": [
-        "Hybrid / remote · Europe"
+        "Munich, Germany · ATS listing location and relocation support",
+        "Company careers page reports permanent employment options in Germany, Spain, Portugal, Italy, Finland, Poland and Romania; remote/hybrid arrangement is role/team dependent",
+        "Mandatory internships require a university-mandated placement of at least five months and are on-site in Munich"
       ],
-      "disciplineScope": [],
+      "disciplineScope": [
+        "Game development",
+        "PC",
+        "Mobile",
+        "Cross-platform",
+        "Original IP",
+        "Work-for-hire"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -6278,6 +6287,35 @@
     }
   },
   {
+    "name": "Sudden Forest",
+    "country": "Germany",
+    "websiteUrl": "https://suddenforest.com/",
+    "applicationUrl": "https://suddenforest.com/",
+    "evidenceUrl": "https://suddenforest.com/",
+    "notes": "Official Join the Team page lists a 'Speculative Application Unreal Engine 5' and invites contact despite there being no open positions at present. The current project is the 3D action-adventure prototype Tidewind, funded by Medienboard Berlin-Brandenburg; current freelance collaboration is limited to people residing in Berlin/Brandenburg. The studio explicitly says people outside the region may still contact it about potential future collaborations. This is not a current salaried vacancy or a worldwide-remote opening.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Current Tidewind freelance collaboration is limited to residents of Berlin/Brandenburg, Germany",
+        "People elsewhere may contact the studio about future collaborations; no current remote role or country eligibility is promised"
+      ],
+      "disciplineScope": [
+        "Unreal Engine 5",
+        "3D action-adventure",
+        "Freelance game development"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "SumiGames Studio",
     "country": "Not stated",
     "websiteUrl": "https://www.sumigamesstudio.com/",
@@ -6337,22 +6375,22 @@
     "websiteUrl": "https://www.supermassivegames.com/",
     "applicationUrl": "https://www.supermassivegames.com/careers/speculative-application",
     "evidenceUrl": "https://www.supermassivegames.com/careers/speculative-application",
-    "notes": "Official page titled Speculative Application invites applicants whose experience fits even when no listed role does. Guildford, UK.",
-    "checkedAt": "2026-10-29",
+    "notes": "Official Careers page lists a permanent Speculative Application and explicitly invites candidates who cannot see a role that fits to email their resume for future opportunities. The employer-managed Workable portal repeats the future-consideration invitation. The route is shown under Guildford, UK; remote or cross-border eligibility is not stated.",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
-        "website_form"
+        "email"
       ],
       "workModel": "not_stated",
       "eligibleLocations": [
-        "Guildford · see role-specific conditions"
+        "Guildford, United Kingdom · official careers page lists the speculative route in Guildford; remote and cross-border eligibility are not stated"
       ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-27"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {

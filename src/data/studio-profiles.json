@@ -2110,7 +2110,7 @@
     "reachHighlights": "The studio's About page identifies its office as Sthlm 01 in central Stockholm; its Teamtailor Connect form lists roles including VFX Artist, Technical Artist, Animator, Game Designer and multiple programming disciplines."
   },
   "Chimera Entertainment": {
-    "description": "Independent Munich game developer with a broad portfolio spanning strategy, RPG and mobile titles; offers hybrid and remote work across Europe.",
+    "description": "Independent Munich game developer producing proprietary IP and work-for-hire projects across PC, mobile and cross-platform development.",
     "headquarters": {
       "city": "Munich",
       "country": "Germany",
@@ -2127,8 +2127,8 @@
     "ownership": "Independent",
     "parentCompany": null,
     "industryScale": "Indie / AA",
-    "teamSize": "Around 80 team members (studio-reported)",
-    "teamSizeAsOf": "2026",
+    "teamSize": "Official pages differ: the current Personio posting says 25 game developers; the company careers page says around 70 international game developers.",
+    "teamSizeAsOf": "2026-10",
     "focus": [
       "PC",
       "Mobile",
@@ -2145,9 +2145,11 @@
         "appId": null
       }
     ],
-    "applicationLocation": "Hybrid / remote · Europe",
+    "applicationLocation": "Munich ATS listing; company careers page also reports remote/hybrid work and permanent employment options in Germany, Spain, Portugal, Italy, Finland, Poland and Romania; internships are on-site in Munich",
     "profileSources": [
-      "https://chimera-entertainment.com/"
+      "https://chimera-entertainment.com/",
+      "https://chimera-entertainment.jobs.personio.com/job/150955?language=en",
+      "https://chimera-entertainment.com/career/"
     ],
     "reachHighlights": "25+ released games · around 80 team members across Europe (studio-reported)."
   },
@@ -9325,6 +9327,42 @@
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
   },
+  "Sudden Forest": {
+    "description": "Independent Berlin/Brandenburg game-development studio creating Tidewind, a 3D action-adventure prototype using Unreal Engine 5.",
+    "headquarters": {
+      "city": null,
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "HQ not publicly stated · current prototype collaborator region is Berlin/Brandenburg"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie / early-stage",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Unreal Engine 5",
+      "3D action-adventure",
+      "Freelance development"
+    ],
+    "popularGames": [
+      {
+        "title": "Tidewind",
+        "appId": null,
+        "stage": "Prototype"
+      }
+    ],
+    "profileSources": [
+      "https://suddenforest.com/"
+    ],
+    "applicationLocation": "Current freelance collaboration is Berlin/Brandenburg-only; applicants elsewhere may contact for future collaborations"
+  },
   "SumiGames Studio": {
     "description": "Small, senior game-development and co-development studio working on mobile, PC, multiplayer, XR and Web3 projects for itself and partner teams.",
     "headquarters": {
@@ -9408,8 +9446,8 @@
     "ownership": "Owned by Nordisk Games · part of the Egmont Group",
     "parentCompany": "Nordisk Games / Egmont Group",
     "industryScale": "AA / AAA",
-    "teamSize": "About 188 estimated employees worldwide (March 2026; third-party estimate)",
-    "teamSizeAsOf": "2026-03",
+    "teamSize": "150+ people (company-reported on the employer-managed careers portal)",
+    "teamSizeAsOf": "2026-10",
     "focus": [
       "PC",
       "PlayStation",
@@ -9433,9 +9471,11 @@
     ],
     "profileSources": [
       "https://www.supermassivegames.com/about",
-      "https://www.reveliolabs.com/companies/supermassive-games/employees"
+      "https://www.reveliolabs.com/companies/supermassive-games/employees",
+      "https://www.supermassivegames.com/careers",
+      "https://apply.workable.com/supermassive-games/"
     ],
-    "applicationLocation": "Guildford · see role-specific conditions",
+    "applicationLocation": "Guildford, United Kingdom · remote and cross-border eligibility not stated",
     "reachHighlights": "BAFTA-winning studio; known for Until Dawn, The Quarry, The Dark Pictures Anthology and Little Nightmares III."
   },
   "Surgical Science": {
