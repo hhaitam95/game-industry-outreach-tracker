@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-31T10:28:15.284799+00:00",
+  "updated_at": "2026-10-31T12:39:27.802877+00:00",
   "feed_cursors": {
-    "wikidata_video_game_developers": "",
-    "wikidata_game_developer_credits": "",
-    "wikidata_video_game_companies": "",
+    "wikidata_video_game_developers": "Q108910285",
+    "wikidata_game_developer_credits": "Q99968931",
+    "wikidata_video_game_companies": "Q8072425",
     "gamedevmap": "10601"
   },
   "feed_done": {
     "wikidata_video_game_developers": false,
-    "wikidata_game_developer_credits": false,
-    "wikidata_video_game_companies": false,
+    "wikidata_game_developer_credits": true,
+    "wikidata_video_game_companies": true,
     "gamedevmap": true
   },
   "feed_index": 1,
@@ -202488,49 +202488,49 @@
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T09:53:16.458214+00:00"
+      "last_checked_at": "2026-10-31T12:39:11.427956+00:00"
     },
     "Kinetic Games": {
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T09:53:17.918737+00:00"
+      "last_checked_at": "2026-10-31T12:39:12.980209+00:00"
     },
     "Kitfox Games": {
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T10:11:08.501746+00:00"
+      "last_checked_at": "2026-10-31T12:39:14.502521+00:00"
     },
     "Kolibri Games": {
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T10:11:12.147237+00:00"
+      "last_checked_at": "2026-10-31T12:39:17.445892+00:00"
     },
     "KORION": {
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T10:11:15.709199+00:00"
+      "last_checked_at": "2026-10-31T12:39:20.966613+00:00"
     },
     "Krillbite Studios": {
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T10:11:17.413086+00:00"
+      "last_checked_at": "2026-10-31T12:39:22.694387+00:00"
     },
     "Kuuasema": {
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T10:27:51.947928+00:00"
+      "last_checked_at": "2026-10-31T12:39:24.247446+00:00"
     },
     "Kylotonn": {
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T10:27:55.420465+00:00"
+      "last_checked_at": "2026-10-31T12:39:27.802832+00:00"
     },
     "Larian Studios": {
       "negative_count": 0,
@@ -202569,7 +202569,7 @@
       "last_checked_at": "2026-10-31T10:28:15.282057+00:00"
     }
   },
-  "route_check_index": 128,
+  "route_check_index": 136,
   "stats": {
     "candidates_seen": 10370,
     "routes_verified": 126,
