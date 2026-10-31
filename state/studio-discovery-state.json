@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-31T15:13:47.910153+00:00",
+  "updated_at": "2026-10-31T15:51:44.101909+00:00",
   "feed_cursors": {
-    "wikidata_video_game_developers": "Q2495040",
+    "wikidata_video_game_developers": "Q403714",
     "wikidata_game_developer_credits": "",
     "wikidata_video_game_companies": "",
     "gamedevmap": "10601"
@@ -14,7 +14,7 @@
     "gamedevmap": true
   },
   "feed_index": 1,
-  "cycle": 4,
+  "cycle": 5,
   "cycle_additions": 0,
   "empty_cycles": 0,
   "saturated": false,
@@ -212980,49 +212980,49 @@
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T15:13:38.999477+00:00"
+      "last_checked_at": "2026-10-31T15:51:22.440475+00:00"
     },
     "Loading Studios": {
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T15:13:46.334269+00:00"
+      "last_checked_at": "2026-10-31T15:51:29.225756+00:00"
     },
     "Lost Boys Interactive": {
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T15:13:47.908062+00:00"
+      "last_checked_at": "2026-10-31T15:51:30.915469+00:00"
     },
     "Lost Native Games": {
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T15:03:16.735154+00:00"
+      "last_checked_at": "2026-10-31T15:51:32.639796+00:00"
     },
     "Lucid Games": {
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T15:03:20.086811+00:00"
+      "last_checked_at": "2026-10-31T15:51:36.125988+00:00"
     },
     "Lucid Labs": {
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T15:03:21.402300+00:00"
+      "last_checked_at": "2026-10-31T15:51:37.485818+00:00"
     },
     "Ludia": {
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T15:03:24.371522+00:00"
+      "last_checked_at": "2026-10-31T15:51:40.726541+00:00"
     },
     "Lunacy Studios": {
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T15:03:25.654409+00:00"
+      "last_checked_at": "2026-10-31T15:51:44.099455+00:00"
     },
     "Mainframe Industries": {
       "negative_count": 0,
@@ -213031,7 +213031,7 @@
       "last_checked_at": "2026-10-31T15:03:27.611888+00:00"
     }
   },
-  "route_check_index": 160,
+  "route_check_index": 168,
   "stats": {
     "candidates_seen": 10372,
     "routes_verified": 126,
@@ -213053,25 +213053,25 @@
       "last_pass_incomplete_candidates": 0
     },
     "wikidata_game_developer_credits": {
-      "cycle": 4,
+      "cycle": 5,
       "cycle_additions": 0,
-      "empty_cycles": 2,
-      "saturated": false,
+      "empty_cycles": 3,
+      "saturated": true,
       "complete": false,
-      "last_pass_completed_at": "2026-10-31T15:13:47.908099+00:00",
-      "last_pass_status": "complete",
+      "last_pass_completed_at": "2026-10-31T15:51:44.099492+00:00",
+      "last_pass_status": "saturated",
       "last_pass_candidates": 0,
       "last_pass_verified": 0,
       "last_pass_incomplete_candidates": 0
     },
     "wikidata_video_game_companies": {
-      "cycle": 4,
+      "cycle": 5,
       "cycle_additions": 0,
-      "empty_cycles": 2,
-      "saturated": false,
+      "empty_cycles": 3,
+      "saturated": true,
       "complete": false,
-      "last_pass_completed_at": "2026-10-31T15:13:47.908099+00:00",
-      "last_pass_status": "complete",
+      "last_pass_completed_at": "2026-10-31T15:51:44.099492+00:00",
+      "last_pass_status": "saturated",
       "last_pass_candidates": 0,
       "last_pass_verified": 0,
       "last_pass_incomplete_candidates": 0
