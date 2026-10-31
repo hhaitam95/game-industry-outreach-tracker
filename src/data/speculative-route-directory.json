@@ -258,6 +258,38 @@
     }
   },
   {
+    "name": "Aether Studios",
+    "country": "United States",
+    "websiteUrl": "https://aetherstudios.com/",
+    "applicationUrl": "https://aetherstudios.com/vacancy/general-application/",
+    "evidenceUrl": "https://aetherstudios.com/vacancy/general-application/",
+    "notes": "Official Jobs page lists a General Application and explicitly asks applicants to email jobs@aetherstudios.com with a resume, portfolio and cover letter. The form/page asks candidates to describe how they see themselves fitting into the team. The application page does not state remote or applicant-country eligibility.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Location preference is collected in the official jobs system; remote and international eligibility are not stated"
+      ],
+      "disciplineScope": [
+        "Art & Animation",
+        "Design",
+        "Effects",
+        "Human Resources",
+        "Production",
+        "Programming & Engineering",
+        "UI"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Aethra Studios",
     "country": "Netherlands",
     "websiteUrl": "https://www.aethrastudios.com/",

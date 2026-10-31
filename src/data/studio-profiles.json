@@ -9118,5 +9118,60 @@
       "https://careers.fenris.com/en/register-your-interest/new"
     ],
     "applicationLocation": "Reykjavík, London or Shanghai · select preferences in the official application form; remote eligibility not stated"
+  },
+  "Aether Studios": {
+    "description": "Independent game developer creating games in the Rivals of Aether universe, including competitive platform fighters, dungeon crawlers and other spin-offs.",
+    "headquarters": {
+      "city": "Seattle",
+      "country": "United States",
+      "countryCode": "US",
+      "label": "Studio base · official studio announcement"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent studio · legal ownership not stated",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Fighting",
+      "Platform fighter",
+      "Action"
+    ],
+    "popularGames": [
+      {
+        "title": "Rivals of Aether",
+        "appId": null
+      },
+      {
+        "title": "Rivals of Aether II",
+        "appId": null
+      },
+      {
+        "title": "Dungeons of Aether",
+        "appId": null
+      },
+      {
+        "title": "Creatures of Aether",
+        "appId": null
+      },
+      {
+        "title": "Lovers of Aether",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://aetherstudios.com/",
+      "https://aetherstudios.com/jobs/",
+      "https://aetherstudios.com/vacancy/general-application/",
+      "https://aetherstudios.com/news/aether-studios-announcment/"
+    ],
+    "applicationLocation": "Location preference is collected in the official jobs system; remote and international eligibility are not stated"
   }
 }
