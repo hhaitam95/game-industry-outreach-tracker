@@ -7,12 +7,12 @@
 
 - The site remains limited to the studio directory and My applications.
 - Tracker entries remain in the visitor's browser localStorage; no personal application data is committed to the repository.
-- The current main-branch public directory contains **252 studio records** and the profile dataset contains **252 matching profiles** (the current main-branch snapshot; two open data PRs propose a combined 14 additional routes and profiles).
-- **249 routes are active** and **3 are paused** on main; the combined PR proposal would bring this to **263 active** and **3 paused**. Paused records are retained for audit/history but are not shown as currently open routes.
-- Records currently cover **41 country/location labels** on main; the combined PR proposal would cover **44 labels**; unknown country values remain explicitly undisclosed.
+- The consolidated public directory snapshot contains **266 studio records** and the profile dataset contains **266 matching profiles** (252 baseline records plus 14 additions in the worldwide expansion batch).
+- **263 routes are active** and **3 are paused**. Paused records are retained for audit/history but are not shown as currently open routes.
+- Records currently cover **44 country/location labels**; unknown country values remain explicitly undisclosed.
 - Each active/paused record retains official studio, application and evidence URLs plus a verification date.
 - A studio is published only when an official studio-controlled page or linked employer-controlled hiring platform explicitly invites speculative, unsolicited, spontaneous, open or general applications.
-- One consolidated review batch is open: PR [#63](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/63) proposes **14 additional routes** (including Halfbrick Studios, Bonfire Studios and Flashbulb Games, previously tracked in PR #62). PR #62 is now redundant and will be closed as superseded once the consolidated batch passes CI.
+- The 14-route expansion is consolidated in PR [#63](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/63); it includes Halfbrick Studios, Bonfire Studios and Flashbulb Games, previously tracked in PR #62. PR #62 is superseded by the consolidated change.
 
 ## Phase 1 — Global discovery
 
@@ -30,7 +30,7 @@
 
 - The public-data validator checks every record for required identity and route fields, HTTPS official/application/evidence URLs, route enums and review dates.
 - It also verifies matching studio profiles, required profile fields and source URLs, duplicate studio names, and required exclusion cases.
-- The latest main-branch CI validation covered **252 studios with 252 matching profile records**. The pre-consolidation PR #63 head passed CI at 263 records. The consolidated 266-record dataset is undergoing a fresh exact-head CI run before merge.
+- The consolidated 266-record dataset passed the exact-head CI suite before this status-only update: route/profile validation, Python discovery tests, frontend tests, production build, privacy boundary, Pages artifact and browser acceptance. CI is rerunning for the documentation correction.
 - Privacy-boundary checks pass for tracked paths and public/build output; personal tracker records remain browser-local and are not sent to a backend.
 - At the latest saved checkpoint, retry cases and 79 manual-review cases remain separate queues. They are not being incorrectly counted as complete.
 
