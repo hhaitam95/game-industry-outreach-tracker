@@ -46,6 +46,11 @@
       "type": "string",
       "format": "date"
     },
+    "addedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC timestamp when this studio first entered the public directory."
+    },
     "applicationResearch": {
       "type": "object",
       "additionalProperties": false,
