@@ -530,6 +530,61 @@
       "https://adeninteractive.com/"
     ]
   },
+  "Aether Studios": {
+    "description": "Independent game developer creating games in the Rivals of Aether universe, including competitive platform fighters, dungeon crawlers and other spin-offs.",
+    "headquarters": {
+      "city": "Seattle",
+      "country": "United States",
+      "countryCode": "US",
+      "label": "Studio base · official studio announcement"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent studio · legal ownership not stated",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Fighting",
+      "Platform fighter",
+      "Action"
+    ],
+    "popularGames": [
+      {
+        "title": "Rivals of Aether",
+        "appId": null
+      },
+      {
+        "title": "Rivals of Aether II",
+        "appId": null
+      },
+      {
+        "title": "Dungeons of Aether",
+        "appId": null
+      },
+      {
+        "title": "Creatures of Aether",
+        "appId": null
+      },
+      {
+        "title": "Lovers of Aether",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://aetherstudios.com/",
+      "https://aetherstudios.com/jobs/",
+      "https://aetherstudios.com/vacancy/general-application/",
+      "https://aetherstudios.com/news/aether-studios-announcment/"
+    ],
+    "applicationLocation": "Location preference is collected in the official jobs system; remote and international eligibility are not stated"
+  },
   "Aethra Studios": {
     "description": "Independent remote-first studio focused on atmospheric, narrative-driven games.",
     "headquarters": {
@@ -3030,6 +3085,54 @@
     "applicationLocation": "Strasbourg, France · speculative applicant geography and remote eligibility not stated",
     "reachHighlights": "The official site lists its Strasbourg address and invites general applications through its contact channel."
   },
+  "Facepunch Studios": {
+    "description": "Independent, self-published game developer based in Birmingham, known for Rust, Garry's Mod, s&box and Chippy.",
+    "headquarters": {
+      "city": "Birmingham",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "Office location · official careers page"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent",
+      "Self-published"
+    ],
+    "ownership": "Independent · self-published",
+    "parentCompany": null,
+    "industryScale": "Independent mid-sized studio",
+    "teamSize": "Over 110 people · stated on the official website",
+    "teamSizeAsOf": "2026-10-31",
+    "focus": [
+      "PC",
+      "Multiplayer",
+      "Sandbox"
+    ],
+    "popularGames": [
+      {
+        "title": "Rust",
+        "appId": null
+      },
+      {
+        "title": "Garry's Mod",
+        "appId": null
+      },
+      {
+        "title": "s&box",
+        "appId": null
+      },
+      {
+        "title": "Chippy",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://facepunch.com/",
+      "https://facepunch.com/careers"
+    ],
+    "applicationLocation": "Worldwide remote, subject to local employment laws; Birmingham office also available"
+  },
   "Fakefish": {
     "description": "Turku-based Finnish game studio founded in 2014. FakeFish develops games including Barotrauma and has an official open-application route for prospective team members.",
     "headquarters": {
@@ -3157,6 +3260,51 @@
       "https://fawkesgames.com/privacy"
     ],
     "applicationLocation": "Remote · worldwide stated"
+  },
+  "Fenris Creations": {
+    "description": "Independent video-game developer headquartered in Reykjavík, known for EVE Online and its player-driven virtual worlds. The company also operates studios in London and Shanghai.",
+    "headquarters": {
+      "city": "Reykjavík",
+      "country": "Iceland",
+      "countryCode": "IS",
+      "label": "Headquarters · official careers FAQ"
+    },
+    "otherLocations": [
+      "London, United Kingdom",
+      "Shanghai, China"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independently owned · stated by the company in 2026",
+    "parentCompany": null,
+    "industryScale": "Established international game studio",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "MMO",
+      "Online games",
+      "Persistent worlds"
+    ],
+    "popularGames": [
+      {
+        "title": "EVE Online",
+        "appId": null
+      },
+      {
+        "title": "EVE Frontier",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://fenris.com/",
+      "https://fenris.com/careers",
+      "https://careers.fenris.com/en/register-your-interest/new"
+    ],
+    "applicationLocation": "Reykjavík, London or Shanghai · select preferences in the official application form; remote eligibility not stated"
   },
   "Flow Studio": {
     "description": "Independent game-development studio based in Brisbane, Australia. Its portfolio includes Len's Island, an open-world survival and crafting game.",
@@ -4447,6 +4595,61 @@
       "https://www.invictus.com/"
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "IO Interactive": {
+    "description": "Independent video-game development and publishing company founded in 1998, best known for the HITMAN series and its proprietary Glacier technology. The studio is also developing 007 First Light and Project Fantasy.",
+    "headquarters": {
+      "city": "Copenhagen",
+      "country": "Denmark",
+      "countryCode": "DK",
+      "label": "Office address · official IOI website"
+    },
+    "otherLocations": [
+      "Malmö, Sweden",
+      "Barcelona, Spain",
+      "Brighton, United Kingdom",
+      "Istanbul, Türkiye"
+    ],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Independent"
+    ],
+    "ownership": "Independent video-game company · stated by IOI",
+    "parentCompany": null,
+    "industryScale": "AAA",
+    "teamSize": "Not publicly disclosed in this record",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Action",
+      "Stealth",
+      "Shooter",
+      "Online"
+    ],
+    "popularGames": [
+      {
+        "title": "HITMAN World of Assassination",
+        "appId": null
+      },
+      {
+        "title": "007 First Light",
+        "appId": null,
+        "stage": "In development"
+      },
+      {
+        "title": "Project Fantasy",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://ioi.dk/careers",
+      "https://apply.ioi.dk/jobs/2380320-unsolicited-applications/1a0498c3-c941-4b03-a29a-56535ccf9011",
+      "https://ioi.dk/about"
+    ],
+    "applicationLocation": "Copenhagen, Malmö, Barcelona, Brighton or Istanbul · hybrid; onsite presence expected per the unsolicited application listing"
   },
   "Ironroot Games": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
@@ -6443,6 +6646,56 @@
     "profileSources": [
       "https://www.wikidata.org/entity/Q138639552",
       "https://ballisticmoon.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Q30225692": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": null,
+      "country": "Not stated",
+      "countryCode": "MA",
+      "label": "Country · Wikidata"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.wikidata.org/entity/Q30225692",
+      "https://www.hinterland.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Q55236686": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": null,
+      "country": "Not stated",
+      "countryCode": "IT",
+      "label": "Country · Wikidata"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.wikidata.org/entity/Q55236686",
+      "https://www.redbitgames.com/"
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
   },
@@ -9025,208 +9278,5 @@
       "https://zygle-games.com/careers"
     ],
     "applicationLocation": "Hybrid London or remote · remote-country eligibility not stated"
-  },
-  "Facepunch Studios": {
-    "description": "Independent, self-published game developer based in Birmingham, known for Rust, Garry's Mod, s&box and Chippy.",
-    "headquarters": {
-      "city": "Birmingham",
-      "country": "United Kingdom",
-      "countryCode": "GB",
-      "label": "Office location · official careers page"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Independent",
-      "Self-published"
-    ],
-    "ownership": "Independent · self-published",
-    "parentCompany": null,
-    "industryScale": "Independent mid-sized studio",
-    "teamSize": "Over 110 people · stated on the official website",
-    "teamSizeAsOf": "2026-10-31",
-    "focus": [
-      "PC",
-      "Multiplayer",
-      "Sandbox"
-    ],
-    "popularGames": [
-      {
-        "title": "Rust",
-        "appId": null
-      },
-      {
-        "title": "Garry's Mod",
-        "appId": null
-      },
-      {
-        "title": "s&box",
-        "appId": null
-      },
-      {
-        "title": "Chippy",
-        "appId": null
-      }
-    ],
-    "profileSources": [
-      "https://facepunch.com/",
-      "https://facepunch.com/careers"
-    ],
-    "applicationLocation": "Worldwide remote, subject to local employment laws; Birmingham office also available"
-  },
-  "Fenris Creations": {
-    "description": "Independent video-game developer headquartered in Reykjavík, known for EVE Online and its player-driven virtual worlds. The company also operates studios in London and Shanghai.",
-    "headquarters": {
-      "city": "Reykjavík",
-      "country": "Iceland",
-      "countryCode": "IS",
-      "label": "Headquarters · official careers FAQ"
-    },
-    "otherLocations": [
-      "London, United Kingdom",
-      "Shanghai, China"
-    ],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independently owned · stated by the company in 2026",
-    "parentCompany": null,
-    "industryScale": "Established international game studio",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "MMO",
-      "Online games",
-      "Persistent worlds"
-    ],
-    "popularGames": [
-      {
-        "title": "EVE Online",
-        "appId": null
-      },
-      {
-        "title": "EVE Frontier",
-        "appId": null,
-        "stage": "In development"
-      }
-    ],
-    "profileSources": [
-      "https://fenris.com/",
-      "https://fenris.com/careers",
-      "https://careers.fenris.com/en/register-your-interest/new"
-    ],
-    "applicationLocation": "Reykjavík, London or Shanghai · select preferences in the official application form; remote eligibility not stated"
-  },
-  "Aether Studios": {
-    "description": "Independent game developer creating games in the Rivals of Aether universe, including competitive platform fighters, dungeon crawlers and other spin-offs.",
-    "headquarters": {
-      "city": "Seattle",
-      "country": "United States",
-      "countryCode": "US",
-      "label": "Studio base · official studio announcement"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Independent"
-    ],
-    "ownership": "Independent studio · legal ownership not stated",
-    "parentCompany": null,
-    "industryScale": "Indie",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Console",
-      "Fighting",
-      "Platform fighter",
-      "Action"
-    ],
-    "popularGames": [
-      {
-        "title": "Rivals of Aether",
-        "appId": null
-      },
-      {
-        "title": "Rivals of Aether II",
-        "appId": null
-      },
-      {
-        "title": "Dungeons of Aether",
-        "appId": null
-      },
-      {
-        "title": "Creatures of Aether",
-        "appId": null
-      },
-      {
-        "title": "Lovers of Aether",
-        "appId": null
-      }
-    ],
-    "profileSources": [
-      "https://aetherstudios.com/",
-      "https://aetherstudios.com/jobs/",
-      "https://aetherstudios.com/vacancy/general-application/",
-      "https://aetherstudios.com/news/aether-studios-announcment/"
-    ],
-    "applicationLocation": "Location preference is collected in the official jobs system; remote and international eligibility are not stated"
-  },
-  "IO Interactive": {
-    "description": "Independent video-game development and publishing company founded in 1998, best known for the HITMAN series and its proprietary Glacier technology. The studio is also developing 007 First Light and Project Fantasy.",
-    "headquarters": {
-      "city": "Copenhagen",
-      "country": "Denmark",
-      "countryCode": "DK",
-      "label": "Office address · official IOI website"
-    },
-    "otherLocations": [
-      "Malmö, Sweden",
-      "Barcelona, Spain",
-      "Brighton, United Kingdom",
-      "Istanbul, Türkiye"
-    ],
-    "companyType": [
-      "Developer",
-      "Publisher",
-      "Independent"
-    ],
-    "ownership": "Independent video-game company · stated by IOI",
-    "parentCompany": null,
-    "industryScale": "AAA",
-    "teamSize": "Not publicly disclosed in this record",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Console",
-      "Action",
-      "Stealth",
-      "Shooter",
-      "Online"
-    ],
-    "popularGames": [
-      {
-        "title": "HITMAN World of Assassination",
-        "appId": null
-      },
-      {
-        "title": "007 First Light",
-        "appId": null,
-        "stage": "In development"
-      },
-      {
-        "title": "Project Fantasy",
-        "appId": null,
-        "stage": "In development"
-      }
-    ],
-    "profileSources": [
-      "https://ioi.dk/careers",
-      "https://apply.ioi.dk/jobs/2380320-unsolicited-applications/1a0498c3-c941-4b03-a29a-56535ccf9011",
-      "https://ioi.dk/about"
-    ],
-    "applicationLocation": "Copenhagen, Malmö, Barcelona, Brighton or Istanbul · hybrid; onsite presence expected per the unsolicited application listing"
   }
 }
