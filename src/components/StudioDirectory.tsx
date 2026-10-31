@@ -210,7 +210,7 @@ export default function StudioDirectory({
         numeric: true,
       });
       if (primary !== 0) return primary * direction;
-      return a.name.localeCompare(b.name, undefined, { sensitivity: "base" });
+      return a.name.localeCompare(b.name, undefined, { sensitivity: "base", numeric: true });
     });
   }, [activeStudios, continent, country, now, query, showNewOnly, sortDirection, sortKey, workModel]);
 
