@@ -32,7 +32,8 @@ Candidate sources are leads only; every company and application route is verifie
 
 These are not yet integrated discovery adapters. Their terms, access method, coverage and reuse conditions must be reviewed before automation.
 
-- [GameCompanies.com](https://gamecompanies.com/) — global directory of studios, publishers, hubs, organisations and service companies.
+- [IGDB API](https://api-docs.igdb.com/) — structured game-company and developer-credit source; requires Twitch credentials and access/attribution review before integration.
+- [GameCompanies.com](https://gamecompanies.com/) — global directory of studios, publishers, hubs, organisations and service companies; its terms restrict automated use without permission.
 - [Games Jobs Index studio directory](https://gamesjobsindex.com/studios.html) — supplementary studio directory and cross-check; job listings do not prove speculative applications.
 - [Steam Developer & Publisher Homepages](https://store.steampowered.com/dev/?l=english) — large paginated creator directory; includes publishers and entities beyond unique development studios.
 - [MobyGames API](https://www.mobygames.com/info/api/) — potential game-credit/company discovery source. Requires authorized API access; do not scrape MobyGames pages or bypass its current API/terms restrictions. Review [MobyGames terms](https://www.mobygames.com/info/terms/) before integration.
