@@ -1,7 +1,7 @@
 # ADR-076 — Global discovery batch 11: FakeFish, Winning Streak and ByteRockers; source verification correction
 
 - Date: 2026-10-31
-- Status: Proposed on PR #70; not merged to main
+- Status: Merged to main via PR #70; FakeFish identity consolidated by ADR-078
 - Depends on: Global Discovery Implementation Model; ADR-071 through ADR-075.
 
 ## Decision
