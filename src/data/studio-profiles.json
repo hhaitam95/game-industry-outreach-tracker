@@ -11869,5 +11869,170 @@
     ],
     "applicationLocation": "Remote worldwide per official Careers page; current freelance roles prefer Europe-friendly time zones. Registered office in Plovdiv, Bulgaria.",
     "reachHighlights": "Founded in 2023; operates five legacy online game worlds and develops client modernization, gameplay overhauls, content updates and a unified launcher. Careers page explicitly invites spontaneous applications."
+  },
+  "FakeFish Games": {
+    "description": "Independent Finnish game-development studio established in Turku in 2014. Its flagship title is Barotrauma, a 2D cooperative submarine survival simulator developed together with Undertow Games; the studio says it is also working on an undisclosed second game.",
+    "headquarters": {
+      "city": "Turku",
+      "country": "Finland",
+      "countryCode": "FI",
+      "label": "HQ · official Open Application/About pages"
+    },
+    "otherLocations": [
+      "Smaller office in central Helsinki"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "FakeFish Oy · Finnish limited company; shareholder details not disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie · editorial indication",
+    "teamSize": "Current homepage describes about 20 people; the Open Application page reports about 25 (as of early 2023). Treat exact current headcount as not confirmed.",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "PC",
+      "Console",
+      "Survival horror",
+      "Simulation",
+      "Co-op",
+      "Moddability",
+      "Open development"
+    ],
+    "popularGames": [
+      {
+        "title": "Barotrauma",
+        "appId": null,
+        "stage": "Released; developed with Undertow Games"
+      },
+      {
+        "title": "Undisclosed second game",
+        "appId": null,
+        "stage": "In development; title not announced"
+      }
+    ],
+    "profileSources": [
+      "https://www.fakefishgames.com/",
+      "https://www.fakefishgames.com/jobs",
+      "https://www.fakefishgames.com/jobs/open-application",
+      "https://www.fakefishgames.com/about-us",
+      "https://www.fakefishgames.com/our-games"
+    ],
+    "applicationLocation": "Turku, Finland and beyond · official page offers flexible work arrangements; country-specific hiring eligibility is not stated",
+    "reachHighlights": "Founded in Turku in 2014. The studio created Barotrauma with Undertow Games and describes its team as roughly 20 people on the current homepage; the Open Application listing's early-2023 estimate was about 25."
+  },
+  "Winning Streak Games": {
+    "description": "Cologne-based independent PC game developer specialising in mid-sized simulation projects for the international market. It develops the WE ARE FOOTBALL football-management series and has a publishing agreement with THQ Nordic.",
+    "headquarters": {
+      "city": "Cologne",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "HQ · official company homepage and Impressum"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Winning Streak Games GmbH · privately held German company; publishing agreement with THQ Nordic",
+    "parentCompany": null,
+    "industryScale": "Indie / AA · editorial indication",
+    "teamSize": "Small, deliberately limited team according to the official homepage; exact headcount not disclosed.",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "PC",
+      "Simulation",
+      "Sports management",
+      "Football management",
+      "Game systems",
+      "UI",
+      "AI"
+    ],
+    "popularGames": [
+      {
+        "title": "WE ARE FOOTBALL 2027",
+        "appId": null,
+        "stage": "Current title"
+      },
+      {
+        "title": "WE ARE FOOTBALL 2024",
+        "appId": null,
+        "stage": "Released"
+      },
+      {
+        "title": "Taktikfuchs: Eishockey",
+        "appId": null,
+        "stage": "In development / funded project"
+      }
+    ],
+    "profileSources": [
+      "https://winningstreakgames.de/",
+      "https://winningstreakgames.de/impressum.html"
+    ],
+    "applicationLocation": "Cologne, Germany · all advertised jobs are full-time in Cologne; home office only in exceptional cases",
+    "reachHighlights": "Founded in Cologne in 2018. The company develops PC simulations, particularly football-management games, and has a THQ Nordic publishing agreement."
+  },
+  "ByteRockers' Games": {
+    "description": "Independent Berlin-based game developer and publisher founded in 2008. The studio develops its own PC/console games and began representing other creative teams' projects as a publisher in 2024.",
+    "headquarters": {
+      "city": "Berlin",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "Registered address · official Impressum"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Independent"
+    ],
+    "ownership": "ByteRockers' Games GmbH & Co. KG · privately held German partnership; legal representatives listed in official Impressum",
+    "parentCompany": null,
+    "industryScale": "Indie / AA · editorial indication",
+    "teamSize": "Not publicly disclosed; the official About page lists a multi-disciplinary team across programming, design, art, animation, audio, QA, marketing and production.",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "PC",
+      "Nintendo Switch",
+      "PlayStation",
+      "Xbox",
+      "Adventure",
+      "Roguelite",
+      "Action",
+      "Simulation"
+    ],
+    "popularGames": [
+      {
+        "title": "Insurmountable",
+        "appId": null,
+        "stage": "Released"
+      },
+      {
+        "title": "Beat Slayer",
+        "appId": null,
+        "stage": "Released"
+      },
+      {
+        "title": "Gelly Break Deluxe",
+        "appId": null,
+        "stage": "Released"
+      },
+      {
+        "title": "The Regreening",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://www.byterockers.games/",
+      "https://www.byterockers.games/de/jobs",
+      "https://www.byterockers.games/de/%C3%BCber-uns",
+      "https://www.byterockers.games/de/impressum",
+      "https://www.byterockers.games/insurmountable",
+      "https://www.byterockers.games/beatslayer",
+      "https://www.byterockers.games/gelly-break-deluxe"
+    ],
+    "applicationLocation": "Berlin, Germany · work model and applicant-country eligibility for unsolicited applicants not stated",
+    "reachHighlights": "Founded in 2008 and based in Berlin. Official developer credits include Insurmountable, Beat Slayer and Gelly Break Deluxe; the studio also publishes games for other developers."
   }
 }
