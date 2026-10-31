@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-31T17:48:04.638083+00:00",
+  "updated_at": "2026-10-31T20:07:25.772737+00:00",
   "feed_cursors": {
-    "wikidata_video_game_developers": "Q110454010",
-    "wikidata_game_developer_credits": "",
+    "wikidata_video_game_developers": "Q118558676",
+    "wikidata_game_developer_credits": "Q95",
     "wikidata_video_game_companies": "",
     "gamedevmap": "10601"
   },
@@ -14,7 +14,7 @@
     "gamedevmap": true
   },
   "feed_index": 1,
-  "cycle": 8,
+  "cycle": 9,
   "cycle_additions": 0,
   "empty_cycles": 1,
   "saturated": false,
@@ -213143,9 +213143,57 @@
       "gone_count": 0,
       "last_result": "active",
       "last_checked_at": "2026-10-31T17:48:04.636321+00:00"
+    },
+    "Ocellus": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-10-31T20:07:09.053130+00:00"
+    },
+    "Octocube Games": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-10-31T20:07:12.153124+00:00"
+    },
+    "Oddshot Games": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-10-31T20:07:14.044259+00:00"
+    },
+    "Odenity Interactive": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-10-31T20:07:16.178910+00:00"
+    },
+    "Old Skull Games": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "unknown",
+      "last_checked_at": "2026-10-31T20:07:19.884871+00:00"
+    },
+    "Olive Branch Interactive": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "unknown",
+      "last_checked_at": "2026-10-31T20:07:21.542525+00:00"
+    },
+    "Optillusion Games": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-10-31T20:07:24.135209+00:00"
+    },
+    "Other Ocean Interactive": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-10-31T20:07:25.771210+00:00"
     }
   },
-  "route_check_index": 192,
+  "route_check_index": 200,
   "stats": {
     "candidates_seen": 10372,
     "routes_verified": 126,
@@ -213179,12 +213227,12 @@
       "last_pass_incomplete_candidates": 0
     },
     "wikidata_video_game_companies": {
-      "cycle": 8,
+      "cycle": 9,
       "cycle_additions": 0,
-      "empty_cycles": 6,
+      "empty_cycles": 7,
       "saturated": true,
       "complete": false,
-      "last_pass_completed_at": "2026-10-31T17:48:04.636362+00:00",
+      "last_pass_completed_at": "2026-10-31T20:07:25.771240+00:00",
       "last_pass_status": "saturated",
       "last_pass_candidates": 0,
       "last_pass_verified": 0,
