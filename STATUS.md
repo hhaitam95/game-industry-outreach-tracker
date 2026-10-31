@@ -7,8 +7,8 @@
 
 - The site remains limited to the studio directory and My applications.
 - Tracker entries remain in the visitor's browser localStorage; no personal application data is committed to the repository.
-- Current main contains **278 studio records**, **278 matching profiles**, **275 active** and **3 paused** routes across **45 country/location labels**.
-- This third manual research batch proposes **6 additional studios** and refreshes **3 existing studio records** (Bananagun, Larian Studios and Garena). The proposal branch contains **284 routes / 284 profiles**, **281 active** and **3 paused** routes across **48 country/location labels**.
+- Current main contains **284 studio records**, **284 matching profiles**, **281 active** and **3 paused** routes across **48 country/location labels**.
+- The third manual research batch is merged in [PR #65](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/65): it added **6 studios** and refreshed **3 existing studio records** (Bananagun, Larian Studios and Garena).
 - New records extend coverage to Iraq, the Philippines and Brazil. Existing entries for South Korea and other countries are not duplicated.
 - Every record retains official studio, application and evidence URLs plus a verification date. Explicit work-location, experience, language, country eligibility and compensation constraints are preserved.
 - Some directory entries are publishers, co-development/service studios, game-content providers or entertainment groups rather than traditional original-IP studios; their profile classification makes this visible. All non-paid or volunteer collaboration caveats are disclosed.
@@ -24,9 +24,9 @@
 ## Phase 2 — Data quality
 
 - The validator checks required route fields, HTTPS official/application/evidence URLs, route enums, review dates, one matching profile per route, profile source links and duplicate names.
-- Main at the start of this batch validated **278 routes / 278 profiles**. The proposal contains **284 / 284** and will be validated by exact-head CI before merge.
-- Six new records are included: D4N Games, Monstronauts, Nikity Games Studio, Tropical Games, TAKEONE and SmashByte.
-- Existing entries are refreshed rather than duplicated: Bananagun (wildcard email route), Larian Studios (multiple discipline-specific open applications, including DevOps) and Garena (Singapore, Jakarta and Vietnam talent pools).
+- Main at the start of this batch validated **278 routes / 278 profiles**. The merged dataset contains **284 / 284**; the exact-head PR CI passed Python discovery tests, route/profile validation, frontend tests, route review, production build, privacy boundary, Pages artifact and browser acceptance.
+- Six new records were merged: D4N Games, Monstronauts, Nikity Games Studio, Tropical Games, TAKEONE and SmashByte.
+- Existing entries were refreshed rather than duplicated: Bananagun (wildcard email route), Larian Studios (multiple discipline-specific open applications, including DevOps) and Garena (Singapore, Jakarta and Vietnam talent pools).
 
 ## Next research focus
 

@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-10-31 — Worldwide expansion batch 3 (proposed)
+## 2026-10-31 — Worldwide expansion batch 3 (merged in PR #65)
 
 - Added six more employers/teams across Iraq, the Philippines, Brazil and South Korea.
 - Updated Bananagun's wildcard route to its email-based any-discipline application.

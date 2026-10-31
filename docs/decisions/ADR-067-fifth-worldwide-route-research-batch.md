@@ -1,7 +1,7 @@
 # ADR-067 — Fifth worldwide speculative-route research batch
 
 - Date: 2026-10-31
-- Status: Proposed for review
+- Status: Accepted; implemented in PR #65
 - Depends on: ADR-059 and ADR-063 through ADR-066.
 
 ## Goal
