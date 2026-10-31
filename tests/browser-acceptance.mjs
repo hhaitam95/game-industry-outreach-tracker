@@ -194,6 +194,8 @@ async function main() {
     await fourAGamesDetails.waitFor();
     assert.match(await fourAGamesDetails.textContent(), /About the studio/);
     assert.match(await fourAGamesDetails.textContent(), /Metro Exodus/);
+    assert.match(await fourAGamesDetails.textContent(), /Application route notes/);
+    assert.match(await fourAGamesDetails.textContent(), /Route last checked:/);
     await fourAGamesRow.getByRole("button", { name: /4A Games/ }).click();
     await fourAGamesDetails.waitFor({ state: "detached" });
 
