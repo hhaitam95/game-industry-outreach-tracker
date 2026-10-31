@@ -128,6 +128,10 @@ These are candidate sources to evaluate and integrate; they are not yet confirme
 
 The list above is a living source registry, not a closed list. Add new indexes whenever credible global or regional sources are found. Do not stop because a finite list of sources has been exhausted.
 
+7. **Games Jobs Index studio directory** — https://gamesjobsindex.com/studios.html
+   On 2026-10-31 the live page displayed 2,573 studios in its header but a regional roll-up of 2,415, so the aggregate count is internally inconsistent and should not be quoted as a reconciled total. The page exposes a visible **Speculative only** hiring-status filter, which is useful for finding candidate employers. Treat it as a triage interface only: independently verify every studio and its application route on the employer's own site. No documented bulk API or automated-harvesting permission was established during this review. Keep it as a manual lead source until access terms/permission are clear.
+
+
 ### Source evaluation before adapter implementation
 
 For every source, document:
@@ -213,6 +217,32 @@ The following is an ordered engineering plan, not a priority ranking of employer
 7. **Strengthen application-route verification.** Improve multilingual patterns and evidence extraction without weakening the requirement for explicit official acceptance.
 8. **Make coverage source-specific.** Add per-source progress, exhaustion, failure and refresh reporting. Ensure new sources reopen discovery and no source's saturation stops global work.
 9. **Expand, validate and maintain.** Process sources in resumable batches, review ambiguous cases, deduplicate, test and publish only verified route/profile datasets.
+
+## 11. Live research decision log — 2026-10-31
+
+### Verified new speculative routes prepared for publication
+
+- **22cans (United Kingdom):** official website says there are no open roles but still accepts speculative applications by email at `jobs@22cans.com`. Its published address is in Guildford, Surrey. Remote and applicant-country eligibility are not stated.
+- **Absolutely Games (United Kingdom):** official Careers page expressly directs candidates to its form when no applicable role is available. The studio's About page confirms it develops strategy/tactics games and is based in Guildford. The form does not state remote or international eligibility.
+- **AB Games (Ukraine / Cyprus):** official Careers section says there are no positions currently and invites candidates who found no suitable vacancy to upload a CV or portfolio. The form lists Kyiv, Kharkiv, Rivne and Limassol as location options. The employer states it develops its own free-to-play hidden-object games; remote and applicant-country eligibility are not stated.
+
+### Existing records rechecked and refined
+
+- **Bossa Studios:** the current Careers page directs speculative resumes to `jobs@bossastudios.com`, and labels the speculative route for all departments, remote, any time. Correct the submission method to email; do not treat a distributed team as proof of unrestricted applicant-country eligibility.
+- **Brave At Night:** official About page confirms Manchester as the studio base. Its Speculative Application page publishes `jobs@braveatnight.co.uk` and requests a CV and portfolio where possible. Record Manchester and keep remote/cross-border eligibility unknown.
+- **Ember Crows:** official Careers FAQ confirms a dedicated spontaneous form, opt-in future consideration and international applicants. The form asks about in-person availability in Battersea. The current spontaneous route is expressly project-based freelance using points-based profit sharing, without a guaranteed upfront salary or fee. Preserve this prominently; do not present it as conventional salaried employment.
+
+### Leads held out, rejected or queued for manual review
+
+- **3MenStudio:** its Careers page invites applications even when no role fits, but its official Game Development Services page also advertises casino-game development. Hold for business-level review under the gambling exclusion; do not automatically publish it while the extent of that business is unresolved.
+- **2Awesome Studio:** the inspected page asks applicants to apply even if they do not meet every requirement for a specific advertised vacancy; that is not a general speculative route.
+- **Abstraction Games:** an employer-branded Breezy page says it accepts open applications, but the current official Careers page did not establish a direct link to that ATS. Hold until the employer-route relationship is verified.
+- **Abylight:** the official Careers page says submitted profiles are archived for future selection, but no directly usable general submission method was established.
+- **Primal Game Studio:** the official Careers page links a speculative JazzHR application, but the linked destination returned HTTP 403 during review. Retry rather than publish an inaccessible route.
+- **PRELOADED:** the reviewed official Studio page provides a general enquiry form, not an explicit speculative-application route. Search snippets alone are insufficient.
+- **24 Bit Games:** verified as a game-development services provider, but no explicit speculative application invitation was found. Do not add on the basis of a generic contact address.
+
+All these decisions are evidence-led and provisional where marked for manual review; recheck employer pages before changing a held or excluded disposition.
 
 ## 10. Handover protocol
 
