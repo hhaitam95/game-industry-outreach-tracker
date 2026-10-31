@@ -62,7 +62,7 @@
       "signal": "Member/partner company names provide Korean ecosystem leads.",
       "automationStatus": "manual_only_temporarily_unavailable",
       "accessPolicy": "No automation. The public page returned HTTP 502 during review.",
-      "reviewNotes": "Revisit manually only when the page is available; association membership does not prove game development."
+      "reviewNotes": "Official partner-list URL still returned HTTP 502 during direct review on 2026-10-31. Search results expose association member/company names, but do not automate or assume every listed partner is a developer. Revisit manually when the page responds."
     },
     {
       "id": "abragames_members",
@@ -195,6 +195,61 @@
       "automationStatus": "manual_only_license_unconfirmed",
       "accessPolicy": "Do not ingest or republish until the repository's current licence and provenance permit intended use.",
       "reviewNotes": "Freshness and coverage are uncertain; confirm every lead on official company pages."
+    },
+    {
+      "id": "polish_gamedev_az_directory",
+      "name": "BAZA POLSKI GAMEDEV — Lista A–Z",
+      "url": "https://polskigamedev.weebly.com/lista-a-z.html",
+      "region": "Poland",
+      "sourceKind": "community_maintained_national_gamedev_directory",
+      "signal": "Alphabetical list of Polish game-development organisations with city/region labels; page stated 609 entries and last updated 2026-10-02.",
+      "automationStatus": "manual_only",
+      "accessPolicy": "Manual lead research only; no permission to scrape, bulk-copy or republish the list has been established.",
+      "reviewNotes": "The list identifies publishers and marks uncertain entries as well as developers. Use as a seed list; verify live status, actual game-development activity and each employer-owned application route independently."
+    },
+    {
+      "id": "game_germany_members",
+      "name": "game — German Games Industry Association Members",
+      "url": "https://www.game.de/mitglieder/",
+      "region": "Germany",
+      "sourceKind": "national_industry_association_member_directory",
+      "signal": "Large member listing with company descriptions, locations and an industry selector; includes direct game studios, publishers, development-service firms and broader games ecosystem companies.",
+      "automationStatus": "manual_only",
+      "accessPolicy": "Manual lead review only; no bulk extraction or redistribution permission has been established.",
+      "reviewNotes": "Not a studio-only roster. Filter and read each company's self-description; include only organisations that pass direct game-development and current application-route gates."
+    },
+    {
+      "id": "gdai_india_teams",
+      "name": "Game Developer Association of India — Teams and Membership Network",
+      "url": "https://gdai.in/teams/",
+      "region": "India",
+      "sourceKind": "national_game_developer_association_network",
+      "signal": "GDAI states it has 200+ member studios and publishes board, governing-council and industry-contributor affiliations including game studios, publishers and developers.",
+      "automationStatus": "manual_only",
+      "accessPolicy": "Manual network research only; do not scrape names or infer formal membership from leadership affiliations.",
+      "reviewNotes": "This is a leadership/community network rather than a complete public member directory. Use affiliations as leads, not proof that an organisation is currently a member or actively hiring."
+    },
+    {
+      "id": "igda_india_chapter",
+      "name": "IGDA India National Chapter",
+      "url": "https://igda.org/chapters/india-chapter/",
+      "region": "India",
+      "sourceKind": "professional_developer_community",
+      "signal": "National chapter supporting game developers through local communities, events, industry knowledge-sharing and global connections.",
+      "automationStatus": "manual_only",
+      "accessPolicy": "Community and networking source only; no member-company roster or bulk reuse permission established.",
+      "reviewNotes": "Not a company directory. Useful for discovering regional developer communities and events, then follow official studio channels."
+    },
+    {
+      "id": "usk_members_directory",
+      "name": "USK Member Companies",
+      "url": "https://usk.de/en/home/services/members/",
+      "region": "Germany / international",
+      "sourceKind": "industry_self_regulation_member_directory",
+      "signal": "List of companies participating in the German Entertainment Software Self-Regulation Body, including developers, publishers and platform companies.",
+      "automationStatus": "manual_only",
+      "accessPolicy": "Manual lead review only; no bulk collection or redistribution permission established.",
+      "reviewNotes": "Membership is not a developer-only classification and includes publishers, distributors, platforms and other organisations. Verify the operating company and current development activity."
     }
   ]
 }

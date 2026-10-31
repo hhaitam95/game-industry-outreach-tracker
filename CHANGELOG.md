@@ -1,6 +1,14 @@
 # Changelog
 
-## 2026-10-31 — Global discovery batch 13 (prepared for PR #73)
+## 2026-10-31 — Global discovery batch 14 (prepared for review)
+
+- Added CAPCOM's official mid-career Career Registration (Japan), Cygames Group's HRMOS Career Registration (Japan), and Small Giant Games' Greenhouse Open Application (Finland), each with a matching researched profile.
+- Refreshed Fawkes Games' spontaneous-application submission method and current ATS/landing-page caveat; corrected Stunlock Studios to its Teamtailor Open Application, online-only submission, Skövde location and “Temporarily Remote” status.
+- Added five manual-only candidate sources in Poland, Germany and India: BAZA POLSKI GAMEDEV, game (German Games Industry Association), GDAI, IGDA India and USK member companies.
+- The manual-only source register now contains 22 entries. No new runtime adapter was added; config/discovery-sources.json, workflow schedules, secrets and permissions are unchanged.
+- The branch contains 322 route/profile pairs (317 active, 5 paused; 51 country/location labels). The 319-record main snapshot remains the deployed baseline until this proposal is reviewed and merged.
+
+## 2026-10-31 — Global discovery batch 13 (merged in PR #73)
 
 - Adds Tanglewood Games, Iceflake Studios, Frozenbyte, Mainstay Games, Big Moxi Games, Rogue Snail and Cyberborz Interactive after verifying official non-vacancy application routes and direct game-development activity.
 - Refreshes Awe Interactive's existing speculative application route and remote-work evidence; removes an unsupported 120+ team-size assertion because current company press materials do not confirm total headcount.
@@ -10,7 +18,7 @@
 - Adds a post-merge npm run check:studio-directory step so discovery-generated data is validated after automated merging and before rebuild/deployment.
 - Does not add a new adapter to config/discovery-sources.json; approved runtime feeds remain separate from manual indexes.
 - Holds Two Men and a Dog because its indexed Open Applications page returned HTTP 404 on direct review; AARISE was already present and was not duplicated.
-- On this branch the directory contains 319 route/profile pairs (314 active, 5 paused; 51 country/location labels), including one canonicalised existing identity and seven new routes.
+- After PR #73, main contains 319 route/profile pairs (314 active, 5 paused; 51 country/location labels), including one canonicalised existing identity and seven new routes.
 
 
 ## 2026-10-31 — Merge and data-quality reconciliation

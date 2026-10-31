@@ -37,23 +37,31 @@ Keep the application to the two existing pages. Do not reintroduce the old job-p
 
 ## Current global-discovery checkpoint
 
-- Main contains **313 unique verified studio/employer records / 313 matching profiles**: 308 active routes and 5 paused routes across 51 country/location labels.
-- PR #70 (global directory expansion), PR #71 (source-specific discovery engine) and PR #72 (FakeFish identity reconciliation) are merged. The 314-row PR #70 snapshot had a duplicate identity pair for the same FakeFish employer and identical open-application route. ADR-078 consolidates it into one canonical **FakeFish** record, preserving the more complete official profile and route detail.
+- Main contains **319 unique verified studio/employer records / 319 matching profiles**: 314 active routes and 5 paused routes across 51 country/location labels. The current batch-14 branch contains 322 route/profile pairs: 317 active and 5 paused across the same 51 location labels.
+- PRs #70–#73 are merged. PR #73 added seven verified routes and the manual-only source registry; PR #72 reconciled the duplicate FakeFish identity into one canonical record, preserving the more complete profile and route detail.
 - The integrated candidate feeds are declared in `config/discovery-sources.json` and loaded by `scripts/discover_speculative_studios.py`. The private discovery state now migrates additively from schema v1 to v2.
 - The three Wikidata feeds have independent cursors, cycles, verified-addition counts and complete-empty-pass counters. After three complete empty passes, only that individual feed is limited to one page per hourly run. A new verified route resets only its originating feed. Failed or incomplete passes do not count as exhaustion.
 - GameDevMap remains a one-time backfill; its terminal cursor is preserved. Legacy Wikidata candidates without a stored feed identity remain `legacy_unattributed` instead of being assigned to a guessed source.
-- The first post-merge source-discovery workflow 41212342190 passed and persisted the private schema-v2 checkpoint. The 313-row directory was deployed by Pages run 41212913830. The follow-up discovery run 41212913766 also completed successfully, passed all stages, added zero routes, left the public 313-row dataset unchanged, and advanced the private checkpoint to bc3a302e4f7da0095c2c5c3be407ec6a56f12699.
+- The post-PR #73 319-row directory was deployed by Pages run 41216159119 from merge commit `58ec4511841ed57a321bd8bcf8e9846c5ffa4a76`. Main commit `a892566fdc264e530e661b715c69ec32a52d5610` subsequently refreshed five existing route-review dates without changing the record count. The latest discovery run after PR #73 is [41216225203](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41216225203); consult its summary for current per-source checkpoint values.
 - IGDB, GameCompanies.com, Games Jobs Index, Steam, MobyGames and the community database remain unintegrated research leads; do not describe them as automated feeds. Their current access gates and regional association lead sources are recorded in config/manual-discovery-sources.json.
 - DreamCentury Entertainment and President Studio remain held for the reasons recorded in STATUS.md and the Global Discovery Implementation Model. The manual exclusions remain in `config/manual-studio-exclusions.json`.
 
 
-## Batch 13 research branch (not yet merged)
+## Batch 13 research branch (merged in PR #73)
 
-- Branch: research/manual-sources-and-routes-batch-13.
-- Seven new employer routes have been researched and added to that branch: Tanglewood Games, Iceflake Studios, Frozenbyte, Mainstay Games, Big Moxi Games, Rogue Snail and Cyberborz Interactive. Awe Interactive is refreshed, not duplicated.
-- The branch also consolidates two identical ByteRockers route rows into one canonical identity and adds validation after automated discovery-data merging.
-- Branch totals: 319 route/profile pairs, 314 active, 5 paused, 51 location labels. Main remains at 313 rows / 308 active / 5 paused until PR #73 is merged.
-- A separate manual source registry was added. Do not feed it into the automated runtime without reviewing access terms and adding a tested adapter. IGDB requires written redistribution permission; Steam is manual-only; other commercial/community indexes have their individual terms/licence gates.
+- Seven new employer routes were merged: Tanglewood Games, Iceflake Studios, Frozenbyte, Mainstay Games, Big Moxi Games, Rogue Snail and Cyberborz Interactive. Awe Interactive was refreshed, not duplicated.
+- The merged data consolidates two identical ByteRockers route rows into one canonical identity and adds validation after automated discovery-data merging.
+- Main now contains 319 route/profile pairs, 314 active, 5 paused, across 51 labels. The snapshot was deployed by Pages run 41216159119.
+- The manual source registry is separate from automated runtime ingestion. IGDB requires written redistribution permission; Steam is manual-only; other commercial/community indexes retain their individual terms/licence gates.
+
+## Batch 14 research branch (under review)
+
+- Branch: `research/japan-nordics-routes-and-sources-batch-14`.
+- Adds CAPCOM, Cygames Group and Small Giant Games with official Career Registration / Open Application routes and matching profiles.
+- Refreshes Fawkes Games' submission method and current live ATS caveat; corrects Stunlock Studios to its current Teamtailor route and Skövde / Temporarily Remote scope.
+- Adds five manual-only regional sources (Poland, Germany and India); the registry now contains 22 leads. No runtime adapter or automated collection is enabled.
+- Branch totals: 322 route/profile pairs, 317 active, 5 paused, across 51 labels. Branch build run 41217343456 passed before the documentation checkpoint; exact-head CI must be checked after these handoff updates.
+- The branch is one commit behind and one commit ahead of main. The main-only change refreshes five existing records; the batch-14 branch changes a different five existing records and adds three, so the reviewed route-data changes do not overlap.
 
 ## Handover checklist
 

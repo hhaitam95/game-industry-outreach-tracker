@@ -1373,6 +1373,33 @@
     }
   },
   {
+    "name": "CAPCOM",
+    "country": "Japan",
+    "websiteUrl": "https://www.capcom.co.jp/",
+    "applicationUrl": "https://retiree.alumy.jp/enterprises/4c9694f6-3ce3-46ff-a916-0c1b899075fa/careers/e00358b9-08d9-4c14-8700-99ca676b13c6/invite",
+    "evidenceUrl": "https://www.capcom.co.jp/recruit/guidelines/career/",
+    "notes": "The official Japanese mid-career page explicitly invites Career Registration for candidates who do not wish to narrow down a job type or who cannot find a suitable advertised position; registered experience is reviewed across departments. This is a registration pool, not a current vacancy or a guaranteed interview/job. The official CTA leads to an external Alumy registration portal; the registration page is Japanese-language and overseas eligibility is not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Japan · the official mid-career page is Japanese-language and does not state overseas applicant eligibility or remote-work policy."
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [
+        "https://www.capcom.co.jp/ir/english/company/info.html",
+        "https://www.capcom.co.jp/ir/english/company/map.html"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Carbonated",
     "country": "United States",
     "websiteUrl": "https://www.carbonated.com/",
@@ -1997,6 +2024,34 @@
     }
   },
   {
+    "name": "Cygames Group",
+    "country": "Japan",
+    "websiteUrl": "https://www.cygames.co.jp/en/",
+    "applicationUrl": "https://hrmos.co/pages/cygames/jobs/1984149015409414261/apply",
+    "evidenceUrl": "https://hrmos.co/pages/cygames/jobs/1984149015409414261",
+    "notes": "The employer-managed HRMOS listing is titled Career Registration (Open Position) and states that candidates may register without selecting a specific vacancy. Cygames Group may contact registrants when a matching role appears; registration does not guarantee a position or selection. The listing says registration data is retained for two years. The group portal covers multiple affiliated companies, so candidates should check the employing entity and location for any role offered.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Cygames' official company pages list offices/operations in Tokyo, Osaka and Saga; the group registration does not state overseas applicant eligibility or remote-work arrangements."
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [
+        "https://recruit.cygames.co.jp/career/",
+        "https://www.cygames.co.jp/en/corporate/profile/",
+        "https://www.cygames.co.jp/en/corporate/locations/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "D4N Games",
     "country": "Iraq",
     "websiteUrl": "https://www.d4ngames.com/",
@@ -2471,16 +2526,16 @@
     "websiteUrl": "https://fawkesgames.com/",
     "applicationUrl": "https://fawkesgames.com/en/careers/",
     "evidenceUrl": "https://fawkesgames.com/en/careers/",
-    "notes": "Official Careers page says candidates who do not see a suitable role are welcome to send a spontaneous application. The same page currently lists Unity Game Engineer, 2D Game Artist, Game Designer, Producer and 2.5D Pixel Artist positions, describing them as remote freelance roles with Europe-friendly time zones preferred. The company is a Bulgaria-registered game developer, publisher and live-service operator rather than an original-IP-only studio: its official materials describe client modernization, gameplay-system overhauls, content expansions and development/maintenance across operated online games, and it advertises in-house Unity/game-art/design roles. Its terms identify Fawkes Games LTD, registered in Plovdiv, Bulgaria. The Careers page says work can be remote worldwide, while individual roles prefer Europe-friendly time zones.",
+    "notes": "The official Careers page explicitly invites spontaneous applications by email and says work can be remote from anywhere. Its landing page still lists five freelance disciplines (Unity game engineering, 2D game art, game design, production and pixel art), with Europe-friendly time zones preferred. The linked Breezy ATS currently exposes one concrete vacancy: Senior Unreal Engineer (contractor), worldwide remote, 12-month contract, Eastern Europe preferred, requiring 5+ years of Unreal Engine and strong C++/Blueprint/shader experience. The landing-page role list and live ATS board are not fully aligned; confirm the specific role before applying.",
     "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [
-        "website_form"
+        "email"
       ],
       "workModel": "remote",
       "eligibleLocations": [
-        "Remote worldwide per official Careers page; current roles are freelance and prefer Europe-friendly time zones"
+        "Remote worldwide according to the official Careers page; the current Senior Unreal Engineer contract listing says Eastern Europe preferred."
       ],
       "disciplineScope": [
         "Unity game engineering",
@@ -2492,8 +2547,9 @@
         "Game content development"
       ],
       "relatedApplicationUrls": [
-        "https://fawkesgames.com/en/terms/",
-        "https://fawkesgames.com/en/"
+        "https://fawkes.breezy.hr/",
+        "https://fawkes.breezy.hr/p/e32cfbc0139d01-senior-unreal-engineer-contractor",
+        "https://fawkesgames.com/en/terms/"
       ],
       "routeStatus": "active",
       "sourceType": "official_company_site",
@@ -6468,6 +6524,33 @@
     }
   },
   {
+    "name": "Small Giant Games",
+    "country": "Finland",
+    "websiteUrl": "https://www.smallgiantgames.com/",
+    "applicationUrl": "https://job-boards.greenhouse.io/sggcareers/jobs/5669163004",
+    "evidenceUrl": "https://job-boards.greenhouse.io/sggcareers/jobs/5669163004",
+    "notes": "The employer's Greenhouse board has a dedicated Open Application for candidates who do not see a suitable listed role and invites a CV/resume and covering letter. The studio is based in Helsinki and states that it uses a hybrid model, with each team setting its own office days. The application form asks for country but does not publish country eligibility or remote-from-abroad rules.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "Helsinki, Finland · the official careers page describes a hybrid model with team-specific office days; overseas employment eligibility is not stated."
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [
+        "https://www.smallgiantgames.com/careers/",
+        "https://www.smallgiantgames.com/about/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "SmashByte",
     "country": "Brazil",
     "websiteUrl": "https://smashbyte.com.br/",
@@ -7104,22 +7187,26 @@
     "name": "Stunlock Studios",
     "country": "Sweden",
     "websiteUrl": "https://www.stunlockstudios.com/",
-    "applicationUrl": "https://stunlockstudios.com/careers/",
-    "evidenceUrl": "https://stunlockstudios.com/careers/",
-    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open Application. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-30",
+    "applicationUrl": "https://jobs.stunlockstudios.com/jobs/3257938-open-application",
+    "evidenceUrl": "https://jobs.stunlockstudios.com/jobs/3257938-open-application",
+    "notes": "The studio-controlled Teamtailor board currently lists one Open Application in Skövde and labels it Temporarily Remote. The ATS instructs applicants to submit through the online form with a CV, cover letter and/or portfolio; it says email applications are not accepted. It does not state worldwide remote eligibility.",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
-        "email"
+        "ats"
       ],
-      "workModel": "not_stated",
-      "eligibleLocations": [],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Skövde, Sweden · Teamtailor currently labels the Open Application 'Temporarily Remote'; it does not state that applicants may work remotely worldwide."
+      ],
       "disciplineScope": [],
-      "relatedApplicationUrls": [],
+      "relatedApplicationUrls": [
+        "https://jobs.stunlockstudios.com/jobs"
+      ],
       "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {

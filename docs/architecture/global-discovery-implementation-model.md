@@ -441,7 +441,35 @@ Main contains **313 unique studio/employer records / 313 matching profiles**, **
 
 #### Branch projection
 
-The PR #73 branch has 319 unique route/profile pairs, 314 active and 5 paused, across 51 country/location labels. This is seven additions after consolidating one duplicate identity in the 313-row main snapshot.
+PR #73 is merged: main has 319 unique route/profile pairs, 314 active and 5 paused, across 51 country/location labels. Batch 14 proposes 322 unique route/profile pairs, 317 active and 5 paused, after three additional employer-verified routes.
+
+
+### Additional global discovery and verified route expansion — 2026-10-31 (batch 14)
+
+#### New verified studio/employer routes prepared for review
+
+- **CAPCOM (Japan):** the official mid-career recruitment page offers Career Registration for applicants who do not wish to narrow their job type or cannot find a suitable advertised role. The official call to action leads to an external Alumy registration portal. This is a general registration pool, not a current vacancy or a guaranteed interview/job. The page and registration flow are Japanese-language; overseas applicant eligibility and remote work are not stated. Official evidence: https://www.capcom.co.jp/recruit/guidelines/career/. Official company facts/profile source: https://www.capcom.co.jp/ir/english/company/info.html.
+- **Cygames Group (Japan):** the employer-managed HRMOS listing, “Career Registration (Open Position)”, explicitly invites applicants who do not wish to select a specific job or cannot find a suitable vacancy. The group may suggest matching roles across affiliated companies; it does not promise employment, and the listing says registration data is retained for two years. The specific employing entity and work location must be checked for any resulting role. Overseas eligibility and remote-work arrangements are not stated. Official route: https://hrmos.co/pages/cygames/jobs/1984149015409414261.
+- **Small Giant Games (Finland):** the employer-managed Greenhouse board has a dedicated Open Application inviting candidates who do not see a matching vacancy to submit a resume and covering letter; it says speculative applications are reviewed. The listing is in Helsinki. The official Careers page describes a hybrid model with each team setting its own office days; country eligibility for overseas applicants is not stated. Official route: https://job-boards.greenhouse.io/sggcareers/jobs/5669163004.
+
+#### Existing route corrections
+
+- **Fawkes Games (Bulgaria):** refreshed the official spontaneous-application route. The Careers page invites spontaneous applications by email and describes remote work from anywhere, while the listed freelance roles prefer Europe-friendly time zones. Its linked ATS currently exposes a Senior Unreal Engineer contractor listing (12-month contract; Eastern Europe preferred), and the ATS board is not fully aligned with the five-role list on the landing page. Keep the mismatch and role-specific caveat explicit; candidates should confirm the currently open position and terms. Official evidence: https://fawkesgames.com/en/careers/ and https://fawkes.breezy.hr/.
+- **Stunlock Studios (Sweden):** corrected the application route from a generic studio Careers page/email classification to the current employer-managed Teamtailor Open Application. Email applications are expressly not accepted; applicants must use the form and provide a CV, cover letter and portfolio/showreel. The location is Skövde and the ATS label is “Temporarily Remote”; this does not prove worldwide remote eligibility. Official route: https://jobs.stunlockstudios.com/jobs/3257938-open-application.
+
+#### Manual source register expansion
+
+Five more candidate leads were added to config/manual-discovery-sources.json, bringing the register to 22 entries:
+- **Poland:** BAZA POLSKI GAMEDEV, a community-maintained A–Z list. Manual lead research only; the list also contains publishers and uncertain entries.
+- **Germany:** game (German Games Industry Association) member directory. Mixed member types; manually verify direct development activity and employer routes.
+- **India:** Game Developer Association of India teams/network page. It is a leadership/community network, not a complete public member roster; affiliations are leads, not proof of current membership.
+- **India:** IGDA India National Chapter. A developer-community/networking source, not a company directory.
+- **Germany / international:** USK member companies. The roster includes developers, publishers, distributors, platforms and other organisations; manually classify each entry.
+All five remain manual-only. No automated scraper, adapter, schedule or permission change was introduced. config/discovery-sources.json remains unchanged.
+
+#### Batch checkpoint
+
+The batch-14 branch contains **322 route/profile pairs**: 317 active and 5 paused across 51 country/location labels. Main remains at 319 / 314 active / 5 paused until this proposal is merged. The branch's pre-documentation build [run 41217343456](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41217343456) passed Python discovery tests, the Node suite, lockfile and directory validation, route review, production build, privacy/artifact checks and browser acceptance. Documentation updates require exact-head CI.
 
 ## 10. Handover protocol
 
