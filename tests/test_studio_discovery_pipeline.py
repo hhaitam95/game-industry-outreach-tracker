@@ -753,6 +753,19 @@ class DatasetUpdateTests(unittest.TestCase):
         self.assertEqual(state["empty_cycles"], 3)
 
 
+    def test_verified_growth_clears_saturated_maintenance_mode(self):
+        state = discovery.empty_state()
+        state["saturated"] = True
+        state["empty_cycles"] = 3
+        state["cycle_additions"] = 1
+        for feed in discovery.FEEDS:
+            state["feed_done"][feed["id"]] = True
+
+        self.assertTrue(discovery.finish_cycle_if_complete(state))
+        self.assertFalse(state["saturated"])
+        self.assertEqual(state["empty_cycles"], 0)
+
+
 class GameDevMapDiscoveryTests(unittest.TestCase):
     def test_parser_reads_studio_rows_and_ignores_non_studio_categories(self):
         body = """
