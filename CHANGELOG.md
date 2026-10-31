@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-10-31 — Global discovery batch 6 (proposed)
+
+- Consolidates the validated fifth expansion: adds Sudden Forest and refines Chimera Entertainment and Supermassive Games.
+- Adds 22cans (United Kingdom), whose official site accepts speculative applications by email despite no current open roles.
+- Adds Absolutely Games (United Kingdom), whose Careers page invites candidates to use its enquiry form when no applicable role is available.
+- Adds AB Games (Ukraine / Cyprus), whose official careers page invites CV/portfolio submissions when no suitable vacancy is available.
+- Corrects Bossa Studios' speculative submission method to email; updates Brave At Night's Manchester location; clarifies Ember Crows' international eligibility and its points-based freelance/profit-share caveat.
+- Records additional source findings: IGDB as a promising API requiring credentials/terms review; Games Jobs Index as a manual “Speculative only” lead source with inconsistent displayed totals; GameCompanies.com automated-use restriction; no confirmed reusable licence for the community studio dataset.
+- Records held/rejected candidates and reasons in ADR-071 and the Global Discovery Implementation Model. Candidate-index claims remain leads, not employer evidence.
+
 ## 2026-10-31 — Global discovery implementation model documented
 
 - Added [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md) as the authoritative source for global coverage, studio qualification, speculative-route evidence, adult/vice exclusions, source evaluation, coverage/saturation and handover rules.
