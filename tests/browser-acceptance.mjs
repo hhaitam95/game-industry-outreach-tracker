@@ -78,7 +78,9 @@ async function main() {
       });
     });
     await page.addInitScript(() => {
-      localStorage.setItem("studio-outreach-theme-v1", "light");
+      if (!localStorage.getItem("studio-outreach-theme-v1")) {
+        localStorage.setItem("studio-outreach-theme-v1", "light");
+      }
       Date.now = () => new Date("2026-10-31T18:00:00.000Z").getTime();
     });
 
