@@ -11329,5 +11329,167 @@
     ],
     "applicationLocation": "Berlin, Germany · initiative application listed as full- or part-time permanent; employer describes a mixture of office and remote work; applicant-country eligibility not stated",
     "reachHighlights": "The studio develops multiplayer mobile games with its own FRAMEWORK architecture; its current homepage and initiative-application page report conflicting team-size figures."
+  },
+  "AnkleBreaker Studio": {
+    "description": "Independent French game studio near Paris developing Mithrall, a multiplayer open-world survival sandbox. The studio also builds game-development tooling and contributes to open-source Unity tooling.",
+    "headquarters": {
+      "city": null,
+      "country": "France",
+      "countryCode": "FR",
+      "label": "Studio location stated as near Paris; exact HQ city not stated"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent studio; exact legal ownership not disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie · editorial indication",
+    "teamSize": "Ten senior people (company-reported on current careers pages)",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "PC",
+      "Multiplayer",
+      "Open-world survival",
+      "Sandbox",
+      "Unity"
+    ],
+    "popularGames": [
+      {
+        "title": "Mithrall: Realm of the Dwarves",
+        "appId": null,
+        "stage": "In development; public playtests have taken place"
+      }
+    ],
+    "profileSources": [
+      "https://anklebreaker-studio.com/",
+      "https://anklebreaker-studio.com/careers",
+      "https://anklebreaker-studio.com/devlog/mithrall-why-we-started-again-and-what-comes-next"
+    ],
+    "applicationLocation": "Near Paris, France · in-person is the default; remote is considered for the right person and role",
+    "reachHighlights": "The studio reports ten senior team members and is developing Mithrall, an open-world survival MMO. Its Careers page invites applicants with exceptional skills beyond the eight current advertised roles."
+  },
+  "Alice in Games": {
+    "description": "Small independent, early-stage German game studio creating emotionally driven, story-focused adventure games. The studio says its first game is in development but has not publicly disclosed its title, platform or release date.",
+    "headquarters": {
+      "city": "Berlin",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "Office · official Contact page"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "Early-stage indie · editorial indication",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Narrative",
+      "Adventure",
+      "Story-driven games"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://aliceingames.com/",
+      "https://aliceingames.com/about/",
+      "https://aliceingames.com/career/",
+      "https://aliceingames.com/contact/"
+    ],
+    "applicationLocation": "Berlin, Germany · remote and applicant-country eligibility not stated",
+    "reachHighlights": "The studio describes itself as independent and early-stage; its first narrative game is in development, with no title or release details publicly disclosed."
+  },
+  "No Roof Games": {
+    "description": "Small Finnish mobile game studio from Tampere, building casual real-time multiplayer games. The official About page reports a three-person team with more than 20 years of combined game-industry experience.",
+    "headquarters": {
+      "city": "Tampere",
+      "country": "Finland",
+      "countryCode": "FI",
+      "label": "Studio location · official homepage; registered company address also in Tampere"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent",
+      "Mobile games"
+    ],
+    "ownership": "No Roof Games Oy · Finnish limited company; ownership details not disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie · editorial indication",
+    "teamSize": "Three industry professionals (company-reported); 20+ years combined industry experience",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "Mobile",
+      "Casual",
+      "Real-time multiplayer",
+      "Unity"
+    ],
+    "popularGames": [
+      {
+        "title": "Heroes & Friends GO",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://noroofgames.com/",
+      "https://noroofgames.com/about/",
+      "https://noroofgames.com/open-application/",
+      "https://play.google.com/store/apps/details?id=com.NoRoofGames.HeroesFriendsGO"
+    ],
+    "applicationLocation": "Tampere, Finland · open application does not state remote or international eligibility",
+    "reachHighlights": "The company reports three industry professionals with 20+ years of combined experience. Heroes & Friends GO appears under the No Roof Games developer name on Google Play."
+  },
+  "Skytale": {
+    "description": "French independent non-profit video-game association and volunteer-led studio creating Minecraft-based games, events and its own game editor. Its projects include narrative adventure The Last Artifact and charity tower-defense game Z'Wonder Battle.",
+    "headquarters": {
+      "city": null,
+      "country": "France",
+      "countryCode": "FR",
+      "label": "French non-profit studio; specific HQ city not stated on the reviewed official pages"
+    },
+    "otherLocations": [
+      "Volunteer community across three continents"
+    ],
+    "companyType": [
+      "Developer",
+      "Non-profit",
+      "Volunteer-led"
+    ],
+    "ownership": "Non-profit association; no employees, according to the official site",
+    "parentCompany": null,
+    "industryScale": "Volunteer / non-profit studio",
+    "teamSize": "80+ active volunteers; no employees (company-reported)",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "Minecraft",
+      "Adventure",
+      "Puzzle",
+      "Tower defense",
+      "Community events",
+      "Game tools"
+    ],
+    "popularGames": [
+      {
+        "title": "The Last Artifact",
+        "appId": null,
+        "stage": "In development; Minecraft adventure/puzzle game"
+      },
+      {
+        "title": "Z'Wonder Battle",
+        "appId": null,
+        "stage": "Charity tower-defense project"
+      }
+    ],
+    "profileSources": [
+      "https://skytale.fr/en/",
+      "https://skytale.fr/en/qui-sommes-nous",
+      "https://app.skytale.fr/rejoindre"
+    ],
+    "applicationLocation": "100% remote volunteer team across three continents; this is unpaid volunteering, not employment",
+    "reachHighlights": "The association reports 80+ volunteers, 10 projects and 30M+ total views across its creations. All projects are volunteer-produced and non-commercial."
   }
 }
