@@ -103,7 +103,7 @@ async function main() {
     await page.getByRole("button", { name: "Switch to light theme" }).click();
     assert.equal(await page.locator("html").getAttribute("data-bs-theme"), "light");
 
-    const rows = page.locator(".studio-table tbody tr");
+    const rows = page.locator(".studio-data-row");
     const initialCount = await rows.count();
     assert.ok(initialCount > 100, "The global directory should contain a substantial set of active studios.");
     assert.ok(await page.locator(".studio-mark").count() > 100, "Studio marks should appear for directory rows.");
@@ -126,8 +126,25 @@ async function main() {
     await page.getByLabel("Search").fill("");
     assert.equal(await rows.count(), initialCount, "Clearing a successful search should restore the directory.");
 
-    // Country and work-model filters must actually reduce the visible result set.
-    const country = page.locator(".directory-toolbar label:nth-of-type(2) select");
+    // Continent, country and work-model filters must narrow the visible result set.
+    const continent = page.getByLabel("Continent");
+    const continentValues = await continent.locator("option").evaluateAll((options) =>
+      options.map((option) => option.value),
+    );
+    assert.ok(continentValues.includes("Europe"), "The continent filter should include Europe.");
+    assert.ok(continentValues.includes("Asia"), "The continent filter should include Asia.");
+    assert.ok(continentValues.includes("Africa"), "The continent filter should include Africa.");
+    await continent.selectOption("Europe");
+    const europeRows = await rows.count();
+    assert.ok(europeRows > 0 && europeRows < initialCount, "Europe filtering should narrow the directory.");
+    assert.equal(
+      await rows.evaluateAll((tableRows) => tableRows.every((row) => (row.getAttribute("data-continents") || "").split("|").includes("Europe"))),
+      true,
+      "Every row shown by the Europe filter should have a European headquarters.",
+    );
+    await continent.selectOption("All continents");
+
+    const country = page.getByLabel("Country");
     const countryValues = await country.locator("option").evaluateAll((options) =>
       options.map((option) => option.value),
     );
@@ -138,31 +155,49 @@ async function main() {
     assert.ok(countryCount > 0 && countryCount < initialCount, "Country filtering should narrow the directory.");
     await country.selectOption("All countries");
 
-    await page.getByLabel("Work model").selectOption("remote");
+    await page.locator(".directory-toolbar").getByLabel("Work model").selectOption("remote");
     const remoteCount = await rows.count();
     assert.ok(remoteCount > 0 && remoteCount < initialCount, "Work-model filtering should narrow the directory.");
-    await page.getByLabel("Work model").selectOption("All work models");
+    await page.locator(".directory-toolbar").getByLabel("Work model").selectOption("All work models");
     await page.getByLabel("Search").fill("Laki Studios");
-    await page.locator(".directory-toolbar .form-select").first().selectOption("Poland");
+    await country.selectOption("Poland");
     await page.getByRole("button", { name: "Reset filters" }).click();
     assert.equal(await rows.count(), initialCount, "Reset filters should clear search and selects.");
 
-    // Country sorting must follow the visible location and studio-name order.
-    await page.getByLabel("Sort by").selectOption("country");
+    // Column headers sort the table and expose the active sort direction accessibly.
+    const locationHeader = page.getByRole("button", { name: /Sort by Studio location/ });
+    await locationHeader.click();
+    assert.equal(await locationHeader.locator("xpath=..").getAttribute("aria-sort"), "ascending");
     const locationsAreSorted = await rows.evaluateAll((tableRows) => {
+      const collator = new Intl.Collator(undefined, { sensitivity: "base", numeric: true });
       const values = tableRows.map((row) => ({
-        name: row.cells[0]?.textContent?.trim() || "",
+        name: row.querySelector(".studio-name")?.textContent?.trim() || "",
         location: row.cells[1]?.textContent?.trim() || "",
       }));
       return values.every((current, index) => {
         if (index === 0) return true;
         const previous = values[index - 1];
-        const locationOrder = previous.location.localeCompare(current.location);
-        return locationOrder < 0 || (locationOrder === 0 && previous.name.localeCompare(current.name) <= 0);
+        const locationOrder = collator.compare(previous.location, current.location);
+        return locationOrder < 0 || (locationOrder === 0 && collator.compare(previous.name, current.name) <= 0);
       });
     });
-    assert.equal(locationsAreSorted, true, "Country sorting should be stable by displayed location and studio name.");
-    await page.getByLabel("Sort by").selectOption("name");
+    assert.equal(locationsAreSorted, true, "Location header sorting should follow displayed location and studio-name order.");
+    await locationHeader.click();
+    assert.equal(await locationHeader.locator("xpath=..").getAttribute("aria-sort"), "descending");
+    await page.getByRole("button", { name: /Sort by Studio \(ascending\)/ }).click();
+
+    // Rows expand into a concise studio profile with up to four notable titles.
+    const fourAGamesRow = rows.filter({ hasText: "4A Games" });
+    assert.match(await fourAGamesRow.locator("td").nth(2).textContent(), /Metro Exodus/);
+    await fourAGamesRow.locator("td").nth(3).click();
+    const fourAGamesDetails = page.locator("#studio-details-4a-games");
+    await fourAGamesDetails.waitFor();
+    assert.match(await fourAGamesDetails.textContent(), /About the studio/);
+    assert.match(await fourAGamesDetails.textContent(), /Metro Exodus/);
+    assert.match(await fourAGamesDetails.textContent(), /Application route notes/);
+    assert.match(await fourAGamesDetails.textContent(), /Route last checked:/);
+    await fourAGamesRow.getByRole("button", { name: /4A Games/ }).click();
+    await fourAGamesDetails.waitFor({ state: "detached" });
 
     // Official route links must remain HTTPS and open safely in a new tab.
     const firstApplicationLink = page.locator(".studio-table tbody tr").first().getByRole("link", { name: "Application" });
