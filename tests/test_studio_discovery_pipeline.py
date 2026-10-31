@@ -1,3 +1,4 @@
+import json
 import sys
 import tempfile
 import threading
@@ -747,7 +748,9 @@ class DatasetUpdateTests(unittest.TestCase):
             "country": "Canada",
             "hq_city": "Montreal",
             "country_code": "CA",
+            "source_id": discovery.FEEDS[0]["id"],
         }])
+        source_id = discovery.FEEDS[0]["id"]
         candidate = state["candidates"]["Q123"]
         candidate["status"] = "retry"
         candidate["next_check_at"] = "2099-01-01"
@@ -757,6 +760,8 @@ class DatasetUpdateTests(unittest.TestCase):
         self.assertTrue(discovery.finish_cycle_if_complete(state))
         self.assertEqual(state["cycle"], 2)
         self.assertEqual(candidate["status"], "retry")
+        self.assertEqual(state["source_stats"][source_id]["last_pass_status"], "incomplete")
+        self.assertEqual(state["source_stats"][source_id]["empty_cycles"], 0)
 
     def test_due_retry_keeps_its_current_discovery_cycle_open(self):
         state = discovery.empty_state()
@@ -768,15 +773,24 @@ class DatasetUpdateTests(unittest.TestCase):
             "country": "Canada",
             "hq_city": "Montreal",
             "country_code": "CA",
+            "source_id": discovery.FEEDS[0]["id"],
         }])
+        source_id = discovery.FEEDS[0]["id"]
         candidate = state["candidates"]["Q123"]
         candidate["status"] = "retry"
         candidate["next_check_at"] = discovery.iso_date()
         for feed in discovery.FEEDS:
             state["feed_done"][feed["id"]] = True
 
-        self.assertFalse(discovery.finish_cycle_if_complete(state))
-        self.assertEqual(state["cycle"], 1)
+        completed = discovery.finish_source_cycles(state)
+        self.assertNotIn(source_id, completed)
+        self.assertEqual(state["source_stats"][source_id]["cycle"], 1)
+        self.assertTrue(state["feed_done"][source_id])
+        other_sources = [
+            feed["id"] for feed in discovery.FEEDS
+            if feed["refresh_policy"] == "recurring" and feed["id"] != source_id
+        ]
+        self.assertTrue(all(state["source_stats"][item]["cycle"] == 2 for item in other_sources))
 
     def test_three_complete_empty_cycles_mark_initial_discovery_saturated(self):
         state = discovery.empty_state()
@@ -784,21 +798,97 @@ class DatasetUpdateTests(unittest.TestCase):
             for feed in discovery.FEEDS:
                 state["feed_done"][feed["id"]] = True
             self.assertTrue(discovery.finish_cycle_if_complete(state))
+        recurring = [feed["id"] for feed in discovery.FEEDS if feed["refresh_policy"] == "recurring"]
+        self.assertTrue(all(state["source_stats"][item]["saturated"] for item in recurring))
         self.assertTrue(state["saturated"])
         self.assertEqual(state["empty_cycles"], 3)
 
 
-    def test_verified_growth_clears_saturated_maintenance_mode(self):
+    def test_verified_growth_resets_only_its_own_source_saturation(self):
         state = discovery.empty_state()
-        state["saturated"] = True
-        state["empty_cycles"] = 3
-        state["cycle_additions"] = 1
+        recurring = [feed["id"] for feed in discovery.FEEDS if feed["refresh_policy"] == "recurring"]
+        for feed in discovery.FEEDS:
+            state["feed_done"][feed["id"]] = True
+        for feed_id in recurring:
+            state["source_stats"][feed_id]["empty_cycles"] = 3
+            state["source_stats"][feed_id]["saturated"] = True
+        growing_source = recurring[0]
+        state["source_stats"][growing_source]["cycle_additions"] = 1
+
+        self.assertTrue(discovery.finish_cycle_if_complete(state))
+        self.assertFalse(state["source_stats"][growing_source]["saturated"])
+        self.assertEqual(state["source_stats"][growing_source]["empty_cycles"], 0)
+        self.assertTrue(all(state["source_stats"][item]["saturated"] for item in recurring[1:]))
+        self.assertFalse(state["saturated"])
+
+
+    def test_source_page_budget_is_independent_per_feed(self):
+        state = discovery.empty_state()
+        recurring = [feed for feed in discovery.FEEDS if feed["refresh_policy"] == "recurring"]
+        state["source_stats"][recurring[0]["id"]]["saturated"] = True
+        self.assertEqual(discovery.source_page_budget(recurring[0], state, 8), 1)
+        self.assertEqual(discovery.source_page_budget(recurring[1], state, 8), 8)
+
+    def test_unresolved_retry_from_prior_pass_prevents_later_empty_saturation(self):
+        state = discovery.empty_state()
+        source_id = next(feed["id"] for feed in discovery.FEEDS if feed["refresh_policy"] == "recurring")
+        discovery.add_candidates(state, [{
+            "qid": "Q321",
+            "entity_url": "https://www.wikidata.org/entity/Q321",
+            "name": "Prior Pass Retry",
+            "website": "https://prior-pass-retry.example/",
+            "country": "Canada",
+            "hq_city": "Montreal",
+            "country_code": "CA",
+            "source_id": source_id,
+        }])
+        candidate = state["candidates"]["Q321"]
+        candidate["source_cycle"] = 1
+        candidate["status"] = "retry"
+        candidate["next_check_at"] = "2099-01-01"
+        state["source_stats"][source_id]["cycle"] = 2
         for feed in discovery.FEEDS:
             state["feed_done"][feed["id"]] = True
 
-        self.assertTrue(discovery.finish_cycle_if_complete(state))
-        self.assertFalse(state["saturated"])
-        self.assertEqual(state["empty_cycles"], 0)
+        discovery.finish_source_cycles(state)
+        self.assertEqual(state["source_stats"][source_id]["empty_cycles"], 0)
+        self.assertEqual(state["source_stats"][source_id]["last_pass_status"], "incomplete")
+        self.assertEqual(state["source_stats"][source_id]["last_pass_incomplete_candidates"], 1)
+
+
+    def test_source_manifest_is_the_runtime_feed_inventory(self):
+        manifest_path = Path(__file__).resolve().parents[1] / "config" / "discovery-sources.json"
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        self.assertEqual(
+            {item["id"] for item in manifest["sources"]},
+            {feed["id"] for feed in discovery.FEEDS},
+        )
+
+    def test_v1_state_migration_preserves_checkpoints_without_guessing_feed_provenance(self):
+        legacy = discovery.empty_state()
+        legacy["schema_version"] = 1
+        legacy.pop("source_stats")
+        legacy["feed_cursors"]["wikidata_video_game_developers"] = "Q123"
+        legacy["candidates"]["Q123"] = {
+            "qid": "Q123",
+            "name": "Legacy Candidate",
+            "website": "https://legacy-candidate.example/",
+            "status": "no_route",
+            "cycle": 1,
+        }
+
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "discovery-state.json"
+            path.write_text(json.dumps(legacy), encoding="utf-8")
+            migrated = discovery.load_state(path)
+
+        self.assertEqual(migrated["schema_version"], 2)
+        self.assertEqual(migrated["feed_cursors"]["wikidata_video_game_developers"], "Q123")
+        self.assertEqual(migrated["candidates"]["Q123"]["source_id"], "legacy_unattributed")
+        self.assertFalse(any(
+            metrics["saturated"]
+            for metrics in migrated["source_stats"].values()
+        ))
 
 
 class GameDevMapDiscoveryTests(unittest.TestCase):
@@ -933,6 +1023,7 @@ class GameDevMapDiscoveryTests(unittest.TestCase):
         self.assertTrue(discovery.finish_cycle_if_complete(state))
         self.assertEqual(state["feed_cursors"]["gamedevmap"], "10501")
         self.assertTrue(state["feed_done"]["gamedevmap"])
+        self.assertTrue(state["source_stats"]["gamedevmap"]["complete"])
         self.assertEqual(state["feed_cursors"]["wikidata_video_game_developers"], "")
         self.assertFalse(state["feed_done"]["wikidata_video_game_developers"])
 

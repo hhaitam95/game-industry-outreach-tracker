@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "last_reviewed": "2026-10-31",
+  "description": "Integrated candidate feeds only. Candidate indexes are leads; neither a directory record nor an entity credit proves an employer's current game-development status or acceptance of speculative applications.",
+  "sources": [
+    {
+      "id": "wikidata_video_game_developers",
+      "label": "Wikidata: video game developer entities",
+      "kind": "class",
+      "adapter": "wikidata_sparql",
+      "refresh_policy": "recurring",
+      "coverage": "Entities classified as video-game developers. Classification and official identity require independent verification.",
+      "pagination": "QID cursor; a completed pass restarts from the beginning for incremental discovery.",
+      "access": {
+        "endpoint": "https://query.wikidata.org/sparql",
+        "method": "Public SPARQL query service",
+        "policy_url": "https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service",
+        "minimum_request_spacing_seconds": 65,
+        "retry_policy": "One bounded Retry-After retry for HTTP 429; stop safely when the requested delay is too long or a second 429 occurs."
+      },
+      "saturation": {
+        "complete_empty_passes_before_throttling": 3,
+        "maximum_pages_per_hourly_run_when_saturated": 1
+      }
+    },
+    {
+      "id": "wikidata_game_developer_credits",
+      "label": "Wikidata: organizations credited as video-game developers",
+      "kind": "developer_credit",
+      "adapter": "wikidata_sparql",
+      "refresh_policy": "recurring",
+      "coverage": "Organizations recorded in video-game developer credits. Credits are candidate signals, not sufficient proof of current development activity.",
+      "pagination": "QID cursor; a completed pass restarts from the beginning for incremental discovery.",
+      "access": {
+        "endpoint": "https://query.wikidata.org/sparql",
+        "method": "Public SPARQL query service",
+        "policy_url": "https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service",
+        "minimum_request_spacing_seconds": 65,
+        "retry_policy": "One bounded Retry-After retry for HTTP 429; stop safely when the requested delay is too long or a second 429 occurs."
+      },
+      "saturation": {
+        "complete_empty_passes_before_throttling": 3,
+        "maximum_pages_per_hourly_run_when_saturated": 1
+      }
+    },
+    {
+      "id": "wikidata_video_game_companies",
+      "label": "Wikidata: video-game company entities",
+      "kind": "company_class",
+      "adapter": "wikidata_sparql",
+      "refresh_policy": "recurring",
+      "coverage": "Entities classified as video-game companies. Company entities may be publishers, parents or mixed organisations and require careful classification.",
+      "pagination": "QID cursor; a completed pass restarts from the beginning for incremental discovery.",
+      "access": {
+        "endpoint": "https://query.wikidata.org/sparql",
+        "method": "Public SPARQL query service",
+        "policy_url": "https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service",
+        "minimum_request_spacing_seconds": 65,
+        "retry_policy": "One bounded Retry-After retry for HTTP 429; stop safely when the requested delay is too long or a second 429 occurs."
+      },
+      "saturation": {
+        "complete_empty_passes_before_throttling": 3,
+        "maximum_pages_per_hourly_run_when_saturated": 1
+      }
+    },
+    {
+      "id": "gamedevmap",
+      "label": "GameDevMap: public worldwide studio directory",
+      "kind": "gamedevmap",
+      "adapter": "gamedevmap_public_results",
+      "refresh_policy": "one_time_backfill",
+      "coverage": "Public worldwide directory. Rows may represent multiple offices, publishers or other entities; classification and deduplication are required. Catalogue size is not a unique-studio count.",
+      "pagination": "Numeric start offset; 100 raw rows per page. Preserve the terminal offset after the initial backfill.",
+      "access": {
+        "endpoint": "https://www.gamedevmap.com/index.php",
+        "method": "Public paginated results interface",
+        "policy_url": "https://www.gamedevmap.com/",
+        "request_policy": "Use the existing fetch_url implementation, which enforces robots.txt, public-host validation and per-host request spacing. Do not use raw data files or bypass access controls.",
+        "terms_review": "Re-check current terms and permitted reuse before expanding collection or republishing additional source fields."
+      },
+      "saturation": null
+    }
+  ]
+}

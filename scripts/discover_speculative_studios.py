@@ -33,6 +33,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DIRECTORY_PATH = ROOT / "src/data/speculative-route-directory.json"
 PROFILES_PATH = ROOT / "src/data/studio-profiles.json"
 STATE_PATH = ROOT / "state/studio-discovery-state.json"
+SOURCE_MANIFEST_PATH = ROOT / "config/discovery-sources.json"
 
 USER_AGENT = (
     "GameIndustryOutreachTracker/1.0 "
@@ -50,31 +51,61 @@ MAX_RESPONSE_BYTES = 2_500_000
 PER_HOST_DELAY_SECONDS = 1.2
 MAX_CONCURRENT_SITE_CHECKS = 8
 REVIEW_DAYS = 90
+SATURATION_EMPTY_CYCLE_THRESHOLD = 3
+SATURATED_SOURCE_PAGE_BUDGET = 1
 MAX_SITE_PAGES = 7
 ROUTE_CHECK_STATUSES = {"active", "paused"}
 
-FEEDS = (
-    {
-        "id": "wikidata_video_game_developers",
-        "label": "Wikidata: video game developer entities",
-        "kind": "class",
-    },
-    {
-        "id": "wikidata_game_developer_credits",
-        "label": "Wikidata: organizations credited as video-game developers",
-        "kind": "developer_credit",
-    },
-    {
-        "id": "wikidata_video_game_companies",
-        "label": "Wikidata: video-game company entities",
-        "kind": "company_class",
-    },
-    {
-        "id": "gamedevmap",
-        "label": "GameDevMap: public worldwide studio directory",
-        "kind": "gamedevmap",
-    },
-)
+def load_source_manifest(path: Path = SOURCE_MANIFEST_PATH) -> tuple[dict[str, Any], ...]:
+    try:
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValueError("Discovery source manifest is unavailable or invalid.") from exc
+    if not isinstance(manifest, dict) or manifest.get("schema_version") != 1:
+        raise ValueError("Discovery source manifest has an unsupported schema.")
+    sources = manifest.get("sources")
+    if not isinstance(sources, list) or not sources:
+        raise ValueError("Discovery source manifest must contain at least one source.")
+    feeds: list[dict[str, Any]] = []
+    seen_ids: set[str] = set()
+    for source in sources:
+        if not isinstance(source, dict):
+            raise ValueError("Discovery source manifest entries must be objects.")
+        source_id, label, kind = source.get("id"), source.get("label"), source.get("kind")
+        refresh_policy = source.get("refresh_policy")
+        if not all(isinstance(value, str) and value.strip() for value in (source_id, label, kind)):
+            raise ValueError("Discovery source manifest entries require id, label and kind.")
+        if source_id in seen_ids:
+            raise ValueError("Discovery source manifest contains a duplicate id: " + source_id)
+        if kind not in {"class", "developer_credit", "company_class", "gamedevmap"}:
+            raise ValueError("Unsupported discovery source kind: " + str(kind))
+        if refresh_policy not in {"recurring", "one_time_backfill"}:
+            raise ValueError("Unsupported discovery refresh policy: " + str(refresh_policy))
+        if (kind == "gamedevmap") != (refresh_policy == "one_time_backfill"):
+            raise ValueError("GameDevMap must be a one-time backfill and Wikidata feeds must recur.")
+        saturation = source.get("saturation")
+        if refresh_policy == "recurring":
+            if not isinstance(saturation, dict):
+                raise ValueError("Recurring feeds require source-specific saturation settings: " + source_id)
+            threshold = saturation.get("complete_empty_passes_before_throttling")
+            page_limit = saturation.get("maximum_pages_per_hourly_run_when_saturated")
+            if not isinstance(threshold, int) or isinstance(threshold, bool) or threshold < 1:
+                raise ValueError("Invalid empty-pass saturation threshold for " + source_id)
+            if not isinstance(page_limit, int) or isinstance(page_limit, bool) or page_limit < 1:
+                raise ValueError("Invalid saturated page budget for " + source_id)
+        seen_ids.add(source_id)
+        feeds.append({
+            "id": source_id,
+            "label": label,
+            "kind": kind,
+            "refresh_policy": refresh_policy,
+            "saturation": saturation,
+        })
+    return tuple(feeds)
+
+
+FEEDS = load_source_manifest()
+
 
 GAMEDEVMAP_URL = "https://www.gamedevmap.com/index.php"
 GAMEDEVMAP_TYPES = {
@@ -953,12 +984,9 @@ def fetch_source_batch(feed_kind: str, cursor: str, limit: int) -> list[dict[str
 
 def empty_state() -> dict[str, Any]:
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "updated_at": utc_now().isoformat(),
-        "feed_cursors": {
-            feed["id"]: ("1" if feed["kind"] == "gamedevmap" else "")
-            for feed in FEEDS
-        },
+        "feed_cursors": {feed["id"]: ("1" if feed["kind"] == "gamedevmap" else "") for feed in FEEDS},
         "feed_done": {feed["id"]: False for feed in FEEDS},
         "feed_index": 0,
         "cycle": 1,
@@ -969,24 +997,67 @@ def empty_state() -> dict[str, Any]:
         "candidates": {},
         "route_checks": {},
         "route_check_index": 0,
+        "source_stats": {
+            feed["id"]: {
+                "cycle": 1, "cycle_additions": 0, "empty_cycles": 0,
+                "saturated": False, "complete": False,
+                "last_pass_completed_at": None, "last_pass_status": "not_started",
+                "last_pass_candidates": 0, "last_pass_verified": 0,
+                "last_pass_incomplete_candidates": 0,
+            } for feed in FEEDS
+        },
         "stats": {"candidates_seen": 0, "routes_verified": 0, "excluded": 0, "no_route": 0, "needs_review": 0},
     }
 
 
 def load_state(path: Path = STATE_PATH) -> dict[str, Any]:
     state = read_json(path, empty_state())
-    if not isinstance(state, dict) or state.get("schema_version") != 1:
+    if not isinstance(state, dict) or state.get("schema_version") not in {1, 2}:
         raise ValueError("Discovery state has an unsupported schema; refusing to overwrite it.")
     for field in ("feed_cursors", "feed_done", "candidates", "route_checks", "stats"):
         if not isinstance(state.get(field), dict):
             raise ValueError("Discovery state field is invalid: " + field)
-    # Backfill new source fields when reading state written by an earlier pipeline version.
-    for feed in FEEDS:
-        default_cursor = "1" if feed["kind"] == "gamedevmap" else ""
-        state["feed_cursors"].setdefault(feed["id"], default_cursor)
-        state["feed_done"].setdefault(feed["id"], False)
-    return state
 
+    # Migrate v1 additively, preserving every cursor, candidate, route check and statistic.
+    # Older Wikidata candidates did not keep query-feed provenance; never guess it.
+    state.setdefault("source_stats", {})
+    if not isinstance(state["source_stats"], dict):
+        raise ValueError("Discovery state field is invalid: source_stats")
+    starting_cycle = max(1, int(state.get("cycle", 1)))
+    for feed in FEEDS:
+        feed_id = feed["id"]
+        state["feed_cursors"].setdefault(feed_id, "1" if feed["kind"] == "gamedevmap" else "")
+        state["feed_done"].setdefault(feed_id, False)
+        metrics = state["source_stats"].setdefault(feed_id, {})
+        defaults = {
+            "cycle": starting_cycle, "cycle_additions": 0, "empty_cycles": 0,
+            "saturated": False, "complete": False,
+            "last_pass_completed_at": None, "last_pass_status": "migration_baseline",
+            "last_pass_candidates": 0, "last_pass_verified": 0,
+            "last_pass_incomplete_candidates": 0,
+        }
+        if not isinstance(metrics, dict):
+            raise ValueError("Discovery source state is invalid: " + feed_id)
+        for key, value in defaults.items():
+            metrics.setdefault(key, value)
+        metrics["cycle"] = max(1, int(metrics["cycle"]))
+        metrics["cycle_additions"] = max(0, int(metrics["cycle_additions"]))
+        metrics["empty_cycles"] = max(0, int(metrics["empty_cycles"]))
+        metrics["saturated"] = bool(metrics["saturated"])
+        if feed["refresh_policy"] == "one_time_backfill" and state["feed_done"][feed_id]:
+            metrics["complete"] = True
+            metrics["last_pass_status"] = "complete"
+
+    for candidate in state["candidates"].values():
+        if not isinstance(candidate, dict):
+            continue
+        source_id = candidate.get("source_id")
+        if source_id in state["source_stats"]:
+            candidate.setdefault("source_cycle", state["source_stats"][source_id]["cycle"])
+        else:
+            candidate["source_id"] = "legacy_unattributed"
+    state["schema_version"] = 2
+    return state
 
 def name_key(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "", value.casefold())
@@ -1001,7 +1072,11 @@ def existing_indexes(studios: list[dict[str, Any]]) -> tuple[set[str], set[str]]
     return names, domains
 
 
-def add_candidates(state: dict[str, Any], rows: list[dict[str, str]]) -> int:
+def add_candidates(
+    state: dict[str, Any],
+    rows: list[dict[str, str]],
+    source_id: str | None = None,
+) -> int:
     added = 0
     known_domains = {
         domain_key(str(candidate.get("website", "")))
@@ -1020,8 +1095,12 @@ def add_candidates(state: dict[str, Any], rows: list[dict[str, str]]) -> int:
         # on different domains are retained for verification instead of silently dropped.
         if domain in known_domains:
             continue
+        candidate_source_id = str(row.get("source_id") or source_id or "legacy_unattributed")
+        source_metrics = state.get("source_stats", {}).get(candidate_source_id, {})
         state["candidates"][qid] = {
             **row,
+            "source_id": candidate_source_id,
+            "source_cycle": int(source_metrics.get("cycle", state.get("cycle", 1))),
             "website": website,
             "status": "queued",
             "discovered_at": utc_now().isoformat(),
@@ -1056,7 +1135,7 @@ def ingest_source_pages(state: dict[str, Any], max_pages: int, batch_size: int) 
                 state["feed_cursors"][feed["id"]] = str(int(cursor or "1") + batch_size)
             else:
                 state["feed_cursors"][feed["id"]] = max(row["qid"] for row in rows)
-            candidates_added += add_candidates(state, rows)
+            candidates_added += add_candidates(state, rows, source_id=feed["id"])
         if len(rows) < batch_size:
             state["feed_done"][feed["id"]] = True
     return pages_processed, candidates_added
@@ -1178,6 +1257,11 @@ def process_candidate_queue(
             candidate["next_check_at"] = plus_days(iso_date(), REVIEW_DAYS)
             state["stats"]["routes_verified"] += 1
             state["cycle_additions"] += 1
+            source_metrics = state.get("source_stats", {}).get(candidate.get("source_id"))
+            if source_metrics is not None:
+                source_metrics["cycle_additions"] = int(source_metrics.get("cycle_additions", 0)) + 1
+                source_metrics["empty_cycles"] = 0
+                source_metrics["saturated"] = False
             published += 1
         elif result["status"] == "retry":
             candidate["status"] = "retry"
@@ -1324,43 +1408,110 @@ def maintain_existing_routes(
     return checked
 
 
-def finish_cycle_if_complete(state: dict[str, Any]) -> bool:
-    if not all(state["feed_done"].get(feed["id"], False) for feed in FEEDS):
-        return False
+def source_page_budget(feed: dict[str, Any], state: dict[str, Any], max_pages: int) -> int:
+    metrics = state.get("source_stats", {}).get(feed["id"], {})
+    if feed["refresh_policy"] == "recurring" and metrics.get("saturated"):
+        saturation = feed.get("saturation") or {}
+        page_limit = int(saturation.get(
+            "maximum_pages_per_hourly_run_when_saturated",
+            SATURATED_SOURCE_PAGE_BUDGET,
+        ))
+        return min(max_pages, max(1, page_limit))
+    return max_pages
+
+
+def finish_source_cycles(state: dict[str, Any]) -> list[str]:
+    """Finalize complete source passes independently; a stalled feed cannot block others."""
+    completed: list[str] = []
     today = iso_date()
-    queued = any(
-        candidate.get("cycle") == state["cycle"]
-        and (
+    completed_at = utc_now().isoformat()
+
+    for feed in FEEDS:
+        feed_id = feed["id"]
+        metrics = state["source_stats"][feed_id]
+        if not state["feed_done"].get(feed_id, False):
+            continue
+        if feed["refresh_policy"] == "one_time_backfill":
+            if not metrics.get("complete"):
+                metrics["complete"] = True
+                metrics["last_pass_completed_at"] = completed_at
+                metrics["last_pass_status"] = "complete"
+                metrics["last_pass_candidates"] = sum(
+                    1 for candidate in state["candidates"].values()
+                    if candidate.get("source_id") == feed_id
+                )
+                completed.append(feed_id)
+            continue
+
+        source_cycle = int(metrics.get("cycle", 1))
+        source_candidates = [
+            candidate for candidate in state["candidates"].values()
+            if candidate.get("source_id") == feed_id
+        ]
+        candidates = [
+            candidate for candidate in source_candidates
+            if int(candidate.get("source_cycle", source_cycle)) == source_cycle
+        ]
+        due_work = any(
             candidate.get("status") == "queued"
             or (
-                candidate.get("status") == "retry"
+                candidate.get("status") in {"retry", "needs_review"}
                 and (not candidate.get("next_check_at") or candidate["next_check_at"] <= today)
             )
+            for candidate in source_candidates
         )
-        for candidate in state["candidates"].values()
-    )
-    if queued:
-        return False
-    if int(state.get("cycle_additions", 0)) == 0:
-        state["empty_cycles"] = int(state.get("empty_cycles", 0)) + 1
-    else:
-        # Real, verified growth means this source set is no longer saturated.
-        # Resume the faster discovery cadence for the next full scan cycle.
-        state["empty_cycles"] = 0
-        state["saturated"] = False
-    state["cycle"] = int(state.get("cycle", 1)) + 1
-    state["cycle_additions"] = 0
-    # Wikidata feeds are refreshed on each pass. GameDevMap is a one-time bulk
-    # catalogue backfill; retain its terminal offset so hourly maintenance never
-    # starts downloading the same 10k rows again.
-    for feed in FEEDS:
-        if feed["kind"] == "gamedevmap":
+        if due_work:
             continue
-        state["feed_cursors"][feed["id"]] = ""
-        state["feed_done"][feed["id"]] = False
-    if state["empty_cycles"] >= 3:
-        state["saturated"] = True
-    return True
+        # Retries and manual-review cases from earlier passes remain unresolved
+        # evidence for this source. They must keep later passes from being counted
+        # as empty, even though they do not stop pagination from continuing.
+        incomplete = [
+            candidate for candidate in source_candidates
+            if candidate.get("status") in {"retry", "needs_review"}
+        ]
+        additions = int(metrics.get("cycle_additions", 0))
+        if additions:
+            metrics["empty_cycles"] = 0
+        elif not incomplete:
+            metrics["empty_cycles"] = int(metrics.get("empty_cycles", 0)) + 1
+
+        threshold = int((feed.get("saturation") or {}).get(
+            "complete_empty_passes_before_throttling",
+            SATURATION_EMPTY_CYCLE_THRESHOLD,
+        ))
+        metrics["saturated"] = int(metrics.get("empty_cycles", 0)) >= max(1, threshold)
+        metrics["last_pass_completed_at"] = completed_at
+        metrics["last_pass_status"] = "incomplete" if incomplete else (
+            "saturated" if metrics["saturated"] else "complete"
+        )
+        metrics["last_pass_candidates"] = len(candidates)
+        metrics["last_pass_verified"] = additions
+        metrics["last_pass_incomplete_candidates"] = len(incomplete)
+        metrics["cycle"] = source_cycle + 1
+        metrics["cycle_additions"] = 0
+        state["feed_cursors"][feed_id] = ""
+        state["feed_done"][feed_id] = False
+        completed.append(feed_id)
+
+    if completed:
+        state["cycle"] = int(state.get("cycle", 1)) + 1
+    recurring = [
+        state["source_stats"][feed["id"]]
+        for feed in FEEDS if feed["refresh_policy"] == "recurring"
+    ]
+    state["empty_cycles"] = min(
+        (int(metrics.get("empty_cycles", 0)) for metrics in recurring),
+        default=0,
+    )
+    state["saturated"] = bool(recurring) and all(bool(item.get("saturated")) for item in recurring)
+    state["cycle_additions"] = sum(int(item.get("cycle_additions", 0)) for item in recurring)
+    return completed
+
+
+def finish_cycle_if_complete(state: dict[str, Any]) -> bool:
+    """Compatibility wrapper; true means at least one independent feed pass advanced."""
+    return bool(finish_source_cycles(state))
+
 
 
 def run_pipeline(
@@ -1407,7 +1558,7 @@ def run_pipeline(
                 rows = source_fetcher(feed["kind"], cursor, batch_size)
                 source_row_count = len(rows)
             source_pages += 1
-            source_candidates += add_candidates(state, rows)
+            source_candidates += add_candidates(state, rows, source_id=feed_id)
             state["feed_cursors"][feed_id] = str(int(cursor) + batch_size)
             if source_row_count < batch_size:
                 state["feed_done"][feed_id] = True
@@ -1415,22 +1566,29 @@ def run_pipeline(
     else:
         # Wikidata requests are deliberately spaced apart; GameDevMap uses fetch_url's
         # separate per-host pacing and therefore needs no extra 65-second sleep.
+        # Saturation is source-specific: one capped feed never throttles another.
+        pages_by_feed: dict[str, int] = {}
         for _ in range(max_source_pages):
-            available = [feed for feed in FEEDS if not state["feed_done"].get(feed["id"], False)]
+            available = [
+                feed for feed in FEEDS
+                if not state["feed_done"].get(feed["id"], False)
+                and pages_by_feed.get(feed["id"], 0) < source_page_budget(feed, state, max_source_pages)
+            ]
             if not available:
                 break
             feed = FEEDS[state["feed_index"] % len(FEEDS)]
-            if state["feed_done"].get(feed["id"], False):
+            if feed not in available:
                 feed = available[0]
             cursor = state["feed_cursors"].get(feed["id"], "1" if feed["kind"] == "gamedevmap" else "")
             rows = source_fetcher(feed["kind"], cursor, batch_size)
             source_pages += 1
+            pages_by_feed[feed["id"]] = pages_by_feed.get(feed["id"], 0) + 1
             if rows:
                 if feed["kind"] == "gamedevmap":
                     state["feed_cursors"][feed["id"]] = str(int(cursor or "1") + batch_size)
                 else:
                     state["feed_cursors"][feed["id"]] = max(row["qid"] for row in rows)
-                source_candidates += add_candidates(state, rows)
+                source_candidates += add_candidates(state, rows, source_id=feed["id"])
             if len(rows) < batch_size:
                 state["feed_done"][feed["id"]] = True
             state["feed_index"] = (FEEDS.index(feed) + 1) % len(FEEDS)
@@ -1446,7 +1604,8 @@ def run_pipeline(
     routes_checked = maintain_existing_routes(
         state, studios, route_check_count, page_fetcher, deadline
     )
-    cycle_completed = finish_cycle_if_complete(state)
+    completed_sources = finish_source_cycles(state)
+    cycle_completed = bool(completed_sources)
     state["updated_at"] = utc_now().isoformat()
 
     # Sort only by display name. Existing verified records and profiles are otherwise
@@ -1464,6 +1623,19 @@ def run_pipeline(
         "cycle": state["cycle"],
         "empty_cycles": state["empty_cycles"],
         "saturated": state["saturated"],
+        "source_cycles_completed": completed_sources,
+        "source_status": {
+            feed["id"]: {
+                "cycle": state["source_stats"][feed["id"]]["cycle"],
+                "empty_cycles": state["source_stats"][feed["id"]]["empty_cycles"],
+                "saturated": state["source_stats"][feed["id"]]["saturated"],
+                "last_pass_status": state["source_stats"][feed["id"]]["last_pass_status"],
+                "last_pass_completed_at": state["source_stats"][feed["id"]]["last_pass_completed_at"],
+                "feed_pass_in_progress": not state["feed_done"].get(feed["id"], False),
+                "cursor": state["feed_cursors"].get(feed["id"], ""),
+            }
+            for feed in FEEDS
+        },
         "studio_count": len(studios),
         "candidate_queue": sum(1 for item in state["candidates"].values() if item.get("status") in {"queued", "retry"}),
         "candidate_pool_size": len(state["candidates"]),

@@ -71,27 +71,17 @@ jobs:
           elif [ ! -f "$STATE_FILE" ]; then
             MODE="bulk"
           else
-            # Keep using the larger batch while the initial GameDevMap catalogue
-            # is still downloading or any candidates remain due for verification.
+            # Finish the one-time GameDevMap catalogue backfill first.
+            # Once it is complete, hourly discovery continues even if another
+            # feed still has retries or manual-review candidates.
             MODE="$(python3 - "$STATE_FILE" <<'PY'
-          import datetime as dt
           import json
           import sys
 
           with open(sys.argv[1], encoding="utf-8") as handle:
               state = json.load(handle)
-          today = dt.date.today().isoformat()
-          candidates = state.get("candidates", {}).values()
-          pending = any(
-              item.get("status") == "queued"
-              or (
-                  item.get("status") == "retry"
-                  and (not item.get("next_check_at") or item["next_check_at"] <= today)
-              )
-              for item in candidates
-          )
           map_complete = state.get("feed_done", {}).get("gamedevmap", False)
-          print("hourly" if map_complete and not pending else "bulk")
+          print("hourly" if map_complete else "bulk")
           PY
           )"
           fi
@@ -99,23 +89,6 @@ jobs:
           SOURCE_PAGE_LIMIT=110
           if [ "$MODE" = "hourly" ]; then
             SOURCE_PAGE_LIMIT=8
-          fi
-          if [ "$MODE" = "hourly" ] && [ -f "$STATE_FILE" ]; then
-            SATURATED="$(python3 - "$STATE_FILE" <<'PY'
-          import json
-          import sys
-
-          with open(sys.argv[1], encoding="utf-8") as handle:
-              state = json.load(handle)
-          print("true" if state.get("saturated") else "false")
-          PY
-          )"
-            if [ "$SATURATED" = "true" ]; then
-              # Once three complete cycles add no verified routes, keep checking
-              # the source feeds, but reduce refresh pressure from 8 pages/hour
-              # to 1 page/hour. A verified addition clears saturation.
-              SOURCE_PAGE_LIMIT=1
-            fi
           fi
 
           if [ "$MODE" = "bulk" ]; then
@@ -128,10 +101,10 @@ jobs:
               --max-run-seconds 1500 \
               --state-file "$STATE_FILE" 2>&1 | tee "$RUNNER_TEMP/game-industry-outreach-tracker-discovery.log"
           else
-            # Continue unfinished Wikidata feeds with a bounded hourly budget.
-            # Normal exploration checks up to 8 pages; saturated maintenance
-            # checks 1 page. The scraper preserves the 65-second Wikidata
-            # request spacing and the 25-minute runtime ceiling in both modes.
+            # Continue recurring feeds with a bounded hourly budget. The Python
+            # scheduler caps each saturated feed independently; unsaturated feeds
+            # retain access to the remaining pages. Wikidata requests keep their
+            # 65-second spacing and the 25-minute runtime ceiling.
             python3 scripts/discover_speculative_studios.py \
               --mode hourly \
               --batch-size 100 \
@@ -281,14 +254,21 @@ jobs:
           print(f"- Candidate pool: {len(candidates):,}")
           for status in ("queued", "retry", "needs_review", "no_route", "published", "duplicate", "excluded"):
               print(f"- {status.replace('_', ' ').title()}: {counts.get(status, 0):,}")
-          print(f"- Discovery cycle: {state.get('cycle', 1)}")
-          print(f"- Consecutive empty cycles: {state.get('empty_cycles', 0)}")
-          print(f"- Saturated maintenance: {'yes' if state.get('saturated') else 'no'}")
-          for feed_id in ("wikidata_video_game_developers", "wikidata_game_developer_credits", "wikidata_video_game_companies", "gamedevmap"):
-              done = state.get("feed_done", {}).get(feed_id, False)
-              cursor = state.get("feed_cursors", {}).get(feed_id, "")
-              label = feed_id.replace("_", " ").title()
-              print(f"- {label}: {'complete' if done else 'in progress'} (cursor: {cursor or 'start'})")
+          print(f"- Aggregate saturated (telemetry only): {'yes' if state.get('saturated') else 'no'}")
+          with open("config/discovery-sources.json", encoding="utf-8") as handle:
+              manifest = json.load(handle)
+          source_stats = state.get("source_stats", {})
+          for source in manifest.get("sources", []):
+              source_id = source["id"]
+              metrics = source_stats.get(source_id, {})
+              done = state.get("feed_done", {}).get(source_id, False)
+              cursor = state.get("feed_cursors", {}).get(source_id, "")
+              print(
+                  f"- {source['label']}: pass={metrics.get('last_pass_status', 'unknown')}; "
+                  f"cycle={metrics.get('cycle', 1)}; empty passes={metrics.get('empty_cycles', 0)}; "
+                  f"saturated={'yes' if metrics.get('saturated') else 'no'}; "
+                  f"current pass={'at end' if done else 'in progress'}; cursor={cursor or 'start'}"
+              )
           PY
             else
               echo "- Saved discovery checkpoint: unavailable"
