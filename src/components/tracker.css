@@ -1,6 +1,6 @@
 .tracker-page {
   display: grid;
-  gap: 16px;
+  gap: 15px;
   min-width: 0;
 }
 
@@ -30,21 +30,21 @@
   border: 1px solid transparent;
   border-radius: 5px;
   background: transparent;
-  color: #5e6975;
+  color: var(--muted);
   cursor: pointer;
   font-size: 11px;
   white-space: nowrap;
 }
 
 .tracker-tab:hover {
-  background: #f5f7f9;
+  background: var(--tab-hover-bg);
   color: var(--ink);
 }
 
 .tracker-tab.active {
-  border-color: #c9d8eb;
-  background: #edf4fc;
-  color: #245b9c;
+  border-color: var(--tab-active-border);
+  background: var(--tab-active-bg);
+  color: var(--tab-active-ink);
   font-weight: 650;
 }
 
@@ -55,34 +55,34 @@
   padding: 0 4px;
   place-items: center;
   border-radius: 10px;
-  background: #edf0f3;
-  color: #66717c;
+  background: var(--tab-count-bg);
+  color: var(--tab-count-ink);
   font-size: 9px;
 }
 
 .tracker-tab.active span {
-  background: #d9e8f9;
-  color: #245b9c;
+  background: var(--tab-active-border);
+  color: var(--tab-active-ink);
 }
 
 .tracker-search {
-  width: min(230px, 100%);
+  width: min(260px, 100%);
   flex: 0 0 auto;
 }
 
 .tracker-table {
-  min-width: 760px;
+  width: 100%;
+  min-width: 800px;
+  --bs-table-bg: var(--surface);
+  --bs-table-color: var(--muted);
+  --bs-table-border-color: var(--table-border);
+  --bs-table-hover-bg: var(--row-hover);
+  --bs-table-hover-color: var(--ink);
 }
 
 .status-select-label {
   display: block;
   min-width: 135px;
-}
-
-.status-select-label select {
-  min-height: 31px;
-  padding: 5px 8px;
-  font-size: 11px;
 }
 
 .tracker-table .empty-table {

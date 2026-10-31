@@ -9,6 +9,44 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 import merge_discovery_datasets as merge
 
 
+class NewStudioTimestampTests(unittest.TestCase):
+    def test_new_studio_gets_added_at_without_using_route_checked_date(self):
+        incoming = [{
+            "name": "New Studio",
+            "country": "Canada",
+            "websiteUrl": "https://new-studio.example/",
+            "applicationUrl": "https://new-studio.example/careers",
+            "evidenceUrl": "https://new-studio.example/careers",
+            "checkedAt": "2026-10-30",
+        }]
+        with patch.object(merge, "added_at_timestamp", return_value="2026-10-31T18:00:00Z"):
+            rows, _profiles, summary = merge.merge_datasets(
+                [], incoming, {}, {"New Studio": {"description": "Test studio"}}
+            )
+        self.assertEqual(rows[0]["addedAt"], "2026-10-31T18:00:00Z")
+        self.assertEqual(rows[0]["checkedAt"], "2026-10-30")
+        self.assertEqual(summary["added"], 1)
+
+    def test_existing_studio_does_not_become_new_when_route_is_refreshed(self):
+        existing = {
+            "name": "Existing Studio",
+            "country": "Canada",
+            "websiteUrl": "https://existing-studio.example/",
+            "applicationUrl": "https://existing-studio.example/careers",
+            "evidenceUrl": "https://existing-studio.example/careers",
+            "checkedAt": "2026-10-29",
+        }
+        incoming = {**existing, "checkedAt": "2026-10-30"}
+        rows, _profiles, summary = merge.merge_datasets(
+            [existing], [incoming],
+            {"Existing Studio": {"description": "Existing"}},
+            {"Existing Studio": {"description": "Refreshed"}},
+        )
+        self.assertNotIn("addedAt", rows[0])
+        self.assertEqual(summary["added"], 0)
+        self.assertEqual(summary["updated_routes"], 1)
+
+
 class ConcurrentDirectoryRemovalTests(unittest.TestCase):
     def test_removed_official_domain_is_not_resurrected_from_stale_run(self):
         initial = [

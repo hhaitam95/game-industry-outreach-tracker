@@ -1,6 +1,6 @@
 # Product decisions
 
-**Date:** 30 October 2026
+**Date:** 31 October 2026
 
 Game Industry Outreach Tracker is a personal game-industry research tool with two core functions:
 
@@ -23,6 +23,15 @@ Game Industry Outreach Tracker is a personal game-industry research tool with tw
 - A separate user confirmation records an actually submitted application and moves it to Applied.
 - Records stay in browser localStorage. No login, backend, encryption, remote sync, email sending or automatic application submission is required for this single-user tool.
 - Browser data can be cleared and does not sync across devices.
+
+## UI decisions — Phase B first batch
+
+- Use bundled Bootstrap 5 CSS and a simple, information-dense interface; avoid decorative dashboards and unnecessary interaction.
+- Theme choice is saved locally and defaults to the operating-system preference on first visit.
+- Studio marks use website favicons with initials as a fallback. Headquarters flags use ISO country codes where available and never imply work eligibility.
+- The automation indicator reads public GitHub Actions history and distinguishes the latest attempt from the most recent successful run.
+- `addedAt` is separate from `checkedAt`; the yellow NEW marker expires 24 hours after first publication. Legacy records are not backfilled or marked new.
+- Application records remain browser-local. The theme preference is a separate local setting.
 
 ## Out of scope
 

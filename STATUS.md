@@ -18,9 +18,9 @@ Exclude organisations materially focused on pornography/adult sexual entertainme
 
 ## Website and public data
 
-- The live site remains limited to Studio Directory and My applications.
+- The live site remains limited to Studio Directory and My applications. Phase A is closed at 327 verified routes / 327 matching profiles (322 active, 5 paused; 51 country/location labels).
 - Personal tracker entries remain in the visitor's browser localStorage. No application records or CVs are committed to the public repository.
-- Current main contains **322 unique studio/employer records**, **322 matching profiles**, **317 active** and **5 paused** routes across **51 country/location labels**. The final Phase A closeout proposal contains **327 matching route/profile records** (322 active, 5 paused; 51 labels).
+- Current main contains **327 unique studio/employer records / 327 matching profiles**, **322 active** and **5 paused** routes across **51 country/location labels**. PR #75 is merged and the Phase A closeout is complete.
 - PRs #70–#74 are merged into main: #70 consolidated global route expansion, #71 implemented source-specific discovery saturation, #72 reconciled the FakeFish duplicate, #73 added seven verified routes and the manual-only source register, and #74 added CAPCOM, Cygames Group and Small Giant Games while refreshing Fawkes Games and Stunlock Studios. PR #70's 314 raw rows included two entries for the same FakeFish studio and identical official application route; ADR-078 records their consolidation into one canonical FakeFish record.
 - This batch-6 branch consolidates PR #68's fifth expansion and subsequent manual global research. PR #68 is superseded; do not merge it separately.
 - The proposal includes the prior batch's additions/updates: Sudden Forest, 22cans, Absolutely Games, AB Games, Favo Games, DON’T NOD Montréal and Ubisoft Saguenay; updates to Chimera Entertainment, Supermassive Games, Bossa Studios, Brave At Night and Ember Crows; plus the earlier batch-6 work.

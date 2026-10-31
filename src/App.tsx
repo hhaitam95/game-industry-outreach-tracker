@@ -4,6 +4,18 @@ import StudioDirectory from "./components/StudioDirectory";
 import ApplicationTracker from "./components/ApplicationTracker";
 
 const STORAGE_KEY = "studio-outreach-tracker-v1";
+const THEME_STORAGE_KEY = "studio-outreach-theme-v1";
+type Theme = "light" | "dark";
+
+function readTheme(): Theme {
+  try {
+    const saved = window.localStorage.getItem(THEME_STORAGE_KEY);
+    if (saved === "light" || saved === "dark") return saved;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  } catch {
+    return "light";
+  }
+}
 const VALID_STATUSES = new Set<TrackerStatus>([
   "saved",
   "in_progress",
@@ -18,10 +30,12 @@ type StudioSummary = {
   websiteUrl: string;
   applicationUrl: string;
   country: string;
+  countryCode?: string;
 };
 
 type StudioLocation = {
   country: string;
+  countryCode?: string;
   hqLabel: string;
   applicationLocation: string;
 };
@@ -56,11 +70,21 @@ export default function App() {
   const [applications, setApplications] = useState<TrackedApplication[]>([]);
   const [loaded, setLoaded] = useState(false);
   const [storageError, setStorageError] = useState(false);
+  const [theme, setTheme] = useState<Theme>(readTheme);
 
   useEffect(() => {
     setApplications(readApplications());
     setLoaded(true);
   }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-bs-theme", theme);
+    try {
+      window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+    } catch {
+      // Theme persistence is optional; the selected theme still applies in memory.
+    }
+  }, [theme]);
 
   useEffect(() => {
     if (!loaded) return;
@@ -89,6 +113,7 @@ export default function App() {
         websiteUrl: studio.websiteUrl,
         applicationUrl: studio.applicationUrl,
         country: location?.country || studio.country,
+        countryCode: location?.countryCode || studio.countryCode || "",
         hqLabel: location?.hqLabel || "HQ",
         applicationLocation:
           location?.applicationLocation || "Not specified · see official route",
@@ -178,7 +203,19 @@ export default function App() {
             </button>
           </nav>
 
-          <span className="workspace-label">PERSONAL WORKSPACE</span>
+          <div className="header-tools">
+            <button
+              className="btn btn-outline-secondary btn-sm theme-toggle"
+              type="button"
+              aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+              aria-pressed={theme === "dark"}
+              onClick={() => setTheme((current) => (current === "dark" ? "light" : "dark"))}
+            >
+              <span aria-hidden="true">{theme === "dark" ? "☀" : "◐"}</span>
+              {theme === "dark" ? "Light mode" : "Dark mode"}
+            </button>
+            <span className="workspace-label">PERSONAL WORKSPACE</span>
+          </div>
         </div>
       </header>
 
@@ -208,7 +245,7 @@ export default function App() {
       <footer className="app-footer">
         <span>Game Industry Outreach Tracker</span>
         <span>Studio directory · Application tracker</span>
-        <span>Tracker data stays in this browser</span>
+        <span>Tracker data stays in this browser · Theme preference is saved locally</span>
       </footer>
     </div>
   );
