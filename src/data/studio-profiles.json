@@ -4142,10 +4142,11 @@
     ],
     "profileSources": [
       "https://www.gamefreak.co.jp/",
+      "https://www.gamefreak.co.jp/recruit/",
       "https://www.gamefreak.co.jp/recruit/faq/",
       "https://hrmos.co/pages/gamefreak/jobs/10-4"
     ],
-    "applicationLocation": "Tokyo, Japan · overseas applicants accepted; business-level Japanese required; hybrid office attendance"
+    "applicationLocation": "Tokyo, Japan · overseas applicants accepted; business-level Japanese required for all positions (approximately JLPT N1 for development work); role location/work model depends on the matched opening."
   },
   "Game Tailors": {
     "description": "Delft-based Dutch studio specialising in serious games and interactive experiences. The studio's open-application page specifically describes internship opportunities in marketing, development, art and UX research.",
@@ -9095,14 +9096,16 @@
     "applicationLocation": "Not specified · confirm on the official application route"
   },
   "Stormind Games": {
-    "description": "Independent Italian developer and co-development partner known for atmospheric horror, action-adventure and narrative-driven games.",
+    "description": "Independent Italian game-development studio founded in 2016, focused on PC/console original IP and co-development for AA/AAA IP holders. Its credits include the Remothered survival-horror saga, Batora: Lost Haven, A Quiet Place: The Road Ahead and co-development work on Mafia: The Old Country.",
     "headquarters": {
-      "city": "Catania",
+      "city": "Acireale/Catania",
       "country": "Italy",
       "countryCode": "IT",
-      "label": "HQ"
+      "label": "HQ · official Company page"
     },
-    "otherLocations": [],
+    "otherLocations": [
+      "Registered office: Milan, Italy"
+    ],
     "companyType": [
       "Developer",
       "Co-development",
@@ -9110,29 +9113,45 @@
     ],
     "ownership": "Independent",
     "parentCompany": null,
-    "industryScale": "AA",
-    "teamSize": "100+ internal resources plus external collaborators (studio-reported)",
-    "teamSizeAsOf": "2025",
+    "industryScale": "AA / AAA co-development · editorial indication",
+    "teamSize": "100+ internal resources plus several external collaborators (company-reported on the current Company page)",
+    "teamSizeAsOf": "2026-10",
     "focus": [
       "PC",
       "PlayStation",
       "Xbox",
       "Horror",
       "Action-adventure",
+      "Action RPG",
+      "Survival horror",
+      "Unreal Engine",
       "Co-development"
     ],
     "popularGames": [
       {
-        "title": "Remothered: Tormented Fathers",
-        "appId": 633360
+        "title": "Remothered: Red Nun's Legacy",
+        "appId": null,
+        "stage": "Released 2026-10-27"
       },
       {
-        "title": "Batora: Lost Haven",
-        "appId": 1506440
+        "title": "Remothered: Tormented Fathers Remastered",
+        "appId": null,
+        "stage": "Announced for Q1 2027"
+      },
+      {
+        "title": "Remothered: Broken Porcelain Remastered",
+        "appId": null,
+        "stage": "Announced for Q1 2027"
       },
       {
         "title": "A Quiet Place: The Road Ahead",
-        "appId": 2233120
+        "appId": 2233120,
+        "stage": "Released 2024"
+      },
+      {
+        "title": "Batora: Lost Haven",
+        "appId": 1506440,
+        "stage": "Released 2022"
       },
       {
         "title": "Mafia: The Old Country",
@@ -9140,11 +9159,13 @@
         "stage": "Co-development contribution"
       }
     ],
-    "applicationLocation": "Location not specified · use HQ as reference",
     "profileSources": [
-      "https://stormindgames.com/company/"
+      "https://stormindgames.com/company/",
+      "https://stormindgames.com/careers/",
+      "https://stormindgames.com/games/"
     ],
-    "reachHighlights": "100+ internal resources plus external collaborators (studio-reported); credits include A Quiet Place and Mafia: The Old Country."
+    "applicationLocation": "Catania/Acireale, Italy · company HQ; registered office in Milan. The spontaneous application page does not state remote-work or applicant-country eligibility.",
+    "reachHighlights": "Founded in 2016. The official Company page reports 100+ internal resources plus external collaborators. Stormind's October 2026 releases include Remothered: Red Nun's Legacy; its credits also include A Quiet Place: The Road Ahead and Mafia: The Old Country co-development."
   },
   "Stranded Beast": {
     "description": "Independent Vienna-based game studio founded by business and industry veterans, developing its original multiplayer action game Postmortem.",
@@ -12043,5 +12064,152 @@
     ],
     "applicationLocation": "Berlin, Germany · work model and applicant-country eligibility for unsolicited applicants not stated",
     "reachHighlights": "Founded in 2008 and based in Berlin. Official developer credits include Insurmountable, Beat Slayer and Gelly Break Deluxe; the studio also publishes games for other developers."
+  },
+  "Square Enix": {
+    "description": "Japanese video-game developer and publisher operating a major Digital Entertainment business, alongside publishing, media, amusement and other related businesses. The company develops and operates games for console, PC and mobile platforms and owns internationally recognised game franchises.",
+    "headquarters": {
+      "city": "Shinjuku, Tokyo",
+      "country": "Japan",
+      "countryCode": "JP",
+      "label": "HQ · official company data"
+    },
+    "otherLocations": [
+      "Shibuya office, Tokyo",
+      "Osaka office"
+    ],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Group company"
+    ],
+    "ownership": "Wholly owned by Square Enix Holdings Co., Ltd. (100%, company-reported)",
+    "parentCompany": "Square Enix Holdings Co., Ltd.",
+    "industryScale": "AAA · editorial indication",
+    "teamSize": "3,235 employees (standalone company, company-reported as of 2026-03-31)",
+    "teamSizeAsOf": "2026-03-31",
+    "focus": [
+      "PC",
+      "PlayStation",
+      "Xbox",
+      "Nintendo",
+      "Mobile",
+      "RPG",
+      "Action",
+      "Adventure",
+      "Game development",
+      "Game publishing"
+    ],
+    "popularGames": [
+      {
+        "title": "Final Fantasy series",
+        "appId": null
+      },
+      {
+        "title": "Dragon Quest series",
+        "appId": null
+      },
+      {
+        "title": "Kingdom Hearts series",
+        "appId": null
+      },
+      {
+        "title": "NieR series",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.jp.square-enix.com/recruit/career/",
+      "https://www.jp.square-enix.com/recruit/career/careerlink/index.html",
+      "https://www.jp.square-enix.com/recruit/career/data/index.html"
+    ],
+    "applicationLocation": "Japan · Shinjuku HQ, Shibuya and Osaka offices; career-registration page does not state work-model or overseas applicant eligibility",
+    "reachHighlights": "The official mid-career site invites open Career Registration across job types and group divisions, including game development. The registration is valid for three years and does not guarantee selection. The standalone company reports 3,235 employees as of 2026-03-31."
+  },
+  "Iteration One": {
+    "description": "Self-funded independent German gaming studio and publisher creating free-to-play mobile idle/tycoon games. Its live title Nightclub Tycoon is an idle management game for iOS and Android.",
+    "headquarters": {
+      "city": "Karlsruhe",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "Studio and registered address · official homepage and employer recruitment profile"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Independent",
+      "Mobile games"
+    ],
+    "ownership": "Self-funded, independent company; official employer profile says it has no outside money. Exact shareholder structure not disclosed.",
+    "parentCompany": null,
+    "industryScale": "Indie · editorial indication",
+    "teamSize": "1–10 employees (employer profile on JOIN)",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "Mobile",
+      "iOS",
+      "Android",
+      "Free-to-play",
+      "Idle games",
+      "Tycoon",
+      "Management simulation"
+    ],
+    "popularGames": [
+      {
+        "title": "Nightclub Tycoon",
+        "appId": null,
+        "stage": "Live"
+      }
+    ],
+    "profileSources": [
+      "https://www.iterationone.com/",
+      "https://join.com/companies/iterationonecom",
+      "https://join.com/companies/iterationonecom/spontaneous-application"
+    ],
+    "applicationLocation": "Karlsruhe, Germany · current job adverts are based in Karlsruhe; spontaneous-application work model and applicant-country eligibility are not stated",
+    "reachHighlights": "The official website links to the employer's JOIN career portal. Iteration One describes itself as self-funded and independent; its Nightclub Tycoon title is played by millions according to the employer."
+  },
+  "Cenrellia Studios": {
+    "description": "Independent one-person German-language game development business creating Linux-first, community-oriented games. Its published title Stellar Hustler is sold for PC/Linux, Android and iOS, with a one-time purchase model and no in-app purchases, subscriptions or advertising according to the official Games page.",
+    "headquarters": {
+      "city": null,
+      "country": "Not stated",
+      "countryCode": null,
+      "label": "Country and registered location not stated on the reviewed official About/Careers pages"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent",
+      "Solo developer"
+    ],
+    "ownership": "Sole proprietorship (Einzelunternehmen), owner-operated according to the official Careers page",
+    "parentCompany": null,
+    "industryScale": "Solo indie developer",
+    "teamSize": "One-person business (company-reported on official Careers page)",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "PC",
+      "Linux",
+      "Android",
+      "iOS",
+      "Community-oriented games",
+      "Fair monetization"
+    ],
+    "popularGames": [
+      {
+        "title": "Stellar Hustler",
+        "appId": null,
+        "stage": "Published; site lists Steam/PC, Google Play and App Store, version 0.9.11"
+      }
+    ],
+    "profileSources": [
+      "https://cenrelliastudios.com/de/about",
+      "https://cenrelliastudios.com/de/games",
+      "https://cenrelliastudios.com/de/careers",
+      "https://cenrelliastudios.com/de/contact"
+    ],
+    "applicationLocation": "Not stated · solo developer business; unsolicited collaboration/location and compensation are not specified",
+    "reachHighlights": "Cenrellia describes itself as a one-person independent studio. Its Careers page invites unsolicited Art, Music, commissioned development, QA and Community pitches via the official contact form, with Careers as the subject."
   }
 }
