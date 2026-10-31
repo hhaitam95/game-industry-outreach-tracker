@@ -280,8 +280,7 @@ export default function StudioDirectory({
             {filtered.length === 0 ? (
               <tr>
                 <td className="empty-table" colSpan={7}>
-                  No studios match these filters.
-                  <button type="button" className="text-button" onClick={resetFilters}>Reset filters</button>
+                  No studios match these filters. Use Reset filters above to clear your search and selections.
                 </td>
               </tr>
             ) : null}
