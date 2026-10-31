@@ -7908,5 +7908,39 @@
       "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-29"
     }
+  },
+  {
+    "name": "Thought Pennies",
+    "country": "Not stated",
+    "websiteUrl": "https://www.thoughtpennies.com/",
+    "applicationUrl": "https://thought-pennies.careers-page.com/open-application",
+    "evidenceUrl": "https://www.thoughtpennies.com/",
+    "notes": "The official Thought Pennies website links directly to its “Join Us” page on the employer's careers-page.com subdomain. That linked page explicitly invites candidates to submit a resume even when no suitable position is listed and provides a dedicated Open application route. The studio describes itself as a fully remote, story-first RPG developer focused on emotional storytelling and technically ambitious role-playing games. The official site identifies the legal entity as Thought Pennies, Inc. but does not state a registered country or headquarters city. Remote work is stated; applicant-country and contracting eligibility are not.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Fully remote per official studio website; legal incorporation country, applicant-country and contracting eligibility are not stated"
+      ],
+      "disciplineScope": [
+        "Role-playing game development",
+        "Art",
+        "Visual effects",
+        "Programming",
+        "Game design",
+        "Narrative",
+        "Technical development"
+      ],
+      "relatedApplicationUrls": [
+        "https://thought-pennies.careers-page.com/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
+    }
   }
 ]
