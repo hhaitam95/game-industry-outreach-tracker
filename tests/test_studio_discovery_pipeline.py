@@ -829,6 +829,32 @@ class DatasetUpdateTests(unittest.TestCase):
         self.assertEqual(discovery.source_page_budget(recurring[0], state, 8), 1)
         self.assertEqual(discovery.source_page_budget(recurring[1], state, 8), 8)
 
+    def test_unresolved_retry_from_prior_pass_prevents_later_empty_saturation(self):
+        state = discovery.empty_state()
+        source_id = next(feed["id"] for feed in discovery.FEEDS if feed["refresh_policy"] == "recurring")
+        discovery.add_candidates(state, [{
+            "qid": "Q321",
+            "entity_url": "https://www.wikidata.org/entity/Q321",
+            "name": "Prior Pass Retry",
+            "website": "https://prior-pass-retry.example/",
+            "country": "Canada",
+            "hq_city": "Montreal",
+            "country_code": "CA",
+            "source_id": source_id,
+        }])
+        candidate = state["candidates"]["Q321"]
+        candidate["source_cycle"] = 1
+        candidate["status"] = "retry"
+        candidate["next_check_at"] = "2099-01-01"
+        state["source_stats"][source_id]["cycle"] = 2
+        for feed in discovery.FEEDS:
+            state["feed_done"][feed["id"]] = True
+
+        discovery.finish_source_cycles(state)
+        self.assertEqual(state["source_stats"][source_id]["empty_cycles"], 0)
+        self.assertEqual(state["source_stats"][source_id]["last_pass_status"], "incomplete")
+        self.assertEqual(state["source_stats"][source_id]["last_pass_incomplete_candidates"], 1)
+
 
     def test_source_manifest_is_the_runtime_feed_inventory(self):
         manifest_path = Path(__file__).resolve().parents[1] / "config" / "discovery-sources.json"
