@@ -38,6 +38,7 @@ const CONTINENT_BY_COUNTRY_CODE: Record<string, ContinentLabel> = {
   CZ: "Europe",
   DE: "Europe",
   DK: "Europe",
+  ES: "Europe",
   FI: "Europe",
   FR: "Europe",
   GB: "Europe",
