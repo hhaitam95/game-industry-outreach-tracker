@@ -11,6 +11,41 @@ import discover_speculative_studios as discovery
 
 
 class DiscoveryParsingTests(unittest.TestCase):
+    def test_wikidata_429_honours_retry_after_and_retries_once(self):
+        class FakeResponse:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc_value, traceback):
+                return False
+
+            def read(self, _limit):
+                return b'{"results":{"bindings":[]}}'
+
+        rate_limit = discovery.urllib.error.HTTPError(
+            discovery.WDQS_ENDPOINT, 429, "Too Many Requests", {"Retry-After": "120"}, None
+        )
+        with (
+            patch.object(discovery.urllib.request, "urlopen", side_effect=[rate_limit, FakeResponse()]) as urlopen,
+            patch.object(discovery.time, "sleep") as sleep,
+        ):
+            self.assertEqual(discovery.fetch_wikidata_batch("class", "Q135437500", 100), [])
+            self.assertEqual(urlopen.call_count, 2)
+            sleep.assert_called_once_with(120)
+
+    def test_wikidata_429_retry_after_beyond_in_run_limit_stops_without_retry(self):
+        rate_limit = discovery.urllib.error.HTTPError(
+            discovery.WDQS_ENDPOINT, 429, "Too Many Requests", {"Retry-After": "600"}, None
+        )
+        with (
+            patch.object(discovery.urllib.request, "urlopen", side_effect=rate_limit) as urlopen,
+            patch.object(discovery.time, "sleep") as sleep,
+        ):
+            with self.assertRaisesRegex(RuntimeError, "in-run retry limit"):
+                discovery.fetch_wikidata_batch("class", "Q135437500", 100)
+            urlopen.assert_called_once()
+            sleep.assert_not_called()
+
     def test_canonical_url_enforces_https_and_rejects_credentials_and_private_ips(self):
         self.assertEqual(
             discovery.canonical_url("http://www.example.com/careers#roles"),
