@@ -699,20 +699,24 @@
     "websiteUrl": "https://bananagun.games/",
     "applicationUrl": "https://bananagun.games/",
     "evidenceUrl": "https://bananagun.games/",
-    "notes": "Official site describes a small, senior mobile game team building hyper- and hybrid-casual Unity games for iOS and Android; current careers section invites open applications. HQ is not publicly stated.",
-    "checkedAt": "2026-10-30",
+    "notes": "The current official Careers page includes a Wildcard Open Application for any discipline and invites applicants to send their best work and explain what they would build. Applications are directed to jobs@bananagun.games. The wildcard route itself is marked flexible and does not state a work location; specific listed roles include hybrid and remote-friendly arrangements.",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
-        "website_form"
+        "email"
       ],
-      "workModel": "hybrid",
-      "eligibleLocations": [],
-      "disciplineScope": [],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Work location for the wildcard application is not stated; individual listed roles include hybrid and remote-friendly arrangements"
+      ],
+      "disciplineScope": [
+        "Any discipline"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -1624,6 +1628,38 @@
     }
   },
   {
+    "name": "D4N Games",
+    "country": "Iraq",
+    "websiteUrl": "https://www.d4ngames.com/",
+    "applicationUrl": "https://www.d4ngames.com/careers",
+    "evidenceUrl": "https://www.d4ngames.com/careers",
+    "notes": "Official Careers page has an Open Application for any studio discipline when the listed roles do not fit. Applicants may use the form or email careers@d4ngames.com and are asked for a portfolio, repository, reel or playable link plus a short note. The studio is based in Erbil, Iraq; some advertised roles are marked remote-friendly, but cross-border work eligibility is not stated. Its published hiring process says the short practical task is paid.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form",
+        "email"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Erbil, Iraq · remote-friendly roles are listed; cross-border work eligibility is not stated"
+      ],
+      "disciplineScope": [
+        "Any discipline",
+        "Game development",
+        "Programming",
+        "Art",
+        "Design",
+        "Community and live operations"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Dark Cloud Games",
     "country": "Portugal",
     "websiteUrl": "https://www.darkcloud.games/",
@@ -2509,7 +2545,7 @@
     "websiteUrl": "https://www.garena.sg/",
     "applicationUrl": "https://careers.garena.com/global/careers/J02131365",
     "evidenceUrl": "https://careers.garena.com/global/careers/J02131365",
-    "notes": "Official Garena Careers listing titled General Openings (Associate) states that candidates may be considered for current and future opportunities matching their skills. The Singapore entry-level pool welcomes applicants interested in game operations, marketing, game design, product management and software engineering. A relevant bachelor's degree or higher is required. The listing does not specify remote eligibility.",
+    "notes": "Official Garena careers now show several future-opportunity channels: Singapore General Openings (Associate) across game operations, marketing, game design, product management and software engineering; Jakarta Development Program and Product Associate talent pools (growth/monetization, localization QA, live operations, product health and player feedback); and a Vietnam Future Opportunities pool for Hanoi/Ho Chi Minh City spanning marketing, game development, esports, graphics/video, product/game operations and data/engineering. These are location-specific talent pools with separate experience and education requirements; no global-remote eligibility is stated.",
     "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "general",
@@ -2518,16 +2554,32 @@
       ],
       "workModel": "not_stated",
       "eligibleLocations": [
-        "Singapore · entry-level General Openings (Associate); relevant bachelor's degree or higher required; remote eligibility not stated"
+        "Singapore · General Openings (Associate), entry level; relevant bachelor's degree or higher required",
+        "Jakarta, Indonesia · Development Program (up to 2 years' experience) and Product Associate (up to 3 years); bachelor's degree required; Bahasa Indonesia and English required for Product Associate",
+        "Hanoi / Ho Chi Minh City, Vietnam · Future Opportunities pool across junior to manager levels and multiple functions"
       ],
       "disciplineScope": [
         "Game operations",
+        "Product operations",
+        "Localization QA",
+        "Quality assurance",
         "Marketing",
+        "Growth and monetization",
         "Game design",
+        "Game development",
         "Product management",
-        "Software engineering"
+        "Software engineering",
+        "Esports",
+        "Graphics design",
+        "Video editing",
+        "Data and engineering",
+        "Community and player feedback"
       ],
-      "relatedApplicationUrls": [],
+      "relatedApplicationUrls": [
+        "https://careers.garena.com/global/careers/J02067139",
+        "https://careers.garena.com/global/careers/J02071049",
+        "https://careers.garena.com/global/careers/J02129450"
+      ],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-29"
@@ -3505,23 +3557,41 @@
   },
   {
     "name": "Larian Studios",
-    "country": "Spain",
+    "country": "Belgium",
     "websiteUrl": "https://www.larian.com/",
-    "applicationUrl": "https://larian.com/",
-    "evidenceUrl": "https://larian.com/",
-    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open applications. Hiring geography is not inferred from headquarters.",
+    "applicationUrl": "https://jobs.lever.co/larian/19153167-a979-4236-917d-1a83c0ab631e",
+    "evidenceUrl": "https://larian.com/careers",
+    "notes": "Larian's official careers system currently offers multiple discipline-specific Open Applications for future opportunities, including DevOps, gameplay programming, graphics programming, technical QA, tools programming, production and other creative disciplines. The DevOps Open Application is the primary route recorded here and describes future work on CI/CD pipelines, deployment workflows, build stability and automation. Open-application listings are marked On-site and Any / all studios; Larian's seven studio locations are Gent, Barcelona, Dublin, Guildford, Kuala Lumpur, Quebec and Warsaw. Applicants should expect location-specific onsite arrangements and may be asked about relocation; this is not a global-remote route.",
     "checkedAt": "2026-10-31",
     "applicationResearch": {
-      "routeType": "open",
+      "routeType": "discipline_specific",
       "submissionMethods": [
-        "email"
+        "ats"
       ],
-      "workModel": "not_stated",
-      "eligibleLocations": [],
-      "disciplineScope": [],
-      "relatedApplicationUrls": [],
+      "workModel": "on_site",
+      "eligibleLocations": [
+        "Larian studio network: Gent (Belgium), Barcelona (Spain), Dublin (Ireland), Guildford (United Kingdom), Kuala Lumpur (Malaysia), Quebec (Canada), Warsaw (Poland) · Open Application listings are marked On-site; location/relocation suitability must be confirmed"
+      ],
+      "disciplineScope": [
+        "DevOps",
+        "CI/CD",
+        "Build and deployment engineering",
+        "Infrastructure",
+        "Tools programming",
+        "Gameplay programming",
+        "Graphics programming",
+        "Technical QA",
+        "Technical art",
+        "Production",
+        "Other discipline-specific Open Applications"
+      ],
+      "relatedApplicationUrls": [
+        "https://jobs.lever.co/larian/8a0ddf95-82a6-470f-9a1b-3126f569613b",
+        "https://jobs.lever.co/larian/828b8b15-a5be-40c1-9530-a45b7c581b8b",
+        "https://jobs.lever.co/larian/"
+      ],
       "routeStatus": "active",
-      "sourceType": "official_company_site",
+      "sourceType": "studio_controlled_ats",
       "nextReviewAt": "2027-01-29"
     }
   },
@@ -4023,6 +4093,36 @@
     }
   },
   {
+    "name": "Monstronauts",
+    "country": "Philippines",
+    "websiteUrl": "https://monstronauts.com/",
+    "applicationUrl": "https://monstronauts.com/join-us/careers/audio-video/",
+    "evidenceUrl": "https://monstronauts.com/join-us/careers/audio-video/",
+    "notes": "The official Audio/SFX Designer page explicitly says this is not an active opening and that Monstronauts is building a talent pool. Applicants must be based in the Philippines and should send a cover letter, CV and portfolio to careers@monstronauts.com. This is a discipline-specific future-opportunity pool, not a current vacancy.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "discipline_specific",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Applicants must be based in the Philippines"
+      ],
+      "disciplineScope": [
+        "Audio/SFX design",
+        "Game audio",
+        "Sound design",
+        "Unity audio implementation",
+        "Mobile game audio"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "MVRX games",
     "country": "Sweden",
     "websiteUrl": "https://www.mvrx-games.com/",
@@ -4133,6 +4233,38 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Nikity Games Studio",
+    "country": "Brazil",
+    "websiteUrl": "https://www.nikitygames.com/",
+    "applicationUrl": "https://www.nikitygames.com/careers",
+    "evidenceUrl": "https://www.nikitygames.com/careers",
+    "notes": "The official Careers page invites candidates who do not see a suitable listed role to send a resume and says the studio will get in touch when a matching opportunity becomes available. The page lists remote roles for game development, 3D art, visual design and game design. The studio is based in the state of Rio de Janeiro; broader country eligibility for remote work is not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote roles listed · studio based in Rio de Janeiro state, Brazil; applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "C# / C++",
+        "Unity",
+        "Unreal Engine",
+        "3D art",
+        "Visual design",
+        "Game design"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -5416,6 +5548,38 @@
     }
   },
   {
+    "name": "SmashByte",
+    "country": "Brazil",
+    "websiteUrl": "https://smashbyte.com.br/",
+    "applicationUrl": "https://smashbyte.com.br/",
+    "evidenceUrl": "https://smashbyte.com.br/",
+    "notes": "The official homepage says SmashByte has no open positions right now but still invites candidates to send a portfolio to support@smashbyte.com.br. IMPORTANT: this is the same public address used for business/partnership inquiries, not a dedicated recruitment mailbox. The studio is a registered Brazilian company making and operating online multiplayer games; work location and applicant eligibility are not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Brazil · company registration stated; city, work model and cross-border eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Game design",
+        "Client/server programming",
+        "Backend and server infrastructure",
+        "Live operations",
+        "Community moderation",
+        "Player support"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Snowcastle Games",
     "country": "Norway",
     "websiteUrl": "https://www.snowcastlegames.com/",
@@ -6122,6 +6286,42 @@
     }
   },
   {
+    "name": "TAKEONE",
+    "country": "South Korea",
+    "websiteUrl": "https://www.takeone.co.kr/",
+    "applicationUrl": "https://www.takeone.co.kr/recruit.php?lang=en",
+    "evidenceUrl": "https://www.takeone.co.kr/recruit.php?lang=en",
+    "notes": "Official Careers page provides a Register in Talent Pool form. Applications are reviewed first when recruitment demand arises, and suitable candidates are contacted individually. The listed areas include game design/planning, client/server programming, game art, PM/QA, screenwriting/video production, business planning/marketing and business support. The official head-office address is in Gangnam-gu, Seoul; work model and overseas applicant eligibility are not stated. The privacy notice says applicant records are retained for two years.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Seoul, South Korea · official head-office location; work model and overseas applicant eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Game design",
+        "Game planning",
+        "Client/server programming",
+        "Game art",
+        "Project management",
+        "Quality assurance",
+        "Screenwriting",
+        "Video production",
+        "Business planning",
+        "Marketing",
+        "Business support"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Techtive Games GmbH",
     "country": "Germany",
     "websiteUrl": "https://techtive.games/",
@@ -6369,6 +6569,46 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Tropical Games",
+    "country": "Brazil",
+    "websiteUrl": "https://www.tropicalgames.com.br/en/",
+    "applicationUrl": "https://www.tropicalgames.com.br/en/careers",
+    "evidenceUrl": "https://www.tropicalgames.com.br/en/careers",
+    "notes": "Official Careers page says there are currently no open positions and invites people to leave a profile in its Talent Pool for future aligned opportunities. Work is remote with strategic in-person gatherings; applicants may be based in any state in Brazil. Talent-pool categories include game design, programming, art, QA, XR/3D, sound/music, storytelling and operations/growth (HR, administration, marketing and sales).",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote · applicants from any state in Brazil are explicitly welcome; international eligibility is not stated"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Game design",
+        "Programming",
+        "Art",
+        "Quality assurance",
+        "VR/AR/XR",
+        "3D modeling",
+        "Animation",
+        "Audio",
+        "Narrative",
+        "Operations",
+        "HR",
+        "Administration",
+        "Marketing",
+        "Sales"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-29"
     }
   },

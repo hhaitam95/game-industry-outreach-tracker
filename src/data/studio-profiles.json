@@ -1335,7 +1335,7 @@
         "stage": "In development"
       }
     ],
-    "applicationLocation": "Hybrid roles listed · location eligibility not specified",
+    "applicationLocation": "Wildcard application · any discipline; work location not stated. Specific listed roles include hybrid and remote-friendly arrangements.",
     "reachHighlights": "Founded 2026; the studio's first mobile game is in development.",
     "profileSources": [
       "https://bananagun.games/"
@@ -2837,6 +2837,52 @@
     "applicationLocation": "Antwerp, Belgium · official Jobs page does not state remote or international eligibility",
     "reachHighlights": "Cyborn develops games and immersive experiences and operates an in-house motion-capture facility in Antwerp."
   },
+  "D4N Games": {
+    "description": "Independent Erbil-based game studio creating games with locally rooted stories for global audiences, including Roblox experiences and horror, puzzle and adventure projects.",
+    "headquarters": {
+      "city": "Erbil",
+      "country": "Iraq",
+      "countryCode": "IQ",
+      "label": "Studio base · official Careers page"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small team (studio-described) · exact count not disclosed",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "Roblox",
+      "Horror",
+      "Puzzle",
+      "Adventure",
+      "Multiplayer",
+      "Live operations"
+    ],
+    "popularGames": [
+      {
+        "title": "Rakoon",
+        "appId": null
+      },
+      {
+        "title": "SCREWED",
+        "appId": null
+      },
+      {
+        "title": "The Tablet of Destinies",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.d4ngames.com/",
+      "https://www.d4ngames.com/careers"
+    ],
+    "applicationLocation": "Erbil, Iraq · remote-friendly roles listed; cross-border work eligibility not stated"
+  },
   "Dark Cloud Games": {
     "description": "Independent game-development team recruiting across programming, game services, art, animation, visual effects and design.",
     "headquarters": {
@@ -4172,6 +4218,9 @@
       "label": "Company base · official website"
     },
     "otherLocations": [
+      "Jakarta, Indonesia",
+      "Hanoi, Vietnam",
+      "Ho Chi Minh City, Vietnam",
       "Part of Sea Limited's global technology group"
     ],
     "companyType": [
@@ -4211,9 +4260,12 @@
     ],
     "profileSources": [
       "https://www.garena.sg/",
-      "https://careers.garena.com/global/careers/J02131365"
+      "https://careers.garena.com/global/careers/J02131365",
+      "https://careers.garena.com/global/careers/J02067139",
+      "https://careers.garena.com/global/careers/J02071049",
+      "https://careers.garena.com/global/careers/J02129450"
     ],
-    "applicationLocation": "Singapore · General Openings (Associate), entry level"
+    "applicationLocation": "Singapore, Jakarta or Hanoi / Ho Chi Minh City · separate country-specific talent pools; no global-remote eligibility stated"
   },
   "GauravGo Games Technologies": {
     "description": "India-based game and immersive-technology company with a registered office in Puri and a corporate office in Bhubaneswar, Odisha. Its activities span mobile games, gamification, AR/VR and enterprise experiences; its careers page explicitly invites speculative applications when no vacancy fits.",
@@ -5654,29 +5706,61 @@
     ]
   },
   "Larian Studios": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Independent game developer founded in Gent, Belgium in 1996, known for the Divinity series and Baldur's Gate 3, operating seven studios across Europe, Asia and North America.",
     "headquarters": {
-      "city": "Barcelona, Catalonia",
-      "country": "Spain",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "city": "Gent",
+      "country": "Belgium",
+      "countryCode": "BE",
+      "label": "Founded and main studio base · official careers page"
     },
-    "otherLocations": [],
+    "otherLocations": [
+      "Barcelona, Spain",
+      "Dublin, Ireland",
+      "Guildford, United Kingdom",
+      "Kuala Lumpur, Malaysia",
+      "Quebec, Canada",
+      "Warsaw, Poland"
+    ],
     "companyType": [
-      "Developer"
+      "Developer",
+      "Independent"
     ],
-    "ownership": "Not yet researched",
+    "ownership": "Not disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "AAA",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
-    "popularGames": [],
-    "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=5101&state=&type=",
-      "https://www.larian.com/"
+    "focus": [
+      "PC",
+      "Console",
+      "Role-playing games",
+      "Action RPG",
+      "Narrative",
+      "Game development",
+      "DevOps",
+      "Tools",
+      "Technical QA"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "popularGames": [
+      {
+        "title": "Baldur's Gate 3",
+        "appId": null
+      },
+      {
+        "title": "Divinity: Original Sin II",
+        "appId": null
+      },
+      {
+        "title": "Divinity: Original Sin",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://larian.com/careers",
+      "https://jobs.lever.co/larian/19153167-a979-4236-917d-1a83c0ab631e",
+      "https://jobs.lever.co/larian/8a0ddf95-82a6-470f-9a1b-3126f569613b"
+    ],
+    "applicationLocation": "On-site across Larian's seven studios · Open Applications are marked Any location, but are not remote roles"
   },
   "LBC Studio": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
@@ -6313,6 +6397,40 @@
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
   },
+  "Monstronauts": {
+    "description": "Philippines-based game developer and publisher focused on mobile games, including time-management titles; its careers site is building a future talent pool for game audio/SFX.",
+    "headquarters": {
+      "city": null,
+      "country": "Philippines",
+      "countryCode": "PH",
+      "label": "Country · official company page; city not stated"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Mobile"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "Casual",
+      "Time management",
+      "Game audio",
+      "Sound effects",
+      "Unity"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://monstronauts.com/about-us/",
+      "https://monstronauts.com/join-us/careers/audio-video/"
+    ],
+    "applicationLocation": "Philippines only · Audio/SFX talent pool; not an active vacancy"
+  },
   "MVRX games": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
     "headquarters": {
@@ -6453,6 +6571,40 @@
       "https://nextlevelgames.applytojob.com/apply/YyYQvToJW1/General-Application"
     ],
     "applicationLocation": "Vancouver, Canada · general-route remote eligibility not stated"
+  },
+  "Nikity Games Studio": {
+    "description": "Brazilian video-game startup developing volleyball experiences for PC and consoles, combining sport, technology and interactive entertainment.",
+    "headquarters": {
+      "city": null,
+      "country": "Brazil",
+      "countryCode": "BR",
+      "label": "Studio base · Rio de Janeiro state (city not stated)"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Startup"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie / early-stage",
+    "teamSize": "Lean expert team (studio-described) · exact count not disclosed",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Console",
+      "Sports",
+      "Volleyball",
+      "Unity",
+      "Unreal Engine",
+      "3D art"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.nikitygames.com/",
+      "https://www.nikitygames.com/careers"
+    ],
+    "applicationLocation": "Remote roles listed · Rio de Janeiro state, Brazil; applicant-country eligibility not stated"
   },
   "Nomad Games": {
     "description": "Small independent game studio based in Lymm, England. Nomad Games specialises in digital adaptations of physical board games and also provides co-development, engineering, art, porting and game-development services across PC, console and mobile.",
@@ -8267,6 +8419,47 @@
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
   },
+  "SmashByte": {
+    "description": "Brazilian game studio and publisher building and operating online multiplayer games, including Alaria Online, with in-house client/server engineering, cloud infrastructure and live operations.",
+    "headquarters": {
+      "city": null,
+      "country": "Brazil",
+      "countryCode": "BR",
+      "label": "Country · official company page; city not stated"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Online multiplayer",
+      "Live operations"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "MMORPG",
+      "Online multiplayer",
+      "Client/server programming",
+      "Backend services",
+      "Cloud infrastructure",
+      "Live operations",
+      "Community support"
+    ],
+    "popularGames": [
+      {
+        "title": "Alaria Online",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://smashbyte.com.br/"
+    ],
+    "applicationLocation": "Brazil · careers page accepts portfolios by email; work model and applicant-country eligibility not stated"
+  },
   "Snowcastle Games": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
     "headquarters": {
@@ -9208,6 +9401,64 @@
     ],
     "applicationLocation": "Copenhagen, Denmark · open-application eligibility not stated"
   },
+  "TAKEONE": {
+    "description": "South Korean entertainment content group developing games based on K-pop and story IP alongside films, dramas, animation, characters, webtoons and platforms.",
+    "headquarters": {
+      "city": "Seoul",
+      "country": "South Korea",
+      "countryCode": "KR",
+      "label": "Head office · official contact page"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Game developer",
+      "Publisher",
+      "Entertainment content group"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Not publicly disclosed",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile games",
+      "K-pop IP",
+      "Story IP",
+      "Game operations",
+      "Project management",
+      "QA",
+      "Business support",
+      "Marketing"
+    ],
+    "popularGames": [
+      {
+        "title": "BLACKPINK THE GAME",
+        "appId": null
+      },
+      {
+        "title": "BTS WORLD Season 2",
+        "appId": null
+      },
+      {
+        "title": "NCT ZONE",
+        "appId": null
+      },
+      {
+        "title": "ENHYPEN WORLD: Eternal Moment",
+        "appId": null
+      },
+      {
+        "title": "Pucca Puzzle Adventure",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.takeone.co.kr/company.php?lang=en&section=company",
+      "https://www.takeone.co.kr/contact.php?lang=en",
+      "https://www.takeone.co.kr/recruit.php?lang=en"
+    ],
+    "applicationLocation": "Seoul, South Korea · official talent pool; work arrangement and overseas eligibility not stated"
+  },
   "Techtive Games GmbH": {
     "description": "Germany-based independent video-game developer building Ardem, an open-world survival game.",
     "headquarters": {
@@ -9581,6 +9832,51 @@
       "https://tripwireinteractive.com/"
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Tropical Games": {
+    "description": "Brazilian game and immersive-experience studio delivering games and digital experiences for entertainment, education and business, including PC, console, mobile and VR/AR/XR projects.",
+    "headquarters": {
+      "city": null,
+      "country": "Brazil",
+      "countryCode": "BR",
+      "label": "Brazilian studio · city not stated on reviewed official pages"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Immersive experiences",
+      "Services"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Not publicly disclosed",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Mobile",
+      "VR",
+      "AR",
+      "XR",
+      "Game development",
+      "Operations and support"
+    ],
+    "popularGames": [
+      {
+        "title": "Continue Dream",
+        "appId": null
+      },
+      {
+        "title": "Continue Dream Playgrounds",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.tropicalgames.com.br/en/about",
+      "https://www.tropicalgames.com.br/en/careers"
+    ],
+    "applicationLocation": "Remote · professionals from any state in Brazil; strategic in-person gatherings when needed"
   },
   "Twin Harbour Interactive": {
     "description": "Game developer and operator behind the Supremacy strategy-game franchise, with teams in Germany and Malta.",
