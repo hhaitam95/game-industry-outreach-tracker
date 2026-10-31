@@ -441,12 +441,12 @@ Main contains **313 unique studio/employer records / 313 matching profiles**, **
 
 #### Branch projection
 
-PR #73 is merged: main has 319 unique route/profile pairs, 314 active and 5 paused, across 51 country/location labels. Batch 14 proposes 322 unique route/profile pairs, 317 active and 5 paused, after three additional employer-verified routes.
+PR #73 is merged: main has 319 unique route/profile pairs, 314 active and 5 paused, across 51 country/location labels. PR #74 is also merged, bringing main to 322 unique route/profile pairs, 317 active and 5 paused. The final Phase A proposal raises this to 327 routes (322 active, 5 paused) across the same 51 labels.
 
 
-### Additional global discovery and verified route expansion — 2026-10-31 (batch 14)
+### Additional global discovery and verified route expansion — 2026-10-31 (batch 14, merged in PR #74)
 
-#### New verified studio/employer routes prepared for review
+#### New verified studio/employer routes
 
 - **CAPCOM (Japan):** the official mid-career recruitment page offers Career Registration for applicants who do not wish to narrow their job type or cannot find a suitable advertised role. The official call to action leads to an external Alumy registration portal. This is a general registration pool, not a current vacancy or a guaranteed interview/job. The page and registration flow are Japanese-language; overseas applicant eligibility and remote work are not stated. Official evidence: https://www.capcom.co.jp/recruit/guidelines/career/. Official company facts/profile source: https://www.capcom.co.jp/ir/english/company/info.html.
 - **Cygames Group (Japan):** the employer-managed HRMOS listing, “Career Registration (Open Position)”, explicitly invites applicants who do not wish to select a specific job or cannot find a suitable vacancy. The group may suggest matching roles across affiliated companies; it does not promise employment, and the listing says registration data is retained for two years. The specific employing entity and work location must be checked for any resulting role. Overseas eligibility and remote-work arrangements are not stated. Official route: https://hrmos.co/pages/cygames/jobs/1984149015409414261.
@@ -469,7 +469,31 @@ All five remain manual-only. No automated scraper, adapter, schedule or permissi
 
 #### Batch checkpoint
 
-The batch-14 branch contains **322 route/profile pairs**: 317 active and 5 paused across 51 country/location labels. Main remains at 319 / 314 active / 5 paused until this proposal is merged. The branch's pre-documentation build [run 41217343456](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41217343456) passed Python discovery tests, the Node suite, lockfile and directory validation, route review, production build, privacy/artifact checks and browser acceptance. Documentation updates require exact-head CI.
+PR #74 merged batch 14: main now contains **322 route/profile pairs**, 317 active and 5 paused across 51 country/location labels. Its exact-head CI [run 41224097341](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41224097341) passed the full build and browser-acceptance suite; Pages deployment [run 41224727091](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41224727091) also succeeded.
+
+### Final global sweep and Phase A initial-baseline closeout — 2026-10-31 (batch 15)
+
+#### Five final verified routes
+
+- **Laki Studios (Poland):** official Open Application accepts candidates even when there is no opening in their specialisation. It requests relevant tactical, turn-based, card or roguelite experience, game-design knowledge, English and Unity or Unreal. The route describes full-time flexible, fully remote work, B2B contracts and paid vacation; applicant-country eligibility is not stated. Official evidence: https://www.lakistudios.com/jobs/open-application. Studio evidence: https://www.lakistudios.com/about and https://www.lakistudios.com/games.
+- **Makemake Creative Studio (Türkiye):** official Careers page lists a General Application for Game Professionals. Its linked form invites CVs and brief cover letters from candidates interested in game design, development, art or product. Makemake describes itself as an Istanbul-based creative game and animation studio developing mobile games. Work model and applicant-country eligibility are not stated. Official route: https://makemake.com.tr/career/general-application.
+- **PixelAnt Games (Poland):** official Future Opportunities page invites candidates who do not see a suitable role. Its linked employer-specific eRecruiter form accepts a CV and asks for role, game-development experience, language skills, preferred work model and residence. The form offers Wrocław office, hybrid and fully remote preferences; remote-country eligibility is not stated. PixelAnt provides co-development, porting, remasters/remakes and full production, and is also developing its own IP. Official route: https://form.erecruiter.pl/form/a66fabf884d24c15beb2ec7854531f0a; evidence: https://pixelantgames.com/careers/future-opportunities/.
+- **Played With Fire (Poland):** official Careers page links a CV-for-the-future route for candidates who do not see a suitable advertised role. The employer-managed Traffit form accepts a CV, portfolio and preferred development area for future cooperation. The studio is based in Kraków and makes story-driven first-person action, adventure, puzzle and stealth games. Work model and applicant-country eligibility are not stated. Official route: https://playedwithfire.traffit.com/public/form/a/15?uid=S1F0elJYSjFuNE9oL0UrNkdLSnFmTWFQTTRRcnRLbz0%3D; evidence: https://www.playedwithfire.com/job/cv-for-the-future/.
+- **Rebel Wolves (Poland):** official Join Us page links an Open Application for candidates whose skills/interests do not match a published role. It directs applicants to eRecruiter and warns that registration does not guarantee contact. It says candidates from other countries may be considered where their time difference is within ±4 hours of Warsaw. The studio is based in Warsaw; work model is not stated. Official route/evidence: https://rebel-wolves.com/en/join-us.
+
+#### Rechecked without duplication
+
+- **Codebox Games (Nigeria)** and **G7 Studio (Saudi Arabia)** were rechecked during the same sweep and were already represented in the public directory; no duplicate records were created.
+- Kuuasema, GOALS, Futureplay Games, Katal Games, Playa Games, CipSoft, Havoc Games, Old Skull Games and Sencorp Games were also already represented.
+
+#### Phase A baseline and exit decision
+
+- The final proposal contains **327 unique studio/employer routes and 327 matching profiles**, **322 active** and **5 paused**, across **51 country/location labels**.
+- The manual-only source register remains at **22**. It is not loaded by runtime ingestion; its entries are research leads, not verified application routes or approved scraping targets.
+- The integrated feeds remain GameDevMap (one-time backfill) and three recurring Wikidata feeds. Source-specific cursors and saturation are implemented. The hourly GitHub Actions workflow remains the maintenance mechanism; this batch adds no scraper, adapter, secret, permission or schedule.
+- Initial global discovery is considered complete at this practical, evidence-backed baseline once the final proposal passes exact-head CI, is merged and deployed. This is not an exhaustive census of all game studios worldwide.
+- Permission-gated sources (including IGDB, Steam, GameCompanies.com, Games Jobs Index, MobyGames and the community dataset) stay blocked/manual until their respective access and reuse conditions are satisfied. The private candidate-review backlog does not block Phase B.
+- After the final proposal is merged and deployed, primary development focus moves to **Phase B — UI/UX improvements** for Studio Directory and My applications. Newly verified studios and route changes continue as ordinary maintenance and do not reopen Phase A.
 
 ## 10. Handover protocol
 
