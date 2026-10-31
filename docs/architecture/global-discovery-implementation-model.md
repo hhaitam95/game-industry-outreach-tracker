@@ -109,28 +109,27 @@ Candidate indexes are discovery inputs only. They do not prove that a company is
 
 These are candidate sources to evaluate and integrate; they are not yet confirmed as implemented adapters.
 
-1. **GameCompanies.com** — https://gamecompanies.com/  
-   Its current public site describes a directory of 4,300+ studios, publishers, hubs, organisations and service companies across 195 countries, plus a large game-title catalogue. Useful for breadth and regional discovery. It intentionally mixes entity types, so classify each candidate and review its access/terms before automating collection.
+1. **IGDB API** — https://api-docs.igdb.com/  
+   A promising structured company/game-credit source. Its Company endpoint exposes company identifiers, names, websites, country, parent-company relationships, company types and links to games developed or published. The API requires a Twitch developer application and OAuth credentials; the documented request limit is 4 requests per second and the endpoint supports paginated requests of up to 500 records. Review the current Twitch/IGDB agreement, attribution rules and any commercial-partnership requirements before integration. No credentials or adapter are currently configured. Never commit Client Secrets; use repository Actions secrets only after the owner has configured them. Candidate data remains a lead and must be verified against official employer evidence.
 
-2. **Games Jobs Index studio directory** — https://gamesjobsindex.com/studios.html  
-   Its studio directory currently reports approximately 2,573 studios and provides country coverage and links into its jobs-industry ecosystem. Useful as a studio candidate list and cross-check. Do not treat job listings or directory labels as evidence of a speculative route. Any claim about a dedicated speculative-only filter must be re-verified before relying on it.
+2. **GameCompanies.com** — https://gamecompanies.com/  
+   Its public site describes a directory of studios, publishers, hubs, organisations and service companies across 195 countries, plus a game-title catalogue. Useful for breadth and regional discovery. It mixes entity types, so classify every candidate. Its Terms restrict use to the provided interface unless written permission is obtained; use for manual research only until permission for bulk collection is secured.
 
-3. **Steam Developer & Publisher Homepages** — https://store.steampowered.com/dev/?l=english and https://store.steampowered.com/pub/?l=english  
-   Steam exposes a large paginated set of developer and publisher homepages (the public page displayed roughly 35,433 developer/publisher results when checked on 2026-10-31). This is a valuable supplementary discovery surface, but it mixes developers, publishers and other creator/homepage entities and is not a count of unique game studios. Use official, permitted access methods and respect Steam's terms and rate limits.
+3. **Games Jobs Index studio directory** — https://gamesjobsindex.com/studios.html  
+   On 2026-10-31 the live page displayed 2,573 studios in its header but a regional roll-up of 2,415, so the aggregate count is inconsistent and must not be quoted as a reconciled total. The page exposes a visible **Speculative only** hiring-status filter, useful for manual lead generation. Treat its filter results only as leads: independently verify the organisation and its application route on the employer's official website. No documented bulk API or automated-harvesting permission was established during this review. Keep it as a manual lead source until access terms/permission are clear.
 
-4. **MobyGames API** — https://www.mobygames.com/info/api/  
+4. **Steam Developer & Publisher Homepages** — https://store.steampowered.com/dev/?l=english and https://store.steampowered.com/pub/?l=english  
+   Steam exposes a large paginated set of developer and publisher homepages. It mixes developers, publishers and other creator/homepage entities and is not a count of unique game studios. Use official, permitted access methods and respect Steam's terms and rate limits; do not assume the pages authorize bulk extraction or republication.
+
+5. **MobyGames API** — https://www.mobygames.com/info/api/  
    MobyGames can help identify development companies from game credits and historical releases. The official API documentation says an API key is required and documents non-commercial request limits (720 requests per hour, maximum one request per second, as documented when checked on 2026-10-31). **Do not scrape MobyGames pages or automate access outside the API/permission allowed by its current terms.** Review API access, permitted uses, attribution and redistribution restrictions before implementation. Terms: https://www.mobygames.com/info/terms/.
 
-5. **Community-maintained Game Studios & Publishers Database** — https://github.com/EddieWing/gamedev-studios-db  
-   A useful secondary seed/cross-check: its README describes a hand-verified list of 1,116 PC/console studios and publishers across 64 countries, with mobile-only studios excluded and Europe prioritised. It is not an exhaustive or neutral global census. Review its licence, update cadence, source provenance and exclusions before importing anything; do not copy data without permitted reuse.
+6. **Community-maintained Game Studios & Publishers Database** — https://github.com/EddieWing/gamedev-studios-db  
+   Its README describes a hand-verified list of 1,116 PC/console studios and publishers across 64 countries, with mobile-only studios excluded and Europe prioritised. It is not an exhaustive or neutral global census. No licence was found at the repository root during review; do not import or redistribute its dataset until a reuse licence or permission is confirmed.
 
-6. **Regional and national sources to discover** — local game-industry associations, national game-development directories, government creative-industry registries, public grant/production-funding recipient lists, game-cluster member directories, game-conference/exhibitor lists, and official storefront/developer credit sources. Add each source only after documenting its provenance, coverage and lawful access method.
+7. **Regional and national sources to discover** — local game-industry associations, national game-development directories, government creative-industry registries, public grant/production-funding recipient lists, game-cluster member directories, game-conference/exhibitor lists, and official storefront/developer-credit sources. Add each source only after documenting its provenance, coverage and lawful access method.
 
 The list above is a living source registry, not a closed list. Add new indexes whenever credible global or regional sources are found. Do not stop because a finite list of sources has been exhausted.
-
-7. **Games Jobs Index studio directory** — https://gamesjobsindex.com/studios.html
-   On 2026-10-31 the live page displayed 2,573 studios in its header but a regional roll-up of 2,415, so the aggregate count is internally inconsistent and should not be quoted as a reconciled total. The page exposes a visible **Speculative only** hiring-status filter, which is useful for finding candidate employers. Treat it as a triage interface only: independently verify every studio and its application route on the employer's own site. No documented bulk API or automated-harvesting permission was established during this review. Keep it as a manual lead source until access terms/permission are clear.
-
 
 ### Source evaluation before adapter implementation
 
