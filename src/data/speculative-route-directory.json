@@ -4396,22 +4396,22 @@
     "websiteUrl": "https://nextlevelgames.com/",
     "applicationUrl": "https://nextlevelgames.applytojob.com/apply/YyYQvToJW1/General-Application",
     "evidenceUrl": "https://nextlevelgames.applytojob.com/apply/YyYQvToJW1/General-Application",
-    "notes": "Official studio career portal has a General Application and explicitly invites exceptional game developers even when no opening is posted. The application page identifies the studio as a wholly owned Nintendo subsidiary and lists Vancouver, Canada.",
-    "checkedAt": "2026-10-30",
+    "notes": "Official studio career portal has a General Application and explicitly invites exceptional game developers even when no opening is posted. The employer-managed form identifies the studio as a wholly owned Nintendo subsidiary, lists Vancouver, British Columbia, and states that the position is hybrid with at least three days per week in the Vancouver studio. Applicants must be legally eligible to work in Canada and currently reside in British Columbia.",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
         "ats"
       ],
-      "workModel": "not_stated",
+      "workModel": "hybrid",
       "eligibleLocations": [
-        "Vancouver, Canada · remote eligibility not stated"
+        "Vancouver, British Columbia, Canada · hybrid with at least three days per week in the studio; applicants must be eligible to work in Canada and currently reside in British Columbia"
       ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
