@@ -41,6 +41,13 @@ if (!profiles || typeof profiles !== "object" || Array.isArray(profiles)) errors
 
 if (Array.isArray(studios) && profiles && typeof profiles === "object" && !Array.isArray(profiles)) {
   const names = new Set();
+  const applicationRoutes = new Map();
+
+  function canonicalRouteUrl(value) {
+    const url = new URL(value);
+    const pathname = url.pathname.replace(/\\/+$/, "").toLowerCase();
+    return url.origin.toLowerCase() + (pathname || "/") + url.search;
+  }
 
   for (const [index, studio] of studios.entries()) {
     const row = "Studio row " + (index + 1);
@@ -106,6 +113,20 @@ if (Array.isArray(studios) && profiles && typeof profiles === "object" && !Array
     const key = typeof studio.name === "string" ? studio.name.toLowerCase() : "";
     if (key && names.has(key)) errors.push("Duplicate studio name: " + studio.name + ".");
     if (key) names.add(key);
+
+    if (["websiteUrl", "applicationUrl", "evidenceUrl"].every(field => typeof studio[field] === "string")) {
+      const routeKey = [
+        canonicalRouteUrl(studio.websiteUrl),
+        canonicalRouteUrl(studio.applicationUrl),
+        canonicalRouteUrl(studio.evidenceUrl)
+      ].join("|");
+      const previous = applicationRoutes.get(routeKey);
+      if (previous) {
+        errors.push("Duplicate employer/application route: " + previous + " and " + studio.name + ".");
+      } else {
+        applicationRoutes.set(routeKey, studio.name);
+      }
+    }
 
     if (studio.name === "3Sigma Studios" || studio.name === "Ballistic Moon") {
       errors.push("Excluded studio must not appear in the public directory: " + studio.name + ".");
