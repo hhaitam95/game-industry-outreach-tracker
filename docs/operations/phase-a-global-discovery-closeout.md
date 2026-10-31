@@ -1,7 +1,7 @@
 # Phase A — Initial Global Discovery Closeout
 
 **Checkpoint date:** 2026-10-31  
-**Status:** Proposed for final merge in PR #75  
+**Status:** Merged in PR #75; Pages publication and main build succeeded  
 **Scope:** Public verified studio directory and resumable discovery maintenance pipeline
 
 ## Exit baseline
@@ -62,7 +62,7 @@ Automated candidate-pipeline telemetry is separate from public directory totals.
 
 ## Exit decision
 
-Phase A is complete when this proposal passes exact-head CI, is merged, and the resulting Pages deployment succeeds. At that point:
+Phase A exit criteria were met when PR #75 passed exact-head CI, merged, and the resulting Pages deployment succeeded. At that point:
 
 - Initial global discovery is closed at the documented evidence-backed baseline.
 - Hourly discovery continues as routine maintenance; new additions and route refreshes do not reopen Phase A.
