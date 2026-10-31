@@ -12,7 +12,7 @@
 - Records currently cover **41 country/location labels** on main; the combined PR proposal would cover **44 labels**; unknown country values remain explicitly undisclosed.
 - Each active/paused record retains official studio, application and evidence URLs plus a verification date.
 - A studio is published only when an official studio-controlled page or linked employer-controlled hiring platform explicitly invites speculative, unsolicited, spontaneous, open or general applications.
-- Two reviewable batches are open: PR [#62](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/62) proposes **3 routes** (Halfbrick Studios, Bonfire Studios, Flashbulb Games), while PR [#63](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/63) proposes **11 routes**. PR #63 is being updated to include PR #62's records so both batches can be integrated without overwriting either.
+- One consolidated review batch is open: PR [#63](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/63) proposes **14 additional routes** (including Halfbrick Studios, Bonfire Studios and Flashbulb Games, previously tracked in PR #62). PR #62 is now redundant and will be closed as superseded once the consolidated batch passes CI.
 
 ## Phase 1 — Global discovery
 
@@ -30,7 +30,7 @@
 
 - The public-data validator checks every record for required identity and route fields, HTTPS official/application/evidence URLs, route enums and review dates.
 - It also verifies matching studio profiles, required profile fields and source URLs, duplicate studio names, and required exclusion cases.
-- The latest main-branch CI validation covered **252 studios with 252 matching profile records**. PR #63's previous exact-head CI also passed at 263 records; its updated combined dataset must pass CI again before merge.
+- The latest main-branch CI validation covered **252 studios with 252 matching profile records**. The pre-consolidation PR #63 head passed CI at 263 records. The consolidated 266-record dataset is undergoing a fresh exact-head CI run before merge.
 - Privacy-boundary checks pass for tracked paths and public/build output; personal tracker records remain browser-local and are not sent to a backend.
 - At the latest saved checkpoint, retry cases and 79 manual-review cases remain separate queues. They are not being incorrectly counted as complete.
 
