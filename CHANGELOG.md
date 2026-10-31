@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-10-31 — Global discovery batch 11 (proposed on PR #70)
+
+- Added **FakeFish Games** (Finland), **Winning Streak Games** (Germany) and **ByteRockers' Games** (Germany), with official open/spontaneous application evidence and matching profiles.
+- Refreshed **Redly Games** to link its official homepage to the employer-managed Ashby General Interest application, correctly marking source type and remote-contract eligibility.
+- Refreshed **HypeHype** to reflect its current AI-native studio positioning and Open Application; removed the unsupported assumption that its open application is necessarily on-site.
+- Paused the existing **Plummy Games** route because the employer-branded Teamtailor open application could not be confirmed by a forward link from the official company domain; this is not evidence the application closed.
+- Added **Xatronic Software GmbH** to the manual exclusion configuration because its official Products page expressly identifies online-casino and slot/reel game development.
+- Proposal branch now contains **311 route/profile pairs (306 active, 5 paused; 51 country/location labels)**. Main remains at 287/287 until PR #70 is reviewed, merged and deployed.
+- Added ADR-076 and updated the authoritative model, STATUS and handover.
+
 ## 2026-10-31 — Global discovery batch 10 (proposed on PR #70)
 
 - Added **Fawkes Games** (Bulgaria) after current official evidence confirmed direct game-development/live-service work alongside its publisher/operator business: Unity engineering and game-design recruitment, client modernization, gameplay-system overhauls and content expansions.
