@@ -857,6 +857,34 @@
     }
   },
   {
+    "name": "Blacc Studios",
+    "country": "Türkiye",
+    "websiteUrl": "https://www.blacc.studio/",
+    "applicationUrl": "https://www.blacc.studio/",
+    "evidenceUrl": "https://www.blacc.studio/",
+    "notes": "The official site says candidates who do not find a matching role may submit a spontaneous application by email, including a portfolio and an explanation of their interests. The studio identifies itself as a game developer based in Izmir, founded in 2024; its first game is not yet publicly announced. Work model and applicant-country eligibility are not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Izmir, Türkiye · remote and cross-border eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Art",
+        "Design"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Blackbird Interactive",
     "country": "Canada",
     "websiteUrl": "https://blackbirdinteractive.com/",
@@ -1179,6 +1207,36 @@
     }
   },
   {
+    "name": "CipSoft",
+    "country": "Germany",
+    "websiteUrl": "https://www.cipsoft.com/",
+    "applicationUrl": "https://karriere.cipsoft.com/o/initiativbewerbung-ab-3-jahren-berufserfahrung-mwd/c/new",
+    "evidenceUrl": "https://karriere.cipsoft.com/",
+    "notes": "The official careers site offers two Initiativbewerbung routes, split by relevant professional experience. The selected route accepts candidates with at least three years of relevant experience, including experience outside the games industry; the entry-level route is listed separately. The role is based on-site in Regensburg. CipSoft states German is its business language and asks for application documents in German; its FAQ says up to 20% mobile work may be possible after probation.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "on_site",
+      "eligibleLocations": [
+        "Regensburg, Germany · on-site; German-language application documents expected; up to 20% mobile work may be possible after probation"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Online games",
+        "Digital services"
+      ],
+      "relatedApplicationUrls": [
+        "https://karriere.cipsoft.com/o/initiativbewerbung-einstieg-und-erste-berufserfahrung-mwd/c/new"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Climax Studios",
     "country": "United Kingdom",
     "websiteUrl": "https://www.climaxstudios.com/",
@@ -1233,6 +1291,38 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Codebox Games",
+    "country": "Nigeria",
+    "websiteUrl": "https://www.codeboxgames.com/",
+    "applicationUrl": "https://www.codeboxgames.com/join-us",
+    "evidenceUrl": "https://www.codeboxgames.com/join-us",
+    "notes": "The official Join Us page invites portfolios even when a specific role is not listed, across engineering, art and animation, game design, production, writing and narrative. It directs applicants to send their portfolio to the studio. Codebox identifies Nigeria as its base and says it works globally; cross-border employment eligibility and a remote work model are not specified.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Nigeria · studio says it works globally; applicant-country and remote-work eligibility are not specified"
+      ],
+      "disciplineScope": [
+        "Engineering",
+        "Art",
+        "Animation",
+        "Game design",
+        "Production",
+        "Writing",
+        "Narrative"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -1494,6 +1584,36 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "DECK13 Interactive",
+    "country": "Germany",
+    "websiteUrl": "https://www.deck13.com/",
+    "applicationUrl": "https://deck13.jobs.personio.de/job/2725779?language=en",
+    "evidenceUrl": "https://deck13.jobs.personio.de/job/2725779?language=en",
+    "notes": "The studio-controlled Personio listing is a General Application for candidates whose skills do not match an advertised role and explicitly welcomes freelancers. The listing states Remote (EU), full-time, and permanent employment. The official studio site identifies Frankfurt am Main as its original studio location and also references a Montreal branch.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "European Union · remote; Frankfurt am Main studio; country-specific hiring eligibility should be confirmed"
+      ],
+      "disciplineScope": [
+        "Art",
+        "Programming",
+        "Design",
+        "Freelance",
+        "Other studio disciplines"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -2185,6 +2305,38 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "GAME FREAK",
+    "country": "Japan",
+    "websiteUrl": "https://www.gamefreak.co.jp/",
+    "applicationUrl": "https://hrmos.co/pages/gamefreak/jobs/10-4",
+    "evidenceUrl": "https://hrmos.co/pages/gamefreak/jobs/10-4",
+    "notes": "The official mid-career Career Registration system lets interested candidates register their experience even when they do not have a current target position; HR may contact registrants if a suitable role or hiring event becomes available. The official FAQ says overseas applications are accepted, but business-level Japanese (approximately JLPT N1 for development work) is required. The stated work base is Tokyo, with hybrid attendance; full remote is not offered for new-graduate hiring.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "Tokyo, Japan · overseas applications accepted; business-level Japanese required for all positions; hybrid office attendance"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Art",
+        "Design",
+        "Programming",
+        "Production"
+      ],
+      "relatedApplicationUrls": [
+        "https://www.gamefreak.co.jp/recruit/faq/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-29"
     }
   },
@@ -3274,6 +3426,36 @@
     }
   },
   {
+    "name": "Loading Studios",
+    "country": "Portugal",
+    "websiteUrl": "https://loadingstudios.pt/",
+    "applicationUrl": "https://loadingstudios.pt/spontaneous-application/",
+    "evidenceUrl": "https://loadingstudios.pt/careers/",
+    "notes": "The official Careers page explicitly welcomes spontaneous applications when positions are not open and links to a dedicated application form. The form accepts a CV and optional cover letter, portfolio, online portfolio and games portfolio. The studio identifies itself as an independent game developer in Lisbon; remote and cross-border eligibility are not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Lisbon, Portugal · remote and cross-border applicant eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Artists",
+        "Designers",
+        "Composers",
+        "Developers",
+        "Internships"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Lost Boys Interactive",
     "country": "United States",
     "websiteUrl": "https://www.lostboysinteractive.com/",
@@ -3497,6 +3679,34 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Minder Games",
+    "country": "Vietnam",
+    "websiteUrl": "https://minder.studio/",
+    "applicationUrl": "https://minder.studio/",
+    "evidenceUrl": "https://minder.studio/",
+    "notes": "The official Careers section has a distinct Open application invitation for people in 2D art, marketing or QA, alongside named full-time openings. The page identifies the open-application location as Nghia Do, Hanoi and lists the studio's careers email. This route is discipline-specific; the page does not state remote or cross-border eligibility.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "discipline_specific",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "on_site",
+      "eligibleLocations": [
+        "Nghia Do, Hanoi, Vietnam · open application location shown as Hanoi; remote and cross-border eligibility not stated"
+      ],
+      "disciplineScope": [
+        "2D Art",
+        "Marketing",
+        "Quality Assurance"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -3979,6 +4189,36 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Playa Games",
+    "country": "Germany",
+    "websiteUrl": "https://www.playa-games.com/",
+    "applicationUrl": "https://playagames.teamtailor.com/jobs/4985632-initiativbewerbung-playa-games",
+    "evidenceUrl": "https://playagames.teamtailor.com/jobs/4985632-initiativbewerbung-playa-games",
+    "notes": "The official Teamtailor job list includes an Initiativbewerbung - Playa Games route. Its description invites candidates to join the talent pool when no exact vacancy fits and states Hamburg (Alstertor 9), hybrid. The listing describes Playa as a developer of mobile and browser games and part of Stillfront Group.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "Hamburg, Germany · hybrid; cross-border eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Design",
+        "Marketing",
+        "Community",
+        "Other studio disciplines"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -5821,6 +6061,39 @@
     }
   },
   {
+    "name": "Vanara Games",
+    "country": "India",
+    "websiteUrl": "https://vanaragames.com/",
+    "applicationUrl": "https://vanaragames.com/careers",
+    "evidenceUrl": "https://vanaragames.com/careers",
+    "notes": "The official Careers page explicitly says candidates whose role is not listed can apply anyway and select 'Something else' in the form. The studio's About page identifies it as an independent India-based developer in Delhi-NCR and says it hires from wherever the right people are; international employment eligibility for the open route is not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form",
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Delhi-NCR, India · studio says it hires from wherever the right people are; cross-border work eligibility is not stated"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Game design",
+        "3D Art",
+        "Concept Art",
+        "Other disciplines"
+      ],
+      "relatedApplicationUrls": [
+        "https://vanaragames.com/studio"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Velan Studios",
     "country": "United States",
     "websiteUrl": "https://www.velanstudios.com/",
@@ -6112,6 +6385,70 @@
       "eligibleLocations": [],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Youniverse Games",
+    "country": "Malaysia",
+    "websiteUrl": "https://youniverse.game/",
+    "applicationUrl": "https://youniverse.game/contact.html?type=careers",
+    "evidenceUrl": "https://youniverse.game/careers.html",
+    "notes": "The official Careers page explicitly invites open applications from designers, engineers, artists and other candidates, even without a matching vacancy. Its linked contact form has a Careers category and requires a work-portfolio link; the site also lists a careers contact. Current advertised roles are based in Petaling Jaya, but the work model for open applications is not specified.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "contact_form",
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Petaling Jaya, Malaysia · current advertised roles are office-based; work location for open applications is not stated"
+      ],
+      "disciplineScope": [
+        "Design",
+        "Engineering",
+        "Art",
+        "Other disciplines"
+      ],
+      "relatedApplicationUrls": [
+        "https://youniverse.game/contact.html"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Zunisha",
+    "country": "India",
+    "websiteUrl": "https://www.zunisha.com/",
+    "applicationUrl": "https://www.zunisha.com/careers",
+    "evidenceUrl": "https://www.zunisha.com/careers",
+    "notes": "The official Careers page provides a General or Direct Application form for candidates who do not see a suitable role. Zunisha describes itself as a global remote-first real-time 3D and immersive technology studio working on game development, game art, AR/VR and interactive digital content. It is included as a game-development/co-production services studio; country-of-employment eligibility is not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Global remote-first · country-of-employment eligibility and hiring legal entities not stated"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Real-time 3D",
+        "Game art",
+        "AR/VR",
+        "Interactive technology"
+      ],
+      "relatedApplicationUrls": [
+        "https://www.zunisha.com/about"
+      ],
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-29"

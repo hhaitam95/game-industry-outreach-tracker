@@ -1606,6 +1606,35 @@
     "applicationLocation": "Remote within Germany",
     "reachHighlights": "The Jobs page accepts unsolicited applications by email and explicitly allows remote work from anywhere in Germany."
   },
+  "Blacc Studios": {
+    "description": "Izmir-based independent game development company founded in 2024 and developing its first original game.",
+    "headquarters": {
+      "city": "Izmir",
+      "country": "Türkiye",
+      "countryCode": "TR",
+      "label": "HQ · official website"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie / early stage",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Original IP",
+      "Game development",
+      "Storytelling"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.blacc.studio/"
+    ],
+    "applicationLocation": "Izmir, Türkiye · remote and cross-border eligibility not stated"
+  },
   "Blackbird Interactive": {
     "description": "Independent Vancouver game-development studio working on original worlds and partner-owned game franchises.",
     "headquarters": {
@@ -2192,6 +2221,53 @@
     "applicationLocation": "Worldwide · fully remote",
     "reachHighlights": "150+ professionals reported across its company group."
   },
+  "CipSoft": {
+    "description": "Independent Regensburg game developer known for long-running online games, including Tibia.",
+    "headquarters": {
+      "city": "Regensburg",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Online games"
+    ],
+    "ownership": "Independent; founded and still held by its original shareholders",
+    "parentCompany": null,
+    "industryScale": "Indie / AA",
+    "teamSize": "100+ employees (company-stated)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Mobile",
+      "MMORPG",
+      "Online games",
+      "Live operations"
+    ],
+    "popularGames": [
+      {
+        "title": "Tibia",
+        "appId": null
+      },
+      {
+        "title": "TibiaME",
+        "appId": null
+      },
+      {
+        "title": "Panzer League",
+        "appId": null,
+        "stage": "Discontinued in 2020"
+      }
+    ],
+    "profileSources": [
+      "https://www.cipsoft.com/en/company",
+      "https://karriere.cipsoft.com/",
+      "https://karriere.cipsoft.com/faqs"
+    ],
+    "applicationLocation": "Regensburg, Germany · on-site; German-language application documents expected"
+  },
   "Climax Studios": {
     "description": "Established UK game development and co-development studio delivering original games and partner projects across platforms.",
     "headquarters": {
@@ -2265,6 +2341,37 @@
       "https://careers.codewizards.io/jobs/5884840-speculative-application"
     ],
     "applicationLocation": "Hybrid · Reading, Elgin or Vancouver"
+  },
+  "Codebox Games": {
+    "description": "Independent Nigerian game studio building original games rooted in African mythology, culture and storytelling.",
+    "headquarters": {
+      "city": null,
+      "country": "Nigeria",
+      "countryCode": "NG",
+      "label": "Studio base · city not stated"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent; further ownership not disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie / early stage",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Original IP",
+      "Narrative",
+      "Action",
+      "African mythology",
+      "Game development"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.codeboxgames.com/join-us"
+    ],
+    "applicationLocation": "Nigeria · studio says it works globally; employment geography not stated"
   },
   "Codename Red": {
     "description": "Netherlands-based independent game studio founded in 2024 by former AAA and indie developers. Codename Red is building three titles within its original Arcflame IP. Its debut title, Arcflame Frontiers, is a tactical turn-based wargame for PC, Mac and Linux and entered closed alpha in August 2026.",
@@ -2680,6 +2787,58 @@
       "https://www.darkcloud.games/ui-ux-designer/"
     ],
     "applicationLocation": "Lisbon, Portugal · speculative route does not state remote eligibility"
+  },
+  "DECK13 Interactive": {
+    "description": "German game developer with more than two decades of experience, known for action RPGs and its in-house FLEDGE Engine.",
+    "headquarters": {
+      "city": "Frankfurt am Main",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "HQ"
+    },
+    "otherLocations": [
+      "Montreal, Canada · official site describes this as a second branch"
+    ],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Co-development"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "AA",
+    "teamSize": "Almost 100 employees (company-stated)",
+    "teamSizeAsOf": "Current official website",
+    "focus": [
+      "PC",
+      "Console",
+      "Action RPG",
+      "Adventure",
+      "Game engine development"
+    ],
+    "popularGames": [
+      {
+        "title": "The Surge",
+        "appId": null
+      },
+      {
+        "title": "The Surge 2",
+        "appId": null
+      },
+      {
+        "title": "Atlas Fallen",
+        "appId": null
+      },
+      {
+        "title": "Lords of the Fallen",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.deck13.com/",
+      "https://deck13.jobs.personio.de/job/2725779?language=en"
+    ],
+    "applicationLocation": "Remote within the European Union · full-time; Frankfurt am Main studio"
   },
   "Dionic Software": {
     "description": "Small independent German developer making building, colony, automation and simulation games.",
@@ -3761,6 +3920,46 @@
       "https://g7works.com/en/careers/",
       "https://g7works.com/"
     ]
+  },
+  "GAME FREAK": {
+    "description": "Japanese video game developer headquartered in Tokyo, known for creating the Pokémon series and other original game projects.",
+    "headquarters": {
+      "city": "Tokyo",
+      "country": "Japan",
+      "countryCode": "JP",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "AAA / AA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Console",
+      "RPG",
+      "Action",
+      "Game development"
+    ],
+    "popularGames": [
+      {
+        "title": "Pokémon series",
+        "appId": null
+      },
+      {
+        "title": "Pocket Card Jockey",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.gamefreak.co.jp/",
+      "https://www.gamefreak.co.jp/recruit/faq/",
+      "https://hrmos.co/pages/gamefreak/jobs/10-4"
+    ],
+    "applicationLocation": "Tokyo, Japan · overseas applicants accepted; business-level Japanese required; hybrid office attendance"
   },
   "Game Tailors": {
     "description": "Delft-based Dutch studio specialising in serious games and interactive experiences. The studio's open-application page specifically describes internship opportunities in marketing, development, art and UX research.",
@@ -5280,6 +5479,40 @@
       "https://www.liquidbulletstudios.com/careers"
     ]
   },
+  "Loading Studios": {
+    "description": "Independent Lisbon game developer with a portfolio spanning narrative, sports, adventure, puzzle and historical-fiction games.",
+    "headquarters": {
+      "city": "Lisbon",
+      "country": "Portugal",
+      "countryCode": "PT",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Narrative",
+      "Sports",
+      "Adventure",
+      "Puzzle",
+      "Historical fiction"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://loadingstudios.pt/",
+      "https://loadingstudios.pt/careers/",
+      "https://loadingstudios.pt/spontaneous-application/"
+    ],
+    "applicationLocation": "Lisbon, Portugal · remote and cross-border eligibility not stated"
+  },
   "Lost Boys Interactive": {
     "description": "Veteran-led development and co-development studio providing full-production support across engineering, art, design and production.",
     "headquarters": {
@@ -5571,6 +5804,56 @@
       "https://www.milkytea.com/"
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Minder Games": {
+    "description": "Hanoi-based mobile puzzle game studio building and operating casual games for global audiences.",
+    "headquarters": {
+      "city": "Hanoi",
+      "country": "Vietnam",
+      "countryCode": "VN",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Mobile",
+      "Independent"
+    ],
+    "ownership": "Minder Games Company Limited",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "15+ team members (company-stated)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "Mobile",
+      "Casual",
+      "Puzzle",
+      "Live operations",
+      "User acquisition"
+    ],
+    "popularGames": [
+      {
+        "title": "Jeweline",
+        "appId": null
+      },
+      {
+        "title": "Pour Blocks",
+        "appId": null
+      },
+      {
+        "title": "Cube Stack",
+        "appId": null
+      },
+      {
+        "title": "Cube Parade",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://minder.studio/",
+      "https://minder.studio/careers"
+    ],
+    "applicationLocation": "Hanoi, Vietnam · open application listed for 2D art, marketing and QA"
   },
   "Mindstorm Studios": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
@@ -6296,6 +6579,44 @@
       "https://piktiv.com/"
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Playa Games": {
+    "description": "Hamburg-based developer and operator of browser and mobile games, known for the MMORPG Shakes & Fidget.",
+    "headquarters": {
+      "city": "Hamburg",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Operator"
+    ],
+    "ownership": "Part of Stillfront Group since 2018",
+    "parentCompany": "Stillfront Group",
+    "industryScale": "AA",
+    "teamSize": "Around 50 employees (studio-stated)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "Browser games",
+      "Mobile",
+      "MMORPG",
+      "Online services",
+      "Community"
+    ],
+    "popularGames": [
+      {
+        "title": "Shakes & Fidget",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://playagames.teamtailor.com/jobs/4985632-initiativbewerbung-playa-games",
+      "https://www.playa-games.com/"
+    ],
+    "applicationLocation": "Hamburg, Germany · hybrid"
   },
   "Playdead": {
     "description": "Independent Copenhagen game developer known for atmospheric, highly crafted puzzle-platform adventures.",
@@ -8803,6 +9124,38 @@
       "https://upliftgames.zendesk.com/hc/en-us/articles/39204397059604-Adopt-Me-FAQ"
     ]
   },
+  "Vanara Games": {
+    "description": "Independent India-based game studio building original intellectual property across platforms, with a focus on distinctive gameplay, art and storytelling.",
+    "headquarters": {
+      "city": "Delhi-NCR",
+      "country": "India",
+      "countryCode": "IN",
+      "label": "HQ · studio-stated"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "Indie / early stage",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Original IP",
+      "Game design",
+      "Game development",
+      "Art",
+      "Technology"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://vanaragames.com/studio",
+      "https://vanaragames.com/careers"
+    ],
+    "applicationLocation": "Delhi-NCR, India · studio says it hires from wherever the right people are; cross-border eligibility not stated"
+  },
   "Velan Studios": {
     "description": "Independent game studio founded in Troy, New York in 2016 by brothers Karthik and Guha Bala. Velan builds original games and proprietary technology, with a second studio office in Toronto, Canada.",
     "headquarters": {
@@ -9271,6 +9624,78 @@
       "https://www.yodo1.com/"
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Youniverse Games": {
+    "description": "Malaysia-based game studio developing Yooca: Your Life, a social game connecting real-world brands and players.",
+    "headquarters": {
+      "city": "Petaling Jaya",
+      "country": "Malaysia",
+      "countryCode": "MY",
+      "label": "HQ"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Social games"
+    ],
+    "ownership": "Youniverse Games Sdn. Bhd.; further ownership not disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie / startup",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "Social games",
+      "Casual",
+      "Brand integrations",
+      "Live services"
+    ],
+    "popularGames": [
+      {
+        "title": "Yooca: Your Life",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://youniverse.game/careers.html",
+      "https://youniverse.game/contact.html?type=careers"
+    ],
+    "applicationLocation": "Petaling Jaya, Malaysia · work location for open applications not stated"
+  },
+  "Zunisha": {
+    "description": "India-headquartered real-time 3D and immersive technology studio providing game development, game art, AR/VR and interactive digital production services.",
+    "headquarters": {
+      "city": null,
+      "country": "India",
+      "countryCode": "IN",
+      "label": "HQ country · city not stated"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Game development services",
+      "Real-time 3D",
+      "Immersive technology"
+    ],
+    "ownership": "Zunisha Private Limited",
+    "parentCompany": null,
+    "industryScale": "Not publicly disclosed",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Game development",
+      "Unreal Engine",
+      "Unity",
+      "Game art",
+      "AR/VR",
+      "Real-time 3D",
+      "Interactive experiences"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.zunisha.com/about",
+      "https://www.zunisha.com/careers"
+    ],
+    "applicationLocation": "Global remote-first · country-of-employment eligibility not stated"
   },
   "Zygle Games": {
     "description": "London-based mobile game developer and publisher creating strategy, RPG and simulation experiences.",
