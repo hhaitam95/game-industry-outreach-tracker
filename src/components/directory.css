@@ -498,3 +498,26 @@
 .studio-table th:not([aria-sort]) {
   padding: 10px 12px;
 }
+
+
+.studio-verification-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  color: var(--subtle);
+  font-size: 9px;
+}
+
+.studio-verification-meta strong {
+  color: var(--muted);
+  font-weight: 650;
+}
+
+.studio-verification-meta a {
+  font-size: 10px;
+  font-weight: 600;
+}
