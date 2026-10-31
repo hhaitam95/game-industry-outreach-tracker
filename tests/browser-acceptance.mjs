@@ -155,10 +155,10 @@ async function main() {
     assert.ok(countryCount > 0 && countryCount < initialCount, "Country filtering should narrow the directory.");
     await country.selectOption("All countries");
 
-    await page.getByLabel("Work model").selectOption("remote");
+    await page.locator(".directory-toolbar").getByLabel("Work model").selectOption("remote");
     const remoteCount = await rows.count();
     assert.ok(remoteCount > 0 && remoteCount < initialCount, "Work-model filtering should narrow the directory.");
-    await page.getByLabel("Work model").selectOption("All work models");
+    await page.locator(".directory-toolbar").getByLabel("Work model").selectOption("All work models");
     await page.getByLabel("Search").fill("Laki Studios");
     await country.selectOption("Poland");
     await page.getByRole("button", { name: "Reset filters" }).click();
