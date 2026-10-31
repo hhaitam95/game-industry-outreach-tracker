@@ -85,13 +85,6 @@ function locationSortFor(studio: Studio): string {
 function studioId(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
-function formatDate(value?: string | null): string {
-  if (!value) return "Not stated";
-  const date = new Date(value);
-  return Number.isNaN(date.getTime())
-    ? value
-    : date.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
-}
 
 export default function StudioDirectory({
   applications,
