@@ -178,7 +178,7 @@ async function main() {
     const storedBeforeReload = await page.evaluate((key) => JSON.parse(localStorage.getItem(key) || "[]"), storageKey);
     assert.equal(storedBeforeReload.length, 1);
     assert.equal(storedBeforeReload[0].studioName, "4A Games");
-    assert.equal(storedBeforeReload[0].countryCode, "UA", "The headquarters country code should be retained locally.");
+    assert.equal(storedBeforeReload[0].countryCode, "MT", "The headquarters country code should be retained locally.");
 
     await page.reload({ waitUntil: "networkidle" });
     await page.getByRole("button", { name: /My applications/ }).click();
