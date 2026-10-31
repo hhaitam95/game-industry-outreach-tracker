@@ -4,15 +4,56 @@ export type PopularGame = {
   title: string;
   appId?: number | null;
   stage?: string;
+  igdbGameId?: number;
+  igdbSlug?: string;
+  igdbCoverId?: string;
 };
 
-function steamArtworkSources(appId?: number | null): string[] {
-  if (!appId) return [];
-  return [
-    `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${appId}/library_600x900.jpg`,
-    `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${appId}/library_600x900_2x.jpg`,
-    `https://cdn.cloudflare.steamstatic.com/steam/apps/${appId}/library_600x900.jpg`,
-  ];
+export type GameArtworkSource = {
+  source: "Steam" | "IGDB";
+  url: string;
+};
+
+export function getGameArtworkSources(game: PopularGame): GameArtworkSource[] {
+  const steamSources: GameArtworkSource[] = game.appId
+    ? [
+        {
+          source: "Steam",
+          url: `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${game.appId}/library_600x900.jpg`,
+        },
+        {
+          source: "Steam",
+          url: `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${game.appId}/library_600x900_2x.jpg`,
+        },
+        {
+          source: "Steam",
+          url: `https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appId}/library_600x900.jpg`,
+        },
+      ]
+    : [];
+
+  const igdbSource: GameArtworkSource[] = game.igdbCoverId
+    ? [
+        {
+          source: "IGDB",
+          url: `https://images.igdb.com/igdb/image/upload/t_cover_big/${game.igdbCoverId}.jpg`,
+        },
+      ]
+    : [];
+
+  return [...steamSources, ...igdbSource];
+}
+
+export function gameDestination(game: PopularGame): string {
+  if (game.appId) return `https://store.steampowered.com/app/${game.appId}/`;
+  if (game.igdbSlug) return `https://www.igdb.com/games/${encodeURIComponent(game.igdbSlug)}`;
+  return `https://store.steampowered.com/search/?term=${encodeURIComponent(game.title)}`;
+}
+
+function gameLinkLabel(game: PopularGame): string {
+  if (game.appId) return `Open ${game.title} on Steam`;
+  if (game.igdbSlug) return `Open ${game.title} on IGDB`;
+  return `Search Steam for ${game.title}`;
 }
 
 function gameInitials(title: string): string {
@@ -26,14 +67,16 @@ function gameInitials(title: string): string {
 }
 
 function GameCoverArtwork({ game, compact }: { game: PopularGame; compact: boolean }) {
-  const sources = steamArtworkSources(game.appId);
+  const sources = getGameArtworkSources(game);
   const [sourceIndex, setSourceIndex] = useState(0);
+  const currentSource = sources[sourceIndex];
 
-  if (sourceIndex < sources.length) {
+  if (currentSource) {
     return (
       <img
-        src={sources[sourceIndex]}
-        alt={game.title + " game poster"}
+        src={currentSource.url}
+        alt={game.title + " game cover"}
+        data-artwork-source={currentSource.source}
         loading="lazy"
         decoding="async"
         onError={() => setSourceIndex(current => current + 1)}
@@ -45,33 +88,39 @@ function GameCoverArtwork({ game, compact }: { game: PopularGame; compact: boole
     <span
       className={compact ? "game-cover-fallback is-compact" : "game-cover-fallback"}
       role="img"
-      aria-label={game.title + (game.appId ? " cover artwork unavailable" : " has no Steam cover listing")}
+      aria-label={game.title + " cover artwork unavailable"}
     >
       <span className="game-cover-monogram" aria-hidden="true">{gameInitials(game.title)}</span>
       {compact ? null : (
         <>
           <strong>{game.title}</strong>
-          <small>{game.appId ? "Cover image unavailable" : "No Steam listing"}</small>
+          <small>No verified cover artwork</small>
         </>
       )}
     </span>
   );
 }
 
+function artworkCaption(game: PopularGame): string {
+  if (game.stage) return game.stage;
+  if (game.appId && game.igdbCoverId) return "Steam · IGDB fallback";
+  if (game.appId) return "Steam cover";
+  if (game.igdbCoverId) return "IGDB cover";
+  return "No cover found";
+}
+
 export default function GamePoster({ game }: { game: PopularGame }) {
-  const hasSteamId = Boolean(game.appId);
-  const storeUrl = hasSteamId
-    ? `https://store.steampowered.com/app/${game.appId}/`
-    : `https://store.steampowered.com/search/?term=${encodeURIComponent(game.title)}`;
+  const destination = gameDestination(game);
+  const linkLabel = gameLinkLabel(game);
 
   return (
     <a
       className="game-poster-card"
-      href={storeUrl}
+      href={destination}
       target="_blank"
       rel="noopener noreferrer"
-      title={hasSteamId ? "View " + game.title + " on Steam" : "Search Steam for " + game.title}
-      aria-label={hasSteamId ? "Open " + game.title + " on Steam" : "Search Steam for " + game.title}
+      title={linkLabel}
+      aria-label={linkLabel}
       data-game-title={game.title}
     >
       <span className="game-poster-art">
@@ -80,7 +129,7 @@ export default function GamePoster({ game }: { game: PopularGame }) {
       </span>
       <span className="game-poster-caption">
         <strong>{game.title}</strong>
-        <small>{game.stage || (hasSteamId ? "Steam library cover" : "Search Steam")}</small>
+        <small>{artworkCaption(game)}</small>
       </span>
     </a>
   );
@@ -90,20 +139,16 @@ export function GamePosterStrip({ games }: { games: PopularGame[] }) {
   return (
     <span className="popular-work-list" aria-label={games.map(game => game.title).join(", ")}>
       {games.map(game => {
-        const hasSteamId = Boolean(game.appId);
-        const storeUrl = hasSteamId
-          ? `https://store.steampowered.com/app/${game.appId}/`
-          : `https://store.steampowered.com/search/?term=${encodeURIComponent(game.title)}`;
-
+        const linkLabel = gameLinkLabel(game);
         return (
           <a
             className="popular-game-cover"
-            href={storeUrl}
+            href={gameDestination(game)}
             key={game.title}
             target="_blank"
             rel="noopener noreferrer"
             title={game.title}
-            aria-label={hasSteamId ? "Open " + game.title + " on Steam" : "Search Steam for " + game.title}
+            aria-label={linkLabel}
             data-game-title={game.title}
           >
             <span className="popular-game-cover-art">

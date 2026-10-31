@@ -181,6 +181,19 @@ if (Array.isArray(studios) && profiles && typeof profiles === "object" && !Array
         if (game?.appId !== null && game?.appId !== undefined && (!Number.isInteger(game.appId) || game.appId < 1)) {
           errors.push(studio.name + ".profile.popularGames[" + gameIndex + "].appId must be a positive integer or null.");
         }
+        if (game?.igdbGameId !== undefined && (!Number.isInteger(game.igdbGameId) || game.igdbGameId < 1)) {
+          errors.push(studio.name + ".profile.popularGames[" + gameIndex + "].igdbGameId must be a positive integer.");
+        }
+        if (game?.igdbSlug !== undefined && (typeof game.igdbSlug !== "string" || !/^[a-z0-9-]+$/.test(game.igdbSlug))) {
+          errors.push(studio.name + ".profile.popularGames[" + gameIndex + "].igdbSlug must be a lowercase IGDB slug.");
+        }
+        if (game?.igdbCoverId !== undefined && (typeof game.igdbCoverId !== "string" || !/^[a-zA-Z0-9_-]+$/.test(game.igdbCoverId))) {
+          errors.push(studio.name + ".profile.popularGames[" + gameIndex + "].igdbCoverId must be a valid IGDB image ID.");
+        }
+        const hasIgdbMetadata = game?.igdbGameId !== undefined || game?.igdbSlug !== undefined || game?.igdbCoverId !== undefined;
+        if (hasIgdbMetadata && (!Number.isInteger(game?.igdbGameId) || typeof game?.igdbCoverId !== "string" || !game.igdbCoverId)) {
+          errors.push(studio.name + ".profile.popularGames[" + gameIndex + "] must include both igdbGameId and igdbCoverId when IGDB metadata is present.");
+        }
       }
     }
   }

@@ -2,6 +2,15 @@
 
 Game Industry Outreach Tracker is a two-page static application: a global directory of verified speculative-application routes plus a personal browser-local application tracker.
 
+## Current UI feature checkpoint — PR #78
+
+- Open pull request: [#78 Add visual game posters to studio profiles](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/78), branch `feature/game-poster-gallery-20261031`.
+- The directory table uses compact game-cover thumbnails; expanded profiles use a poster grid. Steam art is preferred, with a verified IGDB cover fallback if all Steam image variants fail.
+- IGDB metadata fields are `igdbGameId`, `igdbSlug` and `igdbCoverId` on each `popularGames` entry. These are static cached identifiers; the frontend does not call the IGDB API.
+- `scripts/enrich-igdb-covers.mjs` is a manual offline enrichment utility. It requires `IGDB_CLIENT_ID` and `IGDB_CLIENT_SECRET`, defaults to dry-run, and only writes one exact normalized-title match with an available cover. Ambiguous, not-found and coverless results stay unresolved.
+- No IGDB credentials were available during the current update, so the script was added but no bulk IGDB cover IDs have been written yet. Configure the two environment variables locally, run the dry-run first, inspect unresolved titles, then use `--write` and run the full checks.
+- This artwork use is independent of IGDB's possible future use as a studio-discovery candidate feed; it does not integrate IGDB company discovery into the scraper or alter its access gates.
+
 ## Read this first
 
 - **Authoritative discovery rules, source strategy, exclusion policy and future implementation roadmap:** [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md).

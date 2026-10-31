@@ -16,6 +16,15 @@ Paid employment is not required for inclusion, but volunteer-only and unpaid par
 
 Exclude organisations materially focused on pornography/adult sexual entertainment, iGaming/gambling/casinos/betting, recreational drugs/cannabis, alcohol, tobacco/nicotine/vaping and related vice sectors. Do not reject mainstream developers based on an isolated keyword or one mature-themed game; uncertain cases require manual review.
 
+## Phase B — poster gallery and IGDB artwork fallback (PR #78)
+
+- PR #78 remains open on `feature/game-poster-gallery-20261031`; Steam poster thumbnails and the expanded profile gallery are implemented in the branch.
+- The gallery supports verified IGDB cover metadata as a fallback after Steam image URLs fail, and links to the matching IGDB game page when no Steam app ID is present.
+- The public application remains static. IGDB API credentials are used only by an offline enrichment script and are never needed by site visitors.
+- `scripts/enrich-igdb-covers.mjs` resolves exact, unique game-title matches, shares verified metadata between duplicate title entries and leaves ambiguous/missing matches untouched. It requires `IGDB_CLIENT_ID` and `IGDB_CLIENT_SECRET`.
+- The current branch snapshot contains 327 studio profiles and 463 listed game entries; 200 entries lacked a Steam app ID when this update was prepared. This is not an IGDB coverage count.
+- The enrichment script has not been executed because IGDB application credentials were not available in this session. CI should verify the exact PR head before merge.
+
 ## Website and public data
 
 - The live site remains limited to Studio Directory and My applications. Phase A is closed at 327 verified routes / 327 matching profiles (322 active, 5 paused; 51 country/location labels).

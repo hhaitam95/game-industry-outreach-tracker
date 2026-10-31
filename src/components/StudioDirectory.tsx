@@ -459,7 +459,7 @@ export default function StudioDirectory({
                                       ))}
                                     </div>
                                     <p className="game-artwork-note">
-                                      Official Steam library covers appear where a Steam listing is available. Other titles use a labelled placeholder.
+                                      Steam covers are preferred. Verified IGDB cover art fills gaps when Steam artwork is unavailable. Artwork metadata is resolved offline; visitors do not make IGDB API requests. Cover-art source: <a href="https://www.igdb.com/" target="_blank" rel="noopener noreferrer">IGDB</a>.
                                     </p>
                                   </>
                                 ) : (

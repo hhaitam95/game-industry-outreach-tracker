@@ -10,6 +10,24 @@ The website intentionally has two pages: the studio directory and My application
 
 Search studios by name, country and studio type; filter by country and work model; open the official studio website or application route; and save studios to the tracker.
 
+### Game cover artwork
+
+The directory prefers verified Steam library artwork and uses a verified IGDB cover as a fallback when Steam art is missing or unavailable. Cover metadata is stored in `src/data/studio-profiles.json`; the deployed site loads static image URLs and never sends Twitch credentials or makes IGDB API requests from a visitor's browser.
+
+To enrich missing cover metadata, create a Twitch developer application and set `IGDB_CLIENT_ID` and `IGDB_CLIENT_SECRET` in your local environment. Then run:
+
+```sh
+node scripts/enrich-igdb-covers.mjs
+node scripts/enrich-igdb-covers.mjs --write
+npm run check:studio-directory
+npm test
+npm run build
+```
+
+The first command is a dry run. The write mode stores only a single exact normalized-title match with a cover image ID. Ambiguous titles, missing records and games without cover art remain unresolved for manual review. Duplicate game titles share one verified match. Never commit the Twitch client secret or an access token.
+
+IGDB API access uses Twitch application credentials and does not support browser API requests because doing so would expose the access token. The API is documented as free for non-commercial use under the Twitch Developer Service Agreement; commercial integrations require a partnership. The UI includes a visible IGDB attribution link. Review the [IGDB API documentation](https://api-docs.igdb.com/) and the current Twitch Developer Services Agreement before changing the usage model.
+
 An organisation appears in the public directory only when both conditions are met:
 
 1. It is a legitimate video-game developer or performs direct game-development work.
@@ -32,7 +50,7 @@ Candidate sources are leads only; every company and application route is verifie
 
 These are not yet integrated discovery adapters. Their terms, access method, coverage and reuse conditions must be reviewed before automation.
 
-- [IGDB API](https://api-docs.igdb.com/) — structured company and game-credit source. The Company endpoint exposes developer/publisher relationships and official websites; Twitch app credentials and current API/attribution terms must be reviewed before integration. No adapter or credentials are configured yet.
+- [IGDB API](https://api-docs.igdb.com/) — structured company and game-credit source. The Company endpoint exposes developer/publisher relationships and official websites; Twitch app credentials and current API/attribution terms must be reviewed before integration. No adapter or credentials are configured yet. This remains unintegrated for studio discovery; the separate artwork lookup above uses IGDB only for game-cover metadata.
 - [GameCompanies.com](https://gamecompanies.com/) — global directory of studios, publishers, hubs, organisations and service companies; its Terms restrict automated use beyond the provided interface without written permission, so use as a manual source unless permission is obtained.
 - [Games Jobs Index studio directory](https://gamesjobsindex.com/studios.html) — manual lead source with a visible “Speculative only” filter. The header showed 2,573 studios while the regional roll-up showed 2,415 on 2026-10-31; the count is unreconciled. Filter labels are not employer evidence, and automated access permission was not established.
 - [Steam Developer & Publisher Homepages](https://store.steampowered.com/dev/?l=english) — large paginated creator directory; includes publishers and entities beyond unique development studios.

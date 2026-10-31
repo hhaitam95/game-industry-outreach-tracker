@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-31 — Phase B game-poster artwork fallback (PR #78 update)
+
+- Keep Steam library covers as the first choice and add IGDB cover art as a fallback when Steam image URLs are missing or unavailable.
+- Store verified IGDB game IDs, slugs and cover image IDs in studio profile data; do not call IGDB from the public browser or expose Twitch credentials.
+- Add an offline metadata-enrichment script that uses Twitch application credentials, exact normalized-title matching and conservative handling of ambiguous/missing results.
+- Add validation and tests for IGDB metadata, Steam-first source ordering and IGDB fallback links.
+- The enrichment script is ready, but no IGDB credentials were available in this session; existing profile data has not yet been bulk-enriched with IGDB image IDs.
+
 ## 2026-10-31 — Phase B first efficiency UI batch (prepared for review)
 
 - Bundle Bootstrap 5.3.3 CSS locally and apply compact Bootstrap tables and controls; add a browser-local light/dark theme switch.

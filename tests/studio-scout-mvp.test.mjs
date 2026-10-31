@@ -48,6 +48,41 @@ test("studio directory renders the small studio table and working filter control
   });
 });
 
+test("game posters prefer Steam and fall back to a verified IGDB cover", async () => {
+  await withViteModules(async (server) => {
+    const module = await server.ssrLoadModule("/src/components/GamePosters.tsx");
+    const steamFirst = renderToStaticMarkup(
+      React.createElement(module.default, {
+        game: {
+          title: "Example Game",
+          appId: 12345,
+          igdbGameId: 67890,
+          igdbSlug: "example-game",
+          igdbCoverId: "cover-hash",
+        },
+      }),
+    );
+    assert.match(steamFirst, /data-artwork-source="Steam"/);
+    assert.match(steamFirst, /shared\.akamai\.steamstatic\.com/);
+    assert.match(steamFirst, /Steam · IGDB fallback/);
+
+    const igdbOnly = renderToStaticMarkup(
+      React.createElement(module.default, {
+        game: {
+          title: "Example Game",
+          igdbGameId: 67890,
+          igdbSlug: "example-game",
+          igdbCoverId: "cover-hash",
+        },
+      }),
+    );
+    assert.match(igdbOnly, /data-artwork-source="IGDB"/);
+    assert.ok(igdbOnly.includes("https://images.igdb.com/igdb/image/upload/t_cover_big/cover-hash.jpg"));
+    assert.ok(igdbOnly.includes('href="https://www.igdb.com/games/example-game"'));
+    assert.match(igdbOnly, /IGDB cover/);
+  });
+});
+
 test("application tracker renders status tabs, studio links and status controls", async () => {
   await withViteModules(async (server) => {
     const module = await server.ssrLoadModule("/src/components/ApplicationTracker.tsx");
