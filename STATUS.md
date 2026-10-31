@@ -1,54 +1,50 @@
 # Game Industry Outreach Tracker status
 
-**Date:** 2026-10-30 20:20 UTC  
-**Product scope:** Two-page worldwide studio directory and personal browser-local application tracker.
+**Last verified:** 2026-10-31 09:25 UTC  
+**Product scope:** Worldwide game-studio speculative-application directory and personal browser-local application tracker.
 
 ## Website and public data
 
 - The site remains limited to the studio directory and My applications.
-- Tracker entries remain in browser localStorage only; no personal application data is committed.
-- Current research branch contains **160 unique studio records and 160 matching profiles**.
-- **157 routes are active** and **3 are paused** because current evidence does not establish a usable speculative submission path.
-- Records span **30 identified countries**; 11 records use the explicit value "Not stated" rather than an inferred country.
-- Every active/paused record retains official studio, application and evidence URLs plus a verification date.
-- Removed Capcom Pictures (film-production subsidiary, not a game studio) and Game Boost Sweden (staffing/talent marketplace, not a game studio).
-- Consolidated duplicate official-domain records for SumiGames, Ocellus and Studios DRAMA, retaining the most recent official application details.
-- Corrected Funny Games to Funny Tales, identified its operator as Digital Tales LLC (DBA Funny Tales), and corrected its location to Miami, Florida.
-- Corrected Greensky Games' location to Montréal, Canada; "remote" is no longer used as a country.
-- Corrected route destinations and constraints for Fool's Theory, Game Tailors and several other recently discovered studios.
-- Enriched 13 previously placeholder profiles with studio descriptions, sourced locations, portfolio focus, selected games and application constraints. Unknown company details remain explicitly unknown.
-- Normalized England to United Kingdom and Czech Republic to Czechia in country fields.
+- Tracker entries remain in the visitor's browser localStorage; no personal application data is committed to the repository.
+- The public directory contains **244 studio records** and the profile dataset contains **244 matching profiles**.
+- **241 routes are active** and **3 are paused**. Paused records are retained for audit/history but are not shown as currently open routes.
+- Records currently cover **40 identified countries**; unknown country values remain explicitly undisclosed.
+- Each active/paused record retains official studio, application and evidence URLs plus a verification date.
+- Directory scope remains strict: a studio is published only when an official studio-controlled page or linked employer-controlled hiring platform explicitly invites speculative, unsolicited, spontaneous, open or general applications.
 
 ## Discovery pipeline
 
-- GameDevMap's initial 10,500-row paginated backfill is complete and saved at cursor 10,601.
-- The combined saved candidate pool contains **8,342 candidates** from GameDevMap and Wikidata.
-- Last confirmed state snapshot on `discovery-state` is 2026-10-30 19:51 UTC:
-  - 5,939 queued
-  - 372 retry
-  - 1,931 no official speculative route
-  - 40 published by discovery
-  - 24 needs review
-  - 23 duplicates
-  - 13 excluded by the suitability screen
-- Two Wikidata feeds remain incomplete; GameDevMap completion is not the end of global discovery.
-- A discovery run had completed its candidate-processing, validation and public-data steps but stalled during GitHub Pages deployment, before persisting its candidate-state checkpoint. The public dataset merge was successful; the last confirmed discovery-state cursor remains the 19:51 snapshot.
-- Main now persists discovery state before the Pages deployment step and uses the versioned `studio-discovery-v3` concurrency group.
-- The current research branch additionally prevents a long-running discovery job from restoring a studio removed from the latest main snapshot. It preserves legitimate renames when the official domain stays the same.
-- Staffing/talent marketplaces are now held for manual review when multiple independent marketplace indicators are found; a single mention of freelancers is not enough.
+- The latest completed discovery run is [`41187451865`](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41187451865), completed successfully on 2026-10-31.
+  - Offline discovery tests, public-data validation, static build, state persistence and deployment completed successfully.
+  - The resulting public-data update was committed as [`49e6402`](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/49e6402b5db89e2c154218a5484454c3d06d3e3b).
+  - The directory grew from 242 to 244 records, with two additional verified routes published by discovery.
+- The latest saved candidate pool contains **9,197 candidates**. Its checkpoint timestamp is 2026-10-31 09:24:38 UTC:
+  - 7,349 candidates with no explicit speculative route found
+  - 1,531 retries, all scheduled for a future recheck at this checkpoint
+  - 76 retained for manual review
+  - 121 published by the discovery pipeline
+  - 77 duplicates
+  - 43 excluded by the suitability screen
+  - 0 queued
+- Source progress at that checkpoint:
+  - GameDevMap initial catalogue backfill: complete (cursor 10,601)
+  - Wikidata video-game company feed: complete (cursor Q8072425)
+  - Wikidata developer-credit feed: complete (cursor Q99968931)
+  - Wikidata video-game developer entity feed: in progress (cursor Q135437500)
+- The candidate pool grew from 8,746 to 9,197 in the latest run. The current discovery cycle has accumulated **122 verified additions**; the source set is not marked saturated.
+- The workflow remains scheduled hourly, with a 25-minute discovery budget, up to 1,000 candidate checks per run, 8 concurrent checks across distinct official studio domains, and a 40-minute job timeout. Same-host pacing and conservative route-closure rules remain in force.
 
-## Scraper and data-quality validation
+## Automation reliability work in progress
 
-- Per-host request pacing remains thread-safe; checks can run concurrently across distinct studio domains while preserving same-host delays.
-- Route verification requires explicit positive application evidence on an official studio-controlled page or linked employer-controlled ATS.
-- Robots denials, blocks, timeouts and ambiguous pages are not treated as route closures.
-- Public data is checked for secure official links, matching profile records and duplicate identities before publication.
-- This branch adds tests for concurrent manual deletions, studio renames, and staffing-platform false positives.
+- PR [#57](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/57) adds saturation-aware maintenance: after three complete source cycles produce no new verified routes, scheduled runs reduce Wikidata scanning from 8 pages/hour to 1 page/hour while retaining candidate checks and route rechecks.
+- A cycle that verifies a new route clears saturation and restores the faster scan cadence.
+- The PR expands the sanitized Actions summary with run work counts, candidate-status totals, source cursors and saturation state, without exposing candidate names or route evidence.
+- PR #57 remains open and unmerged, so its lower-cost maintenance cadence and expanded workflow summary are not yet active on `main`.
 
-## Next
+## Product readiness
 
-1. Merge the current data-quality and stale-merge protection changes after CI passes.
-2. Resume the 5,939 queued candidates and retry eligible candidates from the saved discovery state.
-3. Complete the two remaining Wikidata feeds and verify new route candidates on official studio-controlled pages.
-4. Continue enriching profiles and route restrictions without relaxing the evidence threshold.
-5. Keep the directory and tracker stable; avoid unrelated feature work.
+- Directory search, country/work-model filters, sorting, official links and save-to-tracker are implemented.
+- The browser-local tracker supports Saved, In Progress, Applied, Interview, Offer and Archived states, plus search, status changes and removal confirmations.
+- Browser-driven end-to-end acceptance coverage is being added for saving, reload persistence, every tracker status, confirmation dialogs, filters, links, empty states and mobile layout.
+- UI redesign remains deliberately deferred until the data and automation base is dependable.

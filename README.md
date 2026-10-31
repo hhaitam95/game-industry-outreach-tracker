@@ -32,13 +32,15 @@ For each candidate, the discovery pipeline:
 
 The detailed candidate pool and progress are stored on the separate discovery-state branch. It is not exposed in the public directory.
 
-## Bulk discovery and hourly maintenance
+## Discovery cadence and background maintenance
 
-The scheduled workflow automatically uses bulk mode while the GameDevMap backfill or candidate verification queue remains unfinished. Bulk runs are resumable: the source offset, Wikidata cursors and candidate statuses are saved after each successful run. When the initial queue is processed, the workflow returns to hourly maintenance.
+GitHub Actions runs the discovery workflow hourly. The initial GameDevMap catalogue backfill and due candidate-verification work use resumable batches; source cursors and candidate statuses are saved to the separate discovery-state branch after a successful run.
 
-You can also open Actions → Studio speculative-route discovery → Run workflow → bulk to resume the initial backfill manually, or select hourly to run a smaller maintenance batch.
+After the GameDevMap backfill is complete and there is no queued or due-retry verification work, scheduled runs scan the unfinished Wikidata feeds. The normal exploration cadence checks up to 8 source pages per hourly run, with a 65-second gap between Wikidata requests, up to 1,000 candidate checks, 8 existing-route checks, and a 25-minute discovery runtime ceiling. The workflow itself has a 40-minute timeout.
 
-The bulk run is bounded by a 25-minute discovery budget. If it reaches that limit, it saves its progress and continues on a later run. It does not weaken route verification to increase the number of published records.
+Once three complete Wikidata cycles finish without finding a new verified speculative route, the saved state marks discovery as saturated. Scheduled maintenance then continues to refresh the feeds at 1 source page per hour instead of 8, while retaining candidate verification and existing-route checks. Any cycle that verifies a new studio clears saturation and restores the faster 8-page cadence for the next cycle. This reduces repeated scanning pressure without stopping discovery or relaxing the evidence threshold.
+
+Every run adds a sanitized GitHub Actions summary with its work counts, candidate-status totals, source cursors and saturation state.
 
 ## Route maintenance and safety
 
