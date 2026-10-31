@@ -18,12 +18,12 @@ Exclude organisations materially focused on pornography/adult sexual entertainme
 
 - The live site remains limited to Studio Directory and My applications.
 - Personal tracker entries remain in the visitor's browser localStorage. No application records or CVs are committed to the public repository.
-- Current main contains **291 studio/employer records**, **291 matching profiles**, **288 active** and **3 paused** routes across **49 country/location labels**.
+- Current main contains **287 studio/employer records**, **287 matching profiles**, **284 active** and **3 paused** routes across **48 country/location labels**. The in-progress batch-6 proposal branch contains **291 records / 291 profiles**, with **288 active** and **3 paused** routes across 49 country/location labels; it is not merged or deployed.
 - PR #65 is merged: six additional employers and updates to Bananagun, Larian Studios and Garena.
 - PR #66 is merged: Kokku, Raini Studios and Side, plus a refreshed Havoc Games route.
 - PR #67 is merged: precision updates to Aska Studios, Obsidian Entertainment, SOFTGAMES, Lost Boys Interactive and Rustling Leaves Games.
-- The fifth worldwide expansion is included in this batch: Sudden Forest was added, and Chimera Entertainment and Supermassive Games were refreshed.
-- This batch adds 22cans, Absolutely Games and AB Games, and corrects the application method/location/compensation caveats for Bossa Studios, Brave At Night and Ember Crows.
+- PR #68 is still open but cannot be merged cleanly after the global-model documentation merge; its validated data changes have been consolidated into the batch-6 branch. Do not count them in main until the replacement PR is merged and deployed.
+- The batch-6 proposal includes PR #68's fifth expansion (Sudden Forest, Chimera Entertainment and Supermassive Games), adds 22cans, Absolutely Games and AB Games, and corrects Bossa Studios, Brave At Night and Ember Crows.
 
 ## Discovery pipeline checkpoint
 
@@ -35,7 +35,7 @@ Exclude organisations materially focused on pornography/adult sexual entertainme
 
 ## Additional candidate sources identified — not yet integrated
 
-- [IGDB API](https://api-docs.igdb.com/) — structured company and game-credit source; requires Twitch credentials and access/attribution review.
+- [IGDB API](https://api-docs.igdb.com/) — structured company and game-credit source; requires Twitch app credentials and current access/attribution review. Not integrated.
 - [GameCompanies.com](https://gamecompanies.com/) — global index of studios, publishers, hubs and service companies; terms restrict automated use without permission.
 - [Games Jobs Index](https://gamesjobsindex.com/studios.html) — manual lead source with a visible “Speculative only” filter. Its page showed 2,573 studios in the header but 2,415 in the regional roll-up on 2026-10-31; reconcile before using aggregate figures. Its labels are never employer evidence.
 - [Steam Developer & Publisher Homepages](https://store.steampowered.com/dev/?l=english) — large creator index containing developers, publishers and other entities; not a unique-studio count.
