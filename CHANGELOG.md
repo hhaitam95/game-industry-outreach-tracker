@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-10-31 — Global discovery batch 10 (proposed on PR #70)
+
+- Added **Fawkes Games** (Bulgaria) after current official evidence confirmed direct game-development/live-service work alongside its publisher/operator business: Unity engineering and game-design recruitment, client modernization, gameplay-system overhauls and content expansions.
+- Resolved the earlier Fawkes manual hold; it is now classified as a developer / publisher / live-service operator, not an original-IP-only studio.
+- Recorded **DreamCentury Entertainment** as manual review: it is a digital casual-game creator with a spontaneous-application route, but official rules describe purchaseable credits used to enter games for points/prizes, requiring a gambling/prize-game policy determination.
+- Recorded **President Studio S.A.** as manual review: official studio and spontaneous-application evidence is clear, but the linked employer application endpoint returned HTTP 502 and must be retried before publication.
+- Proposal branch now contains **308 route/profile pairs (304 active, 4 paused; 51 country/location labels)**. Main remains at 287/287 until PR #70 is reviewed, merged and deployed.
+- Added ADR-075 and updated the authoritative model, STATUS and HANDOFF.
+
 ## 2026-10-31 — Global discovery batch 9 (proposed on PR #70)
 
 - Added **Tarokai** (Switzerland), **Procedural Games** (Spain) and **Thought Pennies** (country not stated), each with a first-party or directly linked employer open/spontaneous application route and matching researched profile.
