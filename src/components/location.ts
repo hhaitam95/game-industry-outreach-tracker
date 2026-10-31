@@ -134,7 +134,7 @@ export function continentsForLocation(country: string, countryCode?: string | nu
   if (/^remote$/i.test(label)) return ["Remote / distributed"];
 
   const explicitCode = countryCode?.trim().toUpperCase();
-  const codes = explicitCode && /^[A-Z]{2}$/.test(explicitCode)
+  const codes = explicitCode && /^[A-Z]{2}$/.test(explicitCode) && CONTINENT_BY_COUNTRY_CODE[explicitCode]
     ? [explicitCode]
     : label.split(/\s*\/\s*/).map((part) => COUNTRY_CODE_BY_NAME[part.trim()]).filter(Boolean);
 
