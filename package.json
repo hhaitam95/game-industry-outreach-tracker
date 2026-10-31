@@ -16,7 +16,8 @@
     "check:lockfile-registry": "node scripts/check-lockfile-registry.mjs",
     "check:pages-artifact": "node scripts/check-pages-artifact.mjs",
     "check:studio-directory": "node scripts/check-studio-directory.mjs",
-    "routes:review": "node scripts/route-review-report.mjs"
+    "routes:review": "node scripts/route-review-report.mjs",
+    "test:browser": "node tests/browser-acceptance.mjs"
   },
   "dependencies": {
     "react": "^18.2.0",
