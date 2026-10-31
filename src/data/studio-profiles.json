@@ -3523,36 +3523,6 @@
     "applicationLocation": "Stockholm, Sweden · the open-application page does not state remote or cross-border eligibility",
     "reachHighlights": "The studio's official careers page invites open applications by email; its portfolio is focused on VR games."
   },
-  "Fawkes Games": {
-    "description": "Game operator and publisher running a portfolio of established online multiplayer and strategy titles.",
-    "headquarters": {
-      "city": "Plovdiv",
-      "country": "Bulgaria",
-      "countryCode": "BG",
-      "label": "Registered HQ"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Publisher",
-      "Live operations"
-    ],
-    "ownership": "Privately held · company ownership not publicly detailed",
-    "parentCompany": null,
-    "industryScale": "Indie / AA",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
-    "focus": [
-      "PC",
-      "Online multiplayer",
-      "Live operations"
-    ],
-    "popularGames": [],
-    "profileSources": [
-      "https://fawkesgames.com/terms",
-      "https://fawkesgames.com/privacy"
-    ],
-    "applicationLocation": "Remote · worldwide stated"
-  },
   "Fenris Creations": {
     "description": "Independent video-game developer headquartered in Reykjavík, known for EVE Online and its player-driven virtual worlds. The company also operates studios in London and Shanghai.",
     "headquarters": {
@@ -11019,5 +10989,149 @@
     ],
     "applicationLocation": "Career form lists Kyiv, Kharkiv and Rivne (Ukraine), and Limassol (Cyprus); headquarters, remote and applicant-country eligibility not stated",
     "reachHighlights": "The official site says AB Games develops only its own games and reports 100 team members, 50 million Hidden City players and 1.1 million daily active users."
+  },
+  "Favo Games": {
+    "description": "Five-person Istanbul game studio building word and picture puzzle games on its own web engine for iOS and Android; its current product is Rebus Master.",
+    "headquarters": {
+      "city": "Istanbul",
+      "country": "Türkiye",
+      "countryCode": "TR",
+      "label": "Studio location · official Careers page"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Legal entity listed as NK Kurumsal Teknoloji Çözümleri San. Tic. Ltd. Şti.; ownership details not stated",
+    "parentCompany": null,
+    "industryScale": "Indie · editorial indication",
+    "teamSize": "Five people (company-reported)",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "Mobile",
+      "iOS",
+      "Android",
+      "Puzzle",
+      "Word games",
+      "Casual",
+      "Web games"
+    ],
+    "popularGames": [
+      {
+        "title": "Rebus Master",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://favogames.com/",
+      "https://favogames.com/careers"
+    ],
+    "applicationLocation": "Remote · the Careers page says the team works from anywhere; studio is in Istanbul and country-specific employment arrangements are not stated",
+    "reachHighlights": "Five-person team developing word and picture puzzle games on its own web engine; the Careers page says it works remotely from anywhere."
+  },
+  "DON'T NOD": {
+    "description": "Independent French-Canadian video-game developer and publisher creating internally developed narrative adventure, RPG and action games, with studios in Paris and Montréal.",
+    "headquarters": {
+      "city": null,
+      "country": "France / Canada",
+      "countryCode": null,
+      "label": "Official careers site lists studios in Paris and Montréal; corporate headquarters not selected"
+    },
+    "otherLocations": [
+      "Paris, France",
+      "Montréal, Québec, Canada"
+    ],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Independent"
+    ],
+    "ownership": "Describes itself as an independent developer and publisher; detailed ownership structure not stated in the reviewed sources",
+    "parentCompany": null,
+    "industryScale": "AA / AAA · editorial indication",
+    "teamSize": "200+ talents across France and Québec (company-reported)",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "PC",
+      "Console",
+      "Adventure",
+      "Narrative",
+      "RPG",
+      "Action"
+    ],
+    "popularGames": [
+      {
+        "title": "Life Is Strange",
+        "appId": null
+      },
+      {
+        "title": "Tell Me Why",
+        "appId": null
+      },
+      {
+        "title": "Twin Mirror",
+        "appId": null
+      },
+      {
+        "title": "Vampyr",
+        "appId": null
+      },
+      {
+        "title": "Remember Me",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://dont-nod.com/en/careers/",
+      "https://jobs.smartrecruiters.com/DONTNOD/744000056999405"
+    ],
+    "applicationLocation": "DON’T NOD Montréal, Québec, Canada · candidate-bank route says applicants may work anywhere in Québec; not an active vacancy",
+    "reachHighlights": "Official SmartRecruiters application identifies DON’T NOD as an independent developer/publisher with studios in Paris and Montréal and 200+ talents across France and Québec."
+  },
+  "Ubisoft Saguenay": {
+    "description": "Ubisoft's Saguenay development studio in Québec, part of the company's Canadian studio network. The studio has contributed to large Ubisoft productions and officially identifies NFL Primetime Fantasy as a project it spearheaded.",
+    "headquarters": {
+      "city": "Saguenay, Québec",
+      "country": "Canada",
+      "countryCode": "CA",
+      "label": "Studio location · official Ubisoft Saguenay site"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Subsidiary"
+    ],
+    "ownership": "Owned by Ubisoft Entertainment SA",
+    "parentCompany": "Ubisoft Entertainment SA",
+    "industryScale": "AAA · editorial indication",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Multiplayer",
+      "Game development",
+      "Co-development"
+    ],
+    "popularGames": [
+      {
+        "title": "NFL Primetime Fantasy",
+        "appId": null,
+        "stage": "Studio-led project announced 2024"
+      },
+      {
+        "title": "XDefiant",
+        "appId": null,
+        "stage": "Co-development contribution"
+      }
+    ],
+    "profileSources": [
+      "https://saguenay.ubisoft.com/en/",
+      "https://saguenay.ubisoft.com/fr/emplois/",
+      "https://saguenay.ubisoft.com/en/"
+    ],
+    "applicationLocation": "Saguenay, Québec, Canada · applicant-country and remote-work eligibility not stated",
+    "reachHighlights": "The official Ubisoft site says the Saguenay studio spearheaded NFL Primetime Fantasy and contributed as a co-developer on XDefiant."
   }
 }
