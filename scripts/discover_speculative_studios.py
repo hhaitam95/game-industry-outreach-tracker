@@ -1444,10 +1444,13 @@ def finish_source_cycles(state: dict[str, Any]) -> list[str]:
             continue
 
         source_cycle = int(metrics.get("cycle", 1))
-        candidates = [
+        source_candidates = [
             candidate for candidate in state["candidates"].values()
             if candidate.get("source_id") == feed_id
-            and int(candidate.get("source_cycle", source_cycle)) == source_cycle
+        ]
+        candidates = [
+            candidate for candidate in source_candidates
+            if int(candidate.get("source_cycle", source_cycle)) == source_cycle
         ]
         due_work = any(
             candidate.get("status") == "queued"
@@ -1455,12 +1458,15 @@ def finish_source_cycles(state: dict[str, Any]) -> list[str]:
                 candidate.get("status") in {"retry", "needs_review"}
                 and (not candidate.get("next_check_at") or candidate["next_check_at"] <= today)
             )
-            for candidate in candidates
+            for candidate in source_candidates
         )
         if due_work:
             continue
+        # Retries and manual-review cases from earlier passes remain unresolved
+        # evidence for this source. They must keep later passes from being counted
+        # as empty, even though they do not stop pagination from continuing.
         incomplete = [
-            candidate for candidate in candidates
+            candidate for candidate in source_candidates
             if candidate.get("status") in {"retry", "needs_review"}
         ]
         additions = int(metrics.get("cycle_additions", 0))
