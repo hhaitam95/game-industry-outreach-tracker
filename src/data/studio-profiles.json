@@ -7367,29 +7367,50 @@
     "applicationLocation": "Guildford, United Kingdom · speculative route does not state remote eligibility"
   },
   "Playtouch": {
-    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "description": "Independent HTML5 and casual mobile-game developer established in France in 2010, with its production studio in Grand Baie, Mauritius. Playtouch reports 400+ in-house games and also provides game licensing, white-label portals, branded-game projects, in-car gaming and telco distribution solutions.",
     "headquarters": {
-      "city": "Grand-Baie, Riviere du Rempart",
-      "country": "Mauritius",
-      "countryCode": "",
-      "label": "Listed location · GameDevMap"
+      "city": "Roquefort-les-Pins",
+      "country": "France",
+      "countryCode": "FR",
+      "label": "Headquarters · official Careers page; production studio in Grand Baie, Mauritius"
     },
-    "otherLocations": [],
-    "companyType": [
-      "Developer"
+    "otherLocations": [
+      "Production studio: Grand Baie, Mauritius",
+      "Administration: Port Louis, Mauritius"
     ],
-    "ownership": "Not yet researched",
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Mobile games",
+      "HTML5 games"
+    ],
+    "ownership": "PLAYTOUCH Ltd (Mauritius production/administration entity); France headquarters also listed on official site; detailed parent/shareholding structure not disclosed",
     "parentCompany": null,
-    "industryScale": "Mixed / Unclassified",
-    "teamSize": "Not disclosed",
+    "industryScale": "Established independent studio · editorial indication",
+    "teamSize": "Not publicly disclosed",
     "teamSizeAsOf": null,
-    "focus": [],
+    "focus": [
+      "HTML5",
+      "Mobile",
+      "Instant games",
+      "Casual",
+      "Puzzle",
+      "Arcade",
+      "Action",
+      "Sports",
+      "Smart TV",
+      "In-car gaming",
+      "Web SDKs"
+    ],
     "popularGames": [],
     "profileSources": [
-      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=7101&state=&type=",
-      "https://playtouch.net/"
+      "https://playtouch.net/",
+      "https://playtouch.net/about",
+      "https://playtouch.net/career",
+      "https://playtouch.net/pt/about"
     ],
-    "applicationLocation": "Not specified · confirm on the official application route"
+    "applicationLocation": "Spontaneous applications are reviewed by the production leads in Grand Baie, Mauritius. The company also lists headquarters in Roquefort-les-Pins, France and administration in Port Louis, Mauritius. Current advertised roles are on-site in Grand Baie.",
+    "reachHighlights": "The company reports 400+ in-house HTML5 games and production operations in Mauritius, with headquarters in France. Its careers page keeps a spontaneous talent pool open year-round across six studio skill tracks."
   },
   "Plummy Games": {
     "description": "Moldova-founded remote-first mobile developer creating casual merge games, with its home base in Chișinău and remote team locations including Tallinn.",
@@ -11652,5 +11673,95 @@
     ],
     "applicationLocation": "Berlin, Germany or remote · employer-controlled Personio initiative listing allows either; applicant-country eligibility not stated",
     "reachHighlights": "The company says it began developing GPS-based games in 2006 and now supplies location-based experiences and a mobile games platform used by partners in multiple countries."
+  },
+  "Tarokai": {
+    "description": "Swiss independent mobile-game studio creating experiences that connect digital play with real-world events and activities. Its current title is Peach Farmer, a free-to-play collectible-card game for iOS and Android.",
+    "headquarters": {
+      "city": null,
+      "country": "Switzerland",
+      "countryCode": "CH",
+      "label": "Swiss company · official Legal Notice; registered city/address not disclosed"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent",
+      "Mobile games"
+    ],
+    "ownership": "Tarokai SA · Swiss société anonyme; shareholder details not disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie · editorial indication",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "iOS",
+      "Android",
+      "Collectible card games",
+      "Real-world experiences",
+      "Live events"
+    ],
+    "popularGames": [
+      {
+        "title": "Peach Farmer",
+        "appId": null,
+        "stage": "Live"
+      }
+    ],
+    "profileSources": [
+      "https://www.tarokai.com/",
+      "https://www.tarokai.com/legal",
+      "https://www.tarokai.com/careers"
+    ],
+    "applicationLocation": "Swiss company (Tarokai SA); current listed roles are full-remote. Applicant-country and contracting eligibility are not stated.",
+    "reachHighlights": "The studio reports 250K+ downloads and a 4.8/5 average rating for Peach Farmer; the homepage describes the game as connecting collectible cards with real-world experiences."
+  },
+  "Procedural Games": {
+    "description": "Independent mobile-game studio based in Valencia, Spain, founded in 2023 by Carlos Recourt. Game design, Unity development, live operations, monetization and user acquisition are handled in-house. The studio develops simulation and strategy games for iOS and Android, and says it also explores PC and cross-platform projects.",
+    "headquarters": {
+      "city": "Valencia",
+      "country": "Spain",
+      "countryCode": "ES",
+      "label": "Studio base · official website"
+    },
+    "otherLocations": [
+      "Lanzadera / Marina de Empresas, Valencia"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent",
+      "Mobile games"
+    ],
+    "ownership": "Procedural Games, S.L.U. (NIF B70777016); privately held ownership details not disclosed",
+    "parentCompany": null,
+    "industryScale": "Early-stage indie · editorial indication",
+    "teamSize": "Not disclosed; official homepage identifies founder/CEO/programmer Carlos Recourt and Lead 3D Artist Vicente Soler",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "Mobile",
+      "iOS",
+      "Android",
+      "Simulation",
+      "Strategy",
+      "Unity",
+      "PC and cross-platform exploration"
+    ],
+    "popularGames": [
+      {
+        "title": "Tech Startup Idle Tycoon",
+        "appId": null
+      },
+      {
+        "title": "Legendary Differences",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://proceduralgames.com/",
+      "https://careers.proceduralgames.com/en/jobs/candidatura-espontanea",
+      "https://careers.proceduralgames.com/privacidad"
+    ],
+    "applicationLocation": "Valencia, Spain · open application is hybrid at Lanzadera, arrangement depends on role; company encourages international applications and remote collaboration.",
+    "reachHighlights": "Founded in Valencia in 2023. Its public games include Tech Startup Idle Tycoon and Legendary Differences; the official site states that core game development, Unity engineering, live operations and monetization are handled in-house."
   }
 }
