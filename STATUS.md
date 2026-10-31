@@ -1,54 +1,52 @@
 # StudioScout status
 
-**Date:** 2026-10-30 20:20 UTC  
-**Product scope:** Two-page worldwide studio directory and personal browser-local application tracker.
+**Last verified:** 2026-10-31 08:38 UTC  
+**Product scope:** Worldwide game-studio speculative-application directory and personal browser-local application tracker.
 
 ## Website and public data
 
 - The site remains limited to the studio directory and My applications.
-- Tracker entries remain in browser localStorage only; no personal application data is committed.
-- Current research branch contains **160 unique studio records and 160 matching profiles**.
-- **157 routes are active** and **3 are paused** because current evidence does not establish a usable speculative submission path.
-- Records span **30 identified countries**; 11 records use the explicit value "Not stated" rather than an inferred country.
-- Every active/paused record retains official studio, application and evidence URLs plus a verification date.
-- Removed Capcom Pictures (film-production subsidiary, not a game studio) and Game Boost Sweden (staffing/talent marketplace, not a game studio).
-- Consolidated duplicate official-domain records for SumiGames, Ocellus and Studios DRAMA, retaining the most recent official application details.
-- Corrected Funny Games to Funny Tales, identified its operator as Digital Tales LLC (DBA Funny Tales), and corrected its location to Miami, Florida.
-- Corrected Greensky Games' location to Montréal, Canada; "remote" is no longer used as a country.
-- Corrected route destinations and constraints for Fool's Theory, Game Tailors and several other recently discovered studios.
-- Enriched 13 previously placeholder profiles with studio descriptions, sourced locations, portfolio focus, selected games and application constraints. Unknown company details remain explicitly unknown.
-- Normalized England to United Kingdom and Czech Republic to Czechia in country fields.
+- Tracker entries remain in the visitor's browser localStorage; no personal application data is committed to the repository.
+- The public directory contains **242 studio records** and the profile dataset contains **242 matching profiles**.
+- **239 routes are active** and **3 are paused**. Paused records remain visible in the data for audit/history but are not shown as currently open routes.
+- Each active/paused record retains official studio, application and evidence URLs plus a verification date.
+- Directory scope remains strict: a studio is published only when an official studio-controlled page or linked employer-controlled hiring platform explicitly invites speculative, unsolicited, spontaneous, open or general applications.
 
 ## Discovery pipeline
 
-- GameDevMap's initial 10,500-row paginated backfill is complete and saved at cursor 10,601.
-- The combined saved candidate pool contains **8,342 candidates** from GameDevMap and Wikidata.
-- Last confirmed state snapshot on `discovery-state` is 2026-10-30 19:51 UTC:
-  - 5,939 queued
-  - 372 retry
-  - 1,931 no official speculative route
-  - 40 published by discovery
-  - 24 needs review
-  - 23 duplicates
-  - 13 excluded by the suitability screen
-- Two Wikidata feeds remain incomplete; GameDevMap completion is not the end of global discovery.
-- A discovery run had completed its candidate-processing, validation and public-data steps but stalled during GitHub Pages deployment, before persisting its candidate-state checkpoint. The public dataset merge was successful; the last confirmed discovery-state cursor remains the 19:51 snapshot.
-- Main now persists discovery state before the Pages deployment step and uses the versioned `studio-discovery-v3` concurrency group.
-- The current research branch additionally prevents a long-running discovery job from restoring a studio removed from the latest main snapshot. It preserves legitimate renames when the official domain stays the same.
-- Staffing/talent marketplaces are now held for manual review when multiple independent marketplace indicators are found; a single mention of freelancers is not enough.
+- The last confirmed successful discovery run was [`41159590407`](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41159590407), completed on 2026-10-31 at 02:38 UTC.
+  - 939 candidate checks
+  - 11 new verified routes
+  - 8 existing-route checks
+  - 242 public studio records after publication
+  - Tests, data validation, build, state persistence and Pages deployment succeeded.
+- The latest confirmed saved candidate pool contains **8,342 candidates**. Its last persisted checkpoint is 2026-10-31 02:37:44 UTC:
+  - 6,813 no explicit speculative route found
+  - 1,224 retry
+  - 73 needs manual review
+  - 119 published by the discovery pipeline
+  - 75 duplicates
+  - 38 excluded
+  - 0 queued at that checkpoint
+- Source progress at that checkpoint:
+  - GameDevMap initial catalogue backfill: complete (cursor 10,601)
+  - Wikidata video-game company feed: complete
+  - Wikidata video-game developer entity feed: in progress (cursor Q106171121)
+  - Wikidata developer-credit feed: in progress (cursor Q99297811)
+- The workflow is configured for hourly scheduled runs, a 25-minute discovery budget, up to 1,000 candidate checks per run, 8 concurrent checks across distinct official studio domains, and a 40-minute job timeout. Same-host pacing and conservative route-closure rules remain in force.
+- Run [`41185316827`](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41185316827), triggered by the latest discovery-performance update at 08:36 UTC, is still reported by GitHub as `in_progress`; its last reported update is 08:36:47 UTC. No newer discovery-state checkpoint or run metrics have been confirmed, so the increased batch size has not yet been counted as completed work.
 
-## Scraper and data-quality validation
+## Automation reliability work in progress
 
-- Per-host request pacing remains thread-safe; checks can run concurrently across distinct studio domains while preserving same-host delays.
-- Route verification requires explicit positive application evidence on an official studio-controlled page or linked employer-controlled ATS.
-- Robots denials, blocks, timeouts and ambiguous pages are not treated as route closures.
-- Public data is checked for secure official links, matching profile records and duplicate identities before publication.
-- This branch adds tests for concurrent manual deletions, studio renames, and staffing-platform false positives.
+- A saturation-aware cadence is being added: after three complete source cycles produce no new verified routes, scheduled runs should reduce Wikidata scanning from 8 pages/hour to 1 page/hour while retaining candidate checks and route rechecks.
+- A verified addition clears saturation and restores the faster scan cadence.
+- GitHub Actions summaries are being expanded to report candidate-status totals, source cursors, checks and saturation state without exposing candidate names or private evidence.
+- These changes are pending validation and merge; they are not yet active on `main`.
 
-## Next
+## Product readiness
 
-1. Merge the current data-quality and stale-merge protection changes after CI passes.
-2. Resume the 5,939 queued candidates and retry eligible candidates from the saved discovery state.
-3. Complete the two remaining Wikidata feeds and verify new route candidates on official studio-controlled pages.
-4. Continue enriching profiles and route restrictions without relaxing the evidence threshold.
-5. Keep the directory and tracker stable; avoid unrelated feature work.
+- The directory search, country/work-model filters, sorting, official links and save-to-tracker action are implemented.
+- The browser-local tracker supports Saved, In Progress, Applied, Interview, Offer and Archived states, plus search, status changes and removal confirmations.
+- The remaining pre-UI gate is operational confidence: finish the incomplete Wikidata feeds, verify reliable scheduled checkpointing and deployment, and run the end-to-end acceptance checks for directory and tracker behavior.
+- UI redesign remains deliberately deferred until the data and automation base is dependable.
+
