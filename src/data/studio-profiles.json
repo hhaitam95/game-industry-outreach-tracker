@@ -11763,5 +11763,40 @@
     ],
     "applicationLocation": "Valencia, Spain · open application is hybrid at Lanzadera, arrangement depends on role; company encourages international applications and remote collaboration.",
     "reachHighlights": "Founded in Valencia in 2023. Its public games include Tech Startup Idle Tycoon and Legendary Differences; the official site states that core game development, Unity engineering, live operations and monetization are handled in-house."
+  },
+  "Thought Pennies": {
+    "description": "Fully remote, independent story-first role-playing game studio focused on emotional storytelling, memorable characters and technically ambitious RPG systems. The studio describes itself as building games with a small, highly skilled team and modern development pipelines; no specific released game title is currently named on its public homepage.",
+    "headquarters": {
+      "city": null,
+      "country": "Not stated",
+      "countryCode": null,
+      "label": "Official website describes a fully remote studio; legal incorporation country and headquarters location not stated"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Thought Pennies, Inc. (official website copyright notice); shareholder/parent details not disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie / AA · editorial indication; exact scale not disclosed",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Role-playing games",
+      "Narrative",
+      "Emotional storytelling",
+      "Game systems",
+      "Unreal Engine"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.thoughtpennies.com/",
+      "https://thought-pennies.careers-page.com/",
+      "https://thought-pennies.careers-page.com/open-application"
+    ],
+    "applicationLocation": "Fully remote per official website; applicant-country and contracting eligibility not stated",
+    "reachHighlights": "The official site describes the studio as fully remote and RPG-focused, with leadership experience from established role-playing game productions. The careers page linked from the official homepage accepts open applications."
   }
 }
