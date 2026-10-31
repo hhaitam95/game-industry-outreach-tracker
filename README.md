@@ -42,6 +42,10 @@ These are not yet integrated discovery adapters. Their terms, access method, cov
 
 The full source notes, observed catalogue sizes, caveats, coverage policy and future roadmap are maintained in the Global Discovery Implementation Model. The manual-only source/access register is [config/manual-discovery-sources.json](config/manual-discovery-sources.json); it is intentionally not loaded by the automated discovery runtime. Source catalogue counts are dynamic and must not be interpreted as unique studio totals without validation.
 
+### Initial global-discovery baseline
+
+The Phase A closeout proposal establishes an initial baseline of **327 verified studio routes with 327 matching profiles** (322 active, 5 paused across 51 country/location labels). The existing hourly discovery workflow continues as maintenance using GameDevMap and Wikidata feeds. The separate 22-entry manual source register remains research-only and is not automated ingestion. This is a practical verified baseline, not a claim that every game studio worldwide has been found. See the [Phase A closeout record](docs/operations/phase-a-global-discovery-closeout.md) and the [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md).
+
 ## Verification process
 
 For each candidate, the discovery pipeline:

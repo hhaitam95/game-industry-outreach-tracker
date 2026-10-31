@@ -4189,6 +4189,38 @@
     }
   },
   {
+    "name": "Laki Studios",
+    "country": "Poland",
+    "websiteUrl": "https://www.lakistudios.com/",
+    "applicationUrl": "https://www.lakistudios.com/jobs/open-application",
+    "evidenceUrl": "https://www.lakistudios.com/jobs/open-application",
+    "notes": "The official Open Application invites candidates to apply even when there is no opening in their specialisation. It requests an explanation of the applicant's interest, financial expectations and potential contribution. The page lists full-time flexible work and a fully remote studio, with B2B contracts and paid vacation. It asks for experience in tactical, turn-based, card or roguelite games, strong game-design knowledge, English and Unity or Unreal. Applicant-country eligibility is not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote · the studio describes itself as fully remote; applicant-country eligibility is not stated"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Game design",
+        "Unity",
+        "Unreal"
+      ],
+      "relatedApplicationUrls": [
+        "https://www.lakistudios.com/about",
+        "https://www.lakistudios.com/games"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Larian Studios",
     "country": "Belgium",
     "websiteUrl": "https://www.larian.com/",
@@ -4590,6 +4622,38 @@
       ],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Makemake Creative Studio",
+    "country": "Türkiye",
+    "websiteUrl": "https://www.makemake.com.tr/",
+    "applicationUrl": "https://makemake.com.tr/career/general-application",
+    "evidenceUrl": "https://makemake.com.tr/career",
+    "notes": "The official Careers page lists a General Application for Game Professionals. The linked form invites candidates interested in game design, development, art or product to submit a CV and brief cover letter. Makemake describes itself as an Istanbul-based creative game and animation studio developing mobile games; the open route does not state remote-work or applicant-country eligibility.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Istanbul, Türkiye · remote-work and applicant-country eligibility are not stated"
+      ],
+      "disciplineScope": [
+        "Game design",
+        "Game development",
+        "Game art",
+        "Product"
+      ],
+      "relatedApplicationUrls": [
+        "https://makemake.com.tr/about",
+        "https://makemake.com.tr/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-29"
     }
   },
@@ -5327,6 +5391,39 @@
     }
   },
   {
+    "name": "PixelAnt Games",
+    "country": "Poland",
+    "websiteUrl": "https://pixelantgames.com/",
+    "applicationUrl": "https://form.erecruiter.pl/form/a66fabf884d24c15beb2ec7854531f0a",
+    "evidenceUrl": "https://pixelantgames.com/careers/future-opportunities/",
+    "notes": "The official Future Opportunities page invites candidates who do not see a suitable role to submit an application for future consideration. Its linked employer-specific eRecruiter form is titled Future Opportunities, accepts a CV and asks for the desired role, game-development experience, English and Polish proficiency, preferred work model and country/city of residence. The form offers Wrocław office, hybrid and 100% remote options; applicant-country eligibility is not stated. PixelAnt is a Polish co-development, porting, remaster/remake and full-production studio that also develops its own IP.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Wrocław, Poland · the form offers office, hybrid and fully remote preferences; country eligibility for remote work is not stated"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Co-development",
+        "Porting",
+        "Remasters and remakes",
+        "Full production"
+      ],
+      "relatedApplicationUrls": [
+        "https://pixelantgames.com/careers/",
+        "https://pixelantgames.com/about-us/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Playa Games",
     "country": "Germany",
     "websiteUrl": "https://www.playa-games.com/",
@@ -5380,6 +5477,40 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Played With Fire",
+    "country": "Poland",
+    "websiteUrl": "https://www.playedwithfire.com/",
+    "applicationUrl": "https://playedwithfire.traffit.com/public/form/a/15?uid=S1F0elJYSjFuNE9oL0UrNkdLSnFmTWFQTTRRcnRLbz0%3D",
+    "evidenceUrl": "https://www.playedwithfire.com/job/cv-for-the-future/",
+    "notes": "The official Careers page links a dedicated CV for the future route and says candidates who do not see a suitable job offer may leave a CV for possible future cooperation. The employer-managed Traffit form accepts a CV, portfolio and preferred development area. Played With Fire is an independent Kraków game studio creating story-driven first-person action, adventure, puzzle and stealth games. Work model and applicant-country eligibility are not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Kraków, Poland · work model and applicant-country eligibility are not stated"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Programming",
+        "Game design",
+        "Art",
+        "Production",
+        "QA"
+      ],
+      "relatedApplicationUrls": [
+        "https://www.playedwithfire.com/careers/",
+        "https://www.playedwithfire.com/about/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -5931,6 +6062,40 @@
       "eligibleLocations": [],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Rebel Wolves",
+    "country": "Poland",
+    "websiteUrl": "https://rebel-wolves.com/en",
+    "applicationUrl": "https://rebel-wolves.com/en/join-us",
+    "evidenceUrl": "https://rebel-wolves.com/en/join-us",
+    "notes": "The official Join Us page lists an Open Application for candidates whose skills and interests do not match a published vacancy; it says this does not guarantee contact, but applications may be considered if a relevant role opens. The employer directs candidates to its eRecruiter form rather than email. It says candidates in other countries may be considered when their time difference is within ±4 hours of Warsaw. The studio is based in Warsaw; work model is not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Warsaw, Poland · employer says candidates in other countries may be considered if their time difference is within ±4 hours of Warsaw; work model is not stated"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Programming",
+        "Design",
+        "Art",
+        "Production",
+        "Other studio disciplines"
+      ],
+      "relatedApplicationUrls": [
+        "https://rebel-wolves.com/en",
+        "https://rebel-wolves.com/en/join-us"
+      ],
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-29"

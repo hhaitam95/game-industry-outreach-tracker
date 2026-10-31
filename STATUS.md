@@ -20,8 +20,8 @@ Exclude organisations materially focused on pornography/adult sexual entertainme
 
 - The live site remains limited to Studio Directory and My applications.
 - Personal tracker entries remain in the visitor's browser localStorage. No application records or CVs are committed to the public repository.
-- Current `main` contains **319 unique studio/employer records**, **319 matching profiles**, **314 active** and **5 paused** routes across **51 country/location labels**. The current batch-14 research branch contains **322 matching route/profile records** (317 active, 5 paused; 51 labels).
-- PRs #70–#73 are merged into `main`: #70 consolidated global route expansion, #71 implemented source-specific discovery saturation, #72 reconciled the FakeFish duplicate, and #73 added seven more verified routes plus the manual-only source register. PR #70's 314 raw rows included two entries for the same FakeFish studio and identical official application route; ADR-078 records their consolidation into one canonical `FakeFish` record.
+- Current main contains **322 unique studio/employer records**, **322 matching profiles**, **317 active** and **5 paused** routes across **51 country/location labels**. The final Phase A closeout proposal contains **327 matching route/profile records** (322 active, 5 paused; 51 labels).
+- PRs #70–#74 are merged into main: #70 consolidated global route expansion, #71 implemented source-specific discovery saturation, #72 reconciled the FakeFish duplicate, #73 added seven verified routes and the manual-only source register, and #74 added CAPCOM, Cygames Group and Small Giant Games while refreshing Fawkes Games and Stunlock Studios. PR #70's 314 raw rows included two entries for the same FakeFish studio and identical official application route; ADR-078 records their consolidation into one canonical FakeFish record.
 - This batch-6 branch consolidates PR #68's fifth expansion and subsequent manual global research. PR #68 is superseded; do not merge it separately.
 - The proposal includes the prior batch's additions/updates: Sudden Forest, 22cans, Absolutely Games, AB Games, Favo Games, DON’T NOD Montréal and Ubisoft Saguenay; updates to Chimera Entertainment, Supermassive Games, Bossa Studios, Brave At Night and Ember Crows; plus the earlier batch-6 work.
 - Four additional routes added in this continuation are **AnkleBreaker Studio**, **Alice in Games**, **No Roof Games** and **Skytale**. Their route and profile records are one-to-one.
@@ -33,7 +33,7 @@ Exclude organisations materially focused on pornography/adult sexual entertainme
 - The existing **Next Level Games** route was refreshed: hybrid Vancouver, at least three studio days per week, Canada work authorization and current British Columbia residence are now recorded.
 - Additional rechecks confirmed that Raw Power Games, Futureplay Games and Shiro Games are already in the directory; they were not duplicated. Studio Countdown and welevel were not added because the official videogame-developer/official-route gates were not sufficiently established.
 - Existing Redly Games and HypeHype records were refreshed to match current official pages. **Plummy Games** was moved to paused because its Teamtailor Open Application could not be linked forward from the official company site.
-- The 319-record dataset (314 active, 5 paused) was deployed to GitHub Pages after PR #73 from main commit `58ec4511841ed57a321bd8bcf8e9846c5ffa4a76`; [Pages publication run 41216159119](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41216159119) completed successfully. A later main commit, `a892566fdc264e530e661b715c69ec32a52d5610`, refreshed review dates for five existing routes without changing the directory count.
+- The 322-record dataset (317 active, 5 paused) was deployed to GitHub Pages after PR #74 from merge commit 02645bf679f866f98e077fea73b320b1eeb2c979; [Pages publication run 41224727091](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41224727091) completed successfully. The production build also passed in [run 41224727035](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41224727035).
 - The first post-merge discovery run [41212342190](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41212342190) completed successfully and persisted the v2 private discovery-state checkpoint. The follow-up run [41212913766](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41212913766) also completed successfully: all discovery, offline-test, frontend-test, build, merge, checkpoint, Pages-artifact, deployment and summary steps passed. It added zero routes; the merged dataset remained at 313 and the private checkpoint advanced to bc3a302e4f7da0095c2c5c3be407ec6a56f12699 on discovery-state.
 
 
@@ -47,9 +47,9 @@ Exclude organisations materially focused on pornography/adult sexual entertainme
 - IGDB remains blocked pending written permission from Twitch for public redistribution; Steam remains manual-only; GameCompanies, Games Jobs Index, MobyGames and the community database remain gated by their respective access/licence reviews.
 
 
-## Global discovery batch 14 — prepared for review
+## Global discovery batch 14 — merged in PR #74
 
-- Branch: `research/japan-nordics-routes-and-sources-batch-14`. It adds three verified route/profile pairs: **CAPCOM** (Japan), **Cygames Group** (Japan) and **Small Giant Games** (Finland). Each has an employer-owned non-vacancy application route and matching researched profile.
+- PR #74 added three verified route/profile pairs: **CAPCOM** (Japan), **Cygames Group** (Japan) and **Small Giant Games** (Finland). Each has an employer-owned non-vacancy application route and matching researched profile.
 - CAPCOM's Japanese mid-career page offers Career Registration for candidates who do not wish to select a job type or cannot find a suitable position. The official CTA opens an external Alumy registration portal. The register is not a vacancy or a guaranteed interview; overseas eligibility is not stated.
 - Cygames Group's HRMOS Career Registration accepts candidates without a specific vacancy and may suggest matching group roles. The listing says it does not guarantee employment and retains registration data for two years; overseas eligibility and remote work are not stated.
 - Small Giant Games' Greenhouse Open Application explicitly accepts speculative applications with a CV and covering letter. Its current careers page describes hybrid work with team-specific office days; overseas employment eligibility is not stated.
@@ -57,7 +57,16 @@ Exclude organisations materially focused on pornography/adult sexual entertainme
 - Existing **Stunlock Studios** is corrected to its employer-managed Teamtailor Open Application. It requires an online submission (not email), is listed in Skövde as “Temporarily Remote”, and does not state worldwide remote eligibility.
 - The manual-only registry grows from 17 to **22 sources** with five additional Poland, Germany and India leads: BAZA POLSKI GAMEDEV, game (German Games Industry Association), GDAI's teams/network page, IGDA India and USK member companies. These remain manual leads, not proof of developer status or speculative application acceptance.
 - `config/discovery-sources.json` is unchanged. No new adapter, scrape, schedule, secret, permission or automated source has been enabled.
-- Branch totals: **322 routes / 322 matching profiles**, **317 active**, **5 paused**, across **51 country/location labels**. The pre-documentation branch build [run 41217343456](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41217343456) passed the complete CI/browser-acceptance suite; documentation updates require their own exact-head validation.
+- Main totals after PR #74: **322 routes / 322 matching profiles**, **317 active**, **5 paused**, across **51 country/location labels**. PR #74 exact-head CI [run 41224097341](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41224097341) passed the complete build, data, privacy and browser-acceptance suite.
+
+## Phase A — initial global discovery closeout proposal
+
+- Branch: research/final-global-discovery-closeout-20261031. It adds five employer-verified route/profile pairs: **Laki Studios** (Poland), **Makemake Creative Studio** (Türkiye), **PixelAnt Games** (Poland), **Played With Fire** (Poland) and **Rebel Wolves** (Poland).
+- The final sweep also rechecked **Codebox Games** (Nigeria) and **G7 Studio** (Saudi Arabia); both were already present and were not duplicated. Kuuasema, GOALS, Futureplay Games, Katal Games, Playa Games, CipSoft, Havoc Games, Old Skull Games and Sencorp Games were also already represented.
+- The proposal contains **327 route/profile pairs**, **322 active**, **5 paused**, across **51 country/location labels**. The route/profile one-to-one invariant is preserved.
+- The manual-only candidate-source register remains at **22**. No new runtime feed, scraper, credential, secret, permission or schedule was added. IGDB, Steam, GameCompanies, Games Jobs Index, MobyGames and the community dataset retain their documented access/licence gates.
+- **Phase A exit decision:** after this final batch is merged and deployed, initial global discovery is considered complete as a documented baseline, not as an exhaustive census of every game studio worldwide. The existing hourly workflow remains an ongoing maintenance process; new studios and route changes no longer keep global discovery as the primary development focus.
+- Manual-review and source-coverage limitations remain documented. They do not block Phase B UI/UX work; uncertain candidates remain private/manual-review items and must not be forced into the public directory.
 
 ## Discovery pipeline checkpoint
 
@@ -93,10 +102,9 @@ Exclude organisations materially focused on pornography/adult sexual entertainme
 
 ## Next engineering and research work
 
-1. Review sanitized per-source counters and outcomes from the subsequent discovery runs. Continue monitoring feed failures and verify that new adapters enter the source manifest with their own checkpoint and access policy.
-2. Continue global candidate discovery from additional regional and international indexes; do not prioritize by country, studio size, genre, discipline or personal career fit. Resolve DreamCentury's paid-credits/prize model and retry President Studio's official TSP application link before adding either.
-3. Maintain the source manifest and evaluate additional adapters one at a time, including access terms, coverage, provenance, attribution and source-specific request limits. Keep Games Jobs Index as a manual lead source until automated access is authorized.
-4. Continue identity resolution, company-level industry exclusions and official speculative-route verification; the directory validator now rejects duplicate rows with the same official website, application route and evidence page.
-5. Record every material source, route, exclusion and manual-review finding in the Global Discovery Implementation Model, ADRs, CHANGELOG and STATUS.
-
+1. **Phase A closeout:** complete review and merge of the final 327-record proposal; verify exact-head CI, merge commit and Pages deployment.
+2. **Ongoing discovery maintenance:** keep the existing hourly workflow running; review per-source summaries and route rechecks. New routes are routine maintenance, not a reason to keep initial global discovery open.
+3. **Manual-review backlog:** resolve candidates when new first-party evidence becomes available. Keep uncertain identity, adult/vice, route-link and applicant-eligibility cases out of the public dataset until resolved.
+4. **Source policy:** keep the 22-entry manual registry separate from automated runtime ingestion. Do not integrate IGDB, Steam, GameCompanies, Games Jobs Index, MobyGames or the community dataset without their documented access/licence review and a tested adapter.
+5. **Phase B:** after the closeout PR is merged and deployed, shift primary engineering effort to UI/UX and the existing Directory and My applications workflows.
 Manual real-site acceptance and stabilization remain separate release work; see [issue #11](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/11).

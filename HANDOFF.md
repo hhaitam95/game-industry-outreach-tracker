@@ -37,12 +37,12 @@ Keep the application to the two existing pages. Do not reintroduce the old job-p
 
 ## Current global-discovery checkpoint
 
-- Main contains **319 unique verified studio/employer records / 319 matching profiles**: 314 active routes and 5 paused routes across 51 country/location labels. The current batch-14 branch contains 322 route/profile pairs: 317 active and 5 paused across the same 51 location labels.
-- PRs #70–#73 are merged. PR #73 added seven verified routes and the manual-only source registry; PR #72 reconciled the duplicate FakeFish identity into one canonical record, preserving the more complete profile and route detail.
+- Main contains **322 unique verified studio/employer records / 322 matching profiles**: 317 active routes and 5 paused routes across 51 country/location labels. The final Phase A proposal contains 327 route/profile pairs: 322 active and 5 paused across the same 51 labels.
+- PRs #70–#74 are merged. PR #73 added seven verified routes and the manual-only source register; PR #74 added CAPCOM, Cygames Group and Small Giant Games and corrected Fawkes Games and Stunlock Studios. PR #72 reconciled the duplicate FakeFish identity into one canonical record, preserving the more complete profile and route detail.
 - The integrated candidate feeds are declared in `config/discovery-sources.json` and loaded by `scripts/discover_speculative_studios.py`. The private discovery state now migrates additively from schema v1 to v2.
 - The three Wikidata feeds have independent cursors, cycles, verified-addition counts and complete-empty-pass counters. After three complete empty passes, only that individual feed is limited to one page per hourly run. A new verified route resets only its originating feed. Failed or incomplete passes do not count as exhaustion.
 - GameDevMap remains a one-time backfill; its terminal cursor is preserved. Legacy Wikidata candidates without a stored feed identity remain `legacy_unattributed` instead of being assigned to a guessed source.
-- The post-PR #73 319-row directory was deployed by Pages run 41216159119 from merge commit `58ec4511841ed57a321bd8bcf8e9846c5ffa4a76`. Main commit `a892566fdc264e530e661b715c69ec32a52d5610` subsequently refreshed five existing route-review dates without changing the record count. The latest discovery run after PR #73 is [41216225203](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41216225203); consult its summary for current per-source checkpoint values.
+- The post-PR #74 322-row directory was deployed by Pages run 41224727091 from merge commit 02645bf679f866f98e077fea73b320b1eeb2c979; the production build passed in run 41224727035. The last completed scheduled discovery cycle before PR #74 is [41216225203](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41216225203). The push-triggered discovery run [41224727139](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41224727139) was still running when the final closeout proposal was prepared; inspect its summary before quoting newer counters.
 - IGDB, GameCompanies.com, Games Jobs Index, Steam, MobyGames and the community database remain unintegrated research leads; do not describe them as automated feeds. Their current access gates and regional association lead sources are recorded in config/manual-discovery-sources.json.
 - DreamCentury Entertainment and President Studio remain held for the reasons recorded in STATUS.md and the Global Discovery Implementation Model. The manual exclusions remain in `config/manual-studio-exclusions.json`.
 
@@ -54,14 +54,28 @@ Keep the application to the two existing pages. Do not reintroduce the old job-p
 - Main now contains 319 route/profile pairs, 314 active, 5 paused, across 51 labels. The snapshot was deployed by Pages run 41216159119.
 - The manual source registry is separate from automated runtime ingestion. IGDB requires written redistribution permission; Steam is manual-only; other commercial/community indexes retain their individual terms/licence gates.
 
-## Batch 14 research branch (under review)
+## Batch 14 (merged in PR #74)
 
-- Branch: `research/japan-nordics-routes-and-sources-batch-14`.
 - Adds CAPCOM, Cygames Group and Small Giant Games with official Career Registration / Open Application routes and matching profiles.
-- Refreshes Fawkes Games' submission method and current live ATS caveat; corrects Stunlock Studios to its current Teamtailor route and Skövde / Temporarily Remote scope.
-- Adds five manual-only regional sources (Poland, Germany and India); the registry now contains 22 leads. No runtime adapter or automated collection is enabled.
-- Branch totals: 322 route/profile pairs, 317 active, 5 paused, across 51 labels. Branch build run 41217343456 passed before the documentation checkpoint; exact-head CI must be checked after these handoff updates.
-- The branch is one commit behind and one commit ahead of main. The main-only change refreshes five existing records; the batch-14 branch changes a different five existing records and adds three, so the reviewed route-data changes do not overlap.
+- Refreshes Fawkes Games and Stunlock Studios using current employer evidence.
+- Expands the manual-only source register to 22 leads; it remains separate from the runtime and does not enable scraping.
+- Main now contains 322 route/profile pairs, 317 active and 5 paused, across 51 labels. Pages deployment run 41224727091 and main build run 41224727035 passed.
+
+## Phase A final global sweep (proposed)
+
+- Branch: research/final-global-discovery-closeout-20261031.
+- Adds Laki Studios, Makemake Creative Studio, PixelAnt Games, Played With Fire and Rebel Wolves, each with an official non-vacancy route and matching studio profile.
+- Rechecks Codebox Games and G7 Studio and confirms both are already represented; no duplicates are added. Other rediscovered studios already in the directory are documented in STATUS and the discovery model.
+- Proposal totals: 327 route/profile pairs, 322 active, 5 paused, across 51 labels. Manual source registry remains at 22; no new runtime adapter, scraper, secret, permission or schedule is added.
+- Once merged and deployed, initial global discovery becomes an ongoing maintenance responsibility and primary work shifts to Phase B UI/UX. This is a practical verified baseline, not a claim of an exhaustive worldwide census.
+
+## Phase A exit criteria and handover
+
+Phase A closes once the final global sweep PR passes exact-head CI, is merged, and its Pages deployment succeeds. The proposed exit baseline is **327 verified studio/employer route records and 327 matching profiles**, with 322 active and 5 paused across 51 country/location labels. Every public record passes the two eligibility gates: direct game-development activity and an explicit employer-backed non-vacancy application route.
+
+The discovery engine stays enabled as maintenance: one GameDevMap initial backfill, three recurring Wikidata feeds with independent cursors and source-specific saturation, and an hourly bounded workflow. The 22-entry manual-source register remains research-only. Restricted or unapproved indexes are not scheduled or scraped.
+
+Phase A does not claim that every studio worldwide has been found. The private candidate-review backlog, uncertain cases and permission-gated sources remain maintenance work. They do not block Phase B UI/UX development.
 
 ## Handover checklist
 
