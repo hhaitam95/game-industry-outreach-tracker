@@ -1709,6 +1709,44 @@
       "https://www.blowfishstudios.com/open-application"
     ]
   },
+  "Bonfire Studios": {
+    "description": "Independent game developer creating its first original IP, Arkheron, a competitive PvP game. The studio describes its culture as collaborative and team-owned.",
+    "headquarters": {
+      "city": "Irvine",
+      "country": "United States",
+      "countryCode": "US",
+      "label": "Studio location · official careers listing"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent · company describes itself as truly independent and team-owned",
+    "parentCompany": null,
+    "industryScale": "Independent game studio",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Competitive PvP",
+      "Action",
+      "Original IP"
+    ],
+    "popularGames": [
+      {
+        "title": "Arkheron",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://www.bonfirestudios.com/work-with-us/",
+      "https://www.bonfirestudios.com/work-with-us/4423455009/",
+      "https://job-boards.greenhouse.io/bonfirestudiosinc/jobs/4423455009"
+    ],
+    "applicationLocation": "Irvine, California, United States · full-time hybrid; onsite collaboration expected"
+  },
   "Bongfish": {
     "description": "Privately owned game-development studio headquartered in Graz, Austria, combining game production with advanced technology and co-development services.",
     "headquarters": {
@@ -3465,6 +3503,48 @@
     ],
     "applicationLocation": "Reykjavík, London or Shanghai · select preferences in the official application form; remote eligibility not stated"
   },
+  "Flashbulb Games": {
+    "description": "Independent game studio based in Copenhagen, founded in 2016 by industry veterans. Best known for Trailmakers and Rubber Bandits, with a focus on player-driven experiences.",
+    "headquarters": {
+      "city": "Copenhagen",
+      "country": "Denmark",
+      "countryCode": "DK",
+      "label": "Studio base · official homepage"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent · company-stated",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Around 30 developers, artists and designers · company-stated",
+    "teamSizeAsOf": "2026-10-31",
+    "focus": [
+      "PC",
+      "Console",
+      "Multiplayer",
+      "Construction",
+      "Party games"
+    ],
+    "popularGames": [
+      {
+        "title": "Trailmakers",
+        "appId": null
+      },
+      {
+        "title": "Rubber Bandits",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.flashbulbgames.com/",
+      "https://www.flashbulbgames.com/blank",
+      "https://www.flashbulbgames.com/privacy-policy"
+    ],
+    "applicationLocation": "Copenhagen, Denmark · remote and cross-border applicant eligibility not stated"
+  },
   "Flow Studio": {
     "description": "Independent game-development studio based in Brisbane, Australia. Its portfolio includes Len's Island, an open-world survival and crafting game.",
     "headquarters": {
@@ -4240,6 +4320,55 @@
     ],
     "applicationLocation": "Remote-first · the official page does not specify applicant-country, work-authorisation or role-specific eligibility",
     "reachHighlights": "The official Work page describes the studio as remote-first and based in Montréal and includes an Open Application route."
+  },
+  "Halfbrick Studios": {
+    "description": "Australian game developer headquartered in Brisbane, known for globally successful mobile games including Fruit Ninja and Jetpack Joyride. The company describes its workforce as distributed around the world.",
+    "headquarters": {
+      "city": "Brisbane",
+      "country": "Australia",
+      "countryCode": "AU",
+      "label": "Headquarters · official Expression of Interest page"
+    },
+    "otherLocations": [
+      "Distributed teams around the world · official company description"
+    ],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "Established mobile game studio",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "Casual",
+      "Arcade",
+      "Action"
+    ],
+    "popularGames": [
+      {
+        "title": "Fruit Ninja",
+        "appId": null
+      },
+      {
+        "title": "Jetpack Joyride",
+        "appId": null
+      },
+      {
+        "title": "Dan the Man",
+        "appId": null
+      },
+      {
+        "title": "Monster Dash",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.halfbrick.com/careers",
+      "https://www.halfbrick.com/expression-of-interest"
+    ],
+    "applicationLocation": "Global hiring opportunities · fully remote, per official careers page"
   },
   "Havoc Games": {
     "description": "Independent Indian game studio building WEX, a competitive multiplayer game.",

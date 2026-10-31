@@ -10,7 +10,7 @@ Add a directly researched batch of additional game studios and game-development 
 
 ## Research batch
 
-The batch proposes 11 studio/route records:
+The batch proposes 14 studio/route records, consolidated from PR #62 and this follow-on research PR:
 
 - CipSoft — Germany; experienced and entry-level unsolicited application routes. German-language documents and on-site Regensburg work are stated.
 - Codebox Games — Nigeria; portfolios invited across engineering, art/animation, design, production and narrative when a role is not listed.
@@ -23,6 +23,9 @@ The batch proposes 11 studio/route records:
 - Youniverse Games — Malaysia; explicit open-application route through its careers contact form.
 - Blacc Studios — Türkiye; spontaneous application by email.
 - Zunisha — India; general/direct application at a global remote-first game-development and immersive-technology services studio.
+- Halfbrick Studios — Australia; Expression of Interest form and global remote recruitment statement.
+- Bonfire Studios — United States; General Application for Game Development, full-time hybrid in Irvine.
+- Flashbulb Games — Denmark; official Jobs page invites unsolicited applications by email and privacy policy confirms email-based applications.
 
 ## Inclusion and evidence
 
@@ -33,6 +36,14 @@ The batch proposes 11 studio/route records:
 - Discipline-specific routes state the accepted disciplines and must not be presented as a general invitation for every role.
 - Unknown hiring locations, language requirements and work-authorisation conditions remain unknown rather than inferred.
 - No scraped page bodies, private contact records, email addresses, CVs or candidate data are stored in the public data.
+
+## Earlier PR batch consolidated into this batch
+
+The three additional routes from PR #62 are incorporated into this combined dataset so that merging one PR cannot overwrite the other:
+
+- Halfbrick Studios (Australia) — official Expression of Interest, globally remote according to the studio careers page.
+- Bonfire Studios (United States) — Greenhouse General Application for Game Development; hybrid in Irvine, with no remote/international eligibility stated.
+- Flashbulb Games (Denmark) — official unsolicited email application route, with cross-border eligibility unstated.
 
 ## Explicitly not included in this batch
 

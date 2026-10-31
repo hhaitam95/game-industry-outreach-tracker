@@ -7,12 +7,12 @@
 
 - The site remains limited to the studio directory and My applications.
 - Tracker entries remain in the visitor's browser localStorage; no personal application data is committed to the repository.
-- The current main-branch public directory contains **252 studio records** and the profile dataset contains **252 matching profiles**.
-- **249 routes are active** and **3 are paused**. Paused records are retained for audit/history but are not shown as currently open routes.
-- Records currently cover **41 country/location labels**; unknown country values remain explicitly undisclosed.
+- The current main-branch public directory contains **252 studio records** and the profile dataset contains **252 matching profiles** (the current main-branch snapshot; two open data PRs propose a combined 14 additional routes and profiles).
+- **249 routes are active** and **3 are paused** on main; the combined PR proposal would bring this to **263 active** and **3 paused**. Paused records are retained for audit/history but are not shown as currently open routes.
+- Records currently cover **41 country/location labels** on main; the combined PR proposal would cover **44 labels**; unknown country values remain explicitly undisclosed.
 - Each active/paused record retains official studio, application and evidence URLs plus a verification date.
 - A studio is published only when an official studio-controlled page or linked employer-controlled hiring platform explicitly invites speculative, unsolicited, spontaneous, open or general applications.
-- A separate manual research batch proposing **11 additional official routes** is being submitted for review; it is not counted in the main-branch totals above.
+- Two reviewable batches are open: PR [#62](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/62) proposes **3 routes** (Halfbrick Studios, Bonfire Studios, Flashbulb Games), while PR [#63](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/63) proposes **11 routes**. PR #63 is being updated to include PR #62's records so both batches can be integrated without overwriting either.
 
 ## Phase 1 — Global discovery
 
@@ -30,9 +30,9 @@
 
 - The public-data validator checks every record for required identity and route fields, HTTPS official/application/evidence URLs, route enums and review dates.
 - It also verifies matching studio profiles, required profile fields and source URLs, duplicate studio names, and required exclusion cases.
-- The latest CI run validated **252 studios with 244 matching profile records** and secure official links.
+- The latest main-branch CI validation covered **252 studios with 252 matching profile records**. PR #63's previous exact-head CI also passed at 263 records; its updated combined dataset must pass CI again before merge.
 - Privacy-boundary checks pass for tracked paths and public/build output; personal tracker records remain browser-local and are not sent to a backend.
-- The 1,531 retry cases and 76 manual-review cases remain separate queues. They are not being incorrectly counted as complete.
+- At the latest saved checkpoint, retry cases and 79 manual-review cases remain separate queues. They are not being incorrectly counted as complete.
 
 ## Phase 3 — Background automation
 
