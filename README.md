@@ -32,8 +32,9 @@ Candidate sources are leads only; every company and application route is verifie
 
 These are not yet integrated discovery adapters. Their terms, access method, coverage and reuse conditions must be reviewed before automation.
 
-- [GameCompanies.com](https://gamecompanies.com/) — global directory of studios, publishers, hubs, organisations and service companies.
-- [Games Jobs Index studio directory](https://gamesjobsindex.com/studios.html) — supplementary studio directory and cross-check; job listings do not prove speculative applications.
+- [IGDB API](https://api-docs.igdb.com/) — structured company and game-credit source. The Company endpoint exposes developer/publisher relationships and official websites; Twitch app credentials and current API/attribution terms must be reviewed before integration. No adapter or credentials are configured yet.
+- [GameCompanies.com](https://gamecompanies.com/) — global directory of studios, publishers, hubs, organisations and service companies; its Terms restrict automated use beyond the provided interface without written permission, so use as a manual source unless permission is obtained.
+- [Games Jobs Index studio directory](https://gamesjobsindex.com/studios.html) — manual lead source with a visible “Speculative only” filter. The header showed 2,573 studios while the regional roll-up showed 2,415 on 2026-10-31; the count is unreconciled. Filter labels are not employer evidence, and automated access permission was not established.
 - [Steam Developer & Publisher Homepages](https://store.steampowered.com/dev/?l=english) — large paginated creator directory; includes publishers and entities beyond unique development studios.
 - [MobyGames API](https://www.mobygames.com/info/api/) — potential game-credit/company discovery source. Requires authorized API access; do not scrape MobyGames pages or bypass its current API/terms restrictions. Review [MobyGames terms](https://www.mobygames.com/info/terms/) before integration.
 - [Community Game Studios & Publishers Database](https://github.com/EddieWing/gamedev-studios-db) — secondary seed and cross-check only; review licence, provenance, coverage and exclusions before reuse.
