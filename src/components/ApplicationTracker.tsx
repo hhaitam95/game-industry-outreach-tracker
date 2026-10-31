@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
 import type { TrackedApplication, TrackerStatus } from "./studio.types";
+import StudioMark from "./StudioMark";
+import { countryFlagFor } from "./location";
 import "./tracker.css";
 
 const tabs: { id: string; label: string; status: TrackerStatus }[] = [
@@ -10,7 +12,6 @@ const tabs: { id: string; label: string; status: TrackerStatus }[] = [
   { id: "offer", label: "Offer", status: "offer" },
   { id: "archived", label: "Archived", status: "archived" },
 ];
-
 const statusLabels: Record<TrackerStatus, string> = {
   saved: "Saved",
   in_progress: "In progress",
@@ -19,7 +20,6 @@ const statusLabels: Record<TrackerStatus, string> = {
   offer: "Offer",
   archived: "Not moving forward",
 };
-
 function formatDate(value: string | null | undefined) {
   if (!value) return "—";
   const date = new Date(value);
@@ -53,7 +53,6 @@ export default function ApplicationTracker({
       ),
     [applications],
   );
-
   const visible = applications
     .filter(
       (application) =>
@@ -72,7 +71,7 @@ export default function ApplicationTracker({
           <h1>My applications</h1>
           <p>Keep track of the studios you're considering and the applications you've sent.</p>
         </div>
-        <button className="button button-primary" type="button" onClick={onOpenDirectory}>
+        <button className="btn btn-primary" type="button" onClick={onOpenDirectory}>
           Browse studios
         </button>
       </div>
@@ -96,6 +95,7 @@ export default function ApplicationTracker({
         <label className="form-field tracker-search">
           <span>Search tracker</span>
           <input
+            className="form-control"
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
@@ -110,7 +110,7 @@ export default function ApplicationTracker({
       </div>
 
       <div className="table-wrap">
-        <table className="tracker-table">
+        <table className="table table-sm table-hover align-middle tracker-table mb-0">
           <thead>
             <tr>
               <th scope="col">Studio</th>
@@ -122,54 +122,60 @@ export default function ApplicationTracker({
             </tr>
           </thead>
           <tbody>
-            {visible.map((application) => (
-              <tr key={application.id}>
-                <td className="studio-name">{application.studioName}</td>
-                <td>{application.country || "Not stated"}</td>
-                <td>{formatDate(application.createdAt)}</td>
-                <td>
-                  <a href={application.applicationUrl} target="_blank" rel="noopener noreferrer">
-                    Open route
-                  </a>
-                </td>
-                <td>
-                  <label className="status-select-label">
-                    <span className="visually-hidden">Status for {application.studioName}</span>
-                    <select
-                      value={application.status}
-                      onChange={(event) =>
-                        onChangeStatus(application.id, event.target.value as TrackerStatus)
-                      }
+            {visible.map((application) => {
+              const flag = countryFlagFor(application.country, application.countryCode);
+              return (
+                <tr key={application.id}>
+                  <td>
+                    <div className="studio-identity">
+                      <StudioMark name={application.studioName} websiteUrl={application.websiteUrl} />
+                      <span className="studio-name">{application.studioName}</span>
+                    </div>
+                  </td>
+                  <td>
+                    <span className="location-cell">
+                      {flag ? <span className="country-flag" role="img" aria-label={application.country + " flag"}>{flag}</span> : null}
+                      <span>{application.country || "Not stated"}</span>
+                    </span>
+                  </td>
+                  <td>{formatDate(application.createdAt)}</td>
+                  <td>
+                    <a href={application.applicationUrl} target="_blank" rel="noopener noreferrer">Open route</a>
+                  </td>
+                  <td>
+                    <label className="status-select-label">
+                      <span className="visually-hidden">Status for {application.studioName}</span>
+                      <select
+                        className="form-select"
+                        value={application.status}
+                        onChange={(event) =>
+                          onChangeStatus(application.id, event.target.value as TrackerStatus)
+                        }
+                      >
+                        {tabs.map((tab) => (
+                          <option key={tab.id} value={tab.status}>{statusLabels[tab.status]}</option>
+                        ))}
+                      </select>
+                    </label>
+                  </td>
+                  <td>
+                    <button
+                      className="btn btn-link btn-sm text-danger p-0"
+                      type="button"
+                      onClick={() => onRemove(application.id)}
                     >
-                      {tabs.map((tab) => (
-                        <option key={tab.id} value={tab.status}>
-                          {statusLabels[tab.status]}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                </td>
-                <td>
-                  <button
-                    className="text-button text-danger"
-                    type="button"
-                    onClick={() => onRemove(application.id)}
-                  >
-                    Remove
-                  </button>
-                </td>
-              </tr>
-            ))}
+                      Remove
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
             {visible.length === 0 ? (
               <tr>
                 <td className="empty-table" colSpan={6}>
                   {query ? "No matching studios in this status." : "No studios in this list yet."}
                   {!query && activeTab === "saved" ? (
-                    <button
-                      className="text-button"
-                      type="button"
-                      onClick={onOpenDirectory}
-                    >
+                    <button className="text-button" type="button" onClick={onOpenDirectory}>
                       Browse the studio directory
                     </button>
                   ) : null}
