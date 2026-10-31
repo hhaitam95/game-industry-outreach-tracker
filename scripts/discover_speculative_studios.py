@@ -56,7 +56,7 @@ SATURATED_SOURCE_PAGE_BUDGET = 1
 MAX_SITE_PAGES = 7
 ROUTE_CHECK_STATUSES = {"active", "paused"}
 
-def load_source_manifest(path: Path = SOURCE_MANIFEST_PATH) -> tuple[dict[str, str], ...]:
+def load_source_manifest(path: Path = SOURCE_MANIFEST_PATH) -> tuple[dict[str, Any], ...]:
     try:
         manifest = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
@@ -66,7 +66,7 @@ def load_source_manifest(path: Path = SOURCE_MANIFEST_PATH) -> tuple[dict[str, s
     sources = manifest.get("sources")
     if not isinstance(sources, list) or not sources:
         raise ValueError("Discovery source manifest must contain at least one source.")
-    feeds: list[dict[str, str]] = []
+    feeds: list[dict[str, Any]] = []
     seen_ids: set[str] = set()
     for source in sources:
         if not isinstance(source, dict):
@@ -83,8 +83,24 @@ def load_source_manifest(path: Path = SOURCE_MANIFEST_PATH) -> tuple[dict[str, s
             raise ValueError("Unsupported discovery refresh policy: " + str(refresh_policy))
         if (kind == "gamedevmap") != (refresh_policy == "one_time_backfill"):
             raise ValueError("GameDevMap must be a one-time backfill and Wikidata feeds must recur.")
+        saturation = source.get("saturation")
+        if refresh_policy == "recurring":
+            if not isinstance(saturation, dict):
+                raise ValueError("Recurring feeds require source-specific saturation settings: " + source_id)
+            threshold = saturation.get("complete_empty_passes_before_throttling")
+            page_limit = saturation.get("maximum_pages_per_hourly_run_when_saturated")
+            if not isinstance(threshold, int) or isinstance(threshold, bool) or threshold < 1:
+                raise ValueError("Invalid empty-pass saturation threshold for " + source_id)
+            if not isinstance(page_limit, int) or isinstance(page_limit, bool) or page_limit < 1:
+                raise ValueError("Invalid saturated page budget for " + source_id)
         seen_ids.add(source_id)
-        feeds.append({"id": source_id, "label": label, "kind": kind, "refresh_policy": refresh_policy})
+        feeds.append({
+            "id": source_id,
+            "label": label,
+            "kind": kind,
+            "refresh_policy": refresh_policy,
+            "saturation": saturation,
+        })
     return tuple(feeds)
 
 
@@ -1392,10 +1408,15 @@ def maintain_existing_routes(
     return checked
 
 
-def source_page_budget(feed: dict[str, str], state: dict[str, Any], max_pages: int) -> int:
+def source_page_budget(feed: dict[str, Any], state: dict[str, Any], max_pages: int) -> int:
     metrics = state.get("source_stats", {}).get(feed["id"], {})
     if feed["refresh_policy"] == "recurring" and metrics.get("saturated"):
-        return min(max_pages, SATURATED_SOURCE_PAGE_BUDGET)
+        saturation = feed.get("saturation") or {}
+        page_limit = int(saturation.get(
+            "maximum_pages_per_hourly_run_when_saturated",
+            SATURATED_SOURCE_PAGE_BUDGET,
+        ))
+        return min(max_pages, max(1, page_limit))
     return max_pages
 
 
@@ -1448,7 +1469,11 @@ def finish_source_cycles(state: dict[str, Any]) -> list[str]:
         elif not incomplete:
             metrics["empty_cycles"] = int(metrics.get("empty_cycles", 0)) + 1
 
-        metrics["saturated"] = int(metrics.get("empty_cycles", 0)) >= SATURATION_EMPTY_CYCLE_THRESHOLD
+        threshold = int((feed.get("saturation") or {}).get(
+            "complete_empty_passes_before_throttling",
+            SATURATION_EMPTY_CYCLE_THRESHOLD,
+        ))
+        metrics["saturated"] = int(metrics.get("empty_cycles", 0)) >= max(1, threshold)
         metrics["last_pass_completed_at"] = completed_at
         metrics["last_pass_status"] = "incomplete" if incomplete else (
             "saturated" if metrics["saturated"] else "complete"
