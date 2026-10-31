@@ -47,6 +47,19 @@ Continue global discovery without prioritizing geography, studio size, AAA/indie
 - **Chimera Entertainment:** consolidated from PR #68. Its Personio speculative route is classified as an employer-managed ATS; the Munich listing and company careers page's multi-country remote/hybrid statements are reconciled with mandatory five-month, on-site Munich internships. Conflicting official headcount statements (25 vs around 70) are disclosed rather than resolved by guesswork.
 - **Supermassive Games:** consolidated from PR #68. The official Careers page's speculative application is email-based; Guildford is recorded without inferring remote or cross-border eligibility.
 
+## Additional routes and eligibility corrections — 2026-10-31
+
+### New route additions
+
+- **Favo Games — Türkiye:** official Careers page explicitly offers an Open application choice for candidates whose skills are not listed. It accepts a CV and portfolio through a first-party form. The five-person Istanbul team says it works remotely from anywhere; country-specific legal/contract arrangements are not enumerated.
+- **DON’T NOD Montréal — France / Canada:** official careers page links a SmartRecruiters Spontaneous Application candidate-bank posting. It says this is not a current or future recruitment need, only selected candidates are contacted, and applicants may work anywhere in Québec. This is a speculative candidate bank, not a vacancy.
+- **Ubisoft Saguenay — Canada:** official Ubisoft Saguenay careers page explicitly invites applicants whose desired position is not posted to send a CV and portfolio to rhsaguenay@ubisoft.com.
+
+### Existing-record decisions
+
+- **Techtive Games GmbH:** the JOIN page advertises a spontaneous application, but the current official company domain redirects to the ARDEM game website and does not link to JOIN. The route is paused until the employer-controlled relationship is confirmed through an official company channel.
+- **Fawkes Games:** removed from the public studio directory. The reviewed official About material describes a European publisher/operator of online game titles, live operations and publishing services, without evidence of an in-house development studio. This fails the current developer-identity gate unless further official evidence establishes direct in-house development.
+
 ## Candidate-source findings
 
 - **IGDB API** was evaluated as a promising structured company/game-credit source. Its Company endpoint exposes company identifiers, names, websites, country, parent-company relationships, company types and game relationships. API access requires a Twitch developer application and OAuth credentials; the documented limit is 4 requests per second and up to 500 records per paginated request. Review current terms, attribution and commercial requirements before integration. No adapter or credentials were added.
