@@ -205,7 +205,13 @@ async function main() {
 
     // Rows expand into a concise studio profile with up to four notable titles.
     const fourAGamesRow = rows.filter({ hasText: "4A Games" });
-    assert.match(await fourAGamesRow.locator("td").nth(2).textContent(), /Metro Exodus/);
+    assert.deepEqual(
+      await fourAGamesRow.locator(".popular-game-cover").evaluateAll(covers =>
+        covers.map(cover => cover.getAttribute("data-game-title")),
+      ),
+      ["Metro Exodus", "Metro: Last Light Redux"],
+      "The compact studio table should show thumbnails for its notable games.",
+    );
     await fourAGamesRow.locator("td").nth(3).click();
     const fourAGamesDetails = page.locator("#studio-details-4a-games");
     await fourAGamesDetails.waitFor();
