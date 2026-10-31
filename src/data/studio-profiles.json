@@ -2494,6 +2494,51 @@
     "applicationLocation": "Fully remote · the studio says candidates anywhere in the world may be considered",
     "reachHighlights": "The studio's official Jobs page explicitly states that all positions are fully remote and that international applicants may be considered."
   },
+  "Com2uS Europe GmbH": {
+    "description": "Berlin-based mobile-game publishing and operations hub providing localization, marketing, community management, customer support and game operations across Europe, Russia and the Middle East.",
+    "headquarters": {
+      "city": "Berlin",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "Office and hiring location · official Personio listing"
+    },
+    "otherLocations": [
+      "Seoul, South Korea · Com2uS group headquarters"
+    ],
+    "companyType": [
+      "Publisher",
+      "Localization",
+      "Customer support",
+      "Community management",
+      "Game operations"
+    ],
+    "ownership": "Part of the Com2uS group",
+    "parentCompany": "Com2uS / Com2uS Holdings",
+    "industryScale": "AA / AAA publisher operations",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "Localization",
+      "Community",
+      "Customer support",
+      "Game operations",
+      "Marketing",
+      "Esports",
+      "Video content"
+    ],
+    "popularGames": [
+      {
+        "title": "Summoners War",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://gvc2u.jobs.personio.com/job/116056?language=en",
+      "https://www.com2us.com/"
+    ],
+    "applicationLocation": "Berlin, Germany · full-time, permanent; availability to work from or move to Berlin; home office possible"
+  },
   "Couch Heroes": {
     "description": "Remote-first game studio developing an Unreal Engine-powered MMO experience and a cross-game social platform that connects player identities, progression, quests and rewards.",
     "headquarters": {
@@ -3837,6 +3882,47 @@
       "https://joinus.fundaygames.dk/jobs/7277761-unsolicited-application"
     ]
   },
+  "Funder Games": {
+    "description": "Independent pre-funding game development project building Geis of Anam, a dark Celtic fantasy action RPG in active prototyping.",
+    "headquarters": {
+      "city": null,
+      "country": "Not publicly stated",
+      "countryCode": "",
+      "label": "HQ not publicly stated"
+    },
+    "otherLocations": [
+      "Fully remote team; US Central Time collaboration preference"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent",
+      "Pre-funding project"
+    ],
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie / pre-funding",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Action RPG",
+      "Combat systems",
+      "World-building",
+      "Fantasy"
+    ],
+    "popularGames": [
+      {
+        "title": "Geis of Anam",
+        "appId": null,
+        "stage": "Active prototyping / pre-funding"
+      }
+    ],
+    "profileSources": [
+      "https://www.funder-games.com/careers/",
+      "https://www.funder-games.com/careers/general-application/"
+    ],
+    "applicationLocation": "Fully remote · current collaborations are volunteer/unpaid while pursuing funding; not a paid job offer"
+  },
   "Funny Tales": {
     "description": "Game-development studio operating as Funny Tales, the trading name of Digital Tales LLC, with an office in Miami, Florida. Its official contact form includes a spontaneous-application option.",
     "headquarters": {
@@ -4077,6 +4163,58 @@
     "applicationLocation": "Delft, Netherlands · the open-application page focuses on internships; office presence is preferred and fully remote eligibility is not stated",
     "reachHighlights": "The official Open Sollicitatie page invites applicants for internship opportunities in marketing, development, art and UX research; the studio indicates a preference for office attendance."
   },
+  "Garena": {
+    "description": "Singapore-based online-games developer, publisher and operator with a global footprint, part of Sea Limited.",
+    "headquarters": {
+      "city": "Singapore",
+      "country": "Singapore",
+      "countryCode": "SG",
+      "label": "Company base · official website"
+    },
+    "otherLocations": [
+      "Part of Sea Limited's global technology group"
+    ],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Online games",
+      "Esports",
+      "Live operations"
+    ],
+    "ownership": "Part of Sea Limited",
+    "parentCompany": "Sea Limited",
+    "industryScale": "AAA / global publisher",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Mobile",
+      "Online games",
+      "Game operations",
+      "Esports",
+      "Community",
+      "Marketing"
+    ],
+    "popularGames": [
+      {
+        "title": "Free Fire",
+        "appId": null
+      },
+      {
+        "title": "Arena of Valor",
+        "appId": null
+      },
+      {
+        "title": "Call of Duty: Mobile – Garena",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.garena.sg/",
+      "https://careers.garena.com/global/careers/J02131365"
+    ],
+    "applicationLocation": "Singapore · General Openings (Associate), entry level"
+  },
   "GauravGo Games Technologies": {
     "description": "India-based game and immersive-technology company with a registered office in Puri and a corporate office in Bhubaneswar, Odisha. Its activities span mobile games, gamification, AR/VR and enterprise experiences; its careers page explicitly invites speculative applications when no vacancy fits.",
     "headquarters": {
@@ -4243,6 +4381,59 @@
     ],
     "applicationLocation": "Stockholm / hybrid / optional remote · applicant-country eligibility not stated",
     "reachHighlights": "Official Open Application route connects candidates to all departments and future opportunities."
+  },
+  "GoE-Craft": {
+    "description": "Minecraft Marketplace content developer and official Microsoft Marketplace partner creating Bedrock add-ons, texture packs and custom worlds.",
+    "headquarters": {
+      "city": null,
+      "country": "Not publicly stated",
+      "countryCode": "",
+      "label": "HQ not publicly stated"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Minecraft content",
+      "Marketplace partner"
+    ],
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie / platform-native",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Minecraft",
+      "Bedrock",
+      "Add-ons",
+      "Texture packs",
+      "Worlds",
+      "3D art",
+      "Game scripting"
+    ],
+    "popularGames": [
+      {
+        "title": "TNT+",
+        "appId": null
+      },
+      {
+        "title": "Dinosaur Dimension",
+        "appId": null
+      },
+      {
+        "title": "Smartphones 2.0",
+        "appId": null
+      },
+      {
+        "title": "Naturalist",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.goecraft.com/",
+      "https://www.goecraft.com/careers/",
+      "https://www.goecraft.com/projects"
+    ],
+    "applicationLocation": "Remote roles are listed; country eligibility and work arrangement vary by role"
   },
   "Gold Town Games": {
     "description": "Swedish mobile sports-game studio based in Skellefteå. The company develops sports-management games and reports a team of approximately 25 people; its official job-opportunities page accepts open applications by email.",
@@ -5003,6 +5194,55 @@
       "https://ironrootgames.com/"
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Kabam": {
+    "description": "Video game developer known for highly social mobile and multiplayer games, including Marvel Contest of Champions and Shop Titans.",
+    "headquarters": {
+      "city": "Vancouver, British Columbia",
+      "country": "Canada",
+      "countryCode": "CA",
+      "label": "Studio and general-application location"
+    },
+    "otherLocations": [
+      "Montreal, Canada",
+      "Charlottetown, Canada",
+      "Los Angeles, United States",
+      "San Francisco, United States",
+      "Seoul, South Korea"
+    ],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Mobile",
+      "Online multiplayer"
+    ],
+    "ownership": "Wholly owned subsidiary of Netmarble",
+    "parentCompany": "Netmarble",
+    "industryScale": "AAA / global mobile games",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "PC",
+      "Multiplayer",
+      "Free-to-play",
+      "Live operations"
+    ],
+    "popularGames": [
+      {
+        "title": "Marvel Contest of Champions",
+        "appId": null
+      },
+      {
+        "title": "Shop Titans",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.kabam.com/",
+      "https://jobs.lever.co/kabam/d62974d9-8d92-4c7b-8d56-8ee23d35904d"
+    ],
+    "applicationLocation": "Full-time, in-office at a Kabam studio location; relocation required if not already in an eligible city"
   },
   "Katal Games": {
     "description": "Game and software studio building original games, live interactive formats and real-time technology for partner projects.",
@@ -5834,6 +6074,45 @@
       "https://lunacystudios.com/"
     ]
   },
+  "Mainframe Industries": {
+    "description": "Pan-European game developer building the MMO Pax Dei, with a fully distributed team and offices in Helsinki, Reykjavík and Paris.",
+    "headquarters": {
+      "city": "Helsinki",
+      "country": "Finland",
+      "countryCode": "FI",
+      "label": "HQ · official Work With Us page"
+    },
+    "otherLocations": [
+      "Reykjavík, Iceland",
+      "Paris, France"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "AA / AAA",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "MMO",
+      "Online multiplayer",
+      "World-building",
+      "Procedural generation"
+    ],
+    "popularGames": [
+      {
+        "title": "Pax Dei",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://themainframe.com/en/work-with-us/"
+    ],
+    "applicationLocation": "Pan-European distributed team · Helsinki, Reykjavík and Paris; remote and in-office work supported"
+  },
   "Melcher Studios": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
     "headquarters": {
@@ -6519,6 +6798,39 @@
       "https://www.oldskullgames.com/",
       "https://www.oldskullgames.com/careers/"
     ]
+  },
+  "Olive Branch Interactive": {
+    "description": "Remote-first independent game studio building immersive experiences with a globally distributed, multi-time-zone team.",
+    "headquarters": {
+      "city": null,
+      "country": "Not publicly stated",
+      "countryCode": "",
+      "label": "HQ not publicly stated"
+    },
+    "otherLocations": [
+      "Remote-first team spanning multiple time zones"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Not disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie",
+    "teamSize": "Small team · exact count not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Immersive experiences",
+      "Narrative",
+      "Game development"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://olivebranchinteractive.com/careers",
+      "https://olivebranchinteractive.com/about"
+    ],
+    "applicationLocation": "Remote-first · official careers page says work from anywhere in the world; country-specific hiring entity not stated"
   },
   "Optillusion Games": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
@@ -7800,6 +8112,61 @@
     "applicationLocation": "Boulder, Colorado, USA · applicant-country eligibility for open applications not stated",
     "reachHighlights": "The company operates both dedicated development and publishing teams and explicitly accepts open applications for unlisted roles."
   },
+  "Shiro Games": {
+    "description": "Independent Bordeaux game developer founded in 2012, known for Evoland, Northgard, Wartales and Dune: Spice Wars.",
+    "headquarters": {
+      "city": "Bordeaux",
+      "country": "France",
+      "countryCode": "FR",
+      "label": "HQ · official studio site"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent",
+      "Publisher"
+    ],
+    "ownership": "Independent",
+    "parentCompany": null,
+    "industryScale": "AA",
+    "teamSize": "About 70 people (studio-reported)",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "PC",
+      "Console",
+      "Strategy",
+      "RPG",
+      "Action",
+      "Adventure"
+    ],
+    "popularGames": [
+      {
+        "title": "Evoland",
+        "appId": null
+      },
+      {
+        "title": "Evoland 2",
+        "appId": null
+      },
+      {
+        "title": "Northgard",
+        "appId": null
+      },
+      {
+        "title": "Wartales",
+        "appId": null
+      },
+      {
+        "title": "Dune: Spice Wars",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://jobs.shirogames.com/more-about-us/",
+      "https://jobs.shirogames.com/jobs/general-application/"
+    ],
+    "applicationLocation": "Bordeaux, France · the studio invites candidates to live in Bordeaux"
+  },
   "Silent Games": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
     "headquarters": {
@@ -7984,6 +8351,39 @@
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
   },
+  "Spark Universe": {
+    "description": "Hamburg-based Minecraft content group developing Minecraft games, mods and events.",
+    "headquarters": {
+      "city": "Hamburg",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "Company location · official website footer"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Minecraft content",
+      "Group"
+    ],
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "Not publicly disclosed",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Minecraft",
+      "Games",
+      "Mods",
+      "Events",
+      "Creative production"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://sparkuniverse.com/jobs",
+      "https://spark-universe.talentlyft.com/"
+    ],
+    "applicationLocation": "Hamburg, Germany · remote and cross-border eligibility not stated"
+  },
   "Speedway Games": {
     "description": "Global remote game studio focused on building and operating large-scale Roblox experiences; accepts general applications for experienced contributors.",
     "headquarters": {
@@ -8011,11 +8411,12 @@
       "UGC"
     ],
     "popularGames": [],
-    "applicationLocation": "Global · location stated on general application",
+    "applicationLocation": "Global remote · official General Application lists Global; careers page describes a remote-first, asynchronous team",
     "reachHighlights": "Studio careers material describes Roblox games reaching tens of millions of players per month.",
     "profileSources": [
       "https://speedway-games.com/careers/45073",
-      "https://speedway-games.com/"
+      "https://speedway-games.com/",
+      "https://speedway-games.com/careers"
     ]
   },
   "Sports Interactive": {
@@ -8187,6 +8588,56 @@
       "https://stardust.ch/"
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Starfish Studios": {
+    "description": "Remote Minecraft-focused game studio creating Marketplace add-ons, worlds, visuals and events, including licensed collaborations.",
+    "headquarters": {
+      "city": "Millstone Township, New Jersey",
+      "country": "United States",
+      "countryCode": "US",
+      "label": "Company address · official legal policy"
+    },
+    "otherLocations": [
+      "Fully remote team distributed across time zones"
+    ],
+    "companyType": [
+      "Developer",
+      "Minecraft content",
+      "Independent"
+    ],
+    "ownership": "Starfish Studios, Inc. · independent studio",
+    "parentCompany": null,
+    "industryScale": "Indie / platform-native",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Minecraft",
+      "PC",
+      "Marketplace add-ons",
+      "Worlds",
+      "Mods",
+      "Events"
+    ],
+    "popularGames": [
+      {
+        "title": "Naturalist",
+        "appId": null
+      },
+      {
+        "title": "SpongeBob Biomes",
+        "appId": null
+      },
+      {
+        "title": "Moana 2 DLC",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://starfishstudios.com/",
+      "https://starfishstudios.com/jobs",
+      "https://starfishstudios.com/policy"
+    ],
+    "applicationLocation": "Remote · TalentHR general application lists the United States; international hiring eligibility not stated"
   },
   "StarPolar": {
     "description": "Founder-owned independent game studio based in Greater Kuala Lumpur, founded in 2026 by Ryan Thornton and Troy Mason. The studio is developing an original science-fiction tactical game and works with a small, senior team.",
@@ -9590,6 +10041,62 @@
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
   },
+  "Wolfjaw Studios": {
+    "description": "Game technology and co-development studio focused on backend systems, online game services, engineering and production for major multiplayer games.",
+    "headquarters": {
+      "city": "Troy, New York",
+      "country": "United States",
+      "countryCode": "US",
+      "label": "HQ / hybrid option · official Ashby listings"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Game technology services"
+    ],
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "AA / AAA services",
+    "teamSize": "Around 70 engineers and producers (company-reported)",
+    "teamSizeAsOf": "2026",
+    "focus": [
+      "PC",
+      "Console",
+      "Backend game services",
+      "Online multiplayer",
+      "Cloud infrastructure",
+      "Game client engineering"
+    ],
+    "popularGames": [
+      {
+        "title": "Among Us",
+        "appId": null,
+        "stage": "Technology services"
+      },
+      {
+        "title": "Destiny 2",
+        "appId": null,
+        "stage": "Technology services"
+      },
+      {
+        "title": "Apex Legends",
+        "appId": null,
+        "stage": "Technology services"
+      },
+      {
+        "title": "NBA 2K",
+        "appId": null,
+        "stage": "Technology services"
+      }
+    ],
+    "profileSources": [
+      "https://wolfjawstudios.com/",
+      "https://jobs.ashbyhq.com/wolfjaw-careers/1cd44061-26c9-4cad-b542-6f9820986f16",
+      "https://jobs.ashbyhq.com/wolfjaw-careers/d095b5ee-87d4-473e-bb1f-dd1839745886"
+    ],
+    "applicationLocation": "Remote only in the listed US states; hybrid may be possible near Troy, New York"
+  },
   "WolfPack Game Design": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
     "headquarters": {
@@ -9614,6 +10121,39 @@
       "https://www.wolfpackgamedesign.com/"
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Wonder Works Studio": {
+    "description": "Video game studio creating immersive, social and creative gaming experiences, including Roblox and metaverse-style content.",
+    "headquarters": {
+      "city": "Arlington",
+      "country": "United States",
+      "countryCode": "US",
+      "label": "Listed company location · official Breezy careers board"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Roblox",
+      "Social games"
+    ],
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "Not publicly disclosed",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Roblox",
+      "Social games",
+      "Immersive experiences",
+      "Metaverse"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://wonderworks.gg/",
+      "https://wonder-works-studio-inc.breezy.hr/",
+      "https://wonder-works-studio-inc.breezy.hr/p/abffc4775170-general-application"
+    ],
+    "applicationLocation": "Arlington, Texas · General Application marked Remote Any; country eligibility not stated"
   },
   "Wonderstorm": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",

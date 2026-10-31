@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-10-31 — Worldwide expansion batch 2 (proposed)
+
+- Added 12 manually researched studio/employer application routes across Europe, North America and Asia.
+- Refreshed Speedway Games to reflect the official global, remote-first General Application.
+- Preserved location, work-authorisation, role-scope and compensation caveats; Funder Games is explicitly volunteer/unpaid while pre-funding, and GoE-Craft includes freelance and commission-based terms.
+- Documented the second research pass, source timeout and next research focus.
+
+## Earlier changes — Worldwide expansion batch 1
+
+- Added 14 researched routes across Australia, Denmark, Germany, India, Japan, Malaysia, Nigeria, Portugal, Türkiye, the United States and Vietnam (merged in PR #63).
+- Added official route evidence, matching profiles, location/language caveats and 90-day review dates.
+
 ## 2026-10-31
 
 - Expanded the proposed verified speculative-route directory with 14 researched studio application routes across Europe, Asia, Africa and Oceania (combined from PRs #62 and #63).
