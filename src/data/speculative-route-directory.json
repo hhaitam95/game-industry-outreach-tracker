@@ -7942,5 +7942,40 @@
       "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-29"
     }
+  },
+  {
+    "name": "Fawkes Games",
+    "country": "Bulgaria",
+    "websiteUrl": "https://fawkesgames.com/",
+    "applicationUrl": "https://fawkesgames.com/en/careers/",
+    "evidenceUrl": "https://fawkesgames.com/en/careers/",
+    "notes": "Official Careers page says candidates who do not see a suitable role are welcome to send a spontaneous application. The same page currently lists Unity Game Engineer, 2D Game Artist, Game Designer, Producer and 2.5D Pixel Artist positions, describing them as remote freelance roles with Europe-friendly time zones preferred. The company is a Bulgaria-registered game developer, publisher and live-service operator rather than an original-IP-only studio: its official materials describe client modernization, gameplay-system overhauls, content expansions and development/maintenance across operated online games, and it advertises in-house Unity/game-art/design roles. Its terms identify Fawkes Games LTD, registered in Plovdiv, Bulgaria. The Careers page says work can be remote worldwide, while individual roles prefer Europe-friendly time zones.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote worldwide per official Careers page; current roles are freelance and prefer Europe-friendly time zones"
+      ],
+      "disciplineScope": [
+        "Unity game engineering",
+        "2D game art",
+        "Game design",
+        "Production",
+        "Quality assurance",
+        "Live operations",
+        "Game content development"
+      ],
+      "relatedApplicationUrls": [
+        "https://fawkesgames.com/en/terms/",
+        "https://fawkesgames.com/en/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
   }
 ]
