@@ -291,7 +291,7 @@ export default function StudioDirectory({
         </label>
         <label className="form-field">
           <span>Continent</span>
-          <select className="form-select" value={continent} onChange={(event) => setContinent(event.target.value)}>
+          <select className="form-select" value={continent} onChange={(event) => setContinent(event.target.value as ContinentLabel | "All continents")}>
             <option>All continents</option>
             {continents.map((value) => (
               <option key={value} value={value}>
