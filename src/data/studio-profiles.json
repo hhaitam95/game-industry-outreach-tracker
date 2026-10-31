@@ -7939,6 +7939,31 @@
     "applicationLocation": "Near Vienna preferred · full-time remote work limited to Austria",
     "reachHighlights": "Developing an original top-down multiplayer action game. The studio states that it avoids gambling mechanics, dark patterns and pay-to-win monetisation."
   },
+  "Streamline Studios": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": null,
+      "country": "Not stated",
+      "countryCode": "",
+      "label": "Country · Wikidata"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.wikidata.org/entity/Q7622701",
+      "https://www.streamline-studios.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
   "Studio 316": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
     "headquarters": {
