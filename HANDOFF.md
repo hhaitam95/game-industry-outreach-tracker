@@ -33,6 +33,16 @@ The Global Discovery Implementation Model is the durable source of truth for dis
 
 Keep the application to the two existing pages. Do not reintroduce the old job-posting monitor, resume tools, outreach drafting, analytics, accounts, remote tracker sync or automatic applications. Personal career targeting can be considered later; it must not filter or prioritize global discovery now.
 
+
+
+## Current global-discovery checkpoint
+
+- Main remains at **287 verified routes / 287 profiles** (284 active, 3 paused) until the current batch-6 PR is merged and deployed.
+- The in-progress branch `data/global-discovery-batch-6-20261031` consolidates the previously validated fifth expansion and adds 22cans, Absolutely Games and AB Games, for a proposal of **291 routes / 291 profiles** (288 active, 3 paused).
+- It also corrects submission/eligibility/compensation details for Bossa Studios, Brave At Night and Ember Crows.
+- Candidate source status and access restrictions are recorded in the Global Discovery Implementation Model. IGDB, GameCompanies.com, Games Jobs Index, Steam, MobyGames and the community dataset are not yet automated feeds; do not describe them as integrated.
+- PR #68 is superseded by the consolidated batch-6 proposal because of a base-branch conflict after the global-model documentation merge. Do not merge it independently.
+
 ## Handover checklist
 
 At the start of a new session, read the Global Discovery Implementation Model, this file and STATUS.md; inspect current main, open PRs, discovery-state and latest successful workflows. At the end, update the model with new source/evidence/policy/engineering findings, update STATUS.md and this file for the new checkpoint, and update CHANGELOG.md or an ADR when appropriate. Distinguish proposed, implemented, tested, merged and deployed work accurately.
