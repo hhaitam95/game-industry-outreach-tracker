@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-31T12:39:27.802877+00:00",
+  "updated_at": "2026-10-31T12:49:34.076471+00:00",
   "feed_cursors": {
-    "wikidata_video_game_developers": "Q108910285",
+    "wikidata_video_game_developers": "Q118558676",
     "wikidata_game_developer_credits": "Q99968931",
     "wikidata_video_game_companies": "Q8072425",
     "gamedevmap": "10601"
@@ -202530,46 +202530,52 @@
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T12:39:27.802832+00:00"
+      "last_checked_at": "2026-10-31T12:49:12.506474+00:00"
     },
     "Larian Studios": {
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T10:27:57.577900+00:00"
+      "last_checked_at": "2026-10-31T12:49:15.645782+00:00"
     },
     "LBC Studio": {
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T10:28:04.029340+00:00"
+      "last_checked_at": "2026-10-31T12:49:21.680826+00:00"
     },
     "Lightheart Entertainment": {
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T10:28:07.470350+00:00"
+      "last_checked_at": "2026-10-31T12:49:24.381340+00:00"
     },
     "Lighthouse Games": {
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "unknown",
-      "last_checked_at": "2026-10-31T10:28:08.965795+00:00"
+      "last_checked_at": "2026-10-31T12:49:25.794870+00:00"
     },
     "Limbic Entertainment": {
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T10:28:11.285205+00:00"
+      "last_checked_at": "2026-10-31T12:49:28.100431+00:00"
     },
     "Lion Castle Entertainment": {
       "negative_count": 0,
       "gone_count": 0,
       "last_result": "active",
-      "last_checked_at": "2026-10-31T10:28:15.282057+00:00"
+      "last_checked_at": "2026-10-31T12:49:31.320775+00:00"
+    },
+    "LIQUIDBULLET Studios": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-10-31T12:49:34.076432+00:00"
     }
   },
-  "route_check_index": 136,
+  "route_check_index": 144,
   "stats": {
     "candidates_seen": 10370,
     "routes_verified": 126,
