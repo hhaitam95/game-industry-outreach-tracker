@@ -12,11 +12,11 @@ The Global Discovery Implementation Model is the durable source of truth for dis
 
 ## Current product and data
 
-- Public verified routes: `src/data/speculative-route-directory.json`.
+- Public verified routes: `src/data/speculative-route-directory.json` (327 route/profile pairs; 322 active, 5 paused).
 - Studio profiles: `src/data/studio-profiles.json`.
 - Main UI: Studio Directory and My applications.
 - Personal tracker data stays in browser localStorage; it is not committed to public repository datasets.
-- Candidate/source progress is stored on the separate `discovery-state` branch.
+- Candidate/source progress is stored on the separate `discovery-state` branch. The last inspected hourly discovery run, [41225527000](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41225527000), succeeded at 2026-10-31 17:49 UTC.
 - Active discovery implementation: `scripts/discover_speculative_studios.py`.
 - Discovery workflow: `.github/workflows/discover-studios.yml`.
 
