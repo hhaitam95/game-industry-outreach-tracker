@@ -176,6 +176,9 @@ jobs:
             echo "main advanced during publication; retrying the merge on the new main snapshot."
           done
 
+      - name: Validate merged directory before publishing
+        run: npm run check:studio-directory
+
       - name: Rebuild static directory after merging latest main
         if: steps.commit.outputs.data_changed == 'true'
         run: npm run build

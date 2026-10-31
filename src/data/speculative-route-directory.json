@@ -811,20 +811,22 @@
     "websiteUrl": "https://www.aweinteractive.com/",
     "applicationUrl": "https://www.aweinteractive.com/careers",
     "evidenceUrl": "https://www.aweinteractive.com/careers",
-    "notes": "Official careers page has a Speculative Application section and invites candidates to contact careers@aweinteractive.com. Work location and eligibility are unstated.",
-    "checkedAt": "2026-10-30",
+    "notes": "The official Careers page has a Speculative Application section and invites candidates to email careers@aweinteractive.com. The official press kit describes an international remote game studio headquartered in Bedfordshire, UK; country-level hiring eligibility is not published.",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
         "email"
       ],
-      "workModel": "not_stated",
-      "eligibleLocations": [],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "International remote studio; exact country-level hiring and contracting eligibility is not stated."
+      ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -1066,6 +1068,32 @@
     }
   },
   {
+    "name": "Big Moxi Games",
+    "country": "United States",
+    "websiteUrl": "https://bigmoxigames.com/",
+    "applicationUrl": "https://bigmoxigames.com/careers",
+    "evidenceUrl": "https://bigmoxigames.com/careers",
+    "notes": "The official Careers page invites general applications by email even when no listed role fits. The Studio page describes a full-cycle PC/console development company headquartered in the US with development hubs in Porto Alegre, Brazil and Santiago, Chile, plus talent distributed worldwide. Current role listings include remote locations such as Brazil, Chile and 'Anywhere'; the geographic eligibility of any individual engagement must be confirmed rather than inferred from the studio's global footprint.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Company careers material includes remote roles labelled Brazil, Chile and 'Anywhere'; individual role and country-level hiring eligibility may vary. Development hubs are in Porto Alegre, Brazil and Santiago, Chile; headquarters country is the United States."
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [
+        "https://bigmoxigames.com/studio"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Binary Impact GmbH",
     "country": "Germany",
     "websiteUrl": "https://www.binaryimpact.de/",
@@ -1285,43 +1313,6 @@
   },
   {
     "name": "ByteRockers' Games",
-    "country": "Germany",
-    "websiteUrl": "https://www.byterockers.games/",
-    "applicationUrl": "https://www.byterockers.games/de/jobs",
-    "evidenceUrl": "https://www.byterockers.games/de/jobs",
-    "notes": "Official Jobs page explicitly says that candidates who do not find a suitable role, or when the company is not actively hiring, should send an Initiativbewerbung to jobs@byterockers.games. It specifically addresses people passionate about developing video games. Official About page says ByteRockers' Games creates its own games and began publishing other creative teams' projects in 2024. The legal Impressum identifies ByteRockers' Games GmbH & Co. KG at Schloßstraße 110, 12163 Berlin. Its developer credits include Insurmountable, Beat Slayer and Gelly Break Deluxe; the current homepage also features further PC/console titles. The unsolicited route does not separately state work model or applicant-country eligibility.",
-    "checkedAt": "2026-10-31",
-    "applicationResearch": {
-      "routeType": "unsolicited",
-      "submissionMethods": [
-        "email"
-      ],
-      "workModel": "not_stated",
-      "eligibleLocations": [
-        "Berlin, Germany · official registered address; work model and applicant-country eligibility for unsolicited applicants not stated"
-      ],
-      "disciplineScope": [
-        "Game development",
-        "Programming",
-        "Game design",
-        "Art",
-        "Animation",
-        "Audio",
-        "QA",
-        "Production",
-        "Publishing"
-      ],
-      "relatedApplicationUrls": [
-        "https://www.byterockers.games/de/%C3%BCber-uns",
-        "https://www.byterockers.games/de/impressum"
-      ],
-      "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
-    }
-  },
-  {
-    "name": "Byterockers’ Games",
     "country": "Germany",
     "websiteUrl": "https://www.byterockers.games/",
     "applicationUrl": "https://www.byterockers.games/de/jobs",
@@ -1928,6 +1919,30 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Cyberborz Interactive",
+    "country": "Not stated",
+    "websiteUrl": "https://cyberborz.com/",
+    "applicationUrl": "https://cyberborz.com/",
+    "evidenceUrl": "https://cyberborz.com/",
+    "notes": "The official site identifies Cyberborz Interactive as an independent game-development studio founded in 2025 and shows Battlecontact in development, including closed-alpha activity and an Unreal Engine 5 technical presentation. Its Careers section currently lists remote/Europe roles and explicitly invites a spontaneous CV/portfolio email even when no matching position is open. The official site says 'heart of Europe' but does not state a country or city; location is intentionally left unknown.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Current role descriptions include remote/Europe and remote contract arrangements; exact country eligibility for unsolicited applications is not stated."
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -2670,6 +2685,32 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Frozenbyte",
+    "country": "Finland",
+    "websiteUrl": "https://www.frozenbyte.com/",
+    "applicationUrl": "https://www.frozenbyte.com/careers/",
+    "evidenceUrl": "https://www.frozenbyte.com/careers/",
+    "notes": "The current official Careers page reports no open vacancies but explicitly accepts open applications year-round and asks for a portfolio plus a short introduction by email. Relocation to Helsinki is preferred; the current page says hybrid and remote arrangements may be supported for the right fit. This is a general spontaneous route, not a current advertised vacancy.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Helsinki, Finland · relocation is preferred; the current Careers page says hybrid or remote arrangements may be supported for the right fit, so confirm role-specific arrangements."
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [
+        "https://www.frozenbyte.com/about-frozenbyte"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -3524,6 +3565,34 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Iceflake Studios",
+    "country": "Finland",
+    "websiteUrl": "https://www.iceflake.com/",
+    "applicationUrl": "https://career.paradoxplaza.com/jobs/7673868-open-application-for-game-programmers",
+    "evidenceUrl": "https://career.paradoxplaza.com/jobs/7673868-open-application-for-game-programmers",
+    "notes": "The Paradox employer-managed career platform hosts an explicit spontaneous application for Game Programmers at Iceflake Studios. The studio welcomes programmers whose profiles may fit current or future needs. The listing is based in Tampere and says the team expects office attendance for collaborative development; do not treat this as a remote route.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "discipline_specific",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "on_site",
+      "eligibleLocations": [
+        "Tampere, Finland · the listing says the team expects office attendance for collaborative game development."
+      ],
+      "disciplineScope": [
+        "Game programming",
+        "C#",
+        "Unity"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-29"
     }
   },
@@ -4439,6 +4508,32 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Mainstay Games",
+    "country": "Finland",
+    "websiteUrl": "https://www.mainstaygames.com/",
+    "applicationUrl": "https://careers.mainstaygames.com/roles/open-application",
+    "evidenceUrl": "https://careers.mainstaygames.com/",
+    "notes": "The employer-managed careers portal has a dedicated Open Application. Mainstay says it reads every application and keeps details on file for future partner-project needs. Its work is game development/co-development embedded in partner teams, including ownership of features and systems; this is a development-services route, not evidence of an owned-IP portfolio. The application asks for country of residence but does not publish a geographic eligibility list.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Helsinki, Finland · the form asks applicants to state their country of residence, but does not state eligible countries or a work model."
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [
+        "https://careers.mainstaygames.com/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-29"
     }
   },
@@ -5955,6 +6050,33 @@
     }
   },
   {
+    "name": "Rogue Snail",
+    "country": "Brazil",
+    "websiteUrl": "https://roguesnail.com/",
+    "applicationUrl": "https://roguesnail.com/Jobs/",
+    "evidenceUrl": "https://roguesnail.com/Jobs/",
+    "notes": "The official Jobs page says the studio is always searching for talented people and provides a dedicated 'Be a Rogue Snail' application form. The studio describes itself as fully remote, with team members across Brazil and other countries. Country-level employment/contract eligibility is not enumerated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Fully remote studio with team members across Brazil and other countries; exact applicant-country and contracting eligibility is not enumerated."
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [
+        "https://roguesnail.com/About/",
+        "https://roguesnail.com/Games/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Russet Studio",
     "country": "Not stated",
     "websiteUrl": "https://russetstudio.com/",
@@ -7232,6 +7354,35 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Tanglewood Games",
+    "country": "United Kingdom",
+    "websiteUrl": "https://www.tanglewoodgames.com/",
+    "applicationUrl": "https://careers.tanglewoodgames.com/jobs/5991732-open-application-engineering",
+    "evidenceUrl": "https://careers.tanglewoodgames.com/",
+    "notes": "The official Teamtailor careers site currently lists two dedicated open applications: Unreal Engine engineering and technical art. The studio provides specialist Unreal Engine engineering, optimisation, technology integration and platform-porting services to game teams. The application pages state fully remote within the UK; do not generalise this to worldwide remote eligibility.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "discipline_specific",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Fully remote within the United Kingdom only; studio base in Hartlepool, England."
+      ],
+      "disciplineScope": [
+        "Unreal Engine engineering",
+        "Technical art"
+      ],
+      "relatedApplicationUrls": [
+        "https://careers.tanglewoodgames.com/jobs/5955035-open-application-tech-artist"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-29"
     }
   },

@@ -1446,25 +1446,25 @@
     "reachHighlights": "Included as a serious-games/immersive-technology provider rather than a conventional entertainment-game developer."
   },
   "Awe Interactive": {
-    "description": "Independent remote game studio creating premium PC and console experiences.",
+    "description": "Independent remote game studio headquartered in Bedfordshire, United Kingdom. Awe Interactive released BPM: Bullets Per Minute and is developing an unannounced science-fiction/fantasy game.",
     "headquarters": {
       "city": "Bedfordshire",
       "country": "United Kingdom",
       "countryCode": "GB",
-      "label": "HQ"
+      "label": "HQ · official About and press-kit pages"
     },
     "otherLocations": [
-      "Remote team distributed internationally"
+      "International remote team"
     ],
     "companyType": [
       "Developer",
       "Independent"
     ],
-    "ownership": "Independent",
+    "ownership": "Independent studio (company-described)",
     "parentCompany": null,
     "industryScale": "Indie / AA",
-    "teamSize": "Over 120 across the UK (studio-reported)",
-    "teamSizeAsOf": "2026-10",
+    "teamSize": "Not publicly disclosed; the official press kit names five team members but does not state total headcount.",
+    "teamSizeAsOf": null,
     "focus": [
       "PC",
       "Console",
@@ -1478,10 +1478,12 @@
       }
     ],
     "profileSources": [
+      "https://www.aweinteractive.com/",
       "https://www.aweinteractive.com/about",
-      "https://www.aweinteractive.com/press"
+      "https://www.aweinteractive.com/press",
+      "https://www.aweinteractive.com/careers"
     ],
-    "applicationLocation": "Location not specified · HQ shown"
+    "applicationLocation": "International remote studio; exact country-level hiring eligibility is not stated."
   },
   "AxesInMotion (gamigo Group)": {
     "description": "Seville-based free-to-play mobile game developer and publisher, founded in 2014 and part of the Media and Games Invest (MGI) group since 2022.",
@@ -1925,6 +1927,45 @@
     "applicationLocation": "Copenhagen, Denmark · unsolicited application route is for internships only",
     "reachHighlights": "The official Careers page says unsolicited applications are accepted for internships; internships are unpaid and at least three months."
   },
+  "Big Moxi Games": {
+    "description": "Full-cycle game development studio headquartered in the United States, with development hubs in Porto Alegre, Brazil and Santiago, Chile and additional talent distributed worldwide. The company provides full-cycle PC/console development, co-development and game-content creation for publishers and IP holders, and also develops original IP.",
+    "headquarters": {
+      "city": null,
+      "country": "United States",
+      "countryCode": "US",
+      "label": "Headquarters country · official Studio page; city not stated"
+    },
+    "otherLocations": [
+      "Porto Alegre, Brazil",
+      "Santiago, Chile",
+      "Distributed worldwide"
+    ],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Game-development services"
+    ],
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "Full-cycle PC/console game-development studio",
+    "teamSize": "130+ developers (company-reported on the official Studio page)",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Full-cycle development",
+      "Co-development",
+      "Content creation",
+      "Unreal Engine 5"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://bigmoxigames.com/",
+      "https://bigmoxigames.com/studio",
+      "https://bigmoxigames.com/careers"
+    ],
+    "applicationLocation": "US headquarters; development hubs in Porto Alegre, Brazil and Santiago, Chile; company careers material also advertises remote roles. Role-specific hiring eligibility may vary."
+  },
   "Binary Impact GmbH": {
     "description": "Owner-managed German software and engineering company that also develops games and immersive experiences. Binary Impact developed and published the award-winning game Beam in 2019 alongside software projects for industrial and commercial clients.",
     "headquarters": {
@@ -2347,101 +2388,17 @@
       "https://www.byterockers.games/de/impressum",
       "https://www.byterockers.games/insurmountable",
       "https://www.byterockers.games/beatslayer",
-      "https://www.byterockers.games/gelly-break-deluxe"
-    ],
-    "applicationLocation": "Berlin, Germany · work model and applicant-country eligibility for unsolicited applicants not stated",
-    "reachHighlights": "Founded in 2008 and based in Berlin. Official developer credits include Insurmountable, Beat Slayer and Gelly Break Deluxe; the studio also publishes games for other developers."
-  },
-  "Byterockers’ Games": {
-    "description": "Berlin-based independent game developer and publisher founded in 2008 by Martin Knauf. The company began publishing external indie projects in 2024 alongside its own game development.",
-    "headquarters": {
-      "city": "Berlin",
-      "country": "Germany",
-      "countryCode": "DE",
-      "label": "Studio address · official Contact page"
-    },
-    "otherLocations": [],
-    "companyType": [
-      "Developer",
-      "Publisher",
-      "Independent",
-      "Developer and Publisher"
-    ],
-    "ownership": "Independent · ownership details not disclosed",
-    "parentCompany": null,
-    "industryScale": "Indie",
-    "teamSize": "Not publicly disclosed; the official About page lists a multi-disciplinary team across programming, design, art, animation, audio, QA, marketing and production.",
-    "teamSizeAsOf": "2026-10",
-    "focus": [
-      "PC",
-      "Console",
-      "Indie games",
-      "Publishing",
-      "Nintendo Switch",
-      "PlayStation",
-      "Xbox",
-      "Adventure",
-      "Roguelite",
-      "Action",
-      "Simulation"
-    ],
-    "popularGames": [
-      {
-        "title": "Insurmountable",
-        "appId": null
-      },
-      {
-        "title": "Beat Slayer",
-        "appId": null
-      },
-      {
-        "title": "OKU",
-        "appId": null
-      },
-      {
-        "title": "The Regreening",
-        "appId": null,
-        "stage": "Coming soon"
-      },
-      {
-        "title": "Insurmountable",
-        "appId": null,
-        "stage": "Released"
-      },
-      {
-        "title": "Beat Slayer",
-        "appId": null,
-        "stage": "Released"
-      },
-      {
-        "title": "Gelly Break Deluxe",
-        "appId": null,
-        "stage": "Released"
-      },
-      {
-        "title": "The Regreening",
-        "appId": null,
-        "stage": "In development"
-      }
-    ],
-    "profileSources": [
+      "https://www.byterockers.games/gelly-break-deluxe",
       "https://www.byterockers.games/%C3%BCber-uns",
       "https://www.byterockers.games/kontakt",
       "https://www.byterockers.games/praktikum-byterockersgames",
       "https://www.byterockers.games/games",
       "https://store.steampowered.com/publisher/ByteRockersGames/",
       "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1301&state=&type=",
-      "https://byterockers.games/",
-      "https://www.byterockers.games/",
-      "https://www.byterockers.games/de/jobs",
-      "https://www.byterockers.games/de/%C3%BCber-uns",
-      "https://www.byterockers.games/de/impressum",
-      "https://www.byterockers.games/insurmountable",
-      "https://www.byterockers.games/beatslayer",
-      "https://www.byterockers.games/gelly-break-deluxe"
+      "https://byterockers.games/"
     ],
-    "applicationLocation": "Berlin, Germany · the explicit speculative route is for internships; 18+ requirement applies to interns",
-    "reachHighlights": "ByteRockers' says it was founded in 2008 and has been led by CEO Maik Reichelt since 2023; it describes itself as an indie developer and publisher."
+    "applicationLocation": "Berlin, Germany · work model and applicant-country eligibility for unsolicited applicants not stated",
+    "reachHighlights": "Founded in 2008 and based in Berlin. Official developer credits include Insurmountable, Beat Slayer and Gelly Break Deluxe; the studio also publishes games for other developers."
   },
   "Campfire Cabal": {
     "description": "Copenhagen-based game-development studio wholly owned by THQ Nordic, focused on narrative-led, turn-based historical role-playing games for PC. Established in 2022 by veterans of the Expeditions series; after a difficult 2023 restructuring period, THQ Nordic confirmed in May 2025 that the studio survived and had returned to full production. Its current Expeditions: Samurai has reached Early Access.",
@@ -3322,6 +3279,46 @@
       "https://corporate.nacongaming.com/wp-content/uploads/2026/10/Document-URD-NACON-31.03.2026.html"
     ],
     "applicationLocation": "Location not specified · HQ shown"
+  },
+  "Cyberborz Interactive": {
+    "description": "Independent game-development studio founded in 2025, currently developing Battlecontact, a large-scale multiplayer first-person shooter featuring Unreal Engine 5 destruction systems. The official site describes an international team based in 'the heart of Europe' but does not identify a specific country or city.",
+    "headquarters": {
+      "city": null,
+      "country": "Not stated",
+      "label": "Official site says 'heart of Europe' but does not identify a country or city"
+    },
+    "otherLocations": [
+      "International team · precise locations not stated"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent studio; legal ownership details not publicly stated on the official site",
+    "parentCompany": null,
+    "industryScale": "Independent / early-stage studio",
+    "teamSize": "Described as a small international team; headcount not stated",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Multiplayer",
+      "First-person shooter",
+      "Unreal Engine 5",
+      "Destruction systems",
+      "Online"
+    ],
+    "popularGames": [
+      {
+        "title": "Battlecontact",
+        "appId": null,
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://cyberborz.com/",
+      "https://www.battlecontact.com/"
+    ],
+    "applicationLocation": "The official careers section advertises remote/Europe roles; exact country eligibility for unsolicited applicants is not stated."
   },
   "Cybernation Team": {
     "description": "Independent Ukrainian game studio developing an Unreal Engine 5 tactical multiplayer game.",
@@ -4548,6 +4545,54 @@
     ],
     "reachHighlights": "Multi-platform co-development and full-production partner with work across Triangle Strategy, Fortnite and licensed/partner projects."
   },
+  "Frozenbyte": {
+    "description": "Independent Helsinki game developer founded in 2001, known for the Trine series and Starbase. The studio develops its own PC/console IP and uses a proprietary engine.",
+    "headquarters": {
+      "city": "Helsinki",
+      "country": "Finland",
+      "countryCode": "FI",
+      "label": "HQ · official About page"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent; the current Careers page says the company has no external investors",
+    "parentCompany": null,
+    "industryScale": "Independent PC/console developer",
+    "teamSize": "About 80 employees (company-reported on the official About page)",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Own IP",
+      "Proprietary engine",
+      "Action",
+      "Puzzle",
+      "Co-op"
+    ],
+    "popularGames": [
+      {
+        "title": "Trine 5: A Clockwork Conspiracy",
+        "appId": null
+      },
+      {
+        "title": "Starbase",
+        "appId": null
+      },
+      {
+        "title": "Trine 4: The Nightmare Prince",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.frozenbyte.com/",
+      "https://www.frozenbyte.com/careers/",
+      "https://www.frozenbyte.com/about-frozenbyte"
+    ],
+    "applicationLocation": "Helsinki, Finland · relocation preferred; the current Careers page allows hybrid or remote arrangements for the right fit."
+  },
   "Full Fat Productions": {
     "description": "Independent game developer based in Warwick, United Kingdom, with a long-running focus on mobile and casual games.",
     "headquarters": {
@@ -5768,6 +5813,51 @@
       "https://www.hyperkani.com/"
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
+  },
+  "Iceflake Studios": {
+    "description": "Tampere-based game-development studio specialising in city-builder and management games. Iceflake has been part of the Paradox Interactive family since 2020.",
+    "headquarters": {
+      "city": "Tampere",
+      "country": "Finland",
+      "countryCode": "FI",
+      "label": "Studio location · official Iceflake website"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Subsidiary"
+    ],
+    "ownership": "Part of the Paradox Interactive family since 2020 (company-stated)",
+    "parentCompany": "Paradox Interactive",
+    "industryScale": "Not publicly disclosed",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Simulation",
+      "City builder",
+      "Management",
+      "Strategy"
+    ],
+    "popularGames": [
+      {
+        "title": "Cities: Skylines II",
+        "appId": null
+      },
+      {
+        "title": "Surviving the Aftermath",
+        "appId": null
+      },
+      {
+        "title": "LEGO Skylines",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.iceflake.com/",
+      "https://career.paradoxplaza.com/jobs/7673868-open-application-for-game-programmers"
+    ],
+    "applicationLocation": "Tampere, Finland · the Game Programmer application expects office attendance."
   },
   "Implicit Conversions": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
@@ -7022,6 +7112,39 @@
       "https://themainframe.com/en/work-with-us/"
     ],
     "applicationLocation": "Pan-European distributed team · Helsinki, Reykjavík and Paris; remote and in-office work supported"
+  },
+  "Mainstay Games": {
+    "description": "Helsinki-based game-development partner that embeds teams into partner studios and builds or owns game features and systems end-to-end. Its open application is intended to build a pool for future partner-project needs; the company does not present this route as an owned-IP studio vacancy.",
+    "headquarters": {
+      "city": "Helsinki",
+      "country": "Finland",
+      "countryCode": "FI",
+      "label": "Location · official careers portal"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Co-development",
+      "Game-development services"
+    ],
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "Boutique game-development partner",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Game engineering",
+      "Feature development",
+      "Systems development",
+      "Live games",
+      "Co-development"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.mainstaygames.com/",
+      "https://careers.mainstaygames.com/",
+      "https://careers.mainstaygames.com/roles/open-application"
+    ],
+    "applicationLocation": "Helsinki, Finland · the form asks for country of residence; applicant-country eligibility and work model are not stated."
   },
   "Melcher Studios": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
@@ -9056,6 +9179,65 @@
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
   },
+  "Rogue Snail": {
+    "description": "Independent Brazilian game studio founded in 2013 and based in Brasília. Rogue Snail describes itself as fully remote, with a globally distributed team, and develops original PC and mobile games including the Relic Hunters series and Hell Clock.",
+    "headquarters": {
+      "city": "Brasília",
+      "country": "Brazil",
+      "countryCode": "BR",
+      "label": "HQ · official press kit"
+    },
+    "otherLocations": [
+      "Fully remote team across Brazil and other countries"
+    ],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent; legal ownership details not stated in the available official profile",
+    "parentCompany": null,
+    "industryScale": "Independent studio",
+    "teamSize": "Not publicly disclosed in current official materials",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Mobile",
+      "Action",
+      "RPG",
+      "Shooter",
+      "Remote development"
+    ],
+    "popularGames": [
+      {
+        "title": "Hell Clock",
+        "appId": null
+      },
+      {
+        "title": "Relic Hunters Legend",
+        "appId": null
+      },
+      {
+        "title": "Relic Hunters Rebels",
+        "appId": null
+      },
+      {
+        "title": "Relic Hunters Zero",
+        "appId": null
+      },
+      {
+        "title": "Star Vikings Forever",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://roguesnail.com/",
+      "https://roguesnail.com/Jobs/",
+      "https://roguesnail.com/About/",
+      "https://roguesnail.com/Games/",
+      "https://roguesnail.com/press/"
+    ],
+    "applicationLocation": "Fully remote studio with team members across Brazil and other countries; applicant-country eligibility is not enumerated."
+  },
   "Russet Studio": {
     "description": "Independent creative studio building video games alongside original music, media and tools. Its current projects include Namara, a dark-fantasy action RPG, and Astro Assault, a 2D space shooter.",
     "headquarters": {
@@ -10825,6 +11007,42 @@
       "https://www.takeone.co.kr/recruit.php?lang=en"
     ],
     "applicationLocation": "Seoul, South Korea · official talent pool; work arrangement and overseas eligibility not stated"
+  },
+  "Tanglewood Games": {
+    "description": "Hartlepool-based specialist game-development studio and Unreal Engine partner providing engineering, technical art, optimisation, technology integration and platform-porting services to client game teams. Its portfolio lists contributions to multiple major PC/console titles; these are client projects rather than owned IP.",
+    "headquarters": {
+      "city": "Hartlepool",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "label": "HQ · official studio and careers pages"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Co-development",
+      "Game-development services"
+    ],
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "Specialist game-development services studio",
+    "teamSize": "50+ co-workers (company-reported on the careers site)",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Unreal Engine",
+      "Engineering",
+      "Technical art",
+      "Optimisation",
+      "Platform porting",
+      "PC",
+      "Console"
+    ],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.tanglewoodgames.com/",
+      "https://careers.tanglewoodgames.com/",
+      "https://careers.tanglewoodgames.com/jobs"
+    ],
+    "applicationLocation": "Hartlepool, England · open applications for engineering and technical art are listed as fully remote within the United Kingdom."
   },
   "Tarokai": {
     "description": "Swiss independent mobile-game studio creating experiences that connect digital play with real-world events and activities. Its current title is Peach Farmer, a free-to-play collectible-card game for iOS and Android.",
