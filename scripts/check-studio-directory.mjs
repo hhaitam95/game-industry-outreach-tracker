@@ -115,16 +115,20 @@ if (Array.isArray(studios) && profiles && typeof profiles === "object" && !Array
     if (key) names.add(key);
 
     if (["websiteUrl", "applicationUrl", "evidenceUrl"].every(field => typeof studio[field] === "string")) {
-      const routeKey = [
-        canonicalRouteUrl(studio.websiteUrl),
-        canonicalRouteUrl(studio.applicationUrl),
-        canonicalRouteUrl(studio.evidenceUrl)
-      ].join("|");
-      const previous = applicationRoutes.get(routeKey);
-      if (previous) {
-        errors.push("Duplicate employer/application route: " + previous + " and " + studio.name + ".");
-      } else {
-        applicationRoutes.set(routeKey, studio.name);
+      try {
+        const routeKey = [
+          canonicalRouteUrl(studio.websiteUrl),
+          canonicalRouteUrl(studio.applicationUrl),
+          canonicalRouteUrl(studio.evidenceUrl)
+        ].join("|");
+        const previous = applicationRoutes.get(routeKey);
+        if (previous) {
+          errors.push("Duplicate employer/application route: " + previous + " and " + studio.name + ".");
+        } else {
+          applicationRoutes.set(routeKey, studio.name);
+        }
+      } catch {
+        // HTTPS/URL errors were already reported by the field-level validators above.
       }
     }
 
