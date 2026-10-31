@@ -2503,7 +2503,7 @@
     "applicationUrl": "https://hvnt.com/careers",
     "evidenceUrl": "https://hvnt.com/careers",
     "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open Application. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -2515,7 +2515,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -2549,7 +2549,7 @@
     "applicationUrl": "https://hypemasters.careers-page.com/open-application",
     "evidenceUrl": "https://hypemasters.careers-page.com/open-application",
     "notes": "Branded open-application page welcomes a resume even when no suitable listed position fits. Applicant-country eligibility and work arrangements are not specified.",
-    "checkedAt": "2026-10-29",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -2561,7 +2561,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-27"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -2571,7 +2571,7 @@
     "applicationUrl": "https://hyperkani.com/",
     "evidenceUrl": "https://hyperkani.com/",
     "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -2583,7 +2583,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -2593,7 +2593,7 @@
     "applicationUrl": "https://www.implicitconversions.com/careers",
     "evidenceUrl": "https://www.implicitconversions.com/careers",
     "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -2605,7 +2605,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -2615,7 +2615,7 @@
     "applicationUrl": "https://www.ingamestudios.com/",
     "evidenceUrl": "https://www.ingamestudios.com/",
     "notes": "Official Jobs section explicitly invites open applications and asks candidates to email jobs@ingamestudios.com. The studio says some roles require on-site presence while others may be remote depending on team needs. HQ is Brno; applicant-country eligibility is not stated.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -2629,7 +2629,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -2639,7 +2639,7 @@
     "applicationUrl": "https://www.innogames.com/career/career-starters/index.html",
     "evidenceUrl": "https://www.innogames.com/career/faq/index.html",
     "notes": "Official studio-controlled page explicitly invites unsolicited applications. Evidence: unsolicited application. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "unsolicited",
       "submissionMethods": [
@@ -2651,7 +2651,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -3465,6 +3465,28 @@
     }
   },
   {
+    "name": "Nacon Studio Milan",
+    "country": "Not stated",
+    "websiteUrl": "https://www.naconstudiomilan.com/",
+    "applicationUrl": "https://www.naconstudiomilan.com/careers/",
+    "evidenceUrl": "https://www.naconstudiomilan.com/careers/",
+    "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Ndemic Creations",
     "country": "England",
     "websiteUrl": "https://www.ndemiccreations.com/",
@@ -4217,6 +4239,28 @@
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Ready at Dawn",
+    "country": "Not stated",
+    "websiteUrl": "https://www.readyatdawn.com/",
+    "applicationUrl": "https://www.readyatdawn.com/careers.html",
+    "evidenceUrl": "https://www.readyatdawn.com/careers.html",
+    "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Applications. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {

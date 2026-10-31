@@ -5469,6 +5469,31 @@
     ],
     "applicationLocation": "Not specified · confirm on the official application route"
   },
+  "Nacon Studio Milan": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": null,
+      "country": "Not stated",
+      "countryCode": "IT",
+      "label": "Country · Wikidata"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.wikidata.org/entity/Q124706029",
+      "https://www.naconstudiomilan.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
   "Ndemic Creations": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
     "headquarters": {
@@ -6583,6 +6608,31 @@
       "https://www.chronicles.net/faq",
       "https://www.linkedin.com/company/raw-power-games"
     ]
+  },
+  "Ready at Dawn": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": null,
+      "country": "Not stated",
+      "countryCode": "US",
+      "label": "Country · Wikidata"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.wikidata.org/entity/Q1340558",
+      "https://www.readyatdawn.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
   },
   "Red Thread Games": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
