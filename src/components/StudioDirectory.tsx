@@ -86,6 +86,14 @@ function locationSortFor(studio: Studio): string {
 function studioId(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
+function formatDate(value?: string | null): string {
+  if (!value) return "Not recorded";
+  const normalized = /^\d{4}-\d{2}-\d{2}$/.test(value) ? value + "T12:00:00" : value;
+  const date = new Date(normalized);
+  return Number.isNaN(date.getTime())
+    ? value
+    : date.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+}
 
 export default function StudioDirectory({
   applications,
@@ -469,6 +477,28 @@ export default function StudioDirectory({
                                   <p>{profile.reachHighlights}</p>
                                 </section>
                               ) : null}
+                              {studio.notes ? (
+                                <section className="studio-detail-section">
+                                  <h3>Application route notes</h3>
+                                  <p>{studio.notes}</p>
+                                </section>
+                              ) : null}
+                              {studio.applicationResearch?.eligibleLocations?.length ? (
+                                <section className="studio-detail-section">
+                                  <h3>Listed hiring locations</h3>
+                                  <p>{studio.applicationResearch.eligibleLocations.join(" · ")}</p>
+                                </section>
+                              ) : null}
+                              {studio.applicationResearch?.disciplineScope?.length ? (
+                                <section className="studio-detail-section">
+                                  <h3>Listed disciplines</h3>
+                                  <div className="focus-tag-list">
+                                    {studio.applicationResearch.disciplineScope.slice(0, 8).map((item) => (
+                                      <span className="focus-tag" key={item}>{item}</span>
+                                    ))}
+                                  </div>
+                                </section>
+                              ) : null}
                             </div>
                             <div className="studio-details-facts">
                               <section className="studio-detail-section">
@@ -513,6 +543,15 @@ export default function StudioDirectory({
                               ))}
                             </div>
                           ) : null}
+                          <div className="studio-verification-meta">
+                            <span>Route last checked: <strong>{formatDate(studio.checkedAt)}</strong></span>
+                            {studio.applicationResearch?.nextReviewAt ? (
+                              <span>Next review target: <strong>{formatDate(studio.applicationResearch.nextReviewAt)}</strong></span>
+                            ) : null}
+                            {studio.evidenceUrl ? (
+                              <a href={studio.evidenceUrl} target="_blank" rel="noopener noreferrer">Route evidence</a>
+                            ) : null}
+                          </div>
                         </div>
                       </td>
                     </tr>
