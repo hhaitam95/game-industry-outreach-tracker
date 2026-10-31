@@ -332,6 +332,25 @@ Location-based, GPS-based, mobile and augmented-reality game developers can qual
 
 The working PR #70 branch now proposes **307 route/profile pairs**, **303 active and 4 paused**, across **50 country/location labels**. Main remains at 287/287 until the replacement PR is reviewed, merged and deployed.
 
+### Additional verified and reviewed findings — 2026-10-31 (batch 10)
+
+#### New verified route added to PR #70
+
+- **Fawkes Games (Bulgaria):** the official Careers page explicitly invites spontaneous applications and currently advertises Unity Game Engineer, 2D Game Artist, Game Designer, Producer and 2.5D Pixel Artist roles. The official Terms identify Fawkes Games LTD as registered in Plovdiv, Bulgaria. The official homepage and company documents describe a developer/publisher/live-service operator that operates five established online worlds and performs or coordinates client modernization, gameplay-system overhauls, content expansions and game updates. Its current careers pipeline includes direct Unity engineering, game-art and game-design positions. It is included as a **developer / publisher / live-service operator**, not as an original-IP-only studio; its games are labelled as operated/live-service titles where appropriate. The Careers page says work can be remote worldwide; individual roles are freelance and prefer Europe-friendly time zones. Sources: https://fawkesgames.com/, https://fawkesgames.com/en/careers/, https://fawkesgames.com/en/terms/.
+
+#### Earlier manual hold resolved
+
+- **Fawkes Games:** the prior manual hold was based on its About page describing a publisher/operator and did not yet establish direct in-house development. New official evidence (Unity Game Engineer, Game Designer and game-art recruitment; client modernization; gameplay changes; content cycles) demonstrates direct development/maintenance. This supersedes the earlier hold. The public profile retains the publisher/operator/live-service classification rather than misrepresenting the company as an original-IP-only studio.
+
+#### Manual review — not published
+
+- **DreamCentury Entertainment (France):** official company pages describe a digital casual-game creator since 1999, with around 50 web/mobile games and an explicit spontaneous-application form asking for a CV and motivation letter. However, official MadWin/Wonderz game rules describe both free rounds and a Credits Mode in which players can purchase game credits, use credits to enter games, score points and exchange points for prizes/gifts. This creates a material gambling/prize-game policy question. Keep the company out of the public directory pending company-level assessment of the paid-entry/prize model; do not silently classify it as either ordinary casual gaming or gambling without resolving the boundary. Sources: https://www.dreamcentury.com/playbox/site/index.asp, https://www.dreamcentury.com/playbox/site/recrutement/index.asp, https://www.dreamcentury.com/playbox/site/recrutement/candidaturespontanee.asp, https://php.dreamcentury.com/backend/external/madnetix/reglement_site/reglement_madwin_en.php, https://php.dreamcentury.com/backend/external/madnetix/reglement_site/reglement_wonderz_en.php.
+- **President Studio S.A. (Poland):** its official games page identifies it as a Warsaw-based development studio and publisher, listing Celestial Empire, Crime Scene Cleaner, Ship Builder and Viking City Builder. Its Careers page explicitly invites spontaneous applications and asks for CV/portfolio. However, the official page's linked TSP application destination (https://www.presidentstudio.tsp.link/pl/kontakt) returned HTTP 502 during review, so the usable application route could not be verified. Hold until the official endpoint works or an alternative employer-controlled application method is confirmed. A 502 is not evidence the studio withdrew the route. Sources: https://www.president-studio.com/en/games, https://www.president-studio.com/en/careers.
+
+#### Current batch checkpoint
+
+The proposal branch contains **308 route/profile pairs**, **304 active** and **4 paused**, across **51 country/location labels**. Main remains at 287/287 until PR #70 is reviewed, merged and deployed.
+
 ## 10. Handover protocol
 
 At the start of any new work session or handover:
