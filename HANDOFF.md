@@ -37,12 +37,13 @@ Keep the application to the two existing pages. Do not reintroduce the old job-p
 
 ## Current global-discovery checkpoint
 
-- Main remains at **287 verified routes / 287 profiles** (284 active, 3 paused) until the current batch-6 PR is merged and deployed.
-- The in-progress branch `data/global-discovery-batch-6-20261031` consolidates the previously validated fifth expansion and adds 22cans, Absolutely Games and AB Games, for a proposal of **293 routes / 293 profiles** (289 active, 4 paused).
-- It adds Favo Games, DON’T NOD Montréal's explicitly caveated candidate bank and Ubisoft Saguenay, and refreshes Bossa Studios, Brave At Night and Ember Crows.
-- Techtive Games GmbH is paused until its JOIN application route is linked or confirmed through an official employer channel. Plummy Games is also paused pending first-party confirmation of its Teamtailor Open Application link. Fawkes Games was initially held but is now included as a developer/publisher/live-service operator after official evidence confirmed direct game modernization, gameplay and content development plus active Unity/game-art/game-design roles. DreamCentury Entertainment remains held pending review of paid-entry game credits and prize redemption; President Studio remains held while its linked application endpoint returns HTTP 502. Xatronic Software GmbH is excluded because its official product pages describe online-casino and slot-game software.
-- Candidate source status and access restrictions are recorded in the Global Discovery Implementation Model. IGDB, GameCompanies.com, Games Jobs Index, Steam, MobyGames and the community dataset are not yet automated feeds; do not describe them as integrated.
-- PR #68 is superseded by the consolidated batch-6 proposal because of a base-branch conflict after the global-model documentation merge. Do not merge it independently.
+- Main contains **313 unique verified studio/employer records / 313 matching profiles**: 308 active routes and 5 paused routes across 51 country/location labels.
+- PR #70 (global directory expansion) and PR #71 (source-specific discovery engine) are merged. The 314-row PR #70 snapshot had a duplicate identity pair for the same FakeFish employer and identical open-application route. ADR-078 consolidates it into one canonical **FakeFish** record, preserving the more complete official profile and route detail.
+- The integrated candidate feeds are declared in `config/discovery-sources.json` and loaded by `scripts/discover_speculative_studios.py`. The private discovery state now migrates additively from schema v1 to v2.
+- The three Wikidata feeds have independent cursors, cycles, verified-addition counts and complete-empty-pass counters. After three complete empty passes, only that individual feed is limited to one page per hourly run. A new verified route resets only its originating feed. Failed or incomplete passes do not count as exhaustion.
+- GameDevMap remains a one-time backfill; its terminal cursor is preserved. Legacy Wikidata candidates without a stored feed identity remain `legacy_unattributed` instead of being assigned to a guessed source.
+- IGDB, GameCompanies.com, Games Jobs Index, Steam, MobyGames and the community database remain unintegrated research leads; do not describe them as automated feeds.
+- DreamCentury Entertainment and President Studio remain held for the reasons recorded in STATUS.md and the Global Discovery Implementation Model. The manual exclusions remain in `config/manual-studio-exclusions.json`.
 
 ## Handover checklist
 
