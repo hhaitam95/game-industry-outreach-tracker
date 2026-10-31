@@ -4947,8 +4947,8 @@
     "websiteUrl": "https://playtouch.net/",
     "applicationUrl": "https://playtouch.net/career",
     "evidenceUrl": "https://playtouch.net/career",
-    "notes": "Official studio-controlled page explicitly invites spontaneous applications. Evidence: Spontaneous applications. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-30",
+    "notes": "The official Careers page explicitly invites spontaneous applications year-round, even while the team is currently complete. Applicants select one of six skill tracks (AI/automation, HTML5 game/web engineering, 2D art/motion/Creative AI, game design/narrative/audio, QA/release operations, or product/AdTech/B2B) and submit a CV or portfolio directly to studio management in Grand Baie; email contact@playtouch.net is also accepted. Playtouch describes its production studio in Grand Baie, Mauritius and separately lists its French headquarters in Roquefort-les-Pins. The route is a talent pool for future openings, not a current vacancy for all tracks. Current listed positions are on-site in Grand Baie.",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [
@@ -4956,12 +4956,23 @@
         "website_form"
       ],
       "workModel": "not_stated",
-      "eligibleLocations": [],
-      "disciplineScope": [],
+      "eligibleLocations": [
+        "Grand Baie, Mauritius · applications reviewed by production studio leads; current listed roles are on-site; the company separately lists a French headquarters in Roquefort-les-Pins; applicant-country eligibility for the spontaneous talent pool is not explicitly stated"
+      ],
+      "disciplineScope": [
+        "AI workflows and automation",
+        "HTML5 game/web engineering",
+        "2D art and motion",
+        "Creative AI",
+        "Game design and narrative",
+        "Audio",
+        "QA and release operations",
+        "Product and B2B partnerships"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -7824,6 +7835,74 @@
       "relatedApplicationUrls": [
         "https://www.cluetivity.com/about/",
         "https://www.cluetivity.com/careers/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Tarokai",
+    "country": "Switzerland",
+    "websiteUrl": "https://www.tarokai.com/",
+    "applicationUrl": "https://www.tarokai.com/",
+    "evidenceUrl": "https://www.tarokai.com/",
+    "notes": "Official homepage explicitly invites spontaneous applications by email to careers@tarokai.com when the candidate does not see a suitable role. The site identifies Tarokai as a Swiss mobile-game studio and lists remote full-time roles in engineering, design, growth and art. Its live title is Peach Farmer, a free-to-play collectible-card game for iOS and Android linking card collection to real-world experiences. The Legal Notice identifies Tarokai SA as a Swiss société anonyme but does not disclose a registered city/address. Remote listings do not establish applicant-country or contracting eligibility.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Swiss company (Tarokai SA); current listings are full-remote, but applicant-country and contracting eligibility are not stated"
+      ],
+      "disciplineScope": [
+        "Mobile game development",
+        "Unity engineering",
+        "Game design",
+        "User acquisition",
+        "3D art",
+        "Community and live events"
+      ],
+      "relatedApplicationUrls": [
+        "https://www.tarokai.com/legal"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Procedural Games",
+    "country": "Spain",
+    "websiteUrl": "https://proceduralgames.com/",
+    "applicationUrl": "https://careers.proceduralgames.com/en/jobs/candidatura-espontanea",
+    "evidenceUrl": "https://careers.proceduralgames.com/en/jobs/candidatura-espontanea",
+    "notes": "The official Procedural Games homepage links directly to its Careers subdomain. The employer-controlled application portal lists an “Always open” Open application and says candidates who do not see a suitable role can submit a CV to be considered when a matching role opens. It is explicitly not a firm job offer; CV retention is up to 12 months and requires applicant permission. The portal lists hybrid work at Lanzadera in Valencia, depending on the role. The official homepage describes an independent mobile-game studio founded in Valencia in 2023, with game design, Unity development, live operations, monetization and user acquisition handled in-house. It encourages international applications and remote collaboration, while the open role itself is marked hybrid/Valencia.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "Valencia, Spain · hybrid at Lanzadera; exact arrangement depends on the role. The company says it encourages international applications and remote collaboration, but the open application posting itself is listed as hybrid/Valencia"
+      ],
+      "disciplineScope": [
+        "Mobile game development",
+        "Unity programming",
+        "Game art",
+        "Game design",
+        "Marketing",
+        "Quality assurance",
+        "Live operations"
+      ],
+      "relatedApplicationUrls": [
+        "https://proceduralgames.com/",
+        "https://careers.proceduralgames.com/en"
       ],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
