@@ -24,6 +24,12 @@
       "name": "3Sigma Games",
       "reason": "The company's own careers page explicitly labels the business an “Adult Game Studio”. Its General Application covers VFX, editing, directing, 2D/3D art, game development, game design and related functions, and asks candidates which sector they have worked in, including adult entertainment. This is a direct company-level adult-business signal, not merely a mature theme in an individual mainstream game. Exclude under the pornography/adult-sexual-entertainment policy.",
       "reviewed_at": "2026-10-31"
+    },
+    {
+      "domain": "xatronic.at",
+      "name": "Xatronic Software GmbH",
+      "reason": "The company's official Products page explicitly says it develops online casinos and online games for clients, with a focus on slot/reel games. It describes three-, four- and five-reel mechanics, bonus games and features designed to maximise players' chances of winning. The official homepage describes it as a supplier for online casino platforms and modern gambling software. This is directly within the project's iGaming/online-casino exclusion, regardless of its general software/game-development terminology.",
+      "reviewed_at": "2026-10-31"
     }
   ]
 }
