@@ -838,6 +838,32 @@ class DatasetUpdateTests(unittest.TestCase):
             {feed["id"] for feed in discovery.FEEDS},
         )
 
+    def test_v1_state_migration_preserves_checkpoints_without_guessing_feed_provenance(self):
+        legacy = discovery.empty_state()
+        legacy["schema_version"] = 1
+        legacy.pop("source_stats")
+        legacy["feed_cursors"]["wikidata_video_game_developers"] = "Q123"
+        legacy["candidates"]["Q123"] = {
+            "qid": "Q123",
+            "name": "Legacy Candidate",
+            "website": "https://legacy-candidate.example/",
+            "status": "no_route",
+            "cycle": 1,
+        }
+
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "discovery-state.json"
+            path.write_text(json.dumps(legacy), encoding="utf-8")
+            migrated = discovery.load_state(path)
+
+        self.assertEqual(migrated["schema_version"], 2)
+        self.assertEqual(migrated["feed_cursors"]["wikidata_video_game_developers"], "Q123")
+        self.assertEqual(migrated["candidates"]["Q123"]["source_id"], "legacy_unattributed")
+        self.assertFalse(any(
+            metrics["saturated"]
+            for metrics in migrated["source_stats"].values()
+        ))
+
 
 class GameDevMapDiscoveryTests(unittest.TestCase):
     def test_parser_reads_studio_rows_and_ignores_non_studio_categories(self):
