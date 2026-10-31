@@ -27,7 +27,7 @@ This phase is **not** a personal job-matching, application recommendation, vacan
 
 - Independent and corporate-owned game-development studios, from micro-indies through AAA studios.
 - A development studio that is part of a larger publisher, platform holder or entertainment group, while preserving its actual studio identity and parent relationship.
-- Organisations that materially create video games, including original-IP development and direct co-development, porting or game-production work.
+- Organisations that materially create video games, including original-IP development and direct co-development, porting or game-production work. Direct development of mobile, GPS-based, location-based and augmented-reality games qualifies when the organisation authors digital games/gameplay and supporting game software; a pure event organiser, escape-room operator or general software platform without direct digital-game development does not.
 - Studios across all countries and regions, including locations that are underrepresented in existing directories.
 - Studios across all game platforms and business models, provided their material business is legitimate video-game development.
 
