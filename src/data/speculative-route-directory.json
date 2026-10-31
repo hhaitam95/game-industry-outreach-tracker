@@ -1861,6 +1861,31 @@
     }
   },
   {
+    "name": "DON'T NOD",
+    "country": "France / Canada",
+    "websiteUrl": "https://dont-nod.com/en/careers/",
+    "applicationUrl": "https://jobs.smartrecruiters.com/DONTNOD/744000056999405",
+    "evidenceUrl": "https://dont-nod.com/en/careers/",
+    "notes": "The official careers page lists a Spontaneous Application for DON’T NOD Montréal and links to this SmartRecruiters candidate-bank posting. It asks candidates to describe their dream job and why they want to join Montréal. The posting explicitly says this is an application bank and does not represent a current or future recruitment need; only selected candidates are contacted. It describes the opportunity as permanent/full-time and says applicants may work anywhere in Québec. This is a speculative candidate pool, not an active vacancy.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "DON’T NOD Montréal, Québec, Canada · the SmartRecruiters posting says applicants may work anywhere in Québec; no cross-border eligibility is stated",
+        "Candidate-bank only: the employer states that the posting does not represent a current or future recruitment need"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "DON'T NOD (Montreal)",
     "country": "Canada",
     "websiteUrl": "https://dont-nod.com/en/",
@@ -2142,27 +2167,27 @@
     ]
   },
   {
-    "name": "Fawkes Games",
-    "country": "Bulgaria",
-    "websiteUrl": "https://fawkesgames.com/",
-    "applicationUrl": "https://fawkesgames.com/en/careers/",
-    "evidenceUrl": "https://fawkesgames.com/en/careers/",
-    "notes": "Official careers page invites spontaneous applications and says remote work can be done from anywhere. Some freelance roles prefer Europe-friendly time zones. Official route describes eligibility as worldwide.",
-    "checkedAt": "2026-10-30",
+    "name": "Favo Games",
+    "country": "Türkiye",
+    "websiteUrl": "https://favogames.com/",
+    "applicationUrl": "https://favogames.com/careers",
+    "evidenceUrl": "https://favogames.com/careers",
+    "notes": "The official Careers page has an explicit Open application option for candidates with skills not listed in the current roles and asks how they would improve the studio's games. The site form accepts a CV and portfolio link, is used to consider applicants for jobs, and says the studio replies to every application. The five-person Istanbul team says it works remotely from anywhere; country-specific legal/contract arrangements are not detailed.",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
-      "routeType": "spontaneous",
+      "routeType": "open",
       "submissionMethods": [
         "website_form"
       ],
       "workModel": "remote",
       "eligibleLocations": [
-        "Remote · worldwide stated"
+        "Remote · the official page says “work from anywhere”; country-specific employment or contracting arrangements are not enumerated"
       ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -6612,8 +6637,8 @@
     "websiteUrl": "https://techtive.games/",
     "applicationUrl": "https://join.com/companies/techtivegames/spontaneous-application",
     "evidenceUrl": "https://join.com/companies/techtivegames/spontaneous-application",
-    "notes": "Studio-controlled JOIN company profile offers a Spontaneous Application and invites CVs and cover letters for future opportunities when no suitable role is listed. Germany-based developer creating Ardem; profile lists remote work and relocation support.",
-    "checkedAt": "2026-10-30",
+    "notes": "The JOIN company profile offers a spontaneous application and describes Techtive Games as a Germany-based developer of Ardem. However, the current official Techtive domain redirects to the Ardem game website and does not link to this JOIN application route. The employer-controlled relationship required by the project’s route-verification standard could not be independently established. Route paused pending direct confirmation from an official company channel.",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [
@@ -6621,13 +6646,13 @@
       ],
       "workModel": "remote",
       "eligibleLocations": [
-        "Remote work advertised; eligible countries not specified"
+        "Germany · company location appears on the JOIN profile; official-domain hiring location, remote eligibility and applicant-country eligibility are not confirmed"
       ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
-      "routeStatus": "active",
+      "routeStatus": "paused",
       "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2026-11-30"
     }
   },
   {
@@ -6920,6 +6945,30 @@
       "routeStatus": "active",
       "sourceType": "studio_controlled_ats",
       "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Ubisoft Saguenay",
+    "country": "Canada",
+    "websiteUrl": "https://saguenay.ubisoft.com/en/",
+    "applicationUrl": "https://saguenay.ubisoft.com/fr/emplois/",
+    "evidenceUrl": "https://saguenay.ubisoft.com/fr/emplois/",
+    "notes": "The official Ubisoft Saguenay careers page has a Candidature Spontanée section. It explicitly says that if the desired position is not advertised, applicants should send their CV and portfolio to rhsaguenay@ubisoft.com. The route is tied to the Saguenay studio; applicant-country and remote-work eligibility are not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Saguenay, Québec, Canada · applicant-country and remote-work eligibility not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
