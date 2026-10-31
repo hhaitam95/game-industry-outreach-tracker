@@ -171,7 +171,7 @@ async function main() {
     const locationsAreSorted = await rows.evaluateAll((tableRows) => {
       const collator = new Intl.Collator(undefined, { sensitivity: "base", numeric: true });
       const values = tableRows.map((row) => ({
-        name: row.cells[0]?.textContent?.trim() || "",
+        name: row.querySelector(".studio-name")?.textContent?.trim() || "",
         location: row.cells[1]?.textContent?.trim() || "",
       }));
       return values.every((current, index) => {
