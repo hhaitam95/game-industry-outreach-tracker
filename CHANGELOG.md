@@ -35,7 +35,7 @@
 - Resolved the earlier Fawkes manual hold; it is now classified as a developer / publisher / live-service operator, not an original-IP-only studio.
 - Recorded **DreamCentury Entertainment** as manual review: it is a digital casual-game creator with a spontaneous-application route, but official rules describe purchaseable credits used to enter games for points/prizes, requiring a gambling/prize-game policy determination.
 - Recorded **President Studio S.A.** as manual review: official studio and spontaneous-application evidence is clear, but the linked employer application endpoint returned HTTP 502 and must be retried before publication.
-- Proposal branch now contains **308 route/profile pairs (304 active, 4 paused; 51 country/location labels)**. Main remains at 287/287 until PR #70 is reviewed, merged and deployed.
+- Historical proposal snapshot contained **308 route/profile pairs (304 active, 4 paused; 51 country/location labels)**. PR #70 subsequently merged; see the current checkpoint above.
 - Added ADR-075 and updated the authoritative model, STATUS and HANDOFF.
 
 ## 2026-10-31 — Global discovery batch 9 (merged in PR #70)
@@ -44,7 +44,7 @@
 - Resolved the earlier Thought Pennies manual hold after confirming its official homepage links directly to its careers-page.com Open application; retained unknown country and applicant eligibility rather than inferring them.
 - Refreshed **Playtouch** to document its six year-round spontaneous talent-pool tracks, direct Grand Baie application handling and separate Mauritius production/administration and French HQ locations.
 - Reconfirmed Kuuasema and Bananagun as existing qualifying entries; no duplicates added.
-- Proposal branch now contains **307 route/profile pairs (303 active, 4 paused; 50 country/location labels)**. Main remains at 287/287 until PR #70 is reviewed, merged and deployed.
+- Historical proposal snapshot contained **307 route/profile pairs (303 active, 4 paused; 50 country/location labels)**. PR #70 subsequently merged; see the current checkpoint above.
 - Added ADR-074 and preserved the source evidence and unknowns in the Global Discovery Implementation Model, STATUS and HANDOFF.
 
 ## 2026-10-31 — Global discovery batch 8 (merged in PR #70)
@@ -55,7 +55,7 @@
 - Added **3Sigma Games** to the manual exclusion configuration after its official hiring page explicitly described the company as an Adult Game Studio.
 - Rechecked Raw Power Games, Futureplay Games and Shiro Games; their existing records were already present and were not duplicated.
 - Kept Studio Countdown and welevel out of the public directory because the reviewed evidence did not establish both a legitimate video-game development business and an official employer-backed general application route.
-- Proposal branch now contains **304 route/profile pairs (300 active, 4 paused; 50 country/location labels)**. Main remains at 287/287 until PR #70 is reviewed, merged and deployed.
+- Historical proposal snapshot contained **304 route/profile pairs (300 active, 4 paused; 50 country/location labels)**. PR #70 subsequently merged; see the current checkpoint above.
 - Added ADR-073 and updated the authoritative model, STATUS and handover rules.
 
 ## 2026-10-31 — Global discovery batch 7 (merged in PR #70)
@@ -66,10 +66,10 @@
 - Recorded Duhndal as manual review due to the drug-themed Drug Lord Tycoon title in a broader game portfolio; recorded Manc Games as manual review because the separate General Application microsite is not linked from the main official Careers page.
 - Reconsidered Fawkes Games: its spontaneous application and development role listings warrant review, but the official About page still describes a publisher/operator rather than establishing in-house development. AMIGO Spiele is kept out as a tabletop-only publisher/developer.
 - Confirmed multiple other rediscovered studios were already in the directory and were not duplicated.
-- The proposal branch now contains 301 route/profile pairs (297 active, 4 paused; 49 country/location labels). Main remains at 287 / 287 until PR #70 is reviewed and merged.
+- The historical proposal snapshot contained 301 route/profile pairs (297 active, 4 paused; 49 country/location labels). PR #70 subsequently merged; see the current checkpoint above.
 - Updated the global discovery implementation model, ADR-072 and STATUS.md to preserve the evidence and handover decisions.
 
-## 2026-10-31 — Global discovery batch 6 (proposed)
+## 2026-10-31 — Global discovery batch 6 (merged in PR #70)
 
 - Consolidates the validated fifth expansion: adds Sudden Forest and refines Chimera Entertainment and Supermassive Games.
 - Adds 22cans, Absolutely Games and AB Games, plus Favo Games (Türkiye), DON’T NOD Montréal (France / Canada) and Ubisoft Saguenay (Canada), each with an official non-vacancy application route.
@@ -87,7 +87,7 @@
 - Recorded access and accuracy caveats, including MobyGames API authorization/terms, mixed entity types in directories, manual review for uncertain exclusions and source-specific (not global) saturation as the target model.
 - Linked the model from README.md and HANDOFF.md; refreshed STATUS.md to remove outdated career-path/geography prioritization and record the current discovery checkpoint.
 
-## 2026-10-31 — Route quality refresh (proposed)
+## 2026-10-31 — Route quality refresh (merged in PR #70)
 
 - Updated Aska Studios to its official email-based General Application page and explicit remote-first wording.
 - Updated Obsidian Entertainment to its employer-managed ATS General Application, including discipline scope.
@@ -97,7 +97,7 @@
 
 # Changelog
 
-## 2026-10-31 — Worldwide expansion batch 4 (proposed)
+## 2026-10-31 — Worldwide expansion batch 4 (merged in PR #70)
 
 - Added Kokku (remote co-development talent pools), Side (Philippines Player Support and regional co-development / QA / animation pools), and Raini Studios (spontaneous remote application).
 - Refreshed Havoc Games to reflect current Remote (India) general application and listed disciplines.
