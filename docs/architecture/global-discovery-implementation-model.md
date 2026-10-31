@@ -279,6 +279,36 @@ These records are proposed on the current open data PR and are not yet part of m
 
 Several newly surfaced pages were already represented in the directory and were not duplicated: Reply Game Studios, Ocellus, Old Skull Games, VestGames, Yabu Games, Funday Games, Octocube Games, Abyssal Interactive, Aethra Studios, Katal Games, Sencorp Games, Studios DRAMA, D4N Games and the other current batch records. Rechecking existing records is useful maintenance, but a new search result is not a new studio record.
 
+### Additional verified and reviewed findings — 2026-10-31 (batch 8)
+
+#### New verified speculative routes prepared for publication on PR #70
+
+- **Rapidfire Games (Cyprus):** its official Careers section says there are no open positions but explicitly invites an open application with a CV or portfolio through the careers contact shown on its site. The studio describes an independent senior team of 18 working remotely from around the world and developing free-to-play mobile games for iOS/Android; its live title is Backpack Brawl. Official terms identify RAPIDFIRE LTD, registration HE460989, with a Geri, Cyprus registered office, while its privacy policy styles the name RAPIDFIRE GAME LTD with the same registration number/address. Keep that legal-name discrepancy visible. A globally distributed team is not proof that candidates can be hired in every country; applicant-country/contract eligibility is unstated. Sources: https://rapidfire.games/, https://rapidfire.games/privacy-policy/, https://rapidfire.games/terms-and-conditions/.
+- **Sleeprunner Studios (Germany):** its official Jobs page explicitly invites unsolicited applications from designers, programmers, artists, marketers and other contributors when no role fits. It asks for CV, portfolio and motivation letter by email to `hello@sleeprunnerstudios.com`, in PDF format. The official About page describes a five-person Bayreuth indie developing core PC/console games with Unreal Engine. Employees must reside in Germany or the EU; freelancers can collaborate worldwide. Its workplace is hybrid and relocation support is stated. Projects include Trail of Toads, Downfall Hearts and the Windstorm remaster. Sources: https://sleeprunnerstudios.com/, https://sleeprunnerstudios.com/jobs/, https://sleeprunnerstudios.com/about/, https://sleeprunnerstudios.com/press/.
+- **Cluetivity (Germany):** the official Careers page embeds its employer-controlled Personio recruitment system, which lists an Initiative Application. The Personio listing explicitly invites contact when the desired job is not listed. The official About page says the company began developing GPS-based games in 2006 and now develops location-based/mobile games and a game-creation platform for augmented-reality outdoor/indoor experiences. It is included as a specialised digital-game developer, not represented as a conventional PC/console studio. The employer listing allows remote or Berlin; applicant-country eligibility is not stated. The official careers footer identifies Life Action Games GmbH. Sources: https://www.cluetivity.com/, https://www.cluetivity.com/about/, https://www.cluetivity.com/careers/, https://cluetivity.jobs.personio.de/job/431574?language=en.
+
+#### Existing route refinement
+
+- **Next Level Games (Canada):** the existing General Application remains active and explicitly invites experienced game developers when no position is open. The latest employer-managed application form now states hybrid work with at least three days per week at the Vancouver studio, Canada work authorization and current British Columbia residence. The existing route record has been updated to `workModel: hybrid` and its eligibility caveats corrected. Do not create a duplicate. Evidence: https://nextlevelgames.applytojob.com/apply/YyYQvToJW1/General-Application.
+
+#### Company-level exclusion
+
+- **3Sigma Games — excluded:** its own hiring page explicitly labels the business an “Adult Game Studio” and invites general applications for VFX, editing, directing, 2D/3D art, game development and game design roles. The same application asks about the applicant's sector, including adult entertainment. Added `3sigma-games.com` to `config/manual-studio-exclusions.json`. This is explicit company-level evidence, not a keyword or mature-theme inference. Source: https://www.3sigma-games.com/public/hiring.
+
+#### Other search results reviewed; no new record
+
+- **Raw Power Games:** already in the directory; its official Teamtailor page continues to show an Unsolicited Application. No duplicate added.
+- **Futureplay Games:** already in the directory; its official Open Application continues to say Remote: Global. No duplicate added.
+- **Shiro Games:** already in the directory; its official General Application continues to invite experienced game developers by email. No duplicate added.
+- **Next Level Games:** already recorded; only eligibility/work-model details were refreshed.
+- **Studio Countdown:** not added. Its official Careers page describes an animation studio; the inspected opportunities include a comic project and revenue-share roles, but do not establish direct video-game development.
+- **welevel München:** not added. The speculative route surfaced through LinkedIn, but an official company-controlled application destination/evidence path was not established.
+- **Axonlab:** not added; the search result was a multi-country initiative-application portal, not evidence of a video-game development studio.
+
+#### Classification clarification
+
+Location-based, GPS-based, mobile and augmented-reality game developers can qualify when the organisation materially creates digital games/gameplay and the supporting software. Cluetivity is included under this rule, with its specialised business category clearly stated. Do not automatically include events companies, escape-room operators or general software/platform vendors that do not actually develop digital games.
+
 ## 10. Handover protocol
 
 At the start of any new work session or handover:
