@@ -1,6 +1,12 @@
 # Changelog
 
-## 2026-10-30
+## 2026-10-31
+
+- Expanded the proposed verified speculative-route directory with 14 researched studio application routes across Europe, Asia, Africa and Oceania (combined from PRs #62 and #63).
+- Added explicit hiring-location, language, work-authorisation and discipline caveats wherever official pages stated them; unstated eligibility remains unknown.
+- Updated global discovery status to the 10,370-candidate checkpoint and latest successful source-cycle run.
+
+## Earlier changes — 2026-10-30
 
 - Reset the product to a small studio directory and private application tracker.
 - Flattened the public directory to studios with official speculative/open-application routes only.
