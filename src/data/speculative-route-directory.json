@@ -3162,22 +3162,27 @@
     "websiteUrl": "https://hypehype.com/",
     "applicationUrl": "https://hypehype.com/jobs",
     "evidenceUrl": "https://hypehype.com/jobs",
-    "notes": "Official jobs page lists an Open Application for people interested in AI-native games and game creation; studio is in Helsinki and eligibility is unstated. Work model: onsite.",
-    "checkedAt": "2026-10-29",
+    "notes": "Official Jobs page describes HypeHype as an AI-native game studio based in Helsinki, backed by Supercell and Benchmark, and lists a dedicated Open Application for AI-native people interested in shaping games and game creation. The application page also lists a Game Designer - AI Native Games role. The official page does not specify work-model or applicant-country eligibility for the open application; Helsinki is the studio location, not an assumed hiring restriction.",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
         "website_form"
       ],
-      "workModel": "on_site",
+      "workModel": "not_stated",
       "eligibleLocations": [
-        "Helsinki · on-site noted on route"
+        "Helsinki, Finland · studio location; open-application work model and applicant-country eligibility not stated"
       ],
-      "disciplineScope": [],
+      "disciplineScope": [
+        "AI-native game design",
+        "Game creation tools",
+        "Game development",
+        "AI-native games"
+      ],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-27"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -4981,8 +4986,8 @@
     "websiteUrl": "https://plummygames.teamtailor.com/",
     "applicationUrl": "https://plummygames.teamtailor.com/jobs/6670751-open-application/applications/new",
     "evidenceUrl": "https://plummygames.teamtailor.com/jobs/6670751-open-application/applications/new",
-    "notes": "Official company page identifies Chișinău, Moldova as its home base (about 25 teammates in the office) and lists Tallinn, Estonia among remote-work locations. Open application; fully remote options, with B2B conditions for some countries.",
-    "checkedAt": "2026-10-30",
+    "notes": "The employer-branded Teamtailor site hosts an Open Application and lists Plummy Games, its company information and homepage. However, the current official plummygames.com homepage could not be inspected for a forward link to the Teamtailor application. Under the project's direct employer-linkage standard, the relationship has not been independently established from the official company domain. Route paused pending a verifiable link from the official homepage/careers page or direct confirmation from the employer; this is not evidence that the application has closed.",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -4990,13 +4995,13 @@
       ],
       "workModel": "remote",
       "eligibleLocations": [
-        "Remote / Tallinn · B2B terms may apply depending on country"
+        "Teamtailor page lists Chișinău, Moldova and Tallinn/remote options; applicant-country details require verification with the official employer channel"
       ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
-      "routeStatus": "active",
+      "routeStatus": "paused",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2026-11-30"
     }
   },
   {
@@ -5376,11 +5381,11 @@
   {
     "name": "Redly Games",
     "country": "Finland",
-    "websiteUrl": "https://jobs.ashbyhq.com/redlygames",
+    "websiteUrl": "https://www.redlygames.com/",
     "applicationUrl": "https://jobs.ashbyhq.com/redlygames/3c2a1d1e-5e80-4b4e-895d-f43d0efe4d3b",
-    "evidenceUrl": "https://jobs.ashbyhq.com/redlygames/3c2a1d1e-5e80-4b4e-895d-f43d0efe4d3b",
-    "notes": "Official Ashby General Interest application welcomes candidates without a matching role. Global remote; EU and Canada preferred, others considered by role.",
-    "checkedAt": "2026-10-30",
+    "evidenceUrl": "https://www.redlygames.com/",
+    "notes": "The official Redly Games homepage has a Join Us link to its employer-managed Ashby recruitment portal. The linked General Interest - Open Application explicitly invites thoughtful candidates even when no specific role matches, to be considered for future work. It is a remote contract application for a small, remote-first Helsinki studio developing its first mobile 3D adventure game in Unreal Engine 5. The application says the team is across Europe and North America, EU and Canada are preferred, and exceptional applicants elsewhere may be considered depending on role. No specific hiring country list or game title is published.",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -5388,13 +5393,23 @@
       ],
       "workModel": "remote",
       "eligibleLocations": [
-        "Global remote · EU and Canada preferred"
+        "Remote contract · studio team across Europe and North America; EU and Canada preferred, exceptional candidates elsewhere may be considered depending on role"
       ],
-      "disciplineScope": [],
-      "relatedApplicationUrls": [],
+      "disciplineScope": [
+        "Engineering",
+        "Art",
+        "Design",
+        "Production",
+        "Community",
+        "Marketing",
+        "Game development"
+      ],
+      "relatedApplicationUrls": [
+        "https://www.redlygames.com/"
+      ],
       "routeStatus": "active",
-      "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -7972,6 +7987,113 @@
       "relatedApplicationUrls": [
         "https://fawkesgames.com/en/terms/",
         "https://fawkesgames.com/en/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "FakeFish Games",
+    "country": "Finland",
+    "websiteUrl": "https://www.fakefishgames.com/",
+    "applicationUrl": "https://www.fakefishgames.com/jobs/open-application",
+    "evidenceUrl": "https://www.fakefishgames.com/jobs",
+    "notes": "Official Careers page explicitly tells candidates not to hesitate to fill out the Open Application form if no current role fits. The dedicated application asks candidates who do not see their job listed to submit information so the studio can keep them in mind for future opportunities. FakeFish is an independent game-development studio working on Barotrauma and an undisclosed second game. Its current About page describes a flexible workplace with headquarters in Turku and a smaller Helsinki office. The Open Application page reports a team of about 25 people as of early 2023; the current homepage describes about 20 people, so the older role-page figure should not be treated as current headcount.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Turku, Finland and beyond · official page says Turku & beyond and flexible work; no applicant-country eligibility or fixed remote policy stated"
+      ],
+      "disciplineScope": [
+        "Programming",
+        "Art",
+        "Game design",
+        "Quality assurance",
+        "Production",
+        "Community management",
+        "Audio"
+      ],
+      "relatedApplicationUrls": [
+        "https://www.fakefishgames.com/about-us",
+        "https://www.fakefishgames.com/our-games"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Winning Streak Games",
+    "country": "Germany",
+    "websiteUrl": "https://winningstreakgames.de/",
+    "applicationUrl": "https://winningstreakgames.de/",
+    "evidenceUrl": "https://winningstreakgames.de/",
+    "notes": "Official company homepage contains a dedicated Initiativbewerbung section explicitly inviting candidates to write even when no listed job fits. The company's Impressum publishes the recruitment contact gkoehler@winningstreak.de. Winning Streak Games is a Cologne-based developer of PC simulation games; its own site identifies WE ARE FOOTBALL 2027 and WE ARE FOOTBALL 2024 and records the company's founding in Cologne in 2018. All advertised jobs are full-time in Cologne; home office is possible only as an exception. The company has a publishing agreement with THQ Nordic but is a direct developer, not a publisher-only business.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "on_site",
+      "eligibleLocations": [
+        "Cologne, Germany · advertised positions are full-time in Cologne; home office only in exceptional cases"
+      ],
+      "disciplineScope": [
+        "PC game development",
+        "Simulation",
+        "Programming",
+        "Game design",
+        "UI",
+        "Graphics",
+        "Quality assurance",
+        "Database/game systems"
+      ],
+      "relatedApplicationUrls": [
+        "https://winningstreakgames.de/impressum.html"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "ByteRockers' Games",
+    "country": "Germany",
+    "websiteUrl": "https://www.byterockers.games/",
+    "applicationUrl": "https://www.byterockers.games/de/jobs",
+    "evidenceUrl": "https://www.byterockers.games/de/jobs",
+    "notes": "Official Jobs page explicitly says that candidates who do not find a suitable role, or when the company is not actively hiring, should send an Initiativbewerbung to jobs@byterockers.games. It specifically addresses people passionate about developing video games. Official About page says ByteRockers' Games creates its own games and began publishing other creative teams' projects in 2024. The legal Impressum identifies ByteRockers' Games GmbH & Co. KG at Schloßstraße 110, 12163 Berlin. Its developer credits include Insurmountable, Beat Slayer and Gelly Break Deluxe; the current homepage also features further PC/console titles. The unsolicited route does not separately state work model or applicant-country eligibility.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Berlin, Germany · official registered address; work model and applicant-country eligibility for unsolicited applicants not stated"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Programming",
+        "Game design",
+        "Art",
+        "Animation",
+        "Audio",
+        "QA",
+        "Production",
+        "Publishing"
+      ],
+      "relatedApplicationUrls": [
+        "https://www.byterockers.games/de/%C3%BCber-uns",
+        "https://www.byterockers.games/de/impressum"
       ],
       "routeStatus": "active",
       "sourceType": "official_company_site",
