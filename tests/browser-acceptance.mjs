@@ -77,6 +77,10 @@ async function main() {
         }),
       });
     });
+    const posterFixture = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC", "base64");
+    await page.route("https://shared.steamstatic.com/**", async route => {
+      await route.fulfill({ status: 200, contentType: "image/png", body: posterFixture });
+    });
     await page.addInitScript(() => {
       if (!localStorage.getItem("studio-outreach-theme-v1")) {
         localStorage.setItem("studio-outreach-theme-v1", "light");
@@ -123,6 +127,19 @@ async function main() {
     await page.getByLabel("Search").fill("4A Games");
     assert.equal(await rows.count(), 1, "A matching studio search should return the intended studio.");
     await rows.getByText("4A Games").waitFor();
+    const fourARow = rows.filter({ hasText: "4A Games" });
+    await fourARow.getByRole("button", { name: "4A Games" }).click();
+    const fourAPosters = page.locator(".game-poster-grid .game-poster-card");
+    assert.equal(await fourAPosters.count(), 2, "Expanded studio profiles should render one poster card per notable game.");
+    assert.deepEqual(
+      await fourAPosters.evaluateAll(cards => cards.map(card => card.getAttribute("data-game-title"))),
+      ["Metro Exodus", "Metro: Last Light Redux"],
+    );
+    assert.ok(
+      await page.locator(".game-poster-grid img").count() > 0,
+      "Steam-listed games should render cover artwork images.",
+    );
+    await fourARow.getByRole("button", { name: "4A Games" }).click();
     await page.getByLabel("Search").fill("");
     assert.equal(await rows.count(), initialCount, "Clearing a successful search should restore the directory.");
 

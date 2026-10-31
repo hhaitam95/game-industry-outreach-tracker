@@ -38,6 +38,9 @@ test("studio directory renders the small studio table and working filter control
     assert.match(markup, /Sort by Studio/);
     assert.match(markup, /aria-controls="studio-details-4a-games"/);
     assert.match(markup, /Metro Exodus/);
+    assert.match(markup, /popular-game-cover/);
+    assert.match(markup, /library_600x900/);
+    assert.match(markup, /data-game-title="Metro Exodus"/);
     assert.match(markup, /Bossa Studios/);
     assert.match(markup, /Application/);
     assert.match(markup, /Website/);
