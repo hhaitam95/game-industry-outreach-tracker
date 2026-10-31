@@ -452,14 +452,16 @@ export default function StudioDirectory({
                               <section className="studio-detail-section">
                                 <h3>Notable work</h3>
                                 {notableGames.length > 0 ? (
-                                  <div className="game-poster-grid">
-                                    {notableGames.map((game) => (
-                                      <GamePoster game={game} key={game.title} />
-                                    ))}
-                                  </div>
-                                  <p className="game-artwork-note">
-                                    Official Steam library covers appear where a Steam listing is available. Other titles use a labelled placeholder.
-                                  </p>
+                                  <>
+                                    <div className="game-poster-grid">
+                                      {notableGames.map((game) => (
+                                        <GamePoster game={game} key={game.title} />
+                                      ))}
+                                    </div>
+                                    <p className="game-artwork-note">
+                                      Official Steam library covers appear where a Steam listing is available. Other titles use a labelled placeholder.
+                                    </p>
+                                  </>
                                 ) : (
                                   <p className="detail-muted">No game titles are listed in this profile.</p>
                                 )}
