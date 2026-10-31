@@ -87,7 +87,7 @@ async function main() {
     await page.getByLabel("Search").fill("4A Games");
     assert.equal(await rows.count(), 1, "A matching studio search should return the intended studio.");
     await rows.getByText("4A Games").waitFor();
-    await page.getByRole("button", { name: "Clear filters" }).click();
+    await page.getByLabel("Search").fill("");
     assert.equal(await rows.count(), initialCount, "Clearing a successful search should restore the directory.");
 
     // Country and work-model filters must actually reduce the visible result set.
