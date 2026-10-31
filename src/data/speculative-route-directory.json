@@ -1405,6 +1405,41 @@
     }
   },
   {
+    "name": "Com2uS Europe GmbH",
+    "country": "Germany",
+    "websiteUrl": "https://www.com2us.com/",
+    "applicationUrl": "https://gvc2u.jobs.personio.com/job/116056?language=en",
+    "evidenceUrl": "https://gvc2u.jobs.personio.com/job/116056?language=en",
+    "notes": "The official Personio Application Pool invites speculative applications when no suitable vacancy is listed. It is a full-time, permanent Berlin position covering esports, marketing, community management and video-content editing/production; the wider office also provides localization, customer support and game operations for mobile games. Applicants must be available to work from or move to Berlin. Strong English is required; additional German, French, Russian or Korean may be relevant by role. Home office is possible.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "Berlin, Germany · full-time, permanent; must be available to work from or relocate to Berlin; home office possible"
+      ],
+      "disciplineScope": [
+        "Esports",
+        "Marketing",
+        "Community management",
+        "Video editing",
+        "Video production",
+        "Localization",
+        "Customer support",
+        "Game operations"
+      ],
+      "relatedApplicationUrls": [
+        "https://gvc2u.jobs.personio.com/?language=en"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Couch Heroes",
     "country": "Not stated",
     "websiteUrl": "https://couch-heroes.com/",
@@ -2256,6 +2291,39 @@
     }
   },
   {
+    "name": "Funder Games",
+    "country": "Not stated",
+    "websiteUrl": "https://www.funder-games.com/",
+    "applicationUrl": "https://www.funder-games.com/careers/general-application/",
+    "evidenceUrl": "https://www.funder-games.com/careers/",
+    "notes": "Official General Application invites senior contributors with shipped work and production judgment. IMPORTANT: the studio says its current development roles are volunteer collaborations while its project pursues funding and publishing; there are no guaranteed paid roles at this stage. The team works fully remotely, mainly around US Central Time with flexibility for contributors elsewhere. The application page says the studio responds only when there is a strong fit.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form",
+        "email"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Fully remote; US Central Time overlap is preferred but other regions may be considered. Current collaboration is volunteer/unpaid while pre-funding; no paid employment guarantee"
+      ],
+      "disciplineScope": [
+        "Gameplay",
+        "Combat systems",
+        "Technical foundation",
+        "Pipeline",
+        "Art",
+        "Worldbuilding",
+        "Senior production contributors"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Funny Tales",
     "country": "United States",
     "websiteUrl": "https://funnytales.us/",
@@ -2436,6 +2504,36 @@
     "workModel": "hybrid"
   },
   {
+    "name": "Garena",
+    "country": "Singapore",
+    "websiteUrl": "https://www.garena.sg/",
+    "applicationUrl": "https://careers.garena.com/global/careers/J02131365",
+    "evidenceUrl": "https://careers.garena.com/global/careers/J02131365",
+    "notes": "Official Garena Careers listing titled General Openings (Associate) states that candidates may be considered for current and future opportunities matching their skills. The Singapore entry-level pool welcomes applicants interested in game operations, marketing, game design, product management and software engineering. A relevant bachelor's degree or higher is required. The listing does not specify remote eligibility.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Singapore · entry-level General Openings (Associate); relevant bachelor's degree or higher required; remote eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Game operations",
+        "Marketing",
+        "Game design",
+        "Product management",
+        "Software engineering"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "GauravGo Games Technologies",
     "country": "India",
     "websiteUrl": "https://gauravgo.com/",
@@ -2543,6 +2641,39 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "GoE-Craft",
+    "country": "Not stated",
+    "websiteUrl": "https://www.goecraft.com/",
+    "applicationUrl": "https://www.goecraft.com/careers/",
+    "evidenceUrl": "https://www.goecraft.com/careers/",
+    "notes": "Official Careers page includes remote roles and explicitly invites a general application from creators whose role is not listed. GoE-Craft describes itself as an official Microsoft Minecraft Marketplace partner since 2018, producing Bedrock add-ons, texture packs and worlds. Role terms vary between full-time, freelance and commission-based; country eligibility for remote work is not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote roles are listed; applicant-country eligibility is not stated. Current opportunities include full-time, freelance and commission-based work"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Minecraft scripting",
+        "Art",
+        "Animation",
+        "Building",
+        "Game design",
+        "Project management",
+        "Social content"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-29"
     }
   },
@@ -3067,6 +3198,38 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Kabam",
+    "country": "Canada",
+    "websiteUrl": "https://www.kabam.com/",
+    "applicationUrl": "https://jobs.lever.co/kabam/d62974d9-8d92-4c7b-8d56-8ee23d35904d",
+    "evidenceUrl": "https://jobs.lever.co/kabam/d62974d9-8d92-4c7b-8d56-8ee23d35904d",
+    "notes": "Official Lever General Application invites resumes for future consideration when no perfect role is available. The current listing is full-time, on-site in Vancouver and says applicants must already be in one of Kabam's studio cities or plan to relocate. The company lists offices in Vancouver, Montreal and Charlottetown (Canada), Los Angeles and San Francisco (United States), and Seoul (South Korea). This is not a remote application route.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "on_site",
+      "eligibleLocations": [
+        "Full-time, in-office; must be located in or plan to relocate to a Kabam studio city: Vancouver, Montreal or Charlottetown (Canada), Los Angeles or San Francisco (US), or Seoul (South Korea). Current posting location: Vancouver."
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Game operations",
+        "Creative services",
+        "Production",
+        "People and business functions"
+      ],
+      "relatedApplicationUrls": [
+        "https://jobs.lever.co/kabam/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-29"
     }
   },
@@ -3664,6 +3827,37 @@
     }
   },
   {
+    "name": "Mainframe Industries",
+    "country": "Finland",
+    "websiteUrl": "https://themainframe.com/",
+    "applicationUrl": "https://themainframe.com/en/work-with-us/",
+    "evidenceUrl": "https://themainframe.com/en/work-with-us/",
+    "notes": "Official Work With Us page says there are no open positions and no internship or apprenticeship programme at present, but explicitly invites candidates to email an application to jobs@themainframe.com for future relevant opportunities. Mainframe describes itself as a fully distributed pan-European game developer supporting remote and in-office work, with studios in Helsinki, Reykjavík and Paris. Its headquarters are in Helsinki; the page does not define eligibility for employment from other countries.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Pan-European studio network: Helsinki, Finland; Reykjavík, Iceland; Paris, France. Remote and in-office work supported; employment eligibility outside these hubs is not specified"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Art",
+        "Design",
+        "Engineering",
+        "Production",
+        "Publishing"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Melcher Studios",
     "country": "Canada",
     "websiteUrl": "https://www.melcher.ca/",
@@ -4128,6 +4322,35 @@
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Olive Branch Interactive",
+    "country": "Not stated",
+    "websiteUrl": "https://olivebranchinteractive.com/",
+    "applicationUrl": "https://olivebranchinteractive.com/careers",
+    "evidenceUrl": "https://olivebranchinteractive.com/careers",
+    "notes": "Official Careers page explicitly invites open applications from programmers, artists, designers and other contributors, asking candidates to submit a portfolio and describe how they could contribute. The studio describes itself as remote-first, with team members across multiple time zones, and advertises work from anywhere in the world. Its hiring/legal entity and country-specific employment restrictions are not stated on the reviewed page.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "contact_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Work from anywhere in the world per official careers page; employing entity and country-specific legal eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Programming",
+        "Art",
+        "Design",
+        "Game development"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -5077,6 +5300,32 @@
     }
   },
   {
+    "name": "Shiro Games",
+    "country": "France",
+    "websiteUrl": "https://www.shirogames.com/",
+    "applicationUrl": "https://jobs.shirogames.com/jobs/general-application/",
+    "evidenceUrl": "https://jobs.shirogames.com/jobs/general-application/",
+    "notes": "Official careers page has a General Application and invites experienced game developers to introduce themselves even when their profile does not match a listed vacancy. Applications are accepted by email at jobs@shirogames.com. The studio identifies Bordeaux as its home and explicitly invites candidates to live there; no remote or cross-border eligibility is stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "on_site",
+      "eligibleLocations": [
+        "Bordeaux, France · studio asks applicants to live in Bordeaux; remote and cross-border eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Game development"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Silent Games",
     "country": "England",
     "websiteUrl": "https://www.silentgames-studio.com/",
@@ -5233,27 +5482,56 @@
     }
   },
   {
+    "name": "Spark Universe",
+    "country": "Germany",
+    "websiteUrl": "https://sparkuniverse.com/",
+    "applicationUrl": "https://spark-universe.talentlyft.com/",
+    "evidenceUrl": "https://sparkuniverse.com/jobs",
+    "notes": "The official Jobs page links a General Application to Spark Universe's TalentLyft form. The form accepts a CV for future matching and offers optional consent to retain the applicant's data for 18 months and contact them about later opportunities. Spark Universe GmbH is a Hamburg-based group creating Minecraft games, mods and events. Work model and cross-border eligibility are not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Hamburg, Germany · location of Spark Universe GmbH; remote and cross-border eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Minecraft game development",
+        "Mods",
+        "Events",
+        "Creative production"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Speedway Games",
     "country": "Not stated",
     "websiteUrl": "https://speedway-games.com/",
     "applicationUrl": "https://speedway-games.com/careers/45073",
     "evidenceUrl": "https://speedway-games.com/careers/45073",
-    "notes": "Official General Application is for experienced contributors whose skills do not match a listed role. Applications are reviewed on an ongoing basis; location is Global.",
-    "checkedAt": "2026-10-29",
+    "notes": "Official General Application lists the location as Global and is intended for experienced contributors whose skills do not match a specific current role. The official careers page describes a fully remote, asynchronous team and says applications are reviewed on an ongoing basis. The studio builds and operates live Roblox games at scale.",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
         "website_form"
       ],
-      "workModel": "not_stated",
+      "workModel": "remote",
       "eligibleLocations": [
-        "Global · location stated on general application"
+        "Global · official General Application lists Global; careers page describes a remote-first, asynchronous team"
       ],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-27"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -5393,6 +5671,37 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Starfish Studios",
+    "country": "United States",
+    "websiteUrl": "https://starfishstudios.com/",
+    "applicationUrl": "https://jobs.talenthr.io/starfish/general-application-all-roles/8",
+    "evidenceUrl": "https://starfishstudios.com/jobs",
+    "notes": "Official Jobs page says its general application is always open for builders, artists, developers, designers, producers and QA, and that it reviews the pool when hiring. Starfish is a fully remote Minecraft-focused game studio with shipped Marketplace content and projects. The employer-managed TalentHR general application lists the United States as the location; despite the distributed team, cross-border hiring eligibility is not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote; TalentHR General Application lists United States as the location. International employment eligibility is not stated"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Art",
+        "Design",
+        "Production",
+        "Quality assurance",
+        "Minecraft content"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
@@ -6353,6 +6662,37 @@
     }
   },
   {
+    "name": "Wolfjaw Studios",
+    "country": "United States",
+    "websiteUrl": "https://wolfjawstudios.com/",
+    "applicationUrl": "https://jobs.ashbyhq.com/wolfjaw-careers/1cd44061-26c9-4cad-b542-6f9820986f16",
+    "evidenceUrl": "https://jobs.ashbyhq.com/wolfjaw-careers/1cd44061-26c9-4cad-b542-6f9820986f16",
+    "notes": "Official Ashby Engineer - General Application is an evergreen, full-time W-2 engineering talent pool for future opportunities. The studio builds backend and online services for multiplayer games. Remote work is restricted to eligible US states (Arizona, California, Florida, Georgia, Idaho, Illinois, Maryland, Massachusetts, Michigan, Nevada, New Jersey, New York, North Carolina, North Dakota, Pennsylvania, South Carolina, Texas, Vermont, Virginia and Washington); candidates local to Troy, New York may be hybrid. A separate Producer General Application is linked as a related route. This is not an international-remote position.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Remote only in listed US states: AZ, CA, FL, GA, ID, IL, MD, MA, MI, NV, NJ, NY, NC, ND, PA, SC, TX, VT, VA, WA; hybrid may be possible near Troy, New York; US W-2 employment"
+      ],
+      "disciplineScope": [
+        "Engineering",
+        "Backend game services",
+        "Game client engineering",
+        "Infrastructure"
+      ],
+      "relatedApplicationUrls": [
+        "https://jobs.ashbyhq.com/wolfjaw-careers/d095b5ee-87d4-473e-bb1f-dd1839745886"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "WolfPack Game Design",
     "country": "United States",
     "websiteUrl": "https://www.wolfpackgamedesign.com/",
@@ -6371,6 +6711,36 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Wonder Works Studio",
+    "country": "United States",
+    "websiteUrl": "https://wonderworks.gg/",
+    "applicationUrl": "https://wonder-works-studio-inc.breezy.hr/p/abffc4775170-general-application",
+    "evidenceUrl": "https://wonder-works-studio-inc.breezy.hr/p/abffc4775170-general-application",
+    "notes": "The studio-controlled Breezy page is titled General Application and explicitly invites candidates who do not see a matching advertised job to submit a resume and cover letter for future opportunities. The listing is full-time and marked Remote Any, with Arlington, Texas shown as the company location. The page does not state which countries may be hired remotely; international eligibility should be confirmed before applying.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Arlington, Texas, United States · listing marked Remote Any; countries eligible for remote employment are not specified"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Design",
+        "Art",
+        "Engineering",
+        "Other studio disciplines"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-29"
     }
   },

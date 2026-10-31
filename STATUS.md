@@ -7,57 +7,33 @@
 
 - The site remains limited to the studio directory and My applications.
 - Tracker entries remain in the visitor's browser localStorage; no personal application data is committed to the repository.
-- The consolidated public directory snapshot contains **266 studio records** and the profile dataset contains **266 matching profiles** (252 baseline records plus 14 additions in the worldwide expansion batch).
-- **263 routes are active** and **3 are paused**. Paused records are retained for audit/history but are not shown as currently open routes.
-- Records currently cover **44 country/location labels**; unknown country values remain explicitly undisclosed.
-- Each active/paused record retains official studio, application and evidence URLs plus a verification date.
-- A studio is published only when an official studio-controlled page or linked employer-controlled hiring platform explicitly invites speculative, unsolicited, spontaneous, open or general applications.
-- The 14-route expansion is consolidated in PR [#63](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/63); it includes Halfbrick Studios, Bonfire Studios and Flashbulb Games, previously tracked in PR #62. PR #62 is superseded by the consolidated change.
+- The current main-branch directory contains **266 studio records** and **266 matching profiles**, with **263 active** and **3 paused** routes across **44 country/location labels**.
+- This second worldwide research batch proposes **12 additional records** and refreshes Speedway Games' official route; its proposal snapshot has **278 records / 278 profiles**, **275 active** and **3 paused** routes across **45 country/location labels**.
+- Each route retains official studio, application and evidence URLs plus a verification date.
+- A studio appears only when an official studio-controlled page or linked employer-managed application system explicitly invites speculative, unsolicited, spontaneous, open or general applications.
+- Some entries are publishers, co-development/services studios or Minecraft content developers rather than original-IP game studios; their type is explicit in each profile. Volunteer-only and commission/freelance routes carry clear caveats.
 
 ## Phase 1 — Global discovery
 
-- The latest confirmed successful discovery run is [`41191375366`](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41191375366), completed successfully on 2026-10-31.
-  - It ran in hourly mode, processed **7 source pages** and ingested **304 additional candidates**.
-  - The source cycle completed; the run ended with saturation disabled.
-  - Cumulative pipeline counters at that checkpoint: **10,370 candidates seen**, **126 routes verified**, **56 suitability exclusions**, **7,883 candidates with no route found**, and **79 retained for manual review**.
-  - Offline discovery tests, public-data validation, route review, static build and state persistence completed successfully.
-- The private candidate pool is now **10,370 candidates**, up from 9,197 at the previous saved checkpoint. Retry and review outcomes remain separate from confirmed no-route outcomes; they are not being counted as complete.
-- The four configured source feeds remain GameDevMap and three Wikidata queries. Their completed cycle means a subsequent pass can continue without resetting the one-time GameDevMap catalogue backfill.
-- The workflow remains scheduled hourly, with an up-to-25-minute discovery budget, up to 1,000 candidate checks per run, 8 concurrent checks across distinct official studio domains, and a 40-minute job timeout. Same-host pacing and conservative route-closure rules remain in force.
-- A previous run stopped safely on a Wikidata HTTP 429 response. The later successful run above demonstrates that discovery resumed, persisted a checkpoint and completed a full source cycle without publishing partial data.
+- The latest completed successful scheduled discovery checkpoint is [run 41191375366](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41191375366), which completed a source cycle, processed 7 source pages and added 304 candidates to the pool.
+- The checkpoint contained **10,370 candidates seen**, **126 cumulative routes verified**, **56 suitability exclusions**, **7,883 candidates with no explicit route found** and **79 cases retained for manual review**. Retry and review queues remain distinct from confirmed negative findings.
+- A post-merge run [41200057779](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41200057779) stopped safely when a Wikidata request timed out. It did not advance or publish a partial source checkpoint; the 10,370-candidate state remains the last successful saved checkpoint.
+- The four existing source feeds remain GameDevMap and three Wikidata queries. The one-time GameDevMap catalogue backfill is complete; scheduled refresh and candidate verification continue.
+- The workflow retains the 25-minute bounded source/verification budget, up to 1,000 candidate checks, 8 concurrent distinct-domain checks, same-host pacing, and conservative route-closure rules. Temporary timeouts, rate limits, blocks or robots denials do not close routes.
 
 ## Phase 2 — Data quality and verification
 
-- The public-data validator checks every record for required identity and route fields, HTTPS official/application/evidence URLs, route enums and review dates.
-- It also verifies matching studio profiles, required profile fields and source URLs, duplicate studio names, and required exclusion cases.
-- The consolidated 266-record dataset passed the exact-head CI suite before this status-only update: route/profile validation, Python discovery tests, frontend tests, production build, privacy boundary, Pages artifact and browser acceptance. CI is rerunning for the documentation correction.
-- Privacy-boundary checks pass for tracked paths and public/build output; personal tracker records remain browser-local and are not sent to a backend.
-- At the latest saved checkpoint, retry cases and 79 manual-review cases remain separate queues. They are not being incorrectly counted as complete.
+- The public-data validator checks required route fields, HTTPS official/application/evidence URLs, route enums and review dates.
+- It verifies one matching profile per route, mandatory profile fields/source URLs, duplicate studio names and excluded records.
+- Main at the beginning of this batch validated **266 routes / 266 profiles**. The proposal branch contains **278 / 278**; exact-head CI must pass again before merge.
+- The 79 manual-review cases and retry queue remain separate; they are not counted as successful discoveries.
 
 ## Phase 3 — Background automation
 
-- Saturation-aware maintenance is merged to `main` in [commit `8ad8e5b`](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/8ad8e5b3d2ccaea626fd750921e7ae2ad63efdb4).
-- After three complete Wikidata cycles produce no new verified routes, scheduled discovery reduces source scanning from 8 pages/hour to 1 page/hour.
-- Candidate verification and existing-route maintenance continue during saturated mode.
-- A completed cycle that verifies a new route clears saturation and restores the faster scan cadence.
-- Workflow summaries report run work counts, candidate-status totals, source cursors and saturation state without exposing candidate names or route evidence.
-- The first run after the workflow change hit an upstream Wikidata 429 rate limit. A later successful scheduled run (41191375366) completed the source cycle, persisted state and passed its validation/build stages.
+- Saturation-aware maintenance and the hourly schedule remain in place. A temporary upstream timeout does not reset source cursors or mark candidates as negative.
+- The latest merge-triggered website publication and build succeeded; the failed discovery attempt did not affect the deployed 266-record main dataset.
 
-## Phase 4 — Functional website acceptance
+## Next research focus
 
-- Phase 4 browser acceptance is merged to `main` in [commit `fdd8f25`](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/fdd8f25de24065204425e49b19017c2f47030aae).
-- Chromium browser tests pass on the latest **252-studio** directory snapshot. They exercise:
-  - successful and empty directory searches, country/work-model filters, sorting and HTTPS application links
-  - saving a studio, refreshing the page and restoring the record from browser localStorage
-  - all six tracker statuses, including confirmation/cancellation for marking an application as submitted and removing a record
-  - browser-local data with no network write requests
-  - desktop/mobile overflow and internal table scrolling
-- Both the push and pull-request CI runs passed the Python discovery suite, frontend tests, lockfile registry check, directory validator, route review, production build, privacy boundary, Pages artifact and browser acceptance.
-- The Playwright dependency and Chromium are installed transiently by CI; no permanent application dependency or package-lock update was added.
-
-## Remaining foundation work
-
-1. Finish the remaining Wikidata video-game developer entity feed and process the resulting candidates.
-2. Revisit all 1,531 retries when due and manually resolve or explicitly retain the 76 review cases.
-3. Confirm a subsequent hourly discovery run completes, persists its checkpoint and safely publishes/deploys any verified data changes after the transient Wikidata rate limit.
-4. Keep the directory and tracker stable. Do not begin Phases 5–7 (visual redesign and final polish) until the remaining data and automation acceptance criteria are met.
+- Expand beyond the current strongest UK/US/Canada/Sweden/Germany concentration, prioritising additional APAC, Africa, Latin America, Eastern Europe and remote-first studios.
+- Recheck held leads only when the official employer route becomes reachable or clearer; do not reinterpret 403/404, generic contact pages or vacancy-only listings as applications.
