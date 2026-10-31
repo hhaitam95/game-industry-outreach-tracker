@@ -7597,5 +7597,135 @@
       "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-29"
     }
+  },
+  {
+    "name": "AnkleBreaker Studio",
+    "country": "France",
+    "websiteUrl": "https://anklebreaker-studio.com/",
+    "applicationUrl": "https://anklebreaker-studio.com/careers",
+    "evidenceUrl": "https://anklebreaker-studio.com/careers",
+    "notes": "Official Careers page has a “Don't see your role?” invitation: candidates with an exceptional skill not listed may send a portfolio, project or letter to hello@anklebreaker-studio.com. This is an open invitation for unlisted disciplines, separate from the eight advertised Mithrall vacancies. The studio describes itself as an independent French indie studio near Paris; it works in person by default, with remote considered for the right person and role. Current careers pages say the team has ten senior members. Profit-sharing is stated for shipped titles; do not imply a conventional bonus or guaranteed compensation terms beyond the employer's own wording.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "on_site",
+      "eligibleLocations": [
+        "Near Paris, France · in-person is the default; remote is considered for the right person and role"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Art",
+        "Programming",
+        "Design",
+        "Animation",
+        "Technical art",
+        "Other unlisted skills"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Alice in Games",
+    "country": "Germany",
+    "websiteUrl": "https://aliceingames.com/",
+    "applicationUrl": "https://aliceingames.com/career/",
+    "evidenceUrl": "https://aliceingames.com/career/",
+    "notes": "Official Career page explicitly provides an Open Application and invites artists, developers, designers and other creatives even when no specific role fits. It asks for a resume, portfolio or a short introduction by email to info@aliceingames.com. The official Contact page lists an office in Berlin, Germany. The About page describes a small independent studio and says its first story-driven game is in development, but no title, platform, release date or team size is publicly disclosed. Remote and applicant-country eligibility are not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Berlin, Germany · official Contact page lists an office; remote and applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Art",
+        "Development",
+        "Design",
+        "Storytelling"
+      ],
+      "relatedApplicationUrls": [
+        "https://aliceingames.com/about/",
+        "https://aliceingames.com/contact/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "No Roof Games",
+    "country": "Finland",
+    "websiteUrl": "https://noroofgames.com/",
+    "applicationUrl": "https://noroofgames.com/open-application/",
+    "evidenceUrl": "https://noroofgames.com/open-application/",
+    "notes": "Official homepage identifies No Roof Games as a small mobile game studio from Tampere, Finland. Its dedicated Open Application page explicitly invites applications for casual real-time multiplayer games and asks candidates to send an application letter and CV, with a game portfolio link if available, to contact@noroofgames.com. The official About page reports a three-person team with over 20 years of combined industry experience. The company's current release, Heroes & Friends GO, is also listed under the developer name on Google Play. Remote and applicant-country eligibility for the open application are not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Tampere, Finland · official studio location; remote and applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Mobile game development",
+        "Unity",
+        "Casual games",
+        "Real-time multiplayer"
+      ],
+      "relatedApplicationUrls": [
+        "https://noroofgames.com/about/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Skytale",
+    "country": "France",
+    "websiteUrl": "https://skytale.fr/en/",
+    "applicationUrl": "https://app.skytale.fr/rejoindre",
+    "evidenceUrl": "https://app.skytale.fr/rejoindre",
+    "notes": "Official application page includes a “Candidature spontanée” route and invites people to join the studio. Skytale is a French non-profit, volunteer-run video-game studio: it reports 80+ volunteers across three continents, 100% remote work, no employees and no commercial budget. The application is for volunteering, not paid employment. Its projects include The Last Artifact, a free Minecraft adventure/puzzle game, and Z'Wonder Battle, a charity tower-defense project. Candidates can apply with a CV and two or three links; preserve the volunteer-only status prominently.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Volunteer team across three continents; 100% remote; no paid employment or applicant-country restriction stated"
+      ],
+      "disciplineScope": [
+        "Administration",
+        "Project management",
+        "Game design",
+        "Game testing",
+        "Sound design",
+        "2D/3D art",
+        "Development",
+        "Communication"
+      ],
+      "relatedApplicationUrls": [
+        "https://skytale.fr/en/qui-sommes-nous"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
   }
 ]
