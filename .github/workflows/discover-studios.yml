@@ -106,11 +106,14 @@ jobs:
               --max-run-seconds 1500 \
               --state-file "$STATE_FILE"
           else
+            # Continue the unfinished Wikidata feeds in a larger, bounded batch.
+            # The scraper enforces a 65-second gap between Wikidata requests and
+            # stops discovery work at the existing 25-minute runtime budget.
             python3 scripts/discover_speculative_studios.py \
               --mode hourly \
               --batch-size 100 \
-              --max-source-pages 1 \
-              --max-candidate-checks 150 \
+              --max-source-pages 8 \
+              --max-candidate-checks 1000 \
               --route-check-count 8 \
               --max-run-seconds 1500 \
               --state-file "$STATE_FILE"
