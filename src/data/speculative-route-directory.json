@@ -7727,5 +7727,107 @@
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-29"
     }
+  },
+  {
+    "name": "Rapidfire Games",
+    "country": "Cyprus",
+    "websiteUrl": "https://rapidfire.games/",
+    "applicationUrl": "https://rapidfire.games/",
+    "evidenceUrl": "https://rapidfire.games/",
+    "notes": "Official Careers section says there are no open positions right now but explicitly invites an open application with a portfolio or CV through the careers contact shown on the page. The studio describes itself as an independent team of 18 working remotely from around the world and developing free-to-play mobile games; its live title is Backpack Brawl. The legal documents identify the operating company in Cyprus (Geri, registration HE460989), although the terms and privacy pages vary slightly in the company-name styling. A globally distributed team does not by itself establish that applicants can be hired in every country; applicant-country and contracting eligibility are not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Registered office: Geri, Cyprus · team states that it works remotely across the world; applicant-country and contracting eligibility are not stated"
+      ],
+      "disciplineScope": [
+        "Mobile game development",
+        "Game design",
+        "Art",
+        "Programming",
+        "Production"
+      ],
+      "relatedApplicationUrls": [
+        "https://rapidfire.games/privacy-policy/",
+        "https://rapidfire.games/terms-and-conditions/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Sleeprunner Studios",
+    "country": "Germany",
+    "websiteUrl": "https://sleeprunnerstudios.com/",
+    "applicationUrl": "https://sleeprunnerstudios.com/jobs/",
+    "evidenceUrl": "https://sleeprunnerstudios.com/jobs/",
+    "notes": "Official Jobs page explicitly invites unsolicited applications from designers, programmers, artists, marketers and other contributors when no current vacancy fits. Applications must be sent by email to hello@sleeprunnerstudios.com in PDF format, with CV, portfolio and motivation letter. The five-person indie studio is based in Bayreuth and develops core PC/console games with Unreal Engine. The employer says employees must reside in Germany or the EU; freelance collaborations are possible worldwide. Its current workplace is hybrid, and relocation support is mentioned.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "unsolicited",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Bayreuth, Germany · employee hiring limited to people residing in Germany or the EU; freelance collaboration possible worldwide; hybrid workplace"
+      ],
+      "disciplineScope": [
+        "Game development",
+        "Programming",
+        "Art",
+        "2D art",
+        "Level design",
+        "Game design",
+        "Marketing",
+        "Unreal Engine"
+      ],
+      "relatedApplicationUrls": [
+        "https://sleeprunnerstudios.com/about/",
+        "https://sleeprunnerstudios.com/press/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
+    "name": "Cluetivity",
+    "country": "Germany",
+    "websiteUrl": "https://www.cluetivity.com/",
+    "applicationUrl": "https://cluetivity.jobs.personio.de/job/431574?language=en",
+    "evidenceUrl": "https://www.cluetivity.com/careers/",
+    "notes": "Official Careers page embeds the employer's Personio job system, where an Initiative Application is listed. The Personio page explicitly invites applicants to make contact when their desired job is not listed. Cluetivity is a Berlin-created developer of GPS-based, location-based and mobile games and an associated game-creation platform, with AR-enabled outdoor/indoor experiences. It is included as a specialised digital-game developer, not represented as a conventional PC/console studio. The Personio listing allows remote work or Berlin, but applicant-country eligibility is not stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "mixed",
+      "eligibleLocations": [
+        "Berlin, Germany or remote · employer listing says remote or Berlin; applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [
+        "Mobile game development",
+        "GPS-based games",
+        "Location-based games",
+        "Augmented reality",
+        "Game platform development"
+      ],
+      "relatedApplicationUrls": [
+        "https://www.cluetivity.com/about/",
+        "https://www.cluetivity.com/careers/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
+    }
   }
 ]
