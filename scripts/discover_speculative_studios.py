@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import email.utils
 from concurrent.futures import ThreadPoolExecutor
 import hashlib
 import html
@@ -41,6 +42,10 @@ USER_AGENT = (
 WDQS_ENDPOINT = "https://query.wikidata.org/sparql"
 REQUEST_TIMEOUT_SECONDS = 18
 WDQS_TIMEOUT_SECONDS = 55
+WIKIDATA_MIN_REQUEST_INTERVAL_SECONDS = 65
+WIKIDATA_429_RETRY_LIMIT = 1
+WIKIDATA_MAX_RETRY_AFTER_SECONDS = 180
+WIKIDATA_DEFAULT_RETRY_AFTER_SECONDS = 120
 MAX_RESPONSE_BYTES = 2_500_000
 PER_HOST_DELAY_SECONDS = 1.2
 MAX_CONCURRENT_SITE_CHECKS = 8
@@ -771,6 +776,26 @@ LIMIT {int(limit)}
 """.strip()
 
 
+def wikidata_retry_after_seconds(header_value: str) -> int:
+    """Parse a Retry-After header, defaulting conservatively when it is absent or invalid."""
+    value = str(header_value or "").strip()
+    if not value:
+        return WIKIDATA_DEFAULT_RETRY_AFTER_SECONDS
+
+    try:
+        seconds = int(value)
+    except (TypeError, ValueError):
+        try:
+            retry_at = email.utils.parsedate_to_datetime(value)
+        except (TypeError, ValueError, OverflowError):
+            return WIKIDATA_DEFAULT_RETRY_AFTER_SECONDS
+        if retry_at.tzinfo is None:
+            retry_at = retry_at.replace(tzinfo=dt.timezone.utc)
+        seconds = int((retry_at - utc_now()).total_seconds() + 0.999)
+
+    return max(0, seconds)
+
+
 def fetch_wikidata_batch(feed_kind: str, cursor: str, limit: int) -> list[dict[str, str]]:
     query = sparql_query(feed_kind, cursor, limit)
     data = urllib.parse.urlencode({"query": query, "format": "json"}).encode("utf-8")
@@ -784,14 +809,36 @@ def fetch_wikidata_batch(feed_kind: str, cursor: str, limit: int) -> list[dict[s
         },
         method="POST",
     )
-    try:
-        with urllib.request.urlopen(request, timeout=WDQS_TIMEOUT_SECONDS) as response:
-            payload = json.loads(response.read(MAX_RESPONSE_BYTES).decode("utf-8"))
-    except urllib.error.HTTPError as exc:
-        retry_after = exc.headers.get("Retry-After", "")
-        raise RuntimeError("Wikidata returned HTTP " + str(exc.code) + ("; Retry-After " + retry_after if retry_after else "")) from exc
-    except (urllib.error.URLError, TimeoutError, OSError, json.JSONDecodeError) as exc:
-        raise RuntimeError("Wikidata batch failed safely: " + type(exc).__name__) from exc
+    retry_count = 0
+    while True:
+        try:
+            with urllib.request.urlopen(request, timeout=WDQS_TIMEOUT_SECONDS) as response:
+                payload = json.loads(response.read(MAX_RESPONSE_BYTES).decode("utf-8"))
+            break
+        except urllib.error.HTTPError as exc:
+            retry_after = exc.headers.get("Retry-After", "")
+            if exc.code == 429 and retry_count < WIKIDATA_429_RETRY_LIMIT:
+                wait_seconds = wikidata_retry_after_seconds(retry_after)
+                if wait_seconds <= WIKIDATA_MAX_RETRY_AFTER_SECONDS:
+                    # Respect both the provider's Retry-After value and our existing
+                    # minimum spacing between Wikidata requests. Retry once only.
+                    time.sleep(max(WIKIDATA_MIN_REQUEST_INTERVAL_SECONDS, wait_seconds))
+                    retry_count += 1
+                    continue
+                raise RuntimeError(
+                    "Wikidata rate limited this batch; Retry-After exceeds the "
+                    + str(WIKIDATA_MAX_RETRY_AFTER_SECONDS)
+                    + "-second in-run retry limit. The saved cursor was not advanced."
+                ) from exc
+
+            raise RuntimeError(
+                "Wikidata returned HTTP "
+                + str(exc.code)
+                + ("; Retry-After " + retry_after if retry_after else "")
+                + ("; retry limit reached" if exc.code == 429 else "")
+            ) from exc
+        except (urllib.error.URLError, TimeoutError, OSError, json.JSONDecodeError) as exc:
+            raise RuntimeError("Wikidata batch failed safely: " + type(exc).__name__) from exc
 
     rows: list[dict[str, str]] = []
     for binding in payload.get("results", {}).get("bindings", []):
@@ -1388,8 +1435,8 @@ def run_pipeline(
                 state["feed_done"][feed["id"]] = True
             state["feed_index"] = (FEEDS.index(feed) + 1) % len(FEEDS)
             if feed["kind"] != "gamedevmap" and source_pages < max_source_pages:
-                if time.monotonic() + 65 < deadline:
-                    time.sleep(65)
+                if time.monotonic() + WIKIDATA_MIN_REQUEST_INTERVAL_SECONDS < deadline:
+                    time.sleep(WIKIDATA_MIN_REQUEST_INTERVAL_SECONDS)
                 else:
                     break
 
