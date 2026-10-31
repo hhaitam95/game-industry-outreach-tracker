@@ -63,6 +63,25 @@ async function main() {
     const pageErrors = [];
     const writeRequests = [];
 
+    await page.route("https://api.github.com/**", async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          workflow_runs: [{
+            status: "completed",
+            conclusion: "success",
+            updated_at: "2026-10-31T17:49:00Z",
+            html_url: "https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41225527000",
+          }],
+        }),
+      });
+    });
+    await page.addInitScript(() => {
+      localStorage.setItem("studio-outreach-theme-v1", "light");
+      Date.now = () => new Date("2026-10-31T18:00:00.000Z").getTime();
+    });
+
     page.on("pageerror", (error) => pageErrors.push(error.message));
     page.on("request", (request) => {
       if (!["GET", "HEAD"].includes(request.method())) {
@@ -73,10 +92,25 @@ async function main() {
     await page.goto(appUrl, { waitUntil: "networkidle" });
     assert.match(await page.title(), /Game Industry Outreach Tracker/);
     await page.getByRole("heading", { name: "Studio directory" }).waitFor();
+    await page.getByText(/Last successful run:/).waitFor();
+
+    await page.getByRole("button", { name: "Switch to dark theme" }).click();
+    assert.equal(await page.locator("html").getAttribute("data-bs-theme"), "dark");
+    await page.reload({ waitUntil: "networkidle" });
+    assert.equal(await page.locator("html").getAttribute("data-bs-theme"), "dark", "Theme choice should persist.");
+    await page.getByRole("button", { name: "Switch to light theme" }).click();
+    assert.equal(await page.locator("html").getAttribute("data-bs-theme"), "light");
 
     const rows = page.locator(".studio-table tbody tr");
     const initialCount = await rows.count();
     assert.ok(initialCount > 100, "The global directory should contain a substantial set of active studios.");
+    assert.ok(await page.locator(".studio-mark").count() > 100, "Studio marks should appear for directory rows.");
+    assert.ok(await page.locator(".country-flag").count() > 100, "Known studio locations should display flags.");
+    await page.getByLabel("Show only studios added in the last 24 hours").check();
+    assert.equal(await rows.count(), 5, "Only the five recently published closeout studios should appear.");
+    assert.equal(await page.getByText("NEW", { exact: true }).count(), 5);
+    await page.getByRole("button", { name: "Reset filters" }).click();
+    assert.equal(await rows.count(), initialCount, "Reset filters should restore the full directory.");
 
     // Search and empty-state recovery.
     await page.getByLabel("Search").fill("no-studio-with-this-name-9345");
@@ -106,6 +140,10 @@ async function main() {
     const remoteCount = await rows.count();
     assert.ok(remoteCount > 0 && remoteCount < initialCount, "Work-model filtering should narrow the directory.");
     await page.getByLabel("Work model").selectOption("All work models");
+    await page.getByLabel("Search").fill("Laki Studios");
+    await page.locator(".directory-toolbar .form-select").first().selectOption("Poland");
+    await page.getByRole("button", { name: "Reset filters" }).click();
+    assert.equal(await rows.count(), initialCount, "Reset filters should clear search and selects.");
 
     // Country sorting must follow the visible location and studio-name order.
     await page.getByLabel("Sort by").selectOption("country");
@@ -140,6 +178,7 @@ async function main() {
     const storedBeforeReload = await page.evaluate((key) => JSON.parse(localStorage.getItem(key) || "[]"), storageKey);
     assert.equal(storedBeforeReload.length, 1);
     assert.equal(storedBeforeReload[0].studioName, "4A Games");
+    assert.equal(storedBeforeReload[0].countryCode, "UA", "The headquarters country code should be retained locally.");
 
     await page.reload({ waitUntil: "networkidle" });
     await page.getByRole("button", { name: /My applications/ }).click();
