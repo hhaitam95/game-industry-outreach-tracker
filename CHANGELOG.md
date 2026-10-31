@@ -1,6 +1,15 @@
 # Changelog
 
-## 2026-10-31 — Global discovery batch 12 (proposed on PR #70)
+## 2026-10-31 — Merge and data-quality reconciliation
+
+- Merged **PR #71**: added the manifest-backed discovery source inventory, source-specific saturation, independent recurring-feed checkpoints and additive v1-to-v2 private state migration.
+- Merged **PR #70**: consolidated global discovery batches 5–12, adding and refreshing official speculative-application routes and recording manual exclusions/held cases.
+- Reconciled the duplicate **Fakefish / FakeFish Games** rows. The official site and open-application route identify one employer, **FakeFish Oy**; the canonical directory/profile record is now **FakeFish**. Its richer current profile and route detail are retained, along with earlier profile-source provenance.
+- Added an exact application-route duplicate check to `scripts/check-studio-directory.mjs`, so rows with the same official website, application URL and evidence URL cannot silently pass directory validation.
+- Main now contains **313 unique studio records / 313 matching profiles**: **308 active**, **5 paused**, across **51 country/location labels**.
+- The merges automatically triggered main-branch Build, Pages publication and source-discovery workflows. Their final outcomes are recorded in the current STATUS checkpoint; a merge is not treated as a confirmed deployment until the publication run succeeds.
+
+## 2026-10-31 — Global discovery batch 12 (merged in PR #70)
 
 - Added **SQUARE ENIX** (Japan) with the official three-year group-wide Career Registration for candidates without a current target role; the listing is not a job or guaranteed interview.
 - Added **Iteration One** (Germany) after confirming the official homepage links directly to JOIN's Spontaneous Application.
@@ -8,19 +17,19 @@
 - Refreshed **Stormind Games** using its current spontaneous-application form, studio scale/location and current credits.
 - Refreshed **GAME FREAK** using the current HRMOS Career Registration and official FAQ: overseas applicants are accepted but business-level Japanese is required; work model is not assumed.
 - Added ADR-077 and updated the authoritative model, STATUS and HANDOFF.
-- Proposal branch now contains **314 route/profile pairs (309 active, 5 paused; 51 country/location labels)**. Main remains at 287/287 until PR #70 is reviewed, merged and deployed.
+- Batch 12 brought the proposed dataset to 314 route/profile rows before duplicate identity reconciliation; see the merge/data-quality entry above for the canonical 313-studio count.
 
-## 2026-10-31 — Global discovery batch 11 (proposed on PR #70)
+## 2026-10-31 — Global discovery batch 11 (merged in PR #70)
 
 - Added **FakeFish Games** (Finland), **Winning Streak Games** (Germany) and **ByteRockers' Games** (Germany), with official open/spontaneous application evidence and matching profiles.
 - Refreshed **Redly Games** to link its official homepage to the employer-managed Ashby General Interest application, correctly marking source type and remote-contract eligibility.
 - Refreshed **HypeHype** to reflect its current AI-native studio positioning and Open Application; removed the unsupported assumption that its open application is necessarily on-site.
 - Paused the existing **Plummy Games** route because the employer-branded Teamtailor open application could not be confirmed by a forward link from the official company domain; this is not evidence the application closed.
 - Added **Xatronic Software GmbH** to the manual exclusion configuration because its official Products page expressly identifies online-casino and slot/reel game development.
-- Proposal branch now contains **311 route/profile pairs (306 active, 5 paused; 51 country/location labels)**. Main remains at 287/287 until PR #70 is reviewed, merged and deployed.
+- Historical batch-11 snapshot contained 311 route/profile rows before the final batch-12 additions and duplicate identity reconciliation.
 - Added ADR-076 and updated the authoritative model, STATUS and handover.
 
-## 2026-10-31 — Global discovery batch 10 (proposed on PR #70)
+## 2026-10-31 — Global discovery batch 10 (merged in PR #70)
 
 - Added **Fawkes Games** (Bulgaria) after current official evidence confirmed direct game-development/live-service work alongside its publisher/operator business: Unity engineering and game-design recruitment, client modernization, gameplay-system overhauls and content expansions.
 - Resolved the earlier Fawkes manual hold; it is now classified as a developer / publisher / live-service operator, not an original-IP-only studio.
@@ -29,7 +38,7 @@
 - Proposal branch now contains **308 route/profile pairs (304 active, 4 paused; 51 country/location labels)**. Main remains at 287/287 until PR #70 is reviewed, merged and deployed.
 - Added ADR-075 and updated the authoritative model, STATUS and HANDOFF.
 
-## 2026-10-31 — Global discovery batch 9 (proposed on PR #70)
+## 2026-10-31 — Global discovery batch 9 (merged in PR #70)
 
 - Added **Tarokai** (Switzerland), **Procedural Games** (Spain) and **Thought Pennies** (country not stated), each with a first-party or directly linked employer open/spontaneous application route and matching researched profile.
 - Resolved the earlier Thought Pennies manual hold after confirming its official homepage links directly to its careers-page.com Open application; retained unknown country and applicant eligibility rather than inferring them.
@@ -38,7 +47,7 @@
 - Proposal branch now contains **307 route/profile pairs (303 active, 4 paused; 50 country/location labels)**. Main remains at 287/287 until PR #70 is reviewed, merged and deployed.
 - Added ADR-074 and preserved the source evidence and unknowns in the Global Discovery Implementation Model, STATUS and HANDOFF.
 
-## 2026-10-31 — Global discovery batch 8 (proposed on PR #70)
+## 2026-10-31 — Global discovery batch 8 (merged in PR #70)
 
 - Added **Rapidfire Games** (Cyprus), **Sleeprunner Studios** (Germany) and **Cluetivity** (Germany), each with an official open, unsolicited or initiative application route and matching studio profile.
 - Classified Cluetivity accurately as a location-based/mobile/GPS/AR games developer and platform provider rather than a conventional PC/console studio.
@@ -49,7 +58,7 @@
 - Proposal branch now contains **304 route/profile pairs (300 active, 4 paused; 50 country/location labels)**. Main remains at 287/287 until PR #70 is reviewed, merged and deployed.
 - Added ADR-073 and updated the authoritative model, STATUS and handover rules.
 
-## 2026-10-31 — Global discovery batch 7 (proposed on PR #70)
+## 2026-10-31 — Global discovery batch 7 (merged in PR #70)
 
 - Added AnkleBreaker Studio (France), Alice in Games (Germany), No Roof Games (Finland) and Skytale (France), each with an official open/spontaneous application route and matching researched profile.
 - Marked Skytale clearly as a non-profit, volunteer-only studio with no employees; this is unpaid volunteering, not employment.
