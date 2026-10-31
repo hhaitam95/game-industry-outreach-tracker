@@ -11132,5 +11132,202 @@
     ],
     "applicationLocation": "Saguenay, Québec, Canada · applicant-country and remote-work eligibility not stated",
     "reachHighlights": "The official Ubisoft site says the Saguenay studio spearheaded NFL Primetime Fantasy and contributed as a co-developer on XDefiant."
+  },
+  "Abrakam Studio": {
+    "description": "Belgian independent game developer and game-development services studio creating strategy games and original interactive experiences, while also offering full-game creation, console porting and mobile development services.",
+    "headquarters": {
+      "city": "Angleur, Liège",
+      "country": "Belgium",
+      "countryCode": "BE",
+      "label": "Official company address"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent",
+      "Game-development services"
+    ],
+    "ownership": "Independent (company self-description); legal ownership details not disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie / AA · editorial indication",
+    "teamSize": "30+ collaborators (company-reported on the official Careers page)",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "PC",
+      "Console",
+      "Mobile",
+      "Strategy",
+      "Digital card games",
+      "Game development services",
+      "Porting"
+    ],
+    "popularGames": [
+      {
+        "title": "Faeria",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.abrakam.com/",
+      "https://www.abrakam.com/careers",
+      "https://www.abrakam.com/contact",
+      "https://www.abrakam.com/studio"
+    ],
+    "applicationLocation": "Angleur, Liège, Belgium · official company address; remote and applicant-country eligibility not stated",
+    "reachHighlights": "The official Careers page reports 30+ collaborators. Abrakam describes its work across original strategy games, full-game development, console ports and mobile development."
+  },
+  "Aesir Interactive": {
+    "description": "Munich-based German game developer and publisher building PC and console games across simulation, adventure and survival genres.",
+    "headquarters": {
+      "city": "Munich, Bavaria",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "HQ · official About page"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher"
+    ],
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "AA · editorial indication",
+    "teamSize": "110+ team members (company-reported on the official About page)",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "PC",
+      "Console",
+      "Unreal Engine",
+      "Simulation",
+      "Adventure",
+      "Survival",
+      "Action"
+    ],
+    "popularGames": [
+      {
+        "title": "The Legend of Khiimori",
+        "appId": null
+      },
+      {
+        "title": "Ambulance Life: A Paramedic Simulator",
+        "appId": null
+      },
+      {
+        "title": "Police Simulator: Patrol Officers",
+        "appId": null
+      },
+      {
+        "title": "Horse Tales: Emerald Valley Ranch",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://aesir-interactive.com/",
+      "https://aesir-interactive.com/about",
+      "https://aesir-interactive.com/careers"
+    ],
+    "applicationLocation": "Munich, Bavaria, Germany · official studio location; remote and applicant-country eligibility not stated",
+    "reachHighlights": "Founded in 2013; the official About page reports 110+ team members and 15+ shipped games."
+  },
+  "Ahoiii Entertainment": {
+    "description": "Cologne-based game-development studio creating ad-free mobile apps for children and families, alongside commissioned games for broadcasters and brands.",
+    "headquarters": {
+      "city": "Cologne",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "HQ · official Contact page"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Mobile games"
+    ],
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie · editorial indication",
+    "teamSize": "Not publicly disclosed",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "iOS",
+      "Android",
+      "Children and family games",
+      "Educational and learning games",
+      "Branded games"
+    ],
+    "popularGames": [
+      {
+        "title": "Fiete World",
+        "appId": null
+      },
+      {
+        "title": "Fiete Sports",
+        "appId": null
+      },
+      {
+        "title": "Fiete PlaySchool",
+        "appId": null
+      },
+      {
+        "title": "Fiete Soccer",
+        "appId": null
+      },
+      {
+        "title": "Sandmännchen app",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.ahoiii.com/en/contact",
+      "https://www.ahoiii.com/en/jobs"
+    ],
+    "applicationLocation": "Cologne, Germany · official studio location; remote and applicant-country eligibility for speculative applications not stated",
+    "reachHighlights": "The official Jobs page reports 40+ children's apps and more than 22 million downloads; the Contact page describes its Cologne base and commissioned game work."
+  },
+  "Stratosphere Games": {
+    "description": "Berlin-based game-development studio producing high-end mobile and PC multiplayer games, including MMO-style experiences, with its own development architecture FRAMEWORK.",
+    "headquarters": {
+      "city": "Berlin",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "HQ · official Imprint"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Mobile games"
+    ],
+    "ownership": "Not publicly disclosed",
+    "parentCompany": null,
+    "industryScale": "Indie / AA · editorial indication",
+    "teamSize": "Official pages differ: the Careers listing refers to 60 people; the current homepage describes nearly 35. Confirm directly with the company rather than selecting one figure.",
+    "teamSizeAsOf": "2026-10",
+    "focus": [
+      "Mobile",
+      "PC",
+      "MMO",
+      "Multiplayer",
+      "Action",
+      "Strategy",
+      "Game technology"
+    ],
+    "popularGames": [
+      {
+        "title": "The Desolation",
+        "appId": null
+      },
+      {
+        "title": "The Kingdom: Medieval Tales",
+        "appId": null
+      }
+    ],
+    "profileSources": [
+      "https://www.stratosphere-games.com/en/",
+      "https://www.stratosphere-games.com/en/jobs/initiative-application-part-time-full-time/",
+      "https://stratosphere-games.jobs.personio.de/job/1318003?language=en",
+      "https://www.stratosphere-games.com/en/imprint/"
+    ],
+    "applicationLocation": "Berlin, Germany · initiative application listed as full- or part-time permanent; employer describes a mixture of office and remote work; applicant-country eligibility not stated",
+    "reachHighlights": "The studio develops multiplayer mobile games with its own FRAMEWORK architecture; its current homepage and initiative-application page report conflicting team-size figures."
   }
 }
