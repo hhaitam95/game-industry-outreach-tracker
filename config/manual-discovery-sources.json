@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "last_reviewed": "2026-10-31",
+  "description": "Manual research leads and source-policy register. This file is deliberately not loaded by the automated discovery runtime; entries here are not approved scraping targets, candidate feeds or evidence that a listed organisation accepts speculative applications.",
+  "global_rules": [
+    "Use these indexes to discover candidate organisation names only. Qualify each organisation and verify its own current official website and explicit speculative/open application route before publication.",
+    "Do not bulk scrape, mirror, or republish directory records unless an API, licence or written permission expressly supports the intended use.",
+    "Store only minimum company/provenance facts needed by the tracker; preserve source attribution and per-entity review trails.",
+    "An association membership, company directory entry, game credit, storefront developer page or job-board profile is not by itself proof of current game development or an unsolicited application route."
+  ],
+  "sources": [
+    {
+      "id": "ukie_membership_directory",
+      "name": "Ukie Membership Directory",
+      "url": "https://ukie.org.uk/membership-directory/",
+      "region": "United Kingdom",
+      "sourceKind": "trade_association_membership_directory",
+      "signal": "Member organisations are tagged with Developer, Co-Development, Publisher, Business Service and Education categories.",
+      "automationStatus": "manual_only",
+      "accessPolicy": "Manual lead review only; no bulk-reuse/API permission has been established.",
+      "reviewNotes": "The directory states 764 members including 420 games-company members, 38 academic members and 296 partner members. Filter by developer/co-development categories and verify each organisation."
+    },
+    {
+      "id": "uk_games_map",
+      "name": "Ukie UK Games Map",
+      "url": "https://map.gamesmap.uk/",
+      "region": "United Kingdom",
+      "sourceKind": "interactive_company_map",
+      "signal": "Searches game businesses and institutions by region, company type or keyword.",
+      "automationStatus": "manual_only",
+      "accessPolicy": "Do not automate or republish map data without permission.",
+      "reviewNotes": "Powered by Companies House data and includes developers, publishers, service providers and institutions."
+    },
+    {
+      "id": "swedish_games_industry_members",
+      "name": "Swedish Games Industry / Dataspelsbranschen Members",
+      "url": "https://www.dataspelsbranschen.se/en/members/",
+      "region": "Sweden",
+      "sourceKind": "trade_association_membership_directory",
+      "signal": "Separate filters for Game Studios, Distributors & Publishers, Educational members and Supporting members.",
+      "automationStatus": "manual_only",
+      "accessPolicy": "Manual page inspection only; no bulk-reuse permission established.",
+      "reviewNotes": "Use the Game Studios category first; other categories are ecosystem leads, not direct developers."
+    },
+    {
+      "id": "cesa_members",
+      "name": "Computer Entertainment Supplier's Association Members List",
+      "url": "https://www.cesa.or.jp/about/member-list/index-en.html",
+      "region": "Japan / international",
+      "sourceKind": "trade_association_membership_directory",
+      "signal": "Regular and supporting member rosters include Japanese and overseas game-industry companies.",
+      "automationStatus": "manual_only",
+      "accessPolicy": "Manual lead research only; no automated harvesting or redistribution approved.",
+      "reviewNotes": "Members include developers, publishers, services, platform companies, schools and vendors. Verify company role."
+    },
+    {
+      "id": "korea_game_industry_association",
+      "name": "Korea Game Industry Association Partner List",
+      "url": "https://www.kgames.or.kr/partnership/partner-list/",
+      "region": "South Korea",
+      "sourceKind": "trade_association_membership_directory",
+      "signal": "Member/partner company names provide Korean ecosystem leads.",
+      "automationStatus": "manual_only_temporarily_unavailable",
+      "accessPolicy": "No automation. The public page returned HTTP 502 during review.",
+      "reviewNotes": "Revisit manually only when the page is available; association membership does not prove game development."
+    },
+    {
+      "id": "abragames_members",
+      "name": "ABRAGAMES Members and Affiliates",
+      "url": "https://www.abragames.org/membros.html",
+      "region": "Brazil",
+      "sourceKind": "trade_association_member_directory",
+      "signal": "Associated and affiliated companies are linked to their own websites.",
+      "automationStatus": "manual_only",
+      "accessPolicy": "Manual lead research only; no bulk-reuse licence established.",
+      "reviewNotes": "Roster includes studios, sound firms, services, educators and other organisations."
+    },
+    {
+      "id": "french_games_map",
+      "name": "FrenchGamesMap / SNJV",
+      "url": "https://frenchgamesmap.fr/en/",
+      "region": "France",
+      "sourceKind": "national_industry_map_and_member_directory",
+      "signal": "Member types include Studio, Publisher, Associations and technology/service providers; the 2024 survey reports 575 development studios.",
+      "automationStatus": "manual_only",
+      "accessPolicy": "Manual inspection only; no bulk extraction or redistribution without permission.",
+      "reviewNotes": "575 is a 2024 reference figure, not a current 2026 count."
+    },
+    {
+      "id": "australian_game_developers_directory",
+      "name": "Australian Game Developers Directory",
+      "url": "https://australiangamedevelopers.com.au/",
+      "region": "Australia",
+      "sourceKind": "national_studio_directory",
+      "signal": "Directory reports 418 studios and provides state/location filters.",
+      "automationStatus": "manual_only",
+      "accessPolicy": "Manual research only until site terms and permissible reuse are confirmed.",
+      "reviewNotes": "Verify that each entry remains active and develops digital games."
+    },
+    {
+      "id": "playfinland_studios",
+      "name": "PlayFinland Studio Profiles",
+      "url": "https://www.playfinland.fi/studios",
+      "region": "Finland",
+      "sourceKind": "national_game_developer_association_member_directory",
+      "signal": "Lists member studios of the Finnish Game Developers Association.",
+      "automationStatus": "manual_only",
+      "accessPolicy": "Manual lead use; no bulk-copy permission established.",
+      "reviewNotes": "Use official company pages to confirm activity and application routes."
+    },
+    {
+      "id": "neogames_studio_map",
+      "name": "Neogames / PlayFinland Game Developer Studios on the Map",
+      "url": "https://www.playfinland.fi/studios-and-locations",
+      "region": "Finland",
+      "sourceKind": "national_industry_study_and_studio_map",
+      "signal": "Finnish industry overview estimates 270 actively developing studios at end-2024.",
+      "automationStatus": "manual_only",
+      "accessPolicy": "Manual lead use only; dataset reuse rights not established.",
+      "reviewNotes": "Coverage may be inaccurate, especially for new startups; 270 refers to end-2024."
+    },
+    {
+      "id": "africa_games_week_catalogue",
+      "name": "Africa Games Week Studio Catalogue",
+      "url": "https://gamesweek.africa/studio-catalogue/",
+      "region": "Africa",
+      "sourceKind": "curated_regional_studio_catalogue",
+      "signal": "Curated list of studios, creative teams and commercially released titles, stated current as of Q2 2026.",
+      "automationStatus": "manual_only",
+      "accessPolicy": "Manual research only; no permission for bulk reproduction established.",
+      "reviewNotes": "Catalogue coverage is not proof of a current open application route."
+    },
+    {
+      "id": "igdb_api",
+      "name": "IGDB API / Twitch Developer Services",
+      "url": "https://api-docs.igdb.com/",
+      "region": "Global",
+      "sourceKind": "structured_game_company_and_credit_api",
+      "signal": "Company records expose game and developer/publisher relationships, status, websites and related data.",
+      "automationStatus": "blocked_pending_written_permission",
+      "accessPolicy": "Do not integrate or publish bulk API-derived data until Twitch confirms in writing that public-directory redistribution, attribution and caching are permitted.",
+      "reviewNotes": "Requires Twitch developer application, 2FA, client credentials and OAuth. API access alone is not redistribution permission; API rows remain leads only."
+    },
+    {
+      "id": "steam_developer_publisher_homepages",
+      "name": "Steam Developer & Publisher Homepages",
+      "url": "https://store.steampowered.com/dev/?l=english",
+      "region": "Global",
+      "sourceKind": "storefront_creator_directory",
+      "signal": "Large directory of developer and publisher storefront pages.",
+      "automationStatus": "manual_only_no_bots",
+      "accessPolicy": "No scripted/bot collection or automated interaction. Manual leads only unless Valve provides explicit permission or approved data interface.",
+      "reviewNotes": "Mixes studios, publishers, parent companies and other organisations; not a unique studio count."
+    },
+    {
+      "id": "gamecompanies",
+      "name": "GameCompanies.com",
+      "url": "https://gamecompanies.com/",
+      "region": "Global",
+      "sourceKind": "commercial_company_directory",
+      "signal": "Global index of studios, publishers, hubs and game-service companies.",
+      "automationStatus": "manual_only_permission_required",
+      "accessPolicy": "Do not scrape or automate without permission under current site restrictions.",
+      "reviewNotes": "Use only as a manual lead where permitted; verify company-owned sources."
+    },
+    {
+      "id": "games_jobs_index",
+      "name": "Games Jobs Index Studio Directory",
+      "url": "https://gamesjobsindex.com/studios.html",
+      "region": "Global",
+      "sourceKind": "commercial_studio_directory",
+      "signal": "Includes a speculative-application-oriented filter and studio listings.",
+      "automationStatus": "manual_only",
+      "accessPolicy": "Do not automate until terms/API permission have been checked and approved.",
+      "reviewNotes": "Displayed total and regional roll-up differed on 2026-10-31; do not use aggregate counts. Directory labels are not employer evidence."
+    },
+    {
+      "id": "mobygames_api",
+      "name": "MobyGames API",
+      "url": "https://www.mobygames.com/info/api/",
+      "region": "Global",
+      "sourceKind": "game_credit_and_metadata_api",
+      "signal": "Potential developer/publisher credit discovery.",
+      "automationStatus": "approval_required",
+      "accessPolicy": "Use only authorized API access within current key, quota, attribution and redistribution terms; no page scraping.",
+      "reviewNotes": "Credits may be historic, partial, publisher-only or outsourced; they are candidate signals only."
+    },
+    {
+      "id": "community_studios_database",
+      "name": "Community Game Studios & Publishers Database",
+      "url": "https://github.com/EddieWing/gamedev-studios-db",
+      "region": "Global",
+      "sourceKind": "community_maintained_dataset",
+      "signal": "Secondary names and website cross-check.",
+      "automationStatus": "manual_only_license_unconfirmed",
+      "accessPolicy": "Do not ingest or republish until the repository's current licence and provenance permit intended use.",
+      "reviewNotes": "Freshness and coverage are uncertain; confirm every lead on official company pages."
+    }
+  ]
+}

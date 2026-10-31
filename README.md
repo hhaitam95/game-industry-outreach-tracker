@@ -40,7 +40,7 @@ These are not yet integrated discovery adapters. Their terms, access method, cov
 - [Community Game Studios & Publishers Database](https://github.com/EddieWing/gamedev-studios-db) — secondary seed and cross-check only; review licence, provenance, coverage and exclusions before reuse.
 - Regional/national game-industry associations, government creative-industry registries, public funding recipients, cluster directories, event exhibitor lists and other official developer-credit sources.
 
-The full source notes, observed catalogue sizes, caveats, coverage policy and future roadmap are maintained in the Global Discovery Implementation Model. Source catalogue counts are dynamic and must not be interpreted as unique studio totals without validation.
+The full source notes, observed catalogue sizes, caveats, coverage policy and future roadmap are maintained in the Global Discovery Implementation Model. The manual-only source/access register is [config/manual-discovery-sources.json](config/manual-discovery-sources.json); it is intentionally not loaded by the automated discovery runtime. Source catalogue counts are dynamic and must not be interpreted as unique studio totals without validation.
 
 ## Verification process
 
@@ -60,6 +60,8 @@ The detailed candidate pool and progress are stored on the separate discovery-st
 ## Discovery cadence and known coverage gap
 
 GitHub Actions runs the discovery workflow hourly. The current pipeline has resumable GameDevMap and Wikidata work, but the additional sources above are still evaluation leads, not integrated feeds.
+
+Regional association directories and curated national catalogues are currently manual research inputs only. IGDB is blocked pending written permission for public-directory redistribution; Steam remains manual-only with no scripted collection. See the source register for access restrictions before using any new index.
 
 The integrated discovery pipeline uses **source-specific saturation**, not a global stop. Each active feed has its own cursor, cycle, verified-addition count and saturation state; three complete empty passes throttle only that feed. Incomplete or failed passes do not count as exhaustion, and one source's saturation does not suppress work on others. Additional candidate sources listed above remain evaluation leads until their adapters are implemented and tested.
 

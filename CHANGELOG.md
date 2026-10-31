@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-10-31 — Global discovery batch 13 (prepared for PR #73)
+
+- Adds Tanglewood Games, Iceflake Studios, Frozenbyte, Mainstay Games, Big Moxi Games, Rogue Snail and Cyberborz Interactive after verifying official non-vacancy application routes and direct game-development activity.
+- Refreshes Awe Interactive's existing speculative application route and remote-work evidence; removes an unsupported 120+ team-size assertion because current company press materials do not confirm total headcount.
+- Consolidates the duplicate ByteRockers' Games / Byterockers’ Games rows into one official employer identity and retains combined profile-source provenance.
+- Adds config/manual-discovery-sources.json, a manual-only research registry covering national/regional association directories, curated studio catalogues, IGDB, Steam and other global indexes. It is not loaded by the runtime and does not enable scraping.
+- Keeps IGDB blocked pending written permission for public-directory redistribution; keeps Steam manual-only; leaves GameCompanies, Games Jobs Index, MobyGames and the community dataset behind their terms/licence gates.
+- Adds a post-merge npm run check:studio-directory step so discovery-generated data is validated after automated merging and before rebuild/deployment.
+- Does not add a new adapter to config/discovery-sources.json; approved runtime feeds remain separate from manual indexes.
+- Holds Two Men and a Dog because its indexed Open Applications page returned HTTP 404 on direct review; AARISE was already present and was not duplicated.
+- On this branch the directory contains 319 route/profile pairs (314 active, 5 paused; 51 country/location labels), including one canonicalised existing identity and seven new routes.
+
+
 ## 2026-10-31 — Merge and data-quality reconciliation
 
 - Merged **PR #71**: added the manifest-backed discovery source inventory, source-specific saturation, independent recurring-feed checkpoints and additive v1-to-v2 private state migration.
