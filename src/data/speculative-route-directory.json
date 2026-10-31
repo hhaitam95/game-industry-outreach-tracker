@@ -1323,27 +1323,38 @@
   {
     "name": "Byterockers’ Games",
     "country": "Germany",
-    "websiteUrl": "https://byterockers.games/",
-    "applicationUrl": "https://www.byterockers.games/praktikum-byterockersgames",
-    "evidenceUrl": "https://www.byterockers.games/praktikum-byterockersgames",
-    "notes": "The official internship page explicitly invites speculative applications for internships, asks applicants to email their CV and examples of games/designs they have worked on to jobs@byterockers.games, and requires interns to be at least 18 because they may encounter content unsuitable for minors. The general contact page lists the same application email, but the explicit speculative invitation is internship-specific.",
-    "checkedAt": "2026-10-30",
+    "websiteUrl": "https://www.byterockers.games/",
+    "applicationUrl": "https://www.byterockers.games/de/jobs",
+    "evidenceUrl": "https://www.byterockers.games/de/jobs",
+    "notes": "Official Jobs page explicitly says that candidates who do not find a suitable role, or when the company is not actively hiring, should send an Initiativbewerbung to jobs@byterockers.games. It specifically addresses people passionate about developing video games. Official About page says ByteRockers' Games creates its own games and began publishing other creative teams' projects in 2024. The legal Impressum identifies ByteRockers' Games GmbH & Co. KG at Schloßstraße 110, 12163 Berlin. Its developer credits include Insurmountable, Beat Slayer and Gelly Break Deluxe; the current homepage also features further PC/console titles. The unsolicited route does not separately state work model or applicant-country eligibility.",
+    "checkedAt": "2026-10-31",
     "applicationResearch": {
-      "routeType": "discipline_specific",
+      "routeType": "unsolicited",
       "submissionMethods": [
         "email"
       ],
       "workModel": "not_stated",
       "eligibleLocations": [
-        "Berlin, Germany · internship applicants must be at least 18"
+        "Berlin, Germany · official registered address; work model and applicant-country eligibility for unsolicited applicants not stated"
       ],
       "disciplineScope": [
-        "Internships only"
+        "Game development",
+        "Programming",
+        "Game design",
+        "Art",
+        "Animation",
+        "Audio",
+        "QA",
+        "Production",
+        "Publishing"
       ],
-      "relatedApplicationUrls": [],
+      "relatedApplicationUrls": [
+        "https://www.byterockers.games/de/%C3%BCber-uns",
+        "https://www.byterockers.games/de/impressum"
+      ],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-01-29"
     }
   },
   {

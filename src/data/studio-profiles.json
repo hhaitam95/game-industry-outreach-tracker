@@ -2370,13 +2370,20 @@
     "ownership": "Independent · ownership details not disclosed",
     "parentCompany": null,
     "industryScale": "Indie",
-    "teamSize": "Not publicly disclosed",
-    "teamSizeAsOf": null,
+    "teamSize": "Not publicly disclosed; the official About page lists a multi-disciplinary team across programming, design, art, animation, audio, QA, marketing and production.",
+    "teamSizeAsOf": "2026-10",
     "focus": [
       "PC",
       "Console",
       "Indie games",
-      "Publishing"
+      "Publishing",
+      "Nintendo Switch",
+      "PlayStation",
+      "Xbox",
+      "Adventure",
+      "Roguelite",
+      "Action",
+      "Simulation"
     ],
     "popularGames": [
       {
@@ -2395,6 +2402,26 @@
         "title": "The Regreening",
         "appId": null,
         "stage": "Coming soon"
+      },
+      {
+        "title": "Insurmountable",
+        "appId": null,
+        "stage": "Released"
+      },
+      {
+        "title": "Beat Slayer",
+        "appId": null,
+        "stage": "Released"
+      },
+      {
+        "title": "Gelly Break Deluxe",
+        "appId": null,
+        "stage": "Released"
+      },
+      {
+        "title": "The Regreening",
+        "appId": null,
+        "stage": "In development"
       }
     ],
     "profileSources": [
@@ -2404,7 +2431,14 @@
       "https://www.byterockers.games/games",
       "https://store.steampowered.com/publisher/ByteRockersGames/",
       "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=1301&state=&type=",
-      "https://byterockers.games/"
+      "https://byterockers.games/",
+      "https://www.byterockers.games/",
+      "https://www.byterockers.games/de/jobs",
+      "https://www.byterockers.games/de/%C3%BCber-uns",
+      "https://www.byterockers.games/de/impressum",
+      "https://www.byterockers.games/insurmountable",
+      "https://www.byterockers.games/beatslayer",
+      "https://www.byterockers.games/gelly-break-deluxe"
     ],
     "applicationLocation": "Berlin, Germany · the explicit speculative route is for internships; 18+ requirement applies to interns",
     "reachHighlights": "ByteRockers' says it was founded in 2008 and has been led by CEO Maik Reichelt since 2023; it describes itself as an indie developer and publisher."
