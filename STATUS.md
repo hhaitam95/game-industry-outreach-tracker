@@ -70,7 +70,7 @@ Exclude organisations materially focused on pornography/adult sexual entertainme
 
 ## Next engineering and research work
 
-1. Verify the first post-merge Pages publication and source-discovery workflow outcomes; confirm the schema v2 discovery-state migration preserves all v1 cursors and candidates.
+1. Review sanitized per-source counters and outcomes from the subsequent discovery runs. Continue monitoring feed failures and verify that new adapters enter the source manifest with their own checkpoint and access policy.
 2. Continue global candidate discovery from additional regional and international indexes; do not prioritize by country, studio size, genre, discipline or personal career fit. Resolve DreamCentury's paid-credits/prize model and retry President Studio's official TSP application link before adding either.
 3. Maintain the source manifest and evaluate additional adapters one at a time, including access terms, coverage, provenance, attribution and source-specific request limits. Keep Games Jobs Index as a manual lead source until automated access is authorized.
 4. Continue identity resolution, company-level industry exclusions and official speculative-route verification; the directory validator now rejects duplicate rows with the same official website, application route and evidence page.
