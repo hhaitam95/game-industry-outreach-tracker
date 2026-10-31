@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-10-31 — Global discovery batch 8 (proposed on PR #70)
+
+- Added **Rapidfire Games** (Cyprus), **Sleeprunner Studios** (Germany) and **Cluetivity** (Germany), each with an official open, unsolicited or initiative application route and matching studio profile.
+- Classified Cluetivity accurately as a location-based/mobile/GPS/AR games developer and platform provider rather than a conventional PC/console studio.
+- Refreshed **Next Level Games** to record hybrid work (at least three days per week in Vancouver) and the employer's explicit requirements for Canadian work authorization and current British Columbia residence.
+- Added **3Sigma Games** to the manual exclusion configuration after its official hiring page explicitly described the company as an Adult Game Studio.
+- Rechecked Raw Power Games, Futureplay Games and Shiro Games; their existing records were already present and were not duplicated.
+- Kept Studio Countdown and welevel out of the public directory because the reviewed evidence did not establish both a legitimate video-game development business and an official employer-backed general application route.
+- Proposal branch now contains **304 route/profile pairs (300 active, 4 paused; 50 country/location labels)**. Main remains at 287/287 until PR #70 is reviewed, merged and deployed.
+- Added ADR-073 and updated the authoritative model, STATUS and handover rules.
+
 ## 2026-10-31 — Global discovery batch 7 (proposed on PR #70)
 
 - Added AnkleBreaker Studio (France), Alice in Games (Germany), No Roof Games (Finland) and Skytale (France), each with an official open/spontaneous application route and matching researched profile.
