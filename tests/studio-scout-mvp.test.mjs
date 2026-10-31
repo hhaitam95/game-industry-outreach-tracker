@@ -30,14 +30,18 @@ test("studio directory renders the small studio table and working filter control
 
     assert.match(markup, /Studio directory/);
     assert.match(markup, /Search/);
+    assert.match(markup, /Continent/);
     assert.match(markup, /Country/);
     assert.match(markup, /Work model/);
     assert.match(markup, /Application route/);
-    assert.match(markup, /4A Games/);
+    assert.match(markup, /Notable work/);
+    assert.match(markup, /Sort by Studio/);
+    assert.match(markup, /aria-controls="studio-details-4a-games"/);
+    assert.match(markup, /Metro Exodus/);
     assert.match(markup, /Bossa Studios/);
     assert.match(markup, /Application/);
     assert.match(markup, /Website/);
-    assert.doesNotMatch(markup, /Selected work|Ownership|Team size|studio-detail/);
+    assert.match(markup, /Click a row for studio details/);
   });
 });
 
