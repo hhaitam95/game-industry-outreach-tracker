@@ -69,7 +69,7 @@ These dispositions should be rechecked against current official sources before c
 
 ## Validation and rollback
 
-- The proposed dataset contains **291 routes / 291 matching profiles**, with **288 active** and **3 paused** entries across 49 country/location labels.
+- The proposed dataset contains **293 routes / 293 matching profiles**, with **289 active** and **4 paused** entries across 49 country/location labels.
 - Data files remain one-to-one; no personal application records or CVs are included.
 - Run Python discovery tests, frontend tests, directory validation, route review, production build, privacy boundary, Pages artifact check and browser acceptance on the exact PR head.
 - Roll back only this batch's three new routes/profile records, the Sudden Forest addition, and the five refreshed route/profile entries if an inclusion decision fails review.
