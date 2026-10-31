@@ -85,7 +85,7 @@ async function main() {
     assert.equal(await rows.count(), initialCount, "Clearing filters should restore the directory.");
 
     // Country and work-model filters must actually reduce the visible result set.
-    const country = page.getByLabel("Country");
+    const country = page.locator(".directory-toolbar label:nth-of-type(2) select");
     const countryValues = await country.locator("option").evaluateAll((options) =>
       options.map((option) => option.value),
     );
