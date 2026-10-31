@@ -152,10 +152,10 @@ export default function App() {
             className="brand"
             type="button"
             onClick={() => setPage("studios")}
-            aria-label="StudioScout home"
+            aria-label="Game Industry Outreach Tracker home"
           >
-            <span className="brand-mark">SS</span>
-            <span className="brand-name">StudioScout</span>
+            <span className="brand-mark">GI</span>
+            <span className="brand-name">Game Industry Outreach Tracker</span>
           </button>
 
           <nav className="main-navigation" aria-label="Main navigation">
@@ -206,7 +206,7 @@ export default function App() {
       </main>
 
       <footer className="app-footer">
-        <span>StudioScout</span>
+        <span>Game Industry Outreach Tracker</span>
         <span>Studio directory · Application tracker</span>
         <span>Tracker data stays in this browser</span>
       </footer>

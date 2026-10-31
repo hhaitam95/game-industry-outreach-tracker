@@ -1,6 +1,6 @@
 # Product specification
 
-StudioScout has two jobs:
+Game Industry Outreach Tracker has two jobs:
 
 1. Help the user discover game studios with official speculative/open/unsolicited/general application routes.
 2. Let the user save studios and track applications manually.

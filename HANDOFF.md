@@ -1,6 +1,6 @@
 # Handoff
 
-StudioScout is a small personal static app: a worldwide studio directory of verified speculative application routes plus a lightweight local application tracker.
+Game Industry Outreach Tracker is a small personal static app: a worldwide studio directory of verified speculative application routes plus a lightweight local application tracker.
 
 - Public verified routes: src/data/speculative-route-directory.json.
 - Studio details: src/data/studio-profiles.json.

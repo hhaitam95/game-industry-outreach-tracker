@@ -1,4 +1,4 @@
-# StudioScout MVP plan
+# Game Industry Outreach Tracker MVP plan
 
 ## Immediate website scope
 

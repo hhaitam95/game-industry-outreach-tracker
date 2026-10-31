@@ -2,7 +2,7 @@
 
 **Date:** 30 October 2026
 
-StudioScout is a personal game-industry research tool with two core functions:
+Game Industry Outreach Tracker is a personal game-industry research tool with two core functions:
 
 1. A dark, searchable and expandable directory of studios with verified official speculative/open/unsolicited/general application routes.
 2. A lightweight application tracker stored in the user's browser using localStorage.

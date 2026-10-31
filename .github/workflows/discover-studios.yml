@@ -225,7 +225,7 @@ jobs:
         if: always()
         run: |
           {
-            echo "## StudioScout discovery run"
+            echo "## Game Industry Outreach Tracker discovery run"
             echo "- Mode: ${{ steps.discovery.outputs.mode || 'not started' }}"
             echo "- Public changes: ${{ steps.commit.outputs.data_changed || 'not committed' }}"
             echo "- Candidate and route details remain in the discovery-state branch."

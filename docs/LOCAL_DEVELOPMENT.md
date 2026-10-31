@@ -1,6 +1,6 @@
 # Local development
 
-StudioScout is a static React/Vite site with a Python discovery script. No backend, database, resume tools or third-party API credentials are required.
+Game Industry Outreach Tracker is a static React/Vite site with a Python discovery script. No backend, database, resume tools or third-party API credentials are required.
 
 ## Requirements
 

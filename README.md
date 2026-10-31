@@ -1,6 +1,6 @@
-# StudioScout
+# Game Industry Outreach Tracker
 
-StudioScout is a small worldwide directory of game studios that explicitly accept speculative applications, paired with a personal application tracker.
+Game Industry Outreach Tracker is a worldwide directory of game studios that explicitly accept speculative applications, paired with a personal application tracker.
 
 The website intentionally has only two pages: the studio directory and My applications. Tracker data stays in this browser's local storage.
 
@@ -21,7 +21,7 @@ Current candidate sources:
 
 GameDevMap is accessed through its public paginated results interface (100 rows per page). The scraper does not download its raw data files. It respects robots.txt and the per-host request delay. Website verification checks up to eight different studio domains concurrently; requests to the same host remain paced. Source directories are leads only; no source's claim is treated as proof of speculative hiring.
 
-For each candidate, StudioScout:
+For each candidate, the discovery pipeline:
 
 1. Deduplicates by official website domain. Same-name candidates on different domains are retained for separate verification rather than silently merged.
 2. Fetches the official HTTPS site and relevant careers, jobs, application or contact links.

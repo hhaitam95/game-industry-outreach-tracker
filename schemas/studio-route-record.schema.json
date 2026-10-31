@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://studioscout.local/schemas/studio-route-record.schema.json",
-  "title": "StudioScout application route record",
+  "$id": "https://game-industry-outreach-tracker.local/schemas/studio-route-record.schema.json",
+  "title": "Game Industry Outreach Tracker application route record",
   "type": "object",
   "additionalProperties": false,
   "required": [

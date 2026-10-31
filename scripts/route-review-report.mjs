@@ -24,7 +24,7 @@ const byType = studios.reduce((groups, studio) => {
 }, {});
 const countries = new Set(studios.map((studio) => studio.country || "Not stated"));
 
-process.stdout.write("StudioScout route research report\n");
+process.stdout.write("Game Industry Outreach Tracker route research report\n");
 process.stdout.write("As of: " + asOf + "\n");
 process.stdout.write("Total records: " + studios.length + "\n");
 process.stdout.write("Due for review: " + due.length + " (" + overdue.length + " overdue)\n\n");

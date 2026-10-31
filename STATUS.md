@@ -1,4 +1,4 @@
-# StudioScout status
+# Game Industry Outreach Tracker status
 
 **Date:** 2026-10-30 20:20 UTC  
 **Product scope:** Two-page worldwide studio directory and personal browser-local application tracker.

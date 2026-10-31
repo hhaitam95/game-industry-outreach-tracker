@@ -1,6 +1,6 @@
 # Project notes
 
-Keep StudioScout focused on its first useful release: a studio directory and a connected personal application tracker.
+Keep Game Industry Outreach Tracker focused on its first useful release: a studio directory and a connected personal application tracker.
 
 ## Product scope
 
