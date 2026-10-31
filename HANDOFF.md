@@ -46,6 +46,6 @@ Keep the application to the two existing pages. Do not reintroduce the old job-p
 
 ## Handover checklist
 
-At the start of a new session, read the Global Discovery Implementation Model, this file and STATUS.md; inspect current main, open PRs, discovery-state and latest successful workflows. At the end, update the model with new source/evidence/policy/engineering findings, update STATUS.md and this file for the new checkpoint, and update CHANGELOG.md or an ADR when appropriate. Distinguish proposed, implemented, tested, merged and deployed work accurately.
+At the start of a new session, read the Global Discovery Implementation Model, this file and STATUS.md; inspect current main, open PRs, discovery-state and latest successful workflows. At the end, update the model with new source/evidence/policy/engineering findings, update STATUS.md and this file for the new checkpoint, and update CHANGELOG.md or an ADR when appropriate. Record why any candidate was held and what evidence would resolve the hold; when new first-party linkage is later found, reconsider the hold rather than leaving stale manual-review notes. Distinguish proposed, implemented, tested, merged and deployed work accurately.
 
 Never put personal application records, CVs, recruiter correspondence, secrets or private profile data in public repository source datasets, issues or PR descriptions.
