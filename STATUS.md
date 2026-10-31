@@ -39,7 +39,8 @@
 - PR [#57](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/57) adds saturation-aware maintenance: after three complete source cycles produce no new verified routes, scheduled runs reduce Wikidata scanning from 8 pages/hour to 1 page/hour while retaining candidate checks and route rechecks.
 - A cycle that verifies a new route clears saturation and restores the faster scan cadence.
 - The PR also expands the sanitized Actions summary with run work counts, candidate-status totals, source cursors and saturation state, without exposing candidate names or route evidence.
-- The offline discovery test for clearing saturation after verified growth has passed. Full PR checks are still pending on the latest branch commit; these changes are not yet active on `main`.
+- Full PR CI passed on the latest implementation commit: offline discovery tests, `npm test`, directory validation, route review and production build all succeeded.
+- PR #57 remains open and unmerged, so the saturation-aware cadence and expanded workflow summary are not yet active on `main`.
 
 ## Product readiness
 
