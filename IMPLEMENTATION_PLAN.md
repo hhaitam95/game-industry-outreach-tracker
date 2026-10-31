@@ -9,6 +9,17 @@ The first usable release has two pages:
 
 The UI should remain a straightforward developer/internal-tool interface. Do not spend time on detailed profiles, artwork, analytics or visual polish before the core workflow works.
 
+## Phase B — efficient UI improvements (first batch)
+
+Use Bootstrap 5 CSS and keep the existing two-page interface compact, readable and quick to operate.
+
+- Add a browser-local light/dark theme switch.
+- Show studio website favicons with initials fallbacks; do not build a manually maintained logo catalogue.
+- Show headquarters flags using profile ISO country codes and conservative country-name fallbacks. Flags do not imply hiring eligibility.
+- Read public GitHub Actions history to display discovery automation status and the last successful run; do not imply that every successful run changed the data.
+- Add an optional `addedAt` UTC timestamp for first publication, separate from `checkedAt`. Display NEW for 24 hours, with a matching filter.
+- Keep Reset filters visible and preserve browser-local application data. Automation status requests are read-only.
+
 ## Discovery automation
 
 Build an automated studio-route discovery pipeline, not an advertised-vacancy crawler.
