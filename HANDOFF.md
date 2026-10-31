@@ -42,9 +42,18 @@ Keep the application to the two existing pages. Do not reintroduce the old job-p
 - The integrated candidate feeds are declared in `config/discovery-sources.json` and loaded by `scripts/discover_speculative_studios.py`. The private discovery state now migrates additively from schema v1 to v2.
 - The three Wikidata feeds have independent cursors, cycles, verified-addition counts and complete-empty-pass counters. After three complete empty passes, only that individual feed is limited to one page per hourly run. A new verified route resets only its originating feed. Failed or incomplete passes do not count as exhaustion.
 - GameDevMap remains a one-time backfill; its terminal cursor is preserved. Legacy Wikidata candidates without a stored feed identity remain `legacy_unattributed` instead of being assigned to a guessed source.
-- The first post-merge source-discovery workflow 41212342190 passed and persisted the private schema-v2 discovery-state checkpoint (state commit `61bc51c0830fb62521ce182e806ca3fe282b54b9`). The corrected 313-record directory was deployed by Pages run 41212913830. A second discovery run triggered by PR #72 is processing separately.
-- IGDB, GameCompanies.com, Games Jobs Index, Steam, MobyGames and the community database remain unintegrated research leads; do not describe them as automated feeds.
+- The first post-merge source-discovery workflow 41212342190 passed and persisted the private schema-v2 checkpoint. The 313-row directory was deployed by Pages run 41212913830. The follow-up discovery run 41212913766 also completed successfully, passed all stages, added zero routes, left the public 313-row dataset unchanged, and advanced the private checkpoint to bc3a302e4f7da0095c2c5c3be407ec6a56f12699.
+- IGDB, GameCompanies.com, Games Jobs Index, Steam, MobyGames and the community database remain unintegrated research leads; do not describe them as automated feeds. Their current access gates and regional association lead sources are recorded in config/manual-discovery-sources.json.
 - DreamCentury Entertainment and President Studio remain held for the reasons recorded in STATUS.md and the Global Discovery Implementation Model. The manual exclusions remain in `config/manual-studio-exclusions.json`.
+
+
+## Batch 13 research branch (not yet merged)
+
+- Branch: research/manual-sources-and-routes-batch-13.
+- Seven new employer routes have been researched and added to that branch: Tanglewood Games, Iceflake Studios, Frozenbyte, Mainstay Games, Big Moxi Games, Rogue Snail and Cyberborz Interactive. Awe Interactive is refreshed, not duplicated.
+- The branch also consolidates two identical ByteRockers route rows into one canonical identity and adds validation after automated discovery-data merging.
+- Branch totals: 319 route/profile pairs, 314 active, 5 paused, 51 location labels. Main remains at 313 rows / 308 active / 5 paused until PR #73 is merged.
+- A separate manual source registry was added. Do not feed it into the automated runtime without reviewing access terms and adding a tested adapter. IGDB requires written redistribution permission; Steam is manual-only; other commercial/community indexes have their individual terms/licence gates.
 
 ## Handover checklist
 

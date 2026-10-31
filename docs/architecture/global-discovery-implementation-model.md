@@ -406,6 +406,43 @@ A legitimate one-person video-game developer can satisfy the studio gate. If the
 
 Main contains **313 unique studio/employer records / 313 matching profiles**, **308 active** and **5 paused**, across **51 country/location labels**. PR #70 and PR #71 are merged. The pre-deduplication PR #70 dataset had 314 rows because Fakefish and FakeFish Games represented the same official employer/application route; ADR-078 records the canonical FakeFish consolidation.
 
+
+### Additional global discovery and verified route expansion — 2026-10-31 (batch 13)
+
+#### New verified studio/employer routes prepared for PR #73
+
+- **Tanglewood Games (United Kingdom):** the official careers platform lists two active Open Application routes: Unreal Engine engineering and technical art. Both are marked fully remote within the UK only. The company is a specialist Unreal Engine engineering, optimisation, technical-art and porting partner; partner credits are not presented as owned IP.
+- **Iceflake Studios (Finland):** Paradox's employer-managed ATS accepts spontaneous applications specifically from Game Programmers for current or future needs. The route is in Tampere and expects office attendance; it is not a remote route.
+- **Frozenbyte (Finland):** the current official Careers page reports zero open vacancies but accepts open applications year-round by email. Relocation to Helsinki is preferred; hybrid and remote arrangements may be supported for the right fit.
+- **Mainstay Games (Finland):** its employer-managed Open Application form invites candidates for future partner-project needs and asks for CV/portfolio and country of residence. It is classified as co-development/game-development services rather than as an owned-IP studio.
+- **Big Moxi Games (United States / Latin American development hubs):** the official Careers page invites open applications by email. The Studio page describes a full-cycle PC/console developer with hubs in Porto Alegre, Brazil and Santiago, Chile and 130+ developers. Remote hiring is role-dependent.
+- **Rogue Snail (Brazil):** the official Jobs page says it is always looking for talent and provides a dedicated Be a Rogue Snail application form. Its About page describes a fully remote team across Brazil and other countries; applicant-country eligibility is not enumerated.
+- **Cyberborz Interactive (country not stated):** the official site identifies an independent game studio founded in 2025, with Battlecontact in development, and explicitly invites spontaneous CV/portfolio emails. The site says only that the team is based in the heart of Europe; no country or city is inferred.
+
+#### Existing record refreshed
+
+- **Awe Interactive (United Kingdom):** the record already existed and was not duplicated. Its current Careers page explicitly invites speculative applications by email; its press kit describes an international remote studio. The profile's unsupported 120+ headcount claim was removed: the press kit names five team members but does not state total headcount. Exact country-level hiring eligibility remains unknown.
+
+#### Identity correction from the latest automated dataset merge
+
+- **ByteRockers' Games:** the main snapshot contained two spellings (ByteRockers' Games and Byterockers’ Games) with the same official website, application page and evidence page. These are one employer and one route. The branch keeps the canonical apostrophe spelling and merges profile source provenance. This resolves one existing duplicate before adding the seven new records.
+
+#### New candidate-source registry and access decisions
+
+- Added config/manual-discovery-sources.json as a separate manual lead registry, not loaded by the discovery runtime. It records Ukie, UK Games Map, Swedish Games Industry members, CESA, Korea Game Industry Association, ABRAGAMES, FrenchGamesMap/SNJV, Australian Game Developers Directory, PlayFinland/Neogames and Africa Games Week.
+- The regional indexes intentionally remain manual leads: membership or map entries can include publishers, service vendors, educators or inactive/stealth entities. Every company still needs identity/activity verification and a current official speculative-application route.
+- IGDB remains blocked pending written Twitch permission for the planned public-directory redistribution and attribution model. Steam remains manual-only with no scripted collection. GameCompanies.com, Games Jobs Index, MobyGames and the community dataset remain gated by their terms/API/licence checks.
+- No new adapter is added to config/discovery-sources.json. That file remains the strict inventory of approved, integrated feeds; a manual source registry must never be mistaken for automated ingestion.
+
+#### Held / not added in this batch
+
+- **AARISE (France)** was already present in the directory and was not duplicated.
+- **Two Men and a Dog (Finland)** appears to invite open applications by email in search-indexed text, but the direct official Jobs URL returned HTTP 404 during this review. Hold until the employer page is accessible again or the email route is independently reconfirmed from a working first-party channel.
+
+#### Branch projection
+
+The PR #73 branch has 319 unique route/profile pairs, 314 active and 5 paused, across 51 country/location labels. This is seven additions after consolidating one duplicate identity in the 313-row main snapshot.
+
 ## 10. Handover protocol
 
 At the start of any new work session or handover:

@@ -34,7 +34,17 @@ Exclude organisations materially focused on pornography/adult sexual entertainme
 - Additional rechecks confirmed that Raw Power Games, Futureplay Games and Shiro Games are already in the directory; they were not duplicated. Studio Countdown and welevel were not added because the official videogame-developer/official-route gates were not sufficiently established.
 - Existing Redly Games and HypeHype records were refreshed to match current official pages. **Plummy Games** was moved to paused because its Teamtailor Open Application could not be linked forward from the official company site.
 - The corrected 313-record dataset is deployed to GitHub Pages from main commit `360d0a79530a1d0402deb8bba158b966fe1562e8`; [Pages publication run 41212913830](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41212913830) completed successfully.
-- The first post-merge discovery run [41212342190](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41212342190) completed successfully and persisted the v2 private discovery-state checkpoint in commit `61bc51c0830fb62521ce182e806ca3fe282b54b9` on `discovery-state`. A follow-up run triggered by PR #72 [41212913766](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41212913766) is processing separately.
+- The first post-merge discovery run [41212342190](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41212342190) completed successfully and persisted the v2 private discovery-state checkpoint. The follow-up run [41212913766](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41212913766) also completed successfully: all discovery, offline-test, frontend-test, build, merge, checkpoint, Pages-artifact, deployment and summary steps passed. It added zero routes; the merged dataset remained at 313 and the private checkpoint advanced to bc3a302e4f7da0095c2c5c3be407ec6a56f12699 on discovery-state.
+
+
+## Global discovery batch 13 — proposed routes and expanded source coverage
+
+- The research/manual-sources-and-routes-batch-13 branch prepares seven new verified route/profile pairs: Tanglewood Games, Iceflake Studios, Frozenbyte, Mainstay Games, Big Moxi Games, Rogue Snail and Cyberborz Interactive. It also refreshes existing Awe Interactive information. The proposal branch contains 319 route/profile pairs (314 active, 5 paused; 51 labels); main remains at 313 rows until PR #73 is merged.
+- The 313-row main snapshot included a duplicate ByteRockers identity: ByteRockers' Games and Byterockers’ Games shared one official website and exact application/evidence URL. This branch retains one canonical ByteRockers' Games profile and consolidates its provenance.
+- New employer routes are not inferred from indexes. Tanglewood's two applications are UK-only remote; Iceflake's programmer route expects Tampere office attendance; Frozenbyte prefers Helsinki relocation but allows hybrid/remote for the right fit; Mainstay asks for country of residence but publishes no eligibility list; Big Moxi's remote hiring is role-dependent; Rogue Snail is fully remote without a country list; Cyberborz does not state a country/city.
+- Awe Interactive's profile refresh removes the previous unsupported 120+ headcount; its press kit lists five named team members but does not state total workforce.
+- The separate manual source registry adds regional lead directories for the UK, Sweden, Japan, South Korea, Brazil, France, Australia, Finland and Africa. It is intentionally disconnected from runtime ingestion.
+- IGDB remains blocked pending written permission from Twitch for public redistribution; Steam remains manual-only; GameCompanies, Games Jobs Index, MobyGames and the community database remain gated by their respective access/licence reviews.
 
 ## Discovery pipeline checkpoint
 
@@ -54,7 +64,7 @@ Exclude organisations materially focused on pornography/adult sexual entertainme
 - [Steam Developer & Publisher Homepages](https://store.steampowered.com/dev/?l=english) — large creator index containing developers, publishers and other entities; not a unique-studio count.
 - [MobyGames API](https://www.mobygames.com/info/api/) — possible game-credit source; do not scrape pages or automate until access and terms are verified.
 - [Community Game Studios & Publishers Database](https://github.com/EddieWing/gamedev-studios-db) — secondary manual cross-check only until a reusable licence is found.
-- Regional/national game-industry associations, government registries, funding recipients, game clusters and official game-credit sources.
+- Regional/national game-industry associations, government registries, funding recipients, game clusters and official game-credit sources. The dated manual lead register is maintained separately in config/manual-discovery-sources.json; it is not an automated feed.
 
 ## Candidate-review decisions
 
