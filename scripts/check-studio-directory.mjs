@@ -45,7 +45,10 @@ if (Array.isArray(studios) && profiles && typeof profiles === "object" && !Array
 
   function canonicalRouteUrl(value) {
     const url = new URL(value);
-    const pathname = url.pathname.replace(/\\/+$/, "").toLowerCase();
+    let pathname = url.pathname.toLowerCase();
+    while (pathname.length > 1 && pathname.endsWith("/")) {
+      pathname = pathname.slice(0, -1);
+    }
     return url.origin.toLowerCase() + (pathname || "/") + url.search;
   }
 
