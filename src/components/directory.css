@@ -521,3 +521,190 @@
   font-size: 10px;
   font-weight: 600;
 }
+
+
+/* Game artwork keeps the directory compact and gives expanded profiles a visual portfolio strip. */
+.popular-work-list {
+  display: flex;
+  max-width: 270px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+}
+
+.popular-game-cover {
+  display: block;
+  width: 36px;
+  flex: 0 0 36px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--tag-bg);
+  text-decoration: none;
+}
+
+.popular-game-cover-art {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+}
+
+.popular-game-cover-art img,
+.game-poster-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.game-cover-fallback {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 11px;
+  background:
+    radial-gradient(ellipse at 85% 15%, rgb(120 145 176 / 24%), transparent 42%),
+    linear-gradient(150deg, var(--tag-bg), var(--surface));
+  color: var(--ink);
+}
+
+.game-cover-fallback.is-compact {
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  background:
+    radial-gradient(ellipse at 80% 20%, rgb(120 145 176 / 28%), transparent 45%),
+    linear-gradient(150deg, var(--tag-bg), var(--surface));
+}
+
+.game-cover-monogram {
+  color: var(--primary);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+
+.game-cover-fallback.is-compact .game-cover-monogram {
+  font-size: 10px;
+}
+
+.game-cover-fallback strong {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 10px;
+  line-height: 1.25;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
+.game-cover-fallback small {
+  color: var(--subtle);
+  font-size: 8px;
+  line-height: 1.25;
+}
+
+.game-poster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(106px, 126px));
+  align-items: start;
+  gap: 12px;
+}
+
+.game-poster-card {
+  display: grid;
+  min-width: 0;
+  gap: 6px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.game-poster-art {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--tag-bg);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 9%);
+}
+
+.game-poster-art img {
+  transition: transform 160ms ease;
+}
+
+.game-poster-card:hover .game-poster-art img,
+.game-poster-card:focus-visible .game-poster-art img {
+  transform: scale(1.035);
+}
+
+.game-poster-card:focus-visible,
+.popular-game-cover:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+.game-poster-caption {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+}
+
+.game-poster-caption strong {
+  display: -webkit-box;
+  min-height: 2.6em;
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.3;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.game-poster-caption small {
+  overflow: hidden;
+  color: var(--subtle);
+  font-size: 9px;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.game-stage-badge {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  left: 5px;
+  overflow: hidden;
+  padding: 3px 5px;
+  border-radius: 3px;
+  background: rgb(15 18 23 / 82%);
+  color: #ffffff;
+  font-size: 8px;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.game-artwork-note {
+  margin: 8px 0 0;
+  color: var(--subtle);
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+@media (max-width: 520px) {
+  .game-poster-grid {
+    grid-template-columns: repeat(auto-fill, minmax(96px, 116px));
+    gap: 10px;
+  }
+}

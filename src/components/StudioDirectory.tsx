@@ -5,16 +5,13 @@ import profilesJson from "../data/studio-profiles.json" with { type: "json" };
 import type { TrackedApplication } from "./studio.types";
 import DiscoveryStatus from "./DiscoveryStatus";
 import StudioMark from "./StudioMark";
+import GamePoster, { GamePosterStrip } from "./GamePosters";
+import type { PopularGame } from "./GamePosters";
 import { continentsForLocation, countryFlagFor } from "./location";
 import type { ContinentLabel } from "./location";
 import "./directory.css";
 
 type Studio = (typeof studios)[number] & { addedAt?: string };
-type PopularGame = {
-  title: string;
-  appId?: number | null;
-  stage?: string;
-};
 type Profile = {
   description?: string;
   headquarters?: {
@@ -410,11 +407,7 @@ export default function StudioDirectory({
                     </td>
                     <td>
                       {notableGames.length > 0 ? (
-                        <span className="popular-work-list">
-                          {notableGames.map((game) => (
-                            <span className="popular-work-chip" key={game.title}>{game.title}</span>
-                          ))}
-                        </span>
+                        <GamePosterStrip games={notableGames} />
                       ) : (
                         <span className="unlisted-work">Not listed</span>
                       )}
@@ -459,14 +452,16 @@ export default function StudioDirectory({
                               <section className="studio-detail-section">
                                 <h3>Notable work</h3>
                                 {notableGames.length > 0 ? (
-                                  <div className="detail-game-list">
-                                    {notableGames.map((game) => (
-                                      <span className="detail-game-chip" key={game.title}>
-                                        <strong>{game.title}</strong>
-                                        {game.stage ? <small>{game.stage}</small> : null}
-                                      </span>
-                                    ))}
-                                  </div>
+                                  <>
+                                    <div className="game-poster-grid">
+                                      {notableGames.map((game) => (
+                                        <GamePoster game={game} key={game.title} />
+                                      ))}
+                                    </div>
+                                    <p className="game-artwork-note">
+                                      Official Steam library covers appear where a Steam listing is available. Other titles use a labelled placeholder.
+                                    </p>
+                                  </>
                                 ) : (
                                   <p className="detail-muted">No game titles are listed in this profile.</p>
                                 )}

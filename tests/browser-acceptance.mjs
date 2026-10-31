@@ -77,6 +77,10 @@ async function main() {
         }),
       });
     });
+    const posterFixture = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC", "base64");
+    await page.route("https://shared.akamai.steamstatic.com/**", async route => {
+      await route.fulfill({ status: 200, contentType: "image/png", body: posterFixture });
+    });
     await page.addInitScript(() => {
       if (!localStorage.getItem("studio-outreach-theme-v1")) {
         localStorage.setItem("studio-outreach-theme-v1", "light");
@@ -115,15 +119,28 @@ async function main() {
     assert.equal(await rows.count(), initialCount, "Reset filters should restore the full directory.");
 
     // Search and empty-state recovery.
-    await page.getByLabel("Search").fill("no-studio-with-this-name-9345");
+    await page.getByLabel("Search", { exact: true }).fill("no-studio-with-this-name-9345");
     await page.getByText("No studios match these filters.").waitFor();
     await page.getByRole("button", { name: "Reset filters" }).click();
     assert.equal(await rows.count(), initialCount, "Clearing filters should restore the directory.");
 
-    await page.getByLabel("Search").fill("4A Games");
+    await page.getByLabel("Search", { exact: true }).fill("4A Games");
     assert.equal(await rows.count(), 1, "A matching studio search should return the intended studio.");
     await rows.getByText("4A Games").waitFor();
-    await page.getByLabel("Search").fill("");
+    const fourARow = rows.filter({ hasText: "4A Games" });
+    await fourARow.getByRole("button", { name: "4A Games" }).click();
+    const fourAPosters = page.locator(".game-poster-grid .game-poster-card");
+    assert.equal(await fourAPosters.count(), 2, "Expanded studio profiles should render one poster card per notable game.");
+    assert.deepEqual(
+      await fourAPosters.evaluateAll(cards => cards.map(card => card.getAttribute("data-game-title"))),
+      ["Metro Exodus", "Metro: Last Light Redux"],
+    );
+    assert.ok(
+      await page.locator(".game-poster-grid img").count() > 0,
+      "Steam-listed games should render cover artwork images.",
+    );
+    await fourARow.getByRole("button", { name: "4A Games" }).click();
+    await page.getByLabel("Search", { exact: true }).fill("");
     assert.equal(await rows.count(), initialCount, "Clearing a successful search should restore the directory.");
 
     // Continent, country and work-model filters must narrow the visible result set.
@@ -159,7 +176,7 @@ async function main() {
     const remoteCount = await rows.count();
     assert.ok(remoteCount > 0 && remoteCount < initialCount, "Work-model filtering should narrow the directory.");
     await page.locator(".directory-toolbar").getByLabel("Work model").selectOption("All work models");
-    await page.getByLabel("Search").fill("Laki Studios");
+    await page.getByLabel("Search", { exact: true }).fill("Laki Studios");
     await country.selectOption("Poland");
     await page.getByRole("button", { name: "Reset filters" }).click();
     assert.equal(await rows.count(), initialCount, "Reset filters should clear search and selects.");
@@ -188,7 +205,13 @@ async function main() {
 
     // Rows expand into a concise studio profile with up to four notable titles.
     const fourAGamesRow = rows.filter({ hasText: "4A Games" });
-    assert.match(await fourAGamesRow.locator("td").nth(2).textContent(), /Metro Exodus/);
+    assert.deepEqual(
+      await fourAGamesRow.locator(".popular-game-cover").evaluateAll(covers =>
+        covers.map(cover => cover.getAttribute("data-game-title")),
+      ),
+      ["Metro Exodus", "Metro: Last Light Redux"],
+      "The compact studio table should show thumbnails for its notable games.",
+    );
     await fourAGamesRow.locator("td").nth(3).click();
     const fourAGamesDetails = page.locator("#studio-details-4a-games");
     await fourAGamesDetails.waitFor();
