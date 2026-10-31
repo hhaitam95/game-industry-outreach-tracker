@@ -38,10 +38,11 @@ Keep the application to the two existing pages. Do not reintroduce the old job-p
 ## Current global-discovery checkpoint
 
 - Main contains **313 unique verified studio/employer records / 313 matching profiles**: 308 active routes and 5 paused routes across 51 country/location labels.
-- PR #70 (global directory expansion) and PR #71 (source-specific discovery engine) are merged. The 314-row PR #70 snapshot had a duplicate identity pair for the same FakeFish employer and identical open-application route. ADR-078 consolidates it into one canonical **FakeFish** record, preserving the more complete official profile and route detail.
+- PR #70 (global directory expansion), PR #71 (source-specific discovery engine) and PR #72 (FakeFish identity reconciliation) are merged. The 314-row PR #70 snapshot had a duplicate identity pair for the same FakeFish employer and identical open-application route. ADR-078 consolidates it into one canonical **FakeFish** record, preserving the more complete official profile and route detail.
 - The integrated candidate feeds are declared in `config/discovery-sources.json` and loaded by `scripts/discover_speculative_studios.py`. The private discovery state now migrates additively from schema v1 to v2.
 - The three Wikidata feeds have independent cursors, cycles, verified-addition counts and complete-empty-pass counters. After three complete empty passes, only that individual feed is limited to one page per hourly run. A new verified route resets only its originating feed. Failed or incomplete passes do not count as exhaustion.
 - GameDevMap remains a one-time backfill; its terminal cursor is preserved. Legacy Wikidata candidates without a stored feed identity remain `legacy_unattributed` instead of being assigned to a guessed source.
+- The first post-merge source-discovery workflow 41212342190 passed and persisted the private schema-v2 discovery-state checkpoint (state commit `61bc51c0830fb62521ce182e806ca3fe282b54b9`). The corrected 313-record directory was deployed by Pages run 41212913830. A second discovery run triggered by PR #72 is processing separately.
 - IGDB, GameCompanies.com, Games Jobs Index, Steam, MobyGames and the community database remain unintegrated research leads; do not describe them as automated feeds.
 - DreamCentury Entertainment and President Studio remain held for the reasons recorded in STATUS.md and the Global Discovery Implementation Model. The manual exclusions remain in `config/manual-studio-exclusions.json`.
 
