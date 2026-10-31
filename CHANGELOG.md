@@ -1,12 +1,19 @@
 # Changelog
 
-## 2026-10-31 — Global discovery batch 14 (prepared for review)
+## 2026-10-31 — Phase A final global sweep and initial-baseline closeout (proposed in PR #75)
+
+- Added Laki Studios, Makemake Creative Studio, PixelAnt Games, Played With Fire and Rebel Wolves with official open/general/future-application routes and matching studio profiles.
+- Rechecked Codebox Games and G7 Studio and confirmed both were already in the directory; other rediscovered employers were not duplicated.
+- Proposal baseline: 327 route/profile pairs, 322 active and 5 paused, across 51 country/location labels.
+- The manual-only source register remains at 22; the integrated runtime remains GameDevMap plus three Wikidata feeds. No new adapter, scraper, schedule, secret or permission was added.
+- Defines initial global discovery as a practical, evidence-backed baseline followed by ongoing hourly maintenance, not an exhaustive worldwide census. After merge and deployment, primary development focus moves to Phase B UI/UX.
+## 2026-10-31 — Global discovery batch 14 (merged in PR #74)
 
 - Added CAPCOM's official mid-career Career Registration (Japan), Cygames Group's HRMOS Career Registration (Japan), and Small Giant Games' Greenhouse Open Application (Finland), each with a matching researched profile.
 - Refreshed Fawkes Games' spontaneous-application submission method and current ATS/landing-page caveat; corrected Stunlock Studios to its Teamtailor Open Application, online-only submission, Skövde location and “Temporarily Remote” status.
 - Added five manual-only candidate sources in Poland, Germany and India: BAZA POLSKI GAMEDEV, game (German Games Industry Association), GDAI, IGDA India and USK member companies.
 - The manual-only source register now contains 22 entries. No new runtime adapter was added; config/discovery-sources.json, workflow schedules, secrets and permissions are unchanged.
-- The branch contains 322 route/profile pairs (317 active, 5 paused; 51 country/location labels). The 319-record main snapshot remains the deployed baseline until this proposal is reviewed and merged.
+- Main now contains 322 route/profile pairs (317 active, 5 paused; 51 country/location labels), deployed successfully in Pages run 41224727091.
 
 ## 2026-10-31 — Global discovery batch 13 (merged in PR #73)
 
