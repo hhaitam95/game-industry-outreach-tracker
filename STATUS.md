@@ -18,12 +18,12 @@ Exclude organisations materially focused on pornography/adult sexual entertainme
 
 - The live site remains limited to Studio Directory and My applications.
 - Personal tracker entries remain in the visitor's browser localStorage. No application records or CVs are committed to the public repository.
-- Current main contains **287 studio/employer records**, **287 matching profiles**, **284 active** and **3 paused** routes across **48 country/location labels**. The in-progress batch-6 proposal branch contains **291 records / 291 profiles**, with **288 active** and **3 paused** routes across 49 country/location labels; it is not merged or deployed.
+- Current main contains **287 studio/employer records**, **287 matching profiles**, **284 active** and **3 paused** routes across **48 country/location labels**. The in-progress batch-6 proposal branch contains **293 records / 293 profiles**, with **289 active** and **4 paused** routes across 49 country/location labels; it is not merged or deployed.
 - PR #65 is merged: six additional employers and updates to Bananagun, Larian Studios and Garena.
 - PR #66 is merged: Kokku, Raini Studios and Side, plus a refreshed Havoc Games route.
 - PR #67 is merged: precision updates to Aska Studios, Obsidian Entertainment, SOFTGAMES, Lost Boys Interactive and Rustling Leaves Games.
 - PR #68 is still open but cannot be merged cleanly after the global-model documentation merge; its validated data changes have been consolidated into the batch-6 branch. Do not count them in main until the replacement PR is merged and deployed.
-- The batch-6 proposal includes PR #68's fifth expansion (Sudden Forest, Chimera Entertainment and Supermassive Games), adds 22cans, Absolutely Games and AB Games, and corrects Bossa Studios, Brave At Night and Ember Crows.
+- The batch-6 proposal includes PR #68's fifth expansion (Sudden Forest, Chimera Entertainment and Supermassive Games), adds 22cans, Absolutely Games, AB Games, Favo Games, DON’T NOD and Ubisoft Saguenay, and refreshes Bossa Studios, Brave At Night and Ember Crows. Techtive Games GmbH is paused pending official route linkage; Fawkes Games was removed because official evidence supports publisher/live-operations classification, not in-house game development.
 
 ## Discovery pipeline checkpoint
 
@@ -52,6 +52,11 @@ Exclude organisations materially focused on pornography/adult sexual entertainme
 - Primal Game Studio links a speculative JazzHR route, but the ATS destination returned HTTP 403; retry before publication.
 - PRELOADED's inspected page provided a general enquiry form, not an explicit speculative application.
 - 24 Bit Games is a legitimate development-services studio, but no speculative route was found.
+- Techtive Games GmbH's JOIN spontaneous application is paused because the current official company domain redirects to ARDEM and does not link to the JOIN route; the employer-controlled route relationship needs direct confirmation.
+- Fawkes Games was removed from the directory after its official About material described a publisher/operator and live-operations business without establishing an in-house development studio.
+- DON’T NOD Montréal is recorded as a candidate-bank route, not an active vacancy; its employer posting expressly disclaims a current or future recruitment need and states the remote scope as Québec.
+- Ubisoft Saguenay's official French careers page requests CVs and portfolios by email when a desired position is not advertised.
+- Favo Games' official form includes an explicit Open application choice; the studio says it works remotely from anywhere, while country-specific legal arrangements remain unspecified.
 
 ## Next engineering and research work
 
