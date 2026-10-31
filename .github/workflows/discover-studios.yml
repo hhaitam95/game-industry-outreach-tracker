@@ -96,6 +96,25 @@ jobs:
           )"
           fi
 
+          SOURCE_PAGE_LIMIT=8
+          if [ "$MODE" = "hourly" ] && [ -f "$STATE_FILE" ]; then
+            SATURATED="$(python3 - "$STATE_FILE" <<'PY'
+          import json
+          import sys
+
+          with open(sys.argv[1], encoding="utf-8") as handle:
+              state = json.load(handle)
+          print("true" if state.get("saturated") else "false")
+          PY
+          )"
+            if [ "$SATURATED" = "true" ]; then
+              # Once three complete cycles add no verified routes, keep checking
+              # the source feeds, but reduce refresh pressure from 8 pages/hour
+              # to 1 page/hour. A verified addition clears saturation.
+              SOURCE_PAGE_LIMIT=1
+            fi
+          fi
+
           if [ "$MODE" = "bulk" ]; then
             python3 scripts/discover_speculative_studios.py \
               --mode bulk \
@@ -104,21 +123,23 @@ jobs:
               --max-candidate-checks 1000 \
               --route-check-count 8 \
               --max-run-seconds 1500 \
-              --state-file "$STATE_FILE"
+              --state-file "$STATE_FILE" 2>&1 | tee "$RUNNER_TEMP/studioscout-discovery.log"
           else
-            # Continue the unfinished Wikidata feeds in a larger, bounded batch.
-            # The scraper enforces a 65-second gap between Wikidata requests and
-            # stops discovery work at the existing 25-minute runtime budget.
+            # Continue unfinished Wikidata feeds with a bounded hourly budget.
+            # Normal exploration checks up to 8 pages; saturated maintenance
+            # checks 1 page. The scraper preserves the 65-second Wikidata
+            # request spacing and the 25-minute runtime ceiling in both modes.
             python3 scripts/discover_speculative_studios.py \
               --mode hourly \
               --batch-size 100 \
-              --max-source-pages 8 \
+              --max-source-pages "$SOURCE_PAGE_LIMIT" \
               --max-candidate-checks 1000 \
               --route-check-count 8 \
               --max-run-seconds 1500 \
-              --state-file "$STATE_FILE"
+              --state-file "$STATE_FILE" 2>&1 | tee "$RUNNER_TEMP/studioscout-discovery.log"
           fi
           echo "mode=$MODE" >> "$GITHUB_OUTPUT"
+          echo "source_page_limit=$SOURCE_PAGE_LIMIT" >> "$GITHUB_OUTPUT"
 
       - name: Run offline discovery pipeline tests
         run: python3 -m unittest discover -s tests -p 'test_studio_discovery*.py' -v
@@ -223,11 +244,52 @@ jobs:
 
       - name: Add sanitized workflow summary
         if: always()
+        shell: bash
         run: |
           {
             echo "## StudioScout discovery run"
             echo "- Mode: ${{ steps.discovery.outputs.mode || 'not started' }}"
+            echo "- Source-page cap: ${{ steps.discovery.outputs.source_page_limit || 'not set' }}"
             echo "- Public changes: ${{ steps.commit.outputs.data_changed || 'not committed' }}"
-            echo "- Candidate and route details remain in the discovery-state branch."
+            if [ -f "$RUNNER_TEMP/studioscout-discovery.log" ]; then
+              for key in source_pages source_candidates candidate_checks verified_added routes_checked time_budget_exhausted; do
+                value="$(awk -F': ' -v key="$key" '$1 == key { print substr($0, index($0, ": ") + 2); exit }' "$RUNNER_TEMP/studioscout-discovery.log")"
+                if [ -n "$value" ]; then
+                  label="$(printf '%s' "$key" | tr '_' ' ')"
+                  echo "- ${label^}: $value"
+                fi
+              done
+            fi
+            STATE_FILE=".discovery-state/state/studio-discovery-state.json"
+            if [ -f "$STATE_FILE" ]; then
+              python3 - "$STATE_FILE" <<'PY'
+          import json
+          import sys
+
+          with open(sys.argv[1], encoding="utf-8") as handle:
+              state = json.load(handle)
+          candidates = state.get("candidates", {})
+          counts = {}
+          for candidate in candidates.values():
+              status = candidate.get("status", "unknown")
+              counts[status] = counts.get(status, 0) + 1
+
+          print(f"- Saved checkpoint: {state.get('updated_at', 'unknown')}")
+          print(f"- Candidate pool: {len(candidates):,}")
+          for status in ("queued", "retry", "needs_review", "no_route", "published", "duplicate", "excluded"):
+              print(f"- {status.replace('_', ' ').title()}: {counts.get(status, 0):,}")
+          print(f"- Discovery cycle: {state.get('cycle', 1)}")
+          print(f"- Consecutive empty cycles: {state.get('empty_cycles', 0)}")
+          print(f"- Saturated maintenance: {'yes' if state.get('saturated') else 'no'}")
+          for feed_id in ("wikidata_video_game_developers", "wikidata_game_developer_credits", "wikidata_video_game_companies", "gamedevmap"):
+              done = state.get("feed_done", {}).get(feed_id, False)
+              cursor = state.get("feed_cursors", {}).get(feed_id, "")
+              label = feed_id.replace("_", " ").title()
+              print(f"- {label}: {'complete' if done else 'in progress'} (cursor: {cursor or 'start'})")
+          PY
+            else
+              echo "- Saved discovery checkpoint: unavailable"
+            fi
+            echo "- Candidate names and route evidence remain in the private discovery-state branch."
             echo "- Unavailable, blocked, robots-disallowed or ambiguous pages do not close routes."
           } >> "$GITHUB_STEP_SUMMARY"
