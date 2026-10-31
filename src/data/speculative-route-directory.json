@@ -1693,6 +1693,46 @@
     ]
   },
   {
+    "name": "Facepunch Studios",
+    "country": "United Kingdom",
+    "websiteUrl": "https://facepunch.com/",
+    "applicationUrl": "https://careers.facepunch.com/jobs/5154164/applications/new?iframe=true",
+    "evidenceUrl": "https://facepunch.com/careers",
+    "notes": "Official careers page explicitly says it accepts general applications when no listed role fits. The linked Teamtailor General Application form collects a CV, portfolio/GitHub URL, country and preferred discipline. Facepunch describes itself as remote-first and says applicants can work from wherever they prefer, subject to local employment laws.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Worldwide · subject to local employment laws"
+      ],
+      "disciplineScope": [
+        "Art",
+        "Programming",
+        "Sound Design",
+        "Support",
+        "Production",
+        "Community",
+        "Marketing",
+        "People & Talent",
+        "IT",
+        "Office",
+        "Finance",
+        "Legal",
+        "Other",
+        "QA",
+        "Graphics"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Fakefish",
     "country": "Finland",
     "websiteUrl": "https://www.fakefishgames.com/",
@@ -1774,6 +1814,30 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-28"
+    }
+  },
+  {
+    "name": "Fenris Creations",
+    "country": "Iceland",
+    "websiteUrl": "https://fenris.com/",
+    "applicationUrl": "https://careers.fenris.com/en/register-your-interest/new",
+    "evidenceUrl": "https://fenris.com/careers",
+    "notes": "The official careers FAQ says applicants without a matching vacancy can make a general application and have their CV added to the database. The linked Pinpoint careers platform has a dedicated “Register Your Interest” form under “Speculative Applications”, with CV upload and location/department preferences.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Choose an available studio location through the official application form; remote eligibility is not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
     }
   },
   {
