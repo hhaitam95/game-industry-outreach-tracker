@@ -1297,7 +1297,10 @@ def finish_cycle_if_complete(state: dict[str, Any]) -> bool:
     if int(state.get("cycle_additions", 0)) == 0:
         state["empty_cycles"] = int(state.get("empty_cycles", 0)) + 1
     else:
+        # Real, verified growth means this source set is no longer saturated.
+        # Resume the faster discovery cadence for the next full scan cycle.
         state["empty_cycles"] = 0
+        state["saturated"] = False
     state["cycle"] = int(state.get("cycle", 1)) + 1
     state["cycle_additions"] = 0
     # Wikidata feeds are refreshed on each pass. GameDevMap is a one-time bulk
