@@ -905,6 +905,32 @@
     }
   },
   {
+    "name": "Bonfire Studios",
+    "country": "United States",
+    "websiteUrl": "https://www.bonfirestudios.com/",
+    "applicationUrl": "https://job-boards.greenhouse.io/bonfirestudiosinc/jobs/4423455009",
+    "evidenceUrl": "https://www.bonfirestudios.com/work-with-us/4423455009/",
+    "notes": "Official Work With Us page lists a General Application for Game Development and links to the Greenhouse application form. The form invites people even when the right role is not currently posted and asks about their discipline, work and motivations. The listing is full-time hybrid in Irvine, California; no remote or international eligibility is stated.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "general",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "hybrid",
+      "eligibleLocations": [
+        "Irvine, California, United States · hybrid; onsite collaboration expected"
+      ],
+      "disciplineScope": [
+        "Game Development"
+      ],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-01-29"
+    }
+  },
+  {
     "name": "Bongfish",
     "country": "Austria",
     "websiteUrl": "https://bongfish.com/",
@@ -2401,6 +2427,30 @@
       "Remote-first; studio base Montréal, Québec, Canada; applicant-country eligibility not stated"
     ],
     "workModel": "remote"
+  },
+  {
+    "name": "Halfbrick Studios",
+    "country": "Australia",
+    "websiteUrl": "https://www.halfbrick.com/",
+    "applicationUrl": "https://www.halfbrick.com/expression-of-interest",
+    "evidenceUrl": "https://www.halfbrick.com/careers",
+    "notes": "The official careers page directs applicants who do not see an ideal role to the Expression of Interest form. The form asks for location, role interest, portfolio link and resume upload. Halfbrick describes itself as fully remote and says its move to remote work opened recruitment to global hiring opportunities.",
+    "checkedAt": "2026-10-31",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "remote",
+      "eligibleLocations": [
+        "Global hiring opportunities · fully remote, per official careers page"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-01-29"
+    }
   },
   {
     "name": "Havoc Games",
