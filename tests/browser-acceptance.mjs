@@ -119,12 +119,12 @@ async function main() {
     assert.equal(await rows.count(), initialCount, "Reset filters should restore the full directory.");
 
     // Search and empty-state recovery.
-    await page.getByLabel("Search").fill("no-studio-with-this-name-9345");
+    await page.getByLabel("Search", { exact: true }).fill("no-studio-with-this-name-9345");
     await page.getByText("No studios match these filters.").waitFor();
     await page.getByRole("button", { name: "Reset filters" }).click();
     assert.equal(await rows.count(), initialCount, "Clearing filters should restore the directory.");
 
-    await page.getByLabel("Search").fill("4A Games");
+    await page.getByLabel("Search", { exact: true }).fill("4A Games");
     assert.equal(await rows.count(), 1, "A matching studio search should return the intended studio.");
     await rows.getByText("4A Games").waitFor();
     const fourARow = rows.filter({ hasText: "4A Games" });
@@ -140,7 +140,7 @@ async function main() {
       "Steam-listed games should render cover artwork images.",
     );
     await fourARow.getByRole("button", { name: "4A Games" }).click();
-    await page.getByLabel("Search").fill("");
+    await page.getByLabel("Search", { exact: true }).fill("");
     assert.equal(await rows.count(), initialCount, "Clearing a successful search should restore the directory.");
 
     // Continent, country and work-model filters must narrow the visible result set.
@@ -176,7 +176,7 @@ async function main() {
     const remoteCount = await rows.count();
     assert.ok(remoteCount > 0 && remoteCount < initialCount, "Work-model filtering should narrow the directory.");
     await page.locator(".directory-toolbar").getByLabel("Work model").selectOption("All work models");
-    await page.getByLabel("Search").fill("Laki Studios");
+    await page.getByLabel("Search", { exact: true }).fill("Laki Studios");
     await country.selectOption("Poland");
     await page.getByRole("button", { name: "Reset filters" }).click();
     assert.equal(await rows.count(), initialCount, "Reset filters should clear search and selects.");
