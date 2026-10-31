@@ -1,6 +1,6 @@
 # ADR-078: consolidate duplicate FakeFish studio identity
 
-**Status:** Implemented on branch `fix/fakefish-duplicate-and-checkpoint-20261031`; pending exact-head CI and merge  
+**Status:** Merged via PR #72; exact-head CI passed and the corrected directory is deployed  
 **Date:** 2026-10-31  
 **Scope:** Public studio directory, studio profiles and directory validation.
 
