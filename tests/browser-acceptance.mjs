@@ -134,6 +134,10 @@ async function main() {
     await page.getByLabel("Email").fill("candidate@example.test");
     await page.getByLabel("Current location").fill("Budapest, Hungary");
     await page.getByLabel("Professional summary").fill("A test profile with an evidence-backed technical background.");
+    // Switching views must not discard profile edits that have not yet been saved.
+    await page.getByRole("button", { name: "Studios", exact: true }).click();
+    await page.getByRole("button", { name: "My profile" }).click();
+    assert.equal(await page.getByLabel("Full name").inputValue(), "Test Candidate");
     await page.getByRole("button", { name: /Add experience/ }).click();
     await page.getByLabel("Employer").fill("Example Studio");
     await page.getByLabel("Exact job title").fill("Product Support Engineer");
