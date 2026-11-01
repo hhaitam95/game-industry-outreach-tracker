@@ -194,7 +194,9 @@ function collectGamesMissingSteamArtwork(profiles) {
   for (const [studio, profile] of Object.entries(profiles)) {
     for (const game of profile.popularGames || []) {
       if (!Number.isInteger(game.appId) || game.appId < 1) continue;
-      if (game.steamHeaderUrl && isValidSteamArtworkUrl(game.steamHeaderUrl)) continue;
+      const hasHeaderUrl = game.steamHeaderUrl && isValidSteamArtworkUrl(game.steamHeaderUrl);
+      const hasCapsuleUrl = game.steamCapsuleUrl && isValidSteamArtworkUrl(game.steamCapsuleUrl);
+      if (hasHeaderUrl && hasCapsuleUrl) continue;
       const group = entriesByAppId.get(game.appId) || { appId: game.appId, entries: [] };
       group.entries.push({ studio, game });
       entriesByAppId.set(game.appId, group);
