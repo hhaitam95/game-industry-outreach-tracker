@@ -164,7 +164,7 @@ function isPubliclyReleasedGame(game) {
   return true;
 }
 
-function collectMissingArtworkGames(profiles) {
+export function collectMissingArtworkGames(profiles) {
   const groups = new Map();
   for (const [studio, profile] of Object.entries(profiles)) {
     for (const game of profile.popularGames || []) {
@@ -172,7 +172,6 @@ function collectMissingArtworkGames(profiles) {
       if (
         game.igdbCoverId ||
         game.officialArtworkUrl ||
-        game.steamHeaderUrl ||
         game.appStoreArtworkUrl ||
         game.appStoreUrl
       ) {
