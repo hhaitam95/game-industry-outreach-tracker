@@ -578,6 +578,7 @@ async function main() {
     await ahoiiiDetails.waitFor({ state: "detached" });
 
     // IGDB images are a live fallback source, and games still link to their exact IGDB page.
+    await page.getByLabel("Search", { exact: true }).fill("Ocellus");
     const ocellusRow = rows.filter({ hasText: "Ocellus" });
     await ocellusRow.getByRole("button", { name: /Ocellus/ }).click();
     const ocellusDetails = page.locator("#studio-details-ocellus");
@@ -596,6 +597,7 @@ async function main() {
     );
     await ocellusRow.getByRole("button", { name: /Ocellus/ }).click();
     await ocellusDetails.waitFor({ state: "detached" });
+    await page.getByLabel("Search", { exact: true }).fill("Halfbrick Studios");
 
     // App Store art is a final fallback when earlier cover sources are absent.
     const halfbrickRow = rows.filter({ hasText: "Halfbrick Studios" });
@@ -614,6 +616,7 @@ async function main() {
     assert.ok(fruitNinjaRatio > 0.9 && fruitNinjaRatio < 1.1);
     await halfbrickRow.getByRole("button", { name: /Halfbrick Studios/ }).click();
     await halfbrickDetails.waitFor({ state: "detached" });
+    await page.getByLabel("Search", { exact: true }).fill("");
 
     assert.equal(
       await page.locator('.game-poster-card[href*="store.steampowered.com/search/"], .popular-game-cover[href*="store.steampowered.com/search/"]').count(),
@@ -625,7 +628,16 @@ async function main() {
     const studioRow = page.getByRole("row").filter({ hasText: "4A Games" });
     assert.equal(await studioRow.count(), 1, "The test studio should appear exactly once.");
     await studioRow.getByRole("button", { name: "Save" }).click();
-    await studioRow.getByRole("button", { name: "In tracker" }).waitFor();
+    const viewInTracker = studioRow.getByRole("button", { name: /View in Tracker/ });
+    await viewInTracker.waitFor();
+    await viewInTracker.click();
+    await page.getByRole("heading", { name: "My applications" }).waitFor();
+
+    let trackedRow = page.locator(".tracker-table tbody tr").filter({ has: page.locator(".status-select-label") }).filter({ hasText: "4A Games" });
+    await trackedRow.waitFor();
+    await trackedRow.waitFor({ state: "visible" });
+    await page.waitForFunction(() => document.querySelector('[id="tracker-row-4a-games"]')?.classList.contains("tracker-row-focused"));
+    assert.equal(await page.getByLabel("Status for 4A Games").inputValue(), "saved");
 
     const storedBeforeReload = await page.evaluate((key) => JSON.parse(localStorage.getItem(key) || "[]"), storageKey);
     assert.equal(storedBeforeReload.length, 1);
