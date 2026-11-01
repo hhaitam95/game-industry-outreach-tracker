@@ -1,6 +1,6 @@
 # Candidate profile, matching and application workspace
 
-**Status:** Approved product direction; implementation not started  
+**Status:** Approved product direction; Candidate Profile C1 implemented in PR #95 (awaiting review/merge); matching, queue and workspace not started  
 **Last updated:** 2026-11-01  
 **Scope:** Candidate-owned profile, transparent studio/opportunity assessment, personal application queue and preparation workspace.  
 **Explicitly deferred:** Browser-extension automation, external portal autofill, automated form interaction and application submission.
