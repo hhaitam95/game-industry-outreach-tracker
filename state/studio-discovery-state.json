@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-11-01T14:48:31.621146+00:00",
+  "updated_at": "2026-11-01T15:23:03.157200+00:00",
   "feed_cursors": {
-    "wikidata_video_game_developers": "Q110454010",
-    "wikidata_game_developer_credits": "Q95",
+    "wikidata_video_game_developers": "Q118558676",
+    "wikidata_game_developer_credits": "Q99540288",
     "wikidata_video_game_companies": "",
     "gamedevmap": "10601"
   },
@@ -14,7 +14,7 @@
     "gamedevmap": true
   },
   "feed_index": 1,
-  "cycle": 15,
+  "cycle": 16,
   "cycle_additions": 0,
   "empty_cycles": 2,
   "saturated": false,
@@ -213498,9 +213498,57 @@
       "gone_count": 0,
       "last_result": "active",
       "last_checked_at": "2026-11-01T14:48:31.619470+00:00"
+    },
+    "Silkroad Studios": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-11-01T15:22:51.849481+00:00"
+    },
+    "Simply Sweet Games": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-11-01T15:22:53.239377+00:00"
+    },
+    "Sinn Studio": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-11-01T15:22:54.631973+00:00"
+    },
+    "Skytale": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-11-01T15:22:56.402505+00:00"
+    },
+    "Sleeprunner Studios": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-11-01T15:22:58.048299+00:00"
+    },
+    "Small Giant Games": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-11-01T15:22:59.586229+00:00"
+    },
+    "SmashByte": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "unknown",
+      "last_checked_at": "2026-11-01T15:23:01.588239+00:00"
+    },
+    "Snowcastle Games": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-11-01T15:23:03.155401+00:00"
     }
   },
-  "route_check_index": 248,
+  "route_check_index": 256,
   "stats": {
     "candidates_seen": 10373,
     "routes_verified": 126,
@@ -213534,12 +213582,12 @@
       "last_pass_incomplete_candidates": 0
     },
     "wikidata_video_game_companies": {
-      "cycle": 15,
+      "cycle": 16,
       "cycle_additions": 0,
-      "empty_cycles": 13,
+      "empty_cycles": 14,
       "saturated": true,
       "complete": false,
-      "last_pass_completed_at": "2026-11-01T14:48:31.619502+00:00",
+      "last_pass_completed_at": "2026-11-01T15:23:03.155448+00:00",
       "last_pass_status": "saturated",
       "last_pass_candidates": 0,
       "last_pass_verified": 0,
