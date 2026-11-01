@@ -38,3 +38,26 @@ test("leaves missing titles and coverless IGDB records unresolved", () => {
   assert.equal(selectExactIgdbMatch("Unknown", []).status, "not_found");
   assert.equal(selectExactIgdbMatch("No Cover", [{ id: 9, name: "No Cover" }]).status, "missing_cover");
 });
+
+test("returns a sourced release year from the exact IGDB match", () => {
+  const match = selectExactIgdbMatch("Example Game", [{
+    id: 99,
+    name: "Example Game",
+    slug: "example-game",
+    first_release_date: Date.UTC(2020, 6, 15) / 1000,
+    cover: { image_id: "example-cover" },
+  }]);
+  assert.equal(match.releaseYear, 2020);
+  assert.equal(match.releaseYearSourceUrl, "https://www.igdb.com/games/example-game");
+});
+
+test("preserves the release year when an exact IGDB game has no cover", () => {
+  const match = selectExactIgdbMatch("No Cover", [{
+    id: 100,
+    name: "No Cover",
+    slug: "no-cover",
+    first_release_date: Date.UTC(2018, 0, 1) / 1000,
+  }]);
+  assert.equal(match.status, "missing_cover");
+  assert.equal(match.releaseYear, 2018);
+});

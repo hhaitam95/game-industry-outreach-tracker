@@ -161,6 +161,40 @@ if (Array.isArray(studios) && profiles && typeof profiles === "object" && !Array
     for (const field of ["companyType", "otherLocations", "focus", "popularGames", "profileSources"]) {
       if (!Array.isArray(profile[field])) errors.push(studio.name + ".profile." + field + " must be an array.");
     }
+    for (const field of ["platforms", "gameFocus", "studioRoles"]) {
+      if (profile[field] !== undefined && !Array.isArray(profile[field])) {
+        errors.push(studio.name + ".profile." + field + " must be an array when supplied.");
+      }
+    }
+    const allowedTags = {
+      platforms: ["PC", "Console", "Mobile", "VR", "XR", "Web"],
+      studioRoles: ["Developer", "Publisher", "Co-dev"],
+      gameFocus: [
+        "Action", "Adventure", "RPG", "Shooter", "Horror", "Strategy", "Simulation", "Narrative",
+        "Co-op", "Multiplayer", "Survival", "Puzzle", "Casual", "Racing", "Arcade", "Fighting",
+        "Stealth", "Roguelike", "Sandbox", "Open world", "Card games", "Sports", "Management",
+        "Fantasy", "Sci-fi", "Historical", "Platformer", "Tactical", "MMO", "Family-friendly",
+        "Serious games", "Social games"
+      ]
+    };
+    for (const [field, allowed] of Object.entries(allowedTags)) {
+      if (!Array.isArray(profile[field])) continue;
+      const seenTags = new Set();
+      for (const [tagIndex, tag] of profile[field].entries()) {
+        if (!allowed.includes(tag)) errors.push(studio.name + ".profile." + field + "[" + tagIndex + "] has unsupported value: " + tag + ".");
+        if (seenTags.has(tag)) errors.push(studio.name + ".profile." + field + " contains duplicate tag: " + tag + ".");
+        seenTags.add(tag);
+      }
+    }
+    if (profile.scale !== undefined && !["Indie", "AA", "AAA"].includes(profile.scale)) {
+      errors.push(studio.name + ".profile.scale must be Indie, AA or AAA when supplied.");
+    }
+    if (profile.scaleBasis !== undefined && !["recorded", "editorial"].includes(profile.scaleBasis)) {
+      errors.push(studio.name + ".profile.scaleBasis must be recorded or editorial when supplied.");
+    }
+    if (profile.scaleBasis !== undefined && profile.scale === undefined) {
+      errors.push(studio.name + ".profile.scaleBasis requires a normalized scale.");
+    }
     if (Array.isArray(profile.companyType) && profile.companyType.length === 0) {
       errors.push(studio.name + ".profile.companyType must not be empty.");
     }
@@ -196,6 +230,19 @@ if (Array.isArray(studios) && profiles && typeof profiles === "object" && !Array
         }
         if (game?.appId !== null && game?.appId !== undefined && (!Number.isInteger(game.appId) || game.appId < 1)) {
           errors.push(studio.name + ".profile.popularGames[" + gameIndex + "].appId must be a positive integer or null.");
+        }
+        if (game?.releaseYear !== undefined && (!Number.isInteger(game.releaseYear) || game.releaseYear < 1950 || game.releaseYear > 2100)) {
+          errors.push(studio.name + ".profile.popularGames[" + gameIndex + "].releaseYear must be a valid year from 1950 to 2100.");
+        }
+        if (game?.releaseYearSourceUrl !== undefined) {
+          try { httpsUrl(game.releaseYearSourceUrl, studio.name + ".profile.popularGames[" + gameIndex + "].releaseYearSourceUrl"); }
+          catch (error) { errors.push(error.message); }
+          if (game?.releaseYear === undefined) {
+            errors.push(studio.name + ".profile.popularGames[" + gameIndex + "].releaseYearSourceUrl requires releaseYear.");
+          }
+        }
+        if (game?.releaseYear !== undefined && game?.releaseYearSourceUrl === undefined) {
+          errors.push(studio.name + ".profile.popularGames[" + gameIndex + "].releaseYear requires a source URL.");
         }
         if (game?.igdbGameId !== undefined && (!Number.isInteger(game.igdbGameId) || game.igdbGameId < 1)) {
           errors.push(studio.name + ".profile.popularGames[" + gameIndex + "].igdbGameId must be a positive integer.");

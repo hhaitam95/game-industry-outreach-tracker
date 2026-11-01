@@ -34,6 +34,13 @@ export function selectExactIgdbMatch(title, results) {
   }
 
   const game = exactMatches[0];
+  const igdbSlug = typeof game.slug === "string" && game.slug ? game.slug : undefined;
+  const firstReleaseDate = Number.isInteger(game.first_release_date)
+    ? new Date(game.first_release_date * 1000).getUTCFullYear()
+    : null;
+  const releaseYearMetadata = firstReleaseDate && firstReleaseDate >= 1950 && firstReleaseDate <= 2100 && igdbSlug
+    ? { releaseYear: firstReleaseDate, releaseYearSourceUrl: "https://www.igdb.com/games/" + igdbSlug }
+    : {};
   const covers = Array.isArray(game.cover) ? game.cover : game.cover ? [game.cover] : [];
   const cover = covers.find(item => typeof item?.image_id === "string" && item.image_id.trim());
   if (!cover) {
@@ -41,7 +48,8 @@ export function selectExactIgdbMatch(title, results) {
       status: "missing_cover",
       exactMatchCount: 1,
       igdbGameId: game.id,
-      igdbSlug: typeof game.slug === "string" ? game.slug : undefined,
+      ...(igdbSlug ? { igdbSlug } : {}),
+      ...releaseYearMetadata,
     };
   }
   if (!Number.isInteger(game.id) || game.id < 1) {
@@ -52,8 +60,9 @@ export function selectExactIgdbMatch(title, results) {
     status: "matched",
     exactMatchCount: 1,
     igdbGameId: game.id,
-    igdbSlug: typeof game.slug === "string" ? game.slug : undefined,
+    ...(igdbSlug ? { igdbSlug } : {}),
     igdbCoverId: cover.image_id,
+    ...releaseYearMetadata,
   };
 }
 
@@ -117,7 +126,7 @@ function escapeApicalypse(value) {
 }
 
 async function searchIgdb(title, clientId, accessToken) {
-  const query = `search "${escapeApicalypse(title)}"; fields id,name,slug,cover.image_id; limit 30;`;
+  const query = `search "${escapeApicalypse(title)}"; fields id,name,slug,cover.image_id,first_release_date; limit 30;`;
   for (let attempt = 0; attempt < 3; attempt += 1) {
     const response = await fetch(API_BASE + "/games", {
       method: "POST",
@@ -162,9 +171,13 @@ function collectGameEntries(profiles) {
 }
 
 function copyMetadata(target, match) {
-  target.igdbGameId = match.igdbGameId;
+  if (Number.isInteger(match.igdbGameId)) target.igdbGameId = match.igdbGameId;
   if (match.igdbSlug) target.igdbSlug = match.igdbSlug;
-  target.igdbCoverId = match.igdbCoverId;
+  if (match.igdbCoverId) target.igdbCoverId = match.igdbCoverId;
+  if (match.releaseYear && !target.releaseYear && match.releaseYearSourceUrl) {
+    target.releaseYear = match.releaseYear;
+    target.releaseYearSourceUrl = match.releaseYearSourceUrl;
+  }
 }
 
 async function main() {
@@ -190,7 +203,10 @@ async function main() {
   const existingByTitle = new Map();
   for (const group of groups) {
     const existing = group.entries.find(game =>
-      Number.isInteger(game.igdbGameId) && typeof game.igdbCoverId === "string" && game.igdbCoverId,
+      Number.isInteger(game.igdbGameId) &&
+      typeof game.igdbCoverId === "string" &&
+      game.igdbCoverId &&
+      Number.isInteger(game.releaseYear),
     );
     if (existing) existingByTitle.set(normalizeGameTitle(group.title), existing);
   }
@@ -208,9 +224,7 @@ async function main() {
         igdbSlug: existing.igdbSlug,
         igdbCoverId: existing.igdbCoverId,
       };
-      for (const game of group.entries) {
-        if (!game.igdbCoverId) copyMetadata(game, metadata);
-      }
+      for (const game of group.entries) copyMetadata(game, metadata);
       counts.reused += 1;
       continue;
     }
@@ -221,12 +235,15 @@ async function main() {
     counts.queried += 1;
     const match = selectExactIgdbMatch(group.title, results);
 
-    if (match.status === "matched") {
-      counts.matched += 1;
+    if (match.status === "matched" || match.status === "missing_cover") {
+      if (match.status === "matched") counts.matched += 1;
+      else {
+        counts.missingCover += 1;
+        unresolved.push({ title: group.title, studios: [...new Set(group.studioNames)], status: match.status });
+      }
       for (const game of group.entries) copyMetadata(game, match);
     } else {
       if (match.status === "ambiguous") counts.ambiguous += 1;
-      else if (match.status === "missing_cover") counts.missingCover += 1;
       else counts.notFound += 1;
       unresolved.push({ title: group.title, studios: [...new Set(group.studioNames)], status: match.status });
     }
@@ -235,7 +252,7 @@ async function main() {
   if (args.write) {
     const serialized = JSON.stringify(profiles, null, 2) + "\n";
     writeFileSync(profilesPath, serialized, "utf8");
-    process.stdout.write("Updated src/data/studio-profiles.json with exact IGDB title matches.\n");
+    process.stdout.write("Updated src/data/studio-profiles.json with exact IGDB title matches, artwork and available release years.\n");
   } else {
     process.stdout.write("Dry run only; no files were changed. Re-run with --write to persist exact matches.\n");
   }

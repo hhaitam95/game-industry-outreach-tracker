@@ -63,6 +63,9 @@ function PosterContents({ game }: { game: PopularGame }) {
       </span>
       <span className="game-poster-caption">
         <strong>{game.title}</strong>
+        {game.releaseYear ? (
+          <small title={game.releaseYearSourceUrl ? "Release year source: " + game.releaseYearSourceUrl : undefined}>{game.releaseYear}</small>
+        ) : null}
       </span>
     </>
   );
@@ -78,7 +81,8 @@ export default function GamePoster({ game }: { game: PopularGame }) {
         className="game-poster-card"
         role="group"
         data-game-title={game.title}
-        aria-label={game.title + " · no verified game page"}
+        aria-label={game.title + (game.releaseYear ? " · " + game.releaseYear : "") + " · no verified game page"}
+        data-release-year={game.releaseYear || ""}
       >
         <PosterContents game={game} />
       </span>
@@ -92,8 +96,9 @@ export default function GamePoster({ game }: { game: PopularGame }) {
       target="_blank"
       rel="noopener noreferrer"
       title={linkLabel}
-      aria-label={linkLabel}
+      aria-label={linkLabel + (game.releaseYear ? " · " + game.releaseYear : "")}
       data-game-title={game.title}
+      data-release-year={game.releaseYear || ""}
     >
       <PosterContents game={game} />
     </a>
@@ -102,7 +107,7 @@ export default function GamePoster({ game }: { game: PopularGame }) {
 
 export function GamePosterStrip({ games }: { games: PopularGame[] }) {
   return (
-    <span className="popular-work-list" aria-label={games.map(game => game.title).join(", ")}>
+    <span className="popular-work-list" aria-label={games.map(game => game.title + (game.releaseYear ? " " + game.releaseYear : "")).join(", ")}>
       {games.map(game => {
         const destination = gameDestination(game);
         const linkLabel = gameLinkLabel(game);
@@ -119,9 +124,10 @@ export function GamePosterStrip({ games }: { games: PopularGame[] }) {
             key={game.title}
             target="_blank"
             rel="noopener noreferrer"
-            title={game.title}
-            aria-label={linkLabel}
+            title={game.title + (game.releaseYear ? " · " + game.releaseYear : "")}
+            aria-label={linkLabel + (game.releaseYear ? " · " + game.releaseYear : "")}
             data-game-title={game.title}
+            data-release-year={game.releaseYear || ""}
           >
             {content}
           </a>
@@ -130,8 +136,9 @@ export function GamePosterStrip({ games }: { games: PopularGame[] }) {
             className="popular-game-cover"
             key={game.title}
             role="group"
-            aria-label={game.title + " · no verified game page"}
+            aria-label={game.title + (game.releaseYear ? " · " + game.releaseYear : "") + " · no verified game page"}
             data-game-title={game.title}
+            data-release-year={game.releaseYear || ""}
           >
             {content}
           </span>

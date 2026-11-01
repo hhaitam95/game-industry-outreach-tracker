@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-11-01 — Studio discovery information redesign
+
+- Replace the Studio type table column with an At a glance column showing compact platform and game-focus tags; show up to three notable game covers and the normalized scale beside each studio name.
+- Add normalized platform, focus and studio-role fields while preserving the original research fields used by matching; leave ambiguous or undisclosed studio scale unclassified rather than infer a tier.
+- Add multi-select scale/platform/focus/role filters, keep work model as an advanced application-route filter, and display removable active-filter chips.
+- Simplify expanded profiles, split Platforms and Focus, merge relevant highlights into About, remove the visible internal source list, and retain official website, application and social links.
+- Add sourced release-year metadata where verified and extend exact Steam/IGDB enrichment to populate future release years; use parent-company favicons with accessible fallbacks.
+
 ## 2026-11-01 — Shared visual design refresh
 
 - Introduce a consistent neutral, card-led visual system across the studio directory, matching dashboard, application tracker and candidate profile.

@@ -5,8 +5,19 @@ import profilesJson from "../data/studio-profiles.json" with { type: "json" };
 import type { TrackedApplication } from "./studio.types";
 import DiscoveryStatus from "./DiscoveryStatus";
 import StudioMark from "./StudioMark";
+import CompanyMarks, { hasKnownCompanyMark } from "./CompanyMarks";
 import GamePoster, { GamePosterStrip } from "./GamePosters";
 import type { PopularGame } from "./GamePosters";
+import {
+  FOCUS_ORDER,
+  PLATFORM_ORDER,
+  ROLE_ORDER,
+  SCALE_ORDER,
+  focusEmoji,
+  orderedTags,
+  platformEmoji,
+} from "./studio-taxonomy";
+import type { StudioScale } from "./studio-taxonomy";
 import { continentsForLocation, countryFlagFor } from "./location";
 import type { ContinentLabel } from "./location";
 import "./directory.css";
@@ -22,12 +33,17 @@ type Profile = {
   } | null;
   otherLocations?: string[];
   companyType?: string[];
+  studioRoles?: string[];
   ownership?: string;
   parentCompany?: string | null;
   industryScale?: string;
+  scale?: StudioScale;
+  scaleBasis?: "recorded" | "editorial";
   teamSize?: string;
   teamSizeAsOf?: string | null;
   focus?: string[];
+  platforms?: string[];
+  gameFocus?: string[];
   popularGames?: PopularGame[];
   profileSources?: string[];
   socialLinks?: { label: string; url: string }[];
@@ -36,14 +52,6 @@ type Profile = {
 };
 const profiles = profilesJson as Record<string, Profile>;
 
-const routeLabels: Record<string, string> = {
-  speculative: "Speculative",
-  unsolicited: "Unsolicited",
-  spontaneous: "Spontaneous",
-  open: "Open application",
-  general: "General application",
-  discipline_specific: "Discipline-specific",
-};
 const workModelLabels: Record<string, string> = {
   remote: "Remote",
   hybrid: "Hybrid",
@@ -62,7 +70,7 @@ const CONTINENT_ORDER = [
   "Remote / distributed",
   "Not stated",
 ];
-type SortKey = "name" | "location" | "popularWork" | "type";
+type SortKey = "name" | "location" | "popularWork" | "atAGlance";
 type SortDirection = "asc" | "desc";
 
 function isNewStudio(studio: Studio, now: number): boolean {
@@ -70,20 +78,102 @@ function isNewStudio(studio: Studio, now: number): boolean {
   const addedAt = Date.parse(studio.addedAt);
   return Number.isFinite(addedAt) && addedAt <= now && now - addedAt < NEW_STUDIO_WINDOW_MS;
 }
+
 function locationFor(studio: Studio): string {
   const hq = profiles[studio.name]?.headquarters;
   const country = hq?.country || studio.country || "Not stated";
   return [hq?.city, country].filter(Boolean).join(", ");
 }
+
 function locationSortFor(studio: Studio): string {
   const hq = profiles[studio.name]?.headquarters;
   const country = hq?.country || studio.country || "Not stated";
   const flag = countryFlagFor(country, hq?.countryCode);
   return [flag, locationFor(studio)].filter(Boolean).join(" ");
 }
+
 function studioId(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
+
+function ScaleBadge({ scale, basis }: { scale: StudioScale; basis?: "recorded" | "editorial" }) {
+  const title = basis === "editorial"
+    ? "Editorial scale indication; not a company-reported tier."
+    : "Scale classification recorded in the studio profile.";
+  return <span className={"studio-scale-tag scale-" + scale.toLowerCase()} title={title}>{scale}{basis === "editorial" ? "*" : ""}</span>;
+}
+
+function TagList({
+  values,
+  kind,
+  limit,
+}: {
+  values: string[];
+  kind: "platform" | "focus" | "role";
+  limit?: number;
+}) {
+  const selected = limit ? values.slice(0, limit) : values;
+  if (!selected.length) return <span className="detail-muted">Not classified</span>;
+  return (
+    <div className={"studio-tag-list tag-list-" + kind}>
+      {selected.map(value => (
+        <span className={"studio-facet-tag facet-" + kind} key={value}>
+          {kind === "platform" ? <span aria-hidden="true">{platformEmoji(value)}</span> : null}
+          {kind === "focus" ? <span aria-hidden="true">{focusEmoji(value)}</span> : null}
+          {value}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function FilterPicker({
+  label,
+  emoji,
+  options,
+  selected,
+  onToggle,
+}: {
+  label: string;
+  emoji: string;
+  options: string[];
+  selected: string[];
+  onToggle: (value: string) => void;
+}) {
+  return (
+    <details className="directory-filter-picker">
+      <summary>
+        <span className="filter-picker-label"><span aria-hidden="true">{emoji}</span>{label}</span>
+        <span className="filter-picker-count">{selected.length || "All"}</span>
+      </summary>
+      <div className="filter-picker-options" role="group" aria-label={label + " filters"}>
+        {options.length ? options.map(value => (
+          <label className="filter-picker-option" key={value}>
+            <input
+              type="checkbox"
+              checked={selected.includes(value)}
+              onChange={() => onToggle(value)}
+              aria-label={label + ": " + value}
+            />
+            <span>{value}</span>
+          </label>
+        )) : <span className="filter-picker-empty">No classified values yet</span>}
+      </div>
+    </details>
+  );
+}
+
+function socialGlyph(label: string): string {
+  const value = label.toLowerCase();
+  if (value.includes("linkedin")) return "in";
+  if (value === "x" || value.includes("twitter")) return "𝕏";
+  if (value.includes("steam")) return "S";
+  if (value.includes("youtube")) return "▶";
+  if (value.includes("instagram")) return "◎";
+  if (value.includes("discord")) return "◉";
+  return "↗";
+}
+
 export default function StudioDirectory({
   applications,
   onSave,
@@ -97,7 +187,11 @@ export default function StudioDirectory({
   const [query, setQuery] = useState("");
   const [continent, setContinent] = useState<ContinentLabel | "All continents">("All continents");
   const [country, setCountry] = useState("All countries");
-  const [workModel, setWorkModel] = useState("All work models");
+  const [workModel, setWorkModel] = useState("all");
+  const [scaleFilters, setScaleFilters] = useState<string[]>([]);
+  const [platformFilters, setPlatformFilters] = useState<string[]>([]);
+  const [focusFilters, setFocusFilters] = useState<string[]>([]);
+  const [roleFilters, setRoleFilters] = useState<string[]>([]);
   const [sortKey, setSortKey] = useState<SortKey>("name");
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
   const [showNewOnly, setShowNewOnly] = useState(false);
@@ -113,6 +207,7 @@ export default function StudioDirectory({
     () => studios.filter((studio) => studio.applicationResearch?.routeStatus === "active") as Studio[],
     [],
   );
+
   const countries = useMemo(
     () =>
       Array.from(
@@ -124,6 +219,7 @@ export default function StudioDirectory({
         .sort((a, b) => a.localeCompare(b)),
     [activeStudios],
   );
+
   const continents = useMemo(
     () =>
       Array.from(
@@ -143,8 +239,34 @@ export default function StudioDirectory({
     [activeStudios],
   );
 
+  const scaleOptions = useMemo(
+    () => SCALE_ORDER.filter(value => activeStudios.some(studio => profiles[studio.name]?.scale === value)),
+    [activeStudios],
+  );
+  const platformOptions = useMemo(
+    () => orderedTags(
+      [...new Set(activeStudios.flatMap(studio => profiles[studio.name]?.platforms || []))],
+      PLATFORM_ORDER,
+    ),
+    [activeStudios],
+  );
+  const focusOptions = useMemo(
+    () => orderedTags(
+      [...new Set(activeStudios.flatMap(studio => profiles[studio.name]?.gameFocus || []))],
+      FOCUS_ORDER,
+    ),
+    [activeStudios],
+  );
+  const roleOptions = useMemo(
+    () => ROLE_ORDER.filter(value => activeStudios.some(studio => profiles[studio.name]?.studioRoles?.includes(value))),
+    [activeStudios],
+  );
+
   const filtered = useMemo(() => {
     const term = query.trim().toLowerCase();
+    const matchesFacet = (selected: string[], available: string[]) =>
+      selected.length === 0 || selected.some(value => available.includes(value));
+
     const matches = activeStudios.filter((studio) => {
       const profile = profiles[studio.name];
       const studioCountry = profile?.headquarters?.country || studio.country;
@@ -156,6 +278,9 @@ export default function StudioDirectory({
         studio.country,
         locationFor(studio),
         ...(profile?.companyType || []),
+        ...(profile?.studioRoles || []),
+        ...(profile?.platforms || []),
+        ...(profile?.gameFocus || []),
         ...(profile?.focus || []),
         ...(profile?.popularGames || []).map((game) => game.title),
         profile?.description || "",
@@ -169,7 +294,11 @@ export default function StudioDirectory({
         (!term || searchable.includes(term)) &&
         (continent === "All continents" || studioContinents.includes(continent)) &&
         (country === "All countries" || studioCountry === country) &&
-        (workModel === "All work models" || routeWorkModel === workModel) &&
+        (workModel === "all" || routeWorkModel === workModel) &&
+        matchesFacet(scaleFilters, profile?.scale ? [profile.scale] : []) &&
+        matchesFacet(platformFilters, profile?.platforms || []) &&
+        matchesFacet(focusFilters, profile?.gameFocus || []) &&
+        matchesFacet(roleFilters, profile?.studioRoles || []) &&
         (!showNewOnly || isNewStudio(studio, now))
       );
     });
@@ -180,9 +309,9 @@ export default function StudioDirectory({
         case "location":
           return locationSortFor(studio);
         case "popularWork":
-          return (profile?.popularGames || []).slice(0, 4).map((game) => game.title).join(" ");
-        case "type":
-          return (profile?.companyType || []).slice(0, 2).join(" · ") || "Not stated";
+          return (profile?.popularGames || []).slice(0, 3).map((game) => game.title).join(" ");
+        case "atAGlance":
+          return [...(profile?.platforms || []), ...(profile?.gameFocus || [])].join(" ");
         case "name":
         default:
           return studio.name;
@@ -197,19 +326,35 @@ export default function StudioDirectory({
       if (primary !== 0) return primary * direction;
       return a.name.localeCompare(b.name, undefined, { sensitivity: "base", numeric: true });
     });
-  }, [activeStudios, continent, country, now, query, showNewOnly, sortDirection, sortKey, workModel]);
+  }, [
+    activeStudios, continent, country, focusFilters, now, platformFilters, query,
+    roleFilters, scaleFilters, showNewOnly, sortDirection, sortKey, workModel,
+  ]);
 
   const tracked = new Set(applications.map((application) => application.studioName));
+  const activeFilterCount =
+    (continent !== "All continents" ? 1 : 0) +
+    (country !== "All countries" ? 1 : 0) +
+    scaleFilters.length + platformFilters.length + focusFilters.length + roleFilters.length +
+    (workModel !== "all" ? 1 : 0) + (showNewOnly ? 1 : 0);
 
   function resetFilters() {
     setQuery("");
     setContinent("All continents");
     setCountry("All countries");
-    setWorkModel("All work models");
+    setWorkModel("all");
+    setScaleFilters([]);
+    setPlatformFilters([]);
+    setFocusFilters([]);
+    setRoleFilters([]);
     setSortKey("name");
     setSortDirection("asc");
     setShowNewOnly(false);
     setExpandedStudio(null);
+  }
+
+  function toggleSelected(values: string[], setValues: (next: string[] | ((current: string[]) => string[])) => void, value: string) {
+    setValues(current => current.includes(value) ? current.filter(item => item !== value) : [...current, value]);
   }
 
   function requestSort(key: SortKey) {
@@ -223,7 +368,7 @@ export default function StudioDirectory({
 
   function handleRowClick(event: MouseEvent<HTMLTableRowElement>, name: string) {
     const target = event.target;
-    if (target instanceof HTMLElement && target.closest("a, button, input, select, label")) return;
+    if (target instanceof HTMLElement && target.closest("a, button, input, select, label, summary")) return;
     setExpandedStudio((current) => (current === name ? null : name));
   }
 
@@ -253,7 +398,7 @@ export default function StudioDirectory({
       <div className="page-heading">
         <div>
           <h1>Studio directory</h1>
-          <p>Game studios with verified speculative and open application routes.</p>
+          <p>Find studios by scale, platforms and the games they make.</p>
         </div>
         <div className="page-count">
           <strong>{filtered.length}</strong>
@@ -271,41 +416,68 @@ export default function StudioDirectory({
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Studio, game, country or focus"
+            placeholder="Studio, game, location or focus"
           />
         </label>
         <label className="form-field">
           <span>Continent</span>
           <select className="form-select" value={continent} onChange={(event) => setContinent(event.target.value as ContinentLabel | "All continents")}>
             <option>All continents</option>
-            {continents.map((value) => (
-              <option key={value} value={value}>
-                {value}
-              </option>
-            ))}
+            {continents.map((value) => <option key={value} value={value}>{value}</option>)}
           </select>
         </label>
         <label className="form-field">
           <span>Country</span>
           <select className="form-select" value={country} onChange={(event) => setCountry(event.target.value)}>
             <option>All countries</option>
-            {countries.map((value) => (
-              <option key={value} value={value}>
-                {countryFlagFor(value)} {value}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label className="form-field">
-          <span>Work model</span>
-          <select className="form-select" value={workModel} onChange={(event) => setWorkModel(event.target.value)}>
-            <option>All work models</option>
-            {Object.entries(workModelLabels).map(([value, label]) => (
-              <option key={value} value={value}>{label}</option>
-            ))}
+            {countries.map((value) => <option key={value} value={value}>{countryFlagFor(value)} {value}</option>)}
           </select>
         </label>
       </div>
+
+      <details className="directory-advanced-filters">
+        <summary>
+          <span><span aria-hidden="true">⚙️</span> More filters</span>
+          <span className="advanced-filter-count">{activeFilterCount ? activeFilterCount + " active" : "Scale · platform · focus · role"}</span>
+        </summary>
+        <div className="directory-filter-grid">
+          <FilterPicker
+            label="Scale"
+            emoji="📈"
+            options={[...scaleOptions]}
+            selected={scaleFilters}
+            onToggle={value => toggleSelected(scaleFilters, setScaleFilters, value)}
+          />
+          <FilterPicker
+            label="Platforms"
+            emoji="🖥️"
+            options={platformOptions}
+            selected={platformFilters}
+            onToggle={value => toggleSelected(platformFilters, setPlatformFilters, value)}
+          />
+          <FilterPicker
+            label="Focus"
+            emoji="🎯"
+            options={focusOptions}
+            selected={focusFilters}
+            onToggle={value => toggleSelected(focusFilters, setFocusFilters, value)}
+          />
+          <FilterPicker
+            label="Studio role"
+            emoji="🏢"
+            options={[...roleOptions]}
+            selected={roleFilters}
+            onToggle={value => toggleSelected(roleFilters, setRoleFilters, value)}
+          />
+          <label className="form-field work-model-filter">
+            <span>Work model · application route</span>
+            <select className="form-select" value={workModel} onChange={(event) => setWorkModel(event.target.value)}>
+              <option value="all">All work models</option>
+              {Object.entries(workModelLabels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+            </select>
+          </label>
+        </div>
+      </details>
 
       <div className="directory-filter-actions">
         <label className="form-check form-switch new-only-filter">
@@ -324,8 +496,37 @@ export default function StudioDirectory({
         </button>
       </div>
 
+      {activeFilterCount > 0 ? (
+        <div className="active-filter-chips" aria-label="Active filters">
+          {continent !== "All continents" ? (
+            <button type="button" onClick={() => setContinent("All continents")} className="active-filter-chip">🌎 {continent} <span aria-hidden="true">×</span></button>
+          ) : null}
+          {country !== "All countries" ? (
+            <button type="button" onClick={() => setCountry("All countries")} className="active-filter-chip">{countryFlagFor(country)} {country} <span aria-hidden="true">×</span></button>
+          ) : null}
+          {scaleFilters.map(value => (
+            <button type="button" key={"scale-" + value} onClick={() => toggleSelected(scaleFilters, setScaleFilters, value)} className="active-filter-chip">Scale · {value} <span aria-hidden="true">×</span></button>
+          ))}
+          {platformFilters.map(value => (
+            <button type="button" key={"platform-" + value} onClick={() => toggleSelected(platformFilters, setPlatformFilters, value)} className="active-filter-chip">{platformEmoji(value)} {value} <span aria-hidden="true">×</span></button>
+          ))}
+          {focusFilters.map(value => (
+            <button type="button" key={"focus-" + value} onClick={() => toggleSelected(focusFilters, setFocusFilters, value)} className="active-filter-chip">{focusEmoji(value)} {value} <span aria-hidden="true">×</span></button>
+          ))}
+          {roleFilters.map(value => (
+            <button type="button" key={"role-" + value} onClick={() => toggleSelected(roleFilters, setRoleFilters, value)} className="active-filter-chip">{value} <span aria-hidden="true">×</span></button>
+          ))}
+          {workModel !== "all" ? (
+            <button type="button" onClick={() => setWorkModel("all")} className="active-filter-chip">Work model · {workModelLabels[workModel]} <span aria-hidden="true">×</span></button>
+          ) : null}
+          {showNewOnly ? (
+            <button type="button" onClick={() => setShowNewOnly(false)} className="active-filter-chip">✨ New studios <span aria-hidden="true">×</span></button>
+          ) : null}
+        </div>
+      ) : null}
+
       <div className="table-meta">
-        <span>Active speculative application routes · Click a row for studio details</span>
+        <span>Click a studio row to see its profile and official links</span>
         <span>{filtered.length} results</span>
       </div>
 
@@ -334,9 +535,9 @@ export default function StudioDirectory({
           <thead>
             <tr>
               {renderSortHeader("name", "Studio")}
-              {renderSortHeader("location", "Studio location")}
+              {renderSortHeader("location", "Location")}
               {renderSortHeader("popularWork", "Notable work")}
-              {renderSortHeader("type", "Studio type")}
+              {renderSortHeader("atAGlance", "At a glance")}
               <th scope="col">Tracker</th>
             </tr>
           </thead>
@@ -348,44 +549,58 @@ export default function StudioDirectory({
               const studioLocation = [profile?.headquarters?.city, studioCountry].filter(Boolean).join(", ");
               const studioHeadquarters =
                 [profile?.headquarters?.city, profile?.headquarters?.country].filter(Boolean).join(", ") ||
-                profile?.headquarters?.label ||
-                "Not stated";
-              const types = profile?.companyType?.slice(0, 2).join(" · ") || "Not stated";
-              const routeType = studio.applicationResearch?.routeType || "general";
-              const workType = studio.applicationResearch?.workModel || "not_stated";
+                profile?.headquarters?.label || "Not stated";
+              const routeWorkModel = studio.applicationResearch?.workModel || "not_stated";
               const isTracked = tracked.has(studio.name);
               const isNew = isNewStudio(studio, now);
               const flag = countryFlagFor(studioCountry, countryCode);
-              const notableGames = profile?.popularGames?.slice(0, 4) || [];
+              const notableGames = profile?.popularGames?.slice(0, 3) || [];
+              const platforms = orderedTags(profile?.platforms || [], PLATFORM_ORDER);
+              const focus = orderedTags(profile?.gameFocus || [], FOCUS_ORDER);
+              const glanceTags = [
+                ...platforms.slice(0, 1).map(value => ({ value, kind: "platform" as const })),
+                ...focus.slice(0, 2).map(value => ({ value, kind: "focus" as const })),
+              ].slice(0, 3);
               const studioContinents = continentsForLocation(studioCountry, countryCode);
               const isExpanded = expandedStudio === studio.name;
               const detailId = "studio-details-" + studioId(studio.name);
+              const aboutText = [profile?.description, profile?.reachHighlights].filter(Boolean).join(" ");
 
               return (
                 <Fragment key={studio.name}>
                   <tr
                     className={isExpanded ? "studio-data-row is-expanded" : "studio-data-row"}
                     data-continents={studioContinents.join("|")}
+                    data-scale={profile?.scale || ""}
+                    data-platforms={(profile?.platforms || []).join("|")}
+                    data-focus={(profile?.gameFocus || []).join("|")}
+                    data-studio-roles={(profile?.studioRoles || []).join("|")}
+                    data-work-model={routeWorkModel}
                     onClick={(event) => handleRowClick(event, studio.name)}
                   >
                     <td>
                       <div className="studio-identity">
                         <StudioMark name={studio.name} websiteUrl={studio.websiteUrl} />
-                        <button
-                          className="studio-expand-trigger"
-                          type="button"
-                          aria-expanded={isExpanded}
-                          aria-controls={detailId}
-                          onClick={() =>
-                            setExpandedStudio((current) => (current === studio.name ? null : studio.name))
-                          }
-                        >
-                          <span className="expand-indicator" aria-hidden="true">
-                            {isExpanded ? "▾" : "▸"}
-                          </span>
-                          <span className="studio-name">{studio.name}</span>
-                        </button>
-                        {isNew ? <span className="badge text-bg-warning new-studio-badge">NEW</span> : null}
+                        <div className="studio-identity-copy">
+                          <button
+                            className="studio-expand-trigger"
+                            type="button"
+                            aria-expanded={isExpanded}
+                            aria-controls={detailId}
+                            onClick={() =>
+                              setExpandedStudio((current) => (current === studio.name ? null : studio.name))
+                            }
+                          >
+                            <span className="expand-indicator" aria-hidden="true">{isExpanded ? "▾" : "▸"}</span>
+                            <span className="studio-name">{studio.name}</span>
+                          </button>
+                          {profile?.scale ? (
+                            <ScaleBadge scale={profile.scale} basis={profile.scaleBasis} />
+                          ) : (
+                            <span className="scale-unclassified">Scale not classified</span>
+                          )}
+                          {isNew ? <span className="badge text-bg-warning new-studio-badge">NEW</span> : null}
+                        </div>
                       </div>
                     </td>
                     <td>
@@ -401,7 +616,18 @@ export default function StudioDirectory({
                         <span className="unlisted-work">Not listed</span>
                       )}
                     </td>
-                    <td>{types}</td>
+                    <td>
+                      {glanceTags.length > 0 ? (
+                        <div className="studio-at-a-glance">
+                          {glanceTags.map(tag => (
+                            <span className={"studio-facet-tag facet-" + tag.kind} key={tag.kind + tag.value}>
+                              {tag.kind === "platform" ? <span aria-hidden="true">{platformEmoji(tag.value)}</span> : <span aria-hidden="true">{focusEmoji(tag.value)}</span>}
+                              {tag.value}
+                            </span>
+                          ))}
+                        </div>
+                      ) : <span className="unlisted-work">Not classified</span>}
+                    </td>
                     <td>
                       <button
                         className={isTracked ? "btn btn-outline-secondary btn-sm" : "btn btn-primary btn-sm"}
@@ -425,95 +651,105 @@ export default function StudioDirectory({
                   {isExpanded ? (
                     <tr className="studio-details-row" id={detailId}>
                       <td colSpan={5}>
-                        <div className="studio-details-panel">
-                          <div className="studio-details-grid">
+                        <div className="studio-details-panel studio-profile-panel">
+                          <div className="studio-profile-heading">
+                            <div className="studio-profile-identity">
+                              <StudioMark name={studio.name} websiteUrl={studio.websiteUrl} />
+                              <div className="studio-profile-heading-copy">
+                                <h2>{studio.name}</h2>
+                                <div className="studio-profile-heading-tags">
+                                  {profile?.scale ? <ScaleBadge scale={profile.scale} basis={profile.scaleBasis} /> : <span className="scale-unclassified">Scale not classified</span>}
+                                  {(profile?.studioRoles || []).map(role => <span className="studio-role-tag" key={role}>{role}</span>)}
+                                </div>
+                                <p>{flag ? <span className="country-flag" aria-hidden="true">{flag}</span> : null} Headquarters · {studioHeadquarters}</p>
+                              </div>
+                            </div>
+                            <button className="studio-profile-close" type="button" onClick={() => setExpandedStudio(null)} aria-label={"Close " + studio.name + " profile"}>×</button>
+                          </div>
+
+                          <div className="studio-details-grid studio-profile-grid">
                             <div className="studio-details-main">
                               <section className="studio-detail-section">
-                                <h3>About the studio</h3>
-                                <p>{profile?.description || "No studio description is available in the current profile."}</p>
+                                <h3>About</h3>
+                                <p>{aboutText || "No studio description is available in the current profile."}</p>
                               </section>
                               <section className="studio-detail-section">
-                                <h3>Notable work</h3>
+                                <h3>Notable work <span className="section-count">· up to 3 titles</span></h3>
                                 {notableGames.length > 0 ? (
                                   <div className="game-poster-grid">
-                                    {notableGames.map((game) => (
-                                      <GamePoster game={game} key={game.title} />
-                                    ))}
+                                    {notableGames.map((game) => <GamePoster game={game} key={game.title} />)}
                                   </div>
                                 ) : (
                                   <p className="detail-muted">No game titles are listed in this profile.</p>
                                 )}
                               </section>
-                              {profile?.reachHighlights ? (
-                                <section className="studio-detail-section">
-                                  <h3>Studio highlights</h3>
-                                  <p>{profile.reachHighlights}</p>
-                                </section>
-                              ) : null}
                             </div>
-                            <div className="studio-details-facts">
+
+                            <aside className="studio-details-facts">
                               <section className="studio-detail-section">
-                                <h3>Studio snapshot</h3>
-                                <dl className="studio-facts-list">
-                                  <div><dt>Studio type</dt><dd>{profile?.companyType?.join(" · ") || "Not stated"}</dd></div>
-                                  <div><dt>Industry scale</dt><dd>{profile?.industryScale || "Not stated"}</dd></div>
+                                <h3>Platforms</h3>
+                                <TagList values={platforms} kind="platform" />
+                              </section>
+                              <section className="studio-detail-section">
+                                <h3>Focus</h3>
+                                <TagList values={focus} kind="focus" limit={8} />
+                              </section>
+                              <section className="studio-detail-section">
+                                <h3>Studio details</h3>
+                                <dl className="studio-facts-list studio-facts-compact">
                                   <div>
                                     <dt>Team size</dt>
-                                    <dd>
-                                      {profile?.teamSize || "Not stated"}
-                                      {profile?.teamSizeAsOf ? <small> · as of {profile.teamSizeAsOf}</small> : null}
-                                    </dd>
+                                    <dd>{profile?.teamSize || "Not stated"}{profile?.teamSizeAsOf ? <small> · checked {profile.teamSizeAsOf}</small> : null}</dd>
                                   </div>
-                                  <div>
-                                    <dt>Work model (route listing)</dt>
-                                    <dd>
-                                      {workModelLabels[workType] || "Not stated"}
-                                      <small> · As recorded for the published application route</small>
+                                  {profile?.ownership ? (
+                                    <div>
+                                      <dt>Ownership</dt>
+                                      <dd className="ownership-value">
+                                      {hasKnownCompanyMark(profile.ownership)
+                                        ? <CompanyMarks value={profile.ownership} />
+                                        : profile.ownership}
                                     </dd>
-                                  </div>
-                                  <div><dt>Application route</dt><dd>{routeLabels[routeType] || "General application"}</dd></div>
-                                  <div><dt>Ownership</dt><dd>{profile?.ownership || "Not stated"}</dd></div>
-                                  {profile?.parentCompany ? <div><dt>Parent company</dt><dd>{profile.parentCompany}</dd></div> : null}
-                                  <div><dt>Headquarters</dt><dd>{studioHeadquarters}</dd></div>
+                                    </div>
+                                  ) : null}
+                                  {profile?.parentCompany ? (
+                                    <div>
+                                      <dt>Parent company</dt>
+                                      <dd className="ownership-value">
+                                      {hasKnownCompanyMark(profile.parentCompany)
+                                        ? <CompanyMarks value={profile.parentCompany} />
+                                        : profile.parentCompany}
+                                    </dd>
+                                    </div>
+                                  ) : null}
                                   {profile?.otherLocations?.length ? (
                                     <div><dt>Other locations</dt><dd>{profile.otherLocations.join(" · ")}</dd></div>
                                   ) : null}
                                 </dl>
                               </section>
-                              {profile?.focus?.length ? (
-                                <section className="studio-detail-section">
-                                  <h3>Platforms and focus</h3>
-                                  <div className="focus-tag-list">
-                                    {profile.focus.slice(0, 10).map((item) => (
-                                      <span className="focus-tag" key={item}>{item}</span>
-                                    ))}
-                                  </div>
-                                </section>
-                              ) : null}
-                              <section className="studio-detail-section">
-                                <h3>Studio links</h3>
-                                <div className="studio-profile-links">
-                                  <a href={studio.websiteUrl} target="_blank" rel="noopener noreferrer">Website</a>
-                                  <a href={studio.applicationUrl} target="_blank" rel="noopener noreferrer">Application route</a>
-                                  {(profile?.socialLinks || []).map((link) => (
-                                    <a href={link.url} key={link.label + link.url} target="_blank" rel="noopener noreferrer">
-                                      {link.label}
-                                    </a>
-                                  ))}
-                                </div>
-                              </section>
-                            </div>
+                            </aside>
                           </div>
-                          {profile?.profileSources?.length ? (
-                            <div className="studio-profile-sources">
-                              <span>Studio information sources</span>
-                              {profile.profileSources.slice(0, 4).map((source, index) => (
-                                <a href={source} key={source} target="_blank" rel="noopener noreferrer">
-                                  Source {index + 1}
-                                </a>
-                              ))}
-                            </div>
-                          ) : null}
+
+                          <div className="studio-profile-links">
+                            <a className="studio-primary-link" href={studio.websiteUrl} target="_blank" rel="noopener noreferrer">
+                              <span aria-hidden="true">🌐</span> Official website <span className="external-link-mark" aria-hidden="true">↗</span>
+                            </a>
+                            <a className="studio-primary-link" href={studio.applicationUrl} target="_blank" rel="noopener noreferrer">
+                              <span aria-hidden="true">📨</span> Application <span className="external-link-mark" aria-hidden="true">↗</span>
+                            </a>
+                            {(profile?.socialLinks || []).map((link) => (
+                              <a
+                                className="studio-social-icon"
+                                href={link.url}
+                                key={link.label + link.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={link.label}
+                                title={link.label}
+                              >
+                                {socialGlyph(link.label)}
+                              </a>
+                            ))}
+                          </div>
                         </div>
                       </td>
                     </tr>
@@ -524,7 +760,7 @@ export default function StudioDirectory({
             {filtered.length === 0 ? (
               <tr>
                 <td className="empty-table" colSpan={5}>
-                  No studios match these filters. Use Reset filters above to clear your search and selections.
+                  No studios match these filters. Remove an active filter or reset the filters to see more studios.
                 </td>
               </tr>
             ) : null}
@@ -532,8 +768,7 @@ export default function StudioDirectory({
         </table>
       </div>
       <p className="directory-note">
-        Flags and continent filters use the recorded headquarters or, where headquarters is not stated, the primary country or location listed in the profile. They do not indicate hiring eligibility or a guaranteed work location.
-        Application routes are linked to official websites or studio-controlled systems.
+        Location and flags reflect the recorded headquarters, or the primary location listed in the profile when HQ is unknown. They do not indicate hiring eligibility or a guaranteed work location.
       </p>
     </section>
   );

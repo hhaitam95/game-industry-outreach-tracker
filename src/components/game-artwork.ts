@@ -2,6 +2,8 @@ export type ArtworkLayout = "portrait" | "landscape" | "square";
 
 export type PopularGameArtworkMetadata = {
   title: string;
+  releaseYear?: number;
+  releaseYearSourceUrl?: string;
   appId?: number | null;
   stage?: string;
   igdbGameId?: number;
