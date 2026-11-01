@@ -2,7 +2,7 @@
 
 Game Industry Outreach Tracker is a worldwide directory of legitimate video-game development organisations that explicitly accept speculative applications, paired with a personal application tracker.
 
-The website intentionally has two pages: the studio directory and My applications. Saved studios move into a browser-local tracker with application statuses, submission dates and private notes; no personal application data is sent to a server.
+The website has three areas: the worldwide studio directory, My applications and My profile. Saved studios move into a browser-local tracker with application statuses, submission dates and private notes. Candidate profile details and documents are stored separately in browser-local IndexedDB with user-controlled backup and restore; no personal application data is sent to a server.
 
 **Discovery rules and handover source of truth:** [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md). Read it before changing discovery sources, qualification, exclusions, application verification or coverage cadence.
 
@@ -121,9 +121,15 @@ Every run adds a sanitized GitHub Actions summary with work counts, candidate-st
 
 Exclude organisations materially focused on pornography/adult sexual entertainment, iGaming/gambling/casinos/betting, recreational drugs/cannabis, alcohol, tobacco/nicotine/vaping and related vice sectors. Apply exclusions to the organisation's actual business, not an isolated keyword or the themes of one legitimate mainstream game. Keep uncertain cases for manual review.
 
+## Candidate profile
+
+The **My profile** area provides structured contact details, a professional summary, employment history, education, projects/training, skills with evidence, a reusable master resume and motivation message, and application preferences. PDF and DOCX attachments are preserved as uploaded; this version does not extract text from them or rewrite application materials.
+
+The profile is stored in IndexedDB in the current browser and is not uploaded or synced. Browser storage is not automatically encrypted and can be cleared. Use **Export backup** regularly and keep the resulting JSON file somewhere private and secure; an export contains personal information and embedded document contents. **Import backup** replaces the profile currently stored in that browser after confirmation.
+
 ## Personal application tracker
 
-Save studios and track them through Saved, In Progress, Applied, Interview, Offer and Archived. Status changes and removals are stored in this browser only. There is no login, server sync or automatic application submission.
+Save studios and track them through Saved, In Progress, Applied, Interview, Offer and Archived. Status changes and removals remain in this browser's localStorage tracker. The profile uses a separate IndexedDB store. There is no login, server sync or automatic application submission.
 
 ## Development checks
 
