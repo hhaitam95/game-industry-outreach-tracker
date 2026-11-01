@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import type { TrackedApplication, TrackerStatus } from "./components/studio.types";
 import StudioDirectory from "./components/StudioDirectory";
 import ApplicationTracker from "./components/ApplicationTracker";
+import CandidateProfile from "./components/CandidateProfile";
 
 const STORAGE_KEY = "studio-outreach-tracker-v1";
 const THEME_STORAGE_KEY = "studio-outreach-theme-v1";
@@ -65,7 +66,7 @@ function readApplications(): TrackedApplication[] {
 }
 
 export default function App() {
-  const [page, setPage] = useState<"studios" | "applications">("studios");
+  const [page, setPage] = useState<"studios" | "applications" | "profile">("studios");
   const [trackerInitialTab, setTrackerInitialTab] = useState("saved");
   const [applications, setApplications] = useState<TrackedApplication[]>([]);
   const [loaded, setLoaded] = useState(false);
@@ -207,6 +208,14 @@ export default function App() {
               My applications
               <span className="nav-count">{trackedCount}</span>
             </button>
+            <button
+              className={page === "profile" ? "nav-link active" : "nav-link"}
+              type="button"
+              onClick={() => setPage("profile")}
+              aria-current={page === "profile" ? "page" : undefined}
+            >
+              My profile
+            </button>
           </nav>
 
           <div className="header-tools">
@@ -231,7 +240,7 @@ export default function App() {
             applications={applications}
             onSave={(studio, location) => trackStudio(studio, "saved", location)}
           />
-        ) : (
+        ) : page === "applications" ? (
           <ApplicationTracker
             initialTab={trackerInitialTab}
             applications={applications}
@@ -240,6 +249,8 @@ export default function App() {
             onRemove={removeApplication}
             onOpenDirectory={() => setPage("studios")}
           />
+        ) : (
+          <CandidateProfile />
         )}
         {storageError ? (
           <p className="storage-warning" role="alert">
@@ -251,8 +262,8 @@ export default function App() {
 
       <footer className="app-footer">
         <span>Game Industry Outreach Tracker</span>
-        <span>Studio directory · Application tracker</span>
-        <span>Tracker data stays in this browser · Theme preference is saved locally</span>
+        <span>Studio directory · Candidate profile · Application tracker</span>
+        <span>Profile and tracker data stay in this browser · Theme preference is saved locally</span>
       </footer>
     </div>
   );
