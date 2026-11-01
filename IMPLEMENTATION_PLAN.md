@@ -1,40 +1,74 @@
-# Game Industry Outreach Tracker MVP plan
+# Game Industry Outreach Tracker — product and implementation plan
 
-## Immediate website scope
+## Product objective
 
-The first usable release has two pages:
+Maintain a broad global directory of game-development studios that explicitly accept speculative/open applications, then help the user identify relevant opportunities and manage applications efficiently.
 
-1. **Studio directory** — a compact table of studios with verified official speculative/open application routes. Support search, country and work-model filters, sorting, official website/application links, and a Save action.
-2. **Application tracker** — a simple LinkedIn-style tracker with Saved, In Progress, Applied, Interview, Offer and Archived statuses. Saving a studio from the directory adds it to the tracker. Status changes and removals persist in browser localStorage.
+The product is organized into three layers:
+1. Studio Discovery — global and non-personalized.
+2. Candidate Profile & Matching — private profile, preferences and transparent assessment.
+3. Application Workspace — private queue, requirements summary, preparation and tracking.
 
-The UI should remain a straightforward developer/internal-tool interface. Do not spend time on detailed profiles, artwork, analytics or visual polish before the core workflow works.
+The full specification is [Candidate Profile, Matching and Application Workspace](docs/architecture/candidate-profile-matching-application-workspace.md).
 
-## Phase B — efficient UI improvements (first batch)
+## Existing foundation
 
-Use Bootstrap 5 CSS and keep the existing two-page interface compact, readable and quick to operate.
+- React/Vite static website on GitHub Pages.
+- Worldwide studio directory with verified employer-backed speculative/open application routes.
+- Researched studio profiles and game artwork.
+- Existing browser-local My applications tracker.
+- Scheduled discovery maintenance and validation.
 
-- Add a browser-local light/dark theme switch.
-- Show studio website favicons with initials fallbacks; do not build a manually maintained logo catalogue.
-- Show headquarters flags using profile ISO country codes and conservative country-name fallbacks. Flags do not imply hiring eligibility.
-- Read public GitHub Actions history to display discovery automation status and the last successful run; do not imply that every successful run changed the data.
-- Add an optional `addedAt` UTC timestamp for first publication, separate from `checkedAt`. Display NEW for 24 hours, with a matching filter.
-- Keep Reset filters visible and preserve browser-local application data. Automation status requests are read-only.
+Keep this foundation stable. Do not change the discovery inclusion rules or hide studios based on a candidate's personal preferences.
 
-## Discovery automation
+## Next roadmap — candidate profile and application workspace
 
-Build an automated studio-route discovery pipeline, not an advertised-vacancy crawler.
+### Phase C1 — Candidate Profile foundation
+- Add a structured profile for contact details, professional summary, experience, education, projects/training and skills.
+- Associate skills with evidence and distinguish demonstrated, transferable, learning/exposure, not evidenced and user-confirmed gaps.
+- Add one approved master resume and one master motivation letter/message.
+- Add editable role, work-model and geographical priority preferences.
+- Keep all candidate data browser-local; use a versioned local schema and user-controlled export/import.
+- Preserve original uploaded documents and require approval before changing master materials.
 
-- Run an initial global discovery/backfill in bounded batches.
-- Use public studio directories and search sources to discover candidates only.
-- Verify each speculative/open application route through the studio's official website or studio-controlled application system.
-- Deduplicate candidates and records using canonical website domains and normalized studio names.
-- Save progress/cursors so long discovery runs can resume.
-- Stop the initial backfill after several complete passes produce no meaningful new verified studios across the configured sources.
-- Add an hourly GitHub Actions maintenance run to discover new studios and recheck known routes in rotating batches.
-- Update verified route details and add newly confirmed studios.
-- Mark routes inactive only with reliable closure evidence. Temporary network failures or blocked sources must preserve the previous active state.
-- Validate records and run tests/build before publishing any dataset change.
+### Phase C2 — Matching and assessment
+- Assess professional relevance, application accessibility/readiness and personal priority independently.
+- Use transparent qualitative categories and explain strengths, transferable evidence, gaps and unknowns.
+- Summarize actual employer-stated skills, disciplines and requirements.
+- Distinguish explicit facts, cautious inference and unknown information; retain sources and verification dates.
+- Keep personal preferences out of the public/global discovery engine.
+- Allow user review and manual override; do not represent match scores as hiring probabilities.
 
-## Out of scope until the MVP is stable
+### Phase C3 — Application Queue
+- Add selected studios to a private queue referencing canonical directory IDs.
+- Provide sorting and filtering by relevance, readiness, priority, country, route type and progress.
+- Preserve manual priority decisions and application history when assessments refresh.
+- Avoid duplicate studio/application records and align with the existing My applications tracker.
 
-Detailed studio profiles, game artwork, elaborate analytics, user accounts, cloud tracker sync, automated applications, resume tooling, outreach generation, notifications and advanced customization.
+### Phase C4 — Application requirements intelligence
+- Capture route type, submission channel, required/optional documents, department/discipline, form questions, language, location, eligibility and special instructions.
+- Use official employer evidence; mark each finding explicit, inferred or unknown.
+- Include evidence URL and last-checked date.
+- Never invent requirements or infer global hiring/visa eligibility.
+
+### Phase C5 — Application Workspace
+- Present studio context, route, requirements, skill mapping, approved materials, preparation checklist, private notes and progress.
+- Make the next action clear and reduce repetitive copying/research.
+- Keep application preparation user-reviewed and submission manual.
+
+### Phase C6 — Evaluation and refinement
+- Test against varied studios, countries, application routes and employer instructions.
+- Review false positives/negatives and usability with the user before expanding scope.
+- Validate local persistence, migrations, export/import and public-build privacy boundaries.
+
+## Explicitly deferred
+
+Browser extension/desktop companion, portal recognition, ATS adapters, automatic form filling, file upload automation, automated email sending and automated application submission are not part of these phases. Revisit only after the profile, matching and workspace are implemented and evaluated, and after a separate design/approval.
+
+## Non-negotiable boundaries
+
+- Never commit CVs, profile data, private assessments, application records, notes or correspondence.
+- Never send personal data to a server or AI service without a separate, explicit privacy decision and user approval.
+- Never fabricate skills, experience, metrics, eligibility or employer requirements.
+- Never change the global discovery set based on personal preferences.
+- Never submit an application automatically.
