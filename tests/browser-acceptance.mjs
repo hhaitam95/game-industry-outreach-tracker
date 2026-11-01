@@ -285,6 +285,10 @@ async function main() {
     const initialCount = await rows.count();
     const totalResultsText = await page.locator(".directory-pagination-summary").textContent() || "";
     const totalResults = Number(totalResultsText.match(/of\s+(\d+)/)?.[1] || 0);
+    const filteredTotal = async () => {
+      const text = await page.locator(".directory-pagination-summary").textContent() || "";
+      return Number(text.match(/of\s+(\d+)/)?.[1] || 0);
+    };
     assert.ok(totalResults > 100, "The global directory should contain a substantial set of active studios.");
     assert.equal(initialCount, 100, "The selected page size should cap the initial directory view at 100 rows.");
     assert.ok(await page.locator(".studio-mark").count() > 50, "Studio marks should appear for visible directory rows.");
@@ -351,7 +355,8 @@ async function main() {
     assert.ok(continentValues.includes("Africa"), "The continent filter should include Africa.");
     await continent.selectOption("Europe");
     const europeRows = await rows.count();
-    assert.ok(europeRows > 0 && europeRows < initialCount, "Europe filtering should narrow the directory.");
+    const europeTotal = await filteredTotal();
+    assert.ok(europeRows > 0 && europeTotal > 0 && europeTotal < totalResults, "Europe filtering should narrow the full directory result set.");
     assert.equal(
       await rows.evaluateAll((tableRows) => tableRows.every((row) => (row.getAttribute("data-continents") || "").split("|").includes("Europe"))),
       true,
@@ -366,8 +371,8 @@ async function main() {
     const firstCountry = countryValues.find((value) => value !== "All countries");
     assert.ok(firstCountry, "The country filter should contain real countries.");
     await country.selectOption(firstCountry);
-    const countryCount = await rows.count();
-    assert.ok(countryCount > 0 && countryCount < initialCount, "Country filtering should narrow the directory.");
+    const countryCount = await filteredTotal();
+    assert.ok(countryCount > 0 && countryCount < totalResults, "Country filtering should narrow the full directory result set.");
     await country.selectOption("All countries");
 
     await page.locator(".directory-advanced-filters > summary").click();
@@ -376,8 +381,8 @@ async function main() {
     const mobileFilter = page.getByRole("checkbox", { name: "Platforms: Mobile" });
     await pcFilter.check();
     await mobileFilter.check();
-    const platformCount = await rows.count();
-    assert.ok(platformCount > 0 && platformCount < initialCount, "Selecting multiple platforms should narrow the directory.");
+    const platformCount = await filteredTotal();
+    assert.ok(platformCount > 0 && platformCount < totalResults, "Selecting multiple platforms should narrow the full directory result set.");
     assert.equal(await page.locator(".active-filter-chip").count(), 2, "Each selected platform should appear as a removable active filter chip.");
     await page.locator(".directory-filter-picker").nth(1).locator("summary").click();
     await page.locator(".directory-advanced-filters > summary").click();
@@ -388,8 +393,8 @@ async function main() {
 
     await page.locator(".directory-advanced-filters > summary").click();
     await page.getByLabel("Work model · application route").selectOption("remote");
-    const remoteCount = await rows.count();
-    assert.ok(remoteCount > 0 && remoteCount < initialCount, "Work-model filtering should remain available under More filters.");
+    const remoteCount = await filteredTotal();
+    assert.ok(remoteCount > 0 && remoteCount < totalResults, "Work-model filtering should remain available under More filters.");
     await page.getByLabel("Work model · application route").selectOption("all");
     await page.getByRole("button", { name: "Reset filters" }).click();
     await page.getByLabel("Search", { exact: true }).fill("Laki Studios");
