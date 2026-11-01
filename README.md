@@ -1,8 +1,8 @@
 # Game Industry Outreach Tracker
 
-Game Industry Outreach Tracker is a worldwide directory of legitimate video-game development organisations that explicitly accept speculative applications, paired with a private Candidate Profile and browser-local application tracker.
+Game Industry Outreach Tracker is a worldwide directory of legitimate video-game development organisations that explicitly accept speculative applications, paired with private, browser-local candidate matching and application tracking.
 
-The website has three areas: the worldwide studio directory, My applications and My profile. Saved studios move into a browser-local tracker with application statuses, submission dates and private notes. Candidate profile details and documents are stored separately in browser-local IndexedDB with user-controlled backup and restore; no personal application data is sent to a server.
+The website has four areas: the worldwide Studio directory, Matches, My applications and My profile. Matches compare a saved Candidate Profile against the active directory and explain professional relevance, route status and personal priority separately. Saved studios continue to move into the existing browser-local application tracker with statuses, submission dates and private notes. Candidate details and documents remain in browser-local IndexedDB with user-controlled backup and restore; matching is calculated on-device and no personal application data is sent to a server.
 
 **Discovery rules and handover source of truth:** [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md). Read it before changing discovery sources, qualification, exclusions, application verification or coverage cadence.
 
