@@ -1,8 +1,17 @@
 # Game Industry Outreach Tracker status
 
 **Last verified:** 2026-11-01  
-**Product scope:** Global directory of legitimate video-game development organisations with verified speculative-application routes, plus a personal browser-local application tracker.  
+**Product scope:** Global directory of legitimate video-game development organisations with verified speculative-application routes, plus a private browser-local Candidate Profile and application tracker.  
 **Authoritative discovery rules:** [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md).
+
+## Candidate Profile implementation — PR #95
+
+**Phase C1 implementation is on the review branch and is not merged or deployed.** The new My profile area includes structured contact and professional summary fields, repeatable experience/education/projects/training/skills records, evidence labels, master application materials, preferences, IndexedDB persistence and versioned JSON backup/restore. PDF/DOCX document bytes are preserved locally; text extraction and document tailoring are not included.
+
+- Existing My applications data remains in its current localStorage key and is not migrated or rewritten by this feature.
+- Candidate profile records use a separate IndexedDB database/store and are not included in public studio JSON or build-time data.
+- The browser UI explains that local browser storage is not encrypted by default and can be cleared. Backups contain personal information and must be kept private.
+- Current CI run: browser acceptance tests are being checked; see PR #95 and its Actions run for the final result.
 
 ## Current product direction — 2026-11-01
 
