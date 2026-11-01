@@ -57,8 +57,12 @@ jobs:
           git commit -m "data: add verified Steam app IDs"
           git push --set-upstream origin "$branch"
 
-          gh pr create \
+          if ! gh pr create \
             --base "$GITHUB_REF_NAME" \
             --head "$branch" \
-            --title "Add verified Steam links and cover fallbacks" \
-            --body "Adds Steam app IDs only when the public Steam Store API returns one exact title match and app details confirm the studio developer. Ambiguous titles, non-game products and developer mismatches remain unresolved. Validation, tests and build passed before this data-only pull request."
+            --title "Add verified Steam links and artwork fallbacks" \
+            --body "Adds Steam app IDs and artwork URLs only when app-details confirms an exact game title and studio developer. Ambiguous titles, non-game products and developer mismatches remain untouched."; then
+            echo "::warning::The data branch was pushed, but GitHub Actions is not allowed to create pull requests in this repository."
+            echo "Enable Settings > Actions > General > Workflow permissions > Allow GitHub Actions to create and approve pull requests."
+            echo "Open the data branch manually: https://github.com/$GITHUB_REPOSITORY/pull/new/$branch"
+          fi
