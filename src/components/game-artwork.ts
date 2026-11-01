@@ -9,13 +9,15 @@ export type PopularGameArtworkMetadata = {
   igdbCoverId?: string;
   steamHeaderUrl?: string;
   steamCapsuleUrl?: string;
+  appStoreArtworkUrl?: string;
+  appStoreUrl?: string;
   officialUrl?: string;
   officialArtworkUrl?: string;
   officialArtworkLayout?: ArtworkLayout;
 };
 
 export type GameArtworkSource = {
-  source: "Steam" | "IGDB" | "Official site";
+  source: "Steam" | "IGDB" | "Official site" | "App Store";
   url: string;
   layout: ArtworkLayout;
 };
@@ -74,6 +76,16 @@ export function getGameArtworkSources(game: PopularGameArtworkMetadata): GameArt
       ]
     : [];
 
+  const appStoreSources: GameArtworkSource[] = game.appStoreArtworkUrl
+    ? [
+        {
+          source: "App Store",
+          layout: "square",
+          url: game.appStoreArtworkUrl,
+        },
+      ]
+    : [];
+
   const steamHeaderSources: GameArtworkSource[] = game.appId
     ? [
         ...(game.steamHeaderUrl
@@ -106,6 +118,7 @@ export function getGameArtworkSources(game: PopularGameArtworkMetadata): GameArt
     ...steamPortraitSources,
     ...igdbSources,
     ...officialSources,
+    ...appStoreSources,
     ...steamHeaderSources,
   ]);
 }
@@ -113,6 +126,7 @@ export function getGameArtworkSources(game: PopularGameArtworkMetadata): GameArt
 export function gameDestination(game: PopularGameArtworkMetadata): string | null {
   if (game.appId) return `https://store.steampowered.com/app/${game.appId}/`;
   if (game.officialUrl) return game.officialUrl;
+  if (game.appStoreUrl) return game.appStoreUrl;
   if (game.igdbSlug) return `https://www.igdb.com/games/${encodeURIComponent(game.igdbSlug)}`;
   return null;
 }
@@ -120,6 +134,7 @@ export function gameDestination(game: PopularGameArtworkMetadata): string | null
 export function gameLinkLabel(game: PopularGameArtworkMetadata): string | null {
   if (game.appId) return `Open ${game.title} on Steam`;
   if (game.officialUrl) return `Open ${game.title} on the official website`;
+  if (game.appStoreUrl) return `Open ${game.title} on the App Store`;
   if (game.igdbSlug) return `Open ${game.title} on IGDB`;
   return null;
 }

@@ -40,6 +40,18 @@ The Steam enrichment uses the public Store search and app-details responses. It 
 
 For automatic data pull requests, enable **Settings → Actions → General → Workflow permissions → Allow GitHub Actions to create and approve pull requests**. If that repository-level permission is disabled, the workflow still pushes its generated data branch and prints the manual PR URL rather than failing after successful validation.
 
+For mobile games that are not represented on Steam and have no verified IGDB or official-site cover, the optional Apple App Store enrichment can find the official app icon and a direct App Store page:
+
+```sh
+node scripts/enrich-app-store-games.mjs
+node scripts/enrich-app-store-games.mjs --write
+npm run check:studio-directory
+npm test
+npm run build
+```
+
+The App Store pass only accepts an exact normalized game-title match where Apple's artist or seller name also matches the studio. It stores Apple's official artwork CDN URL and direct `apps.apple.com` listing URL. Ambiguous listings, developer mismatches, unavailable apps, unreleased projects, generic franchise labels and undisclosed titles remain unchanged. This is an additional source for eligible Apple mobile games, not a claim that every mobile game is available on iOS.
+
 When the enrichment implementation is merged into `main`, GitHub Actions automatically checks that both repository secrets are available (without printing their values), queries all remaining unique game titles, writes only exact unambiguous matches with covers, validates the resulting data, runs the tests and build, and opens a separate pull request containing only the profile-data changes. No manual workflow dispatch is required. The generated data pull request is not auto-merged; ambiguous, missing and coverless matches remain untouched. Merging that data-only pull request does not trigger another enrichment run.
 
 IGDB API access uses Twitch application credentials and does not support browser API requests because doing so would expose the access token. The API is documented as free for non-commercial use under the Twitch Developer Service Agreement; commercial integrations require a partnership. The UI includes a visible IGDB attribution link. Review the [IGDB API documentation](https://api-docs.igdb.com/) and the current Twitch Developer Services Agreement before changing the usage model.

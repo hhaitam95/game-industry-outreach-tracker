@@ -109,3 +109,19 @@ test("uses the Steam capsule image after the verified header image", () => {
   assert.ok(capsuleIndex > headerIndex);
   assert.equal(sources[capsuleIndex].layout, "landscape");
 });
+
+test("uses square App Store art as a fallback and links to the direct App Store page", () => {
+  const game = {
+    title: "WarFriends",
+    appStoreArtworkUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple123/512x512bb.webp",
+    appStoreUrl: "https://apps.apple.com/us/app/warfriends/id123456789",
+  };
+  const sources = getGameArtworkSources(game);
+  assert.deepEqual(sources, [{
+    source: "App Store",
+    url: game.appStoreArtworkUrl,
+    layout: "square",
+  }]);
+  assert.equal(gameDestination(game), game.appStoreUrl);
+  assert.equal(gameLinkLabel(game), "Open WarFriends on the App Store");
+});

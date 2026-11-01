@@ -210,6 +210,26 @@ if (Array.isArray(studios) && profiles && typeof profiles === "object" && !Array
             errors.push(error.message);
           }
         }
+        if (game?.appStoreUrl !== undefined) {
+          try {
+            httpsUrl(game.appStoreUrl, studio.name + ".profile.popularGames[" + gameIndex + "].appStoreUrl");
+            if (new URL(game.appStoreUrl).hostname !== "apps.apple.com" && !new URL(game.appStoreUrl).hostname.endsWith(".apps.apple.com")) {
+              throw new Error(studio.name + ".profile.popularGames[" + gameIndex + "].appStoreUrl must use apps.apple.com.");
+            }
+          } catch (error) {
+            errors.push(error.message);
+          }
+        }
+        if (game?.appStoreArtworkUrl !== undefined) {
+          try {
+            httpsUrl(game.appStoreArtworkUrl, studio.name + ".profile.popularGames[" + gameIndex + "].appStoreArtworkUrl");
+            if (!new URL(game.appStoreArtworkUrl).hostname.endsWith(".mzstatic.com")) {
+              throw new Error(studio.name + ".profile.popularGames[" + gameIndex + "].appStoreArtworkUrl must use an Apple artwork CDN.");
+            }
+          } catch (error) {
+            errors.push(error.message);
+          }
+        }
         if (game?.officialUrl !== undefined) {
           try { httpsUrl(game.officialUrl, studio.name + ".profile.popularGames[" + gameIndex + "].officialUrl"); }
           catch (error) { errors.push(error.message); }
