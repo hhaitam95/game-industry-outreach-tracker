@@ -405,6 +405,8 @@ select:focus-visible {
     min-height: 42px;
     order: 3;
     width: 100%;
+    min-width: 0;
+    flex-wrap: wrap;
   }
 
   .nav-link {
