@@ -367,6 +367,7 @@ async function main() {
     await country.selectOption("All countries");
 
     await page.locator(".directory-advanced-filters > summary").click();
+    await page.locator(".directory-filter-picker").nth(1).locator("summary").click();
     const pcFilter = page.getByRole("checkbox", { name: "Platforms: PC" });
     const mobileFilter = page.getByRole("checkbox", { name: "Platforms: Mobile" });
     await pcFilter.check();
