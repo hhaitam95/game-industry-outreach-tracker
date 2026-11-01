@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
 import { chromium } from "playwright";
@@ -126,6 +126,101 @@ async function main() {
     assert.match(await page.title(), /Game Industry Outreach Tracker/);
     await page.getByRole("heading", { name: "Studio directory" }).waitFor();
     await page.getByText(/Last successful run:/).waitFor();
+
+    // Candidate Profile is private browser-local data, including original document bytes.
+    await page.getByRole("button", { name: "My profile" }).click();
+    await page.getByRole("heading", { name: "My profile" }).waitFor();
+    await page.getByLabel("Full name").fill("Test Candidate");
+    await page.getByLabel("Email").fill("candidate@example.test");
+    await page.getByLabel("Current location").fill("Budapest, Hungary");
+    await page.getByLabel("Professional summary").fill("A test profile with an evidence-backed technical background.");
+    await page.getByRole("button", { name: /Add experience/ }).click();
+    await page.getByLabel("Employer").fill("Example Studio");
+    await page.getByLabel("Exact job title").fill("Product Support Engineer");
+    await page.getByLabel("Start date").fill("Sep 2023");
+    await page.getByLabel("Responsibilities").fill("Investigated application and API issues.");
+    await page.getByRole("button", { name: /Add education/ }).click();
+    await page.getByLabel("Qualification").fill("MSc Computer Science");
+    await page.getByLabel("Institution").fill("Example University");
+    await page.getByRole("button", { name: /Add project or training/ }).click();
+    await page.getByLabel("Type").fill("Bootcamp");
+    await page.getByLabel("Description and your contribution").fill("Completed a practical training project.");
+    await page.getByRole("button", { name: /Add skill/ }).click();
+    await page.getByLabel("Skill or technology").fill("REST APIs");
+    await page.getByLabel("Evidence level").selectOption("demonstrated");
+    await page.getByLabel("Evidence source").fill("Example Studio · Product Support Engineer");
+    await page.getByLabel("What supports this assessment?").fill("Investigated and troubleshot API behavior in production.");
+    await page.getByLabel("Role families").fill("Developer support\nDevOps");
+    await page.getByLabel("Preferred regions").fill("Europe\nUnited Kingdom");
+    await page.getByLabel("Motivation text").fill("I am interested in contributing to game development teams.");
+    const resumeFixture = Buffer.from("%PDF-1.4\\nCandidate resume fixture\\n%%EOF");
+    await page.locator(".profile-material-card").first().locator('input[type="file"]').setInputFiles({
+      name: "candidate-resume.pdf",
+      mimeType: "application/pdf",
+      buffer: resumeFixture,
+    });
+    await page.getByText("candidate-resume.pdf").waitFor();
+    await page.getByRole("button", { name: "Save profile" }).click();
+    await page.getByRole("button", { name: "Profile saved" }).waitFor();
+
+    const savedCandidateProfile = await page.evaluate(() => new Promise((resolve, reject) => {
+      const openRequest = indexedDB.open("game-industry-outreach-private", 1);
+      openRequest.onerror = () => reject(openRequest.error);
+      openRequest.onsuccess = () => {
+        const transaction = openRequest.result.transaction("candidate-profile", "readonly");
+        const request = transaction.objectStore("candidate-profile").get("primary");
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => resolve(request.result?.profile);
+      };
+    }));
+    assert.equal(savedCandidateProfile.personal.fullName, "Test Candidate");
+    assert.equal(savedCandidateProfile.experience[0].title, "Product Support Engineer");
+    assert.equal(savedCandidateProfile.education[0].qualification, "MSc Computer Science");
+    assert.equal(savedCandidateProfile.skills[0].evidence, "demonstrated");
+    assert.equal(savedCandidateProfile.preferences.preferredRegions[0], "Europe");
+    assert.equal(savedCandidateProfile.materials.masterResume.name, "candidate-resume.pdf");
+    assert.equal(Buffer.from(savedCandidateProfile.materials.masterResume.dataBase64, "base64").toString(), resumeFixture.toString());
+
+    await page.reload({ waitUntil: "networkidle" });
+    await page.getByRole("button", { name: "My profile" }).click();
+    await page.getByRole("heading", { name: "My profile" }).waitFor();
+    assert.equal(await page.getByLabel("Full name").inputValue(), "Test Candidate", "The structured profile should survive a page reload.");
+    assert.equal(await page.getByLabel("Motivation text").inputValue(), "I am interested in contributing to game development teams.");
+    await page.getByText("candidate-resume.pdf").waitFor();
+
+    const [profileBackupDownload] = await Promise.all([
+      page.waitForEvent("download"),
+      page.getByRole("button", { name: "Export backup" }).click(),
+    ]);
+    const profileBackup = JSON.parse(readFileSync(await profileBackupDownload.path(), "utf8"));
+    assert.equal(profileBackup.format, "game-industry-outreach-candidate-profile");
+    assert.equal(profileBackup.profile.personal.fullName, "Test Candidate");
+    assert.equal(profileBackup.profile.materials.masterResume.dataBase64, savedCandidateProfile.materials.masterResume.dataBase64);
+
+    await page.evaluate(() => new Promise((resolve, reject) => {
+      const openRequest = indexedDB.open("game-industry-outreach-private", 1);
+      openRequest.onerror = () => reject(openRequest.error);
+      openRequest.onsuccess = () => {
+        const transaction = openRequest.result.transaction("candidate-profile", "readwrite");
+        transaction.objectStore("candidate-profile").delete("primary");
+        transaction.oncomplete = resolve;
+        transaction.onerror = () => reject(transaction.error);
+      };
+    }));
+    const backupPath = await profileBackupDownload.path();
+    const importInput = page.locator('input[type="file"][accept=".json,application/json"]');
+    const importedDialog = await performWithDialog(
+      page,
+      () => importInput.setInputFiles(backupPath),
+      true,
+    );
+    assert.equal(importedDialog.type, "confirm");
+    assert.match(importedDialog.message, /Replace the profile currently in this browser/);
+    assert.equal(await page.getByLabel("Full name").inputValue(), "Test Candidate", "Import should restore the structured profile.");
+    assert.equal(await page.getByText("candidate-resume.pdf").count(), 1, "Import should restore the original resume attachment.");
+
+    await page.getByRole("button", { name: "Studios", exact: true }).click();
+    await page.getByRole("heading", { name: "Studio directory" }).waitFor();
 
     await page.getByRole("button", { name: "Switch to dark theme" }).click();
     assert.equal(await page.locator("html").getAttribute("data-bs-theme"), "dark");
