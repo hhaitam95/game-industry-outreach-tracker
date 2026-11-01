@@ -158,6 +158,12 @@ export default function App() {
     );
   }
 
+  function updateApplicationNote(id: string, note: string) {
+    setApplications((previous) =>
+      previous.map((item) => item.id === id ? { ...item, note } : item),
+    );
+  }
+
   function removeApplication(id: string) {
     const item = applications.find((application) => application.id === id);
     if (!item || !window.confirm("Remove " + item.studioName + " from your tracker?")) return;
@@ -230,6 +236,7 @@ export default function App() {
             initialTab={trackerInitialTab}
             applications={applications}
             onChangeStatus={changeStatus}
+            onUpdateNote={updateApplicationNote}
             onRemove={removeApplication}
             onOpenDirectory={() => setPage("studios")}
           />

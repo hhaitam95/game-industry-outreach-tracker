@@ -72,7 +72,7 @@
 
 .tracker-table {
   width: 100%;
-  min-width: 800px;
+  min-width: 1040px;
   --bs-table-bg: var(--surface);
   --bs-table-color: var(--muted);
   --bs-table-border-color: var(--table-border);
@@ -83,6 +83,73 @@
 .status-select-label {
   display: block;
   min-width: 135px;
+}
+
+.tracker-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.tracker-links a {
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 550;
+}
+
+.tracker-links a:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+.applied-date {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.notes-toggle {
+  white-space: nowrap;
+}
+
+.notes-toggle.has-note {
+  border-color: var(--tab-active-border);
+  color: var(--tab-active-ink);
+}
+
+.note-saved-indicator {
+  display: block;
+  margin-top: 3px;
+  color: var(--subtle);
+  font-size: 9px;
+}
+
+.tracker-notes-row > td {
+  padding: 0 !important;
+  background: var(--row-hover);
+}
+
+.tracker-notes-panel {
+  display: grid;
+  max-width: 760px;
+  gap: 7px;
+  padding: 14px 16px 12px;
+}
+
+.tracker-note-input {
+  min-height: 76px;
+  resize: vertical;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.tracker-notes-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--subtle);
+  font-size: 10px;
 }
 
 .tracker-table .empty-table {
@@ -121,5 +188,9 @@
 
   .tracker-search {
     width: 100%;
+  }
+
+  .tracker-notes-panel {
+    padding: 12px;
   }
 }

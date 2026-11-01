@@ -2,17 +2,13 @@
 
 Game Industry Outreach Tracker is a two-page static application: a global directory of verified speculative-application routes plus a personal browser-local application tracker.
 
-## Current UI feature checkpoint — PR #78
+## Current UI feature checkpoint
 
-- Open pull request: [#78 Add visual game posters to studio profiles](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/78), branch `feature/game-poster-gallery-20261031`.
-- The directory table uses compact game-cover thumbnails; expanded profiles use a poster grid. Steam art is preferred, with a verified IGDB cover fallback if all Steam image variants fail.
-- IGDB metadata fields are `igdbGameId`, `igdbSlug` and `igdbCoverId` on each `popularGames` entry. These are static cached identifiers; the frontend does not call the IGDB API.
-- `scripts/enrich-igdb-covers.mjs` is a manual offline enrichment utility. It requires `IGDB_CLIENT_ID` and `IGDB_CLIENT_SECRET`, defaults to dry-run, and only writes one exact normalized-title match with an available cover. Ambiguous, not-found and coverless results stay unresolved.
-- The user reports adding `IGDB_CLIENT_ID` and `IGDB_CLIENT_SECRET` as repository Actions secrets. The GitHub connection cannot inspect secret values; the automatic workflow validates availability without printing them.
-- `.github/workflows/enrich-igdb-covers.yml` runs automatically on a push to `main` when the workflow or enrichment script changes. Merging PR #78 therefore starts a full write-mode enrichment without a manual dispatch.
-- The workflow writes only exact, unambiguous matches with a cover image, validates the dataset, runs tests/build, and opens a separate data-only PR. Generated metadata is never auto-merged; ambiguous, missing and coverless results stay unresolved.
-- No bulk IGDB cover IDs have yet been written; the first automatic run after PR #78 merges will perform the enrichment.
-- This artwork use is independent of IGDB's possible future use as a studio-discovery candidate feed; it does not integrate IGDB company discovery into the scraper or alter its access gates.
+- PR #78 is merged: `main` now includes the poster gallery with Steam-first artwork and verified IGDB fallback support.
+- Data-only PR [#79](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/79) was merged. It adds 287 IGDB-enriched game entries across 133 studios (280 distinct IGDB games), from 454 queried title groups. Ambiguous, not-found and coverless titles remain unresolved. All 20 tests, data validation, production build and browser acceptance passed before merge.
+- PR #79 was created through the GitHub connection because the repository's Actions token is not permitted to create pull requests. Future enrichment runs can still push their data branch; the connector can publish the review PR.
+- The application-workflow UI branch adds private tracker notes, notes search, visible applied dates, and both official studio and application links. Notes remain in browser localStorage; no account/server sync or network write was introduced.
+- The latest discovery retry [41295984769](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41295984769) completed successfully with 8 route rechecks and no newly verified studios. Hourly discovery continues from the separately saved checkpoint.
 
 ## Read this first
 
