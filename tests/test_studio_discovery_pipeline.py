@@ -838,7 +838,7 @@ class DatasetUpdateTests(unittest.TestCase):
         for feed in discovery.FEEDS:
             state["feed_done"][feed["id"]] = True
         for feed_id in recurring:
-            state["source_stats"][feed_id]["empty_cycles"] = 3
+            state["source_stats"][feed_id]["empty_cycles"] = 5
             state["source_stats"][feed_id]["saturated"] = True
         growing_source = recurring[0]
         state["source_stats"][growing_source]["cycle_additions"] = 1
