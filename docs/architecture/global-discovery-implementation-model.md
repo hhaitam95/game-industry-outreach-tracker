@@ -103,7 +103,7 @@ Candidate indexes are discovery inputs only. They do not prove that a company is
 ### Existing integrated sources
 
 - **GameDevMap** — existing paginated global studio/company directory adapter. Use its public results interface as permitted; do not assume every row is a distinct studio or that a listed location is headquarters.
-- **Wikidata** — existing structured feeds for video-game developer entities, organisations credited as video-game developers and video-game companies. Treat entity types and credits as leads requiring validation.
+- **Wikidata** — four recurring structured feeds: video-game developer entities, organisations credited as video-game developers, video-game company entities and companies classified in the video-game industry. The industry feed is intentionally broad; it remains a lead unless the employer's own site demonstrates direct game-development work. Treat all entity types and credits as leads requiring validation.
 
 ### Additional source leads identified on 2026-10-31
 
@@ -194,10 +194,19 @@ Keep source-level checkpoints and candidate progress resumable. Do not overwrite
 
 The runtime feed inventory is `config/discovery-sources.json`. The discovery script loads this manifest and validates each source ID, adapter kind, refresh policy and saturation settings. The private state schema is v2 and migrates schema-v1 cursors/candidates additively.
 
-The three Wikidata feeds each own their cursor, cycle, verified-addition count, complete-empty-pass count, saturation flag and last-pass outcome. Three complete empty passes throttle only that feed to one page per hourly run; unsaturated feeds retain the remaining run budget. A verified route resets only its originating feed. Due candidate work keeps that feed's pass open; future retries/manual-review candidates mark the pass incomplete and cannot increment saturation. Failed fetches do not advance cursors or count as complete passes.
+The four Wikidata feeds and the GameDevMap catalogue feed each own their cursor, cycle, verified-addition count, complete-empty-pass count, saturation flag and last-pass outcome. Five complete empty passes throttle only that feed to four pages per hourly run; unsaturated feeds retain the remaining global budget. The hourly run budget is 20 source pages, with the existing 65-second spacing between Wikidata requests and a 25-minute pipeline ceiling. A verified route resets only its originating feed. Due candidate work keeps that feed's pass open; future retries/manual-review candidates mark the pass incomplete and cannot increment saturation. Failed fetches do not advance cursors or count as complete passes.
 
-GameDevMap remains a one-time catalogue backfill. Its terminal numeric offset is preserved and is not restarted by recurring Wikidata maintenance. Legacy candidate records without saved Wikidata query-feed provenance remain unattributed; do not guess their origin.
+GameDevMap is revisited as a recurring full-catalogue feed. Its numeric offset is preserved while a pass is in progress, then resets to the first page after the raw catalogue rows are exhausted; the parser uses raw page-row counts so filtered non-studio rows cannot truncate pagination. The source documents monthly catalogue data drops, so the recurring pass prevents the original one-time-backfill design from permanently missing later additions. The four Wikidata feeds restart from the beginning after each complete QID pass to catch newly added entities. Legacy candidate records without saved Wikidata query-feed provenance remain unattributed; do not guess their origin.
 
+The added Wikidata industry feed is a broader discovery signal, not proof of studio status. Its candidates only auto-publish when the employer-controlled pages show direct game-development work as well as an explicit speculative application route; otherwise they remain in manual review.
+
+
+### 2026-11-02 — recurring catalogue refresh and wider industry leads
+
+- Converted GameDevMap from a one-time backfill to a recurring full-catalogue pass because its official help page describes monthly data updates. The pagination cursor is retained within a pass and restarted from the first page after completion.
+- Added a Wikidata industry-classification feed (P452 → video-game industry) to widen coverage beyond direct developer classes and credits. Because it includes publishers and suppliers, new candidates require explicit development evidence on the employer site or remain in manual review.
+- Raised the hourly source budget from 8 to 20 pages, with 4 pages per saturated feed after 5 complete empty passes. Kept Wikidata request spacing at 65 seconds and the 25-minute run ceiling.
+- Fixed GameDevMap end-of-page detection to use raw catalogue rows rather than only filtered candidates, preventing premature termination when a page contains non-studio rows.
 
 ## 8. Accuracy and quality safeguards
 
@@ -216,7 +225,7 @@ GameDevMap remains a one-time catalogue backfill. Its terminal numeric offset is
 
 The following is an ordered engineering plan, not a priority ranking of employers or regions.
 
-1. **Preserve the model and source registry.** Keep this document and the project handoff current. Maintain `config/discovery-sources.json` as the machine-readable inventory for integrated adapters, source coverage, access/policy notes, pagination, refresh policy and per-source saturation settings.
+1. **Preserve the model and source registry.** Keep this document and the project handoff current. Maintain `config/discovery-sources.json` as the machine-readable inventory for integrated adapters, source coverage, access/policy notes, pagination, refresh policy and per-source saturation settings. The current inventory includes four recurring Wikidata feeds and a recurring GameDevMap full-catalogue feed.
 2. **Continue the discovery-quality audit.** The GameDevMap/Wikidata adapter cadence, private checkpoint migration and source-specific saturation are implemented. Continue auditing candidate identity, adult/vice false positives, source failure handling and company-level classification against this model; keyword patterns are not a complete company-level classification system.
 3. **Add source adapters only after access review.** Evaluate the IGDB Company API first as a structured company/game-credit source, using Twitch credentials stored only in repository Actions secrets after the user configures them. Evaluate GameCompanies.com, Games Jobs Index, Steam and permitted regional datasets independently. Do not automate GameCompanies.com without written permission; retain Games Jobs Index as a manual lead source until its automation terms are established. Preserve provenance for every source.
 4. **Review MobyGames access separately.** Use only authorized API access, subject to its current API and content terms. Do not implement page scraping.
