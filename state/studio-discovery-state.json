@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-31T23:32:04.119954+00:00",
+  "updated_at": "2026-11-01T06:09:08.021993+00:00",
   "feed_cursors": {
-    "wikidata_video_game_developers": "Q138632773",
-    "wikidata_game_developer_credits": "Q99540288",
+    "wikidata_video_game_developers": "Q24909573",
+    "wikidata_game_developer_credits": "",
     "wikidata_video_game_companies": "",
     "gamedevmap": "10601"
   },
@@ -14,7 +14,7 @@
     "gamedevmap": true
   },
   "feed_index": 1,
-  "cycle": 10,
+  "cycle": 11,
   "cycle_additions": 0,
   "empty_cycles": 1,
   "saturated": false,
@@ -212349,6 +212349,25 @@
       "attempts": 1,
       "cycle": 2,
       "reason": "no_explicit_speculative_route_found"
+    },
+    "Q141957399": {
+      "qid": "Q141957399",
+      "entity_url": "https://www.wikidata.org/entity/Q141957399",
+      "name": "Fifth Winter Studios",
+      "website": "https://fifthwinter.se/",
+      "country": "Not stated",
+      "hq_city": "",
+      "country_code": "SE",
+      "company_type": "Developer",
+      "source_id": "wikidata_video_game_developers",
+      "source_cycle": 3,
+      "status": "no_route",
+      "discovered_at": "2026-11-01T06:03:59.868213+00:00",
+      "checked_at": "2026-11-01T06:08:47.362810+00:00",
+      "next_check_at": "2027-01-30",
+      "attempts": 1,
+      "cycle": 10,
+      "reason": "no_explicit_speculative_route_found"
     }
   },
   "route_checks": {
@@ -213239,14 +213258,62 @@
       "gone_count": 0,
       "last_result": "unknown",
       "last_checked_at": "2026-10-31T23:32:04.119025+00:00"
+    },
+    "PlayQ": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-11-01T06:08:51.800842+00:00"
+    },
+    "Playrion": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-11-01T06:08:53.921681+00:00"
+    },
+    "Playsport Games": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-11-01T06:08:56.722498+00:00"
+    },
+    "Playtouch": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-11-01T06:08:58.217806+00:00"
+    },
+    "Plummy Games": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-11-01T06:09:00.612926+00:00"
+    },
+    "Pneuma Games Group": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-11-01T06:09:05.112916+00:00"
+    },
+    "Pontoco": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-11-01T06:09:06.514062+00:00"
+    },
+    "Preloaded": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-11-01T06:09:08.019777+00:00"
     }
   },
-  "route_check_index": 208,
+  "route_check_index": 216,
   "stats": {
-    "candidates_seen": 10372,
+    "candidates_seen": 10373,
     "routes_verified": 126,
     "excluded": 56,
-    "no_route": 7885,
+    "no_route": 7886,
     "needs_review": 79
   },
   "source_stats": {
@@ -213263,24 +213330,24 @@
       "last_pass_incomplete_candidates": 0
     },
     "wikidata_game_developer_credits": {
-      "cycle": 6,
+      "cycle": 7,
       "cycle_additions": 0,
-      "empty_cycles": 4,
+      "empty_cycles": 5,
       "saturated": true,
       "complete": false,
-      "last_pass_completed_at": "2026-10-31T17:48:04.636362+00:00",
+      "last_pass_completed_at": "2026-11-01T06:09:08.019816+00:00",
       "last_pass_status": "saturated",
       "last_pass_candidates": 0,
       "last_pass_verified": 0,
       "last_pass_incomplete_candidates": 0
     },
     "wikidata_video_game_companies": {
-      "cycle": 10,
+      "cycle": 11,
       "cycle_additions": 0,
-      "empty_cycles": 8,
+      "empty_cycles": 9,
       "saturated": true,
       "complete": false,
-      "last_pass_completed_at": "2026-10-31T23:32:04.119057+00:00",
+      "last_pass_completed_at": "2026-11-01T06:09:08.019816+00:00",
       "last_pass_status": "saturated",
       "last_pass_candidates": 0,
       "last_pass_verified": 0,
