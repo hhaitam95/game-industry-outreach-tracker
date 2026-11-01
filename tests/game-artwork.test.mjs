@@ -131,3 +131,16 @@ test("keeps the official game page as the destination when no platform store is 
     "https://www.d4ngames.com/games/tablet-of-destinies",
   );
 });
+
+test("labels third-party store artwork by the actual store source", () => {
+  const sources = getGameArtworkSources({
+    title: "Fruit Ninja",
+    storeUrl: "https://play.google.com/store/apps/details?id=com.halfbrick.fruitninjafree",
+    storeName: "Google Play",
+    officialArtworkUrl: "https://play-lh.googleusercontent.com/example=w240-h480",
+    officialArtworkLayout: "square",
+    officialArtworkSource: "Google Play",
+  });
+  assert.equal(sources[0].source, "Google Play");
+  assert.equal(sources[0].layout, "square");
+});
