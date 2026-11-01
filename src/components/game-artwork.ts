@@ -7,6 +7,8 @@ export type PopularGameArtworkMetadata = {
   igdbGameId?: number;
   igdbSlug?: string;
   igdbCoverId?: string;
+  steamLibraryCapsuleUrl?: string;
+  steamLibraryCapsule2xUrl?: string;
   steamHeaderUrl?: string;
   steamCapsuleUrl?: string;
   appStoreArtworkUrl?: string;
@@ -38,6 +40,12 @@ function uniqueSources(sources: GameArtworkSource[]): GameArtworkSource[] {
 export function getGameArtworkSources(game: PopularGameArtworkMetadata): GameArtworkSource[] {
   const steamPortraitSources: GameArtworkSource[] = game.appId
     ? [
+        ...(game.steamLibraryCapsule2xUrl
+          ? [{ source: "Steam" as const, layout: "portrait" as const, url: game.steamLibraryCapsule2xUrl }]
+          : []),
+        ...(game.steamLibraryCapsuleUrl
+          ? [{ source: "Steam" as const, layout: "portrait" as const, url: game.steamLibraryCapsuleUrl }]
+          : []),
         {
           source: "Steam",
           layout: "portrait",
