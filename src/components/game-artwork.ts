@@ -8,6 +8,7 @@ export type PopularGameArtworkMetadata = {
   igdbSlug?: string;
   igdbCoverId?: string;
   steamHeaderUrl?: string;
+  steamCapsuleUrl?: string;
   officialUrl?: string;
   officialArtworkUrl?: string;
   officialArtworkLayout?: ArtworkLayout;
@@ -81,6 +82,15 @@ export function getGameArtworkSources(game: PopularGameArtworkMetadata): GameArt
                 source: "Steam" as const,
                 layout: "landscape" as const,
                 url: game.steamHeaderUrl,
+              },
+            ]
+          : []),
+        ...(game.steamCapsuleUrl
+          ? [
+              {
+                source: "Steam" as const,
+                layout: "landscape" as const,
+                url: game.steamCapsuleUrl,
               },
             ]
           : []),

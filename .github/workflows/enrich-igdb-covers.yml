@@ -73,8 +73,12 @@ jobs:
           git commit -m "data: enrich game cover metadata from IGDB"
           git push --set-upstream origin "$branch"
 
-          gh pr create \
+          if ! gh pr create \
             --base "$GITHUB_REF_NAME" \
             --head "$branch" \
             --title "Enrich game covers with verified IGDB metadata" \
-            --body "Adds exact, unambiguous IGDB cover metadata to game profiles. Ambiguous titles and games without cover artwork remain unresolved. Generated automatically after the artwork-enrichment implementation was merged; validation, tests and build passed before opening this data-only pull request."
+            --body "Adds exact, unambiguous IGDB cover metadata to game profiles. Ambiguous titles and games without cover artwork remain unresolved."; then
+            echo "::warning::The data branch was pushed, but GitHub Actions is not allowed to create pull requests in this repository."
+            echo "Enable Settings > Actions > General > Workflow permissions > Allow GitHub Actions to create and approve pull requests."
+            echo "Open the data branch manually: https://github.com/$GITHUB_REPOSITORY/pull/new/$branch"
+          fi

@@ -200,6 +200,16 @@ if (Array.isArray(studios) && profiles && typeof profiles === "object" && !Array
             errors.push(error.message);
           }
         }
+        if (game?.steamCapsuleUrl !== undefined) {
+          try {
+            httpsUrl(game.steamCapsuleUrl, studio.name + ".profile.popularGames[" + gameIndex + "].steamCapsuleUrl");
+            if (!new URL(game.steamCapsuleUrl).hostname.endsWith(".steamstatic.com")) {
+              throw new Error(studio.name + ".profile.popularGames[" + gameIndex + "].steamCapsuleUrl must use an official Steam artwork CDN.");
+            }
+          } catch (error) {
+            errors.push(error.message);
+          }
+        }
         if (game?.officialUrl !== undefined) {
           try { httpsUrl(game.officialUrl, studio.name + ".profile.popularGames[" + gameIndex + "].officialUrl"); }
           catch (error) { errors.push(error.message); }

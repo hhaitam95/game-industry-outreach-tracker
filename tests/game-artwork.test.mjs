@@ -95,3 +95,17 @@ test("does not create generic Steam search links when no verified destination ex
   assert.equal(gameDestination({ title: "The Tablet of Destinies" }), null);
   assert.equal(gameLinkLabel({ title: "The Tablet of Destinies" }), null);
 });
+
+test("uses the Steam capsule image after the verified header image", () => {
+  const sources = getGameArtworkSources({
+    title: "Example Game",
+    appId: 12345,
+    steamHeaderUrl: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/12345/hash/header.jpg",
+    steamCapsuleUrl: "https://cdn.cloudflare.steamstatic.com/steam/apps/12345/capsule_231x87.jpg",
+  });
+  const headerIndex = sources.findIndex(source => source.url.endsWith("/header.jpg"));
+  const capsuleIndex = sources.findIndex(source => source.url.endsWith("/capsule_231x87.jpg"));
+  assert.ok(headerIndex >= 0);
+  assert.ok(capsuleIndex > headerIndex);
+  assert.equal(sources[capsuleIndex].layout, "landscape");
+});
