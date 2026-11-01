@@ -231,6 +231,12 @@ if (Array.isArray(studios) && profiles && typeof profiles === "object" && !Array
         if (game?.officialArtworkLayout !== undefined && !["portrait", "landscape", "square"].includes(game.officialArtworkLayout)) {
           errors.push(studio.name + ".profile.popularGames[" + gameIndex + "].officialArtworkLayout must be portrait, landscape or square.");
         }
+        if (game?.officialArtworkSource !== undefined && !["Official site", "Google Play", "App Store"].includes(game.officialArtworkSource)) {
+          errors.push(studio.name + ".profile.popularGames[" + gameIndex + "].officialArtworkSource must be Official site, Google Play or App Store.");
+        }
+        if (game?.officialArtworkSource !== undefined && game?.officialArtworkUrl === undefined) {
+          errors.push(studio.name + ".profile.popularGames[" + gameIndex + "].officialArtworkSource requires officialArtworkUrl.");
+        }
         if (game?.officialArtworkLayout !== undefined && game?.officialArtworkUrl === undefined) {
           errors.push(studio.name + ".profile.popularGames[" + gameIndex + "].officialArtworkLayout requires officialArtworkUrl.");
         }
