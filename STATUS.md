@@ -11,7 +11,7 @@
 - Existing My applications data remains in its current localStorage key and is not migrated or rewritten by this feature.
 - Candidate profile records use a separate IndexedDB database/store and are not included in public studio JSON or build-time data.
 - The browser UI explains that local browser storage is not encrypted by default and can be cleared. Backups contain personal information and must be kept private.
-- Current CI run: browser acceptance tests are being checked; see PR #95 and its Actions run for the final result.
+- Validation: a full CI run on the implementation commit passed Python discovery tests, frontend tests, TypeScript checking, production build, directory/privacy/Pages checks and Playwright browser acceptance, including profile persistence, navigation retention and backup restore.
 
 ## Current product direction — 2026-11-01
 
