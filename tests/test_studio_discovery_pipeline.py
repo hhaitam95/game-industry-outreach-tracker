@@ -1045,6 +1045,52 @@ class GameDevMapDiscoveryTests(unittest.TestCase):
             self.assertTrue(saved["feed_done"]["gamedevmap"])
             self.assertEqual(len(saved["candidates"]), 3)
 
+    def test_hourly_gamedevmap_uses_raw_row_count_for_pagination(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            data_dir = root / "src" / "data"
+            data_dir.mkdir(parents=True)
+            (data_dir / "speculative-route-directory.json").write_text("[]", encoding="utf-8")
+            (data_dir / "studio-profiles.json").write_text("{}", encoding="utf-8")
+
+            state = discovery.empty_state()
+            feed = next(item for item in discovery.FEEDS if item["kind"] == "gamedevmap")
+            state["feed_index"] = discovery.FEEDS.index(feed)
+            state_path = root / "state.json"
+            state_path.write_text(json.dumps(state), encoding="utf-8")
+            candidate = {
+                "qid": "GDM:hourly-page",
+                "entity_url": "https://www.gamedevmap.com/index.php?start=1",
+                "name": "Hourly Pagination Studio",
+                "website": "https://hourly-pagination.example/",
+                "country": "Canada",
+                "hq_city": "Montreal",
+                "country_code": "",
+                "company_type": "Developer",
+            }
+
+            with patch.object(
+                discovery,
+                "fetch_gamedevmap_page",
+                return_value=([candidate], 100),
+            ):
+                result = discovery.run_pipeline(
+                    mode="hourly",
+                    batch_size=100,
+                    max_source_pages=1,
+                    max_candidate_checks=0,
+                    route_check_count=0,
+                    max_run_seconds=60,
+                    root=root,
+                    state_path=state_path,
+                )
+
+            saved = discovery.load_state(state_path)
+            self.assertEqual(result["source_pages"], 1)
+            self.assertEqual(saved["feed_cursors"]["gamedevmap"], "101")
+            self.assertFalse(saved["feed_done"]["gamedevmap"])
+
+
     def test_completed_recurring_cycle_restarts_game_dev_map_catalogue_from_first_page(self):
         state = discovery.empty_state()
         state["feed_cursors"]["gamedevmap"] = "10501"
