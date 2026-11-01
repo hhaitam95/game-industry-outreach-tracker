@@ -286,7 +286,9 @@ async function main() {
     assert.ok(await page.locator(".studio-mark").count() > 100, "Studio marks should appear for directory rows.");
     assert.ok(await page.locator(".country-flag").count() > 100, "Known studio locations should display flags.");
     assert.deepEqual(
-      (await page.locator(".studio-table thead th").allTextContents()).map(value => value.trim()),
+      await page.locator(".studio-table thead th").evaluateAll(headers => headers.map(header =>
+        header.querySelector(".column-sort-button span:first-child")?.textContent?.trim() || header.textContent?.trim()
+      )),
       ["Studio", "Studio location", "Notable work", "Studio type", "Tracker"],
       "The main table should keep only general studio information and the tracker action.",
     );
