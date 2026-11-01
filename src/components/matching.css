@@ -18,7 +18,7 @@
 
 .matching-profile-date {
   color: var(--subtle);
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .matching-principle-note,
@@ -29,7 +29,7 @@
   border-radius: 6px;
   background: var(--surface);
   color: var(--muted);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.55;
 }
 
@@ -54,7 +54,7 @@
 .matching-state-panel h2 {
   margin: 0;
   color: var(--ink);
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 650;
 }
 
@@ -62,7 +62,7 @@
 .matching-loading {
   margin: 0;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.55;
 }
 
@@ -84,14 +84,14 @@
 
 .matching-summary-card strong {
   color: var(--ink);
-  font-size: 20px;
+  font-size: 23px;
   font-variant-numeric: tabular-nums;
   line-height: 1.1;
 }
 
 .matching-summary-card span {
   color: var(--muted);
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .matching-toolbar {
@@ -108,7 +108,7 @@
 .matching-toolbar .form-field {
   min-width: 0;
   gap: 5px;
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .matching-toolbar .form-control,
@@ -119,7 +119,7 @@
   border-radius: 5px;
   background-color: var(--control-bg);
   color: var(--ink);
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .matching-results-meta {
@@ -128,7 +128,7 @@
   justify-content: space-between;
   gap: 10px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .matching-results-meta strong {
@@ -165,7 +165,7 @@
 .match-card-identity h2 {
   margin: 0 0 3px;
   color: var(--ink);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 650;
   letter-spacing: -0.01em;
 }
@@ -173,7 +173,7 @@
 .match-card-identity p {
   margin: 0;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .match-badges {
@@ -191,7 +191,7 @@
   border-radius: 4px;
   background: var(--surface-muted);
   color: var(--muted);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 650;
   white-space: nowrap;
 }
@@ -240,14 +240,14 @@
 .match-source-summary h3 {
   margin: 0 0 4px;
   color: var(--ink);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
 }
 
 .match-card-summary p {
   margin: 0;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.5;
 }
 
@@ -255,7 +255,7 @@
   display: block;
   margin-top: 4px;
   color: var(--subtle);
-  font-size: 9px;
+  font-size: 10px;
 }
 
 .match-card-actions {
@@ -271,7 +271,7 @@
 .match-card-actions a,
 .match-source-links a {
   color: var(--link);
-  font-size: 10px;
+  font-size: 11px;
   text-decoration: none;
 }
 
@@ -285,7 +285,7 @@
   border: 0;
   background: transparent;
   color: var(--link);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 650;
   text-align: left;
 }
@@ -315,7 +315,7 @@
 .match-detail-grid h4 {
   margin: 12px 0 6px;
   color: var(--ink);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 650;
 }
 
@@ -325,7 +325,7 @@
   margin: 0;
   padding-left: 16px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.5;
 }
 
@@ -348,7 +348,7 @@
 
 .match-evidence-name {
   color: var(--ink);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 650;
 }
 
@@ -356,20 +356,20 @@
 .match-evidence-relation,
 .match-evidence-list small {
   color: var(--muted);
-  font-size: 9px;
+  font-size: 10px;
 }
 
 .match-evidence-list p {
   margin: 2px 0 0;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.5;
 }
 
 .match-detail-status {
   margin: 0 0 6px;
   color: var(--ink);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 650;
 }
 
@@ -383,7 +383,7 @@
   display: grid;
   grid-template-columns: 115px minmax(0, 1fr);
   gap: 8px;
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .match-fact-list dt {
@@ -410,7 +410,7 @@
   border-radius: 4px;
   background: var(--surface-muted);
   color: var(--muted);
-  font-size: 9px;
+  font-size: 10px;
 }
 
 .match-source-summary {
@@ -423,7 +423,7 @@
 .match-muted {
   margin: 0;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.55;
 }
 
@@ -436,7 +436,7 @@
 .match-caveat {
   margin: 0;
   color: var(--subtle);
-  font-size: 9px;
+  font-size: 10px;
   line-height: 1.5;
 }
 

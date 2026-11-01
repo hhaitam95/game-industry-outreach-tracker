@@ -173,6 +173,22 @@ if (Array.isArray(studios) && profiles && typeof profiles === "object" && !Array
         catch (error) { errors.push(error.message); }
       }
     }
+    if (profile.socialLinks !== undefined) {
+      if (!Array.isArray(profile.socialLinks)) {
+        errors.push(studio.name + ".profile.socialLinks must be an array when supplied.");
+      } else {
+        for (const [linkIndex, link] of profile.socialLinks.entries()) {
+          if (!link || typeof link !== "object" || Array.isArray(link)) {
+            errors.push(studio.name + ".profile.socialLinks[" + linkIndex + "] must be an object.");
+            continue;
+          }
+          try { requiredText(link.label, studio.name + ".profile.socialLinks[" + linkIndex + "].label"); }
+          catch (error) { errors.push(error.message); }
+          try { httpsUrl(link.url, studio.name + ".profile.socialLinks[" + linkIndex + "].url"); }
+          catch (error) { errors.push(error.message); }
+        }
+      }
+    }
     if (Array.isArray(profile.popularGames)) {
       for (const [gameIndex, game] of profile.popularGames.entries()) {
         if (!game || typeof game.title !== "string" || !game.title.trim()) {
@@ -189,6 +205,17 @@ if (Array.isArray(studios) && profiles && typeof profiles === "object" && !Array
         }
         if (game?.igdbCoverId !== undefined && (typeof game.igdbCoverId !== "string" || !/^[a-zA-Z0-9_-]+$/.test(game.igdbCoverId))) {
           errors.push(studio.name + ".profile.popularGames[" + gameIndex + "].igdbCoverId must be a valid IGDB image ID.");
+        }
+        if (game?.igdbCoverUrl !== undefined) {
+          try {
+            httpsUrl(game.igdbCoverUrl, studio.name + ".profile.popularGames[" + gameIndex + "].igdbCoverUrl");
+            const coverUrl = new URL(game.igdbCoverUrl);
+            if (coverUrl.hostname !== "images.igdb.com" || !coverUrl.pathname.startsWith("/igdb/image/upload/")) {
+              throw new Error(studio.name + ".profile.popularGames[" + gameIndex + "].igdbCoverUrl must use the official IGDB image CDN.");
+            }
+          } catch (error) {
+            errors.push(error.message);
+          }
         }
         if (game?.steamHeaderUrl !== undefined) {
           try {

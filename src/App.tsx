@@ -232,13 +232,12 @@ export default function App() {
               className="btn btn-outline-secondary btn-sm theme-toggle"
               type="button"
               aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+              title={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
               aria-pressed={theme === "dark"}
               onClick={() => setTheme((current) => (current === "dark" ? "light" : "dark"))}
             >
               <span aria-hidden="true">{theme === "dark" ? "☀" : "◐"}</span>
-              {theme === "dark" ? "Light mode" : "Dark mode"}
             </button>
-            <span className="workspace-label">PERSONAL WORKSPACE</span>
           </div>
         </div>
       </header>

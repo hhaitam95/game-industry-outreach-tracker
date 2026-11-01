@@ -7,6 +7,7 @@ export type PopularGameArtworkMetadata = {
   igdbGameId?: number;
   igdbSlug?: string;
   igdbCoverId?: string;
+  igdbCoverUrl?: string;
   steamHeaderUrl?: string;
   steamCapsuleUrl?: string;
   appStoreArtworkUrl?: string;
@@ -32,8 +33,9 @@ function uniqueSources(sources: GameArtworkSource[]): GameArtworkSource[] {
 }
 
 /**
- * Prefer portrait key art, then verified IGDB / official art, and only then
- * use a wide Steam header. A wide header must never displace a real cover.
+ * Prefer IGDB cover art first, then the verified Steam artwork for the game.
+ * Original developer artwork is the next fallback; App Store art is retained
+ * as a final option for mobile titles without any of those sources.
  */
 export function getGameArtworkSources(game: PopularGameArtworkMetadata): GameArtworkSource[] {
   const steamPortraitSources: GameArtworkSource[] = game.appId
@@ -56,12 +58,16 @@ export function getGameArtworkSources(game: PopularGameArtworkMetadata): GameArt
       ]
     : [];
 
-  const igdbSources: GameArtworkSource[] = game.igdbCoverId
+  const igdbCoverUrl = game.igdbCoverUrl ||
+    (game.igdbCoverId
+      ? `https://images.igdb.com/igdb/image/upload/t_cover_big/${game.igdbCoverId}.jpg`
+      : null);
+  const igdbSources: GameArtworkSource[] = igdbCoverUrl
     ? [
         {
           source: "IGDB",
           layout: "portrait",
-          url: `https://images.igdb.com/igdb/image/upload/t_cover_big/${game.igdbCoverId}.jpg`,
+          url: igdbCoverUrl,
         },
       ]
     : [];
@@ -115,11 +121,11 @@ export function getGameArtworkSources(game: PopularGameArtworkMetadata): GameArt
     : [];
 
   return uniqueSources([
-    ...steamPortraitSources,
     ...igdbSources,
+    ...steamPortraitSources,
+    ...steamHeaderSources,
     ...officialSources,
     ...appStoreSources,
-    ...steamHeaderSources,
   ]);
 }
 

@@ -25,7 +25,7 @@
   border-radius: 6px;
   background: var(--surface);
   color: var(--muted);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
 }
 
@@ -36,7 +36,7 @@
 
 .profile-save-state {
   color: var(--subtle);
-  font-size: 10px;
+  font-size: 11px;
   white-space: nowrap;
 }
 
@@ -65,7 +65,7 @@
 .profile-section-heading h2 {
   margin: 0 0 4px;
   color: var(--ink);
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 650;
   letter-spacing: -0.015em;
 }
@@ -73,7 +73,7 @@
 .profile-section-heading p {
   margin: 0;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
 }
 
@@ -86,7 +86,7 @@
 .profile-field {
   align-content: start;
   gap: 5px;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .profile-field .form-control,
@@ -97,7 +97,7 @@
   border-radius: 5px;
   background-color: var(--control-bg);
   color: var(--ink);
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.5;
 }
 
@@ -113,7 +113,7 @@
 
 .profile-field-hint {
   color: var(--subtle);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 400;
   line-height: 1.45;
 }
@@ -124,7 +124,7 @@
   border: 1px dashed var(--line);
   border-radius: 5px;
   color: var(--subtle);
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .profile-record-list {
@@ -152,7 +152,7 @@
 .profile-material-card h3 {
   margin: 0;
   color: var(--ink);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
 }
 
@@ -184,7 +184,7 @@
 .profile-material-card > p {
   margin: 0;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.5;
 }
 
@@ -208,14 +208,14 @@
 .profile-document-row strong {
   overflow: hidden;
   color: var(--ink);
-  font-size: 10px;
+  font-size: 11px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .profile-document-row small {
   color: var(--subtle);
-  font-size: 9px;
+  font-size: 10px;
 }
 
 .profile-document-row > div {
@@ -250,13 +250,13 @@
   gap: 12px;
   padding: 10px 1px 0;
   color: var(--subtle);
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .profile-loading {
   margin: 10px 0;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
 }
 
 @media (max-width: 900px) {

@@ -86,7 +86,8 @@ async function main() {
       if (
         requestUrl.includes("images.igdb.com") ||
         requestUrl.includes("d4ngames.com") ||
-        requestUrl.includes("www.ahoiii.com")
+        requestUrl.includes("www.ahoiii.com") ||
+        requestUrl.includes("mzstatic.com")
       ) {
         await route.fulfill({ status: 200, contentType: "image/png", body: posterFixture });
         return;
@@ -124,6 +125,12 @@ async function main() {
 
     await page.goto(appUrl, { waitUntil: "networkidle" });
     assert.match(await page.title(), /Game Industry Outreach Tracker/);
+    assert.equal(await page.locator(".workspace-label").count(), 0, "The redundant workspace label should not be displayed.");
+    assert.equal((await page.locator(".theme-toggle").innerText()).trim(), "◐", "The theme control should show only its icon.");
+    assert.ok(
+      Number.parseFloat(await page.locator("body").evaluate(element => getComputedStyle(element).fontSize)) >= 17,
+      "The global page typography should be larger than the 16px browser baseline.",
+    );
     await page.getByRole("heading", { name: "Studio directory" }).waitFor();
     await page.getByText(/Last successful run:/).waitFor();
 
@@ -278,6 +285,18 @@ async function main() {
     assert.ok(initialCount > 100, "The global directory should contain a substantial set of active studios.");
     assert.ok(await page.locator(".studio-mark").count() > 100, "Studio marks should appear for directory rows.");
     assert.ok(await page.locator(".country-flag").count() > 100, "Known studio locations should display flags.");
+    assert.deepEqual(
+      await page.locator(".studio-table thead th").evaluateAll(headers => headers.map(header =>
+        header.querySelector(".column-sort-button span:first-child")?.textContent?.trim() || header.textContent?.trim()
+      )),
+      ["Studio", "Studio location", "Notable work", "Studio type", "Tracker"],
+      "The main table should keep only general studio information and the tracker action.",
+    );
+    assert.equal(
+      await rows.first().locator("td").count(),
+      5,
+      "Every studio data row should have exactly five cells to match the simplified header.",
+    );
     await page.getByLabel("Show only studios added in the last 24 hours").check();
     assert.equal(await rows.count(), 5, "Only the five recently published closeout studios should appear.");
     assert.equal(await page.getByText("NEW", { exact: true }).count(), 5);
@@ -303,7 +322,14 @@ async function main() {
     );
     assert.ok(
       await page.locator(".game-poster-grid img").count() > 0,
-      "Steam-listed games should render cover artwork images.",
+      "Listed games should render cover artwork images.",
+    );
+    const metroExodusPoster = page.locator('.game-poster-grid .game-poster-card[data-game-title="Metro Exodus"]');
+    const metroExodusImage = metroExodusPoster.locator('img[data-artwork-source="IGDB"]');
+    await metroExodusImage.waitFor();
+    assert.ok(
+      (await metroExodusImage.getAttribute("src") || "").includes("/coaroh.jpg"),
+      "When a game has both IGDB and Steam artwork, the IGDB cover should be displayed first.",
     );
     await fourARow.getByRole("button", { name: "4A Games" }).click();
     await page.getByLabel("Search", { exact: true }).fill("");
@@ -383,10 +409,57 @@ async function main() {
     await fourAGamesDetails.waitFor();
     assert.match(await fourAGamesDetails.textContent(), /About the studio/);
     assert.match(await fourAGamesDetails.textContent(), /Metro Exodus/);
-    assert.match(await fourAGamesDetails.textContent(), /Application route notes/);
-    assert.match(await fourAGamesDetails.textContent(), /Route last checked:/);
+    assert.match(await fourAGamesDetails.textContent(), /Studio type/);
+    assert.match(await fourAGamesDetails.textContent(), /Industry scale/);
+    assert.match(await fourAGamesDetails.textContent(), /Team size/);
+    assert.match(await fourAGamesDetails.textContent(), /Headquarters/);
+    assert.match(await fourAGamesDetails.textContent(), /Platforms and focus/);
+    assert.match(await fourAGamesDetails.textContent(), /Application route/);
+    assert.doesNotMatch(await fourAGamesDetails.textContent(), /Application route notes|Listed hiring locations|Listed disciplines|Route last checked:/);
+    const fullWidthDetails = await fourAGamesDetails.locator("td").evaluate(cell => ({
+      colSpan: cell.colSpan,
+      cellWidth: cell.getBoundingClientRect().width,
+      tableWidth: cell.closest("table").getBoundingClientRect().width,
+    }));
+    assert.equal(fullWidthDetails.colSpan, 5);
+    assert.ok(fullWidthDetails.cellWidth >= fullWidthDetails.tableWidth - 2, "The expanded profile should span the entire table width.");
+    const applicationLink = fourAGamesDetails.getByRole("link", { name: "Application route" });
+    assert.equal(await applicationLink.getAttribute("href"), "https://www.4a-games.com.mt/other-cv");
+    assert.equal(await applicationLink.getAttribute("target"), "_blank");
+    assert.match(await applicationLink.getAttribute("rel") || "", /noopener/);
+    const websiteLink = fourAGamesDetails.getByRole("link", { name: "Website" });
+    assert.equal(await websiteLink.getAttribute("href"), "https://www.4a-games.com.mt/");
     await fourAGamesRow.getByRole("button", { name: /4A Games/ }).click();
     await fourAGamesDetails.waitFor({ state: "detached" });
+
+    // Curated official social/storefront links appear with named labels in the expanded overview.
+    const asoboRow = rows.filter({ hasText: "Asobo Studio" });
+    await asoboRow.getByRole("button", { name: /Asobo Studio/ }).click();
+    const asoboDetails = page.locator("#studio-details-asobo-studio");
+    await asoboDetails.waitFor();
+    const linkedinLink = asoboDetails.getByRole("link", { name: "LinkedIn" });
+    assert.equal(await linkedinLink.getAttribute("href"), "https://www.linkedin.com/company/asobo-studio/");
+    assert.equal(await linkedinLink.getAttribute("target"), "_blank");
+    assert.match(await linkedinLink.getAttribute("rel") || "", /noopener/);
+    await asoboRow.getByRole("button", { name: /Asobo Studio/ }).click();
+    await asoboDetails.waitFor({ state: "detached" });
+
+    // IGDB artwork wins over Steam when both are present (the Stuck Together example).
+    const hugecalfRow = rows.filter({ hasText: "Hugecalf Studios" });
+    await hugecalfRow.getByRole("button", { name: /Hugecalf Studios/ }).click();
+    const hugecalfDetails = page.locator("#studio-details-hugecalf-studios");
+    await hugecalfDetails.waitFor();
+    const stuckTogetherPoster = hugecalfDetails.locator('.game-poster-card[data-game-title="Stuck Together"]');
+    const stuckTogetherImage = stuckTogetherPoster.locator('img[data-artwork-source="IGDB"]');
+    await stuckTogetherImage.waitFor();
+    assert.equal(
+      await stuckTogetherImage.getAttribute("src"),
+      "https://images.igdb.com/igdb/image/upload/t_cover_big/coa9za.webp",
+      "Stuck Together should display the exact IGDB cover supplied for this example.",
+    );
+    assert.equal(await stuckTogetherPoster.getAttribute("href"), "https://store.steampowered.com/app/3295360/");
+    await hugecalfRow.getByRole("button", { name: /Hugecalf Studios/ }).click();
+    await hugecalfDetails.waitFor({ state: "detached" });
 
     // A landscape Steam header must receive a landscape-sized frame in both the table and expanded gallery.
     const twentyTwoCansRow = rows.filter({ hasText: "22cans" });
@@ -488,18 +561,29 @@ async function main() {
     await ocellusRow.getByRole("button", { name: /Ocellus/ }).click();
     await ocellusDetails.waitFor({ state: "detached" });
 
+    // App Store art is a final fallback when earlier cover sources are absent.
+    const halfbrickRow = rows.filter({ hasText: "Halfbrick Studios" });
+    await halfbrickRow.getByRole("button", { name: /Halfbrick Studios/ }).click();
+    const halfbrickDetails = page.locator("#studio-details-halfbrick-studios");
+    await halfbrickDetails.waitFor();
+    const fruitNinjaPoster = halfbrickDetails.locator('.game-poster-card[data-game-title="Fruit Ninja"]').first();
+    const fruitNinjaImage = fruitNinjaPoster.locator('img[data-artwork-source="App Store"][data-artwork-layout="square"]');
+    await fruitNinjaImage.waitFor();
+    assert.ok((await fruitNinjaImage.getAttribute("src") || "").includes("mzstatic.com/image/thumb/"));
+    assert.equal(await fruitNinjaPoster.getAttribute("href"), "https://apps.apple.com/us/app/fruit-ninja/id403858572?uo=4");
+    const fruitNinjaRatio = await fruitNinjaPoster.locator(".game-poster-art").evaluate(element => {
+      const rect = element.getBoundingClientRect();
+      return rect.width / rect.height;
+    });
+    assert.ok(fruitNinjaRatio > 0.9 && fruitNinjaRatio < 1.1);
+    await halfbrickRow.getByRole("button", { name: /Halfbrick Studios/ }).click();
+    await halfbrickDetails.waitFor({ state: "detached" });
+
     assert.equal(
       await page.locator('.game-poster-card[href*="store.steampowered.com/search/"], .popular-game-cover[href*="store.steampowered.com/search/"]').count(),
       0,
       "Game artwork cards must not fall back to generic Steam search URLs.",
     );
-
-    // Official route links must remain HTTPS and open safely in a new tab.
-    const firstApplicationLink = page.locator(".studio-table tbody tr").first().getByRole("link", { name: "Application" });
-    const applicationHref = await firstApplicationLink.getAttribute("href");
-    assert.ok(applicationHref?.startsWith("https://"), "Application links must use HTTPS.");
-    assert.equal(await firstApplicationLink.getAttribute("target"), "_blank");
-    assert.match(await firstApplicationLink.getAttribute("rel") || "", /noopener/);
 
     // Saving, browser-local persistence and refresh.
     const studioRow = page.getByRole("row").filter({ hasText: "4A Games" });

@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-11-01 — Studio directory overview and UI refresh
+
+- Reduce the main studio table to studio, location, notable work, studio type and tracker action; move the website and speculative-application links into the expanded overview.
+- Replace route-specific overview text with general studio facts: description, up to four games, scale, team size, type, workplace listing, platforms, headquarters, ownership and optional social links.
+- Remove artwork-source explanation copy and make the theme control icon-only; remove the redundant workspace label.
+- Increase typography across the directory, matching, profile and application areas while retaining the existing locally bundled Bootstrap / React setup.
+- Prioritize IGDB covers ahead of Steam artwork and developer-hosted imagery; add the explicitly supplied IGDB cover for Stuck Together while retaining its verified Steam page link.
+- Keep team-size research manual or limited to sources that permit automated access; do not scrape LinkedIn without permission.
+
+
 ## 2026-11-01 — Private candidate matching foundation
 
 - Add a Matches page that compares the browser-local Candidate Profile with active public studio route records on-device.
