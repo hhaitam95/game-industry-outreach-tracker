@@ -25,6 +25,20 @@ test("prefers Steam portrait art, then IGDB and official art before a wide heade
   assert.equal(sources[5].layout, "landscape");
 });
 
+test("prefers verified hash-based Steam library artwork for The Trail", () => {
+  const game = {
+    title: "The Trail",
+    appId: 3544920,
+    steamLibraryCapsuleUrl: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3544920/2103420b5b6ac86335205a0220d5ed1b230e4c86/library_capsule.jpg",
+    steamHeaderUrl: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3544920/hash/header.jpg",
+  };
+  const sources = getGameArtworkSources(game);
+  assert.equal(sources[0].url, game.steamLibraryCapsuleUrl);
+  assert.equal(sources[0].source, "Steam");
+  assert.equal(sources[0].layout, "portrait");
+  assert.equal(gameDestination(game), "https://store.steampowered.com/app/3544920/");
+});
+
 test("uses a verified Steam landscape header when no portrait or IGDB art is available", () => {
   const sources = getGameArtworkSources({
     title: "The Trail",
@@ -50,12 +64,12 @@ test("uses a studio-owned official image as a fallback and preserves its declare
   const sources = getGameArtworkSources({
     title: "The Tablet of Destinies",
     officialArtworkUrl: "https://d4ngames.com/images/tablet_thumbnail.webp",
-    officialArtworkLayout: "landscape",
+    officialArtworkLayout: "square",
   });
   assert.deepEqual(sources, [{
     source: "Official site",
     url: "https://d4ngames.com/images/tablet_thumbnail.webp",
-    layout: "landscape",
+    layout: "square",
   }]);
 });
 
@@ -94,6 +108,8 @@ test("uses the direct IGDB game page when no Steam or official page is known", (
 test("does not create generic Steam search links when no verified destination exists", () => {
   assert.equal(gameDestination({ title: "The Tablet of Destinies" }), null);
   assert.equal(gameLinkLabel({ title: "The Tablet of Destinies" }), null);
+  assert.equal(gameDestination({ title: "The Tablet of Destinies", officialUrl: "https://www.d4ngames.com/games/tablet-of-destinies" }), "https://www.d4ngames.com/games/tablet-of-destinies");
+  assert.equal(gameDestination({ title: "The Tablet of Destinies", officialUrl: "https://www.d4ngames.com/games/tablet-of-destinies" }).includes("store.steampowered.com/search"), false);
 });
 
 test("uses the Steam capsule image after the verified header image", () => {
