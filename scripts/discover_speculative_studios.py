@@ -51,8 +51,8 @@ MAX_RESPONSE_BYTES = 2_500_000
 PER_HOST_DELAY_SECONDS = 1.2
 MAX_CONCURRENT_SITE_CHECKS = 8
 REVIEW_DAYS = 90
-SATURATION_EMPTY_CYCLE_THRESHOLD = 3
-SATURATED_SOURCE_PAGE_BUDGET = 1
+SATURATION_EMPTY_CYCLE_THRESHOLD = 5
+SATURATED_SOURCE_PAGE_BUDGET = 4
 MAX_SITE_PAGES = 7
 ROUTE_CHECK_STATUSES = {"active", "paused"}
 
@@ -77,12 +77,12 @@ def load_source_manifest(path: Path = SOURCE_MANIFEST_PATH) -> tuple[dict[str, A
             raise ValueError("Discovery source manifest entries require id, label and kind.")
         if source_id in seen_ids:
             raise ValueError("Discovery source manifest contains a duplicate id: " + source_id)
-        if kind not in {"class", "developer_credit", "company_class", "gamedevmap"}:
+        if kind not in {"class", "developer_credit", "company_class", "industry", "gamedevmap"}:
             raise ValueError("Unsupported discovery source kind: " + str(kind))
         if refresh_policy not in {"recurring", "one_time_backfill"}:
             raise ValueError("Unsupported discovery refresh policy: " + str(refresh_policy))
-        if (kind == "gamedevmap") != (refresh_policy == "one_time_backfill"):
-            raise ValueError("GameDevMap must be a one-time backfill and Wikidata feeds must recur.")
+        if kind != "gamedevmap" and refresh_policy != "recurring":
+            raise ValueError("Only GameDevMap may use a one-time backfill; all Wikidata feeds must recur.")
         saturation = source.get("saturation")
         if refresh_policy == "recurring":
             if not isinstance(saturation, dict):
@@ -193,6 +193,20 @@ POSITIVE_ROUTE_PATTERNS = (
         re.I,
     ),
 )
+
+GAME_DEVELOPMENT_EVIDENCE_PATTERNS = (
+    re.compile(r"\b(?:video|computer|mobile|pc|console)?\s*games?\s+(?:development|developer|studio|production)\b", re.I),
+    re.compile(r"\b(?:independent|indie)\s+game\s+studio\b", re.I),
+    re.compile(r"\b(?:we|our team)\s+(?:develop|create|make|build|produce)\s+(?:video\s+)?games?\b", re.I),
+    re.compile(r"\bco[- ]development\b|\bgame development services\b|\bgame porting services\b", re.I),
+    re.compile(r"\b(?:spielentwicklung|videospielentwicklung|spielestudio|videospielstudio)\b", re.I),
+    re.compile(r"\b(?:développement de jeux vidéo|studio de jeux vidéo)\b", re.I),
+    re.compile(r"\b(?:desarrollo de videojuegos|estudio de videojuegos)\b", re.I),
+    re.compile(r"\b(?:sviluppo di videogiochi|studio di videogiochi)\b", re.I),
+    re.compile(r"\b(?:desenvolvimento de jogos|estúdio de jogos)\b", re.I),
+    re.compile(r"\b(?:studio gier|produkcja gier)\b", re.I),
+)
+
 
 NEGATIVE_ROUTE_PATTERNS = (
     re.compile(r"\bnot\s+(?:currently\s+)?accepting\s+(?:any\s+)?(?:speculative|unsolicited|spontaneous)\s+applications?\b", re.I),
@@ -653,6 +667,15 @@ def staffing_platform_match(text: str) -> re.Match[str] | None:
     return found[0] if len(found) >= 2 else None
 
 
+def game_development_evidence_match(text: str) -> re.Match[str] | None:
+    """Return direct game-development evidence, not a generic games-industry signal."""
+    for pattern in GAME_DEVELOPMENT_EVIDENCE_PATTERNS:
+        match = pattern.search(text)
+        if match:
+            return match
+    return None
+
+
 def route_type_for(text: str) -> str:
     for route_type, pattern in POSITIVE_ROUTE_TYPE:
         if pattern.search(text):
@@ -708,6 +731,17 @@ def verify_candidate_pages(
         return {
             "status": "needs_review",
             "reason": "likely_staffing_or_talent_platform_not_a_game_studio",
+        }
+    # Wikidata industry classifications are broad and include publishers, vendors
+    # and other ecosystem companies. Do not auto-publish those as developers unless
+    # their own pages demonstrate direct game-development work.
+    if (
+        candidate.get("source_id") == "wikidata_video_game_industry"
+        and not game_development_evidence_match(all_text)
+    ):
+        return {
+            "status": "needs_review",
+            "reason": "industry_classification_without_direct_game_development_evidence",
         }
     matches: list[tuple[Page, re.Match[str]]] = []
     negatives: list[tuple[Page, re.Match[str]]] = []
@@ -784,6 +818,11 @@ def sparql_query(feed_kind: str, cursor: str, limit: int) -> str:
         )
     elif feed_kind == "company_class":
         source_pattern = "?company wdt:P31 wd:Q112042224."
+    elif feed_kind == "industry":
+        source_pattern = (
+            "?company wdt:P452 wd:Q941594. "
+            "FILTER NOT EXISTS { ?company wdt:P31/wdt:P279* wd:Q5. }"
+        )
     else:
         raise ValueError("Unknown Wikidata feed kind: " + feed_kind)
     return f"""
@@ -890,7 +929,11 @@ def fetch_wikidata_batch(feed_kind: str, cursor: str, limit: int) -> list[dict[s
             "country": value("countryLabel") or "Not stated",
             "hq_city": value("hqLabel"),
             "country_code": value("countryCode").upper(),
-            "company_type": "Game industry company" if feed_kind == "company_class" else "Developer",
+            "company_type": (
+                "Industry lead" if feed_kind == "industry"
+                else "Game industry company" if feed_kind == "company_class"
+                else "Developer"
+            ),
         })
     return rows
 
@@ -1162,7 +1205,10 @@ def profile_for(candidate: dict[str, Any]) -> dict[str, Any]:
             "label": location_label,
         },
         "otherLocations": [],
-        "companyType": [candidate.get("company_type") or "Developer"],
+        "companyType": [
+            "Developer" if candidate.get("source_id") == "wikidata_video_game_industry"
+            else candidate.get("company_type") or "Developer"
+        ],
         "ownership": "Not yet researched",
         "parentCompany": None,
         "industryScale": "Mixed / Unclassified",
@@ -1580,7 +1626,12 @@ def run_pipeline(
             if feed not in available:
                 feed = available[0]
             cursor = state["feed_cursors"].get(feed["id"], "1" if feed["kind"] == "gamedevmap" else "")
-            rows = source_fetcher(feed["kind"], cursor, batch_size)
+            if feed["kind"] == "gamedevmap" and source_fetcher is fetch_source_batch:
+                # Use raw table-row counts: filtered non-studio rows must not truncate pagination.
+                rows, source_row_count = fetch_gamedevmap_page(cursor, batch_size)
+            else:
+                rows = source_fetcher(feed["kind"], cursor, batch_size)
+                source_row_count = len(rows)
             source_pages += 1
             pages_by_feed[feed["id"]] = pages_by_feed.get(feed["id"], 0) + 1
             if rows:
@@ -1589,7 +1640,7 @@ def run_pipeline(
                 else:
                     state["feed_cursors"][feed["id"]] = max(row["qid"] for row in rows)
                 source_candidates += add_candidates(state, rows, source_id=feed["id"])
-            if len(rows) < batch_size:
+            if source_row_count < batch_size:
                 state["feed_done"][feed["id"]] = True
             state["feed_index"] = (FEEDS.index(feed) + 1) % len(FEEDS)
             if feed["kind"] != "gamedevmap" and source_pages < max_source_pages:
