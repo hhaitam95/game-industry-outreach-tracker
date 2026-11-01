@@ -12,19 +12,19 @@ const REQUEST_INTERVAL_MS = 800;
 export function normalizeGameTitle(value) {
   return String(value ?? "")
     .normalize("NFKD")
-    .replace(/\\p{Diacritic}/gu, "")
+    .replace(/\p{Diacritic}/gu, "")
     .toLowerCase()
     .replace(/&/g, " and ")
     .replace(/[^a-z0-9]+/g, " ")
     .trim()
-    .replace(/\\s+/g, " ");
+    .replace(/\s+/g, " ");
 }
 
 export function normalizeDeveloperName(value) {
   return normalizeGameTitle(value)
-    .replace(/\\b(limited|ltd|incorporated|inc|llc|gmbh|plc|ab|bv|sa|sarl|srl|oy|as)\\b/g, " ")
-    .replace(/\\b(studios|studio)\\b/g, " ")
-    .replace(/\\s+/g, " ")
+    .replace(/\b(limited|ltd|incorporated|inc|llc|gmbh|plc|ab|bv|sa|sarl|srl|oy|as)\b/g, " ")
+    .replace(/\b(studios|studio)\b/g, " ")
+    .replace(/\s+/g, " ")
     .trim();
 }
 
@@ -98,7 +98,7 @@ async function readJsonResponse(response, label) {
 
 async function steamRequest(url, label) {
   for (let attempt = 0; attempt < 3; attempt += 1) {
-    const response = await fetch(url, { headers: { "Accept": "application/json" } });
+    const response = await fetch(url, { headers: { Accept: "application/json" } });
     if ((response.status === 429 || response.status >= 500) && attempt < 2) {
       const retryAfter = Number(response.headers.get("retry-after"));
       await delay(Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : 1500 * (attempt + 1));
@@ -144,9 +144,9 @@ async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (args.help) {
     process.stdout.write(
-      "Safely enrich missing Steam app IDs from the public Steam Store API.\\n\\n" +
-      "Dry run: node scripts/enrich-steam-games.mjs [--limit N]\\n" +
-      "Write exact title + developer matches: node scripts/enrich-steam-games.mjs --write\\n",
+      "Safely enrich missing Steam app IDs from the public Steam Store API.\n\n" +
+      "Dry run: node scripts/enrich-steam-games.mjs [--limit N]\n" +
+      "Write exact title + developer matches: node scripts/enrich-steam-games.mjs --write\n",
     );
     return;
   }
@@ -159,7 +159,15 @@ async function main() {
   }
 
   const groups = collectGames(profiles);
-  const counts = { queried: 0, matchedRecords: 0, reusedTitleMatches: 0, ambiguous: 0, notFound: 0, developerMismatch: 0, notGame: 0, detailsUnavailable: 0 };
+  const counts = {
+    queried: 0,
+    matchedRecords: 0,
+    ambiguous: 0,
+    notFound: 0,
+    developerMismatch: 0,
+    notGame: 0,
+    detailsUnavailable: 0,
+  };
   const unresolved = [];
 
   for (const group of groups) {
@@ -168,54 +176,46 @@ async function main() {
     const { searchResults, appDetails } = await searchSteam(group.title);
     counts.queried += 1;
 
-    const groupResults = [];
     for (const studio of [...new Set(group.entries.map(entry => entry.studio))]) {
       const result = selectExactSteamMatch(group.title, studio, searchResults, appDetails);
       if (result.status === "matched") {
         for (const entry of group.entries.filter(item => item.studio === studio && !item.game.appId)) {
           entry.game.appId = result.appId;
           counts.matchedRecords += 1;
-          groupResults.push(studio);
         }
-      } else if (result.status === "ambiguous") {
-        counts.ambiguous += 1;
-        unresolved.push({ title: group.title, studio, status: result.status });
-      } else if (result.status === "developer_mismatch") {
-        counts.developerMismatch += 1;
-        unresolved.push({ title: group.title, studio, status: result.status });
-      } else if (result.status === "not_a_game") {
-        counts.notGame += 1;
-        unresolved.push({ title: group.title, studio, status: result.status });
-      } else if (result.status === "details_unavailable") {
-        counts.detailsUnavailable += 1;
-        unresolved.push({ title: group.title, studio, status: result.status });
       } else {
-        counts.notFound += 1;
+        const countKey = {
+          ambiguous: "ambiguous",
+          not_found: "notFound",
+          developer_mismatch: "developerMismatch",
+          not_a_game: "notGame",
+          details_unavailable: "detailsUnavailable",
+        }[result.status] || "notFound";
+        counts[countKey] += 1;
         unresolved.push({ title: group.title, studio, status: result.status });
       }
     }
-    if (groupResults.length > 1) counts.reusedTitleMatches += groupResults.length - 1;
   }
 
   if (args.write) {
-    writeFileSync(profilesPath, JSON.stringify(profiles, null, 2) + "\\n", "utf8");
-    process.stdout.write("Updated studio profiles with exact Steam title and developer matches.\\n");
+    writeFileSync(profilesPath, JSON.stringify(profiles, null, 2) + "\n", "utf8");
+    process.stdout.write("Updated studio profiles with exact Steam title and developer matches.\n");
   } else {
-    process.stdout.write("Dry run only; no files were changed. Re-run with --write to persist verified app IDs.\\n");
+    process.stdout.write("Dry run only; no files were changed. Re-run with --write to persist verified app IDs.\n");
   }
 
-  process.stdout.write(JSON.stringify({ ...counts, unresolvedRecords: unresolved.length }, null, 2) + "\\n");
+  process.stdout.write(JSON.stringify({ ...counts, unresolvedRecords: unresolved.length }, null, 2) + "\n");
   for (const item of unresolved.slice(0, 40)) {
-    process.stdout.write("- " + item.status + ": " + item.title + " [" + item.studio + "]\\n");
+    process.stdout.write("- " + item.status + ": " + item.title + " [" + item.studio + "]\n");
   }
   if (unresolved.length > 40) {
-    process.stdout.write("- " + (unresolved.length - 40) + " additional unresolved records omitted.\\n");
+    process.stdout.write("- " + (unresolved.length - 40) + " additional unresolved records omitted.\n");
   }
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   main().catch(error => {
-    process.stderr.write((error?.stack || String(error)) + "\\n");
+    process.stderr.write((error?.stack || String(error)) + "\n");
     process.exitCode = 1;
   });
 }
