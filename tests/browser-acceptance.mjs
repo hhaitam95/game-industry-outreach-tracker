@@ -633,9 +633,9 @@ async function main() {
     await viewInTracker.click();
     await page.getByRole("heading", { name: "My applications" }).waitFor();
 
-    let trackedRow = page.locator(".tracker-table tbody tr").filter({ has: page.locator(".status-select-label") }).filter({ hasText: "4A Games" });
-    await trackedRow.waitFor();
-    await trackedRow.waitFor({ state: "visible" });
+    const focusedTrackerRow = page.locator(".tracker-table tbody tr").filter({ has: page.locator(".status-select-label") }).filter({ hasText: "4A Games" });
+    await focusedTrackerRow.waitFor();
+    await focusedTrackerRow.waitFor({ state: "visible" });
     await page.waitForFunction(() => document.querySelector('[id="tracker-row-4a-games"]')?.classList.contains("tracker-row-focused"));
     assert.equal(await page.getByLabel("Status for 4A Games").inputValue(), "saved");
 
