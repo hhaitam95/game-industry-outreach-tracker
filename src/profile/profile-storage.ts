@@ -3,20 +3,14 @@ import {
   PROFILE_BACKUP_FORMAT,
   PROFILE_SCHEMA_VERSION,
 } from "./profile.types";
-import type {
-  CandidateProfile,
-  ProfileDocument,
-} from "./profile.types";
+import type { CandidateProfile, ProfileDocument } from "./profile.types";
 
 const DATABASE_NAME = "game-industry-outreach-private";
 const DATABASE_VERSION = 1;
 const STORE_NAME = "candidate-profile";
 const PRIMARY_RECORD_KEY = "primary";
 
-type ProfileRecord = {
-  id: string;
-  profile: CandidateProfile;
-};
+type ProfileRecord = { id: string; profile: CandidateProfile };
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -48,9 +42,8 @@ function documentValue(value: unknown): ProfileDocument | null {
     typeof dataBase64 !== "string" ||
     dataBase64.length > Math.ceil(MAX_PROFILE_DOCUMENT_BYTES / 3) * 4 + 8 ||
     !/^[A-Za-z0-9+/]*={0,2}$/.test(dataBase64)
-  ) {
-    return null;
-  }
+  ) return null;
+
   return {
     name: name.slice(0, 255),
     mimeType: mimeType.slice(0, 150),
@@ -60,15 +53,12 @@ function documentValue(value: unknown): ProfileDocument | null {
   };
 }
 
-function recordArray<T extends Record<string, unknown>>(
-  value: unknown,
-  fields: string[],
-): T[] {
+function recordArray(value: unknown, fields: string[]): Record<string, string>[] {
   if (!Array.isArray(value)) return [];
   return value.slice(0, 200).filter(isRecord).map((entry) => {
-    const output: Record<string, unknown> = {};
+    const output: Record<string, string> = {};
     for (const field of fields) output[field] = stringValue(entry[field]);
-    return output as T;
+    return output;
   });
 }
 
@@ -77,13 +67,8 @@ export function createEmptyProfile(): CandidateProfile {
     schemaVersion: PROFILE_SCHEMA_VERSION,
     updatedAt: null,
     personal: {
-      fullName: "",
-      email: "",
-      phone: "",
-      currentLocation: "",
-      linkedinUrl: "",
-      portfolioUrl: "",
-      otherLink: "",
+      fullName: "", email: "", phone: "", currentLocation: "",
+      linkedinUrl: "", portfolioUrl: "", otherLink: "",
     },
     professionalSummary: "",
     experience: [],
@@ -120,13 +105,13 @@ export function normalizeCandidateProfile(value: unknown): CandidateProfile {
   const experience = recordArray(value.experience, [
     "id", "employer", "title", "location", "startDate", "endDate",
     "responsibilities", "achievements",
-  ]);
+  ]) as unknown as CandidateProfile["experience"];
   const education = recordArray(value.education, [
     "id", "qualification", "institution", "startDate", "endDate", "details",
-  ]);
+  ]) as unknown as CandidateProfile["education"];
   const projects = recordArray(value.projects, [
     "id", "name", "kind", "url", "startDate", "endDate", "description",
-  ]);
+  ]) as unknown as CandidateProfile["projects"];
   const skills = recordArray(value.skills, [
     "id", "name", "category", "evidence", "evidenceDetails", "evidenceSource",
   ]).map((skill) => ({
@@ -137,7 +122,7 @@ export function normalizeCandidateProfile(value: unknown): CandidateProfile {
         ? skill.evidence
         : "not_evidenced"
     ),
-  }));
+  })) as unknown as CandidateProfile["skills"];
 
   return {
     schemaVersion: PROFILE_SCHEMA_VERSION,
@@ -155,7 +140,7 @@ export function normalizeCandidateProfile(value: unknown): CandidateProfile {
     experience,
     education,
     projects,
-    skills: skills as CandidateProfile["skills"],
+    skills,
     materials: {
       masterResume: documentValue(materials.masterResume),
       resumeText: stringValue(materials.resumeText),
@@ -266,13 +251,18 @@ export async function readProfileBackup(file: File): Promise<CandidateProfile> {
   ) {
     throw new Error("This is not a supported Candidate Profile backup.");
   }
-  const profile = normalizeCandidateProfile(backup.profile);
-  const declaredDocuments = [backup.profile.materials?.masterResume, backup.profile.materials?.motivationDocument]
-    .filter((item) => item !== null && item !== undefined);
-  const storedDocuments = [profile.materials.masterResume, profile.materials.motivationDocument]
-    .filter((item) => item !== null);
+  const importedMaterials = isRecord(backup.profile.materials) ? backup.profile.materials : {};
+  const declaredDocuments = [
+    importedMaterials.masterResume,
+    importedMaterials.motivationDocument,
+  ].filter((item) => item !== null && item !== undefined);
+  const normalized = normalizeCandidateProfile(backup.profile);
+  const storedDocuments = [
+    normalized.materials.masterResume,
+    normalized.materials.motivationDocument,
+  ].filter((item) => item !== null);
   if (declaredDocuments.length !== storedDocuments.length) {
     throw new Error("The backup contains an invalid or unsupported document. No profile data was imported.");
   }
-  return profile;
+  return normalized;
 }
