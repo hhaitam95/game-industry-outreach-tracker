@@ -240,7 +240,8 @@ export default function App() {
             applications={applications}
             onSave={(studio, location) => trackStudio(studio, "saved", location)}
           />
-        ) : page === "applications" ? (
+        ) : null}
+        {page === "applications" ? (
           <ApplicationTracker
             initialTab={trackerInitialTab}
             applications={applications}
@@ -249,9 +250,10 @@ export default function App() {
             onRemove={removeApplication}
             onOpenDirectory={() => setPage("studios")}
           />
-        ) : (
+        ) : null}
+        <div className="profile-route" style={{ display: page === "profile" ? "block" : "none" }}>
           <CandidateProfile />
-        )}
+        </div>
         {storageError ? (
           <p className="storage-warning" role="alert">
             Your browser could not save changes to local storage. Check your browser's site
