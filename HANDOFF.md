@@ -5,8 +5,8 @@ Game Industry Outreach Tracker is a two-page static application: a global direct
 ## Current UI feature checkpoint
 
 - PR #78 is merged: `main` now includes the poster gallery with Steam-first artwork and verified IGDB fallback support.
-- Data-only PR [#79](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/79) contains 287 IGDB-enriched game entries across 133 studios (280 distinct IGDB games). It has 280 exact matches from 454 queried title groups; ambiguous, not-found and coverless titles remain unresolved. All 20 unit tests, data validation and production build passed before PR creation.
-- PR #79 was created through the GitHub connection because the repository's Actions token is not permitted to create pull requests. Future enrichment workflow runs can still push their data branch, which can then be published as a review PR.
+- Data-only PR [#79](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/79) was merged. It adds 287 IGDB-enriched game entries across 133 studios (280 distinct IGDB games), from 454 queried title groups. Ambiguous, not-found and coverless titles remain unresolved. All 20 tests, data validation, production build and browser acceptance passed before merge.
+- PR #79 was created through the GitHub connection because the repository's Actions token is not permitted to create pull requests. Future enrichment runs can still push their data branch; the connector can publish the review PR.
 - The application-workflow UI branch adds private tracker notes, notes search, visible applied dates, and both official studio and application links. Notes remain in browser localStorage; no account/server sync or network write was introduced.
 - The latest discovery retry [41295984769](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41295984769) completed successfully with 8 route rechecks and no newly verified studios. Hourly discovery continues from the separately saved checkpoint.
 

@@ -20,9 +20,9 @@ Exclude organisations materially focused on pornography/adult sexual entertainme
 
 - PR #78 is merged into `main`: studio rows use compact game-cover thumbnails and expanded profiles use a poster gallery. Steam remains first choice; IGDB is the fallback when verified metadata is present.
 - IGDB enrichment run [41295984736](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41295984736) queried 454 unique titles: 280 exact, unambiguous matches with cover art; 43 ambiguous, 125 not found and 6 without cover remain unresolved.
-- The 280 matched games were copied to 287 studio-game profile entries across 133 studios. Data-only PR [#79](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/79) is open; its CI is running. The data is not on `main` until that PR is reviewed and merged.
+- The 280 matched games were copied to 287 studio-game profile entries across 133 studios. Data-only PR [#79](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/79) merged at 2026-11-01 10:22 UTC; the cover metadata is now in `main` and was included in the succeeding Pages deployment.
 - The workflow verified both IGDB Actions secrets without revealing values. Dataset validation, all 20 tests and the production build passed. The workflow token cannot create pull requests in this repository, so the successful data branch was published and PR #79 was opened through the GitHub connection.
-- The application-workflow UI branch adds private editable tracker notes, notes search, a visible applied date, and direct studio/application links. The tracker remains browser-local.
+- UI PR [#80](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/80) adds private editable tracker notes, notes search, a visible applied date, and direct studio/application links. Unit/data/build/privacy checks passed; the first browser acceptance attempt exposed a test-order issue and is being corrected. The tracker remains browser-local.
 - The latest discovery retry [41295984769](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41295984769) completed successfully: 8 source pages and 8 route rechecks, no new candidates and no verified additions. Checkpoint persistence succeeded; hourly discovery continues.
 
 ## Website and public data

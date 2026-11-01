@@ -249,11 +249,7 @@ async function main() {
     let status = page.getByLabel("Status for 4A Games");
     assert.equal(await status.inputValue(), "saved");
 
-    // Move through every tracker status. The Applied transition must require confirmation.
-    await status.selectOption("in_progress");
-    await page.getByRole("tab", { name: /In progress/ }).click();
-    status = page.getByLabel("Status for 4A Games");
-
+    // Editable notes, note search and browser-local persistence.
     const notesButton = trackedRow.getByRole("button", { name: "Edit notes for 4A Games" });
     await notesButton.click();
     const notesInput = page.getByLabel("Application notes · 4A Games");
@@ -268,6 +264,11 @@ async function main() {
     assert.equal(await trackedRow.count(), 1, "The saved studio should remain after reload.");
     await trackedRow.getByRole("button", { name: "Edit notes for 4A Games" }).click();
     assert.equal(await page.getByLabel("Application notes · 4A Games").inputValue(), savedNote, "Application notes should persist after reload.");
+    status = page.getByLabel("Status for 4A Games");
+
+    // Move through every tracker status. The Applied transition must require confirmation.
+    await status.selectOption("in_progress");
+    await page.getByRole("tab", { name: /In progress/ }).click();
     status = page.getByLabel("Status for 4A Games");
 
     const cancelledApply = await performWithDialog(page, () => status.selectOption("applied"), false);
