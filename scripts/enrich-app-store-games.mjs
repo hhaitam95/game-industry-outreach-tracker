@@ -170,7 +170,6 @@ function collectMissingArtworkGames(profiles) {
     for (const game of profile.popularGames || []) {
       if (!isPubliclyReleasedGame(game)) continue;
       if (
-        game.appId ||
         game.igdbCoverId ||
         game.officialArtworkUrl ||
         game.steamHeaderUrl ||
@@ -216,7 +215,6 @@ async function main() {
     ambiguous: 0,
     missingAssets: 0,
     requestFailures: 0,
-    skippedUnannouncedOrUnreleased: 0,
   };
   const unresolved = [];
   const failures = [];
