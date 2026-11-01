@@ -20,9 +20,9 @@ The discovery directory must remain complete and unaffected by the candidate's r
 
 ## Immediate roadmap
 
-1. **Candidate Profile foundation — implemented on PR #95 branch, not yet merged/deployed.** Includes structured personal/professional records, skill evidence, master materials, preferences, separate browser-local IndexedDB storage and JSON backup/restore. PDF/DOCX originals are preserved; attachment text extraction is not included.
+1. **Candidate Profile foundation — merged in PR #95 and deployed.** Includes structured personal/professional records, skill evidence, master materials, preferences, separate browser-local IndexedDB storage and JSON backup/restore. PDF/DOCX originals are preserved; attachment text extraction is not included.
 
-2. Matching engine — transparent qualitative assessment; explicit/inferred/unknown employer requirements; evidence, gaps and manual overrides.
+2. **Matching foundation — implemented on the current feature branch.** Computes qualitative professional relevance, route freshness/accessibility and personal priority separately in the browser. It maps saved skill evidence to employer-stated discipline scope, leaves unspecified disciplines as unknown/potential, and shows the route source and check date. Assessments are recalculated rather than persisted; the Application Queue, manual overrides and deeper requirements intelligence remain later phases.
 3. Application Queue — private user-selected records referencing canonical studio IDs.
 4. Requirements intelligence — source-linked route instructions, document/form requirements, discipline, language, location and eligibility caveats.
 5. Application Workspace — studio context, route, requirements, skill mapping, approved materials, checklist, notes and progress.
