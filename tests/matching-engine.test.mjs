@@ -225,6 +225,7 @@ test("user-confirmed gaps are not treated as supporting evidence", () => {
   );
   assert.equal(result.relevance, "potential");
   assert.equal(result.evidence.length, 0);
+  assert.ok(result.gaps.includes("User-confirmed gap: Python"));
 });
 
 test("sorting can prioritize professional relevance or personal priority without merging labels", () => {
