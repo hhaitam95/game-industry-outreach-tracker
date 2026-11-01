@@ -476,6 +476,8 @@ async function main() {
     await asoboRow.getByRole("button", { name: /Asobo Studio/ }).click();
     await asoboDetails.waitFor({ state: "detached" });
 
+    // Search must find studios across directory pages, not only within the currently visible page.
+    await page.getByLabel("Search", { exact: true }).fill("Hugecalf Studios");
     // IGDB artwork wins over Steam when both are present (the Stuck Together example).
     const hugecalfRow = rows.filter({ hasText: "Hugecalf Studios" });
     await hugecalfRow.getByRole("button", { name: /Hugecalf Studios/ }).click();
@@ -493,6 +495,7 @@ async function main() {
     assert.equal(await stuckTogetherPoster.getAttribute("data-release-year"), "2025");
     await hugecalfRow.getByRole("button", { name: /Hugecalf Studios/ }).click();
     await hugecalfDetails.waitFor({ state: "detached" });
+    await page.getByLabel("Search", { exact: true }).fill("");
 
     // A landscape Steam header must receive a landscape-sized frame in both the table and expanded gallery.
     const twentyTwoCansRow = rows.filter({ hasText: "22cans" });
