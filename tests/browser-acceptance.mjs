@@ -290,6 +290,11 @@ async function main() {
       ["Studio", "Studio location", "Notable work", "Studio type", "Tracker"],
       "The main table should keep only general studio information and the tracker action.",
     );
+    assert.equal(
+      await rows.first().locator("td").count(),
+      5,
+      "Every studio data row should have exactly five cells to match the simplified header.",
+    );
     await page.getByLabel("Show only studios added in the last 24 hours").check();
     assert.equal(await rows.count(), 5, "Only the five recently published closeout studios should appear.");
     assert.equal(await page.getByText("NEW", { exact: true }).count(), 5);
