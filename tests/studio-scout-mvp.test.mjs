@@ -18,7 +18,7 @@ async function withViteModules(callback) {
   }
 }
 
-test("studio directory renders the small studio table and working filter controls", async () => {
+test("studio directory renders the compact five-column table and working filter controls", async () => {
   await withViteModules(async (server) => {
     const module = await server.ssrLoadModule("/src/components/StudioDirectory.tsx");
     const markup = renderToStaticMarkup(
@@ -33,25 +33,24 @@ test("studio directory renders the small studio table and working filter control
     assert.match(markup, /Continent/);
     assert.match(markup, /Country/);
     assert.match(markup, /Work model/);
-    assert.match(markup, /Application route/);
     assert.match(markup, /Notable work/);
     assert.match(markup, /Sort by Studio/);
     assert.match(markup, /aria-controls="studio-details-4a-games"/);
     assert.match(markup, /Metro Exodus/);
     assert.match(markup, /popular-game-cover/);
-    assert.match(markup, /library_600x900/);
+    assert.match(markup, /data-artwork-source="IGDB"/);
     assert.match(markup, /data-game-title="Metro Exodus"/);
     assert.match(markup, /Bossa Studios/);
-    assert.match(markup, /Application/);
-    assert.match(markup, /Website/);
+    assert.match(markup, /<th scope="col">Tracker<\/th>/);
+    assert.doesNotMatch(markup, /class="link-cell"|<th[^>]*>Links<\/th>/);
     assert.match(markup, /Click a row for studio details/);
   });
 });
 
-test("game posters prefer Steam and fall back to a verified IGDB cover", async () => {
+test("game posters prefer IGDB covers and retain a verified Steam destination", async () => {
   await withViteModules(async (server) => {
     const module = await server.ssrLoadModule("/src/components/GamePosters.tsx");
-    const steamFirst = renderToStaticMarkup(
+    const igdbFirst = renderToStaticMarkup(
       React.createElement(module.default, {
         game: {
           title: "Example Game",
@@ -62,9 +61,10 @@ test("game posters prefer Steam and fall back to a verified IGDB cover", async (
         },
       }),
     );
-    assert.match(steamFirst, /data-artwork-source="Steam"/);
-    assert.match(steamFirst, /shared\.akamai\.steamstatic\.com/);
-    assert.match(steamFirst, /Steam · IGDB fallback/);
+    assert.match(igdbFirst, /data-artwork-source="IGDB"/);
+    assert.match(igdbFirst, /images\.igdb\.com/);
+    assert.match(igdbFirst, /href="https:\/\/store\.steampowered\.com\/app\/12345\//);
+    assert.doesNotMatch(igdbFirst, /Steam · IGDB fallback/);
 
     const igdbOnly = renderToStaticMarkup(
       React.createElement(module.default, {
@@ -79,7 +79,7 @@ test("game posters prefer Steam and fall back to a verified IGDB cover", async (
     assert.match(igdbOnly, /data-artwork-source="IGDB"/);
     assert.ok(igdbOnly.includes("https://images.igdb.com/igdb/image/upload/t_cover_big/cover-hash.jpg"));
     assert.ok(igdbOnly.includes('href="https://www.igdb.com/games/example-game"'));
-    assert.match(igdbOnly, /IGDB cover/);
+    assert.doesNotMatch(igdbOnly, /IGDB cover|Steam artwork|Official artwork/);
   });
 });
 
