@@ -164,7 +164,7 @@ async function main() {
       buffer: resumeFixture,
     });
     await page.getByText("candidate-resume.pdf").waitFor();
-    await page.getByRole("button", { name: "Save profile" }).click();
+    await page.locator(".profile-actions").getByRole("button", { name: "Save profile" }).click();
     await page.getByRole("button", { name: "Profile saved" }).waitFor();
 
     const savedCandidateProfile = await page.evaluate(() => new Promise((resolve, reject) => {
