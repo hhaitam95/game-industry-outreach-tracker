@@ -43,7 +43,7 @@ function CompanyMark({ brand }: { brand: ParentCompanyBrand }) {
     <a className="company-mark" href={brand.url} target="_blank" rel="noopener noreferrer"
       title={"Visit " + brand.name + " official website"} aria-label={"Visit " + brand.name + " official website"}>
       {!failed ? (
-        <img src={src} alt="" loading="lazy" decoding="async" onError={() => setFailed(true)} />
+        <img src={src} alt={brand.name} loading="lazy" decoding="async" onError={() => setFailed(true)} />
       ) : <span aria-hidden="true">{brand.name.slice(0, 1)}</span>}
     </a>
   );
