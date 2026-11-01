@@ -56,7 +56,7 @@ function GameCoverArtwork({ game, compact }: { game: PopularGame; compact: boole
 
 function gameYearLabel(game: PopularGame): string | null {
   if (game.stage?.toLowerCase() === "in development") return "In development";
-  return game.releaseYear ? "· " + game.releaseYear : null;
+  return game.releaseYear ? String(game.releaseYear) : null;
 }
 
 function PosterContents({ game }: { game: PopularGame }) {
@@ -117,11 +117,7 @@ export function GamePosterStrip({ games }: { games: PopularGame[] }) {
         const destination = gameDestination(game);
         const linkLabel = gameLinkLabel(game);
         const yearLabel = gameYearLabel(game);
-        const content = (
-          <span className="popular-game-cover-art">
-            <GameCoverArtwork game={game} compact />
-          </span>
-        );
+        const content = <GameCoverArtwork game={game} compact />;
         const caption = (
           <span className="popular-game-caption">
             <strong title={game.title}>{game.title}</strong>
