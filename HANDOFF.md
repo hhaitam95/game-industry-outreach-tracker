@@ -20,7 +20,8 @@ The discovery directory must remain complete and unaffected by the candidate's r
 
 ## Immediate roadmap
 
-1. Candidate Profile foundation — structured experience, education, projects/training, evidence-backed skills, master resume, master motivation letter and preferences.
+1. **Candidate Profile foundation — implemented on PR #95 branch, not yet merged/deployed.** Includes structured personal/professional records, skill evidence, master materials, preferences, separate browser-local IndexedDB storage and JSON backup/restore. PDF/DOCX originals are preserved; attachment text extraction is not included.
+
 2. Matching engine — transparent qualitative assessment; explicit/inferred/unknown employer requirements; evidence, gaps and manual overrides.
 3. Application Queue — private user-selected records referencing canonical studio IDs.
 4. Requirements intelligence — source-linked route instructions, document/form requirements, discipline, language, location and eligibility caveats.
