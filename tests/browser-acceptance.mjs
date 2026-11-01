@@ -78,8 +78,29 @@ async function main() {
       });
     });
     const posterFixture = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC", "base64");
+    const landscapeFixture = Buffer.from(
+      '<svg xmlns="http://www.w3.org/2000/svg" width="460" height="215" viewBox="0 0 460 215"><rect width="460" height="215" fill="#345"/><text x="230" y="118" fill="white" text-anchor="middle" font-size="24">Landscape artwork</text></svg>',
+    );
     await page.route("https://shared.akamai.steamstatic.com/**", async route => {
+      if (route.request().url().includes("/steam/apps/3544920/library_600x900")) {
+        await route.fulfill({ status: 404 });
+        return;
+      }
       await route.fulfill({ status: 200, contentType: "image/png", body: posterFixture });
+    });
+    await page.route("https://cdn.cloudflare.steamstatic.com/**", async route => {
+      if (route.request().url().includes("/steam/apps/3544920/library_600x900")) {
+        await route.fulfill({ status: 404 });
+        return;
+      }
+      await route.fulfill({
+        status: 200,
+        contentType: route.request().url().endsWith("/header.jpg") ? "image/svg+xml" : "image/png",
+        body: route.request().url().endsWith("/header.jpg") ? landscapeFixture : posterFixture,
+      });
+    });
+    await page.route("https://shared.fastly.steamstatic.com/**", async route => {
+      await route.fulfill({ status: 200, contentType: "image/svg+xml", body: landscapeFixture });
     });
     await page.addInitScript(() => {
       if (!localStorage.getItem("studio-outreach-theme-v1")) {
@@ -221,6 +242,40 @@ async function main() {
     assert.match(await fourAGamesDetails.textContent(), /Route last checked:/);
     await fourAGamesRow.getByRole("button", { name: /4A Games/ }).click();
     await fourAGamesDetails.waitFor({ state: "detached" });
+
+    // A landscape Steam header must receive a landscape-sized frame in both the table and expanded gallery.
+    const twentyTwoCansRow = rows.filter({ hasText: "22cans" });
+    await twentyTwoCansRow.getByRole("button", { name: /22cans/ }).click();
+    const trailTableCover = twentyTwoCansRow.locator('.popular-game-cover[data-game-title="The Trail"]');
+    const trailTableImage = trailTableCover.locator('img[data-artwork-layout="landscape"]');
+    await trailTableImage.waitFor();
+    assert.match(
+      await trailTableImage.getAttribute("src") || "",
+      /shared\.fastly\.steamstatic\.com\/store_item_assets\/steam\/apps\/3544920\/.+\/header\.jpg/,
+      "The Trail should use its verified wide Steam header after portrait artwork fails.",
+    );
+    const compactRatio = await trailTableCover.evaluate(element => {
+      const rect = element.getBoundingClientRect();
+      return rect.width / rect.height;
+    });
+    assert.ok(compactRatio > 1.8, "The compact table thumbnail should expand horizontally for landscape artwork.");
+
+    const twentyTwoCansButton = twentyTwoCansRow.getByRole("button", { name: /22cans/ });
+    const twentyTwoCansDetails = page.locator("#studio-details-22cans");
+    await twentyTwoCansButton.click();
+    const trailPoster = page.locator('.game-poster-grid .game-poster-card[data-game-title="The Trail"]');
+    const trailPosterImage = trailPoster.locator('img[data-artwork-layout="landscape"]');
+    await trailPosterImage.waitFor();
+    const posterRatio = await trailPoster.locator(".game-poster-art").evaluate(element => {
+      const rect = element.getBoundingClientRect();
+      return rect.width / rect.height;
+    });
+    assert.ok(
+      posterRatio > 1.8 && posterRatio < 2.3,
+      "The expanded poster frame itself should be landscape-shaped, rather than a portrait frame containing a wide image.",
+    );
+    await twentyTwoCansButton.click();
+    await twentyTwoCansDetails.waitFor({ state: "detached" });
 
     // Official route links must remain HTTPS and open safely in a new tab.
     const firstApplicationLink = page.locator(".studio-table tbody tr").first().getByRole("link", { name: "Application" });
