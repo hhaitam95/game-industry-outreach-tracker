@@ -3,11 +3,12 @@ import type { CandidateProfile } from "../profile/profile.types";
 import {
   loadCandidateProfile,
 } from "../profile/profile-storage";
-import type { StudioMatchAssessment } from "../matching/matching-engine.mjs";
 import {
   assessStudioMatch,
   sortStudioMatches,
 } from "../matching/matching-engine.mjs";
+
+type StudioMatchAssessment = ReturnType<typeof assessStudioMatch>;
 import studiosJson from "../data/speculative-route-directory.json" with { type: "json" };
 import profilesJson from "../data/studio-profiles.json" with { type: "json" };
 import { continentsForLocation } from "./location";
