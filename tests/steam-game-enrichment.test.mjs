@@ -1,8 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  isValidSteamArtworkUrl,
   normalizeDeveloperName,
   normalizeGameTitle,
+  selectExactSteamArtwork,
   selectExactSteamMatch,
 } from "../scripts/enrich-steam-games.mjs";
 
@@ -58,4 +60,71 @@ test("rejects non-game Steam items and title variants", () => {
     selectExactSteamMatch("KARDS", "1939 Games", { items: [{ id: 20, name: "KARDS - The WW2 Card Game" }] }, {}).status,
     "not_found",
   );
+});
+
+test("accepts a Steam app-details header image only for an exact game title", () => {
+  const result = selectExactSteamArtwork("The Trail", {
+    success: true,
+    data: {
+      type: "game",
+      name: "The Trail",
+      header_image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3544920/hash/header.jpg?t=1",
+      capsule_image: "https://cdn.cloudflare.steamstatic.com/steam/apps/3544920/capsule_231x87.jpg",
+    },
+  });
+  assert.deepEqual(result, {
+    status: "matched",
+    steamHeaderUrl: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3544920/hash/header.jpg?t=1",
+    steamCapsuleUrl: "https://cdn.cloudflare.steamstatic.com/steam/apps/3544920/capsule_231x87.jpg",
+  });
+});
+
+test("does not attach an image from a title mismatch or a non-game Steam item", () => {
+  assert.equal(
+    selectExactSteamArtwork("The Trail", {
+      success: true,
+      data: { type: "game", name: "Another Trail", header_image: "https://cdn.cloudflare.steamstatic.com/steam/apps/1/header.jpg" },
+    }).status,
+    "title_mismatch",
+  );
+  assert.equal(
+    selectExactSteamArtwork("The Trail", {
+      success: true,
+      data: { type: "dlc", name: "The Trail", header_image: "https://cdn.cloudflare.steamstatic.com/steam/apps/1/header.jpg" },
+    }).status,
+    "not_a_game",
+  );
+});
+
+test("rejects non-HTTPS and non-Steam artwork hosts", () => {
+  assert.equal(isValidSteamArtworkUrl("http://cdn.cloudflare.steamstatic.com/steam/apps/1/header.jpg"), false);
+  assert.equal(isValidSteamArtworkUrl("https://images.example.com/header.jpg"), false);
+  assert.equal(isValidSteamArtworkUrl("https://user:pass@cdn.cloudflare.steamstatic.com/steam/apps/1/header.jpg"), false);
+  assert.equal(isValidSteamArtworkUrl("https://cdn.cloudflare.steamstatic.com/steam/apps/1/header.jpg"), true);
+});
+
+test("adds Steam header and capsule artwork metadata when a new app ID is matched", () => {
+  const result = selectExactSteamMatch(
+    "The Trail",
+    "The Trail Team",
+    { items: [{ id: 3544920, name: "The Trail" }] },
+    {
+      "3544920": {
+        success: true,
+        data: {
+          type: "game",
+          name: "The Trail",
+          developers: ["The Trail Team"],
+          header_image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3544920/hash/header.jpg",
+          capsule_image: "https://cdn.cloudflare.steamstatic.com/steam/apps/3544920/capsule_231x87.jpg",
+        },
+      },
+    },
+  );
+  assert.deepEqual(result, {
+    status: "matched",
+    appId: 3544920,
+    steamHeaderUrl: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3544920/hash/header.jpg",
+    steamCapsuleUrl: "https://cdn.cloudflare.steamstatic.com/steam/apps/3544920/capsule_231x87.jpg",
+  });
 });
