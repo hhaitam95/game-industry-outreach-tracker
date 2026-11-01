@@ -207,6 +207,13 @@ async function main() {
         transaction.onerror = () => reject(transaction.error);
       };
     }));
+    // Reload after clearing IndexedDB so the import test cannot pass from stale React state.
+    await page.reload({ waitUntil: "networkidle" });
+    await page.getByRole("button", { name: "My profile" }).click();
+    await page.getByRole("heading", { name: "My profile" }).waitFor();
+    assert.equal(await page.getByLabel("Full name").inputValue(), "", "The profile should be empty after its IndexedDB record is removed.");
+    assert.equal(await page.getByText("candidate-resume.pdf").count(), 0, "The removed resume should no longer appear.");
+
     const backupPath = await profileBackupDownload.path();
     const importInput = page.locator('input[type="file"][accept=".json,application/json"]');
     const importedDialog = await performWithDialog(
