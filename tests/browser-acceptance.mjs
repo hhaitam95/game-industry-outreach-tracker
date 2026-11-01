@@ -562,22 +562,22 @@ async function main() {
     await ocellusDetails.waitFor({ state: "detached" });
 
     // App Store art is a final fallback when earlier cover sources are absent.
-    const aboutFunRow = rows.filter({ hasText: "About Fun" });
-    await aboutFunRow.getByRole("button", { name: /About Fun/ }).click();
-    const aboutFunDetails = page.locator("#studio-details-about-fun");
-    await aboutFunDetails.waitFor();
-    const tinyMinersPoster = aboutFunDetails.locator('.game-poster-card[data-game-title="Tiny Miners"]').first();
-    const tinyMinersImage = tinyMinersPoster.locator('img[data-artwork-source="App Store"][data-artwork-layout="square"]');
-    await tinyMinersImage.waitFor();
-    assert.ok((await tinyMinersImage.getAttribute("src") || "").includes("mzstatic.com/image/thumb/"));
-    assert.equal(await tinyMinersPoster.getAttribute("href"), "https://apps.apple.com/us/app/tiny-miners/id920054061?uo=4");
-    const tinyMinersRatio = await tinyMinersPoster.locator(".game-poster-art").evaluate(element => {
+    const halfbrickRow = rows.filter({ hasText: "Halfbrick Studios" });
+    await halfbrickRow.getByRole("button", { name: /Halfbrick Studios/ }).click();
+    const halfbrickDetails = page.locator("#studio-details-halfbrick-studios");
+    await halfbrickDetails.waitFor();
+    const fruitNinjaPoster = halfbrickDetails.locator('.game-poster-card[data-game-title="Fruit Ninja"]').first();
+    const fruitNinjaImage = fruitNinjaPoster.locator('img[data-artwork-source="App Store"][data-artwork-layout="square"]');
+    await fruitNinjaImage.waitFor();
+    assert.ok((await fruitNinjaImage.getAttribute("src") || "").includes("mzstatic.com/image/thumb/"));
+    assert.equal(await fruitNinjaPoster.getAttribute("href"), "https://apps.apple.com/us/app/fruit-ninja/id403858572?uo=4");
+    const fruitNinjaRatio = await fruitNinjaPoster.locator(".game-poster-art").evaluate(element => {
       const rect = element.getBoundingClientRect();
       return rect.width / rect.height;
     });
-    assert.ok(tinyMinersRatio > 0.9 && tinyMinersRatio < 1.1);
-    await aboutFunRow.getByRole("button", { name: /About Fun/ }).click();
-    await aboutFunDetails.waitFor({ state: "detached" });
+    assert.ok(fruitNinjaRatio > 0.9 && fruitNinjaRatio < 1.1);
+    await halfbrickRow.getByRole("button", { name: /Halfbrick Studios/ }).click();
+    await halfbrickDetails.waitFor({ state: "detached" });
 
     assert.equal(
       await page.locator('.game-poster-card[href*="store.steampowered.com/search/"], .popular-game-cover[href*="store.steampowered.com/search/"]').count(),
