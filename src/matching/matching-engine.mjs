@@ -187,7 +187,7 @@ function skillSupportsDiscipline(skillName, discipline) {
  * @returns {skill is CandidateProfile["skills"][number] & { evidence: "demonstrated" | "transferable" | "learning_exposure" }}
  */
 function isUsableEvidence(skill) {
-  return skill.name.trim() &&
+  return Boolean(skill.name.trim()) &&
     ["demonstrated", "transferable", "learning_exposure"].includes(skill.evidence);
 }
 
@@ -227,7 +227,7 @@ function assessRelevance(profile, studio) {
 
   /** @type {EvidenceItem[]} */
   const evidence = [
-    ...matchedSkills.map((skill) => ({
+    ...matchedSkills.map((skill) => /** @type {EvidenceItem} */ ({
       name: skill.name,
       evidence: skill.evidence,
       details: skill.evidenceDetails,
@@ -237,14 +237,14 @@ function assessRelevance(profile, studio) {
     ...contextualSkills
       .filter((skill) => !matchedSkills.some((item) => item.id === skill.id))
       .slice(0, 5)
-      .map((skill) => ({
+      .map((skill) => /** @type {EvidenceItem} */ ({
         name: skill.name,
         evidence: skill.evidence,
         details: skill.evidenceDetails,
         source: skill.evidenceSource,
         relationship: "supporting_context",
       })),
-    ...matchedExperience.map((item) => ({
+    ...matchedExperience.map((item) => /** @type {EvidenceItem} */ ({
       name: item.title,
       evidence: "transferable",
       details: item.responsibilities || item.achievements,
@@ -386,6 +386,7 @@ function regionMatches(regions, studio) {
   const country = normalize(studio.country);
   const countryCode = normalize(studio.countryCode);
   const continents = (studio.continents || []).map(normalize);
+  /** @type {Record<string, string>} */
   /** @type {Record<string, string>} */
   const countryAliases = {
     uk: "united kingdom",
