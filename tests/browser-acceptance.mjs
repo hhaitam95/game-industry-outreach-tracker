@@ -81,8 +81,13 @@ async function main() {
     const landscapeFixture = Buffer.from(
       '<svg xmlns="http://www.w3.org/2000/svg" width="460" height="215" viewBox="0 0 460 215"><rect width="460" height="215" fill="#345"/><text x="230" y="118" fill="white" text-anchor="middle" font-size="24">Landscape artwork</text></svg>',
     );
-    await page.route(/steamstatic/, async route => {
-      const url = new URL(route.request().url());
+    await page.route("**/*", async route => {
+      const requestUrl = route.request().url();
+      if (!requestUrl.includes("steamstatic")) {
+        await route.continue();
+        return;
+      }
+      const url = new URL(requestUrl);
       const isTrailPortrait = url.pathname.includes("/steam/apps/3544920/") && url.pathname.includes("library_600x900");
       if (isTrailPortrait) {
         await route.fulfill({ status: 404 });
