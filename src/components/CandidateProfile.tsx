@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import type { ChangeEvent, ReactNode } from "react";
 import {
   createEmptyProfile,
@@ -96,7 +96,7 @@ function downloadDocument(document: ProfileDocument): void {
   anchor.href = url;
   anchor.download = document.name;
   anchor.click();
-  URL.revokeObjectURL(url);
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 function downloadBackup(profile: CandidateProfile): void {
@@ -127,7 +127,8 @@ function Field({
   rows?: number;
   hint?: string;
 }) {
-  const id = "profile-field-" + label.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  const reactId = useId();
+  const id = "profile-field-" + reactId.replace(/:/g, "");
   return (
     <label className="form-field profile-field" htmlFor={id}>
       <span>{label}</span>
@@ -228,9 +229,9 @@ export default function CandidateProfile() {
     setError("");
   }
 
-  function updateMaterials(
-    key: keyof CandidateProfile["materials"],
-    value: CandidateProfile["materials"][typeof key],
+  function updateMaterials<K extends keyof CandidateProfile["materials"]>(
+    key: K,
+    value: CandidateProfile["materials"][K],
   ) {
     setProfile((current) => ({
       ...current,
@@ -240,9 +241,9 @@ export default function CandidateProfile() {
     setError("");
   }
 
-  function updatePreference(
-    key: keyof CandidateProfile["preferences"],
-    value: CandidateProfile["preferences"][typeof key],
+  function updatePreference<K extends keyof CandidateProfile["preferences"]>(
+    key: K,
+    value: CandidateProfile["preferences"][K],
   ) {
     setProfile((current) => ({
       ...current,
@@ -262,7 +263,7 @@ export default function CandidateProfile() {
       [key]: current[key].map((item) =>
         item.id === id ? { ...item, ...patch } : item,
       ),
-    }));
+    } as CandidateProfile));
     setDirty(true);
     setError("");
   }
@@ -271,7 +272,7 @@ export default function CandidateProfile() {
     setProfile((current) => ({
       ...current,
       [key]: current[key].filter((item) => item.id !== id),
-    }));
+    } as CandidateProfile));
     setDirty(true);
     setError("");
   }
@@ -441,8 +442,8 @@ export default function CandidateProfile() {
                 <Field label="Employer" value={item.employer} onChange={(value) => updateCollectionItem("experience", item.id, { employer: value })} />
                 <Field label="Exact job title" value={item.title} onChange={(value) => updateCollectionItem("experience", item.id, { title: value })} />
                 <Field label="Location (optional)" value={item.location} onChange={(value) => updateCollectionItem("experience", item.id, { location: value })} />
-                <Field label="Start date" type="month" value={item.startDate} onChange={(value) => updateCollectionItem("experience", item.id, { startDate: value })} />
-                <Field label="End date" type="month" value={item.endDate} onChange={(value) => updateCollectionItem("experience", item.id, { endDate: value })} hint="Leave empty for a current position." />
+                <Field label="Start date" placeholder="e.g. Sep 2023" value={item.startDate} onChange={(value) => updateCollectionItem("experience", item.id, { startDate: value })} />
+                <Field label="End date" placeholder="e.g. Present" value={item.endDate} onChange={(value) => updateCollectionItem("experience", item.id, { endDate: value })} hint="Leave empty for a current position." />
                 <Field label="Responsibilities" value={item.responsibilities} onChange={(value) => updateCollectionItem("experience", item.id, { responsibilities: value })} multiline rows={4} />
                 <Field label="Achievements and outcomes" value={item.achievements} onChange={(value) => updateCollectionItem("experience", item.id, { achievements: value })} multiline rows={4} />
               </div>
