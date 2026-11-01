@@ -449,7 +449,7 @@ async function main() {
     assert.equal(await websiteLink.getAttribute("href"), "https://www.4a-games.com.mt/");
     const expandedMetroExodusPoster = fourAGamesDetails.locator('.game-poster-card[data-game-title="Metro Exodus"]');
     assert.equal(await expandedMetroExodusPoster.getAttribute("data-release-year"), "2019");
-    await expandedMetroExodusPoster.getByText("2019", { exact: true }).waitFor();
+    await expandedMetroExodusPoster.getByText("· 2019", { exact: true }).waitFor();
     const metroLastLightPoster = fourAGamesDetails.locator('.game-poster-card[data-game-title="Metro: Last Light Redux"]');
     assert.equal(await metroLastLightPoster.getAttribute("data-release-year"), "2014");
     await fourAGamesRow.getByRole("button", { name: /4A Games/ }).click();
