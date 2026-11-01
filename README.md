@@ -26,6 +26,8 @@ npm run build
 
 The first command is a dry run. The write mode stores only a single exact normalized-title match with a cover image ID. Ambiguous titles, missing records and games without cover art remain unresolved for manual review. Duplicate game titles share one verified match. Never commit the Twitch client secret or an access token.
 
+After this change is merged into the default branch, the same process can be run from **Actions → Enrich game artwork from IGDB**. The workflow checks that both repository Actions secrets are available without printing their values. Leave **write** disabled for a dry run; enable it to save exact matches and open a separate pull request containing only the profile-data changes. A limit of `0` queries all remaining unique titles.
+
 IGDB API access uses Twitch application credentials and does not support browser API requests because doing so would expose the access token. The API is documented as free for non-commercial use under the Twitch Developer Service Agreement; commercial integrations require a partnership. The UI includes a visible IGDB attribution link. Review the [IGDB API documentation](https://api-docs.igdb.com/) and the current Twitch Developer Services Agreement before changing the usage model.
 
 An organisation appears in the public directory only when both conditions are met:

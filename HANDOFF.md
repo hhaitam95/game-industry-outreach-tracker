@@ -8,7 +8,9 @@ Game Industry Outreach Tracker is a two-page static application: a global direct
 - The directory table uses compact game-cover thumbnails; expanded profiles use a poster grid. Steam art is preferred, with a verified IGDB cover fallback if all Steam image variants fail.
 - IGDB metadata fields are `igdbGameId`, `igdbSlug` and `igdbCoverId` on each `popularGames` entry. These are static cached identifiers; the frontend does not call the IGDB API.
 - `scripts/enrich-igdb-covers.mjs` is a manual offline enrichment utility. It requires `IGDB_CLIENT_ID` and `IGDB_CLIENT_SECRET`, defaults to dry-run, and only writes one exact normalized-title match with an available cover. Ambiguous, not-found and coverless results stay unresolved.
-- No IGDB credentials were available during the current update, so the script was added but no bulk IGDB cover IDs have been written yet. Configure the two environment variables locally, run the dry-run first, inspect unresolved titles, then use `--write` and run the full checks.
+- The user reports adding `IGDB_CLIENT_ID` and `IGDB_CLIENT_SECRET` as repository Actions secrets. The connector cannot inspect these secret settings or values; the manual workflow performs a safe presence check when dispatched.
+- `.github/workflows/enrich-igdb-covers.yml` is manual-only (`workflow_dispatch`), defaults to dry-run, validates the profile dataset/tests/build, and opens a separate pull request when write mode adds metadata. It becomes runnable after PR #78 is merged into the default branch.
+- No bulk IGDB cover IDs have yet been written. Run the workflow in dry-run mode first; inspect its summary, then run write mode to create a data-only PR.
 - This artwork use is independent of IGDB's possible future use as a studio-discovery candidate feed; it does not integrate IGDB company discovery into the scraper or alter its access gates.
 
 ## Read this first
