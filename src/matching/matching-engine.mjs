@@ -19,7 +19,7 @@
  * @property {string} [checkedAt]
  * @property {string} [notes]
  * @property {string[]} [continents]
- * @property {{description?: string, companyType?: string[], industryScale?: string, focus?: string[]} [profile]
+ * @property {{description?: string, companyType?: string[], industryScale?: string, focus?: string[]}} [profile]
  * @property {{
  *   routeType?: string,
  *   submissionMethods?: string[],
@@ -374,7 +374,7 @@ function regionMatches(regions, studio) {
     england: "united kingdom",
     us: "united states",
     usa: "united states",
-    u s a: "united states",
+    "u s a": "united states",
   };
   return regions.find((region) => {
     const value = normalize(region);
