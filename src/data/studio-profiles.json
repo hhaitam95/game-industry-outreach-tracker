@@ -521,7 +521,13 @@
     "popularGames": [
       {
         "title": "WarFriends",
-        "appId": null
+        "appId": null,
+        "storeUrl": "https://play.google.com/store/apps/details?id=com.chillingo.warfriends.android.gplay",
+        "storeName": "Google Play",
+        "officialUrl": "https://www.about-fun.com/our-games/warfriends",
+        "officialArtworkUrl": "https://play-lh.googleusercontent.com/BPXBa_JuVu9RKtFEqUkSXkgQnUHYJIqDGX0L_4Z_yMQ2_Lu-y-lCmpAKtsm31-0mPILO55gyh90n3m9Dxb2-hw%3Dw240-h480",
+        "officialArtworkLayout": "square",
+        "officialArtworkSource": "Google Play"
       },
       {
         "title": "Zombie Horde",
@@ -540,11 +546,21 @@
       },
       {
         "title": "Cut and Hack",
-        "appId": null
+        "appId": null,
+        "officialUrl": "https://www.about-fun.com/our-games/cut-and-hack",
+        "officialArtworkUrl": "https://www.about-fun.com/img/game-cut-ico.png",
+        "officialArtworkLayout": "square",
+        "officialArtworkSource": "Official site"
       },
       {
         "title": "Tiny Miners",
-        "appId": null
+        "appId": null,
+        "storeUrl": "https://apps.apple.com/us/app/tiny-miners/id920054061",
+        "storeName": "App Store",
+        "officialUrl": "https://www.about-fun.com/our-games/tiny-miners",
+        "officialArtworkUrl": "https://www.about-fun.com/img/game-miner-ico.png",
+        "officialArtworkLayout": "square",
+        "officialArtworkSource": "Official site"
       }
     ],
     "profileSources": [
@@ -1660,27 +1676,63 @@
         "appId": null,
         "igdbGameId": 87021,
         "igdbSlug": "extreme-car-driving-simulator",
-        "igdbCoverId": "co9sur"
+        "igdbCoverId": "co9sur",
+        "storeUrl": "https://play.google.com/store/apps/details?id=com.aim.racing",
+        "storeName": "Google Play",
+        "officialUrl": "https://axesinmotion.com/extreme-car-driving-simulator/",
+        "officialArtworkUrl": "https://axesinmotion.com/wp-content/uploads/2023/04/ecds-nuevo-3.jpg",
+        "officialArtworkLayout": "landscape",
+        "officialArtworkSource": "Official site"
       },
       {
         "title": "Extreme Motorcycle Simulator",
-        "appId": null
+        "appId": null,
+        "storeUrl": "https://play.google.com/store/apps/details?id=com.aim.racing.motorcycles",
+        "storeName": "Google Play",
+        "officialUrl": "https://axesinmotion.com/extreme-motorcycle-simulator/",
+        "officialArtworkUrl": "https://axesinmotion.com/wp-content/uploads/2026/03/03_airport_-scaled.png",
+        "officialArtworkLayout": "landscape",
+        "officialArtworkSource": "Official site"
       },
       {
         "title": "Extreme Car Driving Stunts",
-        "appId": null
+        "appId": null,
+        "storeUrl": "https://play.google.com/store/apps/details?id=com.aim.racing.stunts",
+        "storeName": "Google Play",
+        "officialUrl": "https://axesinmotion.com/extreme-car-driving-stunts/",
+        "officialArtworkUrl": "https://axesinmotion.com/wp-content/uploads/2026/09/Stunts_Screenshot_05.png",
+        "officialArtworkLayout": "landscape",
+        "officialArtworkSource": "Official site"
       },
       {
         "title": "Highway Moto Rush",
-        "appId": null
+        "appId": null,
+        "storeUrl": "https://play.google.com/store/apps/details?id=com.aim.motorush",
+        "storeName": "Google Play",
+        "officialUrl": "https://axesinmotion.com/highway-moto-rush/",
+        "officialArtworkUrl": "https://axesinmotion.com/wp-content/uploads/2026/09/AB_Real1.png",
+        "officialArtworkLayout": "landscape",
+        "officialArtworkSource": "Official site"
       },
       {
         "title": "Car Stunt Races: Mega Ramps",
-        "appId": null
+        "appId": null,
+        "storeUrl": "https://play.google.com/store/apps/details?id=com.aim.stunts",
+        "storeName": "Google Play",
+        "officialUrl": "https://axesinmotion.com/car-stunt-races-mega-ramps/",
+        "officialArtworkUrl": "https://axesinmotion.com/wp-content/uploads/2023/02/stunt-3.jpg",
+        "officialArtworkLayout": "landscape",
+        "officialArtworkSource": "Official site"
       },
       {
         "title": "Extreme SUV Driving Simulator",
-        "appId": null
+        "appId": null,
+        "storeUrl": "https://play.google.com/store/apps/details?id=com.aim.rallyhum",
+        "storeName": "Google Play",
+        "officialUrl": "https://axesinmotion.com/extreme-suv-driving-simulator/",
+        "officialArtworkUrl": "https://axesinmotion.com/wp-content/uploads/2023/04/SUV-slider-2.jpg",
+        "officialArtworkLayout": "landscape",
+        "officialArtworkSource": "Official site"
       }
     ],
     "profileSources": [
@@ -1931,7 +1983,12 @@
       },
       {
         "title": "The Chase: World Tour",
-        "appId": null
+        "appId": null,
+        "storeUrl": "https://play.google.com/store/apps/details?hl=en_US&id=com.barnstormgames.chasewtus",
+        "storeName": "Google Play",
+        "officialArtworkUrl": "https://play-lh.googleusercontent.com/sluUaYtWhPgN5UduKIOyUjWqzf2nPGT9rSDWvItck8B7eYyXSj8oYhBkxuEttoZX2mzXG6tZAaby1PSW5dDY_Q%3Dw240-h480",
+        "officialArtworkLayout": "square",
+        "officialArtworkSource": "Google Play"
       },
       {
         "title": "The Wheel: Premium Edition",
@@ -5900,7 +5957,13 @@
     "popularGames": [
       {
         "title": "World Hockey Manager",
-        "appId": null
+        "appId": null,
+        "storeUrl": "https://play.google.com/store/apps/details?id=com.goldtowngames.worldhockeymanager",
+        "storeName": "Google Play",
+        "officialUrl": "https://www.worldhockeymanagergame.com",
+        "officialArtworkUrl": "https://play-lh.googleusercontent.com/N0g41gE-N2miYOO3fGbIHbo1ZM5nW3-WxgDWfcT8WDoeFI67XefPbe1j1bk3HIF1xZAPojCTOA4GqGeEE7wE%3Dw240-h480",
+        "officialArtworkLayout": "square",
+        "officialArtworkSource": "Google Play"
       }
     ],
     "profileSources": [
@@ -5975,11 +6038,21 @@
     "popularGames": [
       {
         "title": "Fruit Ninja",
-        "appId": null
+        "appId": null,
+        "storeUrl": "https://play.google.com/store/apps/details?id=com.halfbrick.fruitninjafree",
+        "storeName": "Google Play",
+        "officialArtworkUrl": "https://play-lh.googleusercontent.com/fznhdrBfXgOQx6CBMYServVpkwRBjUKEke9-S6-QfeCnI0ZmipdfO7dvD5K-ae7Fb-8l9O3uIYYR3XXEl8ot1%3Dw240-h480",
+        "officialArtworkLayout": "square",
+        "officialArtworkSource": "Google Play"
       },
       {
         "title": "Jetpack Joyride",
-        "appId": null
+        "appId": null,
+        "storeUrl": "https://play.google.com/store/apps/details?id=com.halfbrick.jetpackjoyride",
+        "storeName": "Google Play",
+        "officialArtworkUrl": "https://play-lh.googleusercontent.com/fo_dS1ZkonPQsBvxnbuIcPU8kuTbmRHsDojJIRsK1zqtlgDHMmzP8hHL2Ex-aapGjYZC7OfsvX92gZNPzxkAwg%3Dw240-h480",
+        "officialArtworkLayout": "square",
+        "officialArtworkSource": "Google Play"
       },
       {
         "title": "Dan the Man",
