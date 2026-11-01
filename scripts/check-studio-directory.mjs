@@ -193,11 +193,11 @@ if (Array.isArray(studios) && profiles && typeof profiles === "object" && !Array
         if (game?.steamHeaderUrl !== undefined) {
           try {
             httpsUrl(game.steamHeaderUrl, studio.name + ".profile.popularGames[" + gameIndex + "].steamHeaderUrl");
+            if (!new URL(game.steamHeaderUrl).hostname.endsWith(".steamstatic.com")) {
+              throw new Error(studio.name + ".profile.popularGames[" + gameIndex + "].steamHeaderUrl must use an official Steam artwork CDN.");
+            }
           } catch (error) {
             errors.push(error.message);
-          }
-          if (typeof game.steamHeaderUrl === "string" && !new URL(game.steamHeaderUrl).hostname.endsWith(".steamstatic.com")) {
-            errors.push(studio.name + ".profile.popularGames[" + gameIndex + "].steamHeaderUrl must use an official Steam artwork CDN.");
           }
         }
         const hasIgdbMetadata = game?.igdbGameId !== undefined || game?.igdbSlug !== undefined || game?.igdbCoverId !== undefined;
