@@ -2577,7 +2577,7 @@
       },
       {
         "title": "Beat Slayer",
-        "appId": null,
+        "appId": 2089830,
         "stage": "Released",
         "igdbGameId": 244838,
         "igdbSlug": "beat-slayer",
@@ -4824,7 +4824,7 @@
     "popularGames": [
       {
         "title": "EVE Online",
-        "appId": null,
+        "appId": 8500,
         "igdbGameId": 2584,
         "igdbSlug": "eve-online",
         "igdbCoverId": "cociug"
@@ -10486,7 +10486,7 @@
     "popularGames": [
       {
         "title": "Faraday Blues",
-        "appId": null,
+        "appId": 5221470,
         "igdbGameId": 418498,
         "igdbSlug": "faraday-blues",
         "igdbCoverId": "cocxgl"
