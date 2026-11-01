@@ -398,8 +398,6 @@ export default function StudioDirectory({
                       )}
                     </td>
                     <td>{types}</td>
-                    <td><span className="plain-tag">{workModelLabels[workType] || "Not stated"}</span></td>
-                    <td>{routeLabels[routeType] || "Open application"}</td>
                     <td>
                       <button
                         className={isTracked ? "btn btn-outline-secondary btn-sm" : "btn btn-primary btn-sm"}
