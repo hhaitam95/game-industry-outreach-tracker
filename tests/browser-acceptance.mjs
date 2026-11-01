@@ -257,9 +257,9 @@ async function main() {
     const matchCount = await matchCards.count();
     assert.ok(matchCount > 100, "The matching page should assess the active public studio routes.");
     assert.ok(await page.getByText(/Professional relevance, application-route readiness and personal priority are assessed separately/).count());
-    await page.getByLabel("Professional relevance").selectOption("potential");
+    await page.locator("#matching-relevance-filter").selectOption("potential");
     assert.ok(await matchCards.count() > 0, "Potential matches should remain visible for general and transferable routes.");
-    await page.getByLabel("Professional relevance").selectOption("all");
+    await page.locator("#matching-relevance-filter").selectOption("all");
     await matchCards.first().getByRole("button", { name: "View assessment details" }).click();
     await page.getByRole("heading", { name: "Application route and instructions" }).waitFor();
     await page.getByText(/Confirm the employer's latest instructions/).waitFor();
