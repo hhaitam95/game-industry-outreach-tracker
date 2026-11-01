@@ -249,8 +249,8 @@ export function createProfileBackup(profile: CandidateProfile): Blob {
 }
 
 export async function readProfileBackup(file: File): Promise<CandidateProfile> {
-  if (file.size > 25 * 1024 * 1024) {
-    throw new Error("The backup file is too large. The maximum supported backup size is 25 MB.");
+  if (file.size > 32 * 1024 * 1024) {
+    throw new Error("The backup file is too large. The maximum supported backup size is 32 MB.");
   }
   let backup: unknown;
   try {
