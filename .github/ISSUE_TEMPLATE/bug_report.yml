@@ -1,0 +1,91 @@
+name: Bug report
+description: Report a reproducible defect or regression in the published site.
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Privacy notice:** This is a public repository and your issue will be public. Do not include your CV/resume, private profile or application details, recruiter correspondence, vault exports, credentials, or screenshots containing personal information. Use synthetic examples and redact screenshots.
+  - type: textarea
+    id: summary
+    attributes:
+      label: What went wrong?
+      description: Describe the visible problem without including private candidate data.
+      placeholder: The page or workflow behaves unexpectedly when...
+    validations:
+      required: true
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Impact
+      description: Choose the highest impact you observed.
+      options:
+        - "Blocker — a core workflow cannot be used"
+        - "High — a major workflow is broken"
+        - "Medium — a workaround exists"
+        - "Low — cosmetic or minor inconvenience"
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Use a small numbered sequence and synthetic data where possible.
+      placeholder: |
+        1. Open...
+        2. Select...
+        3. Observe...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect the app to do?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What actually happened? Include exact error text only if it contains no personal information.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Studio and role exploration
+        - Vault, settings, or backup/restore
+        - Resume parsing, editing, or export
+        - Outreach drafts
+        - Applications and follow-ups
+        - Page layout, navigation, or accessibility
+        - Publishing or loading assets
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: build
+    attributes:
+      label: Build or commit reference
+      description: Optional version/date/commit. Do not enter credentials or personal data.
+      placeholder: v1.0.0 or commit SHA
+    validations:
+      required: false
+  - type: textarea
+    id: environment
+    attributes:
+      label: Browser and device
+      description: Browser name/version and general device/OS, if relevant.
+      placeholder: Chrome on macOS
+    validations:
+      required: false
+  - type: textarea
+    id: sanitized_evidence
+    attributes:
+      label: Sanitized evidence
+      description: Optional. Include only a minimal redacted screenshot or console message. Never attach a CV, vault export, personal record, or unredacted screenshot.
+    validations:
+      required: false
