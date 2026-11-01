@@ -118,6 +118,7 @@ test("adds Steam header and capsule artwork metadata when a new app ID is matche
           type: "game",
           name: "The Trail",
           developers: ["The Trail Team"],
+          release_date: { date: "Jan 1, 2020" },
           header_image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3544920/hash/header.jpg",
           capsule_image: "https://cdn.cloudflare.steamstatic.com/steam/apps/3544920/capsule_231x87.jpg",
         },
@@ -127,6 +128,8 @@ test("adds Steam header and capsule artwork metadata when a new app ID is matche
   assert.deepEqual(result, {
     status: "matched",
     appId: 3544920,
+    releaseYear: 2020,
+    releaseYearSourceUrl: "https://store.steampowered.com/app/3544920/",
     steamHeaderUrl: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3544920/hash/header.jpg",
     steamCapsuleUrl: "https://cdn.cloudflare.steamstatic.com/steam/apps/3544920/capsule_231x87.jpg",
   });

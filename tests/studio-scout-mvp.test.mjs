@@ -41,6 +41,9 @@ test("studio directory renders the compact five-column table and working filter 
     assert.match(markup, /aria-controls="studio-details-4a-games"/);
     assert.match(markup, /Metro Exodus/);
     assert.match(markup, /popular-game-cover/);
+    assert.match(markup, /popular-game-caption/);
+    assert.match(markup, /GTFO/);
+    assert.match(markup, /· 2021/);
     assert.match(markup, /data-artwork-source="IGDB"/);
     assert.match(markup, /data-game-title="Metro Exodus"/);
     assert.match(markup, /Bossa Studios/);

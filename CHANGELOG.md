@@ -6,7 +6,9 @@
 - Add normalized platform, focus and studio-role fields while preserving the original research fields used by matching; leave ambiguous or undisclosed studio scale unclassified rather than infer a tier.
 - Add multi-select scale/platform/focus/role filters, keep work model as an advanced application-route filter, and display removable active-filter chips.
 - Simplify expanded profiles, split Platforms and Focus, merge relevant highlights into About, remove the visible internal source list, and retain official website, application and social links.
-- Add sourced release-year metadata where verified and extend exact Steam/IGDB enrichment to populate future release years; use parent-company favicons with accessible fallbacks.
+- Show each notable title with its thumbnail and a sourced release-year label when known; preserve release years through exact Steam title/developer enrichment and keep unreleased titles labeled In development.
+- Align the primary filter toolbar to its three visible controls; keep route work-model filtering under More filters.
+- Use parent-company favicons with accessible fallbacks.
 
 ## 2026-11-01 — Shared visual design refresh
 

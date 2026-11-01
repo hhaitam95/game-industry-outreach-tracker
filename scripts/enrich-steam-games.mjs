@@ -103,6 +103,10 @@ export function selectExactSteamMatch(title, studioName, searchResults, appDetai
   return {
     status: "matched",
     appId,
+    ...(artwork.releaseYear ? {
+      releaseYear: artwork.releaseYear,
+      releaseYearSourceUrl: "https://store.steampowered.com/app/" + appId + "/",
+    } : {}),
     ...(artwork.steamHeaderUrl ? { steamHeaderUrl: artwork.steamHeaderUrl } : {}),
     ...(artwork.steamCapsuleUrl ? { steamCapsuleUrl: artwork.steamCapsuleUrl } : {}),
   };
@@ -245,7 +249,7 @@ async function enrichKnownSteamArtwork(profiles) {
     const entry = response?.[String(group.appId)];
     for (const { game } of group.entries) {
       const result = selectExactSteamArtwork(game.title, entry);
-      if (result.releaseYear && !game.releaseYear) {
+      if (result.releaseYear && !game.releaseYear && game.stage !== "In development") {
         game.releaseYear = result.releaseYear;
         game.releaseYearSourceUrl = "https://store.steampowered.com/app/" + group.appId + "/";
         counts.releaseYearsAdded += 1;
@@ -325,6 +329,11 @@ async function main() {
           entry.game.appId = result.appId;
           if (result.steamHeaderUrl) entry.game.steamHeaderUrl = result.steamHeaderUrl;
           if (result.steamCapsuleUrl) entry.game.steamCapsuleUrl = result.steamCapsuleUrl;
+          if (result.releaseYear && !entry.game.releaseYear && entry.game.stage !== "In development") {
+            entry.game.releaseYear = result.releaseYear;
+            entry.game.releaseYearSourceUrl = result.releaseYearSourceUrl;
+            counts.releaseYearsAdded += 1;
+          }
           counts.matchedRecords += 1;
         }
       } else {

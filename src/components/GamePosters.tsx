@@ -54,6 +54,11 @@ function GameCoverArtwork({ game, compact }: { game: PopularGame; compact: boole
   );
 }
 
+function gameYearLabel(game: PopularGame): string | null {
+  if (game.stage?.toLowerCase() === "in development") return "In development";
+  return game.releaseYear ? "· " + game.releaseYear : null;
+}
+
 function PosterContents({ game }: { game: PopularGame }) {
   return (
     <>
@@ -63,8 +68,8 @@ function PosterContents({ game }: { game: PopularGame }) {
       </span>
       <span className="game-poster-caption">
         <strong>{game.title}</strong>
-        {game.releaseYear ? (
-          <small title={game.releaseYearSourceUrl ? "Release year source: " + game.releaseYearSourceUrl : undefined}>{game.releaseYear}</small>
+        {gameYearLabel(game) ? (
+          <small title={game.releaseYear && game.releaseYearSourceUrl ? "Release year source: " + game.releaseYearSourceUrl : undefined}>{gameYearLabel(game)}</small>
         ) : null}
       </span>
     </>
@@ -107,40 +112,52 @@ export default function GamePoster({ game }: { game: PopularGame }) {
 
 export function GamePosterStrip({ games }: { games: PopularGame[] }) {
   return (
-    <span className="popular-work-list" aria-label={games.map(game => game.title + (game.releaseYear ? " " + game.releaseYear : "")).join(", ")}>
+    <span className="popular-work-list" aria-label={games.map(game => game.title + (gameYearLabel(game) ? " " + gameYearLabel(game) : "")).join(", ")}>
       {games.map(game => {
         const destination = gameDestination(game);
         const linkLabel = gameLinkLabel(game);
+        const yearLabel = gameYearLabel(game);
         const content = (
           <span className="popular-game-cover-art">
             <GameCoverArtwork game={game} compact />
           </span>
         );
+        const caption = (
+          <span className="popular-game-caption">
+            <strong title={game.title}>{game.title}</strong>
+            {yearLabel ? (
+              <small title={game.releaseYear && game.releaseYearSourceUrl ? "Release year source: " + game.releaseYearSourceUrl : undefined}>{yearLabel}</small>
+            ) : null}
+          </span>
+        );
 
-        return destination && linkLabel ? (
-          <a
-            className="popular-game-cover"
-            href={destination}
-            key={game.title}
-            target="_blank"
-            rel="noopener noreferrer"
-            title={game.title + (game.releaseYear ? " · " + game.releaseYear : "")}
-            aria-label={linkLabel + (game.releaseYear ? " · " + game.releaseYear : "")}
-            data-game-title={game.title}
-            data-release-year={game.releaseYear || ""}
-          >
-            {content}
-          </a>
-        ) : (
-          <span
-            className="popular-game-cover"
-            key={game.title}
-            role="group"
-            aria-label={game.title + (game.releaseYear ? " · " + game.releaseYear : "") + " · no verified game page"}
-            data-game-title={game.title}
-            data-release-year={game.releaseYear || ""}
-          >
-            {content}
+        return (
+          <span className="popular-game-entry" key={game.title}>
+            {destination && linkLabel ? (
+              <a
+                className="popular-game-cover"
+                href={destination}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={game.title + (yearLabel ? " " + yearLabel : "")}
+                aria-label={linkLabel + (yearLabel ? " " + yearLabel : "")}
+                data-game-title={game.title}
+                data-release-year={game.releaseYear || ""}
+              >
+                {content}
+              </a>
+            ) : (
+              <span
+                className="popular-game-cover"
+                role="group"
+                aria-label={game.title + (yearLabel ? " " + yearLabel : "") + " · no verified game page"}
+                data-game-title={game.title}
+                data-release-year={game.releaseYear || ""}
+              >
+                {content}
+              </span>
+            )}
+            {caption}
           </span>
         );
       })}
