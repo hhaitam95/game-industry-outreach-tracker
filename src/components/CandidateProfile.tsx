@@ -67,7 +67,7 @@ async function profileDocumentFromFile(file: File): Promise<ProfileDocument> {
   if (extension !== "pdf" && extension !== "docx") {
     throw new Error("Choose a PDF or DOCX document.");
   }
-  if (file.type && !acceptedMimeTypes.includes(file.type)) {
+  if (file.type && file.type !== "application/octet-stream" && !acceptedMimeTypes.includes(file.type)) {
     throw new Error("The selected file type does not match a supported PDF or DOCX document.");
   }
   if (file.size === 0 || file.size > MAX_PROFILE_DOCUMENT_BYTES) {
@@ -105,7 +105,7 @@ function downloadBackup(profile: CandidateProfile): void {
   anchor.href = url;
   anchor.download = "candidate-profile-backup-" + new Date().toISOString().slice(0, 10) + ".json";
   anchor.click();
-  URL.revokeObjectURL(url);
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 function Field({
