@@ -1,0 +1,64 @@
+name: Enrich missing Steam game links and artwork
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/enrich-steam-games.yml"
+      - "scripts/enrich-steam-games.mjs"
+      - "src/data/studio-profiles.json"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: steam-game-enrichment-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.ref }}
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+      - name: Install dependencies
+        run: npm ci
+      - name: Enrich only exact Steam title and developer matches
+        run: node scripts/enrich-steam-games.mjs --write
+      - name: Validate enriched studio data
+        run: |
+          npm run check:studio-directory
+          npm test
+          npm run build
+      - name: Open a pull request for verified Steam matches
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- src/data/studio-profiles.json; then
+            echo "No new exact Steam title + developer matches; no pull request is needed."
+            exit 0
+          fi
+
+          branch="automation/steam-game-link-enrichment-${GITHUB_RUN_ID}"
+          git switch -c "$branch"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f -- src/data/studio-profiles.json
+          git commit -m "data: add verified Steam app IDs"
+          git push --set-upstream origin "$branch"
+
+          gh pr create \
+            --base "$GITHUB_REF_NAME" \
+            --head "$branch" \
+            --title "Add verified Steam links and cover fallbacks" \
+            --body "Adds Steam app IDs only when the public Steam Store API returns one exact title match and app details confirm the studio developer. Ambiguous titles, non-game products and developer mismatches remain unresolved. Validation, tests and build passed before this data-only pull request."
