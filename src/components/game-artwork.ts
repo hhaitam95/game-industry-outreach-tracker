@@ -14,10 +14,11 @@ export type PopularGameArtworkMetadata = {
   officialUrl?: string;
   officialArtworkUrl?: string;
   officialArtworkLayout?: ArtworkLayout;
+  officialArtworkSource?: "Official site" | "Google Play" | "App Store";
 };
 
 export type GameArtworkSource = {
-  source: "Steam" | "IGDB" | "Official site";
+  source: "Steam" | "IGDB" | "Official site" | "Google Play" | "App Store";
   url: string;
   layout: ArtworkLayout;
 };
@@ -69,7 +70,7 @@ export function getGameArtworkSources(game: PopularGameArtworkMetadata): GameArt
   const officialSources: GameArtworkSource[] = game.officialArtworkUrl
     ? [
         {
-          source: "Official site",
+          source: game.officialArtworkSource || "Official site",
           layout: game.officialArtworkLayout || "portrait",
           url: game.officialArtworkUrl,
         },
