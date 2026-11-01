@@ -8,11 +8,12 @@
 - Add validation and tests for IGDB metadata, Steam-first source ordering and IGDB fallback links.
 - The enrichment script is ready, but no IGDB credentials were available in this session; existing profile data has not yet been bulk-enriched with IGDB image IDs.
 
-## 2026-11-01 — Add manual IGDB artwork enrichment workflow (PR #78 update)
+## 2026-11-01 — Automate IGDB artwork enrichment after merge (PR #78 update)
 
-- Add a manual-only GitHub Actions workflow that checks the repository's IGDB secret configuration without displaying values, then runs the offline enrichment script.
-- Default to dry-run mode; write mode validates the dataset and opens a separate pull request for profile-only metadata changes.
-- Keep IGDB credentials out of browser bundles, public data, logs and commits. The workflow becomes dispatchable after it is merged into the default branch.
+- Run the IGDB metadata-enrichment script automatically when the workflow implementation or script is pushed to `main`; merging PR #78 triggers the first full run without a manual dispatch.
+- Check repository secret availability without displaying credential values, query all remaining unique titles, and write only exact unambiguous matches with covers.
+- Validate the profile dataset and run tests/build before opening a separate data-only pull request; never auto-merge generated metadata.
+- Keep IGDB credentials out of browser bundles, public data, logs and commits. A merge of the resulting data-only PR does not retrigger the enrichment.
 
 ## 2026-10-31 — Phase B first efficiency UI batch (prepared for review)
 

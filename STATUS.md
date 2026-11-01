@@ -23,7 +23,7 @@ Exclude organisations materially focused on pornography/adult sexual entertainme
 - The public application remains static. IGDB API credentials are used only by an offline enrichment script and are never needed by site visitors.
 - `scripts/enrich-igdb-covers.mjs` resolves exact, unique game-title matches, shares verified metadata between duplicate title entries and leaves ambiguous/missing matches untouched. It requires `IGDB_CLIENT_ID` and `IGDB_CLIENT_SECRET`.
 - The current branch snapshot contains 327 studio profiles and 463 listed game entries; 200 entries lacked a Steam app ID when this update was prepared. This is not an IGDB coverage count.
-- The user reports that both repository Actions secrets have now been added. The GitHub connector cannot inspect secret names or values, so their availability is not independently confirmed here. A manual-only workflow is included in PR #78; it checks both variables without printing values and defaults to dry-run.
+- The user reports that both repository Actions secrets have been added. Their values are not visible through the GitHub connection; the workflow checks their availability at run time without printing them. On merge to `main`, a push-triggered workflow automatically enriches all missing game-cover metadata and opens a separate data-only PR after validation/tests/build. It does not auto-merge generated data.
 
 ## Website and public data
 
