@@ -6,12 +6,23 @@
 
 ## Candidate Profile implementation — PR #95
 
-**Phase C1 implementation is on the review branch and is not merged or deployed.** The new My profile area includes structured contact and professional summary fields, repeatable experience/education/projects/training/skills records, evidence labels, master application materials, preferences, IndexedDB persistence and versioned JSON backup/restore. PDF/DOCX document bytes are preserved locally; text extraction and document tailoring are not included.
+**Phase C1 is merged and deployed.** PR #95 merged on 2026-11-01 as commit `2475c4665febf849dd489f7b56f3487a90967577`; the GitHub Pages publish workflow completed its deployment step and reported the live site environment URL. The My profile area includes structured contact and professional records, skill evidence, master application materials, preferences, browser-local IndexedDB persistence and versioned JSON backup/restore. PDF/DOCX original bytes are preserved; text extraction is not included.
 
-- Existing My applications data remains in its current localStorage key and is not migrated or rewritten by this feature.
+- Existing My applications data remains in its current localStorage key and is not migrated or rewritten by the profile feature.
 - Candidate profile records use a separate IndexedDB database/store and are not included in public studio JSON or build-time data.
 - The browser UI explains that local browser storage is not encrypted by default and can be cleared. Backups contain personal information and must be kept private.
-- Validation: a full CI run on the implementation commit passed Python discovery tests, frontend tests, TypeScript checking, production build, directory/privacy/Pages checks and Playwright browser acceptance, including profile persistence, navigation retention and backup restore.
+- The complete pre-merge CI suite passed, including profile persistence, navigation retention and backup restore.
+
+## Phase C2 — private matching foundation (implemented on feature branch)
+
+- Added a Matches page that reads the saved Candidate Profile from browser-local IndexedDB and compares it against active public studio route records on-device.
+- Professional relevance, application-route status/freshness and personal priority remain separate qualitative dimensions. No combined score or hiring probability is presented.
+- Strong / Potential / Weak / Needs profile details classifications explain the basis, show matched profile evidence and identify information not evidenced. Routes without a published discipline scope remain potential/unknown rather than being treated as mismatches.
+- Personal region, work-model and studio-type preferences affect priority only. They never remove or change a studio in the global directory.
+- Each expanded assessment shows recorded discipline scope, submission channel, work model, eligibility/location notes, directory check date and official application/evidence links.
+- Active directory status is not a ready-to-submit guarantee. Applicants must still check the employer's current instructions and their own eligibility.
+- Assessments are recalculated locally and are not yet persisted as queue items. Manual overrides, queue history and deeper requirements intelligence remain later phases.
+- Deterministic engine tests and browser acceptance coverage are included in the feature branch; final CI results are pending PR checks.
 
 ## Current product direction — 2026-11-01
 

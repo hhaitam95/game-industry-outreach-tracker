@@ -3,6 +3,7 @@ import type { TrackedApplication, TrackerStatus } from "./components/studio.type
 import StudioDirectory from "./components/StudioDirectory";
 import ApplicationTracker from "./components/ApplicationTracker";
 import CandidateProfile from "./components/CandidateProfile";
+import MatchingDashboard from "./components/MatchingDashboard";
 
 const STORAGE_KEY = "studio-outreach-tracker-v1";
 const THEME_STORAGE_KEY = "studio-outreach-theme-v1";
@@ -66,7 +67,7 @@ function readApplications(): TrackedApplication[] {
 }
 
 export default function App() {
-  const [page, setPage] = useState<"studios" | "applications" | "profile">("studios");
+  const [page, setPage] = useState<"studios" | "matches" | "applications" | "profile">("studios");
   const [trackerInitialTab, setTrackerInitialTab] = useState("saved");
   const [applications, setApplications] = useState<TrackedApplication[]>([]);
   const [loaded, setLoaded] = useState(false);
@@ -200,6 +201,14 @@ export default function App() {
               Studios
             </button>
             <button
+              className={page === "matches" ? "nav-link active" : "nav-link"}
+              type="button"
+              onClick={() => setPage("matches")}
+              aria-current={page === "matches" ? "page" : undefined}
+            >
+              Matches
+            </button>
+            <button
               className={page === "applications" ? "nav-link active" : "nav-link"}
               type="button"
               onClick={() => openTracker()}
@@ -241,6 +250,9 @@ export default function App() {
             onSave={(studio, location) => trackStudio(studio, "saved", location)}
           />
         ) : null}
+        {page === "matches" ? (
+          <MatchingDashboard onOpenProfile={() => setPage("profile")} />
+        ) : null}
         {page === "applications" ? (
           <ApplicationTracker
             initialTab={trackerInitialTab}
@@ -264,7 +276,7 @@ export default function App() {
 
       <footer className="app-footer">
         <span>Game Industry Outreach Tracker</span>
-        <span>Studio directory · Candidate profile · Application tracker</span>
+        <span>Studio directory · Private matches · Candidate profile · Application tracker</span>
         <span>Profile and tracker data stay in this browser · Theme preference is saved locally</span>
       </footer>
     </div>

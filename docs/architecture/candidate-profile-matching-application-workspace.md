@@ -1,6 +1,6 @@
 # Candidate profile, matching and application workspace
 
-**Status:** Approved product direction; Candidate Profile C1 implemented in PR #95 (awaiting review/merge); matching, queue and workspace not started  
+**Status:** Candidate Profile C1 merged/deployed in PR #95; matching C2 foundation implemented on the current feature branch; Application Queue, deeper requirements intelligence and workspace remain unimplemented  
 **Last updated:** 2026-11-01  
 **Scope:** Candidate-owned profile, transparent studio/opportunity assessment, personal application queue and preparation workspace.  
 **Explicitly deferred:** Browser-extension automation, external portal autofill, automated form interaction and application submission.
@@ -140,6 +140,20 @@ For each selected studio, show a concise list of actual employer-stated discipli
 - not specified.
 
 Map each item to candidate evidence as demonstrated, transferable, learning/exposure, not evidenced, user-confirmed gap or unknown. Do not present a keyword overlap percentage as a hiring probability.
+
+### 4.6 Matching foundation — current implementation
+
+The first C2 implementation calculates matches in the browser from the saved Candidate Profile and the active public studio records. It is a private presentation layer; profile data, documents and assessments are not sent to a backend or added to public data files.
+
+- Professional relevance uses saved target role families, discipline scope published in the studio route record and profile evidence. Demonstrated, transferable and learning/exposure evidence remain distinct. Absence of evidence is not treated as a confirmed gap.
+- If an open route does not publish a discipline scope, the result remains **Potential match / limited role information** rather than being penalized. Missing profile evidence is **Needs profile details**, not a weak match.
+- The current engine does not automatically classify an opportunity as **Not applicable** from a keyword mismatch. A weak assessment is not a claim that the employer would reject an application.
+- Route readiness is deliberately conservative: the UI reports an active route on record or a need to verify it. It does not claim a route is ready to submit based only on the existence of a URL.
+- Personal priority uses the saved preferred/acceptable/lower-priority regions, studio types and work models. These signals do not alter professional relevance or directory membership.
+- Expanded details show source and application URLs, directory check/review dates, published discipline scope, submission method, work model and location/eligibility notes when those fields exist.
+- Assessments are currently computed in memory each time the Matches page opens. Persistent assessment snapshots, manual overrides/pins and queue decisions belong to the Application Queue phase.
+
+Known limitation: the current public directory has route-level research fields, not a fully normalized requirements record for every employer. Missing requirements remain unknown; no requirement, language, work-authorization, sponsorship or remote-work condition is inferred from a headquarters address or a search keyword.
 
 ## 5. Application Queue
 
