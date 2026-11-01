@@ -8,6 +8,7 @@ on:
       - "scripts/discover_speculative_studios.py"
       - "scripts/merge_discovery_datasets.py"
       - "config/manual-studio-exclusions.json"
+      - "config/discovery-sources.json"
       - "src/data/speculative-route-directory.json"
       - "src/data/studio-profiles.json"
   schedule:
@@ -71,16 +72,22 @@ jobs:
           elif [ ! -f "$STATE_FILE" ]; then
             MODE="bulk"
           else
-            # Finish the one-time GameDevMap catalogue backfill first.
-            # Once it is complete, hourly discovery continues even if another
-            # feed still has retries or manual-review candidates.
+            # Finish the initial GameDevMap catalogue pass first. Later passes
+            # restart from the beginning after reaching the end.
+            # Once the first pass is complete, hourly discovery continues even if
+            # another feed still has retries or manual-review candidates.
             MODE="$(python3 - "$STATE_FILE" <<'PY'
           import json
           import sys
 
           with open(sys.argv[1], encoding="utf-8") as handle:
               state = json.load(handle)
-          map_complete = state.get("feed_done", {}).get("gamedevmap", False)
+          map_metrics = state.get("source_stats", {}).get("gamedevmap", {})
+          map_complete = (
+              state.get("feed_done", {}).get("gamedevmap", False)
+              or bool(map_metrics.get("complete"))
+              or bool(map_metrics.get("last_pass_completed_at"))
+          )
           print("hourly" if map_complete else "bulk")
           PY
           )"
@@ -88,7 +95,7 @@ jobs:
 
           SOURCE_PAGE_LIMIT=110
           if [ "$MODE" = "hourly" ]; then
-            SOURCE_PAGE_LIMIT=8
+            SOURCE_PAGE_LIMIT=20
           fi
 
           if [ "$MODE" = "bulk" ]; then
