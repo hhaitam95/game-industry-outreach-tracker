@@ -6,6 +6,7 @@ import {
   normalizeGameTitle,
   selectExactSteamArtwork,
   selectExactSteamMatch,
+  selectSteamLibraryArtwork,
 } from "../scripts/enrich-steam-games.mjs";
 
 test("normalizes game titles without fuzzy matching", () => {
@@ -101,6 +102,53 @@ test("rejects non-HTTPS and non-Steam artwork hosts", () => {
   assert.equal(isValidSteamArtworkUrl("https://images.example.com/header.jpg"), false);
   assert.equal(isValidSteamArtworkUrl("https://user:pass@cdn.cloudflare.steamstatic.com/steam/apps/1/header.jpg"), false);
   assert.equal(isValidSteamArtworkUrl("https://cdn.cloudflare.steamstatic.com/steam/apps/1/header.jpg"), true);
+});
+
+test("resolves The Trail's hash-based portrait library capsules from Steam Store Browse metadata", () => {
+  const result = selectSteamLibraryArtwork(3544920, {
+    appid: 3544920,
+    success: 1,
+    name: "The Trail",
+    assets: {
+      asset_url_format: "steam/apps/3544920/${FILENAME}",
+      library_capsule: "2103420b5b6ac86335205a0220d5ed1b230e4c86/library_capsule.jpg",
+      library_capsule_2x: "2103420b5b6ac86335205a0220d5ed1b230e4c86/library_capsule_2x.jpg",
+    },
+  }, "The Trail");
+
+  assert.deepEqual(result, {
+    status: "matched",
+    steamLibraryCapsuleUrl: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3544920/2103420b5b6ac86335205a0220d5ed1b230e4c86/library_capsule.jpg",
+    steamLibraryCapsule2xUrl: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3544920/2103420b5b6ac86335205a0220d5ed1b230e4c86/library_capsule_2x.jpg",
+  });
+});
+
+test("rejects Steam library assets with mismatched app IDs, names or unsafe asset paths", () => {
+  const base = {
+    appid: 3544920,
+    success: 1,
+    name: "The Trail",
+    assets: {
+      asset_url_format: "steam/apps/3544920/${FILENAME}",
+      library_capsule: "2103420b5b6ac86335205a0220d5ed1b230e4c86/library_capsule.jpg",
+    },
+  };
+  assert.equal(selectSteamLibraryArtwork(3544921, base, "The Trail").status, "app_id_mismatch");
+  assert.equal(selectSteamLibraryArtwork(3544920, base, "Another Trail").status, "title_mismatch");
+  assert.equal(
+    selectSteamLibraryArtwork(3544920, {
+      ...base,
+      assets: { ...base.assets, asset_url_format: "steam/apps/3544921/${FILENAME}" },
+    }, "The Trail").status,
+    "invalid_asset_url_format",
+  );
+  assert.equal(
+    selectSteamLibraryArtwork(3544920, {
+      ...base,
+      assets: { ...base.assets, library_capsule: "other-game/library_capsule.jpg" },
+    }, "The Trail").status,
+    "missing_artwork",
+  );
 });
 
 test("adds Steam header and capsule artwork metadata when a new app ID is matched", () => {
