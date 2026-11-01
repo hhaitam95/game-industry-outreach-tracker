@@ -74,7 +74,7 @@ Candidate sources are leads only; every company and application route is verifie
 ### Currently integrated candidate feeds
 
 - GameDevMap public paginated worldwide directory. The existing adapter reads its public results interface; rows can represent multiple offices or non-studio organisations, so classification and deduplication are required.
-- Wikidata feeds for video-game developers, organisations credited as video-game developers, and video-game companies.
+- Four recurring Wikidata feeds for video-game developer entities, credited developer organisations, video-game companies and video-game-industry classifications. The broad industry feed is a lead only: candidates must show direct game-development work on their own site before automatic publication.
 
 ### Additional candidate sources under evaluation
 
@@ -111,11 +111,11 @@ The detailed candidate pool and progress are stored on the separate discovery-st
 
 ## Discovery cadence and known coverage gap
 
-GitHub Actions runs the discovery workflow hourly. The current pipeline has resumable GameDevMap and Wikidata work, but the additional sources above are still evaluation leads, not integrated feeds.
+GitHub Actions runs discovery hourly. The pipeline now revisits the entire GameDevMap catalogue in recurring paginated passes (rather than treating it as a one-time backfill) and uses four recurring Wikidata feeds. GameDevMap page completion is based on raw catalogue rows, not only rows that pass candidate filters.
 
 Regional association directories and curated national catalogues are currently manual research inputs only. IGDB is blocked pending written permission for public-directory redistribution; Steam remains manual-only with no scripted collection. See the source register for access restrictions before using any new index.
 
-The integrated discovery pipeline uses **source-specific saturation**, not a global stop. Each active feed has its own cursor, cycle, verified-addition count and saturation state; three complete empty passes throttle only that feed. Incomplete or failed passes do not count as exhaustion, and one source's saturation does not suppress work on others. Additional candidate sources listed above remain evaluation leads until their adapters are implemented and tested.
+The integrated discovery pipeline uses **source-specific saturation**, not a global stop. Each of the five active feeds has its own cursor, cycle, verified-addition count and saturation state; five complete empty passes throttle only that feed to four pages per hourly run. The global hourly budget is 20 source pages. Wikidata requests retain 65-second spacing and the pipeline retains its 25-minute runtime ceiling. Incomplete or failed passes do not count as exhaustion, and one source's saturation does not suppress work on others. Additional candidate sources listed above remain evaluation leads until their access terms are cleared and adapters are implemented and tested.
 
 Every run adds a sanitized GitHub Actions summary with work counts, candidate-status totals, source cursors and saturation state.
 
