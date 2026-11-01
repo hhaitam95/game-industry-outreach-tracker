@@ -8,6 +8,11 @@
  * @typedef {"strong" | "potential" | "weak" | "not_assessed"} RelevanceLevel
  * @typedef {"active" | "needs_verification" | "unavailable"} RouteReadiness
  * @typedef {"high" | "preferred" | "neutral" | "low"} PriorityLevel
+ * @typedef {{group: string, pattern: RegExp, disciplines: string[]}} RoleRule
+ * @typedef {{level: RelevanceLevel, reasons: string[], evidence: EvidenceItem[], gaps: string[], limitedRoleInformation: boolean}} RelevanceAssessment
+ * @typedef {{level: RouteReadiness, reasons: string[]}} RouteAssessment
+ * @typedef {{description?: string, companyType?: string[], industryScale?: string, focus?: string[]}} StudioProfile
+ * @typedef {{routeType?: string, submissionMethods?: string[], workModel?: string, eligibleLocations?: string[], disciplineScope?: string[], routeStatus?: string, nextReviewAt?: string | null}} ApplicationResearch
  *
  * @typedef {Object} MatchStudio
  * @property {string} name
@@ -19,16 +24,8 @@
  * @property {string} [checkedAt]
  * @property {string} [notes]
  * @property {string[]} [continents]
- * @property {{description?: string, companyType?: string[], industryScale?: string, focus?: string[]}} [profile]
- * @property {{
- *   routeType?: string,
- *   submissionMethods?: string[],
- *   workModel?: string,
- *   eligibleLocations?: string[],
- *   disciplineScope?: string[],
- *   routeStatus?: string,
- *   nextReviewAt?: string | null
- * }} [applicationResearch]
+ * @property {StudioProfile} [profile]
+ * @property {ApplicationResearch} [applicationResearch]
  *
  * @typedef {Object} EvidenceItem
  * @property {string} name
@@ -126,6 +123,7 @@ const SUPPORT_SKILLS = [
   "incident", "debugging", "integration",
 ];
 
+/** @param {unknown} value @returns {string} */
 function normalize(value) {
   return String(value ?? "")
     .toLowerCase()
@@ -135,22 +133,26 @@ function normalize(value) {
     .trim();
 }
 
+/** @param {string} haystack @param {string} phrase @returns {boolean} */
 function hasPhrase(haystack, phrase) {
   const text = normalize(haystack);
   const needle = normalize(phrase);
   return Boolean(text && needle && (text === needle || text.includes(needle)));
 }
 
+/** @param {string} name @returns {string} */
 function studioId(name) {
   return normalize(name).replace(/\s+/g, "-").replace(/^-|-$/g, "");
 }
 
+/** @param {string[]} roleFamilies @returns {RoleRule[]} */
 function roleRulesFor(roleFamilies) {
   return ROLE_RULES.filter((rule) =>
     roleFamilies.some((role) => rule.pattern.test(normalize(role))),
   );
 }
 
+/** @param {string} skillName @param {string} discipline @returns {boolean} */
 function skillSupportsDiscipline(skillName, discipline) {
   const skill = normalize(skillName);
   const target = normalize(discipline);
@@ -180,11 +182,20 @@ function skillSupportsDiscipline(skillName, discipline) {
   return false;
 }
 
+/**
+ * @param {CandidateProfile["skills"][number]} skill
+ * @returns {skill is CandidateProfile["skills"][number] & { evidence: "demonstrated" | "transferable" | "learning_exposure" }}
+ */
 function isUsableEvidence(skill) {
   return skill.name.trim() &&
     ["demonstrated", "transferable", "learning_exposure"].includes(skill.evidence);
 }
 
+/**
+ * @param {CandidateProfile} profile
+ * @param {MatchStudio} studio
+ * @returns {RelevanceAssessment}
+ */
 function assessRelevance(profile, studio) {
   const roleFamilies = profile.preferences.roleFamilies.filter(Boolean);
   const skills = profile.skills.filter(isUsableEvidence);
@@ -317,6 +328,7 @@ function assessRelevance(profile, studio) {
   };
 }
 
+/** @param {string} value @returns {boolean} */
 function validHttpUrl(value) {
   try {
     const url = new URL(value);
@@ -326,6 +338,11 @@ function validHttpUrl(value) {
   }
 }
 
+/**
+ * @param {MatchStudio} studio
+ * @param {Date} now
+ * @returns {RouteAssessment}
+ */
 function assessRouteReadiness(studio, now) {
   const route = studio.applicationResearch || {};
   if (route.routeStatus !== "active") {
@@ -364,6 +381,7 @@ function assessRouteReadiness(studio, now) {
   };
 }
 
+/** @param {string[]} regions @param {MatchStudio} studio @returns {string} */
 function regionMatches(regions, studio) {
   const country = normalize(studio.country);
   const countryCode = normalize(studio.countryCode);
@@ -387,6 +405,7 @@ function regionMatches(regions, studio) {
   }) || "";
 }
 
+/** @param {string} preference @param {string} workModel @returns {boolean} */
 function workModelMatches(preference, workModel) {
   const aliases = {
     onsite: "on site",
@@ -402,6 +421,7 @@ function workModelMatches(preference, workModel) {
   return preferred === actual;
 }
 
+/** @param {string} preference @param {string[]} companyTypes @param {string} industryScale @returns {boolean} */
 function typeMatches(preference, companyTypes, industryScale) {
   const preferred = normalize(preference);
   const aliases = preferred === "indie" ? ["independent", "indie"] : [preferred];
@@ -409,6 +429,11 @@ function typeMatches(preference, companyTypes, industryScale) {
   return aliases.some((alias) => actual.some((value) => value === alias || value.includes(alias) || alias.includes(value)));
 }
 
+/**
+ * @param {CandidateProfile} profile
+ * @param {MatchStudio} studio
+ * @returns {PriorityAssessment}
+ */
 function assessPriority(profile, studio) {
   const preferences = profile.preferences;
   const reasons = [];
