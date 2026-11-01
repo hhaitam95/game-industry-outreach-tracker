@@ -23,7 +23,7 @@ Keep this foundation stable. Do not change the discovery inclusion rules or hide
 
 ## Next roadmap — candidate profile and application workspace
 
-### Phase C1 — Candidate Profile foundation (implementation in PR #95; awaiting review/merge)
+### Phase C1 — Candidate Profile foundation (merged in PR #95; deployed)
 - Add a structured profile for contact details, professional summary, experience, education, projects/training and skills.
 - Associate skills with evidence and distinguish demonstrated, transferable, learning/exposure, not evidenced and user-confirmed gaps.
 - Add one approved master resume and one master motivation letter/message.
@@ -31,15 +31,15 @@ Keep this foundation stable. Do not change the discovery inclusion rules or hide
 - Keep all candidate data browser-local; use a versioned local schema and user-controlled export/import.
 - Preserve original uploaded documents and require approval before changing master materials.
 - Implemented: structured profile UI, separate versioned IndexedDB storage, PDF/DOCX original-file preservation, manual save, versioned JSON export/import, and browser acceptance coverage for persistence and restore.
-- Not included: text extraction from attachments, matching, queue/workspace features, server sync or any application automation.
+- Not included in C1: text extraction from attachments, matching, queue/workspace features, server sync or any application automation.
 
-### Phase C2 — Matching and assessment
-- Assess professional relevance, application accessibility/readiness and personal priority independently.
-- Use transparent qualitative categories and explain strengths, transferable evidence, gaps and unknowns.
-- Summarize actual employer-stated skills, disciplines and requirements.
-- Distinguish explicit facts, cautious inference and unknown information; retain sources and verification dates.
-- Keep personal preferences out of the public/global discovery engine.
-- Allow user review and manual override; do not represent match scores as hiring probabilities.
+### Phase C2 — Matching and assessment (foundation implemented on feature branch)
+- Implemented: on-device assessments for active directory records; separate professional relevance, route freshness/accessibility and personal priority dimensions; filters and sorting; evidence, gaps, route facts, source links and review dates.
+- Implemented: qualitative Strong / Potential / Weak / Needs profile details classifications. Unspecified role scope is treated as unknown/potential, never as a mismatch. No hiring-probability score is produced.
+- Implemented: region, work-model and studio-type preferences affect personal priority only and do not remove or alter directory records.
+- Implemented: deterministic fixture-based engine tests and browser acceptance for the Matches page.
+- Current limitation: route readiness is conservative. An active route on record is not labelled ready-to-submit; employer instructions and personal eligibility still require human review. Requirement-level provenance is shown only where the public directory currently stores it.
+- Deferred to later queue/requirements phases: persistent assessment snapshots, user overrides, manual priority pins, exhaustive form/document/language/eligibility extraction and AI processing.
 
 ### Phase C3 — Application Queue
 - Add selected studios to a private queue referencing canonical directory IDs.
