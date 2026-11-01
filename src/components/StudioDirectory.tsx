@@ -353,7 +353,7 @@ export default function StudioDirectory({
     setExpandedStudio(null);
   }
 
-  function toggleSelected(values: string[], setValues: (next: string[] | ((current: string[]) => string[])) => void, value: string) {
+  function toggleSelected(setValues: (next: string[] | ((current: string[]) => string[])) => void, value: string) {
     setValues(current => current.includes(value) ? current.filter(item => item !== value) : [...current, value]);
   }
 
@@ -446,28 +446,28 @@ export default function StudioDirectory({
             emoji="📈"
             options={[...scaleOptions]}
             selected={scaleFilters}
-            onToggle={value => toggleSelected(scaleFilters, setScaleFilters, value)}
+            onToggle={value => toggleSelected(setScaleFilters, value)}
           />
           <FilterPicker
             label="Platforms"
             emoji="🖥️"
             options={platformOptions}
             selected={platformFilters}
-            onToggle={value => toggleSelected(platformFilters, setPlatformFilters, value)}
+            onToggle={value => toggleSelected(setPlatformFilters, value)}
           />
           <FilterPicker
             label="Focus"
             emoji="🎯"
             options={focusOptions}
             selected={focusFilters}
-            onToggle={value => toggleSelected(focusFilters, setFocusFilters, value)}
+            onToggle={value => toggleSelected(setFocusFilters, value)}
           />
           <FilterPicker
             label="Studio role"
             emoji="🏢"
             options={[...roleOptions]}
             selected={roleFilters}
-            onToggle={value => toggleSelected(roleFilters, setRoleFilters, value)}
+            onToggle={value => toggleSelected(setRoleFilters, value)}
           />
           <label className="form-field work-model-filter">
             <span>Work model · application route</span>
@@ -505,16 +505,16 @@ export default function StudioDirectory({
             <button type="button" onClick={() => setCountry("All countries")} className="active-filter-chip">{countryFlagFor(country)} {country} <span aria-hidden="true">×</span></button>
           ) : null}
           {scaleFilters.map(value => (
-            <button type="button" key={"scale-" + value} onClick={() => toggleSelected(scaleFilters, setScaleFilters, value)} className="active-filter-chip">Scale · {value} <span aria-hidden="true">×</span></button>
+            <button type="button" key={"scale-" + value} onClick={() => toggleSelected(setScaleFilters, value)} className="active-filter-chip">Scale · {value} <span aria-hidden="true">×</span></button>
           ))}
           {platformFilters.map(value => (
-            <button type="button" key={"platform-" + value} onClick={() => toggleSelected(platformFilters, setPlatformFilters, value)} className="active-filter-chip">{platformEmoji(value)} {value} <span aria-hidden="true">×</span></button>
+            <button type="button" key={"platform-" + value} onClick={() => toggleSelected(setPlatformFilters, value)} className="active-filter-chip">{platformEmoji(value)} {value} <span aria-hidden="true">×</span></button>
           ))}
           {focusFilters.map(value => (
-            <button type="button" key={"focus-" + value} onClick={() => toggleSelected(focusFilters, setFocusFilters, value)} className="active-filter-chip">{focusEmoji(value)} {value} <span aria-hidden="true">×</span></button>
+            <button type="button" key={"focus-" + value} onClick={() => toggleSelected(setFocusFilters, value)} className="active-filter-chip">{focusEmoji(value)} {value} <span aria-hidden="true">×</span></button>
           ))}
           {roleFilters.map(value => (
-            <button type="button" key={"role-" + value} onClick={() => toggleSelected(roleFilters, setRoleFilters, value)} className="active-filter-chip">{value} <span aria-hidden="true">×</span></button>
+            <button type="button" key={"role-" + value} onClick={() => toggleSelected(setRoleFilters, value)} className="active-filter-chip">{value} <span aria-hidden="true">×</span></button>
           ))}
           {workModel !== "all" ? (
             <button type="button" onClick={() => setWorkModel("all")} className="active-filter-chip">Work model · {workModelLabels[workModel]} <span aria-hidden="true">×</span></button>
