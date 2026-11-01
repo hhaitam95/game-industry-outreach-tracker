@@ -27,12 +27,18 @@
     "popularGames": [
       {
         "title": "GTFO",
-        "appId": 493520
+        "appId": 493520,
+        "igdbGameId": 36646,
+        "igdbSlug": "gtfo",
+        "igdbCoverId": "co4cnq"
       },
       {
         "title": "Den of Wolves",
         "appId": 1818140,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 279649,
+        "igdbSlug": "den-of-wolves",
+        "igdbCoverId": "co7hal"
       }
     ],
     "profileSources": [
@@ -83,7 +89,10 @@
       {
         "title": "WARCANA",
         "appId": 2022930,
-        "stage": "No longer in active development"
+        "stage": "No longer in active development",
+        "igdbGameId": 265477,
+        "igdbSlug": "warcana",
+        "igdbCoverId": "co8dc1"
       }
     ],
     "profileSources": [
@@ -123,19 +132,31 @@
     "popularGames": [
       {
         "title": "DYSMANTLE",
-        "appId": 846770
+        "appId": 846770,
+        "igdbGameId": 113998,
+        "igdbSlug": "dysmantle",
+        "igdbCoverId": "co1ixi"
       },
       {
         "title": "Tesla vs Lovecraft",
-        "appId": 636100
+        "appId": 636100,
+        "igdbGameId": 28592,
+        "igdbSlug": "tesla-vs-lovecraft",
+        "igdbCoverId": "co27ab"
       },
       {
         "title": "Neon Chrome",
-        "appId": 428750
+        "appId": 428750,
+        "igdbGameId": 18954,
+        "igdbSlug": "neon-chrome",
+        "igdbCoverId": "co4z6k"
       },
       {
         "title": "Undead Horde",
-        "appId": 790850
+        "appId": 790850,
+        "igdbGameId": 88250,
+        "igdbSlug": "undead-horde--1",
+        "igdbCoverId": "co1ibk"
       }
     ],
     "profileSources": [
@@ -225,7 +246,10 @@
       {
         "title": "Masters of Albion",
         "appId": 3165650,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 314272,
+        "igdbSlug": "masters-of-albion",
+        "igdbCoverId": "cobyli"
       },
       {
         "title": "The Trail",
@@ -233,7 +257,10 @@
       },
       {
         "title": "Godus",
-        "appId": 232810
+        "appId": 232810,
+        "igdbGameId": 3115,
+        "igdbSlug": "godus",
+        "igdbCoverId": "co1zx4"
       }
     ],
     "profileSources": [
@@ -271,11 +298,17 @@
     "popularGames": [
       {
         "title": "Metro Exodus",
-        "appId": 412020
+        "appId": 412020,
+        "igdbGameId": 37016,
+        "igdbSlug": "metro-exodus",
+        "igdbCoverId": "coaroh"
       },
       {
         "title": "Metro: Last Light Redux",
-        "appId": 287390
+        "appId": 287390,
+        "igdbGameId": 50199,
+        "igdbSlug": "metro-last-light-redux",
+        "igdbCoverId": "coar10"
       }
     ],
     "profileSources": [
@@ -431,15 +464,24 @@
     "popularGames": [
       {
         "title": "Reus",
-        "appId": 222730
+        "appId": 222730,
+        "igdbGameId": 5523,
+        "igdbSlug": "reus",
+        "igdbCoverId": "co1z3q"
       },
       {
         "title": "Renowned Explorers: International Society",
-        "appId": 296970
+        "appId": 296970,
+        "igdbGameId": 12510,
+        "igdbSlug": "renowned-explorers-international-society",
+        "igdbCoverId": "co2h13"
       },
       {
         "title": "Godhood",
-        "appId": 917150
+        "appId": 917150,
+        "igdbGameId": 106679,
+        "igdbSlug": "godhood",
+        "igdbCoverId": "co1j28"
       }
     ],
     "profileSources": [
@@ -490,7 +532,10 @@
       },
       {
         "title": "Mega Dead Pixel",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 120241,
+        "igdbSlug": "mega-dead-pixel",
+        "igdbCoverId": "co8v23"
       },
       {
         "title": "Cut and Hack",
@@ -542,7 +587,10 @@
     "popularGames": [
       {
         "title": "Faeria",
-        "appId": 397060
+        "appId": 397060,
+        "igdbGameId": 12523,
+        "igdbSlug": "faeria",
+        "igdbCoverId": "co1mwi"
       }
     ],
     "profileSources": [
@@ -581,17 +629,26 @@
       {
         "title": "Classified: France '44",
         "appId": 2085370,
-        "stage": "Released 2024"
+        "stage": "Released 2024",
+        "igdbGameId": 253409,
+        "igdbSlug": "classified-france-44",
+        "igdbCoverId": "co6wxx"
       },
       {
         "title": "Fangtopia",
         "appId": 3010170,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 349380,
+        "igdbSlug": "fangtopia",
+        "igdbCoverId": "coct9k"
       },
       {
         "title": "Worms: Galactic Tactics",
         "appId": 3278930,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 414949,
+        "igdbSlug": "worms-galactic-tactics",
+        "igdbCoverId": "cocrhb"
       }
     ],
     "profileSources": [
@@ -632,11 +689,17 @@
       {
         "title": "Train Station Tycoon",
         "appId": 1565490,
-        "stage": "Released October 2026"
+        "stage": "Released October 2026",
+        "igdbGameId": 411263,
+        "igdbSlug": "train-station-tycoon",
+        "igdbCoverId": "cocktf"
       },
       {
         "title": "Wood'N'Destroy",
-        "appId": 4487540
+        "appId": 4487540,
+        "igdbGameId": 396367,
+        "igdbSlug": "woodndestroy",
+        "igdbCoverId": "cobuei"
       },
       {
         "title": "Stereopoly",
@@ -688,12 +751,18 @@
     "popularGames": [
       {
         "title": "Gladihaters",
-        "appId": 1559580
+        "appId": 1559580,
+        "igdbGameId": 149405,
+        "igdbSlug": "gladihaters",
+        "igdbCoverId": "co41ay"
       },
       {
         "title": "Timepunk",
         "appId": 2091030,
-        "stage": "Beta"
+        "stage": "Beta",
+        "igdbGameId": 220697,
+        "igdbSlug": "timepunk",
+        "igdbCoverId": "co7xwr"
       },
       {
         "title": "AM I AI",
@@ -739,19 +808,31 @@
     "popularGames": [
       {
         "title": "The Legend of Khiimori",
-        "appId": 2697000
+        "appId": 2697000,
+        "igdbGameId": 318175,
+        "igdbSlug": "the-legend-of-khiimori",
+        "igdbCoverId": "cobg18"
       },
       {
         "title": "Ambulance Life: A Paramedic Simulator",
-        "appId": 1926520
+        "appId": 1926520,
+        "igdbGameId": 278606,
+        "igdbSlug": "ambulance-life-a-paramedic-simulator",
+        "igdbCoverId": "co7fj4"
       },
       {
         "title": "Police Simulator: Patrol Officers",
-        "appId": 997010
+        "appId": 997010,
+        "igdbGameId": 152297,
+        "igdbSlug": "police-simulator-patrol-officers",
+        "igdbCoverId": "co39t1"
       },
       {
         "title": "Horse Tales: Emerald Valley Ranch",
-        "appId": 1474740
+        "appId": 1474740,
+        "igdbGameId": 206679,
+        "igdbSlug": "horse-tales-emerald-valley-ranch",
+        "igdbCoverId": "co5eef"
       }
     ],
     "profileSources": [
@@ -790,23 +871,38 @@
     "popularGames": [
       {
         "title": "Rivals of Aether",
-        "appId": 383980
+        "appId": 383980,
+        "igdbGameId": 21646,
+        "igdbSlug": "rivals-of-aether",
+        "igdbCoverId": "cobl61"
       },
       {
         "title": "Rivals of Aether II",
-        "appId": 2217000
+        "appId": 2217000,
+        "igdbGameId": 245847,
+        "igdbSlug": "rivals-of-aether-ii",
+        "igdbCoverId": "coar00"
       },
       {
         "title": "Dungeons of Aether",
-        "appId": 1668290
+        "appId": 1668290,
+        "igdbGameId": 195068,
+        "igdbSlug": "dungeons-of-aether",
+        "igdbCoverId": "co4leu"
       },
       {
         "title": "Creatures of Aether",
-        "appId": 1593750
+        "appId": 1593750,
+        "igdbGameId": 139140,
+        "igdbSlug": "creatures-of-aether",
+        "igdbCoverId": "co686g"
       },
       {
         "title": "Lovers of Aether",
-        "appId": 1043180
+        "appId": 1043180,
+        "igdbGameId": 117041,
+        "igdbSlug": "lovers-of-aether",
+        "igdbCoverId": "co45hi"
       }
     ],
     "profileSources": [
@@ -1044,7 +1140,10 @@
     "popularGames": [
       {
         "title": "Amber Isle",
-        "appId": 1663040
+        "appId": 1663040,
+        "igdbGameId": 152188,
+        "igdbSlug": "amber-isle",
+        "igdbCoverId": "co8bun"
       }
     ],
     "profileSources": [
@@ -1122,11 +1221,17 @@
     "popularGames": [
       {
         "title": "Gorilla Tag",
-        "appId": 1533390
+        "appId": 1533390,
+        "igdbGameId": 143228,
+        "igdbSlug": "gorilla-tag",
+        "igdbCoverId": "coau8c"
       },
       {
         "title": "Orion Drift",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 322571,
+        "igdbSlug": "orion-drift",
+        "igdbCoverId": "co926x"
       },
       {
         "title": "Monke Mayhem",
@@ -1134,7 +1239,10 @@
       },
       {
         "title": "Contagion",
-        "appId": 238430
+        "appId": 238430,
+        "igdbGameId": 6404,
+        "igdbSlug": "contagion",
+        "igdbCoverId": "co2mtq"
       }
     ],
     "profileSources": [
@@ -1175,11 +1283,17 @@
       {
         "title": "ATMOSFAR",
         "appId": 1798230,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 244677,
+        "igdbSlug": "atmosfar",
+        "igdbCoverId": "cod5l5"
       },
       {
         "title": "Airport CEO",
-        "appId": 673610
+        "appId": 673610,
+        "igdbGameId": 52524,
+        "igdbSlug": "airport-ceo",
+        "igdbCoverId": "fskvagcnhvpxhnhngwgs"
       }
     ],
     "profileSources": [
@@ -1223,11 +1337,17 @@
       },
       {
         "title": "Crown Wars: The Black Prince",
-        "appId": 1658920
+        "appId": 1658920,
+        "igdbGameId": 208416,
+        "igdbSlug": "crown-wars-the-black-prince",
+        "igdbCoverId": "co7pvv"
       },
       {
         "title": "Disciples: Domination",
-        "appId": 2808560
+        "appId": 2808560,
+        "igdbGameId": 360140,
+        "igdbSlug": "disciples-domination",
+        "igdbCoverId": "coa8ss"
       }
     ],
     "applicationLocation": "Location not specified · use HQ as reference",
@@ -1308,7 +1428,10 @@
       {
         "title": "Gang of Frogs",
         "appId": 3081510,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 369326,
+        "igdbSlug": "gang-of-frogs",
+        "igdbCoverId": "coaj23"
       }
     ],
     "applicationLocation": "Remote-first · country-of-employment eligibility not stated",
@@ -1349,11 +1472,17 @@
       },
       {
         "title": "A Plague Tale: Requiem",
-        "appId": 1182900
+        "appId": 1182900,
+        "igdbGameId": 152242,
+        "igdbSlug": "a-plague-tale-requiem",
+        "igdbCoverId": "co5pwb"
       },
       {
         "title": "A Plague Tale: Innocence",
-        "appId": 752590
+        "appId": 752590,
+        "igdbGameId": 27316,
+        "igdbSlug": "a-plague-tale-innocence",
+        "igdbCoverId": "co1lat"
       }
     ],
     "profileSources": [
@@ -1395,7 +1524,10 @@
       },
       {
         "title": "Stellar Cafe",
-        "appId": 4415130
+        "appId": 4415130,
+        "igdbGameId": 360777,
+        "igdbSlug": "stellar-cafe",
+        "igdbCoverId": "coazal"
       }
     ],
     "profileSources": [
@@ -1474,7 +1606,10 @@
     "popularGames": [
       {
         "title": "BPM: Bullets Per Minute",
-        "appId": 1286350
+        "appId": 1286350,
+        "igdbGameId": 133330,
+        "igdbSlug": "bpm-bullets-per-minute",
+        "igdbCoverId": "co555i"
       }
     ],
     "profileSources": [
@@ -1513,7 +1648,10 @@
     "popularGames": [
       {
         "title": "Extreme Car Driving Simulator",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 87021,
+        "igdbSlug": "extreme-car-driving-simulator",
+        "igdbCoverId": "co9sur"
       },
       {
         "title": "Extreme Motorcycle Simulator",
@@ -1574,7 +1712,10 @@
     "popularGames": [
       {
         "title": "Scrap Mechanic",
-        "appId": 387990
+        "appId": 387990,
+        "igdbGameId": 16611,
+        "igdbSlug": "scrap-mechanic",
+        "igdbCoverId": "cocxak"
       }
     ],
     "profileSources": [
@@ -1614,7 +1755,10 @@
       {
         "title": "Son of Thanjai",
         "appId": 2879790,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 362117,
+        "igdbSlug": "son-of-thanjai",
+        "igdbCoverId": "coab96"
       }
     ],
     "profileSources": [
@@ -1653,7 +1797,10 @@
     "popularGames": [
       {
         "title": "Ereban: Shadow Legacy",
-        "appId": 1671360
+        "appId": 1671360,
+        "igdbGameId": 204624,
+        "igdbSlug": "ereban-shadow-legacy",
+        "igdbCoverId": "co7wdb"
       }
     ],
     "profileSources": [
@@ -1768,7 +1915,10 @@
     "popularGames": [
       {
         "title": "The 1% Club World Challenge",
-        "appId": 4461210
+        "appId": 4461210,
+        "igdbGameId": 396117,
+        "igdbSlug": "the-1-percent-club-world-challenge",
+        "igdbCoverId": "coclrv"
       },
       {
         "title": "The Chase: World Tour",
@@ -1820,7 +1970,10 @@
     "popularGames": [
       {
         "title": "BeamNG.drive",
-        "appId": 284160
+        "appId": 284160,
+        "igdbGameId": 17131,
+        "igdbSlug": "beamng-dot-drive",
+        "igdbCoverId": "co1sym"
       }
     ],
     "profileSources": [
@@ -1863,15 +2016,24 @@
     "popularGames": [
       {
         "title": "Crash Bandicoot N. Sane Trilogy",
-        "appId": 731490
+        "appId": 731490,
+        "igdbGameId": 26196,
+        "igdbSlug": "crash-bandicoot-n-sane-trilogy",
+        "igdbCoverId": "co1v62"
       },
       {
         "title": "Tony Hawk's Pro Skater 1 + 2",
-        "appId": 2395210
+        "appId": 2395210,
+        "igdbGameId": 133887,
+        "igdbSlug": "tony-hawks-pro-skater-1-plus-2",
+        "igdbCoverId": "co25u7"
       },
       {
         "title": "Call of Duty: Modern Warfare III",
-        "appId": 3595270
+        "appId": 3595270,
+        "igdbGameId": 260780,
+        "igdbSlug": "call-of-duty-modern-warfare-iii",
+        "igdbCoverId": "co7ctx"
       }
     ],
     "profileSources": [
@@ -1908,15 +2070,24 @@
     "popularGames": [
       {
         "title": "FORCED",
-        "appId": 249990
+        "appId": 249990,
+        "igdbGameId": 5626,
+        "igdbSlug": "forced",
+        "igdbCoverId": "co2gzn"
       },
       {
         "title": "Minion Masters",
-        "appId": 489520
+        "appId": 489520,
+        "igdbGameId": 27150,
+        "igdbSlug": "minion-masters",
+        "igdbCoverId": "co8scr"
       },
       {
         "title": "Forced Showdown",
-        "appId": 265000
+        "appId": 265000,
+        "igdbGameId": 14578,
+        "igdbSlug": "forced-showdown",
+        "igdbCoverId": "co1ii2"
       }
     ],
     "profileSources": [
@@ -2067,11 +2238,17 @@
     "popularGames": [
       {
         "title": "Hardspace: Shipbreaker",
-        "appId": 1161580
+        "appId": 1161580,
+        "igdbGameId": 130216,
+        "igdbSlug": "hardspace-shipbreaker",
+        "igdbCoverId": "co2m8b"
       },
       {
         "title": "Homeworld 3",
-        "appId": 1840080
+        "appId": 1840080,
+        "igdbGameId": 122123,
+        "igdbSlug": "homeworld-3",
+        "igdbCoverId": "co4a9d"
       }
     ],
     "profileSources": [
@@ -2139,7 +2316,10 @@
       {
         "title": "Arkheron",
         "appId": 3333850,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 368311,
+        "igdbSlug": "arkheron",
+        "igdbCoverId": "cod9ru"
       }
     ],
     "profileSources": [
@@ -2184,7 +2364,10 @@
       {
         "title": "Generation Zero",
         "appId": 704270,
-        "stage": "Co-development contribution"
+        "stage": "Co-development contribution",
+        "igdbGameId": 65445,
+        "igdbSlug": "generation-zero",
+        "igdbCoverId": "co66ky"
       },
       {
         "title": "Waffenträger event / World of Tanks",
@@ -2234,11 +2417,17 @@
       },
       {
         "title": "I Am Bread",
-        "appId": 327890
+        "appId": 327890,
+        "igdbGameId": 7868,
+        "igdbSlug": "i-am-bread",
+        "igdbCoverId": "co8xt7"
       },
       {
         "title": "Lost Skies",
-        "appId": 1931180
+        "appId": 1931180,
+        "igdbGameId": 250163,
+        "igdbSlug": "lost-skies",
+        "igdbCoverId": "co9ory"
       }
     ],
     "applicationLocation": "Remote-first · application eligibility to confirm",
@@ -2310,17 +2499,26 @@
     "popularGames": [
       {
         "title": "Yes, Your Grace",
-        "appId": 1115690
+        "appId": 1115690,
+        "igdbGameId": 122729,
+        "igdbSlug": "yes-your-grace",
+        "igdbCoverId": "co2c8o"
       },
       {
         "title": "Yes, Your Grace: Snowfall",
         "appId": 1373090,
-        "stage": "Released 2025"
+        "stage": "Released 2025",
+        "igdbGameId": 252483,
+        "igdbSlug": "yes-your-grace-snowfall",
+        "igdbCoverId": "cobz7y"
       },
       {
         "title": "Mind Scanners",
         "appId": 1389550,
-        "stage": "Published title"
+        "stage": "Published title",
+        "igdbGameId": 139566,
+        "igdbSlug": "mind-scanners",
+        "igdbCoverId": "co2j6m"
       }
     ],
     "applicationLocation": "Manchester, United Kingdom · remote and applicant-country eligibility not stated",
@@ -2363,22 +2561,34 @@
       {
         "title": "Insurmountable",
         "appId": 1385100,
-        "stage": "Released"
+        "stage": "Released",
+        "igdbGameId": 133846,
+        "igdbSlug": "insurmountable",
+        "igdbCoverId": "co2fhl"
       },
       {
         "title": "Beat Slayer",
         "appId": null,
-        "stage": "Released"
+        "stage": "Released",
+        "igdbGameId": 244838,
+        "igdbSlug": "beat-slayer",
+        "igdbCoverId": "co7glr"
       },
       {
         "title": "Gelly Break Deluxe",
         "appId": 1690060,
-        "stage": "Released"
+        "stage": "Released",
+        "igdbGameId": 164317,
+        "igdbSlug": "gelly-break-deluxe",
+        "igdbCoverId": "co417z"
       },
       {
         "title": "The Regreening",
         "appId": 3419080,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 350554,
+        "igdbSlug": "the-regreening",
+        "igdbCoverId": "cod730"
       }
     ],
     "profileSources": [
@@ -2427,20 +2637,32 @@
     "popularGames": [
       {
         "title": "Expeditions: Conquistador",
-        "appId": 237430
+        "appId": 237430,
+        "igdbGameId": 16523,
+        "igdbSlug": "expeditions-conquistador",
+        "igdbCoverId": "co24mt"
       },
       {
         "title": "Expeditions: Viking",
-        "appId": 445190
+        "appId": 445190,
+        "igdbGameId": 10501,
+        "igdbSlug": "expeditions-viking",
+        "igdbCoverId": "co24rl"
       },
       {
         "title": "Expeditions: Rome",
-        "appId": 987840
+        "appId": 987840,
+        "igdbGameId": 146650,
+        "igdbSlug": "expeditions-rome",
+        "igdbCoverId": "co3ub5"
       },
       {
         "title": "Expeditions: Samurai",
         "appId": 2212910,
-        "stage": "Early Access"
+        "stage": "Early Access",
+        "igdbGameId": 404904,
+        "igdbSlug": "expeditions-samurai",
+        "igdbCoverId": "coc6vi"
       }
     ],
     "profileSources": [
@@ -2649,11 +2871,17 @@
     "popularGames": [
       {
         "title": "Songs of Silence",
-        "appId": 2195410
+        "appId": 2195410,
+        "igdbGameId": 238460,
+        "igdbSlug": "songs-of-silence",
+        "igdbCoverId": "coayrg"
       },
       {
         "title": "Shadow and Bone: Enter the Fold",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 204448,
+        "igdbSlug": "shadow-and-bone-enter-the-fold--1",
+        "igdbCoverId": "co7d9b"
       }
     ],
     "applicationLocation": "Munich ATS listing; company careers page also reports remote/hybrid work and permanent employment options in Germany, Spain, Portugal, Italy, Finland, Poland and Romania; internships are on-site in Munich",
@@ -2701,7 +2929,10 @@
       },
       {
         "title": "Baseball Boy",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 87059,
+        "igdbSlug": "baseball-boy",
+        "igdbCoverId": "ebjhsnalbpzkawwml52z"
       },
       {
         "title": "Rider",
@@ -2709,7 +2940,10 @@
       },
       {
         "title": "Stack Jump",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 87657,
+        "igdbSlug": "stack-jump",
+        "igdbCoverId": "coc62o"
       },
       {
         "title": "Horizon",
@@ -2763,7 +2997,10 @@
       },
       {
         "title": "Sniper Ghost Warrior Contracts 2",
-        "appId": 1338770
+        "appId": 1338770,
+        "igdbGameId": 138980,
+        "igdbSlug": "sniper-ghost-warrior-contracts-2",
+        "igdbCoverId": "co2nuh"
       }
     ],
     "profileSources": [
@@ -2801,11 +3038,17 @@
     "popularGames": [
       {
         "title": "Tibia",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 9596,
+        "igdbSlug": "tibia",
+        "igdbCoverId": "co255g"
       },
       {
         "title": "TibiaME",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 115761,
+        "igdbSlug": "tibiame",
+        "igdbCoverId": "co9sni"
       },
       {
         "title": "Panzer League",
@@ -2891,7 +3134,10 @@
     "popularGames": [
       {
         "title": "Treasure Hunters",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 25552,
+        "igdbSlug": "treasure-hunters",
+        "igdbCoverId": "cobul4"
       },
       {
         "title": "Magic Portal",
@@ -3019,7 +3265,10 @@
       {
         "title": "Arcflame Frontiers",
         "appId": 4062380,
-        "stage": "Closed alpha"
+        "stage": "Closed alpha",
+        "igdbGameId": 413099,
+        "igdbSlug": "arcflame-frontiers",
+        "igdbCoverId": "coco1k"
       }
     ],
     "profileSources": [
@@ -3060,7 +3309,10 @@
     "popularGames": [
       {
         "title": "Mortal Shell",
-        "appId": 1110910
+        "appId": 1110910,
+        "igdbGameId": 132050,
+        "igdbSlug": "mortal-shell",
+        "igdbCoverId": "co227z"
       }
     ],
     "profileSources": [
@@ -3223,15 +3475,24 @@
       },
       {
         "title": "Rise of the Tomb Raider",
-        "appId": 391220
+        "appId": 391220,
+        "igdbGameId": 7323,
+        "igdbSlug": "rise-of-the-tomb-raider",
+        "igdbCoverId": "co1rqa"
       },
       {
         "title": "Shadow of the Tomb Raider",
-        "appId": 750920
+        "appId": 750920,
+        "igdbGameId": 37777,
+        "igdbSlug": "shadow-of-the-tomb-raider",
+        "igdbCoverId": "co1vcn"
       },
       {
         "title": "Marvel's Avengers",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 26950,
+        "igdbSlug": "marvels-avengers",
+        "igdbCoverId": "co2edq"
       },
       {
         "title": "Legacy of Kain",
@@ -3274,7 +3535,10 @@
       {
         "title": "Pistonica",
         "appId": 4018480,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 388551,
+        "igdbSlug": "pistonica",
+        "igdbCoverId": "cocoll"
       }
     ],
     "profileSources": [
@@ -3316,7 +3580,10 @@
     "popularGames": [
       {
         "title": "Styx: Shards of Darkness",
-        "appId": 355790
+        "appId": 355790,
+        "igdbGameId": 13554,
+        "igdbSlug": "styx-shards-of-darkness",
+        "igdbCoverId": "co24zt"
       },
       {
         "title": "Blood Bowl 3",
@@ -3324,7 +3591,10 @@
       },
       {
         "title": "Werewolf: The Apocalypse – Earthblood",
-        "appId": 679110
+        "appId": 679110,
+        "igdbGameId": 26879,
+        "igdbSlug": "werewolf-the-apocalypse-earthblood",
+        "igdbCoverId": "co259p"
       }
     ],
     "profileSources": [
@@ -3438,11 +3708,17 @@
     "popularGames": [
       {
         "title": "Hubris",
-        "appId": 1265800
+        "appId": 1265800,
+        "igdbGameId": 114705,
+        "igdbSlug": "hubris",
+        "igdbCoverId": "co8cv5"
       },
       {
         "title": "Wall Town Wonders",
-        "appId": 3570400
+        "appId": 3570400,
+        "igdbGameId": 320625,
+        "igdbSlug": "wall-town-wonders",
+        "igdbCoverId": "co8z3w"
       }
     ],
     "profileSources": [
@@ -3496,19 +3772,31 @@
     "popularGames": [
       {
         "title": "Granblue Fantasy",
-        "appId": 767320
+        "appId": 767320,
+        "igdbGameId": 13623,
+        "igdbSlug": "granblue-fantasy",
+        "igdbCoverId": "cocrun"
       },
       {
         "title": "Umamusume: Pretty Derby",
-        "appId": 3224770
+        "appId": 3224770,
+        "igdbGameId": 97494,
+        "igdbSlug": "umamusume-pretty-derby",
+        "igdbCoverId": "coclen"
       },
       {
         "title": "Shadowverse",
-        "appId": 453480
+        "appId": 453480,
+        "igdbGameId": 25811,
+        "igdbSlug": "shadowverse",
+        "igdbCoverId": "co1twx"
       },
       {
         "title": "Shadowverse: Worlds Beyond",
-        "appId": 2584990
+        "appId": 2584990,
+        "igdbGameId": 339985,
+        "igdbSlug": "shadowverse-worlds-beyond",
+        "igdbCoverId": "co9s57"
       }
     ],
     "profileSources": [
@@ -3630,15 +3918,24 @@
     "popularGames": [
       {
         "title": "The Surge",
-        "appId": 378540
+        "appId": 378540,
+        "igdbGameId": 11590,
+        "igdbSlug": "the-surge",
+        "igdbCoverId": "co1odu"
       },
       {
         "title": "The Surge 2",
-        "appId": 644830
+        "appId": 644830,
+        "igdbGameId": 86477,
+        "igdbSlug": "the-surge-2",
+        "igdbCoverId": "co1y0k"
       },
       {
         "title": "Atlas Fallen",
-        "appId": 1230530
+        "appId": 1230530,
+        "igdbGameId": 214409,
+        "igdbSlug": "atlas-fallen",
+        "igdbCoverId": "co546f"
       },
       {
         "title": "Lords of the Fallen",
@@ -3679,16 +3976,25 @@
     "popularGames": [
       {
         "title": "Founders' Fortune",
-        "appId": 1104330
+        "appId": 1104330,
+        "igdbGameId": 120455,
+        "igdbSlug": "founders-fortune",
+        "igdbCoverId": "co1pu5"
       },
       {
         "title": "InfraSpace",
-        "appId": 1511460
+        "appId": 1511460,
+        "igdbGameId": 149691,
+        "igdbSlug": "infraspace",
+        "igdbCoverId": "co43kc"
       },
       {
         "title": "HavenCraft",
         "appId": 2481240,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 404111,
+        "igdbSlug": "havencraft--1",
+        "igdbCoverId": "coc5uz"
       }
     ],
     "applicationLocation": "Germany for employees · European time zones considered for freelancers",
@@ -3761,19 +4067,31 @@
     "popularGames": [
       {
         "title": "Life Is Strange",
-        "appId": 319630
+        "appId": 319630,
+        "igdbGameId": 7599,
+        "igdbSlug": "life-is-strange",
+        "igdbCoverId": "co1r8e"
       },
       {
         "title": "Tell Me Why",
-        "appId": 1180660
+        "appId": 1180660,
+        "igdbGameId": 125628,
+        "igdbSlug": "tell-me-why",
+        "igdbCoverId": "co2ej1"
       },
       {
         "title": "Twin Mirror",
-        "appId": 1552810
+        "appId": 1552810,
+        "igdbGameId": 103266,
+        "igdbSlug": "twin-mirror",
+        "igdbCoverId": "co5w0s"
       },
       {
         "title": "Vampyr",
-        "appId": 427290
+        "appId": 427290,
+        "igdbGameId": 8729,
+        "igdbSlug": "vampyr",
+        "igdbCoverId": "co8lrg"
       },
       {
         "title": "Remember Me",
@@ -3816,7 +4134,10 @@
     "popularGames": [
       {
         "title": "Lost Records: Bloom & Rage",
-        "appId": 1902960
+        "appId": 1902960,
+        "igdbGameId": 279642,
+        "igdbSlug": "lost-records-bloom-and-rage",
+        "igdbCoverId": "co9p3a"
       }
     ],
     "profileSources": [
@@ -3868,24 +4189,39 @@
       {
         "title": "Fallout 76",
         "appId": 1151340,
-        "stage": "Development contribution"
+        "stage": "Development contribution",
+        "igdbGameId": 103020,
+        "igdbSlug": "fallout-76",
+        "igdbCoverId": "co1yc4"
       },
       {
         "title": "Minecraft Dungeons",
         "appId": 1672970,
-        "stage": "Development contribution"
+        "stage": "Development contribution",
+        "igdbGameId": 110474,
+        "igdbSlug": "minecraft-dungeons",
+        "igdbCoverId": "co233r"
       },
       {
         "title": "Rust Console Edition",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 145149,
+        "igdbSlug": "rust-console-edition",
+        "igdbCoverId": "coauwt"
       },
       {
         "title": "RimWorld Console Edition",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 210525,
+        "igdbSlug": "rimworld-console-edition--1",
+        "igdbCoverId": "co506s"
       },
       {
         "title": "Songbringer",
-        "appId": 367080
+        "appId": 367080,
+        "igdbGameId": 25213,
+        "igdbSlug": "songbringer",
+        "igdbCoverId": "co1szv"
       }
     ],
     "profileSources": [
@@ -3971,27 +4307,45 @@
     "popularGames": [
       {
         "title": "Deus Ex: Human Revolution",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 43,
+        "igdbSlug": "deus-ex-human-revolution",
+        "igdbCoverId": "co1rd2"
       },
       {
         "title": "Deus Ex: Mankind Divided",
-        "appId": 337000
+        "appId": 337000,
+        "igdbGameId": 9498,
+        "igdbSlug": "deus-ex-mankind-divided",
+        "igdbCoverId": "co25jt"
       },
       {
         "title": "Shadow of the Tomb Raider",
-        "appId": 750920
+        "appId": 750920,
+        "igdbGameId": 37777,
+        "igdbSlug": "shadow-of-the-tomb-raider",
+        "igdbCoverId": "co1vcn"
       },
       {
         "title": "Marvel's Guardians of the Galaxy",
-        "appId": 1088850
+        "appId": 1088850,
+        "igdbGameId": 152249,
+        "igdbSlug": "marvels-guardians-of-the-galaxy",
+        "igdbCoverId": "co39pu"
       },
       {
         "title": "Thief VR: Legacy of Shadow",
-        "appId": 2800080
+        "appId": 2800080,
+        "igdbGameId": 347124,
+        "igdbSlug": "thief-vr-legacy-of-shadow",
+        "igdbCoverId": "co9ww7"
       },
       {
         "title": "Grounded 2",
-        "appId": 2661300
+        "appId": 2661300,
+        "igdbGameId": 348187,
+        "igdbSlug": "grounded-2",
+        "igdbCoverId": "co9xwo"
       }
     ],
     "profileSources": [
@@ -4145,15 +4499,24 @@
       },
       {
         "title": "Garry's Mod",
-        "appId": 4000
+        "appId": 4000,
+        "igdbGameId": 3278,
+        "igdbSlug": "garry-s-mod",
+        "igdbCoverId": "co8pgw"
       },
       {
         "title": "s&box",
-        "appId": 590830
+        "appId": 590830,
+        "igdbGameId": 142355,
+        "igdbSlug": "s-and-box",
+        "igdbCoverId": "cobzd1"
       },
       {
         "title": "Chippy",
-        "appId": 602700
+        "appId": 602700,
+        "igdbGameId": 117217,
+        "igdbSlug": "chippy",
+        "igdbCoverId": "co268j"
       }
     ],
     "profileSources": [
@@ -4198,7 +4561,10 @@
       {
         "title": "Barotrauma",
         "appId": 602960,
-        "stage": "Released; developed with Undertow Games"
+        "stage": "Released; developed with Undertow Games",
+        "igdbGameId": 27344,
+        "igdbSlug": "barotrauma",
+        "igdbCoverId": "coa97f"
       },
       {
         "title": "Undisclosed second game",
@@ -4207,7 +4573,10 @@
       },
       {
         "title": "Barotrauma",
-        "appId": 602960
+        "appId": 602960,
+        "igdbGameId": 27344,
+        "igdbSlug": "barotrauma",
+        "igdbCoverId": "coa97f"
       }
     ],
     "profileSources": [
@@ -4252,19 +4621,31 @@
     "popularGames": [
       {
         "title": "Apex Construct",
-        "appId": 694090
+        "appId": 694090,
+        "igdbGameId": 75283,
+        "igdbSlug": "apex-construct",
+        "igdbCoverId": "co28u8"
       },
       {
         "title": "The Curious Tale of the Stolen Pets",
-        "appId": 1099500
+        "appId": 1099500,
+        "igdbGameId": 119332,
+        "igdbSlug": "the-curious-tale-of-the-stolen-pets",
+        "igdbCoverId": "co1m5v"
       },
       {
         "title": "Wraith: The Oblivion – Afterlife",
-        "appId": 1386870
+        "appId": 1386870,
+        "igdbGameId": 135110,
+        "igdbSlug": "wraith-the-oblivion-afterlife",
+        "igdbCoverId": "co2s3e"
       },
       {
         "title": "Ghost Signal: A Stellaris Game",
-        "appId": 2156770
+        "appId": 2156770,
+        "igdbGameId": 251560,
+        "igdbSlug": "ghost-signal-a-stellaris-game",
+        "igdbCoverId": "co8d8z"
       },
       {
         "title": "Mannequin",
@@ -4357,7 +4738,10 @@
       {
         "title": "Shaiya",
         "appId": 2690190,
-        "stage": "Operated live-service title"
+        "stage": "Operated live-service title",
+        "igdbGameId": 85841,
+        "igdbSlug": "shaiya",
+        "igdbCoverId": "co2ra7"
       },
       {
         "title": "Defiance",
@@ -4367,7 +4751,10 @@
       {
         "title": "Last Chaos",
         "appId": null,
-        "stage": "Operated live-service title"
+        "stage": "Operated live-service title",
+        "igdbGameId": 90316,
+        "igdbSlug": "last-chaos",
+        "igdbCoverId": "co5qjy"
       },
       {
         "title": "Desert Operations",
@@ -4425,12 +4812,18 @@
     "popularGames": [
       {
         "title": "EVE Online",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 2584,
+        "igdbSlug": "eve-online",
+        "igdbCoverId": "cociug"
       },
       {
         "title": "EVE Frontier",
         "appId": null,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 323164,
+        "igdbSlug": "eve-frontier",
+        "igdbCoverId": "co92vb"
       }
     ],
     "profileSources": [
@@ -4468,11 +4861,17 @@
     "popularGames": [
       {
         "title": "Trailmakers",
-        "appId": 585420
+        "appId": 585420,
+        "igdbGameId": 29667,
+        "igdbSlug": "trailmakers",
+        "igdbCoverId": "co8u8s"
       },
       {
         "title": "Rubber Bandits",
-        "appId": 1206610
+        "appId": 1206610,
+        "igdbGameId": 139684,
+        "igdbSlug": "rubber-bandits",
+        "igdbCoverId": "co496w"
       }
     ],
     "profileSources": [
@@ -4510,7 +4909,10 @@
     "popularGames": [
       {
         "title": "Len's Island",
-        "appId": 1335830
+        "appId": 1335830,
+        "igdbGameId": 136594,
+        "igdbSlug": "lens-island",
+        "igdbCoverId": "coa0fm"
       }
     ],
     "profileSources": [
@@ -4549,16 +4951,25 @@
     "popularGames": [
       {
         "title": "Seven: The Days Long Gone",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 18908,
+        "igdbSlug": "seven-the-days-long-gone",
+        "igdbCoverId": "co24sa"
       },
       {
         "title": "The Thaumaturge",
-        "appId": 1684350
+        "appId": 1684350,
+        "igdbGameId": 239942,
+        "igdbSlug": "the-thaumaturge",
+        "igdbCoverId": "cob3e3"
       },
       {
         "title": "The Witcher remake",
         "appId": null,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 220277,
+        "igdbSlug": "the-witcher-remake",
+        "igdbCoverId": "co5p2t"
       }
     ],
     "profileSources": [
@@ -4599,7 +5010,10 @@
       {
         "title": "CLUB",
         "appId": null,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 347555,
+        "igdbSlug": "club",
+        "igdbCoverId": "co9xf5"
       }
     ],
     "profileSources": [
@@ -4642,7 +5056,10 @@
       {
         "title": "Disciples: Liberation",
         "appId": 1287840,
-        "stage": "Development contribution"
+        "stage": "Development contribution",
+        "igdbGameId": 152125,
+        "igdbSlug": "disciples-liberation",
+        "igdbCoverId": "co4e4h"
       },
       {
         "title": "Triangle Strategy",
@@ -4652,7 +5069,10 @@
       {
         "title": "Temple Run: Legends",
         "appId": null,
-        "stage": "Development contribution"
+        "stage": "Development contribution",
+        "igdbGameId": 312929,
+        "igdbSlug": "temple-run-legends",
+        "igdbCoverId": "co8nk7"
       }
     ],
     "applicationLocation": "Québec / Montréal · see role-specific conditions",
@@ -4692,15 +5112,24 @@
     "popularGames": [
       {
         "title": "Trine 5: A Clockwork Conspiracy",
-        "appId": 1436700
+        "appId": 1436700,
+        "igdbGameId": 245390,
+        "igdbSlug": "trine-5-a-clockwork-conspiracy",
+        "igdbCoverId": "co6dpx"
       },
       {
         "title": "Starbase",
-        "appId": 454120
+        "appId": 454120,
+        "igdbGameId": 119157,
+        "igdbSlug": "starbase",
+        "igdbCoverId": "co4sm0"
       },
       {
         "title": "Trine 4: The Nightmare Prince",
-        "appId": 690640
+        "appId": 690640,
+        "igdbGameId": 110846,
+        "igdbSlug": "trine-4-the-nightmare-prince",
+        "igdbCoverId": "co1qsm"
       }
     ],
     "profileSources": [
@@ -4803,16 +5232,25 @@
     "popularGames": [
       {
         "title": "Deep Rock Galactic: Survivor",
-        "appId": 2321470
+        "appId": 2321470,
+        "igdbGameId": 240556,
+        "igdbSlug": "deep-rock-galactic-survivor",
+        "igdbCoverId": "co68ah"
       },
       {
         "title": "Wild Indigo Ranch",
-        "appId": 1751350
+        "appId": 1751350,
+        "igdbGameId": 199596,
+        "igdbSlug": "wild-indigo-ranch",
+        "igdbCoverId": "co8tz8"
       },
       {
         "title": "The Margot Collapse",
         "appId": 3273150,
-        "stage": "Announced 2026"
+        "stage": "Announced 2026",
+        "igdbGameId": 422175,
+        "igdbSlug": "the-margot-collapse",
+        "igdbCoverId": "cod2wa"
       }
     ],
     "applicationLocation": "Aarhus hybrid · broader eligibility not specified",
@@ -4963,11 +5401,17 @@
     "popularGames": [
       {
         "title": "Idle Farming Empire",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 88124,
+        "igdbSlug": "idle-farming-empire",
+        "igdbCoverId": "gwcxecdf7wtmbakvzd0a"
       },
       {
         "title": "Merge Gardens",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 227368,
+        "igdbSlug": "merge-gardens",
+        "igdbCoverId": "co7m0v"
       }
     ],
     "applicationLocation": "Remote · global stated",
@@ -5008,7 +5452,10 @@
       {
         "title": "The Last Signal",
         "appId": 2906180,
-        "stage": "Project"
+        "stage": "Project",
+        "igdbGameId": 294120,
+        "igdbSlug": "the-last-signal",
+        "igdbCoverId": "co7zkz"
       },
       {
         "title": "Remnant Bloom",
@@ -5057,7 +5504,10 @@
       },
       {
         "title": "Pocket Card Jockey",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 18196,
+        "igdbSlug": "pocket-card-jockey",
+        "igdbCoverId": "co2dzs"
       }
     ],
     "profileSources": [
@@ -5142,11 +5592,17 @@
     "popularGames": [
       {
         "title": "Free Fire",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 87622,
+        "igdbSlug": "free-fire",
+        "igdbCoverId": "co52c7"
       },
       {
         "title": "Arena of Valor",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 55044,
+        "igdbSlug": "arena-of-valor",
+        "igdbCoverId": "co2pg0"
       },
       {
         "title": "Call of Duty: Mobile – Garena",
@@ -5234,12 +5690,18 @@
     "popularGames": [
       {
         "title": "Deep Rock Galactic",
-        "appId": 548430
+        "appId": 548430,
+        "igdbGameId": 27134,
+        "igdbSlug": "deep-rock-galactic",
+        "igdbCoverId": "coaat4"
       },
       {
         "title": "Deep Rock Galactic: Rogue Core",
         "appId": 2605790,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 270354,
+        "igdbSlug": "deep-rock-galactic-rogue-core",
+        "igdbCoverId": "coay8u"
       }
     ],
     "profileSources": [
@@ -5280,7 +5742,10 @@
     "popularGames": [
       {
         "title": "Rogue Fortune",
-        "appId": 4891150
+        "appId": 4891150,
+        "igdbGameId": 415285,
+        "igdbSlug": "rogue-fortune",
+        "igdbCoverId": "cocrxy"
       }
     ],
     "profileSources": [
@@ -5318,7 +5783,10 @@
       {
         "title": "GOALS",
         "appId": 2753000,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 289602,
+        "igdbSlug": "goals--3",
+        "igdbCoverId": "cocuxb"
       }
     ],
     "profileSources": [
@@ -5360,7 +5828,10 @@
     "popularGames": [
       {
         "title": "TNT+",
-        "appId": 1086430
+        "appId": 1086430,
+        "igdbGameId": 118978,
+        "igdbSlug": "tnt--2",
+        "igdbCoverId": "co46ek"
       },
       {
         "title": "Dinosaur Dimension",
@@ -5372,7 +5843,10 @@
       },
       {
         "title": "Naturalist",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 334026,
+        "igdbSlug": "naturalist",
+        "igdbCoverId": "co9hch"
       }
     ],
     "profileSources": [
@@ -5495,11 +5969,17 @@
       },
       {
         "title": "Dan the Man",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 38946,
+        "igdbSlug": "dan-the-man",
+        "igdbCoverId": "co5v9e"
       },
       {
         "title": "Monster Dash",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 18497,
+        "igdbSlug": "monster-dash",
+        "igdbCoverId": "co2xi2"
       }
     ],
     "profileSources": [
@@ -5536,7 +6016,10 @@
       {
         "title": "WEX",
         "appId": null,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 415847,
+        "igdbSlug": "wex",
+        "igdbCoverId": "cocsz9"
       }
     ],
     "profileSources": [
@@ -5575,11 +6058,17 @@
     "popularGames": [
       {
         "title": "Brothers: A Tale of Two Sons",
-        "appId": 225080
+        "appId": 225080,
+        "igdbGameId": 1334,
+        "igdbSlug": "brothers-a-tale-of-two-sons",
+        "igdbCoverId": "co1rro"
       },
       {
         "title": "A Way Out",
-        "appId": 1222700
+        "appId": 1222700,
+        "igdbGameId": 36897,
+        "igdbSlug": "a-way-out",
+        "igdbCoverId": "co1vca"
       },
       {
         "title": "It Takes Two",
@@ -5587,7 +6076,10 @@
       },
       {
         "title": "Split Fiction",
-        "appId": 2001120
+        "appId": 2001120,
+        "igdbGameId": 325594,
+        "igdbSlug": "split-fiction",
+        "igdbCoverId": "co95gf"
       }
     ],
     "profileSources": [
@@ -5633,22 +6125,34 @@
       {
         "title": "G.I. Joe: Operation Blackout",
         "appId": 1432220,
-        "stage": "Co-development"
+        "stage": "Co-development",
+        "igdbGameId": 138697,
+        "igdbSlug": "gi-joe-operation-blackout",
+        "igdbCoverId": "co2ikm"
       },
       {
         "title": "Quar: Infernal Machines",
         "appId": null,
-        "stage": "Porting / engineering"
+        "stage": "Porting / engineering",
+        "igdbGameId": 116239,
+        "igdbSlug": "quar-infernal-machines",
+        "igdbCoverId": "co1js8"
       },
       {
         "title": "Cobra Kai: The Karate Kid Saga Continues",
         "appId": 1279920,
-        "stage": "Art production"
+        "stage": "Art production",
+        "igdbGameId": 137300,
+        "igdbSlug": "cobra-kai-the-karate-kid-saga-continues",
+        "igdbCoverId": "co2gkb"
       },
       {
         "title": "Cobra Kai 2: Dojos Rising",
         "appId": 1681870,
-        "stage": "Porting / engineering"
+        "stage": "Porting / engineering",
+        "igdbGameId": 208711,
+        "igdbSlug": "cobra-kai-2-dojos-rising",
+        "igdbCoverId": "co536q"
       },
       {
         "title": "CrisTales",
@@ -5658,12 +6162,18 @@
       {
         "title": "Nickelodeon All-Star Brawl",
         "appId": 1414850,
-        "stage": "Co-development"
+        "stage": "Co-development",
+        "igdbGameId": 156151,
+        "igdbSlug": "nickelodeon-all-star-brawl",
+        "igdbCoverId": "co4upo"
       },
       {
         "title": "Bramble: The Mountain King",
         "appId": 1623940,
-        "stage": "Porting / engineering"
+        "stage": "Porting / engineering",
+        "igdbGameId": 152124,
+        "igdbSlug": "bramble-the-mountain-king",
+        "igdbCoverId": "co6f01"
       }
     ],
     "profileSources": [
@@ -5755,11 +6265,17 @@
     "popularGames": [
       {
         "title": "Turbo Golf Racing",
-        "appId": 1324350
+        "appId": 1324350,
+        "igdbGameId": 194736,
+        "igdbSlug": "turbo-golf-racing",
+        "igdbCoverId": "co4kxg"
       },
       {
         "title": "When Ski Lifts Go Wrong",
-        "appId": 638000
+        "appId": 638000,
+        "igdbGameId": 111908,
+        "igdbSlug": "when-ski-lifts-go-wrong",
+        "igdbCoverId": "co1ix9"
       },
       {
         "title": "Stuck Together",
@@ -5896,7 +6412,10 @@
     "popularGames": [
       {
         "title": "World War Armies",
-        "appId": 2438160
+        "appId": 2438160,
+        "igdbGameId": 175684,
+        "igdbSlug": "world-war-armies",
+        "igdbCoverId": "co8ul2"
       }
     ],
     "profileSources": [
@@ -5959,15 +6478,24 @@
     "popularGames": [
       {
         "title": "Cities: Skylines II",
-        "appId": 949230
+        "appId": 949230,
+        "igdbGameId": 240902,
+        "igdbSlug": "cities-skylines-ii",
+        "igdbCoverId": "coaasz"
       },
       {
         "title": "Surviving the Aftermath",
-        "appId": 684450
+        "appId": 684450,
+        "igdbGameId": 123251,
+        "igdbSlug": "surviving-the-aftermath",
+        "igdbCoverId": "co3wsb"
       },
       {
         "title": "LEGO Skylines",
-        "appId": 1573550
+        "appId": 1573550,
+        "igdbGameId": 414994,
+        "igdbSlug": "lego-skylines",
+        "igdbCoverId": "cocriw"
       }
     ],
     "profileSources": [
@@ -6028,7 +6556,10 @@
     "popularGames": [
       {
         "title": "Crime Boss: Rockay City",
-        "appId": 2933080
+        "appId": 2933080,
+        "igdbGameId": 228541,
+        "igdbSlug": "crime-boss-rockay-city",
+        "igdbCoverId": "co6mey"
       }
     ],
     "profileSources": [
@@ -6147,17 +6678,26 @@
     "popularGames": [
       {
         "title": "HITMAN World of Assassination",
-        "appId": 1659040
+        "appId": 1659040,
+        "igdbGameId": 233571,
+        "igdbSlug": "hitman-world-of-assassination",
+        "igdbCoverId": "co620f"
       },
       {
         "title": "007 First Light",
         "appId": 3768760,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 141114,
+        "igdbSlug": "007-first-light",
+        "igdbCoverId": "coaoiz"
       },
       {
         "title": "Project Fantasy",
         "appId": null,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 254858,
+        "igdbSlug": "project-fantasy",
+        "igdbCoverId": "co6ogx"
       }
     ],
     "profileSources": [
@@ -6272,11 +6812,17 @@
     "popularGames": [
       {
         "title": "Marvel Contest of Champions",
-        "appId": 3127280
+        "appId": 3127280,
+        "igdbGameId": 28107,
+        "igdbSlug": "marvel-contest-of-champions",
+        "igdbCoverId": "coblax"
       },
       {
         "title": "Shop Titans",
-        "appId": 1258080
+        "appId": 1258080,
+        "igdbGameId": 119969,
+        "igdbSlug": "shop-titans",
+        "igdbCoverId": "coaosu"
       }
     ],
     "profileSources": [
@@ -6352,11 +6898,17 @@
     "popularGames": [
       {
         "title": "Space Engineers",
-        "appId": 244850
+        "appId": 244850,
+        "igdbGameId": 3239,
+        "igdbSlug": "space-engineers",
+        "igdbCoverId": "coaaw8"
       },
       {
         "title": "Medieval Engineers",
-        "appId": 333950
+        "appId": 333950,
+        "igdbGameId": 9115,
+        "igdbSlug": "medieval-engineers",
+        "igdbCoverId": "co2qnz"
       }
     ],
     "applicationLocation": "Remote considered · CET overlap; experienced candidates preferred",
@@ -6459,7 +7011,10 @@
     "popularGames": [
       {
         "title": "Phasmophobia",
-        "appId": 739630
+        "appId": 739630,
+        "igdbGameId": 132516,
+        "igdbSlug": "phasmophobia",
+        "igdbCoverId": "coamcz"
       }
     ],
     "applicationLocation": "Southampton hybrid · UK right-to-work required",
@@ -6563,7 +7118,10 @@
     "popularGames": [
       {
         "title": "Idle Miner Tycoon",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 87052,
+        "igdbSlug": "idle-miner-tycoon",
+        "igdbCoverId": "co2qe6"
       }
     ],
     "profileSources": [
@@ -6611,23 +7169,38 @@
       },
       {
         "title": "Moorhuhn Kart 4",
-        "appId": 3012980
+        "appId": 3012980,
+        "igdbGameId": 328411,
+        "igdbSlug": "moorhuhn-kart-4",
+        "igdbCoverId": "co9d8l"
       },
       {
         "title": "Yatzi 2",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 364082,
+        "igdbSlug": "yatzi-2",
+        "igdbCoverId": "coad4b"
       },
       {
         "title": "Ludo XXL 2",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 362369,
+        "igdbSlug": "ludo-xxl-2",
+        "igdbCoverId": "coac9d"
       },
       {
         "title": "Tow Game",
-        "appId": 3690870
+        "appId": 3690870,
+        "igdbGameId": 348347,
+        "igdbSlug": "tow-game",
+        "igdbCoverId": "cob4lr"
       },
       {
         "title": "Whoowasit?",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 381712,
+        "igdbSlug": "whoowasit",
+        "igdbCoverId": "cob1sp"
       }
     ],
     "profileSources": [
@@ -6725,11 +7298,17 @@
     "popularGames": [
       {
         "title": "Test Drive Unlimited Solar Crown",
-        "appId": 1249970
+        "appId": 1249970,
+        "igdbGameId": 135671,
+        "igdbSlug": "test-drive-unlimited-solar-crown",
+        "igdbCoverId": "co7my1"
       },
       {
         "title": "WRC Generations",
-        "appId": 1953520
+        "appId": 1953520,
+        "igdbGameId": 201963,
+        "igdbSlug": "wrc-generations",
+        "igdbCoverId": "co4rp1"
       }
     ],
     "profileSources": [
@@ -6768,7 +7347,10 @@
     "popularGames": [
       {
         "title": "Oaken",
-        "appId": 1348690
+        "appId": 1348690,
+        "igdbGameId": 165396,
+        "igdbSlug": "oaken",
+        "igdbCoverId": "co3p5p"
       },
       {
         "title": "Haze",
@@ -6825,11 +7407,17 @@
       },
       {
         "title": "Divinity: Original Sin II",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 11800,
+        "igdbSlug": "divinity-original-sin-ii",
+        "igdbCoverId": "co1y5v"
       },
       {
         "title": "Divinity: Original Sin",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 5082,
+        "igdbSlug": "divinity-original-sin",
+        "igdbCoverId": "co2axn"
       }
     ],
     "profileSources": [
@@ -7000,7 +7588,10 @@
       {
         "title": "DECAYED",
         "appId": 2733180,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 280301,
+        "igdbSlug": "decayed",
+        "igdbCoverId": "co99q1"
       }
     ],
     "applicationLocation": "Fully remote · worldwide stated on application page",
@@ -7076,17 +7667,26 @@
       {
         "title": "WWE 2K26",
         "appId": 3717070,
-        "stage": "Co-development contribution"
+        "stage": "Co-development contribution",
+        "igdbGameId": 387782,
+        "igdbSlug": "wwe-2k26",
+        "igdbCoverId": "cobebd"
       },
       {
         "title": "Tiny Tina's Wonderlands",
         "appId": 1286680,
-        "stage": "Co-development contribution"
+        "stage": "Co-development contribution",
+        "igdbGameId": 152061,
+        "igdbSlug": "tiny-tinas-wonderlands",
+        "igdbCoverId": "co390m"
       },
       {
         "title": "Diablo IV",
         "appId": 2344520,
-        "stage": "Co-development contribution"
+        "stage": "Co-development contribution",
+        "igdbGameId": 125165,
+        "igdbSlug": "diablo-iv",
+        "igdbCoverId": "co69sm"
       }
     ],
     "profileSources": [
@@ -7227,7 +7827,10 @@
       {
         "title": "The House of Hikmah",
         "appId": 3451680,
-        "stage": "Demo available"
+        "stage": "Demo available",
+        "igdbGameId": 380426,
+        "igdbSlug": "the-house-of-hikmah",
+        "igdbCoverId": "coay7c"
       }
     ],
     "applicationLocation": "Fully remote · global team; eligibility not stated",
@@ -7267,7 +7870,10 @@
     "popularGames": [
       {
         "title": "Pax Dei",
-        "appId": 1995520
+        "appId": 1995520,
+        "igdbGameId": 240432,
+        "igdbSlug": "pax-dei",
+        "igdbCoverId": "co8b9p"
       }
     ],
     "profileSources": [
@@ -7724,11 +8330,17 @@
     "popularGames": [
       {
         "title": "Luigi’s Mansion 3",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 109455,
+        "igdbSlug": "luigis-mansion-3",
+        "igdbCoverId": "co22a9"
       },
       {
         "title": "Mario Strikers: Battle League",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 191398,
+        "igdbSlug": "mario-strikers-battle-league",
+        "igdbCoverId": "co83vf"
       }
     ],
     "profileSources": [
@@ -7853,11 +8465,17 @@
       },
       {
         "title": "Fighting Fantasy Legends",
-        "appId": 496340
+        "appId": 496340,
+        "igdbGameId": 40557,
+        "igdbSlug": "fighting-fantasy-legends",
+        "igdbCoverId": "co24gv"
       },
       {
         "title": "Talisman: Origins",
-        "appId": 1033170
+        "appId": 1033170,
+        "igdbGameId": 117644,
+        "igdbSlug": "talisman-origins",
+        "igdbCoverId": "co42ws"
       }
     ],
     "profileSources": [
@@ -7922,19 +8540,31 @@
     "popularGames": [
       {
         "title": "Avowed",
-        "appId": 2457220
+        "appId": 2457220,
+        "igdbGameId": 135994,
+        "igdbSlug": "avowed",
+        "igdbCoverId": "co7nbb"
       },
       {
         "title": "The Outer Worlds",
-        "appId": 578650
+        "appId": 578650,
+        "igdbGameId": 113114,
+        "igdbSlug": "the-outer-worlds",
+        "igdbCoverId": "co2eew"
       },
       {
         "title": "The Outer Worlds 2",
-        "appId": 1449110
+        "appId": 1449110,
+        "igdbGameId": 152246,
+        "igdbSlug": "the-outer-worlds-2",
+        "igdbCoverId": "co9xx4"
       },
       {
         "title": "Pillars of Eternity",
-        "appId": 291650
+        "appId": 291650,
+        "igdbGameId": 1593,
+        "igdbSlug": "pillars-of-eternity",
+        "igdbCoverId": "co8tzg"
       }
     ],
     "profileSources": [
@@ -7987,7 +8617,10 @@
       {
         "title": "Clash Royale",
         "appId": null,
-        "stage": "Art / live-operations services"
+        "stage": "Art / live-operations services",
+        "igdbGameId": 15707,
+        "igdbSlug": "clash-royale",
+        "igdbCoverId": "cobb48"
       },
       {
         "title": "Fortnite",
@@ -8002,12 +8635,18 @@
       {
         "title": "Everdale",
         "appId": null,
-        "stage": "Original studio project"
+        "stage": "Original studio project",
+        "igdbGameId": 165321,
+        "igdbSlug": "everdale",
+        "igdbCoverId": "co3nsd"
       },
       {
         "title": "Clash Royale",
         "appId": null,
-        "stage": "Art/live-operations services"
+        "stage": "Art/live-operations services",
+        "igdbGameId": 15707,
+        "igdbSlug": "clash-royale",
+        "igdbCoverId": "cobb48"
       },
       {
         "title": "Fortnite",
@@ -8084,11 +8723,17 @@
     "popularGames": [
       {
         "title": "Slapshot: Rebound",
-        "appId": 1173370
+        "appId": 1173370,
+        "igdbGameId": 132909,
+        "igdbSlug": "slapshot-rebound",
+        "igdbCoverId": "co76nd"
       },
       {
         "title": "Strikers Club",
-        "appId": 1952920
+        "appId": 1952920,
+        "igdbGameId": 343323,
+        "igdbSlug": "strikers-club",
+        "igdbCoverId": "coc7xa"
       }
     ],
     "profileSources": [
@@ -8271,11 +8916,17 @@
     "popularGames": [
       {
         "title": "The Incentive Program",
-        "appId": 4429290
+        "appId": 4429290,
+        "igdbGameId": 402643,
+        "igdbSlug": "the-incentive-program",
+        "igdbCoverId": "coc3oh"
       },
       {
         "title": "The Creeps",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 232581,
+        "igdbSlug": "the-creeps",
+        "igdbCoverId": "co6ybn"
       },
       {
         "title": "Monopoly Match",
@@ -8316,11 +8967,17 @@
     "popularGames": [
       {
         "title": "Through the Darkest of Times",
-        "appId": 1003090
+        "appId": 1003090,
+        "igdbGameId": 107172,
+        "igdbSlug": "through-the-darkest-of-times",
+        "igdbCoverId": "co1xel"
       },
       {
         "title": "The Darkest Files",
-        "appId": 2058730
+        "appId": 2058730,
+        "igdbGameId": 214233,
+        "igdbSlug": "the-darkest-files",
+        "igdbCoverId": "co66ds"
       }
     ],
     "applicationLocation": "Berlin · full-time",
@@ -8447,7 +9104,10 @@
     "popularGames": [
       {
         "title": "Shakes & Fidget",
-        "appId": 438040
+        "appId": 438040,
+        "igdbGameId": 18090,
+        "igdbSlug": "shakes-and-fidget",
+        "igdbCoverId": "coab01"
       }
     ],
     "profileSources": [
@@ -8618,7 +9278,10 @@
     "popularGames": [
       {
         "title": "Motorsport Manager",
-        "appId": 415200
+        "appId": 415200,
+        "igdbGameId": 19293,
+        "igdbSlug": "motorsport-manager",
+        "igdbCoverId": "co4kgg"
       }
     ],
     "profileSources": [
@@ -9076,7 +9739,10 @@
     "popularGames": [
       {
         "title": "Backpack Brawl",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 309589,
+        "igdbSlug": "backpack-brawl",
+        "igdbCoverId": "coa1mb"
       }
     ],
     "profileSources": [
@@ -9231,7 +9897,10 @@
       {
         "title": "Chronicles: Medieval",
         "appId": 2231020,
-        "stage": "Debut game · 2026 Early Access plan"
+        "stage": "Debut game · 2026 Early Access plan",
+        "igdbGameId": 347635,
+        "igdbSlug": "chronicles-medieval",
+        "igdbCoverId": "co9xh3"
       }
     ],
     "applicationLocation": "Copenhagen / hybrid / remote within CET ±1–2 hours",
@@ -9296,7 +9965,10 @@
     "popularGames": [
       {
         "title": "The Blood of Dawnwalker",
-        "appId": 3751260
+        "appId": 3751260,
+        "igdbGameId": 282831,
+        "igdbSlug": "the-blood-of-dawnwalker",
+        "igdbCoverId": "cob7ym"
       }
     ],
     "profileSources": [
@@ -9418,7 +10090,10 @@
     "popularGames": [
       {
         "title": "Soulstice",
-        "appId": 1602080
+        "appId": 1602080,
+        "igdbGameId": 152262,
+        "igdbSlug": "soulstice",
+        "igdbCoverId": "co39sa"
       },
       {
         "title": "Theseus",
@@ -9537,23 +10212,38 @@
     "popularGames": [
       {
         "title": "Hell Clock",
-        "appId": 1782460
+        "appId": 1782460,
+        "igdbGameId": 324256,
+        "igdbSlug": "hell-clock",
+        "igdbCoverId": "cocczq"
       },
       {
         "title": "Relic Hunters Legend",
-        "appId": 633080
+        "appId": 633080,
+        "igdbGameId": 72497,
+        "igdbSlug": "relic-hunters-legend",
+        "igdbCoverId": "co757i"
       },
       {
         "title": "Relic Hunters Rebels",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 200309,
+        "igdbSlug": "relic-hunters-rebels",
+        "igdbCoverId": "co4q50"
       },
       {
         "title": "Relic Hunters Zero",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 12301,
+        "igdbSlug": "relic-hunters-zero",
+        "igdbCoverId": "co1pj8"
       },
       {
         "title": "Star Vikings Forever",
-        "appId": 488960
+        "appId": 488960,
+        "igdbGameId": 51899,
+        "igdbSlug": "star-vikings-forever",
+        "igdbCoverId": "cobxmt"
       }
     ],
     "profileSources": [
@@ -9784,7 +10474,10 @@
     "popularGames": [
       {
         "title": "Faraday Blues",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 418498,
+        "igdbSlug": "faraday-blues",
+        "igdbCoverId": "cocxgl"
       },
       {
         "title": "Vivarium",
@@ -9792,11 +10485,17 @@
       },
       {
         "title": "Fractured Blooms",
-        "appId": 3730310
+        "appId": 3730310,
+        "igdbGameId": 347648,
+        "igdbSlug": "fractured-blooms",
+        "igdbCoverId": "co9xgt"
       },
       {
         "title": "Springs, Eternal",
-        "appId": 3677850
+        "appId": 3677850,
+        "igdbGameId": 380435,
+        "igdbSlug": "springs-eternal",
+        "igdbCoverId": "coay7y"
       }
     ],
     "profileSources": [
@@ -9839,23 +10538,38 @@
     "popularGames": [
       {
         "title": "Evoland",
-        "appId": 233470
+        "appId": 233470,
+        "igdbGameId": 2029,
+        "igdbSlug": "evoland",
+        "igdbCoverId": "co2sb1"
       },
       {
         "title": "Evoland 2",
-        "appId": 359310
+        "appId": 359310,
+        "igdbGameId": 11798,
+        "igdbSlug": "evoland-2",
+        "igdbCoverId": "co295h"
       },
       {
         "title": "Northgard",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 18918,
+        "igdbSlug": "northgard",
+        "igdbCoverId": "guqifzispzew1rubnyzd"
       },
       {
         "title": "Wartales",
-        "appId": 1527950
+        "appId": 1527950,
+        "igdbGameId": 152257,
+        "igdbSlug": "wartales",
+        "igdbCoverId": "co6dpz"
       },
       {
         "title": "Dune: Spice Wars",
-        "appId": 1605220
+        "appId": 1605220,
+        "igdbGameId": 185253,
+        "igdbSlug": "dune-spice-wars",
+        "igdbCoverId": "co4a96"
       }
     ],
     "profileSources": [
@@ -10094,17 +10808,26 @@
       {
         "title": "Trail of Toads",
         "appId": 2117110,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 223166,
+        "igdbSlug": "trail-of-toads",
+        "igdbCoverId": "co6306"
       },
       {
         "title": "Downfall Hearts",
         "appId": 1430020,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 258487,
+        "igdbSlug": "downfall-hearts",
+        "igdbCoverId": "co6u2o"
       },
       {
         "title": "Windstorm: Start of a Great Friendship - Remastered",
         "appId": 2829790,
-        "stage": "Developed/remastered by the studio"
+        "stage": "Developed/remastered by the studio",
+        "igdbGameId": 295730,
+        "igdbSlug": "windstorm-start-of-a-great-friendship-remastered",
+        "igdbCoverId": "co8dsv"
       }
     ],
     "profileSources": [
@@ -10618,7 +11341,10 @@
     "popularGames": [
       {
         "title": "Naturalist",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 334026,
+        "igdbSlug": "naturalist",
+        "igdbCoverId": "co9hch"
       },
       {
         "title": "SpongeBob Biomes",
@@ -10705,12 +11431,18 @@
       {
         "title": "M.O.O.D.S.",
         "appId": 1956770,
-        "stage": "Released in Early Access"
+        "stage": "Released in Early Access",
+        "igdbGameId": 199487,
+        "igdbSlug": "moods",
+        "igdbCoverId": "coa458"
       },
       {
         "title": "Memorrha",
         "appId": 954080,
-        "stage": "Released"
+        "stage": "Released",
+        "igdbGameId": 109573,
+        "igdbSlug": "memorrha",
+        "igdbCoverId": "cocs6h"
       }
     ],
     "profileSources": [
@@ -10782,44 +11514,71 @@
       {
         "title": "Remothered: Red Nun's Legacy",
         "appId": 3335310,
-        "stage": "Released 2026-10-27"
+        "stage": "Released 2026-10-27",
+        "igdbGameId": 394670,
+        "igdbSlug": "remothered-red-nuns-legacy",
+        "igdbCoverId": "cobrbr"
       },
       {
         "title": "Remothered: Tormented Fathers Remastered",
         "appId": 4457050,
-        "stage": "Announced for Q1 2027"
+        "stage": "Announced for Q1 2027",
+        "igdbGameId": 409009,
+        "igdbSlug": "remothered-tormented-fathers-remastered",
+        "igdbCoverId": "coccrg"
       },
       {
         "title": "Remothered: Broken Porcelain Remastered",
         "appId": 4461560,
-        "stage": "Announced for Q1 2027"
+        "stage": "Announced for Q1 2027",
+        "igdbGameId": 409008,
+        "igdbSlug": "remothered-broken-porcelain-remastered",
+        "igdbCoverId": "coccre"
       },
       {
         "title": "A Quiet Place: The Road Ahead",
         "appId": 2233120,
-        "stage": "Released 2024"
+        "stage": "Released 2024",
+        "igdbGameId": 294453,
+        "igdbSlug": "a-quiet-place-the-road-ahead",
+        "igdbCoverId": "co8gtp"
       },
       {
         "title": "Batora: Lost Haven",
         "appId": 1506440,
-        "stage": "Released 2022"
+        "stage": "Released 2022",
+        "igdbGameId": 142900,
+        "igdbSlug": "batora-lost-haven",
+        "igdbCoverId": "co2p95"
       },
       {
         "title": "Mafia: The Old Country",
         "appId": 1941540,
-        "stage": "Co-development contribution"
+        "stage": "Co-development contribution",
+        "igdbGameId": 314276,
+        "igdbSlug": "mafia-the-old-country",
+        "igdbCoverId": "coa9dq"
       },
       {
         "title": "Remothered: Tormented Fathers",
-        "appId": 633360
+        "appId": 633360,
+        "igdbGameId": 28548,
+        "igdbSlug": "remothered-tormented-fathers",
+        "igdbCoverId": "co26dl"
       },
       {
         "title": "Batora: Lost Haven",
-        "appId": 1506440
+        "appId": 1506440,
+        "igdbGameId": 142900,
+        "igdbSlug": "batora-lost-haven",
+        "igdbCoverId": "co2p95"
       },
       {
         "title": "A Quiet Place: The Road Ahead",
-        "appId": 2233120
+        "appId": 2233120,
+        "igdbGameId": 294453,
+        "igdbSlug": "a-quiet-place-the-road-ahead",
+        "igdbCoverId": "co8gtp"
       }
     ],
     "profileSources": [
@@ -11022,7 +11781,10 @@
       {
         "title": "UNRECORD",
         "appId": 2381520,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 246417,
+        "igdbSlug": "unrecord",
+        "igdbCoverId": "co6es1"
       }
     ],
     "profileSources": [
@@ -11061,15 +11823,24 @@
     "popularGames": [
       {
         "title": "V Rising",
-        "appId": 1604030
+        "appId": 1604030,
+        "igdbGameId": 148228,
+        "igdbSlug": "v-rising",
+        "igdbCoverId": "coby9v"
       },
       {
         "title": "Battlerite",
-        "appId": 504370
+        "appId": 504370,
+        "igdbGameId": 23193,
+        "igdbSlug": "battlerite",
+        "igdbCoverId": "cocsmn"
       },
       {
         "title": "Bloodline Champions",
-        "appId": 6370
+        "appId": 6370,
+        "igdbGameId": 2352,
+        "igdbSlug": "bloodline-champions",
+        "igdbCoverId": "co2pkx"
       }
     ],
     "profileSources": [
@@ -11215,11 +11986,17 @@
       },
       {
         "title": "The Quarry",
-        "appId": 1577120
+        "appId": 1577120,
+        "igdbGameId": 194404,
+        "igdbSlug": "the-quarry",
+        "igdbCoverId": "co4kl4"
       },
       {
         "title": "Little Nightmares III",
-        "appId": 1392860
+        "appId": 1392860,
+        "igdbGameId": 262529,
+        "igdbSlug": "little-nightmares-iii--1",
+        "igdbCoverId": "coa171"
       }
     ],
     "profileSources": [
@@ -11334,7 +12111,10 @@
     "popularGames": [
       {
         "title": "Lily's Garden",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 129160,
+        "igdbSlug": "lilys-garden",
+        "igdbCoverId": "co2hp6"
       }
     ],
     "profileSources": [
@@ -11375,7 +12155,10 @@
     "popularGames": [
       {
         "title": "BLACKPINK THE GAME",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 250430,
+        "igdbSlug": "blackpink-the-game",
+        "igdbCoverId": "co6j74"
       },
       {
         "title": "BTS WORLD Season 2",
@@ -11391,7 +12174,10 @@
       },
       {
         "title": "Pucca Puzzle Adventure",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 239003,
+        "igdbSlug": "pucca-puzzle-adventure",
+        "igdbCoverId": "co66ll"
       }
     ],
     "profileSources": [
@@ -11506,7 +12292,10 @@
       {
         "title": "Ardem",
         "appId": 2179480,
-        "stage": "In development"
+        "stage": "In development",
+        "igdbGameId": 260389,
+        "igdbSlug": "ardem",
+        "igdbCoverId": "cobs64"
       }
     ],
     "profileSources": [
@@ -11575,7 +12364,10 @@
     "popularGames": [
       {
         "title": "Project Zomboid",
-        "appId": 108600
+        "appId": 108600,
+        "igdbGameId": 3189,
+        "igdbSlug": "project-zomboid",
+        "igdbCoverId": "co7kod"
       }
     ],
     "applicationLocation": "Fully remote · worldwide contributors",
@@ -11685,17 +12477,26 @@
       {
         "title": "Forza Horizon",
         "appId": null,
-        "stage": "Co-development credit"
+        "stage": "Co-development credit",
+        "igdbGameId": 3047,
+        "igdbSlug": "forza-horizon",
+        "igdbCoverId": "co228y"
       },
       {
         "title": "Sea of Thieves",
         "appId": 1172620,
-        "stage": "Co-development credit"
+        "stage": "Co-development credit",
+        "igdbGameId": 11137,
+        "igdbSlug": "sea-of-thieves",
+        "igdbCoverId": "co2558"
       },
       {
         "title": "Hearthstone",
         "appId": null,
-        "stage": "Co-development credit"
+        "stage": "Co-development credit",
+        "igdbGameId": 1279,
+        "igdbSlug": "hearthstone",
+        "igdbCoverId": "co1sh2"
       }
     ],
     "applicationLocation": "Location not specified · use HQ as reference",
@@ -11770,7 +12571,10 @@
     "popularGames": [
       {
         "title": "Darksiders",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 1270,
+        "igdbSlug": "darksiders",
+        "igdbCoverId": "co29t0"
       },
       {
         "title": "Destroy All Humans!",
@@ -11778,7 +12582,10 @@
       },
       {
         "title": "Wreckfest",
-        "appId": 228380
+        "appId": 228380,
+        "igdbGameId": 3772,
+        "igdbSlug": "wreckfest",
+        "igdbCoverId": "co3vof"
       }
     ],
     "profileSources": [
@@ -12007,7 +12814,10 @@
       {
         "title": "XDefiant",
         "appId": null,
-        "stage": "Co-development contribution"
+        "stage": "Co-development contribution",
+        "igdbGameId": 159029,
+        "igdbSlug": "xdefiant",
+        "igdbCoverId": "co6dta"
       }
     ],
     "profileSources": [
@@ -12044,11 +12854,17 @@
     "popularGames": [
       {
         "title": "Subnautica",
-        "appId": 264710
+        "appId": 264710,
+        "igdbGameId": 9254,
+        "igdbSlug": "subnautica",
+        "igdbCoverId": "coa938"
       },
       {
         "title": "Subnautica: Below Zero",
-        "appId": 848450
+        "appId": 848450,
+        "igdbGameId": 107315,
+        "igdbSlug": "subnautica-below-zero",
+        "igdbCoverId": "co39ve"
       }
     ],
     "profileSources": [
@@ -12167,23 +12983,38 @@
       },
       {
         "title": "Midnight Murder Club",
-        "appId": 2698870
+        "appId": 2698870,
+        "igdbGameId": 312282,
+        "igdbSlug": "midnight-murder-club",
+        "igdbCoverId": "co96gv"
       },
       {
         "title": "Bounce Arcade",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 306945,
+        "igdbSlug": "bounce-arcade",
+        "igdbCoverId": "co8eme"
       },
       {
         "title": "Hot Wheels Rift Rally",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 254347,
+        "igdbSlug": "hot-wheels-rift-rally",
+        "igdbCoverId": "co72ms"
       },
       {
         "title": "Knockout City",
-        "appId": 1301210
+        "appId": 1301210,
+        "igdbGameId": 143615,
+        "igdbSlug": "knockout-city",
+        "igdbCoverId": "co2tvg"
       },
       {
         "title": "Mario Kart Live: Home Circuit",
-        "appId": null
+        "appId": null,
+        "igdbGameId": 138251,
+        "igdbSlug": "mario-kart-live-home-circuit",
+        "igdbCoverId": "co2fuw"
       }
     ],
     "profileSources": [
@@ -12223,11 +13054,17 @@
     "popularGames": [
       {
         "title": "The 7th Guest Remake",
-        "appId": 4491360
+        "appId": 4491360,
+        "igdbGameId": 394668,
+        "igdbSlug": "the-7th-guest-remake",
+        "igdbCoverId": "cobrc7"
       },
       {
         "title": "Thief VR: Legacy of Shadow",
-        "appId": 2800080
+        "appId": 2800080,
+        "igdbGameId": 347124,
+        "igdbSlug": "thief-vr-legacy-of-shadow",
+        "igdbCoverId": "co9ww7"
       },
       {
         "title": "Metro Awakening",
@@ -12276,7 +13113,10 @@
     "popularGames": [
       {
         "title": "Eville",
-        "appId": 1220170
+        "appId": 1220170,
+        "igdbGameId": 133619,
+        "igdbSlug": "eville",
+        "igdbCoverId": "co4vhs"
       }
     ],
     "applicationLocation": "Hybrid / remote · full-time roles require German; English required",
@@ -12398,7 +13238,10 @@
       {
         "title": "Galactic Prospectors",
         "appId": 3561380,
-        "stage": "Early Access"
+        "stage": "Early Access",
+        "igdbGameId": 346852,
+        "igdbSlug": "galactic-prospectors",
+        "igdbCoverId": "cocwd8"
       },
       {
         "title": "Starbreaker",
@@ -12467,12 +13310,18 @@
       {
         "title": "WE ARE FOOTBALL 2027",
         "appId": 4328570,
-        "stage": "Current title"
+        "stage": "Current title",
+        "igdbGameId": 417785,
+        "igdbSlug": "we-are-football-2027",
+        "igdbCoverId": "cocwyq"
       },
       {
         "title": "WE ARE FOOTBALL 2024",
         "appId": 1951410,
-        "stage": "Released"
+        "stage": "Released",
+        "igdbGameId": 288844,
+        "igdbSlug": "we-are-football-2024",
+        "igdbCoverId": "co7tr3"
       },
       {
         "title": "Taktikfuchs: Eishockey",
@@ -12523,17 +13372,26 @@
       {
         "title": "Destiny 2",
         "appId": 1085660,
-        "stage": "Technology services"
+        "stage": "Technology services",
+        "igdbGameId": 25657,
+        "igdbSlug": "destiny-2",
+        "igdbCoverId": "coc89g"
       },
       {
         "title": "Apex Legends",
         "appId": 1172470,
-        "stage": "Technology services"
+        "stage": "Technology services",
+        "igdbGameId": 114795,
+        "igdbSlug": "apex-legends",
+        "igdbCoverId": "cocqh2"
       },
       {
         "title": "NBA 2K",
         "appId": null,
-        "stage": "Technology services"
+        "stage": "Technology services",
+        "igdbGameId": 8832,
+        "igdbSlug": "nba-2k",
+        "igdbCoverId": "co5xx3"
       }
     ],
     "profileSources": [
@@ -12768,7 +13626,10 @@
     "popularGames": [
       {
         "title": "Yooca: Your Life",
-        "appId": 4138870
+        "appId": 4138870,
+        "igdbGameId": 390516,
+        "igdbSlug": "yooca-your-life",
+        "igdbCoverId": "cobjwm"
       }
     ],
     "profileSources": [
