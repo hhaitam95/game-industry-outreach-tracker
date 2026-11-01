@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-01 — Shared visual design refresh
+
+- Introduce a consistent neutral, card-led visual system across the studio directory, matching dashboard, application tracker and candidate profile.
+- Refine navigation with lightweight inline icons, clearer active states, rounded controls, accessible focus styling and responsive spacing.
+- Improve light and dark theme surfaces, typography, table readability and mobile navigation without adding UI or icon-library dependencies.
+
 ## 2026-11-01 — Studio directory overview and UI refresh
 
 - Reduce the main studio table to studio, location, notable work, studio type and tracker action; move the website and speculative-application links into the expanded overview.
