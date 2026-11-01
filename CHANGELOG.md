@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-11-01 — Candidate profile and application workspace roadmap
+
+- Define the next product layer: a structured, private Candidate Profile, evidence-based matching, a personal Application Queue and an application preparation workspace.
+- Keep global studio discovery worldwide and non-personalized; profile preferences affect private priority only.
+- Separate professional relevance, application accessibility/readiness and personal priority; preserve source evidence, unknowns and manual overrides.
+- Standardize on one approved master resume and one master motivation letter/message by default, with no automatic embellishment or per-studio resume tailoring.
+- Keep candidate data browser-local and document IndexedDB/export-import/privacy requirements.
+- Explicitly defer browser-extension/desktop automation, ATS adapters, autofill, uploads, email sending and automated submission pending a separate design and approval.
+- Documentation only: no application code, UI, schema or runtime behavior changed in this update.
+
 ## 2026-10-31 — Phase B game-poster artwork fallback (PR #78 update)
 
 - Keep Steam library covers as the first choice and add IGDB cover art as a fallback when Steam image URLs are missing or unavailable.
