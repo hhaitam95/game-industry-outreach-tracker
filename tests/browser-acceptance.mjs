@@ -280,11 +280,15 @@ async function main() {
     await page.getByRole("button", { name: "Switch to light theme" }).click();
     assert.equal(await page.locator("html").getAttribute("data-bs-theme"), "light");
 
+    await page.getByLabel("Rows per page").selectOption("100");
     const rows = page.locator(".studio-data-row");
     const initialCount = await rows.count();
-    assert.ok(initialCount > 100, "The global directory should contain a substantial set of active studios.");
-    assert.ok(await page.locator(".studio-mark").count() > 100, "Studio marks should appear for directory rows.");
-    assert.ok(await page.locator(".country-flag").count() > 100, "Known studio locations should display flags.");
+    const totalResultsText = await page.locator(".directory-pagination-summary").textContent() || "";
+    const totalResults = Number(totalResultsText.match(/of\s+(\d+)/)?.[1] || 0);
+    assert.ok(totalResults > 100, "The global directory should contain a substantial set of active studios.");
+    assert.equal(initialCount, 100, "The selected page size should cap the initial directory view at 100 rows.");
+    assert.ok(await page.locator(".studio-mark").count() > 50, "Studio marks should appear for visible directory rows.");
+    assert.ok(await page.locator(".country-flag").count() > 50, "Known studio locations should display flags.");
     assert.ok(await page.locator(".studio-scale-tag").count() > 0, "Classified studios should show a scale badge beside the name.");
     assert.ok(await page.locator(".studio-at-a-glance .studio-facet-tag").count() > 0, "The At a glance column should show platform and focus tags.");
     assert.deepEqual(
@@ -449,7 +453,7 @@ async function main() {
     assert.equal(await websiteLink.getAttribute("href"), "https://www.4a-games.com.mt/");
     const expandedMetroExodusPoster = fourAGamesDetails.locator('.game-poster-card[data-game-title="Metro Exodus"]');
     assert.equal(await expandedMetroExodusPoster.getAttribute("data-release-year"), "2019");
-    await expandedMetroExodusPoster.getByText("· 2019", { exact: true }).waitFor();
+    await expandedMetroExodusPoster.getByText("2019", { exact: true }).waitFor();
     const metroLastLightPoster = fourAGamesDetails.locator('.game-poster-card[data-game-title="Metro: Last Light Redux"]');
     assert.equal(await metroLastLightPoster.getAttribute("data-release-year"), "2014");
     await fourAGamesRow.getByRole("button", { name: /4A Games/ }).click();
