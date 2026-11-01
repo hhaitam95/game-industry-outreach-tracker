@@ -75,7 +75,7 @@ test("game posters prefer IGDB covers and retain a verified Steam destination", 
     );
     assert.match(igdbFirst, /data-artwork-source="IGDB"/);
     assert.match(igdbFirst, /data-release-year="2019"/);
-    assert.ok(igdbFirst.includes(">2019</small>"));
+    assert.ok(igdbFirst.includes(">· 2019</small>"));
     assert.match(igdbFirst, /images\.igdb\.com/);
     assert.match(igdbFirst, /href="https:\/\/store\.steampowered\.com\/app\/12345\//);
     assert.doesNotMatch(igdbFirst, /Steam · IGDB fallback/);
