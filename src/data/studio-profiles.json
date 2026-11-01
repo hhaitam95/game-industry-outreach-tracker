@@ -1593,7 +1593,13 @@
       "https://www.asobostudio.com/about-us",
       "https://www.linkedin.com/company/asobo-studio/"
     ],
-    "applicationLocation": "Bordeaux · on-site"
+    "applicationLocation": "Bordeaux · on-site",
+    "socialLinks": [
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/company/asobo-studio/"
+      }
+    ]
   },
   "AstroBeam": {
     "description": "Austin-based independent game studio developing original interactive and virtual-reality experiences, including the titles Robo Detective and Stellar Cafe.",
@@ -2676,6 +2682,12 @@
       "https://store.steampowered.com/developer/braveatnight/",
       "https://www.braveatnight.co.uk/speculative",
       "https://www.braveatnight.co.uk/about"
+    ],
+    "socialLinks": [
+      {
+        "label": "Steam developer page",
+        "url": "https://store.steampowered.com/developer/braveatnight/"
+      }
     ]
   },
   "ByteRockers' Games": {
@@ -2766,7 +2778,13 @@
       "https://byterockers.games/"
     ],
     "applicationLocation": "Berlin, Germany · work model and applicant-country eligibility for unsolicited applicants not stated",
-    "reachHighlights": "Founded in 2008 and based in Berlin. Official developer credits include Insurmountable, Beat Slayer and Gelly Break Deluxe; the studio also publishes games for other developers."
+    "reachHighlights": "Founded in 2008 and based in Berlin. Official developer credits include Insurmountable, Beat Slayer and Gelly Break Deluxe; the studio also publishes games for other developers.",
+    "socialLinks": [
+      {
+        "label": "Steam publisher page",
+        "url": "https://store.steampowered.com/publisher/ByteRockersGames/"
+      }
+    ]
   },
   "Campfire Cabal": {
     "description": "Copenhagen-based game-development studio wholly owned by THQ Nordic, focused on narrative-led, turn-based historical role-playing games for PC. Established in 2022 by veterans of the Expeditions series; after a difficult 2023 restructuring period, THQ Nordic confirmed in May 2025 that the studio survived and had returned to full production. Its current Expeditions: Samurai has reached Early Access.",
@@ -4682,6 +4700,12 @@
       "https://www.embercrows.com/",
       "https://www.embercrows.com/careers/spontaneous-application",
       "https://www.linkedin.com/company/ember-crows"
+    ],
+    "socialLinks": [
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/company/ember-crows"
+      }
     ]
   },
   "Embers": {
@@ -6776,7 +6800,17 @@
       "https://www.linkedin.com/company/hypemasters",
       "https://store.steampowered.com/developer/hypemasters_inc"
     ],
-    "applicationLocation": "Location not specified · HQ shown"
+    "applicationLocation": "Location not specified · HQ shown",
+    "socialLinks": [
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/company/hypemasters"
+      },
+      {
+        "label": "Steam developer page",
+        "url": "https://store.steampowered.com/developer/hypemasters_inc"
+      }
+    ]
   },
   "Hyperkani": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
@@ -9076,6 +9110,12 @@
       "https://ocellus-studio.com/contact",
       "https://ocellus-studio.com/games",
       "https://www.linkedin.com/company/ocellus-games/"
+    ],
+    "socialLinks": [
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/company/ocellus-games/"
+      }
     ]
   },
   "Octocube Games": {
@@ -10365,6 +10405,12 @@
       "https://careers.rawpowergames.com/",
       "https://www.chronicles.net/faq",
       "https://www.linkedin.com/company/raw-power-games"
+    ],
+    "socialLinks": [
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/company/raw-power-games"
+      }
     ]
   },
   "Ready at Dawn": {
@@ -10804,7 +10850,13 @@
       "https://www.linkedin.com/company/rustling-leaves-games",
       "https://www.rustlingleavesgames.com/join-us/general-application/"
     ],
-    "applicationLocation": "Location not stated · revenue-share model; no conventional salary or guaranteed upfront pay stated"
+    "applicationLocation": "Location not stated · revenue-share model; no conventional salary or guaranteed upfront pay stated",
+    "socialLinks": [
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/company/rustling-leaves-games"
+      }
+    ]
   },
   "Sans Strings Studio": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
@@ -11473,7 +11525,13 @@
       "https://jobs.softgames.de/o/unsolicited-application",
       "https://www.linkedin.com/company/softgames-mobile-entertainment-services/"
     ],
-    "applicationLocation": "Remote-first · the unsolicited route does not state specific country or work-authorisation eligibility"
+    "applicationLocation": "Remote-first · the unsolicited route does not state specific country or work-authorisation eligibility",
+    "socialLinks": [
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/company/softgames-mobile-entertainment-services/"
+      }
+    ]
   },
   "Solid Clouds": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
