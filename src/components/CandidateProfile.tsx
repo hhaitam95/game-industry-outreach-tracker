@@ -214,6 +214,16 @@ export default function CandidateProfile() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!dirty) return;
+    const warnBeforeLeaving = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      event.returnValue = "";
+    };
+    window.addEventListener("beforeunload", warnBeforeLeaving);
+    return () => window.removeEventListener("beforeunload", warnBeforeLeaving);
+  }, [dirty]);
+
   function updateProfile<K extends keyof CandidateProfile>(key: K, value: CandidateProfile[K]) {
     setProfile((current) => ({ ...current, [key]: value }));
     setDirty(true);
