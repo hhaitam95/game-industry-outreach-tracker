@@ -36,13 +36,26 @@ function documentValue(value: unknown): ProfileDocument | null {
     typeof mimeType !== "string" ||
     typeof size !== "number" ||
     !Number.isFinite(size) ||
-    size < 0 ||
+    size <= 0 ||
     size > MAX_PROFILE_DOCUMENT_BYTES ||
     typeof lastModified !== "number" ||
+    !Number.isFinite(lastModified) ||
+    lastModified < 0 ||
     typeof dataBase64 !== "string" ||
-    dataBase64.length > Math.ceil(MAX_PROFILE_DOCUMENT_BYTES / 3) * 4 + 8 ||
-    !/^[A-Za-z0-9+/]*={0,2}$/.test(dataBase64)
+    dataBase64.length === 0 ||
+    dataBase64.length > Math.ceil(MAX_PROFILE_DOCUMENT_BYTES / 3) * 4 ||
+    dataBase64.length % 4 !== 0 ||
+    !/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(dataBase64)
   ) return null;
+
+  const padding = dataBase64.endsWith("==") ? 2 : dataBase64.endsWith("=") ? 1 : 0;
+  const decodedSize = (dataBase64.length / 4) * 3 - padding;
+  const extension = name.toLowerCase().split(".").pop();
+  const validPdf = extension === "pdf" && mimeType === "application/pdf";
+  const validDocx =
+    extension === "docx" &&
+    mimeType === "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+  if (decodedSize !== size || (!validPdf && !validDocx)) return null;
 
   return {
     name: name.slice(0, 255),
@@ -205,6 +218,8 @@ export async function loadCandidateProfile(): Promise<CandidateProfile> {
       resolve(record ? normalizeCandidateProfile(record.profile) : createEmptyProfile());
     };
     request.onerror = () => reject(request.error || new Error("Could not read the saved profile."));
+    transaction.onerror = () => reject(transaction.error || new Error("Could not read the saved profile."));
+    transaction.onabort = () => reject(transaction.error || new Error("Profile read was cancelled."));
   });
 }
 
