@@ -23,13 +23,15 @@ Keep this foundation stable. Do not change the discovery inclusion rules or hide
 
 ## Next roadmap — candidate profile and application workspace
 
-### Phase C1 — Candidate Profile foundation
+### Phase C1 — Candidate Profile foundation (implementation in PR #95; awaiting review/merge)
 - Add a structured profile for contact details, professional summary, experience, education, projects/training and skills.
 - Associate skills with evidence and distinguish demonstrated, transferable, learning/exposure, not evidenced and user-confirmed gaps.
 - Add one approved master resume and one master motivation letter/message.
 - Add editable role, work-model and geographical priority preferences.
 - Keep all candidate data browser-local; use a versioned local schema and user-controlled export/import.
 - Preserve original uploaded documents and require approval before changing master materials.
+- Implemented: structured profile UI, separate versioned IndexedDB storage, PDF/DOCX original-file preservation, manual save, versioned JSON export/import, and browser acceptance coverage for persistence and restore.
+- Not included: text extraction from attachments, matching, queue/workspace features, server sync or any application automation.
 
 ### Phase C2 — Matching and assessment
 - Assess professional relevance, application accessibility/readiness and personal priority independently.
