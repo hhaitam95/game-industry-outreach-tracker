@@ -470,7 +470,7 @@ export default function MatchingDashboard({
               <div className="match-card-header">
                 <div className="match-card-identity">
                   <div className="match-studio-title">
-                    <StudioMark name={assessment.name} websiteUrl={studioInfo?.websiteUrl} />
+                    <StudioMark name={assessment.name} websiteUrl={studioInfo?.websiteUrl || ""} />
                     <div>
                       <h2>{assessment.name}</h2>
                       <p>📍 {assessment.country} · {labelFromKey(assessment.routeType)} route</p>
