@@ -210,6 +210,16 @@ if (Array.isArray(studios) && profiles && typeof profiles === "object" && !Array
             errors.push(error.message);
           }
         }
+        if (game?.storeUrl !== undefined) {
+          try { httpsUrl(game.storeUrl, studio.name + ".profile.popularGames[" + gameIndex + "].storeUrl"); }
+          catch (error) { errors.push(error.message); }
+        }
+        if (game?.storeName !== undefined && (typeof game.storeName !== "string" || !game.storeName.trim())) {
+          errors.push(studio.name + ".profile.popularGames[" + gameIndex + "].storeName must be a non-empty string.");
+        }
+        if (game?.storeName !== undefined && game?.storeUrl === undefined) {
+          errors.push(studio.name + ".profile.popularGames[" + gameIndex + "].storeName requires storeUrl.");
+        }
         if (game?.officialUrl !== undefined) {
           try { httpsUrl(game.officialUrl, studio.name + ".profile.popularGames[" + gameIndex + "].officialUrl"); }
           catch (error) { errors.push(error.message); }

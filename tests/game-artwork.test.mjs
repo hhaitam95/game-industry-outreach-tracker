@@ -109,3 +109,25 @@ test("uses the Steam capsule image after the verified header image", () => {
   assert.ok(capsuleIndex > headerIndex);
   assert.equal(sources[capsuleIndex].layout, "landscape");
 });
+
+test("uses a verified direct platform page instead of a generic Steam search", () => {
+  const game = {
+    title: "The Tablet of Destinies",
+    storeUrl: "https://www.roblox.com/games/137066928345713/The-Tablet-Of-Destinies",
+    storeName: "Roblox",
+    officialUrl: "https://www.d4ngames.com/games/tablet-of-destinies",
+    igdbSlug: "tablet-of-destinies",
+  };
+  assert.equal(gameDestination(game), game.storeUrl);
+  assert.equal(gameLinkLabel(game), "Open The Tablet of Destinies on Roblox");
+});
+
+test("keeps the official game page as the destination when no platform store is known", () => {
+  assert.equal(
+    gameDestination({
+      title: "The Tablet of Destinies",
+      officialUrl: "https://www.d4ngames.com/games/tablet-of-destinies",
+    }),
+    "https://www.d4ngames.com/games/tablet-of-destinies",
+  );
+});

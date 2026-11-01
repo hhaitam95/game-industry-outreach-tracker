@@ -12,7 +12,7 @@ Search studios by name, country and studio type; filter by country and work mode
 
 ### Game cover artwork
 
-The directory resolves game artwork in this order: verified Steam portrait art, verified IGDB cover art, a curated official-studio image, then a Steam landscape header. The gallery preserves each source's portrait, square or landscape layout. Cover metadata is stored in `src/data/studio-profiles.json`; the deployed site loads static image URLs and never sends Twitch credentials or makes IGDB API requests from a visitor's browser. Game cards link directly to a verified Steam app page, an official game page or an IGDB page. When no direct destination is verified, the card is deliberately not a link rather than sending visitors to a generic Steam search.
+The directory resolves game artwork in this order: verified Steam portrait art, verified IGDB cover art, a curated official-studio image, then a Steam landscape header. The gallery preserves each source's portrait, square or landscape layout. Cover metadata is stored in `src/data/studio-profiles.json`; the deployed site loads static image URLs and never sends Twitch credentials or makes IGDB API requests from a visitor's browser. Game cards link directly to a verified Steam app page, a verified platform/store page, an official game page or an IGDB page. When no direct destination is verified, the card is deliberately not a link rather than sending visitors to a generic Steam search.
 
 To enrich missing cover metadata, create a Twitch developer application and set `IGDB_CLIENT_ID` and `IGDB_CLIENT_SECRET` in your local environment. Then run:
 

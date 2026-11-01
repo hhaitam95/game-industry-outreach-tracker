@@ -3856,7 +3856,9 @@
         "appId": null,
         "officialUrl": "https://www.d4ngames.com/games/tablet-of-destinies",
         "officialArtworkUrl": "https://d4ngames.com/images/tablet_thumbnail.webp",
-        "officialArtworkLayout": "landscape"
+        "officialArtworkLayout": "landscape",
+        "storeUrl": "https://www.roblox.com/games/137066928345713/The-Tablet-Of-Destinies",
+        "storeName": "Roblox"
       }
     ],
     "profileSources": [
