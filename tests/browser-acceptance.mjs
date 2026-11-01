@@ -227,8 +227,28 @@ async function main() {
     );
     assert.equal(importedDialog.type, "confirm");
     assert.match(importedDialog.message, /Replace the profile currently in this browser/);
+    await page.waitForFunction(() => {
+      const label = Array.from(document.querySelectorAll("label"))
+        .find((item) => item.textContent?.trim() === "Full name");
+      return label?.querySelector("input")?.value === "Test Candidate";
+    });
     assert.equal(await page.getByLabel("Full name").inputValue(), "Test Candidate", "Import should restore the structured profile.");
     assert.equal(await page.getByText("candidate-resume.pdf").count(), 1, "Import should restore the original resume attachment.");
+    const restoredCandidateProfile = await page.evaluate(() => new Promise((resolve, reject) => {
+      const openRequest = indexedDB.open("game-industry-outreach-private", 1);
+      openRequest.onerror = () => reject(openRequest.error);
+      openRequest.onsuccess = () => {
+        const transaction = openRequest.result.transaction("candidate-profile", "readonly");
+        const request = transaction.objectStore("candidate-profile").get("primary");
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => resolve(request.result?.profile);
+      };
+    }));
+    assert.equal(
+      restoredCandidateProfile.materials.masterResume.dataBase64,
+      savedCandidateProfile.materials.masterResume.dataBase64,
+      "Backup import should restore the exact original document bytes.",
+    );
 
     await page.getByRole("button", { name: "Studios", exact: true }).click();
     await page.getByRole("heading", { name: "Studio directory" }).waitFor();
