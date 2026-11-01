@@ -386,6 +386,7 @@ function regionMatches(regions, studio) {
   const country = normalize(studio.country);
   const countryCode = normalize(studio.countryCode);
   const continents = (studio.continents || []).map(normalize);
+  /** @type {Record<string, string>} */
   const countryAliases = {
     uk: "united kingdom",
     britain: "united kingdom",
@@ -407,6 +408,7 @@ function regionMatches(regions, studio) {
 
 /** @param {string} preference @param {string} workModel @returns {boolean} */
 function workModelMatches(preference, workModel) {
+  /** @type {Record<string, string>} */
   const aliases = {
     onsite: "on site",
     "on site": "on site",
