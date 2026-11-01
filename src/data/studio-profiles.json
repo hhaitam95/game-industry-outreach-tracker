@@ -2067,6 +2067,12 @@
       "https://www.barnstormgames.com/",
       "https://uk.linkedin.com/company/barnstorm-games",
       "https://apps.apple.com/gb/developer/barnstorm-games/id385706699"
+    ],
+    "socialLinks": [
+      {
+        "label": "LinkedIn",
+        "url": "https://uk.linkedin.com/company/barnstorm-games"
+      }
     ]
   },
   "BeamNG": {
