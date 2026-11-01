@@ -375,11 +375,13 @@ async function main() {
     const platformCount = await rows.count();
     assert.ok(platformCount > 0 && platformCount < initialCount, "Selecting multiple platforms should narrow the directory.");
     assert.equal(await page.locator(".active-filter-chip").count(), 2, "Each selected platform should appear as a removable active filter chip.");
+    await page.locator(".directory-advanced-filters > summary").click();
     await page.locator(".active-filter-chip").first().click();
     assert.equal(await page.locator(".active-filter-chip").count(), 1, "Removing a filter chip should remove only that filter.");
     await page.getByRole("button", { name: "Reset filters" }).click();
     assert.equal(await rows.count(), initialCount);
 
+    await page.locator(".directory-advanced-filters > summary").click();
     await page.getByLabel("Work model · application route").selectOption("remote");
     const remoteCount = await rows.count();
     assert.ok(remoteCount > 0 && remoteCount < initialCount, "Work-model filtering should remain available under More filters.");
