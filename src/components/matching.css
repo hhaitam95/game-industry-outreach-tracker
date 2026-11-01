@@ -280,7 +280,7 @@
   text-decoration: underline;
 }
 
-.text-button {
+.matching-page .text-button {
   padding: 0;
   border: 0;
   background: transparent;
@@ -290,7 +290,7 @@
   text-align: left;
 }
 
-.text-button:hover {
+.matching-page .text-button:hover {
   text-decoration: underline;
 }
 
