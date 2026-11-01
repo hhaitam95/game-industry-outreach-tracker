@@ -54,16 +54,6 @@ function GameCoverArtwork({ game, compact }: { game: PopularGame; compact: boole
   );
 }
 
-function artworkCaption(game: PopularGame): string {
-  if (game.stage) return game.stage;
-  if (game.igdbCoverId && game.appId) return "Steam · IGDB fallback";
-  if (game.officialArtworkUrl) return "Official artwork";
-  if (game.appStoreArtworkUrl) return "App Store artwork";
-  if (game.appId) return "Steam artwork";
-  if (game.igdbCoverId) return "IGDB cover";
-  return "Artwork unavailable";
-}
-
 function PosterContents({ game }: { game: PopularGame }) {
   return (
     <>
@@ -73,7 +63,6 @@ function PosterContents({ game }: { game: PopularGame }) {
       </span>
       <span className="game-poster-caption">
         <strong>{game.title}</strong>
-        <small>{artworkCaption(game)}</small>
       </span>
     </>
   );

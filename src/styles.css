@@ -77,6 +77,7 @@ body {
   min-height: 100vh;
   background: var(--page);
   color: var(--ink);
+  font-size: 1.0625rem;
 }
 
 button,
@@ -153,12 +154,12 @@ select:focus-visible {
   border-radius: 5px;
   background: #263442;
   color: #ffffff;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.02em;
 }
 
 .brand-name {
-  font-size: 15px;
+  font-size: 17px;
   letter-spacing: -0.02em;
 }
 
@@ -178,7 +179,7 @@ select:focus-visible {
   background: transparent;
   color: var(--muted);
   cursor: pointer;
-  font-size: 13px;
+  font-size: 15px;
   white-space: nowrap;
 }
 
@@ -202,7 +203,7 @@ select:focus-visible {
   border-radius: 10px;
   background: var(--tab-count-bg);
   color: var(--tab-count-ink);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
 }
 
@@ -215,17 +216,12 @@ select:focus-visible {
 }
 
 .theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.workspace-label {
-  color: var(--subtle);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  white-space: nowrap;
+  display: inline-grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  padding: 0;
+  font-size: 18px;
 }
 
 .page-container {
@@ -246,7 +242,7 @@ select:focus-visible {
 .page-heading h1 {
   margin: 0 0 6px;
   color: var(--ink);
-  font-size: 25px;
+  font-size: 28px;
   font-weight: 650;
   letter-spacing: -0.035em;
 }
@@ -254,7 +250,7 @@ select:focus-visible {
 .page-heading p {
   margin: 0;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .page-count {
@@ -266,13 +262,13 @@ select:focus-visible {
 
 .page-count strong {
   color: var(--ink);
-  font-size: 23px;
+  font-size: 26px;
   font-weight: 650;
 }
 
 .page-count span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .form-field {
@@ -280,7 +276,7 @@ select:focus-visible {
   min-width: 0;
   gap: 6px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
 }
 
@@ -294,7 +290,7 @@ select:focus-visible {
   border-radius: 5px;
   background-color: var(--control-bg);
   color: var(--ink);
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .form-field .form-control::placeholder {
@@ -307,7 +303,7 @@ select:focus-visible {
 }
 
 .btn {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
 }
 
@@ -340,7 +336,7 @@ select:focus-visible {
   background: transparent;
   color: var(--primary);
   cursor: pointer;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .text-button:hover {
@@ -355,7 +351,7 @@ select:focus-visible {
   border-radius: 5px;
   background: #fff6f6;
   color: #914040;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 [data-bs-theme="dark"] .storage-warning {
@@ -371,7 +367,7 @@ select:focus-visible {
   border-top: 1px solid var(--line);
   background: var(--surface);
   color: var(--subtle);
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .app-footer span:first-child {
@@ -417,10 +413,6 @@ select:focus-visible {
     gap: 8px;
   }
 
-  .workspace-label {
-    display: none;
-  }
-
   .page-container {
     width: calc(100% - 24px);
     padding-top: 21px;
@@ -444,7 +436,7 @@ select:focus-visible {
 
 @media (max-width: 420px) {
   .brand-name {
-    font-size: 13px;
+    font-size: 15px;
   }
 
   .theme-toggle {

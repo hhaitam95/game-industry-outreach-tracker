@@ -6,7 +6,7 @@ import {
   getGameArtworkSources,
 } from "../src/components/game-artwork.ts";
 
-test("prefers Steam portrait art, then IGDB and official art before a wide header", () => {
+test("prefers IGDB covers before Steam artwork and developer-hosted art", () => {
   const sources = getGameArtworkSources({
     title: "Example Game",
     appId: 12345,
@@ -16,13 +16,32 @@ test("prefers Steam portrait art, then IGDB and official art before a wide heade
     steamHeaderUrl: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/12345/header.jpg",
   });
 
+  assert.equal(sources[0].source, "IGDB");
+  assert.equal(sources[0].url, "https://images.igdb.com/igdb/image/upload/t_cover_big/cover-hash.jpg");
   assert.equal(sources[0].layout, "portrait");
-  assert.equal(sources[0].source, "Steam");
-  assert.equal(sources[3].source, "IGDB");
-  assert.equal(sources[4].source, "Official site");
-  assert.equal(sources[4].layout, "square");
-  assert.equal(sources[5].source, "Steam");
-  assert.equal(sources[5].layout, "landscape");
+  assert.equal(sources[1].source, "Steam");
+  assert.equal(sources[1].layout, "portrait");
+  assert.equal(sources.find(source => source.source === "Official site")?.layout, "square");
+  assert.ok(
+    sources.findIndex(source => source.source === "Official site") >
+      sources.findIndex(source => source.source === "Steam"),
+    "All Steam artwork should be tried before the developer-site fallback.",
+  );
+});
+
+
+test("uses an explicitly stored IGDB cover URL before other artwork sources", () => {
+  const game = {
+    title: "Stuck Together",
+    appId: 3295360,
+    igdbCoverUrl: "https://images.igdb.com/igdb/image/upload/t_cover_big/coa9za.webp",
+    steamHeaderUrl: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3295360/header.jpg",
+    officialArtworkUrl: "https://studio.example/stuck-together.webp",
+  };
+  const sources = getGameArtworkSources(game);
+  assert.equal(sources[0].source, "IGDB");
+  assert.equal(sources[0].url, game.igdbCoverUrl);
+  assert.equal(sources[1].source, "Steam");
 });
 
 test("uses a verified Steam landscape header when no portrait or IGDB art is available", () => {

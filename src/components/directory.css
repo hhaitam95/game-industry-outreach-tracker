@@ -28,7 +28,7 @@
   gap: 8px;
   margin: 0;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   cursor: pointer;
 }
 
@@ -43,7 +43,7 @@
   justify-content: space-between;
   gap: 12px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .table-meta span:first-child {
@@ -61,7 +61,7 @@
 
 .studio-table {
   width: 100%;
-  min-width: 1080px;
+  min-width: 980px;
   text-align: left;
   --bs-table-bg: var(--surface);
   --bs-table-color: var(--muted);
@@ -76,7 +76,7 @@
   border-bottom: 1px solid var(--line);
   background: var(--table-head);
   color: var(--muted);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 650;
   white-space: nowrap;
 }
@@ -86,7 +86,7 @@
   padding: 10px 12px;
   border-bottom: 1px solid var(--table-border);
   color: var(--muted);
-  font-size: 11px;
+  font-size: 12px;
   vertical-align: middle;
 }
 
@@ -125,7 +125,7 @@
   border-radius: 5px;
   background: var(--tag-bg);
   color: var(--tag-ink);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.02em;
 }
@@ -148,13 +148,13 @@
 .country-flag {
   display: inline-block;
   min-width: 17px;
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1;
 }
 
 .new-studio-badge {
   padding: 0.3em 0.48em;
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 0.025em;
 }
 
@@ -165,24 +165,17 @@
   border-radius: 4px;
   background: var(--tag-bg);
   color: var(--tag-ink);
-  font-size: 10px;
+  font-size: 11px;
   white-space: nowrap;
 }
 
-.link-cell {
-  display: flex;
-  gap: 11px;
-  white-space: nowrap;
-}
-
-.link-cell a,
+.studio-profile-links a,
 .tracker-table td a {
   color: var(--primary);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 550;
 }
 
-.link-cell a:hover,
 .tracker-table td a:hover {
   color: var(--primary-hover);
   text-decoration: underline;
@@ -202,7 +195,7 @@
 .tracker-note {
   margin: 0;
   color: var(--subtle);
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.5;
 }
 
@@ -213,11 +206,11 @@
   align-items: center;
   gap: 8px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .automation-status .badge {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
 }
 
@@ -250,7 +243,7 @@
   }
 
   .studio-table {
-    min-width: 1000px;
+    min-width: 900px;
   }
 }
 
@@ -273,7 +266,7 @@
   color: var(--muted);
   cursor: pointer;
   font: inherit;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 650;
   text-align: left;
   white-space: nowrap;
@@ -287,12 +280,12 @@
 
 .sort-indicator {
   color: var(--subtle);
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1;
 }
 
 .studio-table {
-  min-width: 1320px;
+  min-width: 980px;
 }
 
 .studio-data-row {
@@ -331,7 +324,7 @@
   width: 11px;
   flex: 0 0 11px;
   color: var(--subtle);
-  font-size: 12px;
+  font-size: 14px;
   text-align: center;
 }
 
@@ -352,7 +345,7 @@
   border-radius: 4px;
   background: var(--tag-bg);
   color: var(--tag-ink);
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.25;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -361,7 +354,7 @@
 .unlisted-work,
 .detail-muted {
   color: var(--subtle);
-  font-size: 10px;
+  font-size: 11px;
   font-style: italic;
 }
 
@@ -391,7 +384,7 @@
 .studio-detail-section h3 {
   margin: 0 0 6px;
   color: var(--ink);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -399,7 +392,7 @@
   max-width: 900px;
   margin: 0;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.6;
 }
 
@@ -420,13 +413,13 @@
   border-radius: 4px;
   background: var(--surface);
   color: var(--ink);
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .detail-game-chip small,
 .studio-facts-list dd small {
   color: var(--subtle);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 400;
 }
 
@@ -444,7 +437,7 @@
 .studio-facts-list dt {
   margin-bottom: 2px;
   color: var(--subtle);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 650;
   text-transform: uppercase;
   letter-spacing: 0.035em;
@@ -453,7 +446,7 @@
 .studio-facts-list dd {
   margin: 0;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.45;
   overflow-wrap: anywhere;
 }
@@ -467,15 +460,34 @@
   padding-top: 10px;
   border-top: 1px solid var(--line);
   color: var(--subtle);
-  font-size: 9px;
+  font-size: 10px;
 }
 
 .studio-profile-sources > span {
   font-weight: 650;
 }
 
+.studio-profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px 16px;
+  padding: 3px 0;
+}
+
+.studio-profile-links a {
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.studio-profile-links a:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
 .studio-profile-sources a {
-  font-size: 10px;
+  font-size: 11px;
 }
 
 @media (max-width: 900px) {
@@ -509,7 +521,7 @@
   padding-top: 10px;
   border-top: 1px solid var(--line);
   color: var(--subtle);
-  font-size: 9px;
+  font-size: 10px;
 }
 
 .studio-verification-meta strong {
@@ -518,7 +530,7 @@
 }
 
 .studio-verification-meta a {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
 }
 
@@ -605,21 +617,21 @@
 
 .game-cover-monogram {
   color: var(--primary);
-  font-size: 22px;
+  font-size: 25px;
   font-weight: 800;
   letter-spacing: -0.06em;
   line-height: 1;
 }
 
 .game-cover-fallback.is-compact .game-cover-monogram {
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .game-cover-fallback strong {
   display: -webkit-box;
   overflow: hidden;
   color: var(--ink);
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.25;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
@@ -627,7 +639,7 @@
 
 .game-cover-fallback small {
   color: var(--subtle);
-  font-size: 8px;
+  font-size: 9px;
   line-height: 1.25;
 }
 
@@ -698,7 +710,7 @@
   min-height: 2.6em;
   overflow: hidden;
   color: var(--ink);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   line-height: 1.3;
   -webkit-box-orient: vertical;
@@ -708,7 +720,7 @@
 .game-poster-caption small {
   overflow: hidden;
   color: var(--subtle);
-  font-size: 9px;
+  font-size: 10px;
   line-height: 1.3;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -724,18 +736,12 @@
   border-radius: 3px;
   background: rgb(15 18 23 / 82%);
   color: #ffffff;
-  font-size: 8px;
+  font-size: 9px;
   line-height: 1.25;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.game-artwork-note {
-  margin: 8px 0 0;
-  color: var(--subtle);
-  font-size: 9px;
-  line-height: 1.4;
-}
 
 @media (max-width: 520px) {
   .game-poster-grid {

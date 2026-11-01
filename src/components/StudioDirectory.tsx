@@ -30,6 +30,7 @@ type Profile = {
   focus?: string[];
   popularGames?: PopularGame[];
   profileSources?: string[];
+  socialLinks?: { label: string; url: string }[];
   applicationLocation?: string;
   reachHighlights?: string;
 };
@@ -61,7 +62,7 @@ const CONTINENT_ORDER = [
   "Remote / distributed",
   "Not stated",
 ];
-type SortKey = "name" | "location" | "popularWork" | "type" | "workModel" | "route";
+type SortKey = "name" | "location" | "popularWork" | "type";
 type SortDirection = "asc" | "desc";
 
 function isNewStudio(studio: Studio, now: number): boolean {
@@ -83,15 +84,6 @@ function locationSortFor(studio: Studio): string {
 function studioId(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
-function formatDate(value?: string | null): string {
-  if (!value) return "Not recorded";
-  const normalized = /^\d{4}-\d{2}-\d{2}$/.test(value) ? value + "T12:00:00" : value;
-  const date = new Date(normalized);
-  return Number.isNaN(date.getTime())
-    ? value
-    : date.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
-}
-
 export default function StudioDirectory({
   applications,
   onSave,
@@ -191,10 +183,6 @@ export default function StudioDirectory({
           return (profile?.popularGames || []).slice(0, 4).map((game) => game.title).join(" ");
         case "type":
           return (profile?.companyType || []).slice(0, 2).join(" · ") || "Not stated";
-        case "workModel":
-          return workModelLabels[studio.applicationResearch?.workModel || "not_stated"] || "Not stated";
-        case "route":
-          return routeLabels[studio.applicationResearch?.routeType || "general"] || "Open application";
         case "name":
         default:
           return studio.name;
@@ -349,9 +337,6 @@ export default function StudioDirectory({
               {renderSortHeader("location", "Studio location")}
               {renderSortHeader("popularWork", "Notable work")}
               {renderSortHeader("type", "Studio type")}
-              {renderSortHeader("workModel", "Work model")}
-              {renderSortHeader("route", "Application route")}
-              <th scope="col">Links</th>
               <th scope="col">Tracker</th>
             </tr>
           </thead>
@@ -415,10 +400,6 @@ export default function StudioDirectory({
                     <td>{types}</td>
                     <td><span className="plain-tag">{workModelLabels[workType] || "Not stated"}</span></td>
                     <td>{routeLabels[routeType] || "Open application"}</td>
-                    <td className="link-cell">
-                      <a href={studio.applicationUrl} target="_blank" rel="noopener noreferrer">Application</a>
-                      <a href={studio.websiteUrl} target="_blank" rel="noopener noreferrer">Website</a>
-                    </td>
                     <td>
                       <button
                         className={isTracked ? "btn btn-outline-secondary btn-sm" : "btn btn-primary btn-sm"}
@@ -441,7 +422,7 @@ export default function StudioDirectory({
                   </tr>
                   {isExpanded ? (
                     <tr className="studio-details-row" id={detailId}>
-                      <td colSpan={8}>
+                      <td colSpan={5}>
                         <div className="studio-details-panel">
                           <div className="studio-details-grid">
                             <div className="studio-details-main">
@@ -452,46 +433,19 @@ export default function StudioDirectory({
                               <section className="studio-detail-section">
                                 <h3>Notable work</h3>
                                 {notableGames.length > 0 ? (
-                                  <>
-                                    <div className="game-poster-grid">
-                                      {notableGames.map((game) => (
-                                        <GamePoster game={game} key={game.title} />
-                                      ))}
-                                    </div>
-                                    <p className="game-artwork-note">
-                                      Steam covers are preferred. Verified IGDB cover art fills gaps when Steam artwork is unavailable. Artwork metadata is resolved offline; visitors do not make IGDB API requests. Cover-art source: <a href="https://www.igdb.com/" target="_blank" rel="noopener noreferrer">IGDB</a>.
-                                    </p>
-                                  </>
+                                  <div className="game-poster-grid">
+                                    {notableGames.map((game) => (
+                                      <GamePoster game={game} key={game.title} />
+                                    ))}
+                                  </div>
                                 ) : (
                                   <p className="detail-muted">No game titles are listed in this profile.</p>
                                 )}
                               </section>
                               {profile?.reachHighlights ? (
                                 <section className="studio-detail-section">
-                                  <h3>Why this studio stands out</h3>
+                                  <h3>Studio highlights</h3>
                                   <p>{profile.reachHighlights}</p>
-                                </section>
-                              ) : null}
-                              {studio.notes ? (
-                                <section className="studio-detail-section">
-                                  <h3>Application route notes</h3>
-                                  <p>{studio.notes}</p>
-                                </section>
-                              ) : null}
-                              {studio.applicationResearch?.eligibleLocations?.length ? (
-                                <section className="studio-detail-section">
-                                  <h3>Listed hiring locations</h3>
-                                  <p>{studio.applicationResearch.eligibleLocations.join(" · ")}</p>
-                                </section>
-                              ) : null}
-                              {studio.applicationResearch?.disciplineScope?.length ? (
-                                <section className="studio-detail-section">
-                                  <h3>Listed disciplines</h3>
-                                  <div className="focus-tag-list">
-                                    {studio.applicationResearch.disciplineScope.slice(0, 8).map((item) => (
-                                      <span className="focus-tag" key={item}>{item}</span>
-                                    ))}
-                                  </div>
                                 </section>
                               ) : null}
                             </div>
@@ -499,6 +453,7 @@ export default function StudioDirectory({
                               <section className="studio-detail-section">
                                 <h3>Studio snapshot</h3>
                                 <dl className="studio-facts-list">
+                                  <div><dt>Studio type</dt><dd>{profile?.companyType?.join(" · ") || "Not stated"}</dd></div>
                                   <div><dt>Industry scale</dt><dd>{profile?.industryScale || "Not stated"}</dd></div>
                                   <div>
                                     <dt>Team size</dt>
@@ -507,13 +462,20 @@ export default function StudioDirectory({
                                       {profile?.teamSizeAsOf ? <small> · as of {profile.teamSizeAsOf}</small> : null}
                                     </dd>
                                   </div>
+                                  <div>
+                                    <dt>Work model (route listing)</dt>
+                                    <dd>
+                                      {workModelLabels[workType] || "Not stated"}
+                                      <small> · As recorded for the published application route</small>
+                                    </dd>
+                                  </div>
+                                  <div><dt>Application route</dt><dd>{routeLabels[routeType] || "General application"}</dd></div>
                                   <div><dt>Ownership</dt><dd>{profile?.ownership || "Not stated"}</dd></div>
                                   {profile?.parentCompany ? <div><dt>Parent company</dt><dd>{profile.parentCompany}</dd></div> : null}
                                   <div><dt>Headquarters</dt><dd>{studioLocation || "Not stated"}</dd></div>
                                   {profile?.otherLocations?.length ? (
-                                    <div><dt>Other locations</dt><dd>{profile.otherLocations.slice(0, 4).join(" · ")}</dd></div>
+                                    <div><dt>Other locations</dt><dd>{profile.otherLocations.join(" · ")}</dd></div>
                                   ) : null}
-                                  <div><dt>Application location</dt><dd>{profile?.applicationLocation || "See the official application route"}</dd></div>
                                 </dl>
                               </section>
                               {profile?.focus?.length ? (
@@ -526,11 +488,23 @@ export default function StudioDirectory({
                                   </div>
                                 </section>
                               ) : null}
+                              <section className="studio-detail-section">
+                                <h3>Studio links</h3>
+                                <div className="studio-profile-links">
+                                  <a href={studio.websiteUrl} target="_blank" rel="noopener noreferrer">Website</a>
+                                  <a href={studio.applicationUrl} target="_blank" rel="noopener noreferrer">Application route</a>
+                                  {(profile?.socialLinks || []).map((link) => (
+                                    <a href={link.url} key={link.label + link.url} target="_blank" rel="noopener noreferrer">
+                                      {link.label}
+                                    </a>
+                                  ))}
+                                </div>
+                              </section>
                             </div>
                           </div>
                           {profile?.profileSources?.length ? (
                             <div className="studio-profile-sources">
-                              <span>Profile sources</span>
+                              <span>Studio information sources</span>
                               {profile.profileSources.slice(0, 4).map((source, index) => (
                                 <a href={source} key={source} target="_blank" rel="noopener noreferrer">
                                   Source {index + 1}
@@ -538,15 +512,6 @@ export default function StudioDirectory({
                               ))}
                             </div>
                           ) : null}
-                          <div className="studio-verification-meta">
-                            <span>Route last checked: <strong>{formatDate(studio.checkedAt)}</strong></span>
-                            {studio.applicationResearch?.nextReviewAt ? (
-                              <span>Next review target: <strong>{formatDate(studio.applicationResearch.nextReviewAt)}</strong></span>
-                            ) : null}
-                            {studio.evidenceUrl ? (
-                              <a href={studio.evidenceUrl} target="_blank" rel="noopener noreferrer">Route evidence</a>
-                            ) : null}
-                          </div>
                         </div>
                       </td>
                     </tr>
@@ -556,7 +521,7 @@ export default function StudioDirectory({
             })}
             {filtered.length === 0 ? (
               <tr>
-                <td className="empty-table" colSpan={8}>
+                <td className="empty-table" colSpan={5}>
                   No studios match these filters. Use Reset filters above to clear your search and selections.
                 </td>
               </tr>

@@ -32,7 +32,7 @@
   background: transparent;
   color: var(--muted);
   cursor: pointer;
-  font-size: 11px;
+  font-size: 12px;
   white-space: nowrap;
 }
 
@@ -57,7 +57,7 @@
   border-radius: 10px;
   background: var(--tab-count-bg);
   color: var(--tab-count-ink);
-  font-size: 9px;
+  font-size: 10px;
 }
 
 .tracker-tab.active span {
@@ -95,7 +95,7 @@
 
 .tracker-links a {
   color: var(--primary);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 550;
 }
 
@@ -122,7 +122,7 @@
   display: block;
   margin-top: 3px;
   color: var(--subtle);
-  font-size: 9px;
+  font-size: 10px;
 }
 
 .tracker-notes-row > td {
@@ -140,7 +140,7 @@
 .tracker-note-input {
   min-height: 76px;
   resize: vertical;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.5;
 }
 
@@ -149,7 +149,7 @@
   justify-content: space-between;
   gap: 12px;
   color: var(--subtle);
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .tracker-table .empty-table {
