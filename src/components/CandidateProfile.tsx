@@ -419,7 +419,7 @@ export default function CandidateProfile() {
 
       <Section title="Professional summary" description="A concise, honest overview of your background and the contribution you want to make. You can refine the wording later.">
         <Field
-          label="Summary"
+          label="Professional summary"
           value={profile.professionalSummary}
           onChange={(value) => updateProfile("professionalSummary", value)}
           multiline
