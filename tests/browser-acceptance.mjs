@@ -244,7 +244,7 @@ async function main() {
     await page.getByRole("button", { name: /My applications/ }).click();
     await page.getByRole("heading", { name: "My applications" }).waitFor();
 
-    let trackedRow = page.getByRole("row").filter({ hasText: "4A Games" });
+    let trackedRow = page.locator(".tracker-table tbody tr").filter({ has: page.locator(".status-select-label") }).filter({ hasText: "4A Games" });
     assert.equal(await trackedRow.count(), 1, "A saved studio should survive a full page reload.");
     let status = page.getByLabel("Status for 4A Games");
     assert.equal(await status.inputValue(), "saved");
@@ -252,6 +252,22 @@ async function main() {
     // Move through every tracker status. The Applied transition must require confirmation.
     await status.selectOption("in_progress");
     await page.getByRole("tab", { name: /In progress/ }).click();
+    status = page.getByLabel("Status for 4A Games");
+
+    const notesButton = trackedRow.getByRole("button", { name: "Edit notes for 4A Games" });
+    await notesButton.click();
+    const notesInput = page.getByLabel("Application notes · 4A Games");
+    const savedNote = "Submitted via the studio careers portal; follow up next Tuesday.";
+    await notesInput.fill(savedNote);
+    await page.getByLabel("Search tracker").fill("follow up next Tuesday");
+    assert.equal(await trackedRow.count(), 1, "Tracker search should include application notes.");
+    await page.getByLabel("Search tracker").fill("");
+    await page.reload({ waitUntil: "networkidle" });
+    await page.getByRole("button", { name: /My applications/ }).click();
+    trackedRow = page.locator(".tracker-table tbody tr").filter({ has: page.locator(".status-select-label") }).filter({ hasText: "4A Games" });
+    assert.equal(await trackedRow.count(), 1, "The saved studio should remain after reload.");
+    await trackedRow.getByRole("button", { name: "Edit notes for 4A Games" }).click();
+    assert.equal(await page.getByLabel("Application notes · 4A Games").inputValue(), savedNote, "Application notes should persist after reload.");
     status = page.getByLabel("Status for 4A Games");
 
     const cancelledApply = await performWithDialog(page, () => status.selectOption("applied"), false);
@@ -263,6 +279,7 @@ async function main() {
     assert.equal(acceptedApply.type, "confirm");
     await page.getByRole("tab", { name: /Applied/ }).click();
     status = page.getByLabel("Status for 4A Games");
+    assert.notEqual((await trackedRow.locator(".applied-date").textContent())?.trim(), "—", "The tracker should display the application submission date.");
     await status.selectOption("interview");
 
     await page.getByRole("tab", { name: /Interview/ }).click();
@@ -274,7 +291,7 @@ async function main() {
     await status.selectOption("archived");
 
     await page.getByRole("tab", { name: /Archived/ }).click();
-    trackedRow = page.getByRole("row").filter({ hasText: "4A Games" });
+    trackedRow = page.locator(".tracker-table tbody tr").filter({ has: page.locator(".status-select-label") }).filter({ hasText: "4A Games" });
     assert.equal(await trackedRow.count(), 1, "Archived applications should remain accessible in their status tab.");
 
     const cancelledRemoval = await performWithDialog(
@@ -335,7 +352,7 @@ async function main() {
     assert.deepEqual(pageErrors, [], "The browser should not report uncaught application errors.");
 
     process.stdout.write(
-      "Browser acceptance passed: directory filters/sorting/links, save and reload persistence, all tracker statuses, confirmation dialogs, removal, local-only storage, and desktop/mobile overflow checks.\n",
+      "Browser acceptance passed: directory filters/sorting/links, save and reload persistence, all tracker statuses, applied-date tracking, editable/searchable/persistent notes, confirmation dialogs, removal, local-only storage, and desktop/mobile overflow checks.\n",
     );
     await context.close();
   } finally {

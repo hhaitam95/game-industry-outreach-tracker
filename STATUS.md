@@ -1,6 +1,6 @@
 # Game Industry Outreach Tracker status
 
-**Last verified:** 2026-10-31  
+**Last verified:** 2026-11-01  
 **Product scope:** Global directory of legitimate video-game development organisations with verified speculative-application routes, plus a personal browser-local application tracker.  
 **Authoritative discovery rules:** [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md).
 
@@ -16,14 +16,14 @@ Paid employment is not required for inclusion, but volunteer-only and unpaid par
 
 Exclude organisations materially focused on pornography/adult sexual entertainment, iGaming/gambling/casinos/betting, recreational drugs/cannabis, alcohol, tobacco/nicotine/vaping and related vice sectors. Do not reject mainstream developers based on an isolated keyword or one mature-themed game; uncertain cases require manual review.
 
-## Phase B — poster gallery and IGDB artwork fallback (PR #78)
+## Phase B — artwork and application workflow UI
 
-- PR #78 remains open on `feature/game-poster-gallery-20261031`; Steam poster thumbnails and the expanded profile gallery are implemented in the branch.
-- The gallery supports verified IGDB cover metadata as a fallback after Steam image URLs fail, and links to the matching IGDB game page when no Steam app ID is present.
-- The public application remains static. IGDB API credentials are used only by an offline enrichment script and are never needed by site visitors.
-- `scripts/enrich-igdb-covers.mjs` resolves exact, unique game-title matches, shares verified metadata between duplicate title entries and leaves ambiguous/missing matches untouched. It requires `IGDB_CLIENT_ID` and `IGDB_CLIENT_SECRET`.
-- The current branch snapshot contains 327 studio profiles and 463 listed game entries; 200 entries lacked a Steam app ID when this update was prepared. This is not an IGDB coverage count.
-- The user reports that both repository Actions secrets have been added. Their values are not visible through the GitHub connection; the workflow checks their availability at run time without printing them. On merge to `main`, a push-triggered workflow automatically enriches all missing game-cover metadata and opens a separate data-only PR after validation/tests/build. It does not auto-merge generated data.
+- PR #78 is merged into `main`: studio rows use compact game-cover thumbnails and expanded profiles use a poster gallery. Steam remains first choice; IGDB is the fallback when verified metadata is present.
+- IGDB enrichment run [41295984736](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41295984736) queried 454 unique titles: 280 exact, unambiguous matches with cover art; 43 ambiguous, 125 not found and 6 without cover remain unresolved.
+- The 280 matched games were copied to 287 studio-game profile entries across 133 studios. Data-only PR [#79](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/79) is open; its CI is running. The data is not on `main` until that PR is reviewed and merged.
+- The workflow verified both IGDB Actions secrets without revealing values. Dataset validation, all 20 tests and the production build passed. The workflow token cannot create pull requests in this repository, so the successful data branch was published and PR #79 was opened through the GitHub connection.
+- The application-workflow UI branch adds private editable tracker notes, notes search, a visible applied date, and direct studio/application links. The tracker remains browser-local.
+- The latest discovery retry [41295984769](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41295984769) completed successfully: 8 source pages and 8 route rechecks, no new candidates and no verified additions. Checkpoint persistence succeeded; hourly discovery continues.
 
 ## Website and public data
 

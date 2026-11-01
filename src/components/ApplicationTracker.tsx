@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import type { TrackedApplication, TrackerStatus } from "./studio.types";
 import StudioMark from "./StudioMark";
 import { countryFlagFor } from "./location";
@@ -25,22 +25,28 @@ function formatDate(value: string | null | undefined) {
   const date = new Date(value);
   return Number.isNaN(date.getTime()) ? "—" : date.toLocaleDateString();
 }
+function trackerRowId(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
 
 export default function ApplicationTracker({
   initialTab = "saved",
   applications,
   onChangeStatus,
+  onUpdateNote,
   onRemove,
   onOpenDirectory,
 }: {
   initialTab?: string;
   applications: TrackedApplication[];
   onChangeStatus: (id: string, status: TrackerStatus) => void;
+  onUpdateNote: (id: string, note: string) => void;
   onRemove: (id: string) => void;
   onOpenDirectory: () => void;
 }) {
   const [activeTab, setActiveTab] = useState(initialTab);
   const [query, setQuery] = useState("");
+  const [expandedNotesId, setExpandedNotesId] = useState<string | null>(null);
   const active = tabs.find((tab) => tab.id === activeTab) || tabs[0];
 
   const counts = useMemo(
@@ -54,14 +60,16 @@ export default function ApplicationTracker({
     [applications],
   );
   const visible = applications
-    .filter(
-      (application) =>
-        application.status === active.status &&
-        [application.studioName, application.country, application.hqLabel]
-          .join(" ")
-          .toLowerCase()
-          .includes(query.trim().toLowerCase()),
-    )
+    .filter((application) => {
+      const searchable = [
+        application.studioName,
+        application.country,
+        application.hqLabel,
+        application.applicationLocation || "",
+        application.note || "",
+      ].join(" ").toLowerCase();
+      return application.status === active.status && searchable.includes(query.trim().toLowerCase());
+    })
     .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
 
   return (
@@ -69,7 +77,7 @@ export default function ApplicationTracker({
       <div className="page-heading">
         <div>
           <h1>My applications</h1>
-          <p>Keep track of the studios you're considering and the applications you've sent.</p>
+          <p>Keep track of studios you're considering, applications you've sent, and your follow-up notes.</p>
         </div>
         <button className="btn btn-primary" type="button" onClick={onOpenDirectory}>
           Browse studios
@@ -85,7 +93,10 @@ export default function ApplicationTracker({
               key={tab.id}
               role="tab"
               aria-selected={activeTab === tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => {
+                setActiveTab(tab.id);
+                setExpandedNotesId(null);
+              }}
             >
               {tab.label}
               <span>{counts[tab.id] || 0}</span>
@@ -99,7 +110,7 @@ export default function ApplicationTracker({
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Studio or country"
+            placeholder="Studio, country or note"
           />
         </label>
       </div>
@@ -116,63 +127,111 @@ export default function ApplicationTracker({
               <th scope="col">Studio</th>
               <th scope="col">Location</th>
               <th scope="col">Added</th>
-              <th scope="col">Application</th>
+              <th scope="col">Applied</th>
+              <th scope="col">Official links</th>
               <th scope="col">Status</th>
+              <th scope="col">Notes</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
             {visible.map((application) => {
               const flag = countryFlagFor(application.country, application.countryCode);
+              const notesOpen = expandedNotesId === application.id;
+              const notesId = "tracker-notes-" + trackerRowId(application.id);
+              const note = application.note || "";
               return (
-                <tr key={application.id}>
-                  <td>
-                    <div className="studio-identity">
-                      <StudioMark name={application.studioName} websiteUrl={application.websiteUrl} />
-                      <span className="studio-name">{application.studioName}</span>
-                    </div>
-                  </td>
-                  <td>
-                    <span className="location-cell">
-                      {flag ? <span className="country-flag" role="img" aria-label={application.country + " flag"}>{flag}</span> : null}
-                      <span>{application.country || "Not stated"}</span>
-                    </span>
-                  </td>
-                  <td>{formatDate(application.createdAt)}</td>
-                  <td>
-                    <a href={application.applicationUrl} target="_blank" rel="noopener noreferrer">Open route</a>
-                  </td>
-                  <td>
-                    <label className="status-select-label">
-                      <span className="visually-hidden">Status for {application.studioName}</span>
-                      <select
-                        className="form-select"
-                        value={application.status}
-                        onChange={(event) =>
-                          onChangeStatus(application.id, event.target.value as TrackerStatus)
-                        }
+                <Fragment key={application.id}>
+                  <tr>
+                    <td>
+                      <div className="studio-identity">
+                        <StudioMark name={application.studioName} websiteUrl={application.websiteUrl} />
+                        <span className="studio-name">{application.studioName}</span>
+                      </div>
+                    </td>
+                    <td>
+                      <span className="location-cell">
+                        {flag ? <span className="country-flag" role="img" aria-label={application.country + " flag"}>{flag}</span> : null}
+                        <span>{application.country || "Not stated"}</span>
+                      </span>
+                    </td>
+                    <td>{formatDate(application.createdAt)}</td>
+                    <td className="applied-date">{formatDate(application.appliedAt)}</td>
+                    <td>
+                      <div className="tracker-links">
+                        <a href={application.applicationUrl} target="_blank" rel="noopener noreferrer">Open route</a>
+                        <a href={application.websiteUrl} target="_blank" rel="noopener noreferrer">Studio website</a>
+                      </div>
+                    </td>
+                    <td>
+                      <label className="status-select-label">
+                        <span className="visually-hidden">Status for {application.studioName}</span>
+                        <select
+                          className="form-select"
+                          value={application.status}
+                          onChange={(event) =>
+                            onChangeStatus(application.id, event.target.value as TrackerStatus)
+                          }
+                        >
+                          {tabs.map((tab) => (
+                            <option key={tab.id} value={tab.status}>{statusLabels[tab.status]}</option>
+                          ))}
+                        </select>
+                      </label>
+                    </td>
+                    <td>
+                      <button
+                        className={note.trim() ? "btn btn-outline-secondary btn-sm notes-toggle has-note" : "btn btn-outline-secondary btn-sm notes-toggle"}
+                        type="button"
+                        aria-expanded={notesOpen}
+                        aria-controls={notesId}
+                        aria-label={"Edit notes for " + application.studioName}
+                        onClick={() => setExpandedNotesId((current) => current === application.id ? null : application.id)}
                       >
-                        {tabs.map((tab) => (
-                          <option key={tab.id} value={tab.status}>{statusLabels[tab.status]}</option>
-                        ))}
-                      </select>
-                    </label>
-                  </td>
-                  <td>
-                    <button
-                      className="btn btn-link btn-sm text-danger p-0"
-                      type="button"
-                      onClick={() => onRemove(application.id)}
-                    >
-                      Remove
-                    </button>
-                  </td>
-                </tr>
+                        {note.trim() ? "Edit notes" : "Add notes"}
+                      </button>
+                      {note.trim() ? <span className="note-saved-indicator" aria-label="Notes saved">Saved</span> : null}
+                    </td>
+                    <td>
+                      <button
+                        className="btn btn-link btn-sm text-danger p-0"
+                        type="button"
+                        onClick={() => onRemove(application.id)}
+                      >
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                  {notesOpen ? (
+                    <tr className="tracker-notes-row" id={notesId}>
+                      <td colSpan={8}>
+                        <div className="tracker-notes-panel">
+                          <label className="form-field" htmlFor={notesId + "-input"}>
+                            <span>Application notes · {application.studioName}</span>
+                            <textarea
+                              id={notesId + "-input"}
+                              className="form-control tracker-note-input"
+                              value={note}
+                              maxLength={2000}
+                              rows={3}
+                              onChange={(event) => onUpdateNote(application.id, event.target.value)}
+                              placeholder="Role or team, contact person, submission details, interview notes, and follow-up reminders…"
+                            />
+                          </label>
+                          <div className="tracker-notes-meta">
+                            <span>Saved automatically in this browser only.</span>
+                            <span>{note.length.toLocaleString()} / 2,000</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  ) : null}
+                </Fragment>
               );
             })}
             {visible.length === 0 ? (
               <tr>
-                <td className="empty-table" colSpan={6}>
+                <td className="empty-table" colSpan={8}>
                   {query ? "No matching studios in this status." : "No studios in this list yet."}
                   {!query && activeTab === "saved" ? (
                     <button className="text-button" type="button" onClick={onOpenDirectory}>
@@ -187,8 +246,7 @@ export default function ApplicationTracker({
       </div>
 
       <p className="tracker-note">
-        Your tracker is saved in this browser only. It is not connected to a server or shared with
-        anyone.
+        Your tracker, notes and application dates are saved in this browser only. They are not connected to a server or shared with anyone.
       </p>
     </section>
   );
