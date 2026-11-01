@@ -172,7 +172,6 @@ function collectMissingArtworkGames(profiles) {
       if (
         game.igdbCoverId ||
         game.officialArtworkUrl ||
-        game.steamHeaderUrl ||
         game.appStoreArtworkUrl ||
         game.appStoreUrl
       ) {
