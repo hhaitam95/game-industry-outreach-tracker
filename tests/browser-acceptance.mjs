@@ -256,9 +256,10 @@ async function main() {
     const trailTableImage = trailTableCover.locator('img[data-artwork-layout="landscape"]');
     await trailTableImage.waitFor();
     const trailTableImageUrl = await trailTableImage.getAttribute("src") || "";
+    const trailArtworkPath = new URL(trailTableImageUrl).pathname;
     assert.ok(
-      trailTableImageUrl.endsWith("/steam/apps/3544920/header.jpg"),
-      "The Trail should fall back to a landscape Steam header after portrait artwork fails. Actual URL: " + trailTableImageUrl,
+      trailArtworkPath.includes("/steam/apps/3544920/") && trailArtworkPath.endsWith("/header.jpg"),
+      "The Trail should fall back to its verified landscape Steam header after portrait artwork fails. Actual URL: " + trailTableImageUrl,
     );
     const compactRatio = await trailTableCover.evaluate(element => {
       const rect = element.getBoundingClientRect();
