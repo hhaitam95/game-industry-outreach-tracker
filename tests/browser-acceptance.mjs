@@ -430,6 +430,18 @@ async function main() {
     await fourAGamesRow.getByRole("button", { name: /4A Games/ }).click();
     await fourAGamesDetails.waitFor({ state: "detached" });
 
+    // Curated official social/storefront links appear with named labels in the expanded overview.
+    const asoboRow = rows.filter({ hasText: "Asobo Studio" });
+    await asoboRow.getByRole("button", { name: /Asobo Studio/ }).click();
+    const asoboDetails = page.locator("#studio-details-asobo-studio");
+    await asoboDetails.waitFor();
+    const linkedinLink = asoboDetails.getByRole("link", { name: "LinkedIn" });
+    assert.equal(await linkedinLink.getAttribute("href"), "https://www.linkedin.com/company/asobo-studio/");
+    assert.equal(await linkedinLink.getAttribute("target"), "_blank");
+    assert.match(await linkedinLink.getAttribute("rel") || "", /noopener/);
+    await asoboRow.getByRole("button", { name: /Asobo Studio/ }).click();
+    await asoboDetails.waitFor({ state: "detached" });
+
     // IGDB artwork wins over Steam when both are present (the Stuck Together example).
     const hugecalfRow = rows.filter({ hasText: "Hugecalf Studios" });
     await hugecalfRow.getByRole("button", { name: /Hugecalf Studios/ }).click();
