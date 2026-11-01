@@ -387,7 +387,6 @@ function regionMatches(regions, studio) {
   const countryCode = normalize(studio.countryCode);
   const continents = (studio.continents || []).map(normalize);
   /** @type {Record<string, string>} */
-  /** @type {Record<string, string>} */
   const countryAliases = {
     uk: "united kingdom",
     britain: "united kingdom",
