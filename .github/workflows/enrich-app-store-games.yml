@@ -1,0 +1,68 @@
+name: Enrich game artwork from Apple App Store
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/enrich-app-store-games.yml"
+      - "scripts/enrich-app-store-games.mjs"
+      - "src/data/studio-profiles.json"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: app-store-artwork-enrichment-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.ref }}
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+      - name: Install dependencies
+        run: npm ci
+      - name: Enrich exact mobile-game artwork and links
+        run: node scripts/enrich-app-store-games.mjs --write
+      - name: Validate enriched studio data
+        run: |
+          npm run check:studio-directory
+          npm test
+          npm run build
+      - name: Open a pull request for verified App Store metadata
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- src/data/studio-profiles.json; then
+            echo "No new exact title + developer App Store matches; no pull request is needed."
+            exit 0
+          fi
+
+          branch="automation/app-store-enrichment-${GITHUB_RUN_ID}"
+          git switch -c "$branch"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f -- src/data/studio-profiles.json
+          git commit -m "data: add verified App Store artwork and links"
+          git push --set-upstream origin "$branch"
+
+          if ! gh pr create \
+            --base "$GITHUB_REF_NAME" \
+            --head "$branch" \
+            --title "Add verified mobile-game artwork from the App Store" \
+            --body "Adds official Apple App Store artwork and direct listing URLs only when the game title and developer match exactly. Ambiguous listings, developer mismatches, unreleased projects and unavailable apps remain unchanged."; then
+            echo "::warning::The data branch was pushed, but GitHub Actions is not allowed to create pull requests in this repository."
+            echo "Enable Settings > Actions > General > Workflow permissions > Allow GitHub Actions to create and approve pull requests."
+            echo "Open the data branch manually: https://github.com/$GITHUB_REPOSITORY/pull/new/$branch"
+          fi
