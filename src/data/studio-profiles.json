@@ -27,11 +27,11 @@
     "popularGames": [
       {
         "title": "GTFO",
-        "appId": null
+        "appId": 493520
       },
       {
         "title": "Den of Wolves",
-        "appId": null,
+        "appId": 1818140,
         "stage": "In development"
       }
     ],
@@ -82,7 +82,7 @@
       },
       {
         "title": "WARCANA",
-        "appId": null,
+        "appId": 2022930,
         "stage": "No longer in active development"
       }
     ],
@@ -123,19 +123,19 @@
     "popularGames": [
       {
         "title": "DYSMANTLE",
-        "appId": null
+        "appId": 846770
       },
       {
         "title": "Tesla vs Lovecraft",
-        "appId": null
+        "appId": 636100
       },
       {
         "title": "Neon Chrome",
-        "appId": null
+        "appId": 428750
       },
       {
         "title": "Undead Horde",
-        "appId": null
+        "appId": 790850
       }
     ],
     "profileSources": [
@@ -224,16 +224,16 @@
     "popularGames": [
       {
         "title": "Masters of Albion",
-        "appId": null,
+        "appId": 3165650,
         "stage": "In development"
       },
       {
         "title": "The Trail",
-        "appId": null
+        "appId": 3544920
       },
       {
         "title": "Godus",
-        "appId": null
+        "appId": 232810
       }
     ],
     "profileSources": [
@@ -431,15 +431,15 @@
     "popularGames": [
       {
         "title": "Reus",
-        "appId": null
+        "appId": 222730
       },
       {
         "title": "Renowned Explorers: International Society",
-        "appId": null
+        "appId": 296970
       },
       {
         "title": "Godhood",
-        "appId": null
+        "appId": 917150
       }
     ],
     "profileSources": [
@@ -482,7 +482,7 @@
       },
       {
         "title": "Zombie Horde",
-        "appId": null
+        "appId": 1163320
       },
       {
         "title": "LETZ Match!",
@@ -542,7 +542,7 @@
     "popularGames": [
       {
         "title": "Faeria",
-        "appId": null
+        "appId": 397060
       }
     ],
     "profileSources": [
@@ -580,17 +580,17 @@
     "popularGames": [
       {
         "title": "Classified: France '44",
-        "appId": null,
+        "appId": 2085370,
         "stage": "Released 2024"
       },
       {
         "title": "Fangtopia",
-        "appId": null,
+        "appId": 3010170,
         "stage": "In development"
       },
       {
         "title": "Worms: Galactic Tactics",
-        "appId": null,
+        "appId": 3278930,
         "stage": "In development"
       }
     ],
@@ -631,12 +631,12 @@
     "popularGames": [
       {
         "title": "Train Station Tycoon",
-        "appId": null,
+        "appId": 1565490,
         "stage": "Released October 2026"
       },
       {
         "title": "Wood'N'Destroy",
-        "appId": null
+        "appId": 4487540
       },
       {
         "title": "Stereopoly",
@@ -688,11 +688,11 @@
     "popularGames": [
       {
         "title": "Gladihaters",
-        "appId": null
+        "appId": 1559580
       },
       {
         "title": "Timepunk",
-        "appId": null,
+        "appId": 2091030,
         "stage": "Beta"
       },
       {
@@ -739,19 +739,19 @@
     "popularGames": [
       {
         "title": "The Legend of Khiimori",
-        "appId": null
+        "appId": 2697000
       },
       {
         "title": "Ambulance Life: A Paramedic Simulator",
-        "appId": null
+        "appId": 1926520
       },
       {
         "title": "Police Simulator: Patrol Officers",
-        "appId": null
+        "appId": 997010
       },
       {
         "title": "Horse Tales: Emerald Valley Ranch",
-        "appId": null
+        "appId": 1474740
       }
     ],
     "profileSources": [
@@ -790,23 +790,23 @@
     "popularGames": [
       {
         "title": "Rivals of Aether",
-        "appId": null
+        "appId": 383980
       },
       {
         "title": "Rivals of Aether II",
-        "appId": null
+        "appId": 2217000
       },
       {
         "title": "Dungeons of Aether",
-        "appId": null
+        "appId": 1668290
       },
       {
         "title": "Creatures of Aether",
-        "appId": null
+        "appId": 1593750
       },
       {
         "title": "Lovers of Aether",
-        "appId": null
+        "appId": 1043180
       }
     ],
     "profileSources": [
@@ -1044,7 +1044,7 @@
     "popularGames": [
       {
         "title": "Amber Isle",
-        "appId": null
+        "appId": 1663040
       }
     ],
     "profileSources": [
@@ -1122,7 +1122,7 @@
     "popularGames": [
       {
         "title": "Gorilla Tag",
-        "appId": null
+        "appId": 1533390
       },
       {
         "title": "Orion Drift",
@@ -1134,7 +1134,7 @@
       },
       {
         "title": "Contagion",
-        "appId": null
+        "appId": 238430
       }
     ],
     "profileSources": [
@@ -1174,12 +1174,12 @@
     "popularGames": [
       {
         "title": "ATMOSFAR",
-        "appId": null,
+        "appId": 1798230,
         "stage": "In development"
       },
       {
         "title": "Airport CEO",
-        "appId": null
+        "appId": 673610
       }
     ],
     "profileSources": [
@@ -1227,7 +1227,7 @@
       },
       {
         "title": "Disciples: Domination",
-        "appId": 2383200
+        "appId": 2808560
       }
     ],
     "applicationLocation": "Location not specified · use HQ as reference",
@@ -1264,7 +1264,7 @@
     "popularGames": [
       {
         "title": "Last Train Home",
-        "appId": null
+        "appId": 1469610
       }
     ],
     "profileSources": [
@@ -1307,7 +1307,7 @@
     "popularGames": [
       {
         "title": "Gang of Frogs",
-        "appId": null,
+        "appId": 3081510,
         "stage": "In development"
       }
     ],
@@ -1395,7 +1395,7 @@
       },
       {
         "title": "Stellar Cafe",
-        "appId": null
+        "appId": 4415130
       }
     ],
     "profileSources": [
@@ -1574,7 +1574,7 @@
     "popularGames": [
       {
         "title": "Scrap Mechanic",
-        "appId": null
+        "appId": 387990
       }
     ],
     "profileSources": [
@@ -1613,7 +1613,7 @@
     "popularGames": [
       {
         "title": "Son of Thanjai",
-        "appId": null,
+        "appId": 2879790,
         "stage": "In development"
       }
     ],
@@ -1653,7 +1653,7 @@
     "popularGames": [
       {
         "title": "Ereban: Shadow Legacy",
-        "appId": null
+        "appId": 1671360
       }
     ],
     "profileSources": [
@@ -1768,7 +1768,7 @@
     "popularGames": [
       {
         "title": "The 1% Club World Challenge",
-        "appId": null
+        "appId": 4461210
       },
       {
         "title": "The Chase: World Tour",
@@ -1820,7 +1820,7 @@
     "popularGames": [
       {
         "title": "BeamNG.drive",
-        "appId": null
+        "appId": 284160
       }
     ],
     "profileSources": [
@@ -1871,7 +1871,7 @@
       },
       {
         "title": "Call of Duty: Modern Warfare III",
-        "appId": 2519060
+        "appId": 3595270
       }
     ],
     "profileSources": [
@@ -1908,15 +1908,15 @@
     "popularGames": [
       {
         "title": "FORCED",
-        "appId": null
+        "appId": 249990
       },
       {
         "title": "Minion Masters",
-        "appId": null
+        "appId": 489520
       },
       {
         "title": "Forced Showdown",
-        "appId": null
+        "appId": 265000
       }
     ],
     "profileSources": [
@@ -1996,7 +1996,7 @@
     "popularGames": [
       {
         "title": "Beam",
-        "appId": null
+        "appId": 1067430
       }
     ],
     "profileSources": [
@@ -2071,7 +2071,7 @@
       },
       {
         "title": "Homeworld 3",
-        "appId": null
+        "appId": 1840080
       }
     ],
     "profileSources": [
@@ -2138,7 +2138,7 @@
     "popularGames": [
       {
         "title": "Arkheron",
-        "appId": null,
+        "appId": 3333850,
         "stage": "In development"
       }
     ],
@@ -2183,7 +2183,7 @@
       },
       {
         "title": "Generation Zero",
-        "appId": null,
+        "appId": 704270,
         "stage": "Co-development contribution"
       },
       {
@@ -2314,7 +2314,7 @@
       },
       {
         "title": "Yes, Your Grace: Snowfall",
-        "appId": null,
+        "appId": 1373090,
         "stage": "Released 2025"
       },
       {
@@ -2362,7 +2362,7 @@
     "popularGames": [
       {
         "title": "Insurmountable",
-        "appId": null,
+        "appId": 1385100,
         "stage": "Released"
       },
       {
@@ -2372,12 +2372,12 @@
       },
       {
         "title": "Gelly Break Deluxe",
-        "appId": null,
+        "appId": 1690060,
         "stage": "Released"
       },
       {
         "title": "The Regreening",
-        "appId": null,
+        "appId": 3419080,
         "stage": "In development"
       }
     ],
@@ -2427,19 +2427,19 @@
     "popularGames": [
       {
         "title": "Expeditions: Conquistador",
-        "appId": null
+        "appId": 237430
       },
       {
         "title": "Expeditions: Viking",
-        "appId": null
+        "appId": 445190
       },
       {
         "title": "Expeditions: Rome",
-        "appId": null
+        "appId": 987840
       },
       {
         "title": "Expeditions: Samurai",
-        "appId": null,
+        "appId": 2212910,
         "stage": "Early Access"
       }
     ],
@@ -2487,7 +2487,8 @@
     ],
     "popularGames": [
       {
-        "title": "Resident Evil"
+        "title": "Resident Evil",
+        "appId": 304240
       },
       {
         "title": "Monster Hunter"
@@ -2571,7 +2572,7 @@
     "popularGames": [
       {
         "title": "Stellar Hustler",
-        "appId": null,
+        "appId": 4557080,
         "stage": "Published; site lists Steam/PC, Google Play and App Store, version 0.9.11"
       }
     ],
@@ -3017,7 +3018,7 @@
     "popularGames": [
       {
         "title": "Arcflame Frontiers",
-        "appId": null,
+        "appId": 4062380,
         "stage": "Closed alpha"
       }
     ],
@@ -3059,7 +3060,7 @@
     "popularGames": [
       {
         "title": "Mortal Shell",
-        "appId": null
+        "appId": 1110910
       }
     ],
     "profileSources": [
@@ -3107,7 +3108,7 @@
     "popularGames": [
       {
         "title": "Summoners War",
-        "appId": null
+        "appId": 2426960
       }
     ],
     "profileSources": [
@@ -3218,15 +3219,15 @@
     "popularGames": [
       {
         "title": "Tomb Raider",
-        "appId": null
+        "appId": 203160
       },
       {
         "title": "Rise of the Tomb Raider",
-        "appId": null
+        "appId": 391220
       },
       {
         "title": "Shadow of the Tomb Raider",
-        "appId": null
+        "appId": 750920
       },
       {
         "title": "Marvel's Avengers",
@@ -3272,7 +3273,7 @@
     "popularGames": [
       {
         "title": "Pistonica",
-        "appId": null,
+        "appId": 4018480,
         "stage": "In development"
       }
     ],
@@ -3315,7 +3316,7 @@
     "popularGames": [
       {
         "title": "Styx: Shards of Darkness",
-        "appId": 527100
+        "appId": 355790
       },
       {
         "title": "Blood Bowl 3",
@@ -3437,11 +3438,11 @@
     "popularGames": [
       {
         "title": "Hubris",
-        "appId": null
+        "appId": 1265800
       },
       {
         "title": "Wall Town Wonders",
-        "appId": null
+        "appId": 3570400
       }
     ],
     "profileSources": [
@@ -3494,16 +3495,20 @@
     ],
     "popularGames": [
       {
-        "title": "Granblue Fantasy"
+        "title": "Granblue Fantasy",
+        "appId": 767320
       },
       {
-        "title": "Umamusume: Pretty Derby"
+        "title": "Umamusume: Pretty Derby",
+        "appId": 3224770
       },
       {
-        "title": "Shadowverse"
+        "title": "Shadowverse",
+        "appId": 453480
       },
       {
-        "title": "Shadowverse: Worlds Beyond"
+        "title": "Shadowverse: Worlds Beyond",
+        "appId": 2584990
       }
     ],
     "profileSources": [
@@ -3625,15 +3630,15 @@
     "popularGames": [
       {
         "title": "The Surge",
-        "appId": null
+        "appId": 378540
       },
       {
         "title": "The Surge 2",
-        "appId": null
+        "appId": 644830
       },
       {
         "title": "Atlas Fallen",
-        "appId": null
+        "appId": 1230530
       },
       {
         "title": "Lords of the Fallen",
@@ -3682,7 +3687,7 @@
       },
       {
         "title": "HavenCraft",
-        "appId": null,
+        "appId": 2481240,
         "stage": "In development"
       }
     ],
@@ -3756,19 +3761,19 @@
     "popularGames": [
       {
         "title": "Life Is Strange",
-        "appId": null
+        "appId": 319630
       },
       {
         "title": "Tell Me Why",
-        "appId": null
+        "appId": 1180660
       },
       {
         "title": "Twin Mirror",
-        "appId": null
+        "appId": 1552810
       },
       {
         "title": "Vampyr",
-        "appId": null
+        "appId": 427290
       },
       {
         "title": "Remember Me",
@@ -3857,17 +3862,17 @@
     "popularGames": [
       {
         "title": "Red Dead Redemption",
-        "appId": null,
+        "appId": 2668510,
         "stage": "Development contribution"
       },
       {
         "title": "Fallout 76",
-        "appId": null,
+        "appId": 1151340,
         "stage": "Development contribution"
       },
       {
         "title": "Minecraft Dungeons",
-        "appId": null,
+        "appId": 1672970,
         "stage": "Development contribution"
       },
       {
@@ -3880,7 +3885,7 @@
       },
       {
         "title": "Songbringer",
-        "appId": null
+        "appId": 367080
       }
     ],
     "profileSources": [
@@ -3970,23 +3975,23 @@
       },
       {
         "title": "Deus Ex: Mankind Divided",
-        "appId": null
+        "appId": 337000
       },
       {
         "title": "Shadow of the Tomb Raider",
-        "appId": null
+        "appId": 750920
       },
       {
         "title": "Marvel's Guardians of the Galaxy",
-        "appId": null
+        "appId": 1088850
       },
       {
         "title": "Thief VR: Legacy of Shadow",
-        "appId": null
+        "appId": 2800080
       },
       {
         "title": "Grounded 2",
-        "appId": null
+        "appId": 2661300
       }
     ],
     "profileSources": [
@@ -4136,19 +4141,19 @@
     "popularGames": [
       {
         "title": "Rust",
-        "appId": null
+        "appId": 252490
       },
       {
         "title": "Garry's Mod",
-        "appId": null
+        "appId": 4000
       },
       {
         "title": "s&box",
-        "appId": null
+        "appId": 590830
       },
       {
         "title": "Chippy",
-        "appId": null
+        "appId": 602700
       }
     ],
     "profileSources": [
@@ -4192,7 +4197,7 @@
     "popularGames": [
       {
         "title": "Barotrauma",
-        "appId": null,
+        "appId": 602960,
         "stage": "Released; developed with Undertow Games"
       },
       {
@@ -4202,7 +4207,7 @@
       },
       {
         "title": "Barotrauma",
-        "appId": null
+        "appId": 602960
       }
     ],
     "profileSources": [
@@ -4247,19 +4252,19 @@
     "popularGames": [
       {
         "title": "Apex Construct",
-        "appId": null
+        "appId": 694090
       },
       {
         "title": "The Curious Tale of the Stolen Pets",
-        "appId": null
+        "appId": 1099500
       },
       {
         "title": "Wraith: The Oblivion – Afterlife",
-        "appId": null
+        "appId": 1386870
       },
       {
         "title": "Ghost Signal: A Stellaris Game",
-        "appId": null
+        "appId": 2156770
       },
       {
         "title": "Mannequin",
@@ -4351,12 +4356,12 @@
     "popularGames": [
       {
         "title": "Shaiya",
-        "appId": null,
+        "appId": 2690190,
         "stage": "Operated live-service title"
       },
       {
         "title": "Defiance",
-        "appId": null,
+        "appId": 224600,
         "stage": "Revival / modernization project"
       },
       {
@@ -4463,11 +4468,11 @@
     "popularGames": [
       {
         "title": "Trailmakers",
-        "appId": null
+        "appId": 585420
       },
       {
         "title": "Rubber Bandits",
-        "appId": null
+        "appId": 1206610
       }
     ],
     "profileSources": [
@@ -4505,7 +4510,7 @@
     "popularGames": [
       {
         "title": "Len's Island",
-        "appId": null
+        "appId": 1335830
       }
     ],
     "profileSources": [
@@ -4548,7 +4553,7 @@
       },
       {
         "title": "The Thaumaturge",
-        "appId": null
+        "appId": 1684350
       },
       {
         "title": "The Witcher remake",
@@ -4636,7 +4641,7 @@
     "popularGames": [
       {
         "title": "Disciples: Liberation",
-        "appId": null,
+        "appId": 1287840,
         "stage": "Development contribution"
       },
       {
@@ -4646,7 +4651,7 @@
       },
       {
         "title": "Temple Run: Legends",
-        "appId": 2682580,
+        "appId": null,
         "stage": "Development contribution"
       }
     ],
@@ -4687,15 +4692,15 @@
     "popularGames": [
       {
         "title": "Trine 5: A Clockwork Conspiracy",
-        "appId": null
+        "appId": 1436700
       },
       {
         "title": "Starbase",
-        "appId": null
+        "appId": 454120
       },
       {
         "title": "Trine 4: The Nightmare Prince",
-        "appId": null
+        "appId": 690640
       }
     ],
     "profileSources": [
@@ -4802,11 +4807,11 @@
       },
       {
         "title": "Wild Indigo Ranch",
-        "appId": null
+        "appId": 1751350
       },
       {
         "title": "The Margot Collapse",
-        "appId": null,
+        "appId": 3273150,
         "stage": "Announced 2026"
       }
     ],
@@ -4917,7 +4922,7 @@
     "popularGames": [
       {
         "title": "COMPULSE",
-        "appId": null,
+        "appId": 4685100,
         "stage": "In development"
       }
     ],
@@ -5002,7 +5007,7 @@
       },
       {
         "title": "The Last Signal",
-        "appId": null,
+        "appId": 2906180,
         "stage": "Project"
       },
       {
@@ -5229,11 +5234,11 @@
     "popularGames": [
       {
         "title": "Deep Rock Galactic",
-        "appId": null
+        "appId": 548430
       },
       {
         "title": "Deep Rock Galactic: Rogue Core",
-        "appId": null,
+        "appId": 2605790,
         "stage": "In development"
       }
     ],
@@ -5275,7 +5280,7 @@
     "popularGames": [
       {
         "title": "Rogue Fortune",
-        "appId": null
+        "appId": 4891150
       }
     ],
     "profileSources": [
@@ -5312,7 +5317,7 @@
     "popularGames": [
       {
         "title": "GOALS",
-        "appId": null,
+        "appId": 2753000,
         "stage": "In development"
       }
     ],
@@ -5355,7 +5360,7 @@
     "popularGames": [
       {
         "title": "TNT+",
-        "appId": null
+        "appId": 1086430
       },
       {
         "title": "Dinosaur Dimension",
@@ -5570,19 +5575,19 @@
     "popularGames": [
       {
         "title": "Brothers: A Tale of Two Sons",
-        "appId": null
+        "appId": 225080
       },
       {
         "title": "A Way Out",
-        "appId": null
+        "appId": 1222700
       },
       {
         "title": "It Takes Two",
-        "appId": null
+        "appId": 1426210
       },
       {
         "title": "Split Fiction",
-        "appId": null
+        "appId": 2001120
       }
     ],
     "profileSources": [
@@ -5627,7 +5632,7 @@
     "popularGames": [
       {
         "title": "G.I. Joe: Operation Blackout",
-        "appId": null,
+        "appId": 1432220,
         "stage": "Co-development"
       },
       {
@@ -5637,12 +5642,12 @@
       },
       {
         "title": "Cobra Kai: The Karate Kid Saga Continues",
-        "appId": null,
+        "appId": 1279920,
         "stage": "Art production"
       },
       {
         "title": "Cobra Kai 2: Dojos Rising",
-        "appId": null,
+        "appId": 1681870,
         "stage": "Porting / engineering"
       },
       {
@@ -5652,12 +5657,12 @@
       },
       {
         "title": "Nickelodeon All-Star Brawl",
-        "appId": null,
+        "appId": 1414850,
         "stage": "Co-development"
       },
       {
         "title": "Bramble: The Mountain King",
-        "appId": null,
+        "appId": 1623940,
         "stage": "Porting / engineering"
       }
     ],
@@ -5750,11 +5755,11 @@
     "popularGames": [
       {
         "title": "Turbo Golf Racing",
-        "appId": null
+        "appId": 1324350
       },
       {
         "title": "When Ski Lifts Go Wrong",
-        "appId": null
+        "appId": 638000
       },
       {
         "title": "Stuck Together",
@@ -5891,7 +5896,7 @@
     "popularGames": [
       {
         "title": "World War Armies",
-        "appId": null
+        "appId": 2438160
       }
     ],
     "profileSources": [
@@ -5954,15 +5959,15 @@
     "popularGames": [
       {
         "title": "Cities: Skylines II",
-        "appId": null
+        "appId": 949230
       },
       {
         "title": "Surviving the Aftermath",
-        "appId": null
+        "appId": 684450
       },
       {
         "title": "LEGO Skylines",
-        "appId": null
+        "appId": 1573550
       }
     ],
     "profileSources": [
@@ -6023,7 +6028,7 @@
     "popularGames": [
       {
         "title": "Crime Boss: Rockay City",
-        "appId": null
+        "appId": 2933080
       }
     ],
     "profileSources": [
@@ -6142,11 +6147,11 @@
     "popularGames": [
       {
         "title": "HITMAN World of Assassination",
-        "appId": null
+        "appId": 1659040
       },
       {
         "title": "007 First Light",
-        "appId": null,
+        "appId": 3768760,
         "stage": "In development"
       },
       {
@@ -6267,11 +6272,11 @@
     "popularGames": [
       {
         "title": "Marvel Contest of Champions",
-        "appId": null
+        "appId": 3127280
       },
       {
         "title": "Shop Titans",
-        "appId": null
+        "appId": 1258080
       }
     ],
     "profileSources": [
@@ -6606,7 +6611,7 @@
       },
       {
         "title": "Moorhuhn Kart 4",
-        "appId": null
+        "appId": 3012980
       },
       {
         "title": "Yatzi 2",
@@ -6618,7 +6623,7 @@
       },
       {
         "title": "Tow Game",
-        "appId": null
+        "appId": 3690870
       },
       {
         "title": "Whoowasit?",
@@ -6762,7 +6767,8 @@
     ],
     "popularGames": [
       {
-        "title": "Oaken"
+        "title": "Oaken",
+        "appId": 1348690
       },
       {
         "title": "Haze",
@@ -6815,7 +6821,7 @@
     "popularGames": [
       {
         "title": "Baldur's Gate 3",
-        "appId": null
+        "appId": 1086940
       },
       {
         "title": "Divinity: Original Sin II",
@@ -6993,7 +6999,7 @@
     "popularGames": [
       {
         "title": "DECAYED",
-        "appId": null,
+        "appId": 2733180,
         "stage": "In development"
       }
     ],
@@ -7069,7 +7075,7 @@
     "popularGames": [
       {
         "title": "WWE 2K26",
-        "appId": null,
+        "appId": 3717070,
         "stage": "Co-development contribution"
       },
       {
@@ -7220,7 +7226,7 @@
     "popularGames": [
       {
         "title": "The House of Hikmah",
-        "appId": null,
+        "appId": 3451680,
         "stage": "Demo available"
       }
     ],
@@ -7261,7 +7267,7 @@
     "popularGames": [
       {
         "title": "Pax Dei",
-        "appId": null
+        "appId": 1995520
       }
     ],
     "profileSources": [
@@ -7839,7 +7845,7 @@
     "popularGames": [
       {
         "title": "Talisman",
-        "appId": null
+        "appId": 4267320
       },
       {
         "title": "Fury of Dracula",
@@ -7847,11 +7853,11 @@
       },
       {
         "title": "Fighting Fantasy Legends",
-        "appId": null
+        "appId": 496340
       },
       {
         "title": "Talisman: Origins",
-        "appId": null
+        "appId": 1033170
       }
     ],
     "profileSources": [
@@ -7924,7 +7930,7 @@
       },
       {
         "title": "The Outer Worlds 2",
-        "appId": 2882670
+        "appId": 1449110
       },
       {
         "title": "Pillars of Eternity",
@@ -8078,11 +8084,11 @@
     "popularGames": [
       {
         "title": "Slapshot: Rebound",
-        "appId": null
+        "appId": 1173370
       },
       {
         "title": "Strikers Club",
-        "appId": null
+        "appId": 1952920
       }
     ],
     "profileSources": [
@@ -8265,7 +8271,7 @@
     "popularGames": [
       {
         "title": "The Incentive Program",
-        "appId": null
+        "appId": 4429290
       },
       {
         "title": "The Creeps",
@@ -8314,7 +8320,7 @@
       },
       {
         "title": "The Darkest Files",
-        "appId": 2056630
+        "appId": 2058730
       }
     ],
     "applicationLocation": "Berlin · full-time",
@@ -8441,7 +8447,7 @@
     "popularGames": [
       {
         "title": "Shakes & Fidget",
-        "appId": null
+        "appId": 438040
       }
     ],
     "profileSources": [
@@ -9025,7 +9031,7 @@
       },
       {
         "title": "Lucha Throwdown",
-        "appId": null
+        "appId": 3712810
       },
       {
         "title": "Jon Jones Brawler",
@@ -9164,7 +9170,7 @@
     "popularGames": [
       {
         "title": "Unbroken",
-        "appId": null
+        "appId": 2842690
       },
       {
         "title": "Adventurers",
@@ -9224,7 +9230,7 @@
     "popularGames": [
       {
         "title": "Chronicles: Medieval",
-        "appId": null,
+        "appId": 2231020,
         "stage": "Debut game · 2026 Early Access plan"
       }
     ],
@@ -9289,7 +9295,8 @@
     ],
     "popularGames": [
       {
-        "title": "The Blood of Dawnwalker"
+        "title": "The Blood of Dawnwalker",
+        "appId": 3751260
       }
     ],
     "profileSources": [
@@ -9415,7 +9422,7 @@
       },
       {
         "title": "Theseus",
-        "appId": 577280
+        "appId": 677330
       }
     ],
     "applicationLocation": "Milan · on-site; Italian and English required",
@@ -9530,11 +9537,11 @@
     "popularGames": [
       {
         "title": "Hell Clock",
-        "appId": null
+        "appId": 1782460
       },
       {
         "title": "Relic Hunters Legend",
-        "appId": null
+        "appId": 633080
       },
       {
         "title": "Relic Hunters Rebels",
@@ -9546,7 +9553,7 @@
       },
       {
         "title": "Star Vikings Forever",
-        "appId": null
+        "appId": 488960
       }
     ],
     "profileSources": [
@@ -9781,15 +9788,15 @@
       },
       {
         "title": "Vivarium",
-        "appId": null
+        "appId": 4735760
       },
       {
         "title": "Fractured Blooms",
-        "appId": null
+        "appId": 3730310
       },
       {
         "title": "Springs, Eternal",
-        "appId": null
+        "appId": 3677850
       }
     ],
     "profileSources": [
@@ -9832,11 +9839,11 @@
     "popularGames": [
       {
         "title": "Evoland",
-        "appId": null
+        "appId": 233470
       },
       {
         "title": "Evoland 2",
-        "appId": null
+        "appId": 359310
       },
       {
         "title": "Northgard",
@@ -9844,11 +9851,11 @@
       },
       {
         "title": "Wartales",
-        "appId": null
+        "appId": 1527950
       },
       {
         "title": "Dune: Spice Wars",
-        "appId": null
+        "appId": 1605220
       }
     ],
     "profileSources": [
@@ -10086,17 +10093,17 @@
     "popularGames": [
       {
         "title": "Trail of Toads",
-        "appId": null,
+        "appId": 2117110,
         "stage": "In development"
       },
       {
         "title": "Downfall Hearts",
-        "appId": null,
+        "appId": 1430020,
         "stage": "In development"
       },
       {
         "title": "Windstorm: Start of a Great Friendship - Remastered",
-        "appId": null,
+        "appId": 2829790,
         "stage": "Developed/remastered by the studio"
       }
     ],
@@ -10697,12 +10704,12 @@
     "popularGames": [
       {
         "title": "M.O.O.D.S.",
-        "appId": null,
+        "appId": 1956770,
         "stage": "Released in Early Access"
       },
       {
         "title": "Memorrha",
-        "appId": null,
+        "appId": 954080,
         "stage": "Released"
       }
     ],
@@ -10774,17 +10781,17 @@
     "popularGames": [
       {
         "title": "Remothered: Red Nun's Legacy",
-        "appId": null,
+        "appId": 3335310,
         "stage": "Released 2026-10-27"
       },
       {
         "title": "Remothered: Tormented Fathers Remastered",
-        "appId": null,
+        "appId": 4457050,
         "stage": "Announced for Q1 2027"
       },
       {
         "title": "Remothered: Broken Porcelain Remastered",
-        "appId": null,
+        "appId": 4461560,
         "stage": "Announced for Q1 2027"
       },
       {
@@ -10799,7 +10806,7 @@
       },
       {
         "title": "Mafia: The Old Country",
-        "appId": 3058630,
+        "appId": 1941540,
         "stage": "Co-development contribution"
       },
       {
@@ -10892,7 +10899,7 @@
     "popularGames": [
       {
         "title": "The Desolation",
-        "appId": null
+        "appId": 2358780
       },
       {
         "title": "The Kingdom: Medieval Tales",
@@ -11014,7 +11021,7 @@
     "popularGames": [
       {
         "title": "UNRECORD",
-        "appId": null,
+        "appId": 2381520,
         "stage": "In development"
       }
     ],
@@ -11053,13 +11060,16 @@
     ],
     "popularGames": [
       {
-        "title": "V Rising"
+        "title": "V Rising",
+        "appId": 1604030
       },
       {
-        "title": "Battlerite"
+        "title": "Battlerite",
+        "appId": 504370
       },
       {
-        "title": "Bloodline Champions"
+        "title": "Bloodline Champions",
+        "appId": 6370
       }
     ],
     "profileSources": [
@@ -11495,7 +11505,7 @@
     "popularGames": [
       {
         "title": "Ardem",
-        "appId": null,
+        "appId": 2179480,
         "stage": "In development"
       }
     ],
@@ -11669,7 +11679,7 @@
     "popularGames": [
       {
         "title": "Fable",
-        "appId": null,
+        "appId": 2769570,
         "stage": "Co-development credit"
       },
       {
@@ -11679,7 +11689,7 @@
       },
       {
         "title": "Sea of Thieves",
-        "appId": null,
+        "appId": 1172620,
         "stage": "Co-development credit"
       },
       {
@@ -11764,11 +11774,11 @@
       },
       {
         "title": "Destroy All Humans!",
-        "appId": null
+        "appId": 803330
       },
       {
         "title": "Wreckfest",
-        "appId": null
+        "appId": 228380
       }
     ],
     "profileSources": [
@@ -11953,7 +11963,7 @@
     "popularGames": [
       {
         "title": "Supremacy: World War 3",
-        "appId": null
+        "appId": 784950
       }
     ],
     "profileSources": [
@@ -12157,7 +12167,7 @@
       },
       {
         "title": "Midnight Murder Club",
-        "appId": null
+        "appId": 2698870
       },
       {
         "title": "Bounce Arcade",
@@ -12169,7 +12179,7 @@
       },
       {
         "title": "Knockout City",
-        "appId": null
+        "appId": 1301210
       },
       {
         "title": "Mario Kart Live: Home Circuit",
@@ -12213,19 +12223,19 @@
     "popularGames": [
       {
         "title": "The 7th Guest Remake",
-        "appId": null
+        "appId": 4491360
       },
       {
         "title": "Thief VR: Legacy of Shadow",
-        "appId": null
+        "appId": 2800080
       },
       {
         "title": "Metro Awakening",
-        "appId": null
+        "appId": 2669410
       },
       {
         "title": "Arizona Sunshine VR 2",
-        "appId": null
+        "appId": 1540210
       }
     ],
     "profileSources": [
@@ -12392,7 +12402,7 @@
       },
       {
         "title": "Starbreaker",
-        "appId": 492980,
+        "appId": 4929800,
         "stage": "In development"
       }
     ],
@@ -12456,12 +12466,12 @@
     "popularGames": [
       {
         "title": "WE ARE FOOTBALL 2027",
-        "appId": null,
+        "appId": 4328570,
         "stage": "Current title"
       },
       {
         "title": "WE ARE FOOTBALL 2024",
-        "appId": null,
+        "appId": 1951410,
         "stage": "Released"
       },
       {
@@ -12507,17 +12517,17 @@
     "popularGames": [
       {
         "title": "Among Us",
-        "appId": null,
+        "appId": 945360,
         "stage": "Technology services"
       },
       {
         "title": "Destiny 2",
-        "appId": null,
+        "appId": 1085660,
         "stage": "Technology services"
       },
       {
         "title": "Apex Legends",
-        "appId": null,
+        "appId": 1172470,
         "stage": "Technology services"
       },
       {
@@ -12758,7 +12768,7 @@
     "popularGames": [
       {
         "title": "Yooca: Your Life",
-        "appId": null
+        "appId": 4138870
       }
     ],
     "profileSources": [

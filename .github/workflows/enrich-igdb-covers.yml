@@ -1,0 +1,78 @@
+name: Enrich game artwork from IGDB
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/enrich-igdb-covers.yml"
+      - "scripts/enrich-igdb-covers.mjs"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: igdb-artwork-enrichment-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      IGDB_CLIENT_ID: ${{ secrets.IGDB_CLIENT_ID }}
+      IGDB_CLIENT_SECRET: ${{ secrets.IGDB_CLIENT_SECRET }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.ref }}
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+      - name: Install dependencies
+        run: npm ci
+      - name: Verify secret configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -z "${IGDB_CLIENT_ID:-}" ]]; then
+            echo "::error::Repository Actions secret IGDB_CLIENT_ID is missing or unavailable to this workflow."
+            exit 1
+          fi
+          if [[ -z "${IGDB_CLIENT_SECRET:-}" ]]; then
+            echo "::error::Repository Actions secret IGDB_CLIENT_SECRET is missing or unavailable to this workflow."
+            exit 1
+          fi
+          echo "Both IGDB credential variables are available. Secret values are not displayed."
+      - name: Enrich all missing game cover metadata
+        run: node scripts/enrich-igdb-covers.mjs --write
+      - name: Validate enriched studio data
+        run: |
+          npm run check:studio-directory
+          npm test
+          npm run build
+      - name: Open a pull request for enriched metadata
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- src/data/studio-profiles.json; then
+            echo "No new unambiguous IGDB cover metadata was added; no pull request is needed."
+            exit 0
+          fi
+
+          branch="automation/igdb-cover-enrichment-${GITHUB_RUN_ID}"
+          git switch -c "$branch"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/studio-profiles.json
+          git commit -m "data: enrich game cover metadata from IGDB"
+          git push --set-upstream origin "$branch"
+
+          gh pr create \
+            --base "$GITHUB_REF_NAME" \
+            --head "$branch" \
+            --title "Enrich game covers with verified IGDB metadata" \
+            --body "Adds exact, unambiguous IGDB cover metadata to game profiles. Ambiguous titles and games without cover artwork remain unresolved. Generated automatically after the artwork-enrichment implementation was merged; validation, tests and build passed before opening this data-only pull request."
