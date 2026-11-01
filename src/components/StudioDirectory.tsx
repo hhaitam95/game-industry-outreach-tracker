@@ -171,18 +171,48 @@ function socialGlyph(label: string): string {
   if (value.includes("youtube")) return "▶";
   if (value.includes("instagram")) return "◎";
   if (value.includes("discord")) return "◉";
+  if (value.includes("github")) return "⌘";
+  if (value.includes("artstation")) return "A";
+  if (value.includes("facebook")) return "f";
+  if (value.includes("tiktok")) return "♪";
   return "↗";
+}
+
+function socialDomain(label: string): string | null {
+  const value = label.toLowerCase();
+  if (value.includes("linkedin")) return "linkedin.com";
+  if (value === "x" || value.includes("twitter")) return "x.com";
+  if (value.includes("steam")) return "steampowered.com";
+  if (value.includes("youtube")) return "youtube.com";
+  if (value.includes("instagram")) return "instagram.com";
+  if (value.includes("discord")) return "discord.com";
+  if (value.includes("github")) return "github.com";
+  if (value.includes("artstation")) return "artstation.com";
+  if (value.includes("facebook")) return "facebook.com";
+  if (value.includes("tiktok")) return "tiktok.com";
+  return null;
+}
+
+function SocialIcon({ label }: { label: string }) {
+  const [failed, setFailed] = useState(false);
+  const domain = socialDomain(label);
+  return domain && !failed ? (
+    <img src={"https://www.google.com/s2/favicons?domain=" + encodeURIComponent(domain) + "&sz=64"}
+      alt="" loading="lazy" decoding="async" onError={() => setFailed(true)} />
+  ) : <span aria-hidden="true">{socialGlyph(label)}</span>;
 }
 
 export default function StudioDirectory({
   applications,
   onSave,
+  onOpenTracker,
 }: {
   applications: TrackedApplication[];
   onSave: (
     studio: Studio,
     location: { country: string; countryCode: string; hqLabel: string; applicationLocation: string },
   ) => void;
+  onOpenTracker: (studioName: string) => void;
 }) {
   const [query, setQuery] = useState("");
   const [continent, setContinent] = useState<ContinentLabel | "All continents">("All continents");
@@ -196,6 +226,8 @@ export default function StudioDirectory({
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
   const [showNewOnly, setShowNewOnly] = useState(false);
   const [expandedStudio, setExpandedStudio] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(25);
   const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
@@ -330,6 +362,15 @@ export default function StudioDirectory({
     activeStudios, continent, country, focusFilters, now, platformFilters, query,
     roleFilters, scaleFilters, showNewOnly, sortDirection, sortKey, workModel,
   ]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [query, continent, country, workModel, scaleFilters, platformFilters, focusFilters, roleFilters, sortKey, sortDirection, showNewOnly]);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+  const pageStart = filtered.length ? (currentPage - 1) * pageSize + 1 : 0;
+  const pageEnd = Math.min(currentPage * pageSize, filtered.length);
+  const visibleStudios = filtered.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
   const tracked = new Set(applications.map((application) => application.studioName));
   const activeFilterCount =
@@ -542,7 +583,7 @@ export default function StudioDirectory({
             </tr>
           </thead>
           <tbody>
-            {filtered.map((studio) => {
+            {visibleStudios.map((studio) => {
               const profile = profiles[studio.name];
               const studioCountry = profile?.headquarters?.country || studio.country || "Not stated";
               const countryCode = profile?.headquarters?.countryCode || "";
@@ -630,10 +671,13 @@ export default function StudioDirectory({
                     </td>
                     <td>
                       <button
-                        className={isTracked ? "btn btn-outline-secondary btn-sm" : "btn btn-primary btn-sm"}
+                        className={isTracked ? "btn btn-outline-secondary btn-sm tracker-view-button" : "btn btn-primary btn-sm"}
                         type="button"
-                        disabled={isTracked}
-                        onClick={() =>
+                        onClick={() => {
+                          if (isTracked) {
+                            onOpenTracker(studio.name);
+                            return;
+                          }
                           onSave(studio, {
                             country: studioCountry,
                             countryCode,
@@ -641,10 +685,10 @@ export default function StudioDirectory({
                               ? profile.headquarters.city + " · " + (profile.headquarters.label || "Location")
                               : profile?.headquarters?.label || "Country listed",
                             applicationLocation: profile?.applicationLocation || "See official application route",
-                          })
-                        }
+                          });
+                        }}
                       >
-                        {isTracked ? "In tracker" : "Save"}
+                        {isTracked ? "↗ View in Tracker" : "＋ Save"}
                       </button>
                     </td>
                   </tr>
@@ -746,7 +790,7 @@ export default function StudioDirectory({
                                 aria-label={link.label}
                                 title={link.label}
                               >
-                                {socialGlyph(link.label)}
+                                <SocialIcon label={link.label} />
                               </a>
                             ))}
                           </div>
@@ -767,6 +811,28 @@ export default function StudioDirectory({
           </tbody>
         </table>
       </div>
+
+      <div className="directory-pagination" aria-label="Studio result pages">
+        <span className="directory-pagination-summary">
+          Showing <strong>{pageStart}–{pageEnd}</strong> of <strong>{filtered.length}</strong> studios
+        </span>
+        <label className="directory-page-size">
+          <span>Rows</span>
+          <select className="form-select form-select-sm" aria-label="Rows per page" value={pageSize}
+            onChange={(event) => { setPageSize(Number(event.target.value)); setCurrentPage(1); }}>
+            <option value={25}>25</option><option value={50}>50</option><option value={100}>100</option>
+          </select>
+          <span>per page</span>
+        </label>
+        <div className="directory-page-controls">
+          <button type="button" className="btn btn-outline-secondary btn-sm" onClick={() => setCurrentPage(1)} disabled={currentPage <= 1} aria-label="First page">«</button>
+          <button type="button" className="btn btn-outline-secondary btn-sm" onClick={() => setCurrentPage(page => Math.max(1, page - 1))} disabled={currentPage <= 1}>Previous</button>
+          <span>Page {currentPage} of {totalPages}</span>
+          <button type="button" className="btn btn-outline-secondary btn-sm" onClick={() => setCurrentPage(page => Math.min(totalPages, page + 1))} disabled={currentPage >= totalPages}>Next</button>
+          <button type="button" className="btn btn-outline-secondary btn-sm" onClick={() => setCurrentPage(totalPages)} disabled={currentPage >= totalPages} aria-label="Last page">»</button>
+        </div>
+      </div>
+
       <p className="directory-note">
         Location and flags reflect the recorded headquarters, or the primary location listed in the profile when HQ is unknown. They do not indicate hiring eligibility or a guaranteed work location.
       </p>
