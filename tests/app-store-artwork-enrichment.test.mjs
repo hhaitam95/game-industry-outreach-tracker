@@ -3,6 +3,7 @@ import test from "node:test";
 import {
   isValidAppStoreArtworkUrl,
   isValidAppStorePageUrl,
+  collectMissingArtworkGames,
   normalizeDeveloperName,
   normalizeGameTitle,
   selectExactAppStoreMatch,
@@ -73,4 +74,20 @@ test("validates Apple artwork and App Store page hosts", () => {
   assert.equal(isValidAppStoreArtworkUrl("https://images.example.com/example.jpg"), false);
   assert.equal(isValidAppStorePageUrl("https://apps.apple.com/us/app/example/id123"), true);
   assert.equal(isValidAppStorePageUrl("https://example.com/app/id123"), false);
+});
+
+
+test("does not treat a wide Steam header as a substitute for a square mobile cover", () => {
+  const groups = collectMissingArtworkGames({
+    "Studio One": {
+      popularGames: [
+        { title: "Mobile Game", appId: 12345, steamHeaderUrl: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/12345/header.jpg" },
+        { title: "Already Has IGDB Cover", igdbCoverId: "coverhash" },
+        { title: "Unannounced Project", stage: "In development" },
+      ],
+    },
+  });
+  assert.equal(groups.length, 1);
+  assert.equal(groups[0].title, "Mobile Game");
+  assert.equal(groups[0].entries[0].studio, "Studio One");
 });
