@@ -252,6 +252,7 @@ class DiscoveryParsingTests(unittest.TestCase):
         cursor = "Q500"
         developer_query = discovery.sparql_query("class", cursor, 120)
         credit_query = discovery.sparql_query("developer_credit", cursor, 120)
+        industry_query = discovery.sparql_query("industry", cursor, 120)
         self.assertIn("wd:Q210167", developer_query)
         self.assertIn("wdt:P856", developer_query)
         self.assertIn('STRAFTER(STR(?company), "/entity/") > "Q500"', developer_query)
@@ -259,6 +260,33 @@ class DiscoveryParsingTests(unittest.TestCase):
         self.assertIn("wdt:P178", credit_query)
         self.assertIn("wd:Q7889", credit_query)
         self.assertIn("LIMIT 120", credit_query)
+        self.assertIn("wdt:P452 wd:Q941594", industry_query)
+        self.assertIn("LIMIT 120", industry_query)
+
+    def test_industry_leads_require_direct_game_development_evidence(self):
+        publisher_html = """<html><body><p>We publish games from independent developers.</p>
+        <p>We welcome speculative applications.</p><a href="mailto:jobs@publisher.example">Careers</a></body></html>"""
+        studio_html = """<html><body><p>We are an independent video game development studio.</p>
+        <p>We welcome speculative applications.</p><a href="mailto:jobs@studio.example">Careers</a></body></html>"""
+
+        def fetch_page(url, _external):
+            body = publisher_html if "publisher.example" in url else studio_html
+            return discovery.FetchResult(True, url, 200, body)
+
+        publisher_result = discovery.verify_candidate_pages(
+            {"source_id": "wikidata_video_game_industry", "website": "https://publisher.example/"},
+            fetch_page,
+        )
+        studio_result = discovery.verify_candidate_pages(
+            {"source_id": "wikidata_video_game_industry", "website": "https://studio.example/"},
+            fetch_page,
+        )
+        self.assertEqual(publisher_result["status"], "needs_review")
+        self.assertEqual(
+            publisher_result["reason"],
+            "industry_classification_without_direct_game_development_evidence",
+        )
+        self.assertEqual(studio_result["status"], "verified")
 
     def test_wikidata_entity_uri_is_normalized_to_qid_and_https_source(self):
         self.assertEqual(
@@ -792,16 +820,16 @@ class DatasetUpdateTests(unittest.TestCase):
         ]
         self.assertTrue(all(state["source_stats"][item]["cycle"] == 2 for item in other_sources))
 
-    def test_three_complete_empty_cycles_mark_initial_discovery_saturated(self):
+    def test_five_complete_empty_cycles_mark_initial_discovery_saturated(self):
         state = discovery.empty_state()
-        for _ in range(3):
+        for _ in range(5):
             for feed in discovery.FEEDS:
                 state["feed_done"][feed["id"]] = True
             self.assertTrue(discovery.finish_cycle_if_complete(state))
         recurring = [feed["id"] for feed in discovery.FEEDS if feed["refresh_policy"] == "recurring"]
         self.assertTrue(all(state["source_stats"][item]["saturated"] for item in recurring))
         self.assertTrue(state["saturated"])
-        self.assertEqual(state["empty_cycles"], 3)
+        self.assertEqual(state["empty_cycles"], 5)
 
 
     def test_verified_growth_resets_only_its_own_source_saturation(self):
@@ -826,8 +854,8 @@ class DatasetUpdateTests(unittest.TestCase):
         state = discovery.empty_state()
         recurring = [feed for feed in discovery.FEEDS if feed["refresh_policy"] == "recurring"]
         state["source_stats"][recurring[0]["id"]]["saturated"] = True
-        self.assertEqual(discovery.source_page_budget(recurring[0], state, 8), 1)
-        self.assertEqual(discovery.source_page_budget(recurring[1], state, 8), 8)
+        self.assertEqual(discovery.source_page_budget(recurring[0], state, 16), 4)
+        self.assertEqual(discovery.source_page_budget(recurring[1], state, 16), 16)
 
     def test_unresolved_retry_from_prior_pass_prevents_later_empty_saturation(self):
         state = discovery.empty_state()
@@ -862,6 +890,11 @@ class DatasetUpdateTests(unittest.TestCase):
         self.assertEqual(
             {item["id"] for item in manifest["sources"]},
             {feed["id"] for feed in discovery.FEEDS},
+        )
+        self.assertIn("wikidata_video_game_industry", {feed["id"] for feed in discovery.FEEDS})
+        self.assertEqual(
+            next(feed for feed in discovery.FEEDS if feed["id"] == "gamedevmap")["refresh_policy"],
+            "recurring",
         )
 
     def test_v1_state_migration_preserves_checkpoints_without_guessing_feed_provenance(self):
@@ -1012,18 +1045,18 @@ class GameDevMapDiscoveryTests(unittest.TestCase):
             self.assertTrue(saved["feed_done"]["gamedevmap"])
             self.assertEqual(len(saved["candidates"]), 3)
 
-    def test_completed_wikidata_cycle_does_not_reset_game_dev_map_catalogue_cursor(self):
+    def test_completed_recurring_cycle_restarts_game_dev_map_catalogue_from_first_page(self):
         state = discovery.empty_state()
         state["feed_cursors"]["gamedevmap"] = "10501"
         state["feed_done"]["gamedevmap"] = True
         for feed in discovery.FEEDS:
-            if feed["kind"] != "gamedevmap":
-                state["feed_done"][feed["id"]] = True
+            state["feed_done"][feed["id"]] = True
 
-        self.assertTrue(discovery.finish_cycle_if_complete(state))
-        self.assertEqual(state["feed_cursors"]["gamedevmap"], "10501")
-        self.assertTrue(state["feed_done"]["gamedevmap"])
-        self.assertTrue(state["source_stats"]["gamedevmap"]["complete"])
+        completed = discovery.finish_source_cycles(state)
+        self.assertIn("gamedevmap", completed)
+        self.assertEqual(state["feed_cursors"]["gamedevmap"], "")
+        self.assertFalse(state["feed_done"]["gamedevmap"])
+        self.assertEqual(state["source_stats"]["gamedevmap"]["last_pass_status"], "complete")
         self.assertEqual(state["feed_cursors"]["wikidata_video_game_developers"], "")
         self.assertFalse(state["feed_done"]["wikidata_video_game_developers"])
 
