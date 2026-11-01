@@ -580,6 +580,10 @@
         "appId": null,
         "appStoreArtworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple113/v4/06/b4/5c/06b45c42-6d14-950a-be31-1484cdeb8c37/AppIcon-0-1x_U007emarketing-0-85-220-7.png/512x512bb.jpg",
         "appStoreUrl": "https://apps.apple.com/us/app/tiny-miners/id920054061?uo=4"
+      },
+      {
+        "title": "Tiny Miners",
+        "appId": null
       }
     ],
     "profileSources": [
@@ -2045,6 +2049,10 @@
       {
         "title": "Tenable",
         "appId": null
+      },
+      {
+        "title": "The Chase: World Tour",
+        "appId": null
       }
     ],
     "applicationLocation": "Location not specified · use HQ as reference",
@@ -2960,6 +2968,13 @@
         "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4557080/d640c42862eb5d7dd1275915c67e06f3d38d7ecc/capsule_231x87.jpg?t=1786380019",
         "appStoreArtworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/a9/5a/ba/a95aba8a-d631-f8c8-3a52-6ed153ca4e6b/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
         "appStoreUrl": "https://apps.apple.com/us/app/stellar-hustler/id6761012480?uo=4"
+      },
+      {
+        "title": "Stellar Hustler",
+        "appId": 4557080,
+        "stage": "Published; site lists Steam/PC, Google Play and App Store, version 0.9.11",
+        "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4557080/8b82bdf999d9f0d5afa4d207bcbc79011b62df27/header.jpg?t=1786380019",
+        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4557080/d640c42862eb5d7dd1275915c67e06f3d38d7ecc/capsule_231x87.jpg?t=1786380019"
       }
     ],
     "profileSources": [
@@ -4760,6 +4775,12 @@
         "igdbCoverId": "co268j",
         "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/602700/header.jpg?t=1724162553",
         "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/602700/f261940c0b3588d4fc1ad263133259deade507d5/capsule_231x87.jpg?t=1724162553"
+      },
+      {
+        "title": "Rust",
+        "appId": 252490,
+        "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252490/header.jpg?t=1781536981",
+        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252490/21aac0b6e20e1ba12f635e7deb730e32a51afbd5/capsule_231x87.jpg?t=1781536981"
       }
     ],
     "profileSources": [
@@ -6281,6 +6302,10 @@
         "igdbGameId": 18497,
         "igdbSlug": "monster-dash",
         "igdbCoverId": "co2xi2"
+      },
+      {
+        "title": "Fruit Ninja",
+        "appId": null
       }
     ],
     "profileSources": [
@@ -8851,6 +8876,10 @@
         "igdbGameId": 117644,
         "igdbSlug": "talisman-origins",
         "igdbCoverId": "co42ws"
+      },
+      {
+        "title": "Fury of Dracula",
+        "appId": 958530
       }
     ],
     "profileSources": [
@@ -9550,6 +9579,12 @@
         "appId": 304430,
         "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/304430/header.jpg?t=1761819581",
         "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/304430/capsule_231x87.jpg?t=1761819581"
+      },
+      {
+        "title": "LIMBO",
+        "appId": 48000,
+        "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/48000/header.jpg?t=1761819450",
+        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/48000/capsule_231x87.jpg?t=1761819450"
       }
     ],
     "profileSources": [
@@ -9899,6 +9934,14 @@
         "appId": null,
         "appStoreArtworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/7a/2e/b9/7a2eb9c8-9994-0708-c868-bb9f20cf77d9/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
         "appStoreUrl": "https://apps.apple.com/us/app/legendary-differences/id6737454790?uo=4"
+      },
+      {
+        "title": "Tech Startup Idle Tycoon",
+        "appId": null
+      },
+      {
+        "title": "Legendary Differences",
+        "appId": null
       }
     ],
     "profileSources": [
