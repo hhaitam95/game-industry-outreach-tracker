@@ -249,8 +249,8 @@ async function main() {
     await trailTableImage.waitFor();
     const trailTableImageUrl = await trailTableImage.getAttribute("src") || "";
     assert.ok(
-      trailTableImageUrl.includes("/3544920/4b378db32870dbb221964410a943fac5a063f998/header.jpg"),
-      "The Trail should use its verified wide Steam header after portrait artwork fails. Actual URL: " + trailTableImageUrl,
+      trailTableImageUrl.endsWith("/steam/apps/3544920/header.jpg"),
+      "The Trail should fall back to a landscape Steam header after portrait artwork fails. Actual URL: " + trailTableImageUrl,
     );
     const compactRatio = await trailTableCover.evaluate(element => {
       const rect = element.getBoundingClientRect();
