@@ -8,6 +8,7 @@ const profilesPath = path.join(root, "src/data/studio-profiles.json");
 const SEARCH_URL = "https://store.steampowered.com/api/storesearch/";
 const DETAILS_URL = "https://store.steampowered.com/api/appdetails";
 const REQUEST_INTERVAL_MS = 800;
+const DETAILS_BATCH_SIZE = 25;
 
 export function normalizeGameTitle(value) {
   return String(value ?? "")
@@ -26,6 +27,40 @@ export function normalizeDeveloperName(value) {
     .replace(/\b(studios|studio)\b/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+export function isValidSteamArtworkUrl(value) {
+  if (typeof value !== "string" || !value.trim()) return false;
+  try {
+    const url = new URL(value);
+    return (
+      url.protocol === "https:" &&
+      url.hostname.endsWith(".steamstatic.com") &&
+      !url.username &&
+      !url.password &&
+      /\.(?:jpe?g|png|webp)$/i.test(url.pathname)
+    );
+  } catch {
+    return false;
+  }
+}
+
+export function selectExactSteamArtwork(title, appDetailsEntry) {
+  const detail = appDetailsEntry?.success ? appDetailsEntry.data : null;
+  if (!detail || detail.type !== "game") return { status: "not_a_game" };
+  if (normalizeGameTitle(detail.name) !== normalizeGameTitle(title)) {
+    return { status: "title_mismatch" };
+  }
+
+  const headerUrl = isValidSteamArtworkUrl(detail.header_image) ? detail.header_image : undefined;
+  const capsuleUrl = isValidSteamArtworkUrl(detail.capsule_image) ? detail.capsule_image : undefined;
+  if (!headerUrl && !capsuleUrl) return { status: "missing_artwork" };
+
+  return {
+    status: "matched",
+    ...(headerUrl ? { steamHeaderUrl: headerUrl } : {}),
+    ...(capsuleUrl ? { steamCapsuleUrl: capsuleUrl } : {}),
+  };
 }
 
 export function selectExactSteamMatch(title, studioName, searchResults, appDetails) {
@@ -58,7 +93,13 @@ export function selectExactSteamMatch(title, studioName, searchResults, appDetai
   );
   if (!developerMatches) return { status: "developer_mismatch", appId };
 
-  return { status: "matched", appId };
+  const artwork = selectExactSteamArtwork(title, detail);
+  return {
+    status: "matched",
+    appId,
+    ...(artwork.steamHeaderUrl ? { steamHeaderUrl: artwork.steamHeaderUrl } : {}),
+    ...(artwork.steamCapsuleUrl ? { steamCapsuleUrl: artwork.steamCapsuleUrl } : {}),
+  };
 }
 
 function parseArgs(argv) {
@@ -109,6 +150,16 @@ async function steamRequest(url, label) {
   throw new Error(label + " failed after retries.");
 }
 
+async function fetchAppDetails(appIds) {
+  const url = new URL(DETAILS_URL);
+  url.search = new URLSearchParams({
+    appids: appIds.join(","),
+    cc: "US",
+    l: "english",
+  }).toString();
+  return steamRequest(url, "Steam app details for " + appIds.join(","));
+}
+
 async function searchSteam(title) {
   const url = new URL(SEARCH_URL);
   url.search = new URLSearchParams({ term: title, l: "english", cc: "US" }).toString();
@@ -120,13 +171,11 @@ async function searchSteam(title) {
   )];
   if (exactIds.length !== 1) return { searchResults, appDetails: {} };
 
-  const detailsUrl = new URL(DETAILS_URL);
-  detailsUrl.search = new URLSearchParams({ appids: String(exactIds[0]), cc: "US", l: "english" }).toString();
-  const appDetails = await steamRequest(detailsUrl, "Steam app details for " + exactIds[0]);
+  const appDetails = await fetchAppDetails(exactIds);
   return { searchResults, appDetails };
 }
 
-function collectGames(profiles) {
+function collectGamesMissingAppId(profiles) {
   const groups = new Map();
   for (const [studio, profile] of Object.entries(profiles)) {
     for (const game of profile.popularGames || []) {
@@ -140,13 +189,76 @@ function collectGames(profiles) {
   return [...groups.values()];
 }
 
+function collectGamesMissingSteamArtwork(profiles) {
+  const entriesByAppId = new Map();
+  for (const [studio, profile] of Object.entries(profiles)) {
+    for (const game of profile.popularGames || []) {
+      if (!Number.isInteger(game.appId) || game.appId < 1) continue;
+      if (game.steamHeaderUrl && isValidSteamArtworkUrl(game.steamHeaderUrl)) continue;
+      const group = entriesByAppId.get(game.appId) || { appId: game.appId, entries: [] };
+      group.entries.push({ studio, game });
+      entriesByAppId.set(game.appId, group);
+    }
+  }
+  return [...entriesByAppId.values()];
+}
+
+async function enrichKnownSteamArtwork(profiles) {
+  const groups = collectGamesMissingSteamArtwork(profiles);
+  const counts = {
+    existingAppIdsChecked: 0,
+    steamHeaderUrlsAdded: 0,
+    steamCapsuleUrlsAdded: 0,
+    titleMismatches: 0,
+    nonGames: 0,
+    missingSteamArtwork: 0,
+  };
+
+  for (let offset = 0; offset < groups.length; offset += DETAILS_BATCH_SIZE) {
+    if (offset > 0) await delay(REQUEST_INTERVAL_MS);
+    const batch = groups.slice(offset, offset + DETAILS_BATCH_SIZE);
+    const response = await fetchAppDetails(batch.map(group => group.appId));
+
+    for (const group of batch) {
+      counts.existingAppIdsChecked += 1;
+      const entry = response?.[String(group.appId)];
+      for (const { game } of group.entries) {
+        const result = selectExactSteamArtwork(game.title, entry);
+        if (result.status === "not_a_game") {
+          counts.nonGames += 1;
+          continue;
+        }
+        if (result.status === "title_mismatch") {
+          counts.titleMismatches += 1;
+          continue;
+        }
+        if (result.status !== "matched") {
+          counts.missingSteamArtwork += 1;
+          continue;
+        }
+        if (result.steamHeaderUrl && game.steamHeaderUrl !== result.steamHeaderUrl) {
+          game.steamHeaderUrl = result.steamHeaderUrl;
+          counts.steamHeaderUrlsAdded += 1;
+        }
+        if (result.steamCapsuleUrl && game.steamCapsuleUrl !== result.steamCapsuleUrl) {
+          game.steamCapsuleUrl = result.steamCapsuleUrl;
+          counts.steamCapsuleUrlsAdded += 1;
+        }
+      }
+    }
+  }
+
+  return counts;
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (args.help) {
     process.stdout.write(
-      "Safely enrich missing Steam app IDs from the public Steam Store API.\n\n" +
+      "Enrich Steam artwork URLs and discover missing Steam app IDs from the public Steam Store API.\n\n" +
       "Dry run: node scripts/enrich-steam-games.mjs [--limit N]\n" +
-      "Write exact title + developer matches: node scripts/enrich-steam-games.mjs --write\n",
+      "Write verified metadata: node scripts/enrich-steam-games.mjs --write\n" +
+      "--limit caps the number of missing-title search groups; known app-ID artwork URLs are still refreshed.\n",
     );
     return;
   }
@@ -158,9 +270,11 @@ async function main() {
     throw new Error("Could not read src/data/studio-profiles.json.", { cause: error });
   }
 
-  const groups = collectGames(profiles);
+  const headerCounts = await enrichKnownSteamArtwork(profiles);
+  const groups = collectGamesMissingAppId(profiles);
   const counts = {
-    queried: 0,
+    ...headerCounts,
+    missingTitleGroupsQueried: 0,
     matchedRecords: 0,
     ambiguous: 0,
     notFound: 0,
@@ -171,16 +285,18 @@ async function main() {
   const unresolved = [];
 
   for (const group of groups) {
-    if (counts.queried >= args.limit) break;
-    if (counts.queried > 0) await delay(REQUEST_INTERVAL_MS);
+    if (counts.missingTitleGroupsQueried >= args.limit) break;
+    if (counts.missingTitleGroupsQueried > 0) await delay(REQUEST_INTERVAL_MS);
     const { searchResults, appDetails } = await searchSteam(group.title);
-    counts.queried += 1;
+    counts.missingTitleGroupsQueried += 1;
 
     for (const studio of [...new Set(group.entries.map(entry => entry.studio))]) {
       const result = selectExactSteamMatch(group.title, studio, searchResults, appDetails);
       if (result.status === "matched") {
         for (const entry of group.entries.filter(item => item.studio === studio && !item.game.appId)) {
           entry.game.appId = result.appId;
+          if (result.steamHeaderUrl) entry.game.steamHeaderUrl = result.steamHeaderUrl;
+          if (result.steamCapsuleUrl) entry.game.steamCapsuleUrl = result.steamCapsuleUrl;
           counts.matchedRecords += 1;
         }
       } else {
@@ -199,9 +315,9 @@ async function main() {
 
   if (args.write) {
     writeFileSync(profilesPath, JSON.stringify(profiles, null, 2) + "\n", "utf8");
-    process.stdout.write("Updated studio profiles with exact Steam title and developer matches.\n");
+    process.stdout.write("Updated studio profiles with verified Steam app IDs and artwork URLs.\n");
   } else {
-    process.stdout.write("Dry run only; no files were changed. Re-run with --write to persist verified app IDs.\n");
+    process.stdout.write("Dry run only; no files were changed. Re-run with --write to persist verified Steam metadata.\n");
   }
 
   process.stdout.write(JSON.stringify({ ...counts, unresolvedRecords: unresolved.length }, null, 2) + "\n");
