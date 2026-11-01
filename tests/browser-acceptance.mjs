@@ -262,7 +262,7 @@ async function main() {
 
     const twentyTwoCansButton = twentyTwoCansRow.getByRole("button", { name: /22cans/ });
     const twentyTwoCansDetails = page.locator("#studio-details-22cans");
-    await twentyTwoCansButton.click();
+    await twentyTwoCansDetails.waitFor();
     const trailPoster = page.locator('.game-poster-grid .game-poster-card[data-game-title="The Trail"]');
     const trailPosterImage = trailPoster.locator('img[data-artwork-layout="landscape"]');
     await trailPosterImage.waitFor();
