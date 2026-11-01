@@ -7,6 +7,8 @@ const root = process.cwd();
 const profilesPath = path.join(root, "src/data/studio-profiles.json");
 const SEARCH_URL = "https://store.steampowered.com/api/storesearch/";
 const DETAILS_URL = "https://store.steampowered.com/api/appdetails";
+const STORE_BROWSE_URL = "https://api.steampowered.com/IStoreBrowseService/GetItems/v1/";
+const STORE_BROWSE_BATCH_SIZE = 40;
 const REQUEST_INTERVAL_MS = 800;
 
 export function normalizeGameTitle(value) {
@@ -59,6 +61,52 @@ export function selectExactSteamArtwork(title, appDetailsEntry) {
     status: "matched",
     ...(headerUrl ? { steamHeaderUrl: headerUrl } : {}),
     ...(capsuleUrl ? { steamCapsuleUrl: capsuleUrl } : {}),
+  };
+}
+
+/**
+ * Resolve Steam's current hash-based portrait library assets.
+ *
+ * GetItems supplies both the per-app asset path template and exact hashed
+ * filenames. Never synthesize a hash or trust an asset path for another app.
+ */
+export function selectSteamLibraryArtwork(appId, storeItem, title) {
+  if (!Number.isInteger(appId) || appId < 1 || Number(storeItem?.appid) !== appId) {
+    return { status: "app_id_mismatch" };
+  }
+  if (!(storeItem?.success === 1 || storeItem?.success === true)) {
+    return { status: "unavailable" };
+  }
+  if (title && normalizeGameTitle(storeItem.name) !== normalizeGameTitle(title)) {
+    return { status: "title_mismatch" };
+  }
+
+  const assets = storeItem.assets;
+  const expectedFormat = "steam/apps/" + appId + "/" + "$" + "{FILENAME}";
+  if (assets?.asset_url_format !== expectedFormat) {
+    return { status: "invalid_asset_url_format" };
+  }
+
+  const toSteamUrl = filename => {
+    if (
+      typeof filename !== "string" ||
+      !/^[a-f0-9]{40}\\/library_(?:600x900|capsule)(?:_2x)?\\.(?:jpe?g|png|webp)$/i.test(filename)
+    ) {
+      return undefined;
+    }
+    const url = "https://shared.fastly.steamstatic.com/store_item_assets/" +
+      assets.asset_url_format.replace("$" + "{FILENAME}", filename);
+    return isValidSteamArtworkUrl(url) ? url : undefined;
+  };
+
+  const portraitUrl = toSteamUrl(assets.library_capsule);
+  const portrait2xUrl = toSteamUrl(assets.library_capsule_2x);
+  if (!portraitUrl && !portrait2xUrl) return { status: "missing_artwork" };
+
+  return {
+    status: "matched",
+    ...(portraitUrl ? { steamLibraryCapsuleUrl: portraitUrl } : {}),
+    ...(portrait2xUrl ? { steamLibraryCapsule2xUrl: portrait2xUrl } : {}),
   };
 }
 
@@ -159,6 +207,18 @@ async function fetchAppDetails(appIds) {
   return steamRequest(url, "Steam app details for " + appIds.join(","));
 }
 
+async function fetchStoreBrowseItems(appIds) {
+  const input = {
+    ids: appIds.map(appid => ({ appid })),
+    context: { language: "english", country_code: "US", steam_realm: 1 },
+    data_request: { include_assets: true },
+  };
+  const url = new URL(STORE_BROWSE_URL);
+  url.search = new URLSearchParams({ input_json: JSON.stringify(input) }).toString();
+  const result = await steamRequest(url, "Steam Store Browse assets for " + appIds.join(","));
+  return Array.isArray(result?.response?.store_items) ? result.response.store_items : [];
+}
+
 async function searchSteam(title) {
   const url = new URL(SEARCH_URL);
   url.search = new URLSearchParams({ term: title, l: "english", cc: "US" }).toString();
@@ -202,6 +262,84 @@ function collectGamesMissingSteamArtwork(profiles) {
     }
   }
   return [...entriesByAppId.values()];
+}
+
+function collectGamesMissingLibraryArtwork(profiles) {
+  const entriesByAppId = new Map();
+  for (const [studio, profile] of Object.entries(profiles)) {
+    for (const game of profile.popularGames || []) {
+      if (!Number.isInteger(game.appId) || game.appId < 1) continue;
+      const hasPortraitUrl =
+        isValidSteamArtworkUrl(game.steamLibraryCapsuleUrl) ||
+        isValidSteamArtworkUrl(game.steamLibraryCapsule2xUrl);
+      if (hasPortraitUrl) continue;
+      const group = entriesByAppId.get(game.appId) || { appId: game.appId, entries: [] };
+      group.entries.push({ studio, game });
+      entriesByAppId.set(game.appId, group);
+    }
+  }
+  return [...entriesByAppId.values()];
+}
+
+async function enrichSteamLibraryArtwork(profiles) {
+  const groups = collectGamesMissingLibraryArtwork(profiles);
+  const counts = {
+    libraryAppIdsChecked: 0,
+    libraryCapsuleUrlsAdded: 0,
+    libraryCapsule2xUrlsAdded: 0,
+    libraryArtworkMissing: 0,
+    libraryAssetsRequestFailures: 0,
+  };
+  const failures = [];
+
+  for (let offset = 0; offset < groups.length; offset += STORE_BROWSE_BATCH_SIZE) {
+    if (offset > 0) await delay(REQUEST_INTERVAL_MS);
+    const batch = groups.slice(offset, offset + STORE_BROWSE_BATCH_SIZE);
+    const appIds = batch.map(group => group.appId);
+    let items;
+    try {
+      items = await fetchStoreBrowseItems(appIds);
+    } catch (error) {
+      counts.libraryAssetsRequestFailures += appIds.length;
+      failures.push({ appIds, error: String(error).slice(0, 180) });
+      continue;
+    }
+
+    const itemsByAppId = new Map(
+      items
+        .filter(item => Number.isInteger(Number(item?.appid)))
+        .map(item => [Number(item.appid), item]),
+    );
+
+    for (const group of batch) {
+      counts.libraryAppIdsChecked += 1;
+      const item = itemsByAppId.get(group.appId);
+      if (!item) {
+        counts.libraryArtworkMissing += group.entries.length;
+        continue;
+      }
+      for (const { game } of group.entries) {
+        const artwork = selectSteamLibraryArtwork(group.appId, item, game.title);
+        if (artwork.status !== "matched") {
+          counts.libraryArtworkMissing += 1;
+          continue;
+        }
+        if (artwork.steamLibraryCapsuleUrl && !isValidSteamArtworkUrl(game.steamLibraryCapsuleUrl)) {
+          game.steamLibraryCapsuleUrl = artwork.steamLibraryCapsuleUrl;
+          counts.libraryCapsuleUrlsAdded += 1;
+        }
+        if (artwork.steamLibraryCapsule2xUrl && !isValidSteamArtworkUrl(game.steamLibraryCapsule2xUrl)) {
+          game.steamLibraryCapsule2xUrl = artwork.steamLibraryCapsule2xUrl;
+          counts.libraryCapsule2xUrlsAdded += 1;
+        }
+      }
+    }
+  }
+
+  if (failures.length > 0) {
+    process.stdout.write(JSON.stringify({ libraryAssetsRequestFailures: failures.slice(0, 20) }, null, 2) + "\n");
+  }
+  return counts;
 }
 
 async function enrichKnownSteamArtwork(profiles) {
@@ -263,14 +401,15 @@ async function enrichKnownSteamArtwork(profiles) {
   if (failures.length > 0) {
     process.stdout.write(JSON.stringify({ appDetailsRequestFailures: failures.slice(0, 20) }, null, 2) + "\n");
   }
-  return counts;
+  const libraryCounts = await enrichSteamLibraryArtwork(profiles);
+  return { ...counts, ...libraryCounts };
 }
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (args.help) {
     process.stdout.write(
-      "Enrich Steam artwork URLs and discover missing Steam app IDs from the public Steam Store API.\n\n" +
+      "Enrich Steam portrait library capsules, Steam artwork URLs and exact missing app IDs from Steam's public Store APIs.\n\n" +
       "Dry run: node scripts/enrich-steam-games.mjs [--limit N]\n" +
       "Write verified metadata: node scripts/enrich-steam-games.mjs --write\n" +
       "--limit caps the number of missing-title search groups; known app-ID artwork URLs are still refreshed.\n",
@@ -328,11 +467,18 @@ async function main() {
     }
   }
 
+  // A first-pass search can discover new app IDs after the existing-ID batch.
+  // Re-run only the missing portrait-artwork set so those new IDs are covered too.
+  const lateLibraryCounts = await enrichSteamLibraryArtwork(profiles);
+  for (const [key, value] of Object.entries(lateLibraryCounts)) {
+    counts[key] = (counts[key] || 0) + value;
+  }
+
   if (args.write) {
     writeFileSync(profilesPath, JSON.stringify(profiles, null, 2) + "\n", "utf8");
-    process.stdout.write("Updated studio profiles with verified Steam app IDs and artwork URLs.\n");
+    process.stdout.write("Updated studio profiles with verified Steam app IDs, library capsule artwork and Steam artwork URLs.\n");
   } else {
-    process.stdout.write("Dry run only; no files were changed. Re-run with --write to persist verified Steam metadata.\n");
+    process.stdout.write("Dry run only; no files were changed. Re-run with --write to persist verified Steam app IDs and artwork metadata.\n");
   }
 
   process.stdout.write(JSON.stringify({ ...counts, unresolvedRecords: unresolved.length }, null, 2) + "\n");
