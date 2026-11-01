@@ -199,7 +199,7 @@
     "popularGames": [
       {
         "title": "KARDS",
-        "appId": null
+        "appId": 544810
       },
       {
         "title": "Untitled mobile-first game",
@@ -1021,19 +1021,27 @@
     "popularGames": [
       {
         "title": "Fiete World",
-        "appId": null
+        "appId": null,
+        "officialArtworkUrl": "https://www.ahoiii.com/images/apps/FieteWorldKids-Games-Apps-180x180-2.png",
+        "officialArtworkLayout": "square"
       },
       {
         "title": "Fiete Sports",
-        "appId": null
+        "appId": null,
+        "officialArtworkUrl": "https://www.ahoiii.com/images/apps/FieteSports_Kids-Games-Apps-180x180-1.png",
+        "officialArtworkLayout": "square"
       },
       {
         "title": "Fiete PlaySchool",
-        "appId": null
+        "appId": null,
+        "officialArtworkUrl": "https://www.ahoiii.com/images/apps/FietePlaySchool_Kids-Games-Apps-180x180_yellow.png",
+        "officialArtworkLayout": "square"
       },
       {
         "title": "Fiete Soccer",
-        "appId": null
+        "appId": null,
+        "officialArtworkUrl": "https://www.ahoiii.com/images/apps/FieteSoccer_Kids-Games-Apps-180x180-1.png",
+        "officialArtworkLayout": "square"
       },
       {
         "title": "Sandmännchen app",
@@ -3845,7 +3853,10 @@
       },
       {
         "title": "The Tablet of Destinies",
-        "appId": null
+        "appId": null,
+        "officialUrl": "https://www.d4ngames.com/games/tablet-of-destinies",
+        "officialArtworkUrl": "https://d4ngames.com/images/tablet_thumbnail.webp",
+        "officialArtworkLayout": "landscape"
       }
     ],
     "profileSources": [
@@ -4096,7 +4107,7 @@
       },
       {
         "title": "Remember Me",
-        "appId": null
+        "appId": 228300
       }
     ],
     "profileSources": [
@@ -4650,7 +4661,7 @@
       },
       {
         "title": "Mannequin",
-        "appId": null
+        "appId": 2409260
       }
     ],
     "profileSources": [
@@ -6280,7 +6291,7 @@
       },
       {
         "title": "Stuck Together",
-        "appId": null
+        "appId": 3295360
       }
     ],
     "profileSources": [
@@ -8462,7 +8473,7 @@
       },
       {
         "title": "Fury of Dracula",
-        "appId": null
+        "appId": 958530
       },
       {
         "title": "Fighting Fantasy Legends",
@@ -8630,7 +8641,7 @@
       },
       {
         "title": "Smurfs: Dreams",
-        "appId": null,
+        "appId": 2602020,
         "stage": "Game development"
       },
       {
