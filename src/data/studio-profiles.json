@@ -10291,7 +10291,9 @@
         "stage": "Debut game · 2026 Early Access plan",
         "igdbGameId": 347635,
         "igdbSlug": "chronicles-medieval",
-        "igdbCoverId": "co9xh3"
+        "igdbCoverId": "co9xh3",
+        "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2231020/322a3e5e98ce955972508f8ae5a6eb569ee40742/header.jpg?t=1791486435",
+        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2231020/e8865f03b52b75ea36d73148993d0edd32635649/capsule_231x87.jpg?t=1791486435"
       }
     ],
     "applicationLocation": "Copenhagen / hybrid / remote within CET ±1–2 hours",
@@ -10486,11 +10488,15 @@
         "appId": 1602080,
         "igdbGameId": 152262,
         "igdbSlug": "soulstice",
-        "igdbCoverId": "co39sa"
+        "igdbCoverId": "co39sa",
+        "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1602080/header.jpg?t=1746539339",
+        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1602080/capsule_231x87.jpg?t=1746539339"
       },
       {
         "title": "Theseus",
-        "appId": 677330
+        "appId": 677330,
+        "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/677330/header.jpg?t=1725898659",
+        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/677330/capsule_231x87.jpg?t=1725898659"
       }
     ],
     "applicationLocation": "Milan · on-site; Italian and English required",
@@ -10608,14 +10614,18 @@
         "appId": 1782460,
         "igdbGameId": 324256,
         "igdbSlug": "hell-clock",
-        "igdbCoverId": "cocczq"
+        "igdbCoverId": "cocczq",
+        "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1782460/ad535db40678e4c07263cd6378194d2f3924a36b/header_alt_assets_0.jpg?t=1792677583",
+        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1782460/7a68de140430fda054212c2d08a532880818d0ad/capsule_231x87_alt_assets_0.jpg?t=1792677583"
       },
       {
         "title": "Relic Hunters Legend",
         "appId": 633080,
         "igdbGameId": 72497,
         "igdbSlug": "relic-hunters-legend",
-        "igdbCoverId": "co757i"
+        "igdbCoverId": "co757i",
+        "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/633080/header.jpg?t=1755196862",
+        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/633080/3d045952c07c7eed61add73ccd7fa0746b817df7/capsule_231x87.jpg?t=1755196862"
       },
       {
         "title": "Relic Hunters Rebels",
@@ -10636,7 +10646,9 @@
         "appId": 488960,
         "igdbGameId": 51899,
         "igdbSlug": "star-vikings-forever",
-        "igdbCoverId": "cobxmt"
+        "igdbCoverId": "cobxmt",
+        "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/488960/header.jpg?t=1791224376",
+        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/488960/capsule_231x87.jpg?t=1791224376"
       }
     ],
     "profileSources": [
@@ -10870,25 +10882,33 @@
         "appId": 5221470,
         "igdbGameId": 418498,
         "igdbSlug": "faraday-blues",
-        "igdbCoverId": "cocxgl"
+        "igdbCoverId": "cocxgl",
+        "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5221470/dfc60e76c3e26010fbc51c057669e57e85b42aea/header.jpg?t=1790236823",
+        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5221470/c81be35c98dfe98cbafce985e064e618262668d7/capsule_231x87.jpg?t=1790236823"
       },
       {
         "title": "Vivarium",
-        "appId": 4735760
+        "appId": 4735760,
+        "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4735760/d623f5f005ad695def06b2d14ff136c4b4a5eb24/header.jpg?t=1782256159",
+        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4735760/143b1d6193b2b50e55bd1bd4e0155187826240fe/capsule_231x87.jpg?t=1782256159"
       },
       {
         "title": "Fractured Blooms",
         "appId": 3730310,
         "igdbGameId": 347648,
         "igdbSlug": "fractured-blooms",
-        "igdbCoverId": "co9xgt"
+        "igdbCoverId": "co9xgt",
+        "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3730310/54aae5b714777d4bdd1316d3df1f487e4688f703/header.jpg?t=1789611762",
+        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3730310/3486fae8318ef144b90835d67042a2d454c54c48/capsule_231x87.jpg?t=1789611762"
       },
       {
         "title": "Springs, Eternal",
         "appId": 3677850,
         "igdbGameId": 380435,
         "igdbSlug": "springs-eternal",
-        "igdbCoverId": "coay7y"
+        "igdbCoverId": "coay7y",
+        "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3677850/b02d160b50cddfbaf6f5688115d9979ab1378c49/header.jpg?t=1791493361",
+        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3677850/4a5355bff3f70aec7d65da1df038806ba54a4d29/capsule_231x87.jpg?t=1791493361"
       }
     ],
     "profileSources": [
@@ -10934,14 +10954,18 @@
         "appId": 233470,
         "igdbGameId": 2029,
         "igdbSlug": "evoland",
-        "igdbCoverId": "co2sb1"
+        "igdbCoverId": "co2sb1",
+        "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/233470/header.jpg?t=1716563896",
+        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/233470/capsule_231x87.jpg?t=1716563896"
       },
       {
         "title": "Evoland 2",
         "appId": 359310,
         "igdbGameId": 11798,
         "igdbSlug": "evoland-2",
-        "igdbCoverId": "co295h"
+        "igdbCoverId": "co295h",
+        "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/359310/header.jpg?t=1737537707",
+        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/359310/capsule_231x87.jpg?t=1737537707"
       },
       {
         "title": "Northgard",
@@ -10955,14 +10979,18 @@
         "appId": 1527950,
         "igdbGameId": 152257,
         "igdbSlug": "wartales",
-        "igdbCoverId": "co6dpz"
+        "igdbCoverId": "co6dpz",
+        "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1527950/header.jpg?t=1788942263",
+        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1527950/capsule_231x87.jpg?t=1788942263"
       },
       {
         "title": "Dune: Spice Wars",
         "appId": 1605220,
         "igdbGameId": 185253,
         "igdbSlug": "dune-spice-wars",
-        "igdbCoverId": "co4a96"
+        "igdbCoverId": "co4a96",
+        "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1605220/header.jpg?t=1792574625",
+        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1605220/capsule_231x87.jpg?t=1792574625"
       }
     ],
     "profileSources": [
@@ -11204,7 +11232,9 @@
         "stage": "In development",
         "igdbGameId": 223166,
         "igdbSlug": "trail-of-toads",
-        "igdbCoverId": "co6306"
+        "igdbCoverId": "co6306",
+        "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2117110/header.jpg?t=1765912557",
+        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2117110/capsule_231x87.jpg?t=1765912557"
       },
       {
         "title": "Downfall Hearts",
@@ -11212,7 +11242,9 @@
         "stage": "In development",
         "igdbGameId": 258487,
         "igdbSlug": "downfall-hearts",
-        "igdbCoverId": "co6u2o"
+        "igdbCoverId": "co6u2o",
+        "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1430020/header.jpg?t=1732700304",
+        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1430020/capsule_231x87.jpg?t=1732700304"
       },
       {
         "title": "Windstorm: Start of a Great Friendship - Remastered",
