@@ -67,7 +67,7 @@ jobs:
           git switch -c "$branch"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/data/studio-profiles.json
+          git add -f -- src/data/studio-profiles.json
           git commit -m "data: enrich game cover metadata from IGDB"
           git push --set-upstream origin "$branch"
 
