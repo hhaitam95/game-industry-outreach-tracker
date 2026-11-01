@@ -136,7 +136,7 @@ export function gameDestination(game: PopularGameArtworkMetadata): string | null
   if (game.officialUrl) return game.officialUrl;
   if (game.appStoreUrl) return game.appStoreUrl;
   if (game.igdbSlug) return `https://www.igdb.com/games/${encodeURIComponent(game.igdbSlug)}`;
-  return null;
+  return `https://www.google.com/search?q=${encodeURIComponent(game.title + " video game")}`;
 }
 
 export function gameLinkLabel(game: PopularGameArtworkMetadata): string | null {
@@ -144,5 +144,5 @@ export function gameLinkLabel(game: PopularGameArtworkMetadata): string | null {
   if (game.officialUrl) return `Open ${game.title} on the official website`;
   if (game.appStoreUrl) return `Open ${game.title} on the App Store`;
   if (game.igdbSlug) return `Open ${game.title} on IGDB`;
-  return null;
+  return `Search for ${game.title}`;
 }

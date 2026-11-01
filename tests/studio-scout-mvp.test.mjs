@@ -43,10 +43,11 @@ test("studio directory renders the compact five-column table and working filter 
     assert.match(markup, /popular-game-cover/);
     assert.match(markup, /popular-game-caption/);
     assert.match(markup, /GTFO/);
-    assert.match(markup, /· 2021/);
+    assert.match(markup, />2021</);
     assert.match(markup, /data-artwork-source="IGDB"/);
     assert.match(markup, /data-game-title="Metro Exodus"/);
-    assert.match(markup, /Bossa Studios/);
+    assert.match(markup, /Showing/);
+    assert.match(markup, /of \d+ studios/);
     assert.match(markup, /<th scope="col">Tracker<\/th>/);
     assert.doesNotMatch(markup, /class="link-cell"|<th[^>]*>Links<\/th>/);
     assert.match(markup, /Click a studio row to see its profile/);
@@ -75,7 +76,7 @@ test("game posters prefer IGDB covers and retain a verified Steam destination", 
     );
     assert.match(igdbFirst, /data-artwork-source="IGDB"/);
     assert.match(igdbFirst, /data-release-year="2019"/);
-    assert.ok(igdbFirst.includes(">· 2019</small>"));
+    assert.ok(igdbFirst.includes(">2019</small>"));
     assert.match(igdbFirst, /images\.igdb\.com/);
     assert.match(igdbFirst, /href="https:\/\/store\.steampowered\.com\/app\/12345\//);
     assert.doesNotMatch(igdbFirst, /Steam · IGDB fallback/);

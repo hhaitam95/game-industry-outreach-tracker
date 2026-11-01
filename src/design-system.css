@@ -446,17 +446,6 @@ body {
   font-size: 16px;
 }
 
-.popular-game-cover {
-  height: 58px;
-  border-radius: 7px;
-  border-color: var(--line);
-  background: var(--surface-muted);
-}
-
-.popular-game-cover-art {
-  height: 56px;
-}
-
 .studio-details-panel {
   padding: 22px 24px 18px;
   border-top: 1px solid var(--line);

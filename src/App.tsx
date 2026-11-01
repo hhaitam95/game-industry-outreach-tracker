@@ -116,6 +116,7 @@ function readApplications(): TrackedApplication[] {
 export default function App() {
   const [page, setPage] = useState<"studios" | "matches" | "applications" | "profile">("studios");
   const [trackerInitialTab, setTrackerInitialTab] = useState("saved");
+  const [trackerFocusStudio, setTrackerFocusStudio] = useState<string | null>(null);
   const [applications, setApplications] = useState<TrackedApplication[]>([]);
   const [loaded, setLoaded] = useState(false);
   const [storageError, setStorageError] = useState(false);
@@ -220,7 +221,16 @@ export default function App() {
   }
 
   function openTracker(tab = "saved") {
+    setTrackerFocusStudio(null);
     setTrackerInitialTab(tab);
+    setPage("applications");
+  }
+
+  function openTrackedStudio(studioName: string) {
+    const application = applications.find(item => item.studioName === studioName);
+    if (!application) return;
+    setTrackerInitialTab(application.status);
+    setTrackerFocusStudio(studioName);
     setPage("applications");
   }
 
@@ -298,6 +308,7 @@ export default function App() {
           <StudioDirectory
             applications={applications}
             onSave={(studio, location) => trackStudio(studio, "saved", location)}
+            onOpenTracker={openTrackedStudio}
           />
         ) : null}
         {page === "matches" ? (
@@ -306,6 +317,7 @@ export default function App() {
         {page === "applications" ? (
           <ApplicationTracker
             initialTab={trackerInitialTab}
+            focusStudioName={trackerFocusStudio}
             applications={applications}
             onChangeStatus={changeStatus}
             onUpdateNote={updateApplicationNote}

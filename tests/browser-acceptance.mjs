@@ -280,11 +280,19 @@ async function main() {
     await page.getByRole("button", { name: "Switch to light theme" }).click();
     assert.equal(await page.locator("html").getAttribute("data-bs-theme"), "light");
 
+    await page.getByLabel("Rows per page").selectOption("100");
     const rows = page.locator(".studio-data-row");
     const initialCount = await rows.count();
-    assert.ok(initialCount > 100, "The global directory should contain a substantial set of active studios.");
-    assert.ok(await page.locator(".studio-mark").count() > 100, "Studio marks should appear for directory rows.");
-    assert.ok(await page.locator(".country-flag").count() > 100, "Known studio locations should display flags.");
+    const totalResultsText = await page.locator(".directory-pagination-summary").textContent() || "";
+    const totalResults = Number(totalResultsText.match(/of\s+(\d+)/)?.[1] || 0);
+    const filteredTotal = async () => {
+      const text = await page.locator(".directory-pagination-summary").textContent() || "";
+      return Number(text.match(/of\s+(\d+)/)?.[1] || 0);
+    };
+    assert.ok(totalResults > 100, "The global directory should contain a substantial set of active studios.");
+    assert.equal(initialCount, 100, "The selected page size should cap the initial directory view at 100 rows.");
+    assert.ok(await page.locator(".studio-mark").count() > 50, "Studio marks should appear for visible directory rows.");
+    assert.ok(await page.locator(".country-flag").count() > 50, "Known studio locations should display flags.");
     assert.ok(await page.locator(".studio-scale-tag").count() > 0, "Classified studios should show a scale badge beside the name.");
     assert.ok(await page.locator(".studio-at-a-glance .studio-facet-tag").count() > 0, "The At a glance column should show platform and focus tags.");
     assert.deepEqual(
@@ -347,7 +355,8 @@ async function main() {
     assert.ok(continentValues.includes("Africa"), "The continent filter should include Africa.");
     await continent.selectOption("Europe");
     const europeRows = await rows.count();
-    assert.ok(europeRows > 0 && europeRows < initialCount, "Europe filtering should narrow the directory.");
+    const europeTotal = await filteredTotal();
+    assert.ok(europeRows > 0 && europeTotal > 0 && europeTotal < totalResults, "Europe filtering should narrow the full directory result set.");
     assert.equal(
       await rows.evaluateAll((tableRows) => tableRows.every((row) => (row.getAttribute("data-continents") || "").split("|").includes("Europe"))),
       true,
@@ -362,8 +371,8 @@ async function main() {
     const firstCountry = countryValues.find((value) => value !== "All countries");
     assert.ok(firstCountry, "The country filter should contain real countries.");
     await country.selectOption(firstCountry);
-    const countryCount = await rows.count();
-    assert.ok(countryCount > 0 && countryCount < initialCount, "Country filtering should narrow the directory.");
+    const countryCount = await filteredTotal();
+    assert.ok(countryCount > 0 && countryCount < totalResults, "Country filtering should narrow the full directory result set.");
     await country.selectOption("All countries");
 
     await page.locator(".directory-advanced-filters > summary").click();
@@ -372,8 +381,8 @@ async function main() {
     const mobileFilter = page.getByRole("checkbox", { name: "Platforms: Mobile" });
     await pcFilter.check();
     await mobileFilter.check();
-    const platformCount = await rows.count();
-    assert.ok(platformCount > 0 && platformCount < initialCount, "Selecting multiple platforms should narrow the directory.");
+    const platformCount = await filteredTotal();
+    assert.ok(platformCount > 0 && platformCount < totalResults, "Selecting multiple platforms should narrow the full directory result set.");
     assert.equal(await page.locator(".active-filter-chip").count(), 2, "Each selected platform should appear as a removable active filter chip.");
     await page.locator(".directory-filter-picker").nth(1).locator("summary").click();
     await page.locator(".directory-advanced-filters > summary").click();
@@ -384,8 +393,8 @@ async function main() {
 
     await page.locator(".directory-advanced-filters > summary").click();
     await page.getByLabel("Work model · application route").selectOption("remote");
-    const remoteCount = await rows.count();
-    assert.ok(remoteCount > 0 && remoteCount < initialCount, "Work-model filtering should remain available under More filters.");
+    const remoteCount = await filteredTotal();
+    assert.ok(remoteCount > 0 && remoteCount < totalResults, "Work-model filtering should remain available under More filters.");
     await page.getByLabel("Work model · application route").selectOption("all");
     await page.getByRole("button", { name: "Reset filters" }).click();
     await page.getByLabel("Search", { exact: true }).fill("Laki Studios");
@@ -449,7 +458,7 @@ async function main() {
     assert.equal(await websiteLink.getAttribute("href"), "https://www.4a-games.com.mt/");
     const expandedMetroExodusPoster = fourAGamesDetails.locator('.game-poster-card[data-game-title="Metro Exodus"]');
     assert.equal(await expandedMetroExodusPoster.getAttribute("data-release-year"), "2019");
-    await expandedMetroExodusPoster.getByText("· 2019", { exact: true }).waitFor();
+    await expandedMetroExodusPoster.getByText("2019", { exact: true }).waitFor();
     const metroLastLightPoster = fourAGamesDetails.locator('.game-poster-card[data-game-title="Metro: Last Light Redux"]');
     assert.equal(await metroLastLightPoster.getAttribute("data-release-year"), "2014");
     await fourAGamesRow.getByRole("button", { name: /4A Games/ }).click();
@@ -467,6 +476,8 @@ async function main() {
     await asoboRow.getByRole("button", { name: /Asobo Studio/ }).click();
     await asoboDetails.waitFor({ state: "detached" });
 
+    // Search must find studios across directory pages, not only within the currently visible page.
+    await page.getByLabel("Search", { exact: true }).fill("Hugecalf Studios");
     // IGDB artwork wins over Steam when both are present (the Stuck Together example).
     const hugecalfRow = rows.filter({ hasText: "Hugecalf Studios" });
     await hugecalfRow.getByRole("button", { name: /Hugecalf Studios/ }).click();
@@ -484,6 +495,7 @@ async function main() {
     assert.equal(await stuckTogetherPoster.getAttribute("data-release-year"), "2025");
     await hugecalfRow.getByRole("button", { name: /Hugecalf Studios/ }).click();
     await hugecalfDetails.waitFor({ state: "detached" });
+    await page.getByLabel("Search", { exact: true }).fill("");
 
     // A landscape Steam header must receive a landscape-sized frame in both the table and expanded gallery.
     const twentyTwoCansRow = rows.filter({ hasText: "22cans" });
@@ -566,6 +578,7 @@ async function main() {
     await ahoiiiDetails.waitFor({ state: "detached" });
 
     // IGDB images are a live fallback source, and games still link to their exact IGDB page.
+    await page.getByLabel("Search", { exact: true }).fill("Ocellus");
     const ocellusRow = rows.filter({ hasText: "Ocellus" });
     await ocellusRow.getByRole("button", { name: /Ocellus/ }).click();
     const ocellusDetails = page.locator("#studio-details-ocellus");
@@ -584,6 +597,7 @@ async function main() {
     );
     await ocellusRow.getByRole("button", { name: /Ocellus/ }).click();
     await ocellusDetails.waitFor({ state: "detached" });
+    await page.getByLabel("Search", { exact: true }).fill("Halfbrick Studios");
 
     // App Store art is a final fallback when earlier cover sources are absent.
     const halfbrickRow = rows.filter({ hasText: "Halfbrick Studios" });
@@ -602,6 +616,7 @@ async function main() {
     assert.ok(fruitNinjaRatio > 0.9 && fruitNinjaRatio < 1.1);
     await halfbrickRow.getByRole("button", { name: /Halfbrick Studios/ }).click();
     await halfbrickDetails.waitFor({ state: "detached" });
+    await page.getByLabel("Search", { exact: true }).fill("");
 
     assert.equal(
       await page.locator('.game-poster-card[href*="store.steampowered.com/search/"], .popular-game-cover[href*="store.steampowered.com/search/"]').count(),
@@ -613,7 +628,16 @@ async function main() {
     const studioRow = page.getByRole("row").filter({ hasText: "4A Games" });
     assert.equal(await studioRow.count(), 1, "The test studio should appear exactly once.");
     await studioRow.getByRole("button", { name: "Save" }).click();
-    await studioRow.getByRole("button", { name: "In tracker" }).waitFor();
+    const viewInTracker = studioRow.getByRole("button", { name: /View in Tracker/ });
+    await viewInTracker.waitFor();
+    await viewInTracker.click();
+    await page.getByRole("heading", { name: "My applications" }).waitFor();
+
+    const focusedTrackerRow = page.locator(".tracker-table tbody tr").filter({ has: page.locator(".status-select-label") }).filter({ hasText: "4A Games" });
+    await focusedTrackerRow.waitFor();
+    await focusedTrackerRow.waitFor({ state: "visible" });
+    await page.waitForFunction(() => document.querySelector('[id="tracker-row-4a-games"]')?.classList.contains("tracker-row-focused"));
+    assert.equal(await page.getByLabel("Status for 4A Games").inputValue(), "saved");
 
     const storedBeforeReload = await page.evaluate((key) => JSON.parse(localStorage.getItem(key) || "[]"), storageKey);
     assert.equal(storedBeforeReload.length, 1);

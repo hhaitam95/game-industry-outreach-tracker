@@ -1,4 +1,4 @@
-import { Fragment, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import type { TrackedApplication, TrackerStatus } from "./studio.types";
 import StudioMark from "./StudioMark";
 import { countryFlagFor } from "./location";
@@ -29,8 +29,18 @@ function trackerRowId(value: string): string {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
 
+const statusIcons: Record<TrackerStatus, string> = {
+  saved: "📌",
+  in_progress: "🛠️",
+  applied: "📨",
+  interview: "🎤",
+  offer: "🏆",
+  archived: "🗂️",
+};
+
 export default function ApplicationTracker({
   initialTab = "saved",
+  focusStudioName,
   applications,
   onChangeStatus,
   onUpdateNote,
@@ -38,6 +48,7 @@ export default function ApplicationTracker({
   onOpenDirectory,
 }: {
   initialTab?: string;
+  focusStudioName?: string | null;
   applications: TrackedApplication[];
   onChangeStatus: (id: string, status: TrackerStatus) => void;
   onUpdateNote: (id: string, note: string) => void;
@@ -72,6 +83,16 @@ export default function ApplicationTracker({
     })
     .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
 
+  useEffect(() => {
+    if (!focusStudioName) return;
+    const target = document.getElementById("tracker-row-" + trackerRowId(focusStudioName));
+    if (!target) return;
+    target.scrollIntoView({ behavior: "smooth", block: "center" });
+    target.classList.add("tracker-row-focused");
+    const timer = window.setTimeout(() => target.classList.remove("tracker-row-focused"), 2600);
+    return () => window.clearTimeout(timer);
+  }, [focusStudioName, active.status]);
+
   return (
     <section className="tracker-page">
       <div className="page-heading">
@@ -98,6 +119,7 @@ export default function ApplicationTracker({
                 setExpandedNotesId(null);
               }}
             >
+              <span className="tracker-tab-icon" aria-hidden="true">{statusIcons[tab.status]}</span>
               {tab.label}
               <span>{counts[tab.id] || 0}</span>
             </button>
@@ -142,7 +164,7 @@ export default function ApplicationTracker({
               const note = application.note || "";
               return (
                 <Fragment key={application.id}>
-                  <tr>
+                  <tr id={"tracker-row-" + trackerRowId(application.studioName)}>
                     <td>
                       <div className="studio-identity">
                         <StudioMark name={application.studioName} websiteUrl={application.websiteUrl} />
@@ -159,15 +181,16 @@ export default function ApplicationTracker({
                     <td className="applied-date">{formatDate(application.appliedAt)}</td>
                     <td>
                       <div className="tracker-links">
-                        <a href={application.applicationUrl} target="_blank" rel="noopener noreferrer">Open route</a>
-                        <a href={application.websiteUrl} target="_blank" rel="noopener noreferrer">Studio website</a>
+                        <a href={application.applicationUrl} target="_blank" rel="noopener noreferrer">📨 Open route</a>
+                        <a href={application.websiteUrl} target="_blank" rel="noopener noreferrer">🌐 Studio website</a>
                       </div>
                     </td>
                     <td>
                       <label className="status-select-label">
+                        <span className="status-select-icon" aria-hidden="true">{statusIcons[application.status]}</span>
                         <span className="visually-hidden">Status for {application.studioName}</span>
                         <select
-                          className="form-select"
+                          className={"form-select status-" + application.status}
                           value={application.status}
                           onChange={(event) =>
                             onChangeStatus(application.id, event.target.value as TrackerStatus)
@@ -188,7 +211,7 @@ export default function ApplicationTracker({
                         aria-label={"Edit notes for " + application.studioName}
                         onClick={() => setExpandedNotesId((current) => current === application.id ? null : application.id)}
                       >
-                        {note.trim() ? "Edit notes" : "Add notes"}
+                        {note.trim() ? "📝 Edit notes" : "＋ Add notes"}
                       </button>
                       {note.trim() ? <span className="note-saved-indicator" aria-label="Notes saved">Saved</span> : null}
                     </td>
@@ -198,7 +221,7 @@ export default function ApplicationTracker({
                         type="button"
                         onClick={() => onRemove(application.id)}
                       >
-                        Remove
+                        × Remove
                       </button>
                     </td>
                   </tr>

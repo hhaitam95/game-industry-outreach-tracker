@@ -110,9 +110,12 @@ test("uses the direct IGDB game page when no Steam or official page is known", (
   );
 });
 
-test("does not create generic Steam search links when no verified destination exists", () => {
-  assert.equal(gameDestination({ title: "The Tablet of Destinies" }), null);
-  assert.equal(gameLinkLabel({ title: "The Tablet of Destinies" }), null);
+test("provides a clearly labelled search destination when no verified game link exists", () => {
+  assert.equal(
+    gameDestination({ title: "The Tablet of Destinies" }),
+    "https://www.google.com/search?q=The%20Tablet%20of%20Destinies%20video%20game",
+  );
+  assert.equal(gameLinkLabel({ title: "The Tablet of Destinies" }), "Search for The Tablet of Destinies");
 });
 
 test("uses the Steam capsule image after the verified header image", () => {
