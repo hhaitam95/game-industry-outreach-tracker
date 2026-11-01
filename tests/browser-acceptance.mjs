@@ -552,7 +552,7 @@ async function main() {
     await aboutFunRow.getByRole("button", { name: /About Fun/ }).click();
     const aboutFunDetails = page.locator("#studio-details-about-fun");
     await aboutFunDetails.waitFor();
-    const tinyMinersPoster = aboutFunDetails.locator('.game-poster-card[data-game-title="Tiny Miners"]');
+    const tinyMinersPoster = aboutFunDetails.locator('.game-poster-card[data-game-title="Tiny Miners"]').first();
     const tinyMinersImage = tinyMinersPoster.locator('img[data-artwork-source="App Store"][data-artwork-layout="square"]');
     await tinyMinersImage.waitFor();
     assert.ok((await tinyMinersImage.getAttribute("src") || "").includes("mzstatic.com/image/thumb/"));
