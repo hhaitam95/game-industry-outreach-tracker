@@ -47,7 +47,7 @@ test("studio directory renders the compact five-column table and working filter 
     assert.match(markup, /data-artwork-source="IGDB"/);
     assert.match(markup, /data-game-title="Metro Exodus"/);
     assert.match(markup, /Showing/);
-    assert.match(markup, /of \\d+ studios/);
+    assert.match(markup, /of \d+ studios/);
     assert.match(markup, /<th scope="col">Tracker<\/th>/);
     assert.doesNotMatch(markup, /class="link-cell"|<th[^>]*>Links<\/th>/);
     assert.match(markup, /Click a studio row to see its profile/);
