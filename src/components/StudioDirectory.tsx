@@ -346,6 +346,10 @@ export default function StudioDirectory({
               const studioCountry = profile?.headquarters?.country || studio.country || "Not stated";
               const countryCode = profile?.headquarters?.countryCode || "";
               const studioLocation = [profile?.headquarters?.city, studioCountry].filter(Boolean).join(", ");
+              const studioHeadquarters =
+                [profile?.headquarters?.city, profile?.headquarters?.country].filter(Boolean).join(", ") ||
+                profile?.headquarters?.label ||
+                "Not stated";
               const types = profile?.companyType?.slice(0, 2).join(" · ") || "Not stated";
               const routeType = studio.applicationResearch?.routeType || "general";
               const workType = studio.applicationResearch?.workModel || "not_stated";
@@ -470,7 +474,7 @@ export default function StudioDirectory({
                                   <div><dt>Application route</dt><dd>{routeLabels[routeType] || "General application"}</dd></div>
                                   <div><dt>Ownership</dt><dd>{profile?.ownership || "Not stated"}</dd></div>
                                   {profile?.parentCompany ? <div><dt>Parent company</dt><dd>{profile.parentCompany}</dd></div> : null}
-                                  <div><dt>Headquarters</dt><dd>{studioLocation || "Not stated"}</dd></div>
+                                  <div><dt>Headquarters</dt><dd>{studioHeadquarters}</dd></div>
                                   {profile?.otherLocations?.length ? (
                                     <div><dt>Other locations</dt><dd>{profile.otherLocations.join(" · ")}</dd></div>
                                   ) : null}
