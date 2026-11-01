@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-11-01T10:30:34.099897+00:00",
+  "updated_at": "2026-11-01T10:39:16.155034+00:00",
   "feed_cursors": {
-    "wikidata_video_game_developers": "Q756147",
-    "wikidata_game_developer_credits": "Q99540288",
+    "wikidata_video_game_developers": "",
+    "wikidata_game_developer_credits": "",
     "wikidata_video_game_companies": "",
     "gamedevmap": "10601"
   },
@@ -14,9 +14,9 @@
     "gamedevmap": true
   },
   "feed_index": 1,
-  "cycle": 13,
+  "cycle": 14,
   "cycle_additions": 0,
-  "empty_cycles": 1,
+  "empty_cycles": 2,
   "saturated": false,
   "bootstrap_started": true,
   "candidates": {
@@ -213402,9 +213402,57 @@
       "gone_count": 0,
       "last_result": "active",
       "last_checked_at": "2026-11-01T10:30:34.098265+00:00"
+    },
+    "Redly Games": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-11-01T10:38:57.146511+00:00"
+    },
+    "Render Cube": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-11-01T10:38:59.840697+00:00"
+    },
+    "Reply Game Studios": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-11-01T10:39:01.620800+00:00"
+    },
+    "Rice Games": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-11-01T10:39:08.554615+00:00"
+    },
+    "Rightsized Games": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-11-01T10:39:10.114036+00:00"
+    },
+    "Rogue Factor": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-11-01T10:39:12.450185+00:00"
+    },
+    "Rogue Snail": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "unknown",
+      "last_checked_at": "2026-11-01T10:39:14.605264+00:00"
+    },
+    "Russet Studio": {
+      "negative_count": 0,
+      "gone_count": 0,
+      "last_result": "active",
+      "last_checked_at": "2026-11-01T10:39:16.152187+00:00"
     }
   },
-  "route_check_index": 232,
+  "route_check_index": 240,
   "stats": {
     "candidates_seen": 10373,
     "routes_verified": 126,
@@ -213414,36 +213462,36 @@
   },
   "source_stats": {
     "wikidata_video_game_developers": {
-      "cycle": 3,
+      "cycle": 4,
       "cycle_additions": 0,
-      "empty_cycles": 1,
+      "empty_cycles": 2,
       "saturated": false,
       "complete": false,
-      "last_pass_completed_at": "2026-10-31T17:37:15.985520+00:00",
+      "last_pass_completed_at": "2026-11-01T10:39:16.152243+00:00",
       "last_pass_status": "complete",
-      "last_pass_candidates": 2,
+      "last_pass_candidates": 1,
       "last_pass_verified": 0,
       "last_pass_incomplete_candidates": 0
     },
     "wikidata_game_developer_credits": {
-      "cycle": 7,
+      "cycle": 8,
       "cycle_additions": 0,
-      "empty_cycles": 5,
+      "empty_cycles": 6,
       "saturated": true,
       "complete": false,
-      "last_pass_completed_at": "2026-11-01T06:09:08.019816+00:00",
+      "last_pass_completed_at": "2026-11-01T10:39:16.152243+00:00",
       "last_pass_status": "saturated",
       "last_pass_candidates": 0,
       "last_pass_verified": 0,
       "last_pass_incomplete_candidates": 0
     },
     "wikidata_video_game_companies": {
-      "cycle": 13,
+      "cycle": 14,
       "cycle_additions": 0,
-      "empty_cycles": 11,
+      "empty_cycles": 12,
       "saturated": true,
       "complete": false,
-      "last_pass_completed_at": "2026-11-01T10:30:34.098309+00:00",
+      "last_pass_completed_at": "2026-11-01T10:39:16.152243+00:00",
       "last_pass_status": "saturated",
       "last_pass_candidates": 0,
       "last_pass_verified": 0,
