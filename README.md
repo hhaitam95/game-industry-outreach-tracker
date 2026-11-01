@@ -12,7 +12,7 @@ Search studios by name, country and studio type; filter by country and work mode
 
 ### Game cover artwork
 
-The directory prefers verified Steam library artwork and uses a verified IGDB cover as a fallback when Steam art is missing or unavailable. Cover metadata is stored in `src/data/studio-profiles.json`; the deployed site loads static image URLs and never sends Twitch credentials or makes IGDB API requests from a visitor's browser.
+The directory resolves game artwork in this order: verified Steam portrait art, verified IGDB cover art, a curated official-studio image, then a Steam landscape header. The gallery preserves each source's portrait, square or landscape layout. Cover metadata is stored in `src/data/studio-profiles.json`; the deployed site loads static image URLs and never sends Twitch credentials or makes IGDB API requests from a visitor's browser. Game cards link directly to a verified Steam app page, an official game page or an IGDB page. When no direct destination is verified, the card is deliberately not a link rather than sending visitors to a generic Steam search.
 
 To enrich missing cover metadata, create a Twitch developer application and set `IGDB_CLIENT_ID` and `IGDB_CLIENT_SECRET` in your local environment. Then run:
 
@@ -25,6 +25,18 @@ npm run build
 ```
 
 The first command is a dry run. The write mode stores only a single exact normalized-title match with a cover image ID. Ambiguous titles, missing records and games without cover art remain unresolved for manual review. Duplicate game titles share one verified match. Never commit the Twitch client secret or an access token.
+
+To discover missing Steam destinations and Steam-hosted cover artwork, run:
+
+```sh
+node scripts/enrich-steam-games.mjs
+node scripts/enrich-steam-games.mjs --write
+npm run check:studio-directory
+npm test
+npm run build
+```
+
+The Steam enrichment uses the public Store search and app-details responses. It adds an app ID only when the result has one exact normalized game-title match and the app-details record confirms the matching studio as a developer. Ambiguous titles, non-game products, title variants and developer mismatches are left unchanged. The `Enrich missing Steam game links and artwork` workflow can be run manually from GitHub Actions; after merging the workflow, profile-data changes also trigger a run that opens a separate data-only pull request.
 
 When the enrichment implementation is merged into `main`, GitHub Actions automatically checks that both repository secrets are available (without printing their values), queries all remaining unique game titles, writes only exact unambiguous matches with covers, validates the resulting data, runs the tests and build, and opens a separate pull request containing only the profile-data changes. No manual workflow dispatch is required. The generated data pull request is not auto-merged; ambiguous, missing and coverless matches remain untouched. Merging that data-only pull request does not trigger another enrichment run.
 
