@@ -147,7 +147,7 @@ async function main() {
     await page.getByLabel("Qualification").fill("MSc Computer Science");
     await page.getByLabel("Institution").fill("Example University");
     await page.getByRole("button", { name: /Add project or training/ }).click();
-    await page.getByLabel("Type").fill("Bootcamp");
+    await page.getByRole("textbox", { name: "Type", exact: true }).fill("Bootcamp");
     await page.getByLabel("Description and your contribution").fill("Completed a practical training project.");
     await page.getByRole("button", { name: /Add skill/ }).click();
     await page.getByLabel("Skill or technology").fill("REST APIs");
