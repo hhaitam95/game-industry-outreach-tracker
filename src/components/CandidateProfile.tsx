@@ -397,8 +397,8 @@ export default function CandidateProfile() {
         <strong>Private browser storage</strong>
         <span>
           Your profile and documents stay in this browser on this device. They are not uploaded or synced,
-          and browser storage is not automatically encrypted. Export a backup regularly; clearing site data
-          or changing browsers can remove this profile.
+          and browser storage is not automatically encrypted. Export a backup regularly; it contains personal
+          details and full document contents, so keep it private. Clearing site data or changing browsers can remove this profile.
         </span>
         <span className={error ? "profile-save-state is-error" : "profile-save-state"} role={error ? "alert" : "status"}>
           {error || (dirty ? "Unsaved changes" : status)}
