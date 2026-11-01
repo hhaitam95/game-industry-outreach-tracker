@@ -1,20 +1,30 @@
 # Game Industry Outreach Tracker status
 
 **Last verified:** 2026-11-01  
-**Product scope:** Global directory of legitimate video-game development organisations with verified speculative-application routes, plus a personal browser-local application tracker.  
+**Product scope:** Global directory of legitimate video-game development organisations with verified speculative-application routes, plus a private browser-local Candidate Profile and application tracker.  
 **Authoritative discovery rules:** [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md).
 
-## Current direction
+## Candidate Profile implementation — PR #95
 
-The discovery mission is global coverage and accuracy. Do not prioritize by the user's career interests, role discipline, geography, work model, studio size, prestige, platform or likelihood of hiring the user. Indie through AAA are in scope. There is no arbitrary maximum directory size.
+**Phase C1 implementation is on the review branch and is not merged or deployed.** The new My profile area includes structured contact and professional summary fields, repeatable experience/education/projects/training/skills records, evidence labels, master application materials, preferences, IndexedDB persistence and versioned JSON backup/restore. PDF/DOCX document bytes are preserved locally; text extraction and document tailoring are not included.
 
-Every public record must pass both gates:
-1. The organisation materially develops video games or performs direct game-development work.
-2. It explicitly invites speculative, unsolicited, spontaneous, open or general applications beyond a specific advertised vacancy, with official evidence and a usable application route.
+- Existing My applications data remains in its current localStorage key and is not migrated or rewritten by this feature.
+- Candidate profile records use a separate IndexedDB database/store and are not included in public studio JSON or build-time data.
+- The browser UI explains that local browser storage is not encrypted by default and can be cleared. Backups contain personal information and must be kept private.
+- Validation: a full CI run on the implementation commit passed Python discovery tests, frontend tests, TypeScript checking, production build, directory/privacy/Pages checks and Playwright browser acceptance, including profile persistence, navigation retention and backup restore.
 
-Paid employment is not required for inclusion, but volunteer-only and unpaid participation must be explicitly labelled and must never be represented as a job.
+## Current product direction — 2026-11-01
 
-Exclude organisations materially focused on pornography/adult sexual entertainment, iGaming/gambling/casinos/betting, recreational drugs/cannabis, alcohol, tobacco/nicotine/vaping and related vice sectors. Do not reject mainstream developers based on an isolated keyword or one mature-themed game; uncertain cases require manual review.
+The global studio directory remains a worldwide, evidence-backed catalogue and is not filtered or ranked by the candidate's personal profile. The next product layer adds a private candidate profile, explainable matching, an Application Queue and an application preparation workspace.
+
+- **Candidate Profile:** structured experience, education, projects/training, skills with evidence, approved master resume, master motivation letter/message and user preferences.
+- **Matching:** assess professional relevance, application accessibility/readiness and personal priority separately. Show employer requirements, evidence, gaps, unknowns, source URLs and review dates. Do not claim to predict hiring probability.
+- **Application Queue:** a private working set referencing canonical studio records; user selection and priority never alter the global directory.
+- **Application Workspace:** studio and route details, requirements summary, skills/evidence mapping, approved materials, preparation checklist, notes and progress.
+- **Privacy:** candidate data and documents remain browser-local. GitHub Pages is public static hosting, not a private backend. Prefer IndexedDB for structured private data/files, with export/import and clear disclosure that browser storage is not automatically encrypted and can be cleared.
+- **Automation boundary:** browser extension, ATS/portal recognition, autofill, automated uploads, email sending and automatic submission are deferred. No application is submitted by this roadmap.
+
+The detailed approved direction and acceptance criteria are in [Candidate Profile, Matching and Application Workspace](docs/architecture/candidate-profile-matching-application-workspace.md). This product direction supersedes older scope notes below that list personal matching, resume tools or application preparation as out of scope. The global discovery rules remain unchanged.
 
 ## Phase B — artwork and application workflow UI
 

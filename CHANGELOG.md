@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-11-01 — Candidate Profile foundation (implementation in PR #95)
+
+- Add the new My profile area with editable contact details, professional summary, work experience, education, projects/training, skills and evidence, reusable master application materials and preferences.
+- Persist structured profile data and original PDF/DOCX document bytes in a versioned IndexedDB record separate from the existing application tracker.
+- Add versioned JSON export/import with confirmation, document validation and browser tests for persistence, original-file preservation and backup restore.
+- Keep profile data out of the public directory and network writes; explicitly disclose local-storage limitations and the need for private backups.
+- No matching engine, Application Queue, requirements intelligence, Application Workspace or application automation is implemented in this phase.
+
+## 2026-11-01 — Candidate profile and application workspace roadmap
+
+- Define the next product layer: a structured, private Candidate Profile, evidence-based matching, a personal Application Queue and an application preparation workspace.
+- Keep global studio discovery worldwide and non-personalized; profile preferences affect private priority only.
+- Separate professional relevance, application accessibility/readiness and personal priority; preserve source evidence, unknowns and manual overrides.
+- Standardize on one approved master resume and one master motivation letter/message by default, with no automatic embellishment or per-studio resume tailoring.
+- Keep candidate data browser-local and document IndexedDB/export-import/privacy requirements.
+- Explicitly defer browser-extension/desktop automation, ATS adapters, autofill, uploads, email sending and automated submission pending a separate design and approval.
+
 ## 2026-10-31 — Phase B game-poster artwork fallback (PR #78 update)
 
 - Keep Steam library covers as the first choice and add IGDB cover art as a fallback when Steam image URLs are missing or unavailable.

@@ -1,38 +1,59 @@
 # Product decisions
 
-**Date:** 31 October 2026
+**Last updated:** 1 November 2026
 
-Game Industry Outreach Tracker is a personal game-industry research tool with two core functions:
+## Product direction
 
-1. A dark, searchable and expandable directory of studios with verified official speculative/open/unsolicited/general application routes.
-2. A lightweight application tracker stored in the user's browser using localStorage.
+Game Industry Outreach Tracker has three connected layers:
 
-## Directory rules
+1. Global directory of game-development organisations with verified speculative/open application routes.
+2. Private candidate profile and matching system.
+3. Private application queue and workspace for requirements, preparation and progress.
 
-- Show HQ as a labelled reference when an application route does not state a hiring location. Never imply that HQ is the job location.
-- Show confirmed remote eligibility or application geography separately.
-- Include sourced company type, parent/subsidiary relationship, selected games, indicative industry scale and headcount details where available.
-- Label AAA/AA/Indie as editorial guidance, not an official rating.
-- Exclude studios materially focused on pornography/erotica/sexually explicit entertainment, gambling/casinos/betting (including simulated casino games), recreational drugs/cannabis, alcohol, tobacco/nicotine/vaping and related vice industries. Leave unclear cases out pending manual review.
-- Never invent locations, ownership, employee numbers or game credits.
+The discovery catalogue remains worldwide and impartial. Candidate preferences are a private ranking/assessment overlay and must never remove or suppress studios from the global directory.
 
-## Tracker rules
+## Candidate profile
 
-- Statuses: Saved, In Progress, Applied, Interview, Offer and Archived (Not moving forward).
-- Saving a studio adds it to Saved.
-- A separate user confirmation records an actually submitted application and moves it to Applied.
-- Records stay in browser localStorage. No login, backend, encryption, remote sync, email sending or automatic application submission is required for this single-user tool.
-- Browser data can be cleared and does not sync across devices.
+- Maintain structured experience, education, projects/training, skills and supporting evidence.
+- Distinguish demonstrated, transferable, learning/exposure, not evidenced and user-confirmed gap skill states.
+- Reuse one approved master resume and one master motivation letter/message by default.
+- Never invent, overstate or silently modify candidate facts or approved documents.
+- Preferences include role families, work arrangements and geographical priority tiers. Preferences affect personal priority, not professional compatibility or directory inclusion.
 
-## UI decisions — Phase B first batch
+## Matching
 
-- Use bundled Bootstrap 5 CSS and a simple, information-dense interface; avoid decorative dashboards and unnecessary interaction.
-- Theme choice is saved locally and defaults to the operating-system preference on first visit.
-- Studio marks use website favicons with initials as a fallback. Headquarters flags use ISO country codes where available and never imply work eligibility.
-- The automation indicator reads public GitHub Actions history and distinguishes the latest attempt from the most recent successful run.
-- `addedAt` is separate from `checkedAt`; the yellow NEW marker expires 24 hours after first publication. Legacy records are not backfilled or marked new.
-- Application records remain browser-local. The theme preference is a separate local setting.
+- Assess professional relevance, application accessibility/readiness and personal priority separately.
+- Use explainable qualitative classifications; do not claim to predict hiring probability.
+- Show employer requirements, candidate evidence, gaps, unknowns, source URLs and verification dates.
+- Distinguish explicit employer statements, cautious inference and unknown information.
+- Keep uncertain/transferable opportunities visible for user judgment; hard-exclude only clear incompatibilities or confirmed blockers.
+- Allow user review and manual overrides.
 
-## Out of scope
+## Application Queue and workspace
 
-No general job board, resume editor, outreach generator, AI scoring, automatic crawling, scheduled scans, public user accounts, multi-user access, analytics dashboard or email integration.
+- The Application Queue is a private working set that references canonical studio records; it is not a duplicate directory.
+- Each queued item stores user-specific priority, assessment state, progress, notes and timestamps.
+- Workspace details include studio context, application route, requirements, skill mapping, approved materials, preparation checklist and progress.
+- Align with the existing My applications tracker and avoid duplicate status models or records.
+- Selecting an opportunity is not authorization to submit an application.
+
+## Privacy and hosting
+
+- Current hosting is static GitHub Pages with no private backend/authentication.
+- Candidate profile, documents, preferences, assessments, queue state and application history remain browser-local.
+- Prefer IndexedDB for structured/private records and files; preserve/migrate existing localStorage tracker data.
+- Provide user-controlled export/import and clearly explain that browser storage is not automatically encrypted and can be cleared.
+- Never publish private candidate data in repository files, Pages assets, Actions logs/artifacts, issues or PRs.
+- Any future external AI processing or private backend requires a separate explicit decision and user approval.
+
+## Application automation boundary
+
+- Current roadmap includes profile, matching, queue, requirements intelligence and application preparation only.
+- Browser extension, desktop companion, portal recognition, ATS adapters, autofill, automated uploads, email sending and automated Submit interaction are deferred.
+- Future automation requires a separate design and explicit approval. Human review and final submission control remain mandatory.
+
+## Existing directory and tracker
+
+- Keep the verified global directory and its official route/evidence standards.
+- Existing tracker remains browser-local. Reconcile its statuses with the new workspace rather than creating competing records.
+- Preserve the distinction between studio headquarters, actual hiring location, remote eligibility and work-authorisation rules.
