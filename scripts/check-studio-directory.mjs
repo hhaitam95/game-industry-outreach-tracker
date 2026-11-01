@@ -190,6 +190,16 @@ if (Array.isArray(studios) && profiles && typeof profiles === "object" && !Array
         if (game?.igdbCoverId !== undefined && (typeof game.igdbCoverId !== "string" || !/^[a-zA-Z0-9_-]+$/.test(game.igdbCoverId))) {
           errors.push(studio.name + ".profile.popularGames[" + gameIndex + "].igdbCoverId must be a valid IGDB image ID.");
         }
+        if (game?.steamHeaderUrl !== undefined) {
+          try {
+            httpsUrl(game.steamHeaderUrl, studio.name + ".profile.popularGames[" + gameIndex + "].steamHeaderUrl");
+            if (!new URL(game.steamHeaderUrl).hostname.endsWith(".steamstatic.com")) {
+              throw new Error(studio.name + ".profile.popularGames[" + gameIndex + "].steamHeaderUrl must use an official Steam artwork CDN.");
+            }
+          } catch (error) {
+            errors.push(error.message);
+          }
+        }
         const hasIgdbMetadata = game?.igdbGameId !== undefined || game?.igdbSlug !== undefined || game?.igdbCoverId !== undefined;
         if (hasIgdbMetadata && (!Number.isInteger(game?.igdbGameId) || typeof game?.igdbCoverId !== "string" || !game.igdbCoverId)) {
           errors.push(studio.name + ".profile.popularGames[" + gameIndex + "] must include both igdbGameId and igdbCoverId when IGDB metadata is present.");

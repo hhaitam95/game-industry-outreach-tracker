@@ -7,27 +7,51 @@ export type PopularGame = {
   igdbGameId?: number;
   igdbSlug?: string;
   igdbCoverId?: string;
+  steamHeaderUrl?: string;
 };
 
 export type GameArtworkSource = {
   source: "Steam" | "IGDB";
   url: string;
+  layout: "portrait" | "landscape";
 };
 
 export function getGameArtworkSources(game: PopularGame): GameArtworkSource[] {
-  const steamSources: GameArtworkSource[] = game.appId
+  const steamPortraitSources: GameArtworkSource[] = game.appId
     ? [
         {
           source: "Steam",
+          layout: "portrait",
           url: `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${game.appId}/library_600x900.jpg`,
         },
         {
           source: "Steam",
+          layout: "portrait",
           url: `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${game.appId}/library_600x900_2x.jpg`,
         },
         {
           source: "Steam",
+          layout: "portrait",
           url: `https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appId}/library_600x900.jpg`,
+        },
+      ]
+    : [];
+
+  const steamHeaderSources: GameArtworkSource[] = game.appId
+    ? [
+        ...(game.steamHeaderUrl
+          ? [
+              {
+                source: "Steam" as const,
+                layout: "landscape" as const,
+                url: game.steamHeaderUrl,
+              },
+            ]
+          : []),
+        {
+          source: "Steam",
+          layout: "landscape",
+          url: `https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appId}/header.jpg`,
         },
       ]
     : [];
@@ -36,12 +60,13 @@ export function getGameArtworkSources(game: PopularGame): GameArtworkSource[] {
     ? [
         {
           source: "IGDB",
+          layout: "portrait",
           url: `https://images.igdb.com/igdb/image/upload/t_cover_big/${game.igdbCoverId}.jpg`,
         },
       ]
     : [];
 
-  return [...steamSources, ...igdbSource];
+  return [...steamPortraitSources, ...steamHeaderSources, ...igdbSource];
 }
 
 export function gameDestination(game: PopularGame): string {
@@ -77,6 +102,7 @@ function GameCoverArtwork({ game, compact }: { game: PopularGame; compact: boole
         src={currentSource.url}
         alt={game.title + " game cover"}
         data-artwork-source={currentSource.source}
+        data-artwork-layout={currentSource.layout}
         loading="lazy"
         decoding="async"
         onError={() => setSourceIndex(current => current + 1)}
@@ -104,7 +130,7 @@ function GameCoverArtwork({ game, compact }: { game: PopularGame; compact: boole
 function artworkCaption(game: PopularGame): string {
   if (game.stage) return game.stage;
   if (game.appId && game.igdbCoverId) return "Steam · IGDB fallback";
-  if (game.appId) return "Steam cover";
+  if (game.appId) return "Steam artwork";
   if (game.igdbCoverId) return "IGDB cover";
   return "No cover found";
 }
