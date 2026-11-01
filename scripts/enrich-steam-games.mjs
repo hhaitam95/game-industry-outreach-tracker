@@ -8,7 +8,6 @@ const profilesPath = path.join(root, "src/data/studio-profiles.json");
 const SEARCH_URL = "https://store.steampowered.com/api/storesearch/";
 const DETAILS_URL = "https://store.steampowered.com/api/appdetails";
 const REQUEST_INTERVAL_MS = 800;
-const DETAILS_BATCH_SIZE = 25;
 
 export function normalizeGameTitle(value) {
   return String(value ?? "")
@@ -214,42 +213,56 @@ async function enrichKnownSteamArtwork(profiles) {
     titleMismatches: 0,
     nonGames: 0,
     missingSteamArtwork: 0,
+    appDetailsRequestFailures: 0,
   };
+  const failures = [];
 
-  for (let offset = 0; offset < groups.length; offset += DETAILS_BATCH_SIZE) {
-    if (offset > 0) await delay(REQUEST_INTERVAL_MS);
-    const batch = groups.slice(offset, offset + DETAILS_BATCH_SIZE);
-    const response = await fetchAppDetails(batch.map(group => group.appId));
+  // Steam's public app-details endpoint accepts one app ID per request in practice.
+  // Keep requests sequential and throttled; a single unavailable listing must not
+  // prevent the rest of the catalogue from receiving artwork metadata.
+  for (let index = 0; index < groups.length; index += 1) {
+    if (index > 0) await delay(REQUEST_INTERVAL_MS);
+    const group = groups[index];
+    counts.existingAppIdsChecked += 1;
 
-    for (const group of batch) {
-      counts.existingAppIdsChecked += 1;
-      const entry = response?.[String(group.appId)];
-      for (const { game } of group.entries) {
-        const result = selectExactSteamArtwork(game.title, entry);
-        if (result.status === "not_a_game") {
-          counts.nonGames += 1;
-          continue;
-        }
-        if (result.status === "title_mismatch") {
-          counts.titleMismatches += 1;
-          continue;
-        }
-        if (result.status !== "matched") {
-          counts.missingSteamArtwork += 1;
-          continue;
-        }
-        if (result.steamHeaderUrl && game.steamHeaderUrl !== result.steamHeaderUrl) {
-          game.steamHeaderUrl = result.steamHeaderUrl;
-          counts.steamHeaderUrlsAdded += 1;
-        }
-        if (result.steamCapsuleUrl && game.steamCapsuleUrl !== result.steamCapsuleUrl) {
-          game.steamCapsuleUrl = result.steamCapsuleUrl;
-          counts.steamCapsuleUrlsAdded += 1;
-        }
+    let response;
+    try {
+      response = await fetchAppDetails([group.appId]);
+    } catch (error) {
+      counts.appDetailsRequestFailures += 1;
+      failures.push({ appId: group.appId, error: String(error).slice(0, 180) });
+      continue;
+    }
+
+    const entry = response?.[String(group.appId)];
+    for (const { game } of group.entries) {
+      const result = selectExactSteamArtwork(game.title, entry);
+      if (result.status === "not_a_game") {
+        counts.nonGames += 1;
+        continue;
+      }
+      if (result.status === "title_mismatch") {
+        counts.titleMismatches += 1;
+        continue;
+      }
+      if (result.status !== "matched") {
+        counts.missingSteamArtwork += 1;
+        continue;
+      }
+      if (result.steamHeaderUrl && game.steamHeaderUrl !== result.steamHeaderUrl) {
+        game.steamHeaderUrl = result.steamHeaderUrl;
+        counts.steamHeaderUrlsAdded += 1;
+      }
+      if (result.steamCapsuleUrl && game.steamCapsuleUrl !== result.steamCapsuleUrl) {
+        game.steamCapsuleUrl = result.steamCapsuleUrl;
+        counts.steamCapsuleUrlsAdded += 1;
       }
     }
   }
 
+  if (failures.length > 0) {
+    process.stdout.write(JSON.stringify({ appDetailsRequestFailures: failures.slice(0, 20) }, null, 2) + "\n");
+  }
   return counts;
 }
 
