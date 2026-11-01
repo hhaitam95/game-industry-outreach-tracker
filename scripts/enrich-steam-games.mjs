@@ -44,6 +44,11 @@ export function isValidSteamArtworkUrl(value) {
   }
 }
 
+export function releaseYearFromSteamDate(value) {
+  const match = String(value || "").match(/\b(?:19|20)\d{2}\b/);
+  return match ? Number(match[0]) : null;
+}
+
 export function selectExactSteamArtwork(title, appDetailsEntry) {
   const detail = appDetailsEntry?.success ? appDetailsEntry.data : null;
   if (!detail || detail.type !== "game") return { status: "not_a_game" };
@@ -53,10 +58,12 @@ export function selectExactSteamArtwork(title, appDetailsEntry) {
 
   const headerUrl = isValidSteamArtworkUrl(detail.header_image) ? detail.header_image : undefined;
   const capsuleUrl = isValidSteamArtworkUrl(detail.capsule_image) ? detail.capsule_image : undefined;
-  if (!headerUrl && !capsuleUrl) return { status: "missing_artwork" };
+  const releaseYear = releaseYearFromSteamDate(detail.release_date?.date);
+  if (!headerUrl && !capsuleUrl) return { status: "missing_artwork", ...(releaseYear ? { releaseYear } : {}) };
 
   return {
     status: "matched",
+    ...(releaseYear ? { releaseYear } : {}),
     ...(headerUrl ? { steamHeaderUrl: headerUrl } : {}),
     ...(capsuleUrl ? { steamCapsuleUrl: capsuleUrl } : {}),
   };
@@ -96,6 +103,10 @@ export function selectExactSteamMatch(title, studioName, searchResults, appDetai
   return {
     status: "matched",
     appId,
+    ...(artwork.releaseYear ? {
+      releaseYear: artwork.releaseYear,
+      releaseYearSourceUrl: "https://store.steampowered.com/app/" + appId + "/",
+    } : {}),
     ...(artwork.steamHeaderUrl ? { steamHeaderUrl: artwork.steamHeaderUrl } : {}),
     ...(artwork.steamCapsuleUrl ? { steamCapsuleUrl: artwork.steamCapsuleUrl } : {}),
   };
@@ -195,7 +206,7 @@ function collectGamesMissingSteamArtwork(profiles) {
       if (!Number.isInteger(game.appId) || game.appId < 1) continue;
       const hasHeaderUrl = game.steamHeaderUrl && isValidSteamArtworkUrl(game.steamHeaderUrl);
       const hasCapsuleUrl = game.steamCapsuleUrl && isValidSteamArtworkUrl(game.steamCapsuleUrl);
-      if (hasHeaderUrl && hasCapsuleUrl) continue;
+      if (hasHeaderUrl && hasCapsuleUrl && Number.isInteger(game.releaseYear)) continue;
       const group = entriesByAppId.get(game.appId) || { appId: game.appId, entries: [] };
       group.entries.push({ studio, game });
       entriesByAppId.set(game.appId, group);
@@ -214,6 +225,7 @@ async function enrichKnownSteamArtwork(profiles) {
     nonGames: 0,
     missingSteamArtwork: 0,
     appDetailsRequestFailures: 0,
+    releaseYearsAdded: 0,
   };
   const failures = [];
 
@@ -237,6 +249,11 @@ async function enrichKnownSteamArtwork(profiles) {
     const entry = response?.[String(group.appId)];
     for (const { game } of group.entries) {
       const result = selectExactSteamArtwork(game.title, entry);
+      if (result.releaseYear && !game.releaseYear && game.stage !== "In development") {
+        game.releaseYear = result.releaseYear;
+        game.releaseYearSourceUrl = "https://store.steampowered.com/app/" + group.appId + "/";
+        counts.releaseYearsAdded += 1;
+      }
       if (result.status === "not_a_game") {
         counts.nonGames += 1;
         continue;
@@ -270,7 +287,7 @@ async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (args.help) {
     process.stdout.write(
-      "Enrich Steam artwork URLs and discover missing Steam app IDs from the public Steam Store API.\n\n" +
+      "Enrich verified Steam artwork, release years and missing Steam app IDs from the public Steam Store API.\n\n" +
       "Dry run: node scripts/enrich-steam-games.mjs [--limit N]\n" +
       "Write verified metadata: node scripts/enrich-steam-games.mjs --write\n" +
       "--limit caps the number of missing-title search groups; known app-ID artwork URLs are still refreshed.\n",
@@ -312,6 +329,11 @@ async function main() {
           entry.game.appId = result.appId;
           if (result.steamHeaderUrl) entry.game.steamHeaderUrl = result.steamHeaderUrl;
           if (result.steamCapsuleUrl) entry.game.steamCapsuleUrl = result.steamCapsuleUrl;
+          if (result.releaseYear && !entry.game.releaseYear && entry.game.stage !== "In development") {
+            entry.game.releaseYear = result.releaseYear;
+            entry.game.releaseYearSourceUrl = result.releaseYearSourceUrl;
+            counts.releaseYearsAdded += 1;
+          }
           counts.matchedRecords += 1;
         }
       } else {
@@ -330,9 +352,9 @@ async function main() {
 
   if (args.write) {
     writeFileSync(profilesPath, JSON.stringify(profiles, null, 2) + "\n", "utf8");
-    process.stdout.write("Updated studio profiles with verified Steam app IDs and artwork URLs.\n");
+    process.stdout.write("Updated studio profiles with verified Steam app IDs, artwork URLs and available release years.\n");
   } else {
-    process.stdout.write("Dry run only; no files were changed. Re-run with --write to persist verified Steam metadata.\n");
+    process.stdout.write("Dry run only; no files were changed. Re-run with --write to persist verified Steam artwork and release-year metadata.\n");
   }
 
   process.stdout.write(JSON.stringify({ ...counts, unresolvedRecords: unresolved.length }, null, 2) + "\n");

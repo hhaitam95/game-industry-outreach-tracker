@@ -18,6 +18,53 @@ function readTheme(): Theme {
     return "light";
   }
 }
+
+type NavigationIconName = "studios" | "matches" | "applications" | "profile";
+
+function NavigationIcon({ name }: { name: NavigationIconName }) {
+  return (
+    <svg
+      className="navigation-icon"
+      viewBox="0 0 24 24"
+      width="17"
+      height="17"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      {name === "studios" ? (
+        <>
+          <rect x="3.5" y="3.5" width="7" height="7" rx="1.7" />
+          <rect x="13.5" y="3.5" width="7" height="7" rx="1.7" />
+          <rect x="3.5" y="13.5" width="7" height="7" rx="1.7" />
+          <rect x="13.5" y="13.5" width="7" height="7" rx="1.7" />
+        </>
+      ) : null}
+      {name === "matches" ? (
+        <>
+          <path d="m12 2.9 2.15 6.95L21.1 12l-6.95 2.15L12 21.1l-2.15-6.95L2.9 12l6.95-2.15L12 2.9Z" />
+          <path d="m19 2 .55 1.8L21.4 4.4l-1.85.6L19 6.8l-.55-1.8-1.85-.6 1.85-.6L19 2Z" />
+        </>
+      ) : null}
+      {name === "applications" ? (
+        <>
+          <rect x="3" y="7.5" width="18" height="13" rx="2" />
+          <path d="M8 7.5V5.8A1.8 1.8 0 0 1 9.8 4h4.4A1.8 1.8 0 0 1 16 5.8v1.7M3 12h18M10 12v2h4v-2" />
+        </>
+      ) : null}
+      {name === "profile" ? (
+        <>
+          <circle cx="12" cy="8" r="3.5" />
+          <path d="M4.5 20a7.5 7.5 0 0 1 15 0" />
+        </>
+      ) : null}
+    </svg>
+  );
+}
+
 const VALID_STATUSES = new Set<TrackerStatus>([
   "saved",
   "in_progress",
@@ -198,7 +245,8 @@ export default function App() {
               onClick={() => setPage("studios")}
               aria-current={page === "studios" ? "page" : undefined}
             >
-              Studios
+              <NavigationIcon name="studios" />
+              <span className="nav-label">Studios</span>
             </button>
             <button
               className={page === "matches" ? "nav-link active" : "nav-link"}
@@ -206,7 +254,8 @@ export default function App() {
               onClick={() => setPage("matches")}
               aria-current={page === "matches" ? "page" : undefined}
             >
-              Matches
+              <NavigationIcon name="matches" />
+              <span className="nav-label">Matches</span>
             </button>
             <button
               className={page === "applications" ? "nav-link active" : "nav-link"}
@@ -214,7 +263,8 @@ export default function App() {
               onClick={() => openTracker()}
               aria-current={page === "applications" ? "page" : undefined}
             >
-              My applications
+              <NavigationIcon name="applications" />
+              <span className="nav-label">My applications</span>
               <span className="nav-count">{trackedCount}</span>
             </button>
             <button
@@ -223,7 +273,8 @@ export default function App() {
               onClick={() => setPage("profile")}
               aria-current={page === "profile" ? "page" : undefined}
             >
-              My profile
+              <NavigationIcon name="profile" />
+              <span className="nav-label">My profile</span>
             </button>
           </nav>
 

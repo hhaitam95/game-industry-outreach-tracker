@@ -285,11 +285,13 @@ async function main() {
     assert.ok(initialCount > 100, "The global directory should contain a substantial set of active studios.");
     assert.ok(await page.locator(".studio-mark").count() > 100, "Studio marks should appear for directory rows.");
     assert.ok(await page.locator(".country-flag").count() > 100, "Known studio locations should display flags.");
+    assert.ok(await page.locator(".studio-scale-tag").count() > 0, "Classified studios should show a scale badge beside the name.");
+    assert.ok(await page.locator(".studio-at-a-glance .studio-facet-tag").count() > 0, "The At a glance column should show platform and focus tags.");
     assert.deepEqual(
       await page.locator(".studio-table thead th").evaluateAll(headers => headers.map(header =>
         header.querySelector(".column-sort-button span:first-child")?.textContent?.trim() || header.textContent?.trim()
       )),
-      ["Studio", "Studio location", "Notable work", "Studio type", "Tracker"],
+      ["Studio", "Location", "Notable work", "At a glance", "Tracker"],
       "The main table should keep only general studio information and the tracker action.",
     );
     assert.equal(
@@ -335,7 +337,7 @@ async function main() {
     await page.getByLabel("Search", { exact: true }).fill("");
     assert.equal(await rows.count(), initialCount, "Clearing a successful search should restore the directory.");
 
-    // Continent, country and work-model filters must narrow the visible result set.
+    // Continent, country, normalized facets and route work-model filters must narrow the visible result set.
     const continent = page.getByLabel("Continent");
     const continentValues = await continent.locator("option").evaluateAll((options) =>
       options.map((option) => option.value),
@@ -364,17 +366,35 @@ async function main() {
     assert.ok(countryCount > 0 && countryCount < initialCount, "Country filtering should narrow the directory.");
     await country.selectOption("All countries");
 
-    await page.locator(".directory-toolbar").getByLabel("Work model").selectOption("remote");
+    await page.locator(".directory-advanced-filters > summary").click();
+    await page.locator(".directory-filter-picker").nth(1).locator("summary").click();
+    const pcFilter = page.getByRole("checkbox", { name: "Platforms: PC" });
+    const mobileFilter = page.getByRole("checkbox", { name: "Platforms: Mobile" });
+    await pcFilter.check();
+    await mobileFilter.check();
+    const platformCount = await rows.count();
+    assert.ok(platformCount > 0 && platformCount < initialCount, "Selecting multiple platforms should narrow the directory.");
+    assert.equal(await page.locator(".active-filter-chip").count(), 2, "Each selected platform should appear as a removable active filter chip.");
+    await page.locator(".directory-filter-picker").nth(1).locator("summary").click();
+    await page.locator(".directory-advanced-filters > summary").click();
+    await page.locator(".active-filter-chip").first().click();
+    assert.equal(await page.locator(".active-filter-chip").count(), 1, "Removing a filter chip should remove only that filter.");
+    await page.getByRole("button", { name: "Reset filters" }).click();
+    assert.equal(await rows.count(), initialCount);
+
+    await page.locator(".directory-advanced-filters > summary").click();
+    await page.getByLabel("Work model · application route").selectOption("remote");
     const remoteCount = await rows.count();
-    assert.ok(remoteCount > 0 && remoteCount < initialCount, "Work-model filtering should narrow the directory.");
-    await page.locator(".directory-toolbar").getByLabel("Work model").selectOption("All work models");
+    assert.ok(remoteCount > 0 && remoteCount < initialCount, "Work-model filtering should remain available under More filters.");
+    await page.getByLabel("Work model · application route").selectOption("all");
+    await page.getByRole("button", { name: "Reset filters" }).click();
     await page.getByLabel("Search", { exact: true }).fill("Laki Studios");
     await country.selectOption("Poland");
     await page.getByRole("button", { name: "Reset filters" }).click();
     assert.equal(await rows.count(), initialCount, "Reset filters should clear search and selects.");
 
     // Column headers sort the table and expose the active sort direction accessibly.
-    const locationHeader = page.getByRole("button", { name: /Sort by Studio location/ });
+    const locationHeader = page.getByRole("button", { name: /Sort by Location/ });
     await locationHeader.click();
     assert.equal(await locationHeader.locator("xpath=..").getAttribute("aria-sort"), "ascending");
     const locationsAreSorted = await rows.evaluateAll((tableRows) => {
@@ -395,7 +415,7 @@ async function main() {
     assert.equal(await locationHeader.locator("xpath=..").getAttribute("aria-sort"), "descending");
     await page.getByRole("button", { name: /Sort by Studio \(ascending\)/ }).click();
 
-    // Rows expand into a concise studio profile with up to four notable titles.
+    // Rows expand into a concise studio profile with up to three notable titles.
     const fourAGamesRow = rows.filter({ hasText: "4A Games" });
     assert.deepEqual(
       await fourAGamesRow.locator(".popular-game-cover").evaluateAll(covers =>
@@ -407,14 +427,12 @@ async function main() {
     await fourAGamesRow.locator("td").nth(3).click();
     const fourAGamesDetails = page.locator("#studio-details-4a-games");
     await fourAGamesDetails.waitFor();
-    assert.match(await fourAGamesDetails.textContent(), /About the studio/);
+    assert.match(await fourAGamesDetails.textContent(), /About/);
     assert.match(await fourAGamesDetails.textContent(), /Metro Exodus/);
-    assert.match(await fourAGamesDetails.textContent(), /Studio type/);
-    assert.match(await fourAGamesDetails.textContent(), /Industry scale/);
     assert.match(await fourAGamesDetails.textContent(), /Team size/);
-    assert.match(await fourAGamesDetails.textContent(), /Headquarters/);
-    assert.match(await fourAGamesDetails.textContent(), /Platforms and focus/);
-    assert.match(await fourAGamesDetails.textContent(), /Application route/);
+    assert.match(await fourAGamesDetails.textContent(), /Platforms/);
+    assert.match(await fourAGamesDetails.textContent(), /Focus/);
+    assert.doesNotMatch(await fourAGamesDetails.textContent(), /Studio type|Industry scale|Platforms and focus|Studio highlights|Studio information sources|Source 1/);
     assert.doesNotMatch(await fourAGamesDetails.textContent(), /Application route notes|Listed hiring locations|Listed disciplines|Route last checked:/);
     const fullWidthDetails = await fourAGamesDetails.locator("td").evaluate(cell => ({
       colSpan: cell.colSpan,
@@ -423,12 +441,17 @@ async function main() {
     }));
     assert.equal(fullWidthDetails.colSpan, 5);
     assert.ok(fullWidthDetails.cellWidth >= fullWidthDetails.tableWidth - 2, "The expanded profile should span the entire table width.");
-    const applicationLink = fourAGamesDetails.getByRole("link", { name: "Application route" });
+    const applicationLink = fourAGamesDetails.getByRole("link", { name: /Application/ });
     assert.equal(await applicationLink.getAttribute("href"), "https://www.4a-games.com.mt/other-cv");
     assert.equal(await applicationLink.getAttribute("target"), "_blank");
     assert.match(await applicationLink.getAttribute("rel") || "", /noopener/);
-    const websiteLink = fourAGamesDetails.getByRole("link", { name: "Website" });
+    const websiteLink = fourAGamesDetails.getByRole("link", { name: /Official website/ });
     assert.equal(await websiteLink.getAttribute("href"), "https://www.4a-games.com.mt/");
+    const expandedMetroExodusPoster = fourAGamesDetails.locator('.game-poster-card[data-game-title="Metro Exodus"]');
+    assert.equal(await expandedMetroExodusPoster.getAttribute("data-release-year"), "2019");
+    await expandedMetroExodusPoster.getByText("· 2019", { exact: true }).waitFor();
+    const metroLastLightPoster = fourAGamesDetails.locator('.game-poster-card[data-game-title="Metro: Last Light Redux"]');
+    assert.equal(await metroLastLightPoster.getAttribute("data-release-year"), "2014");
     await fourAGamesRow.getByRole("button", { name: /4A Games/ }).click();
     await fourAGamesDetails.waitFor({ state: "detached" });
 
@@ -458,6 +481,7 @@ async function main() {
       "Stuck Together should display the exact IGDB cover supplied for this example.",
     );
     assert.equal(await stuckTogetherPoster.getAttribute("href"), "https://store.steampowered.com/app/3295360/");
+    assert.equal(await stuckTogetherPoster.getAttribute("data-release-year"), "2025");
     await hugecalfRow.getByRole("button", { name: /Hugecalf Studios/ }).click();
     await hugecalfDetails.waitFor({ state: "detached" });
 

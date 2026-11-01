@@ -6,7 +6,7 @@
 
 .directory-toolbar {
   display: grid;
-  grid-template-columns: minmax(240px, 1.8fr) repeat(3, minmax(140px, 1fr));
+  grid-template-columns: minmax(240px, 1.8fr) repeat(2, minmax(140px, 1fr));
   align-items: end;
   gap: 12px;
   padding: 13px;
@@ -538,19 +538,56 @@
 /* Game artwork keeps the directory compact and gives expanded profiles a visual portfolio strip. */
 .popular-work-list {
   display: flex;
-  max-width: 270px;
+  max-width: 286px;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 5px;
+  align-items: flex-start;
+  gap: 8px 7px;
+}
+
+.popular-game-entry {
+  display: grid;
+  width: 82px;
+  min-width: 0;
+  flex: 0 1 82px;
+  align-content: start;
+  gap: 3px;
+}
+
+.popular-game-caption {
+  display: grid;
+  min-width: 0;
+  gap: 1px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+.popular-game-caption strong {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 650;
+  line-height: 1.25;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.popular-game-caption small {
+  color: var(--subtle);
+  font-size: 10px;
+  line-height: 1.2;
 }
 
 .popular-game-cover {
   display: inline-flex;
-  width: max-content;
+  width: 82px;
   min-width: 36px;
-  max-width: 114px;
+  max-width: 82px;
   height: 54px;
   flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 4px;
@@ -562,7 +599,7 @@
   display: inline-flex;
   width: max-content;
   min-width: 34px;
-  max-width: 112px;
+  max-width: 80px;
   height: 52px;
   overflow: hidden;
 }

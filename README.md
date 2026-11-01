@@ -161,3 +161,10 @@ npm run build
 - `docs/architecture/global-discovery-implementation-model.md`: authoritative global discovery strategy, policies and roadmap.
 
 Never put personal application records, secrets or private candidate notes in the public source datasets.
+
+
+### Studio directory discovery tags
+
+The public studio profiles preserve their original research fields and also include normalized display fields for `scale`, `platforms`, `gameFocus`, and `studioRoles`. Run `node scripts/normalize-studio-tags.mjs` to preview the normalized tag counts, or add `--write` to update the profile data. Ambiguous and undisclosed scale values remain unclassified.
+
+Game release years are stored with a source URL when verified. The Steam and IGDB enrichment scripts can add available release years from exact title matches; they never guess from fuzzy matches. IGDB enrichment requires the Twitch/IGDB credentials described above.
