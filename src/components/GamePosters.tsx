@@ -10,7 +10,7 @@ export type PopularGame = PopularGameArtworkMetadata;
 
 function gameInitials(title: string): string {
   return title
-    .split(/\\s+/)
+    .split(/\s+/)
     .filter(Boolean)
     .slice(0, 2)
     .map(word => word.charAt(0))
@@ -86,6 +86,7 @@ export default function GamePoster({ game }: { game: PopularGame }) {
     return (
       <span
         className="game-poster-card"
+        role="group"
         data-game-title={game.title}
         aria-label={game.title + " · no verified game page"}
       >
@@ -138,6 +139,7 @@ export function GamePosterStrip({ games }: { games: PopularGame[] }) {
           <span
             className="popular-game-cover"
             key={game.title}
+            role="group"
             aria-label={game.title + " · no verified game page"}
             data-game-title={game.title}
           >
