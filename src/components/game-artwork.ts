@@ -9,6 +9,8 @@ export type PopularGameArtworkMetadata = {
   igdbCoverId?: string;
   steamHeaderUrl?: string;
   steamCapsuleUrl?: string;
+  storeUrl?: string;
+  storeName?: string;
   officialUrl?: string;
   officialArtworkUrl?: string;
   officialArtworkLayout?: ArtworkLayout;
@@ -112,6 +114,7 @@ export function getGameArtworkSources(game: PopularGameArtworkMetadata): GameArt
 
 export function gameDestination(game: PopularGameArtworkMetadata): string | null {
   if (game.appId) return `https://store.steampowered.com/app/${game.appId}/`;
+  if (game.storeUrl) return game.storeUrl;
   if (game.officialUrl) return game.officialUrl;
   if (game.igdbSlug) return `https://www.igdb.com/games/${encodeURIComponent(game.igdbSlug)}`;
   return null;
@@ -119,6 +122,7 @@ export function gameDestination(game: PopularGameArtworkMetadata): string | null
 
 export function gameLinkLabel(game: PopularGameArtworkMetadata): string | null {
   if (game.appId) return `Open ${game.title} on Steam`;
+  if (game.storeUrl) return `Open ${game.title} on ${game.storeName || "its game platform"}`;
   if (game.officialUrl) return `Open ${game.title} on the official website`;
   if (game.igdbSlug) return `Open ${game.title} on IGDB`;
   return null;
