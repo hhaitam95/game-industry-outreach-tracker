@@ -200,9 +200,14 @@ function assessRelevance(profile, studio) {
   const roleFamilies = profile.preferences.roleFamilies.filter(Boolean);
   const skills = profile.skills.filter(isUsableEvidence);
   const experiences = profile.experience.filter((item) => item.title.trim());
-  const hasProfileEvidence = skills.length > 0 || experiences.length > 0 ||
-    profile.projects.some((item) => item.name.trim() || item.description.trim());
+  const hasProfileEvidence = skills.length > 0 || experiences.length > 0;
   const scope = studio.applicationResearch?.disciplineScope?.filter(Boolean) || [];
+  const confirmedGaps = profile.skills
+    .filter((skill) => skill.evidence === "user_confirmed_gap" && skill.name.trim())
+    .filter((skill) =>
+      scope.some((discipline) => skillSupportsDiscipline(skill.name, discipline)),
+    )
+    .map((skill) => "User-confirmed gap: " + skill.name);
   const matchedRoles = roleRulesFor(roleFamilies).filter((rule) =>
     scope.some((discipline) => rule.disciplines.some((term) => hasPhrase(discipline, term))),
   );
@@ -293,7 +298,7 @@ function assessRelevance(profile, studio) {
         "The profile contains demonstrated evidence that maps to the stated discipline.",
       ],
       evidence,
-      gaps: [],
+      gaps: confirmedGaps,
       limitedRoleInformation: false,
     };
   }
@@ -308,10 +313,13 @@ function assessRelevance(profile, studio) {
         "The available profile evidence is transferable, learning-level or not directly linked to the stated discipline.",
       ],
       evidence,
-      gaps: scope.filter((discipline) =>
-        !matchedSkills.some((skill) => skillSupportsDiscipline(skill.name, discipline)) &&
-        !matchedExperience.some((item) => hasPhrase(item.title, discipline)),
-      ).map((discipline) => "Not directly evidenced in the profile: " + discipline),
+      gaps: [
+        ...confirmedGaps,
+        ...scope.filter((discipline) =>
+          !matchedSkills.some((skill) => skillSupportsDiscipline(skill.name, discipline)) &&
+          !matchedExperience.some((item) => hasPhrase(item.title, discipline)),
+        ).map((discipline) => "Not directly evidenced in the profile: " + discipline),
+      ],
       limitedRoleInformation: false,
     };
   }
@@ -323,7 +331,10 @@ function assessRelevance(profile, studio) {
       "This is a profile-to-route comparison only; it does not establish that the studio would reject an application.",
     ],
     evidence,
-    gaps: scope.map((discipline) => "Not evidenced in the profile: " + discipline),
+    gaps: [
+      ...confirmedGaps,
+      ...scope.map((discipline) => "Not evidenced in the profile: " + discipline),
+    ],
     limitedRoleInformation: false,
   };
 }
