@@ -1,6 +1,15 @@
 # Changelog
 
-## 2026-11-01 — Candidate Profile foundation (implementation in PR #95)
+## 2026-11-01 — Private candidate matching foundation
+
+- Add a Matches page that compares the browser-local Candidate Profile with active public studio route records on-device.
+- Keep professional relevance, application-route freshness/accessibility and personal priority as separate qualitative assessments; never represent them as hiring probability.
+- Map saved role-family preferences and skill evidence to employer-stated discipline scope; keep unspecified scope visible as unknown/potential and show transferable context, gaps and evidence provenance.
+- Apply region, work-model and studio-type preferences only to private personal priority. The global studio directory remains unchanged.
+- Show route type, submission channel, work model, eligibility/location notes, check date and employer-controlled application/evidence links. An active route is not a ready-to-submit guarantee.
+- Recalculate assessments locally; no private profile data, documents or assessments are sent to a remote service or stored in public assets. Queue persistence, manual overrides and deeper requirements extraction remain deferred.
+
+## 2026-11-01 — Candidate Profile foundation (merged in PR #95)
 
 - Add the new My profile area with editable contact details, professional summary, work experience, education, projects/training, skills and evidence, reusable master application materials and preferences.
 - Persist structured profile data and original PDF/DOCX document bytes in a versioned IndexedDB record separate from the existing application tracker.
