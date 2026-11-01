@@ -1,85 +1,12 @@
 import { useState } from "react";
+import {
+  gameDestination,
+  gameLinkLabel,
+  getGameArtworkSources,
+} from "./game-artwork";
+import type { PopularGameArtworkMetadata } from "./game-artwork";
 
-export type PopularGame = {
-  title: string;
-  appId?: number | null;
-  stage?: string;
-  igdbGameId?: number;
-  igdbSlug?: string;
-  igdbCoverId?: string;
-  steamHeaderUrl?: string;
-};
-
-export type GameArtworkSource = {
-  source: "Steam" | "IGDB";
-  url: string;
-  layout: "portrait" | "landscape";
-};
-
-export function getGameArtworkSources(game: PopularGame): GameArtworkSource[] {
-  const steamPortraitSources: GameArtworkSource[] = game.appId
-    ? [
-        {
-          source: "Steam",
-          layout: "portrait",
-          url: `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${game.appId}/library_600x900.jpg`,
-        },
-        {
-          source: "Steam",
-          layout: "portrait",
-          url: `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${game.appId}/library_600x900_2x.jpg`,
-        },
-        {
-          source: "Steam",
-          layout: "portrait",
-          url: `https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appId}/library_600x900.jpg`,
-        },
-      ]
-    : [];
-
-  const steamHeaderSources: GameArtworkSource[] = game.appId
-    ? [
-        ...(game.steamHeaderUrl
-          ? [
-              {
-                source: "Steam" as const,
-                layout: "landscape" as const,
-                url: game.steamHeaderUrl,
-              },
-            ]
-          : []),
-        {
-          source: "Steam",
-          layout: "landscape",
-          url: `https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appId}/header.jpg`,
-        },
-      ]
-    : [];
-
-  const igdbSource: GameArtworkSource[] = game.igdbCoverId
-    ? [
-        {
-          source: "IGDB",
-          layout: "portrait",
-          url: `https://images.igdb.com/igdb/image/upload/t_cover_big/${game.igdbCoverId}.jpg`,
-        },
-      ]
-    : [];
-
-  return [...steamPortraitSources, ...steamHeaderSources, ...igdbSource];
-}
-
-export function gameDestination(game: PopularGame): string {
-  if (game.appId) return `https://store.steampowered.com/app/${game.appId}/`;
-  if (game.igdbSlug) return `https://www.igdb.com/games/${encodeURIComponent(game.igdbSlug)}`;
-  return `https://store.steampowered.com/search/?term=${encodeURIComponent(game.title)}`;
-}
-
-function gameLinkLabel(game: PopularGame): string {
-  if (game.appId) return `Open ${game.title} on Steam`;
-  if (game.igdbSlug) return `Open ${game.title} on IGDB`;
-  return `Search Steam for ${game.title}`;
-}
+export type PopularGame = PopularGameArtworkMetadata;
 
 function gameInitials(title: string): string {
   return title
@@ -129,15 +56,44 @@ function GameCoverArtwork({ game, compact }: { game: PopularGame; compact: boole
 
 function artworkCaption(game: PopularGame): string {
   if (game.stage) return game.stage;
-  if (game.appId && game.igdbCoverId) return "Steam · IGDB fallback";
+  if (game.igdbCoverId && game.appId) return "Steam · IGDB fallback";
+  if (game.officialArtworkUrl) return "Official artwork";
   if (game.appId) return "Steam artwork";
   if (game.igdbCoverId) return "IGDB cover";
-  return "No cover found";
+  return "Artwork unavailable";
+}
+
+function PosterContents({ game }: { game: PopularGame }) {
+  return (
+    <>
+      <span className="game-poster-art">
+        <GameCoverArtwork game={game} compact={false} />
+        {game.stage ? <span className="game-stage-badge">{game.stage}</span> : null}
+      </span>
+      <span className="game-poster-caption">
+        <strong>{game.title}</strong>
+        <small>{artworkCaption(game)}</small>
+      </span>
+    </>
+  );
 }
 
 export default function GamePoster({ game }: { game: PopularGame }) {
   const destination = gameDestination(game);
   const linkLabel = gameLinkLabel(game);
+
+  if (!destination || !linkLabel) {
+    return (
+      <span
+        className="game-poster-card"
+        role="group"
+        data-game-title={game.title}
+        aria-label={game.title + " · no verified game page"}
+      >
+        <PosterContents game={game} />
+      </span>
+    );
+  }
 
   return (
     <a
@@ -149,14 +105,7 @@ export default function GamePoster({ game }: { game: PopularGame }) {
       aria-label={linkLabel}
       data-game-title={game.title}
     >
-      <span className="game-poster-art">
-        <GameCoverArtwork game={game} compact={false} />
-        {game.stage ? <span className="game-stage-badge">{game.stage}</span> : null}
-      </span>
-      <span className="game-poster-caption">
-        <strong>{game.title}</strong>
-        <small>{artworkCaption(game)}</small>
-      </span>
+      <PosterContents game={game} />
     </a>
   );
 }
@@ -165,11 +114,18 @@ export function GamePosterStrip({ games }: { games: PopularGame[] }) {
   return (
     <span className="popular-work-list" aria-label={games.map(game => game.title).join(", ")}>
       {games.map(game => {
+        const destination = gameDestination(game);
         const linkLabel = gameLinkLabel(game);
-        return (
+        const content = (
+          <span className="popular-game-cover-art">
+            <GameCoverArtwork game={game} compact />
+          </span>
+        );
+
+        return destination && linkLabel ? (
           <a
             className="popular-game-cover"
-            href={gameDestination(game)}
+            href={destination}
             key={game.title}
             target="_blank"
             rel="noopener noreferrer"
@@ -177,10 +133,18 @@ export function GamePosterStrip({ games }: { games: PopularGame[] }) {
             aria-label={linkLabel}
             data-game-title={game.title}
           >
-            <span className="popular-game-cover-art">
-              <GameCoverArtwork game={game} compact />
-            </span>
+            {content}
           </a>
+        ) : (
+          <span
+            className="popular-game-cover"
+            key={game.title}
+            role="group"
+            aria-label={game.title + " · no verified game page"}
+            data-game-title={game.title}
+          >
+            {content}
+          </span>
         );
       })}
     </span>

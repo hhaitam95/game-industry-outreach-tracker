@@ -1,12 +1,14 @@
 name: Enrich game artwork from IGDB
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
     paths:
       - ".github/workflows/enrich-igdb-covers.yml"
       - "scripts/enrich-igdb-covers.mjs"
+      - "src/data/studio-profiles.json"
 
 permissions:
   contents: write

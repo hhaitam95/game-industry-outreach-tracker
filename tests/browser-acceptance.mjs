@@ -83,6 +83,14 @@ async function main() {
     );
     await page.route("**/*", async route => {
       const requestUrl = route.request().url();
+      if (
+        requestUrl.includes("images.igdb.com") ||
+        requestUrl.includes("d4ngames.com") ||
+        requestUrl.includes("www.ahoiii.com")
+      ) {
+        await route.fulfill({ status: 200, contentType: "image/png", body: posterFixture });
+        return;
+      }
       if (!requestUrl.includes("steamstatic")) {
         await route.continue();
         return;
@@ -248,9 +256,10 @@ async function main() {
     const trailTableImage = trailTableCover.locator('img[data-artwork-layout="landscape"]');
     await trailTableImage.waitFor();
     const trailTableImageUrl = await trailTableImage.getAttribute("src") || "";
+    const trailArtworkPath = new URL(trailTableImageUrl).pathname;
     assert.ok(
-      trailTableImageUrl.endsWith("/steam/apps/3544920/header.jpg"),
-      "The Trail should fall back to a landscape Steam header after portrait artwork fails. Actual URL: " + trailTableImageUrl,
+      trailArtworkPath.includes("/steam/apps/3544920/") && trailArtworkPath.endsWith("/header.jpg"),
+      "The Trail should fall back to its verified landscape Steam header after portrait artwork fails. Actual URL: " + trailTableImageUrl,
     );
     const compactRatio = await trailTableCover.evaluate(element => {
       const rect = element.getBoundingClientRect();
@@ -274,6 +283,77 @@ async function main() {
     );
     await twentyTwoCansButton.click();
     await twentyTwoCansDetails.waitFor({ state: "detached" });
+
+    // Official website artwork must work as a real fallback and link to the game's own page.
+    const d4nRow = rows.filter({ hasText: "D4N Games" });
+    await d4nRow.getByRole("button", { name: /D4N Games/ }).click();
+    const d4nDetails = page.locator("#studio-details-d4n-games");
+    await d4nDetails.waitFor();
+    const tabletPoster = d4nDetails.locator('.game-poster-card[data-game-title="The Tablet of Destinies"]');
+    const tabletImage = tabletPoster.locator('img[data-artwork-source="Official site"]');
+    await tabletImage.waitFor();
+    assert.ok(
+      (await tabletImage.getAttribute("src") || "").endsWith("/images/tablet_thumbnail.webp"),
+      "The Tablet of Destinies should use the image hosted on D4N Games' official website.",
+    );
+    assert.equal(
+      await tabletPoster.getAttribute("href"),
+      "https://www.d4ngames.com/games/tablet-of-destinies",
+      "The Tablet of Destinies should link directly to its official game page.",
+    );
+    const tabletRatio = await tabletPoster.locator(".game-poster-art").evaluate(element => {
+      const rect = element.getBoundingClientRect();
+      return rect.width / rect.height;
+    });
+    assert.ok(tabletRatio > 1.8, "The official Tablet of Destinies artwork should use a landscape frame.");
+    await d4nRow.getByRole("button", { name: /D4N Games/ }).click();
+    await d4nDetails.waitFor({ state: "detached" });
+
+    // Square mobile-app art from a studio website should not be forced into portrait or landscape frames.
+    const ahoiiiRow = rows.filter({ hasText: "Ahoiii Entertainment" });
+    await ahoiiiRow.getByRole("button", { name: /Ahoiii Entertainment/ }).click();
+    const ahoiiiDetails = page.locator("#studio-details-ahoiii-entertainment");
+    await ahoiiiDetails.waitFor();
+    const fietePoster = ahoiiiDetails.locator('.game-poster-card[data-game-title="Fiete World"]');
+    const fieteImage = fietePoster.locator('img[data-artwork-source="Official site"][data-artwork-layout="square"]');
+    await fieteImage.waitFor();
+    assert.ok(
+      (await fieteImage.getAttribute("src") || "").endsWith("FieteWorldKids-Games-Apps-180x180-2.png"),
+      "Fiete World should use the official Ahoiii app artwork.",
+    );
+    const fieteRatio = await fietePoster.locator(".game-poster-art").evaluate(element => {
+      const rect = element.getBoundingClientRect();
+      return rect.width / rect.height;
+    });
+    assert.ok(fieteRatio > 0.9 && fieteRatio < 1.1, "Official square app artwork should receive a square frame.");
+    await ahoiiiRow.getByRole("button", { name: /Ahoiii Entertainment/ }).click();
+    await ahoiiiDetails.waitFor({ state: "detached" });
+
+    // IGDB images are a live fallback source, and games still link to their exact IGDB page.
+    const ocellusRow = rows.filter({ hasText: "Ocellus" });
+    await ocellusRow.getByRole("button", { name: /Ocellus/ }).click();
+    const ocellusDetails = page.locator("#studio-details-ocellus");
+    await ocellusDetails.waitFor();
+    const clashPoster = ocellusDetails.locator('.game-poster-card[data-game-title="Clash Royale"]').first();
+    const clashImage = clashPoster.locator('img[data-artwork-source="IGDB"]');
+    await clashImage.waitFor();
+    assert.ok(
+      (await clashImage.getAttribute("src") || "").includes("images.igdb.com/igdb/image/upload/"),
+      "IGDB artwork URLs should be available under the site's Content Security Policy.",
+    );
+    assert.equal(
+      await clashPoster.getAttribute("href"),
+      "https://www.igdb.com/games/clash-royale",
+      "IGDB-backed games should use their direct page, not a generic Steam search.",
+    );
+    await ocellusRow.getByRole("button", { name: /Ocellus/ }).click();
+    await ocellusDetails.waitFor({ state: "detached" });
+
+    assert.equal(
+      await page.locator('.game-poster-card[href*="store.steampowered.com/search/"], .popular-game-cover[href*="store.steampowered.com/search/"]').count(),
+      0,
+      "Game artwork cards must not fall back to generic Steam search URLs.",
+    );
 
     // Official route links must remain HTTPS and open safely in a new tab.
     const firstApplicationLink = page.locator(".studio-table tbody tr").first().getByRole("link", { name: "Application" });

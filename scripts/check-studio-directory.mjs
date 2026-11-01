@@ -200,6 +200,20 @@ if (Array.isArray(studios) && profiles && typeof profiles === "object" && !Array
             errors.push(error.message);
           }
         }
+        if (game?.officialUrl !== undefined) {
+          try { httpsUrl(game.officialUrl, studio.name + ".profile.popularGames[" + gameIndex + "].officialUrl"); }
+          catch (error) { errors.push(error.message); }
+        }
+        if (game?.officialArtworkUrl !== undefined) {
+          try { httpsUrl(game.officialArtworkUrl, studio.name + ".profile.popularGames[" + gameIndex + "].officialArtworkUrl"); }
+          catch (error) { errors.push(error.message); }
+        }
+        if (game?.officialArtworkLayout !== undefined && !["portrait", "landscape", "square"].includes(game.officialArtworkLayout)) {
+          errors.push(studio.name + ".profile.popularGames[" + gameIndex + "].officialArtworkLayout must be portrait, landscape or square.");
+        }
+        if (game?.officialArtworkLayout !== undefined && game?.officialArtworkUrl === undefined) {
+          errors.push(studio.name + ".profile.popularGames[" + gameIndex + "].officialArtworkLayout requires officialArtworkUrl.");
+        }
         const hasIgdbMetadata = game?.igdbGameId !== undefined || game?.igdbSlug !== undefined || game?.igdbCoverId !== undefined;
         if (hasIgdbMetadata && (!Number.isInteger(game?.igdbGameId) || typeof game?.igdbCoverId !== "string" || !game.igdbCoverId)) {
           errors.push(studio.name + ".profile.popularGames[" + gameIndex + "] must include both igdbGameId and igdbCoverId when IGDB metadata is present.");

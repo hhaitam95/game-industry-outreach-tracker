@@ -663,6 +663,15 @@
   aspect-ratio: 460 / 215;
 }
 
+.game-poster-art:has(img[data-artwork-layout="square"]) {
+  aspect-ratio: 1;
+}
+
+.game-poster-art img[data-artwork-layout="square"] {
+  object-fit: contain;
+  background: var(--tag-bg);
+}
+
 .game-poster-art img {
   transition: transform 160ms ease;
 }
