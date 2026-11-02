@@ -39,7 +39,7 @@ Keep this foundation stable. Do not change the discovery inclusion rules or hide
 - Implemented: region, work-model and studio-type preferences affect personal priority only and do not remove or alter directory records.
 - Implemented: deterministic fixture-based engine tests and browser acceptance for the Matches page.
 - Current limitation: route readiness is conservative. An active route on record is not labelled ready-to-submit; employer instructions and personal eligibility still require human review. Requirement-level provenance is shown only where the public directory currently stores it.
-- Follow-up quality review: direct/related discipline alignment, same-discipline demonstrated evidence for Strong matches, whole-phrase skill matching, broader use of work-history responsibilities, directory-country precedence and neutral treatment of mixed work models are being validated in branch feat/matching-quality-validation-20261102. These changes are not merged until its CI passes.
+- Follow-up quality review: direct/related discipline alignment, same-discipline demonstrated evidence for Strong matches, whole-phrase skill matching, broader use of work-history responsibilities, directory-country precedence, neutral treatment of mixed work models and geography-first campaign sorting are being validated in branch feat/matching-quality-validation-20261102. These changes are not merged until its CI passes.
 - Deferred to later queue/requirements phases: persistent assessment snapshots, user overrides, manual priority pins, exhaustive form/document/language/eligibility extraction and AI processing.
 
 ### Phase C3 — Application Queue
