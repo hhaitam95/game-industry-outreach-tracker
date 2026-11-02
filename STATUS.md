@@ -4,6 +4,20 @@
 **Product scope:** Global directory of legitimate video-game development organisations with verified speculative-application routes, plus a private browser-local Candidate Profile and application tracker.  
 **Authoritative discovery rules:** [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md).
 
+## Discovery automation hardening — PR #109
+
+**Implementation and validation completed on the automation branch; merge/release status must be checked against PR #109.**
+
+- The hourly discovery workflow now queues pending executions rather than replacing a previous pending run.
+- The discovery checkpoint is documented accurately as public: the `discovery-state` branch belongs to the public repository. Only public-source employer leads and operational metadata belong there; personal applicant information and secrets remain prohibited.
+- The health snapshot reports candidate status/reason counts, candidates currently due for verification, and unresolved same-domain/different-name identity observations.
+- Domain collisions are retained for identity review rather than silently dropped.
+- Employer-linked ATS and Japanese career-registration coverage has been extended, and the verifier follows relevant nested careers pages within its existing page bound.
+- A blocked relevant careers page is not treated as proof that no speculative route exists.
+- Full branch CI, including Python discovery tests, frontend/data validation, privacy checks, production build and Playwright browser acceptance, passed in [run 41510259225](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41510259225).
+
+**Source coverage boundary:** the integrated runtime still consists of seven feeds. The manual source register distinguishes approved-to-research, manual-only and permission-required sources. Singapore ACRA is licensed for reuse and is a promising lead source, but has no official website field; it must not be routed to employer-site verification until safe official-domain resolution is implemented. IGDB remains integrated with its existing credential, attribution and non-commercial constraints. Steam, Games Jobs Index, GameCompanies.com and MobyGames must not be automated beyond current permissions.
+
 ## Application campaign strategy — 2026-11-02
 
 **Documented and agreed; strategy only, not implemented as a new workflow.** Added [Studio Targeting and Application Campaign Strategy](docs/architecture/studio-targeting-and-application-campaign.md) as the durable handover for the intended application approach.
