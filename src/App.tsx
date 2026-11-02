@@ -4,6 +4,7 @@ import StudioDirectory from "./components/StudioDirectory";
 import ApplicationTracker from "./components/ApplicationTracker";
 import CandidateProfile from "./components/CandidateProfile";
 import MatchingDashboard from "./components/MatchingDashboard";
+import { createApplicationTrackerBackup, readApplicationTrackerBackup } from "./tracker/application-backup.mjs";
 
 const STORAGE_KEY = "studio-outreach-tracker-v1";
 const THEME_STORAGE_KEY = "studio-outreach-theme-v1";
@@ -80,6 +81,17 @@ type StudioSummary = {
   applicationUrl: string;
   country: string;
   countryCode?: string;
+  evidenceUrl?: string;
+  checkedAt?: string;
+  notes?: string;
+  applicationResearch?: {
+    routeType?: string;
+    routeStatus?: string;
+    workModel?: string;
+    submissionMethods?: string[];
+    eligibleLocations?: string[];
+    disciplineScope?: string[];
+  };
 };
 
 type StudioLocation = {
@@ -167,6 +179,15 @@ export default function App() {
         hqLabel: location?.hqLabel || "HQ",
         applicationLocation:
           location?.applicationLocation || "Not specified · see official route",
+        routeType: studio.applicationResearch?.routeType || "general",
+        routeStatus: studio.applicationResearch?.routeStatus || "unknown",
+        routeCheckedAt: studio.checkedAt || "",
+        routeEvidenceUrl: studio.evidenceUrl || "",
+        routeNotes: studio.notes || "",
+        workModel: studio.applicationResearch?.workModel || "not_stated",
+        submissionMethods: studio.applicationResearch?.submissionMethods || [],
+        eligibleLocations: studio.applicationResearch?.eligibleLocations || [],
+        disciplineScope: studio.applicationResearch?.disciplineScope || [],
         status,
         createdAt: timestamp,
         updatedAt: timestamp,
@@ -218,6 +239,27 @@ export default function App() {
     const item = applications.find((application) => application.id === id);
     if (!item || !window.confirm("Remove " + item.studioName + " from your tracker?")) return;
     setApplications((previous) => previous.filter((application) => application.id !== id));
+  }
+
+  function exportApplicationBackup() {
+    const backup = createApplicationTrackerBackup(applications);
+    const url = URL.createObjectURL(backup);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = "application-tracker-backup-" + new Date().toISOString().slice(0, 10) + ".json";
+    anchor.click();
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  async function importApplicationBackup(file: File): Promise<number | null> {
+    const imported = await readApplicationTrackerBackup(file);
+    const confirmed = window.confirm(
+      "Replace the " + applications.length + " application records currently in this browser with " +
+      imported.length + " records from this backup? This cannot be undone.",
+    );
+    if (!confirmed) return null;
+    setApplications(imported);
+    return imported.length;
   }
 
   function openTracker(tab = "saved") {
@@ -312,7 +354,12 @@ export default function App() {
           />
         ) : null}
         {page === "matches" ? (
-          <MatchingDashboard onOpenProfile={() => setPage("profile")} />
+          <MatchingDashboard
+            onOpenProfile={() => setPage("profile")}
+            onSaveStudio={(studio, location) => trackStudio(studio, "saved", location)}
+            onOpenTrackedStudio={openTrackedStudio}
+            trackedStudioNames={applications.map((application) => application.studioName)}
+          />
         ) : null}
         {page === "applications" ? (
           <ApplicationTracker
@@ -323,6 +370,8 @@ export default function App() {
             onUpdateNote={updateApplicationNote}
             onRemove={removeApplication}
             onOpenDirectory={() => setPage("studios")}
+            onExportBackup={exportApplicationBackup}
+            onImportBackup={importApplicationBackup}
           />
         ) : null}
         <div className="profile-route" style={{ display: page === "profile" ? "block" : "none" }}>

@@ -244,8 +244,34 @@ function AssessmentDetails({ assessment }: { assessment: StudioMatchAssessment }
 
 export default function MatchingDashboard({
   onOpenProfile,
+  onSaveStudio,
+  onOpenTrackedStudio,
+  trackedStudioNames,
 }: {
   onOpenProfile: () => void;
+  onSaveStudio: (
+    studio: {
+      name: string;
+      websiteUrl: string;
+      applicationUrl: string;
+      country: string;
+      countryCode?: string;
+      evidenceUrl?: string;
+      checkedAt?: string;
+      notes?: string;
+      applicationResearch?: {
+        routeType?: string;
+        routeStatus?: string;
+        workModel?: string;
+        submissionMethods?: string[];
+        eligibleLocations?: string[];
+        disciplineScope?: string[];
+      };
+    },
+    location?: { country: string; countryCode?: string; hqLabel: string; applicationLocation: string },
+  ) => void;
+  onOpenTrackedStudio: (studioName: string) => void;
+  trackedStudioNames: string[];
 }) {
   const [profile, setProfile] = useState<CandidateProfile | null>(null);
   const [loading, setLoading] = useState(true);
@@ -257,6 +283,10 @@ export default function MatchingDashboard({
   const [routeFilter, setRouteFilter] = useState<RouteFilter>("all");
   const [sortMode, setSortMode] = useState<SortMode>("priority");
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const trackedNames = useMemo(
+    () => new Set(trackedStudioNames.map((name) => name.trim().toLocaleLowerCase())),
+    [trackedStudioNames],
+  );
 
   const refreshProfile = useCallback(async () => {
     setRefreshing(true);
@@ -522,6 +552,50 @@ export default function MatchingDashboard({
                 </button>
                 {assessment.applicationUrl ? (
                   <a href={assessment.applicationUrl} target="_blank" rel="noopener noreferrer">Open application route</a>
+                ) : null}
+                {assessment.applicationUrl && assessment.websiteUrl ? (
+                  trackedNames.has(assessment.name.trim().toLocaleLowerCase()) ? (
+                    <button
+                      className="text-button"
+                      type="button"
+                      onClick={() => onOpenTrackedStudio(assessment.name)}
+                    >
+                      Open in My applications
+                    </button>
+                  ) : (
+                    <button
+                      className="text-button"
+                      type="button"
+                      aria-label={"Save " + assessment.name + " to My applications"}
+                      onClick={() => onSaveStudio({
+                        name: assessment.name,
+                        websiteUrl: assessment.websiteUrl,
+                        applicationUrl: assessment.applicationUrl,
+                        country: assessment.country,
+                        countryCode: assessment.countryCode,
+                        evidenceUrl: assessment.evidenceUrl,
+                        checkedAt: assessment.checkedAt,
+                        notes: assessment.notes,
+                        applicationResearch: {
+                          routeType: assessment.routeType,
+                          routeStatus: assessment.routeReadiness === "active" ? "active" : "needs_verification",
+                          workModel: assessment.workModel,
+                          submissionMethods: assessment.submissionMethods,
+                          eligibleLocations: assessment.eligibleLocations,
+                          disciplineScope: assessment.disciplineScope,
+                        },
+                      }, {
+                        country: assessment.country,
+                        countryCode: assessment.countryCode,
+                        hqLabel: "Directory country",
+                        applicationLocation: assessment.eligibleLocations.length
+                          ? assessment.eligibleLocations.join("; ")
+                          : "Not specified · see official route",
+                      })}
+                    >
+                      Save to My applications
+                    </button>
+                  )
                 ) : null}
               </div>
               {expanded ? <AssessmentDetails assessment={assessment} /> : null}

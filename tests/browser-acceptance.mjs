@@ -282,6 +282,26 @@ async function main() {
     await matchCards.first().getByRole("button", { name: "View assessment details" }).click();
     await page.getByRole("heading", { name: "Application route and instructions" }).waitFor();
     await page.getByText(/Confirm the employer's latest instructions/).waitFor();
+
+    // A selected match can be saved directly into the existing private application tracker.
+    const firstMatch = matchCards.first();
+    const matchStudioName = (await firstMatch.locator("h2").innerText()).trim();
+    await firstMatch.getByRole("button", { name: "Save " + matchStudioName + " to My applications" }).click();
+    await firstMatch.getByRole("button", { name: "Open in My applications" }).waitFor();
+    await firstMatch.getByRole("button", { name: "Open in My applications" }).click();
+    await page.getByRole("heading", { name: "My applications" }).waitFor();
+    const matchSavedRow = page.locator(".tracker-table tbody tr")
+      .filter({ has: page.locator(".status-select-label") })
+      .filter({ hasText: matchStudioName });
+    await matchSavedRow.waitFor();
+    await performWithDialog(
+      page,
+      () => matchSavedRow.getByRole("button", { name: "Remove" }).click(),
+      true,
+    );
+    await page.getByRole("button", { name: "Matches", exact: true }).click();
+    await page.getByRole("heading", { name: "Your matches" }).waitFor();
+
     await page.getByRole("button", { name: "Studios", exact: true }).click();
     await page.getByRole("heading", { name: "Studio directory" }).waitFor();
 
@@ -662,6 +682,18 @@ async function main() {
 
     let trackedRow = page.locator(".tracker-table tbody tr").filter({ has: page.locator(".status-select-label") }).filter({ hasText: "4A Games" });
     assert.equal(await trackedRow.count(), 1, "A saved studio should survive a full page reload.");
+
+    // The tracker preserves route type, check date, work-model caveats and the evidence source.
+    await trackedRow.getByRole("button", { name: "View route context for 4A Games" }).click();
+    const routeContext = page.locator("#tracker-route-4a-games");
+    await routeContext.waitFor();
+    await routeContext.getByText("Unsolicited application", { exact: true }).waitFor();
+    await routeContext.getByText(/Malta \/ Kyiv studio network · remote eligibility not stated/).waitFor();
+    const evidenceLink = routeContext.getByRole("link", { name: "Open source evidence" });
+    assert.equal(await evidenceLink.getAttribute("href"), "https://www.4a-games.com.mt/careers");
+    assert.match(await routeContext.innerText(), /No discipline scope recorded on this route/);
+    await trackedRow.getByRole("button", { name: "Hide route context for 4A Games" }).click();
+
     let status = page.getByLabel("Status for 4A Games");
     assert.equal(await status.inputValue(), "saved");
 
@@ -711,6 +743,20 @@ async function main() {
     trackedRow = page.locator(".tracker-table tbody tr").filter({ has: page.locator(".status-select-label") }).filter({ hasText: "4A Games" });
     assert.equal(await trackedRow.count(), 1, "Archived applications should remain accessible in their status tab.");
 
+    // Export an application backup and verify that its note and progress history are included.
+    const [trackerBackupDownload] = await Promise.all([
+      page.waitForEvent("download"),
+      page.getByRole("button", { name: "Export backup" }).click(),
+    ]);
+    const trackerBackupPath = await trackerBackupDownload.path();
+    const trackerBackup = JSON.parse(readFileSync(trackerBackupPath, "utf8"));
+    assert.equal(trackerBackup.format, "game-industry-outreach-application-tracker");
+    assert.equal(trackerBackup.version, 1);
+    assert.equal(trackerBackup.applications.length, 1);
+    assert.equal(trackerBackup.applications[0].studioName, "4A Games");
+    assert.equal(trackerBackup.applications[0].status, "archived");
+    assert.equal(trackerBackup.applications[0].note, savedNote);
+
     const cancelledRemoval = await performWithDialog(
       page,
       () => trackedRow.getByRole("button", { name: "Remove" }).click(),
@@ -731,6 +777,28 @@ async function main() {
     await page.getByText("No studios in this list yet.").waitFor();
     const storedAfterRemoval = await page.evaluate((key) => JSON.parse(localStorage.getItem(key) || "[]"), storageKey);
     assert.deepEqual(storedAfterRemoval, [], "Removal should persist in browser storage.");
+
+    // Restore the backup with explicit confirmation; the previous tracker data is replaced locally.
+    const trackerRestoreInput = page.locator(".tracker-page input[type=\"file\"][accept=\".json,application/json\"]");
+    const acceptedRestore = await performWithDialog(
+      page,
+      () => trackerRestoreInput.setInputFiles(trackerBackupPath),
+      true,
+    );
+    assert.equal(acceptedRestore.type, "confirm");
+    assert.match(acceptedRestore.message, /Replace the 0 application records currently in this browser/);
+    await page.getByText("Restored 1 application record in this browser.").waitFor();
+    await page.getByRole("tab", { name: /Archived/ }).click();
+    const restoredTrackerRow = page.locator(".tracker-table tbody tr")
+      .filter({ has: page.locator(".status-select-label") })
+      .filter({ hasText: "4A Games" });
+    await restoredTrackerRow.waitFor();
+    assert.equal(await page.getByLabel("Status for 4A Games").inputValue(), "archived");
+    await restoredTrackerRow.getByRole("button", { name: "Edit notes for 4A Games" }).click();
+    assert.equal(await page.getByLabel("Application notes · 4A Games").inputValue(), savedNote);
+    const storedAfterRestore = await page.evaluate((key) => JSON.parse(localStorage.getItem(key) || "[]"), storageKey);
+    assert.equal(storedAfterRestore.length, 1);
+    assert.equal(storedAfterRestore[0].studioName, "4A Games");
 
     // Check both mobile layouts and ensure the directory table scrolls inside its container.
     await page.getByRole("button", { name: "Browse studios" }).click();
@@ -769,7 +837,7 @@ async function main() {
     assert.deepEqual(pageErrors, [], "The browser should not report uncaught application errors.");
 
     process.stdout.write(
-      "Browser acceptance passed: directory filters/sorting/links, save and reload persistence, all tracker statuses, applied-date tracking, editable/searchable/persistent notes, confirmation dialogs, removal, local-only storage, and desktop/mobile overflow checks.\n",
+      "Browser acceptance passed: directory and match filters/sorting/links, direct match-to-tracker handoff, profile and tracker backup/restore, save and reload persistence, all tracker statuses, editable/searchable/persistent notes, confirmation dialogs, removal, local-only storage, and desktop/mobile overflow checks.\n",
     );
     await context.close();
   } finally {
