@@ -180,8 +180,15 @@ function openDatabase(): Promise<IDBDatabase> {
     return Promise.reject(new Error("This browser does not provide IndexedDB storage."));
   }
 
-  databasePromise = new Promise((resolve, reject) => {
-    const request = window.indexedDB.open(DATABASE_NAME, DATABASE_VERSION);
+  const pending = new Promise<IDBDatabase>((resolve, reject) => {
+    let request: IDBOpenDBRequest;
+    try {
+      request = window.indexedDB.open(DATABASE_NAME, DATABASE_VERSION);
+    } catch (error) {
+      reject(error instanceof Error ? error : new Error("Could not open private profile storage."));
+      return;
+    }
+
     request.onupgradeneeded = () => {
       const database = request.result;
       if (!database.objectStoreNames.contains(STORE_NAME)) {
@@ -197,15 +204,17 @@ function openDatabase(): Promise<IDBDatabase> {
       resolve(database);
     };
     request.onerror = () => {
-      databasePromise = null;
       reject(request.error || new Error("Could not open private profile storage."));
     };
     request.onblocked = () => {
-      databasePromise = null;
       reject(new Error("Profile storage is blocked by another open tab. Close older tabs and retry."));
     };
   });
-  return databasePromise;
+  databasePromise = pending;
+  void pending.catch(() => {
+    if (databasePromise === pending) databasePromise = null;
+  });
+  return pending;
 }
 
 export async function loadCandidateProfile(): Promise<CandidateProfile> {
