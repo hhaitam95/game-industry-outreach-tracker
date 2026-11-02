@@ -63,6 +63,17 @@ Keep this foundation stable. Do not change the discovery inclusion rules or hide
 - Review false positives/negatives and usability with the user before expanding scope.
 - Validate local persistence, migrations, export/import and public-build privacy boundaries.
 
+### Phase C7 — Campaign readiness and outcome tracking (proposed; not implemented)
+
+- Define a private, reviewable campaign queue that can group candidate-selected studios into priority waves.
+- Show a pre-submission checklist covering current official route, professional rationale, role/discipline scope, location/work model, language evidence, applicant eligibility, required documents and form exceptions.
+- Reference the single approved master resume and master motivation letter/message by default; require human review for genuine employer-specific exceptions.
+- Track submitted applications, acknowledgements, recruiter responses, screenings, interviews, offers, rejections and no-response outcomes separately from studio-discovery counts.
+- Provide cohort/funnel reporting by wave, region, role family, route type and submission channel without presenting results as a hiring-probability prediction.
+- Keep final review and submission manual. Any portal automation is a separate design and approval.
+
+The detailed target tiers and campaign operating principles are in [Studio Targeting and Application Campaign Strategy](docs/architecture/studio-targeting-and-application-campaign.md). The 200+ application ambition is a scale objective, not a quota or a promised outcome.
+
 ## Explicitly deferred
 
 Browser extension/desktop companion, portal recognition, ATS adapters, automatic form filling, file upload automation, automated email sending and automated application submission are not part of these phases. Revisit only after the profile, matching and workspace are implemented and evaluated, and after a separate design/approval.

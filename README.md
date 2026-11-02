@@ -6,6 +6,8 @@ The website has four areas: the worldwide Studio directory, Matches, My applicat
 
 **Discovery rules and handover source of truth:** [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md). Read it before changing discovery sources, qualification, exclusions, application verification or coverage cadence.
 
+**Application strategy and handover:** [Studio Targeting and Application Campaign Strategy](docs/architecture/studio-targeting-and-application-campaign.md) records the separate private matching, geographic prioritisation, standard application package, campaign waves, readiness checks and outcome tracking. It does not change global discovery eligibility or authorize automated submission.
+
 ## Studio directory
 
 Search studios by name, country and studio type; filter by country and work model; open the official studio website or application route; and save studios to the tracker.

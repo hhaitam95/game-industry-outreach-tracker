@@ -12,7 +12,7 @@ The product has three separate layers:
 
 The discovery layer remains global and impartial. Candidate preferences must not alter public discovery, qualification, ordering or publication. Matching is a private overlay over canonical studio records.
 
-Detailed behavior, data concepts, privacy boundaries, acceptance criteria and the deferred automation boundary are specified in [Candidate Profile, Matching and Application Workspace](docs/architecture/candidate-profile-matching-application-workspace.md).
+Detailed behavior, data concepts, privacy boundaries, acceptance criteria and the deferred automation boundary are specified in [Candidate Profile, Matching and Application Workspace](docs/architecture/candidate-profile-matching-application-workspace.md). The default geographic tiers, standardized application package, coordinated campaign waves, readiness review and outcome metrics are specified in [Studio Targeting and Application Campaign Strategy](docs/architecture/studio-targeting-and-application-campaign.md).
 
 ## Website and hosting
 

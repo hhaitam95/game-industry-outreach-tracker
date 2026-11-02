@@ -5,7 +5,7 @@
 **Scope:** Candidate-owned profile, transparent studio/opportunity assessment, personal application queue and preparation workspace.  
 **Explicitly deferred:** Browser-extension automation, external portal autofill, automated form interaction and application submission.
 
-This document extends the existing global studio-discovery product. It does not replace or personalize the discovery engine.
+This document extends the existing global studio-discovery product. It does not replace or personalize the discovery engine. For the intended large-batch targeting and application operating model, see [Studio Targeting and Application Campaign Strategy](studio-targeting-and-application-campaign.md).
 
 ## 1. Product direction
 
@@ -26,7 +26,7 @@ The product objective is to reduce repetitive research and application preparati
 - **Filter obvious mismatches, preserve possibility.** Hard-exclude only clearly incompatible disciplines or explicit blockers. Uncertainty and transferable relevance should remain visible for human judgment.
 - **Separate relevance, accessibility and preference.** A strong professional match may be geographically low priority; an attractive location does not make a role professionally relevant.
 - **Explain every assessment.** Show the requirements, evidence, gaps, unknowns, source URLs and review date behind the classification.
-- **Batch the repetitive work, review exceptions.** The default is one master resume and one master motivation statement. Suggest document updates only when a real requirement makes them useful; never silently modify approved materials.
+- **Batch the repetitive work, review exceptions.** The default is one approved master resume and one approved master motivation letter/message. The campaign strategy supports coordinated waves and a lightweight pre-submission review. Suggest document updates only when a real requirement makes them useful; never silently modify approved materials.
 - **User remains in control.** Selection, approval and confirmation of an application are user actions. No applications or emails are sent in this scope.
 - **Private by default.** Candidate data, documents, preferences, queue state and application history must never enter public datasets, GitHub commits, Pages assets, workflow logs or public PR descriptions.
 
@@ -155,7 +155,20 @@ The first C2 implementation calculates matches in the browser from the saved Can
 
 Known limitation: the current public directory has route-level research fields, not a fully normalized requirements record for every employer. Missing requirements remain unknown; no requirement, language, work-authorization, sponsorship or remote-work condition is inferred from a headquarters address or a search keyword.
 
-## 5. Application Queue
+## 5. Application campaign operating model
+
+The detailed campaign strategy is maintained in [Studio Targeting and Application Campaign Strategy](studio-targeting-and-application-campaign.md). The implementation must preserve these product-level requirements:
+
+- The public discovery directory remains global and non-personalized; user preferences affect only the private queue/order.
+- The candidate's default package is one approved master resume and one approved core motivation letter/message. Do not create per-studio variants by default.
+- The default geographic campaign ordering is Europe/nearby European markets first, English-language international markets next, and wider global opportunities as an exploratory tier. These are editable preferences, not eligibility decisions.
+- Professional relevance, application accessibility/readiness and personal priority remain separate. Do not collapse them into an ungrounded weighted score or hiring probability.
+- A pre-submission review must show the current official route, route freshness, professional rationale, location/work model, language evidence, stated applicant eligibility and document/form requirements. Unknown facts remain visible.
+- Group suitable targets into coordinated waves, but expose employer-specific exceptions rather than pretending every route is identical. A large batch (potentially 200+) is an aspiration, not a quota.
+- Track submitted applications and their outcomes separately from the number of studios discovered. Keep the pipeline active after an initial positive reply until a written offer and material transition requirements are confirmed.
+- Human review and final submission remain mandatory under the current automation boundary.
+
+## 6. Application Queue
 
 Introduce a personal **Application Queue** (preferred label) as a working set over the global directory.
 
@@ -175,7 +188,7 @@ Suggested queue groupings:
 
 The queue is not an auto-apply list. Selection means “consider/pursue”, not permission to submit.
 
-## 6. Application Workspace
+## 7. Application Workspace
 
 Opening a queued studio should provide a single focused workspace with:
 
@@ -189,7 +202,7 @@ Opening a queued studio should provide a single focused workspace with:
 
 The workspace should make the next action obvious and reduce switching between the directory, profile and external employer page.
 
-## 7. Application requirements research
+## 8. Application requirements research
 
 Requirements research is distinct from compatibility scoring. For each route, collect only what is actually supported by official employer evidence:
 
@@ -211,7 +224,7 @@ Store the source and verification date for each finding. Separate:
 
 Do not turn a general speculative invitation into assumed technical requirements. If the route simply asks for a CV and a short explanation of interest, report exactly that.
 
-## 8. Privacy and hosting architecture
+## 9. Privacy and hosting architecture
 
 The current product is a static React/Vite application on GitHub Pages. It has no private backend or authentication. The first profile/matching/workspace implementation should remain browser-local unless a separately approved hosting decision changes this.
 
@@ -225,7 +238,7 @@ The current product is a static React/Vite application on GitHub Pages. It has n
 - Treat uploaded files and extracted text as untrusted input. Sanitize rendered content and validate file types/size.
 - Avoid putting sensitive profile details into telemetry, browser console logs, error reports or URLs.
 
-## 9. Automation boundary for this roadmap
+## 10. Automation boundary for this roadmap
 
 This roadmap includes candidate profile, matching, queue, requirements summaries and application preparation only.
 
@@ -239,7 +252,7 @@ This roadmap includes candidate profile, matching, queue, requirements summaries
 
 The application workspace may provide copyable values, document links, checklists and direct links to the employer route. Future autofill assistance must be separately designed and approved with strict validation, portal compatibility tiers and user-controlled final submission. CAPTCHA, anti-bot, access-control and login restrictions must never be bypassed.
 
-## 10. Suggested implementation sequence
+## 11. Suggested implementation sequence
 
 1. **Profile foundation:** structured profile sections, skill/evidence model, master resume/motivation storage, preferences, validation and local persistence.
 2. **Assessment foundation:** schema for private assessments; deterministic initial matching rules; explicit/unknown evidence handling; explainable categories and manual override.
@@ -250,7 +263,7 @@ The application workspace may provide copyable values, document links, checklist
 
 Do not begin browser automation as a hidden subtask of these phases. It remains a separate future decision.
 
-## 11. Acceptance criteria
+## 12. Acceptance criteria
 
 The first release of these features should demonstrate that:
 
@@ -267,7 +280,7 @@ The first release of these features should demonstrate that:
 - Application preparation and tracking work without any automated submission or external portal interaction.
 - Tests verify browser-local privacy boundaries and prove no candidate data is included in public build assets, network writes, logs or repository files.
 
-## 12. Open decisions to resolve during design
+## 13. Open decisions to resolve during design
 
 - Exact profile field schema and which fields are optional.
 - Whether resume content is entered manually, extracted from a browser-selected PDF/DOCX, or both.
