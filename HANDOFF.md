@@ -50,7 +50,7 @@ Portal automation is explicitly deferred. Do not implement a browser extension, 
 - Existing personal application tracker uses browser localStorage.
 - Discovery implementation: `scripts/discover_speculative_studios.py`.
 - Discovery workflow: `.github/workflows/discover-studios.yml`.
-- Discovery cursors/state are maintained on the separate `discovery-state` branch.
+- Discovery cursors/state are maintained on the `discovery-state` branch. The branch belongs to this public repository and is publicly visible; it stores public employer leads and operational metadata only, never personal applicant data or secrets.
 
 ## Global discovery — PR #100
 
@@ -64,4 +64,4 @@ At the start of a new implementation session, read the Studio Targeting and Appl
 
 At each milestone, update HANDOFF.md and STATUS.md. Update CHANGELOG.md for meaningful changes and the relevant architecture/decision documents when scope changes. Never put personal application records, CVs, recruiter correspondence, secrets or private profile data in public repository source datasets, issues or PR descriptions.
 
-The successful hourly discovery workflow writes the compact, names-free checkpoint `state/discovery/studio-source-status.json` on `discovery-state`. The daily **Monitor Studio Sources** automation uses it to detect a new exhausted feed, persistent operational blocker or recovery. Keep the GitHub Actions hourly workflow enabled; monitoring is read-only.
+The successful hourly discovery workflow writes the aggregate checkpoint `state/discovery/studio-source-status.json` on the publicly visible `discovery-state` branch. It includes source health, candidate status counts and verification reason-code counts, but no applicant personal data. The daily **Monitor Studio Sources** automation uses it to detect a newly exhausted feed, persistent operational blocker or recovery. Keep the GitHub Actions hourly workflow enabled; monitoring is read-only.

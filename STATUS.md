@@ -4,6 +4,20 @@
 **Product scope:** Global directory of legitimate video-game development organisations with verified speculative-application routes, plus a private browser-local Candidate Profile and application tracker.  
 **Authoritative discovery rules:** [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md).
 
+## Discovery automation hardening — PR #109
+
+**Implementation and validation completed on the automation branch; merge/release status must be checked against PR #109.**
+
+- The hourly discovery workflow now queues pending executions rather than replacing a previous pending run.
+- The discovery checkpoint is documented accurately as public: the `discovery-state` branch belongs to the public repository. Only public-source employer leads and operational metadata belong there; personal applicant information and secrets remain prohibited.
+- The health snapshot reports candidate status/reason counts, candidates currently due for verification, and unresolved same-domain/different-name identity observations.
+- Domain collisions are retained for identity review rather than silently dropped.
+- Employer-linked ATS and Japanese career-registration coverage has been extended, and the verifier follows relevant nested careers pages within its existing page bound.
+- A blocked relevant careers page is not treated as proof that no speculative route exists.
+- Full branch CI, including Python discovery tests, frontend/data validation, privacy checks, production build and Playwright browser acceptance, passed in [run 41510259225](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41510259225).
+
+**Source coverage boundary:** the integrated runtime still consists of seven feeds. The manual source register distinguishes approved-to-research, manual-only and permission-required sources. Singapore ACRA is licensed for reuse and is a promising lead source, but has no official website field; it must not be routed to employer-site verification until safe official-domain resolution is implemented. IGDB remains integrated with its existing credential, attribution and non-commercial constraints. Steam, Games Jobs Index, GameCompanies.com and MobyGames must not be automated beyond current permissions.
+
 ## Application campaign strategy — 2026-11-02
 
 **Documented and agreed; strategy only, not implemented as a new workflow.** Added [Studio Targeting and Application Campaign Strategy](docs/architecture/studio-targeting-and-application-campaign.md) as the durable handover for the intended application approach.
@@ -121,7 +135,7 @@ The detailed approved direction and acceptance criteria are in [Candidate Profil
 - Additional rechecks confirmed that Raw Power Games, Futureplay Games and Shiro Games are already in the directory; they were not duplicated. Studio Countdown and welevel were not added because the official videogame-developer/official-route gates were not sufficiently established.
 - Existing Redly Games and HypeHype records were refreshed to match current official pages. **Plummy Games** was moved to paused because its Teamtailor Open Application could not be linked forward from the official company site.
 - The 322-record dataset (317 active, 5 paused) was deployed to GitHub Pages after PR #74 from merge commit 02645bf679f866f98e077fea73b320b1eeb2c979; [Pages publication run 41224727091](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41224727091) completed successfully. The production build also passed in [run 41224727035](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41224727035).
-- The first post-merge discovery run [41212342190](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41212342190) completed successfully and persisted the v2 private discovery-state checkpoint. The follow-up run [41212913766](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41212913766) also completed successfully: all discovery, offline-test, frontend-test, build, merge, checkpoint, Pages-artifact, deployment and summary steps passed. It added zero routes; the merged dataset remained at 313 and the private checkpoint advanced to bc3a302e4f7da0095c2c5c3be407ec6a56f12699 on discovery-state.
+- The first post-merge discovery run [41212342190](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41212342190) completed successfully and persisted the v2 discovery-state checkpoint. The follow-up run [41212913766](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41212913766) also completed successfully: all discovery, offline-test, frontend-test, build, merge, checkpoint, Pages-artifact, deployment and summary steps passed. It added zero routes; the merged dataset remained at 313 and the discovery-state checkpoint advanced to bc3a302e4f7da0095c2c5c3be407ec6a56f12699 on discovery-state.
 
 
 ## Global discovery batch 13 — merged in PR #73

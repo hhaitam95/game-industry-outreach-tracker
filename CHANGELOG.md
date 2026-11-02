@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-11-02 — Discovery automation reliability and verification hardening (PR #109)
+
+- Queue scheduled/manual discovery workflow runs instead of allowing a newer pending run to replace an earlier pending run.
+- Correct the checkpoint boundary: `discovery-state` is a public branch in the public Pages repository. Explicitly prohibit personal applicant data, CVs, application history and secrets from its employer-lead and operational state.
+- Add per-source candidate reason counts, overdue-candidate counts and shared-domain identity-review counts to the health snapshot and workflow summary.
+- Preserve differently named entities sharing an official domain in an additive identity-review queue instead of silently dropping them during ingestion.
+- Expand employer-linked ATS recognition to Traffit, eRecruiter, HRMOS and Alumy; detect explicit Japanese career-registration routes while retaining the official-site development proof, career-context and linked-submission requirements.
+- Extend the bounded candidate crawler to follow relevant nested careers pages and return manual review when a relevant linked page is inaccessible. Prefer evidence pages that contain an actual submission method over short parent pages that only link to the route.
+- Add regression tests for Japanese career registration, ATS hosts, nested career routes, inaccessible evidence, domain collisions and due-queue metrics.
+- Full PR CI and browser acceptance passed on [run 41510259225](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41510259225). Final PR-head validation is tracked in [run 41510259225](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41510259225).
+
 ## 2026-11-02 — Match-to-application handoff and tracker backups (PR #107, merged and deployed)
 
 - Add a duplicate-aware **Save to My applications** action on eligible Matches cards and a direct return path to the saved tracker record.

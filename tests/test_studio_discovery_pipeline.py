@@ -94,6 +94,32 @@ class DiscoveryParsingTests(unittest.TestCase):
         self.assertTrue(page.has_form)
         self.assertNotIn("ignore this", page.text)
 
+    def test_additional_employer_linked_ats_hosts_are_recognized(self):
+        for host in (
+            "jobs.traffit.com",
+            "playedwithfire.traffit.com",
+            "form.erecruiter.pl",
+            "hrmos.co",
+            "retiree.alumy.jp",
+        ):
+            with self.subTest(host=host):
+                self.assertTrue(discovery.is_ats_host(host))
+
+    def test_japanese_career_registration_selects_employer_linked_alumy_route(self):
+        page = discovery.Page(
+            url="https://www.capcom.co.jp/recruit/guidelines/career/",
+            title="経験者採用",
+            text="キャリア登録。職種を絞らずに応募したい方はご登録ください。",
+            links=[
+                ("https://retiree.alumy.jp/capcom/career-registration", "キャリア登録はこちら"),
+                ("https://hrmos.co/pages/capcom", "募集職種一覧"),
+            ],
+            has_form=False,
+        )
+        selected = discovery.choose_application_url(page, "https://www.capcom.co.jp/")
+        self.assertEqual(selected, "https://retiree.alumy.jp/capcom/career-registration")
+        self.assertTrue(discovery.is_ats_host("retiree.alumy.jp"))
+
     def test_relevant_links_include_careers_and_employer_linked_ats_only(self):
         page = discovery.Page(
             "https://studio.example/",
@@ -207,6 +233,14 @@ class DiscoveryParsingTests(unittest.TestCase):
         for phrase in ["Candidatura espontánea", "Open sollicitatie", "Avoin hakemus", "Uopfordret ansøgning", "Åpen søknad"]:
             with self.subTest(route_type=phrase):
                 self.assertEqual(discovery.route_type_for(phrase), "spontaneous")
+
+        japanese_registration = (
+            "キャリア登録。職種を絞らずに応募したい方、"
+            "現在希望する職種の募集がない方はご登録ください。"
+        )
+        self.assertIsNotNone(discovery.positive_route_match(japanese_registration))
+        self.assertIsNotNone(discovery.CAREER_CONTEXT_TEXT.search(japanese_registration))
+        self.assertEqual(discovery.route_type_for(japanese_registration), "general")
 
     def test_negative_route_language_overrides_positive_ambiguity(self):
         text = (
@@ -534,6 +568,104 @@ class CandidateVerificationTests(unittest.TestCase):
         self.assertEqual(result["evidence_url"], "https://example-studio.example/careers")
         self.assertIn("ats", result["submission_methods"])
         self.assertEqual(result["source_type"], "employer_managed_career_platform")
+
+    def test_japanese_career_registration_passes_both_evidence_gates(self):
+        candidate = {
+            **self.candidate(),
+            "name": "Capcom",
+            "website": "https://www.capcom.co.jp/",
+        }
+        pages = {
+            "https://www.capcom.co.jp/": discovery.FetchResult(
+                True,
+                "https://www.capcom.co.jp/",
+                200,
+                """
+                <title>CAPCOM</title>
+                <p>We develop video games and create game content.</p>
+                <a href="/recruit/guidelines/career/">経験者採用</a>
+                """,
+            ),
+            "https://www.capcom.co.jp/recruit/guidelines/career/": discovery.FetchResult(
+                True,
+                "https://www.capcom.co.jp/recruit/guidelines/career/",
+                200,
+                """
+                <title>経験者採用</title>
+                <h1>経験者採用</h1>
+                <p>キャリア登録。職種を絞らずに応募したい方、現在希望する職種の募集がない方はご登録ください。</p>
+                <a href="https://retiree.alumy.jp/capcom/career-registration">キャリア登録はこちら</a>
+                """,
+            ),
+        }
+
+        def page_fetcher(url, allowed_external):
+            return pages.get(url, discovery.FetchResult(False, url, 404, "", "not-found"))
+
+        result = discovery.verify_candidate_pages(candidate, page_fetcher)
+        self.assertEqual(result["status"], "verified")
+        self.assertEqual(result["route_type"], "general")
+        self.assertEqual(
+            result["application_url"],
+            "https://retiree.alumy.jp/capcom/career-registration",
+        )
+        self.assertEqual(
+            result["evidence_url"],
+            "https://www.capcom.co.jp/recruit/guidelines/career/",
+        )
+        self.assertEqual(result["submission_methods"], ["ats"])
+
+    def test_nested_careers_subpage_is_crawled_for_open_application_route(self):
+        candidate = self.candidate()
+        pages = {
+            "https://example-studio.example/": discovery.FetchResult(
+                True, "https://example-studio.example/", 200,
+                '<p>We develop video games.</p><a href="/careers">Careers</a>',
+            ),
+            "https://example-studio.example/careers": discovery.FetchResult(
+                True, "https://example-studio.example/careers", 200,
+                '<h1>Careers</h1><p>See current jobs.</p>'
+                '<a href="/careers/open-application">Open application</a>',
+            ),
+            "https://example-studio.example/careers/open-application": discovery.FetchResult(
+                True, "https://example-studio.example/careers/open-application", 200,
+                '<h1>Open application</h1><p>We welcome spontaneous applications.</p>'
+                '<form action="/submit"></form>',
+            ),
+        }
+
+        def page_fetcher(url, allowed_external):
+            return pages.get(url, discovery.FetchResult(False, url, 404, "", "not-found"))
+
+        result = discovery.verify_candidate_pages(candidate, page_fetcher)
+        self.assertEqual(result["status"], "verified", result)
+        self.assertEqual(result["route_type"], "spontaneous")
+        self.assertEqual(
+            result["evidence_url"],
+            "https://example-studio.example/careers/open-application",
+        )
+        self.assertIn("website_form", result["submission_methods"])
+
+    def test_unavailable_relevant_career_page_is_not_classified_as_no_route(self):
+        candidate = self.candidate()
+        homepage = discovery.FetchResult(
+            True, "https://example-studio.example/", 200,
+            '<p>We develop video games.</p><a href="/careers">Careers</a>',
+        )
+        blocked = discovery.FetchResult(
+            False, "https://example-studio.example/careers", 403, "", "access-restricted"
+        )
+
+        def page_fetcher(url, allowed_external):
+            if url == "https://example-studio.example/":
+                return homepage
+            if url == "https://example-studio.example/careers":
+                return blocked
+            return discovery.FetchResult(False, url, 404, "", "not-found")
+
+        result = discovery.verify_candidate_pages(candidate, page_fetcher)
+        self.assertEqual(result["status"], "needs_review")
+        self.assertEqual(result["reason"], "relevant_career_page_unavailable")
 
     def test_production_fetcher_uses_the_verifier_two_argument_interface(self):
         bodies = {
@@ -1204,12 +1336,19 @@ class DatasetUpdateTests(unittest.TestCase):
             "source_id": "scottish_games_industry",
         }
         self.assertEqual(discovery.add_candidates(state, [first]), 1)
+        self.assertEqual(discovery.add_candidates(state, [duplicate]), 1)
         self.assertEqual(discovery.add_candidates(state, [duplicate]), 0)
         candidate = state["candidates"]["Q100"]
         self.assertEqual(
             candidate["sources_seen"],
             ["wikidata_video_game_developers", "scottish_games_industry"],
         )
+        self.assertEqual(len(state["identity_review_queue"]), 1)
+        collision = state["identity_review_queue"][0]
+        self.assertEqual(collision["name"], "Alpha Studio Ltd")
+        self.assertEqual(collision["related_candidate_qid"], "Q100")
+        self.assertEqual(collision["reason"], "same_official_domain_different_entity_name")
+        self.assertEqual(collision["status"], "needs_review")
 
     def test_source_failure_backoff_does_not_count_as_empty_pass(self):
         state = discovery.empty_state()

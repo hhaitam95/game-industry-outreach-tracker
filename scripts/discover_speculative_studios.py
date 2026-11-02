@@ -157,6 +157,11 @@ ATS_HOSTS = (
     "breezy.hr",
     "applytojob.com",
     "successfactors.com",
+    # Verified employer-linked providers seen in real studio recruitment routes.
+    "traffit.com",
+    "erecruiter.pl",
+    "hrmos.co",
+    "alumy.jp",
 )
 
 CAREER_LINK_HINT = re.compile(
@@ -165,7 +170,8 @@ CAREER_LINK_HINT = re.compile(
     r"team|emploi|carri[eè]re|recrut|postuler|nous rejoindre|vacature|werken bij|"
     r"contacto|empleo|trabaja con|candidatura|lavoro|lavora con noi|offerte di lavoro|"
     r"karri[aä]r|lediga jobb|spontanans[oö]k|ty[oö]paikka|arbet|sollicitat|"
-    r"stillinger|s[oø]knad|hakemus|ty[oö]paikk|vacantes)",
+    r"stillinger|s[oø]knad|hakemus|ty[oö]paikk|vacantes|"
+    r"採用|募集要項|キャリア登録|エントリー|応募|求人)",
     re.I,
 )
 
@@ -191,6 +197,10 @@ POSITIVE_ROUTE_PATTERNS = (
         re.I | re.S,
     ),
     re.compile(r"\bexpression\s+of\s+interest\b", re.I),
+    # Japanese career-registration pages may accept candidates without a
+    # matching advertised role; career context and a linked submission route
+    # are still mandatory before publication.
+    re.compile(r"(?:キャリア登録|職種を絞らず(?:に)?応募|希望する職種の募集がない方.{0,80}(?:登録|応募))"),
     re.compile(r"\bcandidature\s+spontan[ée]e?s?\b", re.I),
     re.compile(r"\bcandidature\s+libre\b", re.I),
     re.compile(r"\binitiativbewerbung(?:en)?\b", re.I),
@@ -217,7 +227,8 @@ POSITIVE_ROUTE_PATTERNS = (
 CAREER_CONTEXT_TEXT = re.compile(
     r"\b(?:careers?|jobs?|job openings?|roles?|positions?|vacanc(?:y|ies)|"
     r"recruitment|hiring|employment|apply online|submit your cv|send.{0,60}\b(?:cv|resume|résumé)\b|"
-    r"work with us|join (?:our|the) team|human resources|hr department)\b",
+    r"work with us|join (?:our|the) team|human resources|hr department)\b|"
+    r"採用|募集要項|キャリア登録|エントリー|応募|求人",
     re.I,
 )
 CAREER_CONTEXT_URL = re.compile(
@@ -280,6 +291,7 @@ POSITIVE_ROUTE_TYPE = (
     ("discipline_specific", re.compile(r"\b(?:expression of interest|talent pool)\b", re.I)),
     ("open", re.compile(r"\bopen applications?\b", re.I)),
     ("general", re.compile(r"\bgeneral applications?\b", re.I)),
+    ("general", re.compile(r"(?:キャリア登録|職種を絞らず(?:に)?応募|希望する職種の募集がない方.{0,80}(?:登録|応募))")),
     ("spontaneous", re.compile(r"\b(?:candidature\s+spontan[ée]e?s?|initiativbewerbung|spontanbewerbung|candidatura\s+espont[aáâ]nea|spontane\s+sollicitatie|open\s+sollicitatie|avoin\s+hakemus|uopfordret\s+ans[oø]gning|[aå]pen\s+s[oø]knad|spontanansök(?:an|ningar)|spontanansøgning|spontan\s+jelentkez[eé]s|spontaniczna\s+aplikacja)\b", re.I)),
 )
 
@@ -735,7 +747,8 @@ def choose_application_url(page: Page, site_url: str) -> str:
         route_specific = bool(re.search(
             r"(?:speculative|unsolicited|spontaneous|open[-_ ]application|general[-_ ]application|"
             r"expression[-_ ]of[-_ ]interest|initiative[-_ ]application|initiativbewerbung|"
-            r"candidature[-_ ]spontan[ée]e|open[-_ ]sollicitatie|avoin[-_ ]hakemus)",
+            r"candidature[-_ ]spontan[ée]e|open[-_ ]sollicitatie|avoin[-_ ]hakemus|"
+            r"キャリア登録|職種を絞らず(?:に)?応募|希望する職種の募集がない方)",
             combined,
             re.I,
         ))
@@ -760,10 +773,29 @@ def verify_candidate_pages(
         return {"status": "retry", "reason": homepage_result.error or "homepage_unavailable"}
     homepage = parse_page(homepage_result.url, homepage_result.body)
     pages = [homepage]
-    for page_url in relevant_page_urls(website, homepage):
+    unavailable_relevant_pages: list[FetchResult] = []
+    seen_page_urls = {homepage.url}
+    pending_page_urls = relevant_page_urls(website, homepage)
+    # Follow relevant careers/employment links one level deeper while keeping
+    # the complete crawl bounded by MAX_SITE_PAGES. This catches dedicated
+    # open-application subpages linked from a generic careers landing page.
+    while pending_page_urls and len(pages) < MAX_SITE_PAGES:
+        page_url = pending_page_urls.pop(0)
+        if page_url in seen_page_urls:
+            continue
+        seen_page_urls.add(page_url)
         result = page_fetcher(page_url, not same_site(website, page_url))
-        if result.ok:
-            pages.append(parse_page(result.url, result.body))
+        if not result.ok:
+            unavailable_relevant_pages.append(result)
+            continue
+        page = parse_page(result.url, result.body)
+        pages.append(page)
+        if same_site(website, page.url) and len(pages) < MAX_SITE_PAGES:
+            for nested_url in relevant_page_urls(page.url, page):
+                if nested_url not in seen_page_urls and nested_url not in pending_page_urls:
+                    pending_page_urls.append(nested_url)
+                    if len(pages) + len(pending_page_urls) >= MAX_SITE_PAGES:
+                        break
     all_text = " ".join(page.text for page in pages)
     excluded = exclusion_match(all_text)
     if excluded:
@@ -815,8 +847,27 @@ def verify_candidate_pages(
                 "status": "needs_review",
                 "reason": "speculative_language_without_clear_employment_context",
             }
+        if unavailable_relevant_pages:
+            # An inaccessible linked career page is not evidence that the
+            # employer lacks a non-vacancy route.
+            return {
+                "status": "needs_review",
+                "reason": "relevant_career_page_unavailable",
+            }
         return {"status": "no_route", "reason": "no_explicit_speculative_route_found"}
-    matches.sort(key=lambda item: (0 if CAREER_CONTEXT_URL.search(urllib.parse.urlsplit(item[0].url).path) else 1, len(item[0].text)))
+    def submission_evidence_score(page: Page) -> int:
+        score = 2 if page.has_form else 0
+        # Prefer the page that contains the employer-linked application endpoint,
+        # not a shorter parent careers page whose link label merely mentions it.
+        if choose_application_url(page, website) != page.url:
+            score += 1
+        return score
+
+    matches.sort(key=lambda item: (
+        0 if CAREER_CONTEXT_URL.search(urllib.parse.urlsplit(item[0].url).path) else 1,
+        -submission_evidence_score(item[0]),
+        len(item[0].text),
+    ))
     evidence_page, match = matches[0]
     application_url = choose_application_url(evidence_page, website)
     application_host = urllib.parse.urlsplit(application_url).hostname or ""
@@ -1443,6 +1494,7 @@ def empty_state() -> dict[str, Any]:
         "bootstrap_started": False,
         "candidates": {},
         "route_checks": {},
+        "identity_review_queue": [],
         "route_check_index": 0,
         "source_stats": {
             feed["id"]: {
@@ -1466,6 +1518,9 @@ def load_state(path: Path = STATE_PATH) -> dict[str, Any]:
     for field in ("feed_cursors", "feed_done", "candidates", "route_checks", "stats"):
         if not isinstance(state.get(field), dict):
             raise ValueError("Discovery state field is invalid: " + field)
+    state.setdefault("identity_review_queue", [])
+    if not isinstance(state["identity_review_queue"], list):
+        raise ValueError("Discovery state field is invalid: identity_review_queue")
 
     # Migrate v1 additively, preserving every cursor, candidate, route check and statistic.
     # Older Wikidata candidates did not keep query-feed provenance; never guess it.
@@ -1569,6 +1624,38 @@ def add_candidates(
                 seen = existing.setdefault("sources_seen", [existing.get("source_id", "legacy_unattributed")])
                 if candidate_source_id not in seen:
                     seen.append(candidate_source_id)
+                existing_name = name_key(str(existing.get("name", "")))
+                incoming_name = name_key(str(row.get("name", "")))
+                if incoming_name and existing_name and incoming_name != existing_name:
+                    # A shared registrable domain can represent distinct studios,
+                    # subsidiaries or trading names. Preserve the observation for
+                    # manual identity review instead of silently dropping it.
+                    review_queue = state.setdefault("identity_review_queue", [])
+                    already_seen = any(
+                        item.get("qid") == qid and item.get("source_id") == candidate_source_id
+                        for item in review_queue
+                        if isinstance(item, dict)
+                    )
+                    if not already_seen:
+                        review_queue.append({
+                            "qid": qid,
+                            "name": str(row.get("name", "")).strip(),
+                            "website": website,
+                            "source_id": candidate_source_id,
+                            "source_name": str(row.get("source_name", "")),
+                            "entity_url": str(row.get("entity_url", "")),
+                            "related_candidate_qid": str(existing.get("qid", "")),
+                            "reason": "same_official_domain_different_entity_name",
+                            "status": "needs_review",
+                            "discovered_at": utc_now().isoformat(),
+                        })
+                        source_metrics = state.get("source_stats", {}).get(candidate_source_id)
+                        if source_metrics is not None:
+                            source_metrics["cycle_candidate_entities"] = int(
+                                source_metrics.get("cycle_candidate_entities", 0)
+                            ) + 1
+                        state["stats"]["candidates_seen"] += 1
+                        added += 1
             continue
         candidate_source_id = str(row.get("source_id") or source_id or "legacy_unattributed")
         source_metrics = state.get("source_stats", {}).get(candidate_source_id, {})
@@ -2147,6 +2234,15 @@ def run_pipeline(
     # Sort only by display name. Existing verified records and profiles are otherwise
     # preserved; additions are append-only and route closure is a status update.
     studios.sort(key=lambda studio: str(studio.get("name", "")).casefold())
+    today = iso_date()
+    candidate_due_counts: dict[str, int] = {}
+    for candidate in state["candidates"].values():
+        status = str(candidate.get("status", "unknown"))
+        next_check_at = str(candidate.get("next_check_at") or "")
+        if status in {"queued", "retry", "no_route", "needs_review"} and (
+            not next_check_at or next_check_at <= today
+        ):
+            candidate_due_counts[status] = candidate_due_counts.get(status, 0) + 1
     result = {
         "mode": mode,
         "igdb_enabled": igdb_credentials_available(),
@@ -2187,7 +2283,10 @@ def run_pipeline(
         },
         "studio_count": len(studios),
         "candidate_queue": sum(1 for item in state["candidates"].values() if item.get("status") in {"queued", "retry"}),
+        "candidate_due_counts": candidate_due_counts,
+        "candidate_due_total": sum(candidate_due_counts.values()),
         "candidate_pool_size": len(state["candidates"]),
+        "identity_review_queue_size": len(state.get("identity_review_queue", [])),
         "gamedevmap_complete": state["feed_done"].get("gamedevmap", False),
         "gamedevmap_next_start": state["feed_cursors"].get("gamedevmap", "1"),
         "stats": state["stats"],
