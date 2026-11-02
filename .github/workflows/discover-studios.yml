@@ -291,7 +291,7 @@ jobs:
               "sources": sources,
           }
           output_path.parent.mkdir(parents=True, exist_ok=True)
-          output_path.write_text(json.dumps(output, indent=2) + "\\n", encoding="utf-8")
+          output_path.write_text(json.dumps(output, indent=2) + "\n", encoding="utf-8")
           PY
 
           git -C .discovery-state add state/studio-discovery-state.json state/discovery/studio-source-status.json
