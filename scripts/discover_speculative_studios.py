@@ -855,7 +855,19 @@ def verify_candidate_pages(
                 "reason": "relevant_career_page_unavailable",
             }
         return {"status": "no_route", "reason": "no_explicit_speculative_route_found"}
-    matches.sort(key=lambda item: (0 if CAREER_CONTEXT_URL.search(urllib.parse.urlsplit(item[0].url).path) else 1, len(item[0].text)))
+    def submission_evidence_score(page: Page) -> int:
+        score = 2 if page.has_form else 0
+        # Prefer the page that contains the employer-linked application endpoint,
+        # not a shorter parent careers page whose link label merely mentions it.
+        if choose_application_url(page, website) != page.url:
+            score += 1
+        return score
+
+    matches.sort(key=lambda item: (
+        0 if CAREER_CONTEXT_URL.search(urllib.parse.urlsplit(item[0].url).path) else 1,
+        -submission_evidence_score(item[0]),
+        len(item[0].text),
+    ))
     evidence_page, match = matches[0]
     application_url = choose_application_url(evidence_page, website)
     application_host = urllib.parse.urlsplit(application_url).hostname or ""
