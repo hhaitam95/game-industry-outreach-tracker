@@ -1073,6 +1073,30 @@ class DatasetUpdateTests(unittest.TestCase):
         self.assertEqual(state["empty_cycles"], 5)
 
 
+    def test_new_candidates_without_speculative_routes_do_not_saturate_a_source(self):
+        state = discovery.empty_state()
+        source = discovery.FEEDS[0]
+        source_id = source["id"]
+        for feed in discovery.FEEDS:
+            state["feed_done"][feed["id"]] = True
+        for feed in discovery.FEEDS:
+            state["source_stats"][feed["id"]]["empty_cycles"] = 4
+            state["source_stats"][feed["id"]]["saturated"] = False
+        state["source_stats"][source_id]["cycle_candidate_entities"] = 1
+        state["source_stats"][source_id]["cycle_additions"] = 0
+        state["candidates"]["Q777"] = {
+            "qid": "Q777", "name": "No Route Studio",
+            "website": "https://no-route.example/", "source_id": source_id,
+            "source_cycle": 1, "status": "no_route",
+        }
+
+        discovery.finish_source_cycles(state)
+        metrics = state["source_stats"][source_id]
+        self.assertEqual(metrics["empty_cycles"], 0)
+        self.assertFalse(metrics["saturated"])
+        self.assertEqual(metrics["last_pass_candidates"], 1)
+        self.assertEqual(metrics["last_pass_verified"], 0)
+
     def test_verified_growth_resets_only_its_own_source_saturation(self):
         state = discovery.empty_state()
         recurring = [feed["id"] for feed in discovery.FEEDS if feed["refresh_policy"] == "recurring"]
@@ -1083,6 +1107,7 @@ class DatasetUpdateTests(unittest.TestCase):
             state["source_stats"][feed_id]["saturated"] = True
         growing_source = recurring[0]
         state["source_stats"][growing_source]["cycle_additions"] = 1
+        state["source_stats"][growing_source]["cycle_candidate_entities"] = 1
 
         self.assertTrue(discovery.finish_cycle_if_complete(state))
         self.assertFalse(state["source_stats"][growing_source]["saturated"])
