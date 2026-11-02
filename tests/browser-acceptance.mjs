@@ -173,6 +173,57 @@ async function main() {
       buffer: resumeFixture,
     });
     await page.getByText("candidate-resume.pdf").waitFor();
+
+    // Hold the IndexedDB completion callback after its transaction commits so we can edit
+    // the form while the UI is still awaiting the previous snapshot's save.
+    await page.evaluate(() => {
+      let prototype = IDBTransaction.prototype;
+      let descriptor;
+      while (prototype && !descriptor) {
+        descriptor = Object.getOwnPropertyDescriptor(prototype, "oncomplete");
+        prototype = Object.getPrototypeOf(prototype);
+      }
+      if (!descriptor?.set) throw new Error("Could not intercept IndexedDB transaction completion for the save-race test.");
+      Object.defineProperty(IDBTransaction.prototype, "oncomplete", {
+        configurable: true,
+        enumerable: descriptor.enumerable,
+        get() {
+          return descriptor.get?.call(this);
+        },
+        set(handler) {
+          if (this.mode === "readwrite" && window.__holdNextProfileSave) {
+            window.__holdNextProfileSave = false;
+            const transaction = this;
+            descriptor.set.call(this, (event) => {
+              window.__profileSaveCommitted = true;
+              window.__releaseProfileSave = () => {
+                window.__releaseProfileSave = null;
+                handler.call(transaction, event);
+              };
+            });
+            return;
+          }
+          descriptor.set.call(this, handler);
+        },
+      });
+      window.__holdNextProfileSave = true;
+    });
+    await page.locator(".profile-actions").getByRole("button", { name: "Save profile" }).click();
+    await page.waitForFunction(() => window.__profileSaveCommitted === true);
+    const newerProfileLink = "https://portfolio.example.test/edited-during-save";
+    await page.getByLabel("Other professional link").fill(newerProfileLink);
+    assert.equal(
+      await page.getByLabel("Other professional link").inputValue(),
+      newerProfileLink,
+      "The newer edit should be visible while the previous IndexedDB save is awaiting completion.",
+    );
+    await page.evaluate(() => window.__releaseProfileSave?.());
+    await page.locator(".profile-actions").getByRole("button", { name: "Save profile" }).waitFor();
+    assert.equal(
+      await page.getByLabel("Other professional link").inputValue(),
+      newerProfileLink,
+      "Completing an older save must not replace a newer in-memory profile edit.",
+    );
     await page.locator(".profile-actions").getByRole("button", { name: "Save profile" }).click();
     await page.getByRole("button", { name: "Profile saved" }).waitFor();
 
@@ -187,6 +238,7 @@ async function main() {
       };
     }));
     assert.equal(savedCandidateProfile.personal.fullName, "Test Candidate");
+    assert.equal(savedCandidateProfile.personal.otherLink, "https://portfolio.example.test/edited-during-save");
     assert.equal(savedCandidateProfile.experience[0].title, "Product Support Engineer");
     assert.equal(savedCandidateProfile.education[0].qualification, "MSc Computer Science");
     assert.equal(savedCandidateProfile.skills[0].evidence, "demonstrated");
@@ -198,6 +250,7 @@ async function main() {
     await page.getByRole("button", { name: "My profile" }).click();
     await page.getByRole("heading", { name: "My profile" }).waitFor();
     assert.equal(await page.getByLabel("Full name").inputValue(), "Test Candidate", "The structured profile should survive a page reload.");
+    assert.equal(await page.getByLabel("Other professional link").inputValue(), "https://portfolio.example.test/edited-during-save");
     assert.equal(await page.getByLabel("Motivation text").inputValue(), "I am interested in contributing to game development teams.");
     await page.getByText("candidate-resume.pdf").waitFor();
 
@@ -258,6 +311,80 @@ async function main() {
       savedCandidateProfile.materials.masterResume.dataBase64,
       "Backup import should restore the exact original document bytes.",
     );
+
+    // A transient IndexedDB open failure must not enable overwriting a profile that was not loaded.
+    // The failed open must also release its cached promise so a validated backup can recover storage.
+    const profileRecoveryPage = await context.newPage();
+    profileRecoveryPage.on("pageerror", (error) => pageErrors.push(error.message));
+    await profileRecoveryPage.addInitScript(() => {
+      const originalOpen = IDBFactory.prototype.open;
+      let failFirstOpen = true;
+      Object.defineProperty(IDBFactory.prototype, "open", {
+        configurable: true,
+        writable: true,
+        value: function (...args) {
+          if (failFirstOpen) {
+            failFirstOpen = false;
+            throw new DOMException("Temporary IndexedDB open failure", "UnknownError");
+          }
+          return originalOpen.apply(this, args);
+        },
+      });
+    });
+    await profileRecoveryPage.route("https://api.github.com/**", async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({ workflow_runs: [] }),
+      });
+    });
+    await profileRecoveryPage.goto(appUrl, { waitUntil: "networkidle" });
+    await profileRecoveryPage.waitForFunction(() =>
+      Array.from(document.querySelectorAll(".profile-save-state"))
+        .some((element) => element.textContent?.includes("Temporary IndexedDB open failure")),
+    );
+    await profileRecoveryPage.getByRole("button", { name: "My profile" }).click();
+    await profileRecoveryPage.getByRole("heading", { name: "My profile" }).waitFor();
+    await profileRecoveryPage.getByLabel("Full name").fill("Unsaved edit while profile storage is unavailable");
+    const blockedSaveButton = profileRecoveryPage.locator(".profile-actions").getByRole("button", { name: "Save profile" });
+    assert.equal(await blockedSaveButton.isDisabled(), true, "Saving must stay disabled until profile storage has loaded or been restored.");
+    const profileRecoveryInput = profileRecoveryPage.locator(
+      '.profile-actions input[type="file"][accept=".json,application/json"]',
+    );
+    const profileRecoveryDialog = await performWithDialog(
+      profileRecoveryPage,
+      () => profileRecoveryInput.setInputFiles(backupPath),
+      true,
+    );
+    assert.equal(profileRecoveryDialog.type, "confirm");
+    await profileRecoveryPage.getByLabel("Full name").waitFor();
+    await profileRecoveryPage.waitForFunction(() => {
+      const label = Array.from(document.querySelectorAll("label"))
+        .find((item) => item.textContent?.trim() === "Full name");
+      return label?.querySelector("input")?.value === "Test Candidate";
+    });
+    await profileRecoveryPage.getByText("candidate-resume.pdf").waitFor();
+    assert.deepEqual(
+      await profileRecoveryPage.evaluate(() => new Promise((resolve, reject) => {
+        const openRequest = indexedDB.open("game-industry-outreach-private", 1);
+        openRequest.onerror = () => reject(openRequest.error);
+        openRequest.onsuccess = () => {
+          const transaction = openRequest.result.transaction("candidate-profile", "readonly");
+          const request = transaction.objectStore("candidate-profile").get("primary");
+          request.onerror = () => reject(request.error);
+          request.onsuccess = () => resolve({
+            fullName: request.result?.profile.personal.fullName,
+            otherLink: request.result?.profile.personal.otherLink,
+          });
+        };
+      })),
+      {
+        fullName: "Test Candidate",
+        otherLink: "https://portfolio.example.test/edited-during-save",
+      },
+      "A successful backup import should recover IndexedDB after a transient open failure.",
+    );
+    await profileRecoveryPage.close();
 
     // Matches are generated locally from the restored profile and the public studio directory.
     await page.getByRole("button", { name: "Matches", exact: true }).click();
