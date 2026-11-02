@@ -214,8 +214,9 @@ function assertCandidateProfileIntegrity(value: unknown, context: string): void 
       if (typeof id !== "string" || !id.trim() || id.length > 200) {
         fail(`${path}.id`);
       }
-      if (ids.has(id)) fail(`${path}.id (duplicate)`);
-      ids.add(id);
+      const validId = id as string;
+      if (ids.has(validId)) fail(`${path}.id (duplicate)`);
+      ids.add(validId);
       assertOptionalStrings(item, fields.filter((field) => field !== "id"), path);
       if (
         collection === "skills" &&
