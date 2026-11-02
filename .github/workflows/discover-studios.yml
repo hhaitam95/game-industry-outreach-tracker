@@ -268,6 +268,11 @@ jobs:
                   "no_new_candidate_data": no_new_data,
                   "current_pass_complete": bool(state.get("feed_done", {}).get(source_id, False)),
                   "candidate_status_counts": candidate_counts.get(source_id, {}),
+              "consecutive_failures": int(metrics.get("consecutive_failures", 0)),
+              "last_error": metrics.get("last_error"),
+              "last_failure_at": metrics.get("last_failure_at"),
+              "last_success_at": metrics.get("last_success_at"),
+              "next_retry_at": metrics.get("next_retry_at"),
               }
 
           enabled_sources = [source for source in sources.values() if source["enabled"]]
@@ -324,7 +329,7 @@ jobs:
             echo "- Source-page cap: ${{ steps.discovery.outputs.source_page_limit || 'not set' }}"
             echo "- Public changes: ${{ steps.commit.outputs.data_changed || 'not committed' }}"
             if [ -f "$RUNNER_TEMP/game-industry-outreach-tracker-discovery.log" ]; then
-              for key in igdb_enabled source_pages source_candidates candidate_checks verified_added routes_checked time_budget_exhausted; do
+              for key in igdb_enabled source_pages source_candidates candidate_checks verified_added routes_checked time_budget_exhausted source_failures; do
                 value="$(awk -F': ' -v key="$key" '$1 == key { print substr($0, index($0, ": ") + 2); exit }' "$RUNNER_TEMP/game-industry-outreach-tracker-discovery.log")"
                 if [ -n "$value" ]; then
                   label="$(printf '%s' "$key" | tr '_' ' ')"

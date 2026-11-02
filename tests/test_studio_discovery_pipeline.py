@@ -470,7 +470,7 @@ class CandidateVerificationTests(unittest.TestCase):
                 200,
                 """
                 <title>Example Studio</title>
-                <p>We develop original video games.</p>
+                <p>We develop video games.</p>
                 <a href="/careers">Careers</a>
                 <a href="https://boards.greenhouse.io/example-studio">Apply</a>
                 """,
@@ -510,7 +510,7 @@ class CandidateVerificationTests(unittest.TestCase):
     def test_production_fetcher_uses_the_verifier_two_argument_interface(self):
         bodies = {
             "https://example-studio.example/": (
-                "<p>We develop original video games.</p>"
+                "<p>We develop video games.</p>"
                 '<a href="/careers">Careers</a>'
             ),
             "https://example-studio.example/careers": (
@@ -560,7 +560,7 @@ class CandidateVerificationTests(unittest.TestCase):
         pages = {
             "https://example-studio.example/": discovery.FetchResult(
                 True, "https://example-studio.example/", 200,
-                '<p>We develop original video games.</p><a href="/careers">Careers</a>',
+                '<p>We develop video games.</p><a href="/careers">Careers</a>',
             ),
             "https://example-studio.example/careers": discovery.FetchResult(
                 True, "https://example-studio.example/careers", 200,
@@ -579,7 +579,7 @@ class CandidateVerificationTests(unittest.TestCase):
         pages = {
             "https://example-studio.example/": discovery.FetchResult(
                 True, "https://example-studio.example/", 200,
-                "<p>We develop original video games.</p><h1>Careers</h1>"
+                "<p>We develop video games.</p><h1>Careers</h1>"
                 "<p>View our open positions and apply online.</p>",
             ),
         }
@@ -593,7 +593,7 @@ class CandidateVerificationTests(unittest.TestCase):
         pages = {
             "https://example-studio.example/": discovery.FetchResult(
                 True, "https://example-studio.example/", 200,
-                '<p>We develop original video games.</p><a href="/careers">Careers</a>',
+                '<p>We develop video games.</p><a href="/careers">Careers</a>',
             ),
             "https://example-studio.example/careers": discovery.FetchResult(
                 True, "https://example-studio.example/careers", 200,
@@ -666,6 +666,47 @@ class CandidateVerificationTests(unittest.TestCase):
 class DatasetUpdateTests(unittest.TestCase):
     def setUp(self):
         discovery.LAST_REQUEST_BY_HOST.clear()
+
+    def test_source_failure_isolated_and_other_feeds_continue(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "src/data").mkdir(parents=True)
+            (root / "src/data/speculative-route-directory.json").write_text("[]", encoding="utf-8")
+            (root / "src/data/studio-profiles.json").write_text("{}", encoding="utf-8")
+            state_path = root / "state/discovery.json"
+            called = []
+
+            def source_fetcher(kind, cursor, limit):
+                called.append(kind)
+                if kind == "class":
+                    raise RuntimeError("simulated Wikidata HTTP 502")
+                return []
+
+            with patch.object(discovery.time, "sleep"):
+                result = discovery.run_pipeline(
+                    mode="hourly",
+                    batch_size=1,
+                    max_source_pages=2,
+                    max_candidate_checks=0,
+                    route_check_count=0,
+                    root=root,
+                    state_path=state_path,
+                    source_fetcher=source_fetcher,
+                )
+
+            self.assertEqual(called, ["class", "developer_credit"])
+            self.assertIn("wikidata_video_game_developers", result["source_failures"])
+            self.assertEqual(
+                result["source_status"]["wikidata_video_game_developers"]["consecutive_failures"],
+                1,
+            )
+            saved = discovery.read_json(state_path, {})
+            self.assertFalse(saved["feed_done"]["wikidata_video_game_developers"])
+            self.assertEqual(saved["source_stats"]["wikidata_video_game_developers"]["empty_cycles"], 0)
+            self.assertEqual(
+                saved["source_stats"]["wikidata_game_developer_credits"]["last_pass_status"],
+                "complete",
+            )
 
     def test_run_pipeline_persists_qid_cursor_not_entity_url(self):
         with tempfile.TemporaryDirectory() as temporary:
