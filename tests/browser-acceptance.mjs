@@ -687,7 +687,7 @@ async function main() {
     await trackedRow.getByRole("button", { name: "View route context for 4A Games" }).click();
     const routeContext = page.locator("#tracker-route-4a-games");
     await routeContext.waitFor();
-    await routeContext.getByText("Unsolicited application").waitFor();
+    await routeContext.getByText("Unsolicited application", { exact: true }).waitFor();
     await routeContext.getByText(/Malta \/ Kyiv studio network · remote eligibility not stated/).waitFor();
     const evidenceLink = routeContext.getByRole("link", { name: "Open source evidence" });
     assert.equal(await evidenceLink.getAttribute("href"), "https://www.4a-games.com.mt/careers");
