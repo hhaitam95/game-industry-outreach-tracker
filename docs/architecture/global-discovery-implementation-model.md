@@ -165,6 +165,13 @@ Resolve identity using official domains and corroborating company identity, not 
 
 A source row for an office must not automatically become a new studio. Conversely, do not merge separately branded development studios merely because they share a parent company. Keep source provenance attached to candidates so that later handovers can explain where each entity came from.
 
+### 2026-11-02 — ATS and Japanese career-registration coverage
+
+- Expanded the employer-linked ATS allowlist to include Traffit, eRecruiter, HRMOS and Alumy after reviewing their use in employer-controlled studio/company recruitment journeys.
+- Added Japanese career-registration language for routes that explicitly invite applicants who do not wish to select a job type or cannot find a matching advertised role. Career context and an employer-linked submission destination remain mandatory; this does not treat generic recruitment pages as open applications.
+- Added unit coverage for ATS host recognition, Japanese route-language detection, employer-linked destination selection and the complete two-gate verification flow.
+- These additions improve route discovery only; they do not change the public inclusion standard or candidate ranking.
+
 ### Discovery checkpoint visibility and privacy boundary
 
 The current checkpoint is stored on the `discovery-state` branch of this repository. **That branch is publicly visible because the website repository is public; it is not private storage.** Treat every commit on that branch as public.
