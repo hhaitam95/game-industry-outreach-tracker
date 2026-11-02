@@ -348,6 +348,41 @@ class DiscoveryParsingTests(unittest.TestCase):
         self.assertEqual(rows[0]["company_type"], "Developer")
         self.assertIn("/companies/alpha-games", rows[0]["entity_url"])
 
+
+    def test_igdb_api_requests_respect_documented_rate_limit_spacing(self):
+        class FakeResponse:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc_value, traceback):
+                return False
+
+            def read(self, _limit):
+                return b"[]"
+
+        discovery.IGDB_LAST_REQUEST_AT = 10.0
+        with (
+            patch.object(discovery.urllib.request, "urlopen", return_value=FakeResponse()),
+            patch.object(discovery.time, "monotonic", side_effect=[10.1, 10.1]),
+            patch.object(discovery.time, "sleep") as sleep,
+        ):
+            self.assertEqual(
+                discovery.igdb_api_post(
+                    discovery.IGDB_COMPANIES_ENDPOINT,
+                    "fields id;",
+                    "client-id",
+                    "app-token",
+                ),
+                [],
+            )
+        sleep.assert_called_once()
+        self.assertAlmostEqual(
+            sleep.call_args.args[0],
+            discovery.IGDB_MIN_REQUEST_INTERVAL_SECONDS - 0.1,
+            places=6,
+        )
+        discovery.IGDB_LAST_REQUEST_AT = 0.0
+
     def test_igdb_feed_is_skipped_without_both_repository_secrets(self):
         feed = next(item for item in discovery.FEEDS if item["kind"] == "igdb_companies")
         with patch.dict(discovery.os.environ, {"IGDB_CLIENT_ID": "configured"}, clear=True):
