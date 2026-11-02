@@ -44,6 +44,19 @@ function optionalString(value, label, maxLength = 2000) {
   return value;
 }
 
+/**
+ * @param {unknown} value
+ * @param {string} label
+ * @returns {string[] | undefined}
+ */
+function optionalStringArray(value, label) {
+  if (value === undefined) return undefined;
+  if (!Array.isArray(value) || value.length > 100) {
+    throw new Error("The application backup contains an invalid " + label + ".");
+  }
+  return value.map((entry, index) => requiredString(entry, label + " item " + (index + 1), 1000));
+}
+
 /** @param {unknown} value @returns {value is import("../components/studio.types").TrackerStatus} */
 function isTrackerStatus(value) {
   return typeof value === "string" && VALID_STATUSES.has(value);
@@ -103,6 +116,17 @@ function validateApplication(value, index) {
     ...(value.applicationLocation === undefined
       ? {}
       : { applicationLocation: optionalString(value.applicationLocation, prefix + " application location", 1000) }),
+    ...(value.routeType === undefined ? {} : { routeType: optionalString(value.routeType, prefix + " route type", 80) }),
+    ...(value.routeStatus === undefined ? {} : { routeStatus: optionalString(value.routeStatus, prefix + " route status", 80) }),
+    ...(value.routeCheckedAt === undefined ? {} : { routeCheckedAt: optionalString(value.routeCheckedAt, prefix + " route check date", 80) }),
+    ...(value.routeEvidenceUrl === undefined
+      ? {}
+      : { routeEvidenceUrl: validHttpUrl(value.routeEvidenceUrl, prefix + " source evidence URL") }),
+    ...(value.routeNotes === undefined ? {} : { routeNotes: optionalString(value.routeNotes, prefix + " route notes", 5000) }),
+    ...(value.workModel === undefined ? {} : { workModel: optionalString(value.workModel, prefix + " work model", 80) }),
+    ...(value.submissionMethods === undefined ? {} : { submissionMethods: optionalStringArray(value.submissionMethods, prefix + " submission methods") }),
+    ...(value.eligibleLocations === undefined ? {} : { eligibleLocations: optionalStringArray(value.eligibleLocations, prefix + " eligible locations") }),
+    ...(value.disciplineScope === undefined ? {} : { disciplineScope: optionalStringArray(value.disciplineScope, prefix + " discipline scope") }),
     status,
     createdAt: requiredString(value.createdAt, prefix + " created date", 80),
     updatedAt: requiredString(value.updatedAt, prefix + " updated date", 80),
