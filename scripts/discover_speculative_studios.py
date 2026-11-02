@@ -1440,7 +1440,7 @@ def empty_state() -> dict[str, Any]:
         "route_check_index": 0,
         "source_stats": {
             feed["id"]: {
-                "cycle": 1, "cycle_additions": 0, "empty_cycles": 0,
+                "cycle": 1, "cycle_additions": 0, "cycle_candidate_entities": 0, "empty_cycles": 0,
                 "saturated": False, "complete": False,
                 "last_pass_completed_at": None, "last_pass_status": "not_started",
                 "last_pass_candidates": 0, "last_pass_verified": 0,
@@ -1473,7 +1473,7 @@ def load_state(path: Path = STATE_PATH) -> dict[str, Any]:
         state["feed_done"].setdefault(feed_id, False)
         metrics = state["source_stats"].setdefault(feed_id, {})
         defaults = {
-            "cycle": starting_cycle, "cycle_additions": 0, "empty_cycles": 0,
+            "cycle": starting_cycle, "cycle_additions": 0, "cycle_candidate_entities": None, "empty_cycles": 0,
             "saturated": False, "complete": False,
             "last_pass_completed_at": None, "last_pass_status": "migration_baseline",
             "last_pass_candidates": 0, "last_pass_verified": 0,
@@ -1501,6 +1501,16 @@ def load_state(path: Path = STATE_PATH) -> dict[str, Any]:
             candidate.setdefault("source_cycle", state["source_stats"][source_id]["cycle"])
         else:
             candidate["source_id"] = "legacy_unattributed"
+    # Reconstruct old in-flight pass counts before adopting candidate-based saturation.
+    for feed in FEEDS:
+        metrics = state["source_stats"][feed["id"]]
+        if metrics.get("cycle_candidate_entities") is None:
+            metrics["cycle_candidate_entities"] = sum(
+                1 for candidate in state["candidates"].values()
+                if candidate.get("source_id") == feed["id"]
+                and int(candidate.get("source_cycle", metrics["cycle"])) == int(metrics["cycle"])
+            )
+        metrics["cycle_candidate_entities"] = max(0, int(metrics["cycle_candidate_entities"]))
     state["schema_version"] = 2
     return state
 
@@ -1572,6 +1582,11 @@ def add_candidates(
         }
         known_domains.add(domain)
         by_domain[domain] = state["candidates"][qid]
+        if candidate_source_id in state.get("source_stats", {}):
+            source_metrics = state["source_stats"][candidate_source_id]
+            source_metrics["cycle_candidate_entities"] = int(
+                source_metrics.get("cycle_candidate_entities", 0)
+            ) + 1
         state["stats"]["candidates_seen"] += 1
         added += 1
     return added
@@ -1937,8 +1952,13 @@ def finish_source_cycles(state: dict[str, Any]) -> list[str]:
             candidate for candidate in source_candidates
             if candidate.get("status") in {"retry", "needs_review"}
         ]
-        additions = int(metrics.get("cycle_additions", 0))
-        if additions:
+        # Source exhaustion is about whether the feed still discovers new unique
+        # candidate entities, not whether those entities have speculative routes.
+        # A directory that finds 50 studios with no open application still yielded
+        # 50 useful discovery candidates and must not be throttled as empty.
+        candidate_additions = int(metrics.get("cycle_candidate_entities", len(candidates)))
+        verified_additions = int(metrics.get("cycle_additions", 0))
+        if candidate_additions:
             metrics["empty_cycles"] = 0
         elif not incomplete:
             metrics["empty_cycles"] = int(metrics.get("empty_cycles", 0)) + 1
@@ -1952,11 +1972,12 @@ def finish_source_cycles(state: dict[str, Any]) -> list[str]:
         metrics["last_pass_status"] = "incomplete" if incomplete else (
             "saturated" if metrics["saturated"] else "complete"
         )
-        metrics["last_pass_candidates"] = len(candidates)
-        metrics["last_pass_verified"] = additions
+        metrics["last_pass_candidates"] = candidate_additions
+        metrics["last_pass_verified"] = verified_additions
         metrics["last_pass_incomplete_candidates"] = len(incomplete)
         metrics["cycle"] = source_cycle + 1
         metrics["cycle_additions"] = 0
+        metrics["cycle_candidate_entities"] = 0
         state["feed_cursors"][feed_id] = ""
         state["feed_done"][feed_id] = False
         completed.append(feed_id)
@@ -2150,6 +2171,7 @@ def run_pipeline(
                 "last_success_at": state["source_stats"][feed["id"]].get("last_success_at"),
                 "next_retry_at": state["source_stats"][feed["id"]].get("next_retry_at"),
                 "empty_complete_passes": state["source_stats"][feed["id"]].get("empty_cycles", 0),
+                "candidate_entities_this_pass": state["source_stats"][feed["id"]].get("cycle_candidate_entities", 0),
                 "last_pass_candidates": state["source_stats"][feed["id"]].get("last_pass_candidates", 0),
                 "last_pass_incomplete_candidates": state["source_stats"][feed["id"]].get("last_pass_incomplete_candidates", 0),
             }
