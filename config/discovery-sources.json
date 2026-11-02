@@ -4,6 +4,30 @@
   "description": "Integrated candidate feeds only. Candidate indexes are leads; neither a directory record nor an entity credit proves an employer's current game-development status or acceptance of speculative applications.",
   "sources": [
     {
+      "id": "igdb_companies",
+      "label": "IGDB: companies with developed-game credits",
+      "kind": "igdb_companies",
+      "adapter": "igdb_companies_api",
+      "refresh_policy": "recurring",
+      "coverage": "IGDB company records with one or more developed-game credits and an official company website. Publisher/developer hybrids may appear; company records are candidate evidence, not proof of an active studio or an application route.",
+      "pagination": "Numeric IGDB company ID cursor; raw company rows determine page completion, even when a row cannot be normalized to a safe official website.",
+      "access": {
+        "endpoint": "https://api.igdb.com/v4/companies",
+        "authentication": "Twitch client-credentials app access token, minted at run time.",
+        "credentials": [
+          "IGDB_CLIENT_ID",
+          "IGDB_CLIENT_SECRET"
+        ],
+        "policy_url": "https://api-docs.igdb.com/",
+        "website_type_lookup": "Resolve the official website type dynamically from /v4/website_types; do not hard-code the deprecated company_website.category enum.",
+        "request_policy": "Use server-side GitHub Actions secrets only. Never expose credentials in logs, generated files or the public website. Candidate URLs are independently verified before publishing."
+      },
+      "saturation": {
+        "complete_empty_passes_before_throttling": 5,
+        "maximum_pages_per_hourly_run_when_saturated": 4
+      }
+    },
+    {
       "id": "wikidata_video_game_developers",
       "label": "Wikidata: video game developer entities",
       "kind": "class",
