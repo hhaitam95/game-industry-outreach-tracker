@@ -729,13 +729,18 @@ def choose_application_url(page: Page, site_url: str) -> str:
         host = urllib.parse.urlsplit(absolute).hostname or ""
         if not same_site(site_url, absolute) and not is_ats_host(host):
             continue
-        score = 0
-        combined = (absolute + " " + label).lower()
-        if re.search(r"\b(apply|application|submit|speculative|unsolicited|careers?)\b", combined):
-            score += 3
-        if is_ats_host(host):
-            score += 2
-        if score:
+        combined = (absolute + " " + label).casefold()
+        # Never route a speculative candidate to an unrelated live vacancy merely
+        # because the careers page also links to a generic ATS "Apply" button.
+        route_specific = bool(re.search(
+            r"(?:speculative|unsolicited|spontaneous|open[-_ ]application|general[-_ ]application|"
+            r"expression[-_ ]of[-_ ]interest|initiative[-_ ]application|initiativbewerbung|"
+            r"candidature[-_ ]spontan[ée]e|open[-_ ]sollicitatie|avoin[-_ ]hakemus)",
+            combined,
+            re.I,
+        ))
+        if route_specific:
+            score = 10 + (2 if is_ats_host(host) else 0)
             choices.append((score, absolute))
     if choices:
         choices.sort(key=lambda item: (-item[0], item[1]))
@@ -817,9 +822,12 @@ def verify_candidate_pages(
     application_host = urllib.parse.urlsplit(application_url).hostname or ""
     external_ats = not same_site(website, application_url) and is_ats_host(application_host)
     methods: list[str] = []
+    match_context = evidence_page.text[
+        max(0, match.start() - 300):min(len(evidence_page.text), match.end() + 300)
+    ]
     page_is_career_specific = bool(
         CAREER_CONTEXT_URL.search(urllib.parse.urlsplit(evidence_page.url).path)
-        or CAREER_CONTEXT_TEXT.search(evidence_page.text)
+        or CAREER_CONTEXT_TEXT.search(match_context)
     )
     if evidence_page.has_form and page_is_career_specific:
         methods.append("website_form")
