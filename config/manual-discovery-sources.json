@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "last_reviewed": "2026-10-31",
+  "last_reviewed": "2026-11-02",
   "description": "Manual research leads and source-policy register. This file is deliberately not loaded by the automated discovery runtime; entries here are not approved scraping targets, candidate feeds or evidence that a listed organisation accepts speculative applications.",
   "global_rules": [
     "Use these indexes to discover candidate organisation names only. Qualify each organisation and verify its own current official website and explicit speculative/open application route before publication.",
@@ -60,9 +60,9 @@
       "region": "South Korea",
       "sourceKind": "trade_association_membership_directory",
       "signal": "Member/partner company names provide Korean ecosystem leads.",
-      "automationStatus": "manual_only_temporarily_unavailable",
-      "accessPolicy": "No automation. The public page returned HTTP 502 during review.",
-      "reviewNotes": "Official partner-list URL still returned HTTP 502 during direct review on 2026-10-31. Search results expose association member/company names, but do not automate or assume every listed partner is a developer. Revisit manually when the page responds."
+      "automationStatus": "manual_only",
+      "accessPolicy": "Manual lead research only; no bulk-reuse licence or API permission established.",
+      "reviewNotes": "The official member/partner roster can surface Korean game companies, but members are not all developers. Verify each company and its current activity. A previous HTTP 502 should not be treated as a permanent source closure."
     },
     {
       "id": "abragames_members",
@@ -137,9 +137,9 @@
       "region": "Global",
       "sourceKind": "structured_game_company_and_credit_api",
       "signal": "Company records expose game and developer/publisher relationships, status, websites and related data.",
-      "automationStatus": "blocked_pending_written_permission",
-      "accessPolicy": "Do not integrate or publish bulk API-derived data until Twitch confirms in writing that public-directory redistribution, attribution and caching are permitted.",
-      "reviewNotes": "Requires Twitch developer application, 2FA, client credentials and OAuth. API access alone is not redistribution permission; API rows remain leads only."
+      "automationStatus": "integrated_candidate_feed",
+      "accessPolicy": "The repository uses the documented IGDB Companies API through a Twitch developer application with IGDB_CLIENT_ID and IGDB_CLIENT_SECRET stored only as GitHub Actions secrets. Keep it non-commercial, server-side, minimally scoped and attributed; do not expose credentials/tokens or publish raw descriptions/credit arrays. Re-check current Twitch terms before any change in use.",
+      "reviewNotes": "Integrated as a recurring candidate-only feed. Developed-game credits and officially typed company website identify leads; current direct game-development activity and speculative application route must still be proven on the employer site. Existing credentials are already configured; no new user action is required."
     },
     {
       "id": "steam_developer_publisher_homepages",
@@ -250,6 +250,72 @@
       "automationStatus": "manual_only",
       "accessPolicy": "Manual lead review only; no bulk collection or redistribution permission established.",
       "reviewNotes": "Membership is not a developer-only classification and includes publishers, distributors, platforms and other organisations. Verify the operating company and current development activity."
+    },
+    {
+      "id": "dev_spain_members",
+      "name": "DEV — Spanish Videogame and Entertainment Software Development Association",
+      "url": "https://dev.org.es/asociados/",
+      "region": "Spain",
+      "sourceKind": "national_developer_association_member_directory",
+      "signal": "Public member roster reported 83 organisations with member names, locations and company websites.",
+      "automationStatus": "manual_only",
+      "accessPolicy": "Public webpage; automated harvesting and republication rights were not established. Manual lead research only pending terms/licence review.",
+      "reviewNotes": "Roster includes developers alongside universities, services and ecosystem organisations. Confirm direct game development on the employer's own website."
+    },
+    {
+      "id": "gdap_philippines_members",
+      "name": "Game Developers Association of the Philippines — Members",
+      "url": "https://gdap.org.ph/gdap-members/",
+      "region": "Philippines",
+      "sourceKind": "national_developer_association_member_directory",
+      "signal": "Public roster includes game-development and co-development members, with other core/supporting/education organisations also present.",
+      "automationStatus": "manual_only",
+      "accessPolicy": "Public page; no bulk-harvesting or redistribution permission established. Do not join or pay for access solely to collect data.",
+      "reviewNotes": "Prefer core game-development and co-development organisations; other member types are discovery leads only."
+    },
+    {
+      "id": "african_games_report_studios",
+      "name": "African Games Report — African Game Studios",
+      "url": "https://africagamesreport.com/african-game-studios/",
+      "region": "Africa",
+      "sourceKind": "curated_regional_studio_directory",
+      "signal": "Curated directory lists 64 studios across 15 African countries with official website links.",
+      "automationStatus": "manual_only",
+      "accessPolicy": "Public article/directory; automated collection and republication rights not confirmed.",
+      "reviewNotes": "Valuable regional coverage gap-filler. Verify activity, direct development and current employer application route on official company pages."
+    },
+    {
+      "id": "devuego_latam_studios",
+      "name": "DeVuego — Latin American Video Game Studios",
+      "url": "https://devuego.lat/estudios/",
+      "region": "Latin America",
+      "sourceKind": "regional_studio_database",
+      "signal": "Studio directory provides activity and company/non-company distinctions that can improve manual candidate selection.",
+      "automationStatus": "manual_only_license_unconfirmed",
+      "accessPolicy": "Do not bulk ingest or republish until a dataset licence or written permission is confirmed.",
+      "reviewNotes": "Promising regional reference, but check whether its entries are current, how records are sourced and whether reuse is permitted."
+    },
+    {
+      "id": "cova_colombia_network",
+      "name": "COVA — Colombian Video Game Developers Association",
+      "url": "https://cova.games/",
+      "region": "Colombia",
+      "sourceKind": "national_developer_association_network",
+      "signal": "Association reports representing more than 30 Colombian game studios.",
+      "automationStatus": "manual_only_no_public_roster",
+      "accessPolicy": "No complete public member export identified; use public association information or direct contact only.",
+      "reviewNotes": "Useful network and research contact, not a harvestable company directory based on the pages reviewed."
+    },
+    {
+      "id": "africa_cii_studio_directory",
+      "name": "Africa CII — African Games Studio Directory",
+      "url": "https://www.africangamingandanimationintelligence.com/studios",
+      "region": "Africa",
+      "sourceKind": "regional_studio_directory_and_community_index",
+      "signal": "229 organisations across 23 countries, with separate verified and community-submitted record counts.",
+      "automationStatus": "manual_only_duplicate_heavy",
+      "accessPolicy": "Manual cross-check only; no permission for bulk reproduction was established.",
+      "reviewNotes": "Directory states only 20 organisations are independently verified and 209 are community records; much of the community list is derived from GameDevMap. Do not count it as an independent 229-studio discovery feed or re-import duplicate rows."
     }
   ]
 }

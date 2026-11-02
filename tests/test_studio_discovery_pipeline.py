@@ -284,7 +284,7 @@ class DiscoveryParsingTests(unittest.TestCase):
         self.assertEqual(publisher_result["status"], "needs_review")
         self.assertEqual(
             publisher_result["reason"],
-            "industry_classification_without_direct_game_development_evidence",
+            "candidate_without_direct_game_development_evidence_on_official_site",
         )
         self.assertEqual(studio_result["status"], "verified")
 
@@ -395,6 +395,58 @@ class DiscoveryParsingTests(unittest.TestCase):
             self.assertTrue(discovery.source_feed_enabled(feed))
 
 
+    def test_scottish_directory_adapter_filters_active_developers_and_tracks_raw_cursor(self):
+        from unittest.mock import patch
+
+        tree = {
+            "tree": [
+                {"path": "data/companies/alpha.json", "type": "blob"},
+                {"path": "data/companies/publisher.json", "type": "blob"},
+                {"path": "data/companies/closed.json", "type": "blob"},
+                {"path": "README.md", "type": "blob"},
+            ]
+        }
+        records = {
+            "alpha.json": {
+                "id": "alpha-games", "slug": "alpha-games", "name": "Alpha Games",
+                "categories": ["developer"], "status": "active",
+                "website": "https://alpha.example/", "location": "Dundee",
+            },
+            "publisher.json": {
+                "id": "publisher-only", "slug": "publisher-only", "name": "Publisher Only",
+                "categories": ["publisher"], "status": "active",
+                "website": "https://publisher.example/",
+            },
+            "closed.json": {
+                "id": "closed-studio", "slug": "closed-studio", "name": "Closed Studio",
+                "categories": ["developer"], "status": "closed",
+                "website": "https://closed.example/",
+            },
+        }
+
+        def fake_fetch(url, *args, **kwargs):
+            if url == discovery.SCOTTISH_COMPANY_TREE_URL:
+                body = json.dumps(tree)
+            else:
+                slug = url.rsplit("/", 1)[-1]
+                body = json.dumps(records[slug])
+            return discovery.FetchResult(True, url, 200, body)
+
+        discovery.SCOTTISH_COMPANY_PATHS = None
+        try:
+            with patch.object(discovery, "fetch_url", side_effect=fake_fetch):
+                rows, raw_count, next_cursor = discovery.fetch_scottish_companies_page("0", 100)
+        finally:
+            discovery.SCOTTISH_COMPANY_PATHS = None
+
+        self.assertEqual(raw_count, 3)
+        self.assertEqual(next_cursor, "3")
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["qid"], "SCOT:alpha-games")
+        self.assertEqual(rows[0]["source_id"], "scottish_games_industry")
+        self.assertEqual(rows[0]["source_license"], "CC BY-NC-SA 4.0")
+        self.assertEqual(rows[0]["website"], "https://alpha.example/")
+
 class CandidateVerificationTests(unittest.TestCase):
     def setUp(self):
         discovery.LAST_REQUEST_BY_HOST.clear()
@@ -418,8 +470,9 @@ class CandidateVerificationTests(unittest.TestCase):
                 200,
                 """
                 <title>Example Studio</title>
+                <p>We develop video games.</p>
                 <a href="/careers">Careers</a>
-                <a href="https://boards.greenhouse.io/example-studio">Apply</a>
+                <a href="https://boards.greenhouse.io/example-studio">Open Application</a>
                 """,
             ),
             "https://example-studio.example/careers": discovery.FetchResult(
@@ -431,7 +484,7 @@ class CandidateVerificationTests(unittest.TestCase):
                 <h1>Join us</h1>
                 <p>We welcome speculative applications from game developers.</p>
                 <form action="/submit"></form>
-                <a href="https://boards.greenhouse.io/example-studio">Apply here</a>
+                <a href="https://boards.greenhouse.io/example-studio">Open Application</a>
                 """,
             ),
             "https://boards.greenhouse.io/example-studio": discovery.FetchResult(
@@ -456,7 +509,10 @@ class CandidateVerificationTests(unittest.TestCase):
 
     def test_production_fetcher_uses_the_verifier_two_argument_interface(self):
         bodies = {
-            "https://example-studio.example/": '<a href="/careers">Careers</a>',
+            "https://example-studio.example/": (
+                "<p>We develop video games.</p>"
+                '<a href="/careers">Careers</a>'
+            ),
             "https://example-studio.example/careers": (
                 "<p>We welcome speculative applications from game developers.</p>"
                 "<form action='/submit'></form>"
@@ -504,7 +560,7 @@ class CandidateVerificationTests(unittest.TestCase):
         pages = {
             "https://example-studio.example/": discovery.FetchResult(
                 True, "https://example-studio.example/", 200,
-                '<a href="/careers">Careers</a>',
+                '<p>We develop video games.</p><a href="/careers">Careers</a>',
             ),
             "https://example-studio.example/careers": discovery.FetchResult(
                 True, "https://example-studio.example/careers", 200,
@@ -523,7 +579,8 @@ class CandidateVerificationTests(unittest.TestCase):
         pages = {
             "https://example-studio.example/": discovery.FetchResult(
                 True, "https://example-studio.example/", 200,
-                "<h1>Careers</h1><p>View our open positions and apply online.</p>",
+                "<p>We develop video games.</p><h1>Careers</h1>"
+                "<p>View our open positions and apply online.</p>",
             ),
         }
         result = discovery.verify_candidate_pages(
@@ -536,7 +593,7 @@ class CandidateVerificationTests(unittest.TestCase):
         pages = {
             "https://example-studio.example/": discovery.FetchResult(
                 True, "https://example-studio.example/", 200,
-                '<a href="/careers">Careers</a>',
+                '<p>We develop video games.</p><a href="/careers">Careers</a>',
             ),
             "https://example-studio.example/careers": discovery.FetchResult(
                 True, "https://example-studio.example/careers", 200,
@@ -609,6 +666,47 @@ class CandidateVerificationTests(unittest.TestCase):
 class DatasetUpdateTests(unittest.TestCase):
     def setUp(self):
         discovery.LAST_REQUEST_BY_HOST.clear()
+
+    def test_source_failure_isolated_and_other_feeds_continue(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "src/data").mkdir(parents=True)
+            (root / "src/data/speculative-route-directory.json").write_text("[]", encoding="utf-8")
+            (root / "src/data/studio-profiles.json").write_text("{}", encoding="utf-8")
+            state_path = root / "state/discovery.json"
+            called = []
+
+            def source_fetcher(kind, cursor, limit):
+                called.append(kind)
+                if kind == "class":
+                    raise RuntimeError("simulated Wikidata HTTP 502")
+                return []
+
+            with patch.object(discovery.time, "sleep"):
+                result = discovery.run_pipeline(
+                    mode="hourly",
+                    batch_size=1,
+                    max_source_pages=2,
+                    max_candidate_checks=0,
+                    route_check_count=0,
+                    root=root,
+                    state_path=state_path,
+                    source_fetcher=source_fetcher,
+                )
+
+            self.assertEqual(called, ["class", "developer_credit"])
+            self.assertIn("wikidata_video_game_developers", result["source_failures"])
+            self.assertEqual(
+                result["source_status"]["wikidata_video_game_developers"]["consecutive_failures"],
+                1,
+            )
+            saved = discovery.read_json(state_path, {})
+            self.assertFalse(saved["feed_done"]["wikidata_video_game_developers"])
+            self.assertEqual(saved["source_stats"]["wikidata_video_game_developers"]["empty_cycles"], 0)
+            self.assertEqual(
+                saved["source_stats"]["wikidata_game_developer_credits"]["last_pass_status"],
+                "complete",
+            )
 
     def test_run_pipeline_persists_qid_cursor_not_entity_url(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -718,7 +816,7 @@ class DatasetUpdateTests(unittest.TestCase):
             pages = {
                 "https://example-studio.example/": discovery.FetchResult(
                     True, "https://example-studio.example/", 200,
-                    '<a href="/careers">Careers</a>',
+                    '<p>We develop video games.</p><a href="/careers">Careers</a>',
                 ),
                 "https://example-studio.example/careers": discovery.FetchResult(
                     True, "https://example-studio.example/careers", 200,
@@ -975,6 +1073,30 @@ class DatasetUpdateTests(unittest.TestCase):
         self.assertEqual(state["empty_cycles"], 5)
 
 
+    def test_new_candidates_without_speculative_routes_do_not_saturate_a_source(self):
+        state = discovery.empty_state()
+        source = discovery.FEEDS[0]
+        source_id = source["id"]
+        for feed in discovery.FEEDS:
+            state["feed_done"][feed["id"]] = True
+        for feed in discovery.FEEDS:
+            state["source_stats"][feed["id"]]["empty_cycles"] = 4
+            state["source_stats"][feed["id"]]["saturated"] = False
+        state["source_stats"][source_id]["cycle_candidate_entities"] = 1
+        state["source_stats"][source_id]["cycle_additions"] = 0
+        state["candidates"]["Q777"] = {
+            "qid": "Q777", "name": "No Route Studio",
+            "website": "https://no-route.example/", "source_id": source_id,
+            "source_cycle": 1, "status": "no_route",
+        }
+
+        discovery.finish_source_cycles(state)
+        metrics = state["source_stats"][source_id]
+        self.assertEqual(metrics["empty_cycles"], 0)
+        self.assertFalse(metrics["saturated"])
+        self.assertEqual(metrics["last_pass_candidates"], 1)
+        self.assertEqual(metrics["last_pass_verified"], 0)
+
     def test_verified_growth_resets_only_its_own_source_saturation(self):
         state = discovery.empty_state()
         recurring = [feed["id"] for feed in discovery.FEEDS if feed["refresh_policy"] == "recurring"]
@@ -985,6 +1107,7 @@ class DatasetUpdateTests(unittest.TestCase):
             state["source_stats"][feed_id]["saturated"] = True
         growing_source = recurring[0]
         state["source_stats"][growing_source]["cycle_additions"] = 1
+        state["source_stats"][growing_source]["cycle_candidate_entities"] = 1
 
         self.assertTrue(discovery.finish_cycle_if_complete(state))
         self.assertFalse(state["source_stats"][growing_source]["saturated"])
@@ -1036,10 +1159,41 @@ class DatasetUpdateTests(unittest.TestCase):
         )
         self.assertIn("wikidata_video_game_industry", {feed["id"] for feed in discovery.FEEDS})
         self.assertIn("igdb_companies", {feed["id"] for feed in discovery.FEEDS})
+        self.assertIn("scottish_games_industry", {feed["id"] for feed in discovery.FEEDS})
         self.assertEqual(
             next(feed for feed in discovery.FEEDS if feed["id"] == "gamedevmap")["refresh_policy"],
             "recurring",
         )
+
+    def test_add_candidates_keeps_all_source_provenance_for_duplicate_domains(self):
+        state = discovery.empty_state()
+        first = {
+            "qid": "Q100", "name": "Alpha Studio", "website": "https://alpha.example/",
+            "source_id": "wikidata_video_game_developers",
+        }
+        duplicate = {
+            "qid": "SCOT:alpha", "name": "Alpha Studio Ltd", "website": "https://alpha.example/",
+            "source_id": "scottish_games_industry",
+        }
+        self.assertEqual(discovery.add_candidates(state, [first]), 1)
+        self.assertEqual(discovery.add_candidates(state, [duplicate]), 0)
+        candidate = state["candidates"]["Q100"]
+        self.assertEqual(
+            candidate["sources_seen"],
+            ["wikidata_video_game_developers", "scottish_games_industry"],
+        )
+
+    def test_source_failure_backoff_does_not_count_as_empty_pass(self):
+        state = discovery.empty_state()
+        source_id = "wikidata_video_game_developers"
+        failure = discovery.record_source_failure(state, source_id, RuntimeError("HTTP 502"))
+        self.assertEqual(failure["consecutive_failures"], 1)
+        self.assertFalse(discovery.source_feed_retry_due(
+            next(feed for feed in discovery.FEEDS if feed["id"] == source_id), state
+        ))
+        metrics = state["source_stats"][source_id]
+        self.assertEqual(metrics["empty_cycles"], 0)
+        self.assertEqual(metrics["last_pass_status"], "not_started")
 
     def test_v1_state_migration_preserves_checkpoints_without_guessing_feed_provenance(self):
         legacy = discovery.empty_state()
@@ -1279,8 +1433,9 @@ class GameDevMapDiscoveryTests(unittest.TestCase):
             with guard:
                 active -= 1
             body = (
-                "<html><body><p>We welcome speculative applications.</p>"
-                "<form action='/apply'></form></body></html>"
+                "<html><body><p>We develop video games.</p>"
+                "<p>We welcome speculative applications.</p>"
+                "<a href='/careers'>Careers</a><form action='/apply'></form></body></html>"
             )
             return discovery.FetchResult(True, url, 200, body)
 

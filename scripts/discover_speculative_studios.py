@@ -89,7 +89,7 @@ def load_source_manifest(path: Path = SOURCE_MANIFEST_PATH) -> tuple[dict[str, A
             raise ValueError("Discovery source manifest entries require id, label and kind.")
         if source_id in seen_ids:
             raise ValueError("Discovery source manifest contains a duplicate id: " + source_id)
-        if kind not in {"class", "developer_credit", "company_class", "industry", "gamedevmap", "igdb_companies"}:
+        if kind not in {"class", "developer_credit", "company_class", "industry", "gamedevmap", "igdb_companies", "scottish_directory"}:
             raise ValueError("Unsupported discovery source kind: " + str(kind))
         if refresh_policy not in {"recurring", "one_time_backfill"}:
             raise ValueError("Unsupported discovery refresh policy: " + str(refresh_policy))
@@ -112,6 +112,11 @@ def load_source_manifest(path: Path = SOURCE_MANIFEST_PATH) -> tuple[dict[str, A
             "kind": kind,
             "refresh_policy": refresh_policy,
             "saturation": saturation,
+            "endpoint": source.get("endpoint"),
+            "policy_url": source.get("policy_url"),
+            "license": source.get("license"),
+            "attribution": source.get("attribution"),
+            "access": source.get("access"),
         })
     return tuple(feeds)
 
@@ -120,6 +125,9 @@ FEEDS = load_source_manifest()
 
 
 GAMEDEVMAP_URL = "https://www.gamedevmap.com/index.php"
+SCOTTISH_COMPANY_TREE_URL = "https://api.github.com/repos/r0bbie/gamesindustry.scot/git/trees/main?recursive=1"
+SCOTTISH_COMPANY_RAW_BASE = "https://raw.githubusercontent.com/r0bbie/gamesindustry.scot/main/"
+SCOTTISH_COMPANY_PATHS: list[str] | None = None
 GAMEDEVMAP_TYPES = {
     "developer",
     "developer and publisher",
@@ -206,8 +214,19 @@ POSITIVE_ROUTE_PATTERNS = (
     ),
 )
 
+CAREER_CONTEXT_TEXT = re.compile(
+    r"\b(?:careers?|jobs?|job openings?|roles?|positions?|vacanc(?:y|ies)|"
+    r"recruitment|hiring|employment|apply online|submit your cv|send.{0,60}\b(?:cv|resume|résumé)\b|"
+    r"work with us|join (?:our|the) team|human resources|hr department)\b",
+    re.I,
+)
+CAREER_CONTEXT_URL = re.compile(
+    r"(?:^|[/_-])(?:careers?|jobs?|employment|recruitment|vacanc(?:y|ies)|work[-_]?with[-_]?us|join[-_]?us)(?:[/_?&=-]|$)",
+    re.I,
+)
+
 GAME_DEVELOPMENT_EVIDENCE_PATTERNS = (
-    re.compile(r"\b(?:video|computer|mobile|pc|console)?\s*games?\s+(?:development|developer|studio|production)\b", re.I),
+    re.compile(r"\b(?:video|computer|mobile|pc|console)?\s*games?\s+(?:development|developers?|studio|production)\b", re.I),
     re.compile(r"\b(?:independent|indie)\s+game\s+studio\b", re.I),
     re.compile(r"\b(?:we|our team)\s+(?:develop|create|make|build|produce)\s+(?:video\s+)?games?\b", re.I),
     re.compile(r"\bco[- ]development\b|\bgame development services\b|\bgame porting services\b", re.I),
@@ -217,6 +236,10 @@ GAME_DEVELOPMENT_EVIDENCE_PATTERNS = (
     re.compile(r"\b(?:sviluppo di videogiochi|studio di videogiochi)\b", re.I),
     re.compile(r"\b(?:desenvolvimento de jogos|estúdio de jogos)\b", re.I),
     re.compile(r"\b(?:studio gier|produkcja gier)\b", re.I),
+    re.compile(r"\b(?:ゲーム開発|ゲーム制作|ゲームスタジオ|ゲームを開発)\b"),
+    re.compile(r"\b(?:게임 개발|게임 스튜디오|게임을 개발)\b"),
+    re.compile(r"\b(?:游戏开发|电子游戏开发|遊戲開發|遊戲工作室)\b"),
+    re.compile(r"\b(?:desarrollo y producci[oó]n de videojuegos|desarrollamos videojuegos)\b", re.I),
 )
 
 
@@ -571,6 +594,7 @@ def fetch_url(
     timeout: int = REQUEST_TIMEOUT_SECONDS,
     max_bytes: int = MAX_RESPONSE_BYTES,
     allow_plain_text: bool = False,
+    allow_json: bool = False,
 ) -> FetchResult:
     safe_url = canonical_url(url)
     if not safe_url:
@@ -599,7 +623,8 @@ def fetch_url(
             content_type = response.headers.get("Content-Type", "text/html").lower()
             is_html = any(kind in content_type for kind in ("html", "xhtml"))
             is_plain_text = "text/plain" in content_type or content_type.startswith("text/plain;")
-            if not is_html and not (allow_plain_text and is_plain_text):
+            is_json = "application/json" in content_type or content_type.endswith("+json")
+            if not is_html and not (allow_plain_text and is_plain_text) and not (allow_json and is_json):
                 return FetchResult(False, final_url, status, "", "unexpected-content-type")
             body_bytes = response.read(max_bytes + 1)
             if len(body_bytes) > max_bytes:
@@ -704,13 +729,18 @@ def choose_application_url(page: Page, site_url: str) -> str:
         host = urllib.parse.urlsplit(absolute).hostname or ""
         if not same_site(site_url, absolute) and not is_ats_host(host):
             continue
-        score = 0
-        combined = (absolute + " " + label).lower()
-        if re.search(r"\b(apply|application|submit|speculative|unsolicited|careers?)\b", combined):
-            score += 3
-        if is_ats_host(host):
-            score += 2
-        if score:
+        combined = (absolute + " " + label).casefold()
+        # Never route a speculative candidate to an unrelated live vacancy merely
+        # because the careers page also links to a generic ATS "Apply" button.
+        route_specific = bool(re.search(
+            r"(?:speculative|unsolicited|spontaneous|open[-_ ]application|general[-_ ]application|"
+            r"expression[-_ ]of[-_ ]interest|initiative[-_ ]application|initiativbewerbung|"
+            r"candidature[-_ ]spontan[ée]e|open[-_ ]sollicitatie|avoin[-_ ]hakemus)",
+            combined,
+            re.I,
+        ))
+        if route_specific:
+            score = 10 + (2 if is_ats_host(host) else 0)
             choices.append((score, absolute))
     if choices:
         choices.sort(key=lambda item: (-item[0], item[1]))
@@ -744,43 +774,78 @@ def verify_candidate_pages(
             "status": "needs_review",
             "reason": "likely_staffing_or_talent_platform_not_a_game_studio",
         }
-    # Wikidata industry classifications are broad and include publishers, vendors
-    # and other ecosystem companies. Do not auto-publish those as developers unless
-    # their own pages demonstrate direct game-development work.
-    if (
-        candidate.get("source_id") == "wikidata_video_game_industry"
-        and not game_development_evidence_match(all_text)
-    ):
+    # Candidate indexes are only discovery signals. Every source must pass the same
+    # employer-owned proof of direct game development before automatic publication.
+    official_text = " ".join(
+        page.text for page in pages if same_site(website, page.url)
+    )
+    development_evidence = game_development_evidence_match(official_text)
+    if not development_evidence:
         return {
             "status": "needs_review",
-            "reason": "industry_classification_without_direct_game_development_evidence",
+            "reason": "candidate_without_direct_game_development_evidence_on_official_site",
         }
     matches: list[tuple[Page, re.Match[str]]] = []
+    context_ambiguous: list[tuple[Page, re.Match[str]]] = []
     negatives: list[tuple[Page, re.Match[str]]] = []
     for page in pages:
         negative = negative_route_match(page.text)
         match = positive_route_match(page.text)
+        context_window = (
+            page.text[max(0, match.start() - 300):min(len(page.text), match.end() + 300)]
+            if match else ""
+        )
+        career_context = bool(
+            CAREER_CONTEXT_URL.search(urllib.parse.urlsplit(page.url).path)
+            or CAREER_CONTEXT_TEXT.search(context_window)
+        )
         if negative:
             negatives.append((page, negative))
-        elif match:
+        elif match and career_context:
             matches.append((page, match))
+        elif match:
+            context_ambiguous.append((page, match))
     if negatives:
         if matches:
             return {"status": "needs_review", "reason": "conflicting_positive_and_negative_route_evidence"}
         return {"status": "no_route", "reason": "official_site_explicitly_rejects_speculative_applications"}
     if not matches:
+        if context_ambiguous:
+            return {
+                "status": "needs_review",
+                "reason": "speculative_language_without_clear_employment_context",
+            }
         return {"status": "no_route", "reason": "no_explicit_speculative_route_found"}
-    matches.sort(key=lambda item: (0 if CAREER_LINK_HINT.search(item[0].url) else 1, len(item[0].text)))
+    matches.sort(key=lambda item: (0 if CAREER_CONTEXT_URL.search(urllib.parse.urlsplit(item[0].url).path) else 1, len(item[0].text)))
     evidence_page, match = matches[0]
     application_url = choose_application_url(evidence_page, website)
     application_host = urllib.parse.urlsplit(application_url).hostname or ""
     external_ats = not same_site(website, application_url) and is_ats_host(application_host)
     methods: list[str] = []
-    if evidence_page.has_form:
+    match_context = evidence_page.text[
+        max(0, match.start() - 300):min(len(evidence_page.text), match.end() + 300)
+    ]
+    page_is_career_specific = bool(
+        CAREER_CONTEXT_URL.search(urllib.parse.urlsplit(evidence_page.url).path)
+        or CAREER_CONTEXT_TEXT.search(match_context)
+    )
+    if evidence_page.has_form and page_is_career_specific:
         methods.append("website_form")
-    if any(href.lower().startswith("mailto:") for href, _ in evidence_page.links):
+    explicit_cv_instruction = bool(re.search(
+        r"\b(?:email|send|submit|share)\b.{0,100}\b(?:your\s+)?(?:cv|résumé|resume|portfolio)\b",
+        evidence_page.text, re.I | re.S,
+    ))
+    career_mail_link = any(
+        href.lower().startswith("mailto:")
+        and (
+            re.search(r"(?:career|jobs?|recruit|talent|hr|hiring|employment)", href + " " + label, re.I)
+            or explicit_cv_instruction
+        )
+        for href, label in evidence_page.links
+    )
+    if career_mail_link and page_is_career_specific:
         methods.append("email")
-    if external_ats:
+    if external_ats and page_is_career_specific:
         methods.append("ats")
     if not methods:
         return {
@@ -796,6 +861,7 @@ def verify_candidate_pages(
         "submission_methods": sorted(set(methods)),
         "source_type": "employer_managed_career_platform" if external_ats else "official_company_site",
         "evidence_excerpt": matched_text,
+        "development_evidence_excerpt": " ".join(development_evidence.group(0).split())[:180],
         "work_model": infer_work_model(evidence_page.text),
     }
 
@@ -962,6 +1028,36 @@ def igdb_credentials_available() -> bool:
 def source_feed_enabled(feed: dict[str, Any]) -> bool:
     """Keep optional credential-backed feeds dormant rather than counting them as empty."""
     return feed.get("kind") != "igdb_companies" or igdb_credentials_available()
+
+
+def source_feed_retry_due(feed: dict[str, Any], state: dict[str, Any]) -> bool:
+    metrics = state.get("source_stats", {}).get(feed["id"], {})
+    retry_at = metrics.get("next_retry_at")
+    if not retry_at:
+        return True
+    try:
+        return dt.datetime.fromisoformat(str(retry_at)) <= utc_now()
+    except ValueError:
+        return True
+
+
+def record_source_failure(state: dict[str, Any], feed_id: str, error: Exception) -> dict[str, Any]:
+    metrics = state["source_stats"][feed_id]
+    failures = int(metrics.get("consecutive_failures", 0)) + 1
+    delay = min(7200, 300 * (2 ** min(failures - 1, 5)))
+    metrics["consecutive_failures"] = failures
+    metrics["last_error"] = (type(error).__name__ + ": " + str(error))[:240]
+    metrics["last_failure_at"] = utc_now().isoformat()
+    metrics["next_retry_at"] = (utc_now() + dt.timedelta(seconds=delay)).isoformat()
+    return {"error": metrics["last_error"], "consecutive_failures": failures, "retry_in_seconds": delay}
+
+
+def record_source_success(state: dict[str, Any], feed_id: str) -> None:
+    metrics = state["source_stats"][feed_id]
+    metrics["consecutive_failures"] = 0
+    metrics["last_error"] = None
+    metrics["next_retry_at"] = None
+    metrics["last_success_at"] = utc_now().isoformat()
 
 
 def fetch_igdb_access_token() -> str:
@@ -1253,11 +1349,77 @@ def fetch_gamedevmap_batch(cursor: str, limit: int) -> list[dict[str, str]]:
     rows, _raw_row_count = fetch_gamedevmap_page(cursor, limit)
     return rows
 
+def fetch_scottish_companies_page(cursor: str, limit: int) -> tuple[list[dict[str, str]], int, str]:
+    """Read Scottish Games Industry data under its published CC BY-NC-SA 4.0 licence."""
+    global SCOTTISH_COMPANY_PATHS
+    if SCOTTISH_COMPANY_PATHS is None:
+        result = fetch_url(SCOTTISH_COMPANY_TREE_URL, timeout=REQUEST_TIMEOUT_SECONDS,
+                           max_bytes=MAX_RESPONSE_BYTES, allow_json=True)
+        if not result.ok:
+            raise RuntimeError("Scottish Games Industry file index unavailable: " + (result.error or "fetch-failed"))
+        try:
+            payload = json.loads(result.body)
+        except json.JSONDecodeError as exc:
+            raise RuntimeError("Scottish Games Industry file index returned invalid JSON.") from exc
+        SCOTTISH_COMPANY_PATHS = sorted(
+            str(item.get("path", "")) for item in payload.get("tree", [])
+            if str(item.get("path", "")).startswith("data/companies/")
+            and str(item.get("path", "")).endswith(".json") and item.get("type") == "blob"
+        )
+    try:
+        start = max(0, int(cursor or "0"))
+    except ValueError as exc:
+        raise RuntimeError("Scottish Games Industry cursor is invalid.") from exc
+    page_size = min(max(1, int(limit)), 100)
+    paths = (SCOTTISH_COMPANY_PATHS or [])[start:start + page_size]
+    rows: list[dict[str, str]] = []
+    raw_count = len(paths)
+    for path in paths:
+        result = fetch_url(SCOTTISH_COMPANY_RAW_BASE + urllib.parse.quote(path, safe="/"),
+                           timeout=REQUEST_TIMEOUT_SECONDS, max_bytes=MAX_RESPONSE_BYTES,
+                           allow_plain_text=True)
+        if not result.ok:
+            raise RuntimeError("Scottish Games Industry company record unavailable: " + (result.error or "fetch-failed"))
+        try:
+            company = json.loads(result.body)
+        except json.JSONDecodeError as exc:
+            raise RuntimeError("Scottish Games Industry company record returned invalid JSON.") from exc
+        categories = {re.sub(r"[^a-z]+", "_", str(value).casefold()).strip("_")
+                      for value in company.get("categories", [])}
+        if not categories.intersection({
+            "developer", "solo_developer", "development_studio", "solo_developers",
+            "developer_and_publisher", "developer_publisher",
+        }):
+            continue
+        if str(company.get("status", "")).casefold() not in {"active", "trading"}:
+            continue
+        name = str(company.get("name", "")).strip()
+        website = canonical_url(str(company.get("website", "")).strip())
+        slug = str(company.get("slug") or company.get("id") or "")
+        if not name or not website or not slug:
+            continue
+        rows.append({
+            "qid": "SCOT:" + slug,
+            "entity_url": "https://gamesindustry.scot/companies/" + urllib.parse.quote(slug, safe="") + "/",
+            "source_id": "scottish_games_industry",
+            "source_name": "Scottish Games Industry",
+            "source_license": "CC BY-NC-SA 4.0",
+            "source_url": "https://github.com/r0bbie/gamesindustry.scot",
+            "name": name, "website": website, "country": "United Kingdom",
+            "hq_city": str(company.get("location") or "").strip(),
+            "country_code": "GB", "company_type": "Developer",
+        })
+    return rows, raw_count, str(start + raw_count)
+
+
 def fetch_source_batch(feed_kind: str, cursor: str, limit: int) -> list[dict[str, str]]:
     if feed_kind == "gamedevmap":
         return fetch_gamedevmap_batch(cursor, limit)
     if feed_kind == "igdb_companies":
         return fetch_igdb_batch(cursor, limit)
+    if feed_kind == "scottish_directory":
+        rows, _raw_count, _next_cursor = fetch_scottish_companies_page(cursor, limit)
+        return rows
     return fetch_wikidata_batch(feed_kind, cursor, limit)
 
 
@@ -1265,7 +1427,7 @@ def empty_state() -> dict[str, Any]:
     return {
         "schema_version": 2,
         "updated_at": utc_now().isoformat(),
-        "feed_cursors": {feed["id"]: ("1" if feed["kind"] == "gamedevmap" else "") for feed in FEEDS},
+        "feed_cursors": {feed["id"]: ("1" if feed["kind"] == "gamedevmap" else "0" if feed["kind"] == "scottish_directory" else "") for feed in FEEDS},
         "feed_done": {feed["id"]: False for feed in FEEDS},
         "feed_index": 0,
         "cycle": 1,
@@ -1278,11 +1440,13 @@ def empty_state() -> dict[str, Any]:
         "route_check_index": 0,
         "source_stats": {
             feed["id"]: {
-                "cycle": 1, "cycle_additions": 0, "empty_cycles": 0,
+                "cycle": 1, "cycle_additions": 0, "cycle_candidate_entities": 0, "empty_cycles": 0,
                 "saturated": False, "complete": False,
                 "last_pass_completed_at": None, "last_pass_status": "not_started",
                 "last_pass_candidates": 0, "last_pass_verified": 0,
                 "last_pass_incomplete_candidates": 0,
+                "consecutive_failures": 0, "last_error": None,
+                "last_failure_at": None, "last_success_at": None, "next_retry_at": None,
             } for feed in FEEDS
         },
         "stats": {"candidates_seen": 0, "routes_verified": 0, "excluded": 0, "no_route": 0, "needs_review": 0},
@@ -1305,15 +1469,17 @@ def load_state(path: Path = STATE_PATH) -> dict[str, Any]:
     starting_cycle = max(1, int(state.get("cycle", 1)))
     for feed in FEEDS:
         feed_id = feed["id"]
-        state["feed_cursors"].setdefault(feed_id, "1" if feed["kind"] == "gamedevmap" else "")
+        state["feed_cursors"].setdefault(feed_id, "1" if feed["kind"] == "gamedevmap" else "0" if feed["kind"] == "scottish_directory" else "")
         state["feed_done"].setdefault(feed_id, False)
         metrics = state["source_stats"].setdefault(feed_id, {})
         defaults = {
-            "cycle": starting_cycle, "cycle_additions": 0, "empty_cycles": 0,
+            "cycle": starting_cycle, "cycle_additions": 0, "cycle_candidate_entities": None, "empty_cycles": 0,
             "saturated": False, "complete": False,
             "last_pass_completed_at": None, "last_pass_status": "migration_baseline",
             "last_pass_candidates": 0, "last_pass_verified": 0,
             "last_pass_incomplete_candidates": 0,
+            "consecutive_failures": 0, "last_error": None,
+            "last_failure_at": None, "last_success_at": None, "next_retry_at": None,
         }
         if not isinstance(metrics, dict):
             raise ValueError("Discovery source state is invalid: " + feed_id)
@@ -1335,6 +1501,16 @@ def load_state(path: Path = STATE_PATH) -> dict[str, Any]:
             candidate.setdefault("source_cycle", state["source_stats"][source_id]["cycle"])
         else:
             candidate["source_id"] = "legacy_unattributed"
+    # Reconstruct old in-flight pass counts before adopting candidate-based saturation.
+    for feed in FEEDS:
+        metrics = state["source_stats"][feed["id"]]
+        if metrics.get("cycle_candidate_entities") is None:
+            metrics["cycle_candidate_entities"] = sum(
+                1 for candidate in state["candidates"].values()
+                if candidate.get("source_id") == feed["id"]
+                and int(candidate.get("source_cycle", metrics["cycle"])) == int(metrics["cycle"])
+            )
+        metrics["cycle_candidate_entities"] = max(0, int(metrics["cycle_candidate_entities"]))
     state["schema_version"] = 2
     return state
 
@@ -1362,23 +1538,38 @@ def add_candidates(
         for candidate in state["candidates"].values()
         if canonical_url(str(candidate.get("website", "")))
     }
+    by_domain = {
+        domain_key(str(candidate.get("website", ""))): candidate
+        for candidate in state["candidates"].values()
+        if canonical_url(str(candidate.get("website", "")))
+    }
     for row in rows:
         qid = row["qid"]
+        candidate_source_id = str(row.get("source_id") or source_id or "legacy_unattributed")
         if qid in state["candidates"]:
+            candidate = state["candidates"][qid]
+            seen = candidate.setdefault("sources_seen", [])
+            if candidate_source_id not in seen:
+                seen.append(candidate_source_id)
             continue
         website = canonical_url(row["website"])
         if not website:
             continue
         domain = domain_key(website)
-        # Official domains are the reliable deduplication key. Same-name candidates
-        # on different domains are retained for verification instead of silently dropped.
+        # Exact domain duplicates stay one candidate, but their provenance is retained.
         if domain in known_domains:
+            existing = by_domain.get(domain)
+            if existing is not None:
+                seen = existing.setdefault("sources_seen", [existing.get("source_id", "legacy_unattributed")])
+                if candidate_source_id not in seen:
+                    seen.append(candidate_source_id)
             continue
         candidate_source_id = str(row.get("source_id") or source_id or "legacy_unattributed")
         source_metrics = state.get("source_stats", {}).get(candidate_source_id, {})
         state["candidates"][qid] = {
             **row,
             "source_id": candidate_source_id,
+            "sources_seen": [candidate_source_id],
             "source_cycle": int(source_metrics.get("cycle", state.get("cycle", 1))),
             "website": website,
             "status": "queued",
@@ -1390,6 +1581,12 @@ def add_candidates(
             "reason": None,
         }
         known_domains.add(domain)
+        by_domain[domain] = state["candidates"][qid]
+        if candidate_source_id in state.get("source_stats", {}):
+            source_metrics = state["source_stats"][candidate_source_id]
+            source_metrics["cycle_candidate_entities"] = int(
+                source_metrics.get("cycle_candidate_entities", 0)
+            ) + 1
         state["stats"]["candidates_seen"] += 1
         added += 1
     return added
@@ -1454,7 +1651,9 @@ def profile_for(candidate: dict[str, Any]) -> dict[str, Any]:
         "teamSizeAsOf": None,
         "focus": [],
         "popularGames": [],
-        "profileSources": [entity_url, website],
+        "profileSources": [entity_url, website] + (
+            [str(candidate["source_url"])] if candidate.get("source_url") else []
+        ),
         "applicationLocation": "Not specified · confirm on the official application route",
     }
 
@@ -1753,8 +1952,13 @@ def finish_source_cycles(state: dict[str, Any]) -> list[str]:
             candidate for candidate in source_candidates
             if candidate.get("status") in {"retry", "needs_review"}
         ]
-        additions = int(metrics.get("cycle_additions", 0))
-        if additions:
+        # Source exhaustion is about whether the feed still discovers new unique
+        # candidate entities, not whether those entities have speculative routes.
+        # A directory that finds 50 studios with no open application still yielded
+        # 50 useful discovery candidates and must not be throttled as empty.
+        candidate_additions = int(metrics.get("cycle_candidate_entities", len(candidates)))
+        verified_additions = int(metrics.get("cycle_additions", 0))
+        if candidate_additions:
             metrics["empty_cycles"] = 0
         elif not incomplete:
             metrics["empty_cycles"] = int(metrics.get("empty_cycles", 0)) + 1
@@ -1768,11 +1972,12 @@ def finish_source_cycles(state: dict[str, Any]) -> list[str]:
         metrics["last_pass_status"] = "incomplete" if incomplete else (
             "saturated" if metrics["saturated"] else "complete"
         )
-        metrics["last_pass_candidates"] = len(candidates)
-        metrics["last_pass_verified"] = additions
+        metrics["last_pass_candidates"] = candidate_additions
+        metrics["last_pass_verified"] = verified_additions
         metrics["last_pass_incomplete_candidates"] = len(incomplete)
         metrics["cycle"] = source_cycle + 1
         metrics["cycle_additions"] = 0
+        metrics["cycle_candidate_entities"] = 0
         state["feed_cursors"][feed_id] = ""
         state["feed_done"][feed_id] = False
         completed.append(feed_id)
@@ -1825,6 +2030,7 @@ def run_pipeline(
     deadline = time.monotonic() + max_run_seconds
     source_pages = 0
     source_candidates = 0
+    source_failures: dict[str, dict[str, Any]] = {}
     # Bulk mode backfills GameDevMap's public 100-row query interface from its
     # saved offset. fetch_url enforces robots.txt and per-host request spacing.
     if mode == "bulk":
@@ -1857,41 +2063,58 @@ def run_pipeline(
                 feed for feed in FEEDS
                 if not state["feed_done"].get(feed["id"], False)
                 and source_feed_enabled(feed)
+                and source_feed_retry_due(feed, state)
                 and pages_by_feed.get(feed["id"], 0) < source_page_budget(feed, state, max_source_pages)
             ]
-            if not available:
+            if not available or time.monotonic() + 30 >= deadline:
                 break
             feed = FEEDS[state["feed_index"] % len(FEEDS)]
             if feed not in available:
                 feed = available[0]
-            cursor = state["feed_cursors"].get(feed["id"], "1" if feed["kind"] == "gamedevmap" else "")
+            cursor = state["feed_cursors"].get(
+                feed["id"], "1" if feed["kind"] == "gamedevmap" else "0" if feed["kind"] == "scottish_directory" else ""
+            )
             next_cursor = cursor
-            if feed["kind"] == "gamedevmap" and source_fetcher is fetch_source_batch:
-                # Use raw table-row counts: filtered non-studio rows must not truncate pagination.
-                rows, source_row_count = fetch_gamedevmap_page(cursor, batch_size)
-            elif feed["kind"] == "igdb_companies" and source_fetcher is fetch_source_batch:
-                rows, source_row_count, next_cursor = fetch_igdb_page(cursor, batch_size)
-            else:
-                rows = source_fetcher(feed["kind"], cursor, batch_size)
-                source_row_count = len(rows)
-                if feed["kind"] == "igdb_companies":
-                    numeric_ids = []
-                    for row in rows:
-                        try:
-                            numeric_ids.append(int(row.get("source_cursor", str(row.get("qid", "IGDB:0")).split(":")[-1])))
-                        except (TypeError, ValueError):
-                            continue
-                    if numeric_ids:
-                        next_cursor = str(max(numeric_ids))
             source_pages += 1
             pages_by_feed[feed["id"]] = pages_by_feed.get(feed["id"], 0) + 1
-            if feed["kind"] == "igdb_companies" and next_cursor != cursor:
-                # Advance using the raw IGDB company IDs even if candidate filtering removes rows.
+            try:
+                if feed["kind"] == "gamedevmap" and source_fetcher is fetch_source_batch:
+                    # Raw directory rows, not filtered candidates, determine end-of-feed.
+                    rows, source_row_count = fetch_gamedevmap_page(cursor, batch_size)
+                elif feed["kind"] == "igdb_companies" and source_fetcher is fetch_source_batch:
+                    rows, source_row_count, next_cursor = fetch_igdb_page(cursor, batch_size)
+                elif feed["kind"] == "scottish_directory" and source_fetcher is fetch_source_batch:
+                    rows, source_row_count, next_cursor = fetch_scottish_companies_page(cursor, batch_size)
+                else:
+                    rows = source_fetcher(feed["kind"], cursor, batch_size)
+                    source_row_count = len(rows)
+                    if feed["kind"] == "igdb_companies":
+                        numeric_ids = []
+                        for row in rows:
+                            try:
+                                numeric_ids.append(int(row.get("source_cursor", str(row.get("qid", "IGDB:0")).split(":")[-1])))
+                            except (TypeError, ValueError):
+                                continue
+                        if numeric_ids:
+                            next_cursor = str(max(numeric_ids))
+                record_source_success(state, feed["id"])
+            except Exception as exc:
+                source_failures[feed["id"]] = record_source_failure(state, feed["id"], exc)
+                # A failed page never advances a cursor, closes a feed or increments
+                # its empty-pass counter. Move on and let healthy feeds use the budget.
+                state["feed_index"] = (FEEDS.index(feed) + 1) % len(FEEDS)
+                if feed["kind"] in {"class", "developer_credit", "company_class", "industry"}:
+                    if time.monotonic() + WIKIDATA_MIN_REQUEST_INTERVAL_SECONDS < deadline:
+                        time.sleep(WIKIDATA_MIN_REQUEST_INTERVAL_SECONDS)
+                    else:
+                        break
+                continue
+            if feed["kind"] in {"igdb_companies", "scottish_directory"} and next_cursor != cursor:
                 state["feed_cursors"][feed["id"]] = next_cursor
             if rows:
                 if feed["kind"] == "gamedevmap":
                     state["feed_cursors"][feed["id"]] = str(int(cursor or "1") + batch_size)
-                elif feed["kind"] != "igdb_companies":
+                elif feed["kind"] not in {"igdb_companies", "scottish_directory"}:
                     state["feed_cursors"][feed["id"]] = max(row["qid"] for row in rows)
                 source_candidates += add_candidates(state, rows, source_id=feed["id"])
             if source_row_count < batch_size:
@@ -1930,6 +2153,7 @@ def run_pipeline(
         "empty_cycles": state["empty_cycles"],
         "saturated": state["saturated"],
         "source_cycles_completed": completed_sources,
+        "source_failures": source_failures,
         "source_status": {
             feed["id"]: {
                 "cycle": state["source_stats"][feed["id"]]["cycle"],
@@ -1941,6 +2165,15 @@ def run_pipeline(
                 "cursor": state["feed_cursors"].get(feed["id"], ""),
                 "enabled": source_feed_enabled(feed),
                 "disabled_reason": None if source_feed_enabled(feed) else "missing_repository_actions_secrets",
+                "consecutive_failures": state["source_stats"][feed["id"]].get("consecutive_failures", 0),
+                "last_error": state["source_stats"][feed["id"]].get("last_error"),
+                "last_failure_at": state["source_stats"][feed["id"]].get("last_failure_at"),
+                "last_success_at": state["source_stats"][feed["id"]].get("last_success_at"),
+                "next_retry_at": state["source_stats"][feed["id"]].get("next_retry_at"),
+                "empty_complete_passes": state["source_stats"][feed["id"]].get("empty_cycles", 0),
+                "candidate_entities_this_pass": state["source_stats"][feed["id"]].get("cycle_candidate_entities", 0),
+                "last_pass_candidates": state["source_stats"][feed["id"]].get("last_pass_candidates", 0),
+                "last_pass_incomplete_candidates": state["source_stats"][feed["id"]].get("last_pass_incomplete_candidates", 0),
             }
             for feed in FEEDS
         },
