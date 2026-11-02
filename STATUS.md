@@ -11,7 +11,7 @@
 - IGDB company data remains candidate evidence only. The public directory's strict rule is unchanged: the employer's own site or directly linked employer-controlled ATS must explicitly invite speculative/open/general applications.
 - The existing source set remains unchanged otherwise: GameDevMap plus four Wikidata feeds. No Tavily, Companies House or additional source was introduced.
 - The 20-page hourly source budget, independent five-empty-pass/four-page saturation rule, 65-second Wikidata pacing and 25-minute runtime ceiling remain. IGDB requests are separately paced at 0.27 seconds.
-- Full pull-request CI passed in [run 41412920931](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41412920931) before the final rate-limit test/documentation commits. A fresh run is triggered by the latest commits.
+- Full exact-head pull-request CI passed in [run 41413993904](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41413993904) at commit `fd4ef9da5a68f1f01c24d3a6390caf4ae9abc720`, including the API pacing regression test, all discovery/frontend checks, production build, privacy/Pages checks and browser acceptance.
 - PR #100 is open; the feature is not part of `main` and is not live on GitHub Pages yet.
 
 ## Candidate Profile implementation — PR #95
