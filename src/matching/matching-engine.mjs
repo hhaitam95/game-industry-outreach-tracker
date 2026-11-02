@@ -8,7 +8,7 @@
  * @typedef {"strong" | "potential" | "weak" | "not_assessed"} RelevanceLevel
  * @typedef {"active" | "needs_verification" | "unavailable"} RouteReadiness
  * @typedef {"high" | "preferred" | "neutral" | "low"} PriorityLevel
- * @typedef {{group: string, pattern: RegExp, disciplines: string[]}} RoleRule
+ * @typedef {{group: string, pattern: RegExp, directDisciplines: string[], relatedDisciplines: string[]}} RoleRule
  * @typedef {{level: RelevanceLevel, reasons: string[], evidence: EvidenceItem[], gaps: string[], limitedRoleInformation: boolean}} RelevanceAssessment
  * @typedef {{level: RouteReadiness, reasons: string[]}} RouteAssessment
  * @typedef {{description?: string, companyType?: string[], industryScale?: string, focus?: string[]}} StudioProfile
@@ -38,6 +38,7 @@
  * @property {PriorityLevel} level
  * @property {string} label
  * @property {number} score
+ * @property {"preferred" | "acceptable" | "unassigned" | "low"} regionTier
  * @property {string[]} reasons
  *
  * @typedef {Object} StudioMatchAssessment
@@ -74,37 +75,72 @@ const ROLE_RULES = [
   {
     group: "support",
     pattern: /(developer|technical|product|it|systems)\s+support|support\s+(engineer|specialist)|technical operations/,
-    disciplines: ["programming", "software", "game development", "tools", "build", "release", "devops", "qa", "quality assurance", "automation", "infrastructure", "operations", "network", "api"],
+    directDisciplines: [
+      "developer support", "technical support", "product support", "it support",
+      "systems support", "technical operations", "it operations", "studio it",
+      "online services support", "game support engineering", "api support",
+      "integration support", "network support",
+    ],
+    relatedDisciplines: [
+      "support engineer", "support specialist", "support operations",
+      "programming", "software", "game development", "tools", "build", "release",
+      "devops", "qa", "quality assurance", "automation", "infrastructure",
+      "operations", "network", "api",
+    ],
   },
   {
     group: "devops",
     pattern: /\bdevops\b|site reliability|\bsre\b|platform engineer|infrastructure|build and release|release engineer|cloud engineer/,
-    disciplines: ["programming", "software", "game development", "build", "release", "devops", "cloud", "infrastructure", "operations", "tools", "automation", "linux", "network"],
+    directDisciplines: [
+      "devops", "site reliability", "sre", "platform engineering",
+      "infrastructure", "build and release", "release engineering",
+      "cloud engineering", "automation", "deployment", "build pipeline",
+      "continuous integration", "ci cd",
+    ],
+    relatedDisciplines: [
+      "programming", "software", "game development", "tools", "linux",
+      "network", "operations", "cloud",
+    ],
   },
   {
     group: "software",
     pattern: /software engineer|software developer|programmer|gameplay programming|tools programmer|backend|full stack|game engineer/,
-    disciplines: ["programming", "software", "game development", "engineering", "c++", "c#", "python", "java", "unity", "unreal", "backend", "tools"],
+    directDisciplines: [
+      "programming", "software", "game development", "engineering",
+      "c++", "c#", "python", "javascript", "java", "unity", "unreal",
+      "backend", "tools",
+    ],
+    relatedDisciplines: ["automation", "build", "release"],
   },
   {
     group: "qa",
     pattern: /\bqa\b|quality assurance|test automation|software tester|test engineer/,
-    disciplines: ["qa", "quality assurance", "testing", "automation", "programming", "software"],
+    directDisciplines: [
+      "qa", "quality assurance", "testing", "test automation",
+      "software testing", "test engineering",
+    ],
+    relatedDisciplines: ["programming", "software", "automation"],
   },
   {
     group: "vfx",
     pattern: /\bvfx\b|visual effects|technical artist|shader|rendering|realtime effects/,
-    disciplines: ["vfx", "visual effects", "technical art", "shaders", "rendering", "art", "animation"],
+    directDisciplines: [
+      "vfx", "visual effects", "technical art", "shaders", "rendering",
+      "realtime effects", "real time effects",
+    ],
+    relatedDisciplines: ["art", "animation", "character", "environment", "concept"],
   },
   {
     group: "art",
     pattern: /\bartist\b|2d art|3d art|environment art|character art|concept art|animator|animation/,
-    disciplines: ["art", "animation", "character", "environment", "concept", "2d", "3d"],
+    directDisciplines: ["art", "animation", "character", "environment", "concept", "2d", "3d"],
+    relatedDisciplines: [],
   },
   {
     group: "design",
     pattern: /game designer|level designer|systems designer|narrative designer/,
-    disciplines: ["design", "game design", "level design", "narrative", "systems design"],
+    directDisciplines: ["design", "game design", "level design", "narrative", "systems design"],
+    relatedDisciplines: [],
   },
 ];
 
@@ -119,8 +155,8 @@ const DEVOPS_SKILLS = [
 ];
 const SUPPORT_SKILLS = [
   "technical support", "product support", "developer support", "troubleshooting",
-  "rest api", "sql", "postman", "kibana", "opensearch", "logs", "networking",
-  "incident", "debugging", "integration",
+  "rest api", "rest apis", "sql", "postman", "kibana", "opensearch", "logs",
+  "networking", "incident", "debugging", "integration",
 ];
 
 /** @param {unknown} value @returns {string} */
@@ -137,7 +173,8 @@ function normalize(value) {
 function hasPhrase(haystack, phrase) {
   const text = normalize(haystack);
   const needle = normalize(phrase);
-  return Boolean(text && needle && (text === needle || text.includes(needle)));
+  if (!text || !needle) return false;
+  return (" " + text + " ").includes(" " + needle + " ");
 }
 
 /** @param {string} name @returns {string} */
@@ -157,27 +194,35 @@ function skillSupportsDiscipline(skillName, discipline) {
   const skill = normalize(skillName);
   const target = normalize(discipline);
   if (!skill || !target) return false;
-  if (skill === target || skill.includes(target) || target.includes(skill)) return true;
+  if (hasPhrase(skill, target) || hasPhrase(target, skill)) return true;
+
   if (/programming|software|game development|engineering/.test(target)) {
-    return PROGRAMMING_SKILLS.some((item) => skill.includes(normalize(item)));
+    return PROGRAMMING_SKILLS.some((item) => hasPhrase(skill, item));
   }
   if (/devops|cloud|infrastructure|build|release|operations|platform/.test(target)) {
-    return DEVOPS_SKILLS.some((item) => skill.includes(normalize(item)));
+    return DEVOPS_SKILLS.some((item) => hasPhrase(skill, item));
   }
   if (/support|technical|network|api|integration/.test(target)) {
-    return SUPPORT_SKILLS.some((item) => skill.includes(normalize(item)));
+    return SUPPORT_SKILLS.some((item) => hasPhrase(skill, item));
   }
   if (/quality assurance|(^| )qa($| )|testing|test automation/.test(target)) {
-    return /test|quality assurance|\bqa\b|automation/.test(skill);
+    return ["test", "testing", "quality assurance", "qa", "automation"]
+      .some((item) => hasPhrase(skill, item));
   }
   if (/vfx|visual effects|technical art|shaders|rendering/.test(target)) {
-    return /vfx|visual effects|shader|render|niagara|houdini|after effects|embergen/.test(skill);
+    return [
+      "vfx", "visual effects", "shader", "shaders", "rendering",
+      "niagara", "houdini", "after effects", "embergen",
+    ].some((item) => hasPhrase(skill, item));
   }
   if (/art|animation|character|environment|concept/.test(target)) {
-    return /art|animation|character|environment|concept|blender|maya|3d|2d/.test(skill);
+    return [
+      "art", "artist", "animation", "animator", "character", "environment",
+      "concept", "blender", "maya", "3d", "2d",
+    ].some((item) => hasPhrase(skill, item));
   }
   if (/design|narrative|level/.test(target)) {
-    return /design|narrative|level/.test(skill);
+    return ["design", "narrative", "level"].some((item) => hasPhrase(skill, item));
   }
   return false;
 }
@@ -208,9 +253,16 @@ function assessRelevance(profile, studio) {
       scope.some((discipline) => skillSupportsDiscipline(skill.name, discipline)),
     )
     .map((skill) => "User-confirmed gap: " + skill.name);
-  const matchedRoles = roleRulesFor(roleFamilies).filter((rule) =>
-    scope.some((discipline) => rule.disciplines.some((term) => hasPhrase(discipline, term))),
-  );
+  const roleRules = roleRulesFor(roleFamilies);
+  const roleAlignment = scope.map((discipline) => ({
+    discipline,
+    direct: roleRules.some((rule) =>
+      rule.directDisciplines.some((term) => hasPhrase(discipline, term)),
+    ),
+    related: roleRules.some((rule) =>
+      rule.relatedDisciplines.some((term) => hasPhrase(discipline, term)),
+    ),
+  })).filter((item) => item.direct || item.related);
   const matchedSkills = skills.filter((skill) =>
     scope.some((discipline) => skillSupportsDiscipline(skill.name, discipline)),
   );
@@ -223,12 +275,14 @@ function assessRelevance(profile, studio) {
         DEVOPS_SKILLS.some((term) => hasPhrase(skill.name, term)),
       )
     : [];
-  const matchedExperience = experiences.filter((experience) =>
-    scope.some((discipline) =>
-      hasPhrase(experience.title, discipline) ||
-      normalize(experience.title).includes(normalize(discipline)),
-    ),
-  );
+  const matchedExperience = experiences.filter((experience) => {
+    const experienceText = [
+      experience.title,
+      experience.responsibilities,
+      experience.achievements,
+    ].filter(Boolean).join(" ");
+    return scope.some((discipline) => skillSupportsDiscipline(experienceText, discipline));
+  });
 
   /** @type {EvidenceItem[]} */
   const evidence = [
@@ -286,16 +340,22 @@ function assessRelevance(profile, studio) {
     };
   }
 
-  const hasDemonstratedDisciplineEvidence =
-    evidence.some((item) => item.relationship === "discipline" && item.evidence === "demonstrated");
   const hasOtherDisciplineEvidence = evidence.some((item) => item.relationship === "discipline");
+  const hasDemonstratedDirectAlignment = roleAlignment.some((alignment) =>
+    alignment.direct && matchedSkills.some((skill) =>
+      skill.evidence === "demonstrated" &&
+      skillSupportsDiscipline(skill.name, alignment.discipline),
+    ),
+  );
+  const hasDirectRoleAlignment = roleAlignment.some((alignment) => alignment.direct);
+  const hasRelatedRoleAlignment = roleAlignment.some((alignment) => alignment.related);
 
-  if (matchedRoles.length && hasDemonstratedDisciplineEvidence) {
+  if (hasDemonstratedDirectAlignment) {
     return {
       level: "strong",
       reasons: [
-        "At least one saved target role aligns with a discipline stated in the application route.",
-        "The profile contains demonstrated evidence that maps to the stated discipline.",
+        "A saved target role directly aligns with an employer-stated discipline.",
+        "Demonstrated candidate skill evidence maps to that same discipline.",
       ],
       evidence,
       gaps: confirmedGaps,
@@ -303,13 +363,16 @@ function assessRelevance(profile, studio) {
     };
   }
 
-  if (matchedRoles.length || hasOtherDisciplineEvidence) {
+  if (hasDirectRoleAlignment || hasRelatedRoleAlignment || hasOtherDisciplineEvidence) {
+    const alignmentReason = hasDirectRoleAlignment
+      ? "A saved target role directly aligns with an employer-stated discipline."
+      : hasRelatedRoleAlignment
+        ? "A saved target role has adjacent relevance to an employer-stated discipline."
+        : "A saved skill or experience item maps to a discipline stated in the application route.";
     return {
       level: "potential",
       reasons: [
-        matchedRoles.length
-          ? "At least one saved target role aligns with a discipline stated in the application route."
-          : "A saved skill or experience item maps to a discipline stated in the application route.",
+        alignmentReason,
         "The available profile evidence is transferable, learning-level or not directly linked to the stated discipline.",
       ],
       evidence,
@@ -392,6 +455,41 @@ function assessRouteReadiness(studio, now) {
   };
 }
 
+/** @param {string} value @returns {string} */
+function canonicalCountry(value) {
+  const normalized = normalize(value);
+  /** @type {Record<string, string>} */
+  const aliases = {
+    uk: "united kingdom",
+    britain: "united kingdom",
+    england: "united kingdom",
+    us: "united states",
+    usa: "united states",
+    "u s a": "united states",
+  };
+  return aliases[normalized] || normalized;
+}
+
+/**
+ * Use the directory's recorded country for personal geography. A company headquarters
+ * is a separate fact and is only a safe source of an ISO code when both country labels
+ * identify the same country.
+ *
+ * @param {string | undefined} studioCountry
+ * @param {string | undefined} headquartersCountry
+ * @param {string | undefined} headquartersCountryCode
+ * @returns {{country: string, countryCode?: string}}
+ */
+export function resolveStudioLocation(studioCountry, headquartersCountry, headquartersCountryCode) {
+  const country = studioCountry?.trim() || "Not stated";
+  const sameCountry = canonicalCountry(country) &&
+    canonicalCountry(country) === canonicalCountry(headquartersCountry || "");
+  return {
+    country,
+    countryCode: sameCountry && headquartersCountryCode ? headquartersCountryCode : undefined,
+  };
+}
+
 /** @param {string[]} regions @param {MatchStudio} studio @returns {string} */
 function regionMatches(regions, studio) {
   const country = normalize(studio.country);
@@ -452,19 +550,24 @@ function assessPriority(profile, studio) {
   const reasons = [];
   let score = 0;
   let evaluated = 0;
+  /** @type {"preferred" | "acceptable" | "unassigned" | "low"} */
+  let regionTier = "unassigned";
   const preferredRegion = regionMatches(preferences.preferredRegions, studio);
   const acceptableRegion = regionMatches(preferences.acceptableRegions, studio);
   const lowPriorityRegion = regionMatches(preferences.lowPriorityRegions, studio);
 
   if (preferredRegion) {
+    regionTier = "preferred";
     score += 2;
     evaluated += 1;
     reasons.push("Location matches your preferred region: " + preferredRegion + ".");
   } else if (acceptableRegion) {
+    regionTier = "acceptable";
     score += 1;
     evaluated += 1;
     reasons.push("Location matches an acceptable region: " + acceptableRegion + ".");
   } else if (lowPriorityRegion) {
+    regionTier = "low";
     score -= 2;
     evaluated += 1;
     reasons.push("Location is in a region you marked lower priority: " + lowPriorityRegion + ".");
@@ -477,7 +580,7 @@ function assessPriority(profile, studio) {
   }
 
   const workModel = studio.applicationResearch?.workModel || "not_stated";
-  if (preferences.workModels.length && workModel !== "not_stated") {
+  if (preferences.workModels.length && !["not_stated", "mixed"].includes(workModel)) {
     evaluated += 1;
     if (preferences.workModels.some((item) => workModelMatches(item, workModel))) {
       score += 1;
@@ -486,6 +589,9 @@ function assessPriority(profile, studio) {
       score -= 1;
       reasons.push("Published work model differs from your selected preferences.");
     }
+  } else if (workModel === "mixed" && preferences.workModels.length) {
+    evaluated += 1;
+    reasons.push("The employer describes a mixed or variable work arrangement; confirm the specific role's expectations. No preference penalty is applied.");
   } else if (workModel === "not_stated" && preferences.workModels.length) {
     reasons.push("The employer has not stated a work model, so no preference penalty is applied.");
   }
@@ -516,7 +622,7 @@ function assessPriority(profile, studio) {
     neutral: "Neutral",
     low: "Lower priority",
   };
-  return { level, label: labels[level], score, reasons };
+  return { level, label: labels[level], score, regionTier, reasons };
 }
 
 /**
@@ -584,7 +690,9 @@ export function sortStudioMatches(assessments, sortBy = "relevance") {
   return [...assessments].sort((left, right) => {
     if (sortBy === "name") return left.name.localeCompare(right.name);
     if (sortBy === "priority") {
-      return priorityOrder[left.priority.level] - priorityOrder[right.priority.level] ||
+      const regionOrder = { preferred: 0, acceptable: 1, unassigned: 2, low: 3 };
+      return regionOrder[left.priority.regionTier] - regionOrder[right.priority.regionTier] ||
+        priorityOrder[left.priority.level] - priorityOrder[right.priority.level] ||
         relevanceOrder[left.relevance] - relevanceOrder[right.relevance] ||
         left.name.localeCompare(right.name);
     }

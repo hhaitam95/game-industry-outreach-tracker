@@ -11,6 +11,7 @@ export type ContinentLabel =
 const CONTINENT_BY_COUNTRY_CODE: Record<string, ContinentLabel> = {
   // Africa
   MA: "Africa",
+  MU: "Africa",
   NG: "Africa",
 
   // Asia
@@ -94,6 +95,7 @@ const COUNTRY_CODE_BY_NAME: Record<string, string> = {
   Japan: "JP",
   Malaysia: "MY",
   Malta: "MT",
+  Mauritius: "MU",
   Moldova: "MD",
   Morocco: "MA",
   Netherlands: "NL",
@@ -162,7 +164,7 @@ const COUNTRY_CODE_FALLBACK: Record<string, string> = {
   England: "GB", Finland: "FI", France: "FR", Hungary: "HU", Iceland: "IS",
   India: "IN", Netherlands: "NL", Norway: "NO", Pakistan: "PK", Poland: "PL",
   Serbia: "RS", Sweden: "SE", Switzerland: "CH", "Türkiye": "TR",
-  "United States": "US", "United Kingdom": "GB", "Czech Republic": "CZ",
+  "United States": "US", "United Kingdom": "GB", Mauritius: "MU", "Czech Republic": "CZ",
   Czechia: "CZ", "South Korea": "KR", "Saudi Arabia": "SA", "United Arab Emirates": "AE",
   "New Zealand": "NZ", Germany: "DE", Belgium: "BE", Brazil: "BR", Bulgaria: "BG",
   "Costa Rica": "CR", Cyprus: "CY", Indonesia: "ID", Iraq: "IQ", Italy: "IT",

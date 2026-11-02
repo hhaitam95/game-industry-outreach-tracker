@@ -1,6 +1,6 @@
 # Candidate profile, matching and application workspace
 
-**Status:** Candidate Profile C1 merged/deployed in PR #95; matching C2 foundation implemented on the current feature branch; Application Queue, deeper requirements intelligence and workspace remain unimplemented  
+**Status:** Candidate Profile C1 merged/deployed in PR #95; matching C2 foundation merged in PR #96; focused matching-quality validation is in a follow-up branch; Application Queue, deeper requirements intelligence and workspace remain unimplemented  
 **Last updated:** 2026-11-01  
 **Scope:** Candidate-owned profile, transparent studio/opportunity assessment, personal application queue and preparation workspace.  
 **Explicitly deferred:** Browser-extension automation, external portal autofill, automated form interaction and application submission.
@@ -146,14 +146,20 @@ Map each item to candidate evidence as demonstrated, transferable, learning/expo
 The first C2 implementation calculates matches in the browser from the saved Candidate Profile and the active public studio records. It is a private presentation layer; profile data, documents and assessments are not sent to a backend or added to public data files.
 
 - Professional relevance uses saved target role families, discipline scope published in the studio route record and profile evidence. Demonstrated, transferable and learning/exposure evidence remain distinct. Absence of evidence is not treated as a confirmed gap.
+- The role-family mapping distinguishes **direct** disciplines from **related/adjacent** disciplines. Adjacent evidence can support a **Potential match**, but cannot by itself justify a **Strong match**.
+- A **Strong match** now requires a direct role-to-discipline alignment and demonstrated skill evidence mapped to that same stated discipline. Demonstrated evidence in an unrelated discipline must not upgrade the assessment.
+- Skill/discipline vocabulary matching uses normalized phrase boundaries rather than arbitrary substring matches, reducing false positives such as interpreting “Go” inside “Google Workspace” as the Go language.
+- Experience assessment considers job title, responsibilities and achievements; experience evidence remains labelled transferable rather than being silently upgraded to demonstrated skill evidence.
 - If an open route does not publish a discipline scope, the result remains **Potential match / limited role information** rather than being penalized. Missing profile evidence is **Needs profile details**, not a weak match.
-- The current engine does not automatically classify an opportunity as **Not applicable** from a keyword mismatch. A weak assessment is not a claim that the employer would reject an application.
+- The current engine does not automatically classify an opportunity as **Not applicable** from a keyword mismatch. A weak assessment is a profile-to-route comparison, not a claim that the employer would reject an application.
 - Route readiness is deliberately conservative: the UI reports an active route on record or a need to verify it. It does not claim a route is ready to submit based only on the existence of a URL.
-- Personal priority uses the saved preferred/acceptable/lower-priority regions, studio types and work models. These signals do not alter professional relevance or directory membership.
+- Personal priority uses the directory's recorded country for geographic tier matching; a separate headquarters country must not silently override it. The headquarters country code is reused only when the country labels agree. A directory country is still not proof of the actual job location or work-authorisation eligibility.
+- A mixed work model is ambiguous and receives no automatic penalty against a preferred remote/hybrid/on-site arrangement. The specific role's expectations need human verification.
+- The Matches view defaults to **campaign priority (region first)**: preferred geography, acceptable geography, unassigned/unknown geography, then lower-priority geography. Within each geographic tier, overall personal priority and professional relevance break ties. Work-model and studio-type preferences cannot make an acceptable-region target outrank a preferred-region target. The campaign geography tier is visible in expanded assessment details; professional relevance, route status and the overall personal-priority label remain separate.
 - Expanded details show source and application URLs, directory check/review dates, published discipline scope, submission method, work model and location/eligibility notes when those fields exist.
 - Assessments are currently computed in memory each time the Matches page opens. Persistent assessment snapshots, manual overrides/pins and queue decisions belong to the Application Queue phase.
 
-Known limitation: the current public directory has route-level research fields, not a fully normalized requirements record for every employer. Missing requirements remain unknown; no requirement, language, work-authorization, sponsorship or remote-work condition is inferred from a headquarters address or a search keyword.
+Known limitations: the current public directory has route-level research fields, not a fully normalized requirements record for every employer. Working language, country-specific remote eligibility, relocation and visa/work-authorisation sponsorship are not yet structured consistently enough for reliable automated prioritisation. The engine must not infer these facts from headquarters, nationality, a translated website or broad free-text keyword mentions. They remain unknown until separately verified and structured.
 
 ## 5. Application campaign operating model
 

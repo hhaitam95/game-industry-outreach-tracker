@@ -5,6 +5,7 @@ import {
 } from "../profile/profile-storage";
 import {
   assessStudioMatch,
+  resolveStudioLocation,
   sortStudioMatches,
 } from "../matching/matching-engine.mjs";
 
@@ -126,8 +127,11 @@ function buildStudioMatches(profile: CandidateProfile): StudioMatchAssessment[] 
   );
   return activeStudios.map((studio) => {
     const savedProfile = studioProfiles[studio.name];
-    const country = savedProfile?.headquarters?.country || studio.country || "Not stated";
-    const countryCode = savedProfile?.headquarters?.countryCode || undefined;
+    const { country, countryCode } = resolveStudioLocation(
+      studio.country,
+      savedProfile?.headquarters?.country,
+      savedProfile?.headquarters?.countryCode || undefined,
+    );
     return assessStudioMatch(profile, {
       ...studio,
       country,
@@ -187,6 +191,7 @@ function AssessmentDetails({ assessment }: { assessment: StudioMatchAssessment }
             <div><dt>Route type</dt><dd>{labelFromKey(assessment.routeType)}</dd></div>
             <div><dt>Submission channel</dt><dd>{assessment.submissionMethods.length ? assessment.submissionMethods.map(labelFromKey).join(", ") : "Not specified"}</dd></div>
             <div><dt>Work model</dt><dd>{assessment.workModel === "not_stated" ? "Not stated" : labelFromKey(assessment.workModel)}</dd></div>
+            <div><dt>Campaign geography tier</dt><dd>{labelFromKey(assessment.priority.regionTier)}</dd></div>
             <div><dt>Directory check</dt><dd>{formatDate(assessment.checkedAt)}</dd></div>
             <div><dt>Next review date</dt><dd>{formatDate(assessment.nextReviewAt)}</dd></div>
           </dl>
@@ -250,7 +255,7 @@ export default function MatchingDashboard({
   const [relevanceFilter, setRelevanceFilter] = useState<RelevanceFilter>("all");
   const [priorityFilter, setPriorityFilter] = useState<PriorityFilter>("all");
   const [routeFilter, setRouteFilter] = useState<RouteFilter>("all");
-  const [sortMode, setSortMode] = useState<SortMode>("relevance");
+  const [sortMode, setSortMode] = useState<SortMode>("priority");
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const refreshProfile = useCallback(async () => {
@@ -437,7 +442,7 @@ export default function MatchingDashboard({
           <span>Sort by</span>
           <select id="matching-sort" className="form-select" value={sortMode} onChange={(event) => setSortMode(event.target.value as SortMode)}>
             <option value="relevance">Professional relevance</option>
-            <option value="priority">Personal priority</option>
+            <option value="priority">Campaign priority (region first)</option>
             <option value="name">Studio name</option>
           </select>
         </label>
@@ -445,7 +450,7 @@ export default function MatchingDashboard({
 
       <div className="matching-results-meta">
         <strong>{filtered.length} of {assessments.length} active routes</strong>
-        <span>Sorted by {sortMode === "name" ? "studio name" : sortMode === "priority" ? "personal priority" : "professional relevance"}</span>
+        <span>Sorted by {sortMode === "name" ? "studio name" : sortMode === "priority" ? "campaign priority (region first)" : "professional relevance"}</span>
       </div>
 
       <div className="matching-results">
@@ -473,7 +478,7 @@ export default function MatchingDashboard({
                     <StudioMark name={assessment.name} websiteUrl={studioInfo?.websiteUrl || ""} />
                     <div>
                       <h2>{assessment.name}</h2>
-                      <p>📍 {assessment.country} · {labelFromKey(assessment.routeType)} route</p>
+                      <p>🌐 {assessment.country} · recorded studio country · {labelFromKey(assessment.routeType)} route</p>
                     </div>
                   </div>
                   {assessment.studioTypes.length ? (
@@ -535,7 +540,7 @@ export default function MatchingDashboard({
                 setRelevanceFilter("all");
                 setPriorityFilter("all");
                 setRouteFilter("all");
-                setSortMode("relevance");
+                setSortMode("priority");
               }}
             >
               Reset match filters

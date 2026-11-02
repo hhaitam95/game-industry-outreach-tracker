@@ -265,6 +265,16 @@ async function main() {
     const matchCards = page.locator(".match-card");
     const matchCount = await matchCards.count();
     assert.ok(matchCount > 100, "The matching page should assess the active public studio routes.");
+    assert.equal(
+      await page.locator("#matching-sort").inputValue(),
+      "priority",
+      "The campaign view should default to personal priority ordering.",
+    );
+    const playtouchMatch = matchCards.filter({ hasText: "Playtouch" });
+    assert.equal(await playtouchMatch.count(), 1, "Playtouch should remain available in the matching results.");
+    const playtouchLocation = await playtouchMatch.locator(".match-studio-title p").innerText();
+    assert.match(playtouchLocation, /Mauritius/, "Matching should use the directory's recorded studio country.");
+    assert.doesNotMatch(playtouchLocation, /France/, "Headquarters country must not override the directory country.");
     assert.ok(await page.getByText(/Professional relevance, application-route readiness and personal priority are assessed separately/).count());
     await page.locator("#matching-relevance-filter").selectOption("potential");
     assert.ok(await matchCards.count() > 0, "Potential matches should remain visible for general and transferable routes.");
