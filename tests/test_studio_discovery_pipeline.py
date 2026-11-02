@@ -615,6 +615,58 @@ class CandidateVerificationTests(unittest.TestCase):
         )
         self.assertEqual(result["submission_methods"], ["ats"])
 
+    def test_nested_careers_subpage_is_crawled_for_open_application_route(self):
+        candidate = self.candidate()
+        pages = {
+            "https://example-studio.example/": discovery.FetchResult(
+                True, "https://example-studio.example/", 200,
+                '<p>We develop video games.</p><a href="/careers">Careers</a>',
+            ),
+            "https://example-studio.example/careers": discovery.FetchResult(
+                True, "https://example-studio.example/careers", 200,
+                '<h1>Careers</h1><p>See current jobs.</p>'
+                '<a href="/careers/open-application">Open application</a>',
+            ),
+            "https://example-studio.example/careers/open-application": discovery.FetchResult(
+                True, "https://example-studio.example/careers/open-application", 200,
+                '<h1>Open application</h1><p>We welcome spontaneous applications.</p>'
+                '<form action="/submit"></form>',
+            ),
+        }
+
+        def page_fetcher(url, allowed_external):
+            return pages.get(url, discovery.FetchResult(False, url, 404, "", "not-found"))
+
+        result = discovery.verify_candidate_pages(candidate, page_fetcher)
+        self.assertEqual(result["status"], "verified")
+        self.assertEqual(result["route_type"], "spontaneous")
+        self.assertEqual(
+            result["evidence_url"],
+            "https://example-studio.example/careers/open-application",
+        )
+        self.assertIn("website_form", result["submission_methods"])
+
+    def test_unavailable_relevant_career_page_is_not_classified_as_no_route(self):
+        candidate = self.candidate()
+        homepage = discovery.FetchResult(
+            True, "https://example-studio.example/", 200,
+            '<p>We develop video games.</p><a href="/careers">Careers</a>',
+        )
+        blocked = discovery.FetchResult(
+            False, "https://example-studio.example/careers", 403, "", "access-restricted"
+        )
+
+        def page_fetcher(url, allowed_external):
+            if url == "https://example-studio.example/":
+                return homepage
+            if url == "https://example-studio.example/careers":
+                return blocked
+            return discovery.FetchResult(False, url, 404, "", "not-found")
+
+        result = discovery.verify_candidate_pages(candidate, page_fetcher)
+        self.assertEqual(result["status"], "needs_review")
+        self.assertEqual(result["reason"], "relevant_career_page_unavailable")
+
     def test_production_fetcher_uses_the_verifier_two_argument_interface(self):
         bodies = {
             "https://example-studio.example/": (
