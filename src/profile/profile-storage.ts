@@ -186,7 +186,7 @@ function documentValue(value: unknown): ProfileDocument | null {
 
   const fileSignature = atob(dataBase64.slice(0, 24));
   const hasPdfSignature = fileSignature.startsWith("%PDF-");
-  const hasDocxSignature = fileSignature.startsWith("PK\\u0003\\u0004");
+  const hasDocxSignature = fileSignature.startsWith("PK\u0003\u0004");
   if ((validPdf && !hasPdfSignature) || (validDocx && !hasDocxSignature)) return null;
 
   return {
