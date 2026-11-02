@@ -252,6 +252,7 @@ class DiscoveryParsingTests(unittest.TestCase):
         cursor = "Q500"
         developer_query = discovery.sparql_query("class", cursor, 120)
         credit_query = discovery.sparql_query("developer_credit", cursor, 120)
+        industry_query = discovery.sparql_query("industry", cursor, 120)
         self.assertIn("wd:Q210167", developer_query)
         self.assertIn("wdt:P856", developer_query)
         self.assertIn('STRAFTER(STR(?company), "/entity/") > "Q500"', developer_query)
@@ -259,6 +260,33 @@ class DiscoveryParsingTests(unittest.TestCase):
         self.assertIn("wdt:P178", credit_query)
         self.assertIn("wd:Q7889", credit_query)
         self.assertIn("LIMIT 120", credit_query)
+        self.assertIn("wdt:P452 wd:Q941594", industry_query)
+        self.assertIn("LIMIT 120", industry_query)
+
+    def test_industry_leads_require_direct_game_development_evidence(self):
+        publisher_html = """<html><body><p>We publish games from independent developers.</p>
+        <p>We welcome speculative applications.</p><a href="mailto:jobs@publisher.example">Careers</a></body></html>"""
+        studio_html = """<html><body><p>We are an independent video game development studio.</p>
+        <p>We welcome speculative applications.</p><a href="mailto:jobs@studio.example">Careers</a></body></html>"""
+
+        def fetch_page(url, _external):
+            body = publisher_html if "publisher.example" in url else studio_html
+            return discovery.FetchResult(True, url, 200, body)
+
+        publisher_result = discovery.verify_candidate_pages(
+            {"source_id": "wikidata_video_game_industry", "website": "https://publisher.example/"},
+            fetch_page,
+        )
+        studio_result = discovery.verify_candidate_pages(
+            {"source_id": "wikidata_video_game_industry", "website": "https://studio.example/"},
+            fetch_page,
+        )
+        self.assertEqual(publisher_result["status"], "needs_review")
+        self.assertEqual(
+            publisher_result["reason"],
+            "industry_classification_without_direct_game_development_evidence",
+        )
+        self.assertEqual(studio_result["status"], "verified")
 
     def test_wikidata_entity_uri_is_normalized_to_qid_and_https_source(self):
         self.assertEqual(
@@ -272,6 +300,99 @@ class DiscoveryParsingTests(unittest.TestCase):
         self.assertIsNone(
             discovery.normalize_wikidata_entity_uri("https://example.org/entity/Q789")
         )
+
+
+    def test_igdb_company_query_uses_numeric_cursor_and_resolved_official_website_type(self):
+        query = discovery.igdb_company_query("123", 100, 7)
+        self.assertIn("fields id,name,slug,developed,websites.url,websites.type", query)
+        self.assertIn("id > 123", query)
+        self.assertIn("developed != null", query)
+        self.assertIn("websites.type = 7", query)
+        self.assertIn("sort id asc", query)
+        self.assertIn("limit 100", query)
+        self.assertNotIn("websites.category", query)
+
+    def test_igdb_parser_filters_to_official_developer_companies_and_tracks_raw_cursor(self):
+        payload = [
+            {
+                "id": 100,
+                "name": "Alpha Games",
+                "slug": "alpha-games",
+                "developed": [1001],
+                "websites": [
+                    {"type": 7, "url": "https://alpha.example/"},
+                    {"type": 4, "url": "https://social.example/"},
+                ],
+            },
+            {
+                "id": 101,
+                "name": "Social Only",
+                "developed": [1002],
+                "websites": [{"type": 4, "url": "https://social-only.example/"}],
+            },
+            {
+                "id": 102,
+                "name": "Publisher Only",
+                "developed": [],
+                "websites": [{"type": 7, "url": "https://publisher.example/"}],
+            },
+        ]
+        rows, raw_count, next_cursor = discovery.parse_igdb_company_page(payload, "99", 7)
+        self.assertEqual(raw_count, 3)
+        self.assertEqual(next_cursor, "102")
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["qid"], "IGDB:100")
+        self.assertEqual(rows[0]["source_cursor"], "100")
+        self.assertEqual(rows[0]["source_id"], "igdb_companies")
+        self.assertEqual(rows[0]["website"], "https://alpha.example/")
+        self.assertEqual(rows[0]["company_type"], "Developer")
+        self.assertIn("/companies/alpha-games", rows[0]["entity_url"])
+
+
+    def test_igdb_api_requests_respect_documented_rate_limit_spacing(self):
+        class FakeResponse:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc_value, traceback):
+                return False
+
+            def read(self, _limit):
+                return b"[]"
+
+        discovery.IGDB_LAST_REQUEST_AT = 10.0
+        with (
+            patch.object(discovery.urllib.request, "urlopen", return_value=FakeResponse()),
+            patch.object(discovery.time, "monotonic", side_effect=[10.1, 10.1]),
+            patch.object(discovery.time, "sleep") as sleep,
+        ):
+            self.assertEqual(
+                discovery.igdb_api_post(
+                    discovery.IGDB_COMPANIES_ENDPOINT,
+                    "fields id;",
+                    "client-id",
+                    "app-token",
+                ),
+                [],
+            )
+        sleep.assert_called_once()
+        self.assertAlmostEqual(
+            sleep.call_args.args[0],
+            discovery.IGDB_MIN_REQUEST_INTERVAL_SECONDS - 0.1,
+            places=6,
+        )
+        discovery.IGDB_LAST_REQUEST_AT = 0.0
+
+    def test_igdb_feed_is_skipped_without_both_repository_secrets(self):
+        feed = next(item for item in discovery.FEEDS if item["kind"] == "igdb_companies")
+        with patch.dict(discovery.os.environ, {"IGDB_CLIENT_ID": "configured"}, clear=True):
+            self.assertFalse(discovery.source_feed_enabled(feed))
+        with patch.dict(
+            discovery.os.environ,
+            {"IGDB_CLIENT_ID": "configured", "IGDB_CLIENT_SECRET": "configured"},
+            clear=True,
+        ):
+            self.assertTrue(discovery.source_feed_enabled(feed))
 
 
 class CandidateVerificationTests(unittest.TestCase):
@@ -524,6 +645,56 @@ class DatasetUpdateTests(unittest.TestCase):
             self.assertEqual(result["source_pages"], 1)
             self.assertEqual(saved["feed_cursors"][first_feed_id], "Q123")
             self.assertNotIn("https://www.wikidata.org/entity/", saved["feed_cursors"][first_feed_id])
+
+
+    def test_igdb_pipeline_uses_numeric_raw_row_cursor_not_filtered_candidate_count(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "src/data").mkdir(parents=True)
+            (root / "src/data/speculative-route-directory.json").write_text("[]", encoding="utf-8")
+            (root / "src/data/studio-profiles.json").write_text("{}", encoding="utf-8")
+            state_path = root / "state/discovery.json"
+            state = discovery.empty_state()
+            feed = next(item for item in discovery.FEEDS if item["kind"] == "igdb_companies")
+            state["feed_index"] = discovery.FEEDS.index(feed)
+            state_path.parent.mkdir(parents=True)
+            state_path.write_text(json.dumps(state), encoding="utf-8")
+            candidate = {
+                "qid": "IGDB:9001",
+                "source_cursor": "9001",
+                "entity_url": "https://www.igdb.com/companies/example-studio",
+                "source_id": "igdb_companies",
+                "name": "Example Studio",
+                "website": "https://example-studio.example/",
+                "country": "Not stated",
+                "hq_city": "",
+                "country_code": "",
+                "company_type": "Developer",
+            }
+            with (
+                patch.dict(
+                    discovery.os.environ,
+                    {"IGDB_CLIENT_ID": "configured", "IGDB_CLIENT_SECRET": "configured"},
+                    clear=True,
+                ),
+                patch.object(discovery, "fetch_igdb_page", return_value=([candidate], 100, "9999")) as fetch_page,
+            ):
+                result = discovery.run_pipeline(
+                    mode="hourly",
+                    batch_size=100,
+                    max_source_pages=1,
+                    max_candidate_checks=0,
+                    route_check_count=0,
+                    root=root,
+                    state_path=state_path,
+                    page_fetcher=lambda _url, _external: self.fail("No candidate checks expected."),
+                )
+            saved = discovery.read_json(state_path, {})
+            self.assertEqual(result["source_pages"], 1)
+            self.assertTrue(result["igdb_enabled"])
+            fetch_page.assert_called_once_with("", 100)
+            self.assertEqual(saved["feed_cursors"]["igdb_companies"], "9999")
+            self.assertFalse(saved["feed_done"]["igdb_companies"])
 
     def test_verified_candidate_adds_directory_and_minimal_profile_once(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -792,16 +963,16 @@ class DatasetUpdateTests(unittest.TestCase):
         ]
         self.assertTrue(all(state["source_stats"][item]["cycle"] == 2 for item in other_sources))
 
-    def test_three_complete_empty_cycles_mark_initial_discovery_saturated(self):
+    def test_five_complete_empty_cycles_mark_initial_discovery_saturated(self):
         state = discovery.empty_state()
-        for _ in range(3):
+        for _ in range(5):
             for feed in discovery.FEEDS:
                 state["feed_done"][feed["id"]] = True
             self.assertTrue(discovery.finish_cycle_if_complete(state))
         recurring = [feed["id"] for feed in discovery.FEEDS if feed["refresh_policy"] == "recurring"]
         self.assertTrue(all(state["source_stats"][item]["saturated"] for item in recurring))
         self.assertTrue(state["saturated"])
-        self.assertEqual(state["empty_cycles"], 3)
+        self.assertEqual(state["empty_cycles"], 5)
 
 
     def test_verified_growth_resets_only_its_own_source_saturation(self):
@@ -810,7 +981,7 @@ class DatasetUpdateTests(unittest.TestCase):
         for feed in discovery.FEEDS:
             state["feed_done"][feed["id"]] = True
         for feed_id in recurring:
-            state["source_stats"][feed_id]["empty_cycles"] = 3
+            state["source_stats"][feed_id]["empty_cycles"] = 5
             state["source_stats"][feed_id]["saturated"] = True
         growing_source = recurring[0]
         state["source_stats"][growing_source]["cycle_additions"] = 1
@@ -826,8 +997,8 @@ class DatasetUpdateTests(unittest.TestCase):
         state = discovery.empty_state()
         recurring = [feed for feed in discovery.FEEDS if feed["refresh_policy"] == "recurring"]
         state["source_stats"][recurring[0]["id"]]["saturated"] = True
-        self.assertEqual(discovery.source_page_budget(recurring[0], state, 8), 1)
-        self.assertEqual(discovery.source_page_budget(recurring[1], state, 8), 8)
+        self.assertEqual(discovery.source_page_budget(recurring[0], state, 16), 4)
+        self.assertEqual(discovery.source_page_budget(recurring[1], state, 16), 16)
 
     def test_unresolved_retry_from_prior_pass_prevents_later_empty_saturation(self):
         state = discovery.empty_state()
@@ -862,6 +1033,12 @@ class DatasetUpdateTests(unittest.TestCase):
         self.assertEqual(
             {item["id"] for item in manifest["sources"]},
             {feed["id"] for feed in discovery.FEEDS},
+        )
+        self.assertIn("wikidata_video_game_industry", {feed["id"] for feed in discovery.FEEDS})
+        self.assertIn("igdb_companies", {feed["id"] for feed in discovery.FEEDS})
+        self.assertEqual(
+            next(feed for feed in discovery.FEEDS if feed["id"] == "gamedevmap")["refresh_policy"],
+            "recurring",
         )
 
     def test_v1_state_migration_preserves_checkpoints_without_guessing_feed_provenance(self):
@@ -1012,18 +1189,64 @@ class GameDevMapDiscoveryTests(unittest.TestCase):
             self.assertTrue(saved["feed_done"]["gamedevmap"])
             self.assertEqual(len(saved["candidates"]), 3)
 
-    def test_completed_wikidata_cycle_does_not_reset_game_dev_map_catalogue_cursor(self):
+    def test_hourly_gamedevmap_uses_raw_row_count_for_pagination(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            data_dir = root / "src" / "data"
+            data_dir.mkdir(parents=True)
+            (data_dir / "speculative-route-directory.json").write_text("[]", encoding="utf-8")
+            (data_dir / "studio-profiles.json").write_text("{}", encoding="utf-8")
+
+            state = discovery.empty_state()
+            feed = next(item for item in discovery.FEEDS if item["kind"] == "gamedevmap")
+            state["feed_index"] = discovery.FEEDS.index(feed)
+            state_path = root / "state.json"
+            state_path.write_text(json.dumps(state), encoding="utf-8")
+            candidate = {
+                "qid": "GDM:hourly-page",
+                "entity_url": "https://www.gamedevmap.com/index.php?start=1",
+                "name": "Hourly Pagination Studio",
+                "website": "https://hourly-pagination.example/",
+                "country": "Canada",
+                "hq_city": "Montreal",
+                "country_code": "",
+                "company_type": "Developer",
+            }
+
+            with patch.object(
+                discovery,
+                "fetch_gamedevmap_page",
+                return_value=([candidate], 100),
+            ):
+                result = discovery.run_pipeline(
+                    mode="hourly",
+                    batch_size=100,
+                    max_source_pages=1,
+                    max_candidate_checks=0,
+                    route_check_count=0,
+                    max_run_seconds=60,
+                    root=root,
+                    state_path=state_path,
+                )
+
+            saved = discovery.load_state(state_path)
+            self.assertEqual(result["source_pages"], 1)
+            self.assertEqual(saved["feed_cursors"]["gamedevmap"], "101")
+            self.assertFalse(saved["feed_done"]["gamedevmap"])
+
+
+    def test_completed_recurring_cycle_restarts_game_dev_map_catalogue_from_first_page(self):
         state = discovery.empty_state()
         state["feed_cursors"]["gamedevmap"] = "10501"
         state["feed_done"]["gamedevmap"] = True
         for feed in discovery.FEEDS:
-            if feed["kind"] != "gamedevmap":
-                state["feed_done"][feed["id"]] = True
+            state["feed_done"][feed["id"]] = True
 
-        self.assertTrue(discovery.finish_cycle_if_complete(state))
-        self.assertEqual(state["feed_cursors"]["gamedevmap"], "10501")
-        self.assertTrue(state["feed_done"]["gamedevmap"])
-        self.assertTrue(state["source_stats"]["gamedevmap"]["complete"])
+        completed = discovery.finish_source_cycles(state)
+        self.assertIn("gamedevmap", completed)
+        self.assertEqual(state["feed_cursors"]["gamedevmap"], "")
+        self.assertFalse(state["feed_done"]["gamedevmap"])
+        self.assertEqual(state["source_stats"]["gamedevmap"]["last_pass_status"], "complete")
         self.assertEqual(state["feed_cursors"]["wikidata_video_game_developers"], "")
         self.assertFalse(state["feed_done"]["wikidata_video_game_developers"])
 

@@ -8,6 +8,7 @@ on:
       - "scripts/discover_speculative_studios.py"
       - "scripts/merge_discovery_datasets.py"
       - "config/manual-studio-exclusions.json"
+      - "config/discovery-sources.json"
       - "src/data/speculative-route-directory.json"
       - "src/data/studio-profiles.json"
   schedule:
@@ -61,6 +62,9 @@ jobs:
       - name: Run a resumable discovery batch
         id: discovery
         shell: bash
+        env:
+          IGDB_CLIENT_ID: ${{ secrets.IGDB_CLIENT_ID }}
+          IGDB_CLIENT_SECRET: ${{ secrets.IGDB_CLIENT_SECRET }}
         run: |
           set -euo pipefail
           STATE_FILE=".discovery-state/state/studio-discovery-state.json"
@@ -71,16 +75,22 @@ jobs:
           elif [ ! -f "$STATE_FILE" ]; then
             MODE="bulk"
           else
-            # Finish the one-time GameDevMap catalogue backfill first.
-            # Once it is complete, hourly discovery continues even if another
-            # feed still has retries or manual-review candidates.
+            # Finish the initial GameDevMap catalogue pass first. Later passes
+            # restart from the beginning after reaching the end.
+            # Once the first pass is complete, hourly discovery continues even if
+            # another feed still has retries or manual-review candidates.
             MODE="$(python3 - "$STATE_FILE" <<'PY'
           import json
           import sys
 
           with open(sys.argv[1], encoding="utf-8") as handle:
               state = json.load(handle)
-          map_complete = state.get("feed_done", {}).get("gamedevmap", False)
+          map_metrics = state.get("source_stats", {}).get("gamedevmap", {})
+          map_complete = (
+              state.get("feed_done", {}).get("gamedevmap", False)
+              or bool(map_metrics.get("complete"))
+              or bool(map_metrics.get("last_pass_completed_at"))
+          )
           print("hourly" if map_complete else "bulk")
           PY
           )"
@@ -88,7 +98,7 @@ jobs:
 
           SOURCE_PAGE_LIMIT=110
           if [ "$MODE" = "hourly" ]; then
-            SOURCE_PAGE_LIMIT=8
+            SOURCE_PAGE_LIMIT=20
           fi
 
           if [ "$MODE" = "bulk" ]; then
@@ -187,8 +197,12 @@ jobs:
 
       - name: Persist discovery cursors and verification state
         shell: bash
+        env:
+          IGDB_CLIENT_ID: ${{ secrets.IGDB_CLIENT_ID }}
+          IGDB_CLIENT_SECRET: ${{ secrets.IGDB_CLIENT_SECRET }}
         run: |
           set -euo pipefail
+          STATE_FILE=".discovery-state/state/studio-discovery-state.json"
           git -C .discovery-state config user.name "github-actions[bot]"
           git -C .discovery-state config user.email "41898282+hhaitam95@users.noreply.github.com"
 
@@ -202,7 +216,86 @@ jobs:
             exit 1
           fi
 
-          git -C .discovery-state add state/studio-discovery-state.json
+          # Write a compact, names-free health snapshot for the exhaustion monitor.
+          python3 - "$STATE_FILE" config/discovery-sources.json .discovery-state/state/discovery/studio-source-status.json <<'PY'
+          import datetime as dt
+          import json
+          import os
+          import pathlib
+          import sys
+
+          state_path, manifest_path, output_path = map(pathlib.Path, sys.argv[1:])
+          state = json.loads(state_path.read_text(encoding="utf-8"))
+          manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+          candidate_counts = {}
+          for candidate in state.get("candidates", {}).values():
+              source_id = candidate.get("source_id", "unknown")
+              statuses = candidate_counts.setdefault(source_id, {})
+              status = candidate.get("status", "unknown")
+              statuses[status] = statuses.get(status, 0) + 1
+
+          sources = {}
+          for source in manifest.get("sources", []):
+              source_id = source["id"]
+              metrics = state.get("source_stats", {}).get(source_id, {})
+              enabled = (
+                  source.get("kind") != "igdb_companies"
+                  or bool(os.environ.get("IGDB_CLIENT_ID", "").strip()
+                          and os.environ.get("IGDB_CLIENT_SECRET", "").strip())
+              )
+              empty_passes = int(metrics.get("empty_cycles", 0))
+              saturated = bool(metrics.get("saturated", False))
+              last_candidates = int(metrics.get("last_pass_candidates", 0))
+              last_incomplete = int(metrics.get("last_pass_incomplete_candidates", 0))
+              no_new_data = bool(
+                  enabled
+                  and saturated
+                  and last_candidates == 0
+                  and last_incomplete == 0
+                  and metrics.get("last_pass_status") == "saturated"
+              )
+              sources[source_id] = {
+                  "label": source.get("label", source_id),
+                  "enabled": enabled,
+                  "cycle": int(metrics.get("cycle", 1)),
+                  "empty_complete_passes": empty_passes,
+                  "saturated": saturated,
+                  "last_pass_status": metrics.get("last_pass_status", "not_started"),
+                  "last_pass_completed_at": metrics.get("last_pass_completed_at"),
+                  "new_candidate_entities_last_pass": last_candidates,
+                  "verified_routes_last_pass": int(metrics.get("last_pass_verified", 0)),
+                  "incomplete_candidates_last_pass": last_incomplete,
+                  "no_new_candidate_data": no_new_data,
+                  "current_pass_complete": bool(state.get("feed_done", {}).get(source_id, False)),
+                  "candidate_status_counts": candidate_counts.get(source_id, {}),
+              }
+
+          enabled_sources = [source for source in sources.values() if source["enabled"]]
+          output = {
+              "schema_version": 1,
+              "updated_at": dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat(),
+              "discovery_state_updated_at": state.get("updated_at"),
+              "workflow_run_id": os.environ.get("GITHUB_RUN_ID"),
+              "workflow_run_number": os.environ.get("GITHUB_RUN_NUMBER"),
+              "workflow_commit": os.environ.get("GITHUB_SHA"),
+              "igdb_enabled": bool(os.environ.get("IGDB_CLIENT_ID", "").strip()
+                                   and os.environ.get("IGDB_CLIENT_SECRET", "").strip()),
+              "source_count": len(sources),
+              "enabled_source_count": len(enabled_sources),
+              "all_enabled_sources_no_new_candidate_data": bool(enabled_sources)
+                  and all(source["no_new_candidate_data"] for source in enabled_sources),
+              "candidate_pool_size": len(state.get("candidates", {})),
+              "candidate_status_counts": {
+                  status: sum(counts.get(status, 0) for counts in candidate_counts.values())
+                  for status in ("queued", "retry", "needs_review", "no_route", "published", "duplicate", "excluded")
+              },
+              "sources": sources,
+          }
+          output_path.parent.mkdir(parents=True, exist_ok=True)
+          output_path.write_text(json.dumps(output, indent=2) + "\n", encoding="utf-8")
+          PY
+
+          git -C .discovery-state add state/studio-discovery-state.json state/discovery/studio-source-status.json
           if git -C .discovery-state diff --cached --quiet; then
             echo "No discovery-state changes to persist."
           else
@@ -231,7 +324,7 @@ jobs:
             echo "- Source-page cap: ${{ steps.discovery.outputs.source_page_limit || 'not set' }}"
             echo "- Public changes: ${{ steps.commit.outputs.data_changed || 'not committed' }}"
             if [ -f "$RUNNER_TEMP/game-industry-outreach-tracker-discovery.log" ]; then
-              for key in source_pages source_candidates candidate_checks verified_added routes_checked time_budget_exhausted; do
+              for key in igdb_enabled source_pages source_candidates candidate_checks verified_added routes_checked time_budget_exhausted; do
                 value="$(awk -F': ' -v key="$key" '$1 == key { print substr($0, index($0, ": ") + 2); exit }' "$RUNNER_TEMP/game-industry-outreach-tracker-discovery.log")"
                 if [ -n "$value" ]; then
                   label="$(printf '%s' "$key" | tr '_' ' ')"

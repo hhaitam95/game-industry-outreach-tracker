@@ -1,7 +1,7 @@
 # Global discovery implementation model
 
 **Status:** Authoritative project guidance  
-**Last updated:** 2026-10-31  
+**Last updated:** 2026-11-02  
 **Applies to:** Candidate discovery, studio qualification, industry exclusions, speculative-route verification, source coverage and handovers.
 
 This document records the agreed discovery model. Read it before changing discovery scope, source adapters, qualification rules, exclusion rules, verification logic or discovery cadence. It is the durable source of truth when work moves to another chat, contributor or AI assistant.
@@ -103,31 +103,29 @@ Candidate indexes are discovery inputs only. They do not prove that a company is
 ### Existing integrated sources
 
 - **GameDevMap** — existing paginated global studio/company directory adapter. Use its public results interface as permitted; do not assume every row is a distinct studio or that a listed location is headquarters.
-- **Wikidata** — existing structured feeds for video-game developer entities, organisations credited as video-game developers and video-game companies. Treat entity types and credits as leads requiring validation.
+- **Wikidata** — four recurring structured feeds: video-game developer entities, organisations credited as video-game developers, video-game company entities and companies classified in the video-game industry. The industry feed is intentionally broad; it remains a lead unless the employer's own site demonstrates direct game-development work. Treat all entity types and credits as leads requiring validation.
+- **IGDB Company API** — recurring company-ID feed added in PR #100 (pending merge/deployment). It requests companies with one or more `developed` game credits and an official company website, resolving the current official website type from `/v4/website_types`. It records only the company name, safe official website, IGDB source URL and provenance needed for candidate verification; it does not publish raw IGDB descriptions or credit arrays. Twitch app credentials are read from repository Actions secrets only. Missing secrets skip this feed without counting an empty pass. IGDB candidates remain subject to both existing eligibility gates.
 
 ### Additional source leads identified on 2026-10-31
 
-These are candidate sources to evaluate and integrate; they are not yet confirmed as implemented adapters.
+These remain unintegrated candidate sources. Review their terms, access method, coverage and reuse conditions before automation.
 
-1. **IGDB API** — https://api-docs.igdb.com/  
-   A promising structured company/game-credit source. Its Company endpoint exposes company identifiers, names, websites, country, parent-company relationships, company types and links to games developed or published. The API requires a Twitch developer application and OAuth credentials; the documented request limit is 4 requests per second and the endpoint supports paginated requests of up to 500 records. Review the current Twitch/IGDB agreement, attribution rules and any commercial-partnership requirements before integration. No credentials or adapter are currently configured. Never commit Client Secrets; use repository Actions secrets only after the owner has configured them. Candidate data remains a lead and must be verified against official employer evidence.
-
-2. **GameCompanies.com** — https://gamecompanies.com/  
+1. **GameCompanies.com** — https://gamecompanies.com/  
    Its public site describes a directory of studios, publishers, hubs, organisations and service companies across 195 countries, plus a game-title catalogue. Useful for breadth and regional discovery. It mixes entity types, so classify every candidate. Its Terms restrict use to the provided interface unless written permission is obtained; use for manual research only until permission for bulk collection is secured.
 
-3. **Games Jobs Index studio directory** — https://gamesjobsindex.com/studios.html  
+2. **Games Jobs Index studio directory** — https://gamesjobsindex.com/studios.html  
    On 2026-10-31 the live page displayed 2,573 studios in its header but a regional roll-up of 2,415, so the aggregate count is inconsistent and must not be quoted as a reconciled total. The page exposes a visible **Speculative only** hiring-status filter, useful for manual lead generation. Treat its filter results only as leads: independently verify the organisation and its application route on the employer's official website. No documented bulk API or automated-harvesting permission was established during this review. Keep it as a manual lead source until access terms/permission are clear.
 
-4. **Steam Developer & Publisher Homepages** — https://store.steampowered.com/dev/?l=english and https://store.steampowered.com/pub/?l=english  
+3. **Steam Developer & Publisher Homepages** — https://store.steampowered.com/dev/?l=english and https://store.steampowered.com/pub/?l=english  
    Steam exposes a large paginated set of developer and publisher homepages. It mixes developers, publishers and other creator/homepage entities and is not a count of unique game studios. Use official, permitted access methods and respect Steam's terms and rate limits; do not assume the pages authorize bulk extraction or republication.
 
-5. **MobyGames API** — https://www.mobygames.com/info/api/  
+4. **MobyGames API** — https://www.mobygames.com/info/api/  
    MobyGames can help identify development companies from game credits and historical releases. The official API documentation says an API key is required and documents non-commercial request limits (720 requests per hour, maximum one request per second, as documented when checked on 2026-10-31). **Do not scrape MobyGames pages or automate access outside the API/permission allowed by its current terms.** Review API access, permitted uses, attribution and redistribution restrictions before implementation. Terms: https://www.mobygames.com/info/terms/.
 
-6. **Community-maintained Game Studios & Publishers Database** — https://github.com/EddieWing/gamedev-studios-db  
+5. **Community-maintained Game Studios & Publishers Database** — https://github.com/EddieWing/gamedev-studios-db  
    Its README describes a hand-verified list of 1,116 PC/console studios and publishers across 64 countries, with mobile-only studios excluded and Europe prioritised. It is not an exhaustive or neutral global census. No licence was found at the repository root during review; do not import or redistribute its dataset until a reuse licence or permission is confirmed.
 
-7. **Regional and national sources to discover** — local game-industry associations, national game-development directories, government creative-industry registries, public grant/production-funding recipient lists, game-cluster member directories, game-conference/exhibitor lists, and official storefront/developer-credit sources. Add each source only after documenting its provenance, coverage and lawful access method.
+6. **Regional and national sources to discover** — local game-industry associations, national game-development directories, government creative-industry registries, public grant/production-funding recipient lists, game-cluster member directories, game-conference/exhibitor lists, and official storefront/developer-credit sources. Add each source only after documenting its provenance, coverage and lawful access method.
 
 The list above is a living source registry, not a closed list. Add new indexes whenever credible global or regional sources are found. Do not stop because a finite list of sources has been exhausted.
 
@@ -194,10 +192,21 @@ Keep source-level checkpoints and candidate progress resumable. Do not overwrite
 
 The runtime feed inventory is `config/discovery-sources.json`. The discovery script loads this manifest and validates each source ID, adapter kind, refresh policy and saturation settings. The private state schema is v2 and migrates schema-v1 cursors/candidates additively.
 
-The three Wikidata feeds each own their cursor, cycle, verified-addition count, complete-empty-pass count, saturation flag and last-pass outcome. Three complete empty passes throttle only that feed to one page per hourly run; unsaturated feeds retain the remaining run budget. A verified route resets only its originating feed. Due candidate work keeps that feed's pass open; future retries/manual-review candidates mark the pass incomplete and cannot increment saturation. Failed fetches do not advance cursors or count as complete passes.
+The four Wikidata feeds, GameDevMap catalogue feed and IGDB company feed each own their cursor, cycle, verified-addition count, complete-empty-pass count, saturation flag and last-pass outcome. Five complete empty passes throttle only that feed to four pages per hourly run; unsaturated feeds retain the remaining global budget. The hourly run budget is 20 source pages, with the existing 65-second spacing between Wikidata requests, a separate IGDB request interval below four requests per second and a 25-minute pipeline ceiling. A verified route resets only its originating feed. Due candidate work keeps that feed's pass open; future retries/manual-review candidates mark the pass incomplete and cannot increment saturation. Failed fetches do not advance cursors or count as complete passes.
 
-GameDevMap remains a one-time catalogue backfill. Its terminal numeric offset is preserved and is not restarted by recurring Wikidata maintenance. Legacy candidate records without saved Wikidata query-feed provenance remain unattributed; do not guess their origin.
+GameDevMap is revisited as a recurring full-catalogue feed. Its numeric offset is preserved while a pass is in progress, then resets to the first page after the raw catalogue rows are exhausted; the parser uses raw page-row counts so filtered non-studio rows cannot truncate pagination. The source documents monthly catalogue data drops, so the recurring pass prevents the original one-time-backfill design from permanently missing later additions. The four Wikidata feeds restart from the beginning after each complete QID pass to catch newly added entities. Legacy candidate records without saved Wikidata query-feed provenance remain unattributed; do not guess their origin.
 
+The added Wikidata industry feed is a broader discovery signal, not proof of studio status. Its candidates only auto-publish when the employer-controlled pages show direct game-development work as well as an explicit speculative application route; otherwise they remain in manual review.
+
+The IGDB feed advances by numeric company ID, using raw response-row counts to detect the end of a page even when a company record cannot be normalized into a safe website candidate. It uses the `developed` relationship as developer-credit evidence and dynamically resolves the official Company Website type through `/v4/website_types`; it does not rely on the deprecated `category` enum. The app token is minted in the workflow run using `IGDB_CLIENT_ID` and `IGDB_CLIENT_SECRET` from repository Actions secrets. Secret values and access tokens are never logged or committed. If either secret is unavailable, IGDB is skipped and does not count toward source saturation.
+
+
+### 2026-11-02 — recurring catalogue refresh and wider industry leads
+
+- Converted GameDevMap from a one-time backfill to a recurring full-catalogue pass because its official help page describes monthly data updates. The pagination cursor is retained within a pass and restarted from the first page after completion.
+- Added a Wikidata industry-classification feed (P452 → video-game industry) to widen coverage beyond direct developer classes and credits. Because it includes publishers and suppliers, new candidates require explicit development evidence on the employer site or remain in manual review.
+- Raised the hourly source budget from 8 to 20 pages, with 4 pages per saturated feed after 5 complete empty passes. Kept Wikidata request spacing at 65 seconds and the 25-minute run ceiling.
+- Fixed GameDevMap end-of-page detection to use raw catalogue rows rather than only filtered candidates, preventing premature termination when a page contains non-studio rows.
 
 ## 8. Accuracy and quality safeguards
 
@@ -216,7 +225,7 @@ GameDevMap remains a one-time catalogue backfill. Its terminal numeric offset is
 
 The following is an ordered engineering plan, not a priority ranking of employers or regions.
 
-1. **Preserve the model and source registry.** Keep this document and the project handoff current. Maintain `config/discovery-sources.json` as the machine-readable inventory for integrated adapters, source coverage, access/policy notes, pagination, refresh policy and per-source saturation settings.
+1. **Preserve the model and source registry.** Keep this document and the project handoff current. Maintain `config/discovery-sources.json` as the machine-readable inventory for integrated adapters, source coverage, access/policy notes, pagination, refresh policy and per-source saturation settings. The current inventory includes four recurring Wikidata feeds and a recurring GameDevMap full-catalogue feed.
 2. **Continue the discovery-quality audit.** The GameDevMap/Wikidata adapter cadence, private checkpoint migration and source-specific saturation are implemented. Continue auditing candidate identity, adult/vice false positives, source failure handling and company-level classification against this model; keyword patterns are not a complete company-level classification system.
 3. **Add source adapters only after access review.** Evaluate the IGDB Company API first as a structured company/game-credit source, using Twitch credentials stored only in repository Actions secrets after the user configures them. Evaluate GameCompanies.com, Games Jobs Index, Steam and permitted regional datasets independently. Do not automate GameCompanies.com without written permission; retain Games Jobs Index as a manual lead source until its automation terms are established. Preserve provenance for every source.
 4. **Review MobyGames access separately.** Use only authorized API access, subject to its current API and content terms. Do not implement page scraping.
@@ -509,3 +518,14 @@ At the start of any new work session or handover:
 8. Do not change or reprioritize the user's goal without an explicit instruction.
 
 **Current decision:** Global discovery accuracy and coverage are the only focus at this stage. No employer, geography, discipline, company size or work model is prioritized. The personal career-targeting layer can be considered later, after the global discovery work has matured.
+
+
+### 2026-11-02 — IGDB company discovery adapter (PR #100)
+
+- Added the IGDB Company API as the sixth recurring candidate feed, alongside the four Wikidata feeds and recurring GameDevMap catalogue.
+- Query only company records with developed-game credits and an officially typed company website. Resolve the website type dynamically from the IGDB `website_types` endpoint; do not hard-code the deprecated company-website category enum.
+- Use a numeric company-ID cursor, preserve raw API row counts for pagination, and apply a 0.27-second minimum interval between IGDB API requests to stay below the documented four-request-per-second limit.
+- Reuse the existing `IGDB_CLIENT_ID` and `IGDB_CLIENT_SECRET` GitHub Actions secrets. Mint an app token at runtime; keep values out of generated data, workflow summaries and logs. If either secret is absent, skip IGDB without recording an empty pass.
+- Treat IGDB results as candidates only. The public directory still requires independent proof of direct game-development work and an explicit speculative-application route on the employer's official site or linked employer-controlled ATS.
+- PR #100 final head `fd4ef9da5a68f1f01c24d3a6390caf4ae9abc720` passed full CI in [workflow run 41413993904](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41413993904), including the API pacing regression test and browser acceptance. The PR remains open; the adapter is not yet live on GitHub Pages.
+- Access note: IGDB's API documentation describes non-commercial API use as free, and its FAQ says local caching and serving API data to end users is permitted. Keep the integration non-commercial, retain visible IGDB attribution, and recheck the current terms before any monetized use. See https://api-docs.igdb.com/ and https://legal.twitch.com/en/legal/developer-agreement/.

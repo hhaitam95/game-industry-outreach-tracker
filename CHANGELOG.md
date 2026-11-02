@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-11-02 — Add IGDB company discovery feed (PR #100)
+
+- Add a recurring IGDB Companies API candidate feed for companies with developed-game credits and an officially typed company website.
+- Resolve the official website type via `/v4/website_types`; use numeric company-ID pagination and raw response-row counts.
+- Reuse the existing Twitch application secrets in the scheduled workflow, mint app tokens at runtime, and never expose secret values or tokens.
+- Pace IGDB requests at 0.27 seconds. If credentials are unavailable, skip this feed without counting an empty pass.
+- Preserve the existing strict official-site speculative-application verification. No new sources beyond IGDB are introduced.
+- Full exact-head CI and browser acceptance passed in run [41413993904](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41413993904), including the final rate-limit regression test. PR #100 is open; these changes are not yet merged/deployed.
+
+
 ## 2026-11-01 — Studio discovery information redesign
 
 - Replace the Studio type table column with an At a glance column showing compact platform and game-focus tags; show up to three notable game covers and the normalized scale beside each studio name.
