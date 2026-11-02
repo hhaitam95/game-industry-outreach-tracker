@@ -638,7 +638,7 @@ class CandidateVerificationTests(unittest.TestCase):
             return pages.get(url, discovery.FetchResult(False, url, 404, "", "not-found"))
 
         result = discovery.verify_candidate_pages(candidate, page_fetcher)
-        self.assertEqual(result["status"], "verified")
+        self.assertEqual(result["status"], "verified", result)
         self.assertEqual(result["route_type"], "spontaneous")
         self.assertEqual(
             result["evidence_url"],
