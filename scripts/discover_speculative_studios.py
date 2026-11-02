@@ -157,6 +157,11 @@ ATS_HOSTS = (
     "breezy.hr",
     "applytojob.com",
     "successfactors.com",
+    # Verified employer-linked providers seen in real studio recruitment routes.
+    "traffit.com",
+    "erecruiter.pl",
+    "hrmos.co",
+    "alumy.jp",
 )
 
 CAREER_LINK_HINT = re.compile(
@@ -165,7 +170,8 @@ CAREER_LINK_HINT = re.compile(
     r"team|emploi|carri[eè]re|recrut|postuler|nous rejoindre|vacature|werken bij|"
     r"contacto|empleo|trabaja con|candidatura|lavoro|lavora con noi|offerte di lavoro|"
     r"karri[aä]r|lediga jobb|spontanans[oö]k|ty[oö]paikka|arbet|sollicitat|"
-    r"stillinger|s[oø]knad|hakemus|ty[oö]paikk|vacantes)",
+    r"stillinger|s[oø]knad|hakemus|ty[oö]paikk|vacantes|"
+    r"採用|募集要項|キャリア登録|エントリー|応募|求人)",
     re.I,
 )
 
@@ -191,6 +197,10 @@ POSITIVE_ROUTE_PATTERNS = (
         re.I | re.S,
     ),
     re.compile(r"\bexpression\s+of\s+interest\b", re.I),
+    # Japanese career-registration pages may accept candidates without a
+    # matching advertised role; career context and a linked submission route
+    # are still mandatory before publication.
+    re.compile(r"(?:キャリア登録|職種を絞らず(?:に)?応募|希望する職種の募集がない方.{0,80}(?:登録|応募))"),
     re.compile(r"\bcandidature\s+spontan[ée]e?s?\b", re.I),
     re.compile(r"\bcandidature\s+libre\b", re.I),
     re.compile(r"\binitiativbewerbung(?:en)?\b", re.I),
@@ -217,7 +227,8 @@ POSITIVE_ROUTE_PATTERNS = (
 CAREER_CONTEXT_TEXT = re.compile(
     r"\b(?:careers?|jobs?|job openings?|roles?|positions?|vacanc(?:y|ies)|"
     r"recruitment|hiring|employment|apply online|submit your cv|send.{0,60}\b(?:cv|resume|résumé)\b|"
-    r"work with us|join (?:our|the) team|human resources|hr department)\b",
+    r"work with us|join (?:our|the) team|human resources|hr department)\b|"
+    r"採用|募集要項|キャリア登録|エントリー|応募|求人",
     re.I,
 )
 CAREER_CONTEXT_URL = re.compile(
@@ -280,6 +291,7 @@ POSITIVE_ROUTE_TYPE = (
     ("discipline_specific", re.compile(r"\b(?:expression of interest|talent pool)\b", re.I)),
     ("open", re.compile(r"\bopen applications?\b", re.I)),
     ("general", re.compile(r"\bgeneral applications?\b", re.I)),
+    ("general", re.compile(r"(?:キャリア登録|職種を絞らず(?:に)?応募|希望する職種の募集がない方.{0,80}(?:登録|応募))")),
     ("spontaneous", re.compile(r"\b(?:candidature\s+spontan[ée]e?s?|initiativbewerbung|spontanbewerbung|candidatura\s+espont[aáâ]nea|spontane\s+sollicitatie|open\s+sollicitatie|avoin\s+hakemus|uopfordret\s+ans[oø]gning|[aå]pen\s+s[oø]knad|spontanansök(?:an|ningar)|spontanansøgning|spontan\s+jelentkez[eé]s|spontaniczna\s+aplikacja)\b", re.I)),
 )
 
@@ -735,7 +747,8 @@ def choose_application_url(page: Page, site_url: str) -> str:
         route_specific = bool(re.search(
             r"(?:speculative|unsolicited|spontaneous|open[-_ ]application|general[-_ ]application|"
             r"expression[-_ ]of[-_ ]interest|initiative[-_ ]application|initiativbewerbung|"
-            r"candidature[-_ ]spontan[ée]e|open[-_ ]sollicitatie|avoin[-_ ]hakemus)",
+            r"candidature[-_ ]spontan[ée]e|open[-_ ]sollicitatie|avoin[-_ ]hakemus|"
+            r"キャリア登録|職種を絞らず(?:に)?応募|希望する職種の募集がない方)",
             combined,
             re.I,
         ))
