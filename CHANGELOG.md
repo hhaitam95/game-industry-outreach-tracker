@@ -7,7 +7,7 @@
 - Reuse the existing Twitch application secrets in the scheduled workflow, mint app tokens at runtime, and never expose secret values or tokens.
 - Pace IGDB requests at 0.27 seconds. If credentials are unavailable, skip this feed without counting an empty pass.
 - Preserve the existing strict official-site speculative-application verification. No new sources beyond IGDB are introduced.
-- Full CI and browser acceptance passed in run 41412920931; final rate-limit test/documentation commits trigger another CI run. PR #100 is open; these changes are not yet merged/deployed.
+- Full exact-head CI and browser acceptance passed in run [41413993904](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41413993904), including the final rate-limit regression test. PR #100 is open; these changes are not yet merged/deployed.
 
 
 ## 2026-11-01 — Studio discovery information redesign
