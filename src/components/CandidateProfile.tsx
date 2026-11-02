@@ -67,6 +67,9 @@ async function profileDocumentFromFile(file: File): Promise<ProfileDocument> {
   if (extension !== "pdf" && extension !== "docx") {
     throw new Error("Choose a PDF or DOCX document.");
   }
+  if (file.name.length > 255) {
+    throw new Error("The document filename must be 255 characters or fewer.");
+  }
   if (file.type && file.type !== "application/octet-stream" && !acceptedMimeTypes.includes(file.type)) {
     throw new Error("The selected file type does not match a supported PDF or DOCX document.");
   }
@@ -76,12 +79,20 @@ async function profileDocumentFromFile(file: File): Promise<ProfileDocument> {
   const mimeType = extension === "pdf"
     ? "application/pdf"
     : "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+  const dataBase64 = await readFileAsBase64(file);
+  const fileSignature = window.atob(dataBase64.slice(0, 24));
+  const validSignature = extension === "pdf"
+    ? fileSignature.startsWith("%PDF-")
+    : fileSignature.startsWith("PK\\u0003\\u0004");
+  if (!validSignature) {
+    throw new Error("The document contents do not match the selected PDF or DOCX file type.");
+  }
   return {
-    name: file.name.slice(0, 255),
+    name: file.name,
     mimeType,
     size: file.size,
     lastModified: file.lastModified,
-    dataBase64: await readFileAsBase64(file),
+    dataBase64,
   };
 }
 
@@ -366,6 +377,17 @@ export default function CandidateProfile() {
     }
   }
 
+  function handleBackupExport() {
+    try {
+      downloadBackup(profile);
+      setError("");
+      setStatus("Backup exported · keep the file private");
+    } catch (exportError) {
+      setError(exportError instanceof Error ? exportError.message : "Could not export this profile backup.");
+      setStatus("Backup export failed");
+    }
+  }
+
   async function handleBackupImport(event: ChangeEvent<HTMLInputElement>) {
     const file = event.currentTarget.files?.[0];
     event.currentTarget.value = "";
@@ -425,7 +447,7 @@ export default function CandidateProfile() {
               onChange={handleBackupImport}
             />
           </label>
-          <button className="btn btn-outline-secondary btn-sm" type="button" onClick={() => downloadBackup(profile)}>
+          <button className="btn btn-outline-secondary btn-sm" type="button" disabled={!storageReady || saving} onClick={handleBackupExport}>
             Export backup
           </button>
           <button className="btn btn-primary btn-sm" type="button" disabled={!storageReady || !dirty || saving} onClick={handleSave}>
