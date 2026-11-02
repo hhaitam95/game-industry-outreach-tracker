@@ -302,6 +302,64 @@ class DiscoveryParsingTests(unittest.TestCase):
         )
 
 
+    def test_igdb_company_query_uses_numeric_cursor_and_resolved_official_website_type(self):
+        query = discovery.igdb_company_query("123", 100, 7)
+        self.assertIn("fields id,name,slug,developed,websites.url,websites.type", query)
+        self.assertIn("id > 123", query)
+        self.assertIn("developed != null", query)
+        self.assertIn("websites.type = 7", query)
+        self.assertIn("sort id asc", query)
+        self.assertIn("limit 100", query)
+        self.assertNotIn("websites.category", query)
+
+    def test_igdb_parser_filters_to_official_developer_companies_and_tracks_raw_cursor(self):
+        payload = [
+            {
+                "id": 100,
+                "name": "Alpha Games",
+                "slug": "alpha-games",
+                "developed": [1001],
+                "websites": [
+                    {"type": 7, "url": "https://alpha.example/"},
+                    {"type": 4, "url": "https://social.example/"},
+                ],
+            },
+            {
+                "id": 101,
+                "name": "Social Only",
+                "developed": [1002],
+                "websites": [{"type": 4, "url": "https://social-only.example/"}],
+            },
+            {
+                "id": 102,
+                "name": "Publisher Only",
+                "developed": [],
+                "websites": [{"type": 7, "url": "https://publisher.example/"}],
+            },
+        ]
+        rows, raw_count, next_cursor = discovery.parse_igdb_company_page(payload, "99", 7)
+        self.assertEqual(raw_count, 3)
+        self.assertEqual(next_cursor, "102")
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["qid"], "IGDB:100")
+        self.assertEqual(rows[0]["source_cursor"], "100")
+        self.assertEqual(rows[0]["source_id"], "igdb_companies")
+        self.assertEqual(rows[0]["website"], "https://alpha.example/")
+        self.assertEqual(rows[0]["company_type"], "Developer")
+        self.assertIn("/companies/alpha-games", rows[0]["entity_url"])
+
+    def test_igdb_feed_is_skipped_without_both_repository_secrets(self):
+        feed = next(item for item in discovery.FEEDS if item["kind"] == "igdb_companies")
+        with patch.dict(discovery.os.environ, {"IGDB_CLIENT_ID": "configured"}, clear=True):
+            self.assertFalse(discovery.source_feed_enabled(feed))
+        with patch.dict(
+            discovery.os.environ,
+            {"IGDB_CLIENT_ID": "configured", "IGDB_CLIENT_SECRET": "configured"},
+            clear=True,
+        ):
+            self.assertTrue(discovery.source_feed_enabled(feed))
+
+
 class CandidateVerificationTests(unittest.TestCase):
     def setUp(self):
         discovery.LAST_REQUEST_BY_HOST.clear()
@@ -552,6 +610,56 @@ class DatasetUpdateTests(unittest.TestCase):
             self.assertEqual(result["source_pages"], 1)
             self.assertEqual(saved["feed_cursors"][first_feed_id], "Q123")
             self.assertNotIn("https://www.wikidata.org/entity/", saved["feed_cursors"][first_feed_id])
+
+
+    def test_igdb_pipeline_uses_numeric_raw_row_cursor_not_filtered_candidate_count(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "src/data").mkdir(parents=True)
+            (root / "src/data/speculative-route-directory.json").write_text("[]", encoding="utf-8")
+            (root / "src/data/studio-profiles.json").write_text("{}", encoding="utf-8")
+            state_path = root / "state/discovery.json"
+            state = discovery.empty_state()
+            feed = next(item for item in discovery.FEEDS if item["kind"] == "igdb_companies")
+            state["feed_index"] = discovery.FEEDS.index(feed)
+            state_path.parent.mkdir(parents=True)
+            state_path.write_text(json.dumps(state), encoding="utf-8")
+            candidate = {
+                "qid": "IGDB:9001",
+                "source_cursor": "9001",
+                "entity_url": "https://www.igdb.com/companies/example-studio",
+                "source_id": "igdb_companies",
+                "name": "Example Studio",
+                "website": "https://example-studio.example/",
+                "country": "Not stated",
+                "hq_city": "",
+                "country_code": "",
+                "company_type": "Developer",
+            }
+            with (
+                patch.dict(
+                    discovery.os.environ,
+                    {"IGDB_CLIENT_ID": "configured", "IGDB_CLIENT_SECRET": "configured"},
+                    clear=True,
+                ),
+                patch.object(discovery, "fetch_igdb_page", return_value=([candidate], 100, "9999")) as fetch_page,
+            ):
+                result = discovery.run_pipeline(
+                    mode="hourly",
+                    batch_size=100,
+                    max_source_pages=1,
+                    max_candidate_checks=0,
+                    route_check_count=0,
+                    root=root,
+                    state_path=state_path,
+                    page_fetcher=lambda _url, _external: self.fail("No candidate checks expected."),
+                )
+            saved = discovery.read_json(state_path, {})
+            self.assertEqual(result["source_pages"], 1)
+            self.assertTrue(result["igdb_enabled"])
+            fetch_page.assert_called_once_with("", 100)
+            self.assertEqual(saved["feed_cursors"]["igdb_companies"], "9999")
+            self.assertFalse(saved["feed_done"]["igdb_companies"])
 
     def test_verified_candidate_adds_directory_and_minimal_profile_once(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -892,6 +1000,7 @@ class DatasetUpdateTests(unittest.TestCase):
             {feed["id"] for feed in discovery.FEEDS},
         )
         self.assertIn("wikidata_video_game_industry", {feed["id"] for feed in discovery.FEEDS})
+        self.assertIn("igdb_companies", {feed["id"] for feed in discovery.FEEDS})
         self.assertEqual(
             next(feed for feed in discovery.FEEDS if feed["id"] == "gamedevmap")["refresh_policy"],
             "recurring",
