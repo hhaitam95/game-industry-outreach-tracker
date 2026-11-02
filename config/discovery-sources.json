@@ -127,6 +127,29 @@
         "complete_empty_passes_before_throttling": 5,
         "maximum_pages_per_hourly_run_when_saturated": 4
       }
+    },
+    {
+      "id": "scottish_games_industry",
+      "label": "Scottish Games Industry: open company directory",
+      "kind": "scottish_directory",
+      "adapter": "scottish_open_github_json",
+      "refresh_policy": "recurring",
+      "coverage": "Community-maintained Scottish games-company dataset. The adapter selects active developer and solo-developer categories with official websites; every candidate must independently prove direct game development and an explicit speculative application route on the employer-controlled site.",
+      "pagination": "Git tree index of data/companies/*.json; numeric offset over sorted raw company files. Raw file count, not filtered candidate count, determines page completion.",
+      "endpoint": "https://api.github.com/repos/r0bbie/gamesindustry.scot/git/trees/main?recursive=1",
+      "policy_url": "https://github.com/r0bbie/gamesindustry.scot/blob/main/LICENSE-DATA",
+      "license": "CC BY-NC-SA 4.0 for company data. Retain attribution and source provenance; non-commercial use only; share-alike applies. Obtain separate permission before any commercial use.",
+      "attribution": "Scottish Games Industry company dataset, r0bbie/gamesindustry.scot",
+      "access": {
+        "endpoint": "https://api.github.com/repos/r0bbie/gamesindustry.scot/git/trees/main?recursive=1",
+        "method": "Public GitHub API and raw JSON files; no API key required for public repository reads.",
+        "policy_url": "https://github.com/r0bbie/gamesindustry.scot/blob/main/LICENSE-DATA",
+        "request_policy": "Use the public Git tree and raw company JSON records only; respect robots.txt, public-host validation and per-host spacing in fetch_url. Keep CC BY-NC-SA attribution and non-commercial boundary."
+      },
+      "saturation": {
+        "complete_empty_passes_before_throttling": 5,
+        "maximum_pages_per_hourly_run_when_saturated": 4
+      }
     }
   ]
 }
