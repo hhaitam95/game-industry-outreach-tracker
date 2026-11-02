@@ -472,7 +472,7 @@ class CandidateVerificationTests(unittest.TestCase):
                 <title>Example Studio</title>
                 <p>We develop video games.</p>
                 <a href="/careers">Careers</a>
-                <a href="https://boards.greenhouse.io/example-studio">Apply</a>
+                <a href="https://boards.greenhouse.io/example-studio">Open Application</a>
                 """,
             ),
             "https://example-studio.example/careers": discovery.FetchResult(
@@ -484,7 +484,7 @@ class CandidateVerificationTests(unittest.TestCase):
                 <h1>Join us</h1>
                 <p>We welcome speculative applications from game developers.</p>
                 <form action="/submit"></form>
-                <a href="https://boards.greenhouse.io/example-studio">Apply here</a>
+                <a href="https://boards.greenhouse.io/example-studio">Open Application</a>
                 """,
             ),
             "https://boards.greenhouse.io/example-studio": discovery.FetchResult(
