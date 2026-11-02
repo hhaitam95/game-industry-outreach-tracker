@@ -770,7 +770,11 @@ def verify_candidate_pages(
         }
     # Candidate indexes are only discovery signals. Every source must pass the same
     # employer-owned proof of direct game development before automatic publication.
-    if not game_development_evidence_match(all_text):
+    official_text = " ".join(
+        page.text for page in pages if same_site(website, page.url)
+    )
+    development_evidence = game_development_evidence_match(official_text)
+    if not development_evidence:
         return {
             "status": "needs_review",
             "reason": "candidate_without_direct_game_development_evidence_on_official_site",
@@ -781,8 +785,14 @@ def verify_candidate_pages(
     for page in pages:
         negative = negative_route_match(page.text)
         match = positive_route_match(page.text)
-        career_context = bool(CAREER_CONTEXT_URL.search(urllib.parse.urlsplit(page.url).path)
-                              or CAREER_CONTEXT_TEXT.search(page.text))
+        context_window = (
+            page.text[max(0, match.start() - 300):min(len(page.text), match.end() + 300)]
+            if match else ""
+        )
+        career_context = bool(
+            CAREER_CONTEXT_URL.search(urllib.parse.urlsplit(page.url).path)
+            or CAREER_CONTEXT_TEXT.search(context_window)
+        )
         if negative:
             negatives.append((page, negative))
         elif match and career_context:
@@ -842,7 +852,7 @@ def verify_candidate_pages(
         "submission_methods": sorted(set(methods)),
         "source_type": "employer_managed_career_platform" if external_ats else "official_company_site",
         "evidence_excerpt": matched_text,
-        "development_evidence_excerpt": " ".join(game_development_evidence_match(all_text).group(0).split())[:180],
+        "development_evidence_excerpt": " ".join(development_evidence.group(0).split())[:180],
         "work_model": infer_work_model(evidence_page.text),
     }
 
@@ -1506,23 +1516,38 @@ def add_candidates(
         for candidate in state["candidates"].values()
         if canonical_url(str(candidate.get("website", "")))
     }
+    by_domain = {
+        domain_key(str(candidate.get("website", ""))): candidate
+        for candidate in state["candidates"].values()
+        if canonical_url(str(candidate.get("website", "")))
+    }
     for row in rows:
         qid = row["qid"]
+        candidate_source_id = str(row.get("source_id") or source_id or "legacy_unattributed")
         if qid in state["candidates"]:
+            candidate = state["candidates"][qid]
+            seen = candidate.setdefault("sources_seen", [])
+            if candidate_source_id not in seen:
+                seen.append(candidate_source_id)
             continue
         website = canonical_url(row["website"])
         if not website:
             continue
         domain = domain_key(website)
-        # Official domains are the reliable deduplication key. Same-name candidates
-        # on different domains are retained for verification instead of silently dropped.
+        # Exact domain duplicates stay one candidate, but their provenance is retained.
         if domain in known_domains:
+            existing = by_domain.get(domain)
+            if existing is not None:
+                seen = existing.setdefault("sources_seen", [existing.get("source_id", "legacy_unattributed")])
+                if candidate_source_id not in seen:
+                    seen.append(candidate_source_id)
             continue
         candidate_source_id = str(row.get("source_id") or source_id or "legacy_unattributed")
         source_metrics = state.get("source_stats", {}).get(candidate_source_id, {})
         state["candidates"][qid] = {
             **row,
             "source_id": candidate_source_id,
+            "sources_seen": [candidate_source_id],
             "source_cycle": int(source_metrics.get("cycle", state.get("cycle", 1))),
             "website": website,
             "status": "queued",
@@ -1534,6 +1559,7 @@ def add_candidates(
             "reason": None,
         }
         known_domains.add(domain)
+        by_domain[domain] = state["candidates"][qid]
         state["stats"]["candidates_seen"] += 1
         added += 1
     return added
@@ -2109,6 +2135,9 @@ def run_pipeline(
                 "last_failure_at": state["source_stats"][feed["id"]].get("last_failure_at"),
                 "last_success_at": state["source_stats"][feed["id"]].get("last_success_at"),
                 "next_retry_at": state["source_stats"][feed["id"]].get("next_retry_at"),
+                "empty_complete_passes": state["source_stats"][feed["id"]].get("empty_cycles", 0),
+                "last_pass_candidates": state["source_stats"][feed["id"]].get("last_pass_candidates", 0),
+                "last_pass_incomplete_candidates": state["source_stats"][feed["id"]].get("last_pass_incomplete_candidates", 0),
             }
             for feed in FEEDS
         },
