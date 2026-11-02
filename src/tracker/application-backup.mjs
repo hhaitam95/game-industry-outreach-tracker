@@ -12,10 +12,17 @@ const VALID_STATUSES = new Set([
   "archived",
 ]);
 
+/** @param {unknown} value @returns {value is Record<string, unknown>} */
 function isRecord(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 
+/**
+ * @param {unknown} value
+ * @param {string} label
+ * @param {number} [maxLength]
+ * @returns {string}
+ */
 function requiredString(value, label, maxLength = 2000) {
   if (typeof value !== "string" || !value.trim() || value.length > maxLength) {
     throw new Error("The application backup contains an invalid " + label + ".");
@@ -23,6 +30,12 @@ function requiredString(value, label, maxLength = 2000) {
   return value;
 }
 
+/**
+ * @param {unknown} value
+ * @param {string} label
+ * @param {number} [maxLength]
+ * @returns {string | undefined}
+ */
 function optionalString(value, label, maxLength = 2000) {
   if (value === undefined) return undefined;
   if (typeof value !== "string" || value.length > maxLength) {
@@ -31,6 +44,11 @@ function optionalString(value, label, maxLength = 2000) {
   return value;
 }
 
+/**
+ * @param {unknown} value
+ * @param {string} label
+ * @returns {string}
+ */
 function validHttpUrl(value, label) {
   const candidate = requiredString(value, label, 2000);
   try {
@@ -42,6 +60,11 @@ function validHttpUrl(value, label) {
   throw new Error("The application backup contains an invalid " + label + ".");
 }
 
+/**
+ * @param {unknown} value
+ * @param {number} index
+ * @returns {import("../components/studio.types").TrackedApplication}
+ */
 function validateApplication(value, index) {
   const prefix = "application " + (index + 1);
   if (!isRecord(value)) {
@@ -53,7 +76,7 @@ function validateApplication(value, index) {
     throw new Error("The application backup contains an unsupported status for " + prefix + ".");
   }
 
-  const appliedAt = value.appliedAt === null
+  const appliedAt = value.appliedAt === null || value.appliedAt === undefined
     ? null
     : requiredString(value.appliedAt, prefix + " applied date", 80);
   const note = typeof value.note === "string" ? value.note : "";
