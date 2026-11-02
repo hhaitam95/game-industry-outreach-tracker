@@ -316,6 +316,61 @@
       "automationStatus": "manual_only_duplicate_heavy",
       "accessPolicy": "Manual cross-check only; no permission for bulk reproduction was established.",
       "reviewNotes": "Directory states only 20 organisations are independently verified and 209 are community records; much of the community list is derived from GameDevMap. Do not count it as an independent 229-studio discovery feed or re-import duplicate rows."
+    },
+    {
+      "id": "sg_acra_corporate_entities",
+      "name": "ACRA Information on Corporate Entities — Singapore Open Data",
+      "url": "https://developers.data.gov.sg/datasets",
+      "region": "Singapore",
+      "sourceKind": "government_open_company_registry",
+      "signal": "27 monthly CSV datasets of ACRA-registered entities, searchable by company name, UEN, registration status and primary/secondary SSIC. SSIC 62012 identifies Development of computer games; 58201 identifies Publishing of games software/applications. The API sample query works without an API key; a key raises rate limits and priority.",
+      "automationStatus": "research_approved_enrichment_required",
+      "accessPolicy": "Official data.gov.sg Open Data Licence permits free personal and commercial reuse. Use the public datastore API or monthly CSV exports; no authentication required for basic low-rate requests. API key is optional for higher rate limits. Preserve agency attribution and refresh monthly.",
+      "reviewNotes": "High-value Singapore source. The public dataset contains 53 columns including entity name, active status, UEN, address and declared business activities, but no company website. Do not auto-publish or pass to speculative-route verification until an official-site resolution step or a safe match to an existing verified domain is available. Use status and primary/secondary activity; distinguish developers (62012) from publisher-only (58201)."
+    },
+    {
+      "id": "croatian_games_development_alliance_members",
+      "name": "Croatian Games Development Alliance — Members",
+      "url": "https://cgda.eu/en/members",
+      "region": "Croatia",
+      "sourceKind": "national_game_developer_association_directory",
+      "signal": "Public directory shows 50 of 50 member records and includes explicit Studio, Publisher, Education, Partner and Institution categories.",
+      "automationStatus": "manual_only",
+      "accessPolicy": "Public directory; no bulk-reuse/API permission was established during review. Manual lead research only until terms/licence are confirmed.",
+      "reviewNotes": "Useful Croatian/Balkan long-tail source. Start with Studio labels, but the category itself does not prove current activity or speculative-route acceptance. Verify on the employer's site."
+    },
+    {
+      "id": "igea_member_companies",
+      "name": "Interactive Games & Entertainment Association — Our Members",
+      "url": "https://igea.net/about/members/",
+      "region": "Australia and New Zealand",
+      "sourceKind": "regional_trade_association_member_directory",
+      "signal": "Public company-profile and member links for game companies; separate associate-member section includes service providers, schools and professional services.",
+      "automationStatus": "manual_only",
+      "accessPolicy": "Public member listing; no explicit bulk data reuse permission confirmed. Manual research only pending permission/terms review.",
+      "reviewNotes": "Potential additional Oceania coverage beyond the Australian Game Developers Directory. Do not treat the association's corporate roster or associate members as developer-only; read each company profile."
+    },
+    {
+      "id": "canada_gamescom_2026_directory",
+      "name": "Canada at gamescom 2026 — Canadian Game Companies",
+      "url": "https://gamescomcanada.com/directory",
+      "region": "Canada",
+      "sourceKind": "national_trade_mission_event_company_directory",
+      "signal": "Event directory displays 100 Canadian game companies, with company descriptions, locations and partnership/co-development/publishing interests.",
+      "automationStatus": "manual_only",
+      "accessPolicy": "Public event directory; automated collection/republication terms were not established. Manual research only; preserve page attribution.",
+      "reviewNotes": "Good discovery snapshot across Canadian provinces, including smaller studios. Mixes developers, service providers, associations and publishers; inspect each description and verify active game development on the employer's own site."
+    },
+    {
+      "id": "malta_game_developers_association",
+      "name": "Malta Game Developers Association",
+      "url": "https://maltagamedev.com/",
+      "region": "Malta",
+      "sourceKind": "national_game_developer_association",
+      "signal": "Association constituted in May 2026; membership is open and free during its founding year and covers non-gambling video game development across PC, console, mobile and web.",
+      "automationStatus": "manual_only_no_public_company_roster",
+      "accessPolicy": "No public member-company roster or open-data export identified. Do not pay or collect member identity data; use public association announcements and voluntary contacts only.",
+      "reviewNotes": "Potentially useful for finding Malta-based micro-studios and solo developers, but not an automated company directory at present."
     }
   ]
 }
