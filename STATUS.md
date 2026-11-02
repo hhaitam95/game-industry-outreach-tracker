@@ -1,12 +1,17 @@
 # Game Industry Outreach Tracker status
 
+## Candidate Profile data integrity — PR #112
+
+Stored profile records and imported backups are now validated in full before normalization. Invalid or unsupported fields, records, skill evidence and documents are rejected without rewriting the original IndexedDB value. Save/export remain blocked until the profile has loaded or has been explicitly restored from a validated backup. Browser tests cover both rejected backup and corrupt-record recovery. Exact-head implementation CI passed in [run 41521290462](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41521290462). PR #112 is awaiting review.
+
+
 **Last verified:** 2026-11-02  
 **Product scope:** Global directory of legitimate video-game development organisations with verified speculative-application routes, plus a private browser-local Candidate Profile and application tracker.  
 **Authoritative discovery rules:** [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md).
 
 ## Candidate Profile persistence integrity — PR #111
 
-The IndexedDB profile editor now tracks edits across asynchronous writes. A save completion cannot replace newer form state or falsely clear the unsaved flag; a failed initial read does not enable a potentially destructive save. A successful validated backup restore can re-establish storage after a transient database-open failure. The Chromium browser suite now exercises both races/recovery cases. Exact-head full CI passed in [run 41519494261](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41519494261). PR #111 is open and awaiting merge.
+**Merged and deployed.** The IndexedDB profile editor tracks edits across asynchronous writes. A save completion cannot replace newer form state or falsely clear the unsaved flag; a failed initial read does not enable a potentially destructive save. A validated backup can re-establish storage after a transient database-open failure. Full exact-head CI passed in [run 41519494261](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41519494261); merged-main CI and Pages publication for commit `26f91b9ba9a1777ccdc19a00227df0fb11703132` passed in [run 41520306310](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41520306310) and [run 41520306365](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41520306365).
 
 ## Private application tracker integrity — PR #110
 
