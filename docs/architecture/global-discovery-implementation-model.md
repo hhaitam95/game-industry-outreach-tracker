@@ -19,7 +19,7 @@ The discovery phase is global and coverage-led. Do not rank, prioritize or filte
 
 There is no arbitrary ceiling such as 300 or 500 records. Continue adding verified routes while new legitimate candidates and source coverage remain. A candidate count is not a job count or an opportunity count. Paid employment is not an inclusion requirement: legitimate non-profit and volunteer-run game studios may be included when they genuinely develop video games and offer an explicit route to join, but unpaid/volunteer-only participation must be stated prominently and must never be represented as employment.
 
-This phase is **not** a personal job-matching, application recommendation, vacancy-monitoring or outreach-generation project. Do not reintroduce those features into discovery.
+The **discovery layer itself** is not a personal job-matching, application-recommendation, vacancy-monitoring or outreach-generation system. Those responsibilities belong to the separate private Candidate Profile, Matching and Application Workspace layer. See [Candidate Profile, Matching and Application Workspace](candidate-profile-matching-application-workspace.md) and [Studio Targeting and Application Campaign Strategy](studio-targeting-and-application-campaign.md). Do not reintroduce candidate-specific filtering or ranking into public discovery.
 
 ## 2. Eligibility gate A — legitimate game-development organisation
 
@@ -517,7 +517,7 @@ PR #74 merged batch 14: main now contains **322 route/profile pairs**, 317 activ
 
 At the start of any new work session or handover:
 
-1. Read this document first, then HANDOFF.md and STATUS.md.
+1. Read this document, [Studio Targeting and Application Campaign Strategy](studio-targeting-and-application-campaign.md), [Candidate Profile, Matching and Application Workspace](candidate-profile-matching-application-workspace.md), HANDOFF.md and STATUS.md.
 2. Inspect the current main branch, open PRs, discovery-state checkpoint and latest successful workflow runs. Do not rely on old chat summaries as current repository state.
 3. Preserve the two eligibility gates and no-prioritization rule.
 4. Before adding a source, inspect its current coverage, terms, API/robots policy, data shape and provenance.
@@ -526,7 +526,7 @@ At the start of any new work session or handover:
 7. Distinguish proposed work from implemented, tested and merged work. Never claim a source is integrated until the adapter is in the repository and its tests/checkpoints confirm it.
 8. Do not change or reprioritize the user's goal without an explicit instruction.
 
-**Current decision:** Global discovery accuracy and coverage are the only focus at this stage. No employer, geography, discipline, company size or work model is prioritized. The personal career-targeting layer can be considered later, after the global discovery work has matured.
+**Current boundary:** Global discovery remains accuracy- and coverage-led, with no employer, geography, discipline, company-size or work-model prioritization in the public candidate collection or directory. The separate private matching/campaign layer is an approved product direction and may prioritize studios using the candidate's profile and preferences. That private prioritization must never change discovery coverage, qualification, public ordering or publication. Consult STATUS.md before assuming which matching, queue or campaign features are implemented.
 
 
 ### 2026-11-02 — IGDB company discovery adapter (PR #100)
