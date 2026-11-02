@@ -117,10 +117,34 @@ function assertKnownProfileRecord(record: Record<string, unknown>): asserts reco
  * Reject malformed or oversized data before normalization can filter, default or truncate it.
  * Missing fields remain compatible with earlier schema-v1 records and receive normal defaults.
  */
+function rejectInvalidProfileField(context: string, field: string): never {
+  throw new Error(`${context} contains invalid or unsupported data at ${field}. The original data was not modified.`);
+}
+
+function assertProfileRecord(
+  value: unknown,
+  context: string,
+  field: string,
+): asserts value is Record<string, unknown> {
+  if (!isRecord(value)) rejectInvalidProfileField(context, field);
+}
+
+function assertProfileArray(
+  value: unknown,
+  context: string,
+  field: string,
+): asserts value is unknown[] {
+  if (!Array.isArray(value)) rejectInvalidProfileField(context, field);
+}
+
+/**
+ * Reject malformed or oversized data before normalization can filter, default or truncate it.
+ * Missing fields remain compatible with earlier schema-v1 records and receive normal defaults.
+ */
 function assertCandidateProfileIntegrity(value: unknown, context: string): void {
-  const fail = (field: string): never => {
-    throw new Error(`${context} contains invalid or unsupported data at ${field}. The original data was not modified.`);
-  };
+  assertProfileRecord(value, context, "profile");
+  const profile = value;
+  const fail = (field: string): never => rejectInvalidProfileField(context, field);
   const assertKnownKeys = (record: Record<string, unknown>, allowed: string[], path: string) => {
     for (const key of Object.keys(record)) {
       if (!allowed.includes(key)) fail(`${path}.${key}`);
@@ -145,50 +169,53 @@ function assertCandidateProfileIntegrity(value: unknown, context: string): void 
     for (const field of fields) {
       if (!Object.prototype.hasOwnProperty.call(record, field)) continue;
       const list = record[field];
-      if (!Array.isArray(list) || list.length > 100) fail(`${path}.${field}`);
-      if (list.some((item) => typeof item !== "string" || item.length > 200)) {
+      assertProfileArray(list, context, `${path}.${field}`);
+      if (list.length > 100) fail(`${path}.${field}`);
+      if (list.some((item: unknown) => typeof item !== "string" || item.length > 200)) {
         fail(`${path}.${field}`);
       }
     }
   };
 
-  if (!isRecord(value)) fail("profile");
-  assertKnownKeys(value, [
+  assertKnownKeys(profile, [
     "schemaVersion", "updatedAt", "personal", "professionalSummary",
     "experience", "education", "projects", "skills", "materials", "preferences",
   ], "profile");
   if (
-    Object.prototype.hasOwnProperty.call(value, "schemaVersion") &&
-    value.schemaVersion !== PROFILE_SCHEMA_VERSION
+    Object.prototype.hasOwnProperty.call(profile, "schemaVersion") &&
+    profile.schemaVersion !== PROFILE_SCHEMA_VERSION
   ) fail("schemaVersion");
   if (
-    Object.prototype.hasOwnProperty.call(value, "updatedAt") &&
-    value.updatedAt !== null &&
-    (typeof value.updatedAt !== "string" || value.updatedAt.length > 100)
+    Object.prototype.hasOwnProperty.call(profile, "updatedAt") &&
+    profile.updatedAt !== null &&
+    (typeof profile.updatedAt !== "string" || profile.updatedAt.length > 100)
   ) fail("updatedAt");
-  assertOptionalStrings(value, ["professionalSummary"], "profile");
+  assertOptionalStrings(profile, ["professionalSummary"], "profile");
 
-  if (Object.prototype.hasOwnProperty.call(value, "personal")) {
-    if (!isRecord(value.personal)) fail("personal");
-    assertKnownKeys(value.personal, PROFILE_PERSONAL_FIELDS, "personal");
-    assertOptionalStrings(value.personal, PROFILE_PERSONAL_FIELDS, "personal");
+  if (Object.prototype.hasOwnProperty.call(profile, "personal")) {
+    const personal = profile.personal;
+    assertProfileRecord(personal, context, "personal");
+    assertKnownKeys(personal, PROFILE_PERSONAL_FIELDS, "personal");
+    assertOptionalStrings(personal, PROFILE_PERSONAL_FIELDS, "personal");
   }
 
   for (const [collection, fields] of Object.entries(PROFILE_COLLECTION_FIELDS)) {
-    if (!Object.prototype.hasOwnProperty.call(value, collection)) continue;
-    const items = value[collection];
-    if (!Array.isArray(items) || items.length > 200) fail(collection);
+    if (!Object.prototype.hasOwnProperty.call(profile, collection)) continue;
+    const items = profile[collection];
+    assertProfileArray(items, context, collection);
+    if (items.length > 200) fail(collection);
     const ids = new Set<string>();
     for (let index = 0; index < items.length; index += 1) {
       const item = items[index];
       const path = `${collection}[${index}]`;
-      if (!isRecord(item)) fail(path);
+      assertProfileRecord(item, context, path);
       assertKnownKeys(item, fields, path);
-      if (typeof item.id !== "string" || !item.id.trim() || item.id.length > 200) {
+      const id = item.id;
+      if (typeof id !== "string" || !id.trim() || id.length > 200) {
         fail(`${path}.id`);
       }
-      if (ids.has(item.id)) fail(`${path}.id (duplicate)`);
-      ids.add(item.id);
+      if (ids.has(id)) fail(`${path}.id (duplicate)`);
+      ids.add(id);
       assertOptionalStrings(item, fields.filter((field) => field !== "id"), path);
       if (
         collection === "skills" &&
@@ -198,21 +225,22 @@ function assertCandidateProfileIntegrity(value: unknown, context: string): void 
     }
   }
 
-  if (Object.prototype.hasOwnProperty.call(value, "materials")) {
-    if (!isRecord(value.materials)) fail("materials");
+  if (Object.prototype.hasOwnProperty.call(profile, "materials")) {
+    const materials = profile.materials;
+    assertProfileRecord(materials, context, "materials");
     assertKnownKeys(
-      value.materials,
+      materials,
       ["masterResume", "resumeText", "motivationLetter", "motivationDocument"],
       "materials",
     );
-    assertOptionalStrings(value.materials, PROFILE_MATERIAL_FIELDS, "materials");
+    assertOptionalStrings(materials, PROFILE_MATERIAL_FIELDS, "materials");
     for (const key of ["masterResume", "motivationDocument"]) {
-      if (!Object.prototype.hasOwnProperty.call(value.materials, key)) continue;
-      const document = value.materials[key];
+      if (!Object.prototype.hasOwnProperty.call(materials, key)) continue;
+      const document = materials[key];
       if (document === null) continue;
+      assertProfileRecord(document, context, `materials.${key}`);
+      if (!documentValue(document)) fail(`materials.${key}`);
       if (
-        !isRecord(document) ||
-        !documentValue(document) ||
         typeof document.name !== "string" ||
         typeof document.mimeType !== "string" ||
         document.name.length > 255 ||
@@ -226,18 +254,19 @@ function assertCandidateProfileIntegrity(value: unknown, context: string): void 
     }
   }
 
-  if (Object.prototype.hasOwnProperty.call(value, "preferences")) {
-    if (!isRecord(value.preferences)) fail("preferences");
+  if (Object.prototype.hasOwnProperty.call(profile, "preferences")) {
+    const preferences = profile.preferences;
+    assertProfileRecord(preferences, context, "preferences");
     assertKnownKeys(
-      value.preferences,
+      preferences,
       [
         ...PROFILE_PREFERENCE_FIELDS,
         ...PROFILE_PREFERENCE_LISTS,
       ],
       "preferences",
     );
-    assertOptionalStrings(value.preferences, PROFILE_PREFERENCE_FIELDS, "preferences");
-    assertOptionalStringLists(value.preferences, PROFILE_PREFERENCE_LISTS, "preferences");
+    assertOptionalStrings(preferences, PROFILE_PREFERENCE_FIELDS, "preferences");
+    assertOptionalStringLists(preferences, PROFILE_PREFERENCE_LISTS, "preferences");
   }
 }
 
