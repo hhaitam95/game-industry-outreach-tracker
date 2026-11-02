@@ -395,7 +395,11 @@ test("discipline category fallbacks use phrase boundaries in both directions", (
     new Date("2026-11-01T12:00:00Z"),
   );
   assert.equal(rapidDevelopment.relevance, "weak");
-  assert.equal(rapidDevelopment.evidence.length, 0);
+  assert.equal(
+    rapidDevelopment.evidence.some((item) => item.relationship === "discipline"),
+    false,
+    "REST API skills may remain supporting context, but must not count as evidence for Rapid development.",
+  );
 });
 
 test("audit support is not misclassified as IT support", () => {
