@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-11-02 — Non-destructive application tracker recovery (PR #110)
+
+- Validate the complete browser-local application tracker before loading it; malformed JSON, an unsupported structure or any invalid record is treated as a storage error rather than an empty/filtered tracker.
+- Preserve the exact original localStorage value on validation failure, show a recovery warning at the top of the app and block tracker mutations until a valid versioned backup is explicitly restored.
+- Reuse the existing backup validator, retain valid legacy defaults and refresh application activity timestamps when notes change.
+- Add unit and browser-acceptance coverage for malformed data preservation, partial-record rejection and explicit backup recovery.
+- Exact-head CI, including Python discovery tests, frontend tests, data/route checks, TypeScript build, privacy/artifact checks and Chromium browser acceptance, passed in [run 41517916733](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41517916733). PR #110 is awaiting merge at the time of this entry.
+
+
 ## 2026-11-02 — Discovery automation reliability and verification hardening (PR #109, merged and deployed)
 
 - Queue scheduled/manual discovery workflow runs instead of allowing a newer pending run to replace an earlier pending run.
