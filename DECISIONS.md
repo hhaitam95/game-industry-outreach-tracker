@@ -59,6 +59,18 @@ The discovery catalogue remains worldwide and impartial. Candidate preferences a
 - Preserve the distinction between studio headquarters, actual hiring location, remote eligibility and work-authorisation rules.
 
 
+## Application campaign strategy — 2 November 2026
+
+- Keep worldwide discovery broad, non-personalized and without an arbitrary maximum. Candidate preferences must not affect which studios are discovered or published.
+- Retain the existing public-directory gates: direct game-development evidence plus an explicit official speculative/general application route. Do not confuse this route with an advertised vacancy.
+- Apply candidate preferences only in the private matching and application queue. The current default order is Europe/nearby European markets, then English-language international markets such as the UK, Canada and the US, then wider global exploratory targets. These are priority tiers, not hard exclusions or work-authorization conclusions.
+- Reuse one approved master resume/CV and one approved core motivation letter/message by default. Employer-specific requirements are flagged for human review; no automatic per-studio tailoring or factual embellishment.
+- Keep professional relevance, application accessibility/readiness and personal priority separate. Do not introduce an ungrounded weighted composite score or hiring-probability estimate.
+- Support coordinated application waves and a potentially 200+ application campaign only when the targets are genuinely relevant and application-ready. The number is an aspiration, not a quota or response guarantee.
+- Track outcomes from submitted applications, not discovered studios. Do not stop the wider pipeline after one positive reply; continue until a written offer and material transition conditions are confirmed.
+- Human review and final submission remain mandatory. Portal automation, autofill, file uploads, email sending and automated submission remain deferred and require separate approval.
+- The strategy is documented in [Studio Targeting and Application Campaign Strategy](docs/architecture/studio-targeting-and-application-campaign.md). These decisions do not change public discovery eligibility or implementation status.
+
 ## Global discovery source choices — 2 November 2026
 
 - Keep the existing automated source set: the four Wikidata feeds and recurring GameDevMap catalogue.
