@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-11-02 — Strict Candidate Profile data integrity and recovery (PR #112)
+
+- Validate the complete IndexedDB storage record and profile schema before normalization; reject malformed collection entries, duplicate IDs, invalid evidence enums, unsafe or oversized documents, malformed preference lists, oversized strings and unknown fields without mutating the original record.
+- Apply the same validation before profile saves, backup exports and backup imports so permissive normalization cannot silently truncate, filter or downgrade invalid data.
+- Reject unsupported backup envelope fields and invalid export timestamps. Surface export validation errors; disable profile export while the original profile cannot be loaded.
+- Add Chromium browser acceptance for invalid-backup rejection without changing an existing profile, corrupt IndexedDB preservation, disabled save/export while unreadable, and explicit valid-backup recovery.
+- Exact-head implementation CI passed in [run 41521290462](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41521290462), including Python discovery tests, frontend tests, route/data validation, production build, privacy/artifact checks and the browser suite. PR #112 is awaiting review.
+
 ## 2026-11-02 — Candidate Profile IndexedDB save-race and recovery hardening (PR #111)
 
 - Track profile edits across asynchronous IndexedDB saves so completion of an older snapshot cannot replace newer in-memory edits or clear the unsaved state.
@@ -7,7 +15,7 @@
 - Keep profile Save actions disabled until the initial IndexedDB load succeeds or a validated backup is explicitly restored.
 - Clear the cached IndexedDB open promise after synchronous, asynchronous or blocked failures so the storage layer can be retried.
 - Add Chromium browser-acceptance coverage for edits during a committed-but-pending save and for backup recovery after a simulated one-time IndexedDB open failure.
-- Exact-head CI, including Python discovery tests, frontend tests, route/data checks, production build, privacy/artifact validation and the full browser suite, passed in [run 41519494261](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41519494261). PR #111 is open and awaiting merge.
+- Exact-head CI, including Python discovery tests, frontend tests, route/data checks, production build, privacy/artifact validation and the full browser suite, passed in [run 41519494261](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41519494261). PR #111 merged as `26f91b9ba9a1777ccdc19a00227df0fb11703132`; merged-main CI passed in [run 41520306310](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41520306310) and Pages publication passed in [run 41520306365](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41520306365).
 
 ## 2026-11-02 — Non-destructive application tracker recovery (PR #110)
 
