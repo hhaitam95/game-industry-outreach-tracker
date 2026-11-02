@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import type { ChangeEvent, ReactNode } from "react";
 import {
   createEmptyProfile,
@@ -189,8 +189,10 @@ function EmptyList({ children }: { children: string }) {
 export default function CandidateProfile() {
   const [profile, setProfile] = useState<CandidateProfile>(createEmptyProfile);
   const [loaded, setLoaded] = useState(false);
+  const [storageReady, setStorageReady] = useState(false);
   const [dirty, setDirty] = useState(false);
   const [saving, setSaving] = useState(false);
+  const editRevision = useRef(0);
   const [status, setStatus] = useState("Loading your private profile…");
   const [error, setError] = useState("");
   const [resumeInputKey, setResumeInputKey] = useState(0);
@@ -203,6 +205,7 @@ export default function CandidateProfile() {
       .then((saved) => {
         if (!active) return;
         setProfile(saved);
+        setStorageReady(true);
         setStatus("Stored in this browser");
       })
       .catch((loadError: unknown) => {
@@ -228,10 +231,15 @@ export default function CandidateProfile() {
     return () => window.removeEventListener("beforeunload", warnBeforeLeaving);
   }, [dirty]);
 
-  function updateProfile<K extends keyof CandidateProfile>(key: K, value: CandidateProfile[K]) {
-    setProfile((current) => ({ ...current, [key]: value }));
+  function markEdited() {
+    editRevision.current += 1;
     setDirty(true);
     setError("");
+  }
+
+  function updateProfile<K extends keyof CandidateProfile>(key: K, value: CandidateProfile[K]) {
+    setProfile((current) => ({ ...current, [key]: value }));
+    markEdited();
   }
 
   function updatePersonal(key: keyof CandidateProfile["personal"], value: string) {
@@ -239,8 +247,7 @@ export default function CandidateProfile() {
       ...current,
       personal: { ...current.personal, [key]: value },
     }));
-    setDirty(true);
-    setError("");
+    markEdited();
   }
 
   function updateMaterials<K extends keyof CandidateProfile["materials"]>(
@@ -251,8 +258,7 @@ export default function CandidateProfile() {
       ...current,
       materials: { ...current.materials, [key]: value },
     }));
-    setDirty(true);
-    setError("");
+    markEdited();
   }
 
   function updatePreference<K extends keyof CandidateProfile["preferences"]>(
@@ -263,8 +269,7 @@ export default function CandidateProfile() {
       ...current,
       preferences: { ...current.preferences, [key]: value },
     }));
-    setDirty(true);
-    setError("");
+    markEdited();
   }
 
   function updateCollectionItem<K extends CollectionKey>(
@@ -278,8 +283,7 @@ export default function CandidateProfile() {
         item.id === id ? { ...item, ...patch } : item,
       ),
     } as CandidateProfile));
-    setDirty(true);
-    setError("");
+    markEdited();
   }
 
   function removeCollectionItem(key: CollectionKey, id: string) {
@@ -287,8 +291,7 @@ export default function CandidateProfile() {
       ...current,
       [key]: current[key].filter((item) => item.id !== id),
     } as CandidateProfile));
-    setDirty(true);
-    setError("");
+    markEdited();
   }
 
   function addExperience() {
@@ -324,14 +327,21 @@ export default function CandidateProfile() {
   }
 
   async function handleSave() {
+    if (!storageReady || saving) return;
     setSaving(true);
     setError("");
+    const revisionAtSave = editRevision.current;
     const next = { ...profile, updatedAt: new Date().toISOString() };
     try {
       await saveCandidateProfile(next);
-      setProfile(next);
-      setDirty(false);
-      setStatus("Saved in this browser · " + new Date().toLocaleTimeString());
+      if (editRevision.current === revisionAtSave) {
+        setProfile(next);
+        setDirty(false);
+        setStatus("Saved in this browser · " + new Date().toLocaleTimeString());
+      } else {
+        setDirty(true);
+        setStatus("Earlier changes saved · newer edits still need saving");
+      }
     } catch (saveError) {
       setError(saveError instanceof Error ? saveError.message : "Could not save your profile.");
       setStatus("Save failed");
@@ -359,19 +369,28 @@ export default function CandidateProfile() {
   async function handleBackupImport(event: ChangeEvent<HTMLInputElement>) {
     const file = event.currentTarget.files?.[0];
     event.currentTarget.value = "";
-    if (!file) return;
+    if (!file || saving) return;
+    setSaving(true);
     try {
       const imported = await readProfileBackup(file);
       if (!window.confirm("Replace the profile currently in this browser with this backup?")) return;
+      const revisionAtImport = editRevision.current;
       const next = { ...imported, updatedAt: new Date().toISOString() };
       await saveCandidateProfile(next);
-      setProfile(next);
-      setDirty(false);
+      setStorageReady(true);
       setError("");
-      setStatus("Backup imported and saved in this browser");
+      if (editRevision.current === revisionAtImport) {
+        setProfile(next);
+        setDirty(false);
+        setStatus("Backup imported and saved in this browser");
+      } else {
+        setDirty(true);
+        setStatus("Backup imported · newer edits still need saving");
+      }
     } catch (importError) {
       setError(importError instanceof Error ? importError.message : "Could not import this backup.");
     } finally {
+      setSaving(false);
       setBackupInputKey((current) => current + 1);
     }
   }
@@ -395,13 +414,14 @@ export default function CandidateProfile() {
               className="visually-hidden"
               type="file"
               accept=".json,application/json"
+              disabled={saving}
               onChange={handleBackupImport}
             />
           </label>
           <button className="btn btn-outline-secondary btn-sm" type="button" onClick={() => downloadBackup(profile)}>
             Export backup
           </button>
-          <button className="btn btn-primary btn-sm" type="button" disabled={!dirty || saving} onClick={handleSave}>
+          <button className="btn btn-primary btn-sm" type="button" disabled={!storageReady || !dirty || saving} onClick={handleSave}>
             {saving ? "Saving…" : dirty ? "Save profile" : "Profile saved"}
           </button>
         </div>
@@ -415,7 +435,9 @@ export default function CandidateProfile() {
           details and full document contents, so keep it private. Clearing site data or changing browsers can remove this profile.
         </span>
         <span className={error ? "profile-save-state is-error" : "profile-save-state"} role={error ? "alert" : "status"}>
-          {error || (dirty ? "Unsaved changes" : status)}
+          {error || (!storageReady && loaded
+            ? status + " · Save is disabled until storage can be loaded or a valid backup is restored."
+            : dirty ? "Unsaved changes" : status)}
         </span>
       </div>
 
