@@ -767,7 +767,7 @@ async function main() {
     assert.deepEqual(storedAfterRemoval, [], "Removal should persist in browser storage.");
 
     // Restore the backup with explicit confirmation; the previous tracker data is replaced locally.
-    const trackerRestoreInput = page.locator('input[type="file"][accept=".json,application/json"]');
+    const trackerRestoreInput = page.locator(".tracker-page input[type=\"file\"][accept=\".json,application/json\"]");
     const acceptedRestore = await performWithDialog(
       page,
       () => trackerRestoreInput.setInputFiles(trackerBackupPath),
