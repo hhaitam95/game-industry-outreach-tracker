@@ -646,7 +646,7 @@ export default function CandidateProfile() {
 
       <div className="profile-bottom-actions">
         <span>{dirty ? "You have unsaved changes." : "Your saved profile is available in this browser."}</span>
-        <button className="btn btn-primary" type="button" disabled={!dirty || saving} onClick={handleSave}>
+        <button className="btn btn-primary" type="button" disabled={!storageReady || !dirty || saving} onClick={handleSave}>
           {saving ? "Saving…" : "Save profile"}
         </button>
       </div>
