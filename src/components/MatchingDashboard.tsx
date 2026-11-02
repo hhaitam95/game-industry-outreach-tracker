@@ -625,8 +625,9 @@ export default function MatchingDashboard({
 
       <div className="matching-privacy-note">
         Matches are recalculated in this browser from your saved profile and the public directory.
-        The matching assessment is not currently saved as an application or queue item. Your profile
-        and its documents are not uploaded or synchronized.
+        Use “Save to My applications” to create a separate local tracker record for a target; the detailed
+        match assessment itself is recalculated, not stored as a historical snapshot. Your profile and
+        documents are not uploaded or synchronized.
       </div>
     </section>
   );

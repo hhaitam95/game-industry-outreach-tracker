@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-11-02 — Match-to-application handoff and tracker backups (PR #107, merged and deployed)
+
+- Add a duplicate-aware **Save to My applications** action on eligible Matches cards and a direct return path to the saved tracker record.
+- Preserve the directory's saved route type/status, evidence URL, review date, work model, submission method, discipline scope, location/eligibility notes and research summary with each selected application.
+- Add versioned, validated browser-local JSON backup export/restore for tracker statuses, dates, route context and private notes; replacement requires explicit confirmation.
+- Fix the route-context toggle's accessible label so it accurately announces View/Hide state.
+- PR-head CI [41496776891], merged-main CI [41497190125] and Pages publishing [41497190769] passed. Merged as `f66fe1e134b08603ea272f568103ee5cf8000266`.
+- Keep all candidate/application data local. No ATS autofill, uploads, outbound email or automatic submission is introduced.
+
 ## 2026-11-02 — Matching quality follow-up (PR #104, merged and deployed)
 
 - Tighten matching so directly aligned disciplines are distinguished from adjacent disciplines and a Strong result requires demonstrated skill evidence for the same directly aligned discipline.

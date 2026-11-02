@@ -17,7 +17,19 @@
 - A positive reply is not a reason to abandon the rest of the pipeline. Keep other applications active until a written offer and the material transition requirements are confirmed.
 - No portal automation, autofill, automated uploads, email sending or automatic submission is authorized. Final application review and submission remain user-controlled.
 
-The campaign strategy does not change the public discovery schema, source permissions, studio qualification gates or current implementation status. Matching is already implemented and merged in PR [#96](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/96); the Application Queue, deeper requirements intelligence, campaign views and funnel reporting remain future work unless separately verified as merged.
+The campaign strategy does not change the public discovery schema, source permissions or studio qualification gates. Matching is implemented in PR [#96](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/96) and strengthened in PR [#104](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/104). A basic match-to-tracker application workflow is now implemented in PR [#107](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/107). A richer priority queue, deeper requirements intelligence, campaign views and funnel reporting remain future work.
+
+## Application handoff and tracker backup — PR #107 (merged and deployed)
+
+**Merged on 2026-11-02** as `f66fe1e134b08603ea272f568103ee5cf8000266`. PR-head CI [run 41496776891](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41496776891) passed, merged-main CI [run 41497190125](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41497190125) passed, and GitHub Pages publishing [run 41497190769](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41497190769) completed successfully.
+
+- Eligible Matches cards can be saved directly to the existing private My applications tracker; an already-tracked studio is presented as an open-tracker action rather than creating another record.
+- Saved records retain a snapshot of the directory's route type/status, check date, source evidence, work model, submission method, recorded discipline scope, location/eligibility notes and research notes.
+- My applications provides versioned, validated local JSON backup export/restore. Restore requires explicit confirmation and preserves status, dates, route context and private notes.
+- Browser acceptance covers direct match-to-tracker handoff, route context, backup/restore, persistence, status changes, notes and desktop/mobile layouts.
+- The profile and tracker remain browser-local. No profile text, documents, application history or notes are sent to a remote service or placed in public build assets.
+
+**Remaining limitations:** the match assessment itself is recalculated and is not stored as a historical snapshot. A fuller queue with manual priority overrides, campaign waves and outcome analytics is not implemented. Route facts are saved snapshots, not live vacancy or eligibility guarantees; the employer's current instructions and the applicant's language, work location, work authorisation, sponsorship and relocation eligibility still require manual verification.
 
 ## Matching quality validation — PR #104 (merged and deployed)
 
@@ -71,12 +83,12 @@ PR #100 adds IGDB as the sixth recurring candidate feed. It queries companies wi
 
 ## Current product direction — 2026-11-01
 
-The global studio directory remains a worldwide, evidence-backed catalogue and is not filtered or ranked by the candidate's personal profile. The next product layer adds a private candidate profile, explainable matching, an Application Queue and an application preparation workspace.
+The global studio directory remains a worldwide, evidence-backed catalogue and is not filtered or ranked by the candidate's personal profile. The private Candidate Profile and explainable Matches layers are implemented. Matches now has a direct, user-controlled handoff into My applications; deeper requirements intelligence and campaign tooling remain follow-on work.
 
 - **Candidate Profile:** structured experience, education, projects/training, skills with evidence, approved master resume, master motivation letter/message and user preferences.
 - **Matching:** assess professional relevance, application accessibility/readiness and personal priority separately. Show employer requirements, evidence, gaps, unknowns, source URLs and review dates. Do not claim to predict hiring probability.
-- **Application Queue:** a private working set referencing canonical studio records; user selection and priority never alter the global directory.
-- **Application Workspace:** studio and route details, requirements summary, skills/evidence mapping, approved materials, preparation checklist, notes and progress.
+- **My applications:** a browser-local tracker with explicit statuses, applied dates, private notes, official route context and JSON backup/restore. Eligible Matches can be saved into it directly. This is a practical first application queue, not yet a full campaign-priority board.
+- **Application preparation:** the profile stores approved master materials, while saved tracker records preserve a route snapshot and progress. Employer-specific requirements, language/work-authorisation eligibility and a detailed pre-submission checklist still require manual verification.
 - **Privacy:** candidate data and documents remain browser-local. GitHub Pages is public static hosting, not a private backend. Prefer IndexedDB for structured private data/files, with export/import and clear disclosure that browser storage is not automatically encrypted and can be cleared.
 - **Automation boundary:** browser extension, ATS/portal recognition, autofill, automated uploads, email sending and automatic submission are deferred. No application is submitted by this roadmap.
 
@@ -93,7 +105,7 @@ The detailed approved direction and acceptance criteria are in [Candidate Profil
 
 ## Website and public data
 
-- The live site remains limited to Studio Directory and My applications. Phase A is closed at 327 verified routes / 327 matching profiles (322 active, 5 paused; 51 country/location labels).
+- The live site includes Studio Directory, My profile, Matches and My applications. Phase A is closed at 327 verified routes / 327 matching profiles (322 active, 5 paused; 51 country/location labels).
 - Personal tracker entries remain in the visitor's browser localStorage. No application records or CVs are committed to the public repository.
 - Current main contains **327 unique studio/employer records / 327 matching profiles**, **322 active** and **5 paused** routes across **51 country/location labels**. PR #75 is merged and the Phase A closeout is complete.
 - PRs #70–#74 are merged into main: #70 consolidated global route expansion, #71 implemented source-specific discovery saturation, #72 reconciled the FakeFish duplicate, #73 added seven verified routes and the manual-only source register, and #74 added CAPCOM, Cygames Group and Small Giant Games while refreshing Fawkes Games and Stunlock Studios. PR #70's 314 raw rows included two entries for the same FakeFish studio and identical official application route; ADR-078 records their consolidation into one canonical FakeFish record.
