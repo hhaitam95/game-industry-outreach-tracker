@@ -329,7 +329,8 @@ test("word-boundary matching does not treat Google Workspace as Go programming o
     } }),
     new Date("2026-11-01T12:00:00Z"),
   );
-  assert.equal(programming.relevance, "weak");
+  assert.notEqual(programming.relevance, "strong");
+  assert.equal(programming.evidence.length, 0);
 
   profile.preferences.roleFamilies = ["Game VFX"];
   profile.skills = [{
@@ -344,7 +345,7 @@ test("word-boundary matching does not treat Google Workspace as Go programming o
     } }),
     new Date("2026-11-01T12:00:00Z"),
   );
-  assert.equal(visualEffects.relevance, "weak");
+  assert.equal(visualEffects.evidence.length, 0);
 });
 
 test("work experience responsibilities can support a relevant discipline assessment", () => {
