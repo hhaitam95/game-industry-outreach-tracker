@@ -46,10 +46,13 @@ IGDB_COMPANIES_ENDPOINT = "https://api.igdb.com/v4/companies"
 IGDB_WEBSITE_TYPES_ENDPOINT = "https://api.igdb.com/v4/website_types"
 TWITCH_TOKEN_ENDPOINT = "https://id.twitch.tv/oauth2/token"
 IGDB_API_TIMEOUT_SECONDS = 25
+IGDB_MIN_REQUEST_INTERVAL_SECONDS = 0.27
 IGDB_ACCESS_TOKEN: str | None = None
 IGDB_ACCESS_TOKEN_EXPIRES_AT = 0.0
 IGDB_OFFICIAL_WEBSITE_TYPE_ID: int | None = None
+IGDB_LAST_REQUEST_AT = 0.0
 IGDB_AUTH_LOCK = Lock()
+IGDB_REQUEST_LOCK = Lock()
 REQUEST_TIMEOUT_SECONDS = 18
 WDQS_TIMEOUT_SECONDS = 55
 WIKIDATA_MIN_REQUEST_INTERVAL_SECONDS = 65
@@ -1007,6 +1010,15 @@ def fetch_igdb_access_token() -> str:
 
 def igdb_api_post(endpoint: str, query: str, client_id: str, access_token: str) -> list[dict[str, Any]]:
     """Send one bounded Apicalypse POST request and return its JSON array."""
+    global IGDB_LAST_REQUEST_AT
+    with IGDB_REQUEST_LOCK:
+        now = time.monotonic()
+        if IGDB_LAST_REQUEST_AT:
+            wait_seconds = IGDB_MIN_REQUEST_INTERVAL_SECONDS - (now - IGDB_LAST_REQUEST_AT)
+            if wait_seconds > 0:
+                time.sleep(wait_seconds)
+        IGDB_LAST_REQUEST_AT = time.monotonic()
+
     request = urllib.request.Request(
         endpoint,
         data=query.encode("utf-8"),
