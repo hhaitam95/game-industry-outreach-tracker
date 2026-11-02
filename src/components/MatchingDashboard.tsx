@@ -539,7 +539,7 @@ export default function MatchingDashboard({
                 setRelevanceFilter("all");
                 setPriorityFilter("all");
                 setRouteFilter("all");
-                setSortMode("relevance");
+                setSortMode("priority");
               }}
             >
               Reset match filters
