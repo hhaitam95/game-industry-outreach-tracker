@@ -1398,6 +1398,11 @@ def fetch_scottish_companies_page(cursor: str, limit: int) -> tuple[list[dict[st
         slug = str(company.get("slug") or company.get("id") or "")
         if not name or not website or not slug:
             continue
+        is_developer_publisher = (
+            "developer_and_publisher" in categories
+            or "developer_publisher" in categories
+            or {"developer", "publisher"}.issubset(categories)
+        )
         rows.append({
             "qid": "SCOT:" + slug,
             "entity_url": "https://gamesindustry.scot/companies/" + urllib.parse.quote(slug, safe="") + "/",
@@ -1407,7 +1412,8 @@ def fetch_scottish_companies_page(cursor: str, limit: int) -> tuple[list[dict[st
             "source_url": "https://github.com/r0bbie/gamesindustry.scot",
             "name": name, "website": website, "country": "United Kingdom",
             "hq_city": str(company.get("location") or "").strip(),
-            "country_code": "GB", "company_type": "Developer",
+            "country_code": "GB",
+            "company_type": "Developer / Publisher" if is_developer_publisher else "Developer",
         })
     return rows, raw_count, str(start + raw_count)
 
@@ -1627,6 +1633,8 @@ def profile_for(candidate: dict[str, Any]) -> dict[str, Any]:
         location_label = "Listed location · GameDevMap"
     elif candidate.get("source_id") == "igdb_companies":
         location_label = "Not disclosed · IGDB"
+    elif candidate.get("source_id") == "scottish_games_industry":
+        location_label = "Listed location · Scottish Games Industry"
     else:
         location_label = "HQ · Wikidata" if city else (
             "Country · Wikidata" if country != "Not disclosed" else "Not disclosed"
