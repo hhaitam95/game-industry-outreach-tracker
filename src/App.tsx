@@ -4,7 +4,7 @@ import StudioDirectory from "./components/StudioDirectory";
 import ApplicationTracker from "./components/ApplicationTracker";
 import CandidateProfile from "./components/CandidateProfile";
 import MatchingDashboard from "./components/MatchingDashboard";
-import { createApplicationTrackerBackup, readApplicationTrackerBackup } from "./tracker/application-backup.mjs";
+import { createApplicationTrackerBackup, parseStoredApplicationTracker, readApplicationTrackerBackup } from "./tracker/application-backup.mjs";
 
 const STORAGE_KEY = "studio-outreach-tracker-v1";
 const THEME_STORAGE_KEY = "studio-outreach-theme-v1";
@@ -66,15 +66,6 @@ function NavigationIcon({ name }: { name: NavigationIconName }) {
   );
 }
 
-const VALID_STATUSES = new Set<TrackerStatus>([
-  "saved",
-  "in_progress",
-  "applied",
-  "interview",
-  "offer",
-  "archived",
-]);
-
 type StudioSummary = {
   name: string;
   websiteUrl: string;
@@ -101,42 +92,30 @@ type StudioLocation = {
   applicationLocation: string;
 };
 
-function readApplications(): TrackedApplication[] {
-  try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return [];
-    const parsed: unknown = JSON.parse(raw);
-    if (!Array.isArray(parsed)) return [];
-
-    return parsed.filter((item: unknown): item is TrackedApplication => {
-      if (!item || typeof item !== "object") return false;
-      const application = item as Partial<TrackedApplication>;
-      return (
-        typeof application.id === "string" &&
-        typeof application.studioName === "string" &&
-        typeof application.websiteUrl === "string" &&
-        typeof application.applicationUrl === "string" &&
-        typeof application.status === "string" &&
-        VALID_STATUSES.has(application.status as TrackerStatus)
-      );
-    });
-  } catch {
-    return [];
-  }
-}
-
 export default function App() {
   const [page, setPage] = useState<"studios" | "matches" | "applications" | "profile">("studios");
   const [trackerInitialTab, setTrackerInitialTab] = useState("saved");
   const [trackerFocusStudio, setTrackerFocusStudio] = useState<string | null>(null);
   const [applications, setApplications] = useState<TrackedApplication[]>([]);
-  const [loaded, setLoaded] = useState(false);
+  const [storageReady, setStorageReady] = useState(false);
+  const [storageLoadError, setStorageLoadError] = useState("");
   const [storageError, setStorageError] = useState(false);
   const [theme, setTheme] = useState<Theme>(readTheme);
 
   useEffect(() => {
-    setApplications(readApplications());
-    setLoaded(true);
+    try {
+      const stored = parseStoredApplicationTracker(window.localStorage.getItem(STORAGE_KEY));
+      if (!stored.ok) {
+        setStorageLoadError(stored.message);
+        return;
+      }
+      setApplications(stored.applications);
+      setStorageReady(true);
+    } catch {
+      setStorageLoadError(
+        "Your saved application tracker could not be read. The original browser data has been left untouched.",
+      );
+    }
   }, []);
 
   useEffect(() => {
@@ -149,14 +128,14 @@ export default function App() {
   }, [theme]);
 
   useEffect(() => {
-    if (!loaded) return;
+    if (!storageReady) return;
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(applications));
       setStorageError(false);
     } catch {
       setStorageError(true);
     }
-  }, [applications, loaded]);
+  }, [applications, storageReady]);
 
   const trackedCount = useMemo(() => applications.length, [applications]);
 
@@ -165,9 +144,14 @@ export default function App() {
     status: TrackerStatus,
     location?: StudioLocation,
   ) {
+    if (!storageReady) {
+      setStorageLoadError("Restore a valid application backup before adding or changing tracker records.");
+      return;
+    }
     const timestamp = new Date().toISOString();
     setApplications((previous) => {
-      if (previous.some((item) => item.studioName === studio.name)) return previous;
+      const normalizedName = studio.name.trim().toLocaleLowerCase();
+      if (previous.some((item) => item.studioName.trim().toLocaleLowerCase() === normalizedName)) return previous;
 
       const next: TrackedApplication = {
         id: studio.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
@@ -199,6 +183,7 @@ export default function App() {
   }
 
   function changeStatus(id: string, status: TrackerStatus) {
+    if (!storageReady) return;
     const current = applications.find((item) => item.id === id);
     if (!current) return;
 
@@ -230,12 +215,16 @@ export default function App() {
   }
 
   function updateApplicationNote(id: string, note: string) {
+    if (!storageReady) return;
     setApplications((previous) =>
-      previous.map((item) => item.id === id ? { ...item, note } : item),
+      previous.map((item) =>
+        item.id === id ? { ...item, note, updatedAt: new Date().toISOString() } : item,
+      ),
     );
   }
 
   function removeApplication(id: string) {
+    if (!storageReady) return;
     const item = applications.find((application) => application.id === id);
     if (!item || !window.confirm("Remove " + item.studioName + " from your tracker?")) return;
     setApplications((previous) => previous.filter((application) => application.id !== id));
@@ -259,6 +248,9 @@ export default function App() {
     );
     if (!confirmed) return null;
     setApplications(imported);
+    setStorageLoadError("");
+    setStorageReady(true);
+    setStorageError(false);
     return imported.length;
   }
 
@@ -377,10 +369,18 @@ export default function App() {
         <div className="profile-route" style={{ display: page === "profile" ? "block" : "none" }}>
           <CandidateProfile />
         </div>
+        {storageLoadError ? (
+          <p className="storage-warning" role="alert">
+            {storageLoadError} Restore a valid application backup before continuing to use the tracker.
+            <button className="text-button" type="button" onClick={() => openTracker()}>
+              Open My applications to restore a backup
+            </button>
+          </p>
+        ) : null}
         {storageError ? (
           <p className="storage-warning" role="alert">
             Your browser could not save changes to local storage. Check your browser's site
-            storage settings.
+            storage settings. Changes may remain only in memory until storage is available.
           </p>
         ) : null}
       </main>
