@@ -81,6 +81,17 @@ type StudioSummary = {
   applicationUrl: string;
   country: string;
   countryCode?: string;
+  evidenceUrl?: string;
+  checkedAt?: string;
+  notes?: string;
+  applicationResearch?: {
+    routeType?: string;
+    routeStatus?: string;
+    workModel?: string;
+    submissionMethods?: string[];
+    eligibleLocations?: string[];
+    disciplineScope?: string[];
+  };
 };
 
 type StudioLocation = {
@@ -168,6 +179,15 @@ export default function App() {
         hqLabel: location?.hqLabel || "HQ",
         applicationLocation:
           location?.applicationLocation || "Not specified · see official route",
+        routeType: studio.applicationResearch?.routeType || "general",
+        routeStatus: studio.applicationResearch?.routeStatus || "unknown",
+        routeCheckedAt: studio.checkedAt || "",
+        routeEvidenceUrl: studio.evidenceUrl || "",
+        routeNotes: studio.notes || "",
+        workModel: studio.applicationResearch?.workModel || "not_stated",
+        submissionMethods: studio.applicationResearch?.submissionMethods || [],
+        eligibleLocations: studio.applicationResearch?.eligibleLocations || [],
+        disciplineScope: studio.applicationResearch?.disciplineScope || [],
         status,
         createdAt: timestamp,
         updatedAt: timestamp,
