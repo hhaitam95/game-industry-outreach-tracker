@@ -202,6 +202,7 @@ jobs:
           IGDB_CLIENT_SECRET: ${{ secrets.IGDB_CLIENT_SECRET }}
         run: |
           set -euo pipefail
+          STATE_FILE=".discovery-state/state/studio-discovery-state.json"
           git -C .discovery-state config user.name "github-actions[bot]"
           git -C .discovery-state config user.email "41898282+hhaitam95@users.noreply.github.com"
 
