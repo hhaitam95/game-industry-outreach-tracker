@@ -73,7 +73,7 @@
 const ROLE_RULES = [
   {
     group: "support",
-    pattern: /(developer|technical|product|it|systems)\\s+support|support\\s+(engineer|specialist)|technical operations/,
+    pattern: /(developer|technical|product|it|systems)\s+support|support\s+(engineer|specialist)|technical operations/,
     directDisciplines: [
       "developer support", "technical support", "product support", "it support",
       "systems support", "technical operations", "it operations", "studio it",
@@ -89,7 +89,7 @@ const ROLE_RULES = [
   },
   {
     group: "devops",
-    pattern: /\\bdevops\\b|site reliability|\\bsre\\b|platform engineer|infrastructure|build and release|release engineer|cloud engineer/,
+    pattern: /\bdevops\b|site reliability|\bsre\b|platform engineer|infrastructure|build and release|release engineer|cloud engineer/,
     directDisciplines: [
       "devops", "site reliability", "sre", "platform engineering",
       "infrastructure", "build and release", "release engineering",
@@ -113,7 +113,7 @@ const ROLE_RULES = [
   },
   {
     group: "qa",
-    pattern: /\\bqa\\b|quality assurance|test automation|software tester|test engineer/,
+    pattern: /\bqa\b|quality assurance|test automation|software tester|test engineer/,
     directDisciplines: [
       "qa", "quality assurance", "testing", "test automation",
       "software testing", "test engineering",
@@ -122,7 +122,7 @@ const ROLE_RULES = [
   },
   {
     group: "vfx",
-    pattern: /\\bvfx\\b|visual effects|technical artist|shader|rendering|realtime effects/,
+    pattern: /\bvfx\b|visual effects|technical artist|shader|rendering|realtime effects/,
     directDisciplines: [
       "vfx", "visual effects", "technical art", "shaders", "rendering",
       "realtime effects", "real time effects",
@@ -131,7 +131,7 @@ const ROLE_RULES = [
   },
   {
     group: "art",
-    pattern: /\\bartist\\b|2d art|3d art|environment art|character art|concept art|animator|animation/,
+    pattern: /\bartist\b|2d art|3d art|environment art|character art|concept art|animator|animation/,
     directDisciplines: ["art", "animation", "character", "environment", "concept", "2d", "3d"],
     relatedDisciplines: [],
   },
