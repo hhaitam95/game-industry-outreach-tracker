@@ -575,6 +575,7 @@ function assessPriority(profile, studio) {
       reasons.push("Published work model differs from your selected preferences.");
     }
   } else if (workModel === "mixed" && preferences.workModels.length) {
+    evaluated += 1;
     reasons.push("The employer describes a mixed or variable work arrangement; confirm the specific role's expectations. No preference penalty is applied.");
   } else if (workModel === "not_stated" && preferences.workModels.length) {
     reasons.push("The employer has not stated a work model, so no preference penalty is applied.");
