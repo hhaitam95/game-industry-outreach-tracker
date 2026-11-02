@@ -455,9 +455,10 @@ function assessRouteReadiness(studio, now) {
   };
 }
 
-/** @param {string[]} regions @param {MatchStudio} studio @returns {string} */
+/** @param {string} value @returns {string} */
 function canonicalCountry(value) {
   const normalized = normalize(value);
+  /** @type {Record<string, string>} */
   const aliases = {
     uk: "united kingdom",
     britain: "united kingdom",
