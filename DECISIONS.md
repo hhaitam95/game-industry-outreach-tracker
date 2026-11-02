@@ -1,6 +1,6 @@
 # Product decisions
 
-**Last updated:** 1 November 2026
+**Last updated:** 2 November 2026
 
 ## Product direction
 
@@ -57,3 +57,12 @@ The discovery catalogue remains worldwide and impartial. Candidate preferences a
 - Keep the verified global directory and its official route/evidence standards.
 - Existing tracker remains browser-local. Reconcile its statuses with the new workspace rather than creating competing records.
 - Preserve the distinction between studio headquarters, actual hiring location, remote eligibility and work-authorisation rules.
+
+
+## Global discovery source choices — 2 November 2026
+
+- Keep the existing automated source set: the four Wikidata feeds and recurring GameDevMap catalogue.
+- Add IGDB Companies API as the sixth recurring candidate feed. It is limited to companies with developed-game credits and an official company website, and each candidate remains subject to the existing first-party studio/application verification.
+- Reuse the existing repository Actions secrets `IGDB_CLIENT_ID` and `IGDB_CLIENT_SECRET`; never expose their values in source, logs, summaries or public assets.
+- Do not add other source services or APIs yet. Assess the coverage and verified yield of the existing feeds plus IGDB first; only revisit new sources after those options have been exhausted.
+- Implementation is recorded in ADR-081 and PR #100. The latest pre-documentation CI run passed; PR #100 remains open and is not deployed.
