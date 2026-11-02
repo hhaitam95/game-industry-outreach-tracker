@@ -66,14 +66,14 @@ function validateApplication(value, index) {
     studioName: requiredString(value.studioName, prefix + " studio name", 300),
     websiteUrl: validHttpUrl(value.websiteUrl, prefix + " studio URL"),
     applicationUrl: validHttpUrl(value.applicationUrl, prefix + " application URL"),
-    country: requiredString(value.country, prefix + " country", 160),
+    country: typeof value.country === "string" && value.country.length <= 160 ? value.country : "Not stated",
     ...(value.countryCode === undefined
       ? {}
-      : { countryCode: requiredString(value.countryCode, prefix + " country code", 8) }),
-    hqLabel: requiredString(value.hqLabel, prefix + " location label", 160),
+      : { countryCode: optionalString(value.countryCode, prefix + " country code", 8) }),
+    hqLabel: typeof value.hqLabel === "string" && value.hqLabel.length <= 160 ? value.hqLabel : "Not specified",
     ...(value.applicationLocation === undefined
       ? {}
-      : { applicationLocation: requiredString(value.applicationLocation, prefix + " application location", 1000) }),
+      : { applicationLocation: optionalString(value.applicationLocation, prefix + " application location", 1000) }),
     status,
     createdAt: requiredString(value.createdAt, prefix + " created date", 80),
     updatedAt: requiredString(value.updatedAt, prefix + " updated date", 80),
