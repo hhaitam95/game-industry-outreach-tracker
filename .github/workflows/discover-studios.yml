@@ -197,6 +197,9 @@ jobs:
 
       - name: Persist discovery cursors and verification state
         shell: bash
+        env:
+          IGDB_CLIENT_ID: ${{ secrets.IGDB_CLIENT_ID }}
+          IGDB_CLIENT_SECRET: ${{ secrets.IGDB_CLIENT_SECRET }}
         run: |
           set -euo pipefail
           git -C .discovery-state config user.name "github-actions[bot]"
@@ -212,7 +215,86 @@ jobs:
             exit 1
           fi
 
-          git -C .discovery-state add state/studio-discovery-state.json
+          # Write a compact, names-free health snapshot for the exhaustion monitor.
+          python3 - "$STATE_FILE" config/discovery-sources.json .discovery-state/state/discovery/studio-source-status.json <<'PY'
+          import datetime as dt
+          import json
+          import os
+          import pathlib
+          import sys
+
+          state_path, manifest_path, output_path = map(pathlib.Path, sys.argv[1:])
+          state = json.loads(state_path.read_text(encoding="utf-8"))
+          manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+          candidate_counts = {}
+          for candidate in state.get("candidates", {}).values():
+              source_id = candidate.get("source_id", "unknown")
+              statuses = candidate_counts.setdefault(source_id, {})
+              status = candidate.get("status", "unknown")
+              statuses[status] = statuses.get(status, 0) + 1
+
+          sources = {}
+          for source in manifest.get("sources", []):
+              source_id = source["id"]
+              metrics = state.get("source_stats", {}).get(source_id, {})
+              enabled = (
+                  source.get("kind") != "igdb_companies"
+                  or bool(os.environ.get("IGDB_CLIENT_ID", "").strip()
+                          and os.environ.get("IGDB_CLIENT_SECRET", "").strip())
+              )
+              empty_passes = int(metrics.get("empty_cycles", 0))
+              saturated = bool(metrics.get("saturated", False))
+              last_candidates = int(metrics.get("last_pass_candidates", 0))
+              last_incomplete = int(metrics.get("last_pass_incomplete_candidates", 0))
+              no_new_data = bool(
+                  enabled
+                  and saturated
+                  and last_candidates == 0
+                  and last_incomplete == 0
+                  and metrics.get("last_pass_status") == "saturated"
+              )
+              sources[source_id] = {
+                  "label": source.get("label", source_id),
+                  "enabled": enabled,
+                  "cycle": int(metrics.get("cycle", 1)),
+                  "empty_complete_passes": empty_passes,
+                  "saturated": saturated,
+                  "last_pass_status": metrics.get("last_pass_status", "not_started"),
+                  "last_pass_completed_at": metrics.get("last_pass_completed_at"),
+                  "new_candidate_entities_last_pass": last_candidates,
+                  "verified_routes_last_pass": int(metrics.get("last_pass_verified", 0)),
+                  "incomplete_candidates_last_pass": last_incomplete,
+                  "no_new_candidate_data": no_new_data,
+                  "current_pass_complete": bool(state.get("feed_done", {}).get(source_id, False)),
+                  "candidate_status_counts": candidate_counts.get(source_id, {}),
+              }
+
+          enabled_sources = [source for source in sources.values() if source["enabled"]]
+          output = {
+              "schema_version": 1,
+              "updated_at": dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat(),
+              "discovery_state_updated_at": state.get("updated_at"),
+              "workflow_run_id": os.environ.get("GITHUB_RUN_ID"),
+              "workflow_run_number": os.environ.get("GITHUB_RUN_NUMBER"),
+              "workflow_commit": os.environ.get("GITHUB_SHA"),
+              "igdb_enabled": bool(os.environ.get("IGDB_CLIENT_ID", "").strip()
+                                   and os.environ.get("IGDB_CLIENT_SECRET", "").strip()),
+              "source_count": len(sources),
+              "enabled_source_count": len(enabled_sources),
+              "all_enabled_sources_no_new_candidate_data": bool(enabled_sources)
+                  and all(source["no_new_candidate_data"] for source in enabled_sources),
+              "candidate_pool_size": len(state.get("candidates", {})),
+              "candidate_status_counts": {
+                  status: sum(counts.get(status, 0) for counts in candidate_counts.values())
+                  for status in ("queued", "retry", "needs_review", "no_route", "published", "duplicate", "excluded")
+              },
+              "sources": sources,
+          }
+          output_path.parent.mkdir(parents=True, exist_ok=True)
+          output_path.write_text(json.dumps(output, indent=2) + "\\n", encoding="utf-8")
+          PY
+
+          git -C .discovery-state add state/studio-discovery-state.json state/discovery/studio-source-status.json
           if git -C .discovery-state diff --cached --quiet; then
             echo "No discovery-state changes to persist."
           else
