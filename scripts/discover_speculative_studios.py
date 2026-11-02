@@ -116,6 +116,7 @@ def load_source_manifest(path: Path = SOURCE_MANIFEST_PATH) -> tuple[dict[str, A
             "policy_url": source.get("policy_url"),
             "license": source.get("license"),
             "attribution": source.get("attribution"),
+            "access": source.get("access"),
         })
     return tuple(feeds)
 
@@ -1377,7 +1378,10 @@ def fetch_scottish_companies_page(cursor: str, limit: int) -> tuple[list[dict[st
             raise RuntimeError("Scottish Games Industry company record returned invalid JSON.") from exc
         categories = {re.sub(r"[^a-z]+", "_", str(value).casefold()).strip("_")
                       for value in company.get("categories", [])}
-        if not categories.intersection({"developer", "solo_developer", "development_studio", "solo_developers"}):
+        if not categories.intersection({
+            "developer", "solo_developer", "development_studio", "solo_developers",
+            "developer_and_publisher", "developer_publisher",
+        }):
             continue
         if str(company.get("status", "")).casefold() not in {"active", "trading"}:
             continue
@@ -1624,7 +1628,9 @@ def profile_for(candidate: dict[str, Any]) -> dict[str, Any]:
         "teamSizeAsOf": None,
         "focus": [],
         "popularGames": [],
-        "profileSources": [entity_url, website],
+        "profileSources": [entity_url, website] + (
+            [str(candidate["source_url"])] if candidate.get("source_url") else []
+        ),
         "applicationLocation": "Not specified · confirm on the official application route",
     }
 
