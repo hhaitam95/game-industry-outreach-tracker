@@ -773,10 +773,29 @@ def verify_candidate_pages(
         return {"status": "retry", "reason": homepage_result.error or "homepage_unavailable"}
     homepage = parse_page(homepage_result.url, homepage_result.body)
     pages = [homepage]
-    for page_url in relevant_page_urls(website, homepage):
+    unavailable_relevant_pages: list[FetchResult] = []
+    seen_page_urls = {homepage.url}
+    pending_page_urls = relevant_page_urls(website, homepage)
+    # Follow relevant careers/employment links one level deeper while keeping
+    # the complete crawl bounded by MAX_SITE_PAGES. This catches dedicated
+    # open-application subpages linked from a generic careers landing page.
+    while pending_page_urls and len(pages) < MAX_SITE_PAGES:
+        page_url = pending_page_urls.pop(0)
+        if page_url in seen_page_urls:
+            continue
+        seen_page_urls.add(page_url)
         result = page_fetcher(page_url, not same_site(website, page_url))
-        if result.ok:
-            pages.append(parse_page(result.url, result.body))
+        if not result.ok:
+            unavailable_relevant_pages.append(result)
+            continue
+        page = parse_page(result.url, result.body)
+        pages.append(page)
+        if same_site(website, page.url) and len(pages) < MAX_SITE_PAGES:
+            for nested_url in relevant_page_urls(page.url, page):
+                if nested_url not in seen_page_urls and nested_url not in pending_page_urls:
+                    pending_page_urls.append(nested_url)
+                    if len(pages) + len(pending_page_urls) >= MAX_SITE_PAGES:
+                        break
     all_text = " ".join(page.text for page in pages)
     excluded = exclusion_match(all_text)
     if excluded:
@@ -827,6 +846,13 @@ def verify_candidate_pages(
             return {
                 "status": "needs_review",
                 "reason": "speculative_language_without_clear_employment_context",
+            }
+        if unavailable_relevant_pages:
+            # An inaccessible linked career page is not evidence that the
+            # employer lacks a non-vacancy route.
+            return {
+                "status": "needs_review",
+                "reason": "relevant_career_page_unavailable",
             }
         return {"status": "no_route", "reason": "no_explicit_speculative_route_found"}
     matches.sort(key=lambda item: (0 if CAREER_CONTEXT_URL.search(urllib.parse.urlsplit(item[0].url).path) else 1, len(item[0].text)))
