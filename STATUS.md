@@ -6,7 +6,7 @@
 
 ## Discovery automation hardening — PR #109
 
-**Implementation and validation completed on the automation branch; merge/release status must be checked against PR #109.**
+**Merged and deployed on 2026-11-02.** PR [#109](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/109) merged as `27a3dc963976dbb4f161040c22d99b6756cec1d6`. Exact-head CI and browser acceptance passed in [run 41510639242](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41510639242); merged-main CI passed in [run 41511025026](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41511025026); Pages publication completed in [run 41511024791](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41511024791).
 
 - The hourly discovery workflow now queues pending executions rather than replacing a previous pending run.
 - The discovery checkpoint is documented accurately as public: the `discovery-state` branch belongs to the public repository. Only public-source employer leads and operational metadata belong there; personal applicant information and secrets remain prohibited.
@@ -14,7 +14,7 @@
 - Domain collisions are retained for identity review rather than silently dropped.
 - Employer-linked ATS and Japanese career-registration coverage has been extended, and the verifier follows relevant nested careers pages within its existing page bound.
 - A blocked relevant careers page is not treated as proof that no speculative route exists.
-- Full branch CI, including Python discovery tests, frontend/data validation, privacy checks, production build and Playwright browser acceptance, passed in [run 41510259225](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41510259225).
+- Full branch CI, including Python discovery tests, frontend/data validation, privacy checks, production build and Playwright browser acceptance, passed on the merged PR head.
 
 **Source coverage boundary:** the integrated runtime still consists of seven feeds. The manual source register distinguishes approved-to-research, manual-only and permission-required sources. Singapore ACRA is licensed for reuse and is a promising lead source, but has no official website field; it must not be routed to employer-site verification until safe official-domain resolution is implemented. IGDB remains integrated with its existing credential, attribution and non-commercial constraints. Steam, Games Jobs Index, GameCompanies.com and MobyGames must not be automated beyond current permissions.
 
