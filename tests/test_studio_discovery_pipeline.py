@@ -569,6 +569,52 @@ class CandidateVerificationTests(unittest.TestCase):
         self.assertIn("ats", result["submission_methods"])
         self.assertEqual(result["source_type"], "employer_managed_career_platform")
 
+    def test_japanese_career_registration_passes_both_evidence_gates(self):
+        candidate = {
+            **self.candidate(),
+            "name": "Capcom",
+            "website": "https://www.capcom.co.jp/",
+        }
+        pages = {
+            "https://www.capcom.co.jp/": discovery.FetchResult(
+                True,
+                "https://www.capcom.co.jp/",
+                200,
+                """
+                <title>CAPCOM</title>
+                <p>We develop video games and create game content.</p>
+                <a href="/recruit/guidelines/career/">経験者採用</a>
+                """,
+            ),
+            "https://www.capcom.co.jp/recruit/guidelines/career/": discovery.FetchResult(
+                True,
+                "https://www.capcom.co.jp/recruit/guidelines/career/",
+                200,
+                """
+                <title>経験者採用</title>
+                <h1>経験者採用</h1>
+                <p>キャリア登録。職種を絞らずに応募したい方、現在希望する職種の募集がない方はご登録ください。</p>
+                <a href="https://retiree.alumy.jp/capcom/career-registration">キャリア登録はこちら</a>
+                """,
+            ),
+        }
+
+        def page_fetcher(url, allowed_external):
+            return pages.get(url, discovery.FetchResult(False, url, 404, "", "not-found"))
+
+        result = discovery.verify_candidate_pages(candidate, page_fetcher)
+        self.assertEqual(result["status"], "verified")
+        self.assertEqual(result["route_type"], "general")
+        self.assertEqual(
+            result["application_url"],
+            "https://retiree.alumy.jp/capcom/career-registration",
+        )
+        self.assertEqual(
+            result["evidence_url"],
+            "https://www.capcom.co.jp/recruit/guidelines/career/",
+        )
+        self.assertEqual(result["submission_methods"], ["ats"])
+
     def test_production_fetcher_uses_the_verifier_two_argument_interface(self):
         bodies = {
             "https://example-studio.example/": (
