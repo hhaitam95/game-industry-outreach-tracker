@@ -233,3 +233,49 @@
   background: var(--tab-active-bg) !important;
   transition: background-color 180ms ease;
 }
+
+.tracker-page-heading {
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.tracker-heading-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+}
+
+.tracker-restore-control {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  cursor: pointer;
+}
+
+.tracker-backup-notice,
+.tracker-backup-error {
+  margin: 0;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.tracker-backup-error {
+  border-color: var(--warning-line);
+  color: var(--warning);
+}
+
+@media (max-width: 560px) {
+  .tracker-heading-actions {
+    width: 100%;
+  }
+
+  .tracker-heading-actions > * {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}
