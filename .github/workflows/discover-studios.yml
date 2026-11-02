@@ -230,6 +230,8 @@ jobs:
           manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
           candidate_counts = {}
           candidate_reason_counts = {}
+          candidate_due_counts = {}
+          today = dt.datetime.now(dt.timezone.utc).date().isoformat()
           for candidate in state.get("candidates", {}).values():
               source_id = candidate.get("source_id", "unknown")
               statuses = candidate_counts.setdefault(source_id, {})
@@ -238,6 +240,12 @@ jobs:
               reason = str(candidate.get("reason") or "unspecified")
               reasons = candidate_reason_counts.setdefault(source_id, {})
               reasons[reason] = reasons.get(reason, 0) + 1
+              next_check = str(candidate.get("next_check_at") or "")
+              if status in {"queued", "retry", "no_route", "needs_review"} and (
+                  not next_check or next_check <= today
+              ):
+                  due = candidate_due_counts.setdefault(source_id, {})
+                  due[status] = due.get(status, 0) + 1
 
           sources = {}
           for source in manifest.get("sources", []):
@@ -274,6 +282,7 @@ jobs:
                   "current_pass_complete": bool(state.get("feed_done", {}).get(source_id, False)),
                   "candidate_status_counts": candidate_counts.get(source_id, {}),
                   "candidate_reason_counts": candidate_reason_counts.get(source_id, {}),
+                  "candidate_due_counts": candidate_due_counts.get(source_id, {}),
                   "consecutive_failures": int(metrics.get("consecutive_failures", 0)),
               "last_error": metrics.get("last_error"),
               "last_failure_at": metrics.get("last_failure_at"),
@@ -296,6 +305,13 @@ jobs:
               "all_enabled_sources_no_new_candidate_data": bool(enabled_sources)
                   and all(source["no_new_candidate_data"] for source in enabled_sources),
               "candidate_pool_size": len(state.get("candidates", {})),
+              "candidate_due_counts": {
+                  status: sum(counts.get(status, 0) for counts in candidate_due_counts.values())
+                  for status in ("queued", "retry", "no_route", "needs_review")
+              },
+              "candidate_due_total": sum(
+                  sum(counts.values()) for counts in candidate_due_counts.values()
+              ),
               "identity_review_queue_count": len(state.get("identity_review_queue", [])),
               "candidate_status_counts": {
                   status: sum(counts.get(status, 0) for counts in candidate_counts.values())
@@ -336,7 +352,7 @@ jobs:
             echo "- Source-page cap: ${{ steps.discovery.outputs.source_page_limit || 'not set' }}"
             echo "- Public changes: ${{ steps.commit.outputs.data_changed || 'not committed' }}"
             if [ -f "$RUNNER_TEMP/game-industry-outreach-tracker-discovery.log" ]; then
-              for key in igdb_enabled source_pages source_candidates candidate_checks verified_added routes_checked time_budget_exhausted source_failures; do
+              for key in igdb_enabled source_pages source_candidates candidate_checks candidate_due_counts candidate_due_total identity_review_queue_size verified_added routes_checked time_budget_exhausted source_failures; do
                 value="$(awk -F': ' -v key="$key" '$1 == key { print substr($0, index($0, ": ") + 2); exit }' "$RUNNER_TEMP/game-industry-outreach-tracker-discovery.log")"
                 if [ -n "$value" ]; then
                   label="$(printf '%s' "$key" | tr '_' ' ')"
