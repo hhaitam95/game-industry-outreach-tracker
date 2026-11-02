@@ -49,6 +49,11 @@ function optionalString(value, label, maxLength = 2000) {
  * @param {string} label
  * @returns {string}
  */
+/** @param {unknown} value @returns {value is import("../components/studio.types").TrackerStatus} */
+function isTrackerStatus(value) {
+  return typeof value === "string" && VALID_STATUSES.has(value);
+}
+
 function validHttpUrl(value, label) {
   const candidate = requiredString(value, label, 2000);
   try {
@@ -71,10 +76,11 @@ function validateApplication(value, index) {
     throw new Error("The application backup contains an invalid " + prefix + ".");
   }
 
-  const status = requiredString(value.status, prefix + " status", 40);
-  if (!VALID_STATUSES.has(status)) {
+  const statusValue = requiredString(value.status, prefix + " status", 40);
+  if (!isTrackerStatus(statusValue)) {
     throw new Error("The application backup contains an unsupported status for " + prefix + ".");
   }
+  const status = statusValue;
 
   const appliedAt = value.appliedAt === null || value.appliedAt === undefined
     ? null
