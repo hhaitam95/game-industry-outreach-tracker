@@ -62,6 +62,9 @@ jobs:
       - name: Run a resumable discovery batch
         id: discovery
         shell: bash
+        env:
+          IGDB_CLIENT_ID: ${{ secrets.IGDB_CLIENT_ID }}
+          IGDB_CLIENT_SECRET: ${{ secrets.IGDB_CLIENT_SECRET }}
         run: |
           set -euo pipefail
           STATE_FILE=".discovery-state/state/studio-discovery-state.json"
@@ -238,7 +241,7 @@ jobs:
             echo "- Source-page cap: ${{ steps.discovery.outputs.source_page_limit || 'not set' }}"
             echo "- Public changes: ${{ steps.commit.outputs.data_changed || 'not committed' }}"
             if [ -f "$RUNNER_TEMP/game-industry-outreach-tracker-discovery.log" ]; then
-              for key in source_pages source_candidates candidate_checks verified_added routes_checked time_budget_exhausted; do
+              for key in igdb_enabled source_pages source_candidates candidate_checks verified_added routes_checked time_budget_exhausted; do
                 value="$(awk -F': ' -v key="$key" '$1 == key { print substr($0, index($0, ": ") + 2); exit }' "$RUNNER_TEMP/game-industry-outreach-tracker-discovery.log")"
                 if [ -n "$value" ]; then
                   label="$(printf '%s' "$key" | tr '_' ' ')"
