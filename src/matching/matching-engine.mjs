@@ -193,27 +193,35 @@ function skillSupportsDiscipline(skillName, discipline) {
   const skill = normalize(skillName);
   const target = normalize(discipline);
   if (!skill || !target) return false;
-  if (skill === target || skill.includes(target) || target.includes(skill)) return true;
+  if (hasPhrase(skill, target) || hasPhrase(target, skill)) return true;
+
   if (/programming|software|game development|engineering/.test(target)) {
-    return PROGRAMMING_SKILLS.some((item) => skill.includes(normalize(item)));
+    return PROGRAMMING_SKILLS.some((item) => hasPhrase(skill, item));
   }
   if (/devops|cloud|infrastructure|build|release|operations|platform/.test(target)) {
-    return DEVOPS_SKILLS.some((item) => skill.includes(normalize(item)));
+    return DEVOPS_SKILLS.some((item) => hasPhrase(skill, item));
   }
   if (/support|technical|network|api|integration/.test(target)) {
-    return SUPPORT_SKILLS.some((item) => skill.includes(normalize(item)));
+    return SUPPORT_SKILLS.some((item) => hasPhrase(skill, item));
   }
   if (/quality assurance|(^| )qa($| )|testing|test automation/.test(target)) {
-    return /test|quality assurance|\bqa\b|automation/.test(skill);
+    return ["test", "testing", "quality assurance", "qa", "automation"]
+      .some((item) => hasPhrase(skill, item));
   }
   if (/vfx|visual effects|technical art|shaders|rendering/.test(target)) {
-    return /vfx|visual effects|shader|render|niagara|houdini|after effects|embergen/.test(skill);
+    return [
+      "vfx", "visual effects", "shader", "shaders", "rendering",
+      "niagara", "houdini", "after effects", "embergen",
+    ].some((item) => hasPhrase(skill, item));
   }
   if (/art|animation|character|environment|concept/.test(target)) {
-    return /art|animation|character|environment|concept|blender|maya|3d|2d/.test(skill);
+    return [
+      "art", "artist", "animation", "animator", "character", "environment",
+      "concept", "blender", "maya", "3d", "2d",
+    ].some((item) => hasPhrase(skill, item));
   }
   if (/design|narrative|level/.test(target)) {
-    return /design|narrative|level/.test(skill);
+    return ["design", "narrative", "level"].some((item) => hasPhrase(skill, item));
   }
   return false;
 }
