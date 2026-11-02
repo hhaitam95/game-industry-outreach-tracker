@@ -17,7 +17,22 @@
 - A positive reply is not a reason to abandon the rest of the pipeline. Keep other applications active until a written offer and the material transition requirements are confirmed.
 - No portal automation, autofill, automated uploads, email sending or automatic submission is authorized. Final application review and submission remain user-controlled.
 
-The campaign strategy does not change the public discovery schema, source permissions, studio qualification gates or current implementation status. Matching is already described as a C2 feature-branch foundation; the Application Queue, deeper requirements intelligence, campaign views and funnel reporting remain future work unless separately verified as merged.
+The campaign strategy does not change the public discovery schema, source permissions, studio qualification gates or current implementation status. Matching is already implemented and merged in PR [#96](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/96); the Application Queue, deeper requirements intelligence, campaign views and funnel reporting remain future work unless separately verified as merged.
+
+## Matching quality validation — follow-up branch (not yet merged)
+
+A focused code review of the merged matching engine identified correctness issues worth fixing before relying on its ordering for a large application campaign. The follow-up branch feat/matching-quality-validation-20261102 contains:
+
+- Direct versus related role-family mappings; adjacent discipline matches remain Potential rather than being treated as direct.
+- A Strong result requires direct role alignment and demonstrated skill evidence for the same stated discipline.
+- Whole-phrase/token-boundary skill matching to reduce substring false positives.
+- Work-history matching against responsibilities and achievements as well as the exact job title.
+- Directory-recorded country used for geographic preference matching; headquarters does not override it when the two differ (including the Playtouch Mauritius/France distinction).
+- Mixed work arrangements treated as uncertain rather than automatically penalized.
+- Personal-priority ordering as the default Matches view sort, without merging the relevance, route and priority labels.
+- Unit and browser regression coverage for the above.
+
+This is a targeted quality improvement, not a replacement matcher. CI is pending on the follow-up PR. It does not add language, visa, relocation or country-specific remote eligibility scoring; those require structured, sourced data and must remain unknown until verified. The candidate's actual saved profile is browser-local and has not been read from the repository; fixture and data-level validation is not a claim that the user's personal profile has been audited.
 
 ## Global studio discovery source expansion — PR #100
 
@@ -39,7 +54,7 @@ PR #100 adds IGDB as the sixth recurring candidate feed. It queries companies wi
 - The browser UI explains that local browser storage is not encrypted by default and can be cleared. Backups contain personal information and must be kept private.
 - The complete pre-merge CI suite passed, including profile persistence, navigation retention and backup restore.
 
-## Phase C2 — private matching foundation (implemented on feature branch)
+## Phase C2 — private matching foundation (merged in PR #96)
 
 - Added a Matches page that reads the saved Candidate Profile from browser-local IndexedDB and compares it against active public studio route records on-device.
 - Professional relevance, application-route status/freshness and personal priority remain separate qualitative dimensions. No combined score or hiring probability is presented.
