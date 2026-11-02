@@ -191,6 +191,7 @@ function AssessmentDetails({ assessment }: { assessment: StudioMatchAssessment }
             <div><dt>Route type</dt><dd>{labelFromKey(assessment.routeType)}</dd></div>
             <div><dt>Submission channel</dt><dd>{assessment.submissionMethods.length ? assessment.submissionMethods.map(labelFromKey).join(", ") : "Not specified"}</dd></div>
             <div><dt>Work model</dt><dd>{assessment.workModel === "not_stated" ? "Not stated" : labelFromKey(assessment.workModel)}</dd></div>
+            <div><dt>Campaign geography tier</dt><dd>{labelFromKey(assessment.priority.regionTier)}</dd></div>
             <div><dt>Directory check</dt><dd>{formatDate(assessment.checkedAt)}</dd></div>
             <div><dt>Next review date</dt><dd>{formatDate(assessment.nextReviewAt)}</dd></div>
           </dl>
