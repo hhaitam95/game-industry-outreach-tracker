@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-11-02 — Document studio targeting and application campaign strategy
+
+- Add a durable campaign-strategy handover covering global discovery versus private prioritisation, application-route versus vacancy distinctions, geographic priority waves, one approved master resume and motivation letter, pre-submission review, outcome tracking and campaign evaluation.
+- Clarify that the public directory remains worldwide and non-personalized, with its existing two qualification gates unchanged.
+- Record a 200+ application campaign as an aspiration rather than a quota or guaranteed result; preserve human review and manual final submission.
+- Update HANDOFF.md, STATUS.md, architecture, implementation plan and product decisions to distinguish current implementation from future campaign workflow work.
+- No application automation, discovery adapter, schema migration or runtime behavior is changed.
+
+
 ## 2026-11-02 — Add IGDB company discovery feed (PR #100)
 
 - Add a recurring IGDB Companies API candidate feed for companies with developed-game credits and an officially typed company website.
