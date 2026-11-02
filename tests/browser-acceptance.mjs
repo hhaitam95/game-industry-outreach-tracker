@@ -866,7 +866,7 @@ async function main() {
     );
 
     const recoveryRestoreInput = recoveryPage.locator(
-      ".tracker-page input[type=\\"file\\"][accept=\\".json,application/json\\"]",
+      ".tracker-page input[type=\"file\"][accept=\".json,application/json\"]",
     );
     const recoveryRestore = await performWithDialog(
       recoveryPage,
