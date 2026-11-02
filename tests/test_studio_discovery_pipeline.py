@@ -403,6 +403,7 @@ class DiscoveryParsingTests(unittest.TestCase):
                 {"path": "data/companies/alpha.json", "type": "blob"},
                 {"path": "data/companies/publisher.json", "type": "blob"},
                 {"path": "data/companies/closed.json", "type": "blob"},
+                {"path": "data/companies/hybrid.json", "type": "blob"},
                 {"path": "README.md", "type": "blob"},
             ]
         }
@@ -422,6 +423,11 @@ class DiscoveryParsingTests(unittest.TestCase):
                 "categories": ["developer"], "status": "closed",
                 "website": "https://closed.example/",
             },
+            "hybrid.json": {
+                "id": "hybrid-studio", "slug": "hybrid-studio", "name": "Hybrid Studio",
+                "categories": ["developer", "publisher"], "status": "active",
+                "website": "https://hybrid.example/", "location": "Glasgow",
+            },
         }
 
         def fake_fetch(url, *args, **kwargs):
@@ -439,13 +445,35 @@ class DiscoveryParsingTests(unittest.TestCase):
         finally:
             discovery.SCOTTISH_COMPANY_PATHS = None
 
-        self.assertEqual(raw_count, 3)
-        self.assertEqual(next_cursor, "3")
-        self.assertEqual(len(rows), 1)
-        self.assertEqual(rows[0]["qid"], "SCOT:alpha-games")
-        self.assertEqual(rows[0]["source_id"], "scottish_games_industry")
-        self.assertEqual(rows[0]["source_license"], "CC BY-NC-SA 4.0")
-        self.assertEqual(rows[0]["website"], "https://alpha.example/")
+        self.assertEqual(raw_count, 4)
+        self.assertEqual(next_cursor, "4")
+        self.assertEqual(len(rows), 2)
+        alpha = next(row for row in rows if row["qid"] == "SCOT:alpha-games")
+        hybrid = next(row for row in rows if row["qid"] == "SCOT:hybrid-studio")
+        self.assertEqual(alpha["source_id"], "scottish_games_industry")
+        self.assertEqual(alpha["source_license"], "CC BY-NC-SA 4.0")
+        self.assertEqual(alpha["website"], "https://alpha.example/")
+        self.assertEqual(hybrid["company_type"], "Developer / Publisher")
+
+    def test_scottish_location_is_not_labelled_as_headquarters_and_hybrid_is_preserved(self):
+        candidate = {
+            "qid": "SCOT:hybrid-studio",
+            "entity_url": "https://gamesindustry.scot/companies/hybrid-studio/",
+            "name": "Hybrid Studio",
+            "website": "https://hybrid.example/",
+            "country": "United Kingdom",
+            "hq_city": "Glasgow",
+            "country_code": "GB",
+            "source_id": "scottish_games_industry",
+            "company_type": "Developer / Publisher",
+        }
+        profile = discovery.profile_for(candidate)
+        self.assertEqual(
+            profile["headquarters"]["label"],
+            "Listed location · Scottish Games Industry",
+        )
+        self.assertEqual(profile["headquarters"]["city"], "Glasgow")
+        self.assertEqual(profile["companyType"], ["Developer / Publisher"])
 
 class CandidateVerificationTests(unittest.TestCase):
     def setUp(self):
