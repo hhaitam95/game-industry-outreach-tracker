@@ -74,7 +74,7 @@
 const ROLE_RULES = [
   {
     group: "support",
-    pattern: /(developer|technical|product|it|systems)\s+support|support\s+(engineer|specialist)|technical operations/,
+    pattern: /\b(developer|technical|product|it|systems)\s+support\b|\bsupport\s+(engineer|specialist)\b|\btechnical operations\b/,
     directDisciplines: [
       "developer support", "technical support", "product support", "it support",
       "systems support", "technical operations", "it operations", "studio it",
@@ -177,6 +177,11 @@ function hasPhrase(haystack, phrase) {
   return (" " + text + " ").includes(" " + needle + " ");
 }
 
+/** @param {string} value @param {string[]} phrases @returns {boolean} */
+function hasAnyPhrase(value, phrases) {
+  return phrases.some((phrase) => hasPhrase(value, phrase));
+}
+
 /** @param {string} name @returns {string} */
 function studioId(name) {
   return normalize(name).replace(/\s+/g, "-").replace(/^-|-$/g, "");
@@ -196,32 +201,32 @@ function skillSupportsDiscipline(skillName, discipline) {
   if (!skill || !target) return false;
   if (hasPhrase(skill, target) || hasPhrase(target, skill)) return true;
 
-  if (/programming|software|game development|engineering/.test(target)) {
+  if (hasAnyPhrase(target, ["programming", "software", "game development", "engineering"])) {
     return PROGRAMMING_SKILLS.some((item) => hasPhrase(skill, item));
   }
-  if (/devops|cloud|infrastructure|build|release|operations|platform/.test(target)) {
+  if (hasAnyPhrase(target, ["devops", "cloud", "infrastructure", "build", "release", "operations", "platform"])) {
     return DEVOPS_SKILLS.some((item) => hasPhrase(skill, item));
   }
-  if (/support|technical|network|api|integration/.test(target)) {
+  if (hasAnyPhrase(target, ["support", "technical", "network", "api", "integration"])) {
     return SUPPORT_SKILLS.some((item) => hasPhrase(skill, item));
   }
-  if (/quality assurance|(^| )qa($| )|testing|test automation/.test(target)) {
+  if (hasAnyPhrase(target, ["quality assurance", "qa", "testing", "test automation"])) {
     return ["test", "testing", "quality assurance", "qa", "automation"]
       .some((item) => hasPhrase(skill, item));
   }
-  if (/vfx|visual effects|technical art|shaders|rendering/.test(target)) {
+  if (hasAnyPhrase(target, ["vfx", "visual effects", "technical art", "shaders", "rendering"])) {
     return [
       "vfx", "visual effects", "shader", "shaders", "rendering",
       "niagara", "houdini", "after effects", "embergen",
     ].some((item) => hasPhrase(skill, item));
   }
-  if (/art|animation|character|environment|concept/.test(target)) {
+  if (hasAnyPhrase(target, ["art", "animation", "character", "environment", "concept"])) {
     return [
       "art", "artist", "animation", "animator", "character", "environment",
       "concept", "blender", "maya", "3d", "2d",
     ].some((item) => hasPhrase(skill, item));
   }
-  if (/design|narrative|level/.test(target)) {
+  if (hasAnyPhrase(target, ["design", "narrative", "level"])) {
     return ["design", "narrative", "level"].some((item) => hasPhrase(skill, item));
   }
   return false;
