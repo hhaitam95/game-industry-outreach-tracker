@@ -75,6 +75,158 @@ function recordArray(value: unknown, fields: string[]): Record<string, string>[]
   });
 }
 
+const SKILL_EVIDENCE_VALUES = new Set([
+  "demonstrated",
+  "transferable",
+  "learning_exposure",
+  "not_evidenced",
+  "user_confirmed_gap",
+]);
+
+const PROFILE_COLLECTION_FIELDS: Record<string, string[]> = {
+  experience: [
+    "id", "employer", "title", "location", "startDate", "endDate",
+    "responsibilities", "achievements",
+  ],
+  education: ["id", "qualification", "institution", "startDate", "endDate", "details"],
+  projects: ["id", "name", "kind", "url", "startDate", "endDate", "description"],
+  skills: ["id", "name", "category", "evidence", "evidenceDetails", "evidenceSource"],
+};
+
+const PROFILE_PERSONAL_FIELDS = [
+  "fullName", "email", "phone", "currentLocation", "linkedinUrl", "portfolioUrl", "otherLink",
+];
+const PROFILE_MATERIAL_FIELDS = ["resumeText", "motivationLetter"];
+const PROFILE_PREFERENCE_FIELDS = ["additionalConsiderations"];
+const PROFILE_PREFERENCE_LISTS = [
+  "roleFamilies", "studioTypes", "workModels", "preferredRegions",
+  "acceptableRegions", "lowPriorityRegions",
+];
+
+/**
+ * Reject malformed or oversized data before normalization can filter, default or truncate it.
+ * Missing fields remain compatible with earlier schema-v1 records and receive normal defaults.
+ */
+function assertCandidateProfileIntegrity(value: unknown, context: string): void {
+  const fail = (field: string): never => {
+    throw new Error(`${context} contains invalid or unsupported data at ${field}. The original data was not modified.`);
+  };
+  const assertKnownKeys = (record: Record<string, unknown>, allowed: string[], path: string) => {
+    for (const key of Object.keys(record)) {
+      if (!allowed.includes(key)) fail(`${path}.${key}`);
+    }
+  };
+  const assertOptionalStrings = (
+    record: Record<string, unknown>,
+    fields: string[],
+    path: string,
+  ) => {
+    for (const field of fields) {
+      if (!Object.prototype.hasOwnProperty.call(record, field)) continue;
+      const item = record[field];
+      if (typeof item !== "string" || item.length > 30_000) fail(`${path}.${field}`);
+    }
+  };
+  const assertOptionalStringLists = (
+    record: Record<string, unknown>,
+    fields: string[],
+    path: string,
+  ) => {
+    for (const field of fields) {
+      if (!Object.prototype.hasOwnProperty.call(record, field)) continue;
+      const list = record[field];
+      if (!Array.isArray(list) || list.length > 100) fail(`${path}.${field}`);
+      if (list.some((item) => typeof item !== "string" || item.length > 200)) {
+        fail(`${path}.${field}`);
+      }
+    }
+  };
+
+  if (!isRecord(value)) fail("profile");
+  assertKnownKeys(value, [
+    "schemaVersion", "updatedAt", "personal", "professionalSummary",
+    "experience", "education", "projects", "skills", "materials", "preferences",
+  ], "profile");
+  if (
+    Object.prototype.hasOwnProperty.call(value, "schemaVersion") &&
+    value.schemaVersion !== PROFILE_SCHEMA_VERSION
+  ) fail("schemaVersion");
+  if (
+    Object.prototype.hasOwnProperty.call(value, "updatedAt") &&
+    value.updatedAt !== null &&
+    (typeof value.updatedAt !== "string" || value.updatedAt.length > 100)
+  ) fail("updatedAt");
+  assertOptionalStrings(value, ["professionalSummary"], "profile");
+
+  if (Object.prototype.hasOwnProperty.call(value, "personal")) {
+    if (!isRecord(value.personal)) fail("personal");
+    assertKnownKeys(value.personal, PROFILE_PERSONAL_FIELDS, "personal");
+    assertOptionalStrings(value.personal, PROFILE_PERSONAL_FIELDS, "personal");
+  }
+
+  for (const [collection, fields] of Object.entries(PROFILE_COLLECTION_FIELDS)) {
+    if (!Object.prototype.hasOwnProperty.call(value, collection)) continue;
+    const items = value[collection];
+    if (!Array.isArray(items) || items.length > 200) fail(collection);
+    const ids = new Set<string>();
+    for (let index = 0; index < items.length; index += 1) {
+      const item = items[index];
+      const path = `${collection}[${index}]`;
+      if (!isRecord(item)) fail(path);
+      assertKnownKeys(item, fields, path);
+      if (typeof item.id !== "string" || !item.id.trim() || item.id.length > 200) {
+        fail(`${path}.id`);
+      }
+      if (ids.has(item.id)) fail(`${path}.id (duplicate)`);
+      ids.add(item.id);
+      assertOptionalStrings(item, fields.filter((field) => field !== "id"), path);
+      if (
+        collection === "skills" &&
+        Object.prototype.hasOwnProperty.call(item, "evidence") &&
+        (typeof item.evidence !== "string" || !SKILL_EVIDENCE_VALUES.has(item.evidence))
+      ) fail(`${path}.evidence`);
+    }
+  }
+
+  if (Object.prototype.hasOwnProperty.call(value, "materials")) {
+    if (!isRecord(value.materials)) fail("materials");
+    assertKnownKeys(
+      value.materials,
+      ["masterResume", "resumeText", "motivationLetter", "motivationDocument"],
+      "materials",
+    );
+    assertOptionalStrings(value.materials, PROFILE_MATERIAL_FIELDS, "materials");
+    for (const key of ["masterResume", "motivationDocument"]) {
+      if (!Object.prototype.hasOwnProperty.call(value.materials, key)) continue;
+      const document = value.materials[key];
+      if (document === null) continue;
+      if (!documentValue(document) || !isRecord(document)) fail(`materials.${key}`);
+      if (document.name.length > 255 || document.mimeType.length > 150) {
+        fail(`materials.${key}`);
+      }
+      assertKnownKeys(
+        document,
+        ["name", "mimeType", "size", "lastModified", "dataBase64"],
+        `materials.${key}`,
+      );
+    }
+  }
+
+  if (Object.prototype.hasOwnProperty.call(value, "preferences")) {
+    if (!isRecord(value.preferences)) fail("preferences");
+    assertKnownKeys(
+      value.preferences,
+      [
+        ...PROFILE_PREFERENCE_FIELDS,
+        ...PROFILE_PREFERENCE_LISTS,
+      ],
+      "preferences",
+    );
+    assertOptionalStrings(value.preferences, PROFILE_PREFERENCE_FIELDS, "preferences");
+    assertOptionalStringLists(value.preferences, PROFILE_PREFERENCE_LISTS, "preferences");
+  }
+}
+
 export function createEmptyProfile(): CandidateProfile {
   return {
     schemaVersion: PROFILE_SCHEMA_VERSION,
