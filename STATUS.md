@@ -4,9 +4,13 @@
 **Product scope:** Global directory of legitimate video-game development organisations with verified speculative-application routes, plus a private browser-local Candidate Profile and application tracker.  
 **Authoritative discovery rules:** [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md).
 
+## Candidate Profile persistence integrity — PR #111
+
+The IndexedDB profile editor now tracks edits across asynchronous writes. A save completion cannot replace newer form state or falsely clear the unsaved flag; a failed initial read does not enable a potentially destructive save. A successful validated backup restore can re-establish storage after a transient database-open failure. The Chromium browser suite now exercises both races/recovery cases. Exact-head full CI passed in [run 41519494261](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41519494261). PR #111 is open and awaiting merge.
+
 ## Private application tracker integrity — PR #110
 
-The browser-local tracker now validates every saved record before accepting the dataset. Invalid JSON, unsupported structures and partially invalid arrays are not silently converted into empty or filtered data; the original localStorage value remains untouched. A visible recovery warning directs the user to import a validated backup, and tracker mutations remain blocked until that explicit restore succeeds. Unit coverage and the Chromium browser-acceptance recovery scenario passed in [exact-head CI run 41517916733](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41517916733). PR #110 is awaiting merge at the time of this status entry.
+The browser-local tracker validates every saved record before accepting the dataset. Invalid JSON, unsupported structures and partially invalid arrays are not silently converted into empty or filtered data; the original localStorage value remains untouched. A visible recovery warning directs the user to import a validated backup, and tracker mutations remain blocked until that explicit restore succeeds. Unit coverage and the Chromium browser-acceptance recovery scenario passed in [exact-head CI run 41517916733](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41517916733). PR #110 merged as `83b6245e3f7c2fb682ff6cc17b71e0a3b5bf67e3`; main CI and Pages publication for that commit completed successfully.
 
 ## Discovery automation hardening — PR #109
 
