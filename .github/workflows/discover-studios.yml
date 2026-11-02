@@ -32,6 +32,7 @@ permissions:
 concurrency:
   group: studio-discovery-v4-${{ github.repository }}
   cancel-in-progress: false
+  queue: max
 
 jobs:
   discover-and-publish:
@@ -228,11 +229,15 @@ jobs:
           state = json.loads(state_path.read_text(encoding="utf-8"))
           manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
           candidate_counts = {}
+          candidate_reason_counts = {}
           for candidate in state.get("candidates", {}).values():
               source_id = candidate.get("source_id", "unknown")
               statuses = candidate_counts.setdefault(source_id, {})
               status = candidate.get("status", "unknown")
               statuses[status] = statuses.get(status, 0) + 1
+              reason = str(candidate.get("reason") or "unspecified")
+              reasons = candidate_reason_counts.setdefault(source_id, {})
+              reasons[reason] = reasons.get(reason, 0) + 1
 
           sources = {}
           for source in manifest.get("sources", []):
@@ -268,7 +273,8 @@ jobs:
                   "no_new_candidate_data": no_new_data,
                   "current_pass_complete": bool(state.get("feed_done", {}).get(source_id, False)),
                   "candidate_status_counts": candidate_counts.get(source_id, {}),
-              "consecutive_failures": int(metrics.get("consecutive_failures", 0)),
+                  "candidate_reason_counts": candidate_reason_counts.get(source_id, {}),
+                  "consecutive_failures": int(metrics.get("consecutive_failures", 0)),
               "last_error": metrics.get("last_error"),
               "last_failure_at": metrics.get("last_failure_at"),
               "last_success_at": metrics.get("last_success_at"),
@@ -374,6 +380,7 @@ jobs:
             else
               echo "- Saved discovery checkpoint: unavailable"
             fi
-            echo "- Candidate names and route evidence remain in the private discovery-state branch."
+            echo "- Discovery checkpoint: the discovery-state branch is publicly visible and contains public-source employer leads plus operational metadata only."
+            echo "- Do not store candidate personal data, CVs, application history, secrets or private profile information in discovery state."
             echo "- Unavailable, blocked, robots-disallowed or ambiguous pages do not close routes."
           } >> "$GITHUB_STEP_SUMMARY"
