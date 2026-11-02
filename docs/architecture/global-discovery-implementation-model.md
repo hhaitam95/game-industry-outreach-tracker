@@ -194,7 +194,7 @@ There is no global target count and no arbitrary maximum. Report these as separa
 - Candidates still queued or awaiting retry.
 - Source pages/cursors completed and sources not yet integrated.
 
-Never describe 10,000 candidate companies as 10,000 jobs or opportunities. The published route count is the number of verified application routes, not the number of current vacancies.
+Never describe 10,000 candidate companies as 10,000 jobs or opportunities. The published route count is the number of verified application routes, not the number of current vacancies. Health reporting also distinguishes candidates actually due for checking from retry/manual-review records whose scheduled next-check date is still in the future; a retry count alone is not an overdue queue size.
 
 Saturation is source-specific, not global. A source may enter a slower maintenance cadence after its documented full passes stop producing new eligible studios, but:
 
