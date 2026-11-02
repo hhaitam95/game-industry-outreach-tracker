@@ -1,7 +1,7 @@
 # Candidate profile, matching and application workspace
 
-**Status:** Candidate Profile C1 merged/deployed in PR #95; matching C2 foundation merged in PR #96; focused matching-quality validation is in a follow-up branch; Application Queue, deeper requirements intelligence and workspace remain unimplemented  
-**Last updated:** 2026-11-01  
+**Status:** Candidate Profile C1 merged/deployed in PR #95; matching C2 foundation merged in PR #96; focused matching-quality validation merged in PR #104 and is deployed; Application Queue, deeper requirements intelligence and workspace remain unimplemented  
+**Last updated:** 2026-11-02  
 **Scope:** Candidate-owned profile, transparent studio/opportunity assessment, personal application queue and preparation workspace.  
 **Explicitly deferred:** Browser-extension automation, external portal autofill, automated form interaction and application submission.
 

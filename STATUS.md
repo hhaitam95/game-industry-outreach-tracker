@@ -19,20 +19,24 @@
 
 The campaign strategy does not change the public discovery schema, source permissions, studio qualification gates or current implementation status. Matching is already implemented and merged in PR [#96](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/96); the Application Queue, deeper requirements intelligence, campaign views and funnel reporting remain future work unless separately verified as merged.
 
-## Matching quality validation — follow-up branch (not yet merged)
+## Matching quality validation — PR #104 (merged and deployed)
 
-A focused code review of the merged matching engine identified correctness issues worth fixing before relying on its ordering for a large application campaign. The follow-up branch feat/matching-quality-validation-20261102 contains:
+**Merged and deployed on 2026-11-02.** PR [#104](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/104) merged as `a183c8f030552333693fe5c44a87bc7cc9fa34bb`.
 
-- Direct versus related role-family mappings; adjacent discipline matches remain Potential rather than being treated as direct.
-- A Strong result requires direct role alignment and demonstrated skill evidence for the same stated discipline.
-- Whole-phrase/token-boundary skill matching to reduce substring false positives.
-- Work-history matching against responsibilities and achievements as well as the exact job title.
-- Directory-recorded country used for geographic preference matching; headquarters does not override it when the two differ (including the Playtouch Mauritius/France distinction).
-- Mixed work arrangements treated as uncertain rather than automatically penalized.
-- Campaign priority is the default Matches sort: preferred geography first, then acceptable, unassigned/unknown, and lower-priority geography; overall personal priority and professional relevance break ties. A test covers a preferred-region studio ranking ahead of an acceptable-region studio even when the latter has a higher aggregate preference score.
-- Unit and browser regression coverage for the above.
+The follow-up improves the matching foundation already merged in PR #96:
 
-This is a targeted quality improvement, not a replacement matcher. CI is pending on the follow-up PR. It does not add language, visa, relocation or country-specific remote eligibility scoring; those require structured, sourced data and must remain unknown until verified. The candidate's actual saved profile is browser-local and has not been read from the repository; fixture and data-level validation is not a claim that the user's personal profile has been audited.
+- Direct and related/adjacent role-family mappings are distinct. Related disciplines can support Potential, but do not independently justify Strong.
+- Strong requires a direct role-to-discipline alignment and demonstrated skill evidence mapped to that same discipline.
+- Normalized phrase-boundary matching removes substring false positives such as “Go” inside “Google Workspace” and “Art” inside “Cartography”; a positive control confirms standalone Go still maps to Programming.
+- Work-history matching considers job title, responsibilities and achievements; work-history evidence remains transferable.
+- Geographic preference uses the studio directory's recorded country, not a conflicting headquarters country. The Playtouch route remains associated with Mauritius rather than its separate French headquarters; Mauritius is now mapped to Africa for region/continent matching.
+- Mixed work arrangements are treated as uncertain, with no automatic preference penalty.
+- Default Matches sorting is campaign priority, with preferred geography first, then acceptable, unassigned/unknown and lower-priority geography. Overall personal priority and professional relevance break ties. The expanded assessment displays the geographic tier.
+
+**Validation:** PR-head CI [run 41463495519](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41463495519) passed, including Python tests, Node unit tests, TypeScript/Vite build, directory/route validation, privacy checks, Pages-artifact checks and browser acceptance. The merged-main build [run 41464012676](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41464012676) also passed, and website publishing [run 41464012718](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41464012718) completed successfully.
+
+**Remaining limitations:** Working language, country-specific remote eligibility, relocation and visa/work-authorisation sponsorship are not yet structured consistently enough for reliable automated prioritisation. They remain unknown until separately verified and recorded. The user's saved Candidate Profile remains browser-local; repository CI used deterministic fixtures and did not inspect the user's personal profile or documents.
+
 
 ## Global studio discovery source expansion — PR #100
 

@@ -1,13 +1,13 @@
 # Changelog
 
-## 2026-11-02 — Matching quality follow-up (PR #104, awaiting CI)
+## 2026-11-02 — Matching quality follow-up (PR #104, merged and deployed)
 
 - Tighten matching so directly aligned disciplines are distinguished from adjacent disciplines and a Strong result requires demonstrated skill evidence for the same directly aligned discipline.
 - Replace substring skill checks with phrase-boundary matching and include responsibilities/achievements when assessing transferable work-history evidence.
 - Use the route directory's recorded country instead of silently substituting a separate headquarters country; add Mauritius location mapping for the Playtouch record.
 - Treat mixed work arrangements as unresolved rather than as an automatic preference mismatch.
 - Make the default campaign sort geography-first (preferred, acceptable, unassigned/unknown, lower-priority), then use overall preference and professional relevance as tie-breakers; expose the geography tier in expanded assessment details.
-- Add unit and browser regression coverage. CI is not yet green; do not merge until the current PR checks pass.
+- Add unit and browser regression coverage. PR-head CI run 41463495519 passed; main-branch build run 41464012676 and Pages publish run 41464012718 also passed.
 
 
 ## 2026-11-02 — Document studio targeting and application campaign strategy
