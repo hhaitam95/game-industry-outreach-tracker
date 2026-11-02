@@ -338,6 +338,20 @@ export default function App() {
       </header>
 
       <main className="page-container">
+        {storageLoadError ? (
+          <p className="storage-warning" role="alert">
+            {storageLoadError} Restore a valid application backup before continuing to use the tracker.
+            <button className="text-button" type="button" onClick={() => openTracker()}>
+              Open My applications to restore a backup
+            </button>
+          </p>
+        ) : null}
+        {storageError ? (
+          <p className="storage-warning" role="alert">
+            Your browser could not save changes to local storage. Check your browser's site
+            storage settings. Changes may remain only in memory until storage is available.
+          </p>
+        ) : null}
         {page === "studios" ? (
           <StudioDirectory
             applications={applications}
@@ -369,20 +383,6 @@ export default function App() {
         <div className="profile-route" style={{ display: page === "profile" ? "block" : "none" }}>
           <CandidateProfile />
         </div>
-        {storageLoadError ? (
-          <p className="storage-warning" role="alert">
-            {storageLoadError} Restore a valid application backup before continuing to use the tracker.
-            <button className="text-button" type="button" onClick={() => openTracker()}>
-              Open My applications to restore a backup
-            </button>
-          </p>
-        ) : null}
-        {storageError ? (
-          <p className="storage-warning" role="alert">
-            Your browser could not save changes to local storage. Check your browser's site
-            storage settings. Changes may remain only in memory until storage is available.
-          </p>
-        ) : null}
       </main>
 
       <footer className="app-footer">
