@@ -2222,6 +2222,15 @@ def run_pipeline(
     # Sort only by display name. Existing verified records and profiles are otherwise
     # preserved; additions are append-only and route closure is a status update.
     studios.sort(key=lambda studio: str(studio.get("name", "")).casefold())
+    today = iso_date()
+    candidate_due_counts: dict[str, int] = {}
+    for candidate in state["candidates"].values():
+        status = str(candidate.get("status", "unknown"))
+        next_check_at = str(candidate.get("next_check_at") or "")
+        if status in {"queued", "retry", "no_route", "needs_review"} and (
+            not next_check_at or next_check_at <= today
+        ):
+            candidate_due_counts[status] = candidate_due_counts.get(status, 0) + 1
     result = {
         "mode": mode,
         "igdb_enabled": igdb_credentials_available(),
@@ -2262,6 +2271,8 @@ def run_pipeline(
         },
         "studio_count": len(studios),
         "candidate_queue": sum(1 for item in state["candidates"].values() if item.get("status") in {"queued", "retry"}),
+        "candidate_due_counts": candidate_due_counts,
+        "candidate_due_total": sum(candidate_due_counts.values()),
         "candidate_pool_size": len(state["candidates"]),
         "identity_review_queue_size": len(state.get("identity_review_queue", [])),
         "gamedevmap_complete": state["feed_done"].get("gamedevmap", False),
