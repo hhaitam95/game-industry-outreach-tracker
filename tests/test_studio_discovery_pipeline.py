@@ -1284,12 +1284,19 @@ class DatasetUpdateTests(unittest.TestCase):
             "source_id": "scottish_games_industry",
         }
         self.assertEqual(discovery.add_candidates(state, [first]), 1)
+        self.assertEqual(discovery.add_candidates(state, [duplicate]), 1)
         self.assertEqual(discovery.add_candidates(state, [duplicate]), 0)
         candidate = state["candidates"]["Q100"]
         self.assertEqual(
             candidate["sources_seen"],
             ["wikidata_video_game_developers", "scottish_games_industry"],
         )
+        self.assertEqual(len(state["identity_review_queue"]), 1)
+        collision = state["identity_review_queue"][0]
+        self.assertEqual(collision["name"], "Alpha Studio Ltd")
+        self.assertEqual(collision["related_candidate_qid"], "Q100")
+        self.assertEqual(collision["reason"], "same_official_domain_different_entity_name")
+        self.assertEqual(collision["status"], "needs_review")
 
     def test_source_failure_backoff_does_not_count_as_empty_pass(self):
         state = discovery.empty_state()
