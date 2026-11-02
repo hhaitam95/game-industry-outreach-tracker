@@ -65,4 +65,4 @@ The discovery catalogue remains worldwide and impartial. Candidate preferences a
 - Add IGDB Companies API as the sixth recurring candidate feed. It is limited to companies with developed-game credits and an official company website, and each candidate remains subject to the existing first-party studio/application verification.
 - Reuse the existing repository Actions secrets `IGDB_CLIENT_ID` and `IGDB_CLIENT_SECRET`; never expose their values in source, logs, summaries or public assets.
 - Do not add other source services or APIs yet. Assess the coverage and verified yield of the existing feeds plus IGDB first; only revisit new sources after those options have been exhausted.
-- Implementation is recorded in ADR-081 and PR #100. The latest pre-documentation CI run passed; PR #100 remains open and is not deployed.
+- Implementation is recorded in [ADR-081](docs/decisions/ADR-081-igdb-company-discovery-feed.md) and PR #100. The PR merged and GitHub Pages deployment succeeded on 2026-11-02. No additional source service is approved until the existing six feeds have been assessed.

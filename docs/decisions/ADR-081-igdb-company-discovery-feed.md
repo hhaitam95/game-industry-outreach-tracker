@@ -1,6 +1,6 @@
 # ADR-081: add IGDB Companies API as a recurring discovery feed
 
-**Status:** Proposed in PR #100 (CI passed; not yet merged)  
+**Status:** Accepted — merged in PR #100 and deployed to GitHub Pages  
 **Date:** 2026-11-02  
 **Scope:** Automated global studio candidate discovery.
 
@@ -34,7 +34,7 @@ The integration is intended for the project's non-commercial use. Retain visible
 
 - Adapter/parser/query, credential-presence, numeric-cursor and API pacing regression tests added.
 - The complete PR CI suite passed on final head `fd4ef9da5a68f1f01c24d3a6390caf4ae9abc720` in [run 41413993904](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41413993904), including the final rate-limit regression test and documentation updates.
-- PR #100 remains open; this decision is implemented and tested on the feature branch but is not live on GitHub Pages until the PR is merged and deployment completes.
+- PR #100 merged as `b3183f5fae5f3f3793dcefc3241f957267a56a79`; GitHub Pages deployment [run 41416182699](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41416182699) completed successfully. The first post-merge discovery batch is in [run 41416182708](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41416182708).
 
 ## References
 

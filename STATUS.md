@@ -6,13 +6,14 @@
 
 ## Global studio discovery source expansion — PR #100
 
-**Implemented and CI-validated; not yet merged or deployed.** PR [#100](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/100) adds a sixth recurring candidate feed: the IGDB Company API. It queries companies with developed-game credits and a dynamically resolved official company website type, stores a resumable numeric company-ID cursor, and passes the existing Twitch application credentials from repository Actions secrets to the server-side workflow step. Missing secrets safely skip IGDB without counting an empty source pass.
+**Merged and deployed.** PR [#100](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/100) merged on 2026-11-02 as commit `b3183f5fae5f3f3793dcefc3241f957267a56a79`. GitHub Pages deployment [run 41416182699](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41416182699) completed successfully. The merged-main build and browser acceptance [run 41416182698](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41416182698) also passed. The first post-merge hourly discovery run [41416182708](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41416182708) has started; its first source-health checkpoint is pending completion of that batch.
+
+PR #100 adds IGDB as the sixth recurring candidate feed. It queries companies with developed-game credits and a dynamically resolved official company website type, stores a resumable numeric company-ID cursor, and reads the existing Twitch application credentials from repository Actions secrets. Missing credentials safely skip IGDB without counting an empty source pass.
 
 - IGDB company data remains candidate evidence only. The public directory's strict rule is unchanged: the employer's own site or directly linked employer-controlled ATS must explicitly invite speculative/open/general applications.
-- The existing source set remains unchanged otherwise: GameDevMap plus four Wikidata feeds. No Tavily, Companies House or additional source was introduced.
-- The 20-page hourly source budget, independent five-empty-pass/four-page saturation rule, 65-second Wikidata pacing and 25-minute runtime ceiling remain. IGDB requests are separately paced at 0.27 seconds.
-- Full exact-head pull-request CI passed in [run 41413993904](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41413993904) at commit `fd4ef9da5a68f1f01c24d3a6390caf4ae9abc720`, including the API pacing regression test, all discovery/frontend checks, production build, privacy/Pages checks and browser acceptance.
-- PR #100 is open; the feature is not part of `main` and is not live on GitHub Pages yet.
+- The other five feeds remain GameDevMap and four Wikidata queries. No Tavily, Companies House or other service has been introduced.
+- The 20-page hourly source budget, independent five-empty-pass/four-page saturation rule, 65-second Wikidata spacing and 25-minute runtime ceiling remain. IGDB requests are separately paced at 0.27 seconds.
+- The exact PR-head CI and browser acceptance passed in [run 41415897521](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41415897521).
 
 ## Candidate Profile implementation — PR #95
 
@@ -148,3 +149,5 @@ The detailed approved direction and acceptance criteria are in [Candidate Profil
 4. **Source policy:** keep the 22-entry manual registry separate from automated runtime ingestion. Do not integrate IGDB, Steam, GameCompanies, Games Jobs Index, MobyGames or the community dataset without their documented access/licence review and a tested adapter.
 5. **Phase B:** after the closeout PR is merged and deployed, shift primary engineering effort to UI/UX and the existing Directory and My applications workflows.
 Manual real-site acceptance and stabilization remain separate release work; see [issue #11](https://github.com/hhaitam95/game-industry-outreach-tracker/issues/11).
+
+- The daily **Monitor Studio Sources** automation is enabled in Europe/Budapest time. It checks source-level candidate yield and workflow health, and reports new exhaustion, persistent blocks or recoveries without changing the hourly GitHub Actions schedule.

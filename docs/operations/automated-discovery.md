@@ -48,3 +48,12 @@ After five complete empty passes, only that feed receives a four-page hourly cap
 ## IGDB credentials
 
 The workflow passes `IGDB_CLIENT_ID` and `IGDB_CLIENT_SECRET` from repository Actions secrets to the discovery step. It mints an app access token during the run and dynamically resolves the official company-website type through IGDB's `website_types` endpoint. Secret values are never written to discovery state, logs, or the workflow summary. If either secret is absent, the IGDB feed remains pending and is skipped without affecting other sources or increasing its saturation counter. The workflow summary records only whether IGDB was enabled.
+
+
+## Source-health checkpoint and exhaustion monitoring
+
+After each successful discovery run, the workflow writes `state/discovery/studio-source-status.json` on the separate `discovery-state` branch. This compact checkpoint contains no candidate names or route evidence. It records, per integrated feed, the most recent completed pass, number of new candidate entities, verified routes, incomplete candidates, consecutive empty passes and saturation state.
+
+A feed is marked as having no new candidate data only after five complete empty passes, when the latest completed pass has zero new candidate entities and no incomplete candidates remain for that pass. This is a source-level observation, not evidence that the global studio universe has been exhausted. A feed that still returns candidate companies but no qualifying speculative-application routes is not classified as data-exhausted.
+
+The daily **Monitor Studio Sources** check reviews this checkpoint together with recent workflow runs. It reports new source exhaustion, persistent API/authentication/rate-limit failures, repeated workflow failures or recovery. GitHub Actions discovery remains hourly; monitoring does not change the schedule or add external sources.

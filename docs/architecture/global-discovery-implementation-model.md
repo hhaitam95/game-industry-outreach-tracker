@@ -527,5 +527,12 @@ At the start of any new work session or handover:
 - Use a numeric company-ID cursor, preserve raw API row counts for pagination, and apply a 0.27-second minimum interval between IGDB API requests to stay below the documented four-request-per-second limit.
 - Reuse the existing `IGDB_CLIENT_ID` and `IGDB_CLIENT_SECRET` GitHub Actions secrets. Mint an app token at runtime; keep values out of generated data, workflow summaries and logs. If either secret is absent, skip IGDB without recording an empty pass.
 - Treat IGDB results as candidates only. The public directory still requires independent proof of direct game-development work and an explicit speculative-application route on the employer's official site or linked employer-controlled ATS.
-- PR #100 final head `fd4ef9da5a68f1f01c24d3a6390caf4ae9abc720` passed full CI in [workflow run 41413993904](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41413993904), including the API pacing regression test and browser acceptance. The PR remains open; the adapter is not yet live on GitHub Pages.
+- PR #100 merged as `b3183f5fae5f3f3793dcefc3241f957267a56a79` after exact-head CI and browser acceptance passed in [run 41415897521](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41415897521). GitHub Pages deployment completed in [run 41416182699](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41416182699); first post-merge discovery is tracked in [run 41416182708](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41416182708).
 - Access note: IGDB's API documentation describes non-commercial API use as free, and its FAQ says local caching and serving API data to end users is permitted. Keep the integration non-commercial, retain visible IGDB attribution, and recheck the current terms before any monetized use. See https://api-docs.igdb.com/ and https://legal.twitch.com/en/legal/developer-agreement/.
+
+
+### 2026-11-02 — Source-health monitoring
+
+- Added a compact, names-free source status snapshot at `state/discovery/studio-source-status.json` on the private `discovery-state` branch after successful workflow runs.
+- A feed is flagged as having no new candidate data only after five complete empty passes and a latest completed pass with zero new candidate entities and no incomplete candidates. A zero count of published routes alone is not source exhaustion.
+- Enabled a daily Europe/Budapest monitoring task to report newly exhausted feeds, persistent operational blockers and recoveries. It does not alter the hourly workflow or add external discovery providers.
