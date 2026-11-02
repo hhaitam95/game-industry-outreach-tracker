@@ -63,20 +63,6 @@ async function main() {
     const pageErrors = [];
     const writeRequests = [];
 
-    await page.route("https://api.github.com/**", async (route) => {
-      await route.fulfill({
-        status: 200,
-        contentType: "application/json",
-        body: JSON.stringify({
-          workflow_runs: [{
-            status: "completed",
-            conclusion: "success",
-            updated_at: "2026-10-31T17:49:00Z",
-            html_url: "https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41225527000",
-          }],
-        }),
-      });
-    });
     const posterFixture = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC", "base64");
     const landscapeFixture = Buffer.from(
       '<svg xmlns="http://www.w3.org/2000/svg" width="460" height="215" viewBox="0 0 460 215"><rect width="460" height="215" fill="#345"/><text x="230" y="118" fill="white" text-anchor="middle" font-size="24">Landscape artwork</text></svg>',
@@ -109,7 +95,24 @@ async function main() {
         body: isHeader ? landscapeFixture : posterFixture,
       });
     });
+    // Register the specific API mock after the catch-all route: Playwright uses
+    // the most recently registered matching handler first.
+    await page.route("https://api.github.com/**", async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          workflow_runs: [{
+            status: "completed",
+            conclusion: "success",
+            updated_at: "2026-10-31T17:49:00Z",
+            html_url: "https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41225527000",
+          }],
+        }),
+      });
+    });
     await page.addInitScript(() => {
+      if (!localStorage.getItem("studio-outreach-theme-v1")) {    await page.addInitScript(() => {
       if (!localStorage.getItem("studio-outreach-theme-v1")) {
         localStorage.setItem("studio-outreach-theme-v1", "light");
       }
