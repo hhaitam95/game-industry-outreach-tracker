@@ -213,8 +213,19 @@ POSITIVE_ROUTE_PATTERNS = (
     ),
 )
 
+CAREER_CONTEXT_TEXT = re.compile(
+    r"\b(?:careers?|jobs?|job openings?|roles?|positions?|vacanc(?:y|ies)|"
+    r"recruitment|hiring|employment|apply online|submit your cv|send.{0,60}\b(?:cv|resume|résumé)\b|"
+    r"work with us|join (?:our|the) team|human resources|hr department)\b",
+    re.I,
+)
+CAREER_CONTEXT_URL = re.compile(
+    r"(?:^|[/_-])(?:careers?|jobs?|employment|recruitment|vacanc(?:y|ies)|work[-_]?with[-_]?us|join[-_]?us)(?:[/_?&=-]|$)",
+    re.I,
+)
+
 GAME_DEVELOPMENT_EVIDENCE_PATTERNS = (
-    re.compile(r"\b(?:video|computer|mobile|pc|console)?\s*games?\s+(?:development|developer|studio|production)\b", re.I),
+    re.compile(r"\b(?:video|computer|mobile|pc|console)?\s*games?\s+(?:development|developers?|studio|production)\b", re.I),
     re.compile(r"\b(?:independent|indie)\s+game\s+studio\b", re.I),
     re.compile(r"\b(?:we|our team)\s+(?:develop|create|make|build|produce)\s+(?:video\s+)?games?\b", re.I),
     re.compile(r"\bco[- ]development\b|\bgame development services\b|\bgame porting services\b", re.I),
@@ -224,6 +235,10 @@ GAME_DEVELOPMENT_EVIDENCE_PATTERNS = (
     re.compile(r"\b(?:sviluppo di videogiochi|studio di videogiochi)\b", re.I),
     re.compile(r"\b(?:desenvolvimento de jogos|estúdio de jogos)\b", re.I),
     re.compile(r"\b(?:studio gier|produkcja gier)\b", re.I),
+    re.compile(r"\b(?:ゲーム開発|ゲーム制作|ゲームスタジオ|ゲームを開発)\b"),
+    re.compile(r"\b(?:게임 개발|게임 스튜디오|게임을 개발)\b"),
+    re.compile(r"\b(?:游戏开发|电子游戏开发|遊戲開發|遊戲工作室)\b"),
+    re.compile(r"\b(?:desarrollo y producci[oó]n de videojuegos|desarrollamos videojuegos)\b", re.I),
 )
 
 
@@ -753,43 +768,65 @@ def verify_candidate_pages(
             "status": "needs_review",
             "reason": "likely_staffing_or_talent_platform_not_a_game_studio",
         }
-    # Wikidata industry classifications are broad and include publishers, vendors
-    # and other ecosystem companies. Do not auto-publish those as developers unless
-    # their own pages demonstrate direct game-development work.
-    if (
-        candidate.get("source_id") == "wikidata_video_game_industry"
-        and not game_development_evidence_match(all_text)
-    ):
+    # Candidate indexes are only discovery signals. Every source must pass the same
+    # employer-owned proof of direct game development before automatic publication.
+    if not game_development_evidence_match(all_text):
         return {
             "status": "needs_review",
-            "reason": "industry_classification_without_direct_game_development_evidence",
+            "reason": "candidate_without_direct_game_development_evidence_on_official_site",
         }
     matches: list[tuple[Page, re.Match[str]]] = []
+    context_ambiguous: list[tuple[Page, re.Match[str]]] = []
     negatives: list[tuple[Page, re.Match[str]]] = []
     for page in pages:
         negative = negative_route_match(page.text)
         match = positive_route_match(page.text)
+        career_context = bool(CAREER_CONTEXT_URL.search(urllib.parse.urlsplit(page.url).path)
+                              or CAREER_CONTEXT_TEXT.search(page.text))
         if negative:
             negatives.append((page, negative))
-        elif match:
+        elif match and career_context:
             matches.append((page, match))
+        elif match:
+            context_ambiguous.append((page, match))
     if negatives:
         if matches:
             return {"status": "needs_review", "reason": "conflicting_positive_and_negative_route_evidence"}
         return {"status": "no_route", "reason": "official_site_explicitly_rejects_speculative_applications"}
     if not matches:
+        if context_ambiguous:
+            return {
+                "status": "needs_review",
+                "reason": "speculative_language_without_clear_employment_context",
+            }
         return {"status": "no_route", "reason": "no_explicit_speculative_route_found"}
-    matches.sort(key=lambda item: (0 if CAREER_LINK_HINT.search(item[0].url) else 1, len(item[0].text)))
+    matches.sort(key=lambda item: (0 if CAREER_CONTEXT_URL.search(urllib.parse.urlsplit(item[0].url).path) else 1, len(item[0].text)))
     evidence_page, match = matches[0]
     application_url = choose_application_url(evidence_page, website)
     application_host = urllib.parse.urlsplit(application_url).hostname or ""
     external_ats = not same_site(website, application_url) and is_ats_host(application_host)
     methods: list[str] = []
-    if evidence_page.has_form:
+    page_is_career_specific = bool(
+        CAREER_CONTEXT_URL.search(urllib.parse.urlsplit(evidence_page.url).path)
+        or CAREER_CONTEXT_TEXT.search(evidence_page.text)
+    )
+    if evidence_page.has_form and page_is_career_specific:
         methods.append("website_form")
-    if any(href.lower().startswith("mailto:") for href, _ in evidence_page.links):
+    explicit_cv_instruction = bool(re.search(
+        r"\b(?:email|send|submit|share)\b.{0,100}\b(?:your\s+)?(?:cv|résumé|resume|portfolio)\b",
+        evidence_page.text, re.I | re.S,
+    ))
+    career_mail_link = any(
+        href.lower().startswith("mailto:")
+        and (
+            re.search(r"(?:career|jobs?|recruit|talent|hr|hiring|employment)", href + " " + label, re.I)
+            or explicit_cv_instruction
+        )
+        for href, label in evidence_page.links
+    )
+    if career_mail_link and page_is_career_specific:
         methods.append("email")
-    if external_ats:
+    if external_ats and page_is_career_specific:
         methods.append("ats")
     if not methods:
         return {
@@ -805,6 +842,7 @@ def verify_candidate_pages(
         "submission_methods": sorted(set(methods)),
         "source_type": "employer_managed_career_platform" if external_ats else "official_company_site",
         "evidence_excerpt": matched_text,
+        "development_evidence_excerpt": " ".join(game_development_evidence_match(all_text).group(0).split())[:180],
         "work_model": infer_work_model(evidence_page.text),
     }
 
@@ -1931,6 +1969,7 @@ def run_pipeline(
     deadline = time.monotonic() + max_run_seconds
     source_pages = 0
     source_candidates = 0
+    source_failures: dict[str, dict[str, Any]] = {}
     # Bulk mode backfills GameDevMap's public 100-row query interface from its
     # saved offset. fetch_url enforces robots.txt and per-host request spacing.
     if mode == "bulk":
@@ -1958,7 +1997,6 @@ def run_pipeline(
         # separate per-host pacing and therefore needs no extra 65-second sleep.
         # Saturation is source-specific: one capped feed never throttles another.
         pages_by_feed: dict[str, int] = {}
-        source_failures: dict[str, dict[str, Any]] = {}
         for _ in range(max_source_pages):
             available = [
                 feed for feed in FEEDS
