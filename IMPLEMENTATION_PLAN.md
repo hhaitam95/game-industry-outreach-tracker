@@ -42,11 +42,16 @@ Keep this foundation stable. Do not change the discovery inclusion rules or hide
 - Matching-quality follow-up merged in PR #104: direct/related discipline alignment; same-discipline demonstrated evidence for Strong matches; whole-phrase skill matching; responsibilities/achievements in work-history assessment; directory-country precedence; neutral treatment of mixed work models; and geography-first campaign sorting. PR CI, main-branch build and Pages publish all passed. Language, visa/work-authorisation, relocation and country-specific remote eligibility remain unstructured and are not scored.
 - Deferred to later queue/requirements phases: persistent assessment snapshots, user overrides, manual priority pins, exhaustive form/document/language/eligibility extraction and AI processing.
 
-### Phase C3 — Application Queue
-- Add selected studios to a private queue referencing canonical directory IDs.
-- Provide sorting and filtering by relevance, readiness, priority, country, route type and progress.
-- Preserve manual priority decisions and application history when assessments refresh.
-- Avoid duplicate studio/application records and align with the existing My applications tracker.
+### Phase C3 — Basic match-to-tracker workflow (implemented in PR #107)
+
+- Implemented: save an eligible Matches target directly into the existing private My applications tracker.
+- Implemented: duplicate-aware handoff from Matches back into the tracker.
+- Implemented: saved route-context snapshot, including route type/status, source, check date, work model, submission method, stated discipline scope, recorded locations and research notes.
+- Implemented: versioned, validated local tracker JSON export/restore, explicit replacement confirmation, and preservation of private notes, status and dates.
+- Validation: PR-head CI [41496776891](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41496776891), merged-main CI [41497190125](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41497190125) and Pages publish [41497190769](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41497190769) passed.
+- Still later work: a richer queue board with pinned/manual priority, saved assessment history, campaign waves and analytics. The existing tracker is sufficient for the first manually reviewed application wave; do not expand C3 before the weekend pilot.
+
+
 
 ### Phase C4 — Application requirements intelligence
 - Capture route type, submission channel, required/optional documents, department/discipline, form questions, language, location, eligibility and special instructions.
