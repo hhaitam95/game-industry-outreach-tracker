@@ -33,7 +33,7 @@ The integration is intended for the project's non-commercial use. Retain visible
 ## Validation and rollout
 
 - Adapter/parser/query, credential-presence, numeric-cursor and API pacing regression tests added.
-- The complete PR CI suite passed in [run 41412920931](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41412920931) before the final rate-limit test and handover/documentation updates.
+- The complete PR CI suite passed on final head `fd4ef9da5a68f1f01c24d3a6390caf4ae9abc720` in [run 41413993904](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41413993904), including the final rate-limit regression test and documentation updates.
 - PR #100 remains open; this decision is implemented and tested on the feature branch but is not live on GitHub Pages until the PR is merged and deployment completes.
 
 ## References
