@@ -4,6 +4,7 @@ Game Industry Outreach Tracker is a global speculative-application discovery dir
 
 ## Read first
 
+- **Application campaign goals, target tiers, standard documents, readiness checks, campaign waves and outcome metrics:** [Studio Targeting and Application Campaign Strategy](docs/architecture/studio-targeting-and-application-campaign.md).
 - **Candidate profile, matching, queue, application workspace and privacy/automation boundaries:** [Candidate Profile, Matching and Application Workspace](docs/architecture/candidate-profile-matching-application-workspace.md).
 - **Global discovery qualification, evidence and source rules:** [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md).
 - Current product and implementation decisions: [ARCHITECTURE.md](ARCHITECTURE.md), [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md), [DECISIONS.md](DECISIONS.md), [STATUS.md](STATUS.md).
@@ -16,7 +17,7 @@ The product has three layers:
 2. **Candidate Profile & Matching:** structured, private profile and explainable assessments of professional relevance, application readiness/accessibility and personal priority.
 3. **Application Workspace:** private Application Queue, employer requirements summaries, candidate-skill evidence mapping, approved application materials, preparation checklist and progress tracking.
 
-The discovery directory must remain complete and unaffected by the candidate's role, skills, geography or personal preferences. Matching is a private overlay over canonical studio records.
+The discovery directory must remain complete and unaffected by the candidate's role, skills, geography or personal preferences. Matching and campaign prioritisation are private overlays over canonical studio records. The current campaign preference is to build a broad pool, prioritize a first wave in Europe/nearby markets, then consider English-language international markets and wider global options. These are private ordering preferences, not discovery exclusions or assumptions about work authorization.
 
 ## Immediate roadmap
 
@@ -59,7 +60,7 @@ The user has explicitly chosen to exhaust the existing automated sources plus IG
 
 ## Handover rules
 
-At the start of a new implementation session, inspect the current default branch, open PRs, relevant UI/data schemas and tests. Do not assume prior status text is current without checking the repository. Distinguish proposed, implemented, tested, merged and deployed work accurately.
+At the start of a new implementation session, read the Studio Targeting and Application Campaign Strategy alongside the two architecture documents above, then inspect the current default branch, open PRs, relevant UI/data schemas and tests. Do not assume prior status text is current without checking the repository. Distinguish proposed, implemented, tested, merged and deployed work accurately.
 
 At each milestone, update HANDOFF.md and STATUS.md. Update CHANGELOG.md for meaningful changes and the relevant architecture/decision documents when scope changes. Never put personal application records, CVs, recruiter correspondence, secrets or private profile data in public repository source datasets, issues or PR descriptions.
 
