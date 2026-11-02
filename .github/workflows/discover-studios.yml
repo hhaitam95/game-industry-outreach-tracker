@@ -296,6 +296,7 @@ jobs:
               "all_enabled_sources_no_new_candidate_data": bool(enabled_sources)
                   and all(source["no_new_candidate_data"] for source in enabled_sources),
               "candidate_pool_size": len(state.get("candidates", {})),
+              "identity_review_queue_count": len(state.get("identity_review_queue", [])),
               "candidate_status_counts": {
                   status: sum(counts.get(status, 0) for counts in candidate_counts.values())
                   for status in ("queued", "retry", "needs_review", "no_route", "published", "duplicate", "excluded")
@@ -359,6 +360,7 @@ jobs:
 
           print(f"- Saved checkpoint: {state.get('updated_at', 'unknown')}")
           print(f"- Candidate pool: {len(candidates):,}")
+          print(f"- Identity collisions awaiting review: {len(state.get('identity_review_queue', [])):,}")
           for status in ("queued", "retry", "needs_review", "no_route", "published", "duplicate", "excluded"):
               print(f"- {status.replace('_', ' ').title()}: {counts.get(status, 0):,}")
           print(f"- Aggregate saturated (telemetry only): {'yes' if state.get('saturated') else 'no'}")
