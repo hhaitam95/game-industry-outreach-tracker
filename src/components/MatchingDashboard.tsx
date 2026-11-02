@@ -250,7 +250,24 @@ export default function MatchingDashboard({
 }: {
   onOpenProfile: () => void;
   onSaveStudio: (
-    studio: { name: string; websiteUrl: string; applicationUrl: string; country: string; countryCode?: string },
+    studio: {
+      name: string;
+      websiteUrl: string;
+      applicationUrl: string;
+      country: string;
+      countryCode?: string;
+      evidenceUrl?: string;
+      checkedAt?: string;
+      notes?: string;
+      applicationResearch?: {
+        routeType?: string;
+        routeStatus?: string;
+        workModel?: string;
+        submissionMethods?: string[];
+        eligibleLocations?: string[];
+        disciplineScope?: string[];
+      };
+    },
     location?: { country: string; countryCode?: string; hqLabel: string; applicationLocation: string },
   ) => void;
   onOpenTrackedStudio: (studioName: string) => void;
