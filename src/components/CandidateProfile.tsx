@@ -370,11 +370,18 @@ export default function CandidateProfile() {
     const file = event.currentTarget.files?.[0];
     event.currentTarget.value = "";
     if (!file || saving) return;
+    const revisionAtImport = editRevision.current;
     setSaving(true);
     try {
       const imported = await readProfileBackup(file);
       if (!window.confirm("Replace the profile currently in this browser with this backup?")) return;
-      const revisionAtImport = editRevision.current;
+      if (editRevision.current !== revisionAtImport) {
+        setError(
+          "Your profile changed while the backup was being read. No data was replaced. Review your latest edits and import the backup again if you still want to replace them.",
+        );
+        setStatus("Import cancelled to protect newer edits");
+        return;
+      }
       const next = { ...imported, updatedAt: new Date().toISOString() };
       await saveCandidateProfile(next);
       setStorageReady(true);

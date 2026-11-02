@@ -263,6 +263,64 @@ async function main() {
     assert.equal(profileBackup.profile.personal.fullName, "Test Candidate");
     assert.equal(profileBackup.profile.materials.masterResume.dataBase64, savedCandidateProfile.materials.masterResume.dataBase64);
 
+    // Edits made while a selected backup is being read must not be silently replaced by that import.
+    await page.evaluate(() => {
+      const originalText = File.prototype.text;
+      let pauseNextRead = true;
+      Object.defineProperty(File.prototype, "text", {
+        configurable: true,
+        writable: true,
+        value: function () {
+          if (!pauseNextRead) return originalText.call(this);
+          pauseNextRead = false;
+          window.__profileBackupReadStarted = true;
+          return new Promise((resolve, reject) => {
+            window.__releaseProfileBackupRead = () => {
+              originalText.call(this).then(resolve, reject);
+            };
+          });
+        },
+      });
+    });
+    await page.locator('.profile-actions input[type="file"][accept=".json,application/json"]').setInputFiles(await profileBackupDownload.path());
+    await page.waitForFunction(() => window.__profileBackupReadStarted === true);
+    const latestProfileName = "Latest edit made during backup import";
+    await page.getByLabel("Full name").fill(latestProfileName);
+    const importRaceDialogPromise = page.waitForEvent("dialog");
+    await page.evaluate(() => window.__releaseProfileBackupRead?.());
+    const importRaceDialog = await importRaceDialogPromise;
+    assert.equal(importRaceDialog.type(), "confirm");
+    assert.match(importRaceDialog.message(), /Replace the profile currently in this browser/);
+    await importRaceDialog.accept();
+    await page.getByText(/Your profile changed while the backup was being read/).waitFor();
+    assert.equal(
+      await page.getByLabel("Full name").inputValue(),
+      latestProfileName,
+      "An edit made while the backup file is being read must remain visible.",
+    );
+    assert.equal(
+      await page.locator(".profile-actions").getByRole("button", { name: "Save profile" }).isDisabled(),
+      false,
+      "The preserved edit must remain available to save after the import is cancelled.",
+    );
+    const profileAfterCancelledImport = await page.evaluate(() => new Promise((resolve, reject) => {
+      const openRequest = indexedDB.open("game-industry-outreach-private", 1);
+      openRequest.onerror = () => reject(openRequest.error);
+      openRequest.onsuccess = () => {
+        const transaction = openRequest.result.transaction("candidate-profile", "readonly");
+        const request = transaction.objectStore("candidate-profile").get("primary");
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => resolve(request.result?.profile);
+      };
+    }));
+    assert.equal(
+      profileAfterCancelledImport.personal.fullName,
+      "Test Candidate",
+      "A cancelled import must leave the previously persisted profile untouched.",
+    );
+    await page.locator(".profile-actions").getByRole("button", { name: "Save profile" }).click();
+    await page.getByRole("button", { name: "Profile saved" }).waitFor();
+
     await page.evaluate(() => new Promise((resolve, reject) => {
       const openRequest = indexedDB.open("game-industry-outreach-private", 1);
       openRequest.onerror = () => reject(openRequest.error);

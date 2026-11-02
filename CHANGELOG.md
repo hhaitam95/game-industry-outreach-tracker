@@ -7,7 +7,7 @@
 - Keep profile Save actions disabled until the initial IndexedDB load succeeds or a validated backup is explicitly restored.
 - Clear the cached IndexedDB open promise after synchronous, asynchronous or blocked failures so the storage layer can be retried.
 - Add Chromium browser-acceptance coverage for edits during a committed-but-pending save and for backup recovery after a simulated one-time IndexedDB open failure.
-- Exact-head CI, including Python discovery tests, frontend tests, route/data checks, production build, privacy/artifact validation and the full browser suite, passed in [run 41519494261](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41519494261). PR #111 is open and awaiting merge.
+- Exact-head CI, including Python discovery tests, frontend tests, route/data checks, production build, privacy/artifact validation and the full browser suite, passed in [run 41519964763](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41519964763). PR #111 merged as `26f91b9ba9a1777ccdc19a00227df0fb11703132`; merged-main CI [run 41520306310](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41520306310) and Pages publication [run 41520306365](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41520306365) passed.
 
 ## 2026-11-02 — Non-destructive application tracker recovery (PR #110)
 
