@@ -422,7 +422,7 @@ export default function CandidateProfile() {
               onChange={handleBackupImport}
             />
           </label>
-          <button className="btn btn-outline-secondary btn-sm" type="button" onClick={() => downloadBackup(profile, setError)}>
+          <button className="btn btn-outline-secondary btn-sm" type="button" disabled={!storageReady || saving} onClick={() => downloadBackup(profile, setError)}>
             Export backup
           </button>
           <button className="btn btn-primary btn-sm" type="button" disabled={!storageReady || !dirty || saving} onClick={handleSave}>
