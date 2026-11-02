@@ -94,6 +94,32 @@ class DiscoveryParsingTests(unittest.TestCase):
         self.assertTrue(page.has_form)
         self.assertNotIn("ignore this", page.text)
 
+    def test_additional_employer_linked_ats_hosts_are_recognized(self):
+        for host in (
+            "jobs.traffit.com",
+            "playedwithfire.traffit.com",
+            "form.erecruiter.pl",
+            "hrmos.co",
+            "retiree.alumy.jp",
+        ):
+            with self.subTest(host=host):
+                self.assertTrue(discovery.is_ats_host(host))
+
+    def test_japanese_career_registration_selects_employer_linked_alumy_route(self):
+        page = discovery.Page(
+            url="https://www.capcom.co.jp/recruit/guidelines/career/",
+            title="経験者採用",
+            text="キャリア登録。職種を絞らずに応募したい方はご登録ください。",
+            links=[
+                ("https://retiree.alumy.jp/capcom/career-registration", "キャリア登録はこちら"),
+                ("https://hrmos.co/pages/capcom", "募集職種一覧"),
+            ],
+            has_form=False,
+        )
+        selected = discovery.choose_application_url(page, "https://www.capcom.co.jp/")
+        self.assertEqual(selected, "https://retiree.alumy.jp/capcom/career-registration")
+        self.assertTrue(discovery.is_ats_host("retiree.alumy.jp"))
+
     def test_relevant_links_include_careers_and_employer_linked_ats_only(self):
         page = discovery.Page(
             "https://studio.example/",
@@ -207,6 +233,14 @@ class DiscoveryParsingTests(unittest.TestCase):
         for phrase in ["Candidatura espontánea", "Open sollicitatie", "Avoin hakemus", "Uopfordret ansøgning", "Åpen søknad"]:
             with self.subTest(route_type=phrase):
                 self.assertEqual(discovery.route_type_for(phrase), "spontaneous")
+
+        japanese_registration = (
+            "キャリア登録。職種を絞らずに応募したい方、"
+            "現在希望する職種の募集がない方はご登録ください。"
+        )
+        self.assertIsNotNone(discovery.positive_route_match(japanese_registration))
+        self.assertIsNotNone(discovery.CAREER_CONTEXT_TEXT.search(japanese_registration))
+        self.assertEqual(discovery.route_type_for(japanese_registration), "general")
 
     def test_negative_route_language_overrides_positive_ambiguity(self):
         text = (
