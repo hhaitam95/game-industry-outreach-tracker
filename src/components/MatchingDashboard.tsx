@@ -5,6 +5,7 @@ import {
 } from "../profile/profile-storage";
 import {
   assessStudioMatch,
+  resolveStudioLocation,
   sortStudioMatches,
 } from "../matching/matching-engine.mjs";
 
@@ -126,8 +127,11 @@ function buildStudioMatches(profile: CandidateProfile): StudioMatchAssessment[] 
   );
   return activeStudios.map((studio) => {
     const savedProfile = studioProfiles[studio.name];
-    const country = savedProfile?.headquarters?.country || studio.country || "Not stated";
-    const countryCode = savedProfile?.headquarters?.countryCode || undefined;
+    const { country, countryCode } = resolveStudioLocation(
+      studio.country,
+      savedProfile?.headquarters?.country,
+      savedProfile?.headquarters?.countryCode || undefined,
+    );
     return assessStudioMatch(profile, {
       ...studio,
       country,
@@ -250,7 +254,7 @@ export default function MatchingDashboard({
   const [relevanceFilter, setRelevanceFilter] = useState<RelevanceFilter>("all");
   const [priorityFilter, setPriorityFilter] = useState<PriorityFilter>("all");
   const [routeFilter, setRouteFilter] = useState<RouteFilter>("all");
-  const [sortMode, setSortMode] = useState<SortMode>("relevance");
+  const [sortMode, setSortMode] = useState<SortMode>("priority");
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const refreshProfile = useCallback(async () => {
@@ -473,7 +477,7 @@ export default function MatchingDashboard({
                     <StudioMark name={assessment.name} websiteUrl={studioInfo?.websiteUrl || ""} />
                     <div>
                       <h2>{assessment.name}</h2>
-                      <p>📍 {assessment.country} · {labelFromKey(assessment.routeType)} route</p>
+                      <p>🌐 {assessment.country} · recorded studio country · {labelFromKey(assessment.routeType)} route</p>
                     </div>
                   </div>
                   {assessment.studioTypes.length ? (
