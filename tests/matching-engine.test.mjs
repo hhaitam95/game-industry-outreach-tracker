@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {
   assessStudioMatch,
+  resolveStudioLocation,
   sortStudioMatches,
 } from "../src/matching/matching-engine.mjs";
 
@@ -247,4 +248,156 @@ test("sorting can prioritize professional relevance or personal priority without
     "Alpha Studio", "Beta Studio",
   ]);
   assert.equal(strong.priority.level, potential.priority.level);
+});
+
+
+test("support and DevOps targets treat programming as adjacent rather than a direct role match", () => {
+  const profile = emptyProfile();
+  profile.preferences.roleFamilies = ["Developer support"];
+  profile.skills = [{
+    id: "1", name: "Python", category: "Programming", evidence: "demonstrated",
+    evidenceDetails: "Used for small automation scripts.", evidenceSource: "Project",
+  }];
+
+  const result = assessStudioMatch(
+    profile,
+    studio({ applicationResearch: {
+      ...studio().applicationResearch,
+      disciplineScope: ["Programming"],
+    } }),
+    new Date("2026-11-01T12:00:00Z"),
+  );
+
+  assert.equal(result.relevance, "potential");
+  assert.match(result.relevanceReasons.join(" "), /adjacent relevance/);
+});
+
+test("a demonstrated skill in an unrelated discipline cannot create a strong match", () => {
+  const profile = emptyProfile();
+  profile.preferences.roleFamilies = ["Developer support"];
+  profile.skills = [{
+    id: "1", name: "Houdini", category: "VFX", evidence: "demonstrated",
+    evidenceDetails: "Created a procedural visual effect.", evidenceSource: "Project",
+  }];
+
+  const result = assessStudioMatch(
+    profile,
+    studio({ applicationResearch: {
+      ...studio().applicationResearch,
+      disciplineScope: ["Programming", "Visual Effects"],
+    } }),
+    new Date("2026-11-01T12:00:00Z"),
+  );
+
+  assert.notEqual(result.relevance, "strong");
+  assert.equal(result.relevance, "potential");
+});
+
+test("direct role alignment and demonstrated evidence in the same discipline can be strong", () => {
+  const profile = emptyProfile();
+  profile.preferences.roleFamilies = ["Developer support"];
+  profile.skills = [{
+    id: "1", name: "REST APIs", category: "Technical", evidence: "demonstrated",
+    evidenceDetails: "Troubleshot production API integrations.", evidenceSource: "Work",
+  }];
+
+  const result = assessStudioMatch(
+    profile,
+    studio({ applicationResearch: {
+      ...studio().applicationResearch,
+      disciplineScope: ["Developer Support"],
+    } }),
+    new Date("2026-11-01T12:00:00Z"),
+  );
+
+  assert.equal(result.relevance, "strong");
+});
+
+test("word-boundary matching does not treat Google Workspace as Go programming or Cartography as art", () => {
+  const profile = emptyProfile();
+  profile.preferences.roleFamilies = ["Software engineer"];
+  profile.skills = [{
+    id: "1", name: "Google Workspace", category: "Productivity", evidence: "demonstrated",
+    evidenceDetails: "Used for collaboration.", evidenceSource: "Work",
+  }];
+
+  const programming = assessStudioMatch(
+    profile,
+    studio({ applicationResearch: {
+      ...studio().applicationResearch,
+      disciplineScope: ["Programming"],
+    } }),
+    new Date("2026-11-01T12:00:00Z"),
+  );
+  assert.equal(programming.relevance, "weak");
+
+  profile.preferences.roleFamilies = ["Game VFX"];
+  profile.skills = [{
+    id: "2", name: "Cartography", category: "Other", evidence: "demonstrated",
+    evidenceDetails: "Created maps.", evidenceSource: "Project",
+  }];
+  const visualEffects = assessStudioMatch(
+    profile,
+    studio({ applicationResearch: {
+      ...studio().applicationResearch,
+      disciplineScope: ["Art"],
+    } }),
+    new Date("2026-11-01T12:00:00Z"),
+  );
+  assert.equal(visualEffects.relevance, "weak");
+});
+
+test("work experience responsibilities can support a relevant discipline assessment", () => {
+  const profile = emptyProfile();
+  profile.preferences.roleFamilies = ["Developer support"];
+  profile.experience = [{
+    id: "1", employer: "Example employer", title: "Product Support Engineer",
+    location: "", startDate: "", endDate: "",
+    responsibilities: "Troubleshot REST API integrations and production application issues.",
+    achievements: "",
+  }];
+
+  const result = assessStudioMatch(
+    profile,
+    studio({ applicationResearch: {
+      ...studio().applicationResearch,
+      disciplineScope: ["Technical Support"],
+    } }),
+    new Date("2026-11-01T12:00:00Z"),
+  );
+
+  assert.equal(result.relevance, "potential");
+  assert.ok(result.evidence.some((item) => item.name === "Product Support Engineer"));
+});
+
+test("headquarters country cannot override the directory country used for studio prioritisation", () => {
+  assert.deepEqual(
+    resolveStudioLocation("Mauritius", "France", "FR"),
+    { country: "Mauritius", countryCode: undefined },
+  );
+  assert.deepEqual(
+    resolveStudioLocation("France", "France", "FR"),
+    { country: "France", countryCode: "FR" },
+  );
+  assert.deepEqual(
+    resolveStudioLocation("Not stated", "United States", "US"),
+    { country: "Not stated", countryCode: undefined },
+  );
+});
+
+test("mixed work arrangements do not receive a false personal-priority penalty", () => {
+  const profile = emptyProfile();
+  profile.preferences.workModels = ["Remote"];
+  const result = assessStudioMatch(
+    profile,
+    studio({ applicationResearch: {
+      ...studio().applicationResearch,
+      workModel: "mixed",
+    } }),
+    new Date("2026-11-01T12:00:00Z"),
+  );
+
+  assert.equal(result.priority.level, "neutral");
+  assert.equal(result.priority.score, 0);
+  assert.match(result.priority.reasons.join(" "), /mixed or variable/);
 });
