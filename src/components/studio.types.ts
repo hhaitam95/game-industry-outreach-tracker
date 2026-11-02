@@ -15,6 +15,16 @@ export type TrackedApplication = {
   countryCode?: string;
   hqLabel: string;
   applicationLocation?: string;
+  /** Snapshot of the employer's published application-route instructions when saved. */
+  routeType?: string;
+  routeStatus?: string;
+  routeCheckedAt?: string;
+  routeEvidenceUrl?: string;
+  routeNotes?: string;
+  workModel?: string;
+  submissionMethods?: string[];
+  eligibleLocations?: string[];
+  disciplineScope?: string[];
   status: TrackerStatus;
   createdAt: string;
   updatedAt: string;
