@@ -95,6 +95,7 @@ const COUNTRY_CODE_BY_NAME: Record<string, string> = {
   Japan: "JP",
   Malaysia: "MY",
   Malta: "MT",
+  Mauritius: "MU",
   Moldova: "MD",
   Morocco: "MA",
   Netherlands: "NL",
