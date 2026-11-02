@@ -16,6 +16,7 @@ import html
 from html.parser import HTMLParser
 import ipaddress
 import json
+import os
 import re
 import socket
 import sys
@@ -41,6 +42,14 @@ USER_AGENT = (
     "purpose: verify public game-studio speculative application pages)"
 )
 WDQS_ENDPOINT = "https://query.wikidata.org/sparql"
+IGDB_COMPANIES_ENDPOINT = "https://api.igdb.com/v4/companies"
+IGDB_WEBSITE_TYPES_ENDPOINT = "https://api.igdb.com/v4/website_types"
+TWITCH_TOKEN_ENDPOINT = "https://id.twitch.tv/oauth2/token"
+IGDB_API_TIMEOUT_SECONDS = 25
+IGDB_ACCESS_TOKEN: str | None = None
+IGDB_ACCESS_TOKEN_EXPIRES_AT = 0.0
+IGDB_OFFICIAL_WEBSITE_TYPE_ID: int | None = None
+IGDB_AUTH_LOCK = Lock()
 REQUEST_TIMEOUT_SECONDS = 18
 WDQS_TIMEOUT_SECONDS = 55
 WIKIDATA_MIN_REQUEST_INTERVAL_SECONDS = 65
@@ -77,7 +86,7 @@ def load_source_manifest(path: Path = SOURCE_MANIFEST_PATH) -> tuple[dict[str, A
             raise ValueError("Discovery source manifest entries require id, label and kind.")
         if source_id in seen_ids:
             raise ValueError("Discovery source manifest contains a duplicate id: " + source_id)
-        if kind not in {"class", "developer_credit", "company_class", "industry", "gamedevmap"}:
+        if kind not in {"class", "developer_credit", "company_class", "industry", "gamedevmap", "igdb_companies"}:
             raise ValueError("Unsupported discovery source kind: " + str(kind))
         if refresh_policy not in {"recurring", "one_time_backfill"}:
             raise ValueError("Unsupported discovery refresh policy: " + str(refresh_policy))
@@ -938,6 +947,219 @@ def fetch_wikidata_batch(feed_kind: str, cursor: str, limit: int) -> list[dict[s
     return rows
 
 
+
+def igdb_credentials_available() -> bool:
+    """Return whether both IGDB app credentials are available to this workflow run."""
+    return bool(
+        os.environ.get("IGDB_CLIENT_ID", "").strip()
+        and os.environ.get("IGDB_CLIENT_SECRET", "").strip()
+    )
+
+
+def source_feed_enabled(feed: dict[str, Any]) -> bool:
+    """Keep optional credential-backed feeds dormant rather than counting them as empty."""
+    return feed.get("kind") != "igdb_companies" or igdb_credentials_available()
+
+
+def fetch_igdb_access_token() -> str:
+    """Mint and cache an IGDB app token without exposing credential or response contents."""
+    global IGDB_ACCESS_TOKEN, IGDB_ACCESS_TOKEN_EXPIRES_AT
+    client_id = os.environ.get("IGDB_CLIENT_ID", "").strip()
+    client_secret = os.environ.get("IGDB_CLIENT_SECRET", "").strip()
+    if not client_id or not client_secret:
+        raise RuntimeError("IGDB credentials are not configured.")
+
+    with IGDB_AUTH_LOCK:
+        if IGDB_ACCESS_TOKEN and time.monotonic() < IGDB_ACCESS_TOKEN_EXPIRES_AT - 60:
+            return IGDB_ACCESS_TOKEN
+
+        body = urllib.parse.urlencode({
+            "client_id": client_id,
+            "client_secret": client_secret,
+            "grant_type": "client_credentials",
+        }).encode("utf-8")
+        request = urllib.request.Request(
+            TWITCH_TOKEN_ENDPOINT,
+            data=body,
+            headers={"Content-Type": "application/x-www-form-urlencoded"},
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=IGDB_API_TIMEOUT_SECONDS) as response:
+                payload = json.loads(response.read(MAX_RESPONSE_BYTES).decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            raise RuntimeError("IGDB app-token request returned HTTP " + str(exc.code) + ".") from exc
+        except (urllib.error.URLError, TimeoutError, OSError, json.JSONDecodeError) as exc:
+            raise RuntimeError("IGDB app-token request failed safely: " + type(exc).__name__) from exc
+
+        token = str(payload.get("access_token", "")).strip()
+        try:
+            expires_in = int(payload.get("expires_in", 0))
+        except (TypeError, ValueError):
+            expires_in = 0
+        if not token or expires_in <= 0:
+            raise RuntimeError("IGDB app-token response was incomplete.")
+
+        IGDB_ACCESS_TOKEN = token
+        IGDB_ACCESS_TOKEN_EXPIRES_AT = time.monotonic() + expires_in
+        return token
+
+
+def igdb_api_post(endpoint: str, query: str, client_id: str, access_token: str) -> list[dict[str, Any]]:
+    """Send one bounded Apicalypse POST request and return its JSON array."""
+    request = urllib.request.Request(
+        endpoint,
+        data=query.encode("utf-8"),
+        headers={
+            "Client-ID": client_id,
+            "Authorization": "Bearer " + access_token,
+            "Accept": "application/json",
+            "Content-Type": "text/plain",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=IGDB_API_TIMEOUT_SECONDS) as response:
+            raw = response.read(MAX_RESPONSE_BYTES + 1)
+        if len(raw) > MAX_RESPONSE_BYTES:
+            raise RuntimeError("IGDB response exceeded the configured size limit.")
+        payload = json.loads(raw.decode("utf-8"))
+    except urllib.error.HTTPError as exc:
+        raise RuntimeError("IGDB API returned HTTP " + str(exc.code) + ".") from exc
+    except (urllib.error.URLError, TimeoutError, OSError, json.JSONDecodeError) as exc:
+        raise RuntimeError("IGDB API request failed safely: " + type(exc).__name__) from exc
+
+    if not isinstance(payload, list):
+        raise RuntimeError("IGDB API returned an unexpected response shape.")
+    return payload
+
+
+def fetch_igdb_official_website_type_id(client_id: str, access_token: str) -> int:
+    """Resolve the current official-website type ID instead of relying on a deprecated enum."""
+    global IGDB_OFFICIAL_WEBSITE_TYPE_ID
+    if IGDB_OFFICIAL_WEBSITE_TYPE_ID is not None:
+        return IGDB_OFFICIAL_WEBSITE_TYPE_ID
+
+    website_types = igdb_api_post(
+        IGDB_WEBSITE_TYPES_ENDPOINT,
+        "fields id,type; limit 500;",
+        client_id,
+        access_token,
+    )
+    for item in website_types:
+        label = str(item.get("type", "")).strip().casefold()
+        if label == "official" or label.startswith("official "):
+            try:
+                IGDB_OFFICIAL_WEBSITE_TYPE_ID = int(item["id"])
+                return IGDB_OFFICIAL_WEBSITE_TYPE_ID
+            except (KeyError, TypeError, ValueError):
+                continue
+    raise RuntimeError("IGDB did not return an official-website type identifier.")
+
+
+def igdb_company_query(cursor: str, limit: int, official_website_type_id: int) -> str:
+    """Build a numeric, incremental query for companies with developed-game credits and official sites."""
+    try:
+        after_id = max(0, int(cursor or "0"))
+    except (TypeError, ValueError) as exc:
+        raise RuntimeError("IGDB company cursor is invalid.") from exc
+    page_size = min(max(1, int(limit)), 100)
+    return (
+        "fields id,name,slug,developed,websites.url,websites.type; "
+        f"where id > {after_id} & developed != null & websites.type = {int(official_website_type_id)}; "
+        f"sort id asc; limit {page_size};"
+    )
+
+
+def parse_igdb_company_page(
+    payload: list[dict[str, Any]],
+    cursor: str,
+    official_website_type_id: int,
+) -> tuple[list[dict[str, str]], int, str]:
+    """Keep developer-credited companies with official sites; preserve raw page progress."""
+    try:
+        last_seen_id = max(0, int(cursor or "0"))
+    except (TypeError, ValueError) as exc:
+        raise RuntimeError("IGDB company cursor is invalid.") from exc
+
+    raw_row_count = len(payload)
+    rows: list[dict[str, str]] = []
+    for company in payload:
+        try:
+            company_id = int(company.get("id", 0))
+        except (TypeError, ValueError):
+            continue
+        last_seen_id = max(last_seen_id, company_id)
+
+        developed = company.get("developed")
+        if not isinstance(developed, list) or not developed:
+            continue
+
+        websites = company.get("websites")
+        if not isinstance(websites, list):
+            continue
+        official_urls: list[str] = []
+        for website_record in websites:
+            if not isinstance(website_record, dict):
+                continue
+            website_type = website_record.get("type")
+            if isinstance(website_type, dict):
+                website_type = website_type.get("id")
+            try:
+                is_official = int(website_type) == int(official_website_type_id)
+            except (TypeError, ValueError):
+                is_official = False
+            if not is_official:
+                continue
+            website = canonical_url(str(website_record.get("url") or ""))
+            if website and website not in official_urls:
+                official_urls.append(website)
+
+        if not official_urls:
+            continue
+
+        name = str(company.get("name") or "").strip()
+        if not name:
+            continue
+        slug = str(company.get("slug") or "").strip()
+        entity_url = (
+            "https://www.igdb.com/companies/" + urllib.parse.quote(slug, safe="-_")
+            if slug else IGDB_COMPANIES_ENDPOINT
+        )
+        rows.append({
+            "qid": "IGDB:" + str(company_id),
+            "source_cursor": str(company_id),
+            "entity_url": entity_url,
+            "source_id": "igdb_companies",
+            "source_name": "IGDB",
+            "name": name,
+            "website": official_urls[0],
+            "country": "Not stated",
+            "hq_city": "",
+            "country_code": "",
+            "company_type": "Developer",
+        })
+
+    return rows, raw_row_count, str(last_seen_id)
+
+
+def fetch_igdb_page(cursor: str, limit: int) -> tuple[list[dict[str, str]], int, str]:
+    """Fetch one IGDB company page and return candidates, raw count and numeric next cursor."""
+    client_id = os.environ.get("IGDB_CLIENT_ID", "").strip()
+    if not client_id or not os.environ.get("IGDB_CLIENT_SECRET", "").strip():
+        raise RuntimeError("IGDB credentials are not configured.")
+    access_token = fetch_igdb_access_token()
+    website_type_id = fetch_igdb_official_website_type_id(client_id, access_token)
+    query = igdb_company_query(cursor, limit, website_type_id)
+    payload = igdb_api_post(IGDB_COMPANIES_ENDPOINT, query, client_id, access_token)
+    return parse_igdb_company_page(payload, cursor, website_type_id)
+
+
+def fetch_igdb_batch(cursor: str, limit: int) -> list[dict[str, str]]:
+    rows, _raw_row_count, _next_cursor = fetch_igdb_page(cursor, limit)
+    return rows
+
+
 def parse_gamedevmap_page_with_count(
     body: str,
     page_url: str,
@@ -1022,6 +1244,8 @@ def fetch_gamedevmap_batch(cursor: str, limit: int) -> list[dict[str, str]]:
 def fetch_source_batch(feed_kind: str, cursor: str, limit: int) -> list[dict[str, str]]:
     if feed_kind == "gamedevmap":
         return fetch_gamedevmap_batch(cursor, limit)
+    if feed_kind == "igdb_companies":
+        return fetch_igdb_batch(cursor, limit)
     return fetch_wikidata_batch(feed_kind, cursor, limit)
 
 
@@ -1192,6 +1416,8 @@ def profile_for(candidate: dict[str, Any]) -> dict[str, Any]:
     website = candidate["website"]
     if candidate.get("source_id") == "gamedevmap":
         location_label = "Listed location · GameDevMap"
+    elif candidate.get("source_id") == "igdb_companies":
+        location_label = "Not disclosed · IGDB"
     else:
         location_label = "HQ · Wikidata" if city else (
             "Country · Wikidata" if country != "Not disclosed" else "Not disclosed"
@@ -1206,7 +1432,7 @@ def profile_for(candidate: dict[str, Any]) -> dict[str, Any]:
         },
         "otherLocations": [],
         "companyType": [
-            "Developer" if candidate.get("source_id") == "wikidata_video_game_industry"
+            "Developer" if candidate.get("source_id") in {"wikidata_video_game_industry", "igdb_companies"}
             else candidate.get("company_type") or "Developer"
         ],
         "ownership": "Not yet researched",
@@ -1618,6 +1844,7 @@ def run_pipeline(
             available = [
                 feed for feed in FEEDS
                 if not state["feed_done"].get(feed["id"], False)
+                and source_feed_enabled(feed)
                 and pages_by_feed.get(feed["id"], 0) < source_page_budget(feed, state, max_source_pages)
             ]
             if not available:
@@ -1626,24 +1853,39 @@ def run_pipeline(
             if feed not in available:
                 feed = available[0]
             cursor = state["feed_cursors"].get(feed["id"], "1" if feed["kind"] == "gamedevmap" else "")
+            next_cursor = cursor
             if feed["kind"] == "gamedevmap" and source_fetcher is fetch_source_batch:
                 # Use raw table-row counts: filtered non-studio rows must not truncate pagination.
                 rows, source_row_count = fetch_gamedevmap_page(cursor, batch_size)
+            elif feed["kind"] == "igdb_companies" and source_fetcher is fetch_source_batch:
+                rows, source_row_count, next_cursor = fetch_igdb_page(cursor, batch_size)
             else:
                 rows = source_fetcher(feed["kind"], cursor, batch_size)
                 source_row_count = len(rows)
+                if feed["kind"] == "igdb_companies":
+                    numeric_ids = []
+                    for row in rows:
+                        try:
+                            numeric_ids.append(int(row.get("source_cursor", str(row.get("qid", "IGDB:0")).split(":")[-1])))
+                        except (TypeError, ValueError):
+                            continue
+                    if numeric_ids:
+                        next_cursor = str(max(numeric_ids))
             source_pages += 1
             pages_by_feed[feed["id"]] = pages_by_feed.get(feed["id"], 0) + 1
+            if feed["kind"] == "igdb_companies" and next_cursor != cursor:
+                # Advance using the raw IGDB company IDs even if candidate filtering removes rows.
+                state["feed_cursors"][feed["id"]] = next_cursor
             if rows:
                 if feed["kind"] == "gamedevmap":
                     state["feed_cursors"][feed["id"]] = str(int(cursor or "1") + batch_size)
-                else:
+                elif feed["kind"] != "igdb_companies":
                     state["feed_cursors"][feed["id"]] = max(row["qid"] for row in rows)
                 source_candidates += add_candidates(state, rows, source_id=feed["id"])
             if source_row_count < batch_size:
                 state["feed_done"][feed["id"]] = True
             state["feed_index"] = (FEEDS.index(feed) + 1) % len(FEEDS)
-            if feed["kind"] != "gamedevmap" and source_pages < max_source_pages:
+            if feed["kind"] in {"class", "developer_credit", "company_class", "industry"} and source_pages < max_source_pages:
                 if time.monotonic() + WIKIDATA_MIN_REQUEST_INTERVAL_SECONDS < deadline:
                     time.sleep(WIKIDATA_MIN_REQUEST_INTERVAL_SECONDS)
                 else:
@@ -1664,6 +1906,7 @@ def run_pipeline(
     studios.sort(key=lambda studio: str(studio.get("name", "")).casefold())
     result = {
         "mode": mode,
+        "igdb_enabled": igdb_credentials_available(),
         "source_pages": source_pages,
         "source_candidates": source_candidates,
         "candidate_checks": checked,
@@ -1684,6 +1927,8 @@ def run_pipeline(
                 "last_pass_completed_at": state["source_stats"][feed["id"]]["last_pass_completed_at"],
                 "feed_pass_in_progress": not state["feed_done"].get(feed["id"], False),
                 "cursor": state["feed_cursors"].get(feed["id"], ""),
+                "enabled": source_feed_enabled(feed),
+                "disabled_reason": None if source_feed_enabled(feed) else "missing_repository_actions_secrets",
             }
             for feed in FEEDS
         },
