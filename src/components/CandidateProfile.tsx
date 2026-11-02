@@ -83,7 +83,7 @@ async function profileDocumentFromFile(file: File): Promise<ProfileDocument> {
   const fileSignature = window.atob(dataBase64.slice(0, 24));
   const validSignature = extension === "pdf"
     ? fileSignature.startsWith("%PDF-")
-    : fileSignature.startsWith("PK\\u0003\\u0004");
+    : fileSignature.startsWith("PK\u0003\u0004");
   if (!validSignature) {
     throw new Error("The document contents do not match the selected PDF or DOCX file type.");
   }
