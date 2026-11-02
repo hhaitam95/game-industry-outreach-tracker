@@ -169,9 +169,9 @@ A source row for an office must not automatically become a new studio. Conversel
 There is no global target count and no arbitrary maximum. Report these as separate measures:
 
 - Raw source rows harvested.
-- Normalized candidate entities.
+- Normalized candidate entities, including new unique candidates per source pass.
 - Confirmed in-scope game-development organisations.
-- Published verified speculative routes.
+- Published verified speculative routes, measured separately from candidate discovery.
 - Active, paused and closed routes.
 - Duplicate candidates, exclusions and manual-review cases.
 - Candidates still queued or awaiting retry.
@@ -194,7 +194,7 @@ Keep source-level checkpoints and candidate progress resumable. Do not overwrite
 
 The runtime feed inventory is `config/discovery-sources.json`. The discovery script loads this manifest and validates each source ID, adapter kind, refresh policy and saturation settings. The private state schema is v2 and migrates schema-v1 cursors/candidates additively.
 
-The four Wikidata feeds, GameDevMap, IGDB Companies and the Scottish Games Industry dataset each own a cursor, cycle, verified-addition count, complete-empty-pass count, saturation flag and last-pass outcome. Five complete empty passes throttle only that feed to four source pages per hourly run; unsaturated feeds retain the remaining global budget. The hourly run budget is 20 source pages, with 65-second spacing between Wikidata requests, an IGDB request interval below four requests per second and a 25-minute pipeline ceiling. A verified route resets only its originating feed. Due candidate work keeps that feed's pass open; future retries/manual-review candidates mark the pass incomplete and cannot increment exhaustion counters. A source fetch failure is recorded against that feed, applies a bounded 5–120 minute backoff, preserves its cursor and empty-pass counter, and does not stop healthy feeds from using the remainder of the run. Failed or incomplete fetches never count as completed empty passes.
+The four Wikidata feeds, GameDevMap, IGDB Companies and the Scottish Games Industry dataset each own a cursor, cycle, new-candidate count, verified-route count, complete-empty-pass count, saturation flag and last-pass outcome. A pass is empty for saturation purposes only when it has discovered zero new unique candidate entities (and no unresolved candidate work); route outcomes are measured separately. Five such complete empty passes throttle only that feed to four source pages per hourly run; discovering candidates resets that feed's empty-pass counter even when those candidates do not have speculative application routes. Unsaturated feeds retain the remaining global budget. The hourly run budget is 20 source pages, with 65-second spacing between Wikidata requests, an IGDB request interval below four requests per second and a 25-minute pipeline ceiling. A verified route resets only its originating feed. Due candidate work keeps that feed's pass open; future retries/manual-review candidates mark the pass incomplete and cannot increment exhaustion counters. A source fetch failure is recorded against that feed, applies a bounded 5–120 minute backoff, preserves its cursor and empty-pass counter, and does not stop healthy feeds from using the remainder of the run. Failed or incomplete fetches never count as completed empty passes.
 
 GameDevMap is revisited as a recurring full-catalogue feed. Its numeric offset is preserved while a pass is in progress, then resets to the first page after the raw catalogue rows are exhausted; the parser uses raw page-row counts so filtered non-studio rows cannot truncate pagination. The source documents monthly catalogue data drops, so the recurring pass prevents the original one-time-backfill design from permanently missing later additions. The four Wikidata feeds restart from the beginning after each complete QID pass to catch newly added entities. Legacy candidate records without saved Wikidata query-feed provenance remain unattributed; do not guess their origin.
 
