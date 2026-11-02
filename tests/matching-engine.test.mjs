@@ -332,6 +332,20 @@ test("word-boundary matching does not treat Google Workspace as Go programming o
   assert.notEqual(programming.relevance, "strong");
   assert.equal(programming.evidence.length, 0);
 
+  profile.skills = [{
+    id: "go", name: "Go", category: "Programming", evidence: "demonstrated",
+    evidenceDetails: "Used for software development.", evidenceSource: "Work",
+  }];
+  const goLanguage = assessStudioMatch(
+    profile,
+    studio({ applicationResearch: {
+      ...studio().applicationResearch,
+      disciplineScope: ["Programming"],
+    } }),
+    new Date("2026-11-01T12:00:00Z"),
+  );
+  assert.equal(goLanguage.relevance, "strong", "The standalone Go language skill should still map to Programming.");
+
   profile.preferences.roleFamilies = ["Game VFX"];
   profile.skills = [{
     id: "2", name: "Cartography", category: "Other", evidence: "demonstrated",
