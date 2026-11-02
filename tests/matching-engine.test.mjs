@@ -400,6 +400,61 @@ test("headquarters country cannot override the directory country used for studio
   );
 });
 
+test("campaign priority ranks preferred geography before a higher composite score in an acceptable region", () => {
+  const profile = emptyProfile();
+  profile.preferences.roleFamilies = ["Software engineer"];
+  profile.preferences.preferredRegions = ["Europe"];
+  profile.preferences.acceptableRegions = ["Canada"];
+  profile.preferences.workModels = ["Remote"];
+  profile.preferences.studioTypes = ["Indie"];
+  profile.skills = [{
+    id: "1", name: "Python", category: "Programming", evidence: "demonstrated",
+    evidenceDetails: "Used for development automation.", evidenceSource: "Project",
+  }];
+
+  const european = assessStudioMatch(
+    profile,
+    studio({
+      name: "European studio",
+      country: "Poland",
+      countryCode: "PL",
+      continents: ["Europe"],
+      profile: { description: "Developer", companyType: ["Developer"], industryScale: "AAA" },
+      applicationResearch: {
+        ...studio().applicationResearch,
+        workModel: "hybrid",
+        disciplineScope: ["Programming"],
+      },
+    }),
+    new Date("2026-11-01T12:00:00Z"),
+  );
+  const canadian = assessStudioMatch(
+    profile,
+    studio({
+      name: "Canadian studio",
+      country: "Canada",
+      countryCode: "CA",
+      continents: ["North America"],
+      profile: { description: "Developer", companyType: ["Developer", "Independent"], industryScale: "Indie" },
+      applicationResearch: {
+        ...studio().applicationResearch,
+        workModel: "remote",
+        disciplineScope: ["Programming"],
+      },
+    }),
+    new Date("2026-11-01T12:00:00Z"),
+  );
+
+  assert.equal(european.priority.regionTier, "preferred");
+  assert.equal(canadian.priority.regionTier, "acceptable");
+  assert.equal(european.priority.level, "neutral");
+  assert.equal(canadian.priority.level, "high");
+  assert.deepEqual(
+    sortStudioMatches([canadian, european], "priority").map((item) => item.name),
+    ["European studio", "Canadian studio"],
+  );
+});
+
 test("mixed work arrangements do not receive a false personal-priority penalty", () => {
   const profile = emptyProfile();
   profile.preferences.workModels = ["Remote"];
