@@ -2,8 +2,8 @@ import {
   MAX_PROFILE_DOCUMENT_BYTES,
   PROFILE_BACKUP_FORMAT,
   PROFILE_SCHEMA_VERSION,
-} from "./profile.types";
-import type { CandidateProfile, ProfileDocument } from "./profile.types";
+} from "./profile.types.ts";
+import type { CandidateProfile, ProfileDocument } from "./profile.types.ts";
 
 const DATABASE_NAME = "game-industry-outreach-private";
 const DATABASE_VERSION = 1;
