@@ -816,7 +816,7 @@ class DatasetUpdateTests(unittest.TestCase):
             pages = {
                 "https://example-studio.example/": discovery.FetchResult(
                     True, "https://example-studio.example/", 200,
-                    '<a href="/careers">Careers</a>',
+                    '<p>We develop video games.</p><a href="/careers">Careers</a>',
                 ),
                 "https://example-studio.example/careers": discovery.FetchResult(
                     True, "https://example-studio.example/careers", 200,
@@ -1408,8 +1408,9 @@ class GameDevMapDiscoveryTests(unittest.TestCase):
             with guard:
                 active -= 1
             body = (
-                "<html><body><p>We welcome speculative applications.</p>"
-                "<form action='/apply'></form></body></html>"
+                "<html><body><p>We develop video games.</p>"
+                "<p>We welcome speculative applications.</p>"
+                "<a href='/careers'>Careers</a><form action='/apply'></form></body></html>"
             )
             return discovery.FetchResult(True, url, 200, body)
 
