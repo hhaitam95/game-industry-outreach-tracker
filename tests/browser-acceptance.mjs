@@ -835,6 +835,31 @@ async function main() {
     await halfbrickDetails.waitFor({ state: "detached" });
     await page.getByLabel("Search", { exact: true }).fill("");
 
+    // Apple App Store artwork must load from Apple's CDN and link directly to the app page.
+    const aboutFunRow = rows.filter({ hasText: "About Fun" });
+    await aboutFunRow.getByRole("button", { name: /About Fun/ }).click();
+    const aboutFunDetails = page.locator("#studio-details-about-fun");
+    await aboutFunDetails.waitFor();
+    const tinyMinersPoster = aboutFunDetails.locator('.game-poster-card[data-game-title="Tiny Miners"]');
+    const tinyMinersImage = tinyMinersPoster.locator('img[data-artwork-source="App Store"][data-artwork-layout="square"]');
+    await tinyMinersImage.waitFor();
+    assert.ok(
+      (await tinyMinersImage.getAttribute("src") || "").includes("mzstatic.com/image/thumb/"),
+      "Tiny Miners should use its official Apple App Store artwork URL.",
+    );
+    assert.equal(
+      await tinyMinersPoster.getAttribute("href"),
+      "https://apps.apple.com/us/app/tiny-miners/id920054061?uo=4",
+      "Tiny Miners should link directly to its verified App Store page.",
+    );
+    const tinyMinersRatio = await tinyMinersPoster.locator(".game-poster-art").evaluate(element => {
+      const rect = element.getBoundingClientRect();
+      return rect.width / rect.height;
+    });
+    assert.ok(tinyMinersRatio > 0.9 && tinyMinersRatio < 1.1, "App Store artwork should render in a square frame.");
+    await aboutFunRow.getByRole("button", { name: /About Fun/ }).click();
+    await aboutFunDetails.waitFor({ state: "detached" });
+
     assert.equal(
       await page.locator('.game-poster-card[href*="store.steampowered.com/search/"], .popular-game-cover[href*="store.steampowered.com/search/"]').count(),
       0,
