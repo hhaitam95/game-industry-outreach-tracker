@@ -89,7 +89,7 @@ def load_source_manifest(path: Path = SOURCE_MANIFEST_PATH) -> tuple[dict[str, A
             raise ValueError("Discovery source manifest entries require id, label and kind.")
         if source_id in seen_ids:
             raise ValueError("Discovery source manifest contains a duplicate id: " + source_id)
-        if kind not in {"class", "developer_credit", "company_class", "industry", "gamedevmap", "igdb_companies"}:
+        if kind not in {"class", "developer_credit", "company_class", "industry", "gamedevmap", "igdb_companies", "scottish_directory"}:
             raise ValueError("Unsupported discovery source kind: " + str(kind))
         if refresh_policy not in {"recurring", "one_time_backfill"}:
             raise ValueError("Unsupported discovery refresh policy: " + str(refresh_policy))
@@ -112,6 +112,10 @@ def load_source_manifest(path: Path = SOURCE_MANIFEST_PATH) -> tuple[dict[str, A
             "kind": kind,
             "refresh_policy": refresh_policy,
             "saturation": saturation,
+            "endpoint": source.get("endpoint"),
+            "policy_url": source.get("policy_url"),
+            "license": source.get("license"),
+            "attribution": source.get("attribution"),
         })
     return tuple(feeds)
 
@@ -120,6 +124,9 @@ FEEDS = load_source_manifest()
 
 
 GAMEDEVMAP_URL = "https://www.gamedevmap.com/index.php"
+SCOTTISH_COMPANY_TREE_URL = "https://api.github.com/repos/r0bbie/gamesindustry.scot/git/trees/main?recursive=1"
+SCOTTISH_COMPANY_RAW_BASE = "https://raw.githubusercontent.com/r0bbie/gamesindustry.scot/main/"
+SCOTTISH_COMPANY_PATHS: list[str] | None = None
 GAMEDEVMAP_TYPES = {
     "developer",
     "developer and publisher",
@@ -571,6 +578,7 @@ def fetch_url(
     timeout: int = REQUEST_TIMEOUT_SECONDS,
     max_bytes: int = MAX_RESPONSE_BYTES,
     allow_plain_text: bool = False,
+    allow_json: bool = False,
 ) -> FetchResult:
     safe_url = canonical_url(url)
     if not safe_url:
@@ -599,7 +607,8 @@ def fetch_url(
             content_type = response.headers.get("Content-Type", "text/html").lower()
             is_html = any(kind in content_type for kind in ("html", "xhtml"))
             is_plain_text = "text/plain" in content_type or content_type.startswith("text/plain;")
-            if not is_html and not (allow_plain_text and is_plain_text):
+            is_json = "application/json" in content_type or content_type.endswith("+json")
+            if not is_html and not (allow_plain_text and is_plain_text) and not (allow_json and is_json):
                 return FetchResult(False, final_url, status, "", "unexpected-content-type")
             body_bytes = response.read(max_bytes + 1)
             if len(body_bytes) > max_bytes:
@@ -964,6 +973,36 @@ def source_feed_enabled(feed: dict[str, Any]) -> bool:
     return feed.get("kind") != "igdb_companies" or igdb_credentials_available()
 
 
+def source_feed_retry_due(feed: dict[str, Any], state: dict[str, Any]) -> bool:
+    metrics = state.get("source_stats", {}).get(feed["id"], {})
+    retry_at = metrics.get("next_retry_at")
+    if not retry_at:
+        return True
+    try:
+        return dt.datetime.fromisoformat(str(retry_at)) <= utc_now()
+    except ValueError:
+        return True
+
+
+def record_source_failure(state: dict[str, Any], feed_id: str, error: Exception) -> dict[str, Any]:
+    metrics = state["source_stats"][feed_id]
+    failures = int(metrics.get("consecutive_failures", 0)) + 1
+    delay = min(7200, 300 * (2 ** min(failures - 1, 5)))
+    metrics["consecutive_failures"] = failures
+    metrics["last_error"] = (type(error).__name__ + ": " + str(error))[:240]
+    metrics["last_failure_at"] = utc_now().isoformat()
+    metrics["next_retry_at"] = (utc_now() + dt.timedelta(seconds=delay)).isoformat()
+    return {"error": metrics["last_error"], "consecutive_failures": failures, "retry_in_seconds": delay}
+
+
+def record_source_success(state: dict[str, Any], feed_id: str) -> None:
+    metrics = state["source_stats"][feed_id]
+    metrics["consecutive_failures"] = 0
+    metrics["last_error"] = None
+    metrics["next_retry_at"] = None
+    metrics["last_success_at"] = utc_now().isoformat()
+
+
 def fetch_igdb_access_token() -> str:
     """Mint and cache an IGDB app token without exposing credential or response contents."""
     global IGDB_ACCESS_TOKEN, IGDB_ACCESS_TOKEN_EXPIRES_AT
@@ -1253,11 +1292,74 @@ def fetch_gamedevmap_batch(cursor: str, limit: int) -> list[dict[str, str]]:
     rows, _raw_row_count = fetch_gamedevmap_page(cursor, limit)
     return rows
 
+def fetch_scottish_companies_page(cursor: str, limit: int) -> tuple[list[dict[str, str]], int, str]:
+    """Read Scottish Games Industry data under its published CC BY-NC-SA 4.0 licence."""
+    global SCOTTISH_COMPANY_PATHS
+    if SCOTTISH_COMPANY_PATHS is None:
+        result = fetch_url(SCOTTISH_COMPANY_TREE_URL, timeout=REQUEST_TIMEOUT_SECONDS,
+                           max_bytes=MAX_RESPONSE_BYTES, allow_json=True)
+        if not result.ok:
+            raise RuntimeError("Scottish Games Industry file index unavailable: " + (result.error or "fetch-failed"))
+        try:
+            payload = json.loads(result.body)
+        except json.JSONDecodeError as exc:
+            raise RuntimeError("Scottish Games Industry file index returned invalid JSON.") from exc
+        SCOTTISH_COMPANY_PATHS = sorted(
+            str(item.get("path", "")) for item in payload.get("tree", [])
+            if str(item.get("path", "")).startswith("data/companies/")
+            and str(item.get("path", "")).endswith(".json") and item.get("type") == "blob"
+        )
+    try:
+        start = max(0, int(cursor or "0"))
+    except ValueError as exc:
+        raise RuntimeError("Scottish Games Industry cursor is invalid.") from exc
+    page_size = min(max(1, int(limit)), 100)
+    paths = (SCOTTISH_COMPANY_PATHS or [])[start:start + page_size]
+    rows: list[dict[str, str]] = []
+    raw_count = len(paths)
+    for path in paths:
+        result = fetch_url(SCOTTISH_COMPANY_RAW_BASE + urllib.parse.quote(path, safe="/"),
+                           timeout=REQUEST_TIMEOUT_SECONDS, max_bytes=MAX_RESPONSE_BYTES,
+                           allow_plain_text=True)
+        if not result.ok:
+            raise RuntimeError("Scottish Games Industry company record unavailable: " + (result.error or "fetch-failed"))
+        try:
+            company = json.loads(result.body)
+        except json.JSONDecodeError as exc:
+            raise RuntimeError("Scottish Games Industry company record returned invalid JSON.") from exc
+        categories = {re.sub(r"[^a-z]+", "_", str(value).casefold()).strip("_")
+                      for value in company.get("categories", [])}
+        if not categories.intersection({"developer", "solo_developer", "development_studio", "solo_developers"}):
+            continue
+        if str(company.get("status", "")).casefold() not in {"active", "trading"}:
+            continue
+        name = str(company.get("name", "")).strip()
+        website = canonical_url(str(company.get("website", "")).strip())
+        slug = str(company.get("slug") or company.get("id") or "")
+        if not name or not website or not slug:
+            continue
+        rows.append({
+            "qid": "SCOT:" + slug,
+            "entity_url": "https://gamesindustry.scot/companies/" + urllib.parse.quote(slug, safe="") + "/",
+            "source_id": "scottish_games_industry",
+            "source_name": "Scottish Games Industry",
+            "source_license": "CC BY-NC-SA 4.0",
+            "source_url": "https://github.com/r0bbie/gamesindustry.scot",
+            "name": name, "website": website, "country": "United Kingdom",
+            "hq_city": str(company.get("location") or "").strip(),
+            "country_code": "GB", "company_type": "Developer",
+        })
+    return rows, raw_count, str(start + raw_count)
+
+
 def fetch_source_batch(feed_kind: str, cursor: str, limit: int) -> list[dict[str, str]]:
     if feed_kind == "gamedevmap":
         return fetch_gamedevmap_batch(cursor, limit)
     if feed_kind == "igdb_companies":
         return fetch_igdb_batch(cursor, limit)
+    if feed_kind == "scottish_directory":
+        rows, _raw_count, _next_cursor = fetch_scottish_companies_page(cursor, limit)
+        return rows
     return fetch_wikidata_batch(feed_kind, cursor, limit)
 
 
@@ -1265,7 +1367,7 @@ def empty_state() -> dict[str, Any]:
     return {
         "schema_version": 2,
         "updated_at": utc_now().isoformat(),
-        "feed_cursors": {feed["id"]: ("1" if feed["kind"] == "gamedevmap" else "") for feed in FEEDS},
+        "feed_cursors": {feed["id"]: ("1" if feed["kind"] == "gamedevmap" else "0" if feed["kind"] == "scottish_directory" else "") for feed in FEEDS},
         "feed_done": {feed["id"]: False for feed in FEEDS},
         "feed_index": 0,
         "cycle": 1,
@@ -1283,6 +1385,8 @@ def empty_state() -> dict[str, Any]:
                 "last_pass_completed_at": None, "last_pass_status": "not_started",
                 "last_pass_candidates": 0, "last_pass_verified": 0,
                 "last_pass_incomplete_candidates": 0,
+                "consecutive_failures": 0, "last_error": None,
+                "last_failure_at": None, "last_success_at": None, "next_retry_at": None,
             } for feed in FEEDS
         },
         "stats": {"candidates_seen": 0, "routes_verified": 0, "excluded": 0, "no_route": 0, "needs_review": 0},
@@ -1305,7 +1409,7 @@ def load_state(path: Path = STATE_PATH) -> dict[str, Any]:
     starting_cycle = max(1, int(state.get("cycle", 1)))
     for feed in FEEDS:
         feed_id = feed["id"]
-        state["feed_cursors"].setdefault(feed_id, "1" if feed["kind"] == "gamedevmap" else "")
+        state["feed_cursors"].setdefault(feed_id, "1" if feed["kind"] == "gamedevmap" else "0" if feed["kind"] == "scottish_directory" else "")
         state["feed_done"].setdefault(feed_id, False)
         metrics = state["source_stats"].setdefault(feed_id, {})
         defaults = {
@@ -1314,6 +1418,8 @@ def load_state(path: Path = STATE_PATH) -> dict[str, Any]:
             "last_pass_completed_at": None, "last_pass_status": "migration_baseline",
             "last_pass_candidates": 0, "last_pass_verified": 0,
             "last_pass_incomplete_candidates": 0,
+            "consecutive_failures": 0, "last_error": None,
+            "last_failure_at": None, "last_success_at": None, "next_retry_at": None,
         }
         if not isinstance(metrics, dict):
             raise ValueError("Discovery source state is invalid: " + feed_id)
