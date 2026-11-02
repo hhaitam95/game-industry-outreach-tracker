@@ -4,9 +4,9 @@
 **Product scope:** Global directory of legitimate video-game development organisations with verified speculative-application routes, plus a private browser-local Candidate Profile and application tracker.  
 **Authoritative discovery rules:** [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md).
 
-## Candidate Profile persistence integrity — PR #111
+## Candidate Profile persistence integrity — PR #111 (merged and deployed)
 
-The IndexedDB profile editor now tracks edits across asynchronous writes. A save completion cannot replace newer form state or falsely clear the unsaved flag; a failed initial read does not enable a potentially destructive save. A successful validated backup restore can re-establish storage after a transient database-open failure. The Chromium browser suite now exercises both races/recovery cases. Exact-head full CI passed in [run 41519494261](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41519494261). PR #111 is open and awaiting merge.
+The IndexedDB profile editor tracks edits across asynchronous writes. A save completion cannot replace newer form state or falsely clear the unsaved flag; a failed initial read does not enable a potentially destructive save. A successful validated backup restore can re-establish storage after a transient database-open failure. The Chromium browser suite exercises the save-race and storage-recovery cases. PR #111 merged as `26f91b9ba9a1777ccdc19a00227df0fb11703132`; exact-head PR CI passed in [run 41519964763](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41519964763), merged-main CI passed in [run 41520306310](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41520306310), and Pages deployment completed in [run 41520306365](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41520306365).
 
 ## Private application tracker integrity — PR #110
 
