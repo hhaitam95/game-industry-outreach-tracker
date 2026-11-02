@@ -788,6 +788,7 @@ async function main() {
     assert.equal(acceptedRestore.type, "confirm");
     assert.match(acceptedRestore.message, /Replace the 0 application records currently in this browser/);
     await page.getByText("Restored 1 application record in this browser.").waitFor();
+    await page.getByRole("tab", { name: /Archived/ }).click();
     const restoredTrackerRow = page.locator(".tracker-table tbody tr")
       .filter({ has: page.locator(".status-select-label") })
       .filter({ hasText: "4A Games" });
