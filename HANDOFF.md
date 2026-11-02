@@ -51,6 +51,12 @@ Portal automation is explicitly deferred. Do not implement a browser extension, 
 - Discovery workflow: `.github/workflows/discover-studios.yml`.
 - Discovery cursors/state are maintained on the separate `discovery-state` branch.
 
+## Global discovery — PR #100
+
+The current discovery expansion is in [PR #100](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/100), branch `feat/aggressive-global-studio-discovery`. It retains GameDevMap and four Wikidata feeds and adds IGDB as a sixth recurring source. IGDB uses the developer-credit relationship plus the dynamically resolved official website type, with secret-backed server-side authentication and a resumable numeric cursor. Candidate companies still require the existing official speculative-application proof before publication. The complete CI/browser suite passed on final PR head `fd4ef9da5a68f1f01c24d3a6390caf4ae9abc720` in [run 41413993904](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41413993904), including the API request-pacing regression test and browser acceptance. PR #100 remains open and the new IGDB feed is not yet live on Pages. PR #100 remains open and the new IGDB feed is not yet live on Pages; do not describe it as deployed until the PR is merged and the scheduled discovery workflow has run successfully.
+
+The user has explicitly chosen to exhaust the existing automated sources plus IGDB before considering any additional service/API sources. Do not add Tavily, Companies House or other candidate-source integrations until that source set has been assessed for yield and coverage.
+
 ## Handover rules
 
 At the start of a new implementation session, inspect the current default branch, open PRs, relevant UI/data schemas and tests. Do not assume prior status text is current without checking the repository. Distinguish proposed, implemented, tested, merged and deployed work accurately.

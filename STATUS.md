@@ -1,8 +1,18 @@
 # Game Industry Outreach Tracker status
 
-**Last verified:** 2026-11-01  
+**Last verified:** 2026-11-02  
 **Product scope:** Global directory of legitimate video-game development organisations with verified speculative-application routes, plus a private browser-local Candidate Profile and application tracker.  
 **Authoritative discovery rules:** [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md).
+
+## Global studio discovery source expansion — PR #100
+
+**Implemented and CI-validated; not yet merged or deployed.** PR [#100](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/100) adds a sixth recurring candidate feed: the IGDB Company API. It queries companies with developed-game credits and a dynamically resolved official company website type, stores a resumable numeric company-ID cursor, and passes the existing Twitch application credentials from repository Actions secrets to the server-side workflow step. Missing secrets safely skip IGDB without counting an empty source pass.
+
+- IGDB company data remains candidate evidence only. The public directory's strict rule is unchanged: the employer's own site or directly linked employer-controlled ATS must explicitly invite speculative/open/general applications.
+- The existing source set remains unchanged otherwise: GameDevMap plus four Wikidata feeds. No Tavily, Companies House or additional source was introduced.
+- The 20-page hourly source budget, independent five-empty-pass/four-page saturation rule, 65-second Wikidata pacing and 25-minute runtime ceiling remain. IGDB requests are separately paced at 0.27 seconds.
+- Full exact-head pull-request CI passed in [run 41413993904](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41413993904) at commit `fd4ef9da5a68f1f01c24d3a6390caf4ae9abc720`, including the API pacing regression test, all discovery/frontend checks, production build, privacy/Pages checks and browser acceptance.
+- PR #100 is open; the feature is not part of `main` and is not live on GitHub Pages yet.
 
 ## Candidate Profile implementation — PR #95
 
