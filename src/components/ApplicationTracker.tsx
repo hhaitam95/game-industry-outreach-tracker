@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useMemo, useState } from "react";
+import type { ChangeEvent } from "react";
 import type { TrackedApplication, TrackerStatus } from "./studio.types";
 import StudioMark from "./StudioMark";
 import { countryFlagFor } from "./location";
@@ -46,6 +47,8 @@ export default function ApplicationTracker({
   onUpdateNote,
   onRemove,
   onOpenDirectory,
+  onExportBackup,
+  onImportBackup,
 }: {
   initialTab?: string;
   focusStudioName?: string | null;
@@ -54,11 +57,37 @@ export default function ApplicationTracker({
   onUpdateNote: (id: string, note: string) => void;
   onRemove: (id: string) => void;
   onOpenDirectory: () => void;
+  onExportBackup: () => void;
+  onImportBackup: (file: File) => Promise<number | null>;
 }) {
   const [activeTab, setActiveTab] = useState(initialTab);
   const [query, setQuery] = useState("");
   const [expandedNotesId, setExpandedNotesId] = useState<string | null>(null);
+  const [backupInputKey, setBackupInputKey] = useState(0);
+  const [backupNotice, setBackupNotice] = useState("");
+  const [backupError, setBackupError] = useState("");
   const active = tabs.find((tab) => tab.id === activeTab) || tabs[0];
+  
+  async function handleBackupImport(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.currentTarget.files?.[0];
+    event.currentTarget.value = "";
+    if (!file) return;
+    setBackupNotice("");
+    setBackupError("");
+    try {
+      const restoredCount = await onImportBackup(file);
+      setBackupNotice(
+        restoredCount === null
+          ? "Restore cancelled. Your existing application tracker was not changed."
+          : "Restored " + restoredCount + " application " + (restoredCount === 1 ? "record" : "records") + " in this browser.",
+      );
+    } catch (importError) {
+      setBackupError(importError instanceof Error ? importError.message : "Could not restore the application backup.");
+    } finally {
+      setBackupInputKey((current) => current + 1);
+    }
+  }
+
 
   const counts = useMemo(
     () =>
@@ -95,15 +124,32 @@ export default function ApplicationTracker({
 
   return (
     <section className="tracker-page">
-      <div className="page-heading">
+      <div className="page-heading tracker-page-heading">
         <div>
           <h1>My applications</h1>
           <p>Keep track of studios you're considering, applications you've sent, and your follow-up notes.</p>
         </div>
-        <button className="btn btn-primary" type="button" onClick={onOpenDirectory}>
-          Browse studios
-        </button>
+        <div className="tracker-heading-actions">
+          <button className="btn btn-outline-secondary btn-sm" type="button" onClick={onExportBackup} disabled={applications.length === 0}>
+            Export backup
+          </button>
+          <label className="btn btn-outline-secondary btn-sm tracker-restore-control">
+            Restore backup
+            <input
+              key={backupInputKey}
+              className="visually-hidden"
+              type="file"
+              accept=".json,application/json"
+              onChange={handleBackupImport}
+            />
+          </label>
+          <button className="btn btn-primary" type="button" onClick={onOpenDirectory}>
+            Browse studios
+          </button>
+        </div>
       </div>
+      {backupNotice ? <p className="tracker-backup-notice" role="status">{backupNotice}</p> : null}
+      {backupError ? <p className="tracker-backup-error" role="alert">{backupError}</p> : null}
 
       <div className="tracker-toolbar">
         <div className="tracker-tabs" role="tablist" aria-label="Application status">
@@ -269,7 +315,7 @@ export default function ApplicationTracker({
       </div>
 
       <p className="tracker-note">
-        Your tracker, notes and application dates are saved in this browser only. They are not connected to a server or shared with anyone.
+        Your tracker, notes and application dates are saved in this browser only. They are not connected to a server or shared with anyone. Export a backup regularly; backup files contain private application history and notes, so keep them somewhere secure.
       </p>
     </section>
   );
