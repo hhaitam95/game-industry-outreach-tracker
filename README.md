@@ -75,12 +75,12 @@ Candidate sources are leads only; every company and application route is verifie
 
 - GameDevMap public paginated worldwide directory. The existing adapter reads its public results interface; rows can represent multiple offices or non-studio organisations, so classification and deduplication are required.
 - Four recurring Wikidata feeds for video-game developer entities, credited developer organisations, video-game companies and video-game-industry classifications. The broad industry feed is a lead only: candidates must show direct game-development work on their own site before automatic publication.
+- IGDB Companies API (added in PR #100; pending merge/deployment). It contributes company records with developed-game credits and an officially typed company website. The API lead is not proof of current activity or speculative hiring; the existing official-site verification gate still applies.
 
 ### Additional candidate sources under evaluation
 
 These are not yet integrated discovery adapters. Their terms, access method, coverage and reuse conditions must be reviewed before automation.
 
-- [IGDB API](https://api-docs.igdb.com/) — structured company and game-credit source. The Company endpoint exposes developer/publisher relationships and official websites; Twitch app credentials and current API/attribution terms must be reviewed before integration. No adapter or credentials are configured yet. This remains unintegrated for studio discovery; the separate artwork lookup above uses IGDB only for game-cover metadata.
 - [GameCompanies.com](https://gamecompanies.com/) — global directory of studios, publishers, hubs, organisations and service companies; its Terms restrict automated use beyond the provided interface without written permission, so use as a manual source unless permission is obtained.
 - [Games Jobs Index studio directory](https://gamesjobsindex.com/studios.html) — manual lead source with a visible “Speculative only” filter. The header showed 2,573 studios while the regional roll-up showed 2,415 on 2026-10-31; the count is unreconciled. Filter labels are not employer evidence, and automated access permission was not established.
 - [Steam Developer & Publisher Homepages](https://store.steampowered.com/dev/?l=english) — large paginated creator directory; includes publishers and entities beyond unique development studios.
@@ -92,7 +92,7 @@ The full source notes, observed catalogue sizes, caveats, coverage policy and fu
 
 ### Initial global-discovery baseline
 
-The Phase A closeout proposal establishes an initial baseline of **327 verified studio routes with 327 matching profiles** (322 active, 5 paused across 51 country/location labels). The existing hourly discovery workflow continues as maintenance using GameDevMap and Wikidata feeds. The separate 22-entry manual source register remains research-only and is not automated ingestion. This is a practical verified baseline, not a claim that every game studio worldwide has been found. See the [Phase A closeout record](docs/operations/phase-a-global-discovery-closeout.md) and the [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md).
+The Phase A closeout proposal establishes an initial baseline of **327 verified studio routes with 327 matching profiles** (322 active, 5 paused across 51 country/location labels). The existing hourly discovery workflow continues as maintenance using GameDevMap and Wikidata feeds; PR #100 adds IGDB as a sixth recurring candidate feed pending merge and deployment. The separate 22-entry manual source register remains research-only and is not automated ingestion. This is a practical verified baseline, not a claim that every game studio worldwide has been found. See the [Phase A closeout record](docs/operations/phase-a-global-discovery-closeout.md) and the [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md).
 
 ## Verification process
 
@@ -111,11 +111,11 @@ The detailed candidate pool and progress are stored on the separate discovery-st
 
 ## Discovery cadence and known coverage gap
 
-GitHub Actions runs discovery hourly. The pipeline now revisits the entire GameDevMap catalogue in recurring paginated passes (rather than treating it as a one-time backfill) and uses four recurring Wikidata feeds. GameDevMap page completion is based on raw catalogue rows, not only rows that pass candidate filters.
+GitHub Actions runs discovery hourly. The pipeline revisits the full GameDevMap catalogue in recurring paginated passes (rather than treating it as a one-time backfill), uses four recurring Wikidata feeds, and adds IGDB company discovery in PR #100 (pending merge/deployment). GameDevMap page completion is based on raw catalogue rows, not only rows that pass candidate filters.
 
-Regional association directories and curated national catalogues are currently manual research inputs only. IGDB is blocked pending written permission for public-directory redistribution; Steam remains manual-only with no scripted collection. See the source register for access restrictions before using any new index.
+Regional association directories and curated national catalogues remain manual research inputs only. IGDB's server-side adapter uses the existing Twitch application secrets and the documented non-commercial API; the candidate feed queries companies with developed-game credits and an official website type. Its official website type is resolved dynamically through `/v4/website_types`, not a deprecated hard-coded category. The feed is a lead only and still requires the employer's own site to demonstrate an explicit speculative application route. Steam remains manual-only with no scripted collection.
 
-The integrated discovery pipeline uses **source-specific saturation**, not a global stop. Each of the five active feeds has its own cursor, cycle, verified-addition count and saturation state; five complete empty passes throttle only that feed to four pages per hourly run. The global hourly budget is 20 source pages. Wikidata requests retain 65-second spacing and the pipeline retains its 25-minute runtime ceiling. Incomplete or failed passes do not count as exhaustion, and one source's saturation does not suppress work on others. Additional candidate sources listed above remain evaluation leads until their access terms are cleared and adapters are implemented and tested.
+The integrated discovery pipeline uses **source-specific saturation**, not a global stop. After PR #100 is merged, each of the six active feeds will have its own cursor, cycle, verified-addition count and saturation state; five complete empty passes throttle only that feed to four pages per hourly run. The global hourly budget is 20 source pages. Wikidata requests retain 65-second spacing, IGDB requests are spaced below its documented four-per-second limit, and the pipeline retains its 25-minute runtime ceiling. Incomplete or failed passes do not count as exhaustion, and one source's saturation does not suppress work on others. The remaining candidate sources listed above stay manual/evaluation leads until their access terms are cleared and adapters are implemented and tested.
 
 Every run adds a sanitized GitHub Actions summary with work counts, candidate-status totals, source cursors and saturation state.
 
