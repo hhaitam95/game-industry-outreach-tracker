@@ -341,7 +341,7 @@ async function main() {
     await profileRecoveryPage.goto(appUrl, { waitUntil: "networkidle" });
     await profileRecoveryPage.waitForFunction(() =>
       Array.from(document.querySelectorAll(".profile-save-state"))
-        .some((element) => element.textContent?.includes("Profile storage unavailable")),
+        .some((element) => element.textContent?.includes("Temporary IndexedDB open failure")),
     );
     await profileRecoveryPage.getByRole("button", { name: "My profile" }).click();
     await profileRecoveryPage.getByRole("heading", { name: "My profile" }).waitFor();
