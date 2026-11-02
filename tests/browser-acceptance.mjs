@@ -833,6 +833,59 @@ async function main() {
       "The mobile tracker must not create horizontal page overflow.",
     );
 
+    // Corrupt saved tracker data must remain untouched until the user explicitly restores a backup.
+    const recoveryPage = await context.newPage();
+    const recoveryPageErrors = [];
+    recoveryPage.on("pageerror", (error) => recoveryPageErrors.push(error.message));
+    const corruptedTrackerValue = "{not valid tracker JSON";
+    await recoveryPage.addInitScript(
+      ({ key, raw }) => localStorage.setItem(key, raw),
+      { key: storageKey, raw: corruptedTrackerValue },
+    );
+    await recoveryPage.route("https://api.github.com/**", async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({ workflow_runs: [] }),
+      });
+    });
+    await recoveryPage.goto(appUrl, { waitUntil: "networkidle" });
+    const recoveryAlert = recoveryPage.getByRole("alert");
+    await recoveryAlert.getByText(/not valid JSON/).waitFor();
+    await recoveryAlert.getByText(/original browser data has been left untouched/).waitFor();
+    await recoveryPage.getByRole("button", { name: "Open My applications to restore a backup" }).click();
+    await recoveryPage.getByRole("heading", { name: "My applications" }).waitFor();
+    const untouchedTrackerValue = await recoveryPage.evaluate(
+      (key) => localStorage.getItem(key),
+      storageKey,
+    );
+    assert.equal(
+      untouchedTrackerValue,
+      corruptedTrackerValue,
+      "Loading malformed tracker data must not replace the original localStorage value.",
+    );
+
+    const recoveryRestoreInput = recoveryPage.locator(
+      ".tracker-page input[type=\"file\"][accept=\".json,application/json\"]",
+    );
+    const recoveryRestore = await performWithDialog(
+      recoveryPage,
+      () => recoveryRestoreInput.setInputFiles(trackerBackupPath),
+      true,
+    );
+    assert.equal(recoveryRestore.type, "confirm");
+    assert.match(recoveryRestore.message, /Replace the 0 application records currently in this browser/);
+    await recoveryPage.getByText("Restored 1 application record in this browser.").waitFor();
+    const recoveredTracker = await recoveryPage.evaluate(
+      (key) => JSON.parse(localStorage.getItem(key) || "[]"),
+      storageKey,
+    );
+    assert.equal(recoveredTracker.length, 1);
+    assert.equal(recoveredTracker[0].studioName, "4A Games");
+    assert.equal(recoveredTracker[0].note, savedNote);
+    assert.deepEqual(recoveryPageErrors, [], "The tracker recovery flow should not throw browser errors.");
+    await recoveryPage.close();
+
     assert.deepEqual(writeRequests, [], "Personal tracker actions must not issue network write requests.");
     assert.deepEqual(pageErrors, [], "The browser should not report uncaught application errors.");
 

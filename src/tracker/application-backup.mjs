@@ -200,3 +200,49 @@ export async function readApplicationTrackerBackup(file) {
   }
   return parseApplicationTrackerBackup(parsed);
 }
+
+
+/**
+ * Read the existing browser-local tracker without ever turning corrupt or
+ * partially-invalid data into an empty list that could overwrite the original.
+ * @param {string | null} raw
+ * @returns {{ok: true, applications: import("../components/studio.types").TrackedApplication[]} | {ok: false, message: string}}
+ */
+export function parseStoredApplicationTracker(raw) {
+  if (raw === null) {
+    return { ok: true, applications: [] };
+  }
+
+  let parsed;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    return {
+      ok: false,
+      message: "Your saved application tracker is not valid JSON. The original browser data has been left untouched.",
+    };
+  }
+
+  if (!Array.isArray(parsed)) {
+    return {
+      ok: false,
+      message: "Your saved application tracker has an unsupported data structure. The original browser data has been left untouched.",
+    };
+  }
+
+  try {
+    return {
+      ok: true,
+      applications: parseApplicationTrackerBackup({
+        format: BACKUP_FORMAT,
+        version: BACKUP_VERSION,
+        applications: parsed,
+      }),
+    };
+  } catch {
+    return {
+      ok: false,
+      message: "Your saved application tracker contains an invalid or unsupported record. The original browser data has been left untouched.",
+    };
+  }
+}

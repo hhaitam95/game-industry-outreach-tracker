@@ -4,6 +4,10 @@
 **Product scope:** Global directory of legitimate video-game development organisations with verified speculative-application routes, plus a private browser-local Candidate Profile and application tracker.  
 **Authoritative discovery rules:** [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md).
 
+## Private application tracker integrity — PR #110
+
+The browser-local tracker now validates every saved record before accepting the dataset. Invalid JSON, unsupported structures and partially invalid arrays are not silently converted into empty or filtered data; the original localStorage value remains untouched. A visible recovery warning directs the user to import a validated backup, and tracker mutations remain blocked until that explicit restore succeeds. Unit coverage and the Chromium browser-acceptance recovery scenario passed in [exact-head CI run 41517916733](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41517916733). PR #110 is awaiting merge at the time of this status entry.
+
 ## Discovery automation hardening — PR #109
 
 **Merged and deployed on 2026-11-02.** PR [#109](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/109) merged as `27a3dc963976dbb4f161040c22d99b6756cec1d6`. Exact-head CI and browser acceptance passed in [run 41510639242](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41510639242); merged-main CI passed in [run 41511025026](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41511025026); Pages publication completed in [run 41511024791](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41511024791).
