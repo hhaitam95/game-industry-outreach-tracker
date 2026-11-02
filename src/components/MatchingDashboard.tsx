@@ -556,6 +556,17 @@ export default function MatchingDashboard({
                         applicationUrl: assessment.applicationUrl,
                         country: assessment.country,
                         countryCode: assessment.countryCode,
+                        evidenceUrl: assessment.evidenceUrl,
+                        checkedAt: assessment.checkedAt,
+                        notes: assessment.notes,
+                        applicationResearch: {
+                          routeType: assessment.routeType,
+                          routeStatus: assessment.routeReadiness === "active" ? "active" : "needs_verification",
+                          workModel: assessment.workModel,
+                          submissionMethods: assessment.submissionMethods,
+                          eligibleLocations: assessment.eligibleLocations,
+                          disciplineScope: assessment.disciplineScope,
+                        },
                       }, {
                         country: assessment.country,
                         countryCode: assessment.countryCode,
