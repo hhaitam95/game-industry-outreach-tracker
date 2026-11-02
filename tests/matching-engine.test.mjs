@@ -362,6 +362,62 @@ test("word-boundary matching does not treat Google Workspace as Go programming o
   assert.equal(visualEffects.evidence.length, 0);
 });
 
+test("discipline category fallbacks use phrase boundaries in both directions", () => {
+  const profile = emptyProfile();
+  profile.preferences.roleFamilies = ["Game VFX"];
+  profile.skills = [{
+    id: "1", name: "Environment Art", category: "Art", evidence: "demonstrated",
+    evidenceDetails: "Created environment assets.", evidenceSource: "Project",
+  }];
+
+  const cartography = assessStudioMatch(
+    profile,
+    studio({ applicationResearch: {
+      ...studio().applicationResearch,
+      disciplineScope: ["Cartography"],
+    } }),
+    new Date("2026-11-01T12:00:00Z"),
+  );
+  assert.equal(cartography.relevance, "weak");
+  assert.equal(cartography.evidence.length, 0);
+
+  profile.preferences.roleFamilies = ["Developer support"];
+  profile.skills = [{
+    id: "2", name: "REST APIs", category: "Technical", evidence: "demonstrated",
+    evidenceDetails: "Investigated API issues.", evidenceSource: "Work",
+  }];
+  const rapidDevelopment = assessStudioMatch(
+    profile,
+    studio({ applicationResearch: {
+      ...studio().applicationResearch,
+      disciplineScope: ["Rapid development"],
+    } }),
+    new Date("2026-11-01T12:00:00Z"),
+  );
+  assert.equal(rapidDevelopment.relevance, "weak");
+  assert.equal(
+    rapidDevelopment.evidence.some((item) => item.relationship === "discipline"),
+    false,
+    "REST API skills may remain supporting context, but must not count as evidence for Rapid development.",
+  );
+});
+
+test("audit support is not misclassified as IT support", () => {
+  const profile = emptyProfile();
+  profile.preferences.roleFamilies = ["Audit support"];
+
+  const result = assessStudioMatch(
+    profile,
+    studio({ applicationResearch: {
+      ...studio().applicationResearch,
+      disciplineScope: ["Developer Support"],
+    } }),
+    new Date("2026-11-01T12:00:00Z"),
+  );
+
+  assert.equal(result.relevance, "weak");
+});
+
 test("work experience responsibilities can support a relevant discipline assessment", () => {
   const profile = emptyProfile();
   profile.preferences.roleFamilies = ["Developer support"];
