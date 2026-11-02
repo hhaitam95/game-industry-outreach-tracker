@@ -29,7 +29,7 @@ A focused code review of the merged matching engine identified correctness issue
 - Work-history matching against responsibilities and achievements as well as the exact job title.
 - Directory-recorded country used for geographic preference matching; headquarters does not override it when the two differ (including the Playtouch Mauritius/France distinction).
 - Mixed work arrangements treated as uncertain rather than automatically penalized.
-- Personal-priority ordering as the default Matches view sort, without merging the relevance, route and priority labels.
+- Campaign priority is the default Matches sort: preferred geography first, then acceptable, unassigned/unknown, and lower-priority geography; overall personal priority and professional relevance break ties. A test covers a preferred-region studio ranking ahead of an acceptable-region studio even when the latter has a higher aggregate preference score.
 - Unit and browser regression coverage for the above.
 
 This is a targeted quality improvement, not a replacement matcher. CI is pending on the follow-up PR. It does not add language, visa, relocation or country-specific remote eligibility scoring; those require structured, sourced data and must remain unknown until verified. The candidate's actual saved profile is browser-local and has not been read from the repository; fixture and data-level validation is not a claim that the user's personal profile has been audited.
