@@ -38,7 +38,7 @@
  * @property {PriorityLevel} level
  * @property {string} label
  * @property {number} score
- * @property {\"preferred\" | \"acceptable\" | \"unassigned\" | \"low\"} regionTier
+ * @property {"preferred" | "acceptable" | "unassigned" | "low"} regionTier
  * @property {string[]} reasons
  *
  * @typedef {Object} StudioMatchAssessment
@@ -549,24 +549,24 @@ function assessPriority(profile, studio) {
   const reasons = [];
   let score = 0;
   let evaluated = 0;
-  /** @type {\"preferred\" | \"acceptable\" | \"unassigned\" | \"low\"} */
-  let regionTier = \"unassigned\";
+  /** @type {"preferred" | "acceptable" | "unassigned" | "low"} */
+  let regionTier = "unassigned";
   const preferredRegion = regionMatches(preferences.preferredRegions, studio);
   const acceptableRegion = regionMatches(preferences.acceptableRegions, studio);
   const lowPriorityRegion = regionMatches(preferences.lowPriorityRegions, studio);
 
   if (preferredRegion) {
-    regionTier = \"preferred\";
+    regionTier = "preferred";
     score += 2;
     evaluated += 1;
     reasons.push("Location matches your preferred region: " + preferredRegion + ".");
   } else if (acceptableRegion) {
-    regionTier = \"acceptable\";
+    regionTier = "acceptable";
     score += 1;
     evaluated += 1;
     reasons.push("Location matches an acceptable region: " + acceptableRegion + ".");
   } else if (lowPriorityRegion) {
-    regionTier = \"low\";
+    regionTier = "low";
     score -= 2;
     evaluated += 1;
     reasons.push("Location is in a region you marked lower priority: " + lowPriorityRegion + ".");
