@@ -1958,46 +1958,64 @@ def run_pipeline(
         # separate per-host pacing and therefore needs no extra 65-second sleep.
         # Saturation is source-specific: one capped feed never throttles another.
         pages_by_feed: dict[str, int] = {}
+        source_failures: dict[str, dict[str, Any]] = {}
         for _ in range(max_source_pages):
             available = [
                 feed for feed in FEEDS
                 if not state["feed_done"].get(feed["id"], False)
                 and source_feed_enabled(feed)
+                and source_feed_retry_due(feed, state)
                 and pages_by_feed.get(feed["id"], 0) < source_page_budget(feed, state, max_source_pages)
             ]
-            if not available:
+            if not available or time.monotonic() + 30 >= deadline:
                 break
             feed = FEEDS[state["feed_index"] % len(FEEDS)]
             if feed not in available:
                 feed = available[0]
-            cursor = state["feed_cursors"].get(feed["id"], "1" if feed["kind"] == "gamedevmap" else "")
+            cursor = state["feed_cursors"].get(
+                feed["id"], "1" if feed["kind"] == "gamedevmap" else "0" if feed["kind"] == "scottish_directory" else ""
+            )
             next_cursor = cursor
-            if feed["kind"] == "gamedevmap" and source_fetcher is fetch_source_batch:
-                # Use raw table-row counts: filtered non-studio rows must not truncate pagination.
-                rows, source_row_count = fetch_gamedevmap_page(cursor, batch_size)
-            elif feed["kind"] == "igdb_companies" and source_fetcher is fetch_source_batch:
-                rows, source_row_count, next_cursor = fetch_igdb_page(cursor, batch_size)
-            else:
-                rows = source_fetcher(feed["kind"], cursor, batch_size)
-                source_row_count = len(rows)
-                if feed["kind"] == "igdb_companies":
-                    numeric_ids = []
-                    for row in rows:
-                        try:
-                            numeric_ids.append(int(row.get("source_cursor", str(row.get("qid", "IGDB:0")).split(":")[-1])))
-                        except (TypeError, ValueError):
-                            continue
-                    if numeric_ids:
-                        next_cursor = str(max(numeric_ids))
             source_pages += 1
             pages_by_feed[feed["id"]] = pages_by_feed.get(feed["id"], 0) + 1
-            if feed["kind"] == "igdb_companies" and next_cursor != cursor:
-                # Advance using the raw IGDB company IDs even if candidate filtering removes rows.
+            try:
+                if feed["kind"] == "gamedevmap" and source_fetcher is fetch_source_batch:
+                    # Raw directory rows, not filtered candidates, determine end-of-feed.
+                    rows, source_row_count = fetch_gamedevmap_page(cursor, batch_size)
+                elif feed["kind"] == "igdb_companies" and source_fetcher is fetch_source_batch:
+                    rows, source_row_count, next_cursor = fetch_igdb_page(cursor, batch_size)
+                elif feed["kind"] == "scottish_directory" and source_fetcher is fetch_source_batch:
+                    rows, source_row_count, next_cursor = fetch_scottish_companies_page(cursor, batch_size)
+                else:
+                    rows = source_fetcher(feed["kind"], cursor, batch_size)
+                    source_row_count = len(rows)
+                    if feed["kind"] == "igdb_companies":
+                        numeric_ids = []
+                        for row in rows:
+                            try:
+                                numeric_ids.append(int(row.get("source_cursor", str(row.get("qid", "IGDB:0")).split(":")[-1])))
+                            except (TypeError, ValueError):
+                                continue
+                        if numeric_ids:
+                            next_cursor = str(max(numeric_ids))
+                record_source_success(state, feed["id"])
+            except Exception as exc:
+                source_failures[feed["id"]] = record_source_failure(state, feed["id"], exc)
+                # A failed page never advances a cursor, closes a feed or increments
+                # its empty-pass counter. Move on and let healthy feeds use the budget.
+                state["feed_index"] = (FEEDS.index(feed) + 1) % len(FEEDS)
+                if feed["kind"] in {"class", "developer_credit", "company_class", "industry"}:
+                    if time.monotonic() + WIKIDATA_MIN_REQUEST_INTERVAL_SECONDS < deadline:
+                        time.sleep(WIKIDATA_MIN_REQUEST_INTERVAL_SECONDS)
+                    else:
+                        break
+                continue
+            if feed["kind"] in {"igdb_companies", "scottish_directory"} and next_cursor != cursor:
                 state["feed_cursors"][feed["id"]] = next_cursor
             if rows:
                 if feed["kind"] == "gamedevmap":
                     state["feed_cursors"][feed["id"]] = str(int(cursor or "1") + batch_size)
-                elif feed["kind"] != "igdb_companies":
+                elif feed["kind"] not in {"igdb_companies", "scottish_directory"}:
                     state["feed_cursors"][feed["id"]] = max(row["qid"] for row in rows)
                 source_candidates += add_candidates(state, rows, source_id=feed["id"])
             if source_row_count < batch_size:
@@ -2036,6 +2054,7 @@ def run_pipeline(
         "empty_cycles": state["empty_cycles"],
         "saturated": state["saturated"],
         "source_cycles_completed": completed_sources,
+        "source_failures": source_failures,
         "source_status": {
             feed["id"]: {
                 "cycle": state["source_stats"][feed["id"]]["cycle"],
@@ -2047,6 +2066,11 @@ def run_pipeline(
                 "cursor": state["feed_cursors"].get(feed["id"], ""),
                 "enabled": source_feed_enabled(feed),
                 "disabled_reason": None if source_feed_enabled(feed) else "missing_repository_actions_secrets",
+                "consecutive_failures": state["source_stats"][feed["id"]].get("consecutive_failures", 0),
+                "last_error": state["source_stats"][feed["id"]].get("last_error"),
+                "last_failure_at": state["source_stats"][feed["id"]].get("last_failure_at"),
+                "last_success_at": state["source_stats"][feed["id"]].get("last_success_at"),
+                "next_retry_at": state["source_stats"][feed["id"]].get("next_retry_at"),
             }
             for feed in FEEDS
         },
