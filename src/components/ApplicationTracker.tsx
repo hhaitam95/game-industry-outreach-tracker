@@ -263,7 +263,7 @@ export default function ApplicationTracker({
                           className="text-button"
                           type="button"
                           aria-expanded={expandedRouteId === application.id}
-                          aria-label={"View route context for " + application.studioName}
+                          aria-label={(expandedRouteId === application.id ? "Hide route context for " : "View route context for ") + application.studioName}
                           onClick={() => setExpandedRouteId((current) => current === application.id ? null : application.id)}
                         >
                           {expandedRouteId === application.id ? "Hide route context" : "View route context"}
