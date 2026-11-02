@@ -318,6 +318,8 @@ async function main() {
       "Test Candidate",
       "A cancelled import must leave the previously persisted profile untouched.",
     );
+    await page.locator(".profile-actions").getByRole("button", { name: "Save profile" }).click();
+    await page.getByRole("button", { name: "Profile saved" }).waitFor();
 
     await page.evaluate(() => new Promise((resolve, reject) => {
       const openRequest = indexedDB.open("game-industry-outreach-private", 1);
