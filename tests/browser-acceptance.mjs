@@ -682,6 +682,18 @@ async function main() {
 
     let trackedRow = page.locator(".tracker-table tbody tr").filter({ has: page.locator(".status-select-label") }).filter({ hasText: "4A Games" });
     assert.equal(await trackedRow.count(), 1, "A saved studio should survive a full page reload.");
+
+    // The tracker preserves route type, check date, work-model caveats and the evidence source.
+    await trackedRow.getByRole("button", { name: "View route context for 4A Games" }).click();
+    const routeContext = page.locator("#tracker-route-4a-games");
+    await routeContext.waitFor();
+    await routeContext.getByText("Unsolicited application").waitFor();
+    await routeContext.getByText(/Malta \/ Kyiv studio network · remote eligibility not stated/).waitFor();
+    const evidenceLink = routeContext.getByRole("link", { name: "Open source evidence" });
+    assert.equal(await evidenceLink.getAttribute("href"), "https://www.4a-games.com.mt/careers");
+    assert.match(await routeContext.innerText(), /No discipline scope recorded on this route/);
+    await trackedRow.getByRole("button", { name: "Hide route context for 4A Games" }).click();
+
     let status = page.getByLabel("Status for 4A Games");
     assert.equal(await status.inputValue(), "saved");
 
