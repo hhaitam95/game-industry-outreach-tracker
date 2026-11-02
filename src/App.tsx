@@ -4,6 +4,7 @@ import StudioDirectory from "./components/StudioDirectory";
 import ApplicationTracker from "./components/ApplicationTracker";
 import CandidateProfile from "./components/CandidateProfile";
 import MatchingDashboard from "./components/MatchingDashboard";
+import { createApplicationTrackerBackup, readApplicationTrackerBackup } from "./tracker/application-backup.mjs";
 
 const STORAGE_KEY = "studio-outreach-tracker-v1";
 const THEME_STORAGE_KEY = "studio-outreach-theme-v1";
@@ -220,6 +221,27 @@ export default function App() {
     setApplications((previous) => previous.filter((application) => application.id !== id));
   }
 
+  function exportApplicationBackup() {
+    const backup = createApplicationTrackerBackup(applications);
+    const url = URL.createObjectURL(backup);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = "application-tracker-backup-" + new Date().toISOString().slice(0, 10) + ".json";
+    anchor.click();
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  async function importApplicationBackup(file: File): Promise<number | null> {
+    const imported = await readApplicationTrackerBackup(file);
+    const confirmed = window.confirm(
+      "Replace the " + applications.length + " application records currently in this browser with " +
+      imported.length + " records from this backup? This cannot be undone.",
+    );
+    if (!confirmed) return null;
+    setApplications(imported);
+    return imported.length;
+  }
+
   function openTracker(tab = "saved") {
     setTrackerFocusStudio(null);
     setTrackerInitialTab(tab);
@@ -312,7 +334,12 @@ export default function App() {
           />
         ) : null}
         {page === "matches" ? (
-          <MatchingDashboard onOpenProfile={() => setPage("profile")} />
+          <MatchingDashboard
+            onOpenProfile={() => setPage("profile")}
+            onSaveStudio={(studio, location) => trackStudio(studio, "saved", location)}
+            onOpenTrackedStudio={openTrackedStudio}
+            trackedStudioNames={applications.map((application) => application.studioName)}
+          />
         ) : null}
         {page === "applications" ? (
           <ApplicationTracker
@@ -323,6 +350,8 @@ export default function App() {
             onUpdateNote={updateApplicationNote}
             onRemove={removeApplication}
             onOpenDirectory={() => setPage("studios")}
+            onExportBackup={exportApplicationBackup}
+            onImportBackup={importApplicationBackup}
           />
         ) : null}
         <div className="profile-route" style={{ display: page === "profile" ? "block" : "none" }}>
