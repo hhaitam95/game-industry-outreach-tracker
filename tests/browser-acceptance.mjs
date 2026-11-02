@@ -112,7 +112,6 @@ async function main() {
       });
     });
     await page.addInitScript(() => {
-      if (!localStorage.getItem("studio-outreach-theme-v1")) {    await page.addInitScript(() => {
       if (!localStorage.getItem("studio-outreach-theme-v1")) {
         localStorage.setItem("studio-outreach-theme-v1", "light");
       }
