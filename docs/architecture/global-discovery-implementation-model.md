@@ -159,11 +159,19 @@ Keep candidate discovery separate from published route verification. Use explici
 - duplicate
 - excluded
 
-Use the current private discovery-state implementation as the source for actual state-field names; this list describes the required meanings, not a mandate to break existing schemas.
+Use the current discovery-state implementation as the source for actual state-field names; this list describes the required meanings, not a mandate to break existing schemas.
 
 Resolve identity using official domains and corroborating company identity, not company name alone. Preserve same-name entities on different official domains until verified as the same organisation. Track aliases, former names, parent companies, subsidiaries, studio branches and separate recruitment routes.
 
 A source row for an office must not automatically become a new studio. Conversely, do not merge separately branded development studios merely because they share a parent company. Keep source provenance attached to candidates so that later handovers can explain where each entity came from.
+
+### Discovery checkpoint visibility and privacy boundary
+
+The current checkpoint is stored on the `discovery-state` branch of this repository. **That branch is publicly visible because the website repository is public; it is not private storage.** Treat every commit on that branch as public.
+
+The checkpoint may contain public-source employer names, official website domains, source identifiers and URLs, candidate lifecycle statuses, verification reason codes, pagination cursors, retry dates and aggregate operational metadata. It must never contain candidate personal data, CVs, motivation drafts, recruiter correspondence, personal application history, private profile assessments, credentials, API tokens or secrets. IGDB credentials remain GitHub Actions secrets and are never written into checkpoint data.
+
+The user's Candidate Profile and application workspace remain browser-local and separate from this public discovery checkpoint. If future discovery work needs to store anything private, it requires a separate private repository or a properly protected storage service; renaming a branch does not create a privacy boundary.
 
 ## 7. Coverage, saturation and progress reporting
 
@@ -193,7 +201,7 @@ Keep source-level checkpoints and candidate progress resumable. Do not overwrite
 
 ### Implemented source-specific cadence (ADR-070)
 
-The runtime feed inventory is `config/discovery-sources.json`. The discovery script loads this manifest and validates each source ID, adapter kind, refresh policy and saturation settings. The private state schema is v2 and migrates schema-v1 cursors/candidates additively.
+The runtime feed inventory is `config/discovery-sources.json`. The discovery script loads this manifest and validates each source ID, adapter kind, refresh policy and saturation settings. The discovery-state schema is v2 and migrates schema-v1 cursors/candidates additively.
 
 The four Wikidata feeds, GameDevMap, IGDB Companies and the Scottish Games Industry dataset each own a cursor, cycle, new-candidate count, verified-route count, complete-empty-pass count, saturation flag and last-pass outcome. A pass is empty for saturation purposes only when it has discovered zero new unique candidate entities (and no unresolved candidate work); route outcomes are measured separately. Five such complete empty passes throttle only that feed to four source pages per hourly run; discovering candidates resets that feed's empty-pass counter even when those candidates do not have speculative application routes. Unsaturated feeds retain the remaining global budget. The hourly run budget is 20 source pages, with 65-second spacing between Wikidata requests, an IGDB request interval below four requests per second and a 25-minute pipeline ceiling. A verified route resets only its originating feed. Due candidate work keeps that feed's pass open; future retries/manual-review candidates mark the pass incomplete and cannot increment exhaustion counters. A source fetch failure is recorded against that feed, applies a bounded 5–120 minute backoff, preserves its cursor and empty-pass counter, and does not stop healthy feeds from using the remainder of the run. Failed or incomplete fetches never count as completed empty passes.
 
@@ -235,7 +243,7 @@ The Scottish feed reads the upstream repository's Git tree and sorted `data/comp
 The following is an ordered engineering plan, not a priority ranking of employers or regions.
 
 1. **Preserve the model and source registry.** Keep this document and the project handoff current. Maintain `config/discovery-sources.json` as the machine-readable inventory for integrated adapters, source coverage, access/policy notes, pagination, refresh policy and per-source saturation settings. The current inventory includes four recurring Wikidata feeds, a recurring GameDevMap full-catalogue feed, IGDB Companies and the Scottish Games Industry open JSON dataset.
-2. **Continue the discovery-quality audit.** The GameDevMap/Wikidata adapter cadence, private checkpoint migration and source-specific saturation are implemented. Continue auditing candidate identity, adult/vice false positives, source failure handling and company-level classification against this model; source errors are now isolated with backoff, but multilingual coverage and evidence extraction still need ongoing tests. Keyword patterns are not a complete company-level classification system.
+2. **Continue the discovery-quality audit.** The GameDevMap/Wikidata adapter cadence, checkpoint schema migration and source-specific saturation are implemented. Continue auditing candidate identity, adult/vice false positives, source failure handling and company-level classification against this model; source errors are now isolated with backoff, but multilingual coverage and evidence extraction still need ongoing tests. Keyword patterns are not a complete company-level classification system.
 3. **Add source adapters only after access review.** The IGDB Company API is already integrated and deployed; preserve its existing repository-secret handling. The Scottish Games Industry feed is the seventh integrated source. Evaluate GameCompanies.com, Games Jobs Index, Steam and permitted regional datasets independently. Do not automate GameCompanies.com without written permission; retain Games Jobs Index as a manual lead source until its automation terms are established. Preserve provenance for every source.
 4. **Review MobyGames access separately.** Use only authorized API access, subject to its current API and content terms. Do not implement page scraping.
 5. **Strengthen entity classification and deduplication.** Distinguish original developers, developer-publishers, subsidiaries, co-development/service providers, publishers-only entities and non-studio organisations.
@@ -510,7 +518,7 @@ PR #74 merged batch 14: main now contains **322 route/profile pairs**, 317 activ
 - The manual-only source register remains at **22**. It is not loaded by runtime ingestion; its entries are research leads, not verified application routes or approved scraping targets.
 - The integrated feeds remain GameDevMap (one-time backfill) and three recurring Wikidata feeds. Source-specific cursors and saturation are implemented. The hourly GitHub Actions workflow remains the maintenance mechanism; this batch adds no scraper, adapter, secret, permission or schedule.
 - Initial global discovery is considered complete at this practical, evidence-backed baseline once the final proposal passes exact-head CI, is merged and deployed. This is not an exhaustive census of all game studios worldwide.
-- Permission-gated sources (including IGDB, Steam, GameCompanies.com, Games Jobs Index, MobyGames and the community dataset) stay blocked/manual until their respective access and reuse conditions are satisfied. The private candidate-review backlog does not block Phase B.
+- Permission-gated sources (including Steam, GameCompanies.com, Games Jobs Index, MobyGames and unlicensed community datasets) stay blocked/manual until their respective access and reuse conditions are satisfied. The unpublished candidate-review backlog does not block Phase B.
 - After the final proposal is merged and deployed, primary development focus moves to **Phase B — UI/UX improvements** for Studio Directory and My applications. Newly verified studios and route changes continue as ordinary maintenance and do not reopen Phase A.
 
 ## 10. Handover protocol
@@ -542,6 +550,6 @@ At the start of any new work session or handover:
 
 ### 2026-11-02 — Source-health monitoring
 
-- Added a compact, names-free source status snapshot at `state/discovery/studio-source-status.json` on the private `discovery-state` branch after successful workflow runs.
+- Added a compact source status snapshot at `state/discovery/studio-source-status.json` on the publicly visible `discovery-state` branch after successful workflow runs. It stores aggregate counts and reason codes, not personal applicant data.
 - A feed is flagged as having no new candidate data only after five complete empty passes and a latest completed pass with zero new candidate entities and no incomplete candidates. A zero count of published routes alone is not source exhaustion.
 - Enabled a daily Europe/Budapest monitoring task to report newly exhausted feeds, persistent operational blockers and recoveries. It does not alter the hourly workflow or add external discovery providers.
