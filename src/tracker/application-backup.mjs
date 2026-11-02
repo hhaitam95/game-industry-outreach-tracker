@@ -44,16 +44,16 @@ function optionalString(value, label, maxLength = 2000) {
   return value;
 }
 
-/**
- * @param {unknown} value
- * @param {string} label
- * @returns {string}
- */
 /** @param {unknown} value @returns {value is import("../components/studio.types").TrackerStatus} */
 function isTrackerStatus(value) {
   return typeof value === "string" && VALID_STATUSES.has(value);
 }
 
+/**
+ * @param {unknown} value
+ * @param {string} label
+ * @returns {string}
+ */
 function validHttpUrl(value, label) {
   const candidate = requiredString(value, label, 2000);
   try {
@@ -85,8 +85,8 @@ function validateApplication(value, index) {
   const appliedAt = value.appliedAt === null || value.appliedAt === undefined
     ? null
     : requiredString(value.appliedAt, prefix + " applied date", 80);
-  const note = typeof value.note === "string" ? value.note : "";
-  if (note.length > MAX_NOTE_LENGTH) {
+  const note = value.note === undefined ? "" : value.note;
+  if (typeof note !== "string" || note.length > MAX_NOTE_LENGTH) {
     throw new Error("The note for " + prefix + " exceeds 2,000 characters.");
   }
 
