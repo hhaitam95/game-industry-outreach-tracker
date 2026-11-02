@@ -103,6 +103,16 @@ const PROFILE_PREFERENCE_LISTS = [
   "acceptableRegions", "lowPriorityRegions",
 ];
 
+function assertKnownProfileRecord(record: Record<string, unknown>): asserts record is Record<string, unknown> & ProfileRecord {
+  if (
+    Object.keys(record).some((key) => !["id", "profile"].includes(key)) ||
+    record.id !== PRIMARY_RECORD_KEY ||
+    !Object.prototype.hasOwnProperty.call(record, "profile")
+  ) {
+    throw new Error("Saved Candidate Profile contains an invalid storage record. The original data was not modified.");
+  }
+}
+
 /**
  * Reject malformed or oversized data before normalization can filter, default or truncate it.
  * Missing fields remain compatible with earlier schema-v1 records and receive normal defaults.
@@ -200,10 +210,14 @@ function assertCandidateProfileIntegrity(value: unknown, context: string): void 
       if (!Object.prototype.hasOwnProperty.call(value.materials, key)) continue;
       const document = value.materials[key];
       if (document === null) continue;
-      if (!documentValue(document) || !isRecord(document)) fail(`materials.${key}`);
-      if (document.name.length > 255 || document.mimeType.length > 150) {
-        fail(`materials.${key}`);
-      }
+      if (
+        !isRecord(document) ||
+        !documentValue(document) ||
+        typeof document.name !== "string" ||
+        typeof document.mimeType !== "string" ||
+        document.name.length > 255 ||
+        document.mimeType.length > 150
+      ) fail(`materials.${key}`);
       assertKnownKeys(
         document,
         ["name", "mimeType", "size", "lastModified", "dataBase64"],
@@ -375,8 +389,23 @@ export async function loadCandidateProfile(): Promise<CandidateProfile> {
     const transaction = database.transaction(STORE_NAME, "readonly");
     const request = transaction.objectStore(STORE_NAME).get(PRIMARY_RECORD_KEY);
     request.onsuccess = () => {
-      const record = request.result as ProfileRecord | undefined;
-      resolve(record ? normalizeCandidateProfile(record.profile) : createEmptyProfile());
+      const stored = request.result as unknown;
+      if (stored === undefined) {
+        resolve(createEmptyProfile());
+        return;
+      }
+      try {
+        if (!isRecord(stored)) {
+          throw new Error("Saved Candidate Profile contains an invalid storage record. The original data was not modified.");
+        }
+        assertKnownProfileRecord(stored);
+        assertCandidateProfileIntegrity(stored.profile, "Saved Candidate Profile");
+        resolve(normalizeCandidateProfile(stored.profile));
+      } catch (loadError) {
+        reject(loadError instanceof Error
+          ? loadError
+          : new Error("Saved Candidate Profile contains invalid or unsupported data. The original data was not modified."));
+      }
     };
     request.onerror = () => reject(request.error || new Error("Could not read the saved profile."));
     transaction.onerror = () => reject(transaction.error || new Error("Could not read the saved profile."));
@@ -385,10 +414,12 @@ export async function loadCandidateProfile(): Promise<CandidateProfile> {
 }
 
 export async function saveCandidateProfile(profile: CandidateProfile): Promise<void> {
+  assertCandidateProfileIntegrity(profile, "Candidate Profile");
+  const normalized = normalizeCandidateProfile(profile);
   const database = await openDatabase();
   const record: ProfileRecord = {
     id: PRIMARY_RECORD_KEY,
-    profile: normalizeCandidateProfile(profile),
+    profile: normalized,
   };
   await new Promise<void>((resolve, reject) => {
     const transaction = database.transaction(STORE_NAME, "readwrite");
@@ -400,6 +431,7 @@ export async function saveCandidateProfile(profile: CandidateProfile): Promise<v
 }
 
 export function createProfileBackup(profile: CandidateProfile): Blob {
+  assertCandidateProfileIntegrity(profile, "Candidate Profile");
   const backup = {
     format: PROFILE_BACKUP_FORMAT,
     version: PROFILE_SCHEMA_VERSION,
@@ -421,12 +453,16 @@ export async function readProfileBackup(file: File): Promise<CandidateProfile> {
   }
   if (
     !isRecord(backup) ||
+    Object.keys(backup).some((key) => !["format", "version", "exportedAt", "profile"].includes(key)) ||
     backup.format !== PROFILE_BACKUP_FORMAT ||
     backup.version !== PROFILE_SCHEMA_VERSION ||
+    typeof backup.exportedAt !== "string" ||
+    !Number.isFinite(Date.parse(backup.exportedAt)) ||
     !isRecord(backup.profile)
   ) {
     throw new Error("This is not a supported Candidate Profile backup.");
   }
+  assertCandidateProfileIntegrity(backup.profile, "Candidate Profile backup");
   const importedMaterials = isRecord(backup.profile.materials) ? backup.profile.materials : {};
   const declaredDocuments = [
     importedMaterials.masterResume,
