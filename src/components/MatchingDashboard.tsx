@@ -441,7 +441,7 @@ export default function MatchingDashboard({
           <span>Sort by</span>
           <select id="matching-sort" className="form-select" value={sortMode} onChange={(event) => setSortMode(event.target.value as SortMode)}>
             <option value="relevance">Professional relevance</option>
-            <option value="priority">Personal priority</option>
+            <option value="priority">Campaign priority (region first)</option>
             <option value="name">Studio name</option>
           </select>
         </label>
@@ -449,7 +449,7 @@ export default function MatchingDashboard({
 
       <div className="matching-results-meta">
         <strong>{filtered.length} of {assessments.length} active routes</strong>
-        <span>Sorted by {sortMode === "name" ? "studio name" : sortMode === "priority" ? "personal priority" : "professional relevance"}</span>
+        <span>Sorted by {sortMode === "name" ? "studio name" : sortMode === "priority" ? "campaign priority (region first)" : "professional relevance"}</span>
       </div>
 
       <div className="matching-results">
