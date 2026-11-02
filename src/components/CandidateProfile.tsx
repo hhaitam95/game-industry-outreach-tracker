@@ -99,13 +99,17 @@ function downloadDocument(document: ProfileDocument): void {
   window.setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-function downloadBackup(profile: CandidateProfile): void {
-  const url = URL.createObjectURL(createProfileBackup(profile));
-  const anchor = window.document.createElement("a");
-  anchor.href = url;
-  anchor.download = "candidate-profile-backup-" + new Date().toISOString().slice(0, 10) + ".json";
-  anchor.click();
-  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+function downloadBackup(profile: CandidateProfile, onError: (message: string) => void): void {
+  try {
+    const url = URL.createObjectURL(createProfileBackup(profile));
+    const anchor = window.document.createElement("a");
+    anchor.href = url;
+    anchor.download = "candidate-profile-backup-" + new Date().toISOString().slice(0, 10) + ".json";
+    anchor.click();
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  } catch (backupError) {
+    onError(backupError instanceof Error ? backupError.message : "Could not export this profile backup.");
+  }
 }
 
 function Field({
@@ -418,7 +422,7 @@ export default function CandidateProfile() {
               onChange={handleBackupImport}
             />
           </label>
-          <button className="btn btn-outline-secondary btn-sm" type="button" onClick={() => downloadBackup(profile)}>
+          <button className="btn btn-outline-secondary btn-sm" type="button" onClick={() => downloadBackup(profile, setError)}>
             Export backup
           </button>
           <button className="btn btn-primary btn-sm" type="button" disabled={!storageReady || !dirty || saving} onClick={handleSave}>
