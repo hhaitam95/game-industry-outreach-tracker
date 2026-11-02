@@ -171,6 +171,7 @@ A source row for an office must not automatically become a new studio. Conversel
 - Added Japanese career-registration language for routes that explicitly invite applicants who do not wish to select a job type or cannot find a matching advertised role. Career context and an employer-linked submission destination remain mandatory; this does not treat generic recruitment pages as open applications.
 - Added unit coverage for ATS host recognition, Japanese route-language detection, employer-linked destination selection and the complete two-gate verification flow.
 - These additions improve route discovery only; they do not change the public inclusion standard or candidate ranking.
+- The bounded verifier now follows relevant career subpages linked from the first career page, up to the existing seven-page maximum. If a relevant linked page is inaccessible and no route can be established, the candidate stays in manual review rather than being classified as having no route.
 
 ### Discovery checkpoint visibility and privacy boundary
 
