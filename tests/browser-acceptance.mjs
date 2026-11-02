@@ -263,6 +263,40 @@ async function main() {
     assert.equal(profileBackup.profile.personal.fullName, "Test Candidate");
     assert.equal(profileBackup.profile.materials.masterResume.dataBase64, savedCandidateProfile.materials.masterResume.dataBase64);
 
+    // Backups with invalid evidence values must be rejected as a whole, without replacing
+    // the valid profile already stored in IndexedDB.
+    const invalidProfileBackup = JSON.parse(JSON.stringify(profileBackup));
+    invalidProfileBackup.profile.skills[0].evidence = "fabricated_evidence_level";
+    const invalidProfileBackupBuffer = Buffer.from(JSON.stringify(invalidProfileBackup));
+    const invalidBackupInput = page.locator(
+      '.profile-actions input[type="file"][accept=".json,application/json"]',
+    );
+    await invalidBackupInput.setInputFiles({
+      name: "invalid-candidate-profile-backup.json",
+      mimeType: "application/json",
+      buffer: invalidProfileBackupBuffer,
+    });
+    await page.getByRole("alert").getByText(
+      /Candidate Profile backup contains invalid or unsupported data at skills\[0\]\.evidence/,
+    ).waitFor();
+    assert.equal(
+      await page.getByLabel("Full name").inputValue(),
+      "Test Candidate",
+      "A rejected backup must not replace the currently loaded candidate profile.",
+    );
+    const profileAfterRejectedBackup = await page.evaluate(() => new Promise((resolve, reject) => {
+      const openRequest = indexedDB.open("game-industry-outreach-private", 1);
+      openRequest.onerror = () => reject(openRequest.error);
+      openRequest.onsuccess = () => {
+        const transaction = openRequest.result.transaction("candidate-profile", "readonly");
+        const request = transaction.objectStore("candidate-profile").get("primary");
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => resolve(request.result?.profile);
+      };
+    }));
+    assert.equal(profileAfterRejectedBackup.personal.fullName, "Test Candidate");
+    assert.equal(profileAfterRejectedBackup.skills[0].evidence, "demonstrated");
+
     await page.evaluate(() => new Promise((resolve, reject) => {
       const openRequest = indexedDB.open("game-industry-outreach-private", 1);
       openRequest.onerror = () => reject(openRequest.error);
@@ -311,6 +345,82 @@ async function main() {
       savedCandidateProfile.materials.masterResume.dataBase64,
       "Backup import should restore the exact original document bytes.",
     );
+
+    // Corrupt one stored profile field directly. Loading must fail visibly without normalizing
+    // the record to an empty/default profile or overwriting the original IndexedDB value.
+    await page.evaluate(() => new Promise((resolve, reject) => {
+      const openRequest = indexedDB.open("game-industry-outreach-private", 1);
+      openRequest.onerror = () => reject(openRequest.error);
+      openRequest.onsuccess = () => {
+        const transaction = openRequest.result.transaction("candidate-profile", "readwrite");
+        const store = transaction.objectStore("candidate-profile");
+        const getRequest = store.get("primary");
+        getRequest.onerror = () => reject(getRequest.error);
+        getRequest.onsuccess = () => {
+          const record = getRequest.result;
+          record.profile.skills[0].evidence = { corrupted: true };
+          store.put(record);
+        };
+        transaction.oncomplete = resolve;
+        transaction.onerror = () => reject(transaction.error);
+      };
+    }));
+    await page.reload({ waitUntil: "networkidle" });
+    await page.getByRole("button", { name: "My profile" }).click();
+    await page.getByRole("heading", { name: "My profile" }).waitFor();
+    await page.getByRole("alert").getByText(
+      /Saved Candidate Profile contains invalid or unsupported data at skills\[0\]\.evidence/,
+    ).waitFor();
+    await page.getByLabel("Full name").fill("This edit must not overwrite corrupt storage");
+    const invalidStorageSave = page.locator(".profile-actions").getByRole("button", { name: "Save profile" });
+    assert.equal(await invalidStorageSave.isDisabled(), true);
+    assert.equal(
+      await page.locator(".profile-actions").getByRole("button", { name: "Export backup" }).isDisabled(),
+      true,
+      "An invalid or unread profile must not produce a misleading blank backup.",
+    );
+    const preservedCorruptProfile = await page.evaluate(() => new Promise((resolve, reject) => {
+      const openRequest = indexedDB.open("game-industry-outreach-private", 1);
+      openRequest.onerror = () => reject(openRequest.error);
+      openRequest.onsuccess = () => {
+        const transaction = openRequest.result.transaction("candidate-profile", "readonly");
+        const request = transaction.objectStore("candidate-profile").get("primary");
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => resolve(request.result?.profile);
+      };
+    }));
+    assert.deepEqual(
+      preservedCorruptProfile.skills[0].evidence,
+      { corrupted: true },
+      "The invalid stored record must remain untouched until explicit backup recovery.",
+    );
+    const repairedProfileInput = page.locator(
+      '.profile-actions input[type="file"][accept=".json,application/json"]',
+    );
+    const repairedProfileDialog = await performWithDialog(
+      page,
+      () => repairedProfileInput.setInputFiles(backupPath),
+      true,
+    );
+    assert.equal(repairedProfileDialog.type, "confirm");
+    await page.waitForFunction(() => {
+      const label = Array.from(document.querySelectorAll("label"))
+        .find((item) => item.textContent?.trim() === "Full name");
+      return label?.querySelector("input")?.value === "Test Candidate";
+    });
+    assert.equal(await page.getByText("candidate-resume.pdf").count(), 1);
+    const repairedProfile = await page.evaluate(() => new Promise((resolve, reject) => {
+      const openRequest = indexedDB.open("game-industry-outreach-private", 1);
+      openRequest.onerror = () => reject(openRequest.error);
+      openRequest.onsuccess = () => {
+        const transaction = openRequest.result.transaction("candidate-profile", "readonly");
+        const request = transaction.objectStore("candidate-profile").get("primary");
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => resolve(request.result?.profile);
+      };
+    }));
+    assert.equal(repairedProfile.skills[0].evidence, "demonstrated");
+    assert.equal(repairedProfile.personal.fullName, "Test Candidate");
 
     // A transient IndexedDB open failure must not enable overwriting a profile that was not loaded.
     // The failed open must also release its cached promise so a validated backup can recover storage.
