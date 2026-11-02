@@ -4,6 +4,21 @@
 **Product scope:** Global directory of legitimate video-game development organisations with verified speculative-application routes, plus a private browser-local Candidate Profile and application tracker.  
 **Authoritative discovery rules:** [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md).
 
+## Application campaign strategy — 2026-11-02
+
+**Documented and agreed; strategy only, not implemented as a new workflow.** Added [Studio Targeting and Application Campaign Strategy](docs/architecture/studio-targeting-and-application-campaign.md) as the durable handover for the intended application approach.
+
+- Keep discovery broad, worldwide and non-personalized; do not cap the directory or use candidate preferences to suppress studios.
+- Keep the existing strict public-directory gates: verified direct game-development activity plus an explicit employer-backed speculative/general application route.
+- Use private matching to assess professional relevance, application accessibility/readiness and personal priority separately. Do not add a fabricated composite score or hiring probability.
+- Default to one approved master resume/CV and one approved core motivation letter/message. Flag genuine employer-specific exceptions for manual review rather than tailoring every application.
+- Prefer a first campaign wave in Europe and nearby European markets, then English-language international markets (including the UK, Canada and US), then broader global options. These are private priority tiers; work location, language, applicant eligibility, work authorization and relocation must be verified independently.
+- Aim for a substantial, coordinated batch (potentially 200+ where targets are genuinely ready), without treating that number as a quota or promising a response. Track submitted applications and outcomes, not just discovered studios.
+- A positive reply is not a reason to abandon the rest of the pipeline. Keep other applications active until a written offer and the material transition requirements are confirmed.
+- No portal automation, autofill, automated uploads, email sending or automatic submission is authorized. Final application review and submission remain user-controlled.
+
+The campaign strategy does not change the public discovery schema, source permissions, studio qualification gates or current implementation status. Matching is already described as a C2 feature-branch foundation; the Application Queue, deeper requirements intelligence, campaign views and funnel reporting remain future work unless separately verified as merged.
+
 ## Global studio discovery source expansion — PR #100
 
 **Merged and deployed.** PR [#100](https://github.com/hhaitam95/game-industry-outreach-tracker/pull/100) merged on 2026-11-02 as commit `b3183f5fae5f3f3793dcefc3241f957267a56a79`. GitHub Pages deployment [run 41416182699](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41416182699) completed successfully. The merged-main build and browser acceptance [run 41416182698](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41416182698) also passed. The first post-merge hourly discovery run [41416182708](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41416182708) has started; its first source-health checkpoint is pending completion of that batch.
