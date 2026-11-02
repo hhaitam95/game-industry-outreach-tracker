@@ -1456,6 +1456,7 @@ def empty_state() -> dict[str, Any]:
         "bootstrap_started": False,
         "candidates": {},
         "route_checks": {},
+        "identity_review_queue": [],
         "route_check_index": 0,
         "source_stats": {
             feed["id"]: {
@@ -1479,6 +1480,9 @@ def load_state(path: Path = STATE_PATH) -> dict[str, Any]:
     for field in ("feed_cursors", "feed_done", "candidates", "route_checks", "stats"):
         if not isinstance(state.get(field), dict):
             raise ValueError("Discovery state field is invalid: " + field)
+    state.setdefault("identity_review_queue", [])
+    if not isinstance(state["identity_review_queue"], list):
+        raise ValueError("Discovery state field is invalid: identity_review_queue")
 
     # Migrate v1 additively, preserving every cursor, candidate, route check and statistic.
     # Older Wikidata candidates did not keep query-feed provenance; never guess it.
@@ -1582,6 +1586,38 @@ def add_candidates(
                 seen = existing.setdefault("sources_seen", [existing.get("source_id", "legacy_unattributed")])
                 if candidate_source_id not in seen:
                     seen.append(candidate_source_id)
+                existing_name = name_key(str(existing.get("name", "")))
+                incoming_name = name_key(str(row.get("name", "")))
+                if incoming_name and existing_name and incoming_name != existing_name:
+                    # A shared registrable domain can represent distinct studios,
+                    # subsidiaries or trading names. Preserve the observation for
+                    # manual identity review instead of silently dropping it.
+                    review_queue = state.setdefault("identity_review_queue", [])
+                    already_seen = any(
+                        item.get("qid") == qid and item.get("source_id") == candidate_source_id
+                        for item in review_queue
+                        if isinstance(item, dict)
+                    )
+                    if not already_seen:
+                        review_queue.append({
+                            "qid": qid,
+                            "name": str(row.get("name", "")).strip(),
+                            "website": website,
+                            "source_id": candidate_source_id,
+                            "source_name": str(row.get("source_name", "")),
+                            "entity_url": str(row.get("entity_url", "")),
+                            "related_candidate_qid": str(existing.get("qid", "")),
+                            "reason": "same_official_domain_different_entity_name",
+                            "status": "needs_review",
+                            "discovered_at": utc_now().isoformat(),
+                        })
+                        source_metrics = state.get("source_stats", {}).get(candidate_source_id)
+                        if source_metrics is not None:
+                            source_metrics["cycle_candidate_entities"] = int(
+                                source_metrics.get("cycle_candidate_entities", 0)
+                            ) + 1
+                        state["stats"]["candidates_seen"] += 1
+                        added += 1
             continue
         candidate_source_id = str(row.get("source_id") or source_id or "legacy_unattributed")
         source_metrics = state.get("source_stats", {}).get(candidate_source_id, {})
@@ -2201,6 +2237,7 @@ def run_pipeline(
         "studio_count": len(studios),
         "candidate_queue": sum(1 for item in state["candidates"].values() if item.get("status") in {"queued", "retry"}),
         "candidate_pool_size": len(state["candidates"]),
+        "identity_review_queue_size": len(state.get("identity_review_queue", [])),
         "gamedevmap_complete": state["feed_done"].get("gamedevmap", False),
         "gamedevmap_next_start": state["feed_cursors"].get("gamedevmap", "1"),
         "stats": state["stats"],
