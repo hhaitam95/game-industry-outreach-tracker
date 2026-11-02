@@ -161,7 +161,7 @@ Keep candidate discovery separate from published route verification. Use explici
 
 Use the current discovery-state implementation as the source for actual state-field names; this list describes the required meanings, not a mandate to break existing schemas.
 
-Resolve identity using official domains and corroborating company identity, not company name alone. Preserve same-name entities on different official domains until verified as the same organisation. Track aliases, former names, parent companies, subsidiaries, studio branches and separate recruitment routes.
+Resolve identity using official domains and corroborating company identity, not company name alone. Preserve same-name entities on different official domains until verified as the same organisation. When different source names share an official domain, retain an identity-review observation rather than silently discarding the second entity; do not auto-publish a domain collision. Track aliases, former names, parent companies, subsidiaries, studio branches and separate recruitment routes.
 
 A source row for an office must not automatically become a new studio. Conversely, do not merge separately branded development studios merely because they share a parent company. Keep source provenance attached to candidates so that later handovers can explain where each entity came from.
 
