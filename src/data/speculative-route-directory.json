@@ -7821,7 +7821,7 @@
     "applicationUrl": "https://thought-pennies.careers-page.com/open-application",
     "evidenceUrl": "https://www.thoughtpennies.com/",
     "notes": "The official Thought Pennies website links directly to its “Join Us” page on the employer's careers-page.com subdomain. That linked page explicitly invites candidates to submit a resume even when no suitable position is listed and provides a dedicated Open application route. The studio describes itself as a fully remote, story-first RPG developer focused on emotional storytelling and technically ambitious role-playing games. The official site identifies the legal entity as Thought Pennies, Inc. but does not state a registered country or headquarters city. Remote work is stated; applicant-country and contracting eligibility are not.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-02",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -7845,7 +7845,7 @@
       ],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-01-31"
     }
   },
   {
@@ -7855,7 +7855,7 @@
     "applicationUrl": "https://join.com/companies/thqnordiccom/spontaneous-application",
     "evidenceUrl": "https://thqnordic.com/company/careers",
     "notes": "Company-managed JOIN page offers a Spontaneous Application for future roles at THQ Nordic GmbH. This route is for the Vienna headquarters; THQ Nordic states that its subsidiary development studios manage their own recruitment separately.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-02",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [
@@ -7869,7 +7869,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-01-31"
     }
   },
   {
@@ -7879,7 +7879,7 @@
     "applicationUrl": "https://thunderlotusgames.com/careers/",
     "evidenceUrl": "https://thunderlotusgames.com/jobs/",
     "notes": "Official studio-controlled page explicitly invites spontaneous applications. Evidence: spontaneous applications. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-02",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [
@@ -7892,7 +7892,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-01-31"
     }
   },
   {
@@ -7902,7 +7902,7 @@
     "applicationUrl": "https://www.traega.com/careers",
     "evidenceUrl": "https://www.traega.com/careers",
     "notes": "Official studio-controlled page explicitly invites general applications. Evidence: general application. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-02",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -7914,7 +7914,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-01-31"
     }
   },
   {
@@ -7924,7 +7924,7 @@
     "applicationUrl": "https://www.triangularpixels.net/jobs",
     "evidenceUrl": "https://www.triangularpixels.net/jobs",
     "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: speculative applications. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-02",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
@@ -7936,7 +7936,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-01-31"
     }
   },
   {
@@ -7946,7 +7946,7 @@
     "applicationUrl": "https://job-boards.greenhouse.io/tripwireinteractive/jobs/8282003002",
     "evidenceUrl": "https://tripwireinteractive.com/careers",
     "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-02",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -7958,7 +7958,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-01-31"
     }
   },
   {
@@ -8008,7 +8008,7 @@
     "applicationUrl": "https://twinharbour.teamtailor.com/jobs/6958619-unsolicited-application-twin-harbour-interactive/applications/new",
     "evidenceUrl": "https://twinharbour.teamtailor.com/jobs/6958619-unsolicited-application-twin-harbour-interactive/applications/new",
     "notes": "Official Teamtailor Unsolicited Application supports future opportunities and asks candidates to select Hamburg (Germany) or San Ġiljan (Malta), provide current residence and confirm work-permit status for Germany or Malta. Hybrid; this is not a worldwide-remote route.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-02",
     "applicationResearch": {
       "routeType": "unsolicited",
       "submissionMethods": [
@@ -8023,7 +8023,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "studio_controlled_ats",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-01-31"
     }
   },
   {
