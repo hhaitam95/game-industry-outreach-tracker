@@ -4,13 +4,17 @@
 
 ## Product direction
 
-Game Industry Outreach Tracker has three connected layers:
+Game Industry Outreach Tracker has five connected systems:
 
-1. Global directory of game-development organisations with verified speculative/open application routes.
-2. Private candidate profile and matching system.
-3. Private application queue and workspace for requirements, preparation and progress.
+1. **Studio Discovery** — global, evidence-backed discovery of studios with verified speculative/open application routes.
+2. **Candidate Profile** — private source of truth for candidate facts, skill evidence, preferences and approved materials.
+3. **Matching Engine** — private and explainable assessment of studio data against the candidate profile.
+4. **Application Preparation** — analysis of the selected employer's actual application route/form and user-reviewed preparation of answers and materials.
+5. **Application Tracker** — one private record for selected/preparing targets, user-confirmed submissions and subsequent outcomes.
 
-The discovery catalogue remains worldwide and impartial. Candidate preferences are a private ranking/assessment overlay and must never remove or suppress studios from the global directory.
+The Candidate Profile is maintained independently and feeds both Matching and Application Preparation. The current My applications record is the single application lifecycle record: a target may be Saved/Preparing before submission and becomes Applied only after the user confirms that the employer submission is complete.
+
+The discovery catalogue remains worldwide and impartial. Candidate preferences are a private assessment/prioritisation overlay and must never remove, suppress, qualify or reorder studios in the public directory. See the [Five-System Product Blueprint](docs/architecture/five-system-product-blueprint.md) for the overall workflow and data boundaries.
 
 ## Candidate profile
 
@@ -58,6 +62,17 @@ The discovery catalogue remains worldwide and impartial. Candidate preferences a
 - Existing tracker remains browser-local. Reconcile its statuses with the new workspace rather than creating competing records.
 - Preserve the distinction between studio headquarters, actual hiring location, remote eligibility and work-authorisation rules.
 
+
+## Five-system workflow and Application Preparation — 3 November 2026
+
+- Adopt Studio Discovery, Candidate Profile, Matching Engine, Application Preparation and Application Tracker as the five distinct product responsibilities.
+- Keep discovery public, worldwide and non-personalized; Candidate Profile and all matching/preparation/application state remain private and browser-local under the current static-hosting architecture.
+- The profile is a reusable input to both matching and application preparation. Matching results are private assessments, not changes to public studio records.
+- Introduce Application Preparation as the dedicated stage between a selected match and an actual submission. It should identify employer form fields/questions, documents, constraints and requirements where permitted information is accessible; map them to candidate facts; and prepare editable, evidence-grounded drafts and checklists.
+- Keep one canonical My applications record through selection, preparation, user-confirmed submission and later outcomes. Do not create a second queue/history.
+- The initial preparation workflow is assistive and user-reviewed. Copyable values, drafts, checklists and direct employer links are in scope for design; browser-extension/ATS interaction, autofill, automatic uploads, email integration and automatic submission remain separately gated and are not authorized by this decision.
+- A static GitHub Pages app cannot reliably inspect every cross-origin, dynamic or authenticated ATS form. The feature must include an honest, user-assisted fallback and must not bypass access restrictions or anti-bot controls.
+- Detailed direction is recorded in [Five-System Product Blueprint](docs/architecture/five-system-product-blueprint.md) and [Candidate Profile, Matching, Application Preparation and Tracking](docs/architecture/candidate-profile-matching-application-workspace.md). This is a product/architecture decision, not a claim that Application Preparation has been implemented.
 
 ## Application campaign strategy — 2 November 2026
 
