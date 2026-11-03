@@ -2,7 +2,7 @@
 
 **Status:** Strategy agreed on 2026-11-02; future workflow/design guidance, not a claim of implementation  
 **Scope:** Private studio prioritisation, application-readiness review, coordinated application campaigns and outcome tracking  
-**Depends on:** [Global Discovery Implementation Model](global-discovery-implementation-model.md) and [Candidate Profile, Matching and Application Workspace](candidate-profile-matching-application-workspace.md)
+**Depends on:** [Global Discovery Implementation Model](global-discovery-implementation-model.md) and [Candidate Profile, Matching, Application Preparation and Tracking](candidate-profile-matching-application-workspace.md)
 
 This document preserves the application strategy when work continues in another chat or by another contributor. It complements the global discovery rules; it does not change them.
 
@@ -35,7 +35,11 @@ The current public directory has a deliberately narrower publication rule than a
 
 There is no arbitrary discovery ceiling. Continue expanding and refreshing coverage when reliable sources and new candidates are available. A global discovery baseline is a practical checkpoint, not proof that every studio worldwide has been found.
 
-### 2.2 Private matching and prioritisation
+### 2.2 Candidate Profile
+
+The Candidate Profile is the private source of truth for candidate facts, skills/evidence, preferences and approved master materials. It is maintained independently of discovery and is reused by both Matching and Application Preparation. Keep it browser-local under the current architecture; do not allow employer data or draft generation to silently overwrite approved candidate facts.
+
+### 2.3 Private matching and prioritisation
 
 The matching layer may order the user's own work queue, but it must not alter public discovery records. Assess these dimensions independently:
 
@@ -48,15 +52,15 @@ Use explainable qualitative assessments and visible reasons. Do not introduce a 
 
 The current matching architecture already separates professional relevance, route status/accessibility and personal priority. Preserve that model rather than replacing it with one composite score.
 
-### 2.3 Application Preparation
+### 2.4 Application Preparation
 
 Application Preparation is the dedicated stage after a candidate selects a promising match and before the user submits on the employer's site. It should identify actual route/form requirements, documents, questions and constraints where permitted information is accessible; map them to the Candidate Profile; and prepare editable, truthful, user-reviewed answers and checklists. Unknowns remain visible and are never guessed. The current static website cannot inspect every cross-origin, dynamic or authenticated ATS form, so a user-assisted fallback is required. Portal autofill, automatic uploads, email access/sending and automated submission remain separate decisions requiring explicit approval.
 
-### 2.4 Application Tracker
+### 2.5 Application Tracker
 
 The existing My applications item remains the single canonical private record from selected/preparing target through user-confirmed submission and later outcomes. Preparation must not create a second history. Only user-confirmed submissions count as applications in campaign outcome metrics. The candidate manually updates later statuses as employer communication arrives; email remains external in the initial scope.
 
-### 2.5 Application opportunity types
+### 2.6 Application opportunity types
 
 Keep these concepts distinct in data and UI:
 
