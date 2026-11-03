@@ -232,7 +232,7 @@
     "applicationUrl": "https://abbeygames.com/jobs/",
     "evidenceUrl": "https://abbeygames.com/jobs/",
     "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open applications. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-03",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -244,7 +244,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-01"
     }
   },
   {
@@ -254,7 +254,7 @@
     "applicationUrl": "https://www.about-fun.com/jobs-open-application",
     "evidenceUrl": "https://www.about-fun.com/jobs",
     "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open Application. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-03",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -266,7 +266,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-01"
     }
   },
   {
@@ -276,7 +276,7 @@
     "applicationUrl": "https://www.abrakam.com/contact",
     "evidenceUrl": "https://www.abrakam.com/careers",
     "notes": "Official Careers page links a “Spontaneous apply” route and invites candidates whose profile does not match a current opening to send a CV and portfolio. The official Contact page explicitly identifies careers@abrakam.com for spontaneous applications and includes “Job application” in its enquiry form. The company is based at an official address in Angleur, Liège; remote and applicant-country eligibility are not stated.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-03",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [
@@ -293,7 +293,7 @@
       ],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-01"
     }
   },
   {
@@ -327,7 +327,7 @@
     "applicationUrl": "https://www.abyssal-interactive.com/en/careers",
     "evidenceUrl": "https://www.abyssal-interactive.com/en/careers",
     "notes": "Official careers page invites spontaneous applications if no listed role fits. Current freelance roles are remote; speculative applicant eligibility is not stated.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-03",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [
@@ -339,7 +339,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-01"
     }
   },
   {
@@ -349,7 +349,7 @@
     "applicationUrl": "https://adeninteractive.com/careers/",
     "evidenceUrl": "https://adeninteractive.com/careers/",
     "notes": "Official careers page invites spontaneous applications for roles in Portugal or remote, including full-time, part-time, contract and freelance.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-03",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [
@@ -363,7 +363,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-01"
     }
   },
   {
@@ -397,7 +397,7 @@
     "applicationUrl": "https://aetherstudios.com/vacancy/general-application/",
     "evidenceUrl": "https://aetherstudios.com/vacancy/general-application/",
     "notes": "Official Jobs page lists a General Application and explicitly asks applicants to email jobs@aetherstudios.com with a resume, portfolio and cover letter. The form/page asks candidates to describe how they see themselves fitting into the team. The application page does not state remote or applicant-country eligibility.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-03",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -419,7 +419,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-01"
     }
   },
   {
