@@ -2,92 +2,133 @@
 
 ## Product objective
 
-Maintain a broad global directory of game-development studios that explicitly accept speculative/open applications, then help the user identify relevant opportunities and manage applications efficiently.
+Build a reliable end-to-end workflow for finding game studios that explicitly accept speculative/open applications, deciding which are relevant to the candidate, preparing strong and truthful applications, and tracking confirmed submissions and outcomes.
 
-The product is organized into three layers:
-1. Studio Discovery — global and non-personalized.
-2. Candidate Profile & Matching — private profile, preferences and transparent assessment.
-3. Application Workspace — private queue, requirements summary, preparation and tracking.
+The product has five connected systems, defined in the [Five-System Product Blueprint](docs/architecture/five-system-product-blueprint.md):
 
-The full specification is [Candidate Profile, Matching and Application Workspace](docs/architecture/candidate-profile-matching-application-workspace.md).
+1. **Studio Discovery** — worldwide, evidence-backed studio and speculative-application route discovery.
+2. **Candidate Profile** — private structured candidate facts, skills/evidence, preferences and approved materials.
+3. **Matching Engine** — explainable assessment of studio data against the candidate profile.
+4. **Application Preparation** — analysis of the employer's actual application route/form and preparation of reviewed answers and materials.
+5. **Application Tracker** — one canonical private record for selected targets, confirmed submissions and subsequent progress/outcomes.
+
+The profile can be maintained independently and is an input to both matching and preparation. The user manually completes and submits the employer's application. The tracker record may exist before submission as a selected/preparing target, but only a user-confirmed submission counts as an application.
 
 ## Existing foundation
 
 - React/Vite static website on GitHub Pages.
 - Worldwide studio directory with verified employer-backed speculative/open application routes.
-- Researched studio profiles and game artwork.
-- Existing browser-local My applications tracker.
+- Public studio profiles, game metadata and source evidence.
 - Scheduled discovery maintenance and validation.
+- Structured browser-local Candidate Profile with IndexedDB persistence, skill evidence, preferences, master materials and backup/restore.
+- On-device Matching foundation with separate professional relevance, route status/accessibility and personal priority.
+- Existing browser-local My applications tracker with match handoff, statuses, notes, dates and backup/restore.
 
-Keep this foundation stable. Do not change the discovery inclusion rules or hide studios based on a candidate's personal preferences.
+Preserve this foundation. Do not change discovery eligibility or public ordering based on candidate preferences.
 
-## Next roadmap — candidate profile and application workspace
+## Current system status
 
-### Phase C1 — Candidate Profile foundation (merged in PR #95; deployed)
-- Add a structured profile for contact details, professional summary, experience, education, projects/training and skills.
-- Associate skills with evidence and distinguish demonstrated, transferable, learning/exposure, not evidenced and user-confirmed gaps.
-- Add one approved master resume and one master motivation letter/message.
-- Add editable role, work-model and geographical priority preferences.
-- Keep all candidate data browser-local; use a versioned local schema and user-controlled export/import.
-- Preserve original uploaded documents and require approval before changing master materials.
-- Implemented: structured profile UI, separate versioned IndexedDB storage, PDF/DOCX original-file preservation, manual save, versioned JSON export/import, and browser acceptance coverage for persistence and restore.
-- Not included in C1: text extraction from attachments, matching, queue/workspace features, server sync or any application automation.
+| System | Current state | Status of next work |
+|---|---|---|
+| Studio Discovery | V1 automation and public directory operational | Freeze broad restructuring; maintain source health and address real reliability/data-quality defects |
+| Candidate Profile | Foundation implemented | Continue storage, validation, recovery, migration and browser-acceptance hardening |
+| Matching Engine | Foundation and quality improvements implemented | Continue deterministic edge-case, evidence and false-positive validation |
+| Application Preparation | Product direction documented; no integrated preparation workspace yet | Design requirements analysis, page-access method/fallback, candidate mapping and review workflow |
+| Application Tracker | Basic private queue/tracker and match handoff implemented | Complete data-integrity audit; refine selected → preparing → applied lifecycle without duplicating records |
 
-### Phase C2 — Matching and assessment (foundation merged in PR #96)
-- Implemented: on-device assessments for active directory records; separate professional relevance, route freshness/accessibility and personal priority dimensions; filters and sorting; evidence, gaps, route facts, source links and review dates.
-- Implemented: qualitative Strong / Potential / Weak / Needs profile details classifications. Unspecified role scope is treated as unknown/potential, never as a mismatch. No hiring-probability score is produced.
-- Implemented: region, work-model and studio-type preferences affect personal priority only and do not remove or alter directory records.
-- Implemented: deterministic fixture-based engine tests and browser acceptance for the Matches page.
-- Current limitation: route readiness is conservative. An active route on record is not labelled ready-to-submit; employer instructions and personal eligibility still require human review. Requirement-level provenance is shown only where the public directory currently stores it.
-- Matching-quality follow-up merged in PR #104: direct/related discipline alignment; same-discipline demonstrated evidence for Strong matches; whole-phrase skill matching; responsibilities/achievements in work-history assessment; directory-country precedence; neutral treatment of mixed work models; and geography-first campaign sorting. PR CI, main-branch build and Pages publish all passed. Language, visa/work-authorisation, relocation and country-specific remote eligibility remain unstructured and are not scored.
-- Deferred to later queue/requirements phases: persistent assessment snapshots, user overrides, manual priority pins, exhaustive form/document/language/eligibility extraction and AI processing.
+A completed documentation phase or an existing route field is not evidence that Application Preparation is implemented. The live employer form still has to be checked, and eligibility/requirements must not be invented.
 
-### Phase C3 — Basic match-to-tracker workflow (implemented in PR #107)
+## Recommended implementation roadmap
 
-- Implemented: save an eligible Matches target directly into the existing private My applications tracker.
-- Implemented: duplicate-aware handoff from Matches back into the tracker.
-- Implemented: saved route-context snapshot, including route type/status, source, check date, work model, submission method, stated discipline scope, recorded locations and research notes.
-- Implemented: versioned, validated local tracker JSON export/restore, explicit replacement confirmation, and preservation of private notes, status and dates.
-- Validation: PR-head CI [41496776891](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41496776891), merged-main CI [41497190125](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41497190125) and Pages publish [41497190769](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41497190769) passed.
-- Still later work: a richer queue board with pinned/manual priority, saved assessment history, campaign waves and analytics. The existing tracker is sufficient for the first manually reviewed application wave; do not expand C3 before the weekend pilot.
+### Phase 0 — Product blueprint (documented 2026-11-03)
 
+- Agree the five-system product model and overall end-to-end workflow.
+- Define which system owns each category of data.
+- Preserve the global/private boundary and one canonical application record.
+- Record Application Preparation as a distinct system before the tracker.
+- Keep proposed portal assistance separate from currently authorized functionality.
 
+Deliverable: [Five-System Product Blueprint](docs/architecture/five-system-product-blueprint.md).
 
-### Phase C4 — Application requirements intelligence
-- Capture route type, submission channel, required/optional documents, department/discipline, form questions, language, location, eligibility and special instructions.
-- Use official employer evidence; mark each finding explicit, inferred or unknown.
-- Include evidence URL and last-checked date.
-- Never invent requirements or infer global hiring/visa eligibility.
+### Phase 1 — Complete backend correctness of existing systems
 
-### Phase C5 — Application Workspace
-- Present studio context, route, requirements, skill mapping, approved materials, preparation checklist, private notes and progress.
-- Make the next action clear and reduce repetitive copying/research.
-- Keep application preparation user-reviewed and submission manual.
+Before adding another major feature, validate that the existing foundations preserve user data and behave predictably.
 
-### Phase C6 — Evaluation and refinement
-- Test against varied studios, countries, application routes and employer instructions.
-- Review false positives/negatives and usability with the user before expanding scope.
-- Validate local persistence, migrations, export/import and public-build privacy boundaries.
+- **Candidate Profile:** schema validation, non-destructive load/save, asynchronous import/save races, document integrity, backup/restore, recovery and migration.
+- **Matching Engine:** deterministic role/discipline mapping, phrase boundaries, evidence classification, uncertain facts, profile updates and stable explanations.
+- **Application Tracker:** non-destructive storage validation, backup/restore, asynchronous import behavior, duplicate prevention, status transitions, submission confirmation and notes.
+- **Cross-system:** local-only privacy, stable canonical studio IDs, no duplicate application histories and browser refresh/recovery.
+- Add focused unit and browser-acceptance regressions for every discovered defect. Run the relevant full CI/build and inspect actual results before declaring this phase complete.
 
-### Phase C7 — Campaign readiness and outcome tracking (proposed; not implemented)
+Do not add more UI complexity until core persistence and data transitions are trustworthy.
 
-- Define a private, reviewable campaign queue that can group candidate-selected studios into priority waves.
-- Show a pre-submission checklist covering current official route, professional rationale, role/discipline scope, location/work model, language evidence, applicant eligibility, required documents and form exceptions.
-- Reference the single approved master resume and master motivation letter/message by default; require human review for genuine employer-specific exceptions.
-- Track submitted applications, acknowledgements, recruiter responses, screenings, interviews, offers, rejections and no-response outcomes separately from studio-discovery counts.
-- Provide cohort/funnel reporting by wave, region, role family, route type and submission channel without presenting results as a hiring-probability prediction.
-- Keep final review and submission manual. Any portal automation is a separate design and approval.
+### Phase 2 — Design Application Preparation in depth
 
-The detailed target tiers and campaign operating principles are in [Studio Targeting and Application Campaign Strategy](docs/architecture/studio-targeting-and-application-campaign.md). The 200+ application ambition is a scale objective, not a quota or a promised outcome.
+This is the next major product system to design. Before coding, decide:
 
-## Explicitly deferred
+- what the user supplies or opens to identify the official application route;
+- how the system may inspect public route/form information on static GitHub Pages;
+- how to handle dynamic forms, CORS, login, inaccessible pages and user-assisted fallback;
+- the structured model for required/optional fields, questions, documents, constraints and evidence provenance;
+- how each field maps to candidate-profile facts or approved documents;
+- how answer drafts are created, reviewed, edited and versioned;
+- how missing facts and unverified requirements are surfaced;
+- where preparation state lives and how it attaches to the existing canonical application record;
+- what can be done without an external AI provider or private backend.
 
-Browser extension/desktop companion, portal recognition, ATS adapters, automatic form filling, file upload automation, automated email sending and automated application submission are not part of these phases. Revisit only after the profile, matching and workspace are implemented and evaluated, and after a separate design/approval.
+The output of this phase should be a feature-level specification, interaction flow, data contract, constraints, test plan and explicit acceptance criteria.
 
-## Non-negotiable boundaries
+### Phase 3 — Implement Application Preparation V1
 
-- Never commit CVs, profile data, private assessments, application records, notes or correspondence.
-- Never send personal data to a server or AI service without a separate, explicit privacy decision and user approval.
-- Never fabricate skills, experience, metrics, eligibility or employer requirements.
-- Never change the global discovery set based on personal preferences.
-- Never submit an application automatically.
+Start with a non-invasive, user-reviewed workflow:
+
+1. Open the selected studio's official application route.
+2. Gather requirements from permitted, accessible official information; provide a user-assisted path where the site cannot be inspected automatically.
+3. Organize application fields/questions, required/optional files, portfolio, language, location and eligibility conditions.
+4. Map requirements to the Candidate Profile and its approved master materials.
+5. Prepare editable candidate-grounded answer drafts and copyable values.
+6. Highlight unanswered fields, unsupported claims, exceptions and missing documents.
+7. Present a final checklist with direct links to the employer's site.
+8. Let the user complete the form and submit it manually.
+
+Never assume all ATS products expose the same data or form behavior. Common platforms are examples for compatibility evaluation, not an approved integration list.
+
+### Phase 4 — Integrate the application lifecycle
+
+- Continue to use the existing My applications item created from a Match.
+- Attach preparation status, requirement snapshot, reviewed answers and material-version references to that canonical item.
+- Keep selected/preparing items distinct from submitted applications in views and metrics.
+- Provide a clear, deliberate user action to confirm submission and record the submitted date.
+- Continue manual status changes for acknowledgement, assessment, interview, offer, rejection, withdrawal and no response.
+- Keep email external unless a separate email-integration design is approved.
+
+### Phase 5 — Evaluate and refine
+
+Test the system with varied official application routes: direct studio forms, common ATS platforms, email routes, multi-language pages, dynamic/authenticated pages, missing fields and exceptional document requirements.
+
+Evaluate correctness, requirement provenance, answer quality, missing-information handling, privacy, persistence, mobile/desktop usability and time saved. Refine based on actual use, not hypothetical automation.
+
+### Phase 6 — Optional assisted portal interaction (separate decision)
+
+Only after Application Preparation V1 has been used and evaluated, consider whether a browser extension or other controlled integration is worth its security, privacy, support and compatibility cost. It requires a separate design and explicit user approval. Any future autofill must be transparent, opt-in and reviewable. Automatic uploads and final Submit interaction remain prohibited unless separately reconsidered; final submission must remain with the user.
+
+### Phase 7 — Campaign refinement
+
+Once the core workflow is stable, consider manual priority pins, campaign waves, reminders, follow-up dates and outcome analytics. Measure outcomes from user-confirmed submissions, not from the number of studios discovered. The 200+ campaign ambition is a scale objective, not a quota or response guarantee.
+
+## Explicit boundaries
+
+- Studio discovery remains worldwide, impartial and based on official speculative/open-route evidence.
+- Candidate profile, matching, preparation drafts and application history remain browser-local under the current hosting model.
+- Do not fabricate candidate facts or employer requirements.
+- Do not send candidate data to an external AI service without a separate, explicit privacy decision and approval.
+- Do not introduce a private backend, cloud sync, browser extension, ATS portal control, automatic uploads or email sending as an implicit subtask.
+- Never click Apply/Submit or otherwise submit an application on the user's behalf.
+- Preserve one canonical studio identity and one private application record per application instance.
+
+## Detailed references
+
+- [Five-System Product Blueprint](docs/architecture/five-system-product-blueprint.md)
+- [Candidate Profile, Matching, Application Preparation and Tracking](docs/architecture/candidate-profile-matching-application-workspace.md)
+- [Studio Targeting and Application Campaign Strategy](docs/architecture/studio-targeting-and-application-campaign.md)
+- [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md)
