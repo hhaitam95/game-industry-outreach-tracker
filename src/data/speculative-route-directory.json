@@ -1226,7 +1226,7 @@
     "applicationUrl": "https://www.bongfish.com/jobs/",
     "evidenceUrl": "https://www.bongfish.com/jobs/",
     "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-05",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -1238,7 +1238,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-03"
     }
   },
   {
@@ -1248,7 +1248,7 @@
     "applicationUrl": "https://www.bossagames.com/careers.html",
     "evidenceUrl": "https://www.bossagames.com/careers.html",
     "notes": "Official careers page says the studio is 100% remote and invites speculative resumes by email to jobs@bossastudios.com. Its Speculative listing is for all departments and labelled Remote / Any Time. It does not enumerate applicant-country eligibility; the internationally distributed team should not be interpreted as proof of unrestricted global hiring.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-05",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
@@ -1262,7 +1262,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-03"
     }
   },
   {
@@ -1272,7 +1272,7 @@
     "applicationUrl": "https://www.boxdragon.se/jobs",
     "evidenceUrl": "https://www.boxdragon.se/jobs",
     "notes": "Official studio-controlled page explicitly invites general applications. Evidence: general applications. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-05",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -1284,7 +1284,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-03"
     }
   },
   {
@@ -1294,7 +1294,7 @@
     "applicationUrl": "https://www.braveatnight.co.uk/speculative",
     "evidenceUrl": "https://www.braveatnight.co.uk/speculative",
     "notes": "Official Speculative Application page invites candidates to email jobs@braveatnight.co.uk with a CV and portfolio if possible. Its About page identifies the indie studio as Manchester-based. Remote and applicant-country eligibility are not stated.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-05",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
@@ -1308,7 +1308,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-03"
     }
   },
   {
@@ -1318,7 +1318,7 @@
     "applicationUrl": "https://www.byterockers.games/de/jobs",
     "evidenceUrl": "https://www.byterockers.games/de/jobs",
     "notes": "Official Jobs page explicitly says that candidates who do not find a suitable role, or when the company is not actively hiring, should send an Initiativbewerbung to jobs@byterockers.games. It specifically addresses people passionate about developing video games. Official About page says ByteRockers' Games creates its own games and began publishing other creative teams' projects in 2024. The legal Impressum identifies ByteRockers' Games GmbH & Co. KG at Schloßstraße 110, 12163 Berlin. Its developer credits include Insurmountable, Beat Slayer and Gelly Break Deluxe; the current homepage also features further PC/console titles. The unsolicited route does not separately state work model or applicant-country eligibility.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-05",
     "applicationResearch": {
       "routeType": "unsolicited",
       "submissionMethods": [
@@ -1345,7 +1345,7 @@
       ],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-03"
     }
   },
   {
@@ -1355,7 +1355,7 @@
     "applicationUrl": "https://campfirecabal.com/jobs/",
     "evidenceUrl": "https://campfirecabal.com/jobs/",
     "notes": "The official Jobs page currently says there are no open positions, but explicitly invites unsolicited applications by email to contact@campfirecabal.com and asks applicants to state the role in the subject. The studio is based in Copenhagen. Older role descriptions allowed remote work with a maximum three-hour CET/CEST time difference, but the current unsolicited route does not promise remote eligibility.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-05",
     "applicationResearch": {
       "routeType": "unsolicited",
       "submissionMethods": [
@@ -1369,7 +1369,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-03"
     }
   },
   {
@@ -1406,7 +1406,7 @@
     "applicationUrl": "https://www.carbonated.com/job-listings",
     "evidenceUrl": "https://www.carbonated.com/job-listings",
     "notes": "The official Job Listings page explicitly directs applicants who do not see a matching vacancy to complete a general application so the company can contact them if a suitable role becomes available. The main site describes Carbonated as a mobile PvEvP game developer using AI to drive moment-to-moment gameplay; it does not publish applicant geography or a remote-work policy.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-05",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -1425,7 +1425,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-03"
     }
   },
   {
