@@ -1,301 +1,345 @@
-# Candidate profile, matching and application workspace
+# Candidate Profile, Matching, Application Preparation and Tracking
 
-**Status:** Candidate Profile C1 merged/deployed in PR #95; matching C2 foundation merged in PR #96; focused matching-quality validation merged in PR #104 and is deployed; Application Queue, deeper requirements intelligence and workspace remain unimplemented  
-**Last updated:** 2026-11-02  
-**Scope:** Candidate-owned profile, transparent studio/opportunity assessment, personal application queue and preparation workspace.  
-**Explicitly deferred:** Browser-extension automation, external portal autofill, automated form interaction and application submission.
+**Last updated:** 2026-11-03  
+**Scope:** Detailed requirements for the private Candidate Profile, Matching Engine, Application Preparation workspace and Application Tracker lifecycle.  
+**Product overview:** [Five-System Product Blueprint](five-system-product-blueprint.md).  
+**Related strategy:** [Studio Targeting and Application Campaign Strategy](studio-targeting-and-application-campaign.md).
 
-This document extends the existing global studio-discovery product. It does not replace or personalize the discovery engine. For the intended large-batch targeting and application operating model, see [Studio Targeting and Application Campaign Strategy](studio-targeting-and-application-campaign.md).
+**Implementation status:** Candidate Profile foundation is merged/deployed (PR #95) with persistence hardening in PR #111; Matching foundation and focused quality improvements are merged/deployed (PRs #96 and #104); the basic match-to-tracker handoff and local tracker backup/recovery are implemented (PRs #107 and #110). The Application Preparation system described below is a design target, not an implemented feature. The existing tracker remains the canonical private application record.
 
-## 1. Product direction
+## 1. Product direction and system boundaries
 
-The product has three connected but separately responsible layers:
+The complete product has five connected systems:
 
-1. **Studio Discovery** maintains the broad, worldwide directory of legitimate game-development organisations with verified speculative, unsolicited, spontaneous, open or general application routes.
-2. **Candidate Profile & Matching** compares that public directory against a user's structured professional background and preferences, then explains relevance and application readiness.
-3. **Application Workspace** holds the user's selected studios, requirements summaries, preparation materials and application progress.
+1. **Studio Discovery** — the public, global directory of game-development organisations with verified speculative/open application routes.
+2. **Candidate Profile** — the private source of truth for candidate facts, skills/evidence, preferences and approved materials.
+3. **Matching Engine** — private, explainable assessments using studio data and the current candidate profile.
+4. **Application Preparation** — analysis of the selected employer's actual application route/form and preparation of candidate-reviewed answers, materials and a submission checklist.
+5. **Application Tracker** — one private record for selected targets, user-confirmed submissions and subsequent progress/outcomes.
 
-The directory remains a complete global catalogue. Candidate preferences must never remove, rewrite, suppress or change the discovery qualification of a studio. Personal matching is a private overlay.
+This document specifies systems 2–5. It does not replace or personalize Studio Discovery. Global discovery qualification, sources and verification remain defined in the [Global Discovery Implementation Model](global-discovery-implementation-model.md).
 
-The product objective is to reduce repetitive research and application preparation so the user can pursue a large number of relevant opportunities without fabricating qualifications or spending unnecessary time tailoring every application.
+The Candidate Profile is maintained independently of discovery and is a reusable input to both Matching and Application Preparation. Matching selects a target; Application Preparation helps the user prepare the real application; the user submits externally; the user then confirms submission in the tracker.
+
+The existing My applications item is the canonical private record across this lifecycle. It can exist before submission as a saved/selected/preparing target. Do not create a separate queue or duplicate application history when preparation is added. Only user-confirmed submissions count as applications in campaign outcome metrics.
+
+The public Studio Directory remains worldwide and non-personalized. Candidate preferences affect only private matching and campaign priority; they never suppress or reclassify public studios.
 
 ## 2. Product principles
 
-- **One truthful professional source of truth.** Maintain a structured candidate profile and approved master application materials. Do not create a separate tailored resume for every studio by default.
-- **Evidence over keyword matching.** A skill is not claimed merely because an employer mentions it. Distinguish demonstrated experience, transferable experience, learning/exposure and not evidenced.
-- **Filter obvious mismatches, preserve possibility.** Hard-exclude only clearly incompatible disciplines or explicit blockers. Uncertainty and transferable relevance should remain visible for human judgment.
-- **Separate relevance, accessibility and preference.** A strong professional match may be geographically low priority; an attractive location does not make a role professionally relevant.
-- **Explain every assessment.** Show the requirements, evidence, gaps, unknowns, source URLs and review date behind the classification.
-- **Batch the repetitive work, review exceptions.** The default is one approved master resume and one approved master motivation letter/message. The campaign strategy supports coordinated waves and a lightweight pre-submission review. Suggest document updates only when a real requirement makes them useful; never silently modify approved materials.
-- **User remains in control.** Selection, approval and confirmation of an application are user actions. No applications or emails are sent in this scope.
-- **Private by default.** Candidate data, documents, preferences, queue state and application history must never enter public datasets, GitHub commits, Pages assets, workflow logs or public PR descriptions.
+- **One truthful professional source of truth.** Maintain a structured candidate profile and approved master materials. Do not create a separate tailored resume for every studio by default.
+- **Evidence over keyword matching.** A skill is not claimed merely because an employer mentions it. Distinguish demonstrated, transferable, learning/exposure, not evidenced and user-confirmed gap.
+- **Filter obvious mismatches, preserve possibility.** Keep uncertainty and transferable relevance visible for human judgment.
+- **Separate relevance, accessibility and preference.** A strong professional match may be geographically low priority; a preferred location does not make an opportunity professionally relevant.
+- **Explain every assessment.** Show requirements, evidence, gaps, unknowns, source URLs and review dates.
+- **Prepare, do not fabricate.** Candidate-specific answers must be grounded in the profile and marked for user review. Missing information is a question or an unresolved item, never an invitation to guess.
+- **One application lifecycle.** Selection, preparation, submission and tracking update the same canonical private application record.
+- **User remains in control.** The user chooses targets, approves documents/answers and performs final submission.
+- **Private by default.** Candidate data, documents, preparation drafts, preferences, queue state and application history never enter public datasets or discovery automation.
 
 ## 3. Candidate Profile
 
-Add a dedicated **My Profile** area. It is a structured candidate record, not merely a file upload.
+The profile is a structured candidate record, not merely a file upload.
 
 ### 3.1 Profile sections
 
-- **Personal and contact details:** name, email, phone, current location, professional links and optional portfolio. Collect only fields needed for applications.
-- **Professional summary:** user-approved description of background, target contribution and motivation for entering/working in the game industry.
-- **Experience:** employer, title, location (optional), start/end dates, description, responsibilities, achievements and associated skills. Preserve exact dates and titles.
+- **Personal/contact details:** name, email, phone, current location, professional links and optional portfolio. Collect only fields useful for applications.
+- **Professional summary:** user-approved description of background, target contribution and motivation.
+- **Experience:** employer, title, optional location, dates, description, responsibilities, achievements and associated skills. Preserve exact dates and titles.
 - **Education:** qualification, institution, dates and relevant details.
-- **Projects and training:** personal projects, bootcamps, coursework, certifications and portfolio links, clearly distinguished from employment.
-- **Skills and technologies:** normalized skill names, categories, proficiency/experience descriptions, last-used context and supporting evidence references.
-- **Application materials:** approved master resume file and/or text, master motivation letter/message, optional portfolio or supporting files.
-- **Preferences:** role families, studio types, preferred work arrangements, geographical priority tiers and other user-defined considerations.
-- **Eligibility information:** optional, explicitly user-entered work-authorisation/relocation facts. Never infer legal eligibility from nationality, residence, headquarters or a location preference.
+- **Projects/training:** personal projects, bootcamps, coursework, certifications and portfolio links, distinguished from employment.
+- **Skills/technologies:** normalized skill names, categories, context, proficiency description and supporting evidence references.
+- **Master materials:** approved master resume/CV and core motivation letter/message, plus portfolio and supporting links/files.
+- **Preferences:** role families, studio types, work arrangements, geographical priority tiers and other user-defined considerations.
+- **Eligibility facts:** optional user-entered work-authorisation, language or relocation facts. Never infer legal eligibility from nationality, residence, headquarters or a location preference.
 
 ### 3.2 Skill evidence model
 
-Each skill should have a relationship to evidence, not just a label. Suggested evidence states:
+Each skill must be connected to supporting evidence. Use these states:
 
 - **Demonstrated:** directly supported by professional work, education or a completed project.
 - **Transferable:** related experience supports the underlying capability, but not necessarily the exact tool/domain requested.
-- **Learning / exposure:** currently studying or limited hands-on exposure.
-- **Not evidenced:** no supporting profile evidence found.
+- **Learning / exposure:** current study or limited hands-on exposure.
+- **Not evidenced:** no supporting profile evidence was found.
 - **User-confirmed gap:** the user explicitly says they do not have this skill.
 
-Keep evidence references to experience, projects, training or a user-confirmed note. Do not invent proficiency scores or years of experience. A skill's absence from the profile means “not evidenced”, not necessarily “does not know”.
+Keep evidence references to experience, projects, training or a user-confirmed note. Do not invent proficiency scores or years of experience. A skill's absence from the profile means not evidenced, not necessarily that the candidate does not know it.
 
 ### 3.3 Master application materials
 
-- Support a structured/text representation for convenient reuse and an approved PDF/DOCX attachment where applicable.
-- Keep the original uploaded document unchanged.
-- Store one default master resume and one default master motivation letter/message.
-- Allow the user to approve a revised master version when they intentionally update it.
-- The matching engine may recommend a factual clarification or targeted improvement, with the exact reason and supporting employer requirement. It must not automatically edit the master material or create a misleading tailored version.
-- Employer-specific answers may be prepared later in the application workspace, but must be grounded in the profile and marked for user review.
+- Support structured/text information for convenient reuse and approved PDF/DOCX attachments where appropriate.
+- Preserve the original uploaded document unchanged.
+- Keep one default master resume/CV and one default core motivation letter/message.
+- Allow the user to approve an intentionally revised master version.
+- Matching may recommend a factual clarification or improvement, with the exact employer requirement and reason. It must not silently edit master materials or create misleading variants.
+- Application Preparation may suggest studio-specific answers or identify a genuine document exception; every change remains a draft until the user approves it.
 
 ### 3.4 Preferences and geography
 
-Use editable priority tiers or weights rather than a rigid allowlist. Example tiers may include preferred, acceptable and low-priority regions. These are examples, not hard-coded defaults.
+Use editable priority tiers rather than a rigid allowlist. Geography, role family, work model, studio type and personal interest affect private priority only. A low-priority country remains discoverable and selectable.
 
-Preferences affect ordering and prioritization, not professional compatibility and not directory membership. A low-priority country remains discoverable and can still be selected. Explicit legal/work-authorisation blockers are separate from personal preference and require reliable evidence.
+Explicit eligibility or work-authorisation blockers are separate from personal preferences and require reliable evidence. Headquarters alone does not establish role location, remote eligibility or sponsorship.
 
-## 4. Matching and assessment engine
+## 4. Matching Engine
 
-Evaluate each directory record against the candidate profile as a private, explainable assessment. Keep these dimensions independent.
+Evaluate each canonical directory record against the current candidate profile. Matching is a private, explainable assessment and must not alter public studio records.
 
 ### 4.1 Professional relevance
 
 Assess:
+
 - discipline/role-family alignment;
 - responsibilities and work context;
-- required and preferred skills/technologies;
-- direct evidence and transferable evidence;
-- explicit discipline exclusions or requirements;
+- required and preferred skills/technologies when published;
+- direct and transferable profile evidence;
+- explicit discipline exclusions/requirements;
 - unknowns and material gaps.
 
-Use qualitative categories, not a fabricated hiring probability:
+Use qualitative categories rather than a fabricated hiring probability:
 
-- **Strong match:** the application scope clearly aligns with demonstrated or credibly transferable experience.
-- **Potential match:** there is relevant transferable capability or insufficient information to decide.
-- **Weak match:** significant discipline/experience mismatch, but not necessarily an absolute blocker.
-- **Not applicable:** explicit, reliable evidence establishes a fundamental mismatch (for example, an art-only route when the candidate is pursuing technical roles).
+- **Strong match:** direct role/discipline alignment with demonstrated evidence relevant to that same discipline.
+- **Potential match:** relevant transferable capability or insufficient information to decide.
+- **Weak match:** significant professional mismatch, but not necessarily an absolute blocker.
+- **Not applicable:** reliable explicit evidence establishes a fundamental mismatch.
 
-Do not over-penalize an open/general route that lists no technical requirements. In that case report that requirements are unspecified and assess only what is known.
+Do not over-penalize an open/general application route that publishes no technical requirements. Report the information gap and assess only what is known. Missing profile information should be shown as needs profile details, not silently treated as a confirmed gap.
 
 ### 4.2 Application accessibility/readiness
 
-Assess whether a legitimate route is usable and what the employer asks the applicant to do. Suggested states:
+Assess whether the official route is current and what the employer asks the applicant to do. Keep route status separate from professional relevance and personal priority.
 
-- **Ready to apply:** route is active and accessible; standard materials appear sufficient; no unresolved mandatory requirement is known.
-- **Requires attention:** additional questions, a specific department/discipline, language, format, eligibility or other instructions need review.
-- **Not applicable / blocked:** employer explicitly does not accept speculative applications, the route is closed, or a confirmed mandatory condition cannot be met.
-- **Unknown / needs verification:** evidence is incomplete, stale, inaccessible or ambiguous.
-
-“Ready” means the requirements appear understood and the standard package is usable; it is not a guarantee of eligibility or successful submission.
+Potential states include ready for candidate review, requires attention, blocked/not applicable and unknown/needs verification. A route listed as active is not proof that the live form still works, that a specific vacancy exists or that the applicant meets every condition.
 
 ### 4.3 Personal priority
 
-Rank using user preferences such as:
-- geographic priority and realistic relocation considerations;
-- preferred role families and work arrangements;
-- interest in the studio, its games and development environment;
-- user-defined priority or manual pinning.
+Use preferences such as geographic tier, work arrangement, role family, studio type, interest in the studio/games and user-defined priority. Make these factors visible and permit manual overrides.
 
-Do not collapse this into the professional match score. Make the factors visible and allow manual priority overrides.
+Do not collapse professional relevance, route readiness and personal priority into an unexplained weighted score. Do not describe any match category as the probability of being hired.
 
-### 4.4 Assessment confidence and provenance
+### 4.4 Provenance and confidence
 
-Every assessment should record:
-- source URL(s) and the exact employer-controlled application route;
-- extracted requirement statements or concise paraphrases;
-- whether each statement is explicit, inferred or unknown;
+For employer-derived requirements and route claims, retain:
+
+- source URL(s) and official application route;
+- concise evidence statement or faithful paraphrase;
+- explicit, inferred or unknown classification;
 - last checked/reviewed timestamp;
-- extraction/assessment confidence and reasons for uncertainty;
-- profile version or assessment input revision.
+- extraction/assessment confidence and reason for uncertainty;
+- relevant studio/route revision and candidate-profile revision where available.
 
-If evidence is not available, show “unknown” rather than guessing. Search snippets alone are not sufficient proof of a requirement. Do not infer hiring eligibility, visa sponsorship, global remote work or work location from studio headquarters.
+Search snippets alone are not sufficient proof. Do not infer language, eligibility, visa sponsorship, global remote work or hiring location from headquarters or nationality.
 
-### 4.5 Skills/requirements summary
+### 4.5 Requirements-to-profile mapping
 
-For each selected studio, show a concise list of actual employer-stated disciplines, requirements and keywords, grouped where possible into:
-- required;
-- preferred;
-- responsibilities/context;
-- application instructions;
-- eligibility/location/language;
-- not specified.
+For each relevant employer requirement, map candidate evidence as demonstrated, transferable, learning/exposure, not evidenced, user-confirmed gap or unknown. Keep requirement type clear, such as required, preferred, responsibility/context, application instruction, eligibility/location/language or not specified.
 
-Map each item to candidate evidence as demonstrated, transferable, learning/exposure, not evidenced, user-confirmed gap or unknown. Do not present a keyword overlap percentage as a hiring probability.
+Do not present keyword overlap as a hiring probability.
 
-### 4.6 Matching foundation — current implementation
+### 4.6 Matching foundation — implemented behavior
 
-The first C2 implementation calculates matches in the browser from the saved Candidate Profile and the active public studio records. It is a private presentation layer; profile data, documents and assessments are not sent to a backend or added to public data files.
+The first matching implementation calculates assessments in the browser from the saved Candidate Profile and active public studio records. Candidate details and assessments are not sent to a backend or included in public data.
 
-- Professional relevance uses saved target role families, discipline scope published in the studio route record and profile evidence. Demonstrated, transferable and learning/exposure evidence remain distinct. Absence of evidence is not treated as a confirmed gap.
-- The role-family mapping distinguishes **direct** disciplines from **related/adjacent** disciplines. Adjacent evidence can support a **Potential match**, but cannot by itself justify a **Strong match**.
-- A **Strong match** now requires a direct role-to-discipline alignment and demonstrated skill evidence mapped to that same stated discipline. Demonstrated evidence in an unrelated discipline must not upgrade the assessment.
-- Skill/discipline vocabulary matching uses normalized phrase boundaries rather than arbitrary substring matches, reducing false positives such as interpreting “Go” inside “Google Workspace” as the Go language.
-- Experience assessment considers job title, responsibilities and achievements; experience evidence remains labelled transferable rather than being silently upgraded to demonstrated skill evidence.
-- If an open route does not publish a discipline scope, the result remains **Potential match / limited role information** rather than being penalized. Missing profile evidence is **Needs profile details**, not a weak match.
-- The current engine does not automatically classify an opportunity as **Not applicable** from a keyword mismatch. A weak assessment is a profile-to-route comparison, not a claim that the employer would reject an application.
-- Route readiness is deliberately conservative: the UI reports an active route on record or a need to verify it. It does not claim a route is ready to submit based only on the existence of a URL.
-- Personal priority uses the directory's recorded country for geographic tier matching; a separate headquarters country must not silently override it. The headquarters country code is reused only when the country labels agree. A directory country is still not proof of the actual job location or work-authorisation eligibility.
-- A mixed work model is ambiguous and receives no automatic penalty against a preferred remote/hybrid/on-site arrangement. The specific role's expectations need human verification.
-- The Matches view defaults to **campaign priority (region first)**: preferred geography, acceptable geography, unassigned/unknown geography, then lower-priority geography. Within each geographic tier, overall personal priority and professional relevance break ties. Work-model and studio-type preferences cannot make an acceptable-region target outrank a preferred-region target. The campaign geography tier is visible in expanded assessment details; professional relevance, route status and the overall personal-priority label remain separate.
-- Expanded details show source and application URLs, directory check/review dates, published discipline scope, submission method, work model and location/eligibility notes when those fields exist.
-- Assessments are currently computed in memory each time the Matches page opens. Persistent assessment snapshots, manual overrides/pins and queue decisions belong to the Application Queue phase.
+- Professional relevance uses saved target role families, published studio route discipline scope and profile evidence.
+- Direct and related/adjacent role-family mappings are distinct. Adjacent evidence may support Potential but cannot independently justify Strong.
+- Strong requires direct role-to-discipline alignment and demonstrated skill evidence mapped to that same stated discipline.
+- Skill/discipline matching uses normalized phrase boundaries rather than arbitrary substring matches.
+- Work-history assessment considers job title, responsibilities and achievements; transferable work evidence is not silently promoted to demonstrated tool/discipline skill evidence.
+- If an open route does not publish discipline scope, the result remains Potential/limited role information rather than being penalized for a missing requirement.
+- A keyword mismatch alone does not establish that an employer would reject an application.
+- Route readiness remains conservative. The existence of a URL is not treated as proof that the route is ready to submit.
+- Geographic priority uses the directory's recorded country. A separate headquarters country must not silently override it, and the directory country is not proof of role location or work-authorisation eligibility.
+- Mixed work models are ambiguous and receive no automatic penalty against a preferred remote/hybrid/on-site arrangement.
+- The current default ordering uses campaign geography tiers first, then overall personal priority and professional relevance as tie-breakers. The separate dimensions remain visible.
+- Assessments are recalculated locally. Historical assessment snapshots, manual priority pins and richer queue decisions remain future refinements.
 
-Known limitations: the current public directory has route-level research fields, not a fully normalized requirements record for every employer. Working language, country-specific remote eligibility, relocation and visa/work-authorisation sponsorship are not yet structured consistently enough for reliable automated prioritisation. The engine must not infer these facts from headquarters, nationality, a translated website or broad free-text keyword mentions. They remain unknown until separately verified and structured.
+Known limitations: language, country-specific remote eligibility, relocation and visa/work-authorisation/sponsorship are not structured consistently enough for reliable automated prioritisation. Keep these facts unknown until verified and recorded.
 
-## 5. Application campaign operating model
+## 5. Private application record and tracker lifecycle
 
-The detailed campaign strategy is maintained in [Studio Targeting and Application Campaign Strategy](studio-targeting-and-application-campaign.md). The implementation must preserve these product-level requirements:
+### 5.1 One canonical record
 
-- The public discovery directory remains global and non-personalized; user preferences affect only the private queue/order.
-- The candidate's default package is one approved master resume and one approved core motivation letter/message. Do not create per-studio variants by default.
-- The default geographic campaign ordering is Europe/nearby European markets first, English-language international markets next, and wider global opportunities as an exploratory tier. These are editable preferences, not eligibility decisions.
-- Professional relevance, application accessibility/readiness and personal priority remain separate. Do not collapse them into an ungrounded weighted score or hiring probability.
-- A pre-submission review must show the current official route, route freshness, professional rationale, location/work model, language evidence, stated applicant eligibility and document/form requirements. Unknown facts remain visible.
-- Group suitable targets into coordinated waves, but expose employer-specific exceptions rather than pretending every route is identical. A large batch (potentially 200+) is an aspiration, not a quota.
-- Track submitted applications and their outcomes separately from the number of studios discovered. Keep the pipeline active after an initial positive reply until a written offer and material transition requirements are confirmed.
-- Human review and final submission remain mandatory under the current automation boundary.
+The Application Tracker/My applications feature is the private working set for targets selected from Matches. It is also the record that continues after a real submission. Application Preparation must attach its state to this same record.
 
-## 6. Application Queue
+A saved studio is not automatically an application. A selected target is not automatically submitted. Keep these concepts explicit in the interface and in campaign metrics.
 
-Introduce a personal **Application Queue** (preferred label) as a working set over the global directory.
+### 5.2 Lifecycle
 
-- The queue references canonical studio IDs; it must not duplicate studio records or create a second public directory.
-- Adding/removing a studio from the queue is independent of the global directory.
-- Each queued item stores user-specific priority, assessment snapshot/version, review state, application progress, notes and timestamps.
-- Allow sorting/filtering by professional relevance, readiness, personal priority, country, route type and application status.
-- Keep low-priority and not-applicable assessments inspectable; allow the user to override an automated classification.
-- Reassess when the candidate profile, studio route or relevant application evidence changes. Preserve user decisions and submission history when recalculating.
+The exact status vocabulary must remain aligned with the existing tracker and should be designed as one coherent progression. The lifecycle may include:
 
-Suggested queue groupings:
-- Strong / ready to apply;
-- Potential match;
-- Requires attention;
-- Low priority;
-- Not applicable (normally excluded from the active queue but retained in the directory and assessment history).
+- **Saved / Selected:** the user chose the studio for consideration.
+- **Preparing / Reviewing:** route requirements and application materials are being checked.
+- **Ready for user submission:** the user has reviewed the preparation checklist; this is still not a submitted application.
+- **Applied:** the user explicitly confirms that the employer submission was completed; record the date.
+- **Acknowledged / Assessment / Interview / Offer:** later stages entered manually as communication arrives.
+- **Rejected / Withdrawn / No response / Archived:** outcome or inactive states.
 
-The queue is not an auto-apply list. Selection means “consider/pursue”, not permission to submit.
+Do not create two statuses with slightly different meanings across the queue, workspace and tracker. Map new preparation states into the existing schema deliberately and migrate only with validation.
 
-## 7. Application Workspace
+### 5.3 Tracker capabilities
 
-Opening a queued studio should provide a single focused workspace with:
+- Canonical studio reference and saved route-context snapshot.
+- Status, applied/submitted date and activity timestamps.
+- User-editable private notes and direct official studio/application links.
+- Clear actions to open the preparation workspace, confirm submission and update later status.
+- Next follow-up date or reminder as a future refinement.
+- Versioned, validated local export/restore.
+- Duplicate-aware handoff from Matches.
+- No dependence on email access or ATS account credentials.
 
-1. **Studio context:** identity, location facts, official website, relevant games/profile facts and source links.
-2. **Application route:** route type, direct application URL, evidence URL, route status, submission channel and verification date.
-3. **Requirements summary:** what the employer explicitly asks for, required/optional documents, fields/questions, language, eligibility, location and special instructions.
-4. **Skills/compatibility summary:** relevant keywords, evidence mapping, transferable strengths, gaps and unknowns.
-5. **Application package:** links to the approved master resume and motivation letter; show any format or content issue requiring attention.
-6. **Preparation notes:** user-editable notes and a checklist for the specific application.
-7. **Progress tracking:** selected, reviewing, ready, applied, acknowledged, in review, interview, offer, rejected, withdrawn, no response or archived (final status vocabulary to align with existing tracker and avoid duplicate states).
+Track campaign outcomes from user-confirmed submissions, not from discovery counts or saved/preparing items.
 
-The workspace should make the next action obvious and reduce switching between the directory, profile and external employer page.
+## 6. Application Preparation workspace
 
-## 8. Application requirements research
+Application Preparation is the distinct system immediately before submission and is not the same as ongoing outcome tracking.
 
-Requirements research is distinct from compatibility scoring. For each route, collect only what is actually supported by official employer evidence:
+### 6.1 Inputs
 
-- whether speculative/general applications are accepted and the route's purpose;
-- submission channel (email, employer ATS, form, talent pool);
-- required/optional resume, cover letter, portfolio or other attachments;
-- discipline/department options;
-- mandatory form fields and questions when visible;
-- language requirements;
-- location, work model and applicant eligibility;
-- explicit work-authorisation/sponsorship statements;
-- consent/data-retention notices where relevant;
-- file types, size limits and other submission instructions.
+- canonical studio ID and current public studio profile;
+- official application route and route evidence;
+- current Candidate Profile revision;
+- approved master resume and motivation-letter versions;
+- relevant portfolio links and supporting documents;
+- any additional information explicitly supplied by the candidate.
 
-Store the source and verification date for each finding. Separate:
-- **Explicit:** stated by the employer or application form;
-- **Inferred:** a cautious interpretation that must be labelled;
-- **Unknown:** not found or not verified.
+### 6.2 Route and form analysis
 
-Do not turn a general speculative invitation into assumed technical requirements. If the route simply asks for a CV and a short explanation of interest, report exactly that.
+Analyze the employer's actual official application route where content is available through a permitted and technically reliable method. Identify the platform when possible, but do not assume ATS identity implies a standard form.
 
-## 9. Privacy and hosting architecture
+The analysis should identify, when present:
 
-The current product is a static React/Vite application on GitHub Pages. It has no private backend or authentication. The first profile/matching/workspace implementation should remain browser-local unless a separately approved hosting decision changes this.
+- application purpose and route type (open application, talent pool, email, employer form, etc.);
+- mandatory and optional form fields;
+- questions, instructions, character limits and formats;
+- department/discipline/role choices;
+- required and optional files, file formats and size restrictions;
+- portfolio, showreel or other URL requirements;
+- language, location, work model and applicant eligibility;
+- work-authorisation, sponsorship or relocation statements;
+- consent, privacy and data-retention notices;
+- any step or requirement that needs human confirmation.
 
-- Keep public studio facts and verified routes in the existing public-safe data projection.
-- Store structured candidate profile, preferences, uploaded documents, application queue, private assessments, notes and application history in browser-local storage only.
-- Prefer IndexedDB for structured/private records and binary files; keep existing tracker localStorage compatibility where appropriate. Define schema versioning and migration.
-- Provide user-controlled export/backup and import/restore before the feature is relied upon for important data.
-- Explain that browser storage is device/browser/origin-specific, can be cleared, may be unavailable in private browsing and is not automatically encrypted. Do not describe localStorage/IndexedDB as encrypted storage.
-- Do not sync to GitHub, public Pages, Actions artifacts/logs, repository JSON, issues, commits or PRs.
-- Do not add a server-side AI provider or put API keys in frontend code. Any future external AI processing requires a separate explicit privacy and architecture decision, clear disclosure of what leaves the browser and user approval.
-- Treat uploaded files and extracted text as untrusted input. Sanitize rendered content and validate file types/size.
-- Avoid putting sensitive profile details into telemetry, browser console logs, error reports or URLs.
+Every finding should be explicit, inferred or unknown, with the source and review date. If the page is unavailable, blocked, authenticated or incomplete, state that limitation and use a user-assisted review path. Never treat an inaccessible page as evidence that no requirement exists.
 
-## 10. Automation boundary for this roadmap
+### 6.3 Candidate field mapping
 
-This roadmap includes candidate profile, matching, queue, requirements summaries and application preparation only.
+For every field/question, show one of:
 
-**Deferred and not authorized by this specification:**
+- **Mapped from profile:** a matching candidate fact exists and its source section is identifiable.
+- **Draft prepared:** a candidate-grounded proposed response is available for review.
+- **Needs candidate input:** the profile does not contain the required fact or preference.
+- **Needs verification:** the field or employer instruction is ambiguous or unverified.
+- **Not applicable:** the question does not apply, with the reason made clear.
+
+A field mapping must not silently equate different facts (for example, headquarters and job location, language of a website and candidate language ability, or a preferred country and work authorization).
+
+### 6.4 Draft answer and material preparation
+
+- Reuse approved master materials by default.
+- Prepare a studio-specific answer only when the actual form asks for it or a genuine employer-specific exception exists.
+- Ground every suggested answer in profile facts, approved materials and/or explicit employer instructions.
+- Keep drafts editable and clearly labelled as drafts until the user approves them.
+- Show unsupported claims, missing facts and character/format constraints.
+- Do not silently create, overwrite or approve a resume, cover letter or candidate fact.
+- Preserve which profile and master-material versions were used for a submitted application.
+
+The drafting method (manual templates, local processing or optional external AI) must be decided separately. External AI processing is not assumed and requires explicit privacy review and user approval.
+
+### 6.5 Review and handoff
+
+The workspace should provide one reviewable view containing:
+
+- studio and application-route context;
+- extracted requirements and provenance;
+- profile-to-field mapping;
+- editable answer drafts;
+- required/optional document checklist;
+- missing information and unresolved questions;
+- direct employer route;
+- a final checklist before leaving the tool.
+
+The candidate then completes and submits on the employer's site. The user confirms submission in the existing tracker. The system must not infer submission merely because the user opened a URL or completed a checklist.
+
+## 7. Technical and automation boundary
+
+The current product is a static React/Vite website on GitHub Pages with no private authenticated backend. It cannot reliably inspect arbitrary cross-origin or authenticated ATS pages from the page itself. Browser-origin restrictions, CORS, dynamic client rendering, login, anti-bot checks and platform-specific behavior all matter.
+
+The initial Application Preparation design must therefore provide a fallback when automatic page analysis is unavailable, such as user-assisted capture or manually confirmed requirements. A backend fetcher, browser extension, desktop companion or other page-inspection integration requires a separate architecture/privacy review and explicit approval.
+
+Current scope may include:
+- official-route links and permitted research;
+- organizing requirements already present in public directory/profile data;
+- user-assisted collection and review of visible form requirements;
+- candidate/profile field mapping;
+- editable answer drafts, copyable values and document checklists;
+- direct navigation to the employer application page.
+
+Not authorized by this specification:
+- automatic ATS login or account interaction;
 - browser extension or desktop companion;
-- controlling external browser tabs;
-- automated portal recognition or ATS adapters;
-- automatic field entry, autofill or file uploads;
-- automatic email composition/sending;
-- automated clicking of Submit or any final application submission.
+- cross-tab/page control;
+- portal recognition adapters that interact with live accounts;
+- automatic field entry/autofill;
+- automatic document upload;
+- automated email access or sending;
+- automatic Apply/Submit clicks or final application submission.
 
-The application workspace may provide copyable values, document links, checklists and direct links to the employer route. Future autofill assistance must be separately designed and approved with strict validation, portal compatibility tiers and user-controlled final submission. CAPTCHA, anti-bot, access-control and login restrictions must never be bypassed.
+Any future autofill assistant must be opt-in and separately approved, clearly show every value, avoid overwriting user edits and leave final submission to the candidate. Never bypass CAPTCHA, anti-bot controls, login restrictions, robots rules or site terms.
 
-## 11. Suggested implementation sequence
+## 8. Privacy and local storage
 
-1. **Profile foundation:** structured profile sections, skill/evidence model, master resume/motivation storage, preferences, validation and local persistence.
-2. **Assessment foundation:** schema for private assessments; deterministic initial matching rules; explicit/unknown evidence handling; explainable categories and manual override.
-3. **Application Queue:** canonical studio references, priority and readiness filters, assessment refresh, queue persistence and migration.
-4. **Requirements intelligence:** structured route instructions and sourced requirements summary, with explicit/inferred/unknown provenance and review dates.
-5. **Application Workspace:** studio/application details, skill mapping, approved materials, preparation checklist, notes and progress tracking.
-6. **Evaluation and refinement:** test against representative studios from different countries, route types and ATS/contact channels; review false positives/negatives with the user before expanding.
+- GitHub Pages is public static hosting, not a private authenticated backend.
+- Candidate profile, CVs, motivation drafts, preferences, assessments, preparation drafts, application records and notes remain browser-local.
+- Prefer IndexedDB for structured/private records and binary files. Preserve existing tracker localStorage data and migration behavior.
+- Provide validated user-controlled export/import and non-destructive recovery.
+- Explain that browser storage is device/browser/origin-specific, can be cleared and is not automatically encrypted.
+- Never commit or publish candidate data in source datasets, Pages assets, Actions logs/artifacts, issues or PR descriptions.
+- Do not include private data in URLs, console logs or telemetry.
+- Any private backend, cloud sync or external AI processing requires a separate architecture/privacy decision and explicit consent.
+- Treat external page content, uploaded files, extracted text and drafted answers as untrusted input; validate and sanitize before display.
 
-Do not begin browser automation as a hidden subtask of these phases. It remains a separate future decision.
+## 9. Implementation sequence and gates
 
-## 12. Acceptance criteria
+1. **Existing-system correctness:** finish backend correctness across Candidate Profile, Matching and My applications. Validate storage, import/export, race behavior, schema errors, migration, duplicate handling, status transitions and privacy.
+2. **Application Preparation design:** specify requirements extraction, evidence provenance, page-access approach/fallback, form-field model, candidate mapping, draft handling, versioning and review UX.
+3. **Application Preparation V1:** build a non-invasive preparation workspace that supports structured requirements, editable drafts, copyable values, document checklist, unknowns and direct employer links. The user fills and submits externally.
+4. **Tracker integration:** keep preparation and submission lifecycle on the same canonical application record; Applied requires manual confirmation.
+5. **Evaluation:** test diverse studios, direct forms, email routes and common ATS platforms; check multiple languages, inaccessible pages, unusual requirements, privacy and user effort.
+6. **Later optional automation:** separately decide whether opt-in field-filling support is worthwhile. Do not implement it as a hidden extension of V1.
 
-The first release of these features should demonstrate that:
+Do not begin the next stage until the previous stage's acceptance criteria and data boundaries are agreed. Do not let UI polish obscure storage/data correctness.
 
-- The global directory remains complete and unaffected by candidate preferences.
-- A user can create/edit/export/import a structured candidate profile without sending personal data to a server.
-- Skills can be linked to evidence and accurately distinguish direct, transferable, learning and absent evidence.
-- One approved master resume and motivation letter can be reused without per-studio duplication.
-- Every assessment explains its professional relevance, accessibility/readiness and personal priority separately.
-- Explicit requirements, inference and unknown information are visually and structurally distinct and source-linked.
-- Art-only or otherwise clearly incompatible applications can be excluded from the active queue without deleting the studio from the global directory.
-- Unspecified requirements are not fabricated and do not automatically cause exclusion.
-- Queue records reference canonical studios and persist locally across refreshes.
-- Changes to profile or source information can trigger reassessment without erasing manual decisions or application history.
-- Application preparation and tracking work without any automated submission or external portal interaction.
-- Tests verify browser-local privacy boundaries and prove no candidate data is included in public build assets, network writes, logs or repository files.
+## 10. Acceptance criteria
 
-## 13. Open decisions to resolve during design
+A complete implementation should demonstrate that:
 
-- Exact profile field schema and which fields are optional.
-- Whether resume content is entered manually, extracted from a browser-selected PDF/DOCX, or both.
-- IndexedDB wrapper/schema and export format.
-- Initial role-family taxonomy and whether users can add custom categories.
-- Initial preference weighting and whether priority is user-configured or simple tiers.
-- Exact compatibility labels, thresholds and manual override behavior.
-- How requirements are researched/updated without an AI API or backend.
-- How this new Application Queue relates to the existing My applications tracker, including a single canonical application status model.
-- Whether a future private hosting/backend model is worth the cost and complexity.
+- the global directory remains unchanged by candidate preferences;
+- a candidate can create, edit, export and restore a structured profile without transmitting personal data;
+- skill claims retain evidence relationships and truthful distinctions;
+- approved master materials are reused without silent changes;
+- every match explains relevance, route accessibility/readiness and personal priority separately;
+- employer statements, inference and unknowns remain distinguishable and source-linked;
+- selected targets reference canonical studios and use one application record;
+- requirements analysis does not invent inaccessible or unstated requirements;
+- form fields map to profile facts or are clearly marked as requiring candidate input;
+- draft answers are editable, traceable and never silently approved;
+- the final employer-site review and submission remain user-controlled;
+- only user-confirmed submissions count as Applied or enter application outcome metrics;
+- tracker status, notes and dates survive refreshes and backup/restore;
+- profile changes do not silently rewrite past application materials or submission history;
+- tests verify privacy boundaries and prove personal data is absent from public build assets, network writes, logs and repository files.
 
-These decisions should be documented before implementation when they materially affect data migration, privacy or user experience.
+## 11. Open decisions for system-level design
+
+Resolve these before the relevant implementation:
+
+- Which profile fields should be mandatory, optional or conditionally collected?
+- What is the final schema/versioning model for application requirements and form-field snapshots?
+- How should the static application receive or inspect application-page content when cross-origin access is unavailable?
+- Is user-assisted content capture sufficient for V1, and which sources are permitted?
+- Which ATS platforms and direct employer forms should be used as representative test cases?
+- How are generated answer drafts produced without exposing personal data to an external AI service?
+- How are candidate edits, approved material versions and historic submission snapshots preserved?
+- What is the single status model for Saved, Preparing, Ready, Applied and later outcomes?
+- When, if ever, is a browser extension or private backend justified?
+
+Material changes to privacy, storage migrations or portal interaction require a recorded architecture/product decision and explicit user approval.

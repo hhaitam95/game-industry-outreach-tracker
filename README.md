@@ -1,12 +1,18 @@
 # Game Industry Outreach Tracker
 
-Game Industry Outreach Tracker is a worldwide directory of legitimate video-game development organisations that explicitly accept speculative applications, paired with private, browser-local candidate matching and application tracking.
+Game Industry Outreach Tracker is an end-to-end personal game-industry application workflow built around five connected systems: Studio Discovery, Candidate Profile, Matching Engine, Application Preparation and Application Tracker.
 
-The website has four areas: the worldwide Studio directory, Matches, My applications and My profile. Matches compare a saved Candidate Profile against the active directory and explain professional relevance, route status and personal priority separately. Saved studios continue to move into the existing browser-local application tracker with statuses, submission dates and private notes. Candidate details and documents remain in browser-local IndexedDB with user-controlled backup and restore; matching is calculated on-device and no personal application data is sent to a server.
+Studio Discovery maintains the worldwide directory of studios with verified speculative/open application routes. Candidate Profile is the private source of truth for professional facts, evidence, preferences and approved materials. Matching compares that profile with discovered studios. Application Preparation is the planned fourth system: it is designed to analyze an employer's actual application route, map requirements to candidate information and prepare reviewed answers/materials. Its dedicated workspace is documented but not implemented yet. Application Tracker records user-confirmed submissions and later progress.
+
+The Candidate Profile feeds both Matching and Application Preparation. The existing browser-local My applications item remains the single canonical private record from selection/preparation through confirmed submission and outcomes. Candidate data and application history stay browser-local; matching is calculated on-device. The user reviews all prepared content and performs the final submission on the employer's site.
+
+**Product architecture and workflow:** [Five-System Product Blueprint](docs/architecture/five-system-product-blueprint.md). Read it before changing system boundaries, data ownership, application preparation or the application lifecycle.
+
+**Detailed private-system specification:** [Candidate Profile, Matching, Application Preparation and Tracking](docs/architecture/candidate-profile-matching-application-workspace.md).
 
 **Discovery rules and handover source of truth:** [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md). Read it before changing discovery sources, qualification, exclusions, application verification or coverage cadence.
 
-**Application strategy and handover:** [Studio Targeting and Application Campaign Strategy](docs/architecture/studio-targeting-and-application-campaign.md) records the separate private matching, geographic prioritisation, standard application package, campaign waves, readiness checks and outcome tracking. It does not change global discovery eligibility or authorize automated submission.
+**Application strategy and handover:** [Studio Targeting and Application Campaign Strategy](docs/architecture/studio-targeting-and-application-campaign.md) records private targeting, geographic prioritisation, standard application materials, campaign waves, readiness checks and outcome tracking. It does not change global discovery eligibility or authorize automated submission.
 
 ## Studio directory
 

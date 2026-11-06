@@ -2,7 +2,7 @@
 
 **Status:** Strategy agreed on 2026-11-02; future workflow/design guidance, not a claim of implementation  
 **Scope:** Private studio prioritisation, application-readiness review, coordinated application campaigns and outcome tracking  
-**Depends on:** [Global Discovery Implementation Model](global-discovery-implementation-model.md) and [Candidate Profile, Matching and Application Workspace](candidate-profile-matching-application-workspace.md)
+**Depends on:** [Global Discovery Implementation Model](global-discovery-implementation-model.md) and [Candidate Profile, Matching, Application Preparation and Tracking](candidate-profile-matching-application-workspace.md)
 
 This document preserves the application strategy when work continues in another chat or by another contributor. It complements the global discovery rules; it does not change them.
 
@@ -23,9 +23,11 @@ The intended operating model is:
 
 The system should remove repetitive research and administration, not remove human judgment from application decisions.
 
-## 2. Keep the product layers separate
+## 2. Keep the five systems separate
 
-### 2.1 Global discovery
+The overall workflow is defined in the [Five-System Product Blueprint](five-system-product-blueprint.md). Campaign strategy operates across the private systems without changing the public discovery rules.
+
+### 2.1 Studio Discovery
 
 The public directory remains worldwide, coverage-led and non-personalized. It must not rank, hide, suppress or exclude a studio because of the candidate's location preferences, language preferences, career interests or perceived likelihood of hiring.
 
@@ -33,7 +35,11 @@ The current public directory has a deliberately narrower publication rule than a
 
 There is no arbitrary discovery ceiling. Continue expanding and refreshing coverage when reliable sources and new candidates are available. A global discovery baseline is a practical checkpoint, not proof that every studio worldwide has been found.
 
-### 2.2 Private matching and prioritisation
+### 2.2 Candidate Profile
+
+The Candidate Profile is the private source of truth for candidate facts, skills/evidence, preferences and approved master materials. It is maintained independently of discovery and is reused by both Matching and Application Preparation. Keep it browser-local under the current architecture; do not allow employer data or draft generation to silently overwrite approved candidate facts.
+
+### 2.3 Private matching and prioritisation
 
 The matching layer may order the user's own work queue, but it must not alter public discovery records. Assess these dimensions independently:
 
@@ -46,7 +52,15 @@ Use explainable qualitative assessments and visible reasons. Do not introduce a 
 
 The current matching architecture already separates professional relevance, route status/accessibility and personal priority. Preserve that model rather than replacing it with one composite score.
 
-### 2.3 Application opportunity types
+### 2.4 Application Preparation
+
+Application Preparation is the dedicated stage after a candidate selects a promising match and before the user submits on the employer's site. It should identify actual route/form requirements, documents, questions and constraints where permitted information is accessible; map them to the Candidate Profile; and prepare editable, truthful, user-reviewed answers and checklists. Unknowns remain visible and are never guessed. The current static website cannot inspect every cross-origin, dynamic or authenticated ATS form, so a user-assisted fallback is required. Portal autofill, automatic uploads, email access/sending and automated submission remain separate decisions requiring explicit approval.
+
+### 2.5 Application Tracker
+
+The existing My applications item remains the single canonical private record from selected/preparing target through user-confirmed submission and later outcomes. Preparation must not create a second history. Only user-confirmed submissions count as applications in campaign outcome metrics. The candidate manually updates later statuses as employer communication arrives; email remains external in the initial scope.
+
+### 2.6 Application opportunity types
 
 Keep these concepts distinct in data and UI:
 
@@ -191,13 +205,13 @@ A broken request, blocked page or parser failure is not evidence that a route ha
 
 This sequence is strategic guidance; it does not mark any unimplemented feature as complete.
 
-1. **Preserve broad discovery coverage.** Continue source assessment, deduplication and official verification without candidate-specific filters.
-2. **Strengthen identity and data quality.** Make canonical studio/parent relationships, source provenance, route freshness and unknown values dependable.
-3. **Complete and evaluate private matching.** Use the existing Candidate Profile and separate relevance/accessibility/priority dimensions; test against representative targets and refine false positives/negatives.
-4. **Add requirements intelligence.** Capture only employer-stated route instructions, documents, languages, location and eligibility with source and check date.
-5. **Build the private Application Queue/workspace.** Support quick sequential review, exception flags, standard-material references, user notes and progress.
-6. **Add campaign views and metrics.** Group a reviewed queue into waves/cohorts, support a pre-submission checklist, record outcomes and summarize the funnel.
-7. **Evaluate the first campaign.** Use actual response data to decide whether to revise the profile, broaden role families or expand geography.
+1. **Preserve broad discovery coverage.** Continue source assessment, deduplication and official verification without candidate-specific filters; Discovery V1 remains maintenance-led.
+2. **Complete backend correctness of existing private systems.** Validate Candidate Profile persistence, Matching behavior and the existing My applications record before adding another major feature.
+3. **Design Application Preparation.** Decide the requirements model, permitted page-analysis method and fallback, candidate-to-field mapping, draft-answer rules, material versioning and review flow.
+4. **Implement a non-invasive preparation workspace.** Support sourced requirements, candidate-grounded editable drafts, missing-information warnings, document checklists and direct employer links. The candidate completes and submits externally.
+5. **Integrate the existing tracker lifecycle.** Keep selected/preparing and submitted states on one canonical record; require user confirmation before counting an application as Applied.
+6. **Evaluate the first application cohort.** Use actual response data to decide whether to revise the profile, broaden role families or expand geography.
+7. **Refine campaign views and metrics.** Add manual priority, waves, reminders and funnel reporting when the core workflow is reliable and actual usage justifies them.
 
 Do not let polishing the discovery system or building sophisticated automation indefinitely postpone a real application campaign. Conversely, do not start submitting an unreviewed list merely to reach a numerical target. The readiness gate should be light but meaningful.
 

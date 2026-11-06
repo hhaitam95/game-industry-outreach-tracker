@@ -1,8 +1,24 @@
 # Game Industry Outreach Tracker status
 
-**Last verified:** 2026-11-02  
-**Product scope:** Global directory of legitimate video-game development organisations with verified speculative-application routes, plus a private browser-local Candidate Profile and application tracker.  
+**Last verified:** 2026-11-03  
+**Product scope:** Five connected systems: global Studio Discovery, private Candidate Profile, Matching Engine, Application Preparation and Application Tracker. Application Preparation is documented as the next major product system but is not yet implemented.  
 **Authoritative discovery rules:** [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md).
+
+## Five-system product architecture — 2026-11-03
+
+The agreed product workflow is documented in the [Five-System Product Blueprint](docs/architecture/five-system-product-blueprint.md), with detailed private-system requirements in [Candidate Profile, Matching, Application Preparation and Tracking](docs/architecture/candidate-profile-matching-application-workspace.md).
+
+| System | Current position |
+|---|---|
+| Studio Discovery | V1 scheduled automation and public directory are operational; continue maintenance and genuine reliability fixes. |
+| Candidate Profile | Structured browser-local profile and persistence foundation are implemented; backend correctness and recovery validation continue. |
+| Matching Engine | On-device matching foundation and quality improvements are implemented; deterministic edge-case validation continues. |
+| Application Preparation | New distinct system in the product architecture; requirements analysis, candidate mapping and preparation workspace are not yet implemented. |
+| Application Tracker | Existing browser-local queue/tracker and match handoff are implemented; continue data-integrity hardening and refine the selected/preparing/applied lifecycle. |
+
+The Candidate Profile is an independent input to both Matching and Application Preparation. The existing My applications item remains the single canonical record; it can be selected/preparing before submission and becomes Applied only after the user confirms submission. The new preparation system must not create a second application history. Final employer-site review and submission remain user-controlled.
+
+
 
 ## Candidate Profile persistence integrity — PR #111 (merged and deployed)
 

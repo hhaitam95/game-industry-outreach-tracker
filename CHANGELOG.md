@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-11-03 — Document five-system product architecture
+
+- Define Studio Discovery, Candidate Profile, Matching Engine, Application Preparation and Application Tracker as five distinct but connected product responsibilities.
+- Add a complete workflow/data-ownership blueprint and align the architecture, implementation plan, detailed feature specification, product decisions, contributor guidance, product spec, README, handoff and status documentation.
+- Specify Application Preparation as the stage between Matching and final submission: analyze official requirements where accessible, map fields to candidate facts, prepare editable answers/material checklists, and surface unknowns without guessing.
+- Preserve one canonical private application record from selection/preparation through user-confirmed submission and later outcomes; do not create a duplicate queue/history.
+- Record static-hosting/cross-origin limits and retain a user-assisted fallback. Browser extensions, ATS interaction, autofill, automatic uploads, email integrations and automated submission remain separately gated.
+- Documentation-only change. No application feature, runtime behavior, discovery qualification or data schema is changed by this entry.
+
+
 ## 2026-11-02 — Candidate Profile IndexedDB save-race and recovery hardening (PR #111)
 
 - Track profile edits across asynchronous IndexedDB saves so completion of an older snapshot cannot replace newer in-memory edits or clear the unsaved state.
