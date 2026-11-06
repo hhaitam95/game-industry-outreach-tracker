@@ -20,19 +20,20 @@ The Candidate Profile is an independent input to both Matching and Application P
 
 
 
-## Friday application workflow and preparation foundation — PR #116 (validation in progress)
+## Friday application workflow and preparation V1 — PR #116 (merged and deployed)
 
-PR #116 adds the first practical preparation step to each My applications record and hardens tracker behavior for the first application campaign.
+**Merged on 2026-11-06** as commit [8343c12](https://github.com/hhaitam95/game-industry-outreach-tracker/commit/8343c12e9b62e7fa3d53515cebdf7e3dd3f6dc95). The exact-head PR CI run [42203613709](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/42203613709) passed the full pipeline, including Python discovery tests, all Node unit tests, TypeScript/Vite build, directory/route validation, privacy and Pages-artifact checks, and Chromium browser acceptance. GitHub Pages publication on the merge commit completed successfully in [run 42204022828](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/42204022828).
 
-- Add a **Prepare** panel to each tracked target with six checks: route reverified, requirements/questions reviewed, resume ready, motivation letter reviewed, portfolio ready and draft answers reviewed.
+- Add a **Prepare** panel to each tracked target with six checks: official route rechecked, requirements/questions reviewed, resume ready, motivation letter reviewed, portfolio ready and draft answers reviewed.
 - Keep employer requirements/questions and candidate-grounded draft answers/missing information in separate private fields.
 - Persist the checklist and notes in browser-local storage and include them in tracker backup/restore. Older version-1 tracker backups remain compatible and receive an empty preparation state.
 - Prevent a tracker backup from replacing edits made while the file is being read or reviewed.
 - Require submission confirmation before direct transitions to Applied, Interview or Offer; create the submission date only after confirmation.
 - Generate unique, non-empty tracker IDs when studio names normalize to colliding or empty slugs.
 - Add unit and browser-acceptance coverage for preparation persistence, backup compatibility, tracker import races and submission-stage confirmation.
+- Add the [First Application Campaign Runbook](docs/operations/first-application-campaign-runbook.md).
 
-**Boundary:** This is a manual-assisted preparation workspace. It does not automatically inspect dynamic/authenticated ATS pages, fill external forms, upload files or send email. The user opens the official route, reviews every value and submits manually. Final CI/deployment state must be checked against the latest PR #116 Actions runs before calling this change complete.
+**Boundary:** This is a manual-assisted preparation workspace. It does not automatically inspect dynamic/authenticated ATS pages, fill external forms, upload files or send email. The user opens the official route, reviews every value and submits manually. The post-merge main-branch browser regression workflow [42204022911](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/42204022911) is running separately; the full PR-head browser suite already passed.
 
 ## Candidate Profile persistence integrity — PR #111 (merged and deployed)
 
