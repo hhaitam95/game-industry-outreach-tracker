@@ -246,7 +246,7 @@ The drafting method (manual templates, local processing or optional external AI)
 
 ### 6.5 Current manual-assisted preparation baseline
 
-The first preparation baseline is integrated into each existing My applications record (PR #116; final CI/merge status is tracked in STATUS.md):
+The first preparation baseline is integrated into each existing My applications record (PR #116, merged and deployed; full validation and deployment evidence are in STATUS.md):
 
 - Six readiness checks: official route rechecked, requirements/questions reviewed, resume selected, motivation letter reviewed, portfolio/materials ready and draft answers reviewed.
 - A private text area for employer requirements/application questions.
