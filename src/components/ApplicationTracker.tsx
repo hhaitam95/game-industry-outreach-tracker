@@ -58,7 +58,7 @@ const statusIcons: Record<TrackerStatus, string> = {
 
 export default function ApplicationTracker({
   initialTab = "saved",
-  focusStudioName,
+  focusApplicationId,
   applications,
   onChangeStatus,
   onUpdateNote,
@@ -68,7 +68,7 @@ export default function ApplicationTracker({
   onImportBackup,
 }: {
   initialTab?: string;
-  focusStudioName?: string | null;
+  focusApplicationId?: string | null;
   applications: TrackedApplication[];
   onChangeStatus: (id: string, status: TrackerStatus) => void;
   onUpdateNote: (id: string, note: string) => void;
@@ -136,14 +136,14 @@ export default function ApplicationTracker({
     .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
 
   useEffect(() => {
-    if (!focusStudioName) return;
-    const target = document.getElementById("tracker-row-" + trackerRowId(focusStudioName));
+    if (!focusApplicationId) return;
+    const target = document.getElementById("tracker-row-" + trackerRowId(focusApplicationId));
     if (!target) return;
     target.scrollIntoView({ behavior: "smooth", block: "center" });
     target.classList.add("tracker-row-focused");
     const timer = window.setTimeout(() => target.classList.remove("tracker-row-focused"), 2600);
     return () => window.clearTimeout(timer);
-  }, [focusStudioName, active.status]);
+  }, [focusApplicationId, active.status]);
 
   return (
     <section className="tracker-page">
@@ -234,7 +234,7 @@ export default function ApplicationTracker({
               const note = application.note || "";
               return (
                 <Fragment key={application.id}>
-                  <tr id={"tracker-row-" + trackerRowId(application.studioName)}>
+                  <tr id={"tracker-row-" + trackerRowId(application.id)}>
                     <td>
                       <div className="studio-identity">
                         <StudioMark name={application.studioName} websiteUrl={application.websiteUrl} />
