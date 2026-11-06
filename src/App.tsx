@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { TrackedApplication, TrackerStatus } from "./components/studio.types";
 import StudioDirectory from "./components/StudioDirectory";
 import ApplicationTracker from "./components/ApplicationTracker";
 import CandidateProfile from "./components/CandidateProfile";
 import MatchingDashboard from "./components/MatchingDashboard";
 import { createApplicationTrackerBackup, parseStoredApplicationTracker, readApplicationTrackerBackup } from "./tracker/application-backup.mjs";
+import { createApplicationId } from "./tracker/application-identity.mjs";
 
 const STORAGE_KEY = "studio-outreach-tracker-v1";
 const THEME_STORAGE_KEY = "studio-outreach-theme-v1";
@@ -95,8 +96,9 @@ type StudioLocation = {
 export default function App() {
   const [page, setPage] = useState<"studios" | "matches" | "applications" | "profile">("studios");
   const [trackerInitialTab, setTrackerInitialTab] = useState("saved");
-  const [trackerFocusStudio, setTrackerFocusStudio] = useState<string | null>(null);
+  const [trackerFocusApplicationId, setTrackerFocusApplicationId] = useState<string | null>(null);
   const [applications, setApplications] = useState<TrackedApplication[]>([]);
+  const applicationsRevision = useRef(0);
   const [storageReady, setStorageReady] = useState(false);
   const [storageLoadError, setStorageLoadError] = useState("");
   const [storageError, setStorageError] = useState(false);
@@ -148,13 +150,16 @@ export default function App() {
       setStorageLoadError("Restore a valid application backup before adding or changing tracker records.");
       return;
     }
+    const normalizedName = studio.name.trim().toLocaleLowerCase();
+    if (applications.some((item) => item.studioName.trim().toLocaleLowerCase() === normalizedName)) return;
+
     const timestamp = new Date().toISOString();
+    applicationsRevision.current += 1;
     setApplications((previous) => {
-      const normalizedName = studio.name.trim().toLocaleLowerCase();
       if (previous.some((item) => item.studioName.trim().toLocaleLowerCase() === normalizedName)) return previous;
 
       const next: TrackedApplication = {
-        id: studio.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+        id: createApplicationId(studio.name, previous.map((item) => item.id)),
         studioName: studio.name,
         websiteUrl: studio.websiteUrl,
         applicationUrl: studio.applicationUrl,
@@ -185,18 +190,23 @@ export default function App() {
   function changeStatus(id: string, status: TrackerStatus) {
     if (!storageReady) return;
     const current = applications.find((item) => item.id === id);
-    if (!current) return;
+    if (!current || current.status === status) return;
 
+    const representsSubmittedApplication =
+      status === "applied" || status === "interview" || status === "offer";
+    const needsSubmissionConfirmation = representsSubmittedApplication && !current.appliedAt;
     if (
-      status === "applied" &&
-      current.status !== "applied" &&
+      needsSubmissionConfirmation &&
       !window.confirm(
-        "Confirm that you have submitted an application to " + current.studioName + "?",
+        "Confirm that you have submitted an application to " + current.studioName +
+        " before recording this stage?",
       )
     ) {
       return;
     }
 
+    const timestamp = new Date().toISOString();
+    applicationsRevision.current += 1;
     setApplications((previous) =>
       previous.map((item) =>
         item.id !== id
@@ -204,10 +214,10 @@ export default function App() {
           : {
               ...item,
               status,
-              updatedAt: new Date().toISOString(),
+              updatedAt: timestamp,
               appliedAt:
-                status === "applied"
-                  ? item.appliedAt || new Date().toISOString()
+                representsSubmittedApplication
+                  ? item.appliedAt || timestamp
                   : item.appliedAt,
             },
       ),
@@ -216,6 +226,9 @@ export default function App() {
 
   function updateApplicationNote(id: string, note: string) {
     if (!storageReady) return;
+    const current = applications.find((item) => item.id === id);
+    if (!current || current.note === note) return;
+    applicationsRevision.current += 1;
     setApplications((previous) =>
       previous.map((item) =>
         item.id === id ? { ...item, note, updatedAt: new Date().toISOString() } : item,
@@ -227,6 +240,7 @@ export default function App() {
     if (!storageReady) return;
     const item = applications.find((application) => application.id === id);
     if (!item || !window.confirm("Remove " + item.studioName + " from your tracker?")) return;
+    applicationsRevision.current += 1;
     setApplications((previous) => previous.filter((application) => application.id !== id));
   }
 
@@ -241,12 +255,24 @@ export default function App() {
   }
 
   async function importApplicationBackup(file: File): Promise<number | null> {
+    const importRevision = applicationsRevision.current;
     const imported = await readApplicationTrackerBackup(file);
+    if (applicationsRevision.current !== importRevision) {
+      throw new Error(
+        "Your application tracker changed while the backup was being read. No changes were imported. Select the backup again to review it against the latest records.",
+      );
+    }
     const confirmed = window.confirm(
       "Replace the " + applications.length + " application records currently in this browser with " +
       imported.length + " records from this backup? This cannot be undone.",
     );
     if (!confirmed) return null;
+    if (applicationsRevision.current !== importRevision) {
+      throw new Error(
+        "Your application tracker changed while the backup was being reviewed. No changes were imported. Select the backup again.",
+      );
+    }
+    applicationsRevision.current += 1;
     setApplications(imported);
     setStorageLoadError("");
     setStorageReady(true);
@@ -255,7 +281,7 @@ export default function App() {
   }
 
   function openTracker(tab = "saved") {
-    setTrackerFocusStudio(null);
+    setTrackerFocusApplicationId(null);
     setTrackerInitialTab(tab);
     setPage("applications");
   }
@@ -264,7 +290,7 @@ export default function App() {
     const application = applications.find(item => item.studioName === studioName);
     if (!application) return;
     setTrackerInitialTab(application.status);
-    setTrackerFocusStudio(studioName);
+    setTrackerFocusApplicationId(application.id);
     setPage("applications");
   }
 
@@ -370,7 +396,7 @@ export default function App() {
         {page === "applications" ? (
           <ApplicationTracker
             initialTab={trackerInitialTab}
-            focusStudioName={trackerFocusStudio}
+            focusApplicationId={trackerFocusApplicationId}
             applications={applications}
             onChangeStatus={changeStatus}
             onUpdateNote={updateApplicationNote}
