@@ -6,6 +6,17 @@ export type TrackerStatus =
   | "offer"
   | "archived";
 
+export type ApplicationPreparation = {
+  routeVerified: boolean;
+  requirementsReviewed: boolean;
+  resumeReady: boolean;
+  motivationReady: boolean;
+  portfolioReady: boolean;
+  answersReviewed: boolean;
+  requirementsNotes: string;
+  draftAnswers: string;
+};
+
 export type TrackedApplication = {
   id: string;
   studioName: string;
@@ -30,4 +41,5 @@ export type TrackedApplication = {
   updatedAt: string;
   appliedAt: string | null;
   note: string;
+  preparation?: ApplicationPreparation;
 };
