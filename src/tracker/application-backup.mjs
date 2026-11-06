@@ -3,6 +3,9 @@ const BACKUP_VERSION = 1;
 const MAX_BACKUP_BYTES = 20 * 1024 * 1024;
 const MAX_APPLICATIONS = 10000;
 const MAX_NOTE_LENGTH = 2000;
+const MAX_PREPARATION_TEXT_LENGTH = 10000;
+import { createEmptyApplicationPreparation } from "./application-preparation.mjs";
+
 const VALID_STATUSES = new Set([
   "saved",
   "in_progress",
@@ -79,6 +82,54 @@ function validHttpUrl(value, label) {
 }
 
 /**
+ * Validate preparation notes and checklist state. Older tracker backups receive
+ * a safe empty preparation object so this additive field does not break restore.
+ * @param {unknown} value
+ * @param {string} label
+ * @returns {import("../components/studio.types").ApplicationPreparation}
+ */
+function validateApplicationPreparation(value, label) {
+  if (value === undefined) return createEmptyApplicationPreparation();
+  if (!isRecord(value)) {
+    throw new Error("The preparation details for " + label + " are invalid.");
+  }
+
+  const checklist = [
+    "routeVerified",
+    "requirementsReviewed",
+    "resumeReady",
+    "motivationReady",
+    "portfolioReady",
+    "answersReviewed",
+  ];
+  for (const field of checklist) {
+    if (typeof value[field] !== "boolean") {
+      throw new Error("The preparation checklist for " + label + " contains an invalid " + field + " value.");
+    }
+  }
+
+  const requirementsNotes = value.requirementsNotes === undefined ? "" : value.requirementsNotes;
+  const draftAnswers = value.draftAnswers === undefined ? "" : value.draftAnswers;
+  if (typeof requirementsNotes !== "string" || requirementsNotes.length > MAX_PREPARATION_TEXT_LENGTH) {
+    throw new Error("The requirements notes for " + label + " exceed the 10,000-character limit.");
+  }
+  if (typeof draftAnswers !== "string" || draftAnswers.length > MAX_PREPARATION_TEXT_LENGTH) {
+    throw new Error("The draft answers for " + label + " exceed the 10,000-character limit.");
+  }
+
+  return {
+    routeVerified: value.routeVerified,
+    requirementsReviewed: value.requirementsReviewed,
+    resumeReady: value.resumeReady,
+    motivationReady: value.motivationReady,
+    portfolioReady: value.portfolioReady,
+    answersReviewed: value.answersReviewed,
+    requirementsNotes,
+    draftAnswers,
+  };
+}
+
+/**
  * @param {unknown} value
  * @param {number} index
  * @returns {import("../components/studio.types").TrackedApplication}
@@ -132,6 +183,7 @@ function validateApplication(value, index) {
     updatedAt: requiredString(value.updatedAt, prefix + " updated date", 80),
     appliedAt,
     note,
+    preparation: validateApplicationPreparation(value.preparation, value.studioName),
   };
 }
 
