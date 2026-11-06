@@ -2563,7 +2563,7 @@
     "applicationUrl": "https://careers.fenris.com/en/register-your-interest/new",
     "evidenceUrl": "https://fenris.com/careers",
     "notes": "The official careers FAQ says applicants without a matching vacancy can make a general application and have their CV added to the database. The linked Pinpoint careers platform has a dedicated “Register Your Interest” form under “Speculative Applications”, with CV upload and location/department preferences.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
@@ -2577,7 +2577,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-04"
     }
   },
   {
@@ -2587,7 +2587,7 @@
     "applicationUrl": "https://www.flashbulbgames.com/blank",
     "evidenceUrl": "https://www.flashbulbgames.com/blank",
     "notes": "The official Jobs page states there are currently no open positions and explicitly invites unsolicited applications by email to job@flashbulbgames.com. The studio's July 2026 privacy policy confirms that job applications are processed when submitted by email. Remote and cross-border applicant eligibility are not stated.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "unsolicited",
       "submissionMethods": [
@@ -2601,7 +2601,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-04"
     }
   },
   {
@@ -2611,7 +2611,7 @@
     "applicationUrl": "https://www.flowgamestudio.com/opportunities",
     "evidenceUrl": "https://www.flowgamestudio.com/opportunities",
     "notes": "The official Opportunities page invites Expressions of Interest and provides an email submission route. Flow Studio is based in Brisbane, Australia; remote and international eligibility are not stated.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "discipline_specific",
       "submissionMethods": [
@@ -2627,7 +2627,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-04"
     },
     "submissionMethods": [
       "email"
@@ -2646,7 +2646,7 @@
     "applicationUrl": "https://careers.foolstheory.com/connect",
     "evidenceUrl": "https://careers.foolstheory.com/",
     "notes": "The official Teamtailor Careers site provides an Open Applications/Connect form with discipline selections and future-opportunity notifications. The studio is based in Bielsko-Biała and says remote work is available within approximately two hours of GMT+1; confirm any role-specific country and work-authorisation constraints.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -2669,7 +2669,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-04"
     },
     "submissionMethods": [
       "ats"
@@ -2696,7 +2696,7 @@
     "applicationUrl": "https://formation.games/careers",
     "evidenceUrl": "https://formation.games/careers",
     "notes": "The official Careers page invites general applications and provides a CV/portfolio/cover-letter email route. The studio is identified as a UK-based independent sports-game developer; the page does not state remote or cross-border applicant eligibility.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -2710,7 +2710,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-04"
     },
     "submissionMethods": [
       "email"
@@ -2726,7 +2726,7 @@
     "applicationUrl": "https://frimastudio.com/en/careers/",
     "evidenceUrl": "https://frimastudio.com/en/careers/",
     "notes": "Official Québec careers page lists a Spontaneous Application and invites interested candidates to send an English CV and cover letter.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [
@@ -2740,7 +2740,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-04"
     }
   },
   {
@@ -2750,7 +2750,7 @@
     "applicationUrl": "https://www.frozenbyte.com/careers/",
     "evidenceUrl": "https://www.frozenbyte.com/careers/",
     "notes": "The current official Careers page reports no open vacancies but explicitly accepts open applications year-round and asks for a portfolio plus a short introduction by email. Relocation to Helsinki is preferred; the current page says hybrid and remote arrangements may be supported for the right fit. This is a general spontaneous route, not a current advertised vacancy.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -2766,7 +2766,7 @@
       ],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-04"
     }
   },
   {
@@ -2776,7 +2776,7 @@
     "applicationUrl": "https://www.full-fat.com/jobs/",
     "evidenceUrl": "https://www.full-fat.com/jobs/",
     "notes": "The official Jobs page states there are no current vacancies and explicitly invites speculative applications by email. The page identifies Warwick as the studio location; remote and international applicant eligibility are not stated.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
@@ -2790,7 +2790,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-04"
     },
     "submissionMethods": [
       "email"
