@@ -30,6 +30,16 @@ function application(overrides = {}) {
     updatedAt: "2026-11-02T11:00:00.000Z",
     appliedAt: null,
     note: "Prepare the master resume and check the official route.",
+    preparation: {
+      routeVerified: false,
+      requirementsReviewed: false,
+      resumeReady: false,
+      motivationReady: false,
+      portfolioReady: false,
+      answersReviewed: false,
+      requirementsNotes: "",
+      draftAnswers: "",
+    },
     ...overrides,
   };
 }
@@ -70,6 +80,46 @@ test("application backup preserves official route context and unknowns", () => {
   assert.deepEqual(parsed[0].eligibleLocations, ["Budapest, Hungary · hybrid; applicant eligibility not stated"]);
   assert.deepEqual(parsed[0].disciplineScope, ["Technical support", "QA"]);
   assert.match(parsed[0].routeNotes, /eligibility not stated/);
+});
+
+test("application backup preserves the preparation checklist, requirements and draft answers", () => {
+  const preparation = {
+    routeVerified: true,
+    requirementsReviewed: true,
+    resumeReady: true,
+    motivationReady: false,
+    portfolioReady: true,
+    answersReviewed: false,
+    requirementsNotes: "The employer requests a CV and portfolio URL.",
+    draftAnswers: "Why this studio? — Draft based on my profile; review wording.",
+  };
+  const parsed = parseApplicationTrackerBackup(backup([application({ preparation })]));
+  assert.deepEqual(parsed[0].preparation, preparation);
+});
+
+test("older tracker backups receive an empty preparation checklist", () => {
+  const legacy = application();
+  delete legacy.preparation;
+  const parsed = parseApplicationTrackerBackup(backup([legacy]));
+  assert.deepEqual(parsed[0].preparation, {
+    routeVerified: false,
+    requirementsReviewed: false,
+    resumeReady: false,
+    motivationReady: false,
+    portfolioReady: false,
+    answersReviewed: false,
+    requirementsNotes: "",
+    draftAnswers: "",
+  });
+});
+
+test("malformed preparation checklists and oversized drafts are rejected", () => {
+  assert.throws(() => parseApplicationTrackerBackup(backup([
+    application({ preparation: { routeVerified: "yes" } }),
+  ])), /invalid routeVerified/);
+  assert.throws(() => parseApplicationTrackerBackup(backup([
+    application({ preparation: { ...application().preparation, draftAnswers: "x".repeat(10001) } }),
+  ])), /draft answers.*10,000-character limit/);
 });
 
 test("application backup rejects an unknown format or version", () => {
