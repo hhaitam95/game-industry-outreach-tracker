@@ -1,3 +1,4 @@
+/** @type {Array<{key: Exclude<keyof import("../components/studio.types").ApplicationPreparation, "requirementsNotes" | "draftAnswers">, label: string}>} */
 export const APPLICATION_PREPARATION_CHECKLIST = Object.freeze([
   { key: "routeVerified", label: "Official application route rechecked" },
   { key: "requirementsReviewed", label: "Requirements and questions reviewed" },
