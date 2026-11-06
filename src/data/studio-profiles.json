@@ -12157,6 +12157,31 @@
       "Publisher"
     ]
   },
+  "Pomelo Games": {
+    "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
+    "headquarters": {
+      "city": "Montevideo",
+      "country": "Uruguay",
+      "countryCode": "",
+      "label": "Listed location · GameDevMap"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Mobile"
+    ],
+    "ownership": "Not yet researched",
+    "parentCompany": null,
+    "industryScale": "Mixed / Unclassified",
+    "teamSize": "Not disclosed",
+    "teamSizeAsOf": null,
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://www.gamedevmap.com/index.php?city=&count=100&country=&location=&query=&start=7201&state=&type=",
+      "https://www.pomelogames.com/"
+    ],
+    "applicationLocation": "Not specified · confirm on the official application route"
+  },
   "Pontoco": {
     "description": "Not yet researched. The studio was identified through public game-industry data and has an application route verified on its official site.",
     "headquarters": {

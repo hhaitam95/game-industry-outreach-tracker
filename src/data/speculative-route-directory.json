@@ -2319,7 +2319,7 @@
     "applicationUrl": "https://electricsquare.com/come-join-us/",
     "evidenceUrl": "https://electricsquare.com/come-join-us/",
     "notes": "Official Come Join Us page explicitly welcomes speculative applications when no current vacancy fits and asks applicants to email a CV and cover letter to Charlotte.pook@electricsquare.com. Electric Square has bases in the UK and Malta and says its flexible work-from-home policy allows it to consider candidates from anywhere in the world. Applicant work rights and the exact arrangement remain role-specific.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
@@ -2333,7 +2333,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-04"
     }
   },
   {
@@ -2368,7 +2368,7 @@
     "applicationUrl": "https://embers.games/",
     "evidenceUrl": "https://embers.games/",
     "notes": "The official site identifies Embers as a game studio in Strasbourg and invites general applications through its contact channel. The page lists the Strasbourg address; remote and international applicant eligibility are not stated.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -2382,7 +2382,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-04"
     },
     "submissionMethods": [
       "email"
@@ -2398,7 +2398,7 @@
     "applicationUrl": "https://careers.facepunch.com/jobs/5154164/applications/new?iframe=true",
     "evidenceUrl": "https://facepunch.com/careers",
     "notes": "Official careers page explicitly says it accepts general applications when no listed role fits. The linked Teamtailor General Application form collects a CV, portfolio/GitHub URL, country and preferred discipline. Facepunch describes itself as remote-first and says applicants can work from wherever they prefer, subject to local employment laws.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -2428,7 +2428,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-04"
     }
   },
   {
@@ -2438,7 +2438,7 @@
     "applicationUrl": "https://www.fakefishgames.com/jobs/open-application",
     "evidenceUrl": "https://www.fakefishgames.com/jobs",
     "notes": "Official Careers page explicitly tells candidates not to hesitate to fill out the Open Application form if no current role fits. The dedicated application asks candidates who do not see their job listed to submit information so the studio can keep them in mind for future opportunities. FakeFish is an independent game-development studio working on Barotrauma and an undisclosed second game. Its current About page describes a flexible workplace with headquarters in Turku and a smaller Helsinki office. The Open Application page reports a team of about 25 people as of early 2023; the current homepage describes about 20 people, so the older role-page figure should not be treated as current headcount.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -2463,7 +2463,7 @@
       ],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-04"
     }
   },
   {
@@ -2473,7 +2473,7 @@
     "applicationUrl": "https://www.fasttravelgames.com/career",
     "evidenceUrl": "https://www.fasttravelgames.com/career",
     "notes": "The official Careers page invites open applications by email to career@fasttravelgames.com. Fast Travel Games is a Stockholm-based VR developer and publisher; the open route does not state remote or cross-border eligibility.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -2487,7 +2487,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-04"
     },
     "submissionMethods": [
       "email"
@@ -2503,7 +2503,7 @@
     "applicationUrl": "https://favogames.com/careers",
     "evidenceUrl": "https://favogames.com/careers",
     "notes": "The official Careers page has an explicit Open application option for candidates with skills not listed in the current roles and asks how they would improve the studio's games. The site form accepts a CV and portfolio link, is used to consider applicants for jobs, and says the studio replies to every application. The five-person Istanbul team says it works remotely from anywhere; country-specific legal/contract arrangements are not detailed.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -2517,7 +2517,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-04"
     }
   },
   {
@@ -2527,7 +2527,7 @@
     "applicationUrl": "https://fawkesgames.com/en/careers/",
     "evidenceUrl": "https://fawkesgames.com/en/careers/",
     "notes": "The official Careers page explicitly invites spontaneous applications by email and says work can be remote from anywhere. Its landing page still lists five freelance disciplines (Unity game engineering, 2D game art, game design, production and pixel art), with Europe-friendly time zones preferred. The linked Breezy ATS currently exposes one concrete vacancy: Senior Unreal Engineer (contractor), worldwide remote, 12-month contract, Eastern Europe preferred, requiring 5+ years of Unreal Engine and strong C++/Blueprint/shader experience. The landing-page role list and live ATS board are not fully aligned; confirm the specific role before applying.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [
@@ -2553,7 +2553,7 @@
       ],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-04"
     }
   },
   {
@@ -5674,6 +5674,30 @@
       "sourceType": "employer_managed_career_platform",
       "nextReviewAt": "2027-01-30"
     }
+  },
+  {
+    "name": "Pomelo Games",
+    "country": "Uruguay",
+    "websiteUrl": "https://www.pomelogames.com/",
+    "applicationUrl": "https://www.pomelogames.com/careers/",
+    "evidenceUrl": "https://www.pomelogames.com/careers/",
+    "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: Speculative Application. Hiring geography is not inferred from headquarters.",
+    "checkedAt": "2026-11-06",
+    "applicationResearch": {
+      "routeType": "speculative",
+      "submissionMethods": [
+        "email",
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-02-04"
+    },
+    "addedAt": "2026-11-06T16:23:24Z"
   },
   {
     "name": "Pontoco",
