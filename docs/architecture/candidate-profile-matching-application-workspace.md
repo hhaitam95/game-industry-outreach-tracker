@@ -5,7 +5,7 @@
 **Product overview:** [Five-System Product Blueprint](five-system-product-blueprint.md).  
 **Related strategy:** [Studio Targeting and Application Campaign Strategy](studio-targeting-and-application-campaign.md).
 
-**Implementation status:** Candidate Profile foundation is merged/deployed (PR #95) with persistence hardening in PR #111; Matching foundation and focused quality improvements are merged/deployed (PRs #96 and #104); the basic match-to-tracker handoff and local tracker backup/recovery are implemented (PRs #107 and #110). The Application Preparation system described below is a design target, not an implemented feature. The existing tracker remains the canonical private application record.
+**Implementation status:** Candidate Profile foundation is merged/deployed (PR #95) with persistence hardening in PR #111; Matching foundation and focused quality improvements are merged/deployed (PRs #96 and #104); the basic match-to-tracker handoff and local tracker backup/recovery are implemented (PRs #107 and #110). The Application Preparation system now has a manual-assisted baseline: a per-application checklist plus private requirement/question and draft-answer notes, included in tracker backup/restore. Automated application-page analysis and ATS interaction remain future work. The existing tracker remains the canonical private application record.
 
 ## 1. Product direction and system boundaries
 
@@ -244,7 +244,19 @@ A field mapping must not silently equate different facts (for example, headquart
 
 The drafting method (manual templates, local processing or optional external AI) must be decided separately. External AI processing is not assumed and requires explicit privacy review and user approval.
 
-### 6.5 Review and handoff
+### 6.5 Current manual-assisted preparation baseline
+
+The first preparation baseline is integrated into each existing My applications record (PR #116; final CI/merge status is tracked in STATUS.md):
+
+- Six readiness checks: official route rechecked, requirements/questions reviewed, resume selected, motivation letter reviewed, portfolio/materials ready and draft answers reviewed.
+- A private text area for employer requirements/application questions.
+- A separate private text area for draft answers and missing information.
+- Automatic browser-local persistence and inclusion in tracker backup/restore.
+- Legacy tracker backups without a preparation object receive a safe empty checklist during validation.
+
+This baseline helps the candidate organize manual review; it does not read the live ATS form, prove that every requirement is complete or submit anything. The candidate must still open and inspect the actual employer page.
+
+### 6.6 Review and handoff
 
 The workspace should provide one reviewable view containing:
 
