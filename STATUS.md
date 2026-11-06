@@ -33,7 +33,7 @@ The Candidate Profile is an independent input to both Matching and Application P
 - Add unit and browser-acceptance coverage for preparation persistence, backup compatibility, tracker import races and submission-stage confirmation.
 - Add the [First Application Campaign Runbook](docs/operations/first-application-campaign-runbook.md).
 
-**Boundary:** This is a manual-assisted preparation workspace. It does not automatically inspect dynamic/authenticated ATS pages, fill external forms, upload files or send email. The user opens the official route, reviews every value and submits manually. The post-merge main-branch browser regression workflow [42204022911](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/42204022911) is running separately; the full PR-head browser suite already passed.
+**Boundary:** This is a manual-assisted preparation workspace. It does not automatically inspect dynamic/authenticated ATS pages, fill external forms, upload files or send email. The user opens the official route, reviews every value and submits manually. The post-merge main-branch build and Chromium browser regression passed in [run 42204582887](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/42204582887). After the final documentation sync, GitHub Pages was republished successfully in [run 42204582874](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/42204582874).
 
 ## Candidate Profile persistence integrity — PR #111 (merged and deployed)
 
