@@ -2805,8 +2805,8 @@
     "websiteUrl": "https://www.funatic.games/",
     "applicationUrl": "https://www.funatic.games/careers",
     "evidenceUrl": "https://www.funatic.games/careers",
-    "notes": "Official careers page offers a General Application for artists, programmers, game designers, producers and other future collaborators. The studio describes itself as an early-stage independent game developer; headquarters and applicant-country eligibility are not publicly stated.",
-    "checkedAt": "2026-10-30",
+    "notes": "Official careers page offers a General Application for artists, programmers, game designers, producers and other future collaborators. The studio describes itself as an early-stage independent game developer; headquarters and applicant-country eligibility are not publicly stated. Automated route review: marked closed after all configured official application/evidence URLs returned 404/410 on two consecutive checks.",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -2816,9 +2816,9 @@
       "eligibleLocations": [],
       "disciplineScope": [],
       "relatedApplicationUrls": [],
-      "routeStatus": "active",
+      "routeStatus": "closed",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2026-11-06"
     }
   },
   {
@@ -2828,7 +2828,7 @@
     "applicationUrl": "https://joinus.fundaygames.dk/jobs/7277761-unsolicited-application",
     "evidenceUrl": "https://joinus.fundaygames.dk/jobs/7277761-unsolicited-application",
     "notes": "Official Teamtailor Unsolicited Application invites CVs and a brief introduction when no current position matches. The application is listed as hybrid in Aarhus; broader applicant-country eligibility is not stated.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "unsolicited",
       "submissionMethods": [
@@ -2840,7 +2840,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-04"
     }
   },
   {
@@ -2850,7 +2850,7 @@
     "applicationUrl": "https://www.funder-games.com/careers/general-application/",
     "evidenceUrl": "https://www.funder-games.com/careers/",
     "notes": "Official General Application invites senior contributors with shipped work and production judgment. IMPORTANT: the studio says its current development roles are volunteer collaborations while its project pursues funding and publishing; there are no guaranteed paid roles at this stage. The team works fully remotely, mainly around US Central Time with flexibility for contributors elsewhere. The application page says the studio responds only when there is a strong fit.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -2873,7 +2873,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-04"
     }
   },
   {
@@ -2883,7 +2883,7 @@
     "applicationUrl": "https://funnytales.us/contact-us/",
     "evidenceUrl": "https://funnytales.us/contact-us/",
     "notes": "The official Contact page identifies the operator as Digital Tales LLC (DBA Funny Tales), lists a Miami, Florida office and includes a spontaneous-application option in its form. Applicant location and remote eligibility are not stated.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [
@@ -2897,7 +2897,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-04"
     },
     "eligibleLocations": [
       "Miami, Florida, USA · applicant-country and remote eligibility not stated"
@@ -2910,7 +2910,7 @@
     "applicationUrl": "https://futurats.com/work-with-us/",
     "evidenceUrl": "https://futurats.com/work-with-us/",
     "notes": "The official Work With Us page states there are no open positions but explicitly invites spontaneous applications by email. It also lists current Turin hybrid vacancies and an EU-time-zone remote freelance designer role; the spontaneous route does not define separate applicant-country eligibility.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -2924,7 +2924,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-04"
     },
     "submissionMethods": [
       "email"
@@ -2940,7 +2940,7 @@
     "applicationUrl": "https://www.futureplaygames.com/careers/career",
     "evidenceUrl": "https://www.futureplaygames.com/careers/career",
     "notes": "Official Open Application covers general disciplines and explicitly lists Remote: Global for people passionate about the game industry.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -2954,7 +2954,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-04"
     }
   },
   {
@@ -2964,7 +2964,7 @@
     "applicationUrl": "https://g7works.com/en/careers/",
     "evidenceUrl": "https://g7works.com/en/careers/",
     "notes": "Saudi-based G7 Studio has a General Application for game development and future opportunities; roles and working arrangements can be discussed if there's a fit.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -2976,7 +2976,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-04"
     }
   },
   {
@@ -2986,7 +2986,7 @@
     "applicationUrl": "https://hrmos.co/pages/gamefreak/jobs/10-4",
     "evidenceUrl": "https://hrmos.co/pages/gamefreak/jobs/10-4",
     "notes": "The official GAME FREAK recruiting site links to the employer's HRMOS recruitment system; the company-branded Career Registration listing invites candidates to register their career experience even when they do not currently have a target position, so HR can contact them if a suitable role or hiring event arises. The registration is for regular employees, retained for up to two years, and does not guarantee a matching opening or contact. The official FAQ confirms overseas applications are accepted; business-level Japanese is required for all positions and approximately JLPT N1 is specified for development work. The Career Registration listing itself does not state work-model or specific role location; GAME FREAK's HQ is in Tokyo.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -3011,7 +3011,7 @@
       ],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-04"
     }
   },
   {
