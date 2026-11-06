@@ -12,7 +12,10 @@ on:
       - "src/data/speculative-route-directory.json"
       - "src/data/studio-profiles.json"
   schedule:
+    # Primary hourly trigger.
     - cron: "17 * * * *"
+    # Offset fallback; the guard below suppresses a duplicate if the primary ran.
+    - cron: "47 * * * *"
   workflow_dispatch:
     inputs:
       mode:
@@ -24,19 +27,82 @@ on:
         default: bulk
         required: true
 
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
 concurrency:
   group: studio-discovery-v4-${{ github.repository }}
   cancel-in-progress: false
   queue: max
 
 jobs:
+  schedule-guard:
+    name: Avoid redundant scheduled discovery runs
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+    outputs:
+      proceed: ${{ steps.guard.outputs.proceed }}
+    steps:
+      - name: Check for a recent successful discovery run
+        id: guard
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if [ "$GITHUB_EVENT_NAME" != "schedule" ]; then
+            echo "proceed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if ! runs_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/discover-studios.yml/runs?branch=main&per_page=100" 2>/dev/null)"; then
+            echo "proceed=true" >> "$GITHUB_OUTPUT"
+            echo "Could not inspect recent workflow history; failing open so discovery can proceed."
+            exit 0
+          fi
+
+          if ! recent_timestamp="$(jq -r --arg current "$GITHUB_RUN_ID" '
+            [
+              .workflow_runs[]
+              | select((.id | tostring) != $current)
+              | select(
+                  .status == "in_progress"
+                  or (.status == "completed" and .conclusion == "success")
+                )
+              | (if .status == "in_progress" then .run_started_at else .updated_at end)
+              | select(. != null)
+            ]
+            | sort
+            | last // empty
+          ' <<< "$runs_json" 2>/dev/null)"; then
+            echo "proceed=true" >> "$GITHUB_OUTPUT"
+            echo "Could not parse workflow history; failing open so discovery can proceed."
+            exit 0
+          fi
+
+          if [ -n "$recent_timestamp" ]; then
+            now="$(date -u +%s)"
+            if ! recent_epoch="$(date -u -d "$recent_timestamp" +%s 2>/dev/null)"; then
+              echo "proceed=true" >> "$GITHUB_OUTPUT"
+              echo "Could not parse the prior run timestamp; failing open so discovery can proceed."
+              exit 0
+            fi
+            age_seconds=$((now - recent_epoch))
+            if [ "$age_seconds" -ge 0 ] && [ "$age_seconds" -lt 1200 ]; then
+              echo "proceed=false" >> "$GITHUB_OUTPUT"
+              echo "A successful or active discovery run was recorded ${age_seconds}s ago; skipping this redundant scheduled batch."
+              exit 0
+            fi
+          fi
+
+          echo "proceed=true" >> "$GITHUB_OUTPUT"
+          echo "No recent successful or active discovery run; proceeding."
+
   discover-and-publish:
-    if: github.ref == 'refs/heads/main'
+    needs: schedule-guard
+    if: github.ref == 'refs/heads/main' && needs.schedule-guard.outputs.proceed == 'true'
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
     runs-on: ubuntu-latest
     timeout-minutes: 40
     environment:
