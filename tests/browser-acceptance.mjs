@@ -904,6 +904,12 @@ async function main() {
     await page.getByRole("tab", { name: /In progress/ }).click();
     status = page.getByLabel("Status for 4A Games");
 
+    const bypassAttempt = await performWithDialog(page, () => status.selectOption("interview"), false);
+    assert.equal(bypassAttempt.type, "confirm");
+    assert.match(bypassAttempt.message, /Confirm that you have submitted an application/);
+    assert.equal(await status.inputValue(), "in_progress", "An interview status must not bypass submission confirmation.");
+    assert.equal((await trackedRow.locator(".applied-date").textContent())?.trim(), "—", "A cancelled interview transition must not create a submitted date.");
+
     const cancelledApply = await performWithDialog(page, () => status.selectOption("applied"), false);
     assert.equal(cancelledApply.type, "confirm");
     assert.match(cancelledApply.message, /Confirm that you have submitted an application/);
@@ -984,6 +990,46 @@ async function main() {
     const storedAfterRestore = await page.evaluate((key) => JSON.parse(localStorage.getItem(key) || "[]"), storageKey);
     assert.equal(storedAfterRestore.length, 1);
     assert.equal(storedAfterRestore[0].studioName, "4A Games");
+
+    // A backup read must not overwrite tracker edits made while the file is being read.
+    await page.evaluate(() => {
+      const originalText = File.prototype.text;
+      let pauseNextRead = true;
+      Object.defineProperty(File.prototype, "text", {
+        configurable: true,
+        writable: true,
+        value: function () {
+          if (!pauseNextRead) return originalText.call(this);
+          pauseNextRead = false;
+          window.__trackerBackupReadStarted = true;
+          return new Promise((resolve, reject) => {
+            window.__releaseTrackerBackupRead = () => {
+              originalText.call(this).then(resolve, reject);
+            };
+          });
+        },
+      });
+    });
+    const raceRestoreInput = page.locator(".tracker-page input[type=\"file\"][accept=\".json,application/json\"]");
+    await raceRestoreInput.setInputFiles(trackerBackupPath);
+    await page.waitForFunction(() => window.__trackerBackupReadStarted === true);
+    const trackerNoteDuringImport = "Updated while the backup file was being read; keep this version.";
+    await restoredTrackerRow.getByRole("button", { name: "Edit notes for 4A Games" }).click();
+    await page.getByLabel("Application notes · 4A Games").fill(trackerNoteDuringImport);
+    await page.evaluate(() => window.__releaseTrackerBackupRead?.());
+    await page.getByText(/Your application tracker changed while the backup was being read/).waitFor();
+    assert.equal(
+      await page.getByLabel("Application notes · 4A Games").inputValue(),
+      trackerNoteDuringImport,
+      "An edit made while the backup was being read must remain visible.",
+    );
+    const trackerAfterCancelledImport = await page.evaluate((key) => JSON.parse(localStorage.getItem(key) || "[]"), storageKey);
+    assert.equal(trackerAfterCancelledImport.length, 1);
+    assert.equal(
+      trackerAfterCancelledImport[0].note,
+      trackerNoteDuringImport,
+      "A stale backup import must not replace the newer browser-local tracker note.",
+    );
 
     // Check both mobile layouts and ensure the directory table scrolls inside its container.
     await page.getByRole("button", { name: "Browse studios" }).click();
