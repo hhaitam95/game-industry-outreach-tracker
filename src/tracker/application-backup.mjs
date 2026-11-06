@@ -118,12 +118,12 @@ function validateApplicationPreparation(value, label) {
   }
 
   return {
-    routeVerified: value.routeVerified,
-    requirementsReviewed: value.requirementsReviewed,
-    resumeReady: value.resumeReady,
-    motivationReady: value.motivationReady,
-    portfolioReady: value.portfolioReady,
-    answersReviewed: value.answersReviewed,
+    routeVerified: value.routeVerified === true,
+    requirementsReviewed: value.requirementsReviewed === true,
+    resumeReady: value.resumeReady === true,
+    motivationReady: value.motivationReady === true,
+    portfolioReady: value.portfolioReady === true,
+    answersReviewed: value.answersReviewed === true,
     requirementsNotes,
     draftAnswers,
   };
@@ -154,9 +154,11 @@ function validateApplication(value, index) {
     throw new Error("The note for " + prefix + " exceeds 2,000 characters.");
   }
 
+  const studioName = requiredString(value.studioName, prefix + " studio name", 300);
+
   return {
     id: requiredString(value.id, prefix + " ID", 200),
-    studioName: requiredString(value.studioName, prefix + " studio name", 300),
+    studioName,
     websiteUrl: validHttpUrl(value.websiteUrl, prefix + " studio URL"),
     applicationUrl: validHttpUrl(value.applicationUrl, prefix + " application URL"),
     country: typeof value.country === "string" && value.country.length <= 160 ? value.country : "Not stated",
@@ -183,7 +185,7 @@ function validateApplication(value, index) {
     updatedAt: requiredString(value.updatedAt, prefix + " updated date", 80),
     appliedAt,
     note,
-    preparation: validateApplicationPreparation(value.preparation, value.studioName),
+    preparation: validateApplicationPreparation(value.preparation, studioName),
   };
 }
 
