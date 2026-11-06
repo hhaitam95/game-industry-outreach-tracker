@@ -2114,7 +2114,7 @@
     "applicationUrl": "https://deck13.jobs.personio.de/job/2725779?language=en",
     "evidenceUrl": "https://deck13.jobs.personio.de/job/2725779?language=en",
     "notes": "The studio-controlled Personio listing is a General Application for candidates whose skills do not match an advertised role and explicitly welcomes freelancers. The listing states Remote (EU), full-time, and permanent employment. The official studio site identifies Frankfurt am Main as its original studio location and also references a Montreal branch.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -2134,7 +2134,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-04"
     }
   },
   {
@@ -2144,7 +2144,7 @@
     "applicationUrl": "https://dionicsoftware.com/jobs.html",
     "evidenceUrl": "https://dionicsoftware.com/jobs.html",
     "notes": "Official jobs page invites speculative approaches when no role fits. Employment is Germany-only; freelancers can usually work from European time zones. Work model: remote.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
@@ -2158,7 +2158,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-04"
     }
   },
   {
@@ -2168,7 +2168,7 @@
     "applicationUrl": "https://dogfishgames.com/jobs/",
     "evidenceUrl": "https://dogfishgames.com/jobs/",
     "notes": "Official jobs page invites General Applications across all teams despite having no current openings. Full-time and remote; applicants must be based in or willing to work within Canadian time zones.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -2182,7 +2182,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-04"
     }
   },
   {
@@ -2217,7 +2217,7 @@
     "applicationUrl": "https://jobs.smartrecruiters.com/DONTNOD/744000056999494-spontaneous-application",
     "evidenceUrl": "https://jobs.smartrecruiters.com/DONTNOD/744000056999494-spontaneous-application",
     "notes": "Official SmartRecruiters Spontaneous Application for DON'T NOD Montreal. Invites applications when the career site has no matching role; Montreal-specific.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [
@@ -2231,7 +2231,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-04"
     }
   },
   {
@@ -2241,7 +2241,7 @@
     "applicationUrl": "https://apply.workable.com/double-eleven/j/99F32D8BF0",
     "evidenceUrl": "https://double11.com/vacancies/",
     "notes": "Official Vacancies page lists separate Expression of Interest forms for the UK and Kuala Lumpur, both hosted on Double Eleven's Workable account. The UK form is the primary route; the Kuala Lumpur form is included as a related application URL. Double Eleven describes itself as an independent studio with offices/hiring locations in the UK and Malaysia. Applicant eligibility and work model should be confirmed on the relevant location-specific form.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -2258,7 +2258,7 @@
       ],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-04"
     }
   },
   {
@@ -2268,7 +2268,7 @@
     "applicationUrl": "https://www.ernstborg.studio/career",
     "evidenceUrl": "https://www.ernstborg.studio/career",
     "notes": "Official Careers page explicitly says applicants may submit an open application by emailing a CV and portfolio to job@ernstborg.studio. The studio is based in Malmö and says relocation help may be available for the right candidate. No remote-work or applicant-country eligibility is stated.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -2287,7 +2287,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-04"
     }
   },
   {
@@ -2297,7 +2297,7 @@
     "applicationUrl": "https://www.eidosmontreal.com/careers/",
     "evidenceUrl": "https://www.eidosmontreal.com/news/tips-for-your-application/",
     "notes": "Paused pending a directly usable general submission channel. Eidos-Montréal's official application advice article explicitly discusses spontaneous applications and asks candidates to prepare a CV, cover letter and portfolio, but its linked Careers page currently exposes individual job postings through Dayforce and no dedicated open/general application form. The record is retained for review; do not treat the current job list as a verified general application route.",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-06",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [],
@@ -2309,7 +2309,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "paused",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-28"
+      "nextReviewAt": "2027-02-04"
     }
   },
   {
