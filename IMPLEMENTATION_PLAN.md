@@ -80,7 +80,7 @@ The output of this phase should be a feature-level specification, interaction fl
 
 ### Phase 3 — Implement Application Preparation V1
 
-**Initial manual-assisted foundation implemented in PR #116 (pending final verification):** each My applications record has a Prepare panel with six readiness checks, an employer requirements/questions notes field and a separate draft-answers/missing-information field. These values stay browser-local and are preserved by tracker backup/restore. This provides a usable preparation stage without claiming automatic employer-page analysis.
+**Initial manual-assisted foundation implemented, merged and deployed in PR #116:** each My applications record has a Prepare panel with six readiness checks, an employer requirements/questions notes field and a separate draft-answers/missing-information field. These values stay browser-local and are preserved by tracker backup/restore. This provides a usable preparation stage without claiming automatic employer-page analysis.
 
 Remaining scope in this phase is to design reliable official-route analysis and user-assisted content capture for forms that cannot be inspected safely.
 
