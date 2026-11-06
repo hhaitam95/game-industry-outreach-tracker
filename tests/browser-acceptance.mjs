@@ -1014,7 +1014,7 @@ async function main() {
     await raceRestoreInput.setInputFiles(trackerBackupPath);
     await page.waitForFunction(() => window.__trackerBackupReadStarted === true);
     const trackerNoteDuringImport = "Updated while the backup file was being read; keep this version.";
-    await restoredTrackerRow.getByRole("button", { name: "Edit notes for 4A Games" }).click();
+    // The notes editor was opened above to verify the restored value; keep it open during the race.
     await page.getByLabel("Application notes · 4A Games").fill(trackerNoteDuringImport);
     await page.evaluate(() => window.__releaseTrackerBackupRead?.());
     await page.getByText(/Your application tracker changed while the backup was being read/).waitFor();
