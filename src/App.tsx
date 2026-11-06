@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { TrackedApplication, TrackerStatus } from "./components/studio.types";
+import type { ApplicationPreparation, TrackedApplication, TrackerStatus } from "./components/studio.types";
 import StudioDirectory from "./components/StudioDirectory";
 import ApplicationTracker from "./components/ApplicationTracker";
 import CandidateProfile from "./components/CandidateProfile";
 import MatchingDashboard from "./components/MatchingDashboard";
 import { createApplicationTrackerBackup, parseStoredApplicationTracker, readApplicationTrackerBackup } from "./tracker/application-backup.mjs";
 import { createApplicationId } from "./tracker/application-identity.mjs";
+import { createEmptyApplicationPreparation } from "./tracker/application-preparation.mjs";
 
 const STORAGE_KEY = "studio-outreach-tracker-v1";
 const THEME_STORAGE_KEY = "studio-outreach-theme-v1";
@@ -182,6 +183,7 @@ export default function App() {
         updatedAt: timestamp,
         appliedAt: status === "applied" ? timestamp : null,
         note: "",
+        preparation: createEmptyApplicationPreparation(),
       };
       return [next, ...previous];
     });
@@ -232,6 +234,20 @@ export default function App() {
     setApplications((previous) =>
       previous.map((item) =>
         item.id === id ? { ...item, note, updatedAt: new Date().toISOString() } : item,
+      ),
+    );
+  }
+
+  function updateApplicationPreparation(id: string, preparation: ApplicationPreparation) {
+    if (!storageReady) return;
+    const current = applications.find((item) => item.id === id);
+    if (!current || JSON.stringify(current.preparation || createEmptyApplicationPreparation()) === JSON.stringify(preparation)) return;
+    applicationsRevision.current += 1;
+    setApplications((previous) =>
+      previous.map((item) =>
+        item.id === id
+          ? { ...item, preparation, updatedAt: new Date().toISOString() }
+          : item,
       ),
     );
   }
@@ -400,6 +416,7 @@ export default function App() {
             applications={applications}
             onChangeStatus={changeStatus}
             onUpdateNote={updateApplicationNote}
+            onUpdatePreparation={updateApplicationPreparation}
             onRemove={removeApplication}
             onOpenDirectory={() => setPage("studios")}
             onExportBackup={exportApplicationBackup}
