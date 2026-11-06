@@ -897,6 +897,28 @@ async function main() {
     assert.equal(await trackedRow.count(), 1, "The saved studio should remain after reload.");
     await trackedRow.getByRole("button", { name: "Edit notes for 4A Games" }).click();
     assert.equal(await page.getByLabel("Application notes · 4A Games").inputValue(), savedNote, "Application notes should persist after reload.");
+
+    // Prepare an application with a private checklist, employer requirements and draft answers.
+    await trackedRow.getByRole("button", { name: "Prepare application for 4A Games" }).click();
+    const requirementNotes = "The official form asks for a CV, portfolio URL, preferred discipline and a short motivation answer.";
+    const answerDrafts = "Motivation: I enjoy solving technical problems close to game development teams.\nDiscipline: Developer support / technical operations.";
+    await page.getByLabel("Official application route rechecked · 4A Games").check();
+    await page.getByLabel("Requirements and questions reviewed · 4A Games").check();
+    await page.getByLabel("Employer requirements & application questions · 4A Games").fill(requirementNotes);
+    await page.getByLabel("Draft answers & missing information · 4A Games").fill(answerDrafts);
+    await page.getByText("2 / 6 ready").waitFor();
+    await page.getByLabel("Search tracker").fill("preferred discipline");
+    assert.equal(await trackedRow.count(), 1, "Preparation notes should be included in tracker search.");
+    await page.getByLabel("Search tracker").fill("");
+    await page.reload({ waitUntil: "networkidle" });
+    await page.getByRole("button", { name: /My applications/ }).click();
+    trackedRow = page.locator(".tracker-table tbody tr").filter({ has: page.locator(".status-select-label") }).filter({ hasText: "4A Games" });
+    await trackedRow.waitFor();
+    await trackedRow.getByRole("button", { name: "Prepare application for 4A Games" }).click();
+    assert.equal(await page.getByLabel("Official application route rechecked · 4A Games").isChecked(), true);
+    assert.equal(await page.getByLabel("Requirements and questions reviewed · 4A Games").isChecked(), true);
+    assert.equal(await page.getByLabel("Employer requirements & application questions · 4A Games").inputValue(), requirementNotes);
+    assert.equal(await page.getByLabel("Draft answers & missing information · 4A Games").inputValue(), answerDrafts);
     status = page.getByLabel("Status for 4A Games");
 
     // Move through every tracker status. The Applied transition must require confirmation.
@@ -947,6 +969,10 @@ async function main() {
     assert.equal(trackerBackup.applications[0].studioName, "4A Games");
     assert.equal(trackerBackup.applications[0].status, "archived");
     assert.equal(trackerBackup.applications[0].note, savedNote);
+    assert.equal(trackerBackup.applications[0].preparation.routeVerified, true);
+    assert.equal(trackerBackup.applications[0].preparation.requirementsReviewed, true);
+    assert.equal(trackerBackup.applications[0].preparation.requirementsNotes, requirementNotes);
+    assert.equal(trackerBackup.applications[0].preparation.draftAnswers, answerDrafts);
 
     const cancelledRemoval = await performWithDialog(
       page,
