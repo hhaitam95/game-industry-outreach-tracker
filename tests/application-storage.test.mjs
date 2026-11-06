@@ -58,6 +58,7 @@ test("older valid tracker records receive defaults for fields introduced later",
   assert.equal(result.applications[0].country, "Not stated");
   assert.equal(result.applications[0].hqLabel, "Not specified");
   assert.equal(result.applications[0].note, "");
+  assert.equal(result.applications[0].preparation.routeVerified, false, "Legacy tracker records should receive an empty preparation checklist.");
 });
 
 test("invalid JSON is reported instead of being treated as an empty tracker", () => {
