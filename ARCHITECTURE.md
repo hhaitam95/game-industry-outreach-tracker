@@ -54,8 +54,10 @@ Detailed source qualification, permitted feeds, verification and coverage rules 
 - Analyze only information available through permitted access; distinguish explicit requirements, cautious inference and unknowns.
 - Extract or organize form fields, application questions, required/optional documents, portfolio needs, file constraints, language, location and eligibility instructions where available.
 - Map these requirements to profile evidence and approved materials; expose missing information rather than guessing.
+- The current manual-assisted first version in My applications provides six preparation checks, private employer-requirements/question notes and a separate draft-answer/missing-information area. It persists locally and is included in tracker backup/restore.
 - Produce editable answer drafts, document/checklist guidance and direct employer links.
 - Keep the candidate in control of review and all final portal actions.
+- Live application-page parsing, cross-origin ATS inspection, autofill and automatic uploads are not implemented.
 
 The static GitHub Pages application cannot reliably inspect arbitrary cross-origin or authenticated ATS pages. Dynamic forms, CORS, browser isolation, login requirements and anti-bot protections require a staged design and a manual/user-assisted fallback. A backend page fetcher, browser extension, ATS adapter or autofill is not implicitly approved.
 

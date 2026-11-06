@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-11-06 — Manual-assisted Application Preparation and Friday workflow hardening (PR #116; validation pending)
+
+- Add a per-application Prepare panel with six readiness checks, private employer requirements/questions notes and a separate draft-answer/missing-information area.
+- Persist preparation data in the same browser-local application record and include it in version-1 tracker backup/restore; legacy backups receive an empty preparation state.
+- Cancel stale tracker backup imports when the user edits tracker data during file reading/review.
+- Require confirmation of actual submission before recording Applied, Interview or Offer; stamp the applied date on the first confirmed submitted stage.
+- Generate unique non-empty tracker IDs for colliding/non-Latin studio slugs and focus rows by their unique record IDs.
+- Add a first-campaign runbook. This is a manual-assisted preparation release; automated ATS page inspection, autofill, uploads, email integration and submission remain unimplemented.
+- Final CI, browser acceptance, PR merge and Pages deployment are pending the latest PR #116 checks.
+
+
 ## 2026-11-03 — Document five-system product architecture
 
 - Define Studio Discovery, Candidate Profile, Matching Engine, Application Preparation and Application Tracker as five distinct but connected product responsibilities.

@@ -395,3 +395,112 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+
+.tracker-row-actions {
+  display: grid;
+  justify-items: start;
+  gap: 7px;
+}
+
+.tracker-preparation-count {
+  margin-left: 6px;
+  color: var(--subtle);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.tracker-preparation-row > td {
+  padding: 0 !important;
+  background: var(--row-hover);
+}
+
+.tracker-preparation-panel {
+  display: grid;
+  max-width: 1120px;
+  gap: 13px;
+  padding: 16px;
+}
+
+.tracker-preparation-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.tracker-preparation-heading strong {
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.tracker-preparation-heading p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.tracker-preparation-progress {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+
+.tracker-preparation-checklist {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 18px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+}
+
+.tracker-preparation-checklist .form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  min-width: 0;
+  margin: 0;
+}
+
+.tracker-preparation-checklist .form-check-input {
+  flex: 0 0 auto;
+  margin: 3px 0 0;
+}
+
+.tracker-preparation-checklist .form-check-label {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.tracker-preparation-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.tracker-preparation-fields textarea {
+  min-height: 115px;
+  resize: vertical;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+@media (max-width: 700px) {
+  .tracker-preparation-checklist,
+  .tracker-preparation-fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .tracker-preparation-panel {
+    padding: 12px;
+  }
+}

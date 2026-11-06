@@ -33,7 +33,7 @@ Preserve this foundation. Do not change discovery eligibility or public ordering
 | Studio Discovery | V1 automation and public directory operational | Freeze broad restructuring; maintain source health and address real reliability/data-quality defects |
 | Candidate Profile | Foundation implemented | Continue storage, validation, recovery, migration and browser-acceptance hardening |
 | Matching Engine | Foundation and quality improvements implemented | Continue deterministic edge-case, evidence and false-positive validation |
-| Application Preparation | Product direction documented; no integrated preparation workspace yet | Design requirements analysis, page-access method/fallback, candidate mapping and review workflow |
+| Application Preparation | Manual-assisted preparation panel implemented in My applications: six readiness checks, private requirement/question notes and draft-answer notes, included in tracker backup/restore | Design reliable official-page analysis and user-assisted fallbacks; live ATS extraction/autofill/uploads remain unimplemented |
 | Application Tracker | Basic private queue/tracker and match handoff implemented | Complete data-integrity audit; refine selected → preparing → applied lifecycle without duplicating records |
 
 A completed documentation phase or an existing route field is not evidence that Application Preparation is implemented. The live employer form still has to be checked, and eligibility/requirements must not be invented.
@@ -79,6 +79,10 @@ This is the next major product system to design. Before coding, decide:
 The output of this phase should be a feature-level specification, interaction flow, data contract, constraints, test plan and explicit acceptance criteria.
 
 ### Phase 3 — Implement Application Preparation V1
+
+**Initial manual-assisted foundation implemented in PR #116 (pending final verification):** each My applications record has a Prepare panel with six readiness checks, an employer requirements/questions notes field and a separate draft-answers/missing-information field. These values stay browser-local and are preserved by tracker backup/restore. This provides a usable preparation stage without claiming automatic employer-page analysis.
+
+Remaining scope in this phase is to design reliable official-route analysis and user-assisted content capture for forms that cannot be inspected safely.
 
 Start with a non-invasive, user-reviewed workflow:
 

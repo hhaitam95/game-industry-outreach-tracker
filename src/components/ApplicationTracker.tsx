@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useMemo, useState } from "react";
 import type { ChangeEvent } from "react";
-import type { TrackedApplication, TrackerStatus } from "./studio.types";
+import type { ApplicationPreparation, TrackedApplication, TrackerStatus } from "./studio.types";
+import { APPLICATION_PREPARATION_CHECKLIST, createEmptyApplicationPreparation } from "../tracker/application-preparation.mjs";
 import StudioMark from "./StudioMark";
 import { countryFlagFor } from "./location";
 import "./tracker.css";
@@ -58,20 +59,22 @@ const statusIcons: Record<TrackerStatus, string> = {
 
 export default function ApplicationTracker({
   initialTab = "saved",
-  focusStudioName,
+  focusApplicationId,
   applications,
   onChangeStatus,
   onUpdateNote,
+  onUpdatePreparation,
   onRemove,
   onOpenDirectory,
   onExportBackup,
   onImportBackup,
 }: {
   initialTab?: string;
-  focusStudioName?: string | null;
+  focusApplicationId?: string | null;
   applications: TrackedApplication[];
   onChangeStatus: (id: string, status: TrackerStatus) => void;
   onUpdateNote: (id: string, note: string) => void;
+  onUpdatePreparation: (id: string, preparation: ApplicationPreparation) => void;
   onRemove: (id: string) => void;
   onOpenDirectory: () => void;
   onExportBackup: () => void;
@@ -80,6 +83,7 @@ export default function ApplicationTracker({
   const [activeTab, setActiveTab] = useState(initialTab);
   const [query, setQuery] = useState("");
   const [expandedNotesId, setExpandedNotesId] = useState<string | null>(null);
+  const [expandedPreparationId, setExpandedPreparationId] = useState<string | null>(null);
   const [expandedRouteId, setExpandedRouteId] = useState<string | null>(null);
   const [backupInputKey, setBackupInputKey] = useState(0);
   const [backupNotice, setBackupNotice] = useState("");
@@ -130,20 +134,22 @@ export default function ApplicationTracker({
         ...(application.eligibleLocations || []),
         application.routeNotes || "",
         application.note || "",
+        application.preparation?.requirementsNotes || "",
+        application.preparation?.draftAnswers || "",
       ].join(" ").toLowerCase();
       return application.status === active.status && searchable.includes(query.trim().toLowerCase());
     })
     .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
 
   useEffect(() => {
-    if (!focusStudioName) return;
-    const target = document.getElementById("tracker-row-" + trackerRowId(focusStudioName));
+    if (!focusApplicationId) return;
+    const target = document.getElementById("tracker-row-" + trackerRowId(focusApplicationId));
     if (!target) return;
     target.scrollIntoView({ behavior: "smooth", block: "center" });
     target.classList.add("tracker-row-focused");
     const timer = window.setTimeout(() => target.classList.remove("tracker-row-focused"), 2600);
     return () => window.clearTimeout(timer);
-  }, [focusStudioName, active.status]);
+  }, [focusApplicationId, active.status]);
 
   return (
     <section className="tracker-page">
@@ -230,11 +236,15 @@ export default function ApplicationTracker({
             {visible.map((application) => {
               const flag = countryFlagFor(application.country, application.countryCode);
               const notesOpen = expandedNotesId === application.id;
+              const preparationOpen = expandedPreparationId === application.id;
               const notesId = "tracker-notes-" + trackerRowId(application.id);
+              const preparationId = "tracker-preparation-" + trackerRowId(application.id);
               const note = application.note || "";
+              const preparation = application.preparation || createEmptyApplicationPreparation();
+              const preparationCompleted = APPLICATION_PREPARATION_CHECKLIST.filter((item) => preparation[item.key]).length;
               return (
                 <Fragment key={application.id}>
-                  <tr id={"tracker-row-" + trackerRowId(application.studioName)}>
+                  <tr id={"tracker-row-" + trackerRowId(application.id)}>
                     <td>
                       <div className="studio-identity">
                         <StudioMark name={application.studioName} websiteUrl={application.websiteUrl} />
@@ -301,13 +311,26 @@ export default function ApplicationTracker({
                       {note.trim() ? <span className="note-saved-indicator" aria-label="Notes saved">Saved</span> : null}
                     </td>
                     <td>
-                      <button
-                        className="btn btn-link btn-sm text-danger p-0"
-                        type="button"
-                        onClick={() => onRemove(application.id)}
-                      >
-                        × Remove
-                      </button>
+                      <div className="tracker-row-actions">
+                        <button
+                          className="btn btn-outline-secondary btn-sm"
+                          type="button"
+                          aria-expanded={preparationOpen}
+                          aria-controls={preparationId}
+                          aria-label={(preparationOpen ? "Hide preparation for " : "Prepare application for ") + application.studioName}
+                          onClick={() => setExpandedPreparationId((current) => current === application.id ? null : application.id)}
+                        >
+                          {preparationOpen ? "Hide prep" : "Prepare"}
+                          <span className="tracker-preparation-count">{preparationCompleted}/6</span>
+                        </button>
+                        <button
+                          className="btn btn-link btn-sm text-danger p-0"
+                          type="button"
+                          onClick={() => onRemove(application.id)}
+                        >
+                          × Remove
+                        </button>
+                      </div>
                     </td>
                   </tr>
                   {expandedRouteId === application.id ? (
@@ -332,6 +355,74 @@ export default function ApplicationTracker({
                           {application.routeNotes ? <p className="tracker-route-notes">{application.routeNotes}</p> : null}
                           <p className="tracker-route-caveat">This is a saved snapshot, not a live vacancy or a guarantee of eligibility. Open the employer's current route and confirm the role, language, location, work authorisation, sponsorship and relocation requirements before applying.</p>
                         </div>
+                      </td>
+                    </tr>
+                  ) : null}
+                  {preparationOpen ? (
+                    <tr className="tracker-preparation-row" id={preparationId}>
+                      <td colSpan={9}>
+                        <section className="tracker-preparation-panel" aria-label={"Application preparation for " + application.studioName}>
+                          <div className="tracker-preparation-heading">
+                            <div>
+                              <strong>Application preparation · {application.studioName}</strong>
+                              <p>Review the employer's current form yourself. Record requirements and prepare materials here; nothing is filled in or submitted automatically.</p>
+                            </div>
+                            <span className="tracker-preparation-progress">{preparationCompleted} / 6 ready</span>
+                          </div>
+                          <div className="tracker-preparation-checklist">
+                            {APPLICATION_PREPARATION_CHECKLIST.map((item) => (
+                              <label className="form-check" key={item.key}>
+                                <input
+                                  className="form-check-input"
+                                  type="checkbox"
+                                  aria-label={item.label + " · " + application.studioName}
+                                  checked={preparation[item.key]}
+                                  onChange={(event) => onUpdatePreparation(application.id, {
+                                    ...preparation,
+                                    [item.key]: event.target.checked,
+                                  })}
+                                />
+                                <span className="form-check-label">{item.label}</span>
+                              </label>
+                            ))}
+                          </div>
+                          <div className="tracker-preparation-fields">
+                            <label className="form-field" htmlFor={preparationId + "-requirements"}>
+                              <span>Employer requirements & application questions · {application.studioName}</span>
+                              <textarea
+                                id={preparationId + "-requirements"}
+                                className="form-control"
+                                rows={4}
+                                maxLength={10000}
+                                value={preparation.requirementsNotes}
+                                onChange={(event) => onUpdatePreparation(application.id, {
+                                  ...preparation,
+                                  requirementsNotes: event.target.value,
+                                })}
+                                placeholder="Paste or summarize the official form fields, required documents, role/discipline choices, language and eligibility instructions. Include the source URL in your notes where useful."
+                              />
+                            </label>
+                            <label className="form-field" htmlFor={preparationId + "-answers"}>
+                              <span>Draft answers & missing information · {application.studioName}</span>
+                              <textarea
+                                id={preparationId + "-answers"}
+                                className="form-control"
+                                rows={4}
+                                maxLength={10000}
+                                value={preparation.draftAnswers}
+                                onChange={(event) => onUpdatePreparation(application.id, {
+                                  ...preparation,
+                                  draftAnswers: event.target.value,
+                                })}
+                                placeholder="Prepare your answers here. Keep factual claims grounded in your Candidate Profile and mark any question that still needs your input."
+                              />
+                            </label>
+                          </div>
+                          <div className="tracker-notes-meta">
+                            <span>Preparation notes and checklist save automatically in this browser only. Open the official employer route to verify the live form.</span>
+                            <span>{preparation.requirementsNotes.length + preparation.draftAnswers.length} / 20,000</span>
+                          </div>
+                        </section>
                       </td>
                     </tr>
                   ) : null}

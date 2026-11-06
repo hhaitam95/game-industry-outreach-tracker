@@ -1,7 +1,7 @@
 # Game Industry Outreach Tracker status
 
-**Last verified:** 2026-11-03  
-**Product scope:** Five connected systems: global Studio Discovery, private Candidate Profile, Matching Engine, Application Preparation and Application Tracker. Application Preparation is documented as the next major product system but is not yet implemented.  
+**Last verified:** 2026-11-06  
+**Product scope:** Five connected systems: global Studio Discovery, private Candidate Profile, Matching Engine, manual-assisted Application Preparation and Application Tracker. The preparation checklist/notes foundation is in PR #116; automatic application-page analysis and ATS interaction remain future work.  
 **Authoritative discovery rules:** [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md).
 
 ## Five-system product architecture — 2026-11-03
@@ -13,12 +13,26 @@ The agreed product workflow is documented in the [Five-System Product Blueprint]
 | Studio Discovery | V1 scheduled automation and public directory are operational; continue maintenance and genuine reliability fixes. |
 | Candidate Profile | Structured browser-local profile and persistence foundation are implemented; backend correctness and recovery validation continue. |
 | Matching Engine | On-device matching foundation and quality improvements are implemented; deterministic edge-case validation continues. |
-| Application Preparation | New distinct system in the product architecture; requirements analysis, candidate mapping and preparation workspace are not yet implemented. |
+| Application Preparation | Manual-assisted Prepare panel in My applications: six readiness checks, employer-requirements/questions notes and draft-answer notes, persisted locally and included in backups. | Live application-page analysis, automatic extraction and ATS interaction remain future work. |
 | Application Tracker | Existing browser-local queue/tracker and match handoff are implemented; continue data-integrity hardening and refine the selected/preparing/applied lifecycle. |
 
-The Candidate Profile is an independent input to both Matching and Application Preparation. The existing My applications item remains the single canonical record; it can be selected/preparing before submission and becomes Applied only after the user confirms submission. The new preparation system must not create a second application history. Final employer-site review and submission remain user-controlled.
+The Candidate Profile is an independent input to both Matching and Application Preparation. The existing My applications item remains the single canonical record; it can be selected/preparing before submission and becomes Applied only after the user confirms submission. The preparation panel is part of the same canonical application record and must not create a second application history. Final employer-site review and submission remain user-controlled.
 
 
+
+## Friday application workflow and preparation foundation — PR #116 (validation in progress)
+
+PR #116 adds the first practical preparation step to each My applications record and hardens tracker behavior for the first application campaign.
+
+- Add a **Prepare** panel to each tracked target with six checks: route reverified, requirements/questions reviewed, resume ready, motivation letter reviewed, portfolio ready and draft answers reviewed.
+- Keep employer requirements/questions and candidate-grounded draft answers/missing information in separate private fields.
+- Persist the checklist and notes in browser-local storage and include them in tracker backup/restore. Older version-1 tracker backups remain compatible and receive an empty preparation state.
+- Prevent a tracker backup from replacing edits made while the file is being read or reviewed.
+- Require submission confirmation before direct transitions to Applied, Interview or Offer; create the submission date only after confirmation.
+- Generate unique, non-empty tracker IDs when studio names normalize to colliding or empty slugs.
+- Add unit and browser-acceptance coverage for preparation persistence, backup compatibility, tracker import races and submission-stage confirmation.
+
+**Boundary:** This is a manual-assisted preparation workspace. It does not automatically inspect dynamic/authenticated ATS pages, fill external forms, upload files or send email. The user opens the official route, reviews every value and submits manually. Final CI/deployment state must be checked against the latest PR #116 Actions runs before calling this change complete.
 
 ## Candidate Profile persistence integrity — PR #111 (merged and deployed)
 
