@@ -41,7 +41,7 @@ jobs:
     outputs:
       proceed: ${{ steps.guard.outputs.proceed }}
     steps:
-      - name: Check the most recent successful discovery run
+      - name: Check for a recent successful discovery run
         id: guard
         shell: bash
         env:
@@ -53,8 +53,13 @@ jobs:
             exit 0
           fi
 
-          runs_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/discover-studios.yml/runs?branch=main&per_page=100")"
-          recent_timestamp="$(jq -r --arg current "$GITHUB_RUN_ID" '
+          if ! runs_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/discover-studios.yml/runs?branch=main&per_page=100" 2>/dev/null)"; then
+            echo "proceed=true" >> "$GITHUB_OUTPUT"
+            echo "Could not inspect recent workflow history; failing open so discovery can proceed."
+            exit 0
+          fi
+
+          if ! recent_timestamp="$(jq -r --arg current "$GITHUB_RUN_ID" '
             [
               .workflow_runs[]
               | select((.id | tostring) != $current)
@@ -67,11 +72,19 @@ jobs:
             ]
             | sort
             | last // empty
-          ' <<< "$runs_json")"
+          ' <<< "$runs_json" 2>/dev/null)"; then
+            echo "proceed=true" >> "$GITHUB_OUTPUT"
+            echo "Could not parse workflow history; failing open so discovery can proceed."
+            exit 0
+          fi
 
           if [ -n "$recent_timestamp" ]; then
             now="$(date -u +%s)"
-            recent_epoch="$(date -u -d "$recent_timestamp" +%s)"
+            if ! recent_epoch="$(date -u -d "$recent_timestamp" +%s 2>/dev/null)"; then
+              echo "proceed=true" >> "$GITHUB_OUTPUT"
+              echo "Could not parse the prior run timestamp; failing open so discovery can proceed."
+              exit 0
+            fi
             age_seconds=$((now - recent_epoch))
             if [ "$age_seconds" -ge 0 ] && [ "$age_seconds" -lt 1200 ]; then
               echo "proceed=false" >> "$GITHUB_OUTPUT"
