@@ -27,7 +27,7 @@ The Candidate Profile is configured independently and feeds both Matching and Ap
 - **Candidate Profile:** structured profile, skill evidence, master materials, preferences, browser-local IndexedDB and backup/restore foundations are implemented. Persistence hardening is in place; continue the backend correctness audit.
 - **Matching Engine:** on-device qualitative matching and quality improvements are implemented, including separate relevance/readiness/priority dimensions and explanations. Continue deterministic edge-case and false-positive validation.
 - **Application Tracker:** basic browser-local My applications tracking, match handoff, route-context snapshots, statuses, notes and backup/restore/recovery are implemented. Continue data-integrity audit and refine the selected → preparing → applied lifecycle.
-- **Application Preparation:** a manual-assisted first version is included in My applications: six readiness checks, private employer requirement/question notes and draft-answer/missing-information notes. It persists locally and is included in tracker backups. Automatic page analysis, ATS integration, autofill and uploads remain unimplemented.
+- **Application Preparation:** manual-assisted V1 is merged/deployed in PR #116. Each My applications record has six readiness checks, private employer requirement/question notes and draft-answer/missing-information notes; these persist locally and are included in tracker backups. Automated page analysis, ATS integration, autofill, uploads and email remain unimplemented.
 
 Implementation status and merged/deployed claims must be checked against the current repository and Actions runs before being repeated.
 
