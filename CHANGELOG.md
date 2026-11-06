@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-06 — Manual-assisted Application Preparation and Friday workflow hardening (PR #116; validation pending)
+## 2026-11-06 — Manual-assisted Application Preparation and Friday workflow hardening (PR #116, merged and deployed)
 
 - Add a per-application Prepare panel with six readiness checks, private employer requirements/questions notes and a separate draft-answer/missing-information area.
 - Persist preparation data in the same browser-local application record and include it in version-1 tracker backup/restore; legacy backups receive an empty preparation state.
@@ -8,7 +8,7 @@
 - Require confirmation of actual submission before recording Applied, Interview or Offer; stamp the applied date on the first confirmed submitted stage.
 - Generate unique non-empty tracker IDs for colliding/non-Latin studio slugs and focus rows by their unique record IDs.
 - Add a first-campaign runbook. This is a manual-assisted preparation release; automated ATS page inspection, autofill, uploads, email integration and submission remain unimplemented.
-- Final CI, browser acceptance, PR merge and Pages deployment are pending the latest PR #116 checks.
+- Exact-head full CI and Chromium browser acceptance passed in [run 42203613709](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/42203613709). PR #116 merged as `8343c12e9b62e7fa3d53515cebdf7e3dd3f6dc95`; GitHub Pages publication completed successfully in [run 42204022828](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/42204022828). A duplicate post-merge main-branch browser regression run [42204022911](https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/42204022911) is running separately.
 
 
 ## 2026-11-03 — Document five-system product architecture
