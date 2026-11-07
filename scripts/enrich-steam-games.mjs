@@ -7,6 +7,8 @@ const root = process.cwd();
 const profilesPath = path.join(root, "src/data/studio-profiles.json");
 const SEARCH_URL = "https://store.steampowered.com/api/storesearch/";
 const DETAILS_URL = "https://store.steampowered.com/api/appdetails";
+const APP_REVIEWS_URL = "https://store.steampowered.com/appreviews/";
+const STEAM_METADATA_REFRESH_MS = 30 * 24 * 60 * 60 * 1000;
 const REQUEST_INTERVAL_MS = 800;
 
 export function normalizeGameTitle(value) {
@@ -199,6 +201,40 @@ function collectGamesMissingAppId(profiles) {
   return [...groups.values()];
 }
 
+function isFreshTimestamp(value, now = Date.now()) {
+  const timestamp = Date.parse(value || "");
+  return Number.isFinite(timestamp) && timestamp <= now && now - timestamp < STEAM_METADATA_REFRESH_MS;
+}
+
+export function selectSteamReviewSummary(payload) {
+  if (!payload || (payload.success !== 1 && payload.success !== true)) return null;
+  const summary = payload.query_summary;
+  if (!summary || !Number.isInteger(summary.total_reviews) ||
+      !Number.isInteger(summary.total_positive) || !Number.isInteger(summary.total_negative)) {
+    return null;
+  }
+  return {
+    steamReviewCount: Math.max(0, summary.total_reviews),
+    steamPositiveReviewCount: Math.max(0, summary.total_positive),
+    steamNegativeReviewCount: Math.max(0, summary.total_negative),
+    ...(typeof summary.review_score_desc === "string" && summary.review_score_desc.trim()
+      ? { steamReviewScoreDesc: summary.review_score_desc.trim() }
+      : {}),
+  };
+}
+
+async function fetchSteamReviewSummary(appId) {
+  const url = new URL(String(appId), APP_REVIEWS_URL);
+  url.search = new URLSearchParams({
+    json: "1",
+    language: "all",
+    purchase_type: "all",
+    num_per_page: "0",
+    filter: "summary",
+  }).toString();
+  return steamRequest(url, "Steam user-review summary for " + appId);
+}
+
 function collectGamesMissingSteamArtwork(profiles) {
   const entriesByAppId = new Map();
   for (const [studio, profile] of Object.entries(profiles)) {
@@ -206,7 +242,11 @@ function collectGamesMissingSteamArtwork(profiles) {
       if (!Number.isInteger(game.appId) || game.appId < 1) continue;
       const hasHeaderUrl = game.steamHeaderUrl && isValidSteamArtworkUrl(game.steamHeaderUrl);
       const hasCapsuleUrl = game.steamCapsuleUrl && isValidSteamArtworkUrl(game.steamCapsuleUrl);
-      if (hasHeaderUrl && hasCapsuleUrl && Number.isInteger(game.releaseYear)) continue;
+      const artworkReady = hasHeaderUrl && hasCapsuleUrl;
+      const releaseReady = Number.isInteger(game.releaseYear) || game.stage === "In development";
+      const metadataFresh = isFreshTimestamp(game.steamDetailsCheckedAt);
+      const reviewsFresh = isFreshTimestamp(game.steamReviewsUpdatedAt);
+      if (artworkReady && releaseReady && metadataFresh && reviewsFresh) continue;
       const group = entriesByAppId.get(game.appId) || { appId: game.appId, entries: [] };
       group.entries.push({ studio, game });
       entriesByAppId.set(game.appId, group);
@@ -226,27 +266,60 @@ async function enrichKnownSteamArtwork(profiles) {
     missingSteamArtwork: 0,
     appDetailsRequestFailures: 0,
     releaseYearsAdded: 0,
+    steamMetadataRecordsUpdated: 0,
+    steamReviewRecordsUpdated: 0,
+    steamReviewRequestFailures: 0,
   };
   const failures = [];
 
-  // Steam's public app-details endpoint accepts one app ID per request in practice.
-  // Keep requests sequential and throttled; a single unavailable listing must not
-  // prevent the rest of the catalogue from receiving artwork metadata.
+  // Only previously verified Steam app IDs are used. Missing/stale details and
+  // aggregate review totals are refreshed every 30 days.
   for (let index = 0; index < groups.length; index += 1) {
     if (index > 0) await delay(REQUEST_INTERVAL_MS);
     const group = groups[index];
     counts.existingAppIdsChecked += 1;
-
     let response;
     try {
       response = await fetchAppDetails([group.appId]);
     } catch (error) {
       counts.appDetailsRequestFailures += 1;
-      failures.push({ appId: group.appId, error: String(error).slice(0, 180) });
+      failures.push({ appId: group.appId, source: "appdetails", error: String(error).slice(0, 180) });
       continue;
     }
 
     const entry = response?.[String(group.appId)];
+    const detail = entry?.success && entry.data ? entry.data : null;
+    const firstGame = group.entries[0]?.game;
+    const exactGame = detail?.type === "game" && firstGame &&
+      normalizeGameTitle(detail.name) === normalizeGameTitle(firstGame.title);
+
+    if (exactGame) {
+      const checkedAt = new Date().toISOString();
+      const developers = Array.isArray(detail.developers)
+        ? detail.developers.filter(value => typeof value === "string" && value.trim())
+        : [];
+      const publishers = Array.isArray(detail.publishers)
+        ? detail.publishers.filter(value => typeof value === "string" && value.trim())
+        : [];
+      const releaseDate = typeof detail.release_date?.date === "string" ? detail.release_date.date.trim() : "";
+
+      for (const { game } of group.entries) {
+        if (developers.length) game.steamDevelopers = developers;
+        if (publishers.length) game.steamPublishers = publishers;
+        if (releaseDate) game.steamReleaseDate = releaseDate;
+        game.steamDetailsCheckedAt = checkedAt;
+        if (releaseDate && !game.releaseYear && game.stage !== "In development") {
+          const releaseYear = releaseYearFromSteamDate(releaseDate);
+          if (releaseYear) {
+            game.releaseYear = releaseYear;
+            game.releaseYearSourceUrl = "https://store.steampowered.com/app/" + group.appId + "/";
+            counts.releaseYearsAdded += 1;
+          }
+        }
+      }
+      counts.steamMetadataRecordsUpdated += group.entries.length;
+    }
+
     for (const { game } of group.entries) {
       const result = selectExactSteamArtwork(game.title, entry);
       if (result.releaseYear && !game.releaseYear && game.stage !== "In development") {
@@ -254,18 +327,9 @@ async function enrichKnownSteamArtwork(profiles) {
         game.releaseYearSourceUrl = "https://store.steampowered.com/app/" + group.appId + "/";
         counts.releaseYearsAdded += 1;
       }
-      if (result.status === "not_a_game") {
-        counts.nonGames += 1;
-        continue;
-      }
-      if (result.status === "title_mismatch") {
-        counts.titleMismatches += 1;
-        continue;
-      }
-      if (result.status !== "matched") {
-        counts.missingSteamArtwork += 1;
-        continue;
-      }
+      if (result.status === "not_a_game") { counts.nonGames += 1; continue; }
+      if (result.status === "title_mismatch") { counts.titleMismatches += 1; continue; }
+      if (result.status !== "matched") { counts.missingSteamArtwork += 1; continue; }
       if (result.steamHeaderUrl && game.steamHeaderUrl !== result.steamHeaderUrl) {
         game.steamHeaderUrl = result.steamHeaderUrl;
         counts.steamHeaderUrlsAdded += 1;
@@ -275,10 +339,26 @@ async function enrichKnownSteamArtwork(profiles) {
         counts.steamCapsuleUrlsAdded += 1;
       }
     }
+
+    await delay(REQUEST_INTERVAL_MS);
+    try {
+      const reviewPayload = await fetchSteamReviewSummary(group.appId);
+      const reviewSummary = selectSteamReviewSummary(reviewPayload);
+      if (reviewSummary) {
+        const checkedAt = new Date().toISOString();
+        for (const { game } of group.entries) Object.assign(game, reviewSummary, { steamReviewsUpdatedAt: checkedAt });
+        counts.steamReviewRecordsUpdated += group.entries.length;
+      } else {
+        failures.push({ appId: group.appId, source: "appreviews", error: "Steam returned no usable aggregate review summary." });
+      }
+    } catch (error) {
+      counts.steamReviewRequestFailures += 1;
+      failures.push({ appId: group.appId, source: "appreviews", error: String(error).slice(0, 180) });
+    }
   }
 
-  if (failures.length > 0) {
-    process.stdout.write(JSON.stringify({ appDetailsRequestFailures: failures.slice(0, 20) }, null, 2) + "\n");
+  if (failures.length) {
+    process.stdout.write(JSON.stringify({ steamMetadataFailures: failures.slice(0, 30) }, null, 2) + "\n");
   }
   return counts;
 }
