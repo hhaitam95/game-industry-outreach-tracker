@@ -66,7 +66,7 @@ test("Games directory renders popularity and store metadata columns", async () =
   await withViteModules(async (server) => {
     const module = await server.ssrLoadModule("/src/components/GamesDirectory.tsx");
     const markup = renderToStaticMarkup(React.createElement(module.default, { onCountChange: () => {} }));
-    assert.match(markup, /<h1>Games<\\/h1>/);
+    assert.match(markup, /<h1>Games/);
     assert.match(markup, /Popularity/);
     assert.match(markup, /Release date/);
     assert.match(markup, /Developer/);
