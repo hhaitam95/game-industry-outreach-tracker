@@ -136,6 +136,12 @@ async function main() {
     await page.getByRole("heading", { name: "Studio directory" }).waitFor();
     await page.getByText(/Last successful run:/).waitFor();
 
+    await page.getByRole("button", { name: "Games" }).click();
+    await page.getByRole("heading", { name: "Games" }).waitFor();
+    await page.getByText(/Steam user reviews/).waitFor();
+    await page.getByRole("button", { name: "Studios" }).click();
+    await page.getByRole("heading", { name: "Studio directory" }).waitFor();
+
     // Candidate Profile is private browser-local data, including original document bytes.
     await page.getByRole("button", { name: "My profile" }).click();
     await page.getByRole("heading", { name: "My profile" }).waitFor();
