@@ -17604,5 +17604,253 @@
     ],
     "scale": "Indie",
     "scaleBasis": "recorded"
+  },
+  "Liquid Ice Studios": {
+    "description": "Independent game studio in The Hague making its own atmospheric games; its official site says two games are in production and describes a 13-person team.",
+    "headquarters": {
+      "city": "The Hague",
+      "country": "Netherlands",
+      "countryCode": "NL",
+      "label": "Studio base · official studio website"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent · as stated by the studio",
+    "parentCompany": null,
+    "industryScale": "Small independent game studio",
+    "teamSize": "13 people · stated on the official website",
+    "teamSizeAsOf": "2026-11-07",
+    "focus": [],
+    "popularGames": [],
+    "profileSources": [
+      "https://liquidicestudios.com/"
+    ],
+    "applicationLocation": "The Hague, Netherlands · work model and applicant-country eligibility not stated",
+    "platforms": [],
+    "gameFocus": [],
+    "studioRoles": [
+      "Developer"
+    ]
+  },
+  "Paradox Interactive": {
+    "description": "Swedish game developer and publisher whose group includes five internal development studios in Sweden, the Netherlands, Bulgaria, Finland and Spain.",
+    "headquarters": {
+      "city": "Stockholm",
+      "country": "Sweden",
+      "countryCode": "SE",
+      "label": "HQ · official Paradox company website"
+    },
+    "otherLocations": [
+      "Delft, Netherlands",
+      "Sofia, Bulgaria",
+      "Tampere, Finland",
+      "Barcelona, Spain"
+    ],
+    "companyType": [
+      "Developer",
+      "Publisher",
+      "Group"
+    ],
+    "ownership": "Paradox Interactive AB",
+    "parentCompany": null,
+    "industryScale": "International game developer and publisher",
+    "teamSize": "Not publicly disclosed in this record",
+    "teamSizeAsOf": null,
+    "focus": [
+      "PC",
+      "Console",
+      "Strategy",
+      "Management",
+      "Simulation"
+    ],
+    "popularGames": [
+      {
+        "title": "Stellaris"
+      },
+      {
+        "title": "Europa Universalis"
+      },
+      {
+        "title": "Hearts of Iron"
+      },
+      {
+        "title": "Crusader Kings"
+      },
+      {
+        "title": "Prison Architect"
+      }
+    ],
+    "profileSources": [
+      "https://www.paradoxinteractive.com/our-company",
+      "https://career.paradoxplaza.com/jobs/3359477-open-application-for-senior-game-programmers"
+    ],
+    "applicationLocation": "Stockholm, Sweden · open application is specifically for Senior Game Programmers; work model not stated",
+    "platforms": [
+      "PC",
+      "Console"
+    ],
+    "gameFocus": [
+      "Strategy",
+      "Management",
+      "Simulation"
+    ],
+    "studioRoles": [
+      "Developer",
+      "Publisher"
+    ]
+  },
+  "President Studio": {
+    "description": "Warsaw-based game-development studio and publisher established in 2018. Its portfolio includes Crime Scene Cleaner, Celestial Empire, Ship Builder and Viking City Builder.",
+    "headquarters": {
+      "city": "Warsaw",
+      "country": "Poland",
+      "countryCode": "PL",
+      "label": "HQ · official studio website"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Publisher"
+    ],
+    "ownership": "President Studio S.A.",
+    "parentCompany": null,
+    "industryScale": "Independent game developer and publisher",
+    "teamSize": "26 developers · stated on the official About Us page",
+    "teamSizeAsOf": "2026-11-07",
+    "focus": [
+      "PC",
+      "Simulation",
+      "Strategy",
+      "Narrative"
+    ],
+    "popularGames": [
+      {
+        "title": "Crime Scene Cleaner"
+      },
+      {
+        "title": "Celestial Empire"
+      },
+      {
+        "title": "Ship Builder"
+      },
+      {
+        "title": "Viking City Builder"
+      }
+    ],
+    "profileSources": [
+      "https://www.president-studio.com/en/about-us",
+      "https://www.president-studio.com/en/games",
+      "https://www.president-studio.com/en/careers"
+    ],
+    "applicationLocation": "Warsaw, Poland · work model and applicant-country eligibility not stated",
+    "platforms": [
+      "PC"
+    ],
+    "gameFocus": [
+      "Simulation",
+      "Strategy",
+      "Narrative"
+    ],
+    "studioRoles": [
+      "Developer",
+      "Publisher"
+    ]
+  },
+  "Toca Boca": {
+    "description": "Stockholm-based mobile game developer creating playful digital games for children. Its official careers site describes in-house art, animation, play design, programming, production and QA functions.",
+    "headquarters": {
+      "city": "Stockholm",
+      "country": "Sweden",
+      "countryCode": "SE",
+      "label": "HQ · official Toca Boca website"
+    },
+    "otherLocations": [
+      "San Francisco, United States"
+    ],
+    "companyType": [
+      "Developer"
+    ],
+    "ownership": "Toca Boca AB · subsidiary of Spin Master Corp. as stated by the official website",
+    "parentCompany": "Spin Master Corp.",
+    "industryScale": "Established mobile game studio",
+    "teamSize": "Not publicly disclosed in this record",
+    "teamSizeAsOf": null,
+    "focus": [
+      "Mobile",
+      "Casual",
+      "Family-friendly"
+    ],
+    "popularGames": [
+      {
+        "title": "Toca Boca World"
+      }
+    ],
+    "profileSources": [
+      "https://www.tocaboca.com/careers",
+      "https://emp.jobylon.com/jobs/78681-toca-boca-spontaneous-application/"
+    ],
+    "applicationLocation": "Stockholm, Sweden · work model and applicant-country eligibility not stated",
+    "platforms": [
+      "Mobile"
+    ],
+    "gameFocus": [
+      "Casual",
+      "Family-friendly"
+    ],
+    "studioRoles": [
+      "Developer"
+    ]
+  },
+  "welevel": {
+    "description": "Independent game-development studio in Munich with a team of 20+ building a survival city-builder with co-op, city-building and RPG elements.",
+    "headquarters": {
+      "city": "Munich",
+      "country": "Germany",
+      "countryCode": "DE",
+      "label": "Studio base · official company website"
+    },
+    "otherLocations": [],
+    "companyType": [
+      "Developer",
+      "Independent"
+    ],
+    "ownership": "Independent · as stated by the studio",
+    "parentCompany": null,
+    "industryScale": "Independent studio building an AAA-scale game (studio-stated)",
+    "teamSize": "20+ people · stated on the official homepage",
+    "teamSizeAsOf": "2026-11-07",
+    "focus": [
+      "PC",
+      "Survival",
+      "Strategy",
+      "RPG",
+      "Management"
+    ],
+    "popularGames": [
+      {
+        "title": "SolidRiver",
+        "stage": "In development"
+      }
+    ],
+    "profileSources": [
+      "https://welevel.com/",
+      "https://career.welevel.com/jobs/initiative-application"
+    ],
+    "applicationLocation": "Munich, Germany · on-site; valid EU work authorisation required",
+    "platforms": [
+      "PC"
+    ],
+    "gameFocus": [
+      "Survival",
+      "Strategy",
+      "RPG",
+      "Management"
+    ],
+    "studioRoles": [
+      "Developer"
+    ]
   }
 }
