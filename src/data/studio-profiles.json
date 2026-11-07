@@ -708,7 +708,9 @@
       },
       {
         "title": "Tiny Miners",
-        "appId": null
+        "appId": null,
+        "appStoreArtworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple113/v4/06/b4/5c/06b45c42-6d14-950a-be31-1484cdeb8c37/AppIcon-0-1x_U007emarketing-0-85-220-7.png/512x512bb.jpg",
+        "appStoreUrl": "https://apps.apple.com/us/app/tiny-miners/id920054061?uo=4"
       }
     ],
     "profileSources": [
@@ -2542,7 +2544,9 @@
       },
       {
         "title": "The Chase: World Tour",
-        "appId": null
+        "appId": null,
+        "appStoreArtworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a7/56/8a/a7568ab8-4c12-b871-d3fc-31f9fc2ad8b2/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.jpg",
+        "appStoreUrl": "https://apps.apple.com/us/app/the-chase-world-tour/id6449974483?uo=4"
       }
     ],
     "applicationLocation": "Location not specified · use HQ as reference",
@@ -3690,7 +3694,9 @@
         "appId": 4557080,
         "stage": "Published; site lists Steam/PC, Google Play and App Store, version 0.9.11",
         "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4557080/8b82bdf999d9f0d5afa4d207bcbc79011b62df27/header.jpg?t=1786380019",
-        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4557080/d640c42862eb5d7dd1275915c67e06f3d38d7ecc/capsule_231x87.jpg?t=1786380019"
+        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4557080/d640c42862eb5d7dd1275915c67e06f3d38d7ecc/capsule_231x87.jpg?t=1786380019",
+        "appStoreArtworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/a9/5a/ba/a95aba8a-d631-f8c8-3a52-6ed153ca4e6b/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
+        "appStoreUrl": "https://apps.apple.com/us/app/stellar-hustler/id6761012480?uo=4"
       }
     ],
     "profileSources": [
@@ -5898,7 +5904,9 @@
         "title": "Rust",
         "appId": 252490,
         "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252490/header.jpg?t=1781536981",
-        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252490/21aac0b6e20e1ba12f635e7deb730e32a51afbd5/capsule_231x87.jpg?t=1781536981"
+        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252490/21aac0b6e20e1ba12f635e7deb730e32a51afbd5/capsule_231x87.jpg?t=1781536981",
+        "appStoreArtworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/de/bf/cd/debfcd5b-7178-56eb-fd26-e2867415c01e/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg",
+        "appStoreUrl": "https://apps.apple.com/us/app/rust/id1487691681?uo=4"
       }
     ],
     "profileSources": [
@@ -7763,7 +7771,9 @@
       },
       {
         "title": "Fruit Ninja",
-        "appId": null
+        "appId": null,
+        "appStoreArtworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/6b/52/f2/6b52f27e-eba6-6f6e-9a7f-5ca0b6b1a9e2/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
+        "appStoreUrl": "https://apps.apple.com/us/app/fruit-ninja/id403858572?uo=4"
       }
     ],
     "profileSources": [
@@ -10933,7 +10943,9 @@
       },
       {
         "title": "Fury of Dracula",
-        "appId": 958530
+        "appId": 958530,
+        "appStoreArtworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/2b/02/8e/2b028ea7-e33c-808a-25bc-cdf9e42b5b7f/AppIcon-1x_U007emarketing-0-7-0-85-220-0.png/512x512bb.jpg",
+        "appStoreUrl": "https://apps.apple.com/us/app/fury-of-dracula/id1499802612?uo=4"
       }
     ],
     "profileSources": [
@@ -11809,7 +11821,9 @@
         "title": "LIMBO",
         "appId": 48000,
         "steamHeaderUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/48000/header.jpg?t=1761819450",
-        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/48000/capsule_231x87.jpg?t=1761819450"
+        "steamCapsuleUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/48000/capsule_231x87.jpg?t=1761819450",
+        "appStoreArtworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/94/6f/65/946f6540-16e8-aed6-95e9-519432856056/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
+        "appStoreUrl": "https://apps.apple.com/us/app/limbo/id1618201675?uo=4"
       }
     ],
     "profileSources": [
@@ -12287,11 +12301,15 @@
       },
       {
         "title": "Tech Startup Idle Tycoon",
-        "appId": null
+        "appId": null,
+        "appStoreArtworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ee/8e/f1/ee8ef1ac-c2d9-3972-6ad1-f4d482c52644/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
+        "appStoreUrl": "https://apps.apple.com/us/app/tech-startup-idle-tycoon/id6758722859?uo=4"
       },
       {
         "title": "Legendary Differences",
-        "appId": null
+        "appId": null,
+        "appStoreArtworkUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/7a/2e/b9/7a2eb9c8-9994-0708-c868-bb9f20cf77d9/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
+        "appStoreUrl": "https://apps.apple.com/us/app/legendary-differences/id6737454790?uo=4"
       }
     ],
     "profileSources": [
