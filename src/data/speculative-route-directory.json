@@ -3727,7 +3727,7 @@
     "applicationUrl": "https://www.insanitycrew.com/contact-us",
     "evidenceUrl": "https://www.insanitycrew.com/contact-us",
     "notes": "Official studio-controlled page explicitly invites general applications. Evidence: submit your resume for consideration in future positions. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-07",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -3739,7 +3739,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-05"
     }
   },
   {
@@ -3771,7 +3771,7 @@
     "applicationUrl": "https://apply.ioi.dk/jobs/2380320-unsolicited-applications/1a0498c3-c941-4b03-a29a-56535ccf9011",
     "evidenceUrl": "https://ioi.dk/careers?panel=j",
     "notes": "Official careers page links an Unsolicited Applications listing on IOI's Teamtailor platform. The listing explicitly invites unsolicited applications, accepts a resume, cover letter and optional portfolio, and keeps applications on file for future openings. It lists Copenhagen, Malmö, Barcelona and Brighton as locations and says opportunities are based in the studio network including Istanbul; the listing is marked hybrid and states that onsite work is expected.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-07",
     "applicationResearch": {
       "routeType": "unsolicited",
       "submissionMethods": [
@@ -3789,7 +3789,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-05"
     }
   },
   {
@@ -3799,7 +3799,7 @@
     "applicationUrl": "https://ironrootgames.com/",
     "evidenceUrl": "https://ironrootgames.com/",
     "notes": "Official studio-controlled page explicitly invites speculative applications. Evidence: speculative applications. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-07",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
@@ -3811,7 +3811,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-05"
     }
   },
   {
@@ -3821,7 +3821,7 @@
     "applicationUrl": "https://join.com/companies/iterationonecom/spontaneous-application",
     "evidenceUrl": "https://www.iterationone.com/",
     "notes": "The official homepage links its Career section directly to the employer's JOIN recruitment page. The JOIN page includes a dedicated Spontaneous Application and explicitly says there may be no suitable job available now, but candidates' skills may match a future role; it invites applicants to upload a CV and cover letter. Iteration One is a self-funded independent gaming studio and publisher in Karlsruhe, developing free-to-play mobile idle/tycoon games. Its live title Nightclub Tycoon is described by the employer as having been played by millions. The employer profile lists 1–10 employees. Current listed positions are in Karlsruhe, but the open application itself does not state work model or applicant-country eligibility.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-07",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [
@@ -3844,7 +3844,7 @@
       ],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-05"
     }
   },
   {
@@ -3854,7 +3854,7 @@
     "applicationUrl": "https://jobs.lever.co/kabam/d62974d9-8d92-4c7b-8d56-8ee23d35904d",
     "evidenceUrl": "https://jobs.lever.co/kabam/d62974d9-8d92-4c7b-8d56-8ee23d35904d",
     "notes": "Official Lever General Application invites resumes for future consideration when no perfect role is available. The current listing is full-time, on-site in Vancouver and says applicants must already be in one of Kabam's studio cities or plan to relocate. The company lists offices in Vancouver, Montreal and Charlottetown (Canada), Los Angeles and San Francisco (United States), and Seoul (South Korea). This is not a remote application route.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-07",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -3876,7 +3876,7 @@
       ],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-05"
     }
   },
   {
@@ -3886,7 +3886,7 @@
     "applicationUrl": "https://katal.games/careers/",
     "evidenceUrl": "https://katal.games/careers/",
     "notes": "Official careers page says there are no open roles but welcomes open applications by email with a CV or portfolio and a note about the candidate's interests.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-07",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -3898,7 +3898,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-05"
     }
   },
   {
@@ -3908,7 +3908,7 @@
     "applicationUrl": "https://www.keenswh.com/job/spontaneous-applications/",
     "evidenceUrl": "https://www.keenswh.com/job/spontaneous-applications/",
     "notes": "Official spontaneous-application route for candidates who do not fit a listed opening. Remote applications are considered with CET overlap; the studio is looking for experienced, senior people rather than juniors.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-07",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [
@@ -3922,7 +3922,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-05"
     }
   },
   {
