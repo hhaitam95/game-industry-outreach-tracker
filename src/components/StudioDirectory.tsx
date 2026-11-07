@@ -138,12 +138,17 @@ function FilterPicker({
   onToggle: (value: string) => void;
 }) {
   return (
-    <details className="directory-filter-picker">
-      <summary>
-        <span className="filter-picker-label"><span aria-hidden="true">{emoji}</span>{label}</span>
-        <span className="filter-picker-count">{selected.length || "All"}</span>
-      </summary>
-      <div className="filter-picker-options" role="group" aria-label={label + " filters"}>
+    <div className="form-field directory-filter-field">
+      <span>{label}</span>
+      <details className="directory-filter-picker">
+        <summary aria-label={label + " filters"}>
+          <span className="filter-picker-value">
+            <span aria-hidden="true">{emoji}</span>
+            <span>{selected.length ? selected.length + " selected" : "All"}</span>
+          </span>
+          <span className="filter-picker-chevron" aria-hidden="true">▾</span>
+        </summary>
+        <div className="filter-picker-options" role="group" aria-label={label + " filters"}>
         {options.length ? options.map(value => (
           <label className="filter-picker-option" key={value}>
             <input
@@ -155,8 +160,9 @@ function FilterPicker({
             <span>{value}</span>
           </label>
         )) : <span className="filter-picker-empty">No classified values yet</span>}
-      </div>
-    </details>
+        </div>
+      </details>
+    </div>
   );
 }
 

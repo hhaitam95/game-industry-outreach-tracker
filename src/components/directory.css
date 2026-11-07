@@ -6,8 +6,8 @@
 
 .directory-toolbar {
   display: grid;
-  grid-template-columns: minmax(240px, 1.8fr) repeat(2, minmax(140px, 1fr));
-  align-items: end;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: stretch;
   gap: 12px;
   padding: 13px;
   border: 1px solid var(--line);
@@ -853,32 +853,104 @@
 }
 
 
-.directory-toolbar { display: grid; gap: 12px; }
 .directory-primary-filters {
   display: grid;
-  grid-template-columns: minmax(240px, 1.8fr) repeat(2, minmax(140px, 1fr));
+  grid-template-columns: minmax(0, 1.8fr) repeat(2, minmax(0, 1fr));
   align-items: end;
   gap: 12px;
 }
-.directory-filter-row { display: flex; flex-wrap: wrap; align-items: end; gap: 8px; }
-.directory-filter-row .directory-filter-picker { position: relative; min-width: 118px; }
+.directory-primary-filters .form-field { min-width: 0; margin: 0; }
+.directory-primary-filters .form-control,
+.directory-primary-filters .form-select { width: 100%; min-height: 40px; }
+
+.directory-filter-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(170px, 1.1fr) auto;
+  align-items: end;
+  gap: 12px;
+}
+.directory-filter-row .directory-filter-field,
+.directory-filter-row .work-model-filter {
+  display: grid;
+  grid-template-rows: auto 40px;
+  min-width: 0;
+  gap: 6px;
+  margin: 0;
+}
+.directory-filter-row .directory-filter-field > span,
+.directory-filter-row .work-model-filter > span {
+  min-width: 0;
+  line-height: 16px;
+}
+.directory-filter-row .directory-filter-picker {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
 .directory-filter-row .directory-filter-picker summary {
-  display: flex; min-height: 36px; align-items: center; justify-content: space-between;
-  gap: 10px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 5px;
-  background: var(--surface); color: var(--muted); cursor: pointer; font-size: 12px; list-style: none;
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  min-height: 40px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 11px;
+  border: 1px solid var(--control-border);
+  border-radius: 5px;
+  background: var(--control-bg);
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 13px;
+  list-style: none;
 }
 .directory-filter-row .directory-filter-picker summary::-webkit-details-marker { display: none; }
-.directory-filter-row .directory-filter-picker[open] summary { border-color: var(--primary); color: var(--ink); }
+.directory-filter-row .directory-filter-picker[open] summary,
+.directory-filter-row .directory-filter-picker summary:focus-visible {
+  border-color: var(--primary);
+  outline: 0;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 16%, transparent);
+}
+.directory-filter-row .filter-picker-value {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+}
+.directory-filter-row .filter-picker-value > span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.directory-filter-row .filter-picker-chevron {
+  flex: 0 0 auto;
+  color: var(--subtle);
+  font-size: 11px;
+}
 .directory-filter-row .filter-picker-options {
-  position: absolute; z-index: 20; top: calc(100% + 4px); left: 0; display: grid;
-  min-width: 190px; max-height: 280px; overflow: auto; gap: 7px; padding: 10px;
-  border: 1px solid var(--line); border-radius: 6px; background: var(--surface);
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 4px);
+  left: 0;
+  display: grid;
+  min-width: 190px;
+  max-height: 280px;
+  overflow: auto;
+  gap: 7px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
   box-shadow: 0 10px 28px rgb(0 0 0 / 16%);
 }
 .directory-filter-row .filter-picker-option { display: flex; align-items: center; gap: 8px; color: var(--ink); font-size: 12px; }
-.directory-filter-row .filter-picker-count { color: var(--subtle); }
-.directory-filter-row .work-model-filter { min-width: 160px; margin: 0; }
-.directory-filter-row .reset-filters-button { min-height: 36px; }
+.directory-filter-row .work-model-filter .form-select { width: 100%; min-height: 40px; }
+.directory-filter-row .reset-filters-button {
+  align-self: end;
+  min-height: 40px;
+  height: 40px;
+  white-space: nowrap;
+}
 .automation-status-wrap { display: grid; gap: 4px; }
 .automation-status-detail { padding-left: 2px; color: var(--muted); font-size: 11px; }
 .automation-status .new-only-filter { margin-left: auto; }
@@ -912,6 +984,9 @@
 .games-popularity strong { display: block; color: var(--ink); font-variant-numeric: tabular-nums; }
 .games-popularity small, .games-review-detail { display: block; margin-top: 2px; color: var(--subtle); font-size: 10px; }
 .games-review-score { color: var(--ink); font-weight: 600; }
+@media (max-width: 1100px) {
+  .directory-filter-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
 @media (max-width: 900px) {
   .directory-primary-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .directory-primary-filters .search-field { grid-column: 1 / -1; }
@@ -920,7 +995,7 @@
 @media (max-width: 520px) {
   .directory-primary-filters, .games-toolbar { grid-template-columns: 1fr; }
   .directory-primary-filters .search-field { grid-column: auto; }
-  .directory-filter-row { align-items: stretch; }
-  .directory-filter-row > * { flex: 1 1 140px; }
+  .directory-filter-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .directory-filter-row .reset-filters-button { grid-column: 1 / -1; justify-self: start; }
   .games-toolbar { align-items: stretch; }
 }

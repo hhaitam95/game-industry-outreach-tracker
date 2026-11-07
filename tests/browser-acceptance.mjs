@@ -137,6 +137,34 @@ async function main() {
     await page.getByRole("heading", { name: "Studio directory" }).waitFor();
     await page.getByText(/Last successful run:/).waitFor();
 
+    const toolbarGeometry = await page.locator(".directory-toolbar").evaluate(element => {
+      const children = Array.from(element.children).map(child => {
+        const rect = child.getBoundingClientRect();
+        return { left: rect.left, width: rect.width };
+      });
+      const controls = Array.from(element.querySelectorAll(
+        ".directory-filter-picker summary, .work-model-filter .form-select, .reset-filters-button",
+      )).map(control => {
+        const rect = control.getBoundingClientRect();
+        return { top: rect.top, height: rect.height };
+      });
+      return { children, controls };
+    });
+    assert.equal(toolbarGeometry.children.length, 2);
+    assert.ok(
+      Math.abs(toolbarGeometry.children[0].left - toolbarGeometry.children[1].left) < 1 &&
+      Math.abs(toolbarGeometry.children[0].width - toolbarGeometry.children[1].width) < 1,
+      "The primary and secondary filter rows should span the same full-width column.",
+    );
+    assert.ok(
+      toolbarGeometry.controls.every(control => Math.abs(control.top - toolbarGeometry.controls[0].top) < 1),
+      "All secondary filter controls and Reset filters should share one aligned baseline.",
+    );
+    assert.ok(
+      toolbarGeometry.controls.every(control => Math.abs(control.height - 40) < 1),
+      "Every secondary filter control should have the same 40px height.",
+    );
+
     await navigation.getByRole("button", { name: /^Games(?:\s+\d+)?$/ }).click();
     await page.getByRole("heading", { name: "Games" }).waitFor();
     await page.getByText(/Steam user reviews/).waitFor();
