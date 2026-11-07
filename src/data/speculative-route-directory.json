@@ -3314,7 +3314,7 @@
     "applicationUrl": "https://www.halfbrick.com/expression-of-interest",
     "evidenceUrl": "https://www.halfbrick.com/careers",
     "notes": "The official careers page directs applicants who do not see an ideal role to the Expression of Interest form. The form asks for location, role interest, portfolio link and resume upload. Halfbrick describes itself as fully remote and says its move to remote work opened recruitment to global hiring opportunities.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-07",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -3328,7 +3328,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-05"
     }
   },
   {
@@ -3338,7 +3338,7 @@
     "applicationUrl": "https://havocgames.co/careers",
     "evidenceUrl": "https://havocgames.co/careers",
     "notes": "The official Careers page provides a general application for candidates whose profile does not match a listed role; CV and portfolio are requested. The current careers listings include remote roles in India and accept applications across game-development and art disciplines. Remote hiring is stated for India; cross-border eligibility is not stated.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-07",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -3360,7 +3360,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-05"
     }
   },
   {
@@ -3370,7 +3370,7 @@
     "applicationUrl": "https://careers.hazelight.se/connect",
     "evidenceUrl": "https://hazelight.se/faq",
     "notes": "The official FAQ explicitly permits open applications when Hazelight is not currently hiring for an applicant's expertise and directs applicants to its official career site. The Teamtailor Connect page lets applicants select disciplines and consent to future job-opportunity updates or direct contact. The career site lists hybrid work; applicant-country eligibility is not stated.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-07",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -3397,7 +3397,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-05"
     }
   },
   {
@@ -3439,7 +3439,7 @@
     "applicationUrl": "https://www.hindsight-studios.de/career.html",
     "evidenceUrl": "https://www.hindsight-studios.de/career.html",
     "notes": "Invites speculative applications when no listed position fits, with a speculative-application option on its official careers form. Location and country eligibility should be confirmed directly.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-07",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
@@ -3451,7 +3451,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-05"
     }
   },
   {
@@ -3461,7 +3461,7 @@
     "applicationUrl": "https://honeyfrost.net/work",
     "evidenceUrl": "https://honeyfrost.net/work",
     "notes": "Official studio-controlled page explicitly invites spontaneous applications. Evidence: Spontaneous application. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-07",
     "applicationResearch": {
       "routeType": "spontaneous",
       "submissionMethods": [
@@ -3473,7 +3473,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-05"
     }
   },
   {
@@ -3483,7 +3483,7 @@
     "applicationUrl": "https://jobs.hugecalf.com/speculative-application?src=hugecalf.com",
     "evidenceUrl": "https://hugecalf.com/careers",
     "notes": "Official careers page links a dedicated Speculative Application form for candidates even when no vacancy matches. Fully remote, but applicants must work from within the UK.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-07",
     "applicationResearch": {
       "routeType": "speculative",
       "submissionMethods": [
@@ -3497,7 +3497,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-05"
     }
   },
   {
