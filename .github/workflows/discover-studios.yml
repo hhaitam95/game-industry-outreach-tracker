@@ -230,7 +230,7 @@ jobs:
           for attempt in $(seq 1 "$max_attempts"); do
             git fetch origin main
             git reset --mixed origin/main
-            python3 scripts/merge_discovery_datasets.py --base-ref origin/main --initial-ref "$initial_main_sha" --candidate-state .discovery-state/state/studio-discovery-state.json
+            python3 scripts/merge_discovery_datasets.py --base-ref origin/main --initial-ref "$initial_main_sha" --candidate-state .discovery-state/state/studio-discovery-state.json 2>&1 | tee "$RUNNER_TEMP/discovery-merge-summary.log"
 
             # These public datasets match the broad local-data ignore rule.
             git add -f -- src/data/speculative-route-directory.json src/data/studio-profiles.json
@@ -397,15 +397,61 @@ jobs:
             git -C .discovery-state push origin HEAD:discovery-state
           fi
 
-      - name: Upload Pages artifact when the public dataset changed
-        if: steps.commit.outputs.data_changed == 'true'
+      - name: Write the latest public discovery-run summary
+        shell: bash
+        env:
+          DATA_CHANGED: ${{ steps.commit.outputs.data_changed || 'false' }}
+          RUN_MODE: ${{ steps.discovery.outputs.mode || 'unknown' }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          python3 - "$RUNNER_TEMP/game-industry-outreach-tracker-discovery.log" "$RUNNER_TEMP/discovery-merge-summary.log" dist/discovery-run-summary.json <<'PY'
+          import datetime as dt
+          import json
+          import os
+          import pathlib
+          import re
+          import sys
+
+          discovery_log, merge_log, output_path = map(pathlib.Path, sys.argv[1:])
+          discovery_text = discovery_log.read_text(encoding="utf-8") if discovery_log.exists() else ""
+          merge_text = merge_log.read_text(encoding="utf-8") if merge_log.exists() else ""
+
+          def metric(name):
+              matches = re.findall(r"^" + re.escape(name) + r":\\s*(\\d+)", discovery_text, re.MULTILINE)
+              return int(matches[-1]) if matches else 0
+
+          merge_summary = {}
+          for line in merge_text.splitlines():
+              marker = "Merged discovery dataset with latest main:"
+              if marker in line:
+                  try:
+                      merge_summary = json.loads(line.split(marker, 1)[1].strip())
+                  except json.JSONDecodeError:
+                      merge_summary = {}
+
+          result = {
+              "schemaVersion": 1,
+              "completedAt": dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat(),
+              "mode": os.environ.get("RUN_MODE", "unknown"),
+              "newStudiosAdded": int(merge_summary.get("added", 0)),
+              "routesChecked": metric("routes_checked"),
+              "newlyVerifiedCandidates": metric("verified_added"),
+              "publicDatasetChanged": os.environ.get("DATA_CHANGED") == "true",
+              "runUrl": os.environ.get("RUN_URL", ""),
+          }
+          output_path.parent.mkdir(parents=True, exist_ok=True)
+          output_path.write_text(json.dumps(result, indent=2) + "\\n", encoding="utf-8")
+          print("Wrote public discovery summary:", json.dumps(result, sort_keys=True))
+          PY
+
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
           path: dist
 
       - name: Deploy updated directory
         id: deployment
-        if: steps.commit.outputs.data_changed == 'true'
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
 
       - name: Add sanitized workflow summary
@@ -413,7 +459,7 @@ jobs:
         shell: bash
         run: |
           {
-            echo "## Game Industry Outreach Tracker discovery run"
+            echo "## StudioScout discovery run"
             echo "- Mode: ${{ steps.discovery.outputs.mode || 'not started' }}"
             echo "- Source-page cap: ${{ steps.discovery.outputs.source_page_limit || 'not set' }}"
             echo "- Public changes: ${{ steps.commit.outputs.data_changed || 'not committed' }}"
