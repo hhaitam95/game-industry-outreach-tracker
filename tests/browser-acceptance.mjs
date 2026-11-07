@@ -625,10 +625,10 @@ async function main() {
     await page.getByRole("button", { name: "Reset filters" }).click();
     assert.equal(await rows.count(), initialCount);
 
-    await page.getByLabel("Work model · application route").selectOption("remote");
+    await page.getByLabel("Work model").selectOption("remote");
     const remoteCount = await filteredTotal();
     assert.ok(remoteCount > 0 && remoteCount < totalResults, "Work-model filtering should remain available with the integrated studio filters.");
-    await page.getByLabel("Work model · application route").selectOption("all");
+    await page.getByLabel("Work model").selectOption("all");
     await page.getByRole("button", { name: "Reset filters" }).click();
     await page.getByLabel("Search", { exact: true }).fill("Laki Studios");
     await country.selectOption("Poland");
