@@ -146,7 +146,7 @@ export function countryPartsFor(country: string): string[] {
     .filter(value => value && !/^(remote|not stated|not publicly stated|unknown)$/i.test(value));
 }
 
-export function continentsForLocation(country: string, countryCode?: string | null) {
+export function continentsForLocation(country: string, countryCode?: string | null): ContinentLabel[] {
   const label = country.trim();
   if (/^remote$/i.test(label)) return ["Remote / distributed"];
 
