@@ -63,6 +63,33 @@ class DiscoveryDatasetMergeTests(unittest.TestCase):
         self.assertEqual(summary["added"], 1)
         self.assertEqual(summary["total_studios"], 2)
 
+    def test_new_marker_remains_without_a_later_batch_addition(self):
+        old = studio("Old New Studio", "old-new.example", "2026-10-30", "https://old-new.example/open")
+        old["addedAt"] = "2026-10-01T12:00:00Z"
+        profiles = {"Old New Studio": profile("Old", "https://old-new.example/about")}
+
+        rows, _, summary = merge_datasets([old], [old], profiles, profiles)
+
+        self.assertEqual(summary["added"], 0)
+        self.assertEqual(rows[0]["addedAt"], "2026-10-01T12:00:00Z")
+
+    def test_new_batch_replaces_old_new_studio_markers(self):
+        old = studio("Old New Studio", "old-new.example", "2026-10-30", "https://old-new.example/open")
+        old["addedAt"] = "2026-10-01T12:00:00Z"
+        new = studio("New Studio", "new.example", "2026-10-30", "https://new.example/open")
+        base_profiles = {"Old New Studio": profile("Old", "https://old-new.example/about")}
+        incoming_profiles = {
+            **base_profiles,
+            "New Studio": profile("New", "https://new.example/about"),
+        }
+
+        rows, _, summary = merge_datasets([old], [old, new], base_profiles, incoming_profiles)
+        by_name = {row["name"]: row for row in rows}
+
+        self.assertEqual(summary["added"], 1)
+        self.assertNotIn("addedAt", by_name["Old New Studio"])
+        self.assertTrue(by_name["New Studio"].get("addedAt"))
+
     def test_newer_main_record_wins_over_stale_discovery_snapshot(self):
         remote = studio("Existing Studio", "existing.example", "2026-10-30", "https://existing.example/new-route")
         stale = studio("Existing Studio", "existing.example", "2026-10-29", "https://existing.example/old-route")
