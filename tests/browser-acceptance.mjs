@@ -663,8 +663,8 @@ async function main() {
       await fourAGamesRow.locator(".popular-game-cover").evaluateAll(covers =>
         covers.map(cover => cover.getAttribute("data-game-title")),
       ),
-      ["Metro Exodus", "Metro: Last Light Redux"],
-      "The compact studio table should show thumbnails for its notable games.",
+      ["Metro Exodus"],
+      "The compact studio table should show exactly one notable game thumbnail.",
     );
     await fourAGamesRow.locator("td").nth(3).click();
     const fourAGamesDetails = page.locator("#studio-details-4a-games");
@@ -681,7 +681,7 @@ async function main() {
       cellWidth: cell.getBoundingClientRect().width,
       tableWidth: cell.closest("table").getBoundingClientRect().width,
     }));
-    assert.equal(fullWidthDetails.colSpan, 5);
+    assert.equal(fullWidthDetails.colSpan, 8);
     assert.ok(fullWidthDetails.cellWidth >= fullWidthDetails.tableWidth - 2, "The expanded profile should span the entire table width.");
     const applicationLink = fourAGamesDetails.getByRole("link", { name: /Application/ });
     assert.equal(await applicationLink.getAttribute("href"), "https://www.4a-games.com.mt/other-cv");
