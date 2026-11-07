@@ -8,7 +8,7 @@ import { chromium } from "playwright";
 const host = "127.0.0.1";
 const port = 4173;
 const origin = `http://${host}:${port}`;
-const basePath = process.env.VITE_BASE_PATH || "/game-industry-outreach-tracker/";
+const basePath = process.env.VITE_BASE_PATH || "/studioscout/";
 const appUrl = new URL(basePath, origin).toString();
 const storageKey = "studio-outreach-tracker-v1";
 const previewEntry = path.resolve("node_modules/vite/bin/vite.js");
@@ -106,7 +106,7 @@ async function main() {
             status: "completed",
             conclusion: "success",
             updated_at: "2026-10-31T17:49:00Z",
-            html_url: "https://github.com/hhaitam95/game-industry-outreach-tracker/actions/runs/41225527000",
+            html_url: "https://github.com/hhaitam95/studioscout/actions/runs/41225527000",
           }],
         }),
       });
@@ -126,7 +126,7 @@ async function main() {
     });
 
     await page.goto(appUrl, { waitUntil: "networkidle" });
-    assert.match(await page.title(), /Game Industry Outreach Tracker/);
+    assert.match(await page.title(), /StudioScout/);
     assert.equal(await page.locator(".workspace-label").count(), 0, "The redundant workspace label should not be displayed.");
     assert.equal((await page.locator(".theme-toggle").innerText()).trim(), "◐", "The theme control should show only its icon.");
     assert.ok(

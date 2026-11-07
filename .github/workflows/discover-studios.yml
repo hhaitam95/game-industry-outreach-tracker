@@ -213,7 +213,7 @@ jobs:
       - name: Build the updated static directory
         run: npm run build
         env:
-          VITE_BASE_PATH: /game-industry-outreach-tracker/
+          VITE_BASE_PATH: ${{ format('/{0}/', github.event.repository.name) }}
 
       - name: Merge discovery output with the latest published dataset
         id: commit
@@ -260,7 +260,7 @@ jobs:
         if: steps.commit.outputs.data_changed == 'true'
         run: npm run build
         env:
-          VITE_BASE_PATH: /game-industry-outreach-tracker/
+          VITE_BASE_PATH: ${{ format('/{0}/', github.event.repository.name) }}
 
       - name: Persist discovery cursors and verification state
         shell: bash

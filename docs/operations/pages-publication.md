@@ -1,8 +1,10 @@
 # Pages publication
 
-The public site is deployed to:
+The public StudioScout site is deployed to:
 
-https://hhaitam95.github.io/game-industry-outreach-tracker/
+https://hhaitam95.github.io/studioscout/
+
+The Pages base path is derived from the current repository name in all build/deployment workflows, so a future repository rename does not leave Vite assets pointing at the previous path.
 
 The active workflows are:
 

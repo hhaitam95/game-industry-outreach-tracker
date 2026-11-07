@@ -25,7 +25,7 @@ jobs:
       - run: npm run routes:review
       - run: npm run build
         env:
-          VITE_BASE_PATH: /game-industry-outreach-tracker/
+          VITE_BASE_PATH: ${{ format('/{0}/', github.event.repository.name) }}
       - run: npm run check:privacy
       - run: npm run check:pages-artifact
       - name: Install pinned Playwright browser-test dependency
@@ -35,4 +35,4 @@ jobs:
       - name: Run browser acceptance tests
         run: npm run test:browser
         env:
-          VITE_BASE_PATH: /game-industry-outreach-tracker/
+          VITE_BASE_PATH: ${{ format('/{0}/', github.event.repository.name) }}
