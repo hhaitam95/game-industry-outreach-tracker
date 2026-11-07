@@ -9,7 +9,8 @@ const SEARCH_URL = "https://store.steampowered.com/api/storesearch/";
 const DETAILS_URL = "https://store.steampowered.com/api/appdetails";
 const STEAM_REVIEWS_API_URL = "https://api.steampowered.com/IUserReviewsService/GetAppReviews/v1/";
 const STEAM_METADATA_REFRESH_MS = 30 * 24 * 60 * 60 * 1000;
-const REQUEST_INTERVAL_MS = 1200;
+// Anonymous Steam review requests use the shared public rate limit; keep a conservative interval.
+const REQUEST_INTERVAL_MS = 1300;
 
 export function normalizeGameTitle(value) {
   return String(value ?? "")
