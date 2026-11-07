@@ -22,6 +22,9 @@ The Candidate Profile feeds both Matching and Application Preparation. The exist
 
 ## Studio directory
 
+The **Games** tab combines titles already associated with studio profiles. Where a verified Steam app ID exists, it can display Steam's release date, developer, publisher and aggregate review totals. Default popularity sorting uses total Steam reviews as a public signal, not sales or player counts. Missing values are left unknown rather than estimated.
+
+
 Search studios by name, country and studio type; filter by country and work model; open the official studio website or application route; and save studios to the tracker.
 
 ### Game cover artwork
