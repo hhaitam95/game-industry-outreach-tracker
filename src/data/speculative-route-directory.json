@@ -4375,6 +4375,30 @@
     }
   },
   {
+    "name": "Liquid Ice Studios",
+    "country": "Netherlands",
+    "websiteUrl": "https://liquidicestudios.com/",
+    "applicationUrl": "https://liquidicestudios.com/",
+    "evidenceUrl": "https://liquidicestudios.com/",
+    "notes": "The official site identifies Liquid Ice Studios as an independent game-development studio in The Hague with two games in production and a 13-person team. Its Careers section explicitly invites open applications: candidates should send a portfolio and describe what they would build at the studio; the page provides hello@liquidicestudios.com. Work model and applicant-country eligibility are not stated.",
+    "checkedAt": "2026-11-07",
+    "applicationResearch": {
+      "routeType": "open",
+      "submissionMethods": [
+        "email"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "The Hague, Netherlands · work model and applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [],
+      "routeStatus": "active",
+      "sourceType": "official_company_site",
+      "nextReviewAt": "2027-02-07"
+    }
+  },
+  {
     "name": "LIQUIDBULLET Studios",
     "country": "Not stated",
     "websiteUrl": "https://www.liquidbulletstudios.com/",
@@ -5349,6 +5373,34 @@
     }
   },
   {
+    "name": "Paradox Interactive",
+    "country": "Sweden",
+    "websiteUrl": "https://www.paradoxinteractive.com/",
+    "applicationUrl": "https://career.paradoxplaza.com/jobs/3359477-open-application-for-senior-game-programmers",
+    "evidenceUrl": "https://career.paradoxplaza.com/jobs/3359477-open-application-for-senior-game-programmers",
+    "notes": "Paradox Interactive's official company page describes the group as a developer and publisher, with five internal studios in five countries. Its current Teamtailor listing explicitly invites spontaneous applications for future opportunities, but this route is specifically for Senior Game Programmers using C++; it is not a general all-disciplines application. The listing is based in Stockholm, Sweden. Work model is not stated.",
+    "checkedAt": "2026-11-07",
+    "applicationResearch": {
+      "routeType": "discipline_specific",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Stockholm, Sweden · the open application is specifically for Senior Game Programmers"
+      ],
+      "disciplineScope": [
+        "Programming"
+      ],
+      "relatedApplicationUrls": [
+        "https://www.paradoxinteractive.com/our-company"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-02-07"
+    }
+  },
+  {
     "name": "Paranoid Interactive",
     "country": "Poland",
     "websiteUrl": "https://paranoidinteractive.net/",
@@ -5742,6 +5794,33 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-01-30"
+    }
+  },
+  {
+    "name": "President Studio",
+    "country": "Poland",
+    "websiteUrl": "https://www.president-studio.com/",
+    "applicationUrl": "https://www.presidentstudio.tsp.link/pl/kontakt",
+    "evidenceUrl": "https://www.president-studio.com/en/careers",
+    "notes": "President Studio's official Careers page explicitly invites spontaneous applications from candidates whose profile does not match a listed vacancy, asking for a CV and portfolio and linking directly to its application form. The official About Us and Games pages identify it as a Warsaw-based game-development studio and publisher with 26 developers and titles including Crime Scene Cleaner, Celestial Empire, Ship Builder and Viking City Builder. The linked form was temporarily unavailable during this review; the employer's invitation and direct application link remain published. Work model and eligibility are not stated.",
+    "checkedAt": "2026-11-07",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "website_form"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Warsaw, Poland · work model and applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [
+        "https://www.president-studio.com/en/about-us",
+        "https://www.president-studio.com/en/games"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-02-07"
     }
   },
   {
@@ -7920,6 +7999,32 @@
     }
   },
   {
+    "name": "Toca Boca",
+    "country": "Sweden",
+    "websiteUrl": "https://www.tocaboca.com/",
+    "applicationUrl": "https://emp.jobylon.com/jobs/78681-toca-boca-spontaneous-application/",
+    "evidenceUrl": "https://www.tocaboca.com/careers",
+    "notes": "Toca Boca's official Careers page explicitly invites spontaneous applications when no listed position fits and links to its Jobylon application. The employer describes its work across programming, play design, art, animation, production and QA; Jobylon identifies the spontaneous application as Stockholm-based and confirms Toca Boca develops digital games. The company is Toca Boca AB, a subsidiary of Spin Master Corp. Work model and international eligibility are not stated.",
+    "checkedAt": "2026-11-07",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "not_stated",
+      "eligibleLocations": [
+        "Stockholm, Sweden · work model and applicant-country eligibility not stated"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [
+        "https://www.tocaboca.com/careers"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-02-07"
+    }
+  },
+  {
     "name": "Traega Entertainment",
     "country": "United States",
     "websiteUrl": "https://www.traega.com/",
@@ -8336,6 +8441,32 @@
       "routeStatus": "active",
       "sourceType": "official_company_site",
       "nextReviewAt": "2027-02-01"
+    }
+  },
+  {
+    "name": "welevel",
+    "country": "Germany",
+    "websiteUrl": "https://welevel.com/",
+    "applicationUrl": "https://career.welevel.com/jobs/initiative-application",
+    "evidenceUrl": "https://career.welevel.com/jobs/initiative-application",
+    "notes": "welevel's official site identifies it as an independent Munich game studio with a team of 20+ developing a survival city-builder. Its employer-managed Initiative Application explicitly invites speculative applications across areas including art, development, design and operations when no listed role fits. The application is full-time and on-site in Munich and explicitly requires valid EU work authorisation; it asks for a CV and portfolio or work samples.",
+    "checkedAt": "2026-11-07",
+    "applicationResearch": {
+      "routeType": "spontaneous",
+      "submissionMethods": [
+        "ats"
+      ],
+      "workModel": "on_site",
+      "eligibleLocations": [
+        "Munich, Germany · on-site; valid EU work authorisation required"
+      ],
+      "disciplineScope": [],
+      "relatedApplicationUrls": [
+        "https://welevel.com/"
+      ],
+      "routeStatus": "active",
+      "sourceType": "employer_managed_career_platform",
+      "nextReviewAt": "2027-02-07"
     }
   },
   {
