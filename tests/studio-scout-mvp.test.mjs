@@ -19,7 +19,7 @@ async function withViteModules(callback) {
   }
 }
 
-test("studio directory renders the compact five-column table and working filter controls", async () => {
+test("studio directory renders separate studio facets and integrated filters", async () => {
   await withViteModules(async (server) => {
     const module = await server.ssrLoadModule("/src/components/StudioDirectory.tsx");
     const markup = renderToStaticMarkup(
@@ -33,8 +33,12 @@ test("studio directory renders the compact five-column table and working filter 
     assert.match(markup, /Search/);
     assert.match(markup, /Continent/);
     assert.match(markup, /Country/);
-    assert.match(markup, /More filters/);
-    assert.match(markup, /At a glance/);
+    assert.doesNotMatch(markup, /More filters/);
+    assert.doesNotMatch(markup, /At a glance/);
+    assert.match(markup, /Sort by Scale/);
+    assert.match(markup, /Sort by Studio role/);
+    assert.match(markup, /Sort by Platform/);
+    assert.match(markup, /New studios/);
     assert.match(markup, /Scale not classified/);
     assert.match(markup, /Notable work/);
     assert.match(markup, /Sort by Studio/);
@@ -52,9 +56,26 @@ test("studio directory renders the compact five-column table and working filter 
     assert.doesNotMatch(markup, /class="link-cell"|<th[^>]*>Links<\/th>/);
     assert.match(markup, /Click a studio row to see its profile/);
     assert.doesNotMatch(markup, /Studio type/);
-    assert.match(markup, /Platforms/);
+    assert.match(markup, /Platform/);
     assert.match(markup, /Focus/);
     assert.doesNotMatch(markup, /Studio information sources|Source 1|Studio highlights/);
+  });
+});
+
+test("Games directory renders popularity and store metadata columns", async () => {
+  await withViteModules(async (server) => {
+    const module = await server.ssrLoadModule("/src/components/GamesDirectory.tsx");
+    const markup = renderToStaticMarkup(React.createElement(module.default, { onCountChange: () => {} }));
+    assert.match(markup, /<h1>Games<\\/h1>/);
+    assert.match(markup, /Popularity/);
+    assert.match(markup, /Release date/);
+    assert.match(markup, /Developer/);
+    assert.match(markup, /Publisher/);
+    assert.match(markup, /Steam reviews/);
+    assert.match(markup, /GTFO/);
+    assert.match(markup, /Metro Exodus/);
+    assert.match(markup, /Steam user reviews/);
+    assert.doesNotMatch(markup, /NaN/);
   });
 });
 
