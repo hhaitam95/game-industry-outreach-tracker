@@ -418,7 +418,7 @@ jobs:
           merge_text = merge_log.read_text(encoding="utf-8") if merge_log.exists() else ""
 
           def metric(name):
-              matches = re.findall(r"^" + re.escape(name) + r":\\s*(\\d+)", discovery_text, re.MULTILINE)
+              matches = re.findall(r"^" + re.escape(name) + r":\s*(\d+)", discovery_text, re.MULTILINE)
               return int(matches[-1]) if matches else 0
 
           merge_summary = {}
@@ -441,7 +441,7 @@ jobs:
               "runUrl": os.environ.get("RUN_URL", ""),
           }
           output_path.parent.mkdir(parents=True, exist_ok=True)
-          output_path.write_text(json.dumps(result, indent=2) + "\\n", encoding="utf-8")
+          output_path.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
           print("Wrote public discovery summary:", json.dumps(result, sort_keys=True))
           PY
 
