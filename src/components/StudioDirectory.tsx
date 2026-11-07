@@ -446,7 +446,7 @@ export default function StudioDirectory({
         </div>
       </div>
 
-      <DiscoveryStatus />
+      <DiscoveryStatus showNewOnly={showNewOnly} onToggleNewOnly={setShowNewOnly} />
 
       <div className="directory-toolbar">
         <div className="directory-primary-filters">
@@ -486,8 +486,6 @@ export default function StudioDirectory({
           <button className="btn btn-outline-secondary btn-sm reset-filters-button" type="button" onClick={resetFilters}>Reset filters</button>
         </div>
       </div>
-      <DiscoveryStatus showNewOnly={showNewOnly} onToggleNewOnly={setShowNewOnly} />
-
       {activeFilterCount > 0 ? (
         <div className="active-filter-chips" aria-label="Active filters">
           {continent !== "All continents" ? (
