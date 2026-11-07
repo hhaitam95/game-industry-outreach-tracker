@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-07 — Structured application preferences
+
+- Replace free-text role, studio-type, work-model and geographic preference lists with multi-select checkboxes and country picklists.
+- Keep legacy saved preference values visible and removable so existing browser profiles and backups are not silently discarded.
+- Fix the space-key issue caused by trimming list input on every keystroke; retain one optional free-text notes field for genuinely open-ended considerations.
+
 ## 2026-11-06 — Manual-assisted Application Preparation and Friday workflow hardening (PR #116, merged and deployed)
 
 - Add a per-application Prepare panel with six readiness checks, private employer requirements/questions notes and a separate draft-answer/missing-information area.
