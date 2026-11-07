@@ -39,7 +39,8 @@ test("studio directory renders separate studio facets and integrated filters", a
     assert.match(markup, /Sort by Studio role/);
     assert.match(markup, /Sort by Platform/);
     assert.match(markup, /New studios/);
-    assert.ok(markup.includes('<th scope="col">Scale</th>'));
+    assert.match(markup, /aria-label="Sort by Scale \(ascending\)"/);
+    assert.match(markup, /<span>Scale<\/span>/);
     assert.match(markup, /Notable work/);
     assert.match(markup, /Sort by Studio/);
     assert.match(markup, /aria-controls="studio-details-4a-games"/);
@@ -72,7 +73,7 @@ test("Games directory renders popularity and store metadata columns", async () =
     assert.match(markup, /Developer/);
     assert.match(markup, /Publisher/);
     assert.match(markup, /Steam reviews/);
-    assert.match(markup, /of \\d+ games/);
+    assert.match(markup, /of \d+ games/);
     assert.match(markup, /Steam user reviews/);
     assert.doesNotMatch(markup, /NaN/);
   });
@@ -115,6 +116,17 @@ test("game posters prefer IGDB covers and retain a verified Steam destination", 
     assert.ok(igdbOnly.includes("https://images.igdb.com/igdb/image/upload/t_cover_big/cover-hash.jpg"));
     assert.ok(igdbOnly.includes('href="https://www.igdb.com/games/example-game"'));
     assert.doesNotMatch(igdbOnly, /IGDB cover|Steam artwork|Official artwork/);
+  });
+});
+
+test("country and continent filters handle combined headquarters cleanly", async () => {
+  await withViteModules(async (server) => {
+    const location = await server.ssrLoadModule("/src/components/location.ts");
+    assert.deepEqual(location.countryPartsFor("France / Canada"), ["France", "Canada"]);
+    assert.deepEqual(location.continentsForLocation("France / Canada"), ["Europe", "North America"]);
+    assert.deepEqual(location.continentsForLocation("Ukraine / Cyprus"), ["Europe"]);
+    assert.deepEqual(location.countryPartsFor("Remote"), []);
+    assert.equal(location.countryFlagFor("Uruguay"), "🇺🇾");
   });
 });
 

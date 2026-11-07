@@ -324,7 +324,7 @@ export default function StudioDirectory({
         matchesFacet(platformFilters, profile?.platforms || []) &&
         matchesFacet(focusFilters, profile?.gameFocus || []) &&
         matchesFacet(roleFilters, profile?.studioRoles || []) &&
-        (!showNewOnly || isNewStudio(studio, now))
+        (!showNewOnly || isNewStudio(studio))
       );
     });
 

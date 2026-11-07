@@ -46,6 +46,55 @@ class NewStudioTimestampTests(unittest.TestCase):
         self.assertEqual(summary["added"], 0)
         self.assertEqual(summary["updated_routes"], 1)
 
+    def test_new_studio_markers_persist_until_a_later_batch_publishes_new_studios(self):
+        previously_new = {
+            "name": "Previously New Studio",
+            "country": "Canada",
+            "websiteUrl": "https://previously-new.example/",
+            "applicationUrl": "https://previously-new.example/careers",
+            "evidenceUrl": "https://previously-new.example/careers",
+            "checkedAt": "2026-10-30",
+            "addedAt": "2026-10-31T18:00:00Z",
+        }
+        new_studio = {
+            "name": "Fresh Studio",
+            "country": "France",
+            "websiteUrl": "https://fresh-studio.example/",
+            "applicationUrl": "https://fresh-studio.example/careers",
+            "evidenceUrl": "https://fresh-studio.example/careers",
+            "checkedAt": "2026-11-01",
+        }
+        with patch.object(merge, "added_at_timestamp", return_value="2026-11-01T12:00:00Z"):
+            rows, _profiles, summary = merge.merge_datasets(
+                [previously_new],
+                [new_studio],
+                {"Previously New Studio": {"description": "Existing"}},
+                {"Fresh Studio": {"description": "New"}},
+            )
+        by_name = {row["name"]: row for row in rows}
+        self.assertNotIn("addedAt", by_name["Previously New Studio"])
+        self.assertEqual(by_name["Fresh Studio"]["addedAt"], "2026-11-01T12:00:00Z")
+        self.assertEqual(summary["added"], 1)
+
+    def test_new_studio_markers_survive_batches_without_new_publications(self):
+        existing = {
+            "name": "New Studio",
+            "country": "Canada",
+            "websiteUrl": "https://new-studio.example/",
+            "applicationUrl": "https://new-studio.example/careers",
+            "evidenceUrl": "https://new-studio.example/careers",
+            "checkedAt": "2026-10-30",
+            "addedAt": "2026-10-31T18:00:00Z",
+        }
+        rows, _profiles, summary = merge.merge_datasets(
+            [existing],
+            [{**existing}],
+            {"New Studio": {"description": "New"}},
+            {"New Studio": {"description": "New"}},
+        )
+        self.assertEqual(rows[0]["addedAt"], "2026-10-31T18:00:00Z")
+        self.assertEqual(summary["added"], 0)
+
 
 class ConcurrentDirectoryRemovalTests(unittest.TestCase):
     def test_removed_official_domain_is_not_resurrected_from_stale_run(self):

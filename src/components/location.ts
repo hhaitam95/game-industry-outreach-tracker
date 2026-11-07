@@ -153,7 +153,7 @@ export function continentsForLocation(country: string, countryCode?: string | nu
   const explicitCode = countryCode?.trim().toUpperCase();
   const codes = explicitCode && /^[A-Z]{2}$/.test(explicitCode) && CONTINENT_BY_COUNTRY_CODE[explicitCode]
     ? [explicitCode]
-    : label.split(/\s*\/\s*/).map((part) => COUNTRY_CODE_BY_NAME[part.trim()]).filter(Boolean);
+    : label.split(/\s*(?:\/|&)\s*/).map((part) => COUNTRY_CODE_BY_NAME[part.trim()]).filter(Boolean);
 
   const continents = Array.from(
     new Set(codes.map((code) => CONTINENT_BY_COUNTRY_CODE[code]).filter(Boolean)),

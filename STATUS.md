@@ -1,9 +1,21 @@
 # StudioScout status
 
 **Product name:** StudioScout — Your personalized gateway into the game industry.  
-**Last verified:** 2026-11-06  
+**Last verified:** 2026-11-07  
 **Product scope:** Five connected systems: global Studio Discovery, private Candidate Profile, Matching Engine, manual-assisted Application Preparation and Application Tracker. The preparation checklist/notes foundation is in PR #116; automatic application-page analysis and ATS interaction remain future work.  
 **Authoritative discovery rules:** [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md).
+
+## Studio directory, discovery status and Games catalogue — 2026-11-07
+
+The Studio directory and Games catalogue improvements are on the current main branch. At this checkpoint, the public snapshot contains **328 active studio routes** and the catalogue renders **465 deduplicated game titles**.
+
+- The discovery status row shows hourly workflow health, links to the latest run and reports how many studios were added and how many existing routes were rechecked in the latest batch. The New studios filter is integrated alongside the status.
+- A NEW marker does not expire after 24 hours. It remains until a later discovery batch publishes at least one new studio, at which point the previous batch's markers are cleared and the new records receive the marker.
+- Studio table facets are distinct, sortable columns: Scale, Studio role, Platform and Focus. The compact row shows one notable game, while the expanded profile may show more.
+- The Games tab aggregates games across studio profiles, provides popularity sorting using Steam review counts where available, and shows release, developer, publisher and review details only when supported by verified metadata.
+- Navigation counters are provided for Studios, Games, Matches and My applications.
+
+The next verification gate is a clean full CI run and successful Pages publication. Steam review enrichment has been moved to the current `IUserReviewsService/GetAppReviews` Web API; review totals remain explicitly unavailable until the enrichment workflow successfully refreshes them.
 
 ## Five-system product architecture — 2026-11-03
 

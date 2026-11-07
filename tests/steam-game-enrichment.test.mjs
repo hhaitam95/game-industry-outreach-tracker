@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  createSteamReviewSummaryUrl,
   isValidSteamArtworkUrl,
   normalizeDeveloperName,
   normalizeGameTitle,
@@ -142,14 +143,29 @@ test("extracts a release year from the date supplied by Steam", () => {
   assert.equal(releaseYearFromSteamDate("Coming soon"), null);
 });
 
-test("parses Steam aggregate review totals and preserves missing metrics as unknown", () => {
+test("builds the documented Steam GetAppReviews request for all review types and purchases", () => {
+  const url = createSteamReviewSummaryUrl(12345);
+  assert.equal(url.origin + url.pathname, "https://api.steampowered.com/IUserReviewsService/GetAppReviews/v1/");
+  assert.deepEqual(JSON.parse(url.searchParams.get("input_json")), {
+    appid: 12345,
+    filter: 1,
+    languages: ["all"],
+    review_type: 0,
+    purchase_type: 1,
+    num_per_page: 1,
+  });
+  assert.throws(() => createSteamReviewSummaryUrl(0), /positive Steam app ID/);
+});
+
+test("parses Steam aggregate review totals from the current service response", () => {
   assert.deepEqual(selectSteamReviewSummary({
-    success: 1,
-    query_summary: {
-      total_reviews: 1250,
-      total_positive: 1100,
-      total_negative: 150,
-      review_score_desc: "Very Positive",
+    response: {
+      query_summary: {
+        total_reviews: 1250,
+        total_positive: 1100,
+        total_negative: 150,
+        review_score_desc: "Very Positive",
+      },
     },
   }), {
     steamReviewCount: 1250,
@@ -158,13 +174,12 @@ test("parses Steam aggregate review totals and preserves missing metrics as unkn
     steamReviewScoreDesc: "Very Positive",
   });
   assert.deepEqual(selectSteamReviewSummary({
-    success: 1,
-    query_summary: { total_reviews: 0, total_positive: 0, total_negative: 0 },
+    response: { query_summary: { total_reviews: 0, total_positive: 0, total_negative: 0 } },
   }), {
     steamReviewCount: 0,
     steamPositiveReviewCount: 0,
     steamNegativeReviewCount: 0,
   });
-  assert.equal(selectSteamReviewSummary({ success: 1, query_summary: { total_reviews: "many" } }), null);
-  assert.equal(selectSteamReviewSummary({ success: 0, query_summary: {} }), null);
+  assert.equal(selectSteamReviewSummary({ response: { query_summary: { total_reviews: "many" } } }), null);
+  assert.equal(selectSteamReviewSummary({ response: {} }), null);
 });

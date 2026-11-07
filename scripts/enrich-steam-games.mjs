@@ -7,9 +7,9 @@ const root = process.cwd();
 const profilesPath = path.join(root, "src/data/studio-profiles.json");
 const SEARCH_URL = "https://store.steampowered.com/api/storesearch/";
 const DETAILS_URL = "https://store.steampowered.com/api/appdetails";
-const APP_REVIEWS_URL = "https://store.steampowered.com/appreviews/";
+const STEAM_REVIEWS_API_URL = "https://api.steampowered.com/IUserReviewsService/GetAppReviews/v1/";
 const STEAM_METADATA_REFRESH_MS = 30 * 24 * 60 * 60 * 1000;
-const REQUEST_INTERVAL_MS = 800;
+const REQUEST_INTERVAL_MS = 1200;
 
 export function normalizeGameTitle(value) {
   return String(value ?? "")
@@ -206,9 +206,26 @@ function isFreshTimestamp(value, now = Date.now()) {
   return Number.isFinite(timestamp) && timestamp <= now && now - timestamp < STEAM_METADATA_REFRESH_MS;
 }
 
+export function createSteamReviewSummaryUrl(appId) {
+  const normalizedAppId = Number(appId);
+  if (!Number.isSafeInteger(normalizedAppId) || normalizedAppId <= 0) {
+    throw new Error("A positive Steam app ID is required to fetch review totals.");
+  }
+  const url = new URL(STEAM_REVIEWS_API_URL);
+  url.searchParams.set("input_json", JSON.stringify({
+    appid: normalizedAppId,
+    filter: 1,
+    languages: ["all"],
+    review_type: 0,
+    purchase_type: 1,
+    num_per_page: 1,
+  }));
+  return url;
+}
+
 export function selectSteamReviewSummary(payload) {
-  if (!payload || (payload.success !== 1 && payload.success !== true)) return null;
-  const summary = payload.query_summary;
+  const response = payload?.response ?? payload;
+  const summary = response?.query_summary;
   if (!summary || !Number.isInteger(summary.total_reviews) ||
       !Number.isInteger(summary.total_positive) || !Number.isInteger(summary.total_negative)) {
     return null;
@@ -224,15 +241,7 @@ export function selectSteamReviewSummary(payload) {
 }
 
 async function fetchSteamReviewSummary(appId) {
-  const url = new URL(String(appId), APP_REVIEWS_URL);
-  url.search = new URLSearchParams({
-    json: "1",
-    language: "all",
-    purchase_type: "all",
-    num_per_page: "0",
-    filter: "summary",
-  }).toString();
-  return steamRequest(url, "Steam user-review summary for " + appId);
+  return steamRequest(createSteamReviewSummaryUrl(appId), "Steam user-review summary for " + appId);
 }
 
 function collectGamesMissingSteamArtwork(profiles) {
@@ -349,7 +358,7 @@ async function enrichKnownSteamArtwork(profiles) {
         for (const { game } of group.entries) Object.assign(game, reviewSummary, { steamReviewsUpdatedAt: checkedAt });
         counts.steamReviewRecordsUpdated += group.entries.length;
       } else {
-        failures.push({ appId: group.appId, source: "appreviews", error: "Steam returned no usable aggregate review summary." });
+        failures.push({ appId: group.appId, source: "user_reviews_api", error: "Steam returned no usable aggregate review summary." });
       }
     } catch (error) {
       counts.steamReviewRequestFailures += 1;
