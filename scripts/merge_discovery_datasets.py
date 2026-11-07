@@ -261,6 +261,7 @@ def merge_datasets(
             by_domain[domain] = index
 
     added = 0
+    new_names: set[str] = set()
     updated = 0
     unchanged = 0
     conflicts: list[str] = []
@@ -313,6 +314,7 @@ def merge_datasets(
             by_name[name_id] = new_index
             by_domain[domain_id] = new_index
             profiles[name] = copy.deepcopy(profile)
+            new_names.add(name_id)
             added += 1
             continue
 
@@ -336,6 +338,13 @@ def merge_datasets(
                 profiles[existing_name] = merge_profiles(existing_profile, incoming_profile)
             elif existing_name == name:
                 profiles[existing_name] = copy.deepcopy(incoming_profile)
+
+    if added:
+        # The NEW label has no expiry. A later batch clears previous markers
+        # only when that batch actually publishes one or more new studio records.
+        for record in rows:
+            if name_key(str(record.get("name", ""))) not in new_names:
+                record.pop("addedAt", None)
 
     rows.sort(key=lambda record: str(record.get("name", "")).casefold())
     profiles = {
