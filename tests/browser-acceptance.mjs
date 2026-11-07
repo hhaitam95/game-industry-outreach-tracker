@@ -612,8 +612,8 @@ async function main() {
     await country.selectOption("All countries");
 
     await page.locator(".directory-filter-picker").nth(1).locator("summary").click();
-    const pcFilter = page.getByRole("checkbox", { name: "Platforms: PC" });
-    const mobileFilter = page.getByRole("checkbox", { name: "Platforms: Mobile" });
+    const pcFilter = page.getByRole("checkbox", { name: "Platform: PC" });
+    const mobileFilter = page.getByRole("checkbox", { name: "Platform: Mobile" });
     await pcFilter.check();
     await mobileFilter.check();
     const platformCount = await filteredTotal();
