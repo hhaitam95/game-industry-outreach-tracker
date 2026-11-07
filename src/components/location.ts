@@ -64,6 +64,7 @@ const CONTINENT_BY_COUNTRY_CODE: Record<string, ContinentLabel> = {
 
   // South America
   BR: "South America",
+  UY: "South America",
 
   // Oceania
   AU: "Oceania",
@@ -114,6 +115,7 @@ const COUNTRY_CODE_BY_NAME: Record<string, string> = {
   Thailand: "TH",
   "Türkiye": "TR",
   Ukraine: "UA",
+  Uruguay: "UY",
   "United Arab Emirates": "AE",
   "United Kingdom": "GB",
   "United States": "US",
@@ -131,7 +133,20 @@ const CONTINENT_ORDER: ContinentLabel[] = [
   "Not stated",
 ];
 
-export function continentsForLocation(country: string, countryCode?: string | null): ContinentLabel[] {
+export function continentEmoji(continent: ContinentLabel): string {
+  const icons: Record<ContinentLabel, string> = {
+    Africa: "🌍", Asia: "🌏", Europe: "🌍", "North America": "🌎",
+    "South America": "🌎", Oceania: "🌏", "Remote / distributed": "🌐", "Not stated": "❔",
+  };
+  return icons[continent];
+}
+
+export function countryPartsFor(country: string): string[] {
+  return country.split(/\s*(?:\/|&)\s*/).map(value => value.trim())
+    .filter(value => value && !/^(remote|not stated|not publicly stated|unknown)$/i.test(value));
+}
+
+export function continentsForLocation(country: string, countryCode?: string | null) {
   const label = country.trim();
   if (/^remote$/i.test(label)) return ["Remote / distributed"];
 
@@ -170,15 +185,13 @@ const COUNTRY_CODE_FALLBACK: Record<string, string> = {
   "Costa Rica": "CR", Cyprus: "CY", Indonesia: "ID", Iraq: "IQ", Italy: "IT",
   Japan: "JP", Malaysia: "MY", Malta: "MT", Moldova: "MD", Morocco: "MA",
   Nigeria: "NG", Philippines: "PH", Portugal: "PT", Singapore: "SG", Spain: "ES",
-  Thailand: "TH", Ukraine: "UA", Vietnam: "VN",
+  Thailand: "TH", Ukraine: "UA", Uruguay: "UY", Vietnam: "VN",
 };
 
 export function countryFlagFor(country: string, countryCode?: string | null): string | null {
   const label = country.trim();
   if (!label || /^(not stated|not publicly stated|not disclosed|unknown)$/i.test(label)) return null;
   if (label === "Remote") return "🌐";
-  if (label === "France / Canada") return "🇫🇷 🇨🇦";
-  if (label === "Ukraine / Cyprus") return "🇺🇦 🇨🇾";
   const code = countryCode?.trim().toUpperCase() || COUNTRY_CODE_FALLBACK[label];
   return code ? flagFromCode(code) : null;
 }

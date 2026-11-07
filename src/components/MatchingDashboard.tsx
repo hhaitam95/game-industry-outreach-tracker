@@ -247,6 +247,7 @@ export default function MatchingDashboard({
   onSaveStudio,
   onOpenTrackedStudio,
   trackedStudioNames,
+  onCountChange,
 }: {
   onOpenProfile: () => void;
   onSaveStudio: (
@@ -272,6 +273,7 @@ export default function MatchingDashboard({
   ) => void;
   onOpenTrackedStudio: (studioName: string) => void;
   trackedStudioNames: string[];
+  onCountChange: (count: number) => void;
 }) {
   const [profile, setProfile] = useState<CandidateProfile | null>(null);
   const [loading, setLoading] = useState(true);
@@ -311,6 +313,10 @@ export default function MatchingDashboard({
     if (!profile) return [];
     return sortStudioMatches(buildStudioMatches(profile), sortMode);
   }, [profile, sortMode]);
+
+  useEffect(() => {
+    onCountChange(assessments.length);
+  }, [assessments.length, onCountChange]);
 
   const filtered = useMemo(() => {
     const term = query.trim().toLowerCase();

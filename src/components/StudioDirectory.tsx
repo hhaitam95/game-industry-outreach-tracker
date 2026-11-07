@@ -18,7 +18,7 @@ import {
   platformEmoji,
 } from "./studio-taxonomy";
 import type { StudioScale } from "./studio-taxonomy";
-import { continentsForLocation, countryFlagFor } from "./location";
+import { continentEmoji, continentsForLocation, countryFlagFor, countryPartsFor } from "./location";
 import type { ContinentLabel } from "./location";
 import "./directory.css";
 
@@ -59,7 +59,6 @@ const workModelLabels: Record<string, string> = {
   mixed: "Mixed",
   not_stated: "Not stated",
 };
-const NEW_STUDIO_WINDOW_MS = 24 * 60 * 60 * 1000;
 const CONTINENT_ORDER = [
   "Europe",
   "Asia",
@@ -70,13 +69,11 @@ const CONTINENT_ORDER = [
   "Remote / distributed",
   "Not stated",
 ];
-type SortKey = "name" | "location" | "popularWork" | "atAGlance";
+type SortKey = "name" | "location" | "popularWork" | "scale" | "role" | "platform" | "focus";
 type SortDirection = "asc" | "desc";
 
-function isNewStudio(studio: Studio, now: number): boolean {
-  if (!studio.addedAt) return false;
-  const addedAt = Date.parse(studio.addedAt);
-  return Number.isFinite(addedAt) && addedAt <= now && now - addedAt < NEW_STUDIO_WINDOW_MS;
+function isNewStudio(studio: Studio): boolean {
+  return Boolean(studio.addedAt && Number.isFinite(Date.parse(studio.addedAt)));
 }
 
 function locationFor(studio: Studio): string {
@@ -228,12 +225,6 @@ export default function StudioDirectory({
   const [expandedStudio, setExpandedStudio] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(25);
-  const [now, setNow] = useState(() => Date.now());
-
-  useEffect(() => {
-    const interval = window.setInterval(() => setNow(Date.now()), 60_000);
-    return () => window.clearInterval(interval);
-  }, []);
 
   const activeStudios = useMemo(
     () => studios.filter((studio) => studio.applicationResearch?.routeStatus === "active") as Studio[],
@@ -244,7 +235,9 @@ export default function StudioDirectory({
     () =>
       Array.from(
         new Set(
-          activeStudios.map((studio) => profiles[studio.name]?.headquarters?.country || studio.country),
+          activeStudios.flatMap((studio) =>
+            countryPartsFor(profiles[studio.name]?.headquarters?.country || studio.country),
+          ),
         ),
       )
         .filter((value) => value && value !== "Not stated" && value !== "Not publicly stated")
@@ -325,7 +318,7 @@ export default function StudioDirectory({
       return (
         (!term || searchable.includes(term)) &&
         (continent === "All continents" || studioContinents.includes(continent)) &&
-        (country === "All countries" || studioCountry === country) &&
+        (country === "All countries" || countryPartsFor(studioCountry).includes(country)) &&
         (workModel === "all" || routeWorkModel === workModel) &&
         matchesFacet(scaleFilters, profile?.scale ? [profile.scale] : []) &&
         matchesFacet(platformFilters, profile?.platforms || []) &&
@@ -341,9 +334,15 @@ export default function StudioDirectory({
         case "location":
           return locationSortFor(studio);
         case "popularWork":
-          return (profile?.popularGames || []).slice(0, 3).map((game) => game.title).join(" ");
-        case "atAGlance":
-          return [...(profile?.platforms || []), ...(profile?.gameFocus || [])].join(" ");
+          return profile?.popularGames?.[0]?.title || "";
+        case "scale":
+          return profile?.scale || "";
+        case "role":
+          return orderedTags(profile?.studioRoles || [], ROLE_ORDER).join(" ");
+        case "platform":
+          return orderedTags(profile?.platforms || [], PLATFORM_ORDER).join(" ");
+        case "focus":
+          return orderedTags(profile?.gameFocus || [], FOCUS_ORDER).join(" ");
         case "name":
         default:
           return studio.name;
@@ -359,7 +358,7 @@ export default function StudioDirectory({
       return a.name.localeCompare(b.name, undefined, { sensitivity: "base", numeric: true });
     });
   }, [
-    activeStudios, continent, country, focusFilters, now, platformFilters, query,
+    activeStudios, continent, country, focusFilters, platformFilters, query,
     roleFilters, scaleFilters, showNewOnly, sortDirection, sortKey, workModel,
   ]);
 
@@ -450,92 +449,44 @@ export default function StudioDirectory({
       <DiscoveryStatus />
 
       <div className="directory-toolbar">
-        <label className="form-field search-field">
-          <span>Search</span>
-          <input
-            className="form-control"
-            type="search"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="Studio, game, location or focus"
-          />
-        </label>
-        <label className="form-field">
-          <span>Continent</span>
-          <select className="form-select" value={continent} onChange={(event) => setContinent(event.target.value as ContinentLabel | "All continents")}>
-            <option>All continents</option>
-            {continents.map((value) => <option key={value} value={value}>{value}</option>)}
-          </select>
-        </label>
-        <label className="form-field">
-          <span>Country</span>
-          <select className="form-select" value={country} onChange={(event) => setCountry(event.target.value)}>
-            <option>All countries</option>
-            {countries.map((value) => <option key={value} value={value}>{countryFlagFor(value)} {value}</option>)}
-          </select>
-        </label>
-      </div>
-
-      <details className="directory-advanced-filters">
-        <summary>
-          <span><span aria-hidden="true">⚙️</span> More filters</span>
-          <span className="advanced-filter-count">{activeFilterCount ? activeFilterCount + " active" : "Scale · platform · focus · role"}</span>
-        </summary>
-        <div className="directory-filter-grid">
-          <FilterPicker
-            label="Scale"
-            emoji="📈"
-            options={[...scaleOptions]}
-            selected={scaleFilters}
-            onToggle={value => toggleSelected(setScaleFilters, value)}
-          />
-          <FilterPicker
-            label="Platforms"
-            emoji="🖥️"
-            options={platformOptions}
-            selected={platformFilters}
-            onToggle={value => toggleSelected(setPlatformFilters, value)}
-          />
-          <FilterPicker
-            label="Focus"
-            emoji="🎯"
-            options={focusOptions}
-            selected={focusFilters}
-            onToggle={value => toggleSelected(setFocusFilters, value)}
-          />
-          <FilterPicker
-            label="Studio role"
-            emoji="🏢"
-            options={[...roleOptions]}
-            selected={roleFilters}
-            onToggle={value => toggleSelected(setRoleFilters, value)}
-          />
+        <div className="directory-primary-filters">
+          <label className="form-field search-field">
+            <span>Search</span>
+            <input className="form-control" type="search" value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Studio, game, location or focus" />
+          </label>
+          <label className="form-field">
+            <span>Continent</span>
+            <select className="form-select" value={continent} onChange={(event) => setContinent(event.target.value as ContinentLabel | "All continents")}>
+              <option>All continents</option>
+              {continents.map((value) => <option key={value} value={value}>{continentEmoji(value)} {value}</option>)}
+            </select>
+          </label>
+          <label className="form-field">
+            <span>Country</span>
+            <select className="form-select" value={country} onChange={(event) => setCountry(event.target.value)}>
+              <option>All countries</option>
+              {countries.map((value) => <option key={value} value={value}>{countryFlagFor(value)} {value}</option>)}
+            </select>
+          </label>
+        </div>
+        <div className="directory-filter-row" aria-label="Studio filters">
+          <FilterPicker label="Scale" emoji="📈" options={[...scaleOptions]} selected={scaleFilters} onToggle={value => toggleSelected(setScaleFilters, value)} />
+          <FilterPicker label="Platform" emoji="🖥️" options={platformOptions} selected={platformFilters} onToggle={value => toggleSelected(setPlatformFilters, value)} />
+          <FilterPicker label="Focus" emoji="🎯" options={focusOptions} selected={focusFilters} onToggle={value => toggleSelected(setFocusFilters, value)} />
+          <FilterPicker label="Studio role" emoji="🏢" options={[...roleOptions]} selected={roleFilters} onToggle={value => toggleSelected(setRoleFilters, value)} />
           <label className="form-field work-model-filter">
-            <span>Work model · application route</span>
+            <span>Work model</span>
             <select className="form-select" value={workModel} onChange={(event) => setWorkModel(event.target.value)}>
               <option value="all">All work models</option>
               {Object.entries(workModelLabels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
             </select>
           </label>
+          <button className="btn btn-outline-secondary btn-sm reset-filters-button" type="button" onClick={resetFilters}>Reset filters</button>
         </div>
-      </details>
-
-      <div className="directory-filter-actions">
-        <label className="form-check form-switch new-only-filter">
-          <input
-            id="new-only-filter"
-            className="form-check-input"
-            type="checkbox"
-            checked={showNewOnly}
-            onChange={(event) => setShowNewOnly(event.target.checked)}
-            aria-label="Show only studios added in the last 24 hours"
-          />
-          <span className="form-check-label">New studios only (24h)</span>
-        </label>
-        <button className="btn btn-outline-secondary btn-sm" type="button" onClick={resetFilters}>
-          Reset filters
-        </button>
       </div>
+      <DiscoveryStatus showNewOnly={showNewOnly} onToggleNewOnly={setShowNewOnly} />
 
       {activeFilterCount > 0 ? (
         <div className="active-filter-chips" aria-label="Active filters">
@@ -578,7 +529,10 @@ export default function StudioDirectory({
               {renderSortHeader("name", "Studio")}
               {renderSortHeader("location", "Location")}
               {renderSortHeader("popularWork", "Notable work")}
-              {renderSortHeader("atAGlance", "At a glance")}
+              {renderSortHeader("scale", "Scale")}
+              {renderSortHeader("role", "Studio role")}
+              {renderSortHeader("platform", "Platform")}
+              {renderSortHeader("focus", "Focus")}
               <th scope="col">Tracker</th>
             </tr>
           </thead>
@@ -593,15 +547,13 @@ export default function StudioDirectory({
                 profile?.headquarters?.label || "Not stated";
               const routeWorkModel = studio.applicationResearch?.workModel || "not_stated";
               const isTracked = tracked.has(studio.name);
-              const isNew = isNewStudio(studio, now);
+              const isNew = isNewStudio(studio);
               const flag = countryFlagFor(studioCountry, countryCode);
-              const notableGames = profile?.popularGames?.slice(0, 3) || [];
+              const notableGames = profile?.popularGames?.slice(0, 1) || [];
+              const profileGames = profile?.popularGames?.slice(0, 3) || [];
               const platforms = orderedTags(profile?.platforms || [], PLATFORM_ORDER);
               const focus = orderedTags(profile?.gameFocus || [], FOCUS_ORDER);
-              const glanceTags = [
-                ...platforms.slice(0, 1).map(value => ({ value, kind: "platform" as const })),
-                ...focus.slice(0, 2).map(value => ({ value, kind: "focus" as const })),
-              ].slice(0, 3);
+              const roles = orderedTags(profile?.studioRoles || [], ROLE_ORDER);
               const studioContinents = continentsForLocation(studioCountry, countryCode);
               const isExpanded = expandedStudio === studio.name;
               const detailId = "studio-details-" + studioId(studio.name);
@@ -635,11 +587,6 @@ export default function StudioDirectory({
                             <span className="expand-indicator" aria-hidden="true">{isExpanded ? "▾" : "▸"}</span>
                             <span className="studio-name">{studio.name}</span>
                           </button>
-                          {profile?.scale ? (
-                            <ScaleBadge scale={profile.scale} basis={profile.scaleBasis} />
-                          ) : (
-                            <span className="scale-unclassified">Scale not classified</span>
-                          )}
                           {isNew ? <span className="badge text-bg-warning new-studio-badge">NEW</span> : null}
                         </div>
                       </div>
@@ -658,17 +605,11 @@ export default function StudioDirectory({
                       )}
                     </td>
                     <td>
-                      {glanceTags.length > 0 ? (
-                        <div className="studio-at-a-glance">
-                          {glanceTags.map(tag => (
-                            <span className={"studio-facet-tag facet-" + tag.kind} key={tag.kind + tag.value}>
-                              {tag.kind === "platform" ? <span aria-hidden="true">{platformEmoji(tag.value)}</span> : <span aria-hidden="true">{focusEmoji(tag.value)}</span>}
-                              {tag.value}
-                            </span>
-                          ))}
-                        </div>
-                      ) : <span className="unlisted-work">Not classified</span>}
+                      {profile?.scale ? <ScaleBadge scale={profile.scale} basis={profile.scaleBasis} /> : <span className="unlisted-work">Not classified</span>}
                     </td>
+                    <td>{roles.length ? <TagList values={roles} kind="role" /> : <span className="unlisted-work">Not classified</span>}</td>
+                    <td>{platforms.length ? <TagList values={platforms} kind="platform" /> : <span className="unlisted-work">Not classified</span>}</td>
+                    <td>{focus.length ? <TagList values={focus} kind="focus" limit={3} /> : <span className="unlisted-work">Not classified</span>}</td>
                     <td>
                       <button
                         className={isTracked ? "btn btn-outline-secondary btn-sm tracker-view-button" : "btn btn-primary btn-sm"}
@@ -694,7 +635,7 @@ export default function StudioDirectory({
                   </tr>
                   {isExpanded ? (
                     <tr className="studio-details-row" id={detailId}>
-                      <td colSpan={5}>
+                      <td colSpan={8}>
                         <div className="studio-details-panel studio-profile-panel">
                           <div className="studio-profile-heading">
                             <div className="studio-profile-identity">
@@ -718,10 +659,10 @@ export default function StudioDirectory({
                                 <p>{aboutText || "No studio description is available in the current profile."}</p>
                               </section>
                               <section className="studio-detail-section">
-                                <h3>Notable work <span className="section-count">· up to 3 titles</span></h3>
-                                {notableGames.length > 0 ? (
+                                <h3>Notable work <span className="section-count">· selected titles</span></h3>
+                                {profileGames.length > 0 ? (
                                   <div className="game-poster-grid">
-                                    {notableGames.map((game) => <GamePoster game={game} key={game.title} />)}
+                                    {profileGames.map((game) => <GamePoster game={game} key={game.title} />)}
                                   </div>
                                 ) : (
                                   <p className="detail-muted">No game titles are listed in this profile.</p>

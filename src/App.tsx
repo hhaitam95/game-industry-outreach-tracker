@@ -4,6 +4,8 @@ import StudioDirectory from "./components/StudioDirectory";
 import ApplicationTracker from "./components/ApplicationTracker";
 import CandidateProfile from "./components/CandidateProfile";
 import MatchingDashboard from "./components/MatchingDashboard";
+import GamesDirectory from "./components/GamesDirectory";
+import studioDirectory from "./data/speculative-route-directory.json" with { type: "json" };
 import { createApplicationTrackerBackup, parseStoredApplicationTracker, readApplicationTrackerBackup } from "./tracker/application-backup.mjs";
 import { createApplicationId } from "./tracker/application-identity.mjs";
 import { createEmptyApplicationPreparation } from "./tracker/application-preparation.mjs";
@@ -22,7 +24,7 @@ function readTheme(): Theme {
   }
 }
 
-type NavigationIconName = "studios" | "matches" | "applications" | "profile";
+type NavigationIconName = "studios" | "games" | "matches" | "applications" | "profile";
 
 function NavigationIcon({ name }: { name: NavigationIconName }) {
   return (
@@ -44,6 +46,12 @@ function NavigationIcon({ name }: { name: NavigationIconName }) {
           <rect x="13.5" y="3.5" width="7" height="7" rx="1.7" />
           <rect x="3.5" y="13.5" width="7" height="7" rx="1.7" />
           <rect x="13.5" y="13.5" width="7" height="7" rx="1.7" />
+        </>
+      ) : null}
+      {name === "games" ? (
+        <>
+          <path d="M6.5 7.5h11a3 3 0 0 1 2.85 2.1l1.1 3.6a2.2 2.2 0 0 1-3.75 2.1l-1.4-1.5H7.7l-1.4 1.5a2.2 2.2 0 0 1-3.75-2.1l1.1-3.6A3 3 0 0 1 6.5 7.5Z" />
+          <path d="M7.5 10.5v4M5.5 12.5h4M15.5 11.5h.01M18 13.5h.01" />
         </>
       ) : null}
       {name === "matches" ? (
@@ -95,10 +103,16 @@ type StudioLocation = {
 };
 
 export default function App() {
-  const [page, setPage] = useState<"studios" | "matches" | "applications" | "profile">("studios");
+  const [page, setPage] = useState<"studios" | "games" | "matches" | "applications" | "profile">("studios");
   const [trackerInitialTab, setTrackerInitialTab] = useState("saved");
   const [trackerFocusApplicationId, setTrackerFocusApplicationId] = useState<string | null>(null);
   const [applications, setApplications] = useState<TrackedApplication[]>([]);
+  const [matchCount, setMatchCount] = useState(0);
+  const [gameCount, setGameCount] = useState(0);
+  const studioCount = useMemo(
+    () => studioDirectory.filter(studio => studio.applicationResearch?.routeStatus === "active").length,
+    [],
+  );
   const applicationsRevision = useRef(0);
   const [storageReady, setStorageReady] = useState(false);
   const [storageLoadError, setStorageLoadError] = useState("");
@@ -333,6 +347,17 @@ export default function App() {
             >
               <NavigationIcon name="studios" />
               <span className="nav-label">Studios</span>
+              <span className="nav-count">{studioCount}</span>
+            </button>
+            <button
+              className={page === "games" ? "nav-link active" : "nav-link"}
+              type="button"
+              onClick={() => setPage("games")}
+              aria-current={page === "games" ? "page" : undefined}
+            >
+              <NavigationIcon name="games" />
+              <span className="nav-label">Games</span>
+              <span className="nav-count">{gameCount}</span>
             </button>
             <button
               className={page === "matches" ? "nav-link active" : "nav-link"}
@@ -342,6 +367,7 @@ export default function App() {
             >
               <NavigationIcon name="matches" />
               <span className="nav-label">Matches</span>
+              <span className="nav-count">{matchCount}</span>
             </button>
             <button
               className={page === "applications" ? "nav-link active" : "nav-link"}
@@ -407,8 +433,10 @@ export default function App() {
             onSaveStudio={(studio, location) => trackStudio(studio, "saved", location)}
             onOpenTrackedStudio={openTrackedStudio}
             trackedStudioNames={applications.map((application) => application.studioName)}
+            onCountChange={setMatchCount}
           />
         ) : null}
+        {page === "games" ? <GamesDirectory onCountChange={setGameCount} /> : null}
         {page === "applications" ? (
           <ApplicationTracker
             initialTab={trackerInitialTab}
@@ -430,7 +458,7 @@ export default function App() {
 
       <footer className="app-footer">
         <span>StudioScout</span>
-        <span>Studio directory · Private matches · Candidate profile · Application tracker</span>
+        <span>Studio directory · Game catalogue · Private matches · Candidate profile · Application tracker</span>
         <span>Profile and tracker data stay in this browser · Theme preference is saved locally</span>
       </footer>
     </div>

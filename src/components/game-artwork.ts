@@ -4,6 +4,15 @@ export type PopularGameArtworkMetadata = {
   title: string;
   releaseYear?: number;
   releaseYearSourceUrl?: string;
+  steamReleaseDate?: string;
+  steamDetailsCheckedAt?: string;
+  steamDevelopers?: string[];
+  steamPublishers?: string[];
+  steamReviewCount?: number;
+  steamPositiveReviewCount?: number;
+  steamNegativeReviewCount?: number;
+  steamReviewScoreDesc?: string;
+  steamReviewsUpdatedAt?: string;
   appId?: number | null;
   stage?: string;
   igdbGameId?: number;
