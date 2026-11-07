@@ -163,8 +163,15 @@ async function main() {
     await page.getByLabel("Evidence level").selectOption("demonstrated");
     await page.getByLabel("Evidence source").fill("Example Studio · Product Support Engineer");
     await page.getByLabel("What supports this assessment?").fill("Investigated and troubleshot API behavior in production.");
-    await page.getByLabel("Role families").fill("Developer support\nDevOps");
-    await page.getByLabel("Preferred regions").fill("Europe\nUnited Kingdom");
+    await page.locator("#profile-role-families").getByLabel("Developer support", { exact: true }).check();
+    await page.locator("#profile-role-families").getByLabel("DevOps", { exact: true }).check();
+    await page.locator("#profile-preferred-regions").getByLabel("Europe", { exact: true }).check();
+    await page.locator("#profile-preferred-regions").locator("summary").click();
+    await page.locator("#profile-preferred-regions").getByLabel("United Kingdom", { exact: true }).check();
+    const additionalNotes = page.getByLabel("Additional notes (optional)");
+    await additionalNotes.click();
+    await additionalNotes.pressSequentially("Prefer a collaborative studio environment");
+    assert.equal(await additionalNotes.inputValue(), "Prefer a collaborative studio environment");
     await page.getByLabel("Motivation text").fill("I am interested in contributing to game development teams.");
     const resumeFixture = Buffer.from("%PDF-1.4\\nCandidate resume fixture\\n%%EOF");
     await page.locator(".profile-material-card").first().locator('input[type="file"]').setInputFiles({
@@ -243,6 +250,9 @@ async function main() {
     assert.equal(savedCandidateProfile.education[0].qualification, "MSc Computer Science");
     assert.equal(savedCandidateProfile.skills[0].evidence, "demonstrated");
     assert.equal(savedCandidateProfile.preferences.preferredRegions[0], "Europe");
+    assert.ok(savedCandidateProfile.preferences.preferredRegions.includes("United Kingdom"));
+    assert.deepEqual(savedCandidateProfile.preferences.roleFamilies, ["Developer support", "DevOps"]);
+    assert.equal(savedCandidateProfile.preferences.additionalConsiderations, "Prefer a collaborative studio environment");
     assert.equal(savedCandidateProfile.materials.masterResume.name, "candidate-resume.pdf");
     assert.equal(Buffer.from(savedCandidateProfile.materials.masterResume.dataBase64, "base64").toString(), resumeFixture.toString());
 
