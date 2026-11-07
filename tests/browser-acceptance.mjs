@@ -611,7 +611,6 @@ async function main() {
     assert.ok(countryCount > 0 && countryCount < totalResults, "Country filtering should narrow the full directory result set.");
     await country.selectOption("All countries");
 
-    await page.locator(".directory-advanced-filters > summary").click();
     await page.locator(".directory-filter-picker").nth(1).locator("summary").click();
     const pcFilter = page.getByRole("checkbox", { name: "Platforms: PC" });
     const mobileFilter = page.getByRole("checkbox", { name: "Platforms: Mobile" });
@@ -621,16 +620,14 @@ async function main() {
     assert.ok(platformCount > 0 && platformCount < totalResults, "Selecting multiple platforms should narrow the full directory result set.");
     assert.equal(await page.locator(".active-filter-chip").count(), 2, "Each selected platform should appear as a removable active filter chip.");
     await page.locator(".directory-filter-picker").nth(1).locator("summary").click();
-    await page.locator(".directory-advanced-filters > summary").click();
     await page.locator(".active-filter-chip").first().click();
     assert.equal(await page.locator(".active-filter-chip").count(), 1, "Removing a filter chip should remove only that filter.");
     await page.getByRole("button", { name: "Reset filters" }).click();
     assert.equal(await rows.count(), initialCount);
 
-    await page.locator(".directory-advanced-filters > summary").click();
     await page.getByLabel("Work model · application route").selectOption("remote");
     const remoteCount = await filteredTotal();
-    assert.ok(remoteCount > 0 && remoteCount < totalResults, "Work-model filtering should remain available under More filters.");
+    assert.ok(remoteCount > 0 && remoteCount < totalResults, "Work-model filtering should remain available with the integrated studio filters.");
     await page.getByLabel("Work model · application route").selectOption("all");
     await page.getByRole("button", { name: "Reset filters" }).click();
     await page.getByLabel("Search", { exact: true }).fill("Laki Studios");
