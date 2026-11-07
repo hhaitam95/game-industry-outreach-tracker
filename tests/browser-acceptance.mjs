@@ -528,22 +528,24 @@ async function main() {
     assert.ok(await page.locator(".studio-mark").count() > 50, "Studio marks should appear for visible directory rows.");
     assert.ok(await page.locator(".country-flag").count() > 50, "Known studio locations should display flags.");
     assert.ok(await page.locator(".studio-scale-tag").count() > 0, "Classified studios should show a scale badge beside the name.");
-    assert.ok(await page.locator(".studio-at-a-glance .studio-facet-tag").count() > 0, "The At a glance column should show platform and focus tags.");
+    assert.ok(await page.locator(".studio-table .tag-list-platform .studio-facet-tag").count() > 0, "Platform should have its own column.");
+    assert.ok(await page.locator(".studio-table .tag-list-focus .studio-facet-tag").count() > 0, "Focus should have its own column.");
     assert.deepEqual(
       await page.locator(".studio-table thead th").evaluateAll(headers => headers.map(header =>
         header.querySelector(".column-sort-button span:first-child")?.textContent?.trim() || header.textContent?.trim()
       )),
-      ["Studio", "Location", "Notable work", "At a glance", "Tracker"],
+      ["Studio", "Location", "Notable work", "Scale", "Studio role", "Platform", "Focus", "Tracker"],
       "The main table should keep only general studio information and the tracker action.",
     );
     assert.equal(
       await rows.first().locator("td").count(),
-      5,
-      "Every studio data row should have exactly five cells to match the simplified header.",
+      8,
+      "Every studio data row should have one cell for each separate studio facet and the tracker action.",
     );
-    await page.getByLabel("Show only studios added in the last 24 hours").check();
-    assert.equal(await rows.count(), 5, "Only the five recently published closeout studios should appear.");
-    assert.equal(await page.getByText("NEW", { exact: true }).count(), 5);
+    await page.getByLabel("Show only newly added studios").check();
+    const newStudioCount = await rows.count();
+    assert.ok(newStudioCount > 0, "The persistent New studios filter should show the current discovery batch.");
+    assert.equal(await page.getByText("NEW", { exact: true }).count(), newStudioCount, "Every filtered studio should carry the NEW marker.");
     await page.getByRole("button", { name: "Reset filters" }).click();
     assert.equal(await rows.count(), initialCount, "Reset filters should restore the full directory.");
 
