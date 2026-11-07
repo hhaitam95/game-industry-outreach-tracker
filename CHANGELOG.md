@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-11-07 — StudioScout discovery and Games catalogue
+
+- Keep NEW markers on the latest genuinely added studio batch with no 24-hour expiry; clear prior markers only when a later batch publishes new studios.
+- Publish a privacy-safe hourly discovery summary, including newly added studio count and existing route rechecks, and place the New studios filter beside automation status.
+- Integrate scale, platform, focus, role and work-model filters under search; split composite country names, add continent icons and Uruguay's flag.
+- Add dedicated studio table columns for scale, role, platform and focus; show one featured title in table rows and retain further titles in expanded profiles.
+- Add a Games catalogue with popularity, release date, developer, publisher and Steam review information. Steam review totals are used only as a transparent popularity proxy, never as sales or player counts.
+- Extend exact-match Steam enrichment to refresh publisher/developer and release metadata plus aggregate public review totals for known Steam app IDs.
+
+
 ## 2026-11-07 — Introduce StudioScout product name
 
 - Adopt StudioScout as the product name and “Your personalized gateway into the game industry” as its tagline.
