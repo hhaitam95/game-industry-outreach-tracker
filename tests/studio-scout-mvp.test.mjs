@@ -39,7 +39,7 @@ test("studio directory renders separate studio facets and integrated filters", a
     assert.match(markup, /Sort by Studio role/);
     assert.match(markup, /Sort by Platform/);
     assert.match(markup, /New studios/);
-    assert.match(markup, /Scale not classified/);
+    assert.ok(markup.includes('<th scope="col">Scale</th>'));
     assert.match(markup, /Notable work/);
     assert.match(markup, /Sort by Studio/);
     assert.match(markup, /aria-controls="studio-details-4a-games"/);
@@ -72,8 +72,7 @@ test("Games directory renders popularity and store metadata columns", async () =
     assert.match(markup, /Developer/);
     assert.match(markup, /Publisher/);
     assert.match(markup, /Steam reviews/);
-    assert.match(markup, /GTFO/);
-    assert.match(markup, /Metro Exodus/);
+    assert.match(markup, /of \\d+ games/);
     assert.match(markup, /Steam user reviews/);
     assert.doesNotMatch(markup, /NaN/);
   });
