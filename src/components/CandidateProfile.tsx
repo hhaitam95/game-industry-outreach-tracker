@@ -31,14 +31,43 @@ const evidenceLabels: Record<SkillEvidence, string> = {
   user_confirmed_gap: "User-confirmed gap",
 };
 
+const ROLE_FAMILY_OPTIONS = [
+  "Developer support", "Technical support", "Product support", "IT support",
+  "DevOps", "Software engineer", "QA / test engineering",
+  "Game VFX / technical art", "Art / animation", "Game designer",
+] as const;
+
+const STUDIO_TYPE_OPTIONS = [
+  "AAA development", "Indie", "Developer", "Publisher", "Co-development",
+  "External development services", "Game art", "Animation studio",
+  "Game technology", "Game engine developer", "Mobile games",
+  "Support studio", "Quality assurance", "AR/VR", "First-party studio",
+] as const;
+
+const WORK_MODEL_OPTIONS = ["On-site", "Hybrid", "Remote"] as const;
+
+const REGION_OPTIONS = [
+  "Europe", "Asia", "Africa", "North America", "South America", "Oceania",
+  "Remote / distributed",
+] as const;
+
+const COUNTRY_OPTIONS = [
+  "Australia", "Austria", "Belgium", "Brazil", "Bulgaria", "Canada", "China",
+  "Costa Rica", "Cyprus", "Czechia", "Denmark", "Finland", "France", "Germany",
+  "Hungary", "Iceland", "India", "Indonesia", "Iraq", "Italy", "Japan", "Malaysia",
+  "Malta", "Mauritius", "Moldova", "Morocco", "Netherlands", "New Zealand",
+  "Nigeria", "Norway", "Pakistan", "Philippines", "Poland", "Portugal",
+  "Saudi Arabia", "Serbia", "Singapore", "South Korea", "Spain", "Sweden",
+  "Switzerland", "Thailand", "Türkiye", "Ukraine", "United Arab Emirates",
+  "United Kingdom", "United States", "Uruguay", "Vietnam",
+] as const;
+
+type RegionPreferenceKey = "preferredRegions" | "acceptableRegions" | "lowPriorityRegions";
+
 function createId(): string {
   return typeof crypto !== "undefined" && "randomUUID" in crypto
     ? crypto.randomUUID()
     : "profile-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2);
-}
-
-function linesToArray(value: string): string[] {
-  return value.split(/[\n,]/).map((item) => item.trim()).filter(Boolean);
 }
 
 function readFileAsBase64(file: File): Promise<string> {
@@ -167,6 +196,128 @@ function Field({
   );
 }
 
+function CheckboxOptionGrid({
+  id,
+  selected,
+  options,
+  onToggle,
+}: {
+  id: string;
+  selected: string[];
+  options: readonly string[];
+  onToggle: (option: string, checked: boolean) => void;
+}) {
+  return (
+    <div className="profile-choice-grid">
+      {options.map((option, index) => {
+        const inputId = id + "-" + index;
+        return (
+          <label className="profile-choice-option" htmlFor={inputId} key={option}>
+            <input
+              id={inputId}
+              type="checkbox"
+              checked={selected.includes(option)}
+              onChange={(event) => onToggle(option, event.target.checked)}
+            />
+            <span>{option}</span>
+          </label>
+        );
+      })}
+    </div>
+  );
+}
+
+function ChoiceGroup({
+  id,
+  label,
+  selected,
+  options,
+  onToggle,
+  hint,
+}: {
+  id: string;
+  label: string;
+  selected: string[];
+  options: readonly string[];
+  onToggle: (option: string, checked: boolean) => void;
+  hint?: string;
+}) {
+  const savedOptions = selected.filter((option) => !options.includes(option));
+  return (
+    <fieldset id={id} className="profile-choice-group">
+      <legend>{label}</legend>
+      <CheckboxOptionGrid id={id} selected={selected} options={options} onToggle={onToggle} />
+      {savedOptions.length > 0 ? (
+        <div className="profile-saved-choices">
+          <span>Previously saved choices</span>
+          <CheckboxOptionGrid
+            id={id + "-saved"}
+            selected={selected}
+            options={savedOptions}
+            onToggle={onToggle}
+          />
+        </div>
+      ) : null}
+      {hint ? <small className="profile-field-hint">{hint}</small> : null}
+    </fieldset>
+  );
+}
+
+function RegionPreferenceGroup({
+  id,
+  label,
+  selected,
+  onToggle,
+}: {
+  id: string;
+  label: string;
+  selected: string[];
+  onToggle: (option: string, checked: boolean) => void;
+}) {
+  const knownOptions: readonly string[] = [...REGION_OPTIONS, ...COUNTRY_OPTIONS];
+  const savedOptions = selected.filter((option) => !knownOptions.includes(option));
+  const selectedCountryCount = selected.filter((option) =>
+    COUNTRY_OPTIONS.includes(option as (typeof COUNTRY_OPTIONS)[number]),
+  ).length;
+  return (
+    <fieldset id={id} className="profile-choice-group profile-region-choice-group">
+      <legend>{label}</legend>
+      <span className="profile-choice-subheading">Broad regions</span>
+      <CheckboxOptionGrid
+        id={id + "-regions"}
+        selected={selected}
+        options={REGION_OPTIONS}
+        onToggle={onToggle}
+      />
+      <details className="profile-choice-more">
+        <summary>
+          Choose specific countries{selectedCountryCount ? " (" + selectedCountryCount + " selected)" : ""}
+        </summary>
+        <CheckboxOptionGrid
+          id={id + "-countries"}
+          selected={selected}
+          options={COUNTRY_OPTIONS}
+          onToggle={onToggle}
+        />
+      </details>
+      {savedOptions.length > 0 ? (
+        <div className="profile-saved-choices">
+          <span>Previously saved values</span>
+          <CheckboxOptionGrid
+            id={id + "-saved"}
+            selected={selected}
+            options={savedOptions}
+            onToggle={onToggle}
+          />
+        </div>
+      ) : null}
+      <small className="profile-field-hint">
+        Use broad regions or individual countries. The same selection can belong to only one priority tier.
+      </small>
+    </fieldset>
+  );
+}
+
 function Section({
   id,
   icon,
@@ -280,6 +431,44 @@ export default function CandidateProfile() {
       ...current,
       preferences: { ...current.preferences, [key]: value },
     }));
+    markEdited();
+  }
+
+  function toggleListPreference(
+    key: "roleFamilies" | "studioTypes" | "workModels",
+    option: string,
+    checked: boolean,
+  ) {
+    setProfile((current) => {
+      const existing = current.preferences[key];
+      const next = checked
+        ? [...new Set([...existing, option])]
+        : existing.filter((item) => item !== option);
+      return {
+        ...current,
+        preferences: { ...current.preferences, [key]: next },
+      };
+    });
+    markEdited();
+  }
+
+  function toggleRegionPreference(key: RegionPreferenceKey, option: string, checked: boolean) {
+    const regionKeys: RegionPreferenceKey[] = [
+      "preferredRegions",
+      "acceptableRegions",
+      "lowPriorityRegions",
+    ];
+    setProfile((current) => {
+      const preferences = { ...current.preferences };
+      for (const regionKey of regionKeys) {
+        const existing = preferences[regionKey];
+        preferences[regionKey] =
+          checked && regionKey === key
+            ? [...new Set([...existing, option])]
+            : existing.filter((item) => item !== option);
+      }
+      return { ...current, preferences };
+    });
     markEdited();
   }
 
@@ -661,15 +850,62 @@ export default function CandidateProfile() {
         <p className="profile-field-hint">PDF/DOCX files are stored as local browser data. This first version does not extract text from attachments; paste text above when you want it available for later matching.</p>
       </Section>
 
-      <Section id="preferences" icon="🎯" title="Application preferences" description="These preferences will influence your private opportunity priority later. They do not remove or change studios in the global directory.">
-        <div className="profile-form-grid">
-          <Field label="Role families" value={profile.preferences.roleFamilies.join("\n")} onChange={(value) => updatePreference("roleFamilies", linesToArray(value))} multiline rows={3} placeholder={"Developer support\nTechnical support\nDevOps / build & release\nGame VFX"} hint="One item per line, or separate items with commas." />
-          <Field label="Studio types" value={profile.preferences.studioTypes.join("\n")} onChange={(value) => updatePreference("studioTypes", linesToArray(value))} multiline rows={3} placeholder={"AAA\nIndie\nCo-development\nPublisher with internal development"} />
-          <Field label="Work arrangements" value={profile.preferences.workModels.join("\n")} onChange={(value) => updatePreference("workModels", linesToArray(value))} multiline rows={3} placeholder={"On-site\nHybrid\nRemote"} />
-          <Field label="Preferred regions" value={profile.preferences.preferredRegions.join("\n")} onChange={(value) => updatePreference("preferredRegions", linesToArray(value))} multiline rows={3} placeholder={"Europe\nUnited Kingdom"} />
-          <Field label="Acceptable regions" value={profile.preferences.acceptableRegions.join("\n")} onChange={(value) => updatePreference("acceptableRegions", linesToArray(value))} multiline rows={3} placeholder={"Canada\nUnited States"} />
-          <Field label="Lower-priority regions" value={profile.preferences.lowPriorityRegions.join("\n")} onChange={(value) => updatePreference("lowPriorityRegions", linesToArray(value))} multiline rows={3} placeholder={"Regions that are less practical, but not excluded"} />
-          <Field label="Other considerations" value={profile.preferences.additionalConsiderations} onChange={(value) => updatePreference("additionalConsiderations", value)} multiline rows={3} placeholder="Relocation, language, studio environment, collaboration preferences…" />
+      <Section id="preferences" icon="🎯" title="Application preferences" description="Choose from structured options to guide your private opportunity priority. These preferences do not remove or change studios in the global directory.">
+        <div className="profile-preference-grid">
+          <ChoiceGroup
+            id="profile-role-families"
+            label="Role families"
+            selected={profile.preferences.roleFamilies}
+            options={ROLE_FAMILY_OPTIONS}
+            onToggle={(option, checked) => toggleListPreference("roleFamilies", option, checked)}
+            hint="Select every role family you would seriously consider."
+          />
+          <ChoiceGroup
+            id="profile-studio-types"
+            label="Studio types"
+            selected={profile.preferences.studioTypes}
+            options={STUDIO_TYPE_OPTIONS}
+            onToggle={(option, checked) => toggleListPreference("studioTypes", option, checked)}
+            hint="Select the kinds of studios or development organisations that interest you."
+          />
+          <ChoiceGroup
+            id="profile-work-models"
+            label="Work arrangements"
+            selected={profile.preferences.workModels}
+            options={WORK_MODEL_OPTIONS}
+            onToggle={(option, checked) => toggleListPreference("workModels", option, checked)}
+            hint="Select all arrangements you would consider."
+          />
+          <div className="profile-region-preferences">
+            <p className="profile-preference-intro">Set geographic priorities independently. Choose broad regions or open the country list for more precise choices.</p>
+            <RegionPreferenceGroup
+              id="profile-preferred-regions"
+              label="Preferred regions"
+              selected={profile.preferences.preferredRegions}
+              onToggle={(option, checked) => toggleRegionPreference("preferredRegions", option, checked)}
+            />
+            <RegionPreferenceGroup
+              id="profile-acceptable-regions"
+              label="Acceptable regions"
+              selected={profile.preferences.acceptableRegions}
+              onToggle={(option, checked) => toggleRegionPreference("acceptableRegions", option, checked)}
+            />
+            <RegionPreferenceGroup
+              id="profile-low-priority-regions"
+              label="Lower-priority regions"
+              selected={profile.preferences.lowPriorityRegions}
+              onToggle={(option, checked) => toggleRegionPreference("lowPriorityRegions", option, checked)}
+            />
+          </div>
+          <Field
+            label="Additional notes (optional)"
+            value={profile.preferences.additionalConsiderations}
+            onChange={(value) => updatePreference("additionalConsiderations", value)}
+            multiline
+            rows={3}
+            placeholder="Anything important that is not covered by the selections above…"
+            hint="This is an optional note, not a matching filter. The structured choices above drive matching priority."
+          />
         </div>
       </Section>
 
