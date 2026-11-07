@@ -126,6 +126,7 @@ async function main() {
     });
 
     await page.goto(appUrl, { waitUntil: "networkidle" });
+    const navigation = page.getByRole("navigation", { name: "Main navigation" });
     assert.match(await page.title(), /StudioScout/);
     assert.equal(await page.locator(".workspace-label").count(), 0, "The redundant workspace label should not be displayed.");
     assert.equal((await page.locator(".theme-toggle").innerText()).trim(), "◐", "The theme control should show only its icon.");
@@ -136,10 +137,10 @@ async function main() {
     await page.getByRole("heading", { name: "Studio directory" }).waitFor();
     await page.getByText(/Last successful run:/).waitFor();
 
-    await page.getByRole("button", { name: "Games" }).click();
+    await navigation.getByRole("button", { name: /^Games(?:\s+\d+)?$/ }).click();
     await page.getByRole("heading", { name: "Games" }).waitFor();
     await page.getByText(/Steam user reviews/).waitFor();
-    await page.getByRole("button", { name: "Studios" }).click();
+    await navigation.getByRole("button", { name: /^Studios(?:\s+\d+)?$/ }).click();
     await page.getByRole("heading", { name: "Studio directory" }).waitFor();
 
     // Candidate Profile is private browser-local data, including original document bytes.
@@ -150,7 +151,7 @@ async function main() {
     await page.getByLabel("Current location").fill("Budapest, Hungary");
     await page.getByLabel("Professional summary").fill("A test profile with an evidence-backed technical background.");
     // Switching views must not discard profile edits that have not yet been saved.
-    await page.getByRole("button", { name: "Studios", exact: true }).click();
+    await navigation.getByRole("button", { name: /^Studios(?:\s+\d+)?$/ }).click();
     await page.getByRole("button", { name: "My profile" }).click();
     assert.equal(await page.getByLabel("Full name").inputValue(), "Test Candidate");
     await page.getByRole("button", { name: /Add experience/ }).click();
@@ -461,7 +462,7 @@ async function main() {
     await profileRecoveryPage.close();
 
     // Matches are generated locally from the restored profile and the public studio directory.
-    await page.getByRole("button", { name: "Matches", exact: true }).click();
+    await navigation.getByRole("button", { name: /^Matches(?:\s+\d+)?$/ }).click();
     await page.getByRole("heading", { name: "Your matches" }).waitFor();
     const matchCards = page.locator(".match-card");
     const matchCount = await matchCards.count();
@@ -500,10 +501,10 @@ async function main() {
       () => matchSavedRow.getByRole("button", { name: "Remove" }).click(),
       true,
     );
-    await page.getByRole("button", { name: "Matches", exact: true }).click();
+    await navigation.getByRole("button", { name: /^Matches(?:\s+\d+)?$/ }).click();
     await page.getByRole("heading", { name: "Your matches" }).waitFor();
 
-    await page.getByRole("button", { name: "Studios", exact: true }).click();
+    await navigation.getByRole("button", { name: /^Studios(?:\s+\d+)?$/ }).click();
     await page.getByRole("heading", { name: "Studio directory" }).waitFor();
 
     await page.getByRole("button", { name: "Switch to dark theme" }).click();
