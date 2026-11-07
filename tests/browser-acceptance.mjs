@@ -730,30 +730,28 @@ async function main() {
     await hugecalfDetails.waitFor({ state: "detached" });
     await page.getByLabel("Search", { exact: true }).fill("");
 
-    // A landscape Steam header must receive a landscape-sized frame in both the table and expanded gallery.
+    // The compact table shows one featured title; the expanded gallery can retain other notable projects.
     const twentyTwoCansRow = rows.filter({ hasText: "22cans" });
-    await twentyTwoCansRow.getByRole("button", { name: /22cans/ }).click();
-    const trailTableCover = twentyTwoCansRow.locator('.popular-game-cover[data-game-title="The Trail"]');
-    const trailTableImage = trailTableCover.locator('img[data-artwork-layout="landscape"]');
-    await trailTableImage.waitFor();
-    const trailTableImageUrl = await trailTableImage.getAttribute("src") || "";
-    const trailArtworkPath = new URL(trailTableImageUrl).pathname;
-    assert.ok(
-      trailArtworkPath.includes("/steam/apps/3544920/") && trailArtworkPath.endsWith("/header.jpg"),
-      "The Trail should fall back to its verified landscape Steam header after portrait artwork fails. Actual URL: " + trailTableImageUrl,
+    assert.deepEqual(
+      await twentyTwoCansRow.locator(".popular-game-cover").evaluateAll(covers =>
+        covers.map(cover => cover.getAttribute("data-game-title")),
+      ),
+      ["Masters of Albion"],
+      "The compact studio table should show only the single most notable game.",
     );
-    const compactRatio = await trailTableCover.evaluate(element => {
-      const rect = element.getBoundingClientRect();
-      return rect.width / rect.height;
-    });
-    assert.ok(compactRatio > 1.8, "The compact table thumbnail should expand horizontally for landscape artwork.");
-
     const twentyTwoCansButton = twentyTwoCansRow.getByRole("button", { name: /22cans/ });
+    await twentyTwoCansButton.click();
     const twentyTwoCansDetails = page.locator("#studio-details-22cans");
     await twentyTwoCansDetails.waitFor();
     const trailPoster = page.locator('.game-poster-grid .game-poster-card[data-game-title="The Trail"]');
     const trailPosterImage = trailPoster.locator('img[data-artwork-layout="landscape"]');
     await trailPosterImage.waitFor();
+    const trailPosterImageUrl = await trailPosterImage.getAttribute("src") || "";
+    const trailArtworkPath = new URL(trailPosterImageUrl).pathname;
+    assert.ok(
+      trailArtworkPath.includes("/steam/apps/3544920/") && trailArtworkPath.endsWith("/header.jpg"),
+      "The Trail should use its verified landscape Steam header in the expanded gallery. Actual URL: " + trailPosterImageUrl,
+    );
     const posterRatio = await trailPoster.locator(".game-poster-art").evaluate(element => {
       const rect = element.getBoundingClientRect();
       return rect.width / rect.height;
