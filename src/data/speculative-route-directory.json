@@ -4149,7 +4149,7 @@
     "applicationUrl": "https://www.kuuasema.com/jobs/open-application/",
     "evidenceUrl": "https://www.kuuasema.com/jobs/open-application/",
     "notes": "Official Open Application page invites applicants whose preferred role is not listed. Send a CV and work samples to jobs@kuuasema.com with subject 'Open Application'. Roles are Helsinki hybrid (three days in office); applicants must be EU/EEA/Swiss citizens or already hold a Finnish residence permit with work rights. No visa sponsorship; limited senior-role flexibility may occasionally be considered.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-07",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -4163,7 +4163,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-05"
     }
   },
   {
@@ -4173,7 +4173,7 @@
     "applicationUrl": "https://kylotonn.com/en/join-us/",
     "evidenceUrl": "https://kylotonn.com/en/careers/",
     "notes": "Official careers page explicitly links to an unsolicited application. Use the studio's application form; location and eligibility conditions are not stated on the route.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-07",
     "applicationResearch": {
       "routeType": "unsolicited",
       "submissionMethods": [
@@ -4185,7 +4185,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-05"
     }
   },
   {
@@ -4195,7 +4195,7 @@
     "applicationUrl": "https://www.lakistudios.com/jobs/open-application",
     "evidenceUrl": "https://www.lakistudios.com/jobs/open-application",
     "notes": "The official Open Application invites candidates to apply even when there is no opening in their specialisation. It requests an explanation of the applicant's interest, financial expectations and potential contribution. The page lists full-time flexible work and a fully remote studio, with B2B contracts and paid vacation. It asks for experience in tactical, turn-based, card or roguelite games, strong game-design knowledge, English and Unity or Unreal. Applicant-country eligibility is not stated.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-07",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -4217,7 +4217,7 @@
       ],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-05"
     },
     "addedAt": "2026-10-31T17:38:40Z"
   },
@@ -4228,7 +4228,7 @@
     "applicationUrl": "https://jobs.lever.co/larian/19153167-a979-4236-917d-1a83c0ab631e",
     "evidenceUrl": "https://larian.com/careers",
     "notes": "Larian's official careers system currently offers multiple discipline-specific Open Applications for future opportunities, including DevOps, gameplay programming, graphics programming, technical QA, tools programming, production and other creative disciplines. The DevOps Open Application is the primary route recorded here and describes future work on CI/CD pipelines, deployment workflows, build stability and automation. Open-application listings are marked On-site and Any / all studios; Larian's seven studio locations are Gent, Barcelona, Dublin, Guildford, Kuala Lumpur, Quebec and Warsaw. Applicants should expect location-specific onsite arrangements and may be asked about relocation; this is not a global-remote route.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-07",
     "applicationResearch": {
       "routeType": "discipline_specific",
       "submissionMethods": [
@@ -4258,7 +4258,7 @@
       ],
       "routeStatus": "active",
       "sourceType": "studio_controlled_ats",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-05"
     }
   },
   {
@@ -4268,7 +4268,7 @@
     "applicationUrl": "https://lbcstudios.ca/?page_id=2637",
     "evidenceUrl": "https://lbcstudios.ca/careers/",
     "notes": "Official studio-controlled page explicitly invites general applications. Evidence: General Application. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-07",
     "applicationResearch": {
       "routeType": "general",
       "submissionMethods": [
@@ -4280,7 +4280,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-05"
     }
   },
   {
@@ -4290,7 +4290,7 @@
     "applicationUrl": "https://www.teamtailor.com/?utm_campaign=poweredby&utm_content=careers.lightheart.games&utm_medium=referral&utm_source=career-site",
     "evidenceUrl": "https://careers.lightheart.games/",
     "notes": "Official studio-controlled page explicitly invites open applications. Evidence: Open Application. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-07",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -4302,7 +4302,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "employer_managed_career_platform",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-05"
     }
   },
   {
@@ -4336,7 +4336,7 @@
     "applicationUrl": "https://www.limbic-entertainment.de/careers/",
     "evidenceUrl": "https://www.limbic-entertainment.de/careers/",
     "notes": "Official studio-controlled page explicitly invites open applications. Evidence: open application. Hiring geography is not inferred from headquarters.",
-    "checkedAt": "2026-10-31",
+    "checkedAt": "2026-11-07",
     "applicationResearch": {
       "routeType": "open",
       "submissionMethods": [
@@ -4348,7 +4348,7 @@
       "relatedApplicationUrls": [],
       "routeStatus": "active",
       "sourceType": "official_company_site",
-      "nextReviewAt": "2027-01-29"
+      "nextReviewAt": "2027-02-05"
     }
   },
   {
