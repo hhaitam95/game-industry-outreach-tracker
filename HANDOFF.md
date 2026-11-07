@@ -1,6 +1,6 @@
 # Handoff
 
-Game Industry Outreach Tracker is a five-system workflow for discovering suitable studios, matching them against a private candidate profile, preparing applications and tracking confirmed submissions.
+StudioScout is a five-system workflow for discovering suitable studios, matching them against a private candidate profile, preparing applications and tracking confirmed submissions.
 
 ## Read first
 

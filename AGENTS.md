@@ -1,6 +1,6 @@
 # Project notes
 
-Game Industry Outreach Tracker is an end-to-end personal application workflow built around five connected systems. Read the [Five-System Product Blueprint](docs/architecture/five-system-product-blueprint.md) before changing product scope or system boundaries.
+StudioScout is a personal game-industry outreach platform built around five connected systems. Read the [Five-System Product Blueprint](docs/architecture/five-system-product-blueprint.md) before changing product scope or system boundaries.
 
 ## Product scope
 

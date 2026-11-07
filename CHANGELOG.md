@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-11-07 — Introduce StudioScout product name
+
+- Adopt StudioScout as the product name and “Your personalized gateway into the game industry” as its tagline.
+- Update the application header, footer, browser metadata and primary project documentation; keep the GitHub repository and internal package identifier unchanged.
+
 ## 2026-11-07 — Structured application preferences
 
 - Replace free-text role, studio-type, work-model and geographic preference lists with multi-select checkboxes and country picklists.

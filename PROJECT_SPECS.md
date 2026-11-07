@@ -2,7 +2,7 @@
 
 ## Product purpose
 
-Game Industry Outreach Tracker helps a candidate move from discovering legitimate game studios with speculative/open application routes to preparing, submitting and tracking relevant applications.
+StudioScout helps a candidate move from discovering legitimate game studios with speculative/open application routes to preparing, submitting and tracking relevant applications.
 
 The product consists of five systems. The complete workflow and data boundaries are described in the [Five-System Product Blueprint](docs/architecture/five-system-product-blueprint.md).
 

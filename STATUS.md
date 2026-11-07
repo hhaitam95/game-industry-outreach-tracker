@@ -1,5 +1,6 @@
-# Game Industry Outreach Tracker status
+# StudioScout status
 
+**Product name:** StudioScout — Your personalized gateway into the game industry.  
 **Last verified:** 2026-11-06  
 **Product scope:** Five connected systems: global Studio Discovery, private Candidate Profile, Matching Engine, manual-assisted Application Preparation and Application Tracker. The preparation checklist/notes foundation is in PR #116; automatic application-page analysis and ATS interaction remain future work.  
 **Authoritative discovery rules:** [Global Discovery Implementation Model](docs/architecture/global-discovery-implementation-model.md).

@@ -1,6 +1,8 @@
-# Game Industry Outreach Tracker
+# StudioScout
 
-Game Industry Outreach Tracker is an end-to-end personal game-industry application workflow built around five connected systems: Studio Discovery, Candidate Profile, Matching Engine, Application Preparation and Application Tracker.
+*Your personalized gateway into the game industry.*
+
+StudioScout helps you discover game studios worldwide, identify verified speculative application opportunities, match them against your professional profile, and manage your outreach campaign. It is an end-to-end personal game-industry application workflow built around five connected systems: Studio Discovery, Candidate Profile, Matching Engine, Application Preparation and Application Tracker.
 
 Studio Discovery maintains the worldwide directory of studios with verified speculative/open application routes. Candidate Profile is the private source of truth for professional facts, evidence, preferences and approved materials. Matching compares that profile with discovered studios. Application Preparation now has a manual-assisted first version inside My applications: each selected studio has six readiness checks, a private space for employer requirements/questions and a separate draft-answer/missing-information area. This content is saved in the browser and included in tracker backups. Automatic page analysis, cross-origin ATS inspection, autofill and uploads are not implemented. Application Tracker records user-confirmed submissions and later progress.
 
