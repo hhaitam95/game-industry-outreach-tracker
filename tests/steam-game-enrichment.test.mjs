@@ -7,6 +7,7 @@ import {
   releaseYearFromSteamDate,
   selectExactSteamArtwork,
   selectExactSteamMatch,
+  selectSteamReviewSummary,
 } from "../scripts/enrich-steam-games.mjs";
 
 test("normalizes game titles without fuzzy matching", () => {
@@ -139,4 +140,31 @@ test("extracts a release year from the date supplied by Steam", () => {
   assert.equal(releaseYearFromSteamDate("9 Dec, 2021"), 2021);
   assert.equal(releaseYearFromSteamDate("2020"), 2020);
   assert.equal(releaseYearFromSteamDate("Coming soon"), null);
+});
+
+test("parses Steam aggregate review totals and preserves missing metrics as unknown", () => {
+  assert.deepEqual(selectSteamReviewSummary({
+    success: 1,
+    query_summary: {
+      total_reviews: 1250,
+      total_positive: 1100,
+      total_negative: 150,
+      review_score_desc: "Very Positive",
+    },
+  }), {
+    steamReviewCount: 1250,
+    steamPositiveReviewCount: 1100,
+    steamNegativeReviewCount: 150,
+    steamReviewScoreDesc: "Very Positive",
+  });
+  assert.deepEqual(selectSteamReviewSummary({
+    success: 1,
+    query_summary: { total_reviews: 0, total_positive: 0, total_negative: 0 },
+  }), {
+    steamReviewCount: 0,
+    steamPositiveReviewCount: 0,
+    steamNegativeReviewCount: 0,
+  });
+  assert.equal(selectSteamReviewSummary({ success: 1, query_summary: { total_reviews: "many" } }), null);
+  assert.equal(selectSteamReviewSummary({ success: 0, query_summary: {} }), null);
 });
